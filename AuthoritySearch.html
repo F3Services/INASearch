@@ -134,6 +134,10 @@
       background: rgba(255,255,255,.06);
       font-size: 11px;
     }
+    button.status-chip { font: inherit; cursor: pointer; }
+    button.status-chip.attention { border-color: #ffc86d; color: #fff1c9; background: rgba(151, 100, 4, .38); }
+    button.status-chip.attention:hover { background: rgba(183, 124, 10, .52); }
+    button.status-chip.connected { border-color: rgba(107,214,164,.55); color: #dcffef; background: rgba(24, 113, 78, .28); }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #6bd6a4; }
     .status-dot.warn { background: #ffc86d; }
     .status-dot.bad { background: #ff8b82; }
@@ -155,6 +159,27 @@
     .global-search .kbd { border-color: rgba(255,255,255,.22); color: #bed2e4; background: rgba(255,255,255,.07); }
     .scheduled-lock-notice { margin-top: 9px; border: 1px solid #e5bc60; border-radius: 9px; padding: 9px 12px; color: #fff1c9; background: #59400d; font-size: 12px; line-height: 1.45; }
     .scheduled-lock-notice.active { border-color: #ff8b82; color: #ffe4e1; background: #6b211c; }
+    .profile-setup-alert {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      border: 0;
+      border-bottom: 2px solid #d89513;
+      padding: 12px clamp(18px, 4vw, 46px);
+      color: #4e3504;
+      text-align: left;
+      background: #fff0bf;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(89, 64, 13, .16);
+    }
+    .profile-setup-alert:hover { background: #ffe7a0; }
+    .profile-setup-alert-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; background: #a86600; font-weight: 950; }
+    .profile-setup-alert strong, .profile-setup-alert small { display: block; }
+    .profile-setup-alert strong { font-size: 14px; }
+    .profile-setup-alert small { margin-top: 2px; color: #70510e; font-size: 11px; }
+    .profile-setup-alert-action { border-radius: 7px; padding: 7px 10px; color: #fff; background: #8a5700; font-size: 11px; font-weight: 900; white-space: nowrap; }
     .citation-equivalent {
       flex: 0 1 auto;
       min-height: 38px;
@@ -540,9 +565,11 @@
       .visa-single-subtype { margin-left: 0; }
       .page-heading { align-items: start; flex-direction: column; }
       .quiz-controls, .quiz-jump { width: 100%; }
+      .profile-setup-alert { grid-template-columns: auto minmax(0, 1fr); }
+      .profile-setup-alert-action { grid-column: 2; justify-self: start; }
     }
     @media print {
-      .topbar, .search-filter-bar, .search-results-tools, .results-panel, .detail-actions, .profile-bar, .button { display: none !important; }
+      .topbar, .profile-setup-alert, .search-filter-bar, .search-results-tools, .results-panel, .detail-actions, .profile-bar, .button { display: none !important; }
       .app-shell { padding: 0; }
       .workspace { display: block; }
       .detail-panel, .panel { border: 0; box-shadow: none; }
@@ -564,7 +591,7 @@
       </nav>
       <div class="top-status" aria-label="Application status">
         <span class="status-chip" id="corpusStatus"><span class="status-dot warn"></span>Checking corpus</span>
-        <span class="status-chip" id="saveStatus"><span class="status-dot warn"></span>Profile not connected</span>
+        <button class="status-chip attention" id="saveStatus" type="button" aria-label="Set up profile saving"><span class="status-dot warn"></span>Set up saving</button>
       </div>
     </div>
     <div class="global-search" role="search">
@@ -582,6 +609,12 @@
     </div>
     <div class="scheduled-lock-notice" id="scheduledLockNotice" hidden></div>
   </header>
+
+  <button class="profile-setup-alert" id="profileSetupNotice" type="button" hidden>
+    <span class="profile-setup-alert-icon" aria-hidden="true">!</span>
+    <span><strong id="profileSetupTitle">Automatic saving is not connected</strong><small id="profileSetupMessage">Correct answers and notes may exist only in memory.</small></span>
+    <span class="profile-setup-alert-action" id="profileSetupAction">Set up saving →</span>
+  </button>
 
   <div class="search-filter-bar" id="searchFilterBar" hidden>
     <div class="filters" id="filters" aria-label="Filter search results">
@@ -906,6 +939,8 @@
       searchSuggestion: $("#searchSuggestionButton"), closeSearchResults: $("#closeSearchResultsButton"), searchFilterBar: $("#searchFilterBar"),
       resultCount: $("#resultCount"), detail: $("#detailPanel"), corpusStatus: $("#corpusStatus"),
       saveStatus: $("#saveStatus"), visaGrid: $("#visaGrid"), notesList: $("#notesList"),
+      profileSetupNotice: $("#profileSetupNotice"), profileSetupTitle: $("#profileSetupTitle"),
+      profileSetupMessage: $("#profileSetupMessage"), profileSetupAction: $("#profileSetupAction"),
       noteCount: $("#noteCount"), profileSummary: $("#profileSummary"), sourcesGrid: $("#sourcesGrid"),
       sourceWarnings: $("#sourceWarnings"),
       scheduledLockNotice: $("#scheduledLockNotice"),
@@ -2840,8 +2875,55 @@ window.AUTHORITY_SEARCH_PROFILE = ${json};
 `;
     }
 
+    function profileSetupMode() {
+      if (state.fileConnected) return "connected";
+      if (state.profileChanged) return "preserve";
+      return state.profileValid ? "connect" : "create";
+    }
+
+    function renderProfileSetupNotice() {
+      const mode = profileSetupMode();
+      els.profileSetupNotice.hidden = mode === "connected";
+      if (mode === "connected") return;
+      const copy = mode === "preserve"
+        ? {
+            title: "Your progress is not being saved",
+            message: "Correct answers or notes currently exist only in this browser tab. Click here now to save the current profile and enable automatic saving.",
+            action: "Save current progress →"
+          }
+        : mode === "connect"
+          ? {
+              title: "Automatic profile saving is not connected",
+              message: "AuthoritySearch loaded the profile read-only. Click here once, select AuthoritySearch-Profile.js, and grant write access.",
+              action: "Connect profile →"
+            }
+          : {
+              title: "No writable profile is connected",
+              message: "Correct answers and notes will otherwise remain only in memory. Click here to create and connect AuthoritySearch-Profile.js.",
+              action: "Create profile →"
+            };
+      els.profileSetupTitle.textContent = copy.title;
+      els.profileSetupMessage.textContent = copy.message;
+      els.profileSetupAction.textContent = copy.action;
+    }
+
+    async function beginProfileSavingSetup() {
+      const mode = profileSetupMode();
+      if (mode === "connected") return;
+      if (mode === "connect") await connectProfile();
+      else await createProfile();
+      renderProfileSetupNotice();
+    }
+
     function updateSaveStatus(text, kind = "warn") {
-      els.saveStatus.innerHTML = `<span class="status-dot ${kind}"></span>${escapeHtml(text)}`;
+      const connected = state.fileConnected;
+      const displayText = connected ? text : state.profileChanged ? "Unsaved — click to save" : "Set up saving";
+      els.saveStatus.innerHTML = `<span class="status-dot ${connected ? kind : "warn"}"></span>${escapeHtml(displayText)}`;
+      els.saveStatus.classList.toggle("attention", !connected);
+      els.saveStatus.classList.toggle("connected", connected);
+      els.saveStatus.disabled = connected;
+      els.saveStatus.setAttribute("aria-label", connected ? `Profile saving status: ${text}` : "Profile saving is not connected. Click to set it up.");
+      renderProfileSetupNotice();
     }
 
     function updateProfileSummary() {
@@ -3258,6 +3340,8 @@ window.AUTHORITY_SEARCH_PROFILE = ${json};
       $("#connectProfileButton").addEventListener("click", connectProfile);
       $("#createProfileButton").addEventListener("click", createProfile);
       $("#downloadProfileButton").addEventListener("click", downloadProfile);
+      els.saveStatus.addEventListener("click", beginProfileSavingSetup);
+      els.profileSetupNotice.addEventListener("click", beginProfileSavingSetup);
     }
 
     function initialize() {
@@ -3343,6 +3427,9 @@ window.AUTHORITY_SEARCH_PROFILE = ${json};
       renderQuiz,
       openSourceInfo,
       cycleSearchSuggestion,
+      profileSetupMode,
+      renderProfileSetupNotice,
+      beginProfileSavingSetup,
       scheduledStudyLockStatus,
       updateScheduledStudyLock,
       studyAccessLocked,
