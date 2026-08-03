@@ -1,8 +1,8 @@
 # AuthoritySearch
 
-AuthoritySearch is a portable, local-first ISOBASIC study reference. It provides flexible INA/U.S.C./CFR citation handling, a source-scoped definitions catalog, approved-resource catalogs, nonimmigrant and immigrant classification cards, resource-identification unlock questions, optional practice quizzes, and searchable course notes.
+AuthoritySearch is a dynamic, portable, local-first HTML study document for ISOBASIC. Within one interactive document, it provides flexible INA/U.S.C./CFR citation handling, a source-scoped definitions catalog, approved-resource catalogs, nonimmigrant and immigrant classification cards, resource-identification unlock questions, optional practice quizzes, and searchable course notes.
 
-The distributed application is one HTML file. It runs directly from a local folder in current Microsoft Edge or Chrome with no installation, server, framework, telemetry, automatic network request, or companion JavaScript file.
+AuthoritySearch is distributed as one self-contained HTML document. Its navigation, search, filters, quizzes, classification cards, notes, and locally saved profile data all operate dynamically in the browser. The document opens directly from a local folder in current Microsoft Edge or Chrome with no installation, server, framework, telemetry, automatic network request, or companion JavaScript file.
 
 The primary navigation opens on **Definitions**, which is the leftmost page. The classic optional quiz is opened from **Sources & About** instead of occupying a primary-navigation tab. Wrong answers in that practice-only quiz may be retried without a timeout.
 
@@ -13,7 +13,7 @@ The primary navigation opens on **Definitions**, which is the leftmost page. The
 
 ## Immigration type cards and resource checks
 
-The **Nonimmigrant Types** page is built from the 84 symbols in Table 1 to 22 CFR 41.12. Its first three open-resource checks unlock the classification table, the INA 101(a)(15) definition field, and the USCIS Policy Manual Volume 2 EOS/COS appendix field for all matching cards. The EOS/COS check remains one combined question and unlocks both eligibility and the form type reported by that appendix. Fifteen additional approved-resource questions unlock sourced initial application or petition forms for the applicable classifications. Maximum admission and maximum continuous-stay fields direct the student to the Pocket Field Guide once the classification table is unlocked.
+The **Nonimmigrant Types** page is built from the 84 symbols in Table 1 to 22 CFR 41.12. Its first three open-resource checks unlock the classification table, the INA 101(a)(15) definition field, and the USCIS Policy Manual Volume 2 EOS/COS appendix field for all matching cards. The EOS/COS check remains one combined question and unlocks both eligibility and the form type reported by that appendix. Fifteen additional approved-resource questions unlock sourced forms for initial filings or petitions for the applicable classifications. Maximum admission and maximum continuous-stay fields direct the student to the Pocket Field Guide once the classification table is unlocked.
 
 The **Immigrant Types** page is built from the 158 symbols in Table 1 to 22 CFR 42.11. One resource check unlocks the table, followed by eight definition questions grouped by each distinct combination of source instruments (INA-only, INA plus a named appropriations act, and so on) and 22 approved-resource form questions. Large question scopes use compact root-prefix notation, with parenthesized ranges when only part of a root is included. Citation-choice questions link their answer text directly to the official resource; all form questions use six-option multiple choice with concise group labels such as family-based principals, employment-based derivatives, or other specifically defined classification groups. A sourced derivative card displays the principal's form type with an asterisk and a focusable or hoverable `*derivative classification` explanation. Cards do not display an initial form when the approved resources do not justify one. A wrong answer on any immigrant or nonimmigrant resource check locks only that specific question for 30 minutes, while the other questions remain available; the lockout persists with saved progress. The older status and fact question bank is available from **Sources & About** as optional practice without a retry timeout and does not control card content. Both Types pages and the optional Quiz remain unavailable during scheduled testing hours.
 
@@ -23,7 +23,7 @@ Each version is complete by itself. Most users should receive `AuthoritySearch.h
 
 In the standard build, citations embedded in cached operative Title 8 text are clickable when the official House USLM XML identifies a target inside Title 8. Selecting one runs the target citation through AuthoritySearch, opens the locally cached section, and highlights the exact structural target or its nearest cached parent. It does not send the user to `uscode.house.gov`.
 
-While a cached statute is open, a sticky hierarchy navigator appears directly below the top bar. It follows the statutory line at one quarter of the statute-reading viewport and lists Title, chapter, subchapter, part when present, section, and the currently visible nested paragraph levels. Each segment opens a dropdown populated only with siblings that share the same parent. Citation jumps align the selected statutory line—or the top of the section for a section-level citation—with that same quarter-view reading line.
+While a cached statute is open, a sticky hierarchy navigator appears directly below the top bar. It follows the statutory line at one tenth of the statute-reading viewport and lists Title, chapter, subchapter, part when present, section, and the currently visible nested paragraph levels. Each segment opens a dropdown populated only with siblings that share the same parent. Citation jumps align the selected statutory line—or the top of the section for a section-level citation—with that same one-tenth reading line.
 
 The current build contains 3,587 verified local reference links: 1,289 in operative statutory nodes, 33 in section preambles, and 2,265 in statutory or editorial notes. Link text, source record, target section, and target hierarchy are generated from the official House Title 8 XML and checked against the displayed corpus during every build. References to other U.S.C. titles, public laws, Statutes at Large, repealed or omitted Title 8 sections that are not cached, or other unavailable authorities remain plain text rather than pretending that a local target exists.
 
@@ -52,7 +52,7 @@ If managed Edge policy prevents filesystem writing, AuthoritySearch cannot silen
 
 ## Moving progress to a newer file
 
-Application updates arrive as a new HTML file, so progress in an older copy is not automatically present in the replacement. In the new file:
+New AuthoritySearch versions arrive as new HTML documents, so progress in an older copy is not automatically present in the replacement. In the new document:
 
 1. Click the saving-status control at the upper right.
 2. Select **Import an older AuthoritySearch profile**.
@@ -248,7 +248,7 @@ After **Apply structure**, every configured module appears as an initially empty
 
 ## Compressed corpus format
 
-Both generated HTML files carry their corpus as compact UTF-8 JSON compressed with ordinary [gzip (RFC 1952)](https://datatracker.ietf.org/doc/html/rfc1952), then represented with standard [Base64 (RFC 4648)](https://www.rfc-editor.org/info/rfc4648/) inside a marked `application/gzip` script block. Base64 is transport encoding, not encryption or a security measure. Decompression occurs only in browser memory through the standard [DecompressionStream API](https://compression.spec.whatwg.org/) and requires no file, network, installation, or execution permission.
+Both generated HTML files carry their corpus as compact UTF-8 JSON compressed with ordinary [gzip (RFC 1952)](https://datatracker.ietf.org/doc/html/rfc1952), then represented with standard [Base64 (RFC 4648)](https://www.rfc-editor.org/info/rfc4648/) inside the marked embedded-corpus script block. Base64 is transport encoding, not encryption or a security measure. Decompression occurs only in browser memory through the standard [DecompressionStream API](https://compression.spec.whatwg.org/) and requires no file, network, installation, or execution permission.
 
 Immediately above the payload, a readable JSON manifest records the schema and corpus versions, encoding, compression, media/content types, compressed and uncompressed byte counts, and SHA-256 hashes. **Sources & About** displays the same data and a copyable extraction command.
 
@@ -268,7 +268,7 @@ $outGzip = ".\AuthoritySearch-Corpus.json.gz"
 $outJson = ".\AuthoritySearch-Corpus.json"
 
 $html = [IO.File]::ReadAllText($htmlPath)
-$pattern = '(?s)<script id="authoritySearchCorpusData" type="application/gzip" data-encoding="base64">\s*(.*?)\s*</script>'
+$pattern = '(?s)<script id="authoritySearchCorpusData"[^>]*data-encoding="base64"[^>]*>\s*(.*?)\s*</script>'
 $base64 = ([regex]::Match($html, $pattern).Groups[1].Value -replace '\s', '')
 [IO.File]::WriteAllBytes($outGzip, [Convert]::FromBase64String($base64))
 
@@ -292,9 +292,9 @@ Current Microsoft Edge is the primary target. If `DecompressionStream` is unavai
 
 ## Repository structure
 
-The root HTML files are the user-facing builds. Developer source remains separate and human-readable:
+The root HTML files are the user-facing dynamic documents. Developer source remains separate and human-readable:
 
-- `src/AuthoritySearch.template.html` contains the editable interface and application logic.
+- `src/AuthoritySearch.template.html` contains the editable interface and document logic.
 - `src/AuthoritySearch-Corpus.js` contains the reviewed, uncompressed source corpus used during the build.
 - `src/AuthoritySearch-Definitions.js` contains the human-readable 8 CFR 1.2 transcription, source metadata, and scope records. INA 101 entries are deterministically derived from the reviewed 8 U.S.C. 1101 hierarchy during the build.
 - `src/AuthoritySearch-USCIS-Glossary.js` contains the generated capture of all terms and explanations on the official USCIS Glossary page.
