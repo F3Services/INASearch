@@ -11,9 +11,10 @@
   "variant": "all-unlocked",
   "displayName": "AuthoritySearch AU (All Unlocked)",
   "fileName": "AuthoritySearch-AU.html",
-  "instanceId": "83015f8362d906a251d17bbc",
+  "instanceId": "3f0fda316a9cbb985c0e7ee9",
   "hasLocalUscCache": true,
-  "generatedAt": "2026-08-03T17:41:13.483Z"
+  "corpusCompression": "gzip",
+  "generatedAt": "2026-08-03T18:35:30.817Z"
 }</script>
   <!-- AUTHORITY_SEARCH_BUILD_DATA_END -->
   <!-- AUTHORITY_SEARCH_CORPUS_MANIFEST_DATA_START -->
@@ -380,7 +381,9 @@
       const element = document.getElementById("authoritySearchCorpusData");
       if (!element?.getAttribute) return null;
       const read = name => element.getAttribute(`data-${name}`);
-      const required = ["schema-version", "corpus-schema-version", "corpus-version", "encoding", "compression", "media-type", "content-type", "charset", "compressed-bytes", "uncompressed-bytes", "compressed-sha256", "uncompressed-sha256"];
+      const compression = read("compression");
+      const required = ["schema-version", "corpus-schema-version", "corpus-version", "encoding", "compression", "media-type", "content-type", "charset", "uncompressed-bytes", "uncompressed-sha256"];
+      if (compression === "gzip") required.push("compressed-bytes", "compressed-sha256");
       if (required.some(name => read(name) === null)) return null;
       return {
         schemaVersion: Number(read("schema-version")),
@@ -391,10 +394,12 @@
         mediaType: read("media-type"),
         contentType: read("content-type"),
         charset: read("charset"),
-        compressedBytes: Number(read("compressed-bytes")),
         uncompressedBytes: Number(read("uncompressed-bytes")),
-        compressedSha256: read("compressed-sha256"),
-        uncompressedSha256: read("uncompressed-sha256")
+        uncompressedSha256: read("uncompressed-sha256"),
+        ...(compression === "gzip" ? {
+          compressedBytes: Number(read("compressed-bytes")),
+          compressedSha256: read("compressed-sha256")
+        } : {})
       };
     };
     window.AUTHORITY_SEARCH_BUILD = readAuthoritySearchData("authoritySearchBuildData", "build");
@@ -420,10 +425,20 @@
           if (window.AUTHORITY_SEARCH_BUILD?.variant === "template") {
             throw new Error("This is the unbuilt developer template. Open AuthoritySearch.html from the project’s main folder instead of src/AuthoritySearch.template.html.");
           }
-          throw new Error(window.AUTHORITY_SEARCH_LOAD_ERRORS.dataMessages.corpus || "The compressed-corpus manifest is missing.");
+          throw new Error(window.AUTHORITY_SEARCH_LOAD_ERRORS.dataMessages.corpus || "The corpus manifest is missing.");
         }
-        if (manifest.schemaVersion !== 1 || manifest.encoding !== "base64" || manifest.compression !== "gzip" || manifest.mediaType !== "application/gzip" || manifest.contentType !== "application/json" || manifest.charset !== "utf-8" || !Number.isSafeInteger(manifest.compressedBytes) || !Number.isSafeInteger(manifest.uncompressedBytes) || !isSha256(manifest.compressedSha256) || !isSha256(manifest.uncompressedSha256)) {
-          throw new Error("The compressed-corpus manifest is present but has invalid or unsupported fields.");
+        const commonManifestValid = manifest.schemaVersion === 1 && manifest.contentType === "application/json" && manifest.charset === "utf-8" && Number.isSafeInteger(manifest.uncompressedBytes) && isSha256(manifest.uncompressedSha256);
+        const gzipManifestValid = manifest.encoding === "base64" && manifest.compression === "gzip" && manifest.mediaType === "application/gzip" && Number.isSafeInteger(manifest.compressedBytes) && isSha256(manifest.compressedSha256);
+        const jsonManifestValid = manifest.encoding === "utf-8" && manifest.compression === "none" && manifest.mediaType === "application/json";
+        if (!commonManifestValid || (!gzipManifestValid && !jsonManifestValid)) {
+          throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
+        }
+        if (jsonManifestValid) {
+          const text = readAuthoritySearchText("authoritySearchCorpusData");
+          const uncompressed = new TextEncoder().encode(text);
+          if (uncompressed.byteLength !== manifest.uncompressedBytes) throw new Error("The uncompressed corpus has an unexpected byte count.");
+          if (await sha256(uncompressed) !== manifest.uncompressedSha256) throw new Error("The uncompressed corpus failed its SHA-256 integrity check.");
+          return JSON.parse(text);
         }
         if (typeof DecompressionStream !== "function") {
           throw new Error("This browser does not support the standard gzip decompression API required by AuthoritySearch.");
@@ -1380,14 +1395,13 @@
       <div class="sources-grid" id="sourcesGrid"></div>
       <details class="section-card course-config-guide" style="margin-top:14px">
         <summary>Inspect the embedded corpus</summary>
-        <p>The corpus is compact JSON compressed with standard gzip and represented in the HTML with standard Base64. Base64 is transport encoding—not encryption or obfuscation. Decompression happens only in memory and requests no browser permission.</p>
+        <p>The manifest below identifies whether this edition contains Base64-encoded standard gzip or plain uncompressed UTF-8 JSON. Both formats are integrity-checked before the corpus is parsed; neither format requests browser permission.</p>
         <dl class="corpus-manifest" id="corpusManifestDetails"></dl>
         <ol>
           <li>Extract the text inside the <code>authoritySearchCorpusData</code> element.</li>
-          <li>Base64-decode it to <code>AuthoritySearch-Corpus.json.gz</code>.</li>
-          <li>Decompress it with an ordinary gzip-compatible tool.</li>
+          <li>For a gzip edition, Base64-decode and decompress it; for an uncompressed edition, save the extracted text directly as JSON.</li>
           <li>Compare the resulting byte counts and SHA-256 hashes with the manifest above.</li>
-          <li>Open the decompressed UTF-8 JSON in a text editor.</li>
+          <li>Open the UTF-8 JSON in a text editor.</li>
         </ol>
         <p><strong>PowerShell extraction example</strong></p>
         <pre id="corpusAuditPowerShell"></pre>
@@ -1489,7 +1503,7 @@
     const corpus = isValidCorpus(loadedCorpus) ? loadedCorpus : null;
     if (loadedCorpus && !corpus) {
       loadErrors.corpus = true;
-      loadErrors.corpusMessage = "The decompressed data does not match the AuthoritySearch corpus schema.";
+      loadErrors.corpusMessage = "The loaded data does not match the AuthoritySearch corpus schema.";
     }
     window.AUTHORITY_SEARCH_CORPUS = corpus;
     const corpusManifest = window.AUTHORITY_SEARCH_CORPUS_MANIFEST || null;
@@ -5190,18 +5204,20 @@
     }
 
     function renderCorpusAudit() {
+      const compressed = corpusManifest?.compression === "gzip";
       const rows = [
-        ["Packaging", "RFC 4648 Base64 containing RFC 1952 gzip"],
+        ["Packaging", compressed ? "RFC 4648 Base64 containing RFC 1952 gzip" : "Plain UTF-8 JSON (uncompressed)"],
+        ["Encoding", corpusManifest?.encoding || "Unavailable"],
+        ["Compression", corpusManifest?.compression || "Unavailable"],
         ["Media type", corpusManifest?.mediaType || "Unavailable"],
         ["Content", `${corpusManifest?.contentType || "Unavailable"}; charset=${corpusManifest?.charset || "unknown"}`],
-        ["Compressed bytes", Number(corpusManifest?.compressedBytes || 0).toLocaleString()],
         ["Uncompressed bytes", Number(corpusManifest?.uncompressedBytes || 0).toLocaleString()],
-        ["Compressed SHA-256", corpusManifest?.compressedSha256 || "Unavailable"],
         ["Uncompressed SHA-256", corpusManifest?.uncompressedSha256 || "Unavailable"]
       ];
+      if (compressed) rows.splice(5, 0, ["Compressed bytes", Number(corpusManifest?.compressedBytes || 0).toLocaleString()], ["Compressed SHA-256", corpusManifest?.compressedSha256 || "Unavailable"]);
       els.corpusManifestDetails.innerHTML = rows.map(([label, value]) => `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd>`).join("");
       const fileName = build.fileName || "AuthoritySearch.html";
-      els.corpusAuditPowerShell.textContent = `$htmlPath = ".\\${fileName}"
+      els.corpusAuditPowerShell.textContent = compressed ? `$htmlPath = ".\\${fileName}"
 $outGzip = ".\\AuthoritySearch-Corpus.json.gz"
 $outJson = ".\\AuthoritySearch-Corpus.json"
 $html = [IO.File]::ReadAllText($htmlPath)
@@ -5214,6 +5230,12 @@ $gzip = [IO.Compression.GZipStream]::new($input, [IO.Compression.CompressionMode
 $gzip.CopyTo($output)
 $gzip.Dispose(); $output.Dispose(); $input.Dispose()
 Get-FileHash $outGzip -Algorithm SHA256
+Get-FileHash $outJson -Algorithm SHA256` : `$htmlPath = ".\\${fileName}"
+$outJson = ".\\AuthoritySearch-Corpus.json"
+$html = [IO.File]::ReadAllText($htmlPath)
+$pattern = '(?s)<script id="authoritySearchCorpusData" type="application/json"[^>]*>(.*?)<\/script>'
+$json = [regex]::Match($html, $pattern).Groups[1].Value
+[IO.File]::WriteAllText($outJson, $json, [Text.UTF8Encoding]::new($false))
 Get-FileHash $outJson -Algorithm SHA256`;
     }
 
@@ -5228,7 +5250,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
         { title: "U.S. Code Title 8", url: "https://uscode.house.gov/browse/prelim@title8&edition=prelim" },
         { title: "eCFR", url: "https://www.ecfr.gov/current" }
       ];
-      els.sourceWarnings.innerHTML = `${!corpus ? `<div class="notice danger"><strong>The embedded corpus could not be opened.</strong><br>${escapeHtml(loadErrors.corpusMessage || "The compressed data is missing, incompatible, or malformed.")} Visa cards, quizzes, and local catalogs are disabled; official U.S.C. and CFR navigation remains available.</div>` : ""}${state.profileChanged && !state.fileConnected ? `<div class="notice warning">You have unsaved profile changes that will be lost on refresh. Open the saving menu to enable autosaving or download a backup.</div>` : ""}${corpus && !hasLocalUscCache ? `<div class="notice">This AuthoritySearch version omits the general cached U.S. Code section bodies but retains the focused definitions catalog. Ordinary U.S.C. results open on uscode.house.gov.</div>` : ""}`;
+      els.sourceWarnings.innerHTML = `${!corpus ? `<div class="notice danger"><strong>The embedded corpus could not be opened.</strong><br>${escapeHtml(loadErrors.corpusMessage || "The embedded data is missing, incompatible, or malformed.")} Visa cards, quizzes, and local catalogs are disabled; official U.S.C. and CFR navigation remains available.</div>` : ""}${state.profileChanged && !state.fileConnected ? `<div class="notice warning">You have unsaved profile changes that will be lost on refresh. Open the saving menu to enable autosaving or download a backup.</div>` : ""}${corpus && !hasLocalUscCache ? `<div class="notice">This AuthoritySearch version omits the general cached U.S. Code section bodies but retains the focused definitions catalog. Ordinary U.S.C. results open on uscode.house.gov.</div>` : ""}`;
       els.sourcesGrid.innerHTML = `<article class="source-card"><h3>Official shortcuts</h3><p>Open an approved resource or its native search.</p><div class="detail-actions">${shortcuts.map(item => openButton(item.url, item.title)).join("")}</div></article>` + Object.values(sources).map(source => `<article class="source-card"><h3>${escapeHtml(source.name)}</h3><p>${escapeHtml(source.publisher || "")}</p><dl><dt>Captured</dt><dd>${escapeHtml(source.capturedAt || "Navigation only")}</dd>${source.currentThrough ? `<dt>Current through</dt><dd>${escapeHtml(source.currentThrough)}</dd>` : ""}${source.coverage ? `<dt>Coverage</dt><dd>${escapeHtml(source.coverage)}</dd>` : ""}</dl>${openButton(source.url)}</article>`).join("");
     }
 
