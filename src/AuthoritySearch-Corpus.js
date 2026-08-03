@@ -1,10 +1,15 @@
 /* AuthoritySearch public corpus. Replace as one reviewed unit. */
 window.AUTHORITY_SEARCH_CORPUS = {
   "schemaVersion": 1,
-  "corpusVersion": "2026.07.31-12",
+  "corpusVersion": "2026.08.02-7",
   "capturedAt": "2026-07-30",
   "verifiedAt": "2026-07-31",
   "verification": {
+    "nonimmigrantTableRows": 84,
+    "immigrantTableRows": 158,
+    "resourceUnlockQuestions": 49,
+    "nonimmigrantResourceUnlockQuestions": 18,
+    "immigrantResourceUnlockQuestions": 31,
     "visaCards": 85,
     "summaryQuestions": 85,
     "factQuestions": 579,
@@ -21,6 +26,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
   },
   "approvedDomains": [
     "ecfr.gov",
+    "eforms.state.gov",
     "uscis.gov",
     "uscode.house.gov",
     "www.ecfr.gov",
