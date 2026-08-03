@@ -20,6 +20,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-129"
       },
       "prompt": "which of the following nonimmigrant statuses are initially petitioned for with {form}?",
+      "answerLabel": "Employment-based and related principal classifications (H, L, O, P, Q, and R principals)",
       "correctSymbols": ["H1B", "H2A", "H2B", "H3", "L1", "O1", "O2", "P1", "P2", "P3", "Q1", "R1"],
       "card": { "fieldLabel": "Initial petition" }
     },
@@ -39,6 +40,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-129"
       },
       "prompt": "which of the following nonimmigrant dependent statuses do not file {form} themselves but instead rely on an individually petitioned principal's Form I-129?",
+      "answerLabel": "Dependent classifications tied to I-129 principals: L-2, O-3, P-4, and R-2",
       "correctSymbols": ["L2", "O3", "P4", "R2"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -61,6 +63,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-129s"
       },
       "prompt": "which nonimmigrant principal status may be initially petitioned for with {form}?",
+      "answerLabel": "L-1 principal under an approved blanket L petition",
       "correctSymbols": ["L1"],
       "card": { "fieldLabel": "Alternative initial petition" }
     },
@@ -80,6 +83,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-129s"
       },
       "prompt": "which nonimmigrant dependent status may rely on an L1 principal's {form} rather than having its own petition?",
+      "answerLabel": "L-2 dependent of a blanket-petition L-1 principal",
       "correctSymbols": ["L2"],
       "card": {
         "fieldLabel": "Alternative principal petition",
@@ -102,6 +106,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-129cw"
       },
       "prompt": "which nonimmigrant status is initially petitioned for with {form}?",
+      "answerLabel": "CW-1 CNMI-only transitional worker",
       "correctSymbols": ["CW1"],
       "card": { "fieldLabel": "Initial petition" }
     },
@@ -121,6 +126,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-129cw"
       },
       "prompt": "which nonimmigrant dependent status does not use {form} itself but relies on the CW1 principal's Form I-129CW?",
+      "answerLabel": "CW-2 dependent of a CW-1 worker",
       "correctSymbols": ["CW2"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -143,6 +149,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-129f"
       },
       "prompt": "which nonimmigrant principal statuses are initially petitioned for with {form}?",
+      "answerLabel": "K-1 fiance(e) and K-3 spouse principals",
       "correctSymbols": ["K1", "K3"],
       "card": { "fieldLabel": "Initial petition" }
     },
@@ -162,6 +169,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-129f"
       },
       "prompt": "which nonimmigrant dependent statuses are included through a K1 or K3 principal's {form}, rather than through a separate petition?",
+      "answerLabel": "K-2 and K-4 dependent children",
       "correctSymbols": ["K2", "K4"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -184,6 +192,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-854"
       },
       "prompt": "which nonimmigrant principal statuses are initially requested with {form}?",
+      "answerLabel": "S-5 and S-6 witness or informant principals",
       "correctSymbols": ["S5", "S6"],
       "card": { "fieldLabel": "Initial classification request" }
     },
@@ -203,6 +212,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-854"
       },
       "prompt": "which nonimmigrant derivative status is requested with {form}?",
+      "answerLabel": "S-7 qualifying derivative family member",
       "correctSymbols": ["S7"],
       "card": {
         "fieldLabel": "Derivative classification request",
@@ -225,6 +235,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-914"
       },
       "prompt": "which nonimmigrant principal status is initially applied for with {form}?",
+      "answerLabel": "T-1 principal trafficking-victim applicant",
       "correctSymbols": ["T1"],
       "card": { "fieldLabel": "Initial application" }
     },
@@ -244,6 +255,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-914"
       },
       "prompt": "which nonimmigrant derivative statuses are initially applied for on their behalf with {form}?",
+      "answerLabel": "T-2 through T-6 qualifying family members",
       "correctSymbols": ["T2", "T3", "T4", "T5", "T6"],
       "card": {
         "fieldLabel": "Derivative application",
@@ -267,6 +279,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-918"
       },
       "prompt": "which nonimmigrant principal status is initially petitioned for with {form}?",
+      "answerLabel": "U-1 principal crime-victim petitioner",
       "correctSymbols": ["U1"],
       "card": { "fieldLabel": "Initial petition" }
     },
@@ -286,6 +299,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-918"
       },
       "prompt": "which nonimmigrant derivative statuses are initially petitioned for on their behalf with {form}?",
+      "answerLabel": "U-2 through U-5 qualifying family members",
       "correctSymbols": ["U2", "U3", "U4", "U5"],
       "card": {
         "fieldLabel": "Derivative petition",
@@ -309,6 +323,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-539"
       },
       "prompt": "which nonimmigrant statuses may be initially applied for with {form}?",
+      "answerLabel": "V-1 through V-3 family-unity applicants inside the United States",
       "correctSymbols": ["V1", "V2", "V3"],
       "card": {
         "fieldLabel": "Initial application",
@@ -334,6 +349,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-130"
       },
       "prompt": "which of the following immigrant statuses have their own underlying {form}?",
+      "answerLabel": "Family-based principal beneficiaries with their own Form I-130 petition",
       "correctSymbols": ["IR1", "IR2", "IR5", "CR1", "CR2", "VI5", "F11", "F21", "F22", "F24", "C21", "C22", "C24", "FX1", "FX2", "CX1", "CX2", "F31", "C31", "F41"],
       "card": { "fieldLabel": "Underlying petition" }
     },
@@ -353,6 +369,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-130"
       },
       "prompt": "which of the following immigrant statuses do not have their own underlying petition and instead derive from a principal beneficiary's {form}?",
+      "answerLabel": "Family-based derivative beneficiaries relying on a principal's Form I-130",
       "correctSymbols": ["F12", "F23", "F25", "C23", "C25", "FX3", "CX3", "F32", "F33", "C32", "C33", "F42", "F43"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -375,6 +392,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-360"
       },
       "prompt": "which of the following immigrant statuses have their own underlying {form}?",
+      "answerLabel": "Special immigrant and self-petitioning principals with their own Form I-360",
       "correctSymbols": ["IW1", "IB1", "IB2", "IB5", "AM1", "B11", "B21", "B22", "B24", "BX1", "BX2", "B31", "BC1", "SD1", "SF1", "SG1", "SH1", "SI1", "SJ1", "SK1", "SK2", "SK3", "SK4", "SL1", "SM1", "SN1", "SN2", "SN3", "SN4", "SR1"],
       "card": { "fieldLabel": "Underlying petition" }
     },
@@ -394,6 +412,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-360"
       },
       "prompt": "which of the following immigrant statuses do not have their own underlying petition and instead derive from a principal beneficiary's {form}?",
+      "answerLabel": "Derivative special immigrants relying on a principal's Form I-360",
       "correctSymbols": ["IW2", "IB3", "AM2", "AM3", "B12", "B23", "B25", "BX3", "B32", "B33", "BC2", "BC3", "SD2", "SD3", "SF2", "SG2", "SH2", "SJ2", "SM2", "SM3", "SR2", "SR3"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -416,6 +435,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-360"
       },
       "prompt": "which immigrant statuses ordinarily derive from an SI1 principal's {form}, although a qualifying surviving spouse or child may file independently?",
+      "answerLabel": "SI-2 and SI-3 derivatives or qualifying survivors of an SI-1 principal",
       "correctSymbols": ["SI2", "SI3"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -438,6 +458,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-360"
       },
       "prompt": "which immigrant principal status is petitioned with {form} for Iraqi applicants and qualifying legacy Afghan cases?",
+      "answerLabel": "SQ-1 Iraqi or qualifying legacy Afghan principal",
       "correctSymbols": ["SQ1"],
       "card": {
         "fieldLabel": "Initial petition - Iraqi/legacy Afghan route",
@@ -461,6 +482,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://eforms.state.gov/Forms/ds157.PDF"
       },
       "prompt": "which immigrant principal status is petitioned with {form} when the Afghan applicant uses the current DOS petition route?",
+      "answerLabel": "SQ-1 current-route Afghan principal",
       "correctSymbols": ["SQ1"],
       "card": {
         "fieldLabel": "Initial petition - current Afghan route",
@@ -484,6 +506,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-360"
       },
       "prompt": "which immigrant statuses ordinarily derive through an SQ1 principal's {form} in the Iraqi or qualifying legacy-Afghan route?",
+      "answerLabel": "SQ-2 and SQ-3 derivatives in the Iraqi or legacy-Afghan route",
       "correctSymbols": ["SQ2", "SQ3"],
       "card": {
         "fieldLabel": "Underlying principal petition - Iraqi/legacy Afghan route",
@@ -506,6 +529,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://eforms.state.gov/Forms/ds157.PDF"
       },
       "prompt": "which immigrant statuses ordinarily derive through an SQ1 principal's {form} in the current Afghan route?",
+      "answerLabel": "SQ-2 and SQ-3 derivatives in the current Afghan route",
       "correctSymbols": ["SQ2", "SQ3"],
       "card": {
         "fieldLabel": "Underlying principal petition - current Afghan route",
@@ -528,6 +552,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-140"
       },
       "prompt": "which immigrant statuses have their own underlying {form}?",
+      "answerLabel": "Employment-based principal beneficiaries with their own Form I-140",
       "correctSymbols": ["E11", "E12", "E13", "E21", "E31", "E32", "EW3"],
       "card": { "fieldLabel": "Underlying petition" }
     },
@@ -547,6 +572,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-140"
       },
       "prompt": "which immigrant statuses do not have their own Form I-140 and instead derive from a principal beneficiary's {form}?",
+      "answerLabel": "Employment-based derivative beneficiaries relying on a principal's Form I-140",
       "correctSymbols": ["E14", "E15", "E22", "E23", "E34", "E35", "EW4", "EW5"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -569,6 +595,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-526"
       },
       "prompt": "which immigrant principal statuses are based on {form}, including legacy regional-center petitions and current standalone-investor petitions?",
+      "answerLabel": "Legacy and standalone-investor principals using Form I-526",
       "correctSymbols": ["C51", "T51", "R51", "I51", "NU1", "NR1", "NH1"],
       "card": {
         "fieldLabel": "Underlying petition",
@@ -591,6 +618,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-526"
       },
       "prompt": "which immigrant statuses derive from a principal beneficiary's {form} rather than filing their own I-526?",
+      "answerLabel": "Derivative investors relying on a principal's Form I-526",
       "correctSymbols": ["C52", "C53", "T52", "T53", "R52", "R53", "I52", "I53", "NU2", "NU3", "NR2", "NR3", "NH2", "NH3"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -614,6 +642,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-526e"
       },
       "prompt": "which immigrant principal statuses are initially petitioned for with {form}?",
+      "answerLabel": "Regional-center investor principals using Form I-526E",
       "correctSymbols": ["RU1", "RR1", "RH1", "RI1"],
       "card": { "fieldLabel": "Underlying petition" }
     },
@@ -633,6 +662,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-526e"
       },
       "prompt": "which immigrant statuses derive from a principal beneficiary's {form} rather than filing their own I-526E?",
+      "answerLabel": "Derivative regional-center investors relying on a principal's Form I-526E",
       "correctSymbols": ["RU2", "RU3", "RR2", "RR3", "RH2", "RH3", "RI2", "RI3"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -655,6 +685,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-600"
       },
       "prompt": "which immigrant statuses are initially petitioned for with {form}?",
+      "answerLabel": "IR-3 and IR-4 orphan-adoption beneficiaries",
       "correctSymbols": ["IR3", "IR4"],
       "card": { "fieldLabel": "Underlying petition" }
     },
@@ -674,6 +705,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-800"
       },
       "prompt": "which immigrant statuses are initially petitioned for with {form}?",
+      "answerLabel": "IH-3 and IH-4 Hague Convention adoptee beneficiaries",
       "correctSymbols": ["IH3", "IH4"],
       "card": { "fieldLabel": "Underlying petition" }
     },
@@ -693,6 +725,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://eforms.state.gov/Forms/ds1884.PDF"
       },
       "prompt": "which immigrant principal status is initially petitioned for with {form}?",
+      "answerLabel": "SE-1 qualifying international-organization employee principal",
       "correctSymbols": ["SE1"],
       "card": { "fieldLabel": "Underlying petition" }
     },
@@ -712,6 +745,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://eforms.state.gov/Forms/ds1884.PDF"
       },
       "prompt": "which immigrant statuses derive from an SE1 principal's approved {form} rather than filing their own petition?",
+      "answerLabel": "SE-2 and SE-3 derivatives of an SE-1 principal",
       "correctSymbols": ["SE2", "SE3"],
       "card": {
         "fieldLabel": "Underlying principal petition",
@@ -734,6 +768,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
         "url": "https://www.uscis.gov/i-929"
       },
       "prompt": "which immigrant statuses are petitioned for with {form}?",
+      "answerLabel": "SU-2, SU-3, and SU-5 qualifying family members of a U-1 principal",
       "correctSymbols": ["SU2", "SU3", "SU5"],
       "card": {
         "fieldLabel": "Underlying petition",
@@ -753,6 +788,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
       },
       "form": null,
       "prompt": "which immigrant principal status does not require a USCIS-filed underlying petition because it is based on the Diversity Visa Program?",
+      "answerLabel": "DV-1 Diversity Visa principal - no USCIS-filed petition",
       "correctSymbols": ["DV1"],
       "card": { "fieldLabel": "Underlying petition", "value": "No USCIS-filed petition" }
     },
@@ -768,6 +804,7 @@ window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
       },
       "form": null,
       "prompt": "which immigrant statuses have no underlying USCIS petition of their own and instead derive from a DV1 principal?",
+      "answerLabel": "DV-2 and DV-3 derivatives - no USCIS-filed petition of their own",
       "correctSymbols": ["DV2", "DV3"],
       "card": {
         "fieldLabel": "Underlying petition",

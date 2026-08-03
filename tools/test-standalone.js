@@ -26,14 +26,16 @@ function sourceCorpus() {
   vm.runInContext(fs.readFileSync(path.join(root, "src", "AuthoritySearch-Visa-Tables.js"), "utf8"), sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "AuthoritySearch-Form-Questions.js"), "utf8"), sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "AuthoritySearch-Definitions.js"), "utf8"), sandbox);
+  vm.runInContext(fs.readFileSync(path.join(root, "src", "AuthoritySearch-USCIS-Glossary.js"), "utf8"), sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "AuthoritySearch-Statute-References.js"), "utf8"), sandbox);
   const corpus = JSON.parse(JSON.stringify(sandbox.window.AUTHORITY_SEARCH_CORPUS));
   corpus.visaTables = JSON.parse(JSON.stringify(sandbox.window.AUTHORITY_SEARCH_VISA_TABLES));
   corpus.visaTables.formQuestions = JSON.parse(JSON.stringify(sandbox.window.AUTHORITY_SEARCH_FORM_QUESTIONS));
   const definitions = JSON.parse(JSON.stringify(sandbox.window.AUTHORITY_SEARCH_DEFINITIONS));
+  const uscisGlossary = JSON.parse(JSON.stringify(sandbox.window.AUTHORITY_SEARCH_USCIS_GLOSSARY));
   const statuteReferences = JSON.parse(JSON.stringify(sandbox.window.AUTHORITY_SEARCH_STATUTE_REFERENCES));
   applyStatuteReferences(corpus, statuteReferences);
-  corpus.definitions = buildDefinitionCatalog(corpus, definitions);
+  corpus.definitions = buildDefinitionCatalog(corpus, definitions, uscisGlossary);
   return corpus;
 }
 
@@ -236,6 +238,8 @@ async function main() {
   const full = readBuild("AuthoritySearch.html");
   const light = readBuild("AuthoritySearch-no-USC.html");
 
+  assert.deepStrictEqual(blankProfile.resourceChallengeLockouts, [], "Blank profiles must include persisted resource-question lockouts.");
+
   assert(full.bytes <= 2_500_000, "AuthoritySearch.html exceeds 2.5 MB acceptance limit.");
   assert(light.bytes <= 1_000_000, "AuthoritySearch-no-USC.html exceeds 1 MB acceptance limit.");
   assert.strictEqual(full.build.variant, "standard");
@@ -270,9 +274,11 @@ async function main() {
     for (const question of formQuestions[kind]) {
       assert(question.correctSymbols.length, `${question.id}: form question has no correct statuses.`);
       assert(question.correctSymbols.every(symbol => validSymbols.has(symbol)), `${question.id}: form question references an unknown status.`);
+      assert(typeof question.answerLabel === "string" && question.answerLabel.length > 10, `${question.id}: form question has no concise multiple-choice answer label.`);
       assert(question.form === null || question.prompt.includes("{form}"), `${question.id}: linked form is not present in the prompt.`);
       assert(question.source?.label && question.source?.url, `${question.id}: missing specifically named source link.`);
     }
+    assert.strictEqual(new Set(formQuestions[kind].map(question => question.answerLabel)).size, formQuestions[kind].length, `${kind}: form-question answer labels must be unique.`);
   }
   const nonimmigrantFormCoverage = new Set(formQuestions.nonimmigrant.flatMap(question => question.correctSymbols));
   const immigrantFormCoverage = new Set(formQuestions.immigrant.flatMap(question => question.correctSymbols));
@@ -292,7 +298,8 @@ async function main() {
   assert.strictEqual(legacyInvestor.card.valueBySymbol.R51, "Form I-526 (legacy)");
   assert.strictEqual(legacyInvestor.card.valueBySymbol.I51, "Form I-526 (legacy)");
   assert(full.html.includes('class="resource-choice-citation"'), "Resource citations should be the inspectable answer links.");
-  assert(full.html.includes('class="resource-status-choices"'), "Form questions should render selectable status sets.");
+  assert(!full.html.includes('class="resource-status-choices"'), "Form questions still render the oversized status checkbox list.");
+  assert(!full.html.includes('data-resource-status='), "The obsolete multi-status checkbox handler remains in the application.");
   assert(full.html.includes('classificationQualifier("*derivative classification"'), "Derivative cards should display the asterisked derivative label.");
   assert(full.html.includes('class="classification-tooltip" role="tooltip"'), "Derivative details should use a hoverable, focusable tooltip.");
   assert.strictEqual((full.html.match(/resource-nonimmigrant-eos-cos/g) || []).length, 1, "EOS/COS must remain one combined resource question.");
@@ -331,23 +338,37 @@ async function main() {
     }
   }
   assert.strictEqual(verifiedStatutoryReferences, 3587, "Not every generated statutory reference was attached to a displayed cached text record.");
-  assert.strictEqual(full.corpus.definitions.entries.length, 93, "Unexpected definition record count.");
+  assert.strictEqual(full.corpus.definitions.entries.length, 360, "Unexpected definition record count.");
+  assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "uscis-glossary").length, 267, "Unexpected USCIS Glossary definition count.");
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "ina").length, 61, "Unexpected INA 101 definition count.");
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "cfr").length, 32, "Unexpected 8 CFR 1.2 definition count.");
+  assert.strictEqual(full.corpus.definitions.glossaryVerification.entries, 267, "USCIS Glossary verification metadata does not match the catalog.");
   assert.deepStrictEqual(light.corpus.definitions, full.corpus.definitions, "No-USC build lost or altered the independent definitions catalog.");
 
   const definitionScopes = new Map(full.corpus.definitions.scopes.map(scope => [scope.id, scope]));
+  assert.strictEqual(definitionScopes.get("uscis-policy")?.label, "USCIS Policy", "The USCIS glossary applicability is missing.");
   assert.strictEqual(definitionScopes.get("ina-chapter")?.label, "Entire INA", "The chapter-wide INA definition scope is not plainly labeled.");
+  assert.strictEqual(definitionScopes.get("cfr-chapter-i")?.label, "Regulation (8 CFR Chapter I)", "The regulation scope does not use the official Roman-numeral chapter label.");
   assert(!full.corpus.definitions.scopes.some(scope => scope.label === "INA generally"), "The ambiguous INA generally label remains in the definition scopes.");
+  assert(full.corpus.definitions.sourceFilters.some(filter => filter.id === "law" && filter.label === "Law"), "Defined-in filters are missing the Law category.");
+  assert(full.corpus.definitions.scopeFilters.some(filter => filter.id === "law" && filter.label === "Law"), "Applicability filters are missing the Law category.");
+  const sourceFilters = new Map(full.corpus.definitions.sourceFilters.map(filter => [filter.id, filter]));
+  assert.deepStrictEqual(sourceFilters.get("ina-statute"), { id: "ina-statute", label: "Statute", parentId: "law" }, "Defined-in Statute is not nested under Law.");
+  assert.deepStrictEqual(sourceFilters.get("ina-101-h"), { id: "ina-101-h", label: "INA 101(h)", parentId: "ina-statute" }, "INA 101(h) is not a second-level Defined-in option.");
+  assert.deepStrictEqual(sourceFilters.get("8-cfr-1-2"), { id: "8-cfr-1-2", label: "Regulation (8 CFR 1.2)", parentId: "law" }, "The regulatory source filter is not plainly labeled or nested under Law.");
+  const scopeFilters = new Map(full.corpus.definitions.scopeFilters.map(filter => [filter.id, filter]));
+  assert.deepStrictEqual(scopeFilters.get("ina-any"), { id: "ina-any", label: "Statute (Any part of INA)", parentId: "law" }, "The any-part INA applicability option is not nested under Law.");
+  assert.strictEqual(scopeFilters.get("ina-chapter")?.parentId, "ina-any", "Entire INA is not a second-level applicability option.");
+  assert.strictEqual(scopeFilters.get("cfr-chapter-i")?.parentId, "law", "The regulation applicability scope is not directly nested under Law.");
   for (const entry of full.corpus.definitions.entries) {
     assert(entry.id && entry.term && entry.text && entry.locator && entry.url && entry.captureDate, `Incomplete definition provenance for ${entry.id || entry.term}.`);
     assert(Array.isArray(entry.aliases) && entry.aliases.length > 0, `Definition ${entry.id} has no searchable term aliases.`);
     assert(definitionScopes.has(entry.scopeId), `Definition ${entry.id} has an unknown applicability scope.`);
-    assert(/^https:\/\/(?:uscode\.house\.gov|www\.ecfr\.gov)\//.test(entry.url), `Definition ${entry.id} uses an unapproved source URL.`);
+    assert(/^https:\/\/(?:uscode\.house\.gov|www\.ecfr\.gov|www\.uscis\.gov)\//.test(entry.url), `Definition ${entry.id} uses an unapproved source URL.`);
     if (entry.specificScope) assert(entry.text.includes(entry.specificScope), `Definition ${entry.id} has scope text that is not quoted from its source.`);
   }
   const definitionsFor = term => full.corpus.definitions.entries.filter(entry => entry.aliases.some(alias => alias.toLowerCase() === term.toLowerCase()));
-  assert.deepStrictEqual(definitionsFor("child").map(entry => entry.citation), ["INA 101(b)(1)", "INA 101(c)(1)"], "The two statutory definitions of child were not retained separately.");
+  assert.deepStrictEqual(definitionsFor("child").map(entry => entry.citation), ["USCIS Glossary", "INA 101(b)(1)", "INA 101(c)(1)"], "USCIS Glossary is not the first of the three child definitions.");
   assert.deepStrictEqual(definitionsFor("aggravated felony").map(entry => entry.citation), ["INA 101(a)(43)", "8 CFR 1.2"], "Statutory and regulatory aggravated-felony definitions were not retained separately.");
   assert.deepStrictEqual(definitionsFor("lawfully admitted for permanent residence").map(entry => entry.citation), ["INA 101(a)(20)", "8 CFR 1.2"], "Duplicate LPR definitions were not retained separately.");
   assert.strictEqual(definitionsFor("ineligible to citizenship").length, 1, "Quoted statutory punctuation leaked into the term index.");
@@ -359,7 +380,7 @@ async function main() {
     assert.deepStrictEqual(entry.children, node.children || [], `${entry.citation}: definition hierarchy diverges from the cached statute.`);
   }
   const totalitarianSource = statutoryNode(fullSource, "1101", ["a", "37"]).text;
-  assert.strictEqual(definitionsFor("totalitarian party")[0].text + " " + definitionsFor("totalitarianism")[0].text, totalitarianSource, "INA 101(a)(37) split definitions do not reconstruct the source text.");
+  assert.strictEqual(definitionsFor("totalitarian party").find(entry => entry.sourceFamily === "ina").text + " " + definitionsFor("totalitarianism").find(entry => entry.sourceFamily === "ina").text, totalitarianSource, "INA 101(a)(37) split definitions do not reconstruct the source text.");
   assert.strictEqual(definitionScopes.get("ina-chapter").text, statutoryNode(fullSource, "1101", ["a"]).text);
   assert.strictEqual(definitionScopes.get("ina-subchapters-i-ii").text, statutoryNode(fullSource, "1101", ["b"]).text);
   assert.strictEqual(definitionScopes.get("ina-subchapter-iii").text, statutoryNode(fullSource, "1101", ["c"]).text);
@@ -441,10 +462,77 @@ async function main() {
   assert(fallbackSource.includes('id="view-visas" hidden aria-labelledby="visasHeading"'), "Nonimmigrant Types is still the default visible view.");
   assert(!fallbackSource.includes('class="nav-button" data-view="quiz"'), "The classic Quiz remains in the primary navigation.");
   assert(fallbackSource.includes('id="openClassicQuizButton"'), "Sources & About does not link to the classic quiz.");
+  assert(fallbackSource.includes("A wrong answer locks only that specific question for 30 minutes."), "The Types pages do not explain the question-specific resource lockout.");
+  const resourceLockoutProfile = { resourceChallengeLockouts: [{ questionId: "resource-other", revision: "test-revision", lockedUntil: "2026-08-03T12:45:00.000Z" }] };
+  let resourceLockoutChanges = 0;
+  const recordResourceLockout = extractedFunction(fallbackSource, "recordResourceLockout", "immigrantDefinitionQuestion", {
+    profile: resourceLockoutProfile,
+    markProfileChanged: () => { resourceLockoutChanges += 1; },
+    Date
+  });
+  const resourceQuestion = { id: "resource-test", revision: "test-revision" };
+  const lockoutStartedAt = Date.parse("2026-08-03T12:00:00.000Z");
+  recordResourceLockout(resourceQuestion, lockoutStartedAt);
+  assert.strictEqual(resourceLockoutChanges, 1, "Recording a resource lockout did not mark the profile changed.");
+  assert.deepStrictEqual(plain(resourceLockoutProfile.resourceChallengeLockouts), [
+    { questionId: "resource-other", revision: "test-revision", lockedUntil: "2026-08-03T12:45:00.000Z" },
+    { questionId: resourceQuestion.id, revision: resourceQuestion.revision, lockedUntil: "2026-08-03T12:30:00.000Z" }
+  ], "A resource-question lockout changed another question or was not exactly 30 minutes.");
+  const activeResourceLockout = extractedFunction(fallbackSource, "activeResourceLockout", "recordResourceLockout", {
+    profile: resourceLockoutProfile,
+    Date
+  });
+  assert.strictEqual(activeResourceLockout(resourceQuestion, lockoutStartedAt).remainingMs, 30 * 60000);
+  assert.strictEqual(activeResourceLockout(resourceQuestion, lockoutStartedAt + 30 * 60000), null, "Resource lockout remained active after 30 minutes.");
+  assert.strictEqual(activeResourceLockout({ ...resourceQuestion, revision: "new-revision" }, lockoutStartedAt), null, "A stale resource-question revision remained locked.");
+  const currentResourceQuestion = extractedFunction(fallbackSource, "currentResourceQuestion", "resourceQuestionLockouts", {
+    resourceQuestions: () => [{ id: "locked-question" }, { id: "available-question" }],
+    isResourceUnlocked: () => false,
+    activeResourceLockout: question => question.id === "locked-question" ? { remainingMs: 1000 } : null,
+    state: { resourceQuizQuestionId: { nonimmigrant: null } }
+  });
+  assert.strictEqual(currentResourceQuestion("nonimmigrant").id, "available-question", "A locked resource question blocked the next available question.");
+  const formRotatedOptions = extractedFunction(fallbackSource, "rotatedOptions", "resourceOptions");
+  const formResourceOptions = extractedFunction(fallbackSource, "resourceOptions", "resourceQuestionPrompt", {
+    RESOURCE_CATALOG: {},
+    Set,
+    corpus: full.corpus,
+    normalize: value => String(value || "").normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(),
+    rotatedOptions: formRotatedOptions,
+    statusFormQuestions: kind => formQuestions[kind]
+  });
+  for (const kind of ["nonimmigrant", "immigrant"]) {
+    for (const question of formQuestions[kind]) {
+      const correctOptionId = `${question.id}:correct`;
+      const options = plain(formResourceOptions({ ...question, correctOptionId }));
+      assert.strictEqual(options.length, 6, `${question.id}: form question does not have exactly six answer choices.`);
+      assert.strictEqual(new Set(options.map(option => option.id)).size, 6, `${question.id}: form question has duplicate option IDs.`);
+      assert.strictEqual(new Set(options.map(option => option.label)).size, 6, `${question.id}: form question has duplicate answer labels.`);
+      assert.strictEqual(options.filter(option => option.id === correctOptionId).length, 1, `${question.id}: form question does not have exactly one correct option.`);
+      assert(options.every(option => option.url === question.source.url), `${question.id}: an answer option does not link to the question's approved source.`);
+    }
+  }
+  const nonimmigrantQuestionFour = plain(formResourceOptions({ ...formQuestions.nonimmigrant[0], correctOptionId: `${formQuestions.nonimmigrant[0].id}:correct` }));
+  assert.strictEqual(nonimmigrantQuestionFour.length, 6, "Nonimmigrant question 4 is not six-option multiple choice.");
+  assert(nonimmigrantQuestionFour.some(option => option.label === "Employment-based and related principal classifications (H, L, O, P, Q, and R principals)"), "Nonimmigrant question 4 lacks the grouped correct answer.");
+  const submitResourceQuizSource = extractedFunction(fallbackSource, "submitResourceQuiz", "visaTableRecords").toString();
+  assert(submitResourceQuizSource.includes("recordResourceLockout(question)"), "Wrong resource answers do not record a lockout.");
+  assert(!submitResourceQuizSource.includes("correctStatuses"), "Resource submission still expects a giant status-checkbox set.");
+  const submitSequenceQuizSource = extractedFunction(fallbackSource, "submitSequenceQuiz", "currentLink").toString();
+  assert(!submitSequenceQuizSource.includes("recordQuizLockout"), "Classic practice questions still record a retry lockout.");
+  const isQuizQuestionCandidate = extractedFunction(fallbackSource, "isQuizQuestionCandidate", "quizQuestionAtOrAfter", {
+    isQuizQuestionAvailable: () => true,
+    isQuizQuestionUnlocked: () => false,
+    quizQuestionLockout: () => { throw new Error("Classic candidates must ignore legacy lockouts."); },
+    state: { quizIncludeAnswered: false }
+  });
+  assert.strictEqual(isQuizQuestionCandidate({}), true, "A legacy lockout still removes a classic practice question from rotation.");
   assert(fallbackSource.includes('id="statuteNavigator"'), "The live statute hierarchy navigation is missing.");
   assert(fallbackSource.includes('data-statute-path='), "Rendered statutory nodes do not expose their hierarchy paths.");
-  assert(fallbackSource.includes('Math.max(0, window.innerHeight - navigatorBottom) * .25'), "The statute reading line is not one quarter of the statute viewport.");
-  assert(fallbackSource.includes('nestedInaScope ? "\\u2003\\u2003"'), "Narrow INA scope options are not visually nested under Entire INA.");
+  assert(fallbackSource.includes('Math.max(0, window.innerHeight - navigatorBottom) * .1'), "The statute reading line is not one tenth of the statute viewport.");
+  assert(fallbackSource.includes('.definition-filter-option[data-depth="1"]'), "First-level definition checkbox indentation is missing.");
+  assert(fallbackSource.includes('.definition-filter-option[data-depth="2"]'), "Second-level definition checkbox indentation is missing.");
+  assert(fallbackSource.includes('class="definition-applicability-warning"'), "Out-of-applicability definitions do not render a warning.");
   assert(fallbackSource.includes('@keyframes statute-nav-value-flash'), "Changed statute hierarchy values do not flash blue.");
   assert(fallbackSource.includes('previousValues[index] !== segment.value'), "Statute hierarchy changes are not detected by segment value.");
   assert(fallbackSource.includes('.statute-nav-option { display: flex;'), "Statute dropdown rows are not compact single-line layouts.");
@@ -464,6 +552,84 @@ async function main() {
   const childDefinition = definitionsFor("child")[0];
   assert.strictEqual(definitionMatchesQuery(childDefinition, "hil"), true, "Definition substring matching failed.");
   assert.strictEqual(definitionMatchesQuery(childDefinition, "alien"), false, "Definition term filter searched the definition body instead of term aliases.");
+  const definitionFilterDescendantLeaves = extractedFunction(fallbackSource, "definitionFilterDescendantLeaves", "normalizedDefinitionFilterSelection", { Array });
+  const normalizedDefinitionFilterSelection = extractedFunction(fallbackSource, "normalizedDefinitionFilterSelection", "definitionFilterSelectionState", { Array, Set, definitionFilterDescendantLeaves });
+  const definitionFilterSelectionState = extractedFunction(fallbackSource, "definitionFilterSelectionState", "nextDefinitionFilterSelection", { Set, normalizedDefinitionFilterSelection, definitionFilterDescendantLeaves });
+  const nextDefinitionFilterSelection = extractedFunction(fallbackSource, "nextDefinitionFilterSelection", "selectedDefinitionFilterIds", { Set, normalizedDefinitionFilterSelection, definitionFilterDescendantLeaves });
+  const sourceFilterRecords = full.corpus.definitions.sourceFilters;
+  const scopeFilterRecords = full.corpus.definitions.scopeFilters;
+  const definitionFiltersForKind = kind => kind === "source" ? sourceFilterRecords : scopeFilterRecords;
+  const definitionFilterDefinitionCount = extractedFunction(fallbackSource, "definitionFilterDefinitionCount", "renderDefinitionCheckboxTree", {
+    Set,
+    corpus: full.corpus,
+    definitionFiltersForKind,
+    definitionFilterDescendantLeaves
+  });
+  assert.strictEqual(definitionFilterDefinitionCount("source", "all"), 360, "The all-sources count does not include every definition record.");
+  assert.strictEqual(definitionFilterDefinitionCount("source", "uscis-glossary"), 267, "The USCIS Glossary source count is wrong.");
+  assert.strictEqual(definitionFilterDefinitionCount("source", "law"), 93, "The Defined-in Law count is wrong.");
+  assert.strictEqual(definitionFilterDefinitionCount("source", "ina-statute"), 61, "The Defined-in Statute count is wrong.");
+  assert.strictEqual(definitionFilterDefinitionCount("scope", "ina-any"), 61, "The any-part INA applicability count is wrong.");
+  assert.strictEqual(definitionFilterDefinitionCount("scope", "cfr-chapter-i"), 32, "The regulation applicability count is wrong.");
+  assert.deepStrictEqual(plain(definitionFilterDescendantLeaves(sourceFilterRecords, "ina-statute")), ["ina-101-a", "ina-101-b", "ina-101-c", "ina-101-h"], "Defined-in Statute does not cover every INA source leaf.");
+  assert.deepStrictEqual(plain(definitionFilterDescendantLeaves(scopeFilterRecords, "ina-any")), ["ina-chapter", "ina-subchapters-i-ii", "ina-subchapter-iii", "ina-212-a-2-e"], "Any-part INA applicability does not cover every INA scope leaf.");
+  let checkboxSelection = plain(nextDefinitionFilterSelection(sourceFilterRecords, ["all"], "ina-101-h", false));
+  assert.strictEqual(definitionFilterSelectionState(sourceFilterRecords, checkboxSelection, "ina-statute").checked, false, "Unchecking a lower-level source did not uncheck Statute.");
+  assert.strictEqual(definitionFilterSelectionState(sourceFilterRecords, checkboxSelection, "ina-statute").indeterminate, true, "A partially selected Statute parent is not indeterminate.");
+  assert.strictEqual(definitionFilterSelectionState(sourceFilterRecords, checkboxSelection, "law").checked, false, "Unchecking a lower-level source did not uncheck Law.");
+  checkboxSelection = plain(nextDefinitionFilterSelection(sourceFilterRecords, checkboxSelection, "ina-101-h", true));
+  assert.deepStrictEqual(checkboxSelection, ["all"], "Checking the final lower-level source did not restore all fully selected parents.");
+  checkboxSelection = plain(nextDefinitionFilterSelection(sourceFilterRecords, ["all"], "ina-statute", false));
+  assert.deepStrictEqual(checkboxSelection, ["uscis-glossary", "8-cfr-1-2"], "Unchecking Statute did not uncheck every specific INA source.");
+  checkboxSelection = plain(nextDefinitionFilterSelection(sourceFilterRecords, checkboxSelection, "ina-statute", true));
+  assert.deepStrictEqual(checkboxSelection, ["all"], "Checking Statute did not check every specific INA source.");
+  const definitionFilterState = { definitionQuery: "", definitionSourceFilters: ["all"], definitionScopeFilters: ["all"] };
+  const selectedDefinitionFilterIds = kind => normalizedDefinitionFilterSelection(
+    kind === "source" ? sourceFilterRecords : scopeFilterRecords,
+    kind === "source" ? definitionFilterState.definitionSourceFilters : definitionFilterState.definitionScopeFilters
+  );
+  const definitionSourceMatches = extractedFunction(fallbackSource, "definitionSourceMatches", "definitionApplicabilityMatches", { selectedDefinitionFilterIds });
+  const definitionApplicabilityMatches = extractedFunction(fallbackSource, "definitionApplicabilityMatches", "filteredDefinitionGroups", { selectedDefinitionFilterIds });
+  const filterEntries = [
+    { id: "policy-child", term: "Child", aliases: ["Child"], sourceCategory: "policy", sourceFilter: "uscis-glossary", scopeCategory: "policy", scopeId: "uscis-policy", sourcePriority: 0, locator: "USCIS Glossary — Child" },
+    { id: "law-child", term: "Child", aliases: ["Child"], sourceCategory: "law", sourceFilter: "ina-101-b", scopeCategory: "law", scopeId: "ina-subchapters-i-ii", sourcePriority: 1, locator: "INA 101(b)(1)" },
+    { id: "law-alien", term: "Alien", aliases: ["Alien"], sourceCategory: "law", sourceFilter: "ina-101-a", scopeCategory: "law", scopeId: "ina-chapter", sourcePriority: 1, locator: "INA 101(a)(3)" },
+    { id: "law-day", term: "Day", aliases: ["Day"], sourceCategory: "law", sourceFilter: "8-cfr-1-2", scopeCategory: "law", scopeId: "cfr-chapter-i", sourcePriority: 1, locator: "8 CFR 1.2 — Day" }
+  ];
+  const filteredDefinitionGroups = extractedFunction(fallbackSource, "filteredDefinitionGroups", "filteredDefinitions", {
+    corpus: { definitions: { entries: filterEntries } },
+    state: definitionFilterState,
+    definitionMatchesQuery,
+    definitionSourceMatches,
+    definitionApplicabilityMatches,
+    definitionGroupTerm: entry => entry.term,
+    normalize: value => String(value || "").toLowerCase()
+  });
+  definitionFilterState.definitionScopeFilters = ["uscis-policy"];
+  let filteredGroups = plain(filteredDefinitionGroups());
+  assert.deepStrictEqual(filteredGroups.map(group => group.term), ["Child"], "A term with no definition in the selected applicability remained visible.");
+  assert.deepStrictEqual(filteredGroups[0].entries.map(entry => entry.id), ["policy-child", "law-child"], "A duplicate outside the selected applicability was removed or the glossary was not first.");
+  assert.strictEqual(definitionApplicabilityMatches(filterEntries[1]), false, "Law definition was treated as USCIS Policy.");
+  definitionFilterState.definitionScopeFilters = plain(nextDefinitionFilterSelection(scopeFilterRecords, [], "law", true));
+  filteredGroups = plain(filteredDefinitionGroups());
+  assert.deepStrictEqual(filteredGroups.find(group => group.term === "Child").entries.map(entry => entry.id), ["policy-child", "law-child"], "USCIS definition was removed from a term that has a matching Law definition.");
+  definitionFilterState.definitionScopeFilters = plain(nextDefinitionFilterSelection(scopeFilterRecords, [], "ina-any", true));
+  filteredGroups = plain(filteredDefinitionGroups());
+  assert.deepStrictEqual(filteredGroups.map(group => group.term), ["Alien", "Child"], "Any-part INA applicability did not show exactly the terms applicable somewhere in the INA.");
+  definitionFilterState.definitionScopeFilters = ["ina-chapter"];
+  filteredGroups = plain(filteredDefinitionGroups());
+  assert.deepStrictEqual(filteredGroups.map(group => group.term), ["Alien"], "Entire INA applicability included a definition limited to another part of the INA.");
+  definitionFilterState.definitionSourceFilters = plain(nextDefinitionFilterSelection(sourceFilterRecords, [], "law", true));
+  definitionFilterState.definitionScopeFilters = ["all"];
+  filteredGroups = plain(filteredDefinitionGroups());
+  assert.deepStrictEqual(filteredGroups.find(group => group.term === "Child").entries.map(entry => entry.id), ["law-child"], "Defined-in Law did not remove the USCIS Glossary definition.");
+  assert.strictEqual(definitionSourceMatches(filterEntries[0]), false, "USCIS Glossary definition was treated as defined in Law.");
+  assert(fallbackSource.includes('type="checkbox" data-definition-filter-kind='), "Definition filters are not rendered as checkboxes.");
+  assert(fallbackSource.includes('class="definition-filter-dropdown" id="definitionSourceDropdown"'), "The Defined-in checkbox tree is not inside a collapsible dropdown.");
+  assert(fallbackSource.includes('class="definition-filter-dropdown" id="definitionScopeDropdown"'), "The Applicable-in checkbox tree is not inside a collapsible dropdown.");
+  assert(fallbackSource.includes('if (!event.target.closest(".definition-filter-dropdown"))'), "Definition filter dropdowns do not collapse when clicking outside.");
+  assert(fallbackSource.includes('class="definition-filter-count">(${count})'), "Definition filter options do not render their definition counts.");
+  assert(fallbackSource.includes('input:indeterminate { accent-color: var(--warning); }'), "Indeterminate definition filter checkboxes are not yellow.");
   const searchNormalize = value => String(value || "").normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
   const scoreRecord = extractedFunction(fallbackSource, "scoreRecord", "runSearch", {
     normalize: searchNormalize,
@@ -472,7 +638,7 @@ async function main() {
     compactFormLookup: value => String(value || "").replace(/[^a-z0-9]/gi, "").toLowerCase(),
     Math
   });
-  const definitionsLandingScore = scoreRecord({ kind: "definition-index", title: "Definitions", cite: "93 source records", text: "definitions defined terms" }, "definitions");
+  const definitionsLandingScore = scoreRecord({ kind: "definition-index", title: "Definitions", cite: "360 source records", text: "definitions defined terms" }, "definitions");
   const statuteDefinitionsScore = scoreRecord({ kind: "usc", title: "Definitions", cite: "8 U.S.C. 1101", text: "8 usc 1101 definitions" }, "definitions");
   assert(definitionsLandingScore > statuteDefinitionsScore, "The Definitions page is not the top result for an exact definitions search.");
 
@@ -488,13 +654,13 @@ async function main() {
     window: { innerHeight: 950 },
     Math
   });
-  assert.strictEqual(statuteReadingLine(), 350, "The statute reading line does not exclude the sticky bars before taking the top quarter.");
+  assert.strictEqual(statuteReadingLine(), 230, "The statute reading line does not exclude the sticky bars before taking the top tenth.");
   const scrollStatuteAnchorToReadingLine = extractedFunction(fallbackSource, "scrollStatuteAnchorToReadingLine", "currentStatutePathAtReadingLine", {
     statuteReadingLine: () => 200,
     window: { scrollBy: options => statuteScrollCalls.push(options) }
   });
   scrollStatuteAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 500 }) });
-  assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "smooth" }, "Statute navigation did not align an anchor to the quarter-view reading line.");
+  assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "smooth" }, "Statute navigation did not align an anchor to the tenth-view reading line.");
   let renderedStatuteTarget = null;
   const sectionAnchor = { id: "section-anchor" };
   const targetAnchor = { id: "target-anchor" };
@@ -511,17 +677,17 @@ async function main() {
   assert.strictEqual(alignedAnchors.pop(), targetAnchor, "A nested citation did not align its statutory line to the reading line.");
   const visibleStatuteLines = [
     { top: 100, path: ["a"] },
-    { top: 240, path: ["a", "15"] },
-    { top: 360, path: ["a", "16"] }
+    { top: 200, path: ["a", "15"] },
+    { top: 260, path: ["a", "16"] }
   ].map(item => ({ getBoundingClientRect: () => ({ top: item.top }), parentElement: { dataset: { statutePath: JSON.stringify(item.path) } } }));
   const currentStatutePathAtReadingLine = extractedFunction(fallbackSource, "currentStatutePathAtReadingLine", "updateStatuteNavigationFromScroll", {
     els: { statuteNavigator: { hidden: false }, detail: {} },
     state: { statuteNavigationSectionId: "usc-1101" },
-    statuteReadingLine: () => 350,
+    statuteReadingLine: () => 230,
     $$: () => visibleStatuteLines,
     JSON
   });
-  assert.deepStrictEqual(plain(currentStatutePathAtReadingLine()), ["a", "15"], "The live hierarchy does not follow the statutory line touching the quarter-view reading line.");
+  assert.deepStrictEqual(plain(currentStatutePathAtReadingLine()), ["a", "15"], "The live hierarchy does not follow the statutory line touching the tenth-view reading line.");
 
   const statuteNormPart = value => String(value || "").normalize("NFKD").replace(/[^A-Za-z0-9]/g, "").toLowerCase();
   const statuteNormalize = value => String(value || "").normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -657,6 +823,7 @@ async function main() {
   assert.strictEqual(comprehensive.imported.visaFactUnlocks.length, 2);
   assert.deepStrictEqual(comprehensive.imported.visaChallengeLockouts.map(record => record.visaId), ["visa-a-1"], "Expired summary lockout was not removed.");
   assert.deepStrictEqual(comprehensive.imported.visaFactChallengeLockouts.map(record => record.factId), ["visa-a-1:visa-row-001:cos"], "Expired fact lockout was not removed.");
+  assert.deepStrictEqual(comprehensive.imported.resourceChallengeLockouts, [], "A legacy profile without resource lockouts did not receive the new collection.");
   assert.strictEqual(comprehensive.imported.notes.length, 4);
   assert.deepStrictEqual(comprehensive.imported.notes.map(note => note.coursePlacement), [
     { kind: "day", week: 2, day: 4 },
@@ -692,6 +859,7 @@ async function main() {
   assert.deepStrictEqual(minimal.imported.visaChallengeLockouts, []);
   assert.deepStrictEqual(minimal.imported.visaFactUnlocks, []);
   assert.deepStrictEqual(minimal.imported.visaFactChallengeLockouts, []);
+  assert.deepStrictEqual(minimal.imported.resourceChallengeLockouts, []);
   assert.deepStrictEqual(minimal.imported.courseStructure, { blocks: [] });
   assert.deepStrictEqual(minimal.imported.notes[0].coursePlacement, { kind: "uncategorized" });
   assert.strictEqual(minimal.imported.preferences.quizCursorKey, null);
@@ -703,6 +871,14 @@ async function main() {
   assert.strictEqual(minimalReload.errors.profile, false);
 
   const normalized = importFixture("legacy-normalization-profile.js").imported;
+  const normalizedResourceLockouts = plain(migration.normalizeProfile({
+    ...blankProfile,
+    resourceChallengeLockouts: [
+      { questionId: "resource-active", revision: "1", lockedUntil: "2099-01-01T00:00:00.000Z" },
+      { questionId: "resource-expired", revision: "1", lockedUntil: "2000-01-01T00:00:00.000Z" }
+    ]
+  }));
+  assert.deepStrictEqual(normalizedResourceLockouts.resourceChallengeLockouts.map(record => record.questionId), ["resource-active"], "Expired resource-question lockout was not removed during profile normalization.");
   assert.deepStrictEqual(normalized.notes.map(note => note.coursePlacement), [
     { kind: "day", week: 6, day: 5 },
     { kind: "classification", visaId: "visa-f-1" },
@@ -722,7 +898,7 @@ async function main() {
   console.log(`PASS AuthoritySearch.html: ${full.bytes} bytes; ${full.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS AuthoritySearch-no-USC.html: ${light.bytes} bytes; ${light.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${statutoryFormattingAudit.citationLinks} local citation links`);
-  console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 61 INA clauses; 32 exact 8 CFR 1.2 entries`);
+  console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 61 INA clauses; 32 exact 8 CFR 1.2 entries`);
   console.log("PASS round trips, hashes, counts, syntax, native loader, corruption handling, deterministic gzip, profile isolation, comprehensive legacy profile migration, statutory formatting, saving-menu state rules, and ordinary gzip extraction");
 }
 

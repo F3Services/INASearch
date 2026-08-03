@@ -590,13 +590,6 @@
     .resource-choice label { display: flex; align-items: center; cursor: pointer; }
     .resource-choice input { flex: 0 0 auto; width: 17px; height: 17px; margin: 1px 0 0; accent-color: var(--blue); }
     .resource-choice-citation { min-width: 0; font-size: 12px; font-weight: 800; line-height: 1.4; overflow-wrap: anywhere; }
-    .resource-status-choices { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 7px; max-height: 420px; margin: 15px 0; overflow: auto; border: 1px solid var(--line); border-radius: 10px; padding: 9px; background: var(--canvas); }
-    .resource-status-choice { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 7px; min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--panel); cursor: pointer; }
-    .resource-status-choice.selected { border-color: var(--blue); background: var(--blue-soft); }
-    .resource-status-choice input { width: 16px; height: 16px; margin: 1px 0 0; accent-color: var(--blue); }
-    .resource-status-choice span { min-width: 0; }
-    .resource-status-choice strong { display: block; color: var(--navy); font-family: var(--mono); font-size: 12px; }
-    .resource-status-choice small { display: block; margin-top: 2px; color: var(--muted); font-size: 9px; line-height: 1.3; }
     .resource-unlock-complete { padding: 17px; color: var(--success); background: var(--success-soft); }
     .resource-unlock-complete strong { color: var(--success); }
     .type-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin: 9px 0 13px; }
@@ -670,8 +663,28 @@
     .source-card dl { display: grid; grid-template-columns: auto 1fr; gap: 5px 10px; margin: 12px 0; font-size: 11px; }
     .source-card dt { color: var(--muted); }
     .source-card dd { margin: 0; }
-    .definitions-toolbar { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(170px, .42fr) minmax(190px, .5fr); gap: 10px; margin-bottom: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 13px; background: var(--panel); }
-    .definitions-toolbar label { display: grid; gap: 5px; color: var(--navy); font-size: 11px; font-weight: 850; }
+    .definitions-toolbar { position: relative; z-index: 20; display: grid; grid-template-columns: minmax(220px, 1fr) repeat(2, minmax(210px, .58fr)); align-items: start; gap: 10px; margin-bottom: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 13px; background: var(--panel); }
+    .definitions-toolbar > label { display: grid; gap: 5px; color: var(--navy); font-size: 11px; font-weight: 850; }
+    .definition-filter-control { display: grid; min-width: 0; gap: 5px; }
+    .definition-filter-control-label { color: var(--navy); font-size: 11px; font-weight: 850; }
+    .definition-filter-dropdown { position: relative; min-width: 0; }
+    .definition-filter-dropdown > summary { position: relative; display: flex; min-height: 37px; align-items: center; border: 1px solid var(--line); border-radius: 8px; padding: 8px 34px 8px 10px; color: var(--ink); background: var(--canvas); font-size: 12px; font-weight: 750; list-style: none; cursor: pointer; }
+    .definition-filter-dropdown > summary::-webkit-details-marker { display: none; }
+    .definition-filter-dropdown > summary::after { position: absolute; right: 11px; content: "▾"; color: var(--muted); transition: transform .14s ease; }
+    .definition-filter-dropdown[open] > summary { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
+    .definition-filter-dropdown[open] > summary::after { transform: rotate(180deg); }
+    .definition-filter-dropdown > summary:focus-visible { border-color: var(--blue); outline: 3px solid var(--blue-soft); }
+    .definition-checkbox-tree { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; display: grid; width: max(100%, 300px); max-height: min(430px, 65vh); overflow: auto; gap: 1px; border: 1px solid var(--line); border-radius: 9px; padding: 8px; background: var(--panel); box-shadow: var(--shadow); }
+    #definitionScopeDropdown .definition-checkbox-tree { right: 0; left: auto; }
+    .definition-filter-option { display: grid; grid-template-columns: 17px minmax(0, 1fr); align-items: center; gap: 7px; min-height: 25px; border-radius: 6px; padding: 3px 5px; color: var(--ink); font-size: 11px; font-weight: 700; cursor: pointer; }
+    .definition-filter-option:hover { background: var(--blue-soft); }
+    .definition-filter-option[data-depth="1"] { padding-left: 23px; }
+    .definition-filter-option[data-depth="2"] { padding-left: 41px; }
+    .definition-filter-option.filter-all { margin-bottom: 3px; border-bottom: 1px solid var(--line); border-radius: 0; padding-bottom: 6px; color: var(--navy); font-weight: 900; }
+    .definition-filter-option input { width: 16px; height: 16px; margin: 0; accent-color: var(--blue); }
+    .definition-filter-option input:indeterminate { accent-color: var(--warning); }
+    .definition-filter-label { display: flex; min-width: 0; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .definition-filter-count { flex: 0 0 auto; color: var(--muted); font-family: var(--mono); font-size: 9px; font-weight: 800; }
     .definition-count { margin: 4px 0 13px; color: var(--muted); font-size: 12px; }
     .definition-list { display: grid; gap: 13px; }
     .definition-group { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: 0 4px 14px rgba(16,42,67,.04); }
@@ -680,6 +693,8 @@
     .definition-group-head small { color: var(--muted); white-space: nowrap; }
     .definition-entry { padding: 16px; }
     .definition-entry + .definition-entry { border-top: 1px solid var(--line); }
+    .definition-entry.outside-applicability { background: var(--amber-soft); }
+    .definition-applicability-warning { margin: 0 0 12px; border: 1px solid #e5bc60; border-radius: 9px; padding: 9px 11px; color: #75520b; background: rgba(255,255,255,.45); font-size: 12px; line-height: 1.45; }
     .definition-entry-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-bottom: 10px; }
     .definition-citation { color: var(--blue); font-family: var(--mono); font-size: 12px; font-weight: 900; }
     .definition-text { margin: 0; color: var(--ink); line-height: 1.62; white-space: pre-wrap; }
@@ -768,6 +783,7 @@
       .visa-single-subtype { margin-left: 0; }
       .page-heading { align-items: start; flex-direction: column; }
       .definitions-toolbar { grid-template-columns: 1fr; }
+      .definition-checkbox-tree, #definitionScopeDropdown .definition-checkbox-tree { position: static; width: 100%; max-height: 360px; margin-top: 6px; }
       .quiz-controls, .quiz-jump { width: 100%; }
       .resource-unlock-head { align-items: start; flex-direction: column; }
       .resource-unlock-progress { text-align: left; }
@@ -956,18 +972,26 @@
 
     <section class="view" id="view-definitions" aria-labelledby="definitionsHeading">
       <div class="page-heading">
-        <div><h1 id="definitionsHeading">Definitions</h1><p>Exact statutory and regulatory definitions, kept separate by source and by the scope stated in the authority.</p></div>
+        <div><h1 id="definitionsHeading">Definitions</h1><p>USCIS Glossary explanations and exact statutory and regulatory definitions, kept separate by source and applicability.</p></div>
       </div>
       <div class="definitions-toolbar" aria-label="Definition filters">
         <label for="definitionTermFilter">Term contains
           <input class="field" id="definitionTermFilter" type="search" autocomplete="off" spellcheck="false" placeholder="Try alien, child, admission…">
         </label>
-        <label for="definitionSourceFilter">Defined in
-          <select class="field" id="definitionSourceFilter"></select>
-        </label>
-        <label for="definitionScopeFilter">Applicable in
-          <select class="field" id="definitionScopeFilter"></select>
-        </label>
+        <div class="definition-filter-control">
+          <span class="definition-filter-control-label">Defined in</span>
+          <details class="definition-filter-dropdown" id="definitionSourceDropdown">
+            <summary><span data-definition-filter-summary="source">All sources</span></summary>
+            <div class="definition-checkbox-tree" id="definitionSourceFilter" role="group" aria-label="Defined in options"></div>
+          </details>
+        </div>
+        <div class="definition-filter-control">
+          <span class="definition-filter-control-label">Applicable in</span>
+          <details class="definition-filter-dropdown" id="definitionScopeDropdown">
+            <summary><span data-definition-filter-summary="scope">All applicability scopes</span></summary>
+            <div class="definition-checkbox-tree" id="definitionScopeFilter" role="group" aria-label="Applicable in options"></div>
+          </details>
+        </div>
       </div>
       <div id="definitionNoResults" class="notice warning" role="status" hidden><strong>No matching definitions.</strong> Change the term or scope filters.</div>
       <p class="definition-count" id="definitionCount" aria-live="polite"></p>
@@ -981,7 +1005,7 @@
       <div id="sourceWarnings"></div>
       <section class="section-card" style="margin-bottom:14px" aria-labelledby="classicQuizHeading">
         <h2 id="classicQuizHeading" style="margin-top:0;color:var(--navy)">Classic quiz questions</h2>
-        <p>The original status and fact questions remain available as optional practice. They do not control which facts are unlocked on the classification cards.</p>
+        <p>The original status and fact questions remain available as optional practice. They do not control which facts are unlocked on the classification cards, and wrong answers may be retried without a timeout.</p>
         <button class="button primary" id="openClassicQuizButton" type="button">Open classic quiz</button>
       </section>
       <div class="sources-grid" id="sourcesGrid"></div>
@@ -1001,11 +1025,11 @@
       </details>
       <div class="section-card" style="margin-top:14px">
         <h2 style="margin-top:0;color:var(--navy)">Important boundaries</h2>
-        <p>The Definitions catalog reproduces explicit definitions from INA 101 and 8 CFR 1.2 as separate source records. Its applicability labels quote the governing scope language; it does not merge competing definitions or infer a universal meaning.</p>
+        <p>The Definitions catalog preserves USCIS Glossary explanations and explicit definitions from INA 101 and 8 CFR 1.2 as separate source records. Glossary entries are categorized as USCIS Policy; statutory and regulatory entries are categorized as Law. Applicability labels retain the governing source scope, and AuthoritySearch does not merge competing definitions or infer a universal meaning.</p>
         <p>In the standard build, official House cross-references whose targets are inside cached Title 8 are rendered as local links. References outside the cached Title 8 corpus remain plain text rather than being assigned an unverified local target.</p>
         <p>AuthoritySearch is an open-book study aid, not legal advice and not a substitute for checking the current official source. <span id="uscCoverageBoundary">U.S. Code handling depends on this build; regulation links open on current eCFR.</span></p>
         <p>INA citations and U.S.C. citations are preserved as distinct citation systems. A crosswalk is shown only when the USCIS INA table directly supplies it. Named-Act results are references found in approved sources—not complete reproductions of those Acts.</p>
-        <p>Immigration card fields are unlocked by identifying their approved source in six-choice, open-resource questions. The older status and fact questions remain available as optional practice and do not control card content. Wrong resource choices and selected answers are not retained. Until autosaving is enabled, completed resource checks and practice progress remain only in the current browser tab.</p>
+        <p>Immigration card fields are unlocked by identifying their approved source in six-choice, open-resource questions. A wrong resource answer locks only that specific question for 30 minutes; other questions remain available and selected answers are not retained. The older status and fact questions remain available as optional practice without a retry timeout and do not control card content. Until autosaving is enabled, completed resource checks, resource-question lockouts, and practice progress remain only in the current browser tab.</p>
       </div>
     </section>
   </main>
@@ -1192,12 +1216,14 @@
       immigrantSubtypeSelections: {},
       resourceQuizSelection: { nonimmigrant: null, immigrant: null },
       resourceQuizFeedback: { nonimmigrant: "", immigrant: "" },
+      resourceQuizQuestionId: { nonimmigrant: null, immigrant: null },
+      resourceQuizTimers: { nonimmigrant: null, immigrant: null },
       visaNoteIndexTimer: null,
       noteLinksDraft: [],
       notePlacementDraft: { kind: "day", week: 1, day: 1 },
       definitionQuery: "",
-      definitionSourceFilter: "all",
-      definitionScopeFilter: "all",
+      definitionSourceFilters: ["all"],
+      definitionScopeFilters: ["all"],
     };
 
     function normalizeCourseStructure(value) {
@@ -1243,6 +1269,7 @@
       visaFactUnlocks: [],
       visaFactChallengeLockouts: [],
       resourceUnlocks: [],
+      resourceChallengeLockouts: [],
       notes: [],
       courseStructure: { blocks: [] },
       preferences: { theme: "system", resultFilter: "all", compactResults: false, quizCursorKey: null, quizClassification: "all" }
@@ -1260,12 +1287,14 @@
       if (!Array.isArray(normalized.visaFactUnlocks)) normalized.visaFactUnlocks = [];
       if (!Array.isArray(normalized.visaFactChallengeLockouts)) normalized.visaFactChallengeLockouts = [];
       if (!Array.isArray(normalized.resourceUnlocks)) normalized.resourceUnlocks = [];
+      if (!Array.isArray(normalized.resourceChallengeLockouts)) normalized.resourceChallengeLockouts = [];
       normalized.courseStructure = normalizeCourseStructure(normalized.courseStructure);
       normalized.notes = normalized.notes.map(note => ({ ...note, coursePlacement: normalizeCoursePlacement(note.coursePlacement, note) }));
       if (!("quizCursorKey" in normalized.preferences)) normalized.preferences.quizCursorKey = null;
       if (!("quizClassification" in normalized.preferences)) normalized.preferences.quizClassification = "all";
       normalized.visaChallengeLockouts = normalized.visaChallengeLockouts.filter(record => Date.parse(record?.lockedUntil) > Date.now());
       normalized.visaFactChallengeLockouts = normalized.visaFactChallengeLockouts.filter(record => Date.parse(record?.lockedUntil) > Date.now());
+      normalized.resourceChallengeLockouts = normalized.resourceChallengeLockouts.filter(record => Date.parse(record?.lockedUntil) > Date.now());
       return normalized;
     }
 
@@ -1489,12 +1518,77 @@
       return (corpus?.definitions?.scopes || []).find(scope => scope.id === entry.scopeId) || null;
     }
 
-    function filteredDefinitions() {
-      return (corpus?.definitions?.entries || []).filter(entry =>
-        definitionMatchesQuery(entry, state.definitionQuery) &&
-        (state.definitionSourceFilter === "all" || entry.sourceFilter === state.definitionSourceFilter) &&
-        (state.definitionScopeFilter === "all" || entry.scopeId === state.definitionScopeFilter)
+    function definitionFiltersForKind(kind) {
+      return kind === "source" ? (corpus?.definitions?.sourceFilters || []) : (corpus?.definitions?.scopeFilters || []);
+    }
+
+    function definitionFilterDescendantLeaves(filters, filterId) {
+      if (filterId === "all") return filters
+        .filter(filter => filter.id !== "all" && !filters.some(candidate => candidate.parentId === filter.id))
+        .map(filter => filter.id);
+      const children = filters.filter(filter => filter.parentId === filterId);
+      return children.length ? children.flatMap(filter => definitionFilterDescendantLeaves(filters, filter.id)) : [filterId];
+    }
+
+    function normalizedDefinitionFilterSelection(filters, selection) {
+      const leaves = definitionFilterDescendantLeaves(filters, "all");
+      const requested = Array.isArray(selection) ? selection : [selection];
+      if (requested.includes("all")) return leaves;
+      const selected = new Set(requested);
+      return leaves.filter(id => selected.has(id));
+    }
+
+    function definitionFilterSelectionState(filters, selection, filterId) {
+      const selected = new Set(normalizedDefinitionFilterSelection(filters, selection));
+      const descendants = definitionFilterDescendantLeaves(filters, filterId);
+      const selectedCount = descendants.filter(id => selected.has(id)).length;
+      return { checked: descendants.length > 0 && selectedCount === descendants.length, indeterminate: selectedCount > 0 && selectedCount < descendants.length };
+    }
+
+    function nextDefinitionFilterSelection(filters, selection, filterId, checked) {
+      const leaves = definitionFilterDescendantLeaves(filters, "all");
+      const selected = new Set(normalizedDefinitionFilterSelection(filters, selection));
+      for (const id of definitionFilterDescendantLeaves(filters, filterId)) checked ? selected.add(id) : selected.delete(id);
+      const ordered = leaves.filter(id => selected.has(id));
+      return ordered.length === leaves.length ? ["all"] : ordered;
+    }
+
+    function selectedDefinitionFilterIds(kind) {
+      const filters = definitionFiltersForKind(kind);
+      const selection = kind === "source" ? state.definitionSourceFilters : state.definitionScopeFilters;
+      return normalizedDefinitionFilterSelection(filters, selection);
+    }
+
+    function definitionSourceMatches(entry, filterIds = selectedDefinitionFilterIds("source")) {
+      return filterIds.includes(entry.sourceFilter);
+    }
+
+    function definitionApplicabilityMatches(entry, filterIds = selectedDefinitionFilterIds("scope")) {
+      return filterIds.includes(entry.scopeId);
+    }
+
+    function filteredDefinitionGroups() {
+      const candidates = (corpus?.definitions?.entries || []).filter(entry =>
+        definitionMatchesQuery(entry, state.definitionQuery) && definitionSourceMatches(entry)
       );
+      const groups = new Map();
+      for (const entry of candidates) {
+        const groupTerm = definitionGroupTerm(entry);
+        const key = normalize(groupTerm);
+        if (!groups.has(key)) groups.set(key, { term: groupTerm, entries: [] });
+        groups.get(key).entries.push(entry);
+      }
+      return [...groups.values()]
+        .filter(group => group.entries.some(entry => definitionApplicabilityMatches(entry)))
+        .map(group => ({
+          ...group,
+          entries: group.entries.sort((a, b) => (a.sourcePriority ?? 1) - (b.sourcePriority ?? 1) || a.locator.localeCompare(b.locator))
+        }))
+        .sort((a, b) => a.term.localeCompare(b.term));
+    }
+
+    function filteredDefinitions() {
+      return filteredDefinitionGroups().flatMap(group => group.entries);
     }
 
     function definitionGroupTerm(entry, entries = corpus?.definitions?.entries || []) {
@@ -1508,24 +1602,88 @@
       return duplicate || entry.term;
     }
 
+    function definitionFilterDepth(filters, filter) {
+      let depth = 0;
+      let parentId = filter.parentId;
+      while (parentId) {
+        depth++;
+        parentId = filters.find(candidate => candidate.id === parentId)?.parentId;
+      }
+      return depth;
+    }
+
+    function definitionFilterDefinitionCount(kind, filterId) {
+      const filters = definitionFiltersForKind(kind);
+      const leafIds = new Set(definitionFilterDescendantLeaves(filters, filterId));
+      const field = kind === "source" ? "sourceFilter" : "scopeId";
+      return (corpus?.definitions?.entries || []).filter(entry => leafIds.has(entry[field])).length;
+    }
+
+    function renderDefinitionCheckboxTree(container, filters, kind) {
+      container.innerHTML = filters.map(filter => {
+        const count = definitionFilterDefinitionCount(kind, filter.id);
+        return `<label class="definition-filter-option${filter.id === "all" ? " filter-all" : ""}" data-depth="${definitionFilterDepth(filters, filter)}"><input type="checkbox" data-definition-filter-kind="${kind}" data-definition-filter-id="${escapeHtml(filter.id)}"><span class="definition-filter-label"><span>${escapeHtml(filter.label)}</span><span class="definition-filter-count">(${count})</span></span></label>`;
+      }).join("");
+    }
+
+    function definitionFilterSummaryText(kind) {
+      const filters = definitionFiltersForKind(kind);
+      const selection = kind === "source" ? state.definitionSourceFilters : state.definitionScopeFilters;
+      const selected = normalizedDefinitionFilterSelection(filters, selection);
+      const allFilter = filters.find(filter => filter.id === "all");
+      if (!selected.length) return "None selected";
+      if (definitionFilterSelectionState(filters, selection, "all").checked) return `${allFilter?.label || "All"} (${definitionFilterDefinitionCount(kind, "all")})`;
+      const selectedSet = new Set(selected);
+      const exactFilter = filters
+        .filter(filter => filter.id !== "all")
+        .filter(filter => {
+          const leaves = definitionFilterDescendantLeaves(filters, filter.id);
+          return leaves.length === selected.length && leaves.every(id => selectedSet.has(id));
+        })
+        .sort((a, b) => definitionFilterDepth(filters, b) - definitionFilterDepth(filters, a))[0];
+      if (exactFilter) return `${exactFilter.label} (${definitionFilterDefinitionCount(kind, exactFilter.id)})`;
+      return `${selected.length} of ${definitionFilterDescendantLeaves(filters, "all").length} options selected`;
+    }
+
+    function syncDefinitionFilterCheckboxes(kind) {
+      const filters = definitionFiltersForKind(kind);
+      const selection = kind === "source" ? state.definitionSourceFilters : state.definitionScopeFilters;
+      const container = kind === "source" ? els.definitionSourceFilter : els.definitionScopeFilter;
+      for (const input of $$(`[data-definition-filter-kind="${kind}"]`, container)) {
+        const filterState = definitionFilterSelectionState(filters, selection, input.dataset.definitionFilterId);
+        input.checked = filterState.checked;
+        input.indeterminate = filterState.indeterminate;
+      }
+      const summary = $(`[data-definition-filter-summary="${kind}"]`);
+      if (summary) summary.textContent = definitionFilterSummaryText(kind);
+    }
+
+    function setDefinitionFilterSelection(kind, filterId, checked) {
+      const filters = definitionFiltersForKind(kind);
+      const stateKey = kind === "source" ? "definitionSourceFilters" : "definitionScopeFilters";
+      state[stateKey] = nextDefinitionFilterSelection(filters, state[stateKey], filterId, checked);
+      renderDefinitions();
+    }
+
     function renderDefinitionFilterOptions() {
       const definitions = corpus?.definitions;
       if (!definitions) return;
-      els.definitionSourceFilter.innerHTML = (definitions.sourceFilters || []).map(filter => `<option value="${escapeHtml(filter.id)}">${escapeHtml(filter.label)}</option>`).join("");
-      els.definitionScopeFilter.innerHTML = `<option value="all">All applicability scopes</option>` + (definitions.scopes || []).map(scope => {
-        const nestedInaScope = scope.id.startsWith("ina-") && scope.id !== "ina-chapter";
-        return `<option value="${escapeHtml(scope.id)}">${nestedInaScope ? "\u2003\u2003" : ""}${escapeHtml(scope.label)}</option>`;
-      }).join("");
-      els.definitionSourceFilter.value = state.definitionSourceFilter;
-      els.definitionScopeFilter.value = state.definitionScopeFilter;
+      renderDefinitionCheckboxTree(els.definitionSourceFilter, definitions.sourceFilters || [], "source");
+      renderDefinitionCheckboxTree(els.definitionScopeFilter, definitions.scopeFilters || [], "scope");
+      syncDefinitionFilterCheckboxes("source");
+      syncDefinitionFilterCheckboxes("scope");
     }
 
     function renderDefinitionEntry(entry) {
       const scope = definitionScope(entry);
+      const outsideApplicability = !definitionApplicabilityMatches(entry);
       const lastPathPart = entry.path?.[entry.path.length - 1] || "";
-      const definitionBody = formatStatutoryRunInText(entry.text || "", lastPathPart, entry.references || []);
+      const definitionBody = entry.sourceFamily === "ina"
+        ? formatStatutoryRunInText(entry.text || "", lastPathPart, entry.references || [])
+        : escapeHtml(entry.text || "");
       const children = (entry.children || []).map(child => renderStatutoryNode(child, [], entry.path || [], 1)).join("");
-      return `<section class="definition-entry">
+      return `<section class="definition-entry${outsideApplicability ? " outside-applicability" : ""}">
+        ${outsideApplicability ? `<div class="definition-applicability-warning" role="note"><strong>Outside the selected applicability.</strong> This definition is not categorized under any checked applicability; it remains visible because another definition for this term is.</div>` : ""}
         <div class="definition-entry-meta"><span class="definition-citation">${escapeHtml(entry.citation)}</span>${entry.uscCitation ? `<span class="badge">${escapeHtml(entry.uscCitation)}</span>` : ""}<span class="badge">Captured ${escapeHtml(entry.captureDate)}</span></div>
         <p class="definition-text">${definitionBody}</p>${children ? `<div class="definition-children">${children}</div>` : ""}
         <dl class="definition-scope">
@@ -1546,21 +1704,17 @@
         els.definitionNoResults.hidden = true;
         return;
       }
-      if (!els.definitionSourceFilter.options.length) renderDefinitionFilterOptions();
+      if (!els.definitionSourceFilter.children.length) renderDefinitionFilterOptions();
       els.definitionTermFilter.value = state.definitionQuery;
-      els.definitionSourceFilter.value = state.definitionSourceFilter;
-      els.definitionScopeFilter.value = state.definitionScopeFilter;
-      const matches = filteredDefinitions().sort((a, b) => a.term.localeCompare(b.term) || a.locator.localeCompare(b.locator));
-      const groups = new Map();
-      for (const entry of matches) {
-        const groupTerm = definitionGroupTerm(entry);
-        const key = normalize(groupTerm);
-        if (!groups.has(key)) groups.set(key, { term: groupTerm, entries: [] });
-        groups.get(key).entries.push(entry);
-      }
-      els.definitionNoResults.hidden = matches.length > 0;
-      els.definitionCount.textContent = `${matches.length} definition source record${matches.length === 1 ? "" : "s"} · ${groups.size} term${groups.size === 1 ? "" : "s"}`;
-      els.definitionList.innerHTML = [...groups.values()].map(group => `<article class="definition-group">
+      syncDefinitionFilterCheckboxes("source");
+      syncDefinitionFilterCheckboxes("scope");
+      const groups = filteredDefinitionGroups();
+      const matches = groups.flatMap(group => group.entries);
+      const applicableMatches = matches.filter(entry => definitionApplicabilityMatches(entry)).length;
+      const allApplicabilitiesSelected = definitionFilterSelectionState(corpus.definitions.scopeFilters || [], state.definitionScopeFilters, "all").checked;
+      els.definitionNoResults.hidden = groups.length > 0;
+      els.definitionCount.textContent = `${matches.length} definition source record${matches.length === 1 ? "" : "s"} displayed · ${groups.length} term${groups.length === 1 ? "" : "s"}${allApplicabilitiesSelected ? "" : ` · ${applicableMatches} definition${applicableMatches === 1 ? "" : "s"} in checked applicability`}`;
+      els.definitionList.innerHTML = groups.map(group => `<article class="definition-group">
         <div class="definition-group-head"><h2>${escapeHtml(group.term)}</h2><small>${group.entries.length > 1 ? `${group.entries.length} definitions` : "1 definition"}</small></div>
         ${group.entries.map(renderDefinitionEntry).join("")}
       </article>`).join("");
@@ -2219,7 +2373,7 @@
 
     function renderDefinitionCatalogPreview() {
       const count = corpus?.definitions?.entries?.length || 0;
-      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Reference catalog</p><h2 class="detail-title">Definitions</h2><p class="detail-subtitle">${count} separately sourced statutory and regulatory definition records.</p><div class="detail-actions"><button class="button primary" type="button" data-open-definitions>Open Definitions</button></div><div class="source-banner">Includes explicit definitions from INA 101 and 8 CFR 1.2. Duplicate terms remain separate when the authorities define them differently.</div></div>`;
+      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Reference catalog</p><h2 class="detail-title">Definitions</h2><p class="detail-subtitle">${count} separately sourced USCIS Policy, statutory, and regulatory definition records.</p><div class="detail-actions"><button class="button primary" type="button" data-open-definitions>Open Definitions</button></div><div class="source-banner">Includes the USCIS Glossary and explicit definitions from INA 101 and 8 CFR 1.2. Duplicate terms remain separate when the sources define or explain them differently.</div></div>`;
     }
 
     function renderDefinitionPreview(entry) {
@@ -2355,7 +2509,7 @@
     function statuteReadingLine() {
       const topbarBottom = Math.max(0, $(".topbar")?.getBoundingClientRect?.().bottom || 0);
       const navigatorBottom = !els.statuteNavigator.hidden ? Math.max(topbarBottom, els.statuteNavigator.getBoundingClientRect().bottom) : topbarBottom;
-      return navigatorBottom + Math.max(0, window.innerHeight - navigatorBottom) * .25;
+      return navigatorBottom + Math.max(0, window.innerHeight - navigatorBottom) * .1;
     }
 
     function scrollStatuteAnchorToReadingLine(anchor) {
@@ -2896,6 +3050,21 @@
       return Boolean(id && currentRevision && profile.resourceUnlocks.some(record => record.questionId === id && record.revision === currentRevision));
     }
 
+    function activeResourceLockout(question, now = Date.now()) {
+      if (!question?.id || !question?.revision) return null;
+      const record = profile.resourceChallengeLockouts.find(item => item.questionId === question.id && item.revision === question.revision);
+      if (!record) return null;
+      const remainingMs = Date.parse(record.lockedUntil) - now;
+      return remainingMs > 0 ? { ...record, remainingMs } : null;
+    }
+
+    function recordResourceLockout(question, now = Date.now()) {
+      const lockedUntil = new Date(now + 30 * 60000).toISOString();
+      profile.resourceChallengeLockouts = profile.resourceChallengeLockouts.filter(record => record.questionId !== question.id);
+      profile.resourceChallengeLockouts.push({ questionId: question.id, revision: question.revision, lockedUntil });
+      markProfileChanged();
+    }
+
     function immigrantDefinitionQuestion(group) {
       const scope = group.symbols.length > 8 ? group.scopeLabel : formatQuizCodes(group.symbols);
       return {
@@ -2918,13 +3087,23 @@
 
     function resourceQuestions(kind) {
       const base = (BASE_RESOURCE_QUESTIONS[kind] || []).map(question => ({ ...question, correctOptionId: question.correct }));
+      const forms = statusFormQuestions(kind).map(question => ({ ...question, correctOptionId: `${question.id}:correct` }));
       return kind === "immigrant"
-        ? [...base, ...(corpus?.visaTables?.immigrantDefinitionGroups || []).map(immigrantDefinitionQuestion), ...statusFormQuestions(kind)]
-        : [...base, ...statusFormQuestions(kind)];
+        ? [...base, ...(corpus?.visaTables?.immigrantDefinitionGroups || []).map(immigrantDefinitionQuestion), ...forms]
+        : [...base, ...forms];
     }
 
     function currentResourceQuestion(kind) {
-      return resourceQuestions(kind).find(question => !isResourceUnlocked(question)) || null;
+      const available = resourceQuestions(kind).filter(question => !isResourceUnlocked(question) && !activeResourceLockout(question));
+      return available.find(question => question.id === state.resourceQuizQuestionId[kind]) || available[0] || null;
+    }
+
+    function resourceQuestionLockouts(kind) {
+      return resourceQuestions(kind)
+        .filter(question => !isResourceUnlocked(question))
+        .map(question => ({ question, lockout: activeResourceLockout(question) }))
+        .filter(item => item.lockout)
+        .sort((a, b) => a.lockout.remainingMs - b.lockout.remainingMs);
     }
 
     function authorityUrl(authority) {
@@ -2955,6 +3134,21 @@
     }
 
     function resourceOptions(question) {
+      if (Array.isArray(question.correctSymbols)) {
+        const kind = question.id.startsWith("resource-immigrant-") ? "immigrant" : "nonimmigrant";
+        const correct = { id: question.correctOptionId, label: question.answerLabel, url: question.source?.url };
+        const distractorQuestions = rotatedOptions(statusFormQuestions(kind).filter(candidate => candidate.id !== question.id), `${question.id}:distractors`);
+        const seen = new Set([normalize(correct.label)]);
+        const distractors = [];
+        for (const candidate of distractorQuestions) {
+          const key = normalize(candidate.answerLabel);
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
+          distractors.push({ id: `${question.id}:distractor-${distractors.length + 1}`, label: candidate.answerLabel, url: question.source?.url });
+          if (distractors.length === 5) break;
+        }
+        return rotatedOptions([correct, ...distractors], question.id);
+      }
       if (!question.group) return question.optionIds.map(id => ({ id, ...RESOURCE_CATALOG[id] }));
       const correct = { id: question.correctOptionId, label: question.group.authority, url: question.group.sourceUrl || RESOURCE_CATALOG.cfr4211.url };
       const plausible = plausibleWrongAuthority(question.group.authority);
@@ -2998,73 +3192,105 @@
       return `According to the ${sourceLink}, ${promptHtml}`;
     }
 
-    function renderStatusResourceChoices(question, kind, selection) {
-      const selected = new Set(Array.isArray(selection) ? selection : []);
-      return `<div class="resource-status-choices" role="group" aria-label="${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} status choices">${visaTableRecords(kind).map(record => {
-        const checked = selected.has(record.symbol);
-        return `<label class="resource-status-choice${checked ? " selected" : ""}" title="${escapeHtml(`${record.symbol} — ${record.className}`)}"><input type="checkbox" value="${escapeHtml(record.symbol)}" data-resource-status="${escapeHtml(record.symbol)}" data-resource-kind="${kind}" aria-label="Select ${escapeHtml(`${record.symbol} — ${record.className}`)}" ${checked ? "checked" : ""}><span><strong>${escapeHtml(record.symbol)}</strong><small>${escapeHtml(record.className)}</small></span></label>`;
-      }).join("")}</div>`;
+    function resourceLockoutNotice(kind, lockouts, allRemaining = false) {
+      const count = lockouts.length;
+      const retry = formatRemaining(lockouts[0]?.lockout.remainingMs || 0);
+      return `<div class="quiz-lockout" id="${kind}ResourceLockoutNotice"><strong><span id="${kind}ResourceLockedCount">${count}</span> <span id="${kind}ResourceLockedNoun">${count === 1 ? "question" : "questions"}</span> temporarily locked.</strong><p style="margin-bottom:0">${allRemaining ? "No other question is currently available." : "Locked questions are skipped; you can continue answering the question below."} Next retry in <span id="${kind}ResourceQuizCountdown">${escapeHtml(retry)}</span>.</p></div>`;
+    }
+
+    function startResourceLockoutCountdown(kind, container, waitForAvailableQuestion = false) {
+      state.resourceQuizTimers[kind] = setInterval(() => {
+        profile.resourceChallengeLockouts = profile.resourceChallengeLockouts.filter(record => Date.parse(record?.lockedUntil) > Date.now());
+        const lockouts = resourceQuestionLockouts(kind);
+        if (waitForAvailableQuestion && currentResourceQuestion(kind)) {
+          renderResourceQuiz(kind);
+          return;
+        }
+        const notice = $(`#${kind}ResourceLockoutNotice`, container);
+        if (!lockouts.length) {
+          clearInterval(state.resourceQuizTimers[kind]);
+          state.resourceQuizTimers[kind] = null;
+          if (waitForAvailableQuestion) renderResourceQuiz(kind);
+          else if (notice) notice.innerHTML = "<strong>Previously locked questions are available again.</strong><p style=\"margin-bottom:0\">Finish the current question to return to them.</p>";
+          return;
+        }
+        const count = $(`#${kind}ResourceLockedCount`, container);
+        const noun = $(`#${kind}ResourceLockedNoun`, container);
+        const countdown = $(`#${kind}ResourceQuizCountdown`, container);
+        if (count) count.textContent = String(lockouts.length);
+        if (noun) noun.textContent = lockouts.length === 1 ? "question" : "questions";
+        if (countdown) countdown.textContent = formatRemaining(lockouts[0].lockout.remainingMs);
+      }, 1000);
     }
 
     function renderResourceQuiz(kind) {
       const container = kind === "immigrant" ? els.immigrantUnlockQuiz : els.nonimmigrantUnlockQuiz;
       if (!container) return;
+      clearInterval(state.resourceQuizTimers[kind]);
+      state.resourceQuizTimers[kind] = null;
       if (studyAccessLocked()) {
         container.innerHTML = `<div class="type-table-locked"><div><span class="empty-icon" aria-hidden="true">⌛</span><h2>Resource questions unavailable</h2><p>The scheduled testing-time lock remains active until ${escapeHtml(SCHEDULED_STUDY_LOCK.easternEndLabel)}.</p></div></div>`;
         return;
       }
       const questions = resourceQuestions(kind);
       const completed = questions.filter(isResourceUnlocked).length;
+      const remaining = questions.filter(question => !isResourceUnlocked(question));
       const question = currentResourceQuestion(kind);
+      const lockouts = resourceQuestionLockouts(kind);
       const noun = kind === "immigrant" ? "immigrant" : "nonimmigrant";
-      if (!question) {
+      if (!remaining.length) {
+        state.resourceQuizQuestionId[kind] = null;
         container.innerHTML = `<div class="resource-unlock-head"><div><p class="eyebrow">Approved-resource checks</p><h2>${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} card resources</h2><p>Every available field has been unlocked.</p></div><div class="resource-unlock-progress"><strong>${completed} / ${questions.length}</strong>complete</div></div><div class="resource-unlock-complete"><strong>✓ Resource checks complete.</strong> The ${noun} cards now show all currently sourced fields.</div>`;
         return;
       }
+      if (!question) {
+        state.resourceQuizQuestionId[kind] = null;
+        state.resourceQuizSelection[kind] = null;
+        state.resourceQuizFeedback[kind] = "";
+        container.innerHTML = `<div class="resource-unlock-head"><div><p class="eyebrow">Approved-resource checks</p><h2>${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} card resources</h2><p>Each wrong answer locks only that specific question for 30 minutes.</p></div><div class="resource-unlock-progress"><strong>${completed} / ${questions.length}</strong>complete</div></div>${resourceLockoutNotice(kind, lockouts, true)}`;
+        startResourceLockoutCountdown(kind, container, true);
+        return;
+      }
+      state.resourceQuizQuestionId[kind] = question.id;
       const selection = state.resourceQuizSelection[kind];
       const feedback = state.resourceQuizFeedback[kind];
-      const statusQuestion = Array.isArray(question.correctSymbols);
-      const options = statusQuestion ? [] : resourceOptions(question);
-      container.innerHTML = `<div class="resource-unlock-head"><div><p class="eyebrow">Approved-resource checks</p><h2>${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} card resources</h2><p>Open any linked citation to inspect its source before selecting an answer.</p></div><div class="resource-unlock-progress"><strong>${completed} / ${questions.length}</strong>complete</div></div>
-        <div class="resource-question"><p class="eyebrow">Question ${completed + 1} of ${questions.length}</p><h3>${escapeHtml(question.title)}</h3><p>${resourceQuestionPrompt(question)}</p>
-          ${statusQuestion ? renderStatusResourceChoices(question, kind, selection) : `<div class="resource-choices" role="radiogroup" aria-label="Resource choices">${options.map(option => `<div class="resource-choice${selection === option.id ? " selected" : ""}"><label><input type="radio" name="${kind}-resource-answer" value="${escapeHtml(option.id)}" data-resource-option="${escapeHtml(option.id)}" data-resource-kind="${kind}" aria-label="Select ${escapeHtml(option.label)}" ${selection === option.id ? "checked" : ""}></label><a class="resource-choice-citation" href="${escapeHtml(option.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(option.label)} ↗</a></div>`).join("")}</div>`}
-          <div class="challenge-feedback${feedback ? " invalid" : ""}" role="status">${escapeHtml(feedback || (statusQuestion ? "Select every matching status, then submit." : "Select one resource, then submit."))}</div><button class="button primary" type="button" data-submit-resource-quiz="${kind}">Submit answer</button></div>`;
+      const options = resourceOptions(question);
+      const questionNumber = questions.findIndex(item => item.id === question.id) + 1;
+      container.innerHTML = `<div class="resource-unlock-head"><div><p class="eyebrow">Approved-resource checks</p><h2>${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} card resources</h2><p>Open any linked citation to inspect its source before selecting an answer. A wrong answer locks only that specific question for 30 minutes.</p></div><div class="resource-unlock-progress"><strong>${completed} / ${questions.length}</strong>complete</div></div>
+        ${lockouts.length ? resourceLockoutNotice(kind, lockouts) : ""}
+        <div class="resource-question"><p class="eyebrow">Question ${questionNumber} of ${questions.length}</p><h3>${escapeHtml(question.title)}</h3><p>${resourceQuestionPrompt(question)}</p>
+          <div class="resource-choices" role="radiogroup" aria-label="Answer choices">${options.map(option => `<div class="resource-choice${selection === option.id ? " selected" : ""}"><label><input type="radio" name="${kind}-resource-answer" value="${escapeHtml(option.id)}" data-resource-option="${escapeHtml(option.id)}" data-resource-kind="${kind}" aria-label="Select ${escapeHtml(option.label)}" ${selection === option.id ? "checked" : ""}></label><a class="resource-choice-citation" href="${escapeHtml(option.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(option.label)} ↗</a></div>`).join("")}</div>
+          <div class="challenge-feedback${feedback ? " invalid" : ""}" role="status">${escapeHtml(feedback || "Select one answer, then submit.")}</div><button class="button primary" type="button" data-submit-resource-quiz="${kind}">Submit answer</button></div>`;
+      if (lockouts.length) startResourceLockoutCountdown(kind, container);
     }
 
     function recordResourceUnlock(question) {
       profile.resourceUnlocks = profile.resourceUnlocks.filter(record => record.questionId !== question.id);
       profile.resourceUnlocks.push({ questionId: question.id, revision: question.revision, unlockedAt: new Date().toISOString(), corpusVersion: corpus.corpusVersion });
+      profile.resourceChallengeLockouts = profile.resourceChallengeLockouts.filter(record => record.questionId !== question.id);
       markProfileChanged();
     }
 
     function submitResourceQuiz(kind) {
       if (studyAccessLocked()) return;
-      const question = currentResourceQuestion(kind);
+      const question = resourceQuestions(kind).find(item => item.id === state.resourceQuizQuestionId[kind]);
       const selection = state.resourceQuizSelection[kind];
-      if (!question) return;
-      const statusQuestion = Array.isArray(question.correctSymbols);
-      if (statusQuestion && (!Array.isArray(selection) || !selection.length)) {
-        state.resourceQuizFeedback[kind] = "Select at least one status first.";
+      if (!question || isResourceUnlocked(question) || activeResourceLockout(question)) { renderResourceQuiz(kind); return; }
+      if (!selection) {
+        state.resourceQuizFeedback[kind] = "Select one answer first.";
         renderResourceQuiz(kind);
         return;
       }
-      if (!statusQuestion && !selection) {
-        state.resourceQuizFeedback[kind] = "Select one resource first.";
-        renderResourceQuiz(kind);
-        return;
-      }
-      const selectedStatuses = new Set(Array.isArray(selection) ? selection : []);
-      const correctStatuses = new Set(question.correctSymbols || []);
-      const statusAnswerCorrect = statusQuestion && selectedStatuses.size === correctStatuses.size && [...correctStatuses].every(symbol => selectedStatuses.has(symbol));
-      if ((statusQuestion && !statusAnswerCorrect) || (!statusQuestion && selection !== question.correctOptionId)) {
-        if (!statusQuestion) state.resourceQuizSelection[kind] = null;
-        state.resourceQuizFeedback[kind] = statusQuestion
-          ? "That status set is not correct. Recheck the linked resource and form, then try again."
-          : "That resource does not supply this information. Open the choices, compare them, and try again.";
+      if (selection !== question.correctOptionId) {
+        recordResourceLockout(question);
+        state.resourceQuizQuestionId[kind] = null;
+        state.resourceQuizSelection[kind] = null;
+        state.resourceQuizFeedback[kind] = "";
         renderResourceQuiz(kind);
         return;
       }
       recordResourceUnlock(question);
+      state.resourceQuizQuestionId[kind] = null;
       state.resourceQuizSelection[kind] = null;
       state.resourceQuizFeedback[kind] = "";
       renderResourceQuiz(kind);
@@ -3660,7 +3886,7 @@
       if (!isQuizQuestionAvailable(question)) return false;
       const answered = isQuizQuestionUnlocked(question);
       if (answered) return state.quizIncludeAnswered;
-      return !quizQuestionLockout(question);
+      return true;
     }
 
     function quizQuestionAtOrAfter(preferredKey) {
@@ -3780,9 +4006,7 @@
           els.quizStage.innerHTML = `<div class="empty-state"><div><span class="empty-icon" aria-hidden="true">✓</span><h2>All practice questions complete</h2><p>You have answered all ${bank.length} grouped questions for ${escapeHtml(scope)}. Card content is controlled only by the resource checks on the Types pages.</p>${state.quizIncludeAnswered ? "" : `<button class="button primary" type="button" data-enable-quiz-practice>Practice answered questions</button>`}</div></div>`;
           return;
         }
-        const lockouts = unanswered.map(quizQuestionLockout).filter(Boolean).sort((a, b) => a.remainingMs - b.remainingMs);
-        els.quizStage.innerHTML = `<div class="empty-state"><div><span class="empty-icon" aria-hidden="true">⌛</span><h2>Remaining questions are temporarily locked</h2><p>The next question becomes available in ${escapeHtml(formatRemaining(lockouts[0]?.remainingMs || 0))}.</p></div></div>`;
-        if (lockouts[0]) state.quizAdvanceTimer = setInterval(() => renderQuiz(), Math.min(lockouts[0].remainingMs + 50, 1000));
+        els.quizStage.innerHTML = `<div class="empty-state"><div><h2>No practice question available</h2><p>Change the classification filter or reopen the classic quiz.</p></div></div>`;
         return;
       }
       const questionIndex = bank.findIndex(item => item.key === question.key) + 1;
@@ -3817,7 +4041,6 @@
         return;
       }
       if (state.quizSelection !== question.challenge.correctOptionId) {
-        if (!practiceAttempt) recordQuizLockout(question);
         state.quizSelection = null;
         state.quizRevealUntil = Date.now() + 5000;
         renderQuiz();
@@ -4283,6 +4506,8 @@
         state.quizRootFilter = profile.preferences.quizClassification || "all";
         renderCourseStructureEditor();
         buildIndex();
+        renderResourceQuiz("nonimmigrant");
+        renderResourceQuiz("immigrant");
         renderVisaGrid();
         renderNotesList();
         markProfileChanged();
@@ -4548,8 +4773,22 @@ Get-FileHash $outJson -Algorithm SHA256`;
         state.query = els.search.value;
         renderDefinitions();
       });
-      els.definitionSourceFilter.addEventListener("change", () => { state.definitionSourceFilter = els.definitionSourceFilter.value; renderDefinitions(); });
-      els.definitionScopeFilter.addEventListener("change", () => { state.definitionScopeFilter = els.definitionScopeFilter.value; renderDefinitions(); });
+      for (const container of [els.definitionSourceFilter, els.definitionScopeFilter]) container.addEventListener("change", event => {
+        const input = event.target.closest("[data-definition-filter-kind][data-definition-filter-id]");
+        if (input) setDefinitionFilterSelection(input.dataset.definitionFilterKind, input.dataset.definitionFilterId, input.checked);
+      });
+      const definitionFilterDropdowns = $$(".definition-filter-dropdown");
+      for (const dropdown of definitionFilterDropdowns) dropdown.addEventListener("toggle", () => {
+        if (dropdown.open) definitionFilterDropdowns.forEach(other => { if (other !== dropdown) other.open = false; });
+      });
+      document.addEventListener("click", event => {
+        if (!event.target.closest(".definition-filter-dropdown")) definitionFilterDropdowns.forEach(dropdown => { dropdown.open = false; });
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key !== "Escape") return;
+        const openDropdown = definitionFilterDropdowns.find(dropdown => dropdown.open);
+        if (openDropdown) { openDropdown.open = false; openDropdown.querySelector("summary")?.focus(); }
+      });
       $$(".nav-button").forEach(button => button.addEventListener("click", () => closeSearchResults(button.dataset.view)));
       els.openClassicQuizButton.addEventListener("click", () => { resetSearchState(); switchView("quiz"); });
       els.statuteNavigator.addEventListener("click", event => {
@@ -4591,23 +4830,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
       });
       window.addEventListener("focus", () => updateScheduledStudyLock());
       document.addEventListener("change", event => {
-        const status = event.target.closest("[data-resource-status]");
-        if (status) {
-          const kind = status.dataset.resourceKind;
-          const selection = new Set(Array.isArray(state.resourceQuizSelection[kind]) ? state.resourceQuizSelection[kind] : []);
-          if (status.checked) selection.add(status.dataset.resourceStatus);
-          else selection.delete(status.dataset.resourceStatus);
-          state.resourceQuizSelection[kind] = [...selection];
-          state.resourceQuizFeedback[kind] = "";
-          status.closest(".resource-status-choice")?.classList.toggle("selected", status.checked);
-          const container = kind === "immigrant" ? els.immigrantUnlockQuiz : els.nonimmigrantUnlockQuiz;
-          const feedback = container?.querySelector(".challenge-feedback");
-          if (feedback) {
-            feedback.classList.remove("invalid");
-            feedback.textContent = "Select every matching status, then submit.";
-          }
-          return;
-        }
         const option = event.target.closest("[data-resource-option]");
         if (!option) return;
         const kind = option.dataset.resourceKind;
@@ -4741,7 +4963,13 @@ Get-FileHash $outJson -Algorithm SHA256`;
       updateSearchFilterVisibility();
       cycleSearchSuggestion();
       state.searchSuggestionTimer = setInterval(cycleSearchSuggestion, 8000);
-      window.addEventListener("beforeunload", () => { clearInterval(state.searchSuggestionTimer); clearInterval(state.scheduledLockTimer); state.topbarResizeObserver?.disconnect(); }, { once: true });
+      window.addEventListener("beforeunload", () => {
+        clearInterval(state.searchSuggestionTimer);
+        clearInterval(state.scheduledLockTimer);
+        clearInterval(state.resourceQuizTimers.nonimmigrant);
+        clearInterval(state.resourceQuizTimers.immigrant);
+        state.topbarResizeObserver?.disconnect();
+      }, { once: true });
       syncStatuteNavigationOffset();
       if ("ResizeObserver" in window) {
         state.topbarResizeObserver = new ResizeObserver(syncStatuteNavigationOffset);
@@ -4836,6 +5064,8 @@ Get-FileHash $outJson -Algorithm SHA256`;
       submitSequenceQuiz,
       renderQuiz,
       isResourceUnlocked,
+      activeResourceLockout,
+      recordResourceLockout,
       resourceQuestions,
       resourceOptions,
       plausibleWrongAuthority,
