@@ -35,11 +35,12 @@ window.AUTHORITY_SEARCH_PROFILE = {
   "profileId": "b28a83da-7f4a-4b1d-91cf-7bd72b7b3372",
   "createdAt": "2026-07-30T00:00:00.000Z",
   "updatedAt": null,
-  "corpusVersionSeen": "2026.07.31-10",
+  "corpusVersionSeen": "2026.08.02-7",
   "visaSummaryUnlocks": [],
   "visaChallengeLockouts": [],
   "visaFactUnlocks": [],
   "visaFactChallengeLockouts": [],
+  "resourceUnlocks": [],
   "notes": [],
   "courseStructure": {
     "blocks": []
