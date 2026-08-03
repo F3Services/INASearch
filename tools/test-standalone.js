@@ -61,27 +61,6 @@ function payloadBlock(html) {
   return scriptBody(html, "authoritySearchCorpusData").replace(/\s+/g, "");
 }
 
-function metadataOnlyTitle8(title8) {
-  return {
-    title: title8.title,
-    name: title8.name,
-    publication: title8.publication,
-    currentThrough: title8.currentThrough,
-    sourceCreatedAt: title8.sourceCreatedAt,
-    isPositiveLaw: title8.isPositiveLaw,
-    sourceUrl: title8.sourceUrl,
-    sections: (title8.sections || []).map(section => ({
-      id: section.id,
-      section: section.section,
-      heading: section.heading,
-      status: section.status,
-      identifier: section.identifier,
-      breadcrumb: section.breadcrumb,
-      url: section.url
-    }))
-  };
-}
-
 function readBuild(fileName) {
   const filePath = path.join(root, fileName);
   const html = fs.readFileSync(filePath, "utf8");
@@ -232,31 +211,45 @@ function statuteNavigationFunctions(source, context = {}) {
   });
 }
 
+function statuteHistoryFunctions(source, context = {}) {
+  const start = source.indexOf("    function normalizedStatuteHistoryLocation(");
+  const end = source.indexOf("\n\n    function normalizedSearchText(", start);
+  assert(start >= 0 && end > start, "Could not extract the statute history functions.");
+  const declarations = source.slice(start, end);
+  return vm.runInNewContext(`${declarations}\n({ normalizedStatuteHistoryLocation, sameStatuteHistoryLocation, addStatuteHistoryLocation, recordExplicitStatuteMove, navigateToStatuteLocation, navigateToStatuteCitation, navigateStatuteHistory })`, {
+    Array,
+    Boolean,
+    JSON,
+    Map,
+    Math,
+    Number,
+    String,
+    ...context
+  });
+}
+
 async function main() {
   const fullSource = sourceCorpus();
   const blankProfile = sourceProfile();
   const full = readBuild("AuthoritySearch.html");
-  const light = readBuild("AuthoritySearch-no-USC.html");
+  const allUnlocked = readBuild("AuthoritySearch-AU.html");
 
   assert.deepStrictEqual(blankProfile.resourceChallengeLockouts, [], "Blank profiles must include persisted resource-question lockouts.");
+  assert.strictEqual(fs.existsSync(path.join(root, "AuthoritySearch-no-USC.html")), false, "The retired no-USC build still exists.");
 
   assert(full.bytes <= 2_500_000, "AuthoritySearch.html exceeds 2.5 MB acceptance limit.");
-  assert(light.bytes <= 1_000_000, "AuthoritySearch-no-USC.html exceeds 1 MB acceptance limit.");
+  assert(allUnlocked.bytes <= 2_500_000, "AuthoritySearch-AU.html exceeds 2.5 MB acceptance limit.");
   assert.strictEqual(full.build.variant, "standard");
   assert.strictEqual(full.build.hasLocalUscCache, true);
-  assert.strictEqual(light.build.variant, "no-usc");
-  assert.strictEqual(light.build.hasLocalUscCache, false);
+  assert.strictEqual(allUnlocked.build.variant, "all-unlocked");
+  assert.strictEqual(allUnlocked.build.hasLocalUscCache, true);
   assert.deepStrictEqual(full.profile, blankProfile);
-  assert.deepStrictEqual(light.profile, blankProfile);
   assert.deepStrictEqual(full.corpus, fullSource, "Full corpus round trip changed data.");
-
-  const expectedLight = JSON.parse(JSON.stringify(fullSource));
-  expectedLight.title8 = metadataOnlyTitle8(fullSource.title8);
-  assert.deepStrictEqual(light.corpus, expectedLight, "No-USC corpus round trip changed metadata.");
+  assert.deepStrictEqual(allUnlocked.corpus, fullSource, "All-unlocked corpus round trip changed data.");
   assert.strictEqual(full.corpus.title8.sections.length, 376);
-  assert.strictEqual(light.corpus.title8.sections.length, 376);
+  assert.strictEqual(allUnlocked.corpus.title8.sections.length, 376);
   assert(full.corpus.title8.sections.some(section => Array.isArray(section.body)), "Full corpus has no cached Title 8 bodies.");
-  assert(!light.corpus.title8.sections.some(section => Object.hasOwn(section, "body")), "No-USC corpus contains a Title 8 body.");
+  assert(allUnlocked.corpus.title8.sections.some(section => Array.isArray(section.body)), "All-unlocked build has no cached Title 8 bodies.");
   assert.strictEqual(full.corpus.visaCategories.length, 85);
   assert.strictEqual(full.corpus.visaTables.nonimmigrantTypes.length, 84);
   assert.strictEqual(full.corpus.visaTables.immigrantTypes.length, 158);
@@ -267,6 +260,25 @@ async function main() {
   const formQuestions = full.corpus.visaTables.formQuestions;
   assert.strictEqual(formQuestions.nonimmigrant.length, 15, "Unexpected nonimmigrant form-question count.");
   assert.strictEqual(formQuestions.immigrant.length, 22, "Unexpected immigrant form-question count.");
+  const expectedAllUnlockedQuestions = [
+    { id: "resource-nonimmigrant-table", revision: "2026-08-02-1" },
+    { id: "resource-nonimmigrant-definitions", revision: "2026-08-02-1" },
+    { id: "resource-nonimmigrant-eos-cos", revision: "2026-08-02-1" },
+    { id: "resource-immigrant-table", revision: "2026-08-02-1" },
+    ...full.corpus.visaTables.immigrantDefinitionGroups,
+    ...formQuestions.nonimmigrant,
+    ...formQuestions.immigrant
+  ].map(question => ({ questionId: question.id, revision: question.revision })).sort((a, b) => a.questionId.localeCompare(b.questionId));
+  const actualAllUnlockedQuestions = allUnlocked.profile.resourceUnlocks
+    .map(question => ({ questionId: question.questionId, revision: question.revision }))
+    .sort((a, b) => a.questionId.localeCompare(b.questionId));
+  assert.strictEqual(expectedAllUnlockedQuestions.length, 49, "The expected all-unlocked resource-question set changed.");
+  assert.deepStrictEqual(actualAllUnlockedQuestions, expectedAllUnlockedQuestions, "AuthoritySearch-AU does not unlock every current card-resource question revision.");
+  assert(allUnlocked.profile.resourceUnlocks.every(record => record.corpusVersion === full.corpus.corpusVersion && Date.parse(record.unlockedAt)), "An all-unlocked resource record is missing current corpus metadata.");
+  assert.deepStrictEqual(allUnlocked.profile.resourceChallengeLockouts, [], "AuthoritySearch-AU contains a resource-question lockout.");
+  assert.deepStrictEqual(allUnlocked.profile.visaSummaryUnlocks, [], "AuthoritySearch-AU incorrectly answers optional classic summary questions.");
+  assert.deepStrictEqual(allUnlocked.profile.visaFactUnlocks, [], "AuthoritySearch-AU incorrectly answers optional classic fact questions.");
+  assert.strictEqual(allUnlocked.profile.preferences.quizCursorKey, null, "AuthoritySearch-AU advances the optional classic quiz.");
   const allFormQuestions = [...formQuestions.nonimmigrant, ...formQuestions.immigrant];
   assert.strictEqual(new Set(allFormQuestions.map(question => question.id)).size, allFormQuestions.length, "Form-question IDs must be unique.");
   for (const kind of ["nonimmigrant", "immigrant"]) {
@@ -343,7 +355,7 @@ async function main() {
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "ina").length, 61, "Unexpected INA 101 definition count.");
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "cfr").length, 32, "Unexpected 8 CFR 1.2 definition count.");
   assert.strictEqual(full.corpus.definitions.glossaryVerification.entries, 267, "USCIS Glossary verification metadata does not match the catalog.");
-  assert.deepStrictEqual(light.corpus.definitions, full.corpus.definitions, "No-USC build lost or altered the independent definitions catalog.");
+  assert.deepStrictEqual(allUnlocked.corpus.definitions, full.corpus.definitions, "All-unlocked build lost or altered the definitions catalog.");
 
   const definitionScopes = new Map(full.corpus.definitions.scopes.map(scope => [scope.id, scope]));
   assert.strictEqual(definitionScopes.get("uscis-policy")?.label, "USCIS Policy", "The USCIS glossary applicability is missing.");
@@ -385,7 +397,7 @@ async function main() {
   assert.strictEqual(definitionScopes.get("ina-subchapters-i-ii").text, statutoryNode(fullSource, "1101", ["b"]).text);
   assert.strictEqual(definitionScopes.get("ina-subchapter-iii").text, statutoryNode(fullSource, "1101", ["c"]).text);
 
-  for (const build of [full, light]) {
+  for (const build of [full, allUnlocked]) {
     const scripts = executableScripts(build.html);
     assert.strictEqual(scripts.length, 2);
     scripts.forEach((source, index) => new vm.Script(source, { filename: `${build.fileName}:script-${index + 1}` }));
@@ -440,11 +452,11 @@ async function main() {
   }
 
   const fullPayload = payloadBlock(full.html);
-  const lightPayload = payloadBlock(light.html);
+  const allUnlockedPayload = payloadBlock(allUnlocked.html);
   const rebuild = spawnSync(process.execPath, [path.join(root, "tools", "build-standalone.js")], { cwd: root, encoding: "utf8" });
   assert.strictEqual(rebuild.status, 0, rebuild.stderr);
   assert.strictEqual(payloadBlock(fs.readFileSync(full.filePath, "utf8")), fullPayload, "Full gzip output is not deterministic.");
-  assert.strictEqual(payloadBlock(fs.readFileSync(light.filePath, "utf8")), lightPayload, "No-USC gzip output is not deterministic.");
+  assert.strictEqual(payloadBlock(fs.readFileSync(allUnlocked.filePath, "utf8")), allUnlockedPayload, "All-unlocked gzip output is not deterministic.");
 
   const fallbackSource = fs.readFileSync(path.join(root, "src", "AuthoritySearch.template.html"), "utf8");
   assert(fallbackSource.includes("const studyUnavailable = active || !corpus;"));
@@ -462,7 +474,8 @@ async function main() {
   assert(fallbackSource.includes('id="view-visas" hidden aria-labelledby="visasHeading"'), "Nonimmigrant Types is still the default visible view.");
   assert(!fallbackSource.includes('class="nav-button" data-view="quiz"'), "The classic Quiz remains in the primary navigation.");
   assert(fallbackSource.includes('id="openClassicQuizButton"'), "Sources & About does not link to the classic quiz.");
-  assert(fallbackSource.includes("A wrong answer locks only that specific question for 30 minutes."), "The Types pages do not explain the question-specific resource lockout.");
+  assert(fallbackSource.includes("A wrong resource answer locks only that specific question for one minute and keeps it open"), "The Types pages do not explain the one-minute, stay-on-question resource lockout.");
+  assert(fallbackSource.includes('${questionLockout ? "disabled" : ""}></label><a class="resource-choice-citation"'), "Resource answer controls are not disabled independently from their linked sources during a lockout.");
   const corpusStatusElement = { innerHTML: "", title: "", attributes: {}, setAttribute(name, value) { this.attributes[name] = value; } };
   const updateCorpusStatus = extractedFunction(fallbackSource, "updateCorpusStatus", "initialize", {
     corpus: { corpusVersion: "2026.08.02-7", capturedAt: "2026-07-30", verifiedAt: "2026-07-31" },
@@ -473,6 +486,43 @@ async function main() {
   assert.strictEqual(corpusStatusElement.innerHTML, '<span class="status-dot"></span>Corpus Loaded', "The successful corpus chip does not use a plain-language status.");
   assert.strictEqual(corpusStatusElement.title, "Version: 2026.08.02-7 · Captured: 2026-07-30 · Verified: 2026-07-31", "The corpus chip tooltip omits its version or source dates.");
   assert.strictEqual(corpusStatusElement.attributes["aria-label"], "Corpus loaded. Version: 2026.08.02-7 · Captured: 2026-07-30 · Verified: 2026-07-31", "The corpus chip does not expose its status details accessibly.");
+  assert(/<div class="brand" id="authoritySearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>AuthoritySearch<\/strong><small>ISOBASIC study reference<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area does not continuously wrap the full AuthoritySearch brand.");
+  assert(fallbackSource.includes("Inspired by the excellent work of 2604"), "The AuthoritySearch tribute text is missing.");
+  assert(fallbackSource.includes('els.brand.addEventListener("mouseenter", beginBrandTributeHover);'), "The tribute timer is not attached to the continuous brand area.");
+  assert(fallbackSource.includes('els.brand.addEventListener("mouseleave", endBrandTributeHover);'), "The tribute popup is not dismissed when the pointer leaves the brand area.");
+  const brandTributeState = { brandTributeTimer: null };
+  const brandTributeElement = { hidden: true };
+  let brandTributeTimeoutCalls = 0;
+  let brandTributeCallback = null;
+  let brandTributeDelay = null;
+  const clearedBrandTributeTimers = [];
+  const beginBrandTributeHover = extractedFunction(fallbackSource, "beginBrandTributeHover", "endBrandTributeHover", {
+    state: brandTributeState,
+    els: { brandTribute: brandTributeElement },
+    setTimeout: (callback, delay) => {
+      brandTributeTimeoutCalls += 1;
+      brandTributeCallback = callback;
+      brandTributeDelay = delay;
+      return `brand-timer-${brandTributeTimeoutCalls}`;
+    }
+  });
+  const endBrandTributeHover = extractedFunction(fallbackSource, "endBrandTributeHover", "attachEvents", {
+    state: brandTributeState,
+    els: { brandTribute: brandTributeElement },
+    clearTimeout: timer => clearedBrandTributeTimers.push(timer)
+  });
+  beginBrandTributeHover();
+  beginBrandTributeHover();
+  assert.strictEqual(brandTributeTimeoutCalls, 1, "Movement within the brand area restarted the tribute timer.");
+  assert.strictEqual(brandTributeDelay, 2000, "The tribute popup does not wait exactly two seconds.");
+  brandTributeCallback();
+  assert.strictEqual(brandTributeElement.hidden, false, "The tribute popup did not appear after two seconds in the brand area.");
+  endBrandTributeHover();
+  assert.strictEqual(brandTributeElement.hidden, true, "The tribute popup remained visible after leaving the brand area.");
+  beginBrandTributeHover();
+  const pendingBrandTributeTimer = brandTributeState.brandTributeTimer;
+  endBrandTributeHover();
+  assert(clearedBrandTributeTimers.includes(pendingBrandTributeTimer), "Leaving the brand area did not cancel its pending tribute timer.");
   const resourceLockoutProfile = { resourceChallengeLockouts: [{ questionId: "resource-other", revision: "test-revision", lockedUntil: "2026-08-03T12:45:00.000Z" }] };
   let resourceLockoutChanges = 0;
   const recordResourceLockout = extractedFunction(fallbackSource, "recordResourceLockout", "immigrantDefinitionQuestion", {
@@ -486,14 +536,14 @@ async function main() {
   assert.strictEqual(resourceLockoutChanges, 1, "Recording a resource lockout did not mark the profile changed.");
   assert.deepStrictEqual(plain(resourceLockoutProfile.resourceChallengeLockouts), [
     { questionId: "resource-other", revision: "test-revision", lockedUntil: "2026-08-03T12:45:00.000Z" },
-    { questionId: resourceQuestion.id, revision: resourceQuestion.revision, lockedUntil: "2026-08-03T12:30:00.000Z" }
-  ], "A resource-question lockout changed another question or was not exactly 30 minutes.");
+    { questionId: resourceQuestion.id, revision: resourceQuestion.revision, lockedUntil: "2026-08-03T12:01:00.000Z" }
+  ], "A resource-question lockout changed another question or was not exactly one minute.");
   const activeResourceLockout = extractedFunction(fallbackSource, "activeResourceLockout", "recordResourceLockout", {
     profile: resourceLockoutProfile,
     Date
   });
-  assert.strictEqual(activeResourceLockout(resourceQuestion, lockoutStartedAt).remainingMs, 30 * 60000);
-  assert.strictEqual(activeResourceLockout(resourceQuestion, lockoutStartedAt + 30 * 60000), null, "Resource lockout remained active after 30 minutes.");
+  assert.strictEqual(activeResourceLockout(resourceQuestion, lockoutStartedAt).remainingMs, 60000);
+  assert.strictEqual(activeResourceLockout(resourceQuestion, lockoutStartedAt + 60000), null, "Resource lockout remained active after one minute.");
   assert.strictEqual(activeResourceLockout({ ...resourceQuestion, revision: "new-revision" }, lockoutStartedAt), null, "A stale resource-question revision remained locked.");
   const currentResourceQuestion = extractedFunction(fallbackSource, "currentResourceQuestion", "resourceQuestionLockouts", {
     resourceQuestions: () => [{ id: "locked-question" }, { id: "available-question" }],
@@ -501,7 +551,7 @@ async function main() {
     activeResourceLockout: question => question.id === "locked-question" ? { remainingMs: 1000 } : null,
     state: { resourceQuizQuestionId: { nonimmigrant: null } }
   });
-  assert.strictEqual(currentResourceQuestion("nonimmigrant").id, "available-question", "A locked resource question blocked the next available question.");
+  assert.strictEqual(currentResourceQuestion("nonimmigrant").id, "locked-question", "A wrong resource answer automatically jumped to another question.");
   const formRotatedOptions = extractedFunction(fallbackSource, "rotatedOptions", "resourceOptions");
   const formResourceOptions = extractedFunction(fallbackSource, "resourceOptions", "resourceQuestionPrompt", {
     RESOURCE_CATALOG: {},
@@ -528,6 +578,32 @@ async function main() {
   const submitResourceQuizSource = extractedFunction(fallbackSource, "submitResourceQuiz", "visaTableRecords").toString();
   assert(submitResourceQuizSource.includes("recordResourceLockout(question)"), "Wrong resource answers do not record a lockout.");
   assert(!submitResourceQuizSource.includes("correctStatuses"), "Resource submission still expects a giant status-checkbox set.");
+  const wrongResourceQuestion = { id: "resource-stay-put", correctOptionId: "correct" };
+  const wrongResourceState = {
+    resourceQuizQuestionId: { nonimmigrant: wrongResourceQuestion.id },
+    resourceQuizSelection: { nonimmigrant: "wrong" },
+    resourceQuizFeedback: { nonimmigrant: "" }
+  };
+  let wrongResourceLockouts = 0;
+  let wrongResourceRenders = 0;
+  const submitResourceQuiz = extractedFunction(fallbackSource, "submitResourceQuiz", "visaTableRecords", {
+    studyAccessLocked: () => false,
+    resourceQuestions: () => [wrongResourceQuestion],
+    state: wrongResourceState,
+    isResourceUnlocked: () => false,
+    activeResourceLockout: () => null,
+    recordResourceLockout: () => { wrongResourceLockouts += 1; },
+    renderResourceQuiz: () => { wrongResourceRenders += 1; },
+    recordResourceUnlock: () => { throw new Error("A wrong answer must not unlock the question."); },
+    renderVisaGrid: () => {},
+    renderImmigrantGrid: () => {},
+    buildIndex: () => {}
+  });
+  submitResourceQuiz("nonimmigrant");
+  assert.strictEqual(wrongResourceLockouts, 1, "A wrong resource answer did not start its lockout.");
+  assert.strictEqual(wrongResourceRenders, 1, "A wrong resource answer did not redraw the retained question.");
+  assert.strictEqual(wrongResourceState.resourceQuizQuestionId.nonimmigrant, wrongResourceQuestion.id, "A wrong resource answer cleared the current question and advanced automatically.");
+  assert.strictEqual(wrongResourceState.resourceQuizSelection.nonimmigrant, null, "A wrong resource answer retained the selected choice.");
   const submitSequenceQuizSource = extractedFunction(fallbackSource, "submitSequenceQuiz", "currentLink").toString();
   assert(!submitSequenceQuizSource.includes("recordQuizLockout"), "Classic practice questions still record a retry lockout.");
   const isQuizQuestionCandidate = extractedFunction(fallbackSource, "isQuizQuestionCandidate", "quizQuestionAtOrAfter", {
@@ -538,6 +614,8 @@ async function main() {
   });
   assert.strictEqual(isQuizQuestionCandidate({}), true, "A legacy lockout still removes a classic practice question from rotation.");
   assert(fallbackSource.includes('id="statuteNavigator"'), "The live statute hierarchy navigation is missing.");
+  assert(fallbackSource.includes('data-statute-history="back"') && fallbackSource.includes('data-statute-history="forward"'), "The statute navigation bar is missing Back and Forward controls.");
+  assert(fallbackSource.includes('event.target.closest("[data-statute-history]")'), "The statute history controls are not connected to delegated navigation events.");
   assert(fallbackSource.includes('data-statute-path='), "Rendered statutory nodes do not expose their hierarchy paths.");
   assert(fallbackSource.includes('Math.max(0, window.innerHeight - navigatorBottom) * .1'), "The statute reading line is not one tenth of the statute viewport.");
   assert(fallbackSource.includes('.definition-filter-option[data-depth="1"]'), "First-level definition checkbox indentation is missing.");
@@ -661,6 +739,46 @@ async function main() {
   const statutoryCanonicalPath = pathParts => (pathParts || []).map(value => `(${value})`).join("");
   const normalizedSearchText = extractedFunction(fallbackSource, "normalizedSearchText", "searchTextMatch", { String });
   const searchTextMatch = extractedFunction(fallbackSource, "searchTextMatch", "statuteSearchTarget", { normalize: searchNormalize, normalizedSearchText, String });
+  const glossaryReferenceLabels = extractedFunction(fallbackSource, "glossaryReferenceLabels", "glossaryInlineLinks", { normalize: searchNormalize, Map, String });
+  const glossaryAllowedHosts = new Set(full.corpus.approvedDomains);
+  const glossarySafeUrl = value => {
+    try { const parsed = new URL(value); return parsed.protocol === "https:" && glossaryAllowedHosts.has(parsed.hostname) ? parsed.href : ""; }
+    catch { return ""; }
+  };
+  const glossaryInlineLinks = extractedFunction(fallbackSource, "glossaryInlineLinks", "renderDefinitionInlineText", { corpus: full.corpus, glossaryReferenceLabels, normalize: searchNormalize, safeUrl: glossarySafeUrl, searchTextMatch, String });
+  const renderDefinitionInlineText = extractedFunction(fallbackSource, "renderDefinitionInlineText", "renderDefinitionEntry", { escapeHtml: escapeStatutoryHtml, glossaryInlineLinks, String });
+  const glossaryDefinition = term => full.corpus.definitions.entries.find(entry => entry.sourceFamily === "uscis-glossary" && entry.term === term);
+  const disasterReliefHtml = renderDefinitionInlineText(glossaryDefinition("Disaster relief"));
+  const aNumberHtml = renderDefinitionInlineText(glossaryDefinition("A-Number/Alien Registration Number/Alien Number (A-Number or A#)"));
+  const arrivalRecordHtml = renderDefinitionInlineText(glossaryDefinition("Arrival-Departure Record (Form I-94/I-94A)"));
+  assert(disasterReliefHtml.includes('data-definition-reference="Special Situations"'), "Disaster relief does not link to the Special Situations definition.");
+  assert(aNumberHtml.includes('data-definition-reference="USCIS Number"'), "The A-Number definition does not link to the USCIS Number definition.");
+  assert(arrivalRecordHtml.includes('href="https://uscis.gov/i-94information"'), "The Arrival-Departure Record definition does not link its embedded USCIS URL.");
+  const numberHtml = renderDefinitionInlineText(glossaryDefinition("Number"));
+  assert(numberHtml.includes('A-Number/Alien Registration Number/Alien Number (A-Number or A#)</button>'), "Trailing punctuation was left outside a glossary cross-reference link.");
+  const glossaryExternalLinks = full.corpus.definitions.entries.flatMap(entry => glossaryInlineLinks(entry).filter(link => link.kind === "external"));
+  assert.strictEqual(glossaryExternalLinks.length, 5, "Not every embedded government URL in the USCIS Glossary is clickable.");
+  assert(glossaryExternalLinks.some(link => link.href === "https://www.irs.gov/"), "The embedded IRS URL is not clickable.");
+  assert(glossaryExternalLinks.some(link => new URL(link.href).hostname === "justice.gov"), "The embedded Justice Department URLs are not clickable.");
+  const glossaryDefinitionLinks = full.corpus.definitions.entries.flatMap(entry => glossaryInlineLinks(entry).filter(link => link.kind === "definition"));
+  assert.strictEqual(glossaryDefinitionLinks.length, 23, "The glossary-wide cross-reference linker missed expected See references.");
+  let openedDefinitionReference = "";
+  const focusedDefinitionReferences = [];
+  const scrolledDefinitionReferences = [];
+  const definitionReferenceGroup = {
+    focus: options => focusedDefinitionReferences.push(options),
+    scrollIntoView: options => scrolledDefinitionReferences.push(options)
+  };
+  const openDefinitionReference = extractedFunction(fallbackSource, "openDefinitionReference", "buildIndex", {
+    openDefinitions: query => { openedDefinitionReference = query; },
+    requestAnimationFrame: callback => callback(),
+    $: () => definitionReferenceGroup,
+    els: { definitionList: {} }
+  });
+  openDefinitionReference("Special Situations");
+  assert.strictEqual(openedDefinitionReference, "Special Situations", "A glossary cross-reference did not filter to its target definition.");
+  assert.deepStrictEqual(plain(focusedDefinitionReferences.pop()), { preventScroll: true }, "A glossary cross-reference did not focus its target definition.");
+  assert.deepStrictEqual(plain(scrolledDefinitionReferences.pop()), { behavior: "smooth", block: "start" }, "A glossary cross-reference did not scroll to its target definition.");
   const statuteSearchTarget = extractedFunction(fallbackSource, "statuteSearchTarget", "renderStatute", { normalize: searchNormalize, searchTextMatch });
   const searchSection = {
     section: "9999",
@@ -726,6 +844,34 @@ async function main() {
   });
   assert.deepStrictEqual(plain(currentStatutePathAtReadingLine()), ["a", "15"], "The live hierarchy does not follow the statutory line touching the tenth-view reading line.");
 
+  const scrollSection1101 = fullSource.title8.sections.find(section => section.section === "1101");
+  const scrollHistoryState = {
+    view: "search",
+    statuteNavigationFrame: 17,
+    statuteNavigationSectionId: scrollSection1101.id,
+    statuteNavigationPath: ["a"],
+    statuteNavigationHistory: [
+      { sectionId: scrollSection1101.id, path: ["a", "1"] },
+      { sectionId: fullSource.title8.sections.find(section => section.section === "1157").id, path: ["e"] }
+    ],
+    statuteNavigationHistoryIndex: 1
+  };
+  const renderedScrollPaths = [];
+  const updateStatuteNavigationFromScroll = extractedFunction(fallbackSource, "updateStatuteNavigationFromScroll", "scheduleStatuteNavigationUpdate", {
+    state: scrollHistoryState,
+    els: { statuteNavigator: { hidden: false } },
+    corpus: fullSource,
+    currentStatutePathAtReadingLine: () => ["a", "15"],
+    normCitationPart: value => String(value || "").toLowerCase(),
+    renderStatuteNavigation: (section, pathParts) => renderedScrollPaths.push({ sectionId: section.id, path: [...pathParts] }),
+    JSON
+  });
+  const scrollHistoryBefore = JSON.stringify(scrollHistoryState.statuteNavigationHistory);
+  updateStatuteNavigationFromScroll();
+  assert.deepStrictEqual(plain(renderedScrollPaths), [{ sectionId: scrollSection1101.id, path: ["a", "15"] }], "Scrolling did not refresh the visible statute breadcrumb.");
+  assert.strictEqual(JSON.stringify(scrollHistoryState.statuteNavigationHistory), scrollHistoryBefore, "A scroll-driven breadcrumb change was incorrectly added to statute history.");
+  assert.strictEqual(scrollHistoryState.statuteNavigationHistoryIndex, 1, "A scroll-driven breadcrumb change moved the statute history cursor.");
+
   const statuteNormPart = value => String(value || "").normalize("NFKD").replace(/[^A-Za-z0-9]/g, "").toLowerCase();
   const statuteNormalize = value => String(value || "").normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
   const statuteUscToIna = new Map();
@@ -751,6 +897,59 @@ async function main() {
   const ina203Segments = statuteNavigation.statuteNavigationSegments(section1153, ["b", "2", "A"]);
   assert(ina203Segments.some(segment => segment.label === "Part"), "Part navigation is missing where the U.S.C. hierarchy supplies it.");
   assert.deepStrictEqual(plain(statuteNavigation.statuteSiblingNodes(section1101, ["a", "15"]).map(node => node.label)), plain(statuteNavigation.statuteNodeAtPath(section1101, ["a"]).children.map(node => node.label)), "Nested dropdown choices are not derived from the shared parent node.");
+
+  const section1104 = fullSource.title8.sections.find(section => section.section === "1104");
+  const historyBackButton = {};
+  const historyForwardButton = {};
+  const statuteHistoryQueries = [];
+  const statuteHistoryState = {
+    citation: null,
+    statuteNavigationLocation: { sectionId: section1101.id, path: ["a", "42"] },
+    statuteNavigationHistory: [],
+    statuteNavigationHistoryIndex: -1
+  };
+  const statuteHistory = statuteHistoryFunctions(fallbackSource, {
+    state: statuteHistoryState,
+    els: { statuteNavigator: { hidden: false } },
+    $: selector => selector.includes("'back'") ? historyBackButton : selector.includes("'forward'") ? historyForwardButton : null,
+    corpus: fullSource,
+    uscToIna: statuteUscToIna,
+    normCitationPart: statuteNormPart,
+    canonicalPath: statutoryCanonicalPath,
+    applySearchQuery: (query, focus) => statuteHistoryQueries.push({ query, focus }),
+    parseCitation: () => ({ valid: true, record: { kind: "usc", item: section1104 }, renderPath: ["b"] })
+  });
+  statuteHistory.navigateToStatuteLocation(section1153.id, ["b", "2", "A"]);
+  assert.deepStrictEqual(plain(statuteHistoryState.statuteNavigationHistory), [
+    { sectionId: section1101.id, path: ["a", "42"] },
+    { sectionId: section1153.id, path: ["b", "2", "A"] }
+  ], "A hierarchy-menu jump did not preserve its source and destination in statute history.");
+  assert.strictEqual(statuteHistoryState.statuteNavigationHistoryIndex, 1, "A hierarchy-menu jump left the history cursor at the wrong location.");
+  assert.strictEqual(historyBackButton.disabled, false, "Back remained disabled after an explicit statute jump.");
+  assert.strictEqual(historyForwardButton.disabled, true, "Forward was enabled at the newest statute location.");
+  assert.deepStrictEqual(statuteHistoryQueries.pop(), { query: "8 U.S.C. 1153(b)(2)(A)", focus: false }, "A hierarchy-menu jump did not open the exact statutory path.");
+
+  statuteHistory.navigateStatuteHistory(-1);
+  assert.strictEqual(statuteHistoryState.statuteNavigationHistoryIndex, 0, "Back did not move to the preceding statute-history entry.");
+  assert.deepStrictEqual(statuteHistoryQueries.pop(), { query: "8 U.S.C. 1101(a)(42)", focus: false }, "Back did not restore the preceding statutory path.");
+  assert.strictEqual(historyForwardButton.disabled, false, "Forward remained disabled after moving Back.");
+  statuteHistory.navigateStatuteHistory(1);
+  assert.deepStrictEqual(statuteHistoryQueries.pop(), { query: "8 U.S.C. 1153(b)(2)(A)", focus: false }, "Forward did not restore the later statutory path.");
+
+  statuteHistory.navigateStatuteHistory(-1);
+  statuteHistoryQueries.pop();
+  statuteHistoryState.statuteNavigationLocation = { sectionId: section1101.id, path: ["a", "42"] };
+  statuteHistory.navigateToStatuteCitation("8 U.S.C. 1104(b)");
+  assert.deepStrictEqual(plain(statuteHistoryState.statuteNavigationHistory), [
+    { sectionId: section1101.id, path: ["a", "42"] },
+    { sectionId: section1104.id, path: ["b"] }
+  ], "Following a statute citation after Back did not replace the obsolete Forward branch.");
+  assert.deepStrictEqual(statuteHistoryQueries.pop(), { query: "8 U.S.C. 1104(b)", focus: false }, "A linked statute citation did not open its local destination.");
+  assert.strictEqual(statuteHistory.sameStatuteHistoryLocation(
+    { sectionId: section1104.id, path: ["B"] },
+    { sectionId: section1104.id, path: ["b"] }
+  ), true, "Equivalent statutory paths can create duplicate history entries.");
+
   const refugeeNode = statutoryNode(fullSource, "1101", ["a", "42"]);
   const formattedRefugeeDefinition = formatStatutoryRunInText(refugeeNode.text, "42", refugeeNode.references);
   assert.strictEqual((formattedRefugeeDefinition.match(/statutory-runin-line/g) || []).length, 2, "INA 101(a)(42) did not render two run-in subparagraphs.");
@@ -902,8 +1101,8 @@ async function main() {
   assert.strictEqual(minimal.imported.preferences.quizCursorKey, null);
   assert.strictEqual(minimal.imported.preferences.quizClassification, "all");
   assert.strictEqual(minimal.imported.notes[0].body, "Preserve this text.");
-  const embeddedMinimal = replaceProfileOnly(light.html, minimal.imported);
-  const minimalReload = await runBootstrap({ ...light, html: embeddedMinimal, profile: minimal.imported });
+  const embeddedMinimal = replaceProfileOnly(allUnlocked.html, minimal.imported);
+  const minimalReload = await runBootstrap({ ...allUnlocked, html: embeddedMinimal, profile: minimal.imported });
   assert.deepStrictEqual(plain(minimalReload.profile), minimal.imported, "Minimal legacy data did not reload from a standalone AuthoritySearch file.");
   assert.strictEqual(minimalReload.errors.profile, false);
 
@@ -933,7 +1132,7 @@ async function main() {
   assert.throws(() => parseImportedProfile('window.AUTHORITY_SEARCH_PROFILE = {"schemaVersion":1,"notes":"not-an-array","preferences":{}};'), /valid AuthoritySearch profile/, "Malformed notes collection was accepted.");
 
   console.log(`PASS AuthoritySearch.html: ${full.bytes} bytes; ${full.manifest.compressedBytes} gzip bytes`);
-  console.log(`PASS AuthoritySearch-no-USC.html: ${light.bytes} bytes; ${light.manifest.compressedBytes} gzip bytes`);
+  console.log(`PASS AuthoritySearch-AU.html: ${allUnlocked.bytes} bytes; ${allUnlocked.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${statutoryFormattingAudit.citationLinks} local citation links`);
   console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 61 INA clauses; 32 exact 8 CFR 1.2 entries`);
   console.log("PASS round trips, hashes, counts, syntax, native loader, corruption handling, deterministic gzip, profile isolation, comprehensive legacy profile migration, statutory formatting, saving-menu state rules, and ordinary gzip extraction");

@@ -27,9 +27,13 @@ window.AUTHORITY_SEARCH_CORPUS = {
   "approvedDomains": [
     "ecfr.gov",
     "eforms.state.gov",
+    "irs.gov",
+    "justice.gov",
     "uscis.gov",
     "uscode.house.gov",
     "www.ecfr.gov",
+    "www.irs.gov",
+    "www.justice.gov",
     "www.uscis.gov"
   ],
   "sources": {
