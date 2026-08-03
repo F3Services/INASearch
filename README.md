@@ -4,18 +4,18 @@ AuthoritySearch is a portable, local-first ISOBASIC study reference. It provides
 
 The distributed application is one HTML file. It runs directly from a local folder in current Microsoft Edge or Chrome with no installation, server, framework, telemetry, automatic network request, or companion JavaScript file.
 
-The primary navigation opens on **Definitions**, which is the leftmost page. The classic optional quiz is opened from **Sources & About** instead of occupying a primary-navigation tab.
+The primary navigation opens on **Definitions**, which is the leftmost page. The classic optional quiz is opened from **Sources & About** instead of occupying a primary-navigation tab. Wrong answers in that practice-only quiz may be retried without a timeout.
 
 ## Choose one version
 
 - `AuthoritySearch.html` is the standard version. It includes the complete locally captured Title 8 text and notes, so U.S.C. citations can be displayed and highlighted inside AuthoritySearch. An official House source link remains available.
-- `AuthoritySearch-no-USC.html` is the lightweight version. It retains 376 Title 8 citation and hierarchy records, INA/U.S.C. crosswalks, the focused INA 101/8 CFR 1.2 definitions catalog, both classification tables, resource checks, practice quizzes, catalogs, and notes, but omits the general cached Title 8 section bodies. Ordinary U.S.C. citations open on `uscode.house.gov`.
+- `AuthoritySearch-no-USC.html` is the lightweight version. It retains 376 Title 8 citation and hierarchy records, INA/U.S.C. crosswalks, the USCIS Glossary and focused INA 101/8 CFR 1.2 definitions catalog, both classification tables, resource checks, practice quizzes, catalogs, and notes, but omits the general cached Title 8 section bodies. Ordinary U.S.C. citations open on `uscode.house.gov`.
 
 ## Immigration type cards and resource checks
 
 The **Nonimmigrant Types** page is built from the 84 symbols in Table 1 to 22 CFR 41.12. Its first three open-resource checks unlock the classification table, the INA 101(a)(15) definition field, and the USCIS Policy Manual Volume 2 EOS/COS appendix field for all matching cards. The EOS/COS check remains one combined question and unlocks both eligibility and the form type reported by that appendix. Fifteen additional approved-resource questions unlock sourced initial application or petition forms for the applicable classifications. Maximum admission and maximum continuous-stay fields direct the student to the Pocket Field Guide once the classification table is unlocked.
 
-The **Immigrant Types** page is built from the 158 symbols in Table 1 to 22 CFR 42.11. One resource check unlocks the table, followed by eight definition questions grouped by each distinct combination of source instruments (INA-only, INA plus a named appropriations act, and so on) and 22 approved-resource form questions. Large question scopes use compact root-prefix notation, with parenthesized ranges when only part of a root is included. Citation-choice questions link their answer text directly to the official resource; form questions link the specifically named source and form, then require the exact matching set of statuses. A sourced derivative card displays the principal's form type with an asterisk and a focusable or hoverable `*derivative classification` explanation. Cards do not display an initial form when the approved resources do not justify one. The older status and fact question bank is available from **Sources & About** as optional practice and does not control card content. Both Types pages and the optional Quiz remain unavailable during scheduled testing hours.
+The **Immigrant Types** page is built from the 158 symbols in Table 1 to 22 CFR 42.11. One resource check unlocks the table, followed by eight definition questions grouped by each distinct combination of source instruments (INA-only, INA plus a named appropriations act, and so on) and 22 approved-resource form questions. Large question scopes use compact root-prefix notation, with parenthesized ranges when only part of a root is included. Citation-choice questions link their answer text directly to the official resource; all form questions use six-option multiple choice with concise group labels such as family-based principals, employment-based derivatives, or other specifically defined classification groups. A sourced derivative card displays the principal's form type with an asterisk and a focusable or hoverable `*derivative classification` explanation. Cards do not display an initial form when the approved resources do not justify one. A wrong answer on any immigrant or nonimmigrant resource check locks only that specific question for 30 minutes, while the other questions remain available; the lockout persists with saved progress. The older status and fact question bank is available from **Sources & About** as optional practice without a retry timeout and does not control card content. Both Types pages and the optional Quiz remain unavailable during scheduled testing hours.
 
 Each version is complete by itself. Most users should receive `AuthoritySearch.html`; use `AuthoritySearch-no-USC.html` when file size matters more than local U.S.C. text.
 
@@ -31,7 +31,9 @@ The current build contains 3,587 verified local reference links: 1,289 in operat
 
 Open **Definitions** from the navigation bar or search for `definitions`. Typing `define:` in the main search bar opens the page immediately and filters terms by case-insensitive substring as you type—for example, `define: child`.
 
-The initial catalog contains 61 explicit definition clauses from INA 101 and 32 entries from 8 CFR 1.2. Each definition keeps its exact locator, official link, capture date, governing scope language, and any separately recorded definition-specific applicability language. A term defined more than once remains multiple source records; AuthoritySearch does not merge the texts into a synthesized meaning. Use **Defined in** to filter by source location and **Applicable in** to filter by the scope stated in the authority.
+The catalog contains 267 entries captured from the USCIS Glossary, 61 explicit definition clauses from INA 101, and 32 entries from 8 CFR 1.2. USCIS Glossary entries appear first by default and are categorized as **USCIS Policy**. Statutory and regulatory definitions are grouped under **Law**, retain their exact locator, official link, capture date, governing scope language, and any separately recorded definition-specific applicability language. A term defined more than once remains multiple source records; AuthoritySearch does not merge the texts into a synthesized meaning.
+
+The **Defined in** and **Applicable in** controls are hierarchical checkbox filters. Their **Statute** parents select every INA source or applicability scope, while the second-level choices narrow the selection to a specific part of INA 101 or a specific statutory applicability. Checking or clearing a parent changes all descendants; a partially selected parent is indeterminate, and it becomes checked automatically when all descendants are checked. When a checked applicability matches at least one definition for a term, other definitions for that same term remain readable with a yellow out-of-applicability warning. The **Defined in** choices still remove definitions outside the checked sources.
 
 ## Enabling autosaving
 
@@ -295,6 +297,7 @@ The root HTML files are the user-facing builds. Developer source remains separat
 - `src/AuthoritySearch.template.html` contains the editable interface and application logic.
 - `src/AuthoritySearch-Corpus.js` contains the reviewed, uncompressed source corpus used during the build.
 - `src/AuthoritySearch-Definitions.js` contains the human-readable 8 CFR 1.2 transcription, source metadata, and scope records. INA 101 entries are deterministically derived from the reviewed 8 U.S.C. 1101 hierarchy during the build.
+- `src/AuthoritySearch-USCIS-Glossary.js` contains the generated capture of all terms and explanations on the official USCIS Glossary page.
 - `src/AuthoritySearch-Visa-Tables.js` contains the generated 22 CFR 41.12 and 42.11 classification rows and the grouped immigrant-definition authorities.
 - `src/AuthoritySearch-Form-Questions.js` contains the approved-resource initial-form questions, status mappings, form links, and derivative-classification explanations.
 - `src/AuthoritySearch-Statute-References.js` contains the verified local Title 8 reference spans and targets generated from official House USLM XML.
@@ -302,6 +305,7 @@ The root HTML files are the user-facing builds. Developer source remains separat
 - `tools/definition-catalog.js` builds the definitions catalog without merging duplicate terms or discarding source scope.
 - `tools/statute-references.js` validates and attaches local citation spans without changing statutory text or hierarchy.
 - `tools/generate-statute-references.js` regenerates the reviewed reference source from an official `usc08.xml` file.
+- `tools/generate-uscis-glossary.js` refreshes the USCIS Glossary capture from the official glossary page and records the source hash.
 - `tools/generate-visa-tables.js` regenerates the two classification tables from official eCFR Title 22 XML snapshots; `--existing` recomputes derived question groups without rewriting the captured table rows.
 - `tools/build-standalone.js` deterministically generates both standalone HTML files using maximum gzip compression and a zero gzip timestamp.
 

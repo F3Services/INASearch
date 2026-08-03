@@ -53,8 +53,11 @@ function deriveInaEntries(corpus, definitionSource) {
       children: clone(children),
       references: clone(node.references || []),
       sourceFamily: "ina",
-      sourceFilter: scopeId === "ina-chapter" ? "ina-101-a" : scopeId === "ina-subchapters-i-ii" ? "ina-101-b" : scopeId === "ina-subchapter-iii" ? "ina-101-c" : "ina-101-other",
+      sourceCategory: "law",
+      sourceFilter: scopeId === "ina-chapter" ? "ina-101-a" : scopeId === "ina-subchapters-i-ii" ? "ina-101-b" : scopeId === "ina-subchapter-iii" ? "ina-101-c" : "ina-101-h",
       scopeId,
+      scopeCategory: "law",
+      sourcePriority: 1,
       citation: `INA 101${citeSuffix}`,
       uscCitation: `8 U.S.C. 1101${citeSuffix}`,
       path: clone(path),
@@ -85,15 +88,18 @@ function deriveInaEntries(corpus, definitionSource) {
   return entries;
 }
 
-function buildDefinitionCatalog(corpus, definitionSource) {
+function buildDefinitionCatalog(corpus, definitionSource, glossarySource = null) {
   const definitions = clone(definitionSource);
   const cfrSource = definitions.sources.cfr1_2;
   const cfrEntries = definitions.cfrEntries.map((entry, index) => ({
     ...entry,
     id: `8-cfr-1-2-${String(index + 1).padStart(2, "0")}-${slug(entry.term)}`,
     sourceFamily: "cfr",
+    sourceCategory: "law",
     sourceFilter: "8-cfr-1-2",
     scopeId: "cfr-chapter-i",
+    scopeCategory: "law",
+    sourcePriority: 1,
     citation: "8 CFR 1.2",
     locator: `8 CFR 1.2 — ${entry.term}`,
     url: cfrSource.url,
@@ -101,16 +107,63 @@ function buildDefinitionCatalog(corpus, definitionSource) {
     resource: cfrSource.name,
     children: []
   }));
+  const glossary = glossarySource && Array.isArray(glossarySource.entries) ? glossarySource : null;
+  const glossaryEntries = (glossary?.entries || []).map((entry, index) => ({
+    ...entry,
+    id: `uscis-glossary-${String(index + 1).padStart(3, "0")}-${slug(entry.term)}`,
+    sourceFamily: "uscis-glossary",
+    sourceCategory: "policy",
+    sourceFilter: "uscis-glossary",
+    scopeId: "uscis-policy",
+    scopeCategory: "policy",
+    sourcePriority: 0,
+    citation: "USCIS Glossary",
+    locator: `USCIS Glossary — ${entry.term}`,
+    url: glossary.source.url,
+    captureDate: glossary.source.capturedAt,
+    resource: glossary.source.name,
+    children: []
+  }));
   delete definitions.cfrEntries;
   delete definitions.inaSpecificScope;
-  definitions.entries = [...deriveInaEntries(corpus, definitionSource), ...cfrEntries];
+  if (glossary) {
+    definitions.sources.uscisGlossary = clone(glossary.source);
+    definitions.glossaryVerification = clone(glossary.verification);
+  }
+  definitions.scopes = [
+    ...(glossary ? [{
+      id: "uscis-policy",
+      sourceFilter: "uscis-glossary",
+      category: "policy",
+      label: "USCIS Policy",
+      sourceLabel: "USCIS Glossary",
+      text: "You can use this dictionary to quickly look up a definition or explanation for a topic.",
+      context: "USCIS presents the glossary as an online dictionary that is separate from its A-Z Index."
+    }] : []),
+    ...definitions.scopes.map(scope => ({ ...scope, category: "law" }))
+  ];
+  definitions.entries = [...glossaryEntries, ...deriveInaEntries(corpus, definitionSource), ...cfrEntries];
   definitions.sourceFilters = [
     { id: "all", label: "All sources" },
-    { id: "ina-101-a", label: "INA 101(a)" },
-    { id: "ina-101-b", label: "INA 101(b)" },
-    { id: "ina-101-c", label: "INA 101(c)" },
-    { id: "ina-101-other", label: "Other INA 101" },
-    { id: "8-cfr-1-2", label: "8 CFR 1.2" }
+    ...(glossary ? [{ id: "uscis-glossary", label: "USCIS Glossary" }] : []),
+    { id: "law", label: "Law" },
+    { id: "ina-statute", label: "Statute", parentId: "law" },
+    { id: "ina-101-a", label: "INA 101(a)", parentId: "ina-statute" },
+    { id: "ina-101-b", label: "INA 101(b)", parentId: "ina-statute" },
+    { id: "ina-101-c", label: "INA 101(c)", parentId: "ina-statute" },
+    { id: "ina-101-h", label: "INA 101(h)", parentId: "ina-statute" },
+    { id: "8-cfr-1-2", label: "Regulation (8 CFR 1.2)", parentId: "law" }
+  ];
+  definitions.scopeFilters = [
+    { id: "all", label: "All applicability scopes" },
+    ...(glossary ? [{ id: "uscis-policy", label: "USCIS Policy" }] : []),
+    { id: "law", label: "Law" },
+    { id: "ina-any", label: "Statute (Any part of INA)", parentId: "law" },
+    ...definitions.scopes.filter(scope => scope.category === "law").map(scope => ({
+      id: scope.id,
+      label: scope.label,
+      parentId: scope.id.startsWith("ina-") ? "ina-any" : "law"
+    }))
   ];
   return definitions;
 }

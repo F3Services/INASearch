@@ -41,6 +41,7 @@ window.AUTHORITY_SEARCH_PROFILE = {
   "visaFactUnlocks": [],
   "visaFactChallengeLockouts": [],
   "resourceUnlocks": [],
+  "resourceChallengeLockouts": [],
   "notes": [],
   "courseStructure": {
     "blocks": []

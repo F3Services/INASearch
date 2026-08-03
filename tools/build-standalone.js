@@ -147,7 +147,8 @@ fullCorpus.visaTables.formQuestions = readAssignedObject("AuthoritySearch-Form-Q
 const statuteReferenceSource = readAssignedObject("AuthoritySearch-Statute-References.js", "AUTHORITY_SEARCH_STATUTE_REFERENCES");
 applyStatuteReferences(fullCorpus, statuteReferenceSource);
 const definitionSource = readAssignedObject("AuthoritySearch-Definitions.js", "AUTHORITY_SEARCH_DEFINITIONS");
-fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource);
+const uscisGlossarySource = readAssignedObject("AuthoritySearch-USCIS-Glossary.js", "AUTHORITY_SEARCH_USCIS_GLOSSARY");
+fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
 const defaultProfile = readAssignedObject("AuthoritySearch-Profile.js", "AUTHORITY_SEARCH_PROFILE");
 const linkCorpus = JSON.parse(JSON.stringify(fullCorpus));
 linkCorpus.title8 = metadataOnlyTitle8(fullCorpus.title8);

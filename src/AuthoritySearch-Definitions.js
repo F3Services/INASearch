@@ -4,10 +4,11 @@
  * INA 101 entries are derived during the standalone build from the reviewed
  * 8 U.S.C. 1101 hierarchy in AuthoritySearch-Corpus.js. The regulation
  * entries below are a direct transcription of 8 CFR 1.2 as published by eCFR.
+ * The separately generated USCIS glossary source is joined during the build.
  */
 window.AUTHORITY_SEARCH_DEFINITIONS = {
   "schemaVersion": 1,
-  "capturedAt": "2026-07-30",
+  "capturedAt": "2026-08-03",
   "sources": {
     "ina101": {
       "name": "INA section 101 — Definitions",
@@ -49,7 +50,7 @@ window.AUTHORITY_SEARCH_DEFINITIONS = {
     },
     {
       "id": "ina-212-a-2-e",
-      "sourceFilter": "ina-101-other",
+      "sourceFilter": "ina-101-h",
       "label": "INA 212(a)(2)(E) only",
       "sourceLabel": "INA 101(h)",
       "text": "For purposes of section 1182(a)(2)(E) of this title"
@@ -57,7 +58,7 @@ window.AUTHORITY_SEARCH_DEFINITIONS = {
     {
       "id": "cfr-chapter-i",
       "sourceFilter": "8-cfr-1-2",
-      "label": "8 CFR chapter I",
+      "label": "Regulation (8 CFR Chapter I)",
       "sourceLabel": "8 CFR 1.2",
       "text": "As used in this chapter I, the term:",
       "context": "This part further defines some of the terms already described in section 101 and other sections of the Immigration and Nationality Act (66 Stat. 163), as amended, and such other enactments as pertain to immigration and nationality. These terms are used consistently by components within the Department of Homeland Security including U.S. Customs and Border Protection, U.S. Immigration and Customs Enforcement, and U.S. Citizenship and Immigration Services."
