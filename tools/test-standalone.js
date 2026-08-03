@@ -61,15 +61,25 @@ function payloadBlock(html) {
   return scriptBody(html, "authoritySearchCorpusData").replace(/\s+/g, "");
 }
 
+function corpusPayloadText(html) {
+  return scriptBody(html, "authoritySearchCorpusData");
+}
+
 function readBuild(fileName) {
   const filePath = path.join(root, fileName);
   const html = fs.readFileSync(filePath, "utf8");
   const manifest = jsonBlock(html, "authoritySearchCorpusManifest");
-  const compressed = Buffer.from(payloadBlock(html), "base64");
-  const uncompressed = zlib.gunzipSync(compressed);
-  assert.strictEqual(compressed.byteLength, manifest.compressedBytes, `${fileName}: compressed byte count`);
+  const payload = corpusPayloadText(html);
+  const compressed = manifest.compression === "gzip" ? Buffer.from(payload.replace(/\s+/g, ""), "base64") : null;
+  const uncompressed = compressed ? zlib.gunzipSync(compressed) : Buffer.from(payload, "utf8");
+  if (compressed) {
+    assert.strictEqual(compressed.byteLength, manifest.compressedBytes, `${fileName}: compressed byte count`);
+    assert.strictEqual(sha256(compressed), manifest.compressedSha256, `${fileName}: compressed SHA-256`);
+  } else {
+    assert.strictEqual(manifest.compression, "none", `${fileName}: unsupported corpus compression`);
+    assert.strictEqual(manifest.encoding, "utf-8", `${fileName}: unsupported uncompressed encoding`);
+  }
   assert.strictEqual(uncompressed.byteLength, manifest.uncompressedBytes, `${fileName}: uncompressed byte count`);
-  assert.strictEqual(sha256(compressed), manifest.compressedSha256, `${fileName}: compressed SHA-256`);
   assert.strictEqual(sha256(uncompressed), manifest.uncompressedSha256, `${fileName}: uncompressed SHA-256`);
   return {
     fileName,
@@ -79,6 +89,7 @@ function readBuild(fileName) {
     build: jsonBlock(html, "authoritySearchBuildData"),
     profile: jsonBlock(html, "authoritySearchProfileData"),
     manifest,
+    payload,
     compressed,
     uncompressed,
     corpus: JSON.parse(uncompressed.toString("utf8"))
@@ -94,7 +105,7 @@ function executableScripts(html) {
 async function runBootstrap(build, overrides = {}) {
   const scripts = executableScripts(build.html);
   assert.strictEqual(scripts.length, 2, `${build.fileName}: executable script count`);
-  const manifestAttributes = {
+  const manifestAttributes = Object.fromEntries(Object.entries({
     "schema-version": String(build.manifest.schemaVersion),
     "corpus-schema-version": String(build.manifest.corpusSchemaVersion),
     "corpus-version": build.manifest.corpusVersion,
@@ -107,7 +118,7 @@ async function runBootstrap(build, overrides = {}) {
     "uncompressed-bytes": String(build.manifest.uncompressedBytes),
     "compressed-sha256": build.manifest.compressedSha256,
     "uncompressed-sha256": build.manifest.uncompressedSha256
-  };
+  }).filter(([, value]) => value !== undefined && value !== "undefined"));
   const embeddedElement = (value, attributes = {}) => {
     const element = overrides.scriptTextOnly
       ? { text: value, textContent: "", innerHTML: "" }
@@ -118,7 +129,7 @@ async function runBootstrap(build, overrides = {}) {
   const elements = {
     authoritySearchBuildData: embeddedElement(JSON.stringify(build.build)),
     authoritySearchCorpusManifest: embeddedElement(overrides.manifestTextUnreadable ? "" : JSON.stringify(overrides.manifest || build.manifest)),
-    authoritySearchCorpusData: embeddedElement(overrides.payload || payloadBlock(build.html), manifestAttributes),
+    authoritySearchCorpusData: embeddedElement(overrides.payload !== undefined ? overrides.payload : build.payload, manifestAttributes),
     authoritySearchProfileData: embeddedElement(JSON.stringify(build.profile))
   };
   const context = {
@@ -128,6 +139,7 @@ async function runBootstrap(build, overrides = {}) {
     Blob: globalThis.Blob,
     Response: globalThis.Response,
     TextDecoder: globalThis.TextDecoder,
+    TextEncoder: globalThis.TextEncoder,
     Uint8Array,
     atob: globalThis.atob,
     crypto: globalThis.crypto
@@ -233,23 +245,38 @@ async function main() {
   const blankProfile = sourceProfile();
   const full = readBuild("AuthoritySearch.html");
   const allUnlocked = readBuild("AuthoritySearch-AU.html");
+  const uncompressed = readBuild("AuthoritySearch-Uncompressed.html");
 
   assert.deepStrictEqual(blankProfile.resourceChallengeLockouts, [], "Blank profiles must include persisted resource-question lockouts.");
   assert.strictEqual(fs.existsSync(path.join(root, "AuthoritySearch-no-USC.html")), false, "The retired no-USC build still exists.");
 
   assert(full.bytes <= 2_500_000, "AuthoritySearch.html exceeds 2.5 MB acceptance limit.");
   assert(allUnlocked.bytes <= 2_500_000, "AuthoritySearch-AU.html exceeds 2.5 MB acceptance limit.");
+  assert(uncompressed.bytes <= 20_000_000, "AuthoritySearch-Uncompressed.html exceeds 20 MB acceptance limit.");
   assert.strictEqual(full.build.variant, "standard");
   assert.strictEqual(full.build.hasLocalUscCache, true);
+  assert.strictEqual(full.build.corpusCompression, "gzip");
   assert.strictEqual(allUnlocked.build.variant, "all-unlocked");
   assert.strictEqual(allUnlocked.build.hasLocalUscCache, true);
+  assert.strictEqual(allUnlocked.build.corpusCompression, "gzip");
+  assert.strictEqual(uncompressed.build.variant, "uncompressed");
+  assert.strictEqual(uncompressed.build.hasLocalUscCache, true);
+  assert.strictEqual(uncompressed.build.corpusCompression, "none");
+  assert.strictEqual(uncompressed.manifest.encoding, "utf-8");
+  assert.strictEqual(uncompressed.manifest.mediaType, "application/json");
+  assert.strictEqual(Object.hasOwn(uncompressed.manifest, "compressedBytes"), false, "The uncompressed manifest advertises compressed bytes.");
+  assert(/id="authoritySearchCorpusData" type="application\/json"/.test(uncompressed.html), "The uncompressed corpus is not embedded as plain JSON.");
   assert.deepStrictEqual(full.profile, blankProfile);
+  assert.deepStrictEqual(uncompressed.profile, blankProfile, "The uncompressed build must retain the standard unanswered profile.");
   assert.deepStrictEqual(full.corpus, fullSource, "Full corpus round trip changed data.");
   assert.deepStrictEqual(allUnlocked.corpus, fullSource, "All-unlocked corpus round trip changed data.");
+  assert.deepStrictEqual(uncompressed.corpus, fullSource, "Uncompressed corpus round trip changed data.");
   assert.strictEqual(full.corpus.title8.sections.length, 376);
   assert.strictEqual(allUnlocked.corpus.title8.sections.length, 376);
+  assert.strictEqual(uncompressed.corpus.title8.sections.length, 376);
   assert(full.corpus.title8.sections.some(section => Array.isArray(section.body)), "Full corpus has no cached Title 8 bodies.");
   assert(allUnlocked.corpus.title8.sections.some(section => Array.isArray(section.body)), "All-unlocked build has no cached Title 8 bodies.");
+  assert(uncompressed.corpus.title8.sections.some(section => Array.isArray(section.body)), "Uncompressed build has no cached Title 8 bodies.");
   assert.strictEqual(full.corpus.visaCategories.length, 85);
   assert.strictEqual(full.corpus.visaTables.nonimmigrantTypes.length, 84);
   assert.strictEqual(full.corpus.visaTables.immigrantTypes.length, 158);
@@ -397,7 +424,7 @@ async function main() {
   assert.strictEqual(definitionScopes.get("ina-subchapters-i-ii").text, statutoryNode(fullSource, "1101", ["b"]).text);
   assert.strictEqual(definitionScopes.get("ina-subchapter-iii").text, statutoryNode(fullSource, "1101", ["c"]).text);
 
-  for (const build of [full, allUnlocked]) {
+  for (const build of [full, allUnlocked, uncompressed]) {
     const scripts = executableScripts(build.html);
     assert.strictEqual(scripts.length, 2);
     scripts.forEach((source, index) => new vm.Script(source, { filename: `${build.fileName}:script-${index + 1}` }));
@@ -408,7 +435,7 @@ async function main() {
     const elapsed = performance.now() - started;
     assert.deepStrictEqual(JSON.parse(JSON.stringify(loaded.corpus)), build.corpus, `${build.fileName}: browser-standard loader changed data.`);
     assert.strictEqual(loaded.errors.corpus, false);
-    assert(elapsed < 1000, `${build.fileName}: bootstrap decompression took ${elapsed.toFixed(0)} ms.`);
+    assert(elapsed < 1500, `${build.fileName}: bootstrap corpus loading took ${elapsed.toFixed(0)} ms.`);
 
     const safariScriptText = await runBootstrap(build, { scriptTextOnly: true });
     assert.deepStrictEqual(JSON.parse(JSON.stringify(safariScriptText.corpus)), build.corpus, `${build.fileName}: script-text fallback changed data.`);
@@ -419,20 +446,29 @@ async function main() {
     assert.strictEqual(attributeManifestFallback.errors.corpus, false);
 
     const unsupported = await runBootstrap(build, { missingDecompressionStream: true });
-    assert.strictEqual(unsupported.corpus, null);
-    assert.strictEqual(unsupported.errors.corpus, true);
-    assert.match(unsupported.errors.corpusMessage, /does not support the standard gzip decompression API/);
+    if (build.manifest.compression === "gzip") {
+      assert.strictEqual(unsupported.corpus, null);
+      assert.strictEqual(unsupported.errors.corpus, true);
+      assert.match(unsupported.errors.corpusMessage, /does not support the standard gzip decompression API/);
 
-    const badBase64 = await runBootstrap(build, { payload: `!${payloadBlock(build.html).slice(1)}` });
-    assert.strictEqual(badBase64.corpus, null);
-    assert.strictEqual(badBase64.errors.corpus, true);
+      const badBase64 = await runBootstrap(build, { payload: `!${payloadBlock(build.html).slice(1)}` });
+      assert.strictEqual(badBase64.corpus, null);
+      assert.strictEqual(badBase64.errors.corpus, true);
 
-    const corruptedBytes = Buffer.from(build.compressed);
-    corruptedBytes[Math.floor(corruptedBytes.length / 2)] ^= 1;
-    const badGzip = await runBootstrap(build, { payload: corruptedBytes.toString("base64") });
-    assert.strictEqual(badGzip.corpus, null);
-    assert.strictEqual(badGzip.errors.corpus, true);
-    assert.match(badGzip.errors.corpusMessage, /SHA-256 integrity check/);
+      const corruptedBytes = Buffer.from(build.compressed);
+      corruptedBytes[Math.floor(corruptedBytes.length / 2)] ^= 1;
+      const badGzip = await runBootstrap(build, { payload: corruptedBytes.toString("base64") });
+      assert.strictEqual(badGzip.corpus, null);
+      assert.strictEqual(badGzip.errors.corpus, true);
+      assert.match(badGzip.errors.corpusMessage, /SHA-256 integrity check/);
+    } else {
+      assert.deepStrictEqual(JSON.parse(JSON.stringify(unsupported.corpus)), build.corpus, `${build.fileName}: uncompressed loading incorrectly requires DecompressionStream.`);
+      assert.strictEqual(unsupported.errors.corpus, false);
+      const badJson = await runBootstrap(build, { payload: `!${build.payload.slice(1)}` });
+      assert.strictEqual(badJson.corpus, null);
+      assert.strictEqual(badJson.errors.corpus, true);
+      assert.match(badJson.errors.corpusMessage, /SHA-256 integrity check/);
+    }
 
     const corpusBlockBefore = build.html.match(/<!-- AUTHORITY_SEARCH_CORPUS_DATA_START -->[\s\S]*?<!-- AUTHORITY_SEARCH_CORPUS_DATA_END -->/)[0];
     const manifestBlockBefore = build.html.match(/<!-- AUTHORITY_SEARCH_CORPUS_MANIFEST_DATA_START -->[\s\S]*?<!-- AUTHORITY_SEARCH_CORPUS_MANIFEST_DATA_END -->/)[0];
@@ -443,20 +479,24 @@ async function main() {
     assert.strictEqual(rewritten.match(/<!-- AUTHORITY_SEARCH_CORPUS_MANIFEST_DATA_START -->[\s\S]*?<!-- AUTHORITY_SEARCH_CORPUS_MANIFEST_DATA_END -->/)[0], manifestBlockBefore);
     assert.strictEqual(jsonBlock(rewritten, "authoritySearchProfileData").notes[0].body, edited.notes[0].body);
 
-    const temp = fs.mkdtempSync(path.join(os.tmpdir(), "authority-search-audit-"));
-    const gzipPath = path.join(temp, "AuthoritySearch-Corpus.json.gz");
-    fs.writeFileSync(gzipPath, build.compressed);
-    const ordinaryGzip = spawnSync("/usr/bin/gzip", ["-dc", gzipPath], { encoding: null, maxBuffer: 20_000_000 });
-    assert.strictEqual(ordinaryGzip.status, 0, ordinaryGzip.stderr?.toString());
-    assert.strictEqual(sha256(ordinaryGzip.stdout), build.manifest.uncompressedSha256);
+    if (build.compressed) {
+      const temp = fs.mkdtempSync(path.join(os.tmpdir(), "authority-search-audit-"));
+      const gzipPath = path.join(temp, "AuthoritySearch-Corpus.json.gz");
+      fs.writeFileSync(gzipPath, build.compressed);
+      const ordinaryGzip = spawnSync("/usr/bin/gzip", ["-dc", gzipPath], { encoding: null, maxBuffer: 20_000_000 });
+      assert.strictEqual(ordinaryGzip.status, 0, ordinaryGzip.stderr?.toString());
+      assert.strictEqual(sha256(ordinaryGzip.stdout), build.manifest.uncompressedSha256);
+    }
   }
 
   const fullPayload = payloadBlock(full.html);
   const allUnlockedPayload = payloadBlock(allUnlocked.html);
+  const uncompressedPayload = corpusPayloadText(uncompressed.html);
   const rebuild = spawnSync(process.execPath, [path.join(root, "tools", "build-standalone.js")], { cwd: root, encoding: "utf8" });
   assert.strictEqual(rebuild.status, 0, rebuild.stderr);
   assert.strictEqual(payloadBlock(fs.readFileSync(full.filePath, "utf8")), fullPayload, "Full gzip output is not deterministic.");
   assert.strictEqual(payloadBlock(fs.readFileSync(allUnlocked.filePath, "utf8")), allUnlockedPayload, "All-unlocked gzip output is not deterministic.");
+  assert.strictEqual(corpusPayloadText(fs.readFileSync(uncompressed.filePath, "utf8")), uncompressedPayload, "Uncompressed JSON output is not deterministic.");
 
   const fallbackSource = fs.readFileSync(path.join(root, "src", "AuthoritySearch.template.html"), "utf8");
   assert(fallbackSource.includes("const studyUnavailable = active || !corpus;"));
@@ -1133,9 +1173,10 @@ async function main() {
 
   console.log(`PASS AuthoritySearch.html: ${full.bytes} bytes; ${full.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS AuthoritySearch-AU.html: ${allUnlocked.bytes} bytes; ${allUnlocked.manifest.compressedBytes} gzip bytes`);
+  console.log(`PASS AuthoritySearch-Uncompressed.html: ${uncompressed.bytes} bytes; ${uncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
   console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${statutoryFormattingAudit.citationLinks} local citation links`);
   console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 61 INA clauses; 32 exact 8 CFR 1.2 entries`);
-  console.log("PASS round trips, hashes, counts, syntax, native loader, corruption handling, deterministic gzip, profile isolation, comprehensive legacy profile migration, statutory formatting, saving-menu state rules, and ordinary gzip extraction");
+  console.log("PASS round trips, hashes, counts, syntax, native loaders, corruption handling, deterministic gzip and plain JSON, profile isolation, comprehensive legacy profile migration, statutory formatting, saving-menu state rules, and ordinary gzip extraction");
 }
 
 main().catch(error => {

@@ -10,6 +10,7 @@ The primary navigation opens on **Definitions**, which is the leftmost page. The
 
 - `AuthoritySearch.html` is the standard version. It includes the complete locally captured Title 8 text and notes, so U.S.C. citations can be displayed and highlighted inside AuthoritySearch. An official House source link remains available.
 - `AuthoritySearch-AU.html` is the all-unlocked version. It contains the same complete local corpus, with all 49 immigrant and nonimmigrant card-resource checks recorded as correctly completed so every currently sourced card field is available immediately. Its optional classic quiz remains unanswered.
+- `AuthoritySearch-Uncompressed.html` is the standard unanswered version with the same complete corpus embedded directly as plain UTF-8 JSON rather than Base64-encoded gzip. It is substantially larger, but it can load without the browser's `DecompressionStream` API and its corpus is directly inspectable in the HTML.
 
 ## Immigration type cards and resource checks
 
@@ -17,7 +18,7 @@ The **Nonimmigrant Types** page is built from the 84 symbols in Table 1 to 22 CF
 
 The **Immigrant Types** page is built from the 158 symbols in Table 1 to 22 CFR 42.11. One resource check unlocks the table, followed by eight definition questions grouped by each distinct combination of source instruments (INA-only, INA plus a named appropriations act, and so on) and 22 approved-resource form questions. Large question scopes use compact root-prefix notation, with parenthesized ranges when only part of a root is included. Citation-choice questions link their answer text directly to the official resource; all form questions use six-option multiple choice with concise group labels such as family-based principals, employment-based derivatives, or other specifically defined classification groups. A sourced derivative card displays the principal's form type with an asterisk and a focusable or hoverable `*derivative classification` explanation. Cards do not display an initial form when the approved resources do not justify one. A wrong answer on any immigrant or nonimmigrant resource check locks only that specific question for one minute and leaves that question in place. Its answer controls remain disabled during the wait, but its linked resources remain available for review; when the minute ends, the same question becomes answerable again. The lockout persists with saved progress. The older status and fact question bank is available from **Sources & About** as optional practice without a retry timeout and does not control card content. Both Types pages and the optional Quiz remain unavailable during scheduled testing hours.
 
-Each version is complete by itself. Use `AuthoritySearch.html` for the normal question-driven experience and `AuthoritySearch-AU.html` when the card-resource checks should begin fully completed.
+Each version is complete by itself. Use `AuthoritySearch.html` for the normal question-driven experience, `AuthoritySearch-AU.html` when the card-resource checks should begin fully completed, and `AuthoritySearch-Uncompressed.html` when a plain-JSON corpus is required.
 
 ## Local statutory citation links
 
@@ -44,7 +45,7 @@ The HTML contains its own profile data. Browser security still requires one user
 3. Choose **Enable autosaving**.
 4. When the file picker appears, select the same AuthoritySearch HTML file that is currently open and grant write access if Edge asks.
 
-After setup, changes wait five seconds and then AuthoritySearch rewrites only its embedded profile block. The header changes through **Autosave queued**, **Saving…**, and **Saved**. The compressed corpus and its manifest remain byte-for-byte unchanged.
+After setup, changes wait five seconds and then AuthoritySearch rewrites only its embedded profile block. The header changes through **Autosave queued**, **Saving…**, and **Saved**. The embedded corpus and its manifest remain byte-for-byte unchanged.
 
 AuthoritySearch does not show the large unsaved-changes warning merely because autosaving is off. The warning appears only after something that belongs in the profile changes—for example, a quiz answer, note, imported profile, or block/module structure. Searching, changing a result filter, and ordinary navigation do not trigger it.
 
@@ -246,13 +247,15 @@ Structure rules:
 
 After **Apply structure**, every configured module appears as an initially empty note. Week/day notes from W1D1 through W6D5 are always available without configuration.
 
-## Compressed corpus format
+## Corpus formats
 
-Both generated HTML files carry their corpus as compact UTF-8 JSON compressed with ordinary [gzip (RFC 1952)](https://datatracker.ietf.org/doc/html/rfc1952), then represented with standard [Base64 (RFC 4648)](https://www.rfc-editor.org/info/rfc4648/) inside the marked embedded-corpus script block. Base64 is transport encoding, not encryption or a security measure. Decompression occurs only in browser memory through the standard [DecompressionStream API](https://compression.spec.whatwg.org/) and requires no file, network, installation, or execution permission.
+`AuthoritySearch.html` and `AuthoritySearch-AU.html` carry their corpus as compact UTF-8 JSON compressed with ordinary [gzip (RFC 1952)](https://datatracker.ietf.org/doc/html/rfc1952), then represented with standard [Base64 (RFC 4648)](https://www.rfc-editor.org/info/rfc4648/) inside the marked embedded-corpus script block. Base64 is transport encoding, not encryption or a security measure. Decompression occurs only in browser memory through the standard [DecompressionStream API](https://compression.spec.whatwg.org/) and requires no file, network, installation, or execution permission.
+
+`AuthoritySearch-Uncompressed.html` embeds the same corpus as compact plain UTF-8 JSON in an inert `application/json` script block. It verifies the raw JSON byte count and SHA-256 hash before parsing and does not use `DecompressionStream`.
 
 Immediately above the payload, a readable JSON manifest records the schema and corpus versions, encoding, compression, media/content types, compressed and uncompressed byte counts, and SHA-256 hashes. **Sources & About** displays the same data and a copyable extraction command.
 
-To inspect either corpus:
+To inspect either compressed corpus:
 
 1. Extract the text between the `AUTHORITY_SEARCH_CORPUS_DATA_START` and `AUTHORITY_SEARCH_CORPUS_DATA_END` markers.
 2. Base64-decode it to `AuthoritySearch-Corpus.json.gz`.
@@ -286,9 +289,11 @@ Get-FileHash $outJson -Algorithm SHA256
 
 Change `$htmlPath` to `.\AuthoritySearch-AU.html` to inspect the all-unlocked build. No custom or third-party decompressor is used.
 
+For `AuthoritySearch-Uncompressed.html`, the corpus is already JSON: extract the contents of the `authoritySearchCorpusData` script block directly. The in-app **Sources & About** page provides a matching PowerShell command and the expected raw byte count and SHA-256 hash.
+
 ## Compatibility behavior
 
-Current Microsoft Edge is the primary target. If `DecompressionStream` is unavailable, or if the compressed bytes, hashes, JSON, or schema cannot be validated, AuthoritySearch shows a compatibility error and disables the visa cards and quiz. Official U.S.C. and CFR citation navigation remains available. It does not request another permission, download a fallback decoder, or modify the file.
+Current Microsoft Edge is the primary target. The compressed editions require `DecompressionStream`; the uncompressed edition does not. If the applicable bytes, hashes, JSON, or schema cannot be validated, AuthoritySearch shows a compatibility error and disables the visa cards and quiz. Official U.S.C. and CFR citation navigation remains available. It does not request another permission, download a fallback decoder, or modify the file.
 
 ## Repository structure
 
@@ -307,7 +312,7 @@ The root HTML files are the user-facing dynamic documents. Developer source rema
 - `tools/generate-statute-references.js` regenerates the reviewed reference source from an official `usc08.xml` file.
 - `tools/generate-uscis-glossary.js` refreshes the USCIS Glossary capture from the official glossary page and records the source hash.
 - `tools/generate-visa-tables.js` regenerates the two classification tables from official eCFR Title 22 XML snapshots; `--existing` recomputes derived question groups without rewriting the captured table rows.
-- `tools/build-standalone.js` deterministically generates both standalone HTML files using maximum gzip compression and a zero gzip timestamp.
+- `tools/build-standalone.js` deterministically generates the three standalone HTML files, using maximum gzip compression and a zero gzip timestamp for the compressed editions and verified plain JSON for the uncompressed edition.
 
 The source JavaScript files are not part of the workstation package.
 

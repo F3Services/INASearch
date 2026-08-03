@@ -26,6 +26,13 @@ function safeJson(value) {
     .replace(/\u2029/g, "\\u2029");
 }
 
+function safeCompactJson(value) {
+  return JSON.stringify(value)
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+}
+
 function replaceDataBlock(html, name, id, value) {
   const start = `<!-- AUTHORITY_SEARCH_${name}_DATA_START -->`;
   const end = `<!-- AUTHORITY_SEARCH_${name}_DATA_END -->`;
@@ -61,6 +68,26 @@ function compressCorpus(corpus) {
   };
 }
 
+function encodeUncompressedCorpus(corpus) {
+  const text = safeCompactJson(corpus);
+  const bytes = Buffer.from(text, "utf8");
+  return {
+    manifest: {
+      schemaVersion: 1,
+      corpusSchemaVersion: corpus.schemaVersion,
+      corpusVersion: corpus.corpusVersion,
+      encoding: "utf-8",
+      compression: "none",
+      mediaType: "application/json",
+      contentType: "application/json",
+      charset: "utf-8",
+      uncompressedBytes: bytes.byteLength,
+      uncompressedSha256: sha256(bytes)
+    },
+    payload: text
+  };
+}
+
 function htmlAttribute(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -69,7 +96,7 @@ function htmlAttribute(value) {
     .replace(/>/g, "&gt;");
 }
 
-function replaceCorpusBlock(html, base64, manifest) {
+function replaceCorpusBlock(html, payload, manifest) {
   const start = "<!-- AUTHORITY_SEARCH_CORPUS_DATA_START -->";
   const end = "<!-- AUTHORITY_SEARCH_CORPUS_DATA_END -->";
   const attributes = [
@@ -85,19 +112,21 @@ function replaceCorpusBlock(html, base64, manifest) {
     ["uncompressed-bytes", manifest.uncompressedBytes],
     ["compressed-sha256", manifest.compressedSha256],
     ["uncompressed-sha256", manifest.uncompressedSha256]
-  ].map(([name, value]) => `data-${name}="${htmlAttribute(value)}"`).join(" ");
-  const replacement = `${start}\n  <script id="authoritySearchCorpusData" type="application/gzip" ${attributes}>${base64}</script>\n  ${end}`;
+  ].filter(([, value]) => value !== undefined).map(([name, value]) => `data-${name}="${htmlAttribute(value)}"`).join(" ");
+  const scriptType = manifest.compression === "none" ? "application/json" : "application/gzip";
+  const replacement = `${start}\n  <script id="authoritySearchCorpusData" type="${scriptType}" ${attributes}>${payload}</script>\n  ${end}`;
   const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
   if (!expression.test(html)) throw new Error("Template is missing the CORPUS data block.");
   return html.replace(expression, replacement);
 }
 
 function makeBuild(template, corpus, profile, options) {
-  const compressedCorpus = compressCorpus(corpus);
+  const corpusPayload = options.uncompressedCorpus ? encodeUncompressedCorpus(corpus) : compressCorpus(corpus);
+  if (!corpusPayload.payload) corpusPayload.payload = corpusPayload.base64;
   const buildSignature = crypto.createHash("sha256")
     .update(template)
     .update(corpus.corpusVersion || "")
-    .update(compressedCorpus.manifest.uncompressedSha256)
+    .update(corpusPayload.manifest.uncompressedSha256)
     .update(options.variant)
     .digest("hex")
     .slice(0, 24);
@@ -108,15 +137,16 @@ function makeBuild(template, corpus, profile, options) {
     fileName: options.fileName,
     instanceId: buildSignature,
     hasLocalUscCache: options.hasLocalUscCache,
+    corpusCompression: corpusPayload.manifest.compression,
     generatedAt: new Date().toISOString()
   };
   let html = template.replace(/<title>[^<]*<\/title>/, `<title>${options.displayName}</title>`);
   html = replaceDataBlock(html, "BUILD", "authoritySearchBuildData", buildData);
-  html = replaceDataBlock(html, "CORPUS_MANIFEST", "authoritySearchCorpusManifest", compressedCorpus.manifest);
-  html = replaceCorpusBlock(html, compressedCorpus.base64, compressedCorpus.manifest);
+  html = replaceDataBlock(html, "CORPUS_MANIFEST", "authoritySearchCorpusManifest", corpusPayload.manifest);
+  html = replaceCorpusBlock(html, corpusPayload.payload, corpusPayload.manifest);
   html = replaceDataBlock(html, "PROFILE", "authoritySearchProfileData", profile);
   fs.writeFileSync(path.join(root, options.fileName), html);
-  return { fileName: options.fileName, bytes: Buffer.byteLength(html), instanceId: buildSignature, manifest: compressedCorpus.manifest };
+  return { fileName: options.fileName, bytes: Buffer.byteLength(html), instanceId: buildSignature, manifest: corpusPayload.manifest };
 }
 
 function allUnlockedProfile(template, corpus, defaultProfile) {
@@ -176,9 +206,19 @@ const results = [
     displayName: "AuthoritySearch AU (All Unlocked)",
     fileName: "AuthoritySearch-AU.html",
     hasLocalUscCache: true
+  }),
+  makeBuild(template, fullCorpus, defaultProfile, {
+    variant: "uncompressed",
+    displayName: "AuthoritySearch (Uncompressed Corpus)",
+    fileName: "AuthoritySearch-Uncompressed.html",
+    hasLocalUscCache: true,
+    uncompressedCorpus: true
   })
 ];
 
 for (const result of results) {
-  console.log(`${result.fileName}\t${result.bytes} bytes\t${result.instanceId}\t${result.manifest.compressedBytes} gzip bytes`);
+  const corpusSize = result.manifest.compression === "gzip"
+    ? `${result.manifest.compressedBytes} gzip bytes`
+    : `${result.manifest.uncompressedBytes} uncompressed JSON bytes`;
+  console.log(`${result.fileName}\t${result.bytes} bytes\t${result.instanceId}\t${corpusSize}`);
 }
