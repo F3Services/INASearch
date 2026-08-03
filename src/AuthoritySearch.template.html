@@ -191,7 +191,7 @@
       box-shadow: 0 3px 16px rgba(0, 0, 0, .18);
     }
     .topbar-main { display: flex; align-items: center; gap: 18px; min-height: 42px; }
-    .brand { display: flex; align-items: center; gap: 11px; min-width: max-content; }
+    .brand { position: relative; display: flex; align-items: center; gap: 11px; min-width: max-content; margin: -3px -4px; border-radius: 10px; padding: 3px 4px; }
     .brand-mark {
       display: grid;
       place-items: center;
@@ -206,6 +206,25 @@
     }
     .brand strong { display: block; font-size: 17px; letter-spacing: .01em; }
     .brand small { display: block; color: #bed2e4; font-size: 11px; }
+    .brand-tribute {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      z-index: 50;
+      width: max-content;
+      max-width: min(330px, calc(100vw - 32px));
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 9px 11px;
+      color: var(--ink);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.35;
+      pointer-events: none;
+    }
+    .brand-tribute::before { position: absolute; top: -6px; left: 17px; width: 10px; height: 10px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); background: var(--panel); content: ""; transform: rotate(45deg); }
     .main-nav { display: flex; align-items: center; gap: 4px; flex: 1; }
     .nav-button {
       border: 0;
@@ -221,6 +240,11 @@
     .nav-button:disabled { color: #8fa8bd; background: rgba(255,255,255,.04); cursor: not-allowed; }
     .statute-navigator { position: sticky; top: var(--topbar-height, 0px); z-index: 19; border-bottom: 1px solid color-mix(in srgb, var(--blue) 48%, var(--line)); padding: 7px clamp(16px, 3vw, 42px); background: color-mix(in srgb, var(--panel) 78%, var(--blue) 22%); box-shadow: 0 3px 10px rgba(16, 42, 67, .12); }
     .statute-nav-inner { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; max-width: 1500px; margin: 0 auto; }
+    .statute-history-controls { display: flex; align-items: center; gap: 3px; align-self: stretch; margin-right: 4px; border-right: 1px solid color-mix(in srgb, var(--blue) 28%, var(--line)); padding-right: 8px; }
+    .statute-history-button { display: inline-grid; place-items: center; width: 31px; min-height: 31px; border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line)); border-radius: 8px; padding: 0; color: var(--ink); background: color-mix(in srgb, var(--panel) 82%, var(--blue) 18%); font-size: 17px; line-height: 1; cursor: pointer; }
+    .statute-history-button:hover:not(:disabled) { border-color: var(--blue); color: var(--navy); background: var(--blue-soft); }
+    .statute-history-button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .statute-history-button:disabled { color: color-mix(in srgb, var(--muted) 55%, transparent); background: color-mix(in srgb, var(--panel) 92%, var(--muted) 8%); cursor: not-allowed; }
     .statute-nav-intro { margin-right: 4px; color: var(--muted); font-size: 9px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
     .statute-nav-separator { color: color-mix(in srgb, var(--blue) 70%, var(--muted)); font-size: 12px; }
     .statute-nav-segment { position: relative; }
@@ -700,6 +724,9 @@
     .definition-entry-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-bottom: 10px; }
     .definition-citation { color: var(--blue); font-family: var(--mono); font-size: 12px; font-weight: 900; }
     .definition-text { margin: 0; color: var(--ink); line-height: 1.62; white-space: pre-wrap; }
+    .definition-inline-link { display: inline; margin: 0; border: 0; padding: 0; color: var(--blue); background: none; font: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; cursor: pointer; }
+    .definition-inline-link:hover { color: var(--navy); }
+    .definition-inline-link:focus-visible { border-radius: 2px; outline: 3px solid var(--blue-soft); }
     .definition-scope { display: grid; grid-template-columns: minmax(120px, auto) 1fr; gap: 6px 11px; margin: 13px 0 0; border-left: 3px solid var(--blue); padding: 9px 11px; background: var(--blue-soft); font-size: 11px; }
     .definition-scope dt { color: var(--muted); font-weight: 850; }
     .definition-scope dd { margin: 0; }
@@ -805,9 +832,10 @@
 <body>
   <header class="topbar">
     <div class="topbar-main">
-      <div class="brand" aria-label="AuthoritySearch home">
+      <div class="brand" id="authoritySearchBrand" aria-label="AuthoritySearch home" aria-describedby="brandTribute">
         <span class="brand-mark" aria-hidden="true">§</span>
         <span><strong>AuthoritySearch</strong><small>ISOBASIC study reference</small></span>
+        <span class="brand-tribute" id="brandTribute" role="tooltip" hidden>Inspired by the excellent work of 2604</span>
       </div>
       <nav class="main-nav" aria-label="Primary">
         <button class="nav-button" data-view="definitions" aria-current="page">Definitions</button>
@@ -837,7 +865,7 @@
     <div class="scheduled-lock-notice" id="scheduledLockNotice" hidden></div>
   </header>
 
-  <nav class="statute-navigator" id="statuteNavigator" aria-label="Current statute hierarchy" hidden>
+  <nav class="statute-navigator" id="statuteNavigator" aria-label="Statute navigation and history" hidden>
     <div class="statute-nav-inner" id="statuteNavigatorInner"></div>
   </nav>
 
@@ -1031,7 +1059,7 @@
         <p>In the standard build, official House cross-references whose targets are inside cached Title 8 are rendered as local links. References outside the cached Title 8 corpus remain plain text rather than being assigned an unverified local target.</p>
         <p>AuthoritySearch is an open-book study aid, not legal advice and not a substitute for checking the current official source. <span id="uscCoverageBoundary">U.S. Code handling depends on this build; regulation links open on current eCFR.</span></p>
         <p>INA citations and U.S.C. citations are preserved as distinct citation systems. A crosswalk is shown only when the USCIS INA table directly supplies it. Named-Act results are references found in approved sources—not complete reproductions of those Acts.</p>
-        <p>Immigration card fields are unlocked by identifying their approved source in six-choice, open-resource questions. A wrong resource answer locks only that specific question for 30 minutes; other questions remain available and selected answers are not retained. The older status and fact questions remain available as optional practice without a retry timeout and do not control card content. Until autosaving is enabled, completed resource checks, resource-question lockouts, and practice progress remain only in the current browser tab.</p>
+        <p>Immigration card fields are unlocked by identifying their approved source in six-choice, open-resource questions. A wrong resource answer locks only that specific question for one minute and keeps it open so its linked sources can still be reviewed; selected answers are not retained. The older status and fact questions remain available as optional practice without a retry timeout and do not control card content. Until autosaving is enabled, completed resource checks, resource-question lockouts, and practice progress remain only in the current browser tab.</p>
       </div>
     </section>
   </main>
@@ -1183,7 +1211,11 @@
       statuteNavigationPath: [],
       statuteNavigationValues: [],
       statuteNavigationFrame: null,
+      statuteNavigationLocation: null,
+      statuteNavigationHistory: [],
+      statuteNavigationHistoryIndex: -1,
       topbarResizeObserver: null,
+      brandTributeTimer: null,
       records: [],
       results: [],
       selected: null,
@@ -1311,6 +1343,7 @@
       search: $("#searchInput"), citationEquivalent: $("#citationEquivalent"), feedback: $("#citationFeedback"), resultList: $("#resultList"),
       searchSuggestion: $("#searchSuggestionButton"), closeSearchResults: $("#closeSearchResultsButton"), searchFilterBar: $("#searchFilterBar"),
       resultCount: $("#resultCount"), detail: $("#detailPanel"), corpusStatus: $("#corpusStatus"),
+      brand: $("#authoritySearchBrand"), brandTribute: $("#brandTribute"),
       saveStatus: $("#saveStatus"), visaGrid: $("#visaGrid"), immigrantGrid: $("#immigrantGrid"), notesList: $("#notesList"),
       nonimmigrantUnlockQuiz: $("#nonimmigrantUnlockQuiz"), immigrantUnlockQuiz: $("#immigrantUnlockQuiz"),
       profileSetupNotice: $("#profileSetupNotice"), profileSetupTitle: $("#profileSetupTitle"),
@@ -1676,13 +1709,89 @@
       syncDefinitionFilterCheckboxes("scope");
     }
 
+    function glossaryReferenceLabels(entry) {
+      const labels = new Map();
+      for (const value of [entry.term, ...(entry.aliases || [])]) {
+        const label = String(value || "").trim();
+        if (!label) continue;
+        const base = label.replace(/\s*\([^()]*\)\s*$/, "").trim();
+        for (const candidate of [label, base, ...base.split("/")]) {
+          const normalized = normalize(candidate);
+          if (normalized.length >= 4 && !labels.has(normalized)) labels.set(normalized, candidate.trim());
+        }
+      }
+      return [...labels.values()];
+    }
+
+    function glossaryInlineLinks(entry) {
+      if (entry.sourceFamily !== "uscis-glossary") return [];
+      const text = String(entry.text || "");
+      const links = [];
+      const overlaps = (start, end) => links.some(link => start < link.end && end > link.start);
+      const addLink = link => {
+        if (link.end <= link.start || overlaps(link.start, link.end)) return false;
+        links.push(link);
+        return true;
+      };
+      const urlPattern = /(?:https?:\/\/)?(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)+(?:\/[^\s)]+)?/gi;
+      let urlMatch;
+      while ((urlMatch = urlPattern.exec(text))) {
+        const display = urlMatch[0].replace(/[.,;:]+$/, "");
+        const href = safeUrl(/^https?:\/\//i.test(display) ? display : `https://${display}`);
+        if (href) addLink({ kind: "external", start: urlMatch.index, end: urlMatch.index + display.length, href });
+      }
+      const targets = (corpus?.definitions?.entries || [])
+        .filter(target => target.sourceFamily === "uscis-glossary" && target.id !== entry.id)
+        .flatMap(target => glossaryReferenceLabels(target).map(label => ({ target, label, length: normalize(label).length })))
+        .sort((left, right) => right.length - left.length);
+      const seePattern = /\b(?:also\s+see|see(?:\s+also)?)\b/gi;
+      let seeMatch;
+      while ((seeMatch = seePattern.exec(text))) {
+        const clauseStart = seePattern.lastIndex;
+        const remainder = text.slice(clauseStart);
+        const clauseEndMatch = remainder.match(/\.(?=\s|$)|\n/);
+        const clauseEnd = clauseStart + (clauseEndMatch?.index ?? remainder.length);
+        const clause = text.slice(clauseStart, clauseEnd);
+        for (const candidate of targets) {
+          const match = searchTextMatch(clause, candidate.label);
+          if (!match) continue;
+          const start = clauseStart + match.start;
+          const trailingPunctuation = candidate.label.match(/[^a-z0-9]+$/i)?.[0] || "";
+          const extendedEnd = trailingPunctuation && clause.slice(match.end, match.end + trailingPunctuation.length) === trailingPunctuation
+            ? match.end + trailingPunctuation.length
+            : match.end;
+          const end = clauseStart + extendedEnd;
+          addLink({ kind: "definition", start, end, query: candidate.target.term });
+        }
+      }
+      return links.sort((left, right) => left.start - right.start || right.end - left.end);
+    }
+
+    function renderDefinitionInlineText(entry) {
+      const text = String(entry.text || "");
+      const links = glossaryInlineLinks(entry);
+      if (!links.length) return escapeHtml(text);
+      const parts = [];
+      let cursor = 0;
+      for (const link of links) {
+        parts.push(escapeHtml(text.slice(cursor, link.start)));
+        const label = escapeHtml(text.slice(link.start, link.end));
+        parts.push(link.kind === "external"
+          ? `<a class="definition-inline-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${label}</a>`
+          : `<button class="definition-inline-link" type="button" data-definition-reference="${escapeHtml(link.query)}">${label}</button>`);
+        cursor = link.end;
+      }
+      parts.push(escapeHtml(text.slice(cursor)));
+      return parts.join("");
+    }
+
     function renderDefinitionEntry(entry) {
       const scope = definitionScope(entry);
       const outsideApplicability = !definitionApplicabilityMatches(entry);
       const lastPathPart = entry.path?.[entry.path.length - 1] || "";
       const definitionBody = entry.sourceFamily === "ina"
         ? formatStatutoryRunInText(entry.text || "", lastPathPart, entry.references || [])
-        : escapeHtml(entry.text || "");
+        : renderDefinitionInlineText(entry);
       const children = (entry.children || []).map(child => renderStatutoryNode(child, [], entry.path || [], 1)).join("");
       return `<section class="definition-entry${outsideApplicability ? " outside-applicability" : ""}">
         ${outsideApplicability ? `<div class="definition-applicability-warning" role="note"><strong>Outside the selected applicability.</strong> This definition is not categorized under any checked applicability; it remains visible because another definition for this term is.</div>` : ""}
@@ -1716,7 +1825,7 @@
       const allApplicabilitiesSelected = definitionFilterSelectionState(corpus.definitions.scopeFilters || [], state.definitionScopeFilters, "all").checked;
       els.definitionNoResults.hidden = groups.length > 0;
       els.definitionCount.textContent = `${matches.length} definition source record${matches.length === 1 ? "" : "s"} displayed · ${groups.length} term${groups.length === 1 ? "" : "s"}${allApplicabilitiesSelected ? "" : ` · ${applicableMatches} definition${applicableMatches === 1 ? "" : "s"} in checked applicability`}`;
-      els.definitionList.innerHTML = groups.map(group => `<article class="definition-group">
+      els.definitionList.innerHTML = groups.map(group => `<article class="definition-group" tabindex="-1">
         <div class="definition-group-head"><h2>${escapeHtml(group.term)}</h2><small>${group.entries.length > 1 ? `${group.entries.length} definitions` : "1 definition"}</small></div>
         ${group.entries.map(renderDefinitionEntry).join("")}
       </article>`).join("");
@@ -1726,6 +1835,16 @@
       state.definitionQuery = String(query || "").trim();
       switchView("definitions");
       renderDefinitions();
+    }
+
+    function openDefinitionReference(query) {
+      openDefinitions(query);
+      requestAnimationFrame(() => {
+        const group = $(".definition-group", els.definitionList);
+        if (!group) return;
+        group.focus({ preventScroll: true });
+        group.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     }
 
     function buildIndex() {
@@ -2495,18 +2614,74 @@
       syncStatuteNavigationOffset();
     }
 
+    function normalizedStatuteHistoryLocation(sectionId, path = []) {
+      return {
+        sectionId: String(sectionId || ""),
+        path: (Array.isArray(path) ? path : []).map(token => String(token))
+      };
+    }
+
+    function sameStatuteHistoryLocation(left, right) {
+      if (!left || !right || left.sectionId !== right.sectionId) return false;
+      const leftPath = left.path || [];
+      const rightPath = right.path || [];
+      return leftPath.length === rightPath.length && leftPath.every((token, index) => normCitationPart(token) === normCitationPart(rightPath[index]));
+    }
+
+    function statuteHistoryLocationLabel(location) {
+      if (!location) return "";
+      const section = (corpus?.title8?.sections || []).find(item => item.id === location.sectionId);
+      return section ? `8 U.S.C. ${section.section}${canonicalPath(location.path || [])}` : "the previous statute location";
+    }
+
+    function updateStatuteHistoryButtons() {
+      const backButton = $("[data-statute-history='back']", els.statuteNavigator);
+      const forwardButton = $("[data-statute-history='forward']", els.statuteNavigator);
+      const backLocation = state.statuteNavigationHistory[state.statuteNavigationHistoryIndex - 1] || null;
+      const forwardLocation = state.statuteNavigationHistory[state.statuteNavigationHistoryIndex + 1] || null;
+      if (backButton) {
+        backButton.disabled = !backLocation;
+        backButton.title = backLocation ? `Back to ${statuteHistoryLocationLabel(backLocation)}` : "No earlier statute location";
+      }
+      if (forwardButton) {
+        forwardButton.disabled = !forwardLocation;
+        forwardButton.title = forwardLocation ? `Forward to ${statuteHistoryLocationLabel(forwardLocation)}` : "No later statute location";
+      }
+    }
+
+    function addStatuteHistoryLocation(sectionId, path = []) {
+      const location = normalizedStatuteHistoryLocation(sectionId, path);
+      if (!location.sectionId) return false;
+      const current = state.statuteNavigationHistory[state.statuteNavigationHistoryIndex] || null;
+      if (sameStatuteHistoryLocation(current, location)) { updateStatuteHistoryButtons(); return false; }
+      state.statuteNavigationHistory = state.statuteNavigationHistory.slice(0, state.statuteNavigationHistoryIndex + 1);
+      state.statuteNavigationHistory.push(location);
+      if (state.statuteNavigationHistory.length > 100) state.statuteNavigationHistory.shift();
+      state.statuteNavigationHistoryIndex = state.statuteNavigationHistory.length - 1;
+      updateStatuteHistoryButtons();
+      return true;
+    }
+
+    function recordExplicitStatuteMove(sectionId, path = []) {
+      const target = normalizedStatuteHistoryLocation(sectionId, path);
+      const source = state.statuteNavigationLocation;
+      if (!els.statuteNavigator.hidden && source && !sameStatuteHistoryLocation(source, target)) addStatuteHistoryLocation(source.sectionId, source.path);
+      return addStatuteHistoryLocation(target.sectionId, target.path);
+    }
+
     function renderStatuteNavigation(section, path = []) {
       if (!section || !hasLocalUscCache || state.view !== "search") { setStatuteNavigationVisible(false); return; }
       state.statuteNavigationSectionId = section.id;
       state.statuteNavigationPath = [...path];
       const segments = statuteNavigationSegments(section, path);
       const previousValues = state.statuteNavigationValues;
-      els.statuteNavigatorInner.innerHTML = `<span class="statute-nav-intro">Current statute</span>${segments.map((segment, index) => {
+      els.statuteNavigatorInner.innerHTML = `<span class="statute-history-controls" role="group" aria-label="Statute page history"><button class="statute-history-button" type="button" data-statute-history="back" aria-label="Go back in statute history" disabled>←</button><button class="statute-history-button" type="button" data-statute-history="forward" aria-label="Go forward in statute history" disabled>→</button></span><span class="statute-nav-intro">Current statute</span>${segments.map((segment, index) => {
         const valueChanged = previousValues.length > 0 && previousValues[index] !== segment.value;
         return `${index ? `<span class="statute-nav-separator" aria-hidden="true">›</span>` : ""}<details class="statute-nav-segment${valueChanged ? " value-changed" : ""}"><summary><small>${escapeHtml(segment.label)}</small><strong>${escapeHtml(segment.value)}</strong></summary><div class="statute-nav-menu" role="menu" aria-label="Choose ${escapeHtml(segment.label)}">${segment.options.map(option => `<button class="statute-nav-option" type="button" role="menuitem" data-statute-nav-section="${escapeHtml(option.sectionId)}" data-statute-nav-path="${escapeHtml(JSON.stringify(option.path))}" aria-current="${option.current ? "true" : "false"}"><strong>${escapeHtml(option.value)}</strong>${option.description ? `<small title="${escapeHtml(option.description)}">${escapeHtml(option.description)}</small>` : ""}</button>`).join("")}</div></details>`;
       }).join("")}`;
       state.statuteNavigationValues = segments.map(segment => segment.value);
       setStatuteNavigationVisible(true);
+      updateStatuteHistoryButtons();
     }
 
     function statuteReadingLine() {
@@ -2549,12 +2724,35 @@
       state.statuteNavigationFrame = requestAnimationFrame(updateStatuteNavigationFromScroll);
     }
 
-    function navigateToStatuteLocation(sectionId, path) {
+    function openStatuteLocation(sectionId, path) {
       const section = (corpus?.title8?.sections || []).find(item => item.id === sectionId);
-      if (!section) return;
+      if (!section) return false;
       const mapping = uscToIna.get(normCitationPart(section.section));
       const useIna = state.citation?.type === "ina" && mapping?.inaSection;
       applySearchQuery(`${useIna ? `INA ${mapping.inaSection}` : `8 U.S.C. ${section.section}`}${canonicalPath(path || [])}`, false);
+      return true;
+    }
+
+    function navigateToStatuteLocation(sectionId, path) {
+      recordExplicitStatuteMove(sectionId, path);
+      return openStatuteLocation(sectionId, path);
+    }
+
+    function navigateToStatuteCitation(query) {
+      const citationResult = parseCitation(query);
+      if (citationResult?.valid && citationResult.record?.kind === "usc") {
+        recordExplicitStatuteMove(citationResult.record.item.id, citationResult.renderPath || citationResult.path || []);
+      }
+      applySearchQuery(query, false);
+    }
+
+    function navigateStatuteHistory(offset) {
+      const nextIndex = state.statuteNavigationHistoryIndex + Number(offset || 0);
+      if (nextIndex < 0 || nextIndex >= state.statuteNavigationHistory.length) return false;
+      const location = state.statuteNavigationHistory[nextIndex];
+      state.statuteNavigationHistoryIndex = nextIndex;
+      updateStatuteHistoryButtons();
+      return openStatuteLocation(location.sectionId, location.path);
     }
 
     function normalizedSearchText(value) {
@@ -2634,6 +2832,7 @@
       const citationTargetPath = citationResult?.renderPath || citationResult?.path || [];
       const searchTarget = citationResult ? null : statuteSearchTarget(section, state.query);
       const navigationPath = citationTargetPath.length ? citationTargetPath : searchTarget?.path || [];
+      state.statuteNavigationLocation = normalizedStatuteHistoryLocation(section.id, navigationPath);
       const mapping = citationResult?.mapping || uscToIna.get(normCitationPart(section.section));
       const requestedLabel = citationResult?.label || `8 U.S.C. ${section.section}`;
       const breadcrumb = (section.breadcrumb || []).map(x => `<span>${escapeHtml(`${x.kind} ${x.number} — ${x.title}`)}</span>`).join("");
@@ -3150,7 +3349,7 @@
     }
 
     function recordResourceLockout(question, now = Date.now()) {
-      const lockedUntil = new Date(now + 30 * 60000).toISOString();
+      const lockedUntil = new Date(now + 60000).toISOString();
       profile.resourceChallengeLockouts = profile.resourceChallengeLockouts.filter(record => record.questionId !== question.id);
       profile.resourceChallengeLockouts.push({ questionId: question.id, revision: question.revision, lockedUntil });
       markProfileChanged();
@@ -3185,8 +3384,8 @@
     }
 
     function currentResourceQuestion(kind) {
-      const available = resourceQuestions(kind).filter(question => !isResourceUnlocked(question) && !activeResourceLockout(question));
-      return available.find(question => question.id === state.resourceQuizQuestionId[kind]) || available[0] || null;
+      const remaining = resourceQuestions(kind).filter(question => !isResourceUnlocked(question));
+      return remaining.find(question => question.id === state.resourceQuizQuestionId[kind]) || remaining[0] || null;
     }
 
     function resourceQuestionLockouts(kind) {
@@ -3283,17 +3482,22 @@
       return `According to the ${sourceLink}, ${promptHtml}`;
     }
 
-    function resourceLockoutNotice(kind, lockouts, allRemaining = false) {
+    function resourceLockoutNotice(kind, lockouts, currentLockout = null) {
       const count = lockouts.length;
-      const retry = formatRemaining(lockouts[0]?.lockout.remainingMs || 0);
-      return `<div class="quiz-lockout" id="${kind}ResourceLockoutNotice"><strong><span id="${kind}ResourceLockedCount">${count}</span> <span id="${kind}ResourceLockedNoun">${count === 1 ? "question" : "questions"}</span> temporarily locked.</strong><p style="margin-bottom:0">${allRemaining ? "No other question is currently available." : "Locked questions are skipped; you can continue answering the question below."} Next retry in <span id="${kind}ResourceQuizCountdown">${escapeHtml(retry)}</span>.</p></div>`;
+      const retry = formatRemaining(currentLockout?.remainingMs || lockouts[0]?.lockout.remainingMs || 0);
+      const guidance = currentLockout
+        ? `This question stays open so you can review its linked resources. Retry in <span id="${kind}ResourceQuizCountdown">${escapeHtml(retry)}</span>.`
+        : `A previously locked question is still waiting. Next retry in <span id="${kind}ResourceQuizCountdown">${escapeHtml(retry)}</span>.`;
+      return `<div class="quiz-lockout" id="${kind}ResourceLockoutNotice"><strong><span id="${kind}ResourceLockedCount">${count}</span> <span id="${kind}ResourceLockedNoun">${count === 1 ? "question" : "questions"}</span> temporarily locked.</strong><p style="margin-bottom:0">${guidance}</p></div>`;
     }
 
-    function startResourceLockoutCountdown(kind, container, waitForAvailableQuestion = false) {
+    function startResourceLockoutCountdown(kind, container, currentQuestion = null) {
       state.resourceQuizTimers[kind] = setInterval(() => {
         profile.resourceChallengeLockouts = profile.resourceChallengeLockouts.filter(record => Date.parse(record?.lockedUntil) > Date.now());
         const lockouts = resourceQuestionLockouts(kind);
-        if (waitForAvailableQuestion && currentResourceQuestion(kind)) {
+        const currentLockout = currentQuestion ? activeResourceLockout(currentQuestion) : null;
+        if (currentQuestion && !currentLockout) {
+          state.resourceQuizFeedback[kind] = "";
           renderResourceQuiz(kind);
           return;
         }
@@ -3301,8 +3505,7 @@
         if (!lockouts.length) {
           clearInterval(state.resourceQuizTimers[kind]);
           state.resourceQuizTimers[kind] = null;
-          if (waitForAvailableQuestion) renderResourceQuiz(kind);
-          else if (notice) notice.innerHTML = "<strong>Previously locked questions are available again.</strong><p style=\"margin-bottom:0\">Finish the current question to return to them.</p>";
+          if (notice) notice.innerHTML = "<strong>Previously locked questions are available again.</strong>";
           return;
         }
         const count = $(`#${kind}ResourceLockedCount`, container);
@@ -3310,7 +3513,7 @@
         const countdown = $(`#${kind}ResourceQuizCountdown`, container);
         if (count) count.textContent = String(lockouts.length);
         if (noun) noun.textContent = lockouts.length === 1 ? "question" : "questions";
-        if (countdown) countdown.textContent = formatRemaining(lockouts[0].lockout.remainingMs);
+        if (countdown) countdown.textContent = formatRemaining(currentLockout?.remainingMs || lockouts[0].lockout.remainingMs);
       }, 1000);
     }
 
@@ -3328,6 +3531,7 @@
       const remaining = questions.filter(question => !isResourceUnlocked(question));
       const question = currentResourceQuestion(kind);
       const lockouts = resourceQuestionLockouts(kind);
+      const questionLockout = question ? activeResourceLockout(question) : null;
       const noun = kind === "immigrant" ? "immigrant" : "nonimmigrant";
       if (!remaining.length) {
         state.resourceQuizQuestionId[kind] = null;
@@ -3338,21 +3542,22 @@
         state.resourceQuizQuestionId[kind] = null;
         state.resourceQuizSelection[kind] = null;
         state.resourceQuizFeedback[kind] = "";
-        container.innerHTML = `<div class="resource-unlock-head"><div><p class="eyebrow">Approved-resource checks</p><h2>${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} card resources</h2><p>Each wrong answer locks only that specific question for 30 minutes.</p></div><div class="resource-unlock-progress"><strong>${completed} / ${questions.length}</strong>complete</div></div>${resourceLockoutNotice(kind, lockouts, true)}`;
-        startResourceLockoutCountdown(kind, container, true);
+        container.innerHTML = `<div class="resource-unlock-head"><div><p class="eyebrow">Approved-resource checks</p><h2>${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} card resources</h2><p>Each wrong answer keeps that question in place for a one-minute review period.</p></div><div class="resource-unlock-progress"><strong>${completed} / ${questions.length}</strong>complete</div></div>${resourceLockoutNotice(kind, lockouts)}`;
+        startResourceLockoutCountdown(kind, container);
         return;
       }
       state.resourceQuizQuestionId[kind] = question.id;
       const selection = state.resourceQuizSelection[kind];
       const feedback = state.resourceQuizFeedback[kind];
+      const feedbackText = questionLockout ? "That answer was not correct. Review the linked resources, then try this question again when the one-minute wait ends." : feedback;
       const options = resourceOptions(question);
       const questionNumber = questions.findIndex(item => item.id === question.id) + 1;
-      container.innerHTML = `<div class="resource-unlock-head"><div><p class="eyebrow">Approved-resource checks</p><h2>${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} card resources</h2><p>Open any linked citation to inspect its source before selecting an answer. A wrong answer locks only that specific question for 30 minutes.</p></div><div class="resource-unlock-progress"><strong>${completed} / ${questions.length}</strong>complete</div></div>
-        ${lockouts.length ? resourceLockoutNotice(kind, lockouts) : ""}
+      container.innerHTML = `<div class="resource-unlock-head"><div><p class="eyebrow">Approved-resource checks</p><h2>${kind === "immigrant" ? "Immigrant" : "Nonimmigrant"} card resources</h2><p>Open any linked citation to inspect its source before selecting an answer. A wrong answer keeps this question here for one minute.</p></div><div class="resource-unlock-progress"><strong>${completed} / ${questions.length}</strong>complete</div></div>
+        ${lockouts.length ? resourceLockoutNotice(kind, lockouts, questionLockout) : ""}
         <div class="resource-question"><p class="eyebrow">Question ${questionNumber} of ${questions.length}</p><h3>${escapeHtml(question.title)}</h3><p>${resourceQuestionPrompt(question)}</p>
-          <div class="resource-choices" role="radiogroup" aria-label="Answer choices">${options.map(option => `<div class="resource-choice${selection === option.id ? " selected" : ""}"><label><input type="radio" name="${kind}-resource-answer" value="${escapeHtml(option.id)}" data-resource-option="${escapeHtml(option.id)}" data-resource-kind="${kind}" aria-label="Select ${escapeHtml(option.label)}" ${selection === option.id ? "checked" : ""}></label><a class="resource-choice-citation" href="${escapeHtml(option.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(option.label)} ↗</a></div>`).join("")}</div>
-          <div class="challenge-feedback${feedback ? " invalid" : ""}" role="status">${escapeHtml(feedback || "Select one answer, then submit.")}</div><button class="button primary" type="button" data-submit-resource-quiz="${kind}">Submit answer</button></div>`;
-      if (lockouts.length) startResourceLockoutCountdown(kind, container);
+          <div class="resource-choices" role="radiogroup" aria-label="Answer choices">${options.map(option => `<div class="resource-choice${selection === option.id ? " selected" : ""}"><label><input type="radio" name="${kind}-resource-answer" value="${escapeHtml(option.id)}" data-resource-option="${escapeHtml(option.id)}" data-resource-kind="${kind}" aria-label="Select ${escapeHtml(option.label)}" ${selection === option.id ? "checked" : ""} ${questionLockout ? "disabled" : ""}></label><a class="resource-choice-citation" href="${escapeHtml(option.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(option.label)} ↗</a></div>`).join("")}</div>
+          <div class="challenge-feedback${feedbackText ? " invalid" : ""}" role="status">${escapeHtml(feedbackText || "Select one answer, then submit.")}</div><button class="button primary" type="button" data-submit-resource-quiz="${kind}" ${questionLockout ? "disabled" : ""}>Submit answer</button></div>`;
+      if (lockouts.length) startResourceLockoutCountdown(kind, container, questionLockout ? question : null);
     }
 
     function recordResourceUnlock(question) {
@@ -3374,9 +3579,8 @@
       }
       if (selection !== question.correctOptionId) {
         recordResourceLockout(question);
-        state.resourceQuizQuestionId[kind] = null;
         state.resourceQuizSelection[kind] = null;
-        state.resourceQuizFeedback[kind] = "";
+        state.resourceQuizFeedback[kind] = "That answer was not correct.";
         renderResourceQuiz(kind);
         return;
       }
@@ -4826,8 +5030,24 @@ Get-FileHash $outJson -Algorithm SHA256`;
       if (view === "sources") renderSources();
     }
 
+    function beginBrandTributeHover() {
+      if (state.brandTributeTimer !== null || !els.brandTribute.hidden) return;
+      state.brandTributeTimer = setTimeout(() => {
+        state.brandTributeTimer = null;
+        els.brandTribute.hidden = false;
+      }, 2000);
+    }
+
+    function endBrandTributeHover() {
+      clearTimeout(state.brandTributeTimer);
+      state.brandTributeTimer = null;
+      els.brandTribute.hidden = true;
+    }
+
     function attachEvents() {
       let searchTimer;
+      els.brand.addEventListener("mouseenter", beginBrandTributeHover);
+      els.brand.addEventListener("mouseleave", endBrandTributeHover);
       els.search.addEventListener("input", () => {
         clearTimeout(searchTimer);
         state.query = els.search.value.trim();
@@ -4883,6 +5103,11 @@ Get-FileHash $outJson -Algorithm SHA256`;
       $$(".nav-button").forEach(button => button.addEventListener("click", () => closeSearchResults(button.dataset.view)));
       els.openClassicQuizButton.addEventListener("click", () => { resetSearchState(); switchView("quiz"); });
       els.statuteNavigator.addEventListener("click", event => {
+        const historyButton = event.target.closest("[data-statute-history]");
+        if (historyButton) {
+          navigateStatuteHistory(historyButton.dataset.statuteHistory === "back" ? -1 : 1);
+          return;
+        }
         const option = event.target.closest("[data-statute-nav-section]");
         if (option) {
           let path = [];
@@ -4948,7 +5173,9 @@ Get-FileHash $outJson -Algorithm SHA256`;
           }
         }
         const showCitation = event.target.closest("[data-show-citation]");
-        if (showCitation) { event.preventDefault(); applySearchQuery(showCitation.dataset.showCitation, false); }
+        if (showCitation) { event.preventDefault(); navigateToStatuteCitation(showCitation.dataset.showCitation); }
+        const definitionReference = event.target.closest("[data-definition-reference]");
+        if (definitionReference) { event.preventDefault(); openDefinitionReference(definitionReference.dataset.definitionReference); }
         const openDefinitionCatalog = event.target.closest("[data-open-definitions]");
         if (openDefinitionCatalog) openDefinitions(openDefinitionCatalog.dataset.openDefinitions || "");
         const definitionLookup = event.target.closest("[data-definition-lookup]");
@@ -5073,6 +5300,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
       window.addEventListener("beforeunload", () => {
         clearInterval(state.searchSuggestionTimer);
         clearInterval(state.scheduledLockTimer);
+        clearTimeout(state.brandTributeTimer);
         clearInterval(state.resourceQuizTimers.nonimmigrant);
         clearInterval(state.resourceQuizTimers.immigrant);
         state.topbarResizeObserver?.disconnect();

@@ -9,15 +9,15 @@ The primary navigation opens on **Definitions**, which is the leftmost page. The
 ## Choose one version
 
 - `AuthoritySearch.html` is the standard version. It includes the complete locally captured Title 8 text and notes, so U.S.C. citations can be displayed and highlighted inside AuthoritySearch. An official House source link remains available.
-- `AuthoritySearch-no-USC.html` is the lightweight version. It retains 376 Title 8 citation and hierarchy records, INA/U.S.C. crosswalks, the USCIS Glossary and focused INA 101/8 CFR 1.2 definitions catalog, both classification tables, resource checks, practice quizzes, catalogs, and notes, but omits the general cached Title 8 section bodies. Ordinary U.S.C. citations open on `uscode.house.gov`.
+- `AuthoritySearch-AU.html` is the all-unlocked version. It contains the same complete local corpus, with all 49 immigrant and nonimmigrant card-resource checks recorded as correctly completed so every currently sourced card field is available immediately. Its optional classic quiz remains unanswered.
 
 ## Immigration type cards and resource checks
 
 The **Nonimmigrant Types** page is built from the 84 symbols in Table 1 to 22 CFR 41.12. Its first three open-resource checks unlock the classification table, the INA 101(a)(15) definition field, and the USCIS Policy Manual Volume 2 EOS/COS appendix field for all matching cards. The EOS/COS check remains one combined question and unlocks both eligibility and the form type reported by that appendix. Fifteen additional approved-resource questions unlock sourced forms for initial filings or petitions for the applicable classifications. Maximum admission and maximum continuous-stay fields direct the student to the Pocket Field Guide once the classification table is unlocked.
 
-The **Immigrant Types** page is built from the 158 symbols in Table 1 to 22 CFR 42.11. One resource check unlocks the table, followed by eight definition questions grouped by each distinct combination of source instruments (INA-only, INA plus a named appropriations act, and so on) and 22 approved-resource form questions. Large question scopes use compact root-prefix notation, with parenthesized ranges when only part of a root is included. Citation-choice questions link their answer text directly to the official resource; all form questions use six-option multiple choice with concise group labels such as family-based principals, employment-based derivatives, or other specifically defined classification groups. A sourced derivative card displays the principal's form type with an asterisk and a focusable or hoverable `*derivative classification` explanation. Cards do not display an initial form when the approved resources do not justify one. A wrong answer on any immigrant or nonimmigrant resource check locks only that specific question for 30 minutes, while the other questions remain available; the lockout persists with saved progress. The older status and fact question bank is available from **Sources & About** as optional practice without a retry timeout and does not control card content. Both Types pages and the optional Quiz remain unavailable during scheduled testing hours.
+The **Immigrant Types** page is built from the 158 symbols in Table 1 to 22 CFR 42.11. One resource check unlocks the table, followed by eight definition questions grouped by each distinct combination of source instruments (INA-only, INA plus a named appropriations act, and so on) and 22 approved-resource form questions. Large question scopes use compact root-prefix notation, with parenthesized ranges when only part of a root is included. Citation-choice questions link their answer text directly to the official resource; all form questions use six-option multiple choice with concise group labels such as family-based principals, employment-based derivatives, or other specifically defined classification groups. A sourced derivative card displays the principal's form type with an asterisk and a focusable or hoverable `*derivative classification` explanation. Cards do not display an initial form when the approved resources do not justify one. A wrong answer on any immigrant or nonimmigrant resource check locks only that specific question for one minute and leaves that question in place. Its answer controls remain disabled during the wait, but its linked resources remain available for review; when the minute ends, the same question becomes answerable again. The lockout persists with saved progress. The older status and fact question bank is available from **Sources & About** as optional practice without a retry timeout and does not control card content. Both Types pages and the optional Quiz remain unavailable during scheduled testing hours.
 
-Each version is complete by itself. Most users should receive `AuthoritySearch.html`; use `AuthoritySearch-no-USC.html` when file size matters more than local U.S.C. text.
+Each version is complete by itself. Use `AuthoritySearch.html` for the normal question-driven experience and `AuthoritySearch-AU.html` when the card-resource checks should begin fully completed.
 
 ## Local statutory citation links
 
@@ -284,7 +284,7 @@ Get-FileHash $outGzip -Algorithm SHA256
 Get-FileHash $outJson -Algorithm SHA256
 ```
 
-Change `$htmlPath` to `.\AuthoritySearch-no-USC.html` to inspect the lightweight build. No custom or third-party decompressor is used.
+Change `$htmlPath` to `.\AuthoritySearch-AU.html` to inspect the all-unlocked build. No custom or third-party decompressor is used.
 
 ## Compatibility behavior
 

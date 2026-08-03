@@ -92,27 +92,6 @@ function replaceCorpusBlock(html, base64, manifest) {
   return html.replace(expression, replacement);
 }
 
-function metadataOnlyTitle8(title8) {
-  return {
-    title: title8.title,
-    name: title8.name,
-    publication: title8.publication,
-    currentThrough: title8.currentThrough,
-    sourceCreatedAt: title8.sourceCreatedAt,
-    isPositiveLaw: title8.isPositiveLaw,
-    sourceUrl: title8.sourceUrl,
-    sections: (title8.sections || []).map(section => ({
-      id: section.id,
-      section: section.section,
-      heading: section.heading,
-      status: section.status,
-      identifier: section.identifier,
-      breadcrumb: section.breadcrumb,
-      url: section.url
-    }))
-  };
-}
-
 function makeBuild(template, corpus, profile, options) {
   const compressedCorpus = compressCorpus(corpus);
   const buildSignature = crypto.createHash("sha256")
@@ -140,6 +119,39 @@ function makeBuild(template, corpus, profile, options) {
   return { fileName: options.fileName, bytes: Buffer.byteLength(html), instanceId: buildSignature, manifest: compressedCorpus.manifest };
 }
 
+function allUnlockedProfile(template, corpus, defaultProfile) {
+  const baseMatch = template.match(/const BASE_RESOURCE_QUESTIONS = Object\.freeze\((\{[\s\S]*?\})\);\s+const state =/);
+  if (!baseMatch) throw new Error("Could not read the base resource questions from the template.");
+  const baseQuestions = vm.runInNewContext(`(${baseMatch[1]})`);
+  const descriptors = [
+    ...Object.values(baseQuestions).flat(),
+    ...(corpus.visaTables?.immigrantDefinitionGroups || []),
+    ...(corpus.visaTables?.formQuestions?.nonimmigrant || []),
+    ...(corpus.visaTables?.formQuestions?.immigrant || [])
+  ].map(question => ({ id: question.id, revision: question.revision }));
+  if (descriptors.some(question => !question.id || !question.revision)) throw new Error("An all-unlocked resource question is missing its ID or revision.");
+  if (new Set(descriptors.map(question => question.id)).size !== descriptors.length) throw new Error("All-unlocked resource question IDs must be unique.");
+  const unlockedAt = defaultProfile.createdAt || "2026-07-30T00:00:00.000Z";
+  return {
+    ...JSON.parse(JSON.stringify(defaultProfile)),
+    profileId: `${defaultProfile.profileId}-all-unlocked`,
+    updatedAt: unlockedAt,
+    corpusVersionSeen: corpus.corpusVersion,
+    visaSummaryUnlocks: [],
+    visaChallengeLockouts: [],
+    visaFactUnlocks: [],
+    visaFactChallengeLockouts: [],
+    resourceUnlocks: descriptors.map(question => ({
+      questionId: question.id,
+      revision: question.revision,
+      unlockedAt,
+      corpusVersion: corpus.corpusVersion
+    })),
+    resourceChallengeLockouts: [],
+    preferences: { ...defaultProfile.preferences, quizCursorKey: null }
+  };
+}
+
 const template = fs.readFileSync(path.join(sourceDir, "AuthoritySearch.template.html"), "utf8");
 const fullCorpus = readAssignedObject("AuthoritySearch-Corpus.js", "AUTHORITY_SEARCH_CORPUS");
 fullCorpus.visaTables = readAssignedObject("AuthoritySearch-Visa-Tables.js", "AUTHORITY_SEARCH_VISA_TABLES");
@@ -150,8 +162,7 @@ const definitionSource = readAssignedObject("AuthoritySearch-Definitions.js", "A
 const uscisGlossarySource = readAssignedObject("AuthoritySearch-USCIS-Glossary.js", "AUTHORITY_SEARCH_USCIS_GLOSSARY");
 fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
 const defaultProfile = readAssignedObject("AuthoritySearch-Profile.js", "AUTHORITY_SEARCH_PROFILE");
-const linkCorpus = JSON.parse(JSON.stringify(fullCorpus));
-linkCorpus.title8 = metadataOnlyTitle8(fullCorpus.title8);
+const unlockedProfile = allUnlockedProfile(template, fullCorpus, defaultProfile);
 
 const results = [
   makeBuild(template, fullCorpus, defaultProfile, {
@@ -160,11 +171,11 @@ const results = [
     fileName: "AuthoritySearch.html",
     hasLocalUscCache: true
   }),
-  makeBuild(template, linkCorpus, defaultProfile, {
-    variant: "no-usc",
-    displayName: "AuthoritySearch without local U.S. Code",
-    fileName: "AuthoritySearch-no-USC.html",
-    hasLocalUscCache: false
+  makeBuild(template, fullCorpus, unlockedProfile, {
+    variant: "all-unlocked",
+    displayName: "AuthoritySearch AU (All Unlocked)",
+    fileName: "AuthoritySearch-AU.html",
+    hasLocalUscCache: true
   })
 ];
 
