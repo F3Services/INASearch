@@ -463,6 +463,16 @@ async function main() {
   assert(!fallbackSource.includes('class="nav-button" data-view="quiz"'), "The classic Quiz remains in the primary navigation.");
   assert(fallbackSource.includes('id="openClassicQuizButton"'), "Sources & About does not link to the classic quiz.");
   assert(fallbackSource.includes("A wrong answer locks only that specific question for 30 minutes."), "The Types pages do not explain the question-specific resource lockout.");
+  const corpusStatusElement = { innerHTML: "", title: "", attributes: {}, setAttribute(name, value) { this.attributes[name] = value; } };
+  const updateCorpusStatus = extractedFunction(fallbackSource, "updateCorpusStatus", "initialize", {
+    corpus: { corpusVersion: "2026.08.02-7", capturedAt: "2026-07-30", verifiedAt: "2026-07-31" },
+    els: { corpusStatus: corpusStatusElement },
+    loadErrors: {}
+  });
+  updateCorpusStatus();
+  assert.strictEqual(corpusStatusElement.innerHTML, '<span class="status-dot"></span>Corpus Loaded', "The successful corpus chip does not use a plain-language status.");
+  assert.strictEqual(corpusStatusElement.title, "Version: 2026.08.02-7 · Captured: 2026-07-30 · Verified: 2026-07-31", "The corpus chip tooltip omits its version or source dates.");
+  assert.strictEqual(corpusStatusElement.attributes["aria-label"], "Corpus loaded. Version: 2026.08.02-7 · Captured: 2026-07-30 · Verified: 2026-07-31", "The corpus chip does not expose its status details accessibly.");
   const resourceLockoutProfile = { resourceChallengeLockouts: [{ questionId: "resource-other", revision: "test-revision", lockedUntil: "2026-08-03T12:45:00.000Z" }] };
   let resourceLockoutChanges = 0;
   const recordResourceLockout = extractedFunction(fallbackSource, "recordResourceLockout", "immigrantDefinitionQuestion", {
@@ -641,11 +651,34 @@ async function main() {
   const definitionsLandingScore = scoreRecord({ kind: "definition-index", title: "Definitions", cite: "360 source records", text: "definitions defined terms" }, "definitions");
   const statuteDefinitionsScore = scoreRecord({ kind: "usc", title: "Definitions", cite: "8 U.S.C. 1101", text: "8 usc 1101 definitions" }, "definitions");
   assert(definitionsLandingScore > statuteDefinitionsScore, "The Definitions page is not the top result for an exact definitions search.");
+  const unrelatedPolicyScore = scoreRecord({ kind: "policy", title: "I-92", cite: "form", text: "i 92 forms chapter 7 privacy and confidentiality" }, "special situation");
+  const matchingPolicyScore = scoreRecord({ kind: "policy", title: "Special Situations", cite: "chapter", text: "special situations" }, "special situation");
+  assert.strictEqual(unrelatedPolicyScore, 0, "Search ranking treated an unmatched Policy Manual record as a hit.");
+  assert(matchingPolicyScore > 0, "Search ranking removed a genuine Policy Manual text match.");
 
   const escapeStatutoryHtml = value => String(value ?? "").replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
   const statutoryNormPart = value => String(value || "").normalize("NFKD").replace(/[^A-Za-z0-9]/g, "").toLowerCase();
   const statutoryCanonicalPath = pathParts => (pathParts || []).map(value => `(${value})`).join("");
-  const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "formatStatutoryRunInText", { escapeHtml: escapeStatutoryHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
+  const normalizedSearchText = extractedFunction(fallbackSource, "normalizedSearchText", "searchTextMatch", { String });
+  const searchTextMatch = extractedFunction(fallbackSource, "searchTextMatch", "statuteSearchTarget", { normalize: searchNormalize, normalizedSearchText, String });
+  const statuteSearchTarget = extractedFunction(fallbackSource, "statuteSearchTarget", "renderStatute", { normalize: searchNormalize, searchTextMatch });
+  const searchSection = {
+    section: "9999",
+    heading: "Search Heading",
+    preamble: "A short preamble notice.",
+    body: [{ label: "a", heading: "General rule", text: "Alpha applies.", children: [{ label: "1", heading: "Focused relief", text: "A special-situations provision allows expedited treatment.", children: [] }] }]
+  };
+  const exactStatuteSearchTarget = plain(statuteSearchTarget(searchSection, "special situation"));
+  assert.strictEqual(exactStatuteSearchTarget.kind, "node-text", "A U.S. Code phrase match did not resolve to its paragraph text.");
+  assert.deepStrictEqual(exactStatuteSearchTarget.path, ["a", "1"], "A nested U.S. Code phrase match resolved to the wrong statutory path.");
+  assert.strictEqual(searchNormalize(searchSection.body[0].children[0].text.slice(exactStatuteSearchTarget.match.start, exactStatuteSearchTarget.match.end)), "special situation", "Normalized U.S. Code matching lost the original text offsets.");
+  assert.strictEqual(statuteSearchTarget(searchSection, "preamble notice").kind, "preamble", "A U.S. Code preamble match did not resolve to the preamble.");
+  assert.strictEqual(statuteSearchTarget(searchSection, "search heading").kind, "heading", "A U.S. Code heading match did not resolve to the section heading.");
+  assert.deepStrictEqual(plain(statuteSearchTarget(searchSection, "alpha expedited").path), ["a"], "A distributed term match did not choose the first best statutory location.");
+  assert.strictEqual(statuteSearchTarget(searchSection, "absent phrase"), null, "An unmatched query produced a U.S. Code scroll target.");
+  const renderSearchHighlightedText = extractedFunction(fallbackSource, "renderSearchHighlightedText", "linkifyStatutoryText", { escapeHtml: escapeStatutoryHtml, Math, Number, String });
+  assert.strictEqual(renderSearchHighlightedText("A <special> situation", { start: 3, end: 11 }), 'A &lt;<mark class="statute-search-match" data-statute-search-match>special&gt;</mark> situation', "The U.S. Code search highlight did not preserve safe text offsets.");
+  const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "formatStatutoryRunInText", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
   const formatStatutoryRunInText = extractedFunction(fallbackSource, "formatStatutoryRunInText", "renderStatutoryNote", { escapeHtml: escapeStatutoryHtml, linkifyStatutoryText, Set, Number, String });
   const statuteScrollCalls = [];
   const statuteReadingLine = extractedFunction(fallbackSource, "statuteReadingLine", "scrollStatuteAnchorToReadingLine", {
@@ -662,11 +695,12 @@ async function main() {
   scrollStatuteAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 500 }) });
   assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "smooth" }, "Statute navigation did not align an anchor to the tenth-view reading line.");
   let renderedStatuteTarget = null;
+  let renderedSearchMatch = null;
   const sectionAnchor = { id: "section-anchor" };
   const targetAnchor = { id: "target-anchor" };
   const alignedAnchors = [];
   const scrollToRenderedStatuteTarget = extractedFunction(fallbackSource, "scrollToRenderedStatuteTarget", "renderStatutoryNode", {
-    $: (selector, root) => selector === ".statutory-node.target" ? renderedStatuteTarget : selector === ".statutory-line" ? targetAnchor : selector === "[data-statute-start]" ? sectionAnchor : null,
+    $: (selector, root) => selector === "[data-statute-search-match]" ? renderedSearchMatch : selector === ".statutory-node.target, .statutory-node.search-target" ? renderedStatuteTarget : selector === ".statutory-line" ? targetAnchor : selector === "[data-statute-start]" ? sectionAnchor : null,
     els: { detail: {} },
     scrollStatuteAnchorToReadingLine: anchor => alignedAnchors.push(anchor)
   });
@@ -675,6 +709,9 @@ async function main() {
   renderedStatuteTarget = {};
   scrollToRenderedStatuteTarget();
   assert.strictEqual(alignedAnchors.pop(), targetAnchor, "A nested citation did not align its statutory line to the reading line.");
+  renderedSearchMatch = { id: "search-match-anchor" };
+  scrollToRenderedStatuteTarget();
+  assert.strictEqual(alignedAnchors.pop(), renderedSearchMatch, "A U.S. Code text search did not align the matching term to the reading line.");
   const visibleStatuteLines = [
     { top: 100, path: ["a"] },
     { top: 200, path: ["a", "15"] },

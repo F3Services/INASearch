@@ -485,6 +485,8 @@
     .statute-preamble { margin: 17px 0; }
     .statutory-node { position: relative; margin: 5px 0 5px min(calc(var(--depth, 0) * 15px), 90px); padding: 5px 7px 7px; border-radius: 6px; }
     .statutory-node.target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
+    .statutory-node.search-target { background: var(--amber-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 35%, transparent); }
+    .statute-search-match { border-radius: 3px; padding: 1px 2px; color: inherit; background: #ffe08a; box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 30%, transparent); }
     .statutory-line { display: block; line-height: 1.55; }
     .statutory-node .node-number { display: inline-block; margin-right: 7px; color: var(--navy); font-family: var(--mono); font-weight: 950; }
     .statutory-node .node-heading { font-weight: 800; }
@@ -815,7 +817,7 @@
         <button class="nav-button" data-view="sources">Sources &amp; About</button>
       </nav>
       <div class="top-status" aria-label="Application status">
-        <span class="status-chip" id="corpusStatus"><span class="status-dot warn"></span>Opening AuthoritySearch corpus…</span>
+        <span class="status-chip" id="corpusStatus"><span class="status-dot warn"></span>Loading Corpus…</span>
         <button class="status-chip attention" id="saveStatus" type="button" aria-label="Enable autosaving"><span class="status-dot warn"></span>Autosaving off</button>
       </div>
     </div>
@@ -1866,6 +1868,7 @@
       else if (title.includes(q)) score += 90;
       if (record.text.includes(q)) score += 55;
       if (terms.every(t => record.text.includes(t))) score += 35;
+      if (score === 0) return 0;
       score += Math.max(0, 12 - record.title.length / 40);
       return score;
     }
@@ -2554,8 +2557,83 @@
       applySearchQuery(`${useIna ? `INA ${mapping.inaSection}` : `8 U.S.C. ${section.section}`}${canonicalPath(path || [])}`, false);
     }
 
+    function normalizedSearchText(value) {
+      const input = String(value ?? "");
+      const characters = [];
+      const starts = [];
+      const ends = [];
+      let pendingSpace = null;
+      let offset = 0;
+      for (const symbol of input) {
+        const start = offset;
+        offset += symbol.length;
+        const decomposed = symbol.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        for (const character of decomposed) {
+          if (/[a-z0-9]/.test(character)) {
+            if (pendingSpace && characters.length) {
+              characters.push(" ");
+              starts.push(pendingSpace.start);
+              ends.push(pendingSpace.end);
+            }
+            pendingSpace = null;
+            characters.push(character);
+            starts.push(start);
+            ends.push(offset);
+          } else if (characters.length) {
+            if (pendingSpace) pendingSpace.end = offset;
+            else pendingSpace = { start, end: offset };
+          }
+        }
+      }
+      return { text: characters.join(""), starts, ends };
+    }
+
+    function searchTextMatch(value, query) {
+      const normalizedQuery = normalize(query);
+      if (!normalizedQuery) return null;
+      const searchable = normalizedSearchText(value);
+      const index = searchable.text.indexOf(normalizedQuery);
+      if (index < 0) return null;
+      const lastIndex = index + normalizedQuery.length - 1;
+      return { start: searchable.starts[index], end: searchable.ends[lastIndex], normalizedQuery };
+    }
+
+    function statuteSearchTarget(section, query) {
+      const normalizedQuery = normalize(query);
+      if (!section || !normalizedQuery) return null;
+      const fields = [
+        { kind: "section", path: [], text: `8 U.S.C. ${section.section}` },
+        { kind: "heading", path: [], text: section.heading || "" },
+        { kind: "preamble", path: [], text: section.preamble || "" }
+      ];
+      const addNodes = (nodes, path = []) => {
+        for (const node of nodes || []) {
+          const currentPath = [...path, node.label];
+          fields.push({ kind: "node-label", path: currentPath, text: node.label ? `(${node.label})` : "" });
+          fields.push({ kind: "node-heading", path: currentPath, text: node.heading || "" });
+          fields.push({ kind: "node-text", path: currentPath, text: node.text || "" });
+          addNodes(node.children, currentPath);
+        }
+      };
+      addNodes(section.body);
+      for (const field of fields) {
+        const match = searchTextMatch(field.text, normalizedQuery);
+        if (match) return { ...field, match };
+      }
+      const terms = normalizedQuery.split(" ").filter(Boolean);
+      let best = null;
+      for (const field of fields) {
+        const matches = terms.map(term => searchTextMatch(field.text, term)).filter(Boolean);
+        if (matches.length && (!best || matches.length > best.matches.length)) best = { field, matches };
+      }
+      if (!best || !terms.every(term => fields.some(field => searchTextMatch(field.text, term)))) return null;
+      return { ...best.field, match: best.matches[0] };
+    }
+
     function renderStatute(section, citationResult) {
-      const targetPath = citationResult?.renderPath || citationResult?.path || [];
+      const citationTargetPath = citationResult?.renderPath || citationResult?.path || [];
+      const searchTarget = citationResult ? null : statuteSearchTarget(section, state.query);
+      const navigationPath = citationTargetPath.length ? citationTargetPath : searchTarget?.path || [];
       const mapping = citationResult?.mapping || uscToIna.get(normCitationPart(section.section));
       const requestedLabel = citationResult?.label || `8 U.S.C. ${section.section}`;
       const breadcrumb = (section.breadcrumb || []).map(x => `<span>${escapeHtml(`${x.kind} ${x.number} — ${x.title}`)}</span>`).join("");
@@ -2573,57 +2651,70 @@
       }
       els.detail.innerHTML = `<div class="detail-content" data-statute-start>
         <p class="eyebrow">${escapeHtml(section.status === "current" ? "Current U.S. Code text" : `${section.status} section record`)}</p>
-        <h2 class="detail-title">${escapeHtml(section.heading || `Section ${section.section}`)}</h2>
+        <h2 class="detail-title">${searchTarget?.kind === "heading" ? renderSearchHighlightedText(section.heading || `Section ${section.section}`, searchTarget.match) : escapeHtml(section.heading || `Section ${section.section}`)}</h2>
         <p class="detail-subtitle">${escapeHtml(requestedLabel)}</p>
         <div class="breadcrumb">${breadcrumb}</div>
-        <div class="detail-actions">${openButton(officialTextFragment(section.url, targetPath))}${mapping ? openButton("https://www.uscis.gov/legal-resources/immigration-and-nationality-act", "Open INA crosswalk") : ""}<button class="button" data-link-current>＋ Link to note</button></div>
+        <div class="detail-actions">${openButton(officialTextFragment(section.url, citationTargetPath))}${mapping ? openButton("https://www.uscis.gov/legal-resources/immigration-and-nationality-act", "Open INA crosswalk") : ""}<button class="button" data-link-current>＋ Link to note</button></div>
         ${mapping ? `<div class="source-banner"><strong>USCIS INA crosswalk:</strong> INA ${escapeHtml(mapping.inaSection)} ↔ ${escapeHtml(mapping.uscLabel)}. The text below is the separately sourced House U.S. Code record.</div>` : ""}
-        ${section.preamble ? `<p class="statute-preamble">${linkifyStatutoryText(section.preamble, section.preambleReferences || [])}</p>` : ""}
-        <div class="statute-body">${(section.body || []).map(node => renderStatutoryNode(node, targetPath, [], 0)).join("")}</div>
+        ${section.preamble ? `<p class="statute-preamble">${linkifyStatutoryText(section.preamble, section.preambleReferences || [], 0, undefined, searchTarget?.kind === "preamble" ? searchTarget.match : null)}</p>` : ""}
+        <div class="statute-body">${(section.body || []).map(node => renderStatutoryNode(node, citationTargetPath, [], 0, searchTarget)).join("")}</div>
         ${section.sourceCredit ? `<div class="source-credit"><p class="eyebrow">Source credit</p><p>${linkifyStatutoryText(section.sourceCredit, section.sourceCreditReferences || [])}</p></div>` : ""}
         ${(section.notes || []).length ? `<section class="source-credit"><p class="eyebrow">Statutory and editorial notes</p>${section.notes.map(note => `<details class="note-block"><summary>${escapeHtml(note.heading || titleCaseTopic(note.topic))}</summary><p>${linkifyStatutoryText(note.text, note.references || [])}</p></details>`).join("")}</section>` : ""}
       </div>`;
-      renderStatuteNavigation(section, targetPath);
+      renderStatuteNavigation(section, navigationPath);
       requestAnimationFrame(() => { syncStatuteNavigationOffset(); scrollToRenderedStatuteTarget(); scheduleStatuteNavigationUpdate(); });
     }
 
     function scrollToRenderedStatuteTarget() {
-      const target = $(".statutory-node.target", els.detail);
-      const anchor = target ? $(".statutory-line", target) : $("[data-statute-start]", els.detail);
+      const searchMatch = $("[data-statute-search-match]", els.detail);
+      const target = $(".statutory-node.target, .statutory-node.search-target", els.detail);
+      const anchor = searchMatch || (target ? $(".statutory-line", target) : $("[data-statute-start]", els.detail));
       scrollStatuteAnchorToReadingLine(anchor);
     }
 
-    function renderStatutoryNode(node, targetPath, path, depth) {
+    function renderStatutoryNode(node, targetPath, path, depth, searchTarget = null) {
       const currentPath = [...path, node.label];
       const isTarget = targetPath.length && currentPath.length === targetPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(targetPath[i]));
-      return `<div class="statutory-node${isTarget ? " target" : ""}" style="--depth:${depth}" data-statute-path="${escapeHtml(JSON.stringify(currentPath))}"${isTarget ? " aria-label=\"Citation target\"" : ""}>
-        <div class="statutory-line"><strong class="node-number">${escapeHtml(node.label ? `(${node.label})` : "")}</strong>${node.heading ? `<span class="node-heading">${escapeHtml(node.heading)} </span>` : ""}<span class="node-text">${formatStatutoryRunInText(node.text || "", node.label || "", node.references || [])}</span></div>
-        ${(node.children || []).map(child => renderStatutoryNode(child, targetPath, currentPath, depth + 1)).join("")}</div>`;
+      const isSearchTarget = searchTarget?.path?.length === currentPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(searchTarget.path[i]));
+      const number = node.label ? `(${node.label})` : "";
+      return `<div class="statutory-node${isTarget ? " target" : ""}${isSearchTarget ? " search-target" : ""}" style="--depth:${depth}" data-statute-path="${escapeHtml(JSON.stringify(currentPath))}"${isTarget ? " aria-label=\"Citation target\"" : isSearchTarget ? " aria-label=\"Search match\"" : ""}>
+        <div class="statutory-line"><strong class="node-number">${isSearchTarget && searchTarget.kind === "node-label" ? renderSearchHighlightedText(number, searchTarget.match) : escapeHtml(number)}</strong>${node.heading ? `<span class="node-heading">${isSearchTarget && searchTarget.kind === "node-heading" ? renderSearchHighlightedText(node.heading, searchTarget.match) : escapeHtml(node.heading)} </span>` : ""}<span class="node-text">${formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], isSearchTarget && searchTarget.kind === "node-text" ? searchTarget.match : null)}</span></div>
+        ${(node.children || []).map(child => renderStatutoryNode(child, targetPath, currentPath, depth + 1, searchTarget)).join("")}</div>`;
     }
 
-    function linkifyStatutoryText(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length) {
+    function renderSearchHighlightedText(value, match, segmentStart = 0, segmentEnd = String(value || "").length) {
+      const input = String(value || "");
+      const start = Math.max(0, Number(segmentStart) || 0);
+      const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
+      if (!match || match.end <= start || match.start >= end) return escapeHtml(input.slice(start, end));
+      const highlightStart = Math.max(start, match.start);
+      const highlightEnd = Math.min(end, match.end);
+      return `${escapeHtml(input.slice(start, highlightStart))}<mark class="statute-search-match" data-statute-search-match>${escapeHtml(input.slice(highlightStart, highlightEnd))}</mark>${escapeHtml(input.slice(highlightEnd, end))}`;
+    }
+
+    function linkifyStatutoryText(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length, searchMatch = null) {
       const input = String(value || "");
       const start = Math.max(0, Number(segmentStart) || 0);
       const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
       const eligible = (references || [])
         .filter(reference => Number.isInteger(reference.start) && Number.isInteger(reference.end) && reference.start >= start && reference.end <= end && reference.end > reference.start && input.slice(reference.start, reference.end) === reference.text)
         .sort((a, b) => a.start - b.start || a.end - b.end);
-      if (!eligible.length) return escapeHtml(input.slice(start, end));
+      if (!eligible.length) return renderSearchHighlightedText(input, searchMatch, start, end);
       const parts = [];
       let cursor = start;
       for (const reference of eligible) {
         if (reference.start < cursor) continue;
-        parts.push(escapeHtml(input.slice(cursor, reference.start)));
+        parts.push(renderSearchHighlightedText(input, searchMatch, cursor, reference.start));
         const citation = `8 U.S.C. ${reference.targetSection}${canonicalPath(reference.targetPath || [])}`;
         const fragment = `usc-${normCitationPart(reference.targetSection)}-${(reference.targetPath || []).map(normCitationPart).join("-")}`.replace(/-$/, "");
-        parts.push(`<a class="statute-citation-link" href="#${escapeHtml(fragment)}" data-show-citation="${escapeHtml(citation)}" title="Open ${escapeHtml(citation)} inside AuthoritySearch">${escapeHtml(input.slice(reference.start, reference.end))}</a>`);
+        parts.push(`<a class="statute-citation-link" href="#${escapeHtml(fragment)}" data-show-citation="${escapeHtml(citation)}" title="Open ${escapeHtml(citation)} inside AuthoritySearch">${renderSearchHighlightedText(input, searchMatch, reference.start, reference.end)}</a>`);
         cursor = reference.end;
       }
-      parts.push(escapeHtml(input.slice(cursor, end)));
+      parts.push(renderSearchHighlightedText(input, searchMatch, cursor, end));
       return parts.join("");
     }
 
-    function formatStatutoryRunInText(value, currentLabel = "", references = []) {
+    function formatStatutoryRunInText(value, currentLabel = "", references = [], searchMatch = null) {
       const input = String(value || "");
       const markerPattern = /\((\d{1,3}|[A-Za-z]{1,4})\)/g;
       const romanPattern = /^(?:i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)$/i;
@@ -2661,7 +2752,7 @@
         const referenceListEnding = /^\s*[)\],.”"']*\s*(?:in|of|under|above|below|thereof|if)\b/i.test(afterLastMarker) || /^\s*[)\]”"']/.test(afterLastMarker) || /^\s*[,.”"']{2,}/.test(afterLastMarker);
         if (onlyReferenceConnectors && referenceListEnding) markers = [];
       }
-      if (!markers.length) return linkifyStatutoryText(input, references);
+      if (!markers.length) return linkifyStatutoryText(input, references, 0, undefined, searchMatch);
       const combined = [];
       for (const marker of markers) {
         const previous = combined.at(-1);
@@ -2677,7 +2768,7 @@
       markers = combined;
       const initialRaw = input.slice(0, markers[0].start);
       const initial = initialRaw.trimEnd();
-      const parts = initial ? [`<span class="statutory-runin-chapeau">${linkifyStatutoryText(input, references, 0, initial.length)}</span>`] : [];
+      const parts = initial ? [`<span class="statutory-runin-chapeau">${linkifyStatutoryText(input, references, 0, initial.length, searchMatch)}</span>`] : [];
       markers.forEach((marker, index) => {
         const nextStart = markers[index + 1]?.start ?? input.length;
         const rawContent = input.slice(marker.end, nextStart);
@@ -2685,7 +2776,7 @@
         const trailing = rawContent.length - rawContent.trimEnd().length;
         const contentStart = marker.end + leading;
         const contentEnd = Math.max(contentStart, nextStart - trailing);
-        const content = `${escapeHtml(marker.prefixText)}${linkifyStatutoryText(input, references, contentStart, contentEnd)}`;
+        const content = `${escapeHtml(marker.prefixText)}${linkifyStatutoryText(input, references, contentStart, contentEnd, searchMatch)}`;
         parts.push(`<span class="statutory-runin-line"><strong class="inline-address">${escapeHtml(marker.address)}</strong><span>${content}</span></span>`);
       });
       return parts.join("");
@@ -4953,10 +5044,26 @@ Get-FileHash $outJson -Algorithm SHA256`;
       });
     }
 
+    function updateCorpusStatus() {
+      if (corpus) {
+        const details = [
+          corpus.corpusVersion ? `Version: ${corpus.corpusVersion}` : "",
+          corpus.capturedAt ? `Captured: ${corpus.capturedAt}` : "",
+          corpus.verifiedAt ? `Verified: ${corpus.verifiedAt}` : ""
+        ].filter(Boolean).join(" · ");
+        els.corpusStatus.innerHTML = `<span class="status-dot"></span>Corpus Loaded`;
+        els.corpusStatus.title = details || "The embedded corpus loaded successfully.";
+        els.corpusStatus.setAttribute("aria-label", details ? `Corpus loaded. ${details}` : "Corpus loaded.");
+        return;
+      }
+      const failure = loadErrors.corpusMessage || "The embedded corpus could not be loaded.";
+      els.corpusStatus.innerHTML = `<span class="status-dot bad"></span>Corpus Unavailable`;
+      els.corpusStatus.title = failure;
+      els.corpusStatus.setAttribute("aria-label", `Corpus unavailable. ${failure}`);
+    }
+
     function initialize() {
-      els.corpusStatus.innerHTML = corpus
-        ? `<span class="status-dot"></span>${escapeHtml(corpus.corpusVersion)}`
-        : `<span class="status-dot bad"></span>Corpus unavailable`;
+      updateCorpusStatus();
       updateSaveStatus("Autosaving off", "warn");
       $$(".filter-button").forEach(x => x.classList.toggle("active", x.dataset.filter === state.filter));
       attachEvents();
