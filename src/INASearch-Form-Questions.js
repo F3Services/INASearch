@@ -1,7 +1,7 @@
 /* Curated initial-classification form questions supported by approved resources.
  * These mappings intentionally distinguish a direct filing from a derivative
  * classification that relies on a principal's underlying petition. */
-window.AUTHORITY_SEARCH_FORM_QUESTIONS = {
+window.INA_SEARCH_FORM_QUESTIONS = {
   "schemaVersion": 1,
   "nonimmigrant": [
     {

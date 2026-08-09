@@ -1,6 +1,6 @@
 /* Generated from the official eCFR Title 22 XML snapshot dated 2026-07-30.
  * Regenerate with tools/generate-visa-tables.js; do not hand-edit table rows. */
-window.AUTHORITY_SEARCH_VISA_TABLES = {
+window.INA_SEARCH_VISA_TABLES = {
   "schemaVersion": 1,
   "capturedAt": "2026-07-30",
   "sources": {

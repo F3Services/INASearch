@@ -1,12 +1,12 @@
 /*
- * AuthoritySearch definition catalog source.
+ * INASearch definition catalog source.
  *
  * INA 101 entries are derived during the standalone build from the reviewed
- * 8 U.S.C. 1101 hierarchy in AuthoritySearch-Corpus.js. The regulation
+ * 8 U.S.C. 1101 hierarchy in INASearch-Corpus.js. The regulation
  * entries below are a direct transcription of 8 CFR 1.2 as published by eCFR.
  * The separately generated USCIS glossary source is joined during the build.
  */
-window.AUTHORITY_SEARCH_DEFINITIONS = {
+window.INA_SEARCH_DEFINITIONS = {
   "schemaVersion": 1,
   "capturedAt": "2026-08-03",
   "sources": {

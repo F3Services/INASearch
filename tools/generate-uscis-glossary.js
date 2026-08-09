@@ -7,7 +7,7 @@ const https = require("https");
 const path = require("path");
 
 const root = path.resolve(__dirname, "..");
-const outputPath = path.join(root, "src", "AuthoritySearch-USCIS-Glossary.js");
+const outputPath = path.join(root, "src", "INASearch-USCIS-Glossary.js");
 const sourceUrl = "https://www.uscis.gov/tools/glossary";
 
 function decodeHtml(value) {
@@ -52,7 +52,7 @@ function aliasesForTerm(term) {
 
 function fetchSource(url, redirects = 0) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { "User-Agent": "AuthoritySearch glossary generator" } }, response => {
+    https.get(url, { headers: { "User-Agent": "INASearch glossary generator" } }, response => {
       if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location && redirects < 5) {
         response.resume();
         resolve(fetchSource(new URL(response.headers.location, url).toString(), redirects + 1));
@@ -109,7 +109,7 @@ async function main() {
     },
     entries
   };
-  const source = `/* Generated from ${sourceUrl}. Run tools/generate-uscis-glossary.js to refresh. */\nwindow.AUTHORITY_SEARCH_USCIS_GLOSSARY = ${safeJson(output)};\n`;
+  const source = `/* Generated from ${sourceUrl}. Run tools/generate-uscis-glossary.js to refresh. */\nwindow.INA_SEARCH_USCIS_GLOSSARY = ${safeJson(output)};\n`;
   fs.writeFileSync(outputPath, source);
   console.log(`${path.relative(root, outputPath)}\t${entries.length} glossary entries\t${output.verification.sourceSha256}`);
 }

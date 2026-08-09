@@ -13,7 +13,7 @@ if ((!part41Path || !part42Path) && !reuseExistingRows) {
 }
 
 const root = path.resolve(__dirname, "..");
-const outputPath = path.join(root, "src", "AuthoritySearch-Visa-Tables.js");
+const outputPath = path.join(root, "src", "INASearch-Visa-Tables.js");
 
 function decodeXml(value) {
   return String(value || "")
@@ -167,14 +167,14 @@ function existingTableRows() {
   const sandbox = { window: {} };
   vm.createContext(sandbox);
   vm.runInContext(fs.readFileSync(outputPath, "utf8"), sandbox, { filename: outputPath });
-  return sandbox.window.AUTHORITY_SEARCH_VISA_TABLES;
+  return sandbox.window.INA_SEARCH_VISA_TABLES;
 }
 
 const existing = reuseExistingRows ? existingTableRows() : null;
 const nonimmigrantTypes = reuseExistingRows ? existing.nonimmigrantTypes : parseTable(part41Path, "41.12", "nonimmigrant");
 const immigrantTypes = reuseExistingRows ? existing.immigrantTypes : parseTable(part42Path, "42.11", "immigrant");
 const immigrantDefinitionGroups = buildImmigrantDefinitionGroups(immigrantTypes);
-const output = `/* Generated from the official eCFR Title 22 XML snapshot dated 2026-07-30.\n * Regenerate with tools/generate-visa-tables.js; do not hand-edit table rows. */\nwindow.AUTHORITY_SEARCH_VISA_TABLES = ${safeJson({
+const output = `/* Generated from the official eCFR Title 22 XML snapshot dated 2026-07-30.\n * Regenerate with tools/generate-visa-tables.js; do not hand-edit table rows. */\nwindow.INA_SEARCH_VISA_TABLES = ${safeJson({
   schemaVersion: 1,
   capturedAt: "2026-07-30",
   sources: {

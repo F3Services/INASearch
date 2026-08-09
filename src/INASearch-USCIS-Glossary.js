@@ -1,5 +1,5 @@
 /* Generated from https://www.uscis.gov/tools/glossary. Run tools/generate-uscis-glossary.js to refresh. */
-window.AUTHORITY_SEARCH_USCIS_GLOSSARY = {
+window.INA_SEARCH_USCIS_GLOSSARY = {
   "schemaVersion": 1,
   "capturedAt": "2026-08-03",
   "source": {
