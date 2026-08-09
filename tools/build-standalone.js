@@ -8,6 +8,9 @@ const vm = require("vm");
 const zlib = require("zlib");
 const { buildDefinitionCatalog } = require("./definition-catalog");
 const { applyStatuteReferences } = require("./statute-references");
+const { applyStatuteFootnotes } = require("./statute-footnotes");
+const { applyGeneratedLegalReferences } = require("./legal-references");
+const { packLegalReferences } = require("./pack-legal-references");
 
 const root = path.resolve(__dirname, "..");
 const sourceDir = path.join(root, "src");
@@ -34,8 +37,8 @@ function safeCompactJson(value) {
 }
 
 function replaceDataBlock(html, name, id, value) {
-  const start = `<!-- AUTHORITY_SEARCH_${name}_DATA_START -->`;
-  const end = `<!-- AUTHORITY_SEARCH_${name}_DATA_END -->`;
+  const start = `<!-- INA_SEARCH_${name}_DATA_START -->`;
+  const end = `<!-- INA_SEARCH_${name}_DATA_END -->`;
   const replacement = `${start}\n  <script id="${id}" type="application/json">${safeJson(value)}</script>\n  ${end}`;
   const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
   if (!expression.test(html)) throw new Error(`Template is missing the ${name} data block.`);
@@ -97,8 +100,8 @@ function htmlAttribute(value) {
 }
 
 function replaceCorpusBlock(html, payload, manifest) {
-  const start = "<!-- AUTHORITY_SEARCH_CORPUS_DATA_START -->";
-  const end = "<!-- AUTHORITY_SEARCH_CORPUS_DATA_END -->";
+  const start = "<!-- INA_SEARCH_CORPUS_DATA_START -->";
+  const end = "<!-- INA_SEARCH_CORPUS_DATA_END -->";
   const attributes = [
     ["schema-version", manifest.schemaVersion],
     ["corpus-schema-version", manifest.corpusSchemaVersion],
@@ -114,7 +117,7 @@ function replaceCorpusBlock(html, payload, manifest) {
     ["uncompressed-sha256", manifest.uncompressedSha256]
   ].filter(([, value]) => value !== undefined).map(([name, value]) => `data-${name}="${htmlAttribute(value)}"`).join(" ");
   const scriptType = manifest.compression === "none" ? "application/json" : "application/gzip";
-  const replacement = `${start}\n  <script id="authoritySearchCorpusData" type="${scriptType}" ${attributes}>${payload}</script>\n  ${end}`;
+  const replacement = `${start}\n  <script id="inaSearchCorpusData" type="${scriptType}" ${attributes}>${payload}</script>\n  ${end}`;
   const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
   if (!expression.test(html)) throw new Error("Template is missing the CORPUS data block.");
   return html.replace(expression, replacement);
@@ -141,10 +144,18 @@ function makeBuild(template, corpus, profile, options) {
     generatedAt: new Date().toISOString()
   };
   let html = template.replace(/<title>[^<]*<\/title>/, `<title>${options.displayName}</title>`);
-  html = replaceDataBlock(html, "BUILD", "authoritySearchBuildData", buildData);
-  html = replaceDataBlock(html, "CORPUS_MANIFEST", "authoritySearchCorpusManifest", corpusPayload.manifest);
+  html = replaceDataBlock(html, "BUILD", "inaSearchBuildData", buildData);
+  html = replaceDataBlock(html, "CORPUS_MANIFEST", "inaSearchCorpusManifest", corpusPayload.manifest);
   html = replaceCorpusBlock(html, corpusPayload.payload, corpusPayload.manifest);
-  html = replaceDataBlock(html, "PROFILE", "authoritySearchProfileData", profile);
+  html = replaceDataBlock(html, "PROFILE", "inaSearchProfileData", profile);
+  if (options.compactShell) {
+    for (const [name, id] of [["BUILD", "inaSearchBuildData"], ["CORPUS_MANIFEST", "inaSearchCorpusManifest"], ["PROFILE", "inaSearchProfileData"]]) {
+      const expression = new RegExp(`(<!-- INA_SEARCH_${name}_DATA_START -->\\s*<script id="${id}"[^>]*>)([\\s\\S]*?)(<\\/script>\\s*<!-- INA_SEARCH_${name}_DATA_END -->)`);
+      html = html.replace(expression, (_, open, json, close) => `${open}${safeCompactJson(JSON.parse(json))}${close}`);
+    }
+    html = html.replace(/<style>([\s\S]*?)<\/style>/, (_, css) => `<style>${css.replace(/\s+/g, " ").replace(/\s*([{}:;,])\s*/g, "$1")}</style>`);
+    html = html.replace(/<!--(?! INA_SEARCH_)[\s\S]*?-->/g, "").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^[\t ]+/gm, "").replace(/^\/\/[^\n]*\n/gm, "").replace(/\n{2,}/g, "\n");
+  }
   fs.writeFileSync(path.join(root, options.fileName), html);
   return { fileName: options.fileName, bytes: Buffer.byteLength(html), instanceId: buildSignature, manifest: corpusPayload.manifest };
 }
@@ -182,37 +193,43 @@ function allUnlockedProfile(template, corpus, defaultProfile) {
   };
 }
 
-const template = fs.readFileSync(path.join(sourceDir, "AuthoritySearch.template.html"), "utf8");
-const fullCorpus = readAssignedObject("AuthoritySearch-Corpus.js", "AUTHORITY_SEARCH_CORPUS");
-fullCorpus.visaTables = readAssignedObject("AuthoritySearch-Visa-Tables.js", "AUTHORITY_SEARCH_VISA_TABLES");
-fullCorpus.visaTables.formQuestions = readAssignedObject("AuthoritySearch-Form-Questions.js", "AUTHORITY_SEARCH_FORM_QUESTIONS");
-const statuteReferenceSource = readAssignedObject("AuthoritySearch-Statute-References.js", "AUTHORITY_SEARCH_STATUTE_REFERENCES");
+const template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
+const fullCorpus = readAssignedObject("INASearch-Corpus.js", "INA_SEARCH_CORPUS");
+const statuteFootnoteSource = readAssignedObject("INASearch-Statute-Footnotes.js", "INA_SEARCH_STATUTE_FOOTNOTES");
+applyStatuteFootnotes(fullCorpus, statuteFootnoteSource);
+fullCorpus.cfr = readAssignedObject("INASearch-CFR.js", "INA_SEARCH_CFR");
+fullCorpus.visaTables = readAssignedObject("INASearch-Visa-Tables.js", "INA_SEARCH_VISA_TABLES");
+fullCorpus.visaTables.formQuestions = readAssignedObject("INASearch-Form-Questions.js", "INA_SEARCH_FORM_QUESTIONS");
+const statuteReferenceSource = readAssignedObject("INASearch-Statute-References.js", "INA_SEARCH_STATUTE_REFERENCES");
 applyStatuteReferences(fullCorpus, statuteReferenceSource);
-const definitionSource = readAssignedObject("AuthoritySearch-Definitions.js", "AUTHORITY_SEARCH_DEFINITIONS");
-const uscisGlossarySource = readAssignedObject("AuthoritySearch-USCIS-Glossary.js", "AUTHORITY_SEARCH_USCIS_GLOSSARY");
+applyGeneratedLegalReferences(fullCorpus);
+const definitionSource = readAssignedObject("INASearch-Definitions.js", "INA_SEARCH_DEFINITIONS");
+const uscisGlossarySource = readAssignedObject("INASearch-USCIS-Glossary.js", "INA_SEARCH_USCIS_GLOSSARY");
 fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
-const defaultProfile = readAssignedObject("AuthoritySearch-Profile.js", "AUTHORITY_SEARCH_PROFILE");
+packLegalReferences(fullCorpus);
+const defaultProfile = readAssignedObject("INASearch-Profile.js", "INA_SEARCH_PROFILE");
 const unlockedProfile = allUnlockedProfile(template, fullCorpus, defaultProfile);
 
 const results = [
   makeBuild(template, fullCorpus, defaultProfile, {
     variant: "standard",
-    displayName: "AuthoritySearch",
-    fileName: "AuthoritySearch.html",
+    displayName: "INASearch",
+    fileName: "INASearch.html",
     hasLocalUscCache: true
   }),
   makeBuild(template, fullCorpus, unlockedProfile, {
     variant: "all-unlocked",
-    displayName: "AuthoritySearch AU (All Unlocked)",
-    fileName: "AuthoritySearch-AU.html",
+    displayName: "INASearch AU (All Unlocked)",
+    fileName: "INASearch-AU.html",
     hasLocalUscCache: true
   }),
   makeBuild(template, fullCorpus, defaultProfile, {
     variant: "uncompressed",
-    displayName: "AuthoritySearch (Uncompressed Corpus)",
-    fileName: "AuthoritySearch-Uncompressed.html",
+    displayName: "INASearch (Uncompressed Corpus)",
+    fileName: "INASearch-Uncompressed.html",
     hasLocalUscCache: true,
-    uncompressedCorpus: true
+    uncompressedCorpus: true,
+    compactShell: true
   })
 ];
 
