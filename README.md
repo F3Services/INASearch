@@ -18,7 +18,7 @@ INASearch is a self-contained HTML document, not an installed application. It op
 - No account, telemetry, third-party runtime code, or automatic network requests.
 - Statutes, regulations, application logic, and study data are embedded in the HTML file.
 - External official sources open only when the user selects an outbound link.
-- Saving back to the HTML file requires an explicit browser permission; a JSON backup is available when direct saving is unavailable.
+- If the browser cannot be granted permission to update the HTML file directly, the user can explicitly download a portable JSON file containing their notes and progress.
 - The embedded corpus is checked against recorded byte counts and SHA-256 hashes before use.
 
 This design limits the review surface to a static document interpreted by the approved browser. The uncompressed edition also makes the complete embedded corpus directly inspectable as JSON.
@@ -28,6 +28,7 @@ This design limits the review surface to a static document interpreted by the ap
 - **`INASearch.html`** — standard edition with the complete embedded corpus.
 - **`INASearch-AU.html`** — same corpus with card-resource fields already unlocked.
 - **`INASearch-Uncompressed.html`** — standard edition with plain embedded JSON instead of gzip.
+- **`INASearch-AU-Uncompressed.html`** — all-unlocked edition with plain embedded JSON instead of gzip.
 
 Each file is complete by itself.
 
@@ -75,7 +76,7 @@ node tools/build-standalone.js
 node tools/test-standalone.js
 ```
 
-The test suite checks corpus integrity, deterministic payloads, citation targets, structured House footnotes, CFR coverage, profile migration, search performance, and the size limits for all three editions.
+The test suite checks corpus integrity, deterministic payloads, citation targets, structured House footnotes, CFR coverage, profile migration, search performance, and the size limits for all four editions.
 
 ## Scope
 
