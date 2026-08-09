@@ -277,6 +277,7 @@ async function main() {
   const full = readBuild("INASearch.html");
   const allUnlocked = readBuild("INASearch-AU.html");
   const uncompressed = readBuild("INASearch-Uncompressed.html");
+  const allUnlockedUncompressed = readBuild("INASearch-AU-Uncompressed.html");
 
   assert.deepStrictEqual(blankProfile.resourceChallengeLockouts, [], "Blank profiles must include persisted resource-question lockouts.");
   assert.strictEqual(fs.existsSync(path.join(root, "INASearch-no-USC.html")), false, "The retired no-USC build still exists.");
@@ -284,6 +285,7 @@ async function main() {
   assert(full.bytes <= 8_000_000, "INASearch.html exceeds 8 MB acceptance limit.");
   assert(allUnlocked.bytes <= 8_000_000, "INASearch-AU.html exceeds 8 MB acceptance limit.");
   assert(uncompressed.bytes <= 35_000_000, "INASearch-Uncompressed.html exceeds 35 MB acceptance limit.");
+  assert(allUnlockedUncompressed.bytes <= 35_000_000, "INASearch-AU-Uncompressed.html exceeds 35 MB acceptance limit.");
   assert.strictEqual(full.build.variant, "standard");
   assert.strictEqual(full.build.hasLocalUscCache, true);
   assert.strictEqual(full.build.corpusCompression, "gzip");
@@ -297,11 +299,20 @@ async function main() {
   assert.strictEqual(uncompressed.manifest.mediaType, "application/json");
   assert.strictEqual(Object.hasOwn(uncompressed.manifest, "compressedBytes"), false, "The uncompressed manifest advertises compressed bytes.");
   assert(/id="inaSearchCorpusData" type="application\/json"/.test(uncompressed.html), "The uncompressed corpus is not embedded as plain JSON.");
+  assert.strictEqual(allUnlockedUncompressed.build.variant, "all-unlocked-uncompressed");
+  assert.strictEqual(allUnlockedUncompressed.build.hasLocalUscCache, true);
+  assert.strictEqual(allUnlockedUncompressed.build.corpusCompression, "none");
+  assert.strictEqual(allUnlockedUncompressed.manifest.encoding, "utf-8");
+  assert.strictEqual(allUnlockedUncompressed.manifest.mediaType, "application/json");
+  assert.strictEqual(Object.hasOwn(allUnlockedUncompressed.manifest, "compressedBytes"), false, "The all-unlocked uncompressed manifest advertises compressed bytes.");
+  assert(/id="inaSearchCorpusData" type="application\/json"/.test(allUnlockedUncompressed.html), "The all-unlocked uncompressed corpus is not embedded as plain JSON.");
   assert.deepStrictEqual(full.profile, blankProfile);
   assert.deepStrictEqual(uncompressed.profile, blankProfile, "The uncompressed build must retain the standard unanswered profile.");
+  assert.deepStrictEqual(allUnlockedUncompressed.profile, allUnlocked.profile, "The all-unlocked uncompressed build does not retain the complete all-unlocked profile.");
   assert.deepStrictEqual(full.corpus, fullSource, "Full corpus round trip changed data.");
   assert.deepStrictEqual(allUnlocked.corpus, fullSource, "All-unlocked corpus round trip changed data.");
   assert.deepStrictEqual(uncompressed.corpus, fullSource, "Uncompressed corpus round trip changed data.");
+  assert.deepStrictEqual(allUnlockedUncompressed.corpus, fullSource, "All-unlocked uncompressed corpus round trip changed data.");
   const hydratedSource = unpackLegalReferences(JSON.parse(JSON.stringify(fullSource)));
   for (const href of ["/us/usc/t8/s1101/a/15/H/i/b", "/us/pl/104/208", "/us/stat/110/3009", "/us/act/1952-06-27/ch477"]) {
     assert.strictEqual(expandHouseHref(compactHouseHref(href)), href, `Packed House href did not round-trip: ${href}`);
@@ -309,9 +320,11 @@ async function main() {
   assert.strictEqual(full.corpus.title8.sections.length, 376);
   assert.strictEqual(allUnlocked.corpus.title8.sections.length, 376);
   assert.strictEqual(uncompressed.corpus.title8.sections.length, 376);
+  assert.strictEqual(allUnlockedUncompressed.corpus.title8.sections.length, 376);
   assert(full.corpus.title8.sections.some(section => Array.isArray(section.body)), "Full corpus has no cached Title 8 bodies.");
   assert(allUnlocked.corpus.title8.sections.some(section => Array.isArray(section.body)), "All-unlocked build has no cached Title 8 bodies.");
   assert(uncompressed.corpus.title8.sections.some(section => Array.isArray(section.body)), "Uncompressed build has no cached Title 8 bodies.");
+  assert(allUnlockedUncompressed.corpus.title8.sections.some(section => Array.isArray(section.body)), "All-unlocked uncompressed build has no cached Title 8 bodies.");
   assert.strictEqual(full.corpus.schemaVersion, 3, "The combined corpus schema was not upgraded for structured House footnotes.");
   assert.strictEqual(full.corpus.cfr.ptarYear, 2025, "Unexpected CFR Parallel Table year.");
   assert.strictEqual(full.corpus.cfr.coverage.sectionCount, 3039, "Unexpected cached CFR section count.");
@@ -766,7 +779,7 @@ async function main() {
   assert.strictEqual(definitionScopes.get("ina-subchapters-i-ii").text, statutoryNode(fullSource, "1101", ["b"]).text);
   assert.strictEqual(definitionScopes.get("ina-subchapter-iii").text, statutoryNode(fullSource, "1101", ["c"]).text);
 
-  for (const build of [full, allUnlocked, uncompressed]) {
+  for (const build of [full, allUnlocked, uncompressed, allUnlockedUncompressed]) {
     const scripts = executableScripts(build.html);
     assert.strictEqual(scripts.length, 2);
     scripts.forEach((source, index) => new vm.Script(source, { filename: `${build.fileName}:script-${index + 1}` }));
@@ -2222,6 +2235,7 @@ async function main() {
   console.log(`PASS INASearch.html: ${full.bytes} bytes; ${full.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS INASearch-AU.html: ${allUnlocked.bytes} bytes; ${allUnlocked.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS INASearch-Uncompressed.html: ${uncompressed.bytes} bytes; ${uncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
+  console.log(`PASS INASearch-AU-Uncompressed.html: ${allUnlockedUncompressed.bytes} bytes; ${allUnlockedUncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
   console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${statutoryFormattingAudit.citationLinks} generated citation links`);
   console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 199 INA term entries from 170 definition statements; 32 exact 8 CFR 1.2 entries`);
   console.log(`PASS CFR audit: ${full.corpus.cfr.coverage.partCount} active parts; ${full.corpus.cfr.sections.length} sections; ${full.corpus.cfr.appendices.length} appendices; ${full.corpus.cfr.graphics.length} referenced graphics; 1 removed-part tombstone`);

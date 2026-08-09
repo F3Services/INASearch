@@ -230,6 +230,14 @@ const results = [
     hasLocalUscCache: true,
     uncompressedCorpus: true,
     compactShell: true
+  }),
+  makeBuild(template, fullCorpus, unlockedProfile, {
+    variant: "all-unlocked-uncompressed",
+    displayName: "INASearch AU (All Unlocked, Uncompressed Corpus)",
+    fileName: "INASearch-AU-Uncompressed.html",
+    hasLocalUscCache: true,
+    uncompressedCorpus: true,
+    compactShell: true
   })
 ];
 
