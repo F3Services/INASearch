@@ -907,12 +907,12 @@ async function main() {
   assert(/id="impliedUscTitle"[\s\S]*?>8<\/span>[\s\S]*?id="searchInput"/.test(fallbackSource), "The implied Title 8 marker is not positioned before the typed U.S.C. citation.");
   assert(fallbackSource.includes("No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup."), "The implied Title 8 warning is missing.");
   assert(fallbackSource.includes("updateSearchSuggestionVisibility();"), "The integrated search suggestion does not hide when a query is present.");
-  const startupSearchQuery = extractedFunction(fallbackSource, "startupSearchQuery", "showSearchResults", { URLSearchParams, String, DEFAULT_STARTUP_QUERY: "INA 215a" });
+  const startupSearchQuery = extractedFunction(fallbackSource, "startupSearchQuery", "showSearchResults", { URLSearchParams, String, DEFAULT_STARTUP_QUERY: "INA 203b1a" });
   assert.strictEqual(startupSearchQuery({ search: "?q=22%20CFR%2042.11" }), "22 CFR 42.11", "The startup query does not decode citation URLs.");
   assert.strictEqual(startupSearchQuery({ search: "?q=%20INA%20215(a)%20" }), " INA 215(a) ", "Formatting explicitly supplied in the URL query is not preserved for the editable field.");
   assert.strictEqual(startupSearchQuery({ search: "?q=" }), "", "An explicitly empty q argument was replaced by the default citation.");
-  assert.strictEqual(startupSearchQuery({ search: "?other=value" }), "INA 215a", "A URL without a q argument did not receive the INA 215a default.");
-  assert.strictEqual(startupSearchQuery({ search: "" }), "INA 215a", "The no-argument startup citation is not INA 215a.");
+  assert.strictEqual(startupSearchQuery({ search: "?other=value" }), "INA 203b1a", "A URL without a q argument did not receive the INA 203b1a default.");
+  assert.strictEqual(startupSearchQuery({ search: "" }), "INA 203b1a", "The no-argument startup citation is not INA 203b1a.");
   assert.strictEqual(startupSearchQuery({ search: `?q=${"a".repeat(600)}` }).length, 500, "The startup query is not length-limited.");
   assert(fallbackSource.includes("if (startupQuery) setTimeout(() => applySearchQuery(startupQuery, false, true), 0);"), "Initialization does not preserve the displayed formatting of the startup query.");
   const startupEditableSearch = { value: "" };
@@ -1538,9 +1538,9 @@ async function main() {
   const parseLocalStatute = extractedFunction(fallbackSource, "parseLocalStatute", "parseFallbackStatute", {
     corpus: hydratedSource,
     hasLocalUscCache: true,
-    inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["215", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
-    sectionMap: new Map([["1101", section1101ForCompactPaths], ["1185", section1185ForStartup]]),
-    uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["1185", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
+    inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["203", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["215", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
+    sectionMap: new Map([["1101", section1101ForCompactPaths], ["1153", section1153ForCompactPaths], ["1185", section1185ForStartup]]),
+    uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["1153", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["1185", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
     findKnownPrefix,
     resolveIndexedCompactStatutePath: compactPathApi.resolveIndexedCompactStatutePath,
     resolveComponents: resolveComponentsForParser,
@@ -1551,8 +1551,8 @@ async function main() {
   });
   const parsedCompactH1b = plain(parseLocalStatute("ina", "101a15hib"));
   assert(parsedCompactH1b.valid && parsedCompactH1b.label === "INA 101(a)(15)(H)(i)(b)", "The complete compact H-1B citation does not survive the local parser.");
-  const parsedDefaultStartup = plain(parseLocalStatute("ina", "215a"));
-  assert(parsedDefaultStartup.valid && parsedDefaultStartup.label === "INA 215(a)" && JSON.stringify(parsedDefaultStartup.path) === JSON.stringify(["a"]), "The parenthesis-free INA 215a startup text does not resolve to INA 215(a).");
+  const parsedDefaultStartup = plain(parseLocalStatute("ina", "203b1a"));
+  assert(parsedDefaultStartup.valid && parsedDefaultStartup.label === "INA 203(b)(1)(A)" && JSON.stringify(parsedDefaultStartup.path) === JSON.stringify(["b", "1", "A"]), "The parenthesis-free INA 203b1a startup text does not resolve to INA 203(b)(1)(A).");
   const parsedRomanAmbiguity = plain(parseLocalStatute("ina", "101a15oiii"));
   assert(parsedRomanAmbiguity.valid && parsedRomanAmbiguity.ambiguity.options.length === 2, "The local parser did not retain valid ambiguity choices.");
   assert.deepStrictEqual(parsedRomanAmbiguity.renderPath, ["a", "15", "O", "iii"], "The parser still truncates a selected compact path before navigation.");
