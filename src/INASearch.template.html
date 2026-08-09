@@ -312,7 +312,7 @@
       background: rgba(255,255,255,.06);
       font-size: 11px;
     }
-    button.status-chip { font: inherit; cursor: pointer; }
+    button.status-chip { cursor: pointer; font-family: inherit; font-size: 11px; }
     button.status-chip.attention { border-color: #ffc86d; color: #fff1c9; background: rgba(151, 100, 4, .38); }
     button.status-chip.attention:hover { background: rgba(183, 124, 10, .52); }
     button.status-chip.connected { border-color: rgba(107,214,164,.55); color: #dcffef; background: rgba(24, 113, 78, .28); }
@@ -366,24 +366,99 @@
       top: 50%;
       left: 55%;
       translate: 0 -50%;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      width: max-content;
       min-height: 30px;
-      max-width: min(42%, 390px);
+      max-width: calc(100% - 90px);
       overflow: hidden;
-      border: 1px solid #62b6f0;
+      border: 1px solid rgba(98, 182, 240, .72);
       border-radius: 8px;
-      padding: 4px 8px;
-      color: #a8dcff;
-      background: #123b59;
-      cursor: pointer;
+      padding: 2px 3px;
+      color: #dbeeff;
+      background: #102b40;
       font-family: var(--mono);
       font-size: 12px;
       font-weight: 850;
-      text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .citation-equivalent[data-system="ina"] { border-color: #d8a94d; color: #ffd88a; background: #453714; }
-    .citation-equivalent::before { content: "↔ "; opacity: .72; }
-    .citation-equivalent:hover { filter: brightness(1.14); }
+    .citation-equivalent-side { display: flex; align-items: center; min-width: 0; border-radius: 5px; }
+    .citation-equivalent-side-ina { color: #ffd88a; background: #453714; }
+    .citation-equivalent-side-usc { color: #a8dcff; background: #123b59; }
+    .citation-equivalent-label,
+    .citation-equivalent-copy {
+      min-height: 24px;
+      border: 0;
+      color: inherit;
+      background: transparent;
+      cursor: pointer;
+      font: inherit;
+      font-weight: inherit;
+    }
+    .citation-equivalent-label { min-width: 0; overflow: hidden; padding: 3px 5px; text-overflow: ellipsis; white-space: nowrap; }
+    .citation-equivalent-copy { display: grid; place-items: center; flex: 0 0 25px; width: 25px; padding: 0; border-left: 1px solid currentColor; font-family: var(--sans); font-size: 13px; line-height: 1; opacity: .88; }
+    .citation-equivalent-label:hover,
+    .citation-equivalent-copy:hover { background: rgba(255,255,255,.12); }
+    .citation-equivalent-label:focus-visible,
+    .citation-equivalent-copy:focus-visible { position: relative; z-index: 1; outline: 2px solid #fff; outline-offset: -2px; }
+    .citation-equivalent-arrow { flex: 0 0 auto; padding: 0 2px; color: #bed2e4; font-family: var(--sans); opacity: .82; }
+    .search-field-shell.citation-crosswalk-below { padding-bottom: 36px; }
+    .search-field-shell.citation-crosswalk-below .citation-equivalent {
+      top: auto;
+      right: 44px;
+      bottom: 0;
+      left: 45px !important;
+      translate: 0;
+      justify-content: center;
+      width: auto;
+      max-width: none;
+    }
+    .search-field-shell.citation-crosswalk-below .citation-equivalent-side { flex: 1 1 0; }
+    .search-field-shell.citation-crosswalk-below .search-icon,
+    .search-field-shell.citation-crosswalk-below .kbd,
+    .search-field-shell.citation-crosswalk-below .implied-usc-title { top: 21px; }
+    .search-field-shell.citation-crosswalk-below .search-input-mirror { bottom: auto; height: 42px; }
+    .implied-usc-title {
+      position: absolute;
+      z-index: 4;
+      top: 50%;
+      left: 44px;
+      translate: 0 -50%;
+      display: grid;
+      place-items: center;
+      min-width: 17px;
+      height: 22px;
+      border: 1px solid #d8a94d;
+      border-radius: 5px;
+      padding: 0 3px;
+      color: #1f1700;
+      background: #ffd66b;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1;
+    }
+    .search-field-shell.has-implied-usc-title .search-input,
+    .search-field-shell.has-implied-usc-title .search-input-mirror { padding-left: 66px; }
+    .implied-usc-title-notice {
+      position: absolute;
+      z-index: 56;
+      top: calc(100% + 7px);
+      left: 39px;
+      width: max-content;
+      max-width: min(390px, calc(100% - 46px));
+      border: 1px solid #d8a94d;
+      border-radius: 8px;
+      padding: 7px 9px;
+      color: #fff0c2;
+      background: #33290f;
+      box-shadow: 0 9px 22px rgba(0,0,0,.28);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .search-field-shell.has-implied-usc-title.has-citation-ambiguity .citation-ambiguity { top: calc(100% + 48px); }
     .search-input-mirror {
       position: absolute;
       z-index: 2;
@@ -610,12 +685,15 @@
     .breadcrumb { display: flex; flex-wrap: wrap; gap: 4px 7px; margin: 11px 0 16px; color: var(--muted); font-size: 11px; }
     .breadcrumb span:not(:last-child)::after { content: "›"; margin-left: 7px; color: var(--line); }
     .statute-preamble { margin: 17px 0; }
-    .statutory-node { position: relative; margin: 5px 0 5px min(calc(var(--depth, 0) * 15px), 90px); padding: 5px 7px 7px; border-radius: 6px; }
-    .statutory-node.target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
+    .statutory-node,
+    .statutory-runin-line { position: relative; margin: 5px 0 5px min(calc(var(--depth, 0) * 15px), 90px); padding: 5px 7px 7px; border-radius: 6px; }
+    .statutory-node.target,
+    .statutory-runin-line.citation-target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
     .statutory-node.search-target { background: var(--amber-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 35%, transparent); }
     .statute-search-match { border-radius: 3px; padding: 1px 2px; color: inherit; background: #ffe08a; box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 30%, transparent); }
     .statutory-line { display: block; line-height: 1.55; }
-    .statutory-node .node-number { display: inline-block; margin-right: 7px; color: var(--navy); font-family: var(--mono); font-weight: 950; }
+    .statutory-node .node-number,
+    .statutory-runin-line .inline-address { display: inline-block; margin-right: 7px; color: var(--navy); font-family: var(--mono); font-weight: 950; }
     .statutory-node .node-heading { font-weight: 800; }
     .statutory-node .node-text { white-space: pre-wrap; }
     .legal-unit-trigger {
@@ -650,9 +728,12 @@
       background: var(--panel);
       box-shadow: 0 14px 36px rgba(16, 42, 67, .24);
     }
-    .legal-unit-menu-citation { overflow: hidden; padding: 7px 9px 6px; color: var(--muted); font-family: var(--mono); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+    .legal-unit-menu-citations { display: grid; gap: 2px; margin-bottom: 3px; border-bottom: 1px solid var(--line); padding: 3px 2px 6px; }
+    .legal-unit-menu-citation-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px; }
+    .legal-unit-menu-citation { min-width: 0; overflow: hidden; padding: 5px 7px; color: var(--muted); font-family: var(--mono); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
     .legal-unit-menu button { width: 100%; border: 0; border-radius: 7px; padding: 8px 9px; color: var(--ink); text-align: left; background: transparent; cursor: pointer; font-size: 12px; font-weight: 750; }
     .legal-unit-menu button:hover, .legal-unit-menu button:focus-visible { color: var(--blue); background: var(--blue-soft); }
+    .legal-unit-menu .legal-unit-citation-copy { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; text-align: center; font-size: 16px; line-height: 1; }
     .cfr-body { display: grid; gap: 8px; margin-top: 18px; }
     .regulation-source-details { margin: 22px 0 0; border-top: 1px solid var(--line); padding-top: 12px; color: var(--muted); font-size: 12px; }
     .regulation-source-details summary { width: fit-content; cursor: pointer; font-weight: 750; }
@@ -674,9 +755,7 @@
     .cfr-graphic { max-width: 100%; height: auto; margin: 9px auto; display: block; }
     .cfr-footnote { margin: 8px 0; padding-top: 7px; border-top: 1px dotted var(--line); color: var(--muted); font-size: 11px; }
     .statutory-runin-chapeau { display: inline; }
-    .statutory-runin-line { display: block; margin-top: 8px; padding-left: 13px; border-left: 2px solid var(--line); }
-    .statutory-runin-line.citation-target { border: 2px solid var(--blue); border-radius: 7px; padding: 7px 9px; background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
-    .statutory-runin-line .inline-address { margin-right: 7px; color: var(--navy); font-family: var(--mono); font-weight: 950; }
+    .statutory-runin-line { display: block; line-height: 1.55; }
     .statute-citation-link { border-radius: 3px; color: var(--blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
     .statute-citation-link:hover { color: var(--navy); background: var(--blue-soft); }
     .statute-citation-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
@@ -697,14 +776,16 @@
       box-shadow: 0 18px 48px rgba(16, 42, 67, .28);
     }
     .legal-reference-popover-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 12px 13px 9px; border-bottom: 1px solid var(--line); }
-    .legal-reference-popover-head strong { display: block; color: var(--navy); font-family: var(--mono); font-size: 12px; }
+    .legal-reference-popover-citation { display: block; color: var(--navy); font-family: var(--mono); font-size: 12px; font-weight: 850; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .legal-reference-popover-citation:hover { color: var(--blue); }
+    .legal-reference-popover-citation:focus-visible { border-radius: 2px; outline: 2px solid var(--blue); outline-offset: 2px; }
+    .legal-reference-popover-citation:not([href]) { text-decoration: none; }
     .legal-reference-popover-head small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
     .legal-reference-popover-close { flex: 0 0 auto; width: 26px; height: 26px; border: 0; border-radius: 50%; color: var(--muted); background: transparent; cursor: pointer; font-size: 18px; }
     .legal-reference-popover-close:hover, .legal-reference-popover-close:focus-visible { color: var(--blue); background: var(--blue-soft); }
     .legal-reference-popover-body { max-height: min(48vh, 490px); overflow: auto; padding: 12px 13px; }
     .legal-reference-popover-body pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 12px/1.55 Georgia, "Times New Roman", serif; }
     .legal-reference-popover-message { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
-    .legal-reference-popover-actions { display: flex; justify-content: flex-end; padding: 0 13px 12px; }
     .legal-reference-popover[hidden] { display: none; }
     .house-footnote-reference { position: relative; top: -.12em; margin: 0 1px; font-size: .67em; font-weight: 850; line-height: 0; }
     .house-footnote-reference a { border-radius: 2px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
@@ -917,16 +998,29 @@
     .definition-entry.outside-applicability { background: var(--amber-soft); }
     .definition-applicability-warning { margin: 0 0 12px; border: 1px solid #e5bc60; border-radius: 9px; padding: 9px 11px; color: #75520b; background: rgba(255,255,255,.45); font-size: 12px; line-height: 1.45; }
     .definition-entry-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-bottom: 10px; }
-    .definition-citation { color: var(--blue); font-family: var(--mono); font-size: 12px; font-weight: 900; }
+    .definition-citation { color: var(--blue); font-family: var(--mono); font-size: 12px; font-weight: 900; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    button.definition-citation { border: 0; padding: 0; background: transparent; cursor: pointer; }
+    .definition-citation:hover { color: var(--navy); }
+    .definition-citation:focus-visible { border-radius: 2px; outline: 3px solid var(--blue-soft); }
+    .definition-official-link { display: inline-grid; place-items: center; width: 23px; height: 23px; border: 1px solid var(--line); border-radius: 6px; color: var(--blue); background: var(--canvas); font-size: 13px; font-weight: 900; line-height: 1; text-decoration: none; }
+    .definition-official-link:hover { border-color: var(--blue); color: var(--navy); background: var(--blue-soft); }
+    .definition-official-link:focus-visible { outline: 3px solid var(--blue-soft); outline-offset: 1px; }
     .definition-text { margin: 0; color: var(--ink); line-height: 1.62; white-space: pre-wrap; }
     .definition-inline-link { display: inline; margin: 0; border: 0; padding: 0; color: var(--blue); background: none; font: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; cursor: pointer; }
     .definition-inline-link:hover { color: var(--navy); }
     .definition-inline-link:focus-visible { border-radius: 2px; outline: 3px solid var(--blue-soft); }
-    .definition-scope { display: grid; grid-template-columns: minmax(120px, auto) 1fr; gap: 6px 11px; margin: 13px 0 0; border-left: 3px solid var(--blue); padding: 9px 11px; background: var(--blue-soft); font-size: 11px; }
+    .definition-scope-details { margin: 13px 0 0; border-left: 3px solid var(--blue); background: var(--blue-soft); font-size: 11px; }
+    .definition-scope-details > summary { display: flex; align-items: center; gap: 7px; padding: 8px 11px; color: var(--navy); cursor: pointer; font-weight: 850; list-style: none; }
+    .definition-scope-details > summary::-webkit-details-marker { display: none; }
+    .definition-scope-details > summary::before { content: "▸"; color: var(--blue); font-size: 10px; transition: transform .14s ease; }
+    .definition-scope-details[open] > summary::before { transform: rotate(90deg); }
+    .definition-scope-details > summary:hover { background: color-mix(in srgb, var(--blue-soft) 72%, var(--panel) 28%); }
+    .definition-scope-details > summary:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 28%, transparent); outline-offset: -3px; }
+    .definition-scope { display: grid; grid-template-columns: minmax(120px, auto) 1fr; gap: 6px 11px; margin: 0; border-top: 1px solid color-mix(in srgb, var(--blue) 22%, var(--line)); padding: 9px 11px; }
     .definition-scope dt { color: var(--muted); font-weight: 850; }
     .definition-scope dd { margin: 0; }
     .definition-children { margin-top: 9px; }
-    .definition-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .definition-children + .definition-text { margin-top: 9px; }
     .profile-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 16px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
     .profile-bar strong { margin-right: auto; color: var(--navy); font-size: 13px; }
 
@@ -996,7 +1090,7 @@
       .brand small { display: none; }
       .search-box-wrap { flex-wrap: wrap; }
       .search-field-shell { flex-basis: 100%; }
-      .citation-equivalent { max-width: 44%; }
+      .citation-equivalent { max-width: calc(100% - 90px); }
       .search-suggestion-inline { max-width: calc(100% - 105px); }
       .detail-heading-row { flex-direction: column; }
       .detail-heading-actions { justify-content: flex-start; }
@@ -1032,17 +1126,17 @@
     <div class="topbar-main">
       <div class="brand" id="inaSearchBrand" aria-label="INASearch home" aria-describedby="brandTribute">
         <span class="brand-mark" aria-hidden="true">§</span>
-        <span><strong>INASearch</strong><small>ISOBASIC study reference</small></span>
+        <span><strong>INASearch</strong><small>Quick INA/CFR Lookup</small></span>
         <span class="brand-tribute" id="brandTribute" role="tooltip" hidden>Inspired by the excellent work of 2604</span>
       </div>
       <nav class="main-nav" aria-label="Primary">
-        <button class="nav-button" data-view="definitions" aria-current="page">Definitions</button>
+        <button class="nav-button" data-view="definitions" aria-current="false">Definitions</button>
         <button class="nav-button" data-view="notes">Notes</button>
         <button class="nav-button" data-view="sources">Sources &amp; About</button>
       </nav>
       <div class="top-status" aria-label="Application status">
         <span class="status-chip" id="corpusStatus"><span class="status-dot warn"></span>Loading Corpus…</span>
-        <button class="status-chip attention" id="saveStatus" type="button" aria-label="Enable autosaving"><span class="status-dot warn"></span>Autosaving off</button>
+        <button class="status-chip attention" id="saveStatus" type="button" aria-label="Saving is off. Open saving and progress options."><span class="status-dot warn"></span>Saving Off</button>
       </div>
     </div>
     <div class="global-search" role="search">
@@ -1050,12 +1144,24 @@
         <div class="search-field-shell">
           <span class="search-icon" aria-hidden="true">⌕</span>
           <label class="sr-only" for="searchInput">Search authorities, definitions, immigration classifications, forms, and notes</label>
+          <span class="implied-usc-title" id="impliedUscTitle" aria-hidden="true" hidden>8</span>
           <div class="search-input-mirror" id="searchInputMirror" aria-hidden="true"></div>
           <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false"
-            placeholder="Search citations, definitions, classifications, forms, and notes">
-          <button class="citation-equivalent" id="citationEquivalent" type="button" hidden></button>
+            aria-describedby="impliedUscTitleNotice" placeholder="Search citations, definitions, classifications, forms, and notes">
+          <div class="citation-equivalent" id="citationEquivalent" role="group" aria-label="INA and U.S.C. citation crosswalk" hidden>
+            <span class="citation-equivalent-side citation-equivalent-side-ina">
+              <button class="citation-equivalent-label" id="citationEquivalentIna" type="button"></button>
+              <button class="citation-equivalent-copy" id="citationEquivalentInaCopy" type="button" aria-label="Copy INA citation" title="Copy INA citation"><span aria-hidden="true">⧉</span></button>
+            </span>
+            <span class="citation-equivalent-arrow" aria-hidden="true">↔</span>
+            <span class="citation-equivalent-side citation-equivalent-side-usc">
+              <button class="citation-equivalent-label" id="citationEquivalentUsc" type="button"></button>
+              <button class="citation-equivalent-copy" id="citationEquivalentUscCopy" type="button" aria-label="Copy U.S.C. citation" title="Copy U.S.C. citation"><span aria-hidden="true">⧉</span></button>
+            </span>
+          </div>
           <button class="search-suggestion-inline" id="searchSuggestionButton" type="button">Try H-1B</button>
           <kbd class="kbd" aria-hidden="true">/</kbd>
+          <div class="implied-usc-title-notice" id="impliedUscTitleNotice" role="status" hidden>No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup.</div>
           <div class="citation-ambiguity" id="citationAmbiguity" role="region" aria-label="Valid interpretations of ambiguous citation" hidden>
             <span>Lowercase Roman numerals match more than one valid citation. The longest clause is selected unless you choose another interpretation.</span>
             <div class="citation-ambiguity-options" id="citationAmbiguityOptions"></div>
@@ -1097,7 +1203,7 @@
   </div>
 
   <main class="app-shell">
-    <section class="view" id="view-search" hidden aria-label="Search results">
+    <section class="view" id="view-search" aria-label="Search results">
       <div class="sr-only" id="citationFeedback" role="status" aria-live="polite">Type a citation or search phrase.</div>
       <div class="workspace" id="searchWorkspace">
         <section class="panel results-panel" id="resultsPanel" aria-labelledby="resultsHeading">
@@ -1203,7 +1309,7 @@
       </div>
     </section>
 
-    <section class="view" id="view-definitions" aria-labelledby="definitionsHeading">
+    <section class="view" id="view-definitions" hidden aria-labelledby="definitionsHeading">
       <div class="page-heading">
         <div><h1 id="definitionsHeading">Definitions</h1><p>USCIS Glossary explanations and exact statutory and regulatory definitions, kept separate by source and applicability.</p></div>
       </div>
@@ -1265,7 +1371,7 @@
       </details>
       <div class="section-card" style="margin-top:14px">
         <h2 style="margin-top:0;color:var(--navy)">Important boundaries</h2>
-        <p>The Definitions catalog preserves USCIS Glossary explanations and explicit definitions from INA 101 and 8 CFR 1.2 as separate source records. Glossary entries are categorized as USCIS Policy; statutory and regulatory entries are categorized as Law. Applicability labels retain the governing source scope, and INASearch does not merge competing definitions or infer a universal meaning.</p>
+        <p>The Definitions catalog preserves USCIS Glossary explanations and explicit “the term” definitions throughout the included INA, along with 8 CFR 1.2, as separate source records. Glossary entries are categorized as USCIS Policy; statutory and regulatory entries are categorized as Law. Applicability labels retain the governing source scope, and INASearch does not merge competing definitions or infer a universal meaning.</p>
         <p>In the standard build, official House cross-references whose targets are included in Title 8 are rendered as local links. References outside the included Title 8 material remain plain text rather than being assigned an unverified local target.</p>
         <p>INASearch is an open-book study aid, not legal advice and not a substitute for checking the current official source. <span id="uscCoverageBoundary">This build includes dated offline U.S. Code and CFR snapshots; current-source actions remain available.</span></p>
         <p>INA citations and U.S.C. citations are preserved as distinct citation systems. A crosswalk is shown only when the USCIS INA table directly supplies it. Named-Act results are references found in approved sources—not complete reproductions of those Acts.</p>
@@ -1317,18 +1423,18 @@
   <div class="toast" id="toast" role="status" hidden></div>
 
   <div class="legal-unit-menu" id="legalUnitMenu" role="menu" aria-label="Citation actions" hidden>
-    <strong class="legal-unit-menu-citation" id="legalUnitMenuCitation"></strong>
-    <button type="button" role="menuitem" id="copyLegalUnitCitationButton" data-legal-unit-action="copy-usc-citation">Copy USC Citation</button>
-    <button type="button" role="menuitem" id="copyLegalUnitInaCitationButton" data-legal-unit-action="copy-ina-citation" hidden>Copy INA Citation</button>
+    <div class="legal-unit-menu-citations" aria-label="Citation formats">
+      <div class="legal-unit-menu-citation-row"><strong class="legal-unit-menu-citation" id="legalUnitMenuCitation"></strong><button class="legal-unit-citation-copy" type="button" role="menuitem" id="copyLegalUnitCitationButton" data-legal-unit-action="copy-usc-citation" aria-label="Copy citation" title="Copy citation"><span aria-hidden="true">⧉</span></button></div>
+      <div class="legal-unit-menu-citation-row" id="legalUnitMenuCrosswalkRow" hidden><strong class="legal-unit-menu-citation" id="legalUnitMenuCrosswalkCitation"></strong><button class="legal-unit-citation-copy" type="button" role="menuitem" id="copyLegalUnitCrosswalkButton" data-legal-unit-action="copy-ina-citation" aria-label="Copy crosswalk citation" title="Copy crosswalk citation"><span aria-hidden="true">⧉</span></button></div>
+    </div>
     <button type="button" role="menuitem" id="copyLegalUnitTextButton" data-legal-unit-action="copy-text">Copy Statute</button>
     <button type="button" role="menuitem" id="printLegalUnitButton" data-legal-unit-action="print">Print Statute</button>
     <button type="button" role="menuitem" id="openLegalUnitButton" data-legal-unit-action="open">Open in House.gov</button>
   </div>
 
   <section class="legal-reference-popover" id="legalReferencePopover" role="dialog" aria-label="Legal reference preview" hidden>
-    <div class="legal-reference-popover-head"><div><strong id="legalReferencePopoverCitation"></strong><small id="legalReferencePopoverStatus"></small></div><button class="legal-reference-popover-close" id="legalReferencePopoverClose" type="button" aria-label="Close reference preview">×</button></div>
+    <div class="legal-reference-popover-head"><div><a class="legal-reference-popover-citation" id="legalReferencePopoverCitation" target="_blank" rel="noopener noreferrer"></a><small id="legalReferencePopoverStatus"></small></div><button class="legal-reference-popover-close" id="legalReferencePopoverClose" type="button" aria-label="Close reference preview">×</button></div>
     <div class="legal-reference-popover-body" id="legalReferencePopoverBody"></div>
-    <div class="legal-reference-popover-actions" id="legalReferencePopoverActions"></div>
   </section>
 
   <div class="modal-backdrop" id="savingMenuModal" hidden>
@@ -1375,6 +1481,16 @@
     const loadErrors = window.INA_SEARCH_LOAD_ERRORS || {};
     const loadedCorpus = await window.INA_SEARCH_CORPUS_READY;
     const corpus = isValidCorpus(loadedCorpus) ? loadedCorpus : null;
+
+    function expandPackedHouseHref(value) {
+      const input = String(value || "");
+      if (input.startsWith("u")) return `/us/usc/t${input.slice(1)}`;
+      if (input.startsWith("p")) return `/us/pl/${input.slice(1)}`;
+      if (input.startsWith("s")) return `/us/stat/${input.slice(1)}`;
+      if (input.startsWith("a")) return `/us/act/${input.slice(1)}`;
+      return input;
+    }
+
     function hydrateLegalReferences(value) {
       const houseHrefs = value?.legalReferencePacking?.houseHrefs || [];
       const legalTargets = value?.legalReferencePacking?.legalTargets || [];
@@ -1382,7 +1498,7 @@
       const fields = { t: "text", h: "heading", p: "preamble", s: "sourceCredit", x: "x", a: "authority", o: "source" };
       const keys = { i: "id", s: "start", e: "end", x: "text", f: "family", r: "resolution", k: "targetKind", t: "targetTitle", n: "targetSection", a: "targetPath", c: "targetCongress", l: "targetLaw", v: "targetVolume", g: "targetPage", h: "houseHref", u: "officialUrl", p: "provenance", q: "ruleId", z: "sourceKind", d: "inaSection" };
       const families = { u: "usc", i: "ina", c: "cfr", p: "public-law", s: "statutes-at-large", f: "federal-register", "?": "unknown" };
-      const rules = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-this-unit", "context-title8-cfr-the-act", "ambiguous-antecedent"];
+      const rules = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent"];
       const visit = item => {
         if (!item || typeof item !== "object") return;
         if (Array.isArray(item)) { item.forEach(visit); return; }
@@ -1396,7 +1512,7 @@
               const expanded = {};
               const start = previousEnd + Number(reference?.[1] || 0);
               const end = start + Number(reference?.[2] || 0);
-              if (Array.isArray(reference) && reference[0] === 0) Object.assign(expanded, { start, end, houseHref: houseHrefs[reference[3]] || "", resolution: reference[4] });
+              if (Array.isArray(reference) && reference[0] === 0) Object.assign(expanded, { start, end, houseHref: expandPackedHouseHref(houseHrefs[reference[3]] || ""), resolution: reference[4] });
               else if (Array.isArray(reference)) {
                 const packedTarget = legalTargets[reference[3]] || [];
                 const target = typeof packedTarget === "string" ? packedTarget.split("|") : packedTarget;
@@ -1408,7 +1524,6 @@
               expanded.resolution = expanded.resolution === 1 ? "local" : expanded.resolution === 2 ? "unresolved" : "official-source-only";
               if (!expanded.targetPath) expanded.targetPath = [];
               expanded.text = String(item[fields[code]] || "").slice(expanded.start, expanded.end);
-              if (expanded.ruleId === "context-this-unit" && !expanded.targetPath.length) expanded.targetPath = item.path || componentTokens(item.a || item.u?.at?.(-1)?.a || "") || [];
               if (expanded.ruleId === "context-path-this-section" && !expanded.targetPath.length) expanded.targetPath = componentTokens(expanded.text) || [];
               if (expanded.houseHref) {
                 expanded.provenance = "house-uslm-ref";
@@ -1495,7 +1610,7 @@
       ]
     });
     const state = {
-      view: "definitions",
+      view: "search",
       contentViewBeforeSearch: "definitions",
       filter: "all",
       query: "",
@@ -1652,6 +1767,9 @@
 
     const els = {
       search: $("#searchInput"), searchInputMirror: $("#searchInputMirror"), citationEquivalent: $("#citationEquivalent"),
+      citationEquivalentIna: $("#citationEquivalentIna"), citationEquivalentInaCopy: $("#citationEquivalentInaCopy"),
+      citationEquivalentUsc: $("#citationEquivalentUsc"), citationEquivalentUscCopy: $("#citationEquivalentUscCopy"),
+      impliedUscTitle: $("#impliedUscTitle"), impliedUscTitleNotice: $("#impliedUscTitleNotice"),
       citationAmbiguity: $("#citationAmbiguity"), citationAmbiguityOptions: $("#citationAmbiguityOptions"), feedback: $("#citationFeedback"), resultList: $("#resultList"),
       searchSuggestion: $("#searchSuggestionButton"), searchFilterBar: $("#searchFilterBar"), searchWorkspace: $("#searchWorkspace"), resultsPanel: $("#resultsPanel"),
       citationResultsNotification: $("#citationResultsNotification"), citationResultsNotificationCount: $("#citationResultsNotificationCount"),
@@ -1675,11 +1793,12 @@
       scheduledLockNotice: $("#scheduledLockNotice"),
       statuteNavigator: $("#statuteNavigator"), statuteNavigatorInner: $("#statuteNavigatorInner"),
       legalUnitMenu: $("#legalUnitMenu"), legalUnitMenuCitation: $("#legalUnitMenuCitation"),
-      copyLegalUnitCitationButton: $("#copyLegalUnitCitationButton"), copyLegalUnitInaCitationButton: $("#copyLegalUnitInaCitationButton"),
+      legalUnitMenuCrosswalkRow: $("#legalUnitMenuCrosswalkRow"), legalUnitMenuCrosswalkCitation: $("#legalUnitMenuCrosswalkCitation"),
+      copyLegalUnitCitationButton: $("#copyLegalUnitCitationButton"), copyLegalUnitCrosswalkButton: $("#copyLegalUnitCrosswalkButton"),
       copyLegalUnitTextButton: $("#copyLegalUnitTextButton"), printLegalUnitButton: $("#printLegalUnitButton"), openLegalUnitButton: $("#openLegalUnitButton"),
       legalReferencePopover: $("#legalReferencePopover"), legalReferencePopoverCitation: $("#legalReferencePopoverCitation"),
       legalReferencePopoverStatus: $("#legalReferencePopoverStatus"), legalReferencePopoverBody: $("#legalReferencePopoverBody"),
-      legalReferencePopoverActions: $("#legalReferencePopoverActions"), legalReferencePopoverClose: $("#legalReferencePopoverClose"),
+      legalReferencePopoverClose: $("#legalReferencePopoverClose"),
       openClassicQuizButton: $("#openClassicQuizButton"),
       quizStage: $("#quizStage"), quizClassificationSelect: $("#quizClassificationSelect"), quizPracticeAnswered: $("#quizPracticeAnswered"),
       visaQuizModal: $("#visaQuizModal"), visaQuizCode: $("#visaQuizCode"), visaQuizPrompt: $("#visaQuizPrompt"),
@@ -1856,6 +1975,18 @@
       return rightLength - leftLength || left.length - right.length || canonicalPath(left).localeCompare(canonicalPath(right));
     }
 
+    function citationWithRomanCase(value, casePattern) {
+      const characters = [...String(value || "")];
+      const expected = String(casePattern || "");
+      let patternIndex = expected.length - 1;
+      for (let index = characters.length - 1; index >= 0 && patternIndex >= 0; index--) {
+        if (!/[A-Za-z0-9]/.test(characters[index])) continue;
+        const expectedCharacter = expected[patternIndex--];
+        if (characters[index] === "i" && expectedCharacter.toLowerCase() === "i") characters[index] = expectedCharacter === "I" ? "I" : "i";
+      }
+      return patternIndex < 0 ? characters.join("") : String(value || "");
+    }
+
     function resolveIndexedCompactStatutePath(kind, authoritySection, localSection, raw) {
       if (componentTokens(raw) !== null) return null;
       const rawCompact = String(raw || "").replace(/[^A-Za-z0-9]/g, "");
@@ -1870,7 +2001,7 @@
       const authority = kind === "ina" ? `INA ${authoritySection}` : `8 U.S.C. ${authoritySection}`;
       const ambiguity = !hasUppercaseI && candidates.length > 1 ? {
         selectedPath: selected,
-        options: candidates.map(path => ({ path, label: `${authority}${canonicalPath(path)}`, query: `${authority}${canonicalPath(path)}` }))
+        options: candidates.map(path => ({ path, label: `${authority}${canonicalPath(path)}`, casePattern: path.map(String).join("") }))
       } : null;
       return {
         valid: true,
@@ -2242,26 +2373,62 @@
       return parts.join("");
     }
 
+    function definitionReferenceSlice(references, start, end) {
+      return (references || []).filter(reference => reference.start >= start && reference.end <= end).map(reference => ({
+        ...reference,
+        start: reference.start - start,
+        end: reference.end - start
+      }));
+    }
+
+    function renderDefinitionLegalBody(entry) {
+      const text = String(entry.text || "");
+      const lastPathPart = entry.path?.[entry.path.length - 1] || "";
+      const insertion = Number.isInteger(entry.childInsertionOffset) ? entry.childInsertionOffset : null;
+      const section = insertion === null ? null : (corpus?.title8?.sections || []).find(item => item.id === entry.sectionId);
+      const sourceNode = section ? statuteNodeAtPath(section, entry.path || []) : null;
+      const children = insertion === null ? [] : (sourceNode?.children || []);
+      const renderRange = (start, end) => formatStatutoryRunInText(text.slice(start, end), lastPathPart, definitionReferenceSlice(entry.references, start, end));
+      if (!children.length || insertion < 0 || insertion > text.length) return `<p class="definition-text">${renderRange(0, text.length)}</p>`;
+      const citationBase = String(entry.citation || "").match(/^INA\s+[^()]+/i)?.[0]?.trim() || String(entry.citation || "");
+      const childHtml = children.map(child => renderStatutoryNode(child, [], entry.path || [], 1, null, citationBase, entry.sectionId || "")).join("");
+      const postamble = insertion < text.length ? `<p class="definition-text">${renderRange(insertion, text.length)}</p>` : "";
+      return `<p class="definition-text">${renderRange(0, insertion)}</p><div class="definition-children">${childHtml}</div>${postamble}`;
+    }
+
     function renderDefinitionEntry(entry) {
       const scope = definitionScope(entry);
       const outsideApplicability = !definitionApplicabilityMatches(entry);
-      const lastPathPart = entry.path?.[entry.path.length - 1] || "";
+      const sourceUrl = safeUrl(entry.url);
+      const legalSource = ["ina", "cfr"].includes(entry.sourceFamily);
+      const officialUrl = entry.sourceFamily === "ina" ? safeUrl(officialTextFragment(sourceUrl, entry.path || [])) : sourceUrl;
+      const localCitationAttribute = entry.sourceFamily === "cfr" ? "data-show-cfr-citation" : "data-show-citation";
+      const officialSourceName = entry.sourceFamily === "ina" ? "House.gov" : entry.sourceFamily === "cfr" ? "eCFR.gov" : "official source";
+      const sourceLabel = legalSource
+        ? `<button class="definition-citation" type="button" ${localCitationAttribute}="${escapeHtml(entry.citation)}" title="View ${escapeHtml(entry.citation)} in INASearch">${escapeHtml(entry.citation)}</button>${officialUrl ? `<a class="definition-official-link" href="${escapeHtml(officialUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(entry.citation)} on ${officialSourceName}" title="Open on ${officialSourceName}"><span aria-hidden="true">↗</span></a>` : ""}`
+        : sourceUrl
+          ? `<a class="definition-citation" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(entry.citation)}</a>`
+          : `<span class="definition-citation">${escapeHtml(entry.citation)}</span>`;
       const definitionBody = entry.sourceFamily === "ina"
-        ? formatStatutoryRunInText(entry.text || "", lastPathPart, entry.references || [])
-        : renderDefinitionInlineText(entry);
-      const children = (entry.children || []).map(child => renderStatutoryNode(child, [], entry.path || [], 1)).join("");
-      return `<section class="definition-entry${outsideApplicability ? " outside-applicability" : ""}">
-        ${outsideApplicability ? `<div class="definition-applicability-warning" role="note"><strong>Outside the selected applicability.</strong> This definition is not categorized under any checked applicability; it remains visible because another definition for this term is.</div>` : ""}
-        <div class="definition-entry-meta"><span class="definition-citation">${escapeHtml(entry.citation)}</span>${entry.uscCitation ? `<span class="badge">${escapeHtml(entry.uscCitation)}</span>` : ""}<span class="badge">Captured ${escapeHtml(entry.captureDate)}</span></div>
-        <p class="definition-text">${definitionBody}</p>${children ? `<div class="definition-children">${children}</div>` : ""}
-        <dl class="definition-scope">
+        ? renderDefinitionLegalBody(entry)
+        : `<p class="definition-text">${renderDefinitionInlineText(entry)}</p>`;
+      const scopeDetails = entry.sourceFamily === "uscis-glossary"
+        ? `<details class="definition-scope-details"><summary>Definition details</summary><dl class="definition-scope">
+          <dt>Applies in</dt><dd>${escapeHtml(scope?.label || "Scope unavailable")}</dd>
+          ${scope?.context ? `<dt>Source context</dt><dd>${escapeHtml(scope.context)}</dd>` : ""}
+        </dl></details>`
+        : `<details class="definition-scope-details"><summary>Definition details</summary><dl class="definition-scope">
           <dt>Defined at</dt><dd>${escapeHtml(entry.locator)}</dd>
           <dt>Applies in</dt><dd>${escapeHtml(scope?.label || "Scope unavailable")}</dd>
-          <dt>Source scope</dt><dd>“${escapeHtml(scope?.text || "Not stated") }”</dd>
+          <dt>Source scope</dt><dd>“${escapeHtml(entry.sourceScope || scope?.text || "Not stated") }”</dd>
           ${scope?.context ? `<dt>Source context</dt><dd>${escapeHtml(scope.context)}</dd>` : ""}
           ${entry.specificScope ? `<dt>Specific scope</dt><dd>${escapeHtml(entry.specificScope)}</dd>` : ""}
-        </dl>
-        <div class="definition-actions">${["ina", "cfr"].includes(entry.sourceFamily) ? `<button class="button small" type="button" data-definition-lookup="${escapeHtml(entry.citation)}">View citation in INASearch</button>` : ""}${openButton(entry.url, "Open official source")}</div>
+        </dl></details>`;
+      return `<section class="definition-entry${outsideApplicability ? " outside-applicability" : ""}">
+        ${outsideApplicability ? `<div class="definition-applicability-warning" role="note"><strong>Outside the selected applicability.</strong> This definition is not categorized under any checked applicability; it remains visible because another definition for this term is.</div>` : ""}
+        <div class="definition-entry-meta">${sourceLabel}${entry.uscCitation ? `<span class="badge">${escapeHtml(entry.uscCitation)}</span>` : ""}<span class="badge">Captured ${escapeHtml(entry.captureDate)}</span></div>
+        ${definitionBody}
+        ${scopeDetails}
       </section>`;
     }
 
@@ -2331,7 +2498,7 @@
         records.push({
           key: "definitions:catalog", kind: "definition-index", group: "definitions", cite: `${corpus.definitions?.entries?.length || 0} source records`,
           title: "Definitions", item: corpus.definitions,
-          text: normalize("definitions defined terms statutory regulatory glossary INA 101 8 CFR 1.2")
+          text: normalize("definitions defined terms statutory regulatory glossary INA 8 CFR 1.2")
         });
         for (const entry of corpus.definitions?.entries || []) {
           records.push({
@@ -2933,6 +3100,8 @@
       if (cfr) return parseCfr(cfr[1], cfr[2]);
       const usc = input.match(/^\s*8\s*u\.?\s*s\.?\s*c\.?\s*(.*)$/i);
       if (usc) return parseLocalStatute("usc", usc[1]);
+      const impliedUsc = input.match(/^\s*u\.?\s*s\.?\s*c\.?(?=\s|§|\d|$)\s*(?:§+\s*)?(.*)$/i);
+      if (impliedUsc) return { ...parseLocalStatute("usc", impliedUsc[1]), impliedUscTitle: 8 };
       const ina = input.match(/^\s*ina\s*(.*)$/i);
       if (ina) return parseLocalStatute("ina", ina[1]);
       return parseAct(input);
@@ -2971,6 +3140,14 @@
         sourceLabel: result.label,
         mapping
       };
+    }
+
+    function citationCrosswalk(result) {
+      const equivalent = equivalentCitation(result);
+      if (!equivalent) return null;
+      const source = { system: result.type, label: result.label, query: result.label };
+      const other = { system: equivalent.system, label: equivalent.label, query: equivalent.query };
+      return result.type === "ina" ? { ina: source, usc: other } : { ina: other, usc: source };
     }
 
     function inaCitationsFromText(text) {
@@ -3205,16 +3382,59 @@
       return { trigger, family, resolution, title, sectionNumber, path, citation, text, url: trigger.dataset.referenceUrl || "" };
     }
 
+    function legalReferencePopoverPlacement(triggerRect, popoverRect, viewportWidth, viewportHeight) {
+      const margin = 10;
+      const gap = 10;
+      const width = Math.min(Number(popoverRect?.width) || 0, Math.max(0, viewportWidth - margin * 2));
+      const height = Math.min(Number(popoverRect?.height) || 0, Math.max(0, viewportHeight - margin * 2));
+      const clamp = (value, minimum, maximum) => Math.max(minimum, Math.min(value, maximum));
+      const maxLeft = Math.max(margin, viewportWidth - margin - width);
+      const maxTop = Math.max(margin, viewportHeight - margin - height);
+      const verticalLeft = clamp(triggerRect.left, margin, maxLeft);
+      const horizontalTop = clamp(triggerRect.top, margin, maxTop);
+      const horizontalCandidates = triggerRect.left + triggerRect.right <= viewportWidth
+        ? [
+            { side: "right", left: triggerRect.right + gap, top: horizontalTop },
+            { side: "left", left: triggerRect.left - width - gap, top: horizontalTop }
+          ]
+        : [
+            { side: "left", left: triggerRect.left - width - gap, top: horizontalTop },
+            { side: "right", left: triggerRect.right + gap, top: horizontalTop }
+          ];
+      const candidates = [
+        { side: "below", left: verticalLeft, top: triggerRect.bottom + gap },
+        { side: "above", left: verticalLeft, top: triggerRect.top - height - gap },
+        ...horizontalCandidates
+      ];
+      const intersectsTrigger = candidate => candidate.left < triggerRect.right + gap && candidate.left + width > triggerRect.left - gap && candidate.top < triggerRect.bottom + gap && candidate.top + height > triggerRect.top - gap;
+      const fitsViewport = candidate => candidate.left >= margin && candidate.top >= margin && candidate.left + width <= viewportWidth - margin && candidate.top + height <= viewportHeight - margin;
+      const placement = candidates.find(candidate => fitsViewport(candidate) && !intersectsTrigger(candidate));
+      if (placement) return { ...placement, maxHeight: 0 };
+      const availableAbove = Math.max(0, triggerRect.top - gap - margin);
+      const availableBelow = Math.max(0, viewportHeight - margin - triggerRect.bottom - gap);
+      const useBelow = availableBelow >= availableAbove;
+      return {
+        side: useBelow ? "below" : "above",
+        left: verticalLeft,
+        top: useBelow ? triggerRect.bottom + gap : margin,
+        maxHeight: Math.max(1, Math.floor(useBelow ? availableBelow : availableAbove))
+      };
+    }
+
     function positionLegalReferencePopover(trigger) {
       if (!trigger || els.legalReferencePopover.hidden) return;
+      els.legalReferencePopover.style.maxHeight = "";
+      els.legalReferencePopoverBody.style.maxHeight = "";
       const triggerRect = trigger.getBoundingClientRect();
       const popoverRect = els.legalReferencePopover.getBoundingClientRect();
-      const margin = 10;
-      const left = Math.max(margin, Math.min(triggerRect.left, window.innerWidth - popoverRect.width - margin));
-      const below = triggerRect.bottom + 7;
-      const top = below + popoverRect.height <= window.innerHeight - margin ? below : Math.max(margin, triggerRect.top - popoverRect.height - 7);
-      els.legalReferencePopover.style.left = `${Math.round(left)}px`;
-      els.legalReferencePopover.style.top = `${Math.round(top)}px`;
+      const placement = legalReferencePopoverPlacement(triggerRect, popoverRect, window.innerWidth, window.innerHeight);
+      if (placement.maxHeight) {
+        els.legalReferencePopover.style.maxHeight = `${placement.maxHeight}px`;
+        els.legalReferencePopoverBody.style.maxHeight = `${Math.max(0, placement.maxHeight - 55)}px`;
+      }
+      els.legalReferencePopover.dataset.placement = placement.side;
+      els.legalReferencePopover.style.left = `${Math.round(placement.left)}px`;
+      els.legalReferencePopover.style.top = `${Math.round(placement.top)}px`;
     }
 
     function closeLegalReferencePopover(force = false) {
@@ -3232,10 +3452,17 @@
       clearTimeout(state.legalReferenceCloseTimer);
       state.legalReferenceContext = { ...context, pinned };
       els.legalReferencePopoverCitation.textContent = context.citation;
+      const citationUrl = safeUrl(context.url);
+      if (citationUrl) {
+        els.legalReferencePopoverCitation.href = citationUrl;
+        els.legalReferencePopoverCitation.setAttribute("aria-label", `Open ${context.citation} in the verified official source`);
+      } else {
+        els.legalReferencePopoverCitation.removeAttribute("href");
+        els.legalReferencePopoverCitation.removeAttribute("aria-label");
+      }
       els.legalReferencePopoverStatus.textContent = context.resolution === "local" ? "Included source text · offline preview" : context.resolution === "official-source-only" ? "Recognized authority · text not included locally" : "Recognized reference · target could not be resolved without guessing";
       if (context.text) els.legalReferencePopoverBody.innerHTML = `<pre>${escapeHtml(context.text)}</pre>`;
       else els.legalReferencePopoverBody.innerHTML = `<p class="legal-reference-popover-message">${escapeHtml(context.resolution === "unresolved" ? "INASearch recognized this reference but could not determine one exact target from the source wording. No target was inferred." : "This authority is not included in the offline corpus. INASearch has not generated or substituted any legal text for it.")}</p>`;
-      els.legalReferencePopoverActions.innerHTML = context.url ? `<button class="button small" type="button" data-open-legal-reference="${escapeHtml(context.url)}">Open verified official source</button>` : "";
       els.legalReferencePopover.hidden = false;
       positionLegalReferencePopover(trigger);
       return true;
@@ -3273,16 +3500,30 @@
       els.legalUnitMenu.style.top = `${Math.round(top)}px`;
     }
 
+    function legalUnitCitationRows(context) {
+      if (!context) return [];
+      if (context.kind === "cfr") return [{ system: "CFR", citation: context.cfrCitation || context.citation, action: "copy-cfr-citation" }];
+      const usc = context.uscCitation ? { system: "USC", citation: context.uscCitation, action: "copy-usc-citation" } : null;
+      const ina = context.inaCitation ? { system: "INA", citation: context.inaCitation, action: "copy-ina-citation" } : null;
+      return /^INA\b/i.test(context.citation || "") ? [ina, usc].filter(Boolean) : [usc, ina].filter(Boolean);
+    }
+
     function openLegalUnitMenu(trigger) {
       const context = legalUnitContextForTrigger(trigger);
       if (!context) return false;
       closeLegalUnitMenu(false);
       state.legalUnitContext = context;
       trigger.setAttribute("aria-expanded", "true");
-      els.legalUnitMenuCitation.textContent = context.citation;
-      els.copyLegalUnitCitationButton.textContent = context.kind === "cfr" ? "Copy CFR Citation" : "Copy USC Citation";
-      els.copyLegalUnitCitationButton.dataset.legalUnitAction = context.kind === "cfr" ? "copy-cfr-citation" : "copy-usc-citation";
-      els.copyLegalUnitInaCitationButton.hidden = !(context.kind === "usc" && context.inaCitation);
+      const [primaryCitation, crosswalkCitation] = legalUnitCitationRows(context);
+      els.legalUnitMenuCitation.textContent = primaryCitation?.citation || context.citation;
+      els.copyLegalUnitCitationButton.dataset.legalUnitAction = primaryCitation?.action || "copy-cfr-citation";
+      els.copyLegalUnitCitationButton.setAttribute("aria-label", `Copy ${primaryCitation?.system || "legal"} citation`);
+      els.copyLegalUnitCitationButton.title = `Copy ${primaryCitation?.system || "legal"} citation`;
+      els.legalUnitMenuCrosswalkRow.hidden = !crosswalkCitation;
+      els.legalUnitMenuCrosswalkCitation.textContent = crosswalkCitation?.citation || "";
+      els.copyLegalUnitCrosswalkButton.dataset.legalUnitAction = crosswalkCitation?.action || "";
+      els.copyLegalUnitCrosswalkButton.setAttribute("aria-label", crosswalkCitation ? `Copy ${crosswalkCitation.system} citation` : "Copy crosswalk citation");
+      els.copyLegalUnitCrosswalkButton.title = crosswalkCitation ? `Copy ${crosswalkCitation.system} citation` : "Copy crosswalk citation";
       els.copyLegalUnitTextButton.textContent = `Copy ${context.noun}`;
       els.printLegalUnitButton.textContent = `Print ${context.noun}`;
       els.openLegalUnitButton.textContent = context.kind === "cfr" ? "Open in eCFR.gov" : "Open in House.gov";
@@ -3317,7 +3558,8 @@
     }
 
     function legalUnitPrintHtml(context) {
-      return `<!doctype html><html><head><meta charset="utf-8"><title>${escapeHtml(context.citation)}</title><style>html{color-scheme:light}body{margin:.65in;color:#111;background:#fff;font:12pt/1.5 Georgia,"Times New Roman",serif}h1{margin:0 0 4pt;font:700 17pt/1.2 Georgia,"Times New Roman",serif}h2{margin:0 0 18pt;color:#333;font:600 11pt/1.3 ui-monospace,Consolas,monospace}pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:12pt/1.55 Georgia,"Times New Roman",serif}@page{margin:.65in}</style></head><body><h1>${escapeHtml(context.heading)}</h1><h2>${escapeHtml(context.citation)}</h2><pre>${escapeHtml(context.text)}</pre></body></html>`;
+      const citations = legalUnitCitationRows(context).map(row => row.citation).filter(Boolean);
+      return `<!doctype html><html><head><meta charset="utf-8"><title>${escapeHtml(citations.join(" / ") || context.citation)}</title><style>html{color-scheme:light}body{margin:.65in;color:#111;background:#fff;font:12pt/1.5 Georgia,"Times New Roman",serif}h1{margin:0 0 4pt;font:700 17pt/1.2 Georgia,"Times New Roman",serif}h2{margin:0 0 18pt;color:#333;font:600 11pt/1.5 ui-monospace,Consolas,monospace}h2 span{display:block}pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:12pt/1.55 Georgia,"Times New Roman",serif}@page{margin:.65in}</style></head><body><h1>${escapeHtml(context.heading)}</h1><h2>${citations.map(citation => `<span>${escapeHtml(citation)}</span>`).join("")}</h2><pre>${escapeHtml(context.text)}</pre></body></html>`;
     }
 
     function printLegalUnit(context) {
@@ -3363,16 +3605,35 @@
 
     let searchTextMeasureContext = null;
     function positionCitationEquivalent() {
-      if (els.citationEquivalent.hidden) return;
       const shell = els.search.closest(".search-field-shell");
       if (!shell) return;
+      if (els.citationEquivalent.hidden) {
+        shell.classList.remove("citation-crosswalk-below");
+        return;
+      }
+      shell.classList.remove("citation-crosswalk-below");
+      els.citationEquivalent.style.left = "";
       if (!searchTextMeasureContext) searchTextMeasureContext = document.createElement("canvas").getContext("2d");
       const style = getComputedStyle(els.search);
       searchTextMeasureContext.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
       const textWidth = searchTextMeasureContext.measureText(els.search.value).width;
       const preferred = parseFloat(style.paddingLeft || "0") + textWidth + 10 - els.search.scrollLeft;
+      const availableInline = shell.clientWidth - preferred - 46;
+      if (els.citationEquivalent.offsetWidth > Math.max(180, availableInline)) {
+        shell.classList.add("citation-crosswalk-below");
+        return;
+      }
       const maximum = shell.clientWidth - els.citationEquivalent.offsetWidth - 46;
       els.citationEquivalent.style.left = `${Math.round(Math.max(45, Math.min(preferred, maximum)))}px`;
+    }
+
+    function renderImpliedUscTitle(result) {
+      const active = Boolean(result?.impliedUscTitle || /^\s*u\.?\s*s\.?\s*c\.?(?=\s|§|\d|$)/i.test(els.search.value));
+      const shell = els.search.closest(".search-field-shell");
+      shell?.classList.toggle("has-implied-usc-title", active);
+      els.impliedUscTitle.hidden = !active;
+      els.impliedUscTitleNotice.hidden = !active;
+      return active;
     }
 
     function renderCitationAmbiguity(result) {
@@ -3387,16 +3648,17 @@
         return null;
       }
       const value = els.search.value;
-      const authorityPrefix = result.type === "ina" ? value.match(/^\s*ina\s*/i) : value.match(/^\s*8\s*u\.?\s*s\.?\s*c\.?\s*/i);
+      const authorityPrefix = result.type === "ina" ? value.match(/^\s*ina\s*/i) : value.match(/^\s*(?:8\s*)?u\.?\s*s\.?\s*c\.?(?=\s|§|\d|$)\s*/i);
       const pathStart = authorityPrefix?.[0]?.length || 0;
       els.searchInputMirror.innerHTML = [...value].map((character, index) => index >= pathStart && character === "i" ? `<mark>${character}</mark>` : escapeHtml(character)).join("");
       els.searchInputMirror.scrollLeft = els.search.scrollLeft;
       const selectedKey = canonicalPath(ambiguity.selectedPath || []);
-      els.citationAmbiguityOptions.innerHTML = ambiguity.options.map(option => `<button class="citation-ambiguity-option" type="button" data-citation-interpretation="${escapeHtml(option.query)}" aria-current="${canonicalPath(option.path) === selectedKey ? "true" : "false"}">${escapeHtml(option.label)}</button>`).join("");
+      els.citationAmbiguityOptions.innerHTML = ambiguity.options.map(option => `<button class="citation-ambiguity-option" type="button" data-citation-interpretation="${escapeHtml(citationWithRomanCase(value, option.casePattern))}" aria-current="${canonicalPath(option.path) === selectedKey ? "true" : "false"}">${escapeHtml(option.label)}</button>`).join("");
       return ambiguity;
     }
 
     function renderCitationFeedback(result) {
+      renderImpliedUscTitle(result);
       renderCitationEquivalent(result);
       renderCitationAmbiguity(result);
       els.feedback.className = "sr-only";
@@ -3406,22 +3668,33 @@
     }
 
     function renderCitationEquivalent(result) {
-      const equivalent = equivalentCitation(result);
-      if (!equivalent) {
+      const crosswalk = citationCrosswalk(result);
+      const shell = els.search.closest(".search-field-shell");
+      if (!crosswalk) {
         els.citationEquivalent.hidden = true;
-        els.citationEquivalent.textContent = "";
-        delete els.citationEquivalent.dataset.query;
-        delete els.citationEquivalent.dataset.system;
+        shell?.classList.remove("citation-crosswalk-below");
+        for (const element of [els.citationEquivalentIna, els.citationEquivalentUsc]) {
+          element.textContent = "";
+          delete element.dataset.citationQuery;
+        }
+        for (const element of [els.citationEquivalentInaCopy, els.citationEquivalentUscCopy]) delete element.dataset.copyCitation;
         return null;
       }
       els.citationEquivalent.hidden = false;
-      els.citationEquivalent.dataset.query = equivalent.query;
-      els.citationEquivalent.dataset.system = equivalent.system;
-      els.citationEquivalent.textContent = equivalent.label;
-      els.citationEquivalent.setAttribute("aria-label", `Equivalent citation: ${equivalent.label}. Select to search using this format.`);
-      els.citationEquivalent.title = `Equivalent to ${equivalent.sourceLabel}; select to reverse the lookup format`;
+      for (const [system, labelElement, copyElement] of [
+        ["INA", els.citationEquivalentIna, els.citationEquivalentInaCopy],
+        ["U.S.C.", els.citationEquivalentUsc, els.citationEquivalentUscCopy]
+      ]) {
+        const citation = system === "INA" ? crosswalk.ina : crosswalk.usc;
+        labelElement.textContent = citation.label;
+        labelElement.dataset.citationQuery = citation.query;
+        labelElement.setAttribute("aria-label", `${citation.label}. Select to search using this format.`);
+        labelElement.title = `Search for ${citation.label}`;
+        copyElement.dataset.copyCitation = citation.label;
+        copyElement.dataset.copySystem = system;
+      }
       requestAnimationFrame(positionCitationEquivalent);
-      return equivalent;
+      return crosswalk;
     }
 
     function isSingleLegalResult(results = state.results) {
@@ -3507,7 +3780,7 @@
       }
       if (record.kind === "user-note") return truncate(record.item.body);
       if (record.kind === "act") return `${record.item.references?.length || 0} direct references in indexed Title 8 text and notes`;
-      if (record.kind === "definition-index") return "Browse exact definitions from INA 101 and 8 CFR 1.2, with source and applicability filters";
+      if (record.kind === "definition-index") return "Browse exact definitions throughout the INA and in 8 CFR 1.2, with source and applicability filters";
       if (record.kind === "definition") return truncate(`${record.item.locator} · ${definitionScope(record.item)?.label || "scope unavailable"}`);
       return "";
     }
@@ -3562,12 +3835,13 @@
 
     function renderDefinitionCatalogPreview() {
       const count = corpus?.definitions?.entries?.length || 0;
-      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Reference catalog</p><h2 class="detail-title">Definitions</h2><p class="detail-subtitle">${count} separately sourced USCIS Policy, statutory, and regulatory definition records.</p><div class="detail-actions"><button class="button primary" type="button" data-open-definitions>Open Definitions</button></div><div class="source-banner">Includes the USCIS Glossary and explicit definitions from INA 101 and 8 CFR 1.2. Duplicate terms remain separate when the sources define or explain them differently.</div></div>`;
+      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Reference catalog</p><h2 class="detail-title">Definitions</h2><p class="detail-subtitle">${count} separately sourced USCIS Policy, statutory, and regulatory definition records.</p><div class="detail-actions"><button class="button primary" type="button" data-open-definitions>Open Definitions</button></div><div class="source-banner">Includes the USCIS Glossary, explicit “the term” definitions throughout the included INA, and 8 CFR 1.2. Duplicate terms remain separate when the sources define or explain them differently.</div></div>`;
     }
 
     function renderDefinitionPreview(entry) {
       const scope = definitionScope(entry);
-      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Defined term</p><h2 class="detail-title">${escapeHtml(entry.term)}</h2><p class="detail-subtitle">${escapeHtml(entry.locator)}</p><div class="detail-actions"><button class="button primary" type="button" data-open-definitions="${escapeHtml(entry.aliases?.[0] || entry.term)}">Open in Definitions</button>${openButton(entry.url, "Open official source")}</div><div class="source-banner"><strong>Applies in:</strong> ${escapeHtml(scope?.label || "Scope unavailable")}<br><small>Source scope: “${escapeHtml(scope?.text || "Not stated")}”</small></div><p>${escapeHtml(truncate(entry.text, 700))}</p></div>`;
+      const definitionBody = entry.sourceFamily === "ina" ? renderDefinitionLegalBody(entry) : `<p>${escapeHtml(truncate(entry.text, 700))}</p>`;
+      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Defined term</p><h2 class="detail-title">${escapeHtml(entry.term)}</h2><p class="detail-subtitle">${escapeHtml(entry.locator)}</p><div class="detail-actions"><button class="button primary" type="button" data-open-definitions="${escapeHtml(entry.aliases?.[0] || entry.term)}">Open in Definitions</button>${openButton(entry.url, "Open official source")}</div><div class="source-banner"><strong>Applies in:</strong> ${escapeHtml(scope?.label || "Scope unavailable")}<br><small>Source scope: “${escapeHtml(scope?.text || "Not stated")}”</small></div>${definitionBody}</div>`;
     }
 
     function sameStatuteHierarchyItem(left, right) {
@@ -4273,15 +4547,19 @@
         const contentStart = marker.end + leading;
         const contentEnd = Math.max(contentStart, nextStart - trailing);
         const content = `${escapeHtml(marker.prefixText)}${linkifyStatutoryText(input, references, contentStart, contentEnd, searchMatch, footnoteReferences)}`;
-        const inlineTokens = legalUnit ? (componentTokens(marker.address) || [marker.token]) : [];
-        const inlinePath = legalUnit ? resolvedRunInStatutePath(legalUnit, inlineTokens, previousInlinePath) : [];
+        const addressTokens = componentTokens(marker.address);
+        if (!addressTokens.length) addressTokens.push(marker.token);
+        const inlinePath = legalUnit ? resolvedRunInStatutePath(legalUnit, addressTokens, previousInlinePath) : [];
         previousInlinePath = inlinePath;
+        const displayDepth = legalUnit && inlinePath.length
+          ? Math.max(0, inlinePath.length - (legalUnit.currentPath?.length || 0))
+          : Math.max(1, addressTokens.length);
         const inlineCitation = legalUnit ? `${legalUnit.citationBase || ""}${canonicalPath(inlinePath)}` : "";
         const isInlineTarget = legalUnit?.targetPath?.length === inlinePath.length && inlinePath.every((token, pathIndex) => normCitationPart(token) === normCitationPart(legalUnit.targetPath[pathIndex]));
         const address = legalUnit?.sectionId
           ? legalUnitTriggerHtml("usc", legalUnit.sectionId, inlinePath, inlineCitation, escapeHtml(marker.address), "inline-address")
           : `<strong class="inline-address">${escapeHtml(marker.address)}</strong>`;
-        parts.push(`<span class="statutory-runin-line${isInlineTarget ? " citation-target" : ""}" data-statute-inline-path="${escapeHtml(JSON.stringify(inlinePath))}"${isInlineTarget ? " data-statute-inline-target aria-label=\"Citation target\"" : ""}>${address}<span>${content}</span></span>`);
+        parts.push(`<span class="statutory-runin-line${isInlineTarget ? " citation-target" : ""}" style="--depth:${displayDepth}" data-statute-inline-path="${escapeHtml(JSON.stringify(inlinePath))}"${isInlineTarget ? " data-statute-inline-target aria-label=\"Citation target\"" : ""}>${address}<span>${content}</span></span>`);
       });
       return parts.join("");
     }
@@ -6025,12 +6303,12 @@
 
     function updateSaveStatus(text, kind = "warn") {
       const connected = state.fileConnected;
-      const displayText = connected ? text : "Autosaving off";
+      const displayText = connected ? "Saving On" : "Saving Off";
       els.saveStatus.innerHTML = `<span class="status-dot ${connected ? kind : "warn"}"></span>${escapeHtml(displayText)}`;
       els.saveStatus.classList.toggle("attention", !connected && state.profileChanged);
       els.saveStatus.classList.toggle("connected", connected);
       els.saveStatus.disabled = false;
-      els.saveStatus.setAttribute("aria-label", connected ? `Autosaving status: ${text}. Open saving and progress options.` : "Autosaving is off. Open saving and progress options.");
+      els.saveStatus.setAttribute("aria-label", connected ? `Saving is on. ${text}. Open saving and progress options.` : "Saving is off. Open saving and progress options.");
       renderProfileSetupNotice();
       if (!els.savingMenuModal.hidden) renderSavingMenu();
     }
@@ -6414,12 +6692,14 @@ Get-FileHash $outJson -Algorithm SHA256`;
       els.searchSuggestion.hidden = Boolean(els.search.value.trim());
     }
 
+    const DEFAULT_STARTUP_QUERY = "INA 215a";
+
     function startupSearchQuery(locationLike = window.location) {
       try {
         const parameters = new URLSearchParams(String(locationLike?.search || ""));
-        return String(parameters.get("q") || "").trim().slice(0, 500);
+        return parameters.has("q") ? String(parameters.get("q") || "").slice(0, 500) : DEFAULT_STARTUP_QUERY;
       } catch {
-        return "";
+        return DEFAULT_STARTUP_QUERY;
       }
     }
 
@@ -6458,8 +6738,9 @@ Get-FileHash $outJson -Algorithm SHA256`;
       switchView(destination === "search" ? "definitions" : destination, false, !reuseRenderedView);
     }
 
-    function applySearchQuery(query, focusSearch = true) {
-      els.search.value = String(query || "").trim();
+    function applySearchQuery(query, focusSearch = true, preserveFormatting = false) {
+      const suppliedQuery = String(query || "");
+      els.search.value = preserveFormatting ? suppliedQuery.slice(0, 500) : suppliedQuery.trim();
       updateSearchSuggestionVisibility();
       state.query = els.search.value;
       if (!state.query) { closeSearchResults(); return; }
@@ -6631,8 +6912,15 @@ Get-FileHash $outJson -Algorithm SHA256`;
         $$(".filter-button").forEach(button => button.classList.toggle("active", button.dataset.filter === "all"));
         applySearchQuery(state.searchSuggestion);
       });
-      els.citationEquivalent.addEventListener("click", () => {
-        if (els.citationEquivalent.dataset.query) applySearchQuery(els.citationEquivalent.dataset.query, true);
+      els.citationEquivalent.addEventListener("click", async event => {
+        const copyButton = event.target.closest("[data-copy-citation]");
+        if (copyButton) {
+          const copied = await copyLegalText(copyButton.dataset.copyCitation);
+          toast(copied ? `${copyButton.dataset.copySystem} citation copied.` : "The citation could not be copied.");
+          return;
+        }
+        const citationButton = event.target.closest("[data-citation-query]");
+        if (citationButton?.dataset.citationQuery) applySearchQuery(citationButton.dataset.citationQuery, true);
       });
       els.citationAmbiguityOptions.addEventListener("click", event => {
         const option = event.target.closest("[data-citation-interpretation]");
@@ -6668,8 +6956,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
         const legalUnitTrigger = event.target.closest("[data-legal-unit-kind]");
         if (legalUnitTrigger) { event.preventDefault(); openLegalUnitMenu(legalUnitTrigger); return; }
         if (event.target.closest("#legalReferencePopoverClose")) { event.preventDefault(); closeLegalReferencePopover(true); return; }
-        const openLegalReference = event.target.closest("[data-open-legal-reference]");
-        if (openLegalReference) { event.preventDefault(); safeOpen(openLegalReference.dataset.openLegalReference); closeLegalReferencePopover(true); return; }
         const legalReference = event.target.closest("[data-legal-reference]");
         if (legalReference && legalReference.dataset.referenceResolution !== "local") { event.preventDefault(); openLegalReferencePopover(legalReference, true); return; }
         if (legalReference) closeLegalReferencePopover(true);
@@ -6713,8 +6999,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
         if (definitionReference) { event.preventDefault(); openDefinitionReference(definitionReference.dataset.definitionReference); }
         const openDefinitionCatalog = event.target.closest("[data-open-definitions]");
         if (openDefinitionCatalog) openDefinitions(openDefinitionCatalog.dataset.openDefinitions || "");
-        const definitionLookup = event.target.closest("[data-definition-lookup]");
-        if (definitionLookup) applySearchQuery(definitionLookup.dataset.definitionLookup, false);
         if (event.target.closest("[data-link-current]")) { switchView("notes"); if (!$("#noteId").value) resetNoteForm(); addCurrentLinkToDraft(); }
         const edit = event.target.closest("[data-edit-note]"); if (edit) editNote(edit.dataset.editNote);
       });
@@ -6872,7 +7156,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
       setTimeout(buildIndex, 0);
       restoreHandle();
       const startupQuery = startupSearchQuery();
-      if (startupQuery) setTimeout(() => applySearchQuery(startupQuery, false), 0);
+      if (startupQuery) setTimeout(() => applySearchQuery(startupQuery, false, true), 0);
       if (loadErrors.corpus || !corpus) toast(`Corpus unavailable: ${loadErrors.corpusMessage || "the embedded data could not be opened."} Official citation navigation remains available.`);
       else if (loadErrors.profile || !state.profileValid) toast("The embedded profile did not load. Changes remain in memory.");
     }
@@ -6885,6 +7169,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
       filteredDefinitions,
       renderDefinitions,
       equivalentCitation,
+      citationCrosswalk,
       renderCitationEquivalent,
       inaCitationsFromText,
       normalize,

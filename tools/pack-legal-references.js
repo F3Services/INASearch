@@ -20,7 +20,7 @@ const REFERENCE_KEYS = {
 const KEY_REFERENCES = Object.fromEntries(Object.entries(REFERENCE_KEYS).map(([property, key]) => [key, property]));
 const FAMILY_CODES = { usc: "u", ina: "i", cfr: "c", "public-law": "p", "statutes-at-large": "s", "federal-register": "f", unknown: "?" };
 const CODE_FAMILIES = Object.fromEntries(Object.entries(FAMILY_CODES).map(([family, code]) => [code, family]));
-const RULES = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-this-unit", "context-title8-cfr-the-act", "ambiguous-antecedent"];
+const RULES = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent"];
 
 function pathTokens(value) {
   return [...String(value || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]);
@@ -47,7 +47,7 @@ function compactReference(reference, houseHrefIndex = () => 0, legalTargetIndex 
   const houseReference = reference.provenance === "house-uslm-ref" && reference.houseHref;
   const resolution = reference.resolution === "local" ? 1 : reference.resolution === "unresolved" ? 2 : 0;
   if (houseReference) return [0, reference.start - previousEnd, reference.end - reference.start, houseHrefIndex(reference.houseHref), resolution];
-  const derivedPath = ["context-this-unit", "context-path-this-section"].includes(reference.ruleId);
+  const derivedPath = reference.ruleId === "context-path-this-section";
   const target = [FAMILY_CODES[reference.family] || "?", resolution,
     reference.targetTitle || 0, reference.targetSection || 0, !derivedPath && reference.targetPath?.length ? reference.targetPath : 0,
     reference.targetCongress || 0, reference.targetLaw || 0, reference.targetVolume || 0, reference.targetPage || 0,
@@ -65,13 +65,12 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     const packedTarget = legalTargets[reference[3]] || [];
     const target = typeof packedTarget === "string" ? packedTarget.split("|") : packedTarget;
     if (typeof target[4] === "string") target[4] = target[4] ? target[4].split("/") : [];
-    Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: target[1], targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "" });
+    Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "" });
   }
   else for (const [key, value] of Object.entries(reference || {})) output[KEY_REFERENCES[key] || key] = value;
   output.resolution = output.resolution === 1 ? "local" : output.resolution === 2 ? "unresolved" : "official-source-only";
   if (!output.targetPath) output.targetPath = [];
   output.text = String(sourceText || "").slice(output.start, output.end);
-  if (output.ruleId === "context-this-unit" && !output.targetPath.length) output.targetPath = source?.path || pathTokens(source?.a || source?.u?.at?.(-1)?.a || "");
   if (output.ruleId === "context-path-this-section" && !output.targetPath.length) output.targetPath = pathTokens(output.text);
   if (output.houseHref) {
     output.provenance = "house-uslm-ref";
@@ -134,7 +133,7 @@ function packLegalReferences(corpus) {
     }
     if (Object.keys(packed).length) { source._lr = packed; sources += 1; }
   });
-  corpus.legalReferencePacking = { schemaVersion: 1, sources, references, houseHrefs, legalTargets, hydratedAtRuntime: true };
+  corpus.legalReferencePacking = { schemaVersion: 2, sources, references, houseHrefs, legalTargets, hydratedAtRuntime: true };
   return corpus;
 }
 

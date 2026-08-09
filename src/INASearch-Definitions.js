@@ -1,20 +1,21 @@
 /*
  * INASearch definition catalog source.
  *
- * INA 101 entries are derived during the standalone build from the reviewed
- * 8 U.S.C. 1101 hierarchy in INASearch-Corpus.js. The regulation
+ * INA entries are derived during the standalone build from every reviewed
+ * INA-crosswalked hierarchy in INASearch-Corpus.js whose operative text uses
+ * an explicit “the term” or “the terms” definition statement. The regulation
  * entries below are a direct transcription of 8 CFR 1.2 as published by eCFR.
  * The separately generated USCIS glossary source is joined during the build.
  */
 window.INA_SEARCH_DEFINITIONS = {
-  "schemaVersion": 1,
-  "capturedAt": "2026-08-03",
+  "schemaVersion": 2,
+  "capturedAt": "2026-08-09",
   "sources": {
-    "ina101": {
-      "name": "INA section 101 — Definitions",
+    "inaStatute": {
+      "name": "Immigration and Nationality Act — explicit definitions",
       "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
-      "locator": "INA 101 / 8 U.S.C. 1101",
-      "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1101",
+      "locator": "INA-crosswalked provisions in Title 8, chapter 12",
+      "url": "https://uscode.house.gov/browse/prelim@title8/chapter12&edition=prelim",
       "capturedAt": "2026-07-30"
     },
     "cfr1_2": {
