@@ -10,7 +10,7 @@ const vm = require("vm");
 const zlib = require("zlib");
 const { spawnSync } = require("child_process");
 const { performance } = require("perf_hooks");
-const { buildDefinitionCatalog } = require("./definition-catalog");
+const { buildDefinitionCatalog, definitionStatementGroups, deriveInaCatalog } = require("./definition-catalog");
 const { applyStatuteReferences, statuteSourceMap } = require("./statute-references");
 const { applyStatuteFootnotes, reconstructFlattenedField } = require("./statute-footnotes");
 const { applyGeneratedLegalReferences, generatedReferences, legalReferenceContext } = require("./legal-references");
@@ -54,6 +54,13 @@ function sourceProfile() {
   vm.createContext(sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-Profile.js"), "utf8"), sandbox);
   return JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_PROFILE));
+}
+
+function sourceDefinitions() {
+  const sandbox = { window: {} };
+  vm.createContext(sandbox);
+  vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-Definitions.js"), "utf8"), sandbox);
+  return JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_DEFINITIONS));
 }
 
 function scriptBody(html, id) {
@@ -255,7 +262,7 @@ function compactCitationPathFunctions(source, context = {}) {
   const end = source.indexOf("\n\n    function structuredCloneSafe(", start);
   assert(start >= 0 && end > start, "Could not extract the compact citation-path resolver.");
   const declarations = source.slice(start, end);
-  return vm.runInNewContext(`${declarations}\n({ compactStatutePathIndex, romanICaseMatches, compareCompactCitationPaths, resolveIndexedCompactStatutePath })`, {
+  return vm.runInNewContext(`${declarations}\n({ compactStatutePathIndex, romanICaseMatches, compareCompactCitationPaths, citationWithRomanCase, resolveIndexedCompactStatutePath })`, {
     Array,
     Map,
     String,
@@ -265,6 +272,7 @@ function compactCitationPathFunctions(source, context = {}) {
 
 async function main() {
   const fullSource = sourceCorpus();
+  const rawDefinitionSource = sourceDefinitions();
   const blankProfile = sourceProfile();
   const full = readBuild("INASearch.html");
   const allUnlocked = readBuild("INASearch-AU.html");
@@ -521,7 +529,50 @@ async function main() {
     (section.houseEditorialFootnotes || []).forEach(footnote => verifyLegalField(footnote, "text", footnote.id));
   }
   assert.strictEqual(verifiedHouseReferences, 14799, "Not every House USLM reference was attached to its exact displayed source span.");
-  assert(hydratedSource.legalReferenceMetadata.generatedReferences > 20_000, "The deterministic legal-reference audit did not run across the included corpus.");
+  assert(hydratedSource.legalReferenceMetadata.generatedReferences > 15_000, "The deterministic legal-reference audit did not run across the included corpus.");
+  assert(hydratedSource.legalReferenceMetadata.suppressedSelfReferences > 8_000, "The build did not audit and suppress the corpus-wide self-reference set.");
+  assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-this-unit"), "The bare self-referential unit rule remains advertised as navigable.");
+  const retainedBareSelfReferences = [];
+  const collectRetainedBareSelfReferences = value => {
+    if (!value || typeof value !== "object") return;
+    if (value.ruleId === "context-this-unit") retainedBareSelfReferences.push(value);
+    for (const child of Object.values(value)) collectRetainedBareSelfReferences(child);
+  };
+  collectRetainedBareSelfReferences(hydratedSource);
+  assert.strictEqual(retainedBareSelfReferences.length, 0, "The built corpus still contains a bare self-referential link record.");
+  const retainedAncestorReferences = [];
+  const inspectOperativeReferences = (source, properties, kind, title, section, sourcePath, label) => {
+    for (const property of properties) for (const reference of source?.[property] || []) {
+      const targetPath = reference.targetPath || [];
+      const sameAuthority = reference.resolution === "local" && reference.family === kind && String(reference.targetTitle) === String(title) && String(reference.targetSection) === String(section);
+      const ancestor = targetPath.length <= sourcePath.length && targetPath.every((token, index) => String(token).toLowerCase() === String(sourcePath[index]).toLowerCase());
+      if (sameAuthority && ancestor) retainedAncestorReferences.push(`${label}.${property}: ${reference.text}`);
+    }
+  };
+  const inspectStatuteAncestors = (section, nodes, path = []) => {
+    for (const node of nodes || []) {
+      const nodePath = [...path, String(node.label)];
+      inspectOperativeReferences(node, ["headingReferences", "references"], "usc", "8", String(section.section), nodePath, `8 U.S.C. ${section.section}${nodePath.map(value => `(${value})`).join("")}`);
+      inspectStatuteAncestors(section, node.children, nodePath);
+    }
+  };
+  for (const section of hydratedSource.title8.sections) {
+    inspectOperativeReferences(section, ["headingReferences", "preambleReferences"], "usc", "8", String(section.section), [], `8 U.S.C. ${section.section}`);
+    inspectStatuteAncestors(section, section.body);
+  }
+  const inspectCfrAncestors = (section, blocks) => {
+    for (const block of blocks || []) {
+      const blockPath = [...String(block.a || block.u?.at(-1)?.a || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]);
+      inspectOperativeReferences(block, ["xReferences"], "cfr", String(section.title), String(section.section || ""), blockPath, `${section.title} CFR ${section.section}`);
+      if (block.t === "table") for (const row of block.rows || []) for (const cell of row) inspectOperativeReferences(cell, ["xReferences"], "cfr", String(section.title), String(section.section || ""), blockPath, `${section.title} CFR ${section.section} table`);
+      if (block.t === "note") inspectCfrAncestors(section, block.blocks);
+    }
+  };
+  for (const section of [...hydratedSource.cfr.sections, ...hydratedSource.cfr.appendices]) {
+    inspectOperativeReferences(section, ["headingReferences"], "cfr", String(section.title), String(section.section || ""), [], `${section.title} CFR ${section.section}`);
+    inspectCfrAncestors(section, section.blocks);
+  }
+  assert.deepStrictEqual(retainedAncestorReferences, [], "The built corpus retains verified links to the current operative unit or one of its ancestors.");
   const sharedLegalContext = legalReferenceContext(hydratedSource);
   const fixtureContext = {
     ...sharedLegalContext,
@@ -538,8 +589,15 @@ async function main() {
   assert.deepStrictEqual(relativeReferences.filter(reference => reference.ruleId === "context-named-unit").map(reference => reference.targetPath), [["b", "1"], ["b", "2"]], "A contextual statutory list did not produce a separate target for each written unit.");
   assert(relativeReferences.some(reference => reference.ruleId === "context-path-this-section" && reference.targetPath.join("/") === "a/2"), "A chained path relative to this section was not resolved.");
   assert(relativeReferences.some(reference => reference.ruleId === "ambiguous-antecedent" && reference.resolution === "unresolved"), "An uncertain antecedent was guessed instead of marked unresolved.");
+  const bareSelfAudit = { suppressedSelfReferences: 0, suppressedByRule: {}, suppressedByFamily: {} };
+  assert.strictEqual(generatedReferences("Transport is forbidden by this section.", { ...fixtureContext, referenceAudit: bareSelfAudit }).length, 0, "A bare reference to its own section remains clickable.");
+  assert.strictEqual(bareSelfAudit.suppressedByRule["context-this-unit"], 1, "The bare self-reference was not recorded in the build audit.");
+  const ancestorSelfAudit = { suppressedSelfReferences: 0, suppressedByRule: {}, suppressedByFamily: {} };
+  assert.strictEqual(generatedReferences("See (b)(1) of this section.", { ...fixtureContext, suppressSelfReferences: true, referenceAudit: ancestorSelfAudit }).length, 0, "A verified link to the current operative unit's ancestor remains clickable.");
+  assert.strictEqual(ancestorSelfAudit.suppressedByRule["context-path-this-section"], 1, "The resolved ancestor self-reference was not recorded in the build audit.");
   const title8ActReference = generatedReferences("For purposes of the Act, this section applies.", { ...fixtureContext, kind: "cfr", title: "8", section: "214.2", path: ["h"] });
   assert(title8ActReference.some(reference => reference.text === "the Act" && reference.family === "ina" && reference.resolution === "official-source-only"), "Title 8 CFR context did not recognize ‘the Act’ as the INA.");
+  assert(!title8ActReference.some(reference => reference.text.toLowerCase() === "this section"), "A bare CFR self-reference remains clickable.");
   assert.strictEqual(generatedReferences("Form I-130 requires 3 years of evidence.", fixtureContext).length, 0, "A known noncitation pattern produced a false legal reference.");
 
   let verifiedCfrReferences = 0;
@@ -553,12 +611,66 @@ async function main() {
   };
   for (const section of [...hydratedSource.cfr.sections, ...hydratedSource.cfr.appendices]) { verifyLegalField(section, "heading", section.id); verifyCfrBlocks(section, section.blocks); }
   assert(verifiedCfrReferences > 10_000, "The build-time CFR reference audit did not cover the regulation blocks.");
-  assert.strictEqual(full.corpus.definitions.entries.length, 360, "Unexpected definition record count.");
+  assert.strictEqual(full.corpus.definitions.entries.length, 498, "Unexpected definition record count.");
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "uscis-glossary").length, 267, "Unexpected USCIS Glossary definition count.");
-  assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "ina").length, 61, "Unexpected INA 101 definition count.");
+  assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "ina").length, 199, "Unexpected indexed INA term count.");
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "cfr").length, 32, "Unexpected 8 CFR 1.2 definition count.");
   assert.strictEqual(full.corpus.definitions.glossaryVerification.entries, 267, "USCIS Glossary verification metadata does not match the catalog.");
+  assert.deepStrictEqual(full.corpus.definitions.inaVerification, {
+    mappedSections: 176,
+    lexicalFields: 168,
+    definitionFields: 167,
+    definitionStatements: 170,
+    definitionEntries: 199,
+    indexedTerms: 199,
+    excludedMentions: [{
+      citation: "INA 245A(g)(1)(A)",
+      uscCitation: "8 U.S.C. 1255a(g)(1)(A)",
+      text: "regulations establishing a definition of the term “resided continuously”, as used in this section, and the evidence needed to establish that an alien has resided continuously in the United States for purposes of this section, and"
+    }],
+    unresolvedScopes: []
+  }, "The embedded INA definition completeness audit changed or left an unresolved scope.");
   assert.deepStrictEqual(allUnlocked.corpus.definitions, full.corpus.definitions, "All-unlocked build lost or altered the definitions catalog.");
+  const independentInaCatalog = deriveInaCatalog(hydratedSource, rawDefinitionSource);
+  assert.deepStrictEqual(independentInaCatalog.audit, full.corpus.definitions.inaVerification, "A fresh scan of the House-backed INA corpus does not reproduce the embedded definition audit.");
+  assert.strictEqual(independentInaCatalog.entries.reduce((total, entry) => total + entry.aliases.length, 0), 199, "The INA scan did not index every quoted term in multi-term definition statements.");
+  assert.strictEqual(new Set(independentInaCatalog.entries.map(entry => entry.sourceFilter)).size, 41, "The Defined-in registry does not cover every INA section containing a definition.");
+  assert.deepStrictEqual(definitionStatementGroups('The terms “Commissioner” and “Deputy Commissioner” mean the two offices, respectively.').map(group => group.terms), [["Commissioner", "Deputy Commissioner"]], "A shared multi-term definition is not indexed under every quoted term.");
+  assert.deepStrictEqual(definitionStatementGroups('The term “United States” as used in this section includes the territory. The term “person” as used in this section shall be deemed to mean an individual.').map(group => group.terms), [["United States"], ["person"]], "Two distinct definitions in one legal field were merged.");
+  assert.deepStrictEqual(definitionStatementGroups('The term “capital”—', true).map(group => group.terms), [["capital"]], "A definition completed by statutory descendants was rejected for lacking a prose verb.");
+  const structuralDefinitionFixture = definitionStatementGroups('The term “child” means a person who is—', true)[0];
+  assert(structuralDefinitionFixture.structural && structuralDefinitionFixture.childInsertionOffset === structuralDefinitionFixture.text.length, "A definition verb before an em dash still drops its statutory descendants.");
+  const structuralPostambleFixture = definitionStatementGroups('The term “example” means any person who— This trailing sentence remains part of the definition.', true)[0];
+  assert(structuralPostambleFixture.structural && structuralPostambleFixture.childInsertionOffset < structuralPostambleFixture.text.length, "A structural definition cannot preserve text that follows its child list.");
+  const structuralColonFixture = definitionStatementGroups('The term “facility” means a hospital under 42 U.S.C. 1395ww that meets the following requirements:', true)[0];
+  assert(structuralColonFixture.structural && structuralColonFixture.childInsertionOffset === structuralColonFixture.text.length, "A colon-introduced statutory definition list was not retained.");
+  assert.deepStrictEqual(definitionStatementGroups('regulations establishing a definition of the term “resided continuously”, as used in this section, and the required evidence.'), [], "A direction to create a regulatory definition was mistaken for statutory definition text.");
+  assert.deepStrictEqual(definitionStatementGroups('The term “Consular Report of Birth” refers to the report designated as a “Report of Birth Abroad”.').map(group => group.terms), [["Consular Report of Birth"]], "Quoted wording inside a definition was mistaken for another defined term.");
+  const mappedInaByUsc = new Map(hydratedSource.inaCrosswalk.filter(item => item.hasEquivalent && !item.isNote).map(item => [String(item.uscSection), item]));
+  let independentlyScannedLexicalFields = 0;
+  let independentlyScannedDefinitionFields = 0;
+  const independentlyExcludedDefinitionMentions = [];
+  for (const section of hydratedSource.title8.sections) {
+    const mapping = mappedInaByUsc.get(String(section.section));
+    if (!mapping) continue;
+    for (const [field, value] of [["heading", section.heading], ["preamble", section.preamble]]) assert(!/\bthe terms?\s+[“"]/i.test(String(value || "")), `INA ${mapping.inaSection} ${field} contains unscanned definition language.`);
+    const walk = nodes => {
+      for (const node of nodes || []) {
+        if (/\bthe terms?\s+[“"]/i.test(node.heading || "")) throw new Error(`INA ${mapping.inaSection}${node.path.map(part => `(${part})`).join("")} heading contains unscanned definition language.`);
+        if (/\bthe terms?\s+[“"]/i.test(node.text || "")) {
+          independentlyScannedLexicalFields++;
+          const groups = definitionStatementGroups(node.text, Boolean(node.children?.length));
+          if (groups.length) independentlyScannedDefinitionFields++;
+          else independentlyExcludedDefinitionMentions.push(`INA ${mapping.inaSection}${node.path.map(part => `(${part})`).join("")}`);
+        }
+        walk(node.children);
+      }
+    };
+    walk(section.body);
+  }
+  assert.strictEqual(independentlyScannedLexicalFields, 168, "The full INA field scan found a new or missing ‘the term’ field.");
+  assert.strictEqual(independentlyScannedDefinitionFields, 167, "The full INA field scan found a new or missing qualifying definition field.");
+  assert.deepStrictEqual(independentlyExcludedDefinitionMentions, ["INA 245A(g)(1)(A)"], "A lexical ‘the term’ field was omitted without the reviewed non-definition exception.");
 
   const definitionScopes = new Map(full.corpus.definitions.scopes.map(scope => [scope.id, scope]));
   assert.strictEqual(definitionScopes.get("uscis-policy")?.label, "USCIS Policy", "The USCIS glossary applicability is missing.");
@@ -570,6 +682,7 @@ async function main() {
   const sourceFilters = new Map(full.corpus.definitions.sourceFilters.map(filter => [filter.id, filter]));
   assert.deepStrictEqual(sourceFilters.get("ina-statute"), { id: "ina-statute", label: "Statute", parentId: "law" }, "Defined-in Statute is not nested under Law.");
   assert.deepStrictEqual(sourceFilters.get("ina-101-h"), { id: "ina-101-h", label: "INA 101(h)", parentId: "ina-statute" }, "INA 101(h) is not a second-level Defined-in option.");
+  assert.deepStrictEqual(sourceFilters.get("ina-212"), { id: "ina-212", label: "INA 212", parentId: "ina-statute" }, "A newly indexed INA section is missing from the Defined-in hierarchy.");
   assert.deepStrictEqual(sourceFilters.get("8-cfr-1-2"), { id: "8-cfr-1-2", label: "Regulation (8 CFR 1.2)", parentId: "law" }, "The regulatory source filter is not plainly labeled or nested under Law.");
   const scopeFilters = new Map(full.corpus.definitions.scopeFilters.map(filter => [filter.id, filter]));
   assert.deepStrictEqual(scopeFilters.get("ina-any"), { id: "ina-any", label: "Statute (Any part of INA)", parentId: "law" }, "The any-part INA applicability option is not nested under Law.");
@@ -587,15 +700,68 @@ async function main() {
   assert.deepStrictEqual(definitionsFor("aggravated felony").map(entry => entry.citation), ["INA 101(a)(43)", "8 CFR 1.2"], "Statutory and regulatory aggravated-felony definitions were not retained separately.");
   assert.deepStrictEqual(definitionsFor("lawfully admitted for permanent residence").map(entry => entry.citation), ["INA 101(a)(20)", "8 CFR 1.2"], "Duplicate LPR definitions were not retained separately.");
   assert.strictEqual(definitionsFor("ineligible to citizenship").length, 1, "Quoted statutory punctuation leaked into the term index.");
+  assert(definitionsFor("immediate relatives").some(entry => entry.citation === "INA 201(b)(2)(A)(i)"), "INA 201's immediate-relative definition was not added.");
+  assert.deepStrictEqual(definitionsFor("specialty occupation").filter(entry => entry.sourceFamily === "ina").map(entry => entry.citation), ["INA 214(i)(1)", "INA 214(i)(3)"], "The two differently scoped specialty-occupation definitions were not kept separate.");
+  assert(definitionsFor("alien child").some(entry => entry.citation === "INA 216A(f)(2)"), "A second term sharing a definition statement was not indexed.");
+  assert.deepStrictEqual(["Commissioner", "Deputy Commissioner"].map(term => definitionsFor(term).find(entry => entry.citation === "INA 101(a)(8)")?.term), ["Commissioner", "Deputy Commissioner"], "Jointly defined INA 101(a)(8) terms are not separately browsable catalog entries.");
+  assert(definitionsFor("burglary").some(entry => entry.citation === "INA 236(c)(2)"), "One of INA 236's six jointly defined terms was not indexed.");
+  assert.deepStrictEqual(definitionsFor("domestic violence").filter(entry => entry.sourceFamily === "ina").map(entry => entry.citation), ["INA 214(d)(3)(A)", "INA 214(r)(5)(A)"], "Repeated multi-term definitions with different applicability were merged or omitted.");
 
-  const inaDefinitions = full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "ina");
-  for (const entry of inaDefinitions.filter(entry => entry.citation !== "INA 101(a)(37)")) {
-    const node = statutoryNode(fullSource, "1101", entry.path);
-    assert.strictEqual(entry.text, node.text, `${entry.citation}: definition text diverges from the cached statute.`);
-    assert.deepStrictEqual(entry.children, node.children || [], `${entry.citation}: definition hierarchy diverges from the cached statute.`);
+  const inaDefinitions = hydratedSource.definitions.entries.filter(entry => entry.sourceFamily === "ina");
+  assert.deepStrictEqual(independentInaCatalog.entries, inaDefinitions, "The embedded INA definition records do not exactly match a fresh corpus derivation.");
+  const statuteSectionsById = new Map(hydratedSource.title8.sections.map(section => [section.id, section]));
+  const sectionLegalText = section => {
+    const values = [section.preamble || ""];
+    const walk = nodes => { for (const node of nodes || []) { values.push(node.text || ""); walk(node.children); } };
+    walk(section.body);
+    return values.join("\n");
+  };
+  let structuralInaDefinitionCount = 0;
+  for (const entry of inaDefinitions) {
+    const section = statuteSectionsById.get(entry.sectionId);
+    assert(section, `${entry.citation}: definition has no source section.`);
+    const node = statutoryNode(hydratedSource, section.section, entry.path);
+    assert(Number.isInteger(entry.textStart) && Number.isInteger(entry.textEnd) && entry.textEnd > entry.textStart, `${entry.citation}: definition has no exact source range.`);
+    assert.strictEqual(entry.text, node.text.slice(entry.textStart, entry.textEnd), `${entry.citation}: definition text is not an exact substring of the cached House text.`);
+    const sourceGroup = definitionStatementGroups(node.text, Boolean(node.children?.length)).find(group => group.textStart === entry.textStart && group.textEnd === entry.textEnd);
+    assert(sourceGroup, `${entry.citation}: definition range is not reproduced by the qualifying-statement parser.`);
+    assert.deepStrictEqual(entry.aliases, [entry.term], `${entry.citation}: an INA term entry carries unrelated aliases.`);
+    assert(sourceGroup.terms.includes(entry.term), `${entry.citation}: catalog term is not quoted in its source statement.`);
+    assert.deepStrictEqual(entry.children, [], `${entry.citation}: the definition catalog duplicates statutory child text instead of linking the authoritative source hierarchy.`);
+    assert.strictEqual(entry.childInsertionOffset, sourceGroup.childInsertionOffset, `${entry.citation}: the statutory child-list insertion point changed during catalog generation.`);
+    if (sourceGroup.structural) {
+      structuralInaDefinitionCount++;
+      assert(node.children?.length, `${entry.citation}: a structural definition has no statutory child units.`);
+      assert(/[—:]$/.test(entry.text.slice(0, entry.childInsertionOffset)), `${entry.citation}: the linked child units are not inserted after the source list introducer.`);
+    }
+    assert(sectionLegalText(section).includes(entry.sourceScope), `${entry.citation}: source-scope wording is not exact text from its source section.`);
+    for (const reference of entry.references || []) assert.strictEqual(entry.text.slice(reference.start, reference.end), reference.text, `${entry.citation}: a cropped legal-reference offset no longer matches its source span.`);
   }
-  const totalitarianSource = statutoryNode(fullSource, "1101", ["a", "37"]).text;
-  assert.strictEqual(definitionsFor("totalitarian party").find(entry => entry.sourceFamily === "ina").text + " " + definitionsFor("totalitarianism").find(entry => entry.sourceFamily === "ina").text, totalitarianSource, "INA 101(a)(37) split definitions do not reconstruct the source text.");
+  assert.strictEqual(structuralInaDefinitionCount, 42, "The corpus-wide structural-definition audit found a new incomplete or misclassified child list.");
+  const definitionsBySourceNode = new Map();
+  for (const entry of inaDefinitions) {
+    const key = `${entry.sectionId}:${entry.path.join(".")}`;
+    if (!definitionsBySourceNode.has(key)) definitionsBySourceNode.set(key, []);
+    definitionsBySourceNode.get(key).push(entry);
+  }
+  for (const entries of definitionsBySourceNode.values()) {
+    const sourceRanges = [...new Map(entries.map(entry => [`${entry.textStart}:${entry.textEnd}`, entry])).values()];
+    if (sourceRanges.length < 2) continue;
+    const section = statuteSectionsById.get(entries[0].sectionId);
+    const node = statutoryNode(hydratedSource, section.section, entries[0].path);
+    assert.strictEqual(sourceRanges.sort((left, right) => left.textStart - right.textStart).map(entry => entry.text).join(" "), node.text, `${entries[0].citation}: multiple definitions at one citation do not reconstruct the exact source field.`);
+  }
+  const scopeLabelFor = (term, citation) => {
+    const matches = definitionsFor(term).filter(entry => entry.citation === citation);
+    const entry = matches.find(candidate => candidate.term.toLowerCase() === term.toLowerCase()) || matches[0];
+    return definitionScopes.get(entry?.scopeId)?.label;
+  };
+  assert.strictEqual(scopeLabelFor("2–A floor", "INA 202(a)(4)(A)(ii)"), "INA 202(a)(4) only", "A ‘this paragraph’ definition resolved to the wrong statutory level.");
+  assert.strictEqual(scopeLabelFor("subsection (e) ceiling", "INA 202(a)(4)(B)(ii)"), "INA 202(a)(4)(B)(i) only", "A definition applying in a sibling clause resolved to itself.");
+  assert.strictEqual(scopeLabelFor("terrorist activity", "INA 212(a)(3)(B)(iii)"), "Entire INA", "A chapter-wide definition was narrowed to its source provision.");
+  assert.strictEqual(scopeLabelFor("facility", "INA 212(m)(6)"), "INA 212(m) and INA 101(a)(15)(H)(i)(c) only", "A definition with two applicability targets lost one target.");
+  assert.strictEqual(scopeLabelFor("longshore work", "INA 258(b)(2)"), "INA 258 only", "A sibling exception to a section-wide definition was assigned the wrong scope.");
+  assert.strictEqual(definitionScopes.get(definitionsFor("parent").find(entry => entry.citation === "INA 101(b)(2)" && entry.scopeId.startsWith("ina-scope-"))?.scopeId)?.label, "INA 101(b)(1)(F) and INA 101(b)(1)(G)(i) only", "The narrower second parent definition at INA 101(b)(2) lost its two applicability targets.");
   assert.strictEqual(definitionScopes.get("ina-chapter").text, statutoryNode(fullSource, "1101", ["a"]).text);
   assert.strictEqual(definitionScopes.get("ina-subchapters-i-ii").text, statutoryNode(fullSource, "1101", ["b"]).text);
   assert.strictEqual(definitionScopes.get("ina-subchapter-iii").text, statutoryNode(fullSource, "1101", ["c"]).text);
@@ -675,6 +841,47 @@ async function main() {
   assert.strictEqual(corpusPayloadText(fs.readFileSync(uncompressed.filePath, "utf8")), uncompressedPayload, "Uncompressed JSON output is not deterministic.");
 
   const fallbackSource = fs.readFileSync(path.join(root, "src", "INASearch.template.html"), "utf8");
+  const expandPackedHouseHref = extractedFunction(fallbackSource, "expandPackedHouseHref", "hydrateLegalReferences", { String });
+  for (const [packed, expanded] of [
+    ["u8/s1184/i/1", "/us/usc/t8/s1184/i/1"],
+    ["p104/208", "/us/pl/104/208"],
+    ["s110/3009", "/us/stat/110/3009"],
+    ["a1952-06-27/ch477", "/us/act/1952-06-27/ch477"]
+  ]) assert.strictEqual(expandPackedHouseHref(packed), expanded, `The browser did not expand packed House target ${packed}.`);
+  const hydrateStart = fallbackSource.indexOf("    function hydrateLegalReferences(");
+  const hydrateEnd = fallbackSource.indexOf("\n    if (corpus) hydrateLegalReferences(corpus);", hydrateStart);
+  assert(hydrateStart >= 0 && hydrateEnd > hydrateStart, "Could not extract the browser legal-reference hydrator.");
+  const hydrateLegalReferences = vm.runInNewContext(`(${fallbackSource.slice(hydrateStart, hydrateEnd).trim()})`, {
+    expandPackedHouseHref,
+    componentTokens: () => [],
+    houseSectionUrl: (section, title = 8) => `https://uscode.house.gov/view.xhtml?req=${encodeURIComponent(`granuleid:USC-prelim-title${title}-section${section}`)}&num=0&edition=prelim`,
+    encodeURIComponent,
+    Array,
+    Number,
+    Object,
+    String
+  });
+  const runtimeHouseReferenceText = "section 1184(i)(1) of this title";
+  const runtimeHouseReferenceFixture = {
+    legalReferencePacking: { houseHrefs: ["u8/s1184/i/1"], legalTargets: [] },
+    source: { text: runtimeHouseReferenceText, _lr: { t: [[0, 0, runtimeHouseReferenceText.length, 0, 1]] } }
+  };
+  hydrateLegalReferences(runtimeHouseReferenceFixture);
+  assert.deepStrictEqual(plain(runtimeHouseReferenceFixture.source.references[0]), {
+    start: 0,
+    end: runtimeHouseReferenceText.length,
+    houseHref: "/us/usc/t8/s1184/i/1",
+    resolution: "local",
+    targetPath: ["i", "1"],
+    text: runtimeHouseReferenceText,
+    provenance: "house-uslm-ref",
+    ruleId: "house-uslm-ref",
+    family: "usc",
+    targetKind: "usc",
+    targetTitle: "8",
+    targetSection: "1184",
+    officialUrl: "https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title8-section1184&num=0&edition=prelim"
+  }, "The browser-side hydrator lost a packed local House target while retaining its local-resolution flag.");
   assert(fallbackSource.includes("const studyUnavailable = active || !corpus;"));
   assert(fallbackSource.includes("Official navigation is available"));
   assert(fallbackSource.includes("https://www.ecfr.gov/current/title-"));
@@ -682,25 +889,47 @@ async function main() {
   assert(fallbackSource.includes('id="savingMenuModal"'));
   assert(fallbackSource.includes('els.profileSetupNotice.hidden = mode !== "unsaved";'));
   assert(fallbackSource.includes('els.saveStatus.disabled = false;'));
+  assert(fallbackSource.includes('button.status-chip { cursor: pointer; font-family: inherit; font-size: 11px; }'), "The Saving status button no longer matches the compact Corpus Loaded chip typography.");
   assert(fallbackSource.includes("Import earlier progress"));
   assert(fallbackSource.includes("AuthoritySearch-Profile.js"), "The renamed build no longer explains how to import an older three-file AuthoritySearch profile.");
   assert(fallbackSource.includes('id="view-definitions"'));
   assert(fallbackSource.includes('data-view="definitions"'));
-  assert(/<nav class="main-nav"[^>]*>\s*<button class="nav-button" data-view="definitions" aria-current="page">Definitions<\/button>/.test(fallbackSource), "Definitions is not the leftmost current primary page.");
-  assert(fallbackSource.includes('id="view-definitions" aria-labelledby="definitionsHeading"'), "Definitions is not the default visible view.");
+  assert(/<nav class="main-nav"[^>]*>\s*<button class="nav-button" data-view="definitions" aria-current="false">Definitions<\/button>/.test(fallbackSource), "Definitions is not the leftmost primary-page control or is incorrectly marked current on startup.");
+  assert(fallbackSource.includes('id="view-search" aria-label="Search results"'), "Search is not the default visible view.");
+  assert(fallbackSource.includes('id="view-definitions" hidden aria-labelledby="definitionsHeading"'), "Definitions remains the default visible view.");
+  assert(fallbackSource.includes('view: "search"') && fallbackSource.includes('contentViewBeforeSearch: "definitions"'), "The startup state does not open search while retaining Definitions as the close destination.");
   assert(fallbackSource.includes('id="view-visas" hidden aria-labelledby="visasHeading"'), "Nonimmigrant Types is still the default visible view.");
   assert(!/<button class="nav-button" data-view="(?:visas|immigrants)"/.test(fallbackSource), "Immigration Types remain in the primary navigation.");
   assert(fallbackSource.includes('data-study-view="visas">Nonimmigrant Types</button>') && fallbackSource.includes('data-study-view="immigrants">Immigrant Types</button>'), "Sources & About does not link to both Immigration Types pages.");
   assert(!fallbackSource.includes('class="nav-button" data-view="quiz"'), "The classic Quiz remains in the primary navigation.");
   assert(fallbackSource.includes('id="openClassicQuizButton"'), "Sources & About does not link to the classic quiz.");
   assert(/<div class="search-field-shell">[\s\S]*?<input class="search-input"[\s\S]*?<button class="search-suggestion-inline" id="searchSuggestionButton"/.test(fallbackSource), "The rotating suggestion is not integrated into the main search field.");
+  assert(/id="impliedUscTitle"[\s\S]*?>8<\/span>[\s\S]*?id="searchInput"/.test(fallbackSource), "The implied Title 8 marker is not positioned before the typed U.S.C. citation.");
+  assert(fallbackSource.includes("No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup."), "The implied Title 8 warning is missing.");
   assert(fallbackSource.includes("updateSearchSuggestionVisibility();"), "The integrated search suggestion does not hide when a query is present.");
-  const startupSearchQuery = extractedFunction(fallbackSource, "startupSearchQuery", "showSearchResults", { URLSearchParams, String });
+  const startupSearchQuery = extractedFunction(fallbackSource, "startupSearchQuery", "showSearchResults", { URLSearchParams, String, DEFAULT_STARTUP_QUERY: "INA 215a" });
   assert.strictEqual(startupSearchQuery({ search: "?q=22%20CFR%2042.11" }), "22 CFR 42.11", "The startup query does not decode citation URLs.");
-  assert.strictEqual(startupSearchQuery({ search: "?q=%20change%20of%20status%20" }), "change of status", "The startup query does not trim ordinary searches.");
-  assert.strictEqual(startupSearchQuery({ search: "?other=value" }), "", "An unrelated URL argument was treated as a startup search.");
+  assert.strictEqual(startupSearchQuery({ search: "?q=%20INA%20215(a)%20" }), " INA 215(a) ", "Formatting explicitly supplied in the URL query is not preserved for the editable field.");
+  assert.strictEqual(startupSearchQuery({ search: "?q=" }), "", "An explicitly empty q argument was replaced by the default citation.");
+  assert.strictEqual(startupSearchQuery({ search: "?other=value" }), "INA 215a", "A URL without a q argument did not receive the INA 215a default.");
+  assert.strictEqual(startupSearchQuery({ search: "" }), "INA 215a", "The no-argument startup citation is not INA 215a.");
   assert.strictEqual(startupSearchQuery({ search: `?q=${"a".repeat(600)}` }).length, 500, "The startup query is not length-limited.");
-  assert(fallbackSource.includes("if (startupQuery) setTimeout(() => applySearchQuery(startupQuery, false), 0);"), "Initialization does not run the URL query through the existing search path.");
+  assert(fallbackSource.includes("if (startupQuery) setTimeout(() => applySearchQuery(startupQuery, false, true), 0);"), "Initialization does not preserve the displayed formatting of the startup query.");
+  const startupEditableSearch = { value: "" };
+  const startupApplyState = { query: "" };
+  const applyStartupSearchQuery = extractedFunction(fallbackSource, "applySearchQuery", "openSearchRecord", {
+    String,
+    els: { search: startupEditableSearch },
+    state: startupApplyState,
+    updateSearchSuggestionVisibility: () => {},
+    closeSearchResults: () => {},
+    showSearchResults: () => {},
+    runSearch: () => {}
+  });
+  applyStartupSearchQuery(" INA 215(a) ", false, true);
+  assert.strictEqual(startupEditableSearch.value, " INA 215(a) ", "Startup query formatting is canonicalized before it reaches the editable field.");
+  applyStartupSearchQuery(" INA 215(a) ", false);
+  assert.strictEqual(startupEditableSearch.value, "INA 215(a)", "Ordinary non-startup query normalization unexpectedly changed.");
   assert(!fallbackSource.includes('data-filter="authorities"'), "The obsolete Authorities result filter remains visible.");
   for (const filter of ["statutes", "regulations", "ina", "acts", "definitions", "statute-notes", "visas", "policy", "forms", "notes"]) {
     assert(fallbackSource.includes(`data-filter="${filter}"`), `The ${filter} result filter is missing.`);
@@ -741,7 +970,30 @@ async function main() {
   assert.strictEqual(corpusStatusElement.innerHTML, '<span class="status-dot"></span>Corpus Loaded', "The successful corpus chip does not use a plain-language status.");
   assert.strictEqual(corpusStatusElement.title, "Version: 2026.08.02-7 · Captured: 2026-07-30 · Verified: 2026-07-31", "The corpus chip tooltip omits its version or source dates.");
   assert.strictEqual(corpusStatusElement.attributes["aria-label"], "Corpus loaded. Version: 2026.08.02-7 · Captured: 2026-07-30 · Verified: 2026-07-31", "The corpus chip does not expose its status details accessibly.");
-  assert(/<div class="brand" id="inaSearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>INASearch<\/strong><small>ISOBASIC study reference<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area does not continuously wrap the full INASearch brand.");
+  const saveStatusClasses = new Map();
+  const saveStatusElement = {
+    innerHTML: "",
+    disabled: true,
+    attributes: {},
+    classList: { toggle(name, enabled) { saveStatusClasses.set(name, enabled); } },
+    setAttribute(name, value) { this.attributes[name] = value; }
+  };
+  const saveStatusState = { fileConnected: false, profileChanged: false };
+  const updateSaveStatus = extractedFunction(fallbackSource, "updateSaveStatus", "updateProfileSummary", {
+    state: saveStatusState,
+    els: { saveStatus: saveStatusElement, savingMenuModal: { hidden: true } },
+    escapeHtml: value => String(value ?? "").replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]),
+    renderProfileSetupNotice: () => {},
+    renderSavingMenu: () => {}
+  });
+  updateSaveStatus("Autosaving off", "warn");
+  assert.strictEqual(saveStatusElement.innerHTML, '<span class="status-dot warn"></span>Saving Off', "The disconnected saving chip does not use the requested short label.");
+  assert.strictEqual(saveStatusElement.attributes["aria-label"], "Saving is off. Open saving and progress options.", "The disconnected saving chip has an inaccurate accessible label.");
+  saveStatusState.fileConnected = true;
+  updateSaveStatus("Autosave queued", "warn");
+  assert.strictEqual(saveStatusElement.innerHTML, '<span class="status-dot warn"></span>Saving On', "The connected saving chip exposes internal queue wording instead of the requested short label.");
+  assert.strictEqual(saveStatusElement.attributes["aria-label"], "Saving is on. Autosave queued. Open saving and progress options.", "The connected saving chip lost its detailed accessible status.");
+  assert(/<div class="brand" id="inaSearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>INASearch<\/strong><small>Quick INA\/CFR Lookup<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area does not continuously wrap the full INASearch brand.");
   assert(fallbackSource.includes("Inspired by the excellent work of 2604"), "The INASearch tribute text is missing.");
   assert(fallbackSource.includes('els.brand.addEventListener("mouseenter", beginBrandTributeHover);'), "The tribute timer is not attached to the continuous brand area.");
   assert(fallbackSource.includes('els.brand.addEventListener("mouseleave", endBrandTributeHover);'), "The tribute popup is not dismissed when the pointer leaves the brand area.");
@@ -873,11 +1125,19 @@ async function main() {
   assert(fallbackSource.includes('event.target.closest("[data-statute-history]")'), "The statute history controls are not connected to delegated navigation events.");
   assert(fallbackSource.includes('data-statute-path='), "Rendered statutory nodes do not expose their hierarchy paths.");
   assert(fallbackSource.includes('id="legalUnitMenu"') && fallbackSource.includes('data-legal-unit-action="copy-usc-citation"'), "The structural legal-unit action menu is missing.");
-  for (const label of ["Copy USC Citation", "Copy INA Citation", "Copy Statute", "Print Statute", "Open in House.gov"]) assert(fallbackSource.includes(label), `The legal-unit menu is missing ${label}.`);
-  assert(fallbackSource.includes('context.inaCitation') && fallbackSource.includes('data-legal-unit-action="copy-ina-citation"'), "Statutory units do not expose their crosswalked INA citation for copying.");
+  for (const label of ["Copy Statute", "Print Statute", "Open in House.gov"]) assert(fallbackSource.includes(label), `The legal-unit menu is missing ${label}.`);
+  assert(!fallbackSource.includes('>Copy USC Citation</button>') && !fallbackSource.includes('>Copy INA Citation</button>'), "Redundant textual citation-copy menu items remain visible.");
+  const legalUnitMenuStart = fallbackSource.indexOf('id="legalUnitMenu"');
+  const legalUnitMenuEnd = fallbackSource.indexOf('</div>\n  <section class="legal-reference-popover"', legalUnitMenuStart);
+  const legalUnitMenuMarkup = fallbackSource.slice(legalUnitMenuStart, legalUnitMenuEnd);
+  assert((legalUnitMenuMarkup.match(/<span aria-hidden="true">⧉<\/span>/g) || []).length === 2, "The two legal-unit citation rows do not use symbol-only copy controls.");
+  assert(fallbackSource.includes('id="legalUnitMenuCrosswalkCitation"') && fallbackSource.includes('context.inaCitation') && fallbackSource.includes('data-legal-unit-action="copy-ina-citation"'), "Statutory units do not expose their crosswalked citation as a second copyable row.");
   assert(fallbackSource.includes('event.target.closest("[data-legal-unit-kind]")'), "Structural citation markers do not open the legal-unit menu.");
   assert(fallbackSource.includes('html{color-scheme:light}') && fallbackSource.includes('background:#fff'), "Legal-unit printing does not force a light text-only page.");
   assert(fallbackSource.includes('Math.max(0, window.innerHeight - navigatorBottom) * .1'), "The statute reading line is not one tenth of the statute viewport.");
+  assert(/\.statutory-node,\s*\.statutory-runin-line \{ position: relative; margin: 5px 0 5px min\(calc\(var\(--depth, 0\) \* 15px\), 90px\); padding: 5px 7px 7px; border-radius: 6px; \}/.test(fallbackSource), "Run-in statutory units do not share the standard unit layout rules.");
+  assert(/\.statutory-node\.target,\s*\.statutory-runin-line\.citation-target \{/.test(fallbackSource), "Run-in statutory targets do not share the standard target styling.");
+  assert(!/\.statutory-runin-line \{[^}]*border-left/.test(fallbackSource) && !fallbackSource.includes("padding-left: 13px"), "Run-in statutory units still use a source-markup indentation bar.");
   assert(fallbackSource.includes('.definition-filter-option[data-depth="1"]'), "First-level definition checkbox indentation is missing.");
   assert(fallbackSource.includes('.definition-filter-option[data-depth="2"]'), "Second-level definition checkbox indentation is missing.");
   assert(fallbackSource.includes('class="definition-applicability-warning"'), "Out-of-applicability definitions do not render a warning.");
@@ -916,14 +1176,14 @@ async function main() {
     definitionFiltersForKind,
     definitionFilterDescendantLeaves
   });
-  assert.strictEqual(definitionFilterDefinitionCount("source", "all"), 360, "The all-sources count does not include every definition record.");
+  assert.strictEqual(definitionFilterDefinitionCount("source", "all"), 498, "The all-sources count does not include every definition record.");
   assert.strictEqual(definitionFilterDefinitionCount("source", "uscis-glossary"), 267, "The USCIS Glossary source count is wrong.");
-  assert.strictEqual(definitionFilterDefinitionCount("source", "law"), 93, "The Defined-in Law count is wrong.");
-  assert.strictEqual(definitionFilterDefinitionCount("source", "ina-statute"), 61, "The Defined-in Statute count is wrong.");
-  assert.strictEqual(definitionFilterDefinitionCount("scope", "ina-any"), 61, "The any-part INA applicability count is wrong.");
+  assert.strictEqual(definitionFilterDefinitionCount("source", "law"), 231, "The Defined-in Law count is wrong.");
+  assert.strictEqual(definitionFilterDefinitionCount("source", "ina-statute"), 199, "The Defined-in Statute count is wrong.");
+  assert.strictEqual(definitionFilterDefinitionCount("scope", "ina-any"), 199, "The any-part INA applicability count is wrong.");
   assert.strictEqual(definitionFilterDefinitionCount("scope", "cfr-chapter-i"), 32, "The regulation applicability count is wrong.");
-  assert.deepStrictEqual(plain(definitionFilterDescendantLeaves(sourceFilterRecords, "ina-statute")), ["ina-101-a", "ina-101-b", "ina-101-c", "ina-101-h"], "Defined-in Statute does not cover every INA source leaf.");
-  assert.deepStrictEqual(plain(definitionFilterDescendantLeaves(scopeFilterRecords, "ina-any")), ["ina-chapter", "ina-subchapters-i-ii", "ina-subchapter-iii", "ina-212-a-2-e"], "Any-part INA applicability does not cover every INA scope leaf.");
+  assert.deepStrictEqual(plain(definitionFilterDescendantLeaves(sourceFilterRecords, "ina-statute")), [...new Set(inaDefinitions.map(entry => entry.sourceFilter))], "Defined-in Statute does not cover every INA source leaf.");
+  assert.deepStrictEqual(plain(definitionFilterDescendantLeaves(scopeFilterRecords, "ina-any")), full.corpus.definitions.scopes.filter(scope => scope.category === "law" && scope.id.startsWith("ina-")).map(scope => scope.id), "Any-part INA applicability does not cover every INA scope leaf.");
   let checkboxSelection = plain(nextDefinitionFilterSelection(sourceFilterRecords, ["all"], "ina-101-h", false));
   assert.strictEqual(definitionFilterSelectionState(sourceFilterRecords, checkboxSelection, "ina-statute").checked, false, "Unchecking a lower-level source did not uncheck Statute.");
   assert.strictEqual(definitionFilterSelectionState(sourceFilterRecords, checkboxSelection, "ina-statute").indeterminate, true, "A partially selected Statute parent is not indeterminate.");
@@ -996,7 +1256,7 @@ async function main() {
     searchScoreContext,
     Math
   });
-  const definitionsLandingScore = scoreRecord({ kind: "definition-index", title: "Definitions", cite: "360 source records", text: "definitions defined terms" }, "definitions");
+  const definitionsLandingScore = scoreRecord({ kind: "definition-index", title: "Definitions", cite: "498 source records", text: "definitions defined terms" }, "definitions");
   const statuteDefinitionsScore = scoreRecord({ kind: "usc", title: "Definitions", cite: "8 U.S.C. 1101", text: "8 usc 1101 definitions" }, "definitions");
   assert(definitionsLandingScore > statuteDefinitionsScore, "The Definitions page is not the top result for an exact definitions search.");
   const unrelatedPolicyScore = scoreRecord({ kind: "policy", title: "I-92", cite: "form", text: "i 92 forms chapter 7 privacy and confidentiality" }, "special situation");
@@ -1058,6 +1318,15 @@ async function main() {
   }));
   assert.strictEqual(h1bUnitContext.uscCitation, "8 U.S.C. 1101(a)(15)(H)(i)(b)", "Copy USC Citation does not use the unit's complete U.S.C. path.");
   assert.strictEqual(h1bUnitContext.inaCitation, "INA 101(a)(15)(H)(i)(b)", "Copy INA Citation does not use the crosswalked unit path.");
+  const legalUnitCitationRows = extractedFunction(fallbackSource, "legalUnitCitationRows", "openLegalUnitMenu", { Boolean });
+  assert.deepStrictEqual(plain(legalUnitCitationRows(h1bUnitContext)), [
+    { system: "INA", citation: "INA 101(a)(15)(H)(i)(b)", action: "copy-ina-citation" },
+    { system: "USC", citation: "8 U.S.C. 1101(a)(15)(H)(i)(b)", action: "copy-usc-citation" }
+  ], "An INA-opened statutory menu does not show the selected citation followed by its U.S.C. crosswalk.");
+  const legalUnitPrintHtml = extractedFunction(fallbackSource, "legalUnitPrintHtml", "printLegalUnit", { escapeHtml: escapeStatutoryHtml, legalUnitCitationRows });
+  const h1bPrintHtml = legalUnitPrintHtml(h1bUnitContext);
+  assert(h1bPrintHtml.includes("INA 101(a)(15)(H)(i)(b)") && h1bPrintHtml.includes("8 U.S.C. 1101(a)(15)(H)(i)(b)"), "A statutory printout does not display both INA and U.S.C. citations.");
+  assert(h1bPrintHtml.includes("background:#fff") && !h1bPrintHtml.includes("background:#0"), "A statutory printout no longer forces a light text-only background.");
   const cfr2142Text = cfrUnitText(full.corpus.cfr.sections.find(section => section.id === "8:214.2"), ["a", "2"]);
   assert(cfr2142Text.startsWith("(2) Definition of A-1 or A-2 dependent."), "CFR unit copying does not begin at the selected paragraph.");
   assert(cfr2142Text.includes("(i) Spouse;"), "CFR unit copying omits a selected paragraph's descendants.");
@@ -1193,6 +1462,7 @@ async function main() {
   const renderCitationFeedback = extractedFunction(fallbackSource, "renderCitationFeedback", "renderCitationEquivalent", {
     state: { query: "22 CFR 42.11" },
     els: { feedback: feedbackElement },
+    renderImpliedUscTitle: () => false,
     renderCitationEquivalent: () => null,
     renderCitationAmbiguity: () => null
   });
@@ -1245,6 +1515,14 @@ async function main() {
   const lowercaseRomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15oiii"));
   assert.deepStrictEqual(lowercaseRomanAmbiguity.path, ["a", "15", "O", "iii"], "The longest valid clause was not selected for an ambiguous lowercase Roman sequence.");
   assert.deepStrictEqual(lowercaseRomanAmbiguity.ambiguity.options.map(option => option.path), [["a", "15", "O", "iii"], ["a", "15", "O", "ii", "I"]], "The valid lowercase Roman interpretations were not listed in priority order.");
+  assert.deepStrictEqual(lowercaseRomanAmbiguity.ambiguity.options.map(option => option.casePattern), ["a15Oiii", "a15OiiI"], "Ambiguity choices do not retain compact case patterns.");
+  assert.strictEqual(compactPathApi.citationWithRomanCase("INA101a15oiii", "a15OiiI"), "INA101a15oiiI", "Choosing an interpretation changed more than the required Roman-numeral case.");
+  assert.strictEqual(compactPathApi.citationWithRomanCase("Ina 101-a15oiii", "a15OiiI"), "Ina 101-a15oiiI", "Choosing an interpretation did not preserve typed spacing and punctuation.");
+  const section1153ForCompactPaths = hydratedSource.title8.sections.find(section => String(section.section) === "1153");
+  const eb5RomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "203", section1153ForCompactPaths, "b5Biii"));
+  assert(eb5RomanAmbiguity.ambiguity.options.some(option => JSON.stringify(option.path) === JSON.stringify(["b", "5", "B", "iii"])) && eb5RomanAmbiguity.ambiguity.options.some(option => JSON.stringify(option.path) === JSON.stringify(["b", "5", "B", "ii", "I"])), "The reported INA 203(b)(5)(B) ambiguity is not resolved into both expected valid paths.");
+  const eb5SubclauseOption = eb5RomanAmbiguity.ambiguity.options.find(option => JSON.stringify(option.path) === JSON.stringify(["b", "5", "B", "ii", "I"]));
+  assert.strictEqual(compactPathApi.citationWithRomanCase("INA203b5Biii", eb5SubclauseOption.casePattern), "INA203b5BiiI", "The INA 203(b)(5)(B) ambiguity choice does not limit its edit to Roman-numeral case.");
   const explicitlyCasedRoman = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15oiiI"));
   assert.deepStrictEqual(explicitlyCasedRoman.path, ["a", "15", "O", "ii", "I"], "An uppercase I did not disambiguate the compact citation.");
   assert.strictEqual(explicitlyCasedRoman.ambiguity, null, "An explicitly cased Roman sequence still shows ambiguity choices.");
@@ -1256,12 +1534,13 @@ async function main() {
   const childEntriesForParser = extractedFunction(fallbackSource, "childEntries", "resolveComponents", { normCitationPart: statutoryNormPart });
   const resolveComponentsForParser = extractedFunction(fallbackSource, "resolveComponents", "resolveKnownCitationPath", { componentTokens: componentTokensForParser, normCitationPart: statutoryNormPart });
   const resolveKnownCitationPathForParser = extractedFunction(fallbackSource, "resolveKnownCitationPath", "nearestStructuralPath", { knownInaCitationPaths: compactKnownInaPaths, knownUscCitationPaths: compactKnownUscPaths, componentTokens: componentTokensForParser, citationPathKey: (section, pathParts) => `${statutoryNormPart(section)}:${pathParts.map(statutoryNormPart).join("/")}`, normCitationPart: statutoryNormPart });
+  const section1185ForStartup = hydratedSource.title8.sections.find(section => String(section.section) === "1185");
   const parseLocalStatute = extractedFunction(fallbackSource, "parseLocalStatute", "parseFallbackStatute", {
     corpus: hydratedSource,
     hasLocalUscCache: true,
-    inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }]]),
-    sectionMap: new Map([["1101", section1101ForCompactPaths]]),
-    uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }]]),
+    inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["215", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
+    sectionMap: new Map([["1101", section1101ForCompactPaths], ["1185", section1185ForStartup]]),
+    uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["1185", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
     findKnownPrefix,
     resolveIndexedCompactStatutePath: compactPathApi.resolveIndexedCompactStatutePath,
     resolveComponents: resolveComponentsForParser,
@@ -1272,9 +1551,35 @@ async function main() {
   });
   const parsedCompactH1b = plain(parseLocalStatute("ina", "101a15hib"));
   assert(parsedCompactH1b.valid && parsedCompactH1b.label === "INA 101(a)(15)(H)(i)(b)", "The complete compact H-1B citation does not survive the local parser.");
+  const parsedDefaultStartup = plain(parseLocalStatute("ina", "215a"));
+  assert(parsedDefaultStartup.valid && parsedDefaultStartup.label === "INA 215(a)" && JSON.stringify(parsedDefaultStartup.path) === JSON.stringify(["a"]), "The parenthesis-free INA 215a startup text does not resolve to INA 215(a).");
   const parsedRomanAmbiguity = plain(parseLocalStatute("ina", "101a15oiii"));
   assert(parsedRomanAmbiguity.valid && parsedRomanAmbiguity.ambiguity.options.length === 2, "The local parser did not retain valid ambiguity choices.");
   assert.deepStrictEqual(parsedRomanAmbiguity.renderPath, ["a", "15", "O", "iii"], "The parser still truncates a selected compact path before navigation.");
+  const parseCitationForImpliedUsc = extractedFunction(fallbackSource, "parseCitation", "pathStartsWith", {
+    parseCfr: () => ({ type: "cfr" }),
+    parseLocalStatute: (kind, raw) => ({ type: kind, recognized: true, valid: true, label: `8 U.S.C. ${raw}`, raw }),
+    parseAct: () => null
+  });
+  const impliedCompactUsc = plain(parseCitationForImpliedUsc("usc1101(a)(15)(H)"));
+  assert.strictEqual(impliedCompactUsc.raw, "1101(a)(15)(H)", "A compact titleless U.S.C. citation was not parsed as Title 8.");
+  assert.strictEqual(impliedCompactUsc.impliedUscTitle, 8, "A titleless U.S.C. citation does not retain its Title 8 assumption for display.");
+  const impliedPunctuatedUsc = plain(parseCitationForImpliedUsc("U.S.C. § 1153(b)"));
+  assert.strictEqual(impliedPunctuatedUsc.raw, "1153(b)", "A punctuated titleless U.S.C. citation was not parsed as Title 8.");
+  assert.strictEqual(parseCitationForImpliedUsc("USCIS Glossary"), null, "The Title 8 fallback incorrectly captures text beginning with USCIS.");
+  assert.strictEqual(parseCitationForImpliedUsc("8 USC 1101").impliedUscTitle, undefined, "An explicit Title 8 citation was incorrectly marked as assumed.");
+  const impliedTitleShellClasses = new Set();
+  const impliedTitleShell = { classList: { toggle: (name, active) => active ? impliedTitleShellClasses.add(name) : impliedTitleShellClasses.delete(name) } };
+  const impliedTitleElements = {
+    search: { value: "usc1101", closest: () => impliedTitleShell },
+    impliedUscTitle: { hidden: true },
+    impliedUscTitleNotice: { hidden: true }
+  };
+  const renderImpliedUscTitle = extractedFunction(fallbackSource, "renderImpliedUscTitle", "renderCitationAmbiguity", { els: impliedTitleElements, Boolean });
+  assert.strictEqual(renderImpliedUscTitle(impliedCompactUsc), true, "The implied Title 8 presentation was not activated.");
+  assert(impliedTitleShellClasses.has("has-implied-usc-title") && !impliedTitleElements.impliedUscTitle.hidden && !impliedTitleElements.impliedUscTitleNotice.hidden, "The implied Title 8 marker or warning remains hidden.");
+  impliedTitleElements.search.value = "8usc1101";
+  assert.strictEqual(renderImpliedUscTitle({ type: "usc", valid: true }), false, "An explicit Title 8 citation still displays the assumption warning.");
   const ambiguityShellClasses = new Set();
   const ambiguityShell = { classList: { toggle: (name, active) => active ? ambiguityShellClasses.add(name) : ambiguityShellClasses.delete(name) } };
   const ambiguityElements = {
@@ -1283,16 +1588,58 @@ async function main() {
     citationAmbiguity: { hidden: true },
     citationAmbiguityOptions: { innerHTML: "" }
   };
-  const renderCitationAmbiguity = extractedFunction(fallbackSource, "renderCitationAmbiguity", "renderCitationFeedback", { els: ambiguityElements, canonicalPath: statutoryCanonicalPath, escapeHtml: escapeStatutoryHtml, Boolean });
+  const renderCitationAmbiguity = extractedFunction(fallbackSource, "renderCitationAmbiguity", "renderCitationFeedback", { els: ambiguityElements, canonicalPath: statutoryCanonicalPath, citationWithRomanCase: compactPathApi.citationWithRomanCase, escapeHtml: escapeStatutoryHtml, Boolean });
   renderCitationAmbiguity({ type: "ina", ambiguity: lowercaseRomanAmbiguity.ambiguity });
   assert(ambiguityShellClasses.has("has-citation-ambiguity") && !ambiguityElements.citationAmbiguity.hidden, "Ambiguous citation styling and choices were not activated.");
   assert.strictEqual((ambiguityElements.searchInputMirror.innerHTML.match(/<mark>i<\/mark>/g) || []).length, 3, "The ambiguous lowercase i sequence is not highlighted yellow in the search bar.");
   assert(ambiguityElements.citationAmbiguityOptions.innerHTML.includes("INA 101(a)(15)(O)(iii)") && ambiguityElements.citationAmbiguityOptions.innerHTML.includes("INA 101(a)(15)(O)(ii)(I)"), "The ambiguity panel does not render every valid interpretation.");
+  assert(ambiguityElements.citationAmbiguityOptions.innerHTML.includes('data-citation-interpretation="INA101a15oiiI"'), "The alternate interpretation does not preserve the user's compact citation format.");
+  assert(!ambiguityElements.citationAmbiguityOptions.innerHTML.includes('data-citation-interpretation="INA 101('), "An ambiguity choice still rewrites the typed citation with canonical spacing or parentheses.");
   const searchFieldStart = fallbackSource.indexOf('<div class="search-field-shell">');
   const searchFieldEnd = fallbackSource.indexOf('</div>\n      </div>', searchFieldStart);
   const searchFieldMarkup = fallbackSource.slice(searchFieldStart, searchFieldEnd);
   assert(searchFieldMarkup.indexOf('id="searchInput"') < searchFieldMarkup.indexOf('id="citationEquivalent"'), "The crosswalk citation is not inside the main search field after the typed citation.");
+  assert(searchFieldMarkup.indexOf('id="citationEquivalentIna"') < searchFieldMarkup.indexOf('class="citation-equivalent-arrow"') && searchFieldMarkup.indexOf('class="citation-equivalent-arrow"') < searchFieldMarkup.indexOf('id="citationEquivalentUsc"'), "The search crosswalk does not keep INA on the left and U.S.C. on the right.");
+  assert((searchFieldMarkup.match(/<span aria-hidden="true">⧉<\/span>/g) || []).length === 2, "The search crosswalk does not provide one symbol-only copy control per citation.");
+  assert(fallbackSource.includes('event.target.closest("[data-copy-citation]")') && fallbackSource.includes('event.target.closest("[data-citation-query]")'), "The search crosswalk does not separate copying from changing citation format.");
+  const citationCrosswalk = extractedFunction(fallbackSource, "citationCrosswalk", "inaCitationsFromText", {
+    equivalentCitation: result => result.type === "ina"
+      ? { system: "usc", label: "8 U.S.C. 1153(b)", query: "8 U.S.C. 1153(b)" }
+      : { system: "ina", label: "INA 203(b)", query: "INA 203(b)" }
+  });
+  assert.deepStrictEqual(plain(citationCrosswalk({ type: "ina", label: "INA 203(b)" })), {
+    ina: { system: "ina", label: "INA 203(b)", query: "INA 203(b)" },
+    usc: { system: "usc", label: "8 U.S.C. 1153(b)", query: "8 U.S.C. 1153(b)" }
+  }, "An INA query does not render the fixed INA/U.S.C. crosswalk order.");
+  assert.deepStrictEqual(plain(citationCrosswalk({ type: "usc", label: "8 U.S.C. 1153(b)" })), {
+    ina: { system: "ina", label: "INA 203(b)", query: "INA 203(b)" },
+    usc: { system: "usc", label: "8 U.S.C. 1153(b)", query: "8 U.S.C. 1153(b)" }
+  }, "A U.S.C. query does not render the fixed INA/U.S.C. crosswalk order.");
+  const renderedCrosswalkShellClasses = new Set(["citation-crosswalk-below"]);
+  const renderedCrosswalkShell = { classList: { remove: name => renderedCrosswalkShellClasses.delete(name) } };
+  const crosswalkButton = () => ({ textContent: "", dataset: {}, setAttribute(name, value) { this[name] = value; } });
+  const renderedCrosswalkElements = {
+    search: { closest: () => renderedCrosswalkShell },
+    citationEquivalent: { hidden: true },
+    citationEquivalentIna: crosswalkButton(),
+    citationEquivalentInaCopy: crosswalkButton(),
+    citationEquivalentUsc: crosswalkButton(),
+    citationEquivalentUscCopy: crosswalkButton()
+  };
+  const renderCitationEquivalent = extractedFunction(fallbackSource, "renderCitationEquivalent", "isSingleLegalResult", {
+    citationCrosswalk: () => ({
+      ina: { system: "ina", label: "INA 203(b)", query: "INA 203(b)" },
+      usc: { system: "usc", label: "8 U.S.C. 1153(b)", query: "8 U.S.C. 1153(b)" }
+    }),
+    els: renderedCrosswalkElements,
+    requestAnimationFrame: () => {},
+    positionCitationEquivalent: () => {}
+  });
+  renderCitationEquivalent({ type: "usc" });
+  assert(!renderedCrosswalkElements.citationEquivalent.hidden && renderedCrosswalkElements.citationEquivalentIna.textContent === "INA 203(b)" && renderedCrosswalkElements.citationEquivalentUsc.textContent === "8 U.S.C. 1153(b)", "The rendered search crosswalk does not show both citation systems.");
+  assert(renderedCrosswalkElements.citationEquivalentInaCopy.dataset.copyCitation === "INA 203(b)" && renderedCrosswalkElements.citationEquivalentUscCopy.dataset.copyCitation === "8 U.S.C. 1153(b)", "The rendered crosswalk copy controls do not carry their own citations.");
   assert(fallbackSource.includes("measureText(els.search.value)") && fallbackSource.includes("positionCitationEquivalent"), "The inline crosswalk citation does not track the typed citation width.");
+  assert(fallbackSource.includes('classList.add("citation-crosswalk-below")'), "The two-sided crosswalk lacks a narrow-screen layout that avoids covering the query.");
   const glossaryReferenceLabels = extractedFunction(fallbackSource, "glossaryReferenceLabels", "glossaryInlineLinks", { normalize: searchNormalize, Map, String });
   const glossaryAllowedHosts = new Set(full.corpus.approvedDomains);
   const glossarySafeUrl = value => {
@@ -1300,8 +1647,12 @@ async function main() {
     catch { return ""; }
   };
   const glossaryInlineLinks = extractedFunction(fallbackSource, "glossaryInlineLinks", "renderDefinitionInlineText", { corpus: full.corpus, glossaryReferenceLabels, normalize: searchNormalize, safeUrl: glossarySafeUrl, searchTextMatch, String });
-  const renderDefinitionInlineText = extractedFunction(fallbackSource, "renderDefinitionInlineText", "renderDefinitionEntry", { escapeHtml: escapeStatutoryHtml, glossaryInlineLinks, String });
+  const renderDefinitionInlineText = extractedFunction(fallbackSource, "renderDefinitionInlineText", "definitionReferenceSlice", { escapeHtml: escapeStatutoryHtml, glossaryInlineLinks, String });
   const glossaryDefinition = term => full.corpus.definitions.entries.find(entry => entry.sourceFamily === "uscis-glossary" && entry.term === term);
+  const glossaryDefinitionUrls = full.corpus.definitions.entries
+    .filter(entry => entry.sourceFamily === "uscis-glossary")
+    .map(entry => ({ entry, url: new URL(entry.url) }));
+  assert(glossaryDefinitionUrls.every(({ entry, url }) => url.origin === "https://www.uscis.gov" && decodeURIComponent(url.hash.replace(/^#:~:text=/, "")) === entry.term), "A USCIS Glossary source link does not target its exact term.");
   const disasterReliefHtml = renderDefinitionInlineText(glossaryDefinition("Disaster relief"));
   const aNumberHtml = renderDefinitionInlineText(glossaryDefinition("A-Number/Alien Registration Number/Alien Number (A-Number or A#)"));
   const arrivalRecordHtml = renderDefinitionInlineText(glossaryDefinition("Arrival-Departure Record (Form I-94/I-94A)"));
@@ -1316,6 +1667,76 @@ async function main() {
   assert(glossaryExternalLinks.some(link => new URL(link.href).hostname === "justice.gov"), "The embedded Justice Department URLs are not clickable.");
   const glossaryDefinitionLinks = full.corpus.definitions.entries.flatMap(entry => glossaryInlineLinks(entry).filter(link => link.kind === "definition"));
   assert.strictEqual(glossaryDefinitionLinks.length, 23, "The glossary-wide cross-reference linker missed expected See references.");
+  const definitionScopesById = new Map(full.corpus.definitions.scopes.map(scope => [scope.id, scope]));
+  const definitionEntrySafeUrl = value => {
+    try { const parsed = new URL(value); return parsed.protocol === "https:" && glossaryAllowedHosts.has(parsed.hostname) ? parsed.href : ""; }
+    catch { return ""; }
+  };
+  const definitionReferenceSlice = extractedFunction(fallbackSource, "definitionReferenceSlice", "renderDefinitionLegalBody", {});
+  const definitionSourceNode = (section, path) => {
+    let nodes = section?.body || [];
+    let node = null;
+    for (const part of path || []) {
+      node = nodes.find(candidate => String(candidate.label) === String(part));
+      if (!node) return null;
+      nodes = node.children || [];
+    }
+    return node;
+  };
+  const renderDefinitionLegalBody = extractedFunction(fallbackSource, "renderDefinitionLegalBody", "renderDefinitionEntry", {
+    String,
+    Number,
+    corpus: full.corpus,
+    statuteNodeAtPath: definitionSourceNode,
+    definitionReferenceSlice,
+    formatStatutoryRunInText: value => escapeStatutoryHtml(value),
+    renderStatutoryNode: child => `<span data-definition-child="${escapeStatutoryHtml(child.label)}">${escapeStatutoryHtml(child.text)}</span>`
+  });
+  const renderDefinitionEntry = extractedFunction(fallbackSource, "renderDefinitionEntry", "renderDefinitions", {
+    definitionScope: entry => definitionScopesById.get(entry.scopeId),
+    definitionApplicabilityMatches: () => true,
+    safeUrl: definitionEntrySafeUrl,
+    escapeHtml: escapeStatutoryHtml,
+    renderDefinitionInlineText: entry => escapeStatutoryHtml(entry.text),
+    renderDefinitionLegalBody,
+    officialTextFragment: (url, path) => `${url}#substructure-location_${path.join("_")}`
+  });
+  const accommodationEntryHtml = renderDefinitionEntry(glossaryDefinition("Accommodation"));
+  assert(accommodationEntryHtml.includes('<a class="definition-citation" href="https://www.uscis.gov/tools/glossary#:~:text=Accommodation"'), "The USCIS Glossary source label is not linked to the selected definition.");
+  assert(accommodationEntryHtml.includes("<dt>Applies in</dt>") && accommodationEntryHtml.includes("<dt>Source context</dt>") && !accommodationEntryHtml.includes("<dt>Defined at</dt>") && !accommodationEntryHtml.includes("<dt>Source scope</dt>"), "A glossary definition does not display only its useful applicability and context metadata.");
+  assert(accommodationEntryHtml.includes('<details class="definition-scope-details"><summary>Definition details</summary>') && !accommodationEntryHtml.includes('<details class="definition-scope-details" open'), "Glossary metadata is not collapsed by default.");
+  assert(!accommodationEntryHtml.includes("Open official source") && !accommodationEntryHtml.includes("definition-actions"), "A glossary definition still renders a separate source-action row.");
+  const cfrDefinitionEntry = full.corpus.definitions.entries.find(entry => entry.sourceFamily === "cfr");
+  const cfrDefinitionEntryHtml = renderDefinitionEntry(cfrDefinitionEntry);
+  assert(cfrDefinitionEntryHtml.includes(`<button class="definition-citation" type="button" data-show-cfr-citation="${cfrDefinitionEntry.citation}"`), "The CFR definition citation does not navigate to its local INASearch text.");
+  assert(cfrDefinitionEntryHtml.includes('<a class="definition-official-link" href="https://www.ecfr.gov/') && cfrDefinitionEntryHtml.includes('title="Open on eCFR.gov"'), "The CFR definition citation has no adjacent official-source control.");
+  assert(cfrDefinitionEntryHtml.includes("<dt>Defined at</dt>") && cfrDefinitionEntryHtml.includes("<dt>Applies in</dt>") && cfrDefinitionEntryHtml.includes("<dt>Source scope</dt>"), "A legal definition lost its scope metadata.");
+  assert(cfrDefinitionEntryHtml.includes('<details class="definition-scope-details"><summary>Definition details</summary>') && !cfrDefinitionEntryHtml.includes('<details class="definition-scope-details" open'), "Legal-definition metadata is not collapsed by default.");
+  assert(!cfrDefinitionEntryHtml.includes("View citation in INASearch") && !cfrDefinitionEntryHtml.includes("definition-actions"), "The redundant legal-definition action row remains.");
+  const inaDefinitionEntry = full.corpus.definitions.entries.find(entry => entry.sourceFamily === "ina" && entry.path?.length);
+  const inaDefinitionEntryHtml = renderDefinitionEntry(inaDefinitionEntry);
+  assert(inaDefinitionEntryHtml.includes(`<button class="definition-citation" type="button" data-show-citation="${inaDefinitionEntry.citation}"`), "The INA definition citation does not navigate to its local INASearch text.");
+  assert(inaDefinitionEntryHtml.includes('<a class="definition-official-link" href="https://uscode.house.gov/') && inaDefinitionEntryHtml.includes("#substructure-location_"), "The INA definition has no adjacent House.gov control targeting its statutory unit.");
+  const childDefinitionEntry = definitionsFor("child").find(entry => entry.citation === "INA 101(b)(1)");
+  const childDefinitionHtml = renderDefinitionEntry(childDefinitionEntry);
+  assert(childDefinitionHtml.includes('data-definition-child="A"') && childDefinitionHtml.includes('data-definition-child="G"'), "The INA 101(b)(1) child definition still omits its seven defining subparagraphs.");
+  const asylumOfficerEntry = definitionsFor("asylum officer").find(entry => entry.citation === "INA 235(b)(1)(E)");
+  const asylumOfficerHtml = renderDefinitionEntry(asylumOfficerEntry);
+  assert(asylumOfficerHtml.includes('data-definition-child="i"') && asylumOfficerHtml.includes('data-definition-child="ii"'), "The asylum-officer definition still omits its two defining clauses.");
+  const aggravatedFelonyEntry = definitionsFor("aggravated felony").find(entry => entry.citation === "INA 101(a)(43)");
+  const aggravatedFelonyHtml = renderDefinitionEntry(aggravatedFelonyEntry);
+  assert(aggravatedFelonyHtml.indexOf("means—") < aggravatedFelonyHtml.indexOf('data-definition-child="A"') && aggravatedFelonyHtml.indexOf('data-definition-child="U"') < aggravatedFelonyHtml.indexOf("The term applies to an offense"), "A definition with trailing statutory text is rendered out of source order.");
+  const previewDetail = { innerHTML: "" };
+  const renderDefinitionPreview = extractedFunction(fallbackSource, "renderDefinitionPreview", "sameStatuteHierarchyItem", {
+    els: { detail: previewDetail },
+    definitionScope: entry => definitionScopesById.get(entry.scopeId),
+    renderDefinitionLegalBody,
+    escapeHtml: escapeStatutoryHtml,
+    openButton: () => "",
+    truncate: value => String(value)
+  });
+  renderDefinitionPreview(asylumOfficerEntry);
+  assert(previewDetail.innerHTML.includes('data-definition-child="i"') && previewDetail.innerHTML.includes('data-definition-child="ii"'), "The search-result definition preview still truncates structural definitions at the chapeau.");
   let openedDefinitionReference = "";
   const focusedDefinitionReferences = [];
   const scrolledDefinitionReferences = [];
@@ -1360,6 +1781,38 @@ async function main() {
   const statuteFootnoteAppendix = extractedFunction(fallbackSource, "statuteFootnoteAppendix", "statuteNodePlainText", { HOUSE_FOOTNOTE_STATEMENT: "House editorial footnotes are publisher-supplied editorial content and are not operative statutory text." });
   const statuteNodePlainText = extractedFunction(fallbackSource, "statuteNodePlainText", "statuteUnitText", { textWithHouseFootnoteMarkers, Set });
   const statuteUnitText = extractedFunction(fallbackSource, "statuteUnitText", "cfrBlockPlainText", { statuteNodeAtPath: (section, path) => path.reduce((nodes, token, index) => (index ? nodes?.children : section.body)?.find(node => String(node.label) === String(token)), null), statuteNodePlainText, statuteFootnoteAppendix, textWithHouseFootnoteMarkers, Set });
+  const legalReferenceContextForElement = extractedFunction(fallbackSource, "legalReferenceContextForElement", "legalReferencePopoverPlacement", { corpus: hydratedSource, statuteUnitText, cfrSectionIdMap, cfrUnitText, JSON, String });
+  const legalReferencePopoverPlacement = extractedFunction(fallbackSource, "legalReferencePopoverPlacement", "positionLegalReferencePopover", { Math, Number });
+  const referenceTriggerRect = { left: 425, right: 585, top: 250, bottom: 270 };
+  const referencePopoverRect = { width: 590, height: 410 };
+  const sidePlacement = plain(legalReferencePopoverPlacement(referenceTriggerRect, referencePopoverRect, 1371, 664));
+  assert.strictEqual(sidePlacement.side, "right", "A tall legal-reference preview was not moved beside its trigger.");
+  assert(sidePlacement.left >= referenceTriggerRect.right + 10, "The legal-reference preview overlaps the triggering citation.");
+  assert(sidePlacement.left + referencePopoverRect.width <= 1361 && sidePlacement.top >= 10 && sidePlacement.top + referencePopoverRect.height <= 654, "The side-positioned legal-reference preview escaped the viewport.");
+  const belowPlacement = plain(legalReferencePopoverPlacement({ left: 200, right: 320, top: 100, bottom: 120 }, { width: 420, height: 220 }, 1200, 800));
+  assert.strictEqual(belowPlacement.side, "below", "A legal-reference preview with clear space below did not use it.");
+  assert(belowPlacement.top >= 130, "A below-positioned legal-reference preview covers its triggering citation.");
+  const leftPlacement = plain(legalReferencePopoverPlacement({ left: 1050, right: 1220, top: 260, bottom: 280 }, referencePopoverRect, 1371, 664));
+  assert.strictEqual(leftPlacement.side, "left", "A right-edge legal-reference preview was not moved to the open left side.");
+  assert(leftPlacement.left + referencePopoverRect.width <= 1040, "A left-positioned legal-reference preview covers its triggering citation.");
+  const constrainedPlacement = plain(legalReferencePopoverPlacement({ left: 120, right: 280, top: 240, bottom: 260 }, { width: 380, height: 410 }, 400, 500));
+  assert(constrainedPlacement.maxHeight > 0 && constrainedPlacement.top >= 270, "A constrained legal-reference preview was not bounded to a non-overlapping vertical region.");
+  assert(/<a class="legal-reference-popover-citation" id="legalReferencePopoverCitation"[^>]*target="_blank"/.test(fallbackSource), "The preview citation is not the official-source link.");
+  assert(!fallbackSource.includes("Open verified official source") && !fallbackSource.includes("legalReferencePopoverActions") && !fallbackSource.includes("data-open-legal-reference"), "The redundant preview footer button remains in the application.");
+  const hydrated1184Reference = runtimeHouseReferenceFixture.source.references[0];
+  const reference1184Preview = legalReferenceContextForElement({
+    dataset: {
+      referenceFamily: hydrated1184Reference.family,
+      referenceResolution: hydrated1184Reference.resolution,
+      referenceTitle: hydrated1184Reference.targetTitle,
+      referenceSection: hydrated1184Reference.targetSection,
+      referencePath: JSON.stringify(hydrated1184Reference.targetPath),
+      referenceUrl: hydrated1184Reference.officialUrl,
+      referenceCitation: "8 U.S.C. 1184(i)(1)"
+    },
+    textContent: hydrated1184Reference.text
+  });
+  assert(reference1184Preview.text.startsWith("(1) Except as provided in paragraph (3)"), "A locally resolved House link still produces an empty offline preview.");
   const testComponentTokens = value => [...String(value || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]);
   const testUscToIna = new Map([["1101", { inaSection: "101", uscSection: "1101" }]]);
   const indexedStatutePathExists = extractedFunction(fallbackSource, "indexedStatutePathExists", "resolvedRunInStatutePath", { corpus: hydratedSource, uscToIna: testUscToIna, normCitationPart: statutoryNormPart, compactStatutePathIndex: compactPathApi.compactStatutePathIndex });
@@ -1599,10 +2052,13 @@ async function main() {
   const formattedHDefinition = formatStatutoryRunInText(statutoryNode(hydratedSource, "1101", ["a", "15", "H"]).text, "H");
   assert(formattedHDefinition.includes('<strong class="inline-address">(i)(a)</strong>'));
   assert(formattedHDefinition.includes('<strong class="inline-address">(ii)(a)</strong>'));
+  assert(/class="statutory-runin-line" style="--depth:2"[^>]*><strong class="inline-address">\(i\)\(a\)<\/strong>/.test(formattedHDefinition), "A two-level run-in unit does not receive two levels of standard indentation.");
   const actionableHDefinition = formatStatutoryRunInText(statutoryNode(hydratedSource, "1101", ["a", "15", "H"]).text, "H", [], null, { sectionId: section1101ForCompactPaths.id, currentPath: ["a", "15", "H"], parentPath: ["a", "15"], citationBase: "8 U.S.C. 1101", targetPath: ["a", "15", "H", "i", "b"] });
   assert(actionableHDefinition.includes('data-legal-unit-citation="8 U.S.C. 1101(a)(15)(H)(i)(a)"'), "A run-in statutory unit does not receive its own citation action trigger.");
   assert(actionableHDefinition.includes('data-legal-unit-citation="8 U.S.C. 1101(a)(15)(H)(i)(b)"'), "H-1B's run-in statutory unit does not receive its complete indexed citation path.");
   assert(actionableHDefinition.includes('data-statute-inline-target aria-label="Citation target"'), "A virtual run-in citation does not become the visible scroll target.");
+  assert(/class="statutory-runin-line" style="--depth:2"[^>]*>[\s\S]*?data-legal-unit-citation="8 U\.S\.C\. 1101\(a\)\(15\)\(H\)\(i\)\(a\)"/.test(actionableHDefinition), "A validated nested run-in path does not use its relative statutory depth.");
+  assert(/class="statutory-runin-line" style="--depth:1"[^>]*>[\s\S]*?data-legal-unit-citation="8 U\.S\.C\. 1101\(a\)\(15\)\(H\)\(iii\)"/.test(actionableHDefinition), "A validated sibling run-in path does not align at the standard statutory depth.");
   assert.strictEqual((formatStatutoryRunInText(statutoryNode(hydratedSource, "1104", ["a"]).text, "a").match(/statutory-runin-line/g) || []).length, 3, "Numeric run-in paragraphs were not formatted.");
   assert.strictEqual((formatStatutoryRunInText(statutoryNode(hydratedSource, "1430", ["b"]).text, "b").match(/statutory-runin-line/g) || []).length, 6, "Nested numeric and letter run-ins were not formatted.");
   assert(formatStatutoryRunInText(statutoryNode(hydratedSource, "1182", ["j", "2", "B", "ii", "I"]).text, "I").includes('<strong class="inline-address">(II)</strong>'), "A run-in sibling retained inside the prior node was not formatted.");
@@ -1639,7 +2095,7 @@ async function main() {
   assert.strictEqual(statutoryFormattingAudit.nodes, 6973, "The statutory formatting audit did not visit every cached node.");
   assert.strictEqual(statutoryFormattingAudit.formattedNodes, 103, "Unexpected change in the set of cached nodes requiring run-in formatting.");
   assert.strictEqual(statutoryFormattingAudit.runInLines, 261, "Unexpected change in the number of formatted cached run-in provisions.");
-  assert.strictEqual(statutoryFormattingAudit.citationLinks, 3096, "Unexpected generated-link count in operative statutory text.");
+  assert.strictEqual(statutoryFormattingAudit.citationLinks, 1765, "Unexpected generated-link count in operative statutory text.");
   let ancillaryCitationLinks = 0;
   for (const section of hydratedSource.title8.sections) {
     ancillaryCitationLinks += (linkifyStatutoryText(section.preamble || "", section.preambleReferences || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
@@ -1647,7 +2103,7 @@ async function main() {
     for (const note of section.notes || []) ancillaryCitationLinks += (linkifyStatutoryText(note.text || "", note.references || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
     for (const footnote of section.houseEditorialFootnotes || []) ancillaryCitationLinks += (linkifyStatutoryText(footnote.text || "", footnote.references || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
   }
-  assert.strictEqual(statutoryFormattingAudit.citationLinks + ancillaryCitationLinks, 18647, "Unexpected total generated-link count in displayed cached statutory material.");
+  assert.strictEqual(statutoryFormattingAudit.citationLinks + ancillaryCitationLinks, 15933, "Unexpected total generated-link count in displayed cached statutory material.");
 
   const parseAssignedProfile = extractedFunction(fallbackSource, "assignedJsonObjectFromText", "validateStandaloneSource");
   const migration = profileMigrationFunctions(fallbackSource);
@@ -1767,7 +2223,7 @@ async function main() {
   console.log(`PASS INASearch-AU.html: ${allUnlocked.bytes} bytes; ${allUnlocked.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS INASearch-Uncompressed.html: ${uncompressed.bytes} bytes; ${uncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
   console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${statutoryFormattingAudit.citationLinks} generated citation links`);
-  console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 61 INA clauses; 32 exact 8 CFR 1.2 entries`);
+  console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 199 INA term entries from 170 definition statements; 32 exact 8 CFR 1.2 entries`);
   console.log(`PASS CFR audit: ${full.corpus.cfr.coverage.partCount} active parts; ${full.corpus.cfr.sections.length} sections; ${full.corpus.cfr.appendices.length} appendices; ${full.corpus.cfr.graphics.length} referenced graphics; 1 removed-part tombstone`);
   console.log("PASS round trips, hashes, PTAR boundary/intersection, nested CFR citations, exact visible-match targeting, regulation history, syntax, native loaders, corruption handling, deterministic gzip and plain JSON, profile isolation, comprehensive legacy profile migration, statutory formatting, saving-menu state rules, and ordinary gzip extraction");
 }

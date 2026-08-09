@@ -29,6 +29,33 @@ function overlaps(reference, occupied) {
   return occupied.some(span => reference.start < span.end && reference.end > span.start);
 }
 
+function pathStartsWith(path, prefix) {
+  return prefix.length <= path.length && prefix.every((token, index) => String(token).toLowerCase() === String(path[index]).toLowerCase());
+}
+
+function isSelfReference(reference, context) {
+  if (reference.ruleId === "context-this-unit") return true;
+  if (!context.suppressSelfReferences || reference.resolution !== "local") return false;
+  const family = context.kind === "cfr" ? "cfr" : "usc";
+  return reference.family === family &&
+    String(reference.targetTitle || "") === String(context.title || "") &&
+    String(reference.targetSection || "") === String(context.section || "") &&
+    pathStartsWith(context.path || [], reference.targetPath || []);
+}
+
+function retainNavigableReferences(references, context) {
+  return references.filter(reference => {
+    if (!isSelfReference(reference, context)) return true;
+    const audit = context.referenceAudit;
+    if (audit) {
+      audit.suppressedSelfReferences += 1;
+      audit.suppressedByRule[reference.ruleId || "unknown"] = (audit.suppressedByRule[reference.ruleId || "unknown"] || 0) + 1;
+      audit.suppressedByFamily[reference.family || "unknown"] = (audit.suppressedByFamily[reference.family || "unknown"] || 0) + 1;
+    }
+    return false;
+  });
+}
+
 function makeId(context, start, ruleId, index = 0) {
   return `${context.sourceId || context.kind || "legal"}-${start}-${ruleId}-${index}`.replace(/[^A-Za-z0-9_-]+/g, "-");
 }
@@ -159,10 +186,10 @@ function contextualReferenceCandidates(text, context) {
 }
 
 function generatedReferences(text, context, existing = []) {
-  const occupied = [...(existing || [])].sort((a, b) => a.start - b.start || a.end - b.end);
-  const candidates = [...explicitReferenceCandidates(text, context), ...contextualReferenceCandidates(text, context)]
+  const occupied = retainNavigableReferences([...(existing || [])], context).sort((a, b) => a.start - b.start || a.end - b.end);
+  const candidates = retainNavigableReferences([...explicitReferenceCandidates(text, context), ...contextualReferenceCandidates(text, context)]
     .filter(reference => reference.end > reference.start && String(text).slice(reference.start, reference.end) === reference.text)
-    .sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start) || a.ruleId.localeCompare(b.ruleId));
+    .sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start) || a.ruleId.localeCompare(b.ruleId)), context);
   for (const candidate of candidates) {
     if (overlaps(candidate, occupied)) continue;
     occupied.push(candidate);
@@ -202,7 +229,8 @@ function legalReferenceContext(corpus) {
 }
 
 function applyGeneratedLegalReferences(corpus) {
-  const shared = legalReferenceContext(corpus);
+  const referenceAudit = { suppressedSelfReferences: 0, suppressedByRule: {}, suppressedByFamily: {} };
+  const shared = { ...legalReferenceContext(corpus), referenceAudit };
   let generated = 0;
   const attach = (source, field, context) => {
     if (!source || !Object.hasOwn(source, field) || !source[field]) return;
@@ -214,7 +242,7 @@ function applyGeneratedLegalReferences(corpus) {
   const walkUsc = (section, nodes, path = []) => {
     for (const node of nodes || []) {
       const nodePath = [...path, String(node.label)];
-      const context = { kind: "usc", title: "8", section: String(section.section), path: nodePath, sourceId: `usc-${section.section}-${nodePath.join("-")}` };
+      const context = { kind: "usc", title: "8", section: String(section.section), path: nodePath, sourceId: `usc-${section.section}-${nodePath.join("-")}`, suppressSelfReferences: true };
       attach(node, "heading", context);
       attach(node, "text", context);
       walkUsc(section, node.children, nodePath);
@@ -222,8 +250,8 @@ function applyGeneratedLegalReferences(corpus) {
   };
   for (const section of corpus.title8?.sections || []) {
     const context = { kind: "usc", title: "8", section: String(section.section), path: [], sourceId: `usc-${section.section}` };
-    attach(section, "heading", context);
-    attach(section, "preamble", context);
+    attach(section, "heading", { ...context, suppressSelfReferences: true });
+    attach(section, "preamble", { ...context, suppressSelfReferences: true });
     attach(section, "sourceCredit", context);
     walkUsc(section, section.body);
     (section.notes || []).forEach((note, index) => { attach(note, "heading", { ...context, sourceId: `usc-${section.section}-note-${index + 1}` }); attach(note, "text", { ...context, sourceId: `usc-${section.section}-note-${index + 1}` }); });
@@ -232,7 +260,7 @@ function applyGeneratedLegalReferences(corpus) {
   const attachCfrBlocks = (section, blocks, pathPrefix = []) => {
     (blocks || []).forEach((block, index) => {
       const path = pathTokens(block.a || block.u?.at(-1)?.a || "");
-      const context = { kind: "cfr", title: String(section.title), section: String(section.section || ""), path, sourceId: `cfr-${section.id}-${[...pathPrefix, index].join("-")}` };
+      const context = { kind: "cfr", title: String(section.title), section: String(section.section || ""), path, sourceId: `cfr-${section.id}-${[...pathPrefix, index].join("-")}`, suppressSelfReferences: true };
       attach(block, "x", context);
       if (block.t === "table") {
         (block.rows || []).forEach((row, rowIndex) => row.forEach((cell, cellIndex) => attach(cell, "x", { ...context, sourceId: `${context.sourceId}-cell-${rowIndex}-${cellIndex}` })));
@@ -241,7 +269,7 @@ function applyGeneratedLegalReferences(corpus) {
     });
   };
   for (const section of [...(corpus.cfr?.sections || []), ...(corpus.cfr?.appendices || [])]) {
-    attach(section, "heading", { kind: "cfr", title: String(section.title), section: String(section.section || ""), path: [], sourceId: `cfr-${section.id}-heading`, ...shared });
+    attach(section, "heading", { kind: "cfr", title: String(section.title), section: String(section.section || ""), path: [], sourceId: `cfr-${section.id}-heading`, suppressSelfReferences: true, ...shared });
     attachCfrBlocks(section, section.blocks);
   }
   for (const part of corpus.cfr?.parts || []) {
@@ -250,11 +278,14 @@ function applyGeneratedLegalReferences(corpus) {
     attach(part, "source", context);
   }
   corpus.legalReferenceMetadata = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     generatedReferences: generated,
+    suppressedSelfReferences: referenceAudit.suppressedSelfReferences,
+    suppressedSelfReferencesByRule: referenceAudit.suppressedByRule,
+    suppressedSelfReferencesByFamily: referenceAudit.suppressedByFamily,
     generatedAtBuild: true,
     runtimeNetworkForPreviews: false,
-    rules: ["house-uslm-ref", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-this-unit", "context-title8-cfr-the-act", "ambiguous-antecedent"]
+    rules: ["house-uslm-ref", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent"]
   };
   return corpus;
 }
