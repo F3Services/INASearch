@@ -1,10 +1,15 @@
-/* AuthoritySearch public corpus. Replace as one reviewed unit. */
-window.AUTHORITY_SEARCH_CORPUS = {
-  "schemaVersion": 1,
-  "corpusVersion": "2026.07.31-12",
+/* INASearch public corpus. Replace as one reviewed unit. */
+window.INA_SEARCH_CORPUS = {
+  "schemaVersion": 3,
+  "corpusVersion": "2026.08.09-9",
   "capturedAt": "2026-07-30",
   "verifiedAt": "2026-07-31",
   "verification": {
+    "nonimmigrantTableRows": 84,
+    "immigrantTableRows": 158,
+    "resourceUnlockQuestions": 49,
+    "nonimmigrantResourceUnlockQuestions": 18,
+    "immigrantResourceUnlockQuestions": 31,
     "visaCards": 85,
     "summaryQuestions": 85,
     "factQuestions": 579,
@@ -16,14 +21,21 @@ window.AUTHORITY_SEARCH_CORPUS = {
     "activityRestrictionQuestions": 86,
     "classificationRequirementQuestions": 107,
     "sourceRecordsAudited": 752,
-    "appendixCitationCorrections": 27,
-    "ecfrCurrentThrough": "2026-07-29"
+    "appendixCitationCorrections": 27
   },
   "approvedDomains": [
     "ecfr.gov",
+    "eforms.state.gov",
+    "govinfo.gov",
+    "images.federalregister.gov",
+    "irs.gov",
+    "justice.gov",
     "uscis.gov",
     "uscode.house.gov",
     "www.ecfr.gov",
+    "www.govinfo.gov",
+    "www.irs.gov",
+    "www.justice.gov",
     "www.uscis.gov"
   ],
   "sources": {
@@ -45,7 +57,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
       "publisher": "U.S. Citizenship and Immigration Services",
       "url": "https://www.uscis.gov/policy-manual",
       "capturedAt": "2026-07-30",
-      "coverage": "Hierarchy and resource metadata only; complete Policy Manual prose is not cached."
+      "coverage": "Hierarchy and resource metadata only; complete Policy Manual prose is not included."
     },
     "forms": {
       "name": "All Forms",
@@ -80,7 +92,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
       "publisher": "Office of the Federal Register / U.S. Government Publishing Office",
       "url": "https://www.ecfr.gov/current",
       "capturedAt": "2026-07-29",
-      "coverage": "Citation routing plus reviewed short excerpts supporting nonimmigrant card facts; complete regulation text is not cached."
+      "coverage": "Citation routing plus reviewed short excerpts supporting nonimmigrant card facts; complete regulation text is not included."
     }
   },
   "title8": {
@@ -191132,7 +191144,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "Yes. Files Form I-129, per 8 CFR 212.2(h)(4)(v)(E)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -191142,7 +191154,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 ],
                 "verifiedAt": "2026-07-31",
                 "qualificationExcerpt": "1 This classification can no longer be sought as of December 20, 2009. See the Nursing Relief for Disadvantaged Areas Reauthorization Act of 2005, Pub. L. 109-423.",
-                "verificationNote": "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(1)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)"
               },
@@ -191187,7 +191199,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "Yes. Files Form I-129, per 8 CFR 212.2(h)(4)(v)(E)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 248.1(a) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 248.1(a) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -191197,7 +191209,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 ],
                 "verifiedAt": "2026-07-31",
                 "qualificationExcerpt": "1 This classification can no longer be sought as of December 20, 2009. See the Nursing Relief for Disadvantaged Areas Reauthorization Act of 2005, Pub. L. 109-423.",
-                "verificationNote": "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 248.1(a) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 248.1(a) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 248.1(a)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.1#p-248.1(a)"
               },
@@ -191454,13 +191466,13 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 212.2(h)(4)(v)(E)",
               "verified": "8 CFR 214.1(c)(1)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)",
-              "note": "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
             },
             {
               "printed": "8 CFR 212.2(h)(4)(v)(E)",
               "verified": "8 CFR 248.1(a)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.1#p-248.1(a)",
-              "note": "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 248.1(a) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 212.2(h)(4)(v)(E). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 248.1(a) on 2026-07-31."
             }
           ]
         }
@@ -194973,7 +194985,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "No, per 8 CFR 248.2(2), except for change to T and U status, 8 CFR 248.2(b), using Form I-914 or I-918",
                 "verificationNotes": [
-                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31.",
+                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31.",
                   "The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
@@ -194987,7 +194999,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
+                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
                 "verifiedLocator": "8 CFR 248.2(a)(2); 8 CFR 214.204",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)"
               },
@@ -195190,7 +195202,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 248.2(2)",
               "verified": "8 CFR 248.2(a)(2)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)",
-              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31."
+              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31."
             },
             {
               "printed": "8 CFR 248.2(b)",
@@ -195346,7 +195358,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "No, per 8 CFR 248.2(2), except for change to T and U status, 8 CFR 248.2(b), using Form I-914 or I-918",
                 "verificationNotes": [
-                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31.",
+                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31.",
                   "The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
@@ -195360,7 +195372,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
+                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
                 "verifiedLocator": "8 CFR 248.2(a)(2); 8 CFR 214.204",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)"
               },
@@ -195563,7 +195575,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 248.2(2)",
               "verified": "8 CFR 248.2(a)(2)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)",
-              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31."
+              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31."
             },
             {
               "printed": "8 CFR 248.2(b)",
@@ -200940,7 +200952,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "Yes. Files Form I-129, per 8 CFR 213.1(c)(3)(i)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -200949,7 +200961,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(1)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)"
               },
@@ -201231,7 +201243,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 213.1(c)(3)(i)",
               "verified": "8 CFR 214.1(c)(1)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)",
-              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
             }
           ]
         }
@@ -201336,7 +201348,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "Yes. Files Form I-129, per 8 CFR 213.1(c)(3)(i)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -201345,7 +201357,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(1)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)"
               },
@@ -201588,7 +201600,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 213.1(c)(3)(i)",
               "verified": "8 CFR 214.1(c)(1)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)",
-              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
             }
           ]
         }
@@ -201693,7 +201705,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "Yes. Files Form I-129, per 8 CFR 213.1(c)(3)(i)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -201702,7 +201714,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(1)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)"
               },
@@ -201945,7 +201957,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 213.1(c)(3)(i)",
               "verified": "8 CFR 214.1(c)(1)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)",
-              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
             }
           ]
         }
@@ -202378,7 +202390,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "Yes. Files Form I-129, per 8 CFR 213.1(c)(3)(i)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -202387,7 +202399,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(1)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)"
               },
@@ -202748,7 +202760,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 213.1(c)(3)(i)",
               "verified": "8 CFR 214.1(c)(1)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)",
-              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
             }
           ]
         }
@@ -202852,7 +202864,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "Yes. Files Form I-129, per 8 CFR 213.1(c)(3)(i)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -202861,7 +202873,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(1)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)"
               },
@@ -203222,7 +203234,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 213.1(c)(3)(i)",
               "verified": "8 CFR 214.1(c)(1)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(1)",
-              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(i). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(1) on 2026-07-31."
             }
           ]
         }
@@ -203742,7 +203754,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "No, per 8 CFR 213.1(c)(3)(vi)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -203751,7 +203763,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(3)(vi)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(3)(vi)"
               },
@@ -203796,7 +203808,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "No, per 8 CFR 248.2(2) except for change to T and U status, 8 CFR 248.2(b), using Form I-914 or Form I-918",
                 "verificationNotes": [
-                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31.",
+                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31.",
                   "The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
@@ -203810,7 +203822,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
+                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
                 "verifiedLocator": "8 CFR 248.2(a)(2); 8 CFR 214.204",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)"
               },
@@ -204051,13 +204063,13 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 213.1(c)(3)(vi)",
               "verified": "8 CFR 214.1(c)(3)(vi)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(3)(vi)",
-              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
             },
             {
               "printed": "8 CFR 248.2(2)",
               "verified": "8 CFR 248.2(a)(2)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)",
-              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31."
+              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31."
             },
             {
               "printed": "8 CFR 248.2(b)",
@@ -204176,7 +204188,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "No, per 8 CFR 213.1(c)(3)(vi)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -204185,7 +204197,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(3)(vi)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(3)(vi)"
               },
@@ -204230,7 +204242,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "No, per 8 CFR 248.2(2) except for change to T and U status, 8 CFR 248.2(b), using Form I-914 or Form I-918",
                 "verificationNotes": [
-                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31.",
+                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31.",
                   "The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
@@ -204244,7 +204256,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
+                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
                 "verifiedLocator": "8 CFR 248.2(a)(2); 8 CFR 214.204",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)"
               },
@@ -204485,13 +204497,13 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 213.1(c)(3)(vi)",
               "verified": "8 CFR 214.1(c)(3)(vi)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(3)(vi)",
-              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
             },
             {
               "printed": "8 CFR 248.2(2)",
               "verified": "8 CFR 248.2(a)(2)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)",
-              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31."
+              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31."
             },
             {
               "printed": "8 CFR 248.2(b)",
@@ -204604,7 +204616,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "No, per 8 CFR 213.1(c)(3)(vi)",
                 "verificationNotes": [
-                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
+                  "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
                   {
@@ -204613,7 +204625,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31.",
+                "verificationNote": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31.",
                 "verifiedLocator": "8 CFR 214.1(c)(3)(vi)",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(3)(vi)"
               },
@@ -204658,7 +204670,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                 "catalogItemId": "pm-appendix-806",
                 "supportingExcerpt": "No, per 8 CFR 248.2(2) except for change to T and U status, 8 CFR 248.2(b), using Form I-914 or Form I-918",
                 "verificationNotes": [
-                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31.",
+                  "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31.",
                   "The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31."
                 ],
                 "verifiedAuthorities": [
@@ -204672,7 +204684,7 @@ window.AUTHORITY_SEARCH_CORPUS = {
                   }
                 ],
                 "verifiedAt": "2026-07-31",
-                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
+                "verificationNote": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31. The appendix cites 8 CFR 248.2(b) for both T and U. The current provision addresses U; the current T-status application procedure is 8 CFR 214.204, verified on 2026-07-31.",
                 "verifiedLocator": "8 CFR 248.2(a)(2); 8 CFR 214.204",
                 "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)"
               },
@@ -204912,13 +204924,13 @@ window.AUTHORITY_SEARCH_CORPUS = {
               "printed": "8 CFR 213.1(c)(3)(vi)",
               "verified": "8 CFR 214.1(c)(3)(vi)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-214.1#p-214.1(c)(3)(vi)",
-              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; AuthoritySearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
+              "note": "The USCIS appendix prints 8 CFR 213.1(c)(3)(vi). That citation does not identify the current governing provision; INASearch verified this answer against 8 CFR 214.1(c)(3)(vi) on 2026-07-31."
             },
             {
               "printed": "8 CFR 248.2(2)",
               "verified": "8 CFR 248.2(a)(2)",
               "verifiedUrl": "https://www.ecfr.gov/current/title-8/section-248.2#p-248.2(a)(2)",
-              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). AuthoritySearch verified the current locator on 2026-07-31."
+              "note": "The appendix omits paragraph (a) from 8 CFR 248.2(a)(2). INASearch verified the current locator on 2026-07-31."
             },
             {
               "printed": "8 CFR 248.2(b)",
