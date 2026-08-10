@@ -15,6 +15,7 @@ const { applyStatuteReferences, statuteSourceMap } = require("./statute-referenc
 const { applyStatuteFootnotes, reconstructFlattenedField } = require("./statute-footnotes");
 const { applyGeneratedLegalReferences, generatedReferences, legalReferenceContext } = require("./legal-references");
 const { compactHouseHref, expandHouseHref, packLegalReferences, unpackLegalReferences } = require("./pack-legal-references");
+const { indexStatuteRunIns, statuteRunInMarkers } = require("./statute-run-ins");
 
 const root = path.resolve(__dirname, "..");
 
@@ -44,6 +45,7 @@ function sourceCorpus() {
   const statuteReferences = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_STATUTE_REFERENCES));
   applyStatuteReferences(corpus, statuteReferences);
   applyGeneratedLegalReferences(corpus);
+  indexStatuteRunIns(corpus);
   corpus.definitions = buildDefinitionCatalog(corpus, definitions, uscisGlossary);
   packLegalReferences(corpus);
   return corpus;
@@ -1492,6 +1494,12 @@ async function main() {
   assert(inputHandlerSource.includes("closeSearchResults(undefined, true)"), "Clearing the search still rebuilds the previously rendered page.");
   assert(fallbackSource.includes("switchView(destination === \"search\" ? \"definitions\" : destination, false, !reuseRenderedView)"), "The fast close path does not reuse the existing page DOM.");
   const section1101ForCompactPaths = hydratedSource.title8.sections.find(section => String(section.section) === "1101");
+  const section1255ForCompactPaths = hydratedSource.title8.sections.find(section => String(section.section) === "1255");
+  assert.deepStrictEqual(
+    plain(section1255ForCompactPaths.runInPaths.filter(pathParts => pathParts[0] === "c")),
+    ["1", "2", "3", "4", "5", "6", "7", "8"].map(number => ["c", number]),
+    "The generated run-in index does not contain every paragraph of 8 U.S.C. 1255(c)."
+  );
   const compactComponentTokens = raw => {
     const value = String(raw || "").trim();
     if (!value) return [];
@@ -1525,6 +1533,29 @@ async function main() {
   assert.strictEqual(compactH1b.valid, true);
   assert.strictEqual(compactH1b.virtual, true, "Flattened H-1B run-in units were incorrectly treated as structural nodes.");
   assert.strictEqual(compactH1b.ambiguity, null, "A uniquely valid lowercase Roman path was marked ambiguous.");
+  const compactIna245c2 = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "245", section1255ForCompactPaths, "c2"));
+  assert.deepStrictEqual(compactIna245c2.path, ["c", "2"], "Compact INA 245(c)(2) did not resolve through the generated run-in index.");
+  assert.strictEqual(compactIna245c2.virtual, true, "INA 245(c)(2) was incorrectly treated as a structural corpus node.");
+  const parenthesizedIna245c2 = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "245", section1255ForCompactPaths, "(c)(2)"));
+  assert.deepStrictEqual(parenthesizedIna245c2.path, ["c", "2"], "Parenthesized INA 245(c)(2) did not resolve through the generated run-in index.");
+  const inaByUscSection = new Map(hydratedSource.inaCrosswalk.filter(row => row.uscSection).map(row => [String(row.uscSection).toLowerCase(), row]));
+  let auditedGeneratedRunInPaths = 0;
+  for (const section of hydratedSource.title8.sections) {
+    for (const pathParts of section.runInPaths || []) {
+      auditedGeneratedRunInPaths += 1;
+      const parenthesized = plain(compactPathApi.resolveIndexedCompactStatutePath("usc", section.section, section, statutoryCanonicalPath(pathParts)));
+      assert(parenthesized?.valid && JSON.stringify(parenthesized.path) === JSON.stringify(pathParts), `Parenthesized 8 U.S.C. ${section.section}${statutoryCanonicalPath(pathParts)} did not resolve to its generated run-in path.`);
+      const compact = plain(compactPathApi.resolveIndexedCompactStatutePath("usc", section.section, section, pathParts.join("")));
+      const compactOptions = [compact?.path, ...(compact?.ambiguity?.options || []).map(option => option.path)].filter(Boolean);
+      assert(compact?.valid && compactOptions.some(option => JSON.stringify(option) === JSON.stringify(pathParts)), `Compact 8 U.S.C. ${section.section}${statutoryCanonicalPath(pathParts)} does not include its generated run-in path.`);
+      const inaRow = inaByUscSection.get(String(section.section).toLowerCase());
+      if (inaRow) {
+        const inaParenthesized = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", inaRow.inaSection, section, statutoryCanonicalPath(pathParts)));
+        assert(inaParenthesized?.valid && JSON.stringify(inaParenthesized.path) === JSON.stringify(pathParts), `INA ${inaRow.inaSection}${statutoryCanonicalPath(pathParts)} did not resolve to its generated run-in path.`);
+      }
+    }
+  }
+  assert.strictEqual(auditedGeneratedRunInPaths, 256, "The exhaustive compact-citation audit did not visit every generated statutory run-in path.");
   const lowercaseRomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15oiii"));
   assert.deepStrictEqual(lowercaseRomanAmbiguity.path, ["a", "15", "O", "iii"], "The longest valid clause was not selected for an ambiguous lowercase Roman sequence.");
   assert.deepStrictEqual(lowercaseRomanAmbiguity.ambiguity.options.map(option => option.path), [["a", "15", "O", "iii"], ["a", "15", "O", "ii", "I"]], "The valid lowercase Roman interpretations were not listed in priority order.");
@@ -1551,9 +1582,9 @@ async function main() {
   const parseLocalStatute = extractedFunction(fallbackSource, "parseLocalStatute", "parseFallbackStatute", {
     corpus: hydratedSource,
     hasLocalUscCache: true,
-    inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["203", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["215", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
-    sectionMap: new Map([["1101", section1101ForCompactPaths], ["1153", section1153ForCompactPaths], ["1185", section1185ForStartup]]),
-    uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["1153", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["1185", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
+    inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["203", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["215", { inaSection: "215", uscSection: "1185", hasEquivalent: true }], ["245", { inaSection: "245", uscSection: "1255", hasEquivalent: true }]]),
+    sectionMap: new Map([["1101", section1101ForCompactPaths], ["1153", section1153ForCompactPaths], ["1185", section1185ForStartup], ["1255", section1255ForCompactPaths]]),
+    uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["1153", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["1185", { inaSection: "215", uscSection: "1185", hasEquivalent: true }], ["1255", { inaSection: "245", uscSection: "1255", hasEquivalent: true }]]),
     findKnownPrefix,
     resolveIndexedCompactStatutePath: compactPathApi.resolveIndexedCompactStatutePath,
     resolveComponents: resolveComponentsForParser,
@@ -1566,6 +1597,10 @@ async function main() {
   assert(parsedCompactH1b.valid && parsedCompactH1b.label === "INA 101(a)(15)(H)(i)(b)", "The complete compact H-1B citation does not survive the local parser.");
   const parsedDefaultStartup = plain(parseLocalStatute("ina", "203b1a"));
   assert(parsedDefaultStartup.valid && parsedDefaultStartup.label === "INA 203(b)(1)(A)" && JSON.stringify(parsedDefaultStartup.path) === JSON.stringify(["b", "1", "A"]), "The parenthesis-free INA 203b1a startup text does not resolve to INA 203(b)(1)(A).");
+  const parsedCompactIna245c2 = plain(parseLocalStatute("ina", "245c2"));
+  assert(parsedCompactIna245c2.valid && parsedCompactIna245c2.label === "INA 245(c)(2)" && JSON.stringify(parsedCompactIna245c2.path) === JSON.stringify(["c", "2"]), "The complete compact INA 245(c)(2) citation does not survive the local parser.");
+  const parsedParenthesizedIna245c2 = plain(parseLocalStatute("ina", "245(c)(2)"));
+  assert(parsedParenthesizedIna245c2.valid && parsedParenthesizedIna245c2.label === "INA 245(c)(2)" && JSON.stringify(parsedParenthesizedIna245c2.path) === JSON.stringify(["c", "2"]), "The parenthesized INA 245(c)(2) citation does not survive the local parser.");
   const parsedRomanAmbiguity = plain(parseLocalStatute("ina", "101a15oiii"));
   assert(parsedRomanAmbiguity.valid && parsedRomanAmbiguity.ambiguity.options.length === 2, "The local parser did not retain valid ambiguity choices.");
   assert.deepStrictEqual(parsedRomanAmbiguity.renderPath, ["a", "15", "O", "iii"], "The parser still truncates a selected compact path before navigation.");
@@ -2090,24 +2125,54 @@ async function main() {
     assert(!formatStatutoryRunInText(node.text, node.label).includes("statutory-runin-line"), `Reference-only text was split into false statutory lines at 8 U.S.C. ${section}${pathParts.map(value => `(${value})`).join("")}.`);
   }
 
-  const statutoryFormattingAudit = { nodes: 0, formattedNodes: 0, runInLines: 0, citationLinks: 0 };
-  const auditStatutoryNodes = nodes => {
+  const statutoryFormattingAudit = { nodes: 0, formattedNodes: 0, runInLines: 0, citationLinks: 0, indexedRunInPaths: 0 };
+  const generatedRunInPathIdentities = new Set();
+  const renderedVirtualRunInPathIdentities = new Set();
+  const pathIdentity = pathParts => pathParts.map(token => `${String(token).length}:${String(token)}`).join("|");
+  const collectStructuralPathIdentities = (nodes, parentPath = [], identities = new Set()) => {
     for (const node of nodes || []) {
+      const currentPath = [...parentPath, String(node.label)];
+      identities.add(pathIdentity(currentPath));
+      collectStructuralPathIdentities(node.children, currentPath, identities);
+    }
+    return identities;
+  };
+  for (const section of hydratedSource.title8.sections) {
+    for (const pathParts of section.runInPaths || []) generatedRunInPathIdentities.add(`${section.section}:${pathIdentity(pathParts)}`);
+  }
+  const auditStatutoryNodes = (section, nodes, parentPath = [], structuralIdentities = new Set()) => {
+    for (const node of nodes || []) {
+      const currentPath = [...parentPath, String(node.label)];
+      structuralIdentities.add(pathIdentity(currentPath));
       statutoryFormattingAudit.nodes += 1;
       const output = formatStatutoryRunInText(node.text || "", node.label || "", node.references || []);
       const addresses = [...output.matchAll(/class="inline-address">([^<]+)<\/strong>/g)].map(match => match[1]);
+      assert.deepStrictEqual(addresses, statuteRunInMarkers(node.text || "", node.label || "").map(marker => marker.address), `The build-time and browser run-in recognizers disagree at 8 U.S.C. ${section.section}${statutoryCanonicalPath(currentPath)}.`);
       if (addresses.length) statutoryFormattingAudit.formattedNodes += 1;
       statutoryFormattingAudit.runInLines += addresses.length;
       statutoryFormattingAudit.citationLinks += (output.match(/class="statute-citation-link legal-reference-link/g) || []).length;
       for (const address of addresses) assert(/^(?:\((?:\d{1,3}|[A-Za-z]|[ivxlcdmIVXLCDM]{1,4}|([a-z])\1{1,2}|([A-Z])\2)\))+$/.test(address), `Invalid formatted statutory address ${address}.`);
       assert(!output.includes('<span class="statutory-runin-line"><strong class="inline-address"></strong>'), "Formatter emitted an empty statutory address.");
-      auditStatutoryNodes(node.children);
+      if (addresses.length) {
+        const legalUnit = { sectionId: section.id, currentPath, parentPath, citationBase: `8 U.S.C. ${section.section}`, targetPath: [] };
+        const actionable = formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], null, legalUnit, node.textFootnoteReferences || []);
+        const renderedPaths = [...actionable.matchAll(/data-statute-inline-path="([^"]+)"/g)].map(match => JSON.parse(match[1].replace(/&quot;/g, '"').replace(/&amp;/g, "&")));
+        assert.strictEqual(renderedPaths.length, addresses.length, `A run-in line has no generated path at 8 U.S.C. ${section.section}${statutoryCanonicalPath(currentPath)}.`);
+        for (const pathParts of renderedPaths) {
+          assert(indexedStatutePathExists(legalUnit, pathParts), `A rendered run-in path is absent from the citation index at 8 U.S.C. ${section.section}${statutoryCanonicalPath(pathParts)}.`);
+          statutoryFormattingAudit.indexedRunInPaths += 1;
+          if (!structuralIdentities.has(pathIdentity(pathParts))) renderedVirtualRunInPathIdentities.add(`${section.section}:${pathIdentity(pathParts)}`);
+        }
+      }
+      auditStatutoryNodes(section, node.children, currentPath, structuralIdentities);
     }
   };
-  for (const section of hydratedSource.title8.sections) auditStatutoryNodes(section.body);
+  for (const section of hydratedSource.title8.sections) auditStatutoryNodes(section, section.body, [], collectStructuralPathIdentities(section.body));
   assert.strictEqual(statutoryFormattingAudit.nodes, 6973, "The statutory formatting audit did not visit every cached node.");
   assert.strictEqual(statutoryFormattingAudit.formattedNodes, 103, "Unexpected change in the set of cached nodes requiring run-in formatting.");
   assert.strictEqual(statutoryFormattingAudit.runInLines, 261, "Unexpected change in the number of formatted cached run-in provisions.");
+  assert.strictEqual(statutoryFormattingAudit.indexedRunInPaths, 261, "Not every formatted statutory run-in provision received an indexed path.");
+  assert.deepStrictEqual([...renderedVirtualRunInPathIdentities].sort(), [...generatedRunInPathIdentities].sort(), "The generated corpus run-in index has a missing or stale virtual path.");
   assert.strictEqual(statutoryFormattingAudit.citationLinks, 1765, "Unexpected generated-link count in operative statutory text.");
   let ancillaryCitationLinks = 0;
   for (const section of hydratedSource.title8.sections) {
@@ -2236,7 +2301,7 @@ async function main() {
   console.log(`PASS INASearch-AU.html: ${allUnlocked.bytes} bytes; ${allUnlocked.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS INASearch-Uncompressed.html: ${uncompressed.bytes} bytes; ${uncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
   console.log(`PASS INASearch-AU-Uncompressed.html: ${allUnlockedUncompressed.bytes} bytes; ${allUnlockedUncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
-  console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${statutoryFormattingAudit.citationLinks} generated citation links`);
+  console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${generatedRunInPathIdentities.size} generated virtual paths; ${statutoryFormattingAudit.citationLinks} generated citation links`);
   console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 199 INA term entries from 170 definition statements; 32 exact 8 CFR 1.2 entries`);
   console.log(`PASS CFR audit: ${full.corpus.cfr.coverage.partCount} active parts; ${full.corpus.cfr.sections.length} sections; ${full.corpus.cfr.appendices.length} appendices; ${full.corpus.cfr.graphics.length} referenced graphics; 1 removed-part tombstone`);
   console.log("PASS round trips, hashes, PTAR boundary/intersection, nested CFR citations, exact visible-match targeting, regulation history, syntax, native loaders, corruption handling, deterministic gzip and plain JSON, profile isolation, comprehensive legacy profile migration, statutory formatting, saving-menu state rules, and ordinary gzip extraction");
