@@ -1933,7 +1933,10 @@
     function compactStatutePathIndex(kind, authoritySection, localSection) {
       const cacheKey = `${kind}:${normCitationPart(authoritySection)}:${normCitationPart(localSection?.section)}`;
       if (compactStatutePathIndexes.has(cacheKey)) return compactStatutePathIndexes.get(cacheKey);
-      const paths = collectStructuralCitationPaths(localSection?.body || []);
+      const paths = [
+        ...collectStructuralCitationPaths(localSection?.body || []),
+        ...(localSection?.runInPaths || []).map(path => path.map(String))
+      ];
       const addKnown = (map, sectionNumber) => {
         for (const item of map.values()) {
           if (normCitationPart(item.section) === normCitationPart(sectionNumber)) paths.push(item.path.map(String));
@@ -1988,11 +1991,12 @@
     }
 
     function resolveIndexedCompactStatutePath(kind, authoritySection, localSection, raw) {
-      if (componentTokens(raw) !== null) return null;
+      const explicit = componentTokens(raw);
       const rawCompact = String(raw || "").replace(/[^A-Za-z0-9]/g, "");
       const compact = normCitationPart(rawCompact);
       if (!compact) return null;
       let candidates = [...(compactStatutePathIndex(kind, authoritySection, localSection).get(compact) || [])];
+      if (explicit !== null) candidates = candidates.filter(path => path.length === explicit.length && path.every((token, index) => normCitationPart(token) === normCitationPart(explicit[index])));
       const hasUppercaseI = rawCompact.includes("I");
       if (hasUppercaseI) candidates = candidates.filter(path => romanICaseMatches(rawCompact, path));
       if (!candidates.length) return null;

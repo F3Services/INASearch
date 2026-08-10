@@ -11,6 +11,7 @@ const { applyStatuteReferences } = require("./statute-references");
 const { applyStatuteFootnotes } = require("./statute-footnotes");
 const { applyGeneratedLegalReferences } = require("./legal-references");
 const { packLegalReferences } = require("./pack-legal-references");
+const { indexStatuteRunIns } = require("./statute-run-ins");
 
 const root = path.resolve(__dirname, "..");
 const sourceDir = path.join(root, "src");
@@ -203,6 +204,7 @@ fullCorpus.visaTables.formQuestions = readAssignedObject("INASearch-Form-Questio
 const statuteReferenceSource = readAssignedObject("INASearch-Statute-References.js", "INA_SEARCH_STATUTE_REFERENCES");
 applyStatuteReferences(fullCorpus, statuteReferenceSource);
 applyGeneratedLegalReferences(fullCorpus);
+indexStatuteRunIns(fullCorpus);
 const definitionSource = readAssignedObject("INASearch-Definitions.js", "INA_SEARCH_DEFINITIONS");
 const uscisGlossarySource = readAssignedObject("INASearch-USCIS-Glossary.js", "INA_SEARCH_USCIS_GLOSSARY");
 fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
