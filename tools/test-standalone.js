@@ -15,6 +15,7 @@ const { applyStatuteReferences, statuteSourceMap } = require("./statute-referenc
 const { applyStatuteFootnotes, reconstructFlattenedField } = require("./statute-footnotes");
 const { applyGeneratedLegalReferences, generatedReferences, legalReferenceContext } = require("./legal-references");
 const { compactHouseHref, expandHouseHref, packLegalReferences, unpackLegalReferences } = require("./pack-legal-references");
+const { indexStatuteRunIns, statuteRunInMarkers } = require("./statute-run-ins");
 
 const root = path.resolve(__dirname, "..");
 
@@ -44,6 +45,7 @@ function sourceCorpus() {
   const statuteReferences = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_STATUTE_REFERENCES));
   applyStatuteReferences(corpus, statuteReferences);
   applyGeneratedLegalReferences(corpus);
+  indexStatuteRunIns(corpus);
   corpus.definitions = buildDefinitionCatalog(corpus, definitions, uscisGlossary);
   packLegalReferences(corpus);
   return corpus;
@@ -265,6 +267,20 @@ function compactCitationPathFunctions(source, context = {}) {
   return vm.runInNewContext(`${declarations}\n({ compactStatutePathIndex, romanICaseMatches, compareCompactCitationPaths, citationWithRomanCase, resolveIndexedCompactStatutePath })`, {
     Array,
     Map,
+    String,
+    ...context
+  });
+}
+
+function searchScopeParsingFunctions(source, context = {}) {
+  const start = source.indexOf("    function searchScopeDescriptor(");
+  const end = source.indexOf("\n\n    function mappedUscResultForIna(", start);
+  assert(start >= 0 && end > start, "Could not extract the citation-scope parser.");
+  const declarations = source.slice(start, end);
+  return vm.runInNewContext(`${declarations}\n({ searchScopeDescriptor, inferredSearchScopeEndpoint, searchScopeRange, parseSearchScope })`, {
+    Map,
+    Number,
+    Set,
     String,
     ...context
   });
@@ -920,6 +936,53 @@ async function main() {
   assert(/id="impliedUscTitle"[\s\S]*?>8<\/span>[\s\S]*?id="searchInput"/.test(fallbackSource), "The implied Title 8 marker is not positioned before the typed U.S.C. citation.");
   assert(fallbackSource.includes("No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup."), "The implied Title 8 warning is missing.");
   assert(fallbackSource.includes("updateSearchSuggestionVisibility();"), "The integrated search suggestion does not hide when a query is present.");
+  assert(fallbackSource.includes('id="searchScopeToken"') && fallbackSource.includes('id="searchScopeInput"'), "The inline in: citation editor is missing from the main search field.");
+  assert(fallbackSource.includes("background: rgba(46,110,156,.22)") && fallbackSource.includes("has-search-scope"), "The inline in: citation editor is not presented as a subtle blue embedded field.");
+  assert(!/id="searchScopeInput"[^>]*placeholder=/.test(fallbackSource), "The empty in: citation editor still displays flavor text that resembles a prefilled range.");
+  const extractSearchScopeTag = extractedFunction(fallbackSource, "extractSearchScopeTag", "startupSearchQuery", { String });
+  assert.deepStrictEqual(plain(extractSearchScopeTag("in: ina 101-215  unlawful presence")), { query: "unlawful presence", scope: "ina 101-215" }, "A pasted in: range did not retain its internal citation space or split at the double-space escape.");
+  assert.deepStrictEqual(plain(extractSearchScopeTag("adjustment in: INA 245(c)(2)")), { query: "adjustment", scope: "INA 245(c)(2)" }, "An in: tag following search terms did not become a citation scope.");
+  assert.strictEqual(extractSearchScopeTag("inside the statute"), null, "Ordinary words beginning with ‘in’ were mistaken for the in: tag.");
+  const doubleSpaceScopeInput = { value: "INA 101-215 " };
+  const doubleSpaceMainInput = { value: "unlawful presence", focused: false, selection: null, focus() { this.focused = true; }, setSelectionRange(start, end) { this.selection = [start, end]; } };
+  let doubleSpacePrevented = false;
+  let doubleSpaceRefreshes = 0;
+  const escapeSearchScopeOnSecondSpace = extractedFunction(fallbackSource, "escapeSearchScopeOnSecondSpace", "resetSearchState", {
+    els: { searchScopeInput: doubleSpaceScopeInput, search: doubleSpaceMainInput },
+    refreshSearchScope: () => { doubleSpaceRefreshes += 1; }
+  });
+  assert(escapeSearchScopeOnSecondSpace({ key: " ", altKey: false, ctrlKey: false, metaKey: false, preventDefault: () => { doubleSpacePrevented = true; } }), "The second consecutive space did not exit the citation editor.");
+  assert.strictEqual(doubleSpaceScopeInput.value, "INA 101-215", "The first escape-space was not erased from the citation field.");
+  assert(doubleSpacePrevented && doubleSpaceMainInput.focused && doubleSpaceRefreshes === 1, "The double-space escape did not return focus to the main search field and refresh the scope.");
+  const scopeValidationClasses = new Set();
+  const scopeShellClasses = new Set();
+  const scopeValidationAttributes = {};
+  const scopeValidationState = { searchScopeActive: true, searchScopeEditing: true, searchScopeText: "ina101-", searchScope: { valid: false, message: "Enter a valid ending citation for this range." } };
+  const scopeValidationShell = {
+    classList: { toggle: (name, active) => active ? scopeShellClasses.add(name) : scopeShellClasses.delete(name) },
+    style: { removeProperty: () => {} }
+  };
+  const scopeValidationElements = {
+    search: { closest: () => scopeValidationShell },
+    searchScopeToken: { hidden: false, classList: { toggle: (name, active) => active ? scopeValidationClasses.add(name) : scopeValidationClasses.delete(name) } },
+    searchScopeInput: { title: "", setAttribute(name, value) { scopeValidationAttributes[name] = value; } }
+  };
+  const renderSearchScopeEditor = extractedFunction(fallbackSource, "renderSearchScopeEditor", "refreshSearchScope", {
+    state: scopeValidationState,
+    els: scopeValidationElements,
+    syncSearchScopeEditorWidth: () => {},
+    updateSearchSuggestionVisibility: () => {}
+  });
+  renderSearchScopeEditor();
+  assert(!scopeValidationClasses.has("invalid") && scopeValidationAttributes["aria-invalid"] === "false", "An incomplete citation range turns red while its field is actively being edited.");
+  scopeValidationState.searchScopeEditing = false;
+  renderSearchScopeEditor();
+  assert(scopeValidationClasses.has("invalid") && scopeValidationAttributes["aria-invalid"] === "true", "An incomplete citation range is not marked invalid after the user leaves its field.");
+  scopeValidationState.searchScopeEditing = true;
+  scopeValidationState.searchScope = { valid: true, label: "INA 101–212" };
+  renderSearchScopeEditor();
+  assert(!scopeValidationClasses.has("invalid"), "A completed valid range retained invalid styling while still focused.");
+  assert(fallbackSource.includes('els.searchScopeInput.addEventListener("focus"') && fallbackSource.includes('els.searchScopeInput.addEventListener("blur"'), "The citation editor does not explicitly defer and restore validation styling across focus changes.");
   const startupSearchQuery = extractedFunction(fallbackSource, "startupSearchQuery", "showSearchResults", { URLSearchParams, String, DEFAULT_STARTUP_QUERY: "INA 203b1a" });
   assert.strictEqual(startupSearchQuery({ search: "?q=22%20CFR%2042.11" }), "22 CFR 42.11", "The startup query does not decode citation URLs.");
   assert.strictEqual(startupSearchQuery({ search: "?q=%20INA%20215(a)%20" }), " INA 215(a) ", "Formatting explicitly supplied in the URL query is not preserved for the editable field.");
@@ -934,6 +997,9 @@ async function main() {
     String,
     els: { search: startupEditableSearch },
     state: startupApplyState,
+    extractSearchScopeTag,
+    activateSearchScope: () => {},
+    deactivateSearchScope: () => {},
     updateSearchSuggestionVisibility: () => {},
     closeSearchResults: () => {},
     showSearchResults: () => {},
@@ -1262,8 +1328,11 @@ async function main() {
     compactFormLookup: testCompactLookup
   });
   const scoreRecord = extractedFunction(fallbackSource, "scoreRecord", "searchResultCounts", {
+    state: { searchScopeActive: false },
     normalize: searchNormalize,
     filterMatches: () => true,
+    scopedStatuteRecordText: record => record.text,
+    scopedCfrSearchFields: record => record.cfrFields,
     compactLookup: testCompactLookup,
     compactFormLookup: testCompactLookup,
     searchScoreContext,
@@ -1298,7 +1367,8 @@ async function main() {
   const cfrPartMap = new Map(full.corpus.cfr.parts.map(part => [`${part.title}:${statutoryNormPart(part.part)}`, part]));
   const cfrRemovedPartMap = new Map(full.corpus.cfr.removedParts.map(part => [`${part.title}:${statutoryNormPart(part.part)}`, part]));
   const cfrBlockText = block => block?.t === "table" ? [block.caption, ...(block.rows || []).flat().map(cell => cell.x)].join(" ") : block?.t === "note" ? (block.blocks || []).map(cfrBlockText).join(" ") : block?.x || block?.alt || "";
-  const cfrSearchFields = extractedFunction(fallbackSource, "cfrSearchFields", "cfrBlockUnitPaths", { normalize: searchNormalize, cfrBlockText });
+  const cfrBlockUnitPaths = block => [...new Set([...(block?.u || []).map(unit => unit.a), block?.a].filter(Boolean))];
+  const cfrSearchFields = extractedFunction(fallbackSource, "cfrSearchFields", "cfrBlockUnitPaths", { normalize: searchNormalize, cfrBlockText, cfrBlockUnitPaths });
   const cfrComponentTokens = value => {
     const text = String(value || "").trim();
     if (!text) return [];
@@ -1309,7 +1379,6 @@ async function main() {
   const flattenedCfrBlocks = extractedFunction(fallbackSource, "flattenedCfrBlocks", "sameCitationPath", { Array });
   const sameCitationPath = extractedFunction(fallbackSource, "sameCitationPath", "citationPathStartsWith", { normCitationPart: statutoryNormPart });
   const citationPathStartsWith = extractedFunction(fallbackSource, "citationPathStartsWith", "cfrUnitText", { normCitationPart: statutoryNormPart });
-  const cfrBlockUnitPaths = block => [...new Set([...(block?.u || []).map(unit => unit.a), block?.a].filter(Boolean))];
   const cfrUnitText = extractedFunction(fallbackSource, "cfrUnitText", "legalUnitContextForTrigger", { flattenedCfrBlocks, sameCitationPath, citationPathStartsWith, componentTokens: cfrComponentTokens, cfrBlockPlainText, cfrBlockUnitPaths });
   const legalUnitContextForTrigger = extractedFunction(fallbackSource, "legalUnitContextForTrigger", "legalReferenceCitation", {
     corpus: hydratedSource,
@@ -1401,6 +1470,11 @@ async function main() {
   };
   const activeSearchRecords = extractedFunction(fallbackSource, "activeSearchRecords", "searchScoreContext", { state: routedState });
   assert.deepStrictEqual(plain(activeSearchRecords().map(record => record.key)), ["usc-record", "cfr-record"], "Citation search does not retain both direct and related source buckets.");
+  const scopeFilterState = { searchScopeActive: true, searchScope: { valid: true, family: "usc", sectionIds: new Set(["inside-section"]), pathsBySection: new Map() } };
+  const searchScopeMatchesRecord = extractedFunction(fallbackSource, "searchScopeMatchesRecord", "searchScopePathForRecord", { state: scopeFilterState });
+  assert(searchScopeMatchesRecord({ kind: "usc", item: { id: "inside-section" } }), "A U.S.C. record inside an INA citation scope was filtered out.");
+  assert(!searchScopeMatchesRecord({ kind: "usc", item: { id: "outside-section" } }), "A statute beyond the citation range remained searchable.");
+  assert(!searchScopeMatchesRecord({ kind: "ina", item: { id: "inside-section" } }) && !searchScopeMatchesRecord({ kind: "user-note", item: { id: "inside-section" } }), "Crosswalk or note records leaked into a law-text-only citation scope.");
   const resultFilterGroups = new Set(["all", "statutes", "regulations", "ina", "acts", "definitions", "statute-notes", "policy", "forms", "visas", "notes"]);
   const searchResultCounts = extractedFunction(fallbackSource, "searchResultCounts", "updateSearchFilterCounts", { state: { allResults: [] }, RESULT_FILTER_GROUPS: resultFilterGroups, Object });
   const countedResults = searchResultCounts([
@@ -1492,6 +1566,12 @@ async function main() {
   assert(inputHandlerSource.includes("closeSearchResults(undefined, true)"), "Clearing the search still rebuilds the previously rendered page.");
   assert(fallbackSource.includes("switchView(destination === \"search\" ? \"definitions\" : destination, false, !reuseRenderedView)"), "The fast close path does not reuse the existing page DOM.");
   const section1101ForCompactPaths = hydratedSource.title8.sections.find(section => String(section.section) === "1101");
+  const section1255ForCompactPaths = hydratedSource.title8.sections.find(section => String(section.section) === "1255");
+  assert.deepStrictEqual(
+    plain(section1255ForCompactPaths.runInPaths.filter(pathParts => pathParts[0] === "c")),
+    ["1", "2", "3", "4", "5", "6", "7", "8"].map(number => ["c", number]),
+    "The generated run-in index does not contain every paragraph of 8 U.S.C. 1255(c)."
+  );
   const compactComponentTokens = raw => {
     const value = String(raw || "").trim();
     if (!value) return [];
@@ -1525,6 +1605,29 @@ async function main() {
   assert.strictEqual(compactH1b.valid, true);
   assert.strictEqual(compactH1b.virtual, true, "Flattened H-1B run-in units were incorrectly treated as structural nodes.");
   assert.strictEqual(compactH1b.ambiguity, null, "A uniquely valid lowercase Roman path was marked ambiguous.");
+  const compactIna245c2 = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "245", section1255ForCompactPaths, "c2"));
+  assert.deepStrictEqual(compactIna245c2.path, ["c", "2"], "Compact INA 245(c)(2) did not resolve through the generated run-in index.");
+  assert.strictEqual(compactIna245c2.virtual, true, "INA 245(c)(2) was incorrectly treated as a structural corpus node.");
+  const parenthesizedIna245c2 = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "245", section1255ForCompactPaths, "(c)(2)"));
+  assert.deepStrictEqual(parenthesizedIna245c2.path, ["c", "2"], "Parenthesized INA 245(c)(2) did not resolve through the generated run-in index.");
+  const inaByUscSection = new Map(hydratedSource.inaCrosswalk.filter(row => row.uscSection).map(row => [String(row.uscSection).toLowerCase(), row]));
+  let auditedGeneratedRunInPaths = 0;
+  for (const section of hydratedSource.title8.sections) {
+    for (const pathParts of section.runInPaths || []) {
+      auditedGeneratedRunInPaths += 1;
+      const parenthesized = plain(compactPathApi.resolveIndexedCompactStatutePath("usc", section.section, section, statutoryCanonicalPath(pathParts)));
+      assert(parenthesized?.valid && JSON.stringify(parenthesized.path) === JSON.stringify(pathParts), `Parenthesized 8 U.S.C. ${section.section}${statutoryCanonicalPath(pathParts)} did not resolve to its generated run-in path.`);
+      const compact = plain(compactPathApi.resolveIndexedCompactStatutePath("usc", section.section, section, pathParts.join("")));
+      const compactOptions = [compact?.path, ...(compact?.ambiguity?.options || []).map(option => option.path)].filter(Boolean);
+      assert(compact?.valid && compactOptions.some(option => JSON.stringify(option) === JSON.stringify(pathParts)), `Compact 8 U.S.C. ${section.section}${statutoryCanonicalPath(pathParts)} does not include its generated run-in path.`);
+      const inaRow = inaByUscSection.get(String(section.section).toLowerCase());
+      if (inaRow) {
+        const inaParenthesized = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", inaRow.inaSection, section, statutoryCanonicalPath(pathParts)));
+        assert(inaParenthesized?.valid && JSON.stringify(inaParenthesized.path) === JSON.stringify(pathParts), `INA ${inaRow.inaSection}${statutoryCanonicalPath(pathParts)} did not resolve to its generated run-in path.`);
+      }
+    }
+  }
+  assert.strictEqual(auditedGeneratedRunInPaths, 256, "The exhaustive compact-citation audit did not visit every generated statutory run-in path.");
   const lowercaseRomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15oiii"));
   assert.deepStrictEqual(lowercaseRomanAmbiguity.path, ["a", "15", "O", "iii"], "The longest valid clause was not selected for an ambiguous lowercase Roman sequence.");
   assert.deepStrictEqual(lowercaseRomanAmbiguity.ambiguity.options.map(option => option.path), [["a", "15", "O", "iii"], ["a", "15", "O", "ii", "I"]], "The valid lowercase Roman interpretations were not listed in priority order.");
@@ -1547,13 +1650,14 @@ async function main() {
   const childEntriesForParser = extractedFunction(fallbackSource, "childEntries", "resolveComponents", { normCitationPart: statutoryNormPart });
   const resolveComponentsForParser = extractedFunction(fallbackSource, "resolveComponents", "resolveKnownCitationPath", { componentTokens: componentTokensForParser, normCitationPart: statutoryNormPart });
   const resolveKnownCitationPathForParser = extractedFunction(fallbackSource, "resolveKnownCitationPath", "nearestStructuralPath", { knownInaCitationPaths: compactKnownInaPaths, knownUscCitationPaths: compactKnownUscPaths, componentTokens: componentTokensForParser, citationPathKey: (section, pathParts) => `${statutoryNormPart(section)}:${pathParts.map(statutoryNormPart).join("/")}`, normCitationPart: statutoryNormPart });
+  const section1182ForScopeRange = hydratedSource.title8.sections.find(section => String(section.section) === "1182");
   const section1185ForStartup = hydratedSource.title8.sections.find(section => String(section.section) === "1185");
   const parseLocalStatute = extractedFunction(fallbackSource, "parseLocalStatute", "parseFallbackStatute", {
     corpus: hydratedSource,
     hasLocalUscCache: true,
-    inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["203", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["215", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
-    sectionMap: new Map([["1101", section1101ForCompactPaths], ["1153", section1153ForCompactPaths], ["1185", section1185ForStartup]]),
-    uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["1153", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["1185", { inaSection: "215", uscSection: "1185", hasEquivalent: true }]]),
+    inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["203", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["212", { inaSection: "212", uscSection: "1182", hasEquivalent: true }], ["215", { inaSection: "215", uscSection: "1185", hasEquivalent: true }], ["245", { inaSection: "245", uscSection: "1255", hasEquivalent: true }]]),
+    sectionMap: new Map([["1101", section1101ForCompactPaths], ["1153", section1153ForCompactPaths], ["1182", section1182ForScopeRange], ["1185", section1185ForStartup], ["1255", section1255ForCompactPaths]]),
+    uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["1153", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["1182", { inaSection: "212", uscSection: "1182", hasEquivalent: true }], ["1185", { inaSection: "215", uscSection: "1185", hasEquivalent: true }], ["1255", { inaSection: "245", uscSection: "1255", hasEquivalent: true }]]),
     findKnownPrefix,
     resolveIndexedCompactStatutePath: compactPathApi.resolveIndexedCompactStatutePath,
     resolveComponents: resolveComponentsForParser,
@@ -1566,6 +1670,10 @@ async function main() {
   assert(parsedCompactH1b.valid && parsedCompactH1b.label === "INA 101(a)(15)(H)(i)(b)", "The complete compact H-1B citation does not survive the local parser.");
   const parsedDefaultStartup = plain(parseLocalStatute("ina", "203b1a"));
   assert(parsedDefaultStartup.valid && parsedDefaultStartup.label === "INA 203(b)(1)(A)" && JSON.stringify(parsedDefaultStartup.path) === JSON.stringify(["b", "1", "A"]), "The parenthesis-free INA 203b1a startup text does not resolve to INA 203(b)(1)(A).");
+  const parsedCompactIna245c2 = plain(parseLocalStatute("ina", "245c2"));
+  assert(parsedCompactIna245c2.valid && parsedCompactIna245c2.label === "INA 245(c)(2)" && JSON.stringify(parsedCompactIna245c2.path) === JSON.stringify(["c", "2"]), "The complete compact INA 245(c)(2) citation does not survive the local parser.");
+  const parsedParenthesizedIna245c2 = plain(parseLocalStatute("ina", "245(c)(2)"));
+  assert(parsedParenthesizedIna245c2.valid && parsedParenthesizedIna245c2.label === "INA 245(c)(2)" && JSON.stringify(parsedParenthesizedIna245c2.path) === JSON.stringify(["c", "2"]), "The parenthesized INA 245(c)(2) citation does not survive the local parser.");
   const parsedRomanAmbiguity = plain(parseLocalStatute("ina", "101a15oiii"));
   assert(parsedRomanAmbiguity.valid && parsedRomanAmbiguity.ambiguity.options.length === 2, "The local parser did not retain valid ambiguity choices.");
   assert.deepStrictEqual(parsedRomanAmbiguity.renderPath, ["a", "15", "O", "iii"], "The parser still truncates a selected compact path before navigation.");
@@ -1581,6 +1689,47 @@ async function main() {
   assert.strictEqual(impliedPunctuatedUsc.raw, "1153(b)", "A punctuated titleless U.S.C. citation was not parsed as Title 8.");
   assert.strictEqual(parseCitationForImpliedUsc("USCIS Glossary"), null, "The Title 8 fallback incorrectly captures text beginning with USCIS.");
   assert.strictEqual(parseCitationForImpliedUsc("8 USC 1101").impliedUscTitle, undefined, "An explicit Title 8 citation was incorrectly marked as assumed.");
+  const parseCitationForScope = extractedFunction(fallbackSource, "parseCitation", "pathStartsWith", {
+    parseCfr,
+    parseLocalStatute,
+    parseAct: () => null
+  });
+  const scopeSectionMap = new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section]));
+  const { parseSearchScope } = searchScopeParsingFunctions(fallbackSource, {
+    corpus: hydratedSource,
+    sectionMap: scopeSectionMap,
+    normCitationPart: statutoryNormPart,
+    parseCitation: parseCitationForScope
+  });
+  const inaSectionRangeScope = parseSearchScope("ina 101-215");
+  assert(inaSectionRangeScope.valid && inaSectionRangeScope.range && inaSectionRangeScope.label === "INA 101–215", "The flexible INA section-range syntax did not resolve.");
+  assert(inaSectionRangeScope.sectionIds.has(section1101ForCompactPaths.id) && inaSectionRangeScope.sectionIds.has(section1185ForStartup.id) && inaSectionRangeScope.sectionIds.has(section1153ForCompactPaths.id), "An INA range omitted its endpoints or an indexed intervening section.");
+  assert(!inaSectionRangeScope.sectionIds.has(section1255ForCompactPaths.id), "An INA range leaked into a section beyond its ending citation.");
+  const compactIna101Scope = parseSearchScope("ina101");
+  assert(compactIna101Scope.valid && compactIna101Scope.label === "INA 101" && compactIna101Scope.sectionIds.has(section1101ForCompactPaths.id), "The in: field rejected compact INA syntax that the main search accepts.");
+  const repeatedAuthorityRangeScope = parseSearchScope("ina101-ina212");
+  assert(repeatedAuthorityRangeScope.valid && repeatedAuthorityRangeScope.label === "INA 101–212", `The in: field rejected a compact INA range with the authority repeated at both endpoints: ${JSON.stringify({ valid: repeatedAuthorityRangeScope.valid, label: repeatedAuthorityRangeScope.label, message: repeatedAuthorityRangeScope.message })}`);
+  assert(repeatedAuthorityRangeScope.sectionIds.has(section1101ForCompactPaths.id) && repeatedAuthorityRangeScope.sectionIds.has(scopeSectionMap.get("1182").id), "The compact repeated-authority INA range omitted one of its endpoints.");
+  for (const mainSearchCitation of [
+    "INA 101", "ina101", "INA101(a)(15)(H)(i)(b)", "ina101a15hib",
+    "8 U.S.C. 1101", "8usc1101", "usc1101", "U.S.C. § 1101(a)",
+    "8 CFR 214.2", "8cfr214.2", "8 CFR 214.2(h)(13)"
+  ]) {
+    const mainSearchResult = parseCitationForScope(mainSearchCitation);
+    assert(mainSearchResult?.valid && !mainSearchResult.external, `Main-search parity fixture is not a valid local citation: ${mainSearchCitation}`);
+    assert(parseSearchScope(mainSearchCitation).valid, `The in: field rejected main-search citation syntax: ${mainSearchCitation}`);
+  }
+  const compactRunInScope = parseSearchScope("ina245c2");
+  assert(compactRunInScope.valid && compactRunInScope.sectionIds.has(section1255ForCompactPaths.id), "A compact run-in citation was not accepted as a search scope.");
+  assert.deepStrictEqual(plain(compactRunInScope.pathsBySection.get(section1255ForCompactPaths.id)), ["c", "2"], "The run-in citation scope lost its exact statutory path.");
+  const cfrParagraphScope = parseSearchScope("8 CFR 214.2(h)(13)");
+  assert(cfrParagraphScope.valid && cfrParagraphScope.sectionIds.has("8:214.2") && JSON.stringify(cfrParagraphScope.pathsBySection.get("8:214.2")) === JSON.stringify(["h", "13"]), "A CFR paragraph citation was not accepted as an exact scope.");
+  const cfrPartScope = parseSearchScope("22 CFR 62");
+  assert(cfrPartScope.valid && cfrPartScope.sectionIds.size > 1, "A CFR part citation did not scope all locally indexed sections in that part.");
+  const cfrSectionRangeScope = parseSearchScope("22 CFR 41.11 - 41.12");
+  assert(cfrSectionRangeScope.valid && cfrSectionRangeScope.sectionIds.has("22:41.11") && cfrSectionRangeScope.sectionIds.has("22:41.12"), "A CFR section range with flexible spaces did not resolve both endpoints.");
+  assert.strictEqual(parseSearchScope("INA 215-101").valid, false, "A reversed citation range was silently accepted.");
+  assert.strictEqual(parseSearchScope("INA 101-8 CFR 214.2").valid, false, "A mixed-authority citation range was silently accepted.");
   const impliedTitleShellClasses = new Set();
   const impliedTitleShell = { classList: { toggle: (name, active) => active ? impliedTitleShellClasses.add(name) : impliedTitleShellClasses.delete(name) } };
   const impliedTitleElements = {
@@ -1828,9 +1977,74 @@ async function main() {
   assert(reference1184Preview.text.startsWith("(1) Except as provided in paragraph (3)"), "A locally resolved House link still produces an empty offline preview.");
   const testComponentTokens = value => [...String(value || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]);
   const testUscToIna = new Map([["1101", { inaSection: "101", uscSection: "1101" }]]);
+  const statutoryRunInMarkers = extractedFunction(fallbackSource, "statutoryRunInMarkers", "flattenNode", { Number, Set, String });
   const indexedStatutePathExists = extractedFunction(fallbackSource, "indexedStatutePathExists", "resolvedRunInStatutePath", { corpus: hydratedSource, uscToIna: testUscToIna, normCitationPart: statutoryNormPart, compactStatutePathIndex: compactPathApi.compactStatutePathIndex });
   const resolvedRunInStatutePath = extractedFunction(fallbackSource, "resolvedRunInStatutePath", "formatStatutoryRunInText", { indexedStatutePathExists });
-  const formatStatutoryRunInText = extractedFunction(fallbackSource, "formatStatutoryRunInText", "renderHouseEditorialFootnotes", { escapeHtml: escapeStatutoryHtml, linkifyStatutoryText, legalUnitTriggerHtml, componentTokens: testComponentTokens, canonicalPath: statutoryCanonicalPath, resolvedRunInStatutePath, normCitationPart: statutoryNormPart, JSON, Set, Number, String });
+  const formatStatutoryRunInText = extractedFunction(fallbackSource, "formatStatutoryRunInText", "renderHouseEditorialFootnotes", { statutoryRunInMarkers, escapeHtml: escapeStatutoryHtml, linkifyStatutoryText, legalUnitTriggerHtml, componentTokens: testComponentTokens, canonicalPath: statutoryCanonicalPath, resolvedRunInStatutePath, normCitationPart: statutoryNormPart, JSON, Set, Number, String });
+  const statutoryRunInSegments = extractedFunction(fallbackSource, "statutoryRunInSegments", "scrollToRenderedStatuteTarget", { statutoryRunInMarkers, componentTokens: testComponentTokens, resolvedRunInStatutePath, String });
+  const scopeStatuteNodeAtPath = (section, pathParts) => {
+    let nodes = section?.body || [];
+    let node = null;
+    for (const token of pathParts || []) {
+      node = nodes.find(item => statutoryNormPart(item.label) === statutoryNormPart(token));
+      if (!node) return null;
+      nodes = node.children || [];
+    }
+    return node;
+  };
+  const nearestStructuralPathForScope = (section, pathParts) => {
+    const result = [];
+    for (const token of pathParts || []) {
+      const node = scopeStatuteNodeAtPath(section, [...result, token]);
+      if (!node) break;
+      result.push(node.label);
+    }
+    return result;
+  };
+  const statuteScopeProjection = extractedFunction(fallbackSource, "statuteScopeProjection", "scopedStatuteRecordText", {
+    nearestStructuralPath: nearestStructuralPathForScope,
+    statuteNodeAtPath: scopeStatuteNodeAtPath,
+    statutoryRunInSegments,
+    normCitationPart: statutoryNormPart
+  });
+  const ina245c2Projection = statuteScopeProjection(section1255ForCompactPaths, ["c", "2"]);
+  const ina245c2SearchText = ina245c2Projection.map(field => field.text).join(" ");
+  assert.strictEqual(ina245c2Projection.length, 1, "A run-in item scope expanded to its entire structural parent.");
+  assert(/unauthorized employment/i.test(ina245c2SearchText) && !/admitted in transit without visa/i.test(ina245c2SearchText), "INA 245(c)(2) scope includes text from neighboring run-in item (3), or omits its own text.");
+  const scopedStatuteSearchTarget = extractedFunction(fallbackSource, "statuteSearchTarget", "renderStatute", { normalize: searchNormalize, searchTextMatch, statuteScopeProjection });
+  const scopedIna245c2Target = scopedStatuteSearchTarget(section1255ForCompactPaths, "unauthorized employment", ["c", "2"]);
+  assert.deepStrictEqual(plain(scopedIna245c2Target.path), ["c", "2"], "A run-in scoped text match did not target the exact cited item.");
+  assert.strictEqual(scopedStatuteSearchTarget(section1255ForCompactPaths, "admitted in transit without visa", ["c", "2"]), null, "A run-in scoped search matched text from the next numbered item.");
+  const ina245cNode = scopeStatuteNodeAtPath(section1255ForCompactPaths, ["c"]);
+  assert.strictEqual(searchNormalize(ina245cNode.text.slice(scopedIna245c2Target.match.start, scopedIna245c2Target.match.end)), "unauthorized employment", "A run-in scoped match lost its original source offsets for highlighting.");
+  const scopedScoreState = { searchScopeActive: true };
+  const scopedIna245c2Record = { kind: "usc", title: section1255ForCompactPaths.heading, cite: "8 U.S.C. 1255", item: section1255ForCompactPaths, text: searchNormalize([section1255ForCompactPaths.heading, ina245cNode.text].join(" ")) };
+  const scopedScoreRecord = extractedFunction(fallbackSource, "scoreRecord", "searchResultCounts", {
+    state: scopedScoreState,
+    normalize: searchNormalize,
+    filterMatches: () => true,
+    compactLookup: testCompactLookup,
+    compactFormLookup: testCompactLookup,
+    searchScoreContext,
+    scopedStatuteRecordText: () => searchNormalize(ina245c2SearchText),
+    scopedCfrSearchFields: record => record.cfrFields,
+    searchScopePathForRecord: () => ["c", "2"],
+    Math
+  });
+  assert.strictEqual(scopedScoreRecord(scopedIna245c2Record, "person admitted for permanent residence"), 0, "A scoped paragraph search matched words found only in the enclosing section title.");
+  const scopedCfrSearchFields = extractedFunction(fallbackSource, "scopedCfrSearchFields", "searchRouteGroups", {
+    canonicalPath: statutoryCanonicalPath,
+    searchScopePathForRecord: (record, scope) => scope.pathsBySection.get(record.item.id) || []
+  });
+  const scopedCfrSection = full.corpus.cfr.sections.find(section => section.id === "8:214.2");
+  const allScopedCfrFields = cfrSearchFields(scopedCfrSection, "8 CFR 214.2");
+  const h13ScopedCfrFields = scopedCfrSearchFields({ kind: "cfr", item: scopedCfrSection, cfrFields: allScopedCfrFields }, cfrParagraphScope);
+  assert(h13ScopedCfrFields.length > 0 && h13ScopedCfrFields.length < allScopedCfrFields.length, "A CFR paragraph scope did not narrow the preprojected section fields.");
+  assert(h13ScopedCfrFields.every(field => field.kind === "block" && field.unitPaths.some(value => value === "(h)(13)" || value.startsWith("(h)(13)(") || "(h)(13)".startsWith(value + "("))), "A CFR paragraph scope retained an unrelated searchable block.");
+  const scopedCfrExactTarget = cfrSearchTarget(scopedCfrSection, h13ScopedCfrFields[0].text, "8 CFR 214.2", h13ScopedCfrFields);
+  assert(scopedCfrExactTarget, "Text visibly contained in a CFR paragraph scope did not match.");
+  const excludedCfrField = allScopedCfrFields.find(field => field.kind === "block" && field.text.length > 24 && !h13ScopedCfrFields.includes(field) && !cfrSearchTarget(scopedCfrSection, field.text, "8 CFR 214.2", h13ScopedCfrFields));
+  assert(excludedCfrField, "The CFR paragraph scope could not demonstrate exclusion of a neighboring block.");
   const footnotedSection1154 = hydratedSource.title8.sections.find(section => section.section === "1154");
   const copiedSection1154 = statuteUnitText(footnotedSection1154, []);
   assert(copiedSection1154.includes("House editorial footnotes\nHouse editorial footnotes are publisher-supplied editorial content and are not operative statutory text."), "Statute copy text does not separate House editorial footnotes.");
@@ -2090,24 +2304,54 @@ async function main() {
     assert(!formatStatutoryRunInText(node.text, node.label).includes("statutory-runin-line"), `Reference-only text was split into false statutory lines at 8 U.S.C. ${section}${pathParts.map(value => `(${value})`).join("")}.`);
   }
 
-  const statutoryFormattingAudit = { nodes: 0, formattedNodes: 0, runInLines: 0, citationLinks: 0 };
-  const auditStatutoryNodes = nodes => {
+  const statutoryFormattingAudit = { nodes: 0, formattedNodes: 0, runInLines: 0, citationLinks: 0, indexedRunInPaths: 0 };
+  const generatedRunInPathIdentities = new Set();
+  const renderedVirtualRunInPathIdentities = new Set();
+  const pathIdentity = pathParts => pathParts.map(token => `${String(token).length}:${String(token)}`).join("|");
+  const collectStructuralPathIdentities = (nodes, parentPath = [], identities = new Set()) => {
     for (const node of nodes || []) {
+      const currentPath = [...parentPath, String(node.label)];
+      identities.add(pathIdentity(currentPath));
+      collectStructuralPathIdentities(node.children, currentPath, identities);
+    }
+    return identities;
+  };
+  for (const section of hydratedSource.title8.sections) {
+    for (const pathParts of section.runInPaths || []) generatedRunInPathIdentities.add(`${section.section}:${pathIdentity(pathParts)}`);
+  }
+  const auditStatutoryNodes = (section, nodes, parentPath = [], structuralIdentities = new Set()) => {
+    for (const node of nodes || []) {
+      const currentPath = [...parentPath, String(node.label)];
+      structuralIdentities.add(pathIdentity(currentPath));
       statutoryFormattingAudit.nodes += 1;
       const output = formatStatutoryRunInText(node.text || "", node.label || "", node.references || []);
       const addresses = [...output.matchAll(/class="inline-address">([^<]+)<\/strong>/g)].map(match => match[1]);
+      assert.deepStrictEqual(addresses, statuteRunInMarkers(node.text || "", node.label || "").map(marker => marker.address), `The build-time and browser run-in recognizers disagree at 8 U.S.C. ${section.section}${statutoryCanonicalPath(currentPath)}.`);
       if (addresses.length) statutoryFormattingAudit.formattedNodes += 1;
       statutoryFormattingAudit.runInLines += addresses.length;
       statutoryFormattingAudit.citationLinks += (output.match(/class="statute-citation-link legal-reference-link/g) || []).length;
       for (const address of addresses) assert(/^(?:\((?:\d{1,3}|[A-Za-z]|[ivxlcdmIVXLCDM]{1,4}|([a-z])\1{1,2}|([A-Z])\2)\))+$/.test(address), `Invalid formatted statutory address ${address}.`);
       assert(!output.includes('<span class="statutory-runin-line"><strong class="inline-address"></strong>'), "Formatter emitted an empty statutory address.");
-      auditStatutoryNodes(node.children);
+      if (addresses.length) {
+        const legalUnit = { sectionId: section.id, currentPath, parentPath, citationBase: `8 U.S.C. ${section.section}`, targetPath: [] };
+        const actionable = formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], null, legalUnit, node.textFootnoteReferences || []);
+        const renderedPaths = [...actionable.matchAll(/data-statute-inline-path="([^"]+)"/g)].map(match => JSON.parse(match[1].replace(/&quot;/g, '"').replace(/&amp;/g, "&")));
+        assert.strictEqual(renderedPaths.length, addresses.length, `A run-in line has no generated path at 8 U.S.C. ${section.section}${statutoryCanonicalPath(currentPath)}.`);
+        for (const pathParts of renderedPaths) {
+          assert(indexedStatutePathExists(legalUnit, pathParts), `A rendered run-in path is absent from the citation index at 8 U.S.C. ${section.section}${statutoryCanonicalPath(pathParts)}.`);
+          statutoryFormattingAudit.indexedRunInPaths += 1;
+          if (!structuralIdentities.has(pathIdentity(pathParts))) renderedVirtualRunInPathIdentities.add(`${section.section}:${pathIdentity(pathParts)}`);
+        }
+      }
+      auditStatutoryNodes(section, node.children, currentPath, structuralIdentities);
     }
   };
-  for (const section of hydratedSource.title8.sections) auditStatutoryNodes(section.body);
+  for (const section of hydratedSource.title8.sections) auditStatutoryNodes(section, section.body, [], collectStructuralPathIdentities(section.body));
   assert.strictEqual(statutoryFormattingAudit.nodes, 6973, "The statutory formatting audit did not visit every cached node.");
   assert.strictEqual(statutoryFormattingAudit.formattedNodes, 103, "Unexpected change in the set of cached nodes requiring run-in formatting.");
   assert.strictEqual(statutoryFormattingAudit.runInLines, 261, "Unexpected change in the number of formatted cached run-in provisions.");
+  assert.strictEqual(statutoryFormattingAudit.indexedRunInPaths, 261, "Not every formatted statutory run-in provision received an indexed path.");
+  assert.deepStrictEqual([...renderedVirtualRunInPathIdentities].sort(), [...generatedRunInPathIdentities].sort(), "The generated corpus run-in index has a missing or stale virtual path.");
   assert.strictEqual(statutoryFormattingAudit.citationLinks, 1765, "Unexpected generated-link count in operative statutory text.");
   let ancillaryCitationLinks = 0;
   for (const section of hydratedSource.title8.sections) {
@@ -2236,7 +2480,7 @@ async function main() {
   console.log(`PASS INASearch-AU.html: ${allUnlocked.bytes} bytes; ${allUnlocked.manifest.compressedBytes} gzip bytes`);
   console.log(`PASS INASearch-Uncompressed.html: ${uncompressed.bytes} bytes; ${uncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
   console.log(`PASS INASearch-AU-Uncompressed.html: ${allUnlockedUncompressed.bytes} bytes; ${allUnlockedUncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
-  console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${statutoryFormattingAudit.citationLinks} generated citation links`);
+  console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${generatedRunInPathIdentities.size} generated virtual paths; ${statutoryFormattingAudit.citationLinks} generated citation links`);
   console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 199 INA term entries from 170 definition statements; 32 exact 8 CFR 1.2 entries`);
   console.log(`PASS CFR audit: ${full.corpus.cfr.coverage.partCount} active parts; ${full.corpus.cfr.sections.length} sections; ${full.corpus.cfr.appendices.length} appendices; ${full.corpus.cfr.graphics.length} referenced graphics; 1 removed-part tombstone`);
   console.log("PASS round trips, hashes, PTAR boundary/intersection, nested CFR citations, exact visible-match targeting, regulation history, syntax, native loaders, corruption handling, deterministic gzip and plain JSON, profile isolation, comprehensive legacy profile migration, statutory formatting, saving-menu state rules, and ordinary gzip extraction");
