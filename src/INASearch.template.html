@@ -337,6 +337,43 @@
     .global-search .search-input:focus { border-color: #67b7ff; box-shadow: 0 0 0 3px rgba(103,183,255,.22); }
     .global-search .search-icon { z-index: 4; color: #9fb5c8; }
     .global-search .kbd { z-index: 4; border-color: rgba(255,255,255,.22); color: #bed2e4; background: rgba(255,255,255,.07); }
+    .search-scope-token {
+      position: absolute;
+      z-index: 5;
+      top: 50%;
+      left: 39px;
+      translate: 0 -50%;
+      display: flex;
+      align-items: center;
+      max-width: min(46%, 420px);
+      min-height: 29px;
+      overflow: hidden;
+      border: 1px solid rgba(103,183,255,.34);
+      border-radius: 8px;
+      color: #b9d2e4;
+      background: rgba(46,110,156,.22);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+    .search-scope-token:focus-within { border-color: rgba(103,183,255,.58); background: rgba(46,110,156,.28); box-shadow: 0 0 0 1px rgba(103,183,255,.14); }
+    .search-scope-token.invalid { border-color: #c94b57; background: #ffe3e6; }
+    .search-scope-label { flex: 0 0 auto; padding: 5px 2px 5px 7px; }
+    .search-scope-input {
+      min-width: 7ch;
+      max-width: calc(100% - 49px);
+      border: 0;
+      padding: 5px 2px;
+      color: inherit;
+      background: transparent;
+      font: inherit;
+      outline: 0;
+    }
+    .search-scope-clear { display: grid; place-items: center; flex: 0 0 26px; width: 26px; min-height: 27px; border: 0; border-left: 1px solid rgba(185,210,228,.15); padding: 0; color: #95b6cc; background: transparent; cursor: pointer; font-size: 16px; line-height: 1; }
+    .search-scope-clear:hover { color: #d7e8f3; background: rgba(103,183,255,.1); }
+    .search-scope-clear:focus-visible { outline: 2px solid #087dcc; outline-offset: -2px; }
+    .search-field-shell.has-search-scope .search-input { padding-left: calc(45px + var(--search-scope-width, 150px)); }
     .scheduled-lock-notice { margin-top: 9px; border: 1px solid #e5bc60; border-radius: 9px; padding: 9px 12px; color: #fff1c9; background: #59400d; font-size: 12px; line-height: 1.45; }
     .scheduled-lock-notice.active { border-color: #ff8b82; color: #ffe4e1; background: #6b211c; }
     .profile-setup-alert {
@@ -1145,6 +1182,11 @@
           <span class="search-icon" aria-hidden="true">⌕</span>
           <label class="sr-only" for="searchInput">Search authorities, definitions, immigration classifications, forms, and notes</label>
           <span class="implied-usc-title" id="impliedUscTitle" aria-hidden="true" hidden>8</span>
+          <div class="search-scope-token" id="searchScopeToken" hidden>
+            <span class="search-scope-label" aria-hidden="true">in:</span>
+            <input class="search-scope-input" id="searchScopeInput" type="text" autocomplete="off" spellcheck="false" maxlength="160" aria-label="Citation or citation range to search within">
+            <button class="search-scope-clear" id="searchScopeClear" type="button" aria-label="Remove citation search scope" title="Remove search scope">×</button>
+          </div>
           <div class="search-input-mirror" id="searchInputMirror" aria-hidden="true"></div>
           <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false"
             aria-describedby="impliedUscTitleNotice" placeholder="Search citations, definitions, classifications, forms, and notes">
@@ -1614,6 +1656,10 @@
       contentViewBeforeSearch: "definitions",
       filter: "all",
       query: "",
+      searchScopeActive: false,
+      searchScopeEditing: false,
+      searchScopeText: "",
+      searchScope: null,
       searchSuggestion: null,
       searchSuggestionTimer: null,
       scheduledLockTimer: null,
@@ -1766,7 +1812,8 @@
     state.quizRootFilter = profile.preferences.quizClassification || "all";
 
     const els = {
-      search: $("#searchInput"), searchInputMirror: $("#searchInputMirror"), citationEquivalent: $("#citationEquivalent"),
+      search: $("#searchInput"), searchScopeToken: $("#searchScopeToken"), searchScopeInput: $("#searchScopeInput"), searchScopeClear: $("#searchScopeClear"),
+      searchInputMirror: $("#searchInputMirror"), citationEquivalent: $("#citationEquivalent"),
       citationEquivalentIna: $("#citationEquivalentIna"), citationEquivalentInaCopy: $("#citationEquivalentInaCopy"),
       citationEquivalentUsc: $("#citationEquivalentUsc"), citationEquivalentUscCopy: $("#citationEquivalentUscCopy"),
       impliedUscTitle: $("#impliedUscTitle"), impliedUscTitleNotice: $("#impliedUscTitleNotice"),
@@ -2069,6 +2116,58 @@
       toast.timer = setTimeout(() => { els.toast.hidden = true; }, 4200);
     }
 
+    function statutoryRunInMarkers(value, currentLabel = "") {
+      const input = String(value || "");
+      const markerPattern = /\((\d{1,3}|[A-Za-z]{1,4})\)/g;
+      const romanPattern = /^(?:i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)$/i;
+      const referenceWords = new Set(["section", "sections", "subsection", "subsections", "paragraph", "paragraphs", "subparagraph", "subparagraphs", "clause", "clauses", "subclause", "subclauses", "item", "items", "subdivision", "subdivisions", "part", "parts", "chapter", "chapters", "title", "titles", "under"]);
+      const referenceConnector = /^[\s,()[\]]*(?:(?:and|or|through|to)[\s,()[\]]*)*$/i;
+      const isAddressToken = token => /^\d{1,3}$/.test(token) || /^[A-Za-z]$/.test(token) || romanPattern.test(token) || /^([a-z])\1{1,2}$/.test(token) || /^([A-Z])\1$/.test(token);
+      const candidates = [];
+      let referenceChainEnd = -1;
+      let match;
+      while ((match = markerPattern.exec(input))) {
+        const token = match[1];
+        if (!isAddressToken(token)) continue;
+        const start = match.index;
+        const end = markerPattern.lastIndex;
+        const prefix = input.slice(0, start);
+        const precedingWord = prefix.match(/([A-Za-z]+)[\s“”'".:]*$/)?.[1]?.toLowerCase() || "";
+        const previousChar = input[start - 1] || "";
+        const referenceContinuation = referenceChainEnd >= 0 && referenceConnector.test(input.slice(referenceChainEnd, start));
+        const referenceNumberPrefix = /\b(?:section|sections|subsection|subsections|paragraph|paragraphs|subparagraph|subparagraphs|clause|clauses|subclause|subclauses|item|items)\s+\d+[A-Za-z-]*\s*$/i.test(prefix) || /\b\d{3,}[A-Za-z-]*\s*$/.test(prefix);
+        const isReference = referenceContinuation || referenceWords.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(previousChar);
+        if (isReference) { referenceChainEnd = end; continue; }
+        candidates.push({ start, end, address: match[0], token, prefixText: "" });
+        referenceChainEnd = -1;
+      }
+      let markers = candidates;
+      if (markers.length === 1) {
+        const tail = input.slice(0, markers[0].start).slice(-80);
+        const followsStructuralSeparator = /(?:^|[;:,\]])\s*(?:and|or)?\s*$/i.test(tail) || /\b(?:and|or)\s*$/i.test(tail);
+        const siblingPair = String(currentLabel) && ((/^\d+$/.test(currentLabel) && /^\d+$/.test(markers[0].token) && Number(markers[0].token) === Number(currentLabel) + 1) || (/^[A-Za-z]$/.test(currentLabel) && /^[A-Za-z]$/.test(markers[0].token) && markers[0].token.charCodeAt(0) === currentLabel.charCodeAt(0) + 1));
+        if (!followsStructuralSeparator && !siblingPair) markers = [];
+      }
+      if (markers.length > 1) {
+        const onlyReferenceConnectors = markers.slice(1).every((marker, index) => referenceConnector.test(input.slice(markers[index].end, marker.start)));
+        const afterLastMarker = input.slice(markers.at(-1).end);
+        const referenceListEnding = /^\s*[)\],.”"']*\s*(?:in|of|under|above|below|thereof|if)\b/i.test(afterLastMarker) || /^\s*[)\]”"']/.test(afterLastMarker) || /^\s*[,.”"']{2,}/.test(afterLastMarker);
+        if (onlyReferenceConnectors && referenceListEnding) markers = [];
+      }
+      if (!markers.length) return [];
+      const combined = [];
+      for (const marker of markers) {
+        const previous = combined.at(-1);
+        const between = previous ? input.slice(previous.end, marker.start) : "";
+        if (previous && /^\s*\[?\s*$/.test(between)) {
+          previous.address += marker.address;
+          previous.prefixText += between.includes("[") ? "[" : "";
+          previous.end = marker.end;
+        } else combined.push({ ...marker });
+      }
+      return combined;
+    }
+
     function flattenNode(node) {
       return [node.label, node.heading, node.text, ...(node.children || []).map(flattenNode)].join(" ");
     }
@@ -2096,7 +2195,7 @@
             addBlocks(block.blocks, [...prefix, index]);
             continue;
           }
-          fields.push({ kind: "block", blockPath: [...prefix, index], path: block.a || "", text: cfrBlockText(block), matchType: "prose" });
+          fields.push({ kind: "block", blockPath: [...prefix, index], path: block.a || "", unitPaths: cfrBlockUnitPaths(block), text: cfrBlockText(block), matchType: "prose" });
         }
       };
       addBlocks(item?.blocks);
@@ -2629,6 +2728,64 @@
       }
     }
 
+    function searchScopeMatchesRecord(record, scope = state.searchScope) {
+      if (!state.searchScopeActive) return true;
+      if (!scope?.valid || !scope.sectionIds?.has(record?.item?.id)) return false;
+      return scope.family === "usc" ? record.kind === "usc" : scope.family === "cfr" ? record.kind === "cfr" : false;
+    }
+
+    function searchScopePathForRecord(record, scope = state.searchScope) {
+      return scope?.valid ? scope.pathsBySection?.get(record?.item?.id) || [] : [];
+    }
+
+    function statuteScopeProjection(section, scopePath) {
+      const requestedPath = (scopePath || []).map(String);
+      if (!section || !requestedPath.length) return [];
+      const structuralPath = nearestStructuralPath(section, requestedPath);
+      const scopedNode = statuteNodeAtPath(section, structuralPath);
+      if (!scopedNode) return [];
+      const samePath = structuralPath.length === requestedPath.length && structuralPath.every((token, index) => normCitationPart(token) === normCitationPart(requestedPath[index]));
+      if (!samePath) {
+        const legalUnit = {
+          sectionId: section.id,
+          currentPath: structuralPath,
+          parentPath: structuralPath.slice(0, -1),
+          citationBase: `8 U.S.C. ${section.section}`
+        };
+        const segment = statutoryRunInSegments(scopedNode.text, scopedNode.label, legalUnit)
+          .find(item => item.path.length === requestedPath.length && item.path.every((token, index) => normCitationPart(token) === normCitationPart(requestedPath[index])));
+        return segment ? [{ kind: "node-text", path: requestedPath, text: String(scopedNode.text || "").slice(segment.start, segment.contentEnd), sourceStart: segment.start }] : [];
+      }
+      const fields = [];
+      const addNodes = (nodes, path = []) => {
+        for (const node of nodes || []) {
+          const currentPath = [...path, node.label];
+          fields.push({ kind: "node-label", path: currentPath, text: node.label ? `(${node.label})` : "" });
+          fields.push({ kind: "node-heading", path: currentPath, text: node.heading || "" });
+          fields.push({ kind: "node-text", path: currentPath, text: node.text || "" });
+          addNodes(node.children, currentPath);
+        }
+      };
+      fields.push({ kind: "node-label", path: structuralPath, text: scopedNode.label ? `(${scopedNode.label})` : "" });
+      fields.push({ kind: "node-heading", path: structuralPath, text: scopedNode.heading || "" });
+      fields.push({ kind: "node-text", path: structuralPath, text: scopedNode.text || "" });
+      addNodes(scopedNode.children, structuralPath);
+      return fields;
+    }
+
+    function scopedStatuteRecordText(record, scope = state.searchScope) {
+      const path = searchScopePathForRecord(record, scope);
+      if (record?.kind !== "usc" || !path.length) return record?.text || "";
+      return normalize(statuteScopeProjection(record.item, path).map(field => field.text).join(" "));
+    }
+
+    function scopedCfrSearchFields(record, scope = state.searchScope) {
+      const fields = record?.cfrFields || [];
+      const path = canonicalPath(searchScopePathForRecord(record, scope));
+      if (record?.kind !== "cfr" || !path) return fields;
+      return fields.filter(field => field.kind === "block" && (field.unitPaths || []).some(unitPath => unitPath === path || unitPath.startsWith(path + "(") || path.startsWith(unitPath + "(")));
+    }
+
     function searchRouteGroups(query, filter = "all") {
       void query;
       return filter === "all"
@@ -2638,14 +2795,19 @@
 
     function filterMatches(record) {
       if (state.searchAccessLocked && record.kind === "visa") return false;
+      if (state.searchScopeActive && !searchScopeMatchesRecord(record)) return false;
       if (state.activeSearchGroups) return state.activeSearchGroups.has(record.group);
       if (state.filter === "all") return true;
       return record.group === state.filter;
     }
 
     function activeSearchRecords() {
-      if (!state.activeSearchGroups || !state.recordsByGroup.size) return state.records;
-      return [...state.activeSearchGroups].flatMap(group => state.recordsByGroup.get(group) || []);
+      const records = !state.activeSearchGroups || !state.recordsByGroup.size
+        ? state.records
+        : [...state.activeSearchGroups].flatMap(group => state.recordsByGroup.get(group) || []);
+      if (!state.searchScopeActive) return records;
+      if (!state.searchScope?.valid) return [];
+      return records.filter(record => searchScopeMatchesRecord(record));
     }
 
     function searchScoreContext(query) {
@@ -2666,9 +2828,10 @@
       const cite = record.normalizedCite || normalize(record.cite);
       const compactQuery = search.compactQuery;
       const terms = search.terms;
+      const recordText = state.searchScopeActive ? scopedStatuteRecordText(record) : record.text;
       let score = 0;
       if (record.kind === "cfr" || record.kind === "cfr-appendix") {
-        record.cfrTarget = cfrSearchTarget(record.item, query, record.cite, record.cfrFields);
+        record.cfrTarget = cfrSearchTarget(record.item, query, record.cite, state.searchScopeActive ? scopedCfrSearchFields(record) : record.cfrFields);
         if (!record.cfrTarget) return 0;
         score += record.cfrTarget.matchType === "metadata" ? 120 : 55;
       }
@@ -2694,14 +2857,17 @@
           else if (compactFormNumber.startsWith(compactFormQuery)) score += 950;
         }
       }
-      if (cite === q) score += 500;
-      else if (cite.startsWith(q)) score += 240;
-      else if (cite.includes(q)) score += 150;
-      if (title === q) score += 260;
-      else if (title.startsWith(q)) score += 130;
-      else if (title.includes(q)) score += 90;
-      if (record.text.includes(q)) score += 55;
-      if (terms.every(t => record.text.includes(t))) score += 35;
+      const scopeLimitsRecordMetadata = state.searchScopeActive && ["usc", "cfr"].includes(record.kind) && searchScopePathForRecord(record).length > 0;
+      if (!scopeLimitsRecordMetadata) {
+        if (cite === q) score += 500;
+        else if (cite.startsWith(q)) score += 240;
+        else if (cite.includes(q)) score += 150;
+        if (title === q) score += 260;
+        else if (title.startsWith(q)) score += 130;
+        else if (title.includes(q)) score += 90;
+      }
+      if (recordText.includes(q)) score += 55;
+      if (terms.every(t => recordText.includes(t))) score += 35;
       if (score === 0) return 0;
       score += Math.max(0, 12 - record.title.length / 40);
       return score;
@@ -2748,19 +2914,22 @@
 
     function runSearch() {
       state.query = els.search.value.trim();
-      const queryChanged = state.query !== state.lastSearchQuery;
+      if (state.searchScopeActive) refreshSearchScope();
+      else renderSearchScopeEditor();
+      const searchKey = `${state.query}\u0000${state.searchScopeActive ? state.searchScopeText : ""}`;
+      const queryChanged = searchKey !== state.lastSearchQuery;
       if (queryChanged) state.citationResultsExpanded = false;
-      state.lastSearchQuery = state.query;
+      state.lastSearchQuery = searchKey;
       state.activeSearchGroups = searchRouteGroups(state.query, "all");
       state.searchAccessLocked = studyAccessLocked();
-      const definitionCommand = parseDefinitionCommand(state.query);
+      const definitionCommand = state.searchScopeActive ? null : parseDefinitionCommand(state.query);
       if (definitionCommand) {
         state.citation = null;
         renderCitationFeedback(null);
         openDefinitions(definitionCommand.query);
         return;
       }
-      state.citation = parseCitation(state.query);
+      state.citation = state.searchScopeActive ? null : parseCitation(state.query);
       renderCitationFeedback(state.citation);
       if (!state.query) {
         setSearchResults([]);
@@ -2768,7 +2937,14 @@
         return;
       }
       showSearchResults();
-      if (shouldDeferBroadSearch(state.query, state.citation)) {
+      if (state.searchScopeActive && !state.searchScope?.valid) {
+        setSearchResults([]);
+        state.selected = null;
+        renderResults([]);
+        els.detail.innerHTML = `<div class="empty-state"><div><span class="empty-icon" aria-hidden="true">in:</span><h2>Finish the citation scope</h2><p>${escapeHtml(state.searchScope?.message || "Enter a citation or citation range.")}</p></div></div>`;
+        return;
+      }
+      if (!state.searchScopeActive && shouldDeferBroadSearch(state.query, state.citation)) {
         setSearchResults([]);
         state.selected = null;
         renderResults([]);
@@ -3113,6 +3289,81 @@
 
     function pathStartsWith(path, prefix) {
       return prefix.length <= path.length && prefix.every((token, index) => normCitationPart(token) === normCitationPart(path[index]));
+    }
+
+    function searchScopeDescriptor(result) {
+      if (!result?.recognized) return null;
+      if (result.type === "cfr" && result.partial && result.part?.sectionIds?.length) {
+        return {
+          valid: true, family: "cfr", authority: "cfr", title: Number(result.title), authoritySection: String(result.section),
+          label: result.label, sectionIds: new Set(result.part.sectionIds), pathsBySection: new Map()
+        };
+      }
+      if (!result.valid || result.external || !["ina", "usc", "cfr"].includes(result.type)) return null;
+      const section = result.record?.item;
+      if (!section?.id) return null;
+      const family = result.type === "cfr" ? "cfr" : "usc";
+      const authoritySection = result.type === "ina" ? result.mapping?.inaSection : result.type === "cfr" ? result.section : section.section;
+      return {
+        valid: true, family, authority: result.type, title: result.type === "cfr" ? Number(result.title) : 8,
+        authoritySection: String(authoritySection || ""), label: result.label,
+        sectionIds: new Set([section.id]), pathsBySection: new Map((result.path || []).length ? [[section.id, result.path.map(String)]] : [])
+      };
+    }
+
+    function inferredSearchScopeEndpoint(value, left) {
+      const direct = parseCitation(value);
+      if (direct?.recognized) return direct;
+      if (left?.authority === "ina") return parseCitation(`INA ${value}`);
+      if (left?.authority === "usc") return parseCitation(`8 U.S.C. ${value}`);
+      if (left?.authority === "cfr") return parseCitation(`${left.title} CFR ${value}`);
+      return null;
+    }
+
+    function searchScopeRange(left, right) {
+      if (!left?.valid || !right?.valid || left.authority !== right.authority || left.family !== right.family || left.title !== right.title) {
+        return { valid: false, message: "A citation range must use the same authority and title at both ends." };
+      }
+      if (left.pathsBySection.size || right.pathsBySection.size) return { valid: false, message: "Citation ranges must use whole sections or parts." };
+      let ordered = [];
+      if (left.authority === "ina") {
+        ordered = (corpus?.inaCrosswalk || []).map(row => ({
+          authoritySection: String(row.inaSection),
+          id: sectionMap.get(normCitationPart(row.uscSection))?.id
+        })).filter(item => item.id);
+      } else if (left.authority === "usc") {
+        ordered = (corpus?.title8?.sections || []).map(section => ({ authoritySection: String(section.section), id: section.id }));
+      } else {
+        ordered = (corpus?.cfr?.sections || []).filter(section => Number(section.title) === left.title).map(section => ({ authoritySection: String(section.section), id: section.id }));
+      }
+      const start = ordered.findIndex(item => normCitationPart(item.authoritySection) === normCitationPart(left.authoritySection));
+      const end = ordered.findIndex(item => normCitationPart(item.authoritySection) === normCitationPart(right.authoritySection));
+      if (start < 0 || end < 0) return { valid: false, message: "One or both range endpoints are not included in this edition." };
+      if (end < start) return { valid: false, message: "The ending citation must follow the starting citation." };
+      const authorityLabel = left.authority === "ina" ? "INA" : left.authority === "usc" ? "8 U.S.C." : `${left.title} CFR`;
+      return {
+        valid: true, family: left.family, authority: left.authority, title: left.title,
+        label: `${authorityLabel} ${left.authoritySection}–${right.authoritySection}`,
+        sectionIds: new Set(ordered.slice(start, end + 1).map(item => item.id)), pathsBySection: new Map(), range: true
+      };
+    }
+
+    function parseSearchScope(value) {
+      const input = String(value || "").trim();
+      if (!input) return { valid: false, message: "Enter a citation or citation range." };
+      for (const separator of input.matchAll(/[-–—]/g)) {
+        const leftText = input.slice(0, separator.index).trim();
+        const rightText = input.slice(separator.index + separator[0].length).trim();
+        if (!leftText || !rightText) continue;
+        const left = searchScopeDescriptor(parseCitation(leftText));
+        if (!left) continue;
+        const right = searchScopeDescriptor(inferredSearchScopeEndpoint(rightText, left));
+        if (!right) return { valid: false, message: "Enter a valid ending citation for this range." };
+        return searchScopeRange(left, right);
+      }
+      const result = parseCitation(input);
+      const descriptor = searchScopeDescriptor(result);
+      return descriptor || { valid: false, message: result?.message || "Enter a local INA, U.S.C., or CFR citation." };
     }
 
     function mappedUscResultForIna(result) {
@@ -3745,11 +3996,13 @@
       updateSearchResultLayout(results);
       els.resultCount.textContent = !state.indexReady ? "Indexing…" : state.filteredResultCount > results.length ? `${results.length} of ${state.filteredResultCount.toLocaleString()}` : state.filteredResultCount.toLocaleString();
       if (!state.query && !results.length) {
-        els.resultList.innerHTML = `<div class="empty-state" style="min-height:360px"><div><strong>Fast local lookup</strong><p style="margin-top:5px">${hasLocalUscCache ? "Search Title 8 text and notes," : "Search the Title 8 citation index,"} INA crosswalks, Policy Manual resources, forms, visa categories, and your notes.</p></div></div>`;
+        els.resultList.innerHTML = state.searchScopeActive
+          ? `<div class="empty-state" style="min-height:360px"><div><strong>${state.searchScope?.valid ? `Search within ${escapeHtml(state.searchScope.label)}` : "Enter a valid citation scope"}</strong><p style="margin-top:5px">${state.searchScope?.valid ? "Type the words or phrase you want to find in this part of the law." : escapeHtml(state.searchScope?.message || "Enter a citation or citation range in the in: field.")}</p></div></div>`
+          : `<div class="empty-state" style="min-height:360px"><div><strong>Fast local lookup</strong><p style="margin-top:5px">${hasLocalUscCache ? "Search Title 8 text and notes," : "Search the Title 8 citation index,"} INA crosswalks, Policy Manual resources, forms, visa categories, and your notes.</p></div></div>`;
         return;
       }
       if (!results.length) {
-        els.resultList.innerHTML = `<div class="empty-state" style="min-height:300px"><div><strong>No indexed matches</strong><p style="margin-top:5px">Check spelling, try fewer words, or use an official shortcut in Sources &amp; About.</p></div></div>`;
+        els.resultList.innerHTML = `<div class="empty-state" style="min-height:300px"><div><strong>No indexed matches</strong><p style="margin-top:5px">${state.searchScopeActive && state.searchScope?.valid ? `No matches were found within ${escapeHtml(state.searchScope.label)}. Try fewer words or a wider citation range.` : "Check spelling, try fewer words, or use an official shortcut in Sources &amp; About."}</p></div></div>`;
         return;
       }
       els.resultList.innerHTML = results.map((record, index) => {
@@ -4319,10 +4572,10 @@
       return null;
     }
 
-    function statuteSearchTarget(section, query) {
+    function statuteSearchTarget(section, query, scopePath = []) {
       const normalizedQuery = normalize(query);
       if (!section || !normalizedQuery) return null;
-      const fields = [
+      const fields = scopePath.length ? statuteScopeProjection(section, scopePath) : [
         { kind: "section", path: [], text: `8 U.S.C. ${section.section}` },
         { kind: "heading", path: [], text: section.heading || "" },
         { kind: "preamble", path: [], text: section.preamble || "" }
@@ -4336,10 +4589,10 @@
           addNodes(node.children, currentPath);
         }
       };
-      addNodes(section.body);
+      if (!scopePath.length) addNodes(section.body);
       for (const field of fields) {
         const match = searchTextMatch(field.text, normalizedQuery);
-        if (match) return { ...field, match };
+        if (match) return { ...field, match: Number.isInteger(field.sourceStart) ? { start: match.start + field.sourceStart, end: match.end + field.sourceStart } : match };
       }
       const terms = normalizedQuery.split(" ").filter(Boolean);
       let best = null;
@@ -4348,12 +4601,14 @@
         if (matches.length && (!best || matches.length > best.matches.length)) best = { field, matches };
       }
       if (!best || !terms.every(term => fields.some(field => searchTextMatch(field.text, term)))) return null;
-      return { ...best.field, match: best.matches[0] };
+      const match = best.matches[0];
+      return { ...best.field, match: Number.isInteger(best.field.sourceStart) ? { start: match.start + best.field.sourceStart, end: match.end + best.field.sourceStart } : match };
     }
 
     function renderStatute(section, citationResult) {
       const citationTargetPath = citationResult?.path || [];
-      const searchTarget = citationResult ? null : statuteSearchTarget(section, state.query);
+      const scopedPath = state.searchScopeActive ? state.searchScope?.pathsBySection?.get(section.id) || [] : [];
+      const searchTarget = citationResult ? null : statuteSearchTarget(section, state.query, scopedPath);
       const navigationPath = citationTargetPath.length ? citationTargetPath : searchTarget?.path || [];
       state.statuteNavigationKind = "usc";
       state.statuteNavigationLocation = normalizedStatuteHistoryLocation(section.id, navigationPath, "usc");
@@ -4386,6 +4641,24 @@
       requestAnimationFrame(() => { syncStatuteNavigationOffset(); scrollToRenderedStatuteTarget(); scheduleStatuteNavigationUpdate(); });
     }
 
+    function statutoryRunInSegments(value, currentLabel = "", legalUnit = null) {
+      const input = String(value || "");
+      const markers = statutoryRunInMarkers(input, currentLabel);
+      let previousInlinePath = null;
+      return markers.map((marker, index) => {
+        const nextStart = markers[index + 1]?.start ?? input.length;
+        const rawContent = input.slice(marker.end, nextStart);
+        const leading = rawContent.length - rawContent.trimStart().length;
+        const trailing = rawContent.length - rawContent.trimEnd().length;
+        const contentStart = marker.end + leading;
+        const contentEnd = Math.max(contentStart, nextStart - trailing);
+        const addressTokens = componentTokens(marker.address) || [marker.token];
+        const path = legalUnit ? resolvedRunInStatutePath(legalUnit, addressTokens, previousInlinePath) : [];
+        previousInlinePath = path;
+        return { ...marker, path, contentStart, contentEnd, text: `${marker.address} ${input.slice(contentStart, contentEnd)}`.trim() };
+      });
+    }
+
     function scrollToRenderedStatuteTarget() {
       const searchMatch = $("[data-statute-search-match]", els.detail);
       const inlineTarget = $("[data-statute-inline-target]", els.detail);
@@ -4398,11 +4671,12 @@
       const currentPath = [...path, node.label];
       const isTarget = targetPath.length && currentPath.length === targetPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(targetPath[i]));
       const isSearchTarget = searchTarget?.path?.length === currentPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(searchTarget.path[i]));
+      const containsInlineSearchTarget = searchTarget?.kind === "node-text" && searchTarget.path?.length > currentPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(searchTarget.path[i]));
       const number = node.label ? `(${node.label})` : "";
       const citation = `${citationBase}${canonicalPath(currentPath)}`;
       const numberContents = isSearchTarget && searchTarget.kind === "node-label" ? renderSearchHighlightedText(number, searchTarget.match) : escapeHtml(number);
-      return `<div class="statutory-node${isTarget ? " target" : ""}${isSearchTarget ? " search-target" : ""}" style="--depth:${depth}" data-statute-path="${escapeHtml(JSON.stringify(currentPath))}"${isTarget ? " aria-label=\"Citation target\"" : isSearchTarget ? " aria-label=\"Search match\"" : ""}>
-        <div class="statutory-line">${legalUnitTriggerHtml("usc", sectionId, currentPath, citation, numberContents, "node-number")}${node.heading ? `<span class="node-heading">${linkifyStatutoryText(node.heading, node.headingReferences || [], 0, undefined, isSearchTarget && searchTarget.kind === "node-heading" ? searchTarget.match : null, node.headingFootnoteReferences || [])} </span>` : ""}<span class="node-text">${formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], isSearchTarget && searchTarget.kind === "node-text" ? searchTarget.match : null, { sectionId, currentPath, parentPath: path, citationBase, targetPath }, node.textFootnoteReferences || [])}</span></div>
+      return `<div class="statutory-node${isTarget ? " target" : ""}${isSearchTarget || containsInlineSearchTarget ? " search-target" : ""}" style="--depth:${depth}" data-statute-path="${escapeHtml(JSON.stringify(currentPath))}"${isTarget ? " aria-label=\"Citation target\"" : isSearchTarget || containsInlineSearchTarget ? " aria-label=\"Search match\"" : ""}>
+        <div class="statutory-line">${legalUnitTriggerHtml("usc", sectionId, currentPath, citation, numberContents, "node-number")}${node.heading ? `<span class="node-heading">${linkifyStatutoryText(node.heading, node.headingReferences || [], 0, undefined, isSearchTarget && searchTarget.kind === "node-heading" ? searchTarget.match : null, node.headingFootnoteReferences || [])} </span>` : ""}<span class="node-text">${formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], (isSearchTarget || containsInlineSearchTarget) && searchTarget.kind === "node-text" ? searchTarget.match : null, { sectionId, currentPath, parentPath: path, citationBase, targetPath: targetPath.length ? targetPath : searchTarget?.path || [] }, node.textFootnoteReferences || [])}</span></div>
         ${(node.children || []).map(child => renderStatutoryNode(child, targetPath, currentPath, depth + 1, searchTarget, citationBase, sectionId)).join("")}</div>`;
     }
 
@@ -4489,56 +4763,8 @@
 
     function formatStatutoryRunInText(value, currentLabel = "", references = [], searchMatch = null, legalUnit = null, footnoteReferences = []) {
       const input = String(value || "");
-      const markerPattern = /\((\d{1,3}|[A-Za-z]{1,4})\)/g;
-      const romanPattern = /^(?:i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)$/i;
-      const isAddressToken = token => /^\d{1,3}$/.test(token) || /^[A-Za-z]$/.test(token) || romanPattern.test(token) || /^([a-z])\1{1,2}$/.test(token) || /^([A-Z])\1$/.test(token);
-      const referenceWords = new Set(["section", "sections", "subsection", "subsections", "paragraph", "paragraphs", "subparagraph", "subparagraphs", "clause", "clauses", "subclause", "subclauses", "item", "items", "subdivision", "subdivisions", "part", "parts", "chapter", "chapters", "title", "titles", "under"]);
-      const referenceConnector = /^[\s,()[\]]*(?:(?:and|or|through|to)[\s,()[\]]*)*$/i;
-      const candidates = [];
-      let referenceChainEnd = -1;
-      let match;
-      while ((match = markerPattern.exec(input))) {
-        const token = match[1];
-        if (!isAddressToken(token)) continue;
-        const start = match.index;
-        const end = markerPattern.lastIndex;
-        const prefix = input.slice(0, start);
-        const precedingWord = prefix.match(/([A-Za-z]+)[\s“”'".:]*$/)?.[1]?.toLowerCase() || "";
-        const previousChar = input[start - 1] || "";
-        const referenceContinuation = referenceChainEnd >= 0 && referenceConnector.test(input.slice(referenceChainEnd, start));
-        const referenceNumberPrefix = /\b(?:section|sections|subsection|subsections|paragraph|paragraphs|subparagraph|subparagraphs|clause|clauses|subclause|subclauses|item|items)\s+\d+[A-Za-z-]*\s*$/i.test(prefix) || /\b\d{3,}[A-Za-z-]*\s*$/.test(prefix);
-        const isReference = referenceContinuation || referenceWords.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(previousChar);
-        if (isReference) { referenceChainEnd = end; continue; }
-        candidates.push({ start, end, address: match[0], token, prefixText: "" });
-        referenceChainEnd = -1;
-      }
-      let markers = candidates;
-      if (markers.length === 1) {
-        const tail = input.slice(0, markers[0].start).slice(-80);
-        const followsStructuralSeparator = /(?:^|[;:,\]])\s*(?:and|or)?\s*$/i.test(tail) || /\b(?:and|or)\s*$/i.test(tail);
-        const siblingPair = String(currentLabel) && ((/^\d+$/.test(currentLabel) && /^\d+$/.test(markers[0].token) && Number(markers[0].token) === Number(currentLabel) + 1) || (/^[A-Za-z]$/.test(currentLabel) && /^[A-Za-z]$/.test(markers[0].token) && markers[0].token.charCodeAt(0) === currentLabel.charCodeAt(0) + 1));
-        if (!followsStructuralSeparator && !siblingPair) markers = [];
-      }
-      if (markers.length > 1) {
-        const onlyReferenceConnectors = markers.slice(1).every((marker, index) => referenceConnector.test(input.slice(markers[index].end, marker.start)));
-        const afterLastMarker = input.slice(markers.at(-1).end);
-        const referenceListEnding = /^\s*[)\],.”"']*\s*(?:in|of|under|above|below|thereof|if)\b/i.test(afterLastMarker) || /^\s*[)\]”"']/.test(afterLastMarker) || /^\s*[,.”"']{2,}/.test(afterLastMarker);
-        if (onlyReferenceConnectors && referenceListEnding) markers = [];
-      }
+      const markers = statutoryRunInMarkers(input, currentLabel);
       if (!markers.length) return linkifyStatutoryText(input, references, 0, undefined, searchMatch, footnoteReferences);
-      const combined = [];
-      for (const marker of markers) {
-        const previous = combined.at(-1);
-        const between = previous ? input.slice(previous.end, marker.start) : "";
-        if (previous && /^\s*\[?\s*$/.test(between)) {
-          previous.address += marker.address;
-          previous.prefixText += between.includes("[") ? "[" : "";
-          previous.end = marker.end;
-        } else {
-          combined.push({ ...marker });
-        }
-      }
-      markers = combined;
       const initialRaw = input.slice(0, markers[0].start);
       const initial = initialRaw.trimEnd();
       const parts = initial ? [`<span class="statutory-runin-chapeau">${linkifyStatutoryText(input, references, 0, initial.length, searchMatch, footnoteReferences)}</span>`] : [];
@@ -6693,10 +6919,22 @@ Get-FileHash $outJson -Algorithm SHA256`;
     }
 
     function updateSearchSuggestionVisibility() {
-      els.searchSuggestion.hidden = Boolean(els.search.value.trim());
+      els.searchSuggestion.hidden = Boolean(els.search.value.trim()) || state.searchScopeActive;
     }
 
     const DEFAULT_STARTUP_QUERY = "INA 203b1a";
+
+    function extractSearchScopeTag(value) {
+      const input = String(value || "");
+      const match = /(^|\s)in:[ \t]?/i.exec(input);
+      if (!match) return null;
+      const before = input.slice(0, match.index).trim();
+      const after = input.slice(match.index + match[0].length);
+      const delimiter = /[ \t]{2,}/.exec(after);
+      const scope = String(delimiter ? after.slice(0, delimiter.index) : after).trim();
+      const following = delimiter ? after.slice(delimiter.index + delimiter[0].length).trim() : "";
+      return { query: [before, following].filter(Boolean).join(" "), scope };
+    }
 
     function startupSearchQuery(locationLike = window.location) {
       try {
@@ -6717,8 +6955,76 @@ Get-FileHash $outJson -Algorithm SHA256`;
       }
     }
 
+    function syncSearchScopeEditorWidth() {
+      if (!state.searchScopeActive) return;
+      const valueLength = els.searchScopeInput.value.length || 4;
+      els.searchScopeInput.style.width = `${Math.max(9, Math.min(34, valueLength + 1))}ch`;
+      requestAnimationFrame(() => {
+        if (!state.searchScopeActive) return;
+        const width = Math.ceil(els.searchScopeToken.getBoundingClientRect().width || els.searchScopeToken.offsetWidth || 150);
+        els.search.closest(".search-field-shell")?.style.setProperty("--search-scope-width", `${width + 7}px`);
+      });
+    }
+
+    function renderSearchScopeEditor() {
+      const shell = els.search.closest(".search-field-shell");
+      els.searchScopeToken.hidden = !state.searchScopeActive;
+      shell?.classList.toggle("has-search-scope", state.searchScopeActive);
+      const invalid = state.searchScopeActive && !state.searchScopeEditing && Boolean(state.searchScopeText) && !state.searchScope?.valid;
+      els.searchScopeToken.classList.toggle("invalid", invalid);
+      els.searchScopeInput.setAttribute("aria-invalid", invalid ? "true" : "false");
+      els.searchScopeInput.title = invalid ? state.searchScope?.message || "Enter a valid citation or citation range." : "Search only within this citation scope. Press Space twice to return to the main search field.";
+      if (state.searchScopeActive) syncSearchScopeEditorWidth();
+      else shell?.style.removeProperty("--search-scope-width");
+      updateSearchSuggestionVisibility();
+    }
+
+    function refreshSearchScope() {
+      state.searchScopeText = els.searchScopeInput.value.trim();
+      state.searchScope = parseSearchScope(state.searchScopeText);
+      renderSearchScopeEditor();
+      return state.searchScope;
+    }
+
+    function activateSearchScope(value = "", focusScope = true) {
+      state.searchScopeActive = true;
+      state.searchScopeEditing = focusScope;
+      els.searchScopeInput.value = String(value || "").slice(0, 160);
+      refreshSearchScope();
+      state.filter = "all";
+      $$(".filter-button").forEach(button => button.classList.toggle("active", button.dataset.filter === "all"));
+      if (focusScope) setTimeout(() => {
+        els.searchScopeInput.focus();
+        els.searchScopeInput.setSelectionRange(els.searchScopeInput.value.length, els.searchScopeInput.value.length);
+      }, 0);
+    }
+
+    function deactivateSearchScope(focusSearch = false) {
+      state.searchScopeActive = false;
+      state.searchScopeEditing = false;
+      state.searchScopeText = "";
+      state.searchScope = null;
+      els.searchScopeInput.value = "";
+      renderSearchScopeEditor();
+      if (focusSearch) setTimeout(() => {
+        els.search.focus();
+        els.search.setSelectionRange(els.search.value.length, els.search.value.length);
+      }, 0);
+    }
+
+    function escapeSearchScopeOnSecondSpace(event) {
+      if (event.key !== " " || event.altKey || event.ctrlKey || event.metaKey || !els.searchScopeInput.value.endsWith(" ")) return false;
+      event.preventDefault();
+      els.searchScopeInput.value = els.searchScopeInput.value.slice(0, -1);
+      refreshSearchScope();
+      els.search.focus();
+      els.search.setSelectionRange(els.search.value.length, els.search.value.length);
+      return true;
+    }
+
     function resetSearchState(renderSearchShell = true) {
       els.search.value = "";
+      deactivateSearchScope(false);
       updateSearchSuggestionVisibility();
       state.query = "";
       state.lastSearchQuery = "";
@@ -6744,10 +7050,14 @@ Get-FileHash $outJson -Algorithm SHA256`;
 
     function applySearchQuery(query, focusSearch = true, preserveFormatting = false) {
       const suppliedQuery = String(query || "");
-      els.search.value = preserveFormatting ? suppliedQuery.slice(0, 500) : suppliedQuery.trim();
+      const tagged = extractSearchScopeTag(suppliedQuery);
+      const mainQuery = tagged ? tagged.query : suppliedQuery;
+      els.search.value = preserveFormatting ? mainQuery.slice(0, 500) : mainQuery.trim();
+      if (tagged) activateSearchScope(tagged.scope, false);
+      else deactivateSearchScope(false);
       updateSearchSuggestionVisibility();
       state.query = els.search.value;
-      if (!state.query) { closeSearchResults(); return; }
+      if (!state.query && !state.searchScopeActive) { closeSearchResults(); return; }
       showSearchResults(focusSearch);
       runSearch();
     }
@@ -6808,14 +7118,66 @@ Get-FileHash $outJson -Algorithm SHA256`;
       els.brand.addEventListener("mouseleave", endBrandTributeHover);
       els.search.addEventListener("input", event => {
         clearTimeout(searchTimer);
+        const tagged = extractSearchScopeTag(els.search.value);
+        if (tagged) {
+          els.search.value = tagged.query;
+          activateSearchScope(tagged.scope, true);
+        }
         state.query = els.search.value.trim();
         state.citation = null;
         renderCitationFeedback(null);
         updateSearchSuggestionVisibility();
-        if (!state.query) { closeSearchResults(undefined, true); return; }
+        if (!state.query && !state.searchScopeActive) { closeSearchResults(undefined, true); return; }
         showSearchResults();
+        if (!state.query) { runSearch(); return; }
         const deleting = String(event.inputType || "").startsWith("delete");
         searchTimer = setTimeout(runSearch, deleting ? 160 : 65);
+      });
+      els.searchScopeInput.addEventListener("input", event => {
+        clearTimeout(searchTimer);
+        refreshSearchScope();
+        state.query = els.search.value.trim();
+        state.citation = null;
+        renderCitationFeedback(null);
+        showSearchResults();
+        if (!state.query) { runSearch(); return; }
+        const deleting = String(event.inputType || "").startsWith("delete");
+        searchTimer = setTimeout(runSearch, deleting ? 160 : 65);
+      });
+      els.searchScopeInput.addEventListener("focus", () => {
+        state.searchScopeEditing = true;
+        renderSearchScopeEditor();
+      });
+      els.searchScopeInput.addEventListener("blur", () => {
+        state.searchScopeEditing = false;
+        refreshSearchScope();
+      });
+      els.searchScopeInput.addEventListener("keydown", event => {
+        if (escapeSearchScopeOnSecondSpace(event)) return;
+        if (event.key === "Escape") {
+          event.preventDefault();
+          els.search.focus();
+          els.search.setSelectionRange(els.search.value.length, els.search.value.length);
+        }
+        if (event.key === "Enter") {
+          event.preventDefault();
+          clearTimeout(searchTimer);
+          runSearch();
+          els.search.focus();
+          els.search.setSelectionRange(els.search.value.length, els.search.value.length);
+        }
+        if (event.key === "Backspace" && !els.searchScopeInput.value) {
+          event.preventDefault();
+          deactivateSearchScope(true);
+          if (els.search.value.trim()) runSearch();
+          else closeSearchResults(undefined, true);
+        }
+      });
+      els.searchScopeClear.addEventListener("click", () => {
+        clearTimeout(searchTimer);
+        deactivateSearchScope(true);
+        if (els.search.value.trim()) runSearch();
+        else closeSearchResults(undefined, true);
       });
       els.search.addEventListener("scroll", () => {
         els.searchInputMirror.scrollLeft = els.search.scrollLeft;
@@ -6851,6 +7213,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
       els.quizPracticeAnswered.addEventListener("change", () => setQuizPracticeMode(els.quizPracticeAnswered.checked));
       els.definitionTermFilter.addEventListener("input", () => {
         state.definitionQuery = els.definitionTermFilter.value.trim();
+        deactivateSearchScope(false);
         els.search.value = `define:${state.definitionQuery ? ` ${state.definitionQuery}` : ""}`;
         state.query = els.search.value;
         renderDefinitions();
