@@ -20,7 +20,7 @@ const REFERENCE_KEYS = {
 const KEY_REFERENCES = Object.fromEntries(Object.entries(REFERENCE_KEYS).map(([property, key]) => [key, property]));
 const FAMILY_CODES = { usc: "u", ina: "i", cfr: "c", "public-law": "p", "statutes-at-large": "s", "federal-register": "f", unknown: "?" };
 const CODE_FAMILIES = Object.fromEntries(Object.entries(FAMILY_CODES).map(([family, code]) => [code, family]));
-const RULES = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent"];
+const RULES = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent", "context-cfr-ina-act-section"];
 
 function pathTokens(value) {
   return [...String(value || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]);

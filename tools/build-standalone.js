@@ -161,39 +161,6 @@ function makeBuild(template, corpus, profile, options) {
   return { fileName: options.fileName, bytes: Buffer.byteLength(html), instanceId: buildSignature, manifest: corpusPayload.manifest };
 }
 
-function allUnlockedProfile(template, corpus, defaultProfile) {
-  const baseMatch = template.match(/const BASE_RESOURCE_QUESTIONS = Object\.freeze\((\{[\s\S]*?\})\);\s+const state =/);
-  if (!baseMatch) throw new Error("Could not read the base resource questions from the template.");
-  const baseQuestions = vm.runInNewContext(`(${baseMatch[1]})`);
-  const descriptors = [
-    ...Object.values(baseQuestions).flat(),
-    ...(corpus.visaTables?.immigrantDefinitionGroups || []),
-    ...(corpus.visaTables?.formQuestions?.nonimmigrant || []),
-    ...(corpus.visaTables?.formQuestions?.immigrant || [])
-  ].map(question => ({ id: question.id, revision: question.revision }));
-  if (descriptors.some(question => !question.id || !question.revision)) throw new Error("An all-unlocked resource question is missing its ID or revision.");
-  if (new Set(descriptors.map(question => question.id)).size !== descriptors.length) throw new Error("All-unlocked resource question IDs must be unique.");
-  const unlockedAt = defaultProfile.createdAt || "2026-07-30T00:00:00.000Z";
-  return {
-    ...JSON.parse(JSON.stringify(defaultProfile)),
-    profileId: `${defaultProfile.profileId}-all-unlocked`,
-    updatedAt: unlockedAt,
-    corpusVersionSeen: corpus.corpusVersion,
-    visaSummaryUnlocks: [],
-    visaChallengeLockouts: [],
-    visaFactUnlocks: [],
-    visaFactChallengeLockouts: [],
-    resourceUnlocks: descriptors.map(question => ({
-      questionId: question.id,
-      revision: question.revision,
-      unlockedAt,
-      corpusVersion: corpus.corpusVersion
-    })),
-    resourceChallengeLockouts: [],
-    preferences: { ...defaultProfile.preferences, quizCursorKey: null }
-  };
-}
-
 const template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
 const fullCorpus = readAssignedObject("INASearch-Corpus.js", "INA_SEARCH_CORPUS");
 const statuteFootnoteSource = readAssignedObject("INASearch-Statute-Footnotes.js", "INA_SEARCH_STATUTE_FOOTNOTES");
@@ -210,7 +177,6 @@ const uscisGlossarySource = readAssignedObject("INASearch-USCIS-Glossary.js", "I
 fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
 packLegalReferences(fullCorpus);
 const defaultProfile = readAssignedObject("INASearch-Profile.js", "INA_SEARCH_PROFILE");
-const unlockedProfile = allUnlockedProfile(template, fullCorpus, defaultProfile);
 
 const results = [
   makeBuild(template, fullCorpus, defaultProfile, {
@@ -219,24 +185,10 @@ const results = [
     fileName: "INASearch.html",
     hasLocalUscCache: true
   }),
-  makeBuild(template, fullCorpus, unlockedProfile, {
-    variant: "all-unlocked",
-    displayName: "INASearch AU (All Unlocked)",
-    fileName: "INASearch-AU.html",
-    hasLocalUscCache: true
-  }),
   makeBuild(template, fullCorpus, defaultProfile, {
     variant: "uncompressed",
     displayName: "INASearch (Uncompressed Corpus)",
     fileName: "INASearch-Uncompressed.html",
-    hasLocalUscCache: true,
-    uncompressedCorpus: true,
-    compactShell: true
-  }),
-  makeBuild(template, fullCorpus, unlockedProfile, {
-    variant: "all-unlocked-uncompressed",
-    displayName: "INASearch AU (All Unlocked, Uncompressed Corpus)",
-    fileName: "INASearch-AU-Uncompressed.html",
     hasLocalUscCache: true,
     uncompressedCorpus: true,
     compactShell: true

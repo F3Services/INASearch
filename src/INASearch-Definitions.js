@@ -8,7 +8,7 @@
  * The separately generated USCIS glossary source is joined during the build.
  */
 window.INA_SEARCH_DEFINITIONS = {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "capturedAt": "2026-08-09",
   "sources": {
     "inaStatute": {
@@ -33,28 +33,32 @@ window.INA_SEARCH_DEFINITIONS = {
       "sourceFilter": "ina-101-a",
       "label": "Entire INA",
       "sourceLabel": "INA 101(a)",
-      "text": "As used in this chapter—"
+      "text": "As used in this chapter—",
+      "targets": [{ "kind": "chapter" }]
     },
     {
       "id": "ina-subchapters-i-ii",
       "sourceFilter": "ina-101-b",
       "label": "INA subchapters I and II",
       "sourceLabel": "INA 101(b)",
-      "text": "As used in subchapters I and II—"
+      "text": "As used in subchapters I and II—",
+      "targets": [{ "kind": "subchapter", "number": "I" }, { "kind": "subchapter", "number": "II" }]
     },
     {
       "id": "ina-subchapter-iii",
       "sourceFilter": "ina-101-c",
       "label": "INA subchapter III",
       "sourceLabel": "INA 101(c)",
-      "text": "As used in subchapter III—"
+      "text": "As used in subchapter III—",
+      "targets": [{ "kind": "subchapter", "number": "III" }]
     },
     {
       "id": "ina-212-a-2-e",
       "sourceFilter": "ina-101-h",
       "label": "INA 212(a)(2)(E) only",
       "sourceLabel": "INA 101(h)",
-      "text": "For purposes of section 1182(a)(2)(E) of this title"
+      "text": "For purposes of section 1182(a)(2)(E) of this title",
+      "targets": [{ "kind": "ina", "inaSection": "212", "path": ["a", "2", "E"] }]
     },
     {
       "id": "cfr-chapter-i",
@@ -62,6 +66,7 @@ window.INA_SEARCH_DEFINITIONS = {
       "label": "Regulation (8 CFR Chapter I)",
       "sourceLabel": "8 CFR 1.2",
       "text": "As used in this chapter I, the term:",
+      "targets": [{ "kind": "cfr-chapter", "title": "8", "number": "I" }],
       "context": "This part further defines some of the terms already described in section 101 and other sections of the Immigration and Nationality Act (66 Stat. 163), as amended, and such other enactments as pertain to immigration and nationality. These terms are used consistently by components within the Department of Homeland Security including U.S. Customs and Border Protection, U.S. Immigration and Customs Enforcement, and U.S. Citizenship and Immigration Services."
     }
   ],
@@ -75,6 +80,10 @@ window.INA_SEARCH_DEFINITIONS = {
     "a.46": "for purposes of subsection (a)(15)(O)(i), in the case of the arts",
     "a.48.A": "with respect to an alien",
     "h": "For purposes of section 1182(a)(2)(E) of this title"
+  },
+  "inaAnnotationTargets": {
+    "a.45": [{ "kind": "ina", "inaSection": "101", "path": ["a", "15", "E"] }],
+    "a.46": [{ "kind": "ina", "inaSection": "101", "path": ["a", "15", "O", "i"] }]
   },
   "cfrEntries": [
     { "term": "Act or INA", "aliases": ["Act", "INA"], "text": "Act or INA means the Immigration and Nationality Act, as amended." },
