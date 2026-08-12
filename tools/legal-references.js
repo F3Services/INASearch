@@ -72,6 +72,143 @@ function localCfrTarget(context, title, section, path) {
   return !path.length || context.cfrPaths?.has(`${title}:${section}:${path.join("/")}`) || false;
 }
 
+// These parts define “Act” as the INA; other CFR contexts must spell out the INA's name.
+const INA_ACT_CFR_SCOPES = new Set([
+  "20:655", "20:656",
+  "22:40", "22:41", "22:42",
+  "29:501", "29:502", "29:503",
+  "45:400"
+]);
+
+function cfrContextUsesInaAct(context) {
+  if (context.kind !== "cfr") return false;
+  if (String(context.title || "") === "8") return true;
+  return INA_ACT_CFR_SCOPES.has(`${context.title}:${context.part}`);
+}
+
+function inaReferenceTarget(context, inaSection, targetPath) {
+  const mapping = context.inaMap?.get(String(inaSection).toLowerCase());
+  const targetSection = mapping?.uscSection ? String(mapping.uscSection) : "";
+  const local = targetSection && localUscTarget(context, "8", targetSection, targetPath);
+  return {
+    family: "ina",
+    targetKind: local ? "usc" : "ina",
+    targetTitle: "8",
+    targetSection: targetSection || inaSection,
+    targetPath,
+    inaSection,
+    resolution: local ? "local" : "official-source-only",
+    officialUrl: targetSection
+      ? houseSectionUrl("8", targetSection)
+      : "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act"
+  };
+}
+
+function resolvedInaContinuationPath(context, inaSection, basePath, continuationPath) {
+  const mapping = context.inaMap?.get(String(inaSection).toLowerCase());
+  const targetSection = mapping?.uscSection ? String(mapping.uscSection) : "";
+  if (!targetSection) return null;
+  for (let retained = basePath.length; retained >= 0; retained--) {
+    const candidate = [...basePath.slice(0, retained), ...continuationPath];
+    if (localUscTarget(context, "8", targetSection, candidate)) return candidate;
+  }
+  return null;
+}
+
+function parseInaActCitationList(input, start, end) {
+  const citations = [];
+  let cursor = start;
+  let pendingPrefixStart = null;
+  let absoluteCitations = 0;
+  while (cursor < end) {
+    const remainder = input.slice(cursor, end);
+    const whitespace = remainder.match(/^\s+/);
+    if (whitespace) { cursor += whitespace[0].length; continue; }
+    const sectionWord = remainder.match(/^sections?\b/i);
+    if (sectionWord) {
+      if (pendingPrefixStart !== null) return null;
+      pendingPrefixStart = cursor;
+      cursor += sectionWord[0].length;
+      continue;
+    }
+    const connector = remainder.match(/^(?:and|or|through|to|respectively)\b/i);
+    if (connector) { cursor += connector[0].length; continue; }
+    const punctuation = remainder.match(/^[,;:\-–—]+/);
+    if (punctuation) { cursor += punctuation[0].length; continue; }
+    const absolute = remainder.match(/^\d+[A-Za-z-]*(?:\s*\([A-Za-z0-9-]+\))*/);
+    if (absolute) {
+      citations.push({
+        start: pendingPrefixStart ?? cursor,
+        end: cursor + absolute[0].length,
+        inaSection: absolute[0].match(/^\d+[A-Za-z-]*/)[0],
+        path: pathTokens(absolute[0]),
+        relative: false
+      });
+      absoluteCitations++;
+      pendingPrefixStart = null;
+      cursor += absolute[0].length;
+      continue;
+    }
+    const continuation = remainder.match(/^(?:\([A-Za-z0-9-]+\))(?:\s*\([A-Za-z0-9-]+\))*/);
+    if (continuation) {
+      citations.push({
+        start: pendingPrefixStart ?? cursor,
+        end: cursor + continuation[0].length,
+        path: pathTokens(continuation[0]),
+        relative: true
+      });
+      pendingPrefixStart = null;
+      cursor += continuation[0].length;
+      continue;
+    }
+    return null;
+  }
+  return absoluteCitations && pendingPrefixStart === null ? citations : null;
+}
+
+function inaActReferenceCandidates(text, context) {
+  const input = String(text || "");
+  const results = [];
+  if (context.kind !== "cfr") return results;
+  const suffixPattern = /\bof\s+(?:(the)\s+)?(?:(Immigration\s+and\s+Nationality)\s+)?Act\b(?!\s+of\b)/gi;
+  for (const suffix of input.matchAll(suffixPattern)) {
+    const explicitlyIna = Boolean(suffix[2]);
+    if (!explicitlyIna && !cfrContextUsesInaAct(context)) continue;
+    const windowStart = Math.max(0, suffix.index - 420);
+    const prefix = input.slice(windowStart, suffix.index);
+    const starts = [...prefix.matchAll(/\bsections?\b/gi)].map(match => windowStart + match.index);
+    let parsed = null;
+    for (const start of starts) {
+      const candidate = parseInaActCitationList(input, start, suffix.index);
+      if (candidate) { parsed = candidate; break; }
+    }
+    if (!parsed) continue;
+    let currentSection = "";
+    let currentPath = [];
+    parsed.forEach((citation, index) => {
+      let targetPath = citation.path;
+      if (citation.relative) {
+        if (!currentSection) return;
+        targetPath = resolvedInaContinuationPath(context, currentSection, currentPath, citation.path);
+        if (!targetPath) return;
+      } else {
+        currentSection = citation.inaSection;
+      }
+      currentPath = targetPath;
+      results.push({
+        id: makeId(context, citation.start, "context-cfr-ina-act-section", index),
+        start: citation.start,
+        end: citation.end,
+        text: input.slice(citation.start, citation.end),
+        provenance: "deterministic-context",
+        ruleId: "context-cfr-ina-act-section",
+        ...inaReferenceTarget(context, currentSection, targetPath)
+      });
+    });
+  }
+  return results;
+}
+
 function explicitReferenceCandidates(text, context) {
   const input = String(text || "");
   const results = [];
@@ -107,11 +244,7 @@ function explicitReferenceCandidates(text, context) {
   });
   addMatches(/\bINA\s*(?:§|section)?\s*(\d+[A-Za-z-]*)((?:\([A-Za-z0-9-]+\))*)/gi, "explicit-ina", match => {
     const inaSection = match[1], inaPath = pathTokens(match[2]);
-    const mapping = context.inaMap?.get(String(inaSection).toLowerCase());
-    const targetSection = mapping?.uscSection ? String(mapping.uscSection) : "";
-    const targetPath = inaPath;
-    const local = targetSection && localUscTarget(context, "8", targetSection, targetPath);
-    return { family: "ina", targetKind: local ? "usc" : "ina", targetTitle: "8", targetSection: targetSection || inaSection, targetPath, inaSection, resolution: local ? "local" : "official-source-only", officialUrl: targetSection ? houseSectionUrl("8", targetSection) : "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act" };
+    return inaReferenceTarget(context, inaSection, inaPath);
   });
   addMatches(/\bPub(?:lic)?\.?\s+L(?:aw)?\.?\s+(\d+)[–—-](\d+)\b/gi, "explicit-public-law", match => ({
     family: "public-law", targetKind: "public-law", targetCongress: match[1], targetLaw: match[2], targetPath: [], resolution: "official-source-only", officialUrl: `https://www.govinfo.gov/app/details/PLAW-${match[1]}publ${match[2]}`
@@ -187,7 +320,7 @@ function contextualReferenceCandidates(text, context) {
 
 function generatedReferences(text, context, existing = []) {
   const occupied = retainNavigableReferences([...(existing || [])], context).sort((a, b) => a.start - b.start || a.end - b.end);
-  const candidates = retainNavigableReferences([...explicitReferenceCandidates(text, context), ...contextualReferenceCandidates(text, context)]
+  const candidates = retainNavigableReferences([...explicitReferenceCandidates(text, context), ...inaActReferenceCandidates(text, context), ...contextualReferenceCandidates(text, context)]
     .filter(reference => reference.end > reference.start && String(text).slice(reference.start, reference.end) === reference.text)
     .sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start) || a.ruleId.localeCompare(b.ruleId)), context);
   for (const candidate of candidates) {
@@ -260,7 +393,7 @@ function applyGeneratedLegalReferences(corpus) {
   const attachCfrBlocks = (section, blocks, pathPrefix = []) => {
     (blocks || []).forEach((block, index) => {
       const path = pathTokens(block.a || block.u?.at(-1)?.a || "");
-      const context = { kind: "cfr", title: String(section.title), section: String(section.section || ""), path, sourceId: `cfr-${section.id}-${[...pathPrefix, index].join("-")}`, suppressSelfReferences: true };
+      const context = { kind: "cfr", title: String(section.title), part: String(section.partId || "").split(":").at(-1), section: String(section.section || ""), path, sourceId: `cfr-${section.id}-${[...pathPrefix, index].join("-")}`, suppressSelfReferences: true };
       attach(block, "x", context);
       if (block.t === "table") {
         (block.rows || []).forEach((row, rowIndex) => row.forEach((cell, cellIndex) => attach(cell, "x", { ...context, sourceId: `${context.sourceId}-cell-${rowIndex}-${cellIndex}` })));
@@ -269,11 +402,11 @@ function applyGeneratedLegalReferences(corpus) {
     });
   };
   for (const section of [...(corpus.cfr?.sections || []), ...(corpus.cfr?.appendices || [])]) {
-    attach(section, "heading", { kind: "cfr", title: String(section.title), section: String(section.section || ""), path: [], sourceId: `cfr-${section.id}-heading`, suppressSelfReferences: true, ...shared });
+    attach(section, "heading", { kind: "cfr", title: String(section.title), part: String(section.partId || "").split(":").at(-1), section: String(section.section || ""), path: [], sourceId: `cfr-${section.id}-heading`, suppressSelfReferences: true, ...shared });
     attachCfrBlocks(section, section.blocks);
   }
   for (const part of corpus.cfr?.parts || []) {
-    const context = { kind: "cfr", title: String(part.title), section: "", path: [], sourceId: `cfr-part-${part.id}` };
+    const context = { kind: "cfr", title: String(part.title), part: String(part.part || part.id || "").split(":").at(-1), section: "", path: [], sourceId: `cfr-part-${part.id}` };
     attach(part, "authority", context);
     attach(part, "source", context);
   }
@@ -285,7 +418,7 @@ function applyGeneratedLegalReferences(corpus) {
     suppressedSelfReferencesByFamily: referenceAudit.suppressedByFamily,
     generatedAtBuild: true,
     runtimeNetworkForPreviews: false,
-    rules: ["house-uslm-ref", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent"]
+    rules: ["house-uslm-ref", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-cfr-ina-act-section", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent"]
   };
   return corpus;
 }
@@ -294,6 +427,7 @@ module.exports = {
   applyGeneratedLegalReferences,
   explicitReferenceCandidates,
   generatedReferences,
+  inaActReferenceCandidates,
   legalReferenceContext,
   pathTokens
 };

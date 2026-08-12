@@ -230,13 +230,15 @@ function scopeRecordForTargets(targets, scopeContext) {
     id: "ina-chapter",
     label: "Entire INA",
     sourceLabel: scopeContext.sourceCitation,
-    text: scopeContext.text
+    text: scopeContext.text,
+    targets: clone(targets)
   };
   if (targets.length === 1 && targets[0].kind === "subchapter") return {
     id: `ina-subchapter-${slug(targets[0].number)}`,
     label: `INA subchapter ${targets[0].number}`,
     sourceLabel: scopeContext.sourceCitation,
-    text: scopeContext.text
+    text: scopeContext.text,
+    targets: clone(targets)
   };
   const citations = targets.map(scopeTargetCitation);
   const id = targets.length === 1 ? `ina-${scopeTargetKey(targets[0])}` : `ina-scope-${targets.map(scopeTargetKey).join("--")}`;
@@ -244,7 +246,8 @@ function scopeRecordForTargets(targets, scopeContext) {
     id,
     label: `${citations.join(" and ")} only`,
     sourceLabel: scopeContext.sourceCitation,
-    text: scopeContext.text
+    text: scopeContext.text,
+    targets: clone(targets)
   };
 }
 
@@ -285,6 +288,7 @@ function deriveInaCatalog(corpus, definitionSource) {
   const candidates = [];
   const excludedMentions = [];
   const specificScopes = definitionSource.inaSpecificScope || {};
+  const annotationTargets = definitionSource.inaAnnotationTargets || {};
 
   function walk(section, mapping, nodes, ancestors = []) {
     for (const node of nodes || []) {
@@ -384,7 +388,8 @@ function deriveInaCatalog(corpus, definitionSource) {
         resource: section.source?.resource || "United States Code, Title 8",
         sourceScope: candidate.scopeContext?.text || scopeRecord.text,
         scopeLocator: candidate.scopeContext?.sourceCitation || scopeRecord.sourceLabel,
-        specificScope: String(mapping.inaSection) === "101" ? (specificScopes[path.join(".")] || "") : ""
+        specificScope: String(mapping.inaSection) === "101" ? (specificScopes[path.join(".")] || "") : "",
+        ...(String(mapping.inaSection) === "101" && annotationTargets[path.join(".")] ? { annotationTargets: clone(annotationTargets[path.join(".")]) } : {})
       });
     }
   }
@@ -454,6 +459,7 @@ function buildDefinitionCatalog(corpus, definitionSource, glossarySource = null)
   }));
   delete definitions.cfrEntries;
   delete definitions.inaSpecificScope;
+  delete definitions.inaAnnotationTargets;
   if (glossary) {
     definitions.sources.uscisGlossary = clone(glossary.source);
     definitions.glossaryVerification = clone(glossary.verification);
