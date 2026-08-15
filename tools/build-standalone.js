@@ -12,6 +12,8 @@ const { applyStatuteFootnotes } = require("./statute-footnotes");
 const { applyGeneratedLegalReferences } = require("./legal-references");
 const { packLegalReferences } = require("./pack-legal-references");
 const { indexStatuteRunIns } = require("./statute-run-ins");
+const { applyStatuteStatusMetadata } = require("./statute-status");
+const { FORMAT: CORPUS_PACKING_FORMAT, packCorpusForDelivery } = require("../src/INASearch-Corpus-Packing");
 
 const root = path.resolve(__dirname, "..");
 const sourceDir = path.join(root, "src");
@@ -46,11 +48,20 @@ function replaceDataBlock(html, name, id, value) {
   return html.replace(expression, replacement);
 }
 
+function replaceRuntimeBlock(html, name, id, source) {
+  const start = `<!-- INA_SEARCH_${name}_RUNTIME_START -->`;
+  const end = `<!-- INA_SEARCH_${name}_RUNTIME_END -->`;
+  const replacement = `${start}\n  <script id="${id}">${source.replace(/<\/script/gi, "<\\/script")}</script>\n  ${end}`;
+  const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
+  if (!expression.test(html)) throw new Error(`Template is missing the ${name} runtime block.`);
+  return html.replace(expression, replacement);
+}
+
 function sha256(value) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
 
-function compressCorpus(corpus) {
+function compressCorpus(corpus, deliveryPacking = "") {
   const json = Buffer.from(JSON.stringify(corpus), "utf8");
   const gzip = zlib.gzipSync(json, { level: 9, mtime: 0 });
   return {
@@ -63,6 +74,7 @@ function compressCorpus(corpus) {
       mediaType: "application/gzip",
       contentType: "application/json",
       charset: "utf-8",
+      ...(deliveryPacking ? { deliveryPacking } : {}),
       compressedBytes: gzip.byteLength,
       uncompressedBytes: json.byteLength,
       compressedSha256: sha256(gzip),
@@ -112,6 +124,7 @@ function replaceCorpusBlock(html, payload, manifest) {
     ["media-type", manifest.mediaType],
     ["content-type", manifest.contentType],
     ["charset", manifest.charset],
+    ["delivery-packing", manifest.deliveryPacking],
     ["compressed-bytes", manifest.compressedBytes],
     ["uncompressed-bytes", manifest.uncompressedBytes],
     ["compressed-sha256", manifest.compressedSha256],
@@ -125,7 +138,10 @@ function replaceCorpusBlock(html, payload, manifest) {
 }
 
 function makeBuild(template, corpus, profile, options) {
-  const corpusPayload = options.uncompressedCorpus ? encodeUncompressedCorpus(corpus) : compressCorpus(corpus);
+  const deliveryCorpus = options.compactCorpus ? packCorpusForDelivery(corpus) : corpus;
+  const corpusPayload = options.uncompressedCorpus
+    ? encodeUncompressedCorpus(deliveryCorpus)
+    : compressCorpus(deliveryCorpus, options.compactCorpus ? CORPUS_PACKING_FORMAT : "");
   if (!corpusPayload.payload) corpusPayload.payload = corpusPayload.base64;
   const buildSignature = crypto.createHash("sha256")
     .update(template)
@@ -161,17 +177,19 @@ function makeBuild(template, corpus, profile, options) {
   return { fileName: options.fileName, bytes: Buffer.byteLength(html), instanceId: buildSignature, manifest: corpusPayload.manifest };
 }
 
-const template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
+let template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
+template = replaceRuntimeBlock(template, "STORAGE", "inaSearchStorageRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Storage.js"), "utf8"));
+template = replaceRuntimeBlock(template, "CORPUS_PACKING", "inaSearchCorpusPackingRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Corpus-Packing.js"), "utf8"));
+template = replaceRuntimeBlock(template, "UPDATER", "inaSearchUpdaterRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Updater.js"), "utf8"));
 const fullCorpus = readAssignedObject("INASearch-Corpus.js", "INA_SEARCH_CORPUS");
 const statuteFootnoteSource = readAssignedObject("INASearch-Statute-Footnotes.js", "INA_SEARCH_STATUTE_FOOTNOTES");
 applyStatuteFootnotes(fullCorpus, statuteFootnoteSource);
 fullCorpus.cfr = readAssignedObject("INASearch-CFR.js", "INA_SEARCH_CFR");
-fullCorpus.visaTables = readAssignedObject("INASearch-Visa-Tables.js", "INA_SEARCH_VISA_TABLES");
-fullCorpus.visaTables.formQuestions = readAssignedObject("INASearch-Form-Questions.js", "INA_SEARCH_FORM_QUESTIONS");
 const statuteReferenceSource = readAssignedObject("INASearch-Statute-References.js", "INA_SEARCH_STATUTE_REFERENCES");
 applyStatuteReferences(fullCorpus, statuteReferenceSource);
 applyGeneratedLegalReferences(fullCorpus);
 indexStatuteRunIns(fullCorpus);
+applyStatuteStatusMetadata(fullCorpus);
 const definitionSource = readAssignedObject("INASearch-Definitions.js", "INA_SEARCH_DEFINITIONS");
 const uscisGlossarySource = readAssignedObject("INASearch-USCIS-Glossary.js", "INA_SEARCH_USCIS_GLOSSARY");
 fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
@@ -183,7 +201,8 @@ const results = [
     variant: "standard",
     displayName: "INASearch",
     fileName: "INASearch.html",
-    hasLocalUscCache: true
+    hasLocalUscCache: true,
+    compactCorpus: true
   }),
   makeBuild(template, fullCorpus, defaultProfile, {
     variant: "uncompressed",
