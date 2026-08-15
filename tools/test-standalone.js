@@ -16,6 +16,8 @@ const { applyStatuteFootnotes, reconstructFlattenedField } = require("./statute-
 const { applyGeneratedLegalReferences, generatedReferences, legalReferenceContext } = require("./legal-references");
 const { compactHouseHref, expandHouseHref, packLegalReferences, unpackLegalReferences } = require("./pack-legal-references");
 const { indexStatuteRunIns, statuteRunInMarkers } = require("./statute-run-ins");
+const { applyStatuteStatusMetadata } = require("./statute-status");
+const { FORMAT: CORPUS_PACKING_FORMAT, packCorpusForDelivery, hydratePackedCorpus } = require("../src/INASearch-Corpus-Packing");
 
 const root = path.resolve(__dirname, "..");
 
@@ -28,8 +30,6 @@ function sourceCorpus() {
   vm.createContext(sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-Corpus.js"), "utf8"), sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-CFR.js"), "utf8"), sandbox);
-  vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-Visa-Tables.js"), "utf8"), sandbox);
-  vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-Form-Questions.js"), "utf8"), sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-Definitions.js"), "utf8"), sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-USCIS-Glossary.js"), "utf8"), sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-Statute-References.js"), "utf8"), sandbox);
@@ -38,14 +38,13 @@ function sourceCorpus() {
   const statuteFootnotes = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_STATUTE_FOOTNOTES));
   applyStatuteFootnotes(corpus, statuteFootnotes);
   corpus.cfr = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_CFR));
-  corpus.visaTables = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_VISA_TABLES));
-  corpus.visaTables.formQuestions = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_FORM_QUESTIONS));
   const definitions = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_DEFINITIONS));
   const uscisGlossary = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_USCIS_GLOSSARY));
   const statuteReferences = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_STATUTE_REFERENCES));
   applyStatuteReferences(corpus, statuteReferences);
   applyGeneratedLegalReferences(corpus);
   indexStatuteRunIns(corpus);
+  applyStatuteStatusMetadata(corpus);
   corpus.definitions = buildDefinitionCatalog(corpus, definitions, uscisGlossary);
   packLegalReferences(corpus);
   return corpus;
@@ -100,6 +99,8 @@ function readBuild(fileName) {
   }
   assert.strictEqual(uncompressed.byteLength, manifest.uncompressedBytes, `${fileName}: uncompressed byte count`);
   assert.strictEqual(sha256(uncompressed), manifest.uncompressedSha256, `${fileName}: uncompressed SHA-256`);
+  const deliveryCorpus = JSON.parse(uncompressed.toString("utf8"));
+  const corpus = hydratePackedCorpus(deliveryCorpus);
   return {
     fileName,
     filePath,
@@ -110,8 +111,7 @@ function readBuild(fileName) {
     manifest,
     payload,
     compressed,
-    uncompressed,
-    corpus: JSON.parse(uncompressed.toString("utf8"))
+    corpus
   };
 }
 
@@ -123,7 +123,7 @@ function executableScripts(html) {
 
 async function runBootstrap(build, overrides = {}) {
   const scripts = executableScripts(build.html);
-  assert.strictEqual(scripts.length, 2, `${build.fileName}: executable script count`);
+  assert.strictEqual(scripts.length, 5, `${build.fileName}: executable script count`);
   const manifestAttributes = Object.fromEntries(Object.entries({
     "schema-version": String(build.manifest.schemaVersion),
     "corpus-schema-version": String(build.manifest.corpusSchemaVersion),
@@ -136,7 +136,8 @@ async function runBootstrap(build, overrides = {}) {
     "compressed-bytes": String(build.manifest.compressedBytes),
     "uncompressed-bytes": String(build.manifest.uncompressedBytes),
     "compressed-sha256": build.manifest.compressedSha256,
-    "uncompressed-sha256": build.manifest.uncompressedSha256
+    "uncompressed-sha256": build.manifest.uncompressedSha256,
+    "delivery-packing": build.manifest.deliveryPacking
   }).filter(([, value]) => value !== undefined && value !== "undefined"));
   const embeddedElement = (value, attributes = {}) => {
     const element = overrides.scriptTextOnly
@@ -165,7 +166,9 @@ async function runBootstrap(build, overrides = {}) {
   };
   context.window = context;
   vm.createContext(context);
-  new vm.Script(scripts[0], { filename: `${build.fileName}:bootstrap` }).runInContext(context);
+  new vm.Script(scripts[0], { filename: `${build.fileName}:storage` }).runInContext(context);
+  new vm.Script(scripts[1], { filename: `${build.fileName}:corpus-packing` }).runInContext(context);
+  new vm.Script(scripts[3], { filename: `${build.fileName}:bootstrap` }).runInContext(context);
   const corpus = await context.INA_SEARCH_CORPUS_READY;
   return { corpus, profile: context.INA_SEARCH_PROFILE, errors: context.INA_SEARCH_LOAD_ERRORS };
 }
@@ -184,10 +187,10 @@ function replaceProfileOnly(html, profile) {
 }
 
 function extractedFunction(source, name, nextName, context = {}) {
-  const expression = new RegExp(`function ${name}\\([\\s\\S]*?\\n    }\\n\\n    (?:async )?function ${nextName}\\(`);
+  const expression = new RegExp(`function ${name}\\([\\s\\S]*?\\n    }\\n(?:\\n)?    (?:async )?function ${nextName}\\(`);
   const match = source.match(expression);
   assert(match, `Could not extract ${name} from the application source.`);
-  const functionSource = match[0].replace(new RegExp(`\\n\\n    (?:async )?function ${nextName}\\($`), "");
+  const functionSource = match[0].replace(new RegExp(`\\n(?:\\n)?    (?:async )?function ${nextName}\\($`), "");
   return vm.runInNewContext(`(${functionSource})`, { JSON, String, ...context });
 }
 
@@ -196,7 +199,10 @@ function profileMigrationFunctions(source) {
   const end = source.indexOf("\n\n    let profile =", start);
   assert(start >= 0 && end > start, "Could not extract the profile normalization functions.");
   const declarations = source.slice(start, end);
-  const tutorialCatalog = ["quick-start", "advanced-search", "legal-reader", "definitions", "notes", "saving-progress", "classification-study", "source-literacy"].map(id => ({ id, revision: 1 }));
+  const tutorialCatalog = [
+    ["quick-start", 5], ["advanced-search", 4], ["legal-reader", 4],
+    ["definitions", 3], ["notes", 3], ["saving-progress", 3]
+  ].map(([id, revision]) => ({ id, revision }));
   return vm.runInNewContext(`${declarations}\n({ normalizeCourseStructure, normalizeCoursePlacement, isValidProfile, normalizeProfile })`, {
     Array,
     Date,
@@ -220,7 +226,10 @@ function tutorialProgressFunctions(source) {
   const end = source.indexOf("\n\n    const defaultProfile", start);
   assert(start >= 0 && end > start, "Could not extract tutorial progress normalization.");
   const declarations = source.slice(start, end);
-  const catalog = ["quick-start", "advanced-search", "legal-reader", "definitions", "notes", "saving-progress", "classification-study", "source-literacy"].map(id => ({ id, revision: 1 }));
+  const catalog = [
+    ["quick-start", 5], ["advanced-search", 4], ["legal-reader", 4],
+    ["definitions", 3], ["notes", 3], ["saving-progress", 3]
+  ].map(([id, revision]) => ({ id, revision }));
   return vm.runInNewContext(`${declarations}\n({ normalizeTutorialProgress, mergeTutorialProgress })`, {
     Array,
     Date,
@@ -321,27 +330,114 @@ async function main() {
   const full = readBuild("INASearch.html");
   const uncompressed = readBuild("INASearch-Uncompressed.html");
 
-  assert.strictEqual(blankProfile.schemaVersion, 2, "Blank profiles must use citation-associated notes schema v2.");
+  assert.strictEqual(blankProfile.schemaVersion, 3, "Blank profiles must use saved-data schema v3.");
   assert.strictEqual(Object.hasOwn(blankProfile, "courseStructure"), false, "Blank profiles must not retain the retired course structure.");
-  assert.deepStrictEqual(blankProfile.resourceChallengeLockouts, [], "Blank profiles must include persisted resource-question lockouts.");
   assert.deepStrictEqual(blankProfile.tutorialProgress, { schemaVersion: 1, modules: {} }, "Blank profiles must include optional, empty tutorial progress.");
   assert.strictEqual(blankProfile.preferences.statutoryLinkCitationSystem, "usc", "Blank profiles must default statutory link labels to the source U.S. Code wording.");
+  assert.strictEqual(blankProfile.preferences.highlightDefinedTerms, false, "Blank profiles must disable experimental defined-term highlighting by default.");
+  assert.strictEqual(blankProfile.preferences.automaticCfrUpdates, true, "Blank profiles must enable automatic CFR updates by default.");
   assert.strictEqual(blankProfile.preferences.defaultStartupQuery, "INA 203b1a", "Blank profiles must retain the existing startup citation by default.");
   assert.strictEqual(fs.existsSync(path.join(root, "INASearch-no-USC.html")), false, "The retired no-USC build still exists.");
   assert.strictEqual(fs.existsSync(path.join(root, "INASearch-AU.html")), false, "The retired all-unlocked build still exists.");
   assert.strictEqual(fs.existsSync(path.join(root, "INASearch-AU-Uncompressed.html")), false, "The retired all-unlocked uncompressed build still exists.");
+  for (const retiredSource of ["INASearch-Visa-Tables.js", "INASearch-Form-Questions.js"]) assert.strictEqual(fs.existsSync(path.join(root, "src", retiredSource)), false, `${retiredSource} still exists.`);
+  assert.strictEqual(fs.existsSync(path.join(root, "tools", "generate-visa-tables.js")), false, "The retired classification-table generator still exists.");
 
   assert(full.bytes <= 8_000_000, "INASearch.html exceeds 8 MB acceptance limit.");
   assert(uncompressed.bytes <= 35_300_000, "INASearch-Uncompressed.html exceeds 35.3 MB acceptance limit.");
+  const retiredProfileFields = ["unlocks", "visaSummaryUnlocks", "visaChallengeLockouts", "visaFactUnlocks", "visaFactChallengeLockouts", "resourceUnlocks", "resourceChallengeLockouts"];
+  for (const field of retiredProfileFields) assert.strictEqual(Object.hasOwn(blankProfile, field), false, `Blank profile still exports ${field}.`);
+  for (const preference of ["quizCursorKey", "quizClassification"]) assert.strictEqual(Object.hasOwn(blankProfile.preferences, preference), false, `Blank profile still exports ${preference}.`);
+  for (const build of [full, uncompressed]) {
+    for (const fragment of ["visaCategories", "visaQuizGroups", "visaSummaryUnlocks", "visaFactUnlocks", "resourceUnlocks", "quizCursorKey", "quizClassification", "unlockGroupId", 'id="view-visas"', 'id="view-immigrants"', 'id="view-quiz"', "INASearch-AU", "INASearch-progress-"]) {
+      assert.strictEqual(build.html.includes(fragment), false, `${build.fileName} contains retired implementation fragment ${fragment}.`);
+    }
+    for (const label of ["Import saved data", "Download JSON backup", "Saving &amp; data"]) assert(build.html.includes(label), `${build.fileName} is missing ${label}.`);
+  }
+  let persistenceRequests = 0;
+  const storageContext = {
+    globalThis: null, Blob, TextEncoder, TextDecoder, Uint8Array, crypto: globalThis.crypto,
+    navigator: { storage: { persisted: async () => false, persist: async () => { persistenceRequests += 1; return true; } } }
+  };
+  storageContext.globalThis = storageContext;
+  vm.createContext(storageContext);
+  new vm.Script(scriptBody(full.html, "inaSearchStorageRuntime"), { filename: "inaSearchStorageRuntime" }).runInContext(storageContext);
+  const cachedFixtureCorpus = { schemaVersion: full.corpus.schemaVersion, corpusVersion: full.corpus.corpusVersion, fixture: true };
+  const cachedFixtureBytes = new TextEncoder().encode(JSON.stringify(cachedFixtureCorpus));
+  const cachedFixtureRecord = {
+    recordSchemaVersion: 1,
+    storageFormat: "json",
+    corpusSchemaVersion: cachedFixtureCorpus.schemaVersion,
+    corpusVersion: cachedFixtureCorpus.corpusVersion,
+    bytes: cachedFixtureBytes.byteLength,
+    sha256: sha256(cachedFixtureBytes),
+    payload: new Blob([cachedFixtureBytes], { type: "application/json" })
+  };
+  assert.deepStrictEqual(plain(await storageContext.INASearchStorage.decodeCorpusRecord(cachedFixtureRecord)), cachedFixtureCorpus, "A valid uncompressed IndexedDB corpus record did not round-trip.");
+  await assert.rejects(() => storageContext.INASearchStorage.decodeCorpusRecord({ ...cachedFixtureRecord, sha256: "0".repeat(64) }), /integrity check/, "A corrupted IndexedDB corpus record passed its SHA-256 check.");
+  const persistenceResult = plain(await storageContext.INASearchStorage.requestPersistentStorage());
+  assert(!Number.isNaN(Date.parse(persistenceResult.checkedAt)), "The storage-persistence check did not record its time.");
+  delete persistenceResult.checkedAt;
+  assert.deepStrictEqual(persistenceResult, { supported: true, persisted: true, requested: true }, "The storage-persistence request did not report a granted persistent bucket.");
+  assert.strictEqual(persistenceRequests, 1, "The storage-persistence fixture did not exercise the browser persistence request exactly once.");
+  for (const retiredCorpusKey of ["visaCategories", "visaQuizGroups", "visaTables"]) assert.strictEqual(Object.hasOwn(full.corpus, retiredCorpusKey), false, `Corpus still contains ${retiredCorpusKey}.`);
   assert(/id="tutorialMenuButton"/.test(full.html), "The explicit tutorial launcher is missing.");
+  assert(/id="definedTermHighlightingToggle"/.test(full.html), "The defined-term highlighting setting is missing.");
+  assert(full.html.includes("A highlighted word may be used in a different grammatical or contextual sense from its legal definition"), "The experimental defined-term warning does not explain the risk of a misleading match.");
+  assert(/id="automaticCfrUpdatesToggle"[^>]*type="checkbox"[^>]*role="switch"/.test(full.html), "The automatic CFR update setting is missing.");
+  assert(/class="settings-info-button"[^>]*aria-describedby="automaticCfrUpdatesHelp"/.test(full.html), "The automatic CFR update setting is missing its compact information control.");
+  assert(full.html.includes("Turn this off for a local-only workflow") && full.html.includes("INASearch makes no network requests"), "The automatic CFR update information does not explain local-only mode.");
   assert(/id="tutorialHubModal" hidden/.test(full.html), "The tutorial hub is not closed at startup.");
   assert(/id="tutorialCoach"[^>]*aria-modal="false"[^>]*hidden/.test(full.html), "The nonmodal tutorial coach is not closed at startup.");
+  assert(/id="tutorialMenuButton"[^>]*aria-describedby="tutorialStartPromptText"[\s\S]{0,700}id="tutorialStartPromptTitle">New to INASearch\?[\s\S]{0,250}id="tutorialStartPromptBody">Start with the basic tutorial here\.[\s\S]{0,250}id="tutorialStartPromptClose"[^>]*aria-label="Dismiss Quick Start message"/.test(full.html), "An unfinished Quick Start does not display a large, dismissible message pointing to the tutorial button.");
+  assert(/id="tutorialMenuButton"[\s\S]{0,1200}id="corpusStatus"[\s\S]{0,300}id="saveStatus"[\s\S]{0,300}id="settingsMenuButton"/.test(full.html), "The Tutorials button is not the leftmost application-status button.");
+  assert(/\.tutorial-start-prompt\s*\{[^}]*position:\s*absolute[^}]*width:\s*min\(300px,[^}]*font-size/s.test(full.html) || full.html.includes(".tutorial-start-prompt-copy strong { color: var(--navy); font-size: 14px;"), "The Quick Start message is still rendered as a small inline status pill.");
   assert(!/\b(?:localStorage|sessionStorage)\b/.test(full.html), "Tutorial progress must not rely on hidden browser storage.");
   const tutorialCatalogSource = full.html.slice(full.html.indexOf("const TUTORIAL_CATALOG"), full.html.indexOf("const TUTORIAL_BY_ID"));
-  assert.strictEqual((tutorialCatalogSource.match(/\n\s{8}id:\s*"(?:quick-start|advanced-search|legal-reader|definitions|notes|saving-progress|classification-study|source-literacy)"/g) || []).length, 8, "The tutorial catalog must contain Quick Start and seven focused modules.");
-  for (const moduleId of ["advanced-search", "legal-reader", "definitions", "notes", "saving-progress", "classification-study", "source-literacy"]) {
+  const tutorialModuleIds = [...tutorialCatalogSource.matchAll(/\n\s{8}id:\s*"([^"]+)"/g)].map(match => match[1]);
+  assert.deepStrictEqual(tutorialModuleIds, ["quick-start", "advanced-search", "legal-reader", "definitions", "notes", "saving-progress"], "The tutorial catalog does not contain the intentionally compact lesson set in its intended order.");
+  for (const moduleId of ["advanced-search", "legal-reader", "definitions", "notes", "saving-progress"]) {
     assert(full.html.includes(`data-tutorial-module="${moduleId}"`) || full.html.includes(`data-tutorial-module=\\"${moduleId}\\"`), `Missing passive ${moduleId} tutorial entry point.`);
   }
+  for (const removedModule of ["lettered-citations", "former-provisions", "cfr-updates", "source-literacy"]) assert(!tutorialCatalogSource.includes(`id: "${removedModule}"`), `${removedModule} remains as an unnecessary standalone tutorial.`);
+  assert(!tutorialCatalogSource.includes("lettered-units") && !tutorialCatalogSource.includes("Part 274 and Part 274A"), "Letter-suffixed citations remain tutorial material after being removed from the lesson plan.");
+  assert(tutorialCatalogSource.includes("Notice former provisions") && tutorialCatalogSource.includes("sticky warning") && tutorialCatalogSource.includes("reviewed transfer destination"), "The Legal Reader tutorial is missing its brief former-provision warning.");
+  assert(!full.html.includes('data-tutorial-module="source-literacy"') && !full.html.includes('data-tutorial-module="cfr-updates"'), "A removed source or update tutorial still has an entry point.");
+  assert((tutorialCatalogSource.match(/setup: "blank-search"/g) || []).length >= 4, "Search tutorials do not consistently clear a loaded startup citation before practice.");
+  assert(tutorialCatalogSource.includes('target: ".global-search .search-field-shell", focus: "#searchInput"'), "Search tutorials still highlight the input over the INA/U.S.C. crosswalk instead of the complete search shell.");
+  const tutorialSetupSource = full.html.slice(full.html.indexOf("function runTutorialSetup"), full.html.indexOf("function restoreTutorialState"));
+  assert(tutorialSetupSource.includes('setup === "blank-search"') && tutorialSetupSource.includes("resetSearchState()") && tutorialSetupSource.includes('tutorialSwitchView("search")'), "The blank tutorial search setup is incomplete.");
+  assert(tutorialSetupSource.includes('setup === "about-page"') && tutorialSetupSource.includes('tutorialSwitchView("sources")'), "Quick Start cannot open the About page for its contextual explanation.");
+  assert(tutorialCatalogSource.includes('title: "Start with the citation from your work"') && tutorialCatalogSource.includes("The same search box accepts all three citation formats."), "Quick Start does not begin from the citation an officer or attorney already has in front of them.");
+  assert(tutorialCatalogSource.includes('title: "Open INA 203"') && tutorialCatalogSource.includes("Type INA 203 in the search box. As soon as INASearch recognizes the citation") && tutorialCatalogSource.includes("immigrant visa preference categories"), "Quick Start does not describe the live citation lookup clearly and in context.");
+  assert(!tutorialCatalogSource.includes("temporarily clears") && !tutorialCatalogSource.includes("sample citation") && !tutorialCatalogSource.includes("original citation"), "Quick Start exposes irrelevant tutorial-state mechanics or refers to an unexplained sample.");
+  assert(tutorialCatalogSource.includes('id: "crosswalk"') && tutorialCatalogSource.includes("INA 203 is codified at 8 U.S.C. 1153"), "Quick Start does not explain the citation crosswalk when it first appears.");
+  assert(tutorialCatalogSource.includes('id: "reader"') && tutorialCatalogSource.includes("local copy included with INASearch"), "Quick Start does not identify the matching legal text the user is seeing.");
+  assert(tutorialCatalogSource.includes('id: "hierarchy"') && tutorialCatalogSource.includes("This bar places INA 203 within Title 8") && tutorialCatalogSource.includes("When you open a subsection or paragraph, those levels appear here too."), "Quick Start does not explain the hierarchy that is actually visible after opening INA 203.");
+  for (const [pageStep, setup, heading] of [["definitions-page", "definitions-page", "#definitionsHeading"], ["notes-page", "notes-page", "#notesHeading"], ["about-page", "about-page", "#sourcesHeading"]]) {
+    assert(tutorialCatalogSource.includes(`id: "${pageStep}"`) && tutorialCatalogSource.includes(`target: "${heading}", setup: "${setup}"`), `Quick Start does not open and explain ${pageStep} as its own page.`);
+  }
+  assert(!tutorialCatalogSource.includes("offerModules: true"), "Quick Start still piles the remaining tutorial catalog onto a first-time user at completion.");
+  const tutorialLauncherSource = full.html.slice(full.html.indexOf("function quickStartCompleted"), full.html.indexOf("function renderTutorialHub"));
+  assert(tutorialLauncherSource.includes('tutorialProgressEntry("quick-start").status === "completed"'), "The Tutorials launcher does not require actual Quick Start completion.");
+  assert(tutorialLauncherSource.includes("const promptVisible = !completed && !active && !state.tutorialPromptDismissed") && tutorialLauncherSource.includes("els.tutorialStartPrompt.hidden = !promptVisible") && tutorialLauncherSource.includes('classList.toggle("needs-introduction", !completed)'), "The Quick Start prompt and emphasized launcher do not track completion or dismissal.");
+  const openTutorialHubSource = full.html.slice(full.html.indexOf("function openTutorialHub"), full.html.indexOf("function closeTutorialHub"));
+  assert(openTutorialHubSource.includes("if (!quickStartCompleted())") && openTutorialHubSource.includes('startTutorial("quick-start"'), "The Tutorials button can open the catalog before starting or resuming Quick Start.");
+  const tutorialPauseSource = full.html.slice(full.html.indexOf("function pauseTutorial"), full.html.indexOf("function finishTutorial"));
+  assert(tutorialPauseSource.includes("endTutorial(openHub && quickStartCompleted())"), "Pausing an unfinished Quick Start still opens the tutorial catalog.");
+  const tutorialFinishSource = full.html.slice(full.html.indexOf("function finishTutorial"), full.html.indexOf("function advanceTutorial"));
+  assert(tutorialFinishSource.includes("else if (quickStartCompleted())") && tutorialFinishSource.includes("openTutorialHub(returnFocus)"), "The tutorial catalog is not gated until Quick Start completion.");
+  const attachEventsSource = full.html.slice(full.html.indexOf("function attachEvents"), full.html.indexOf("function reloadUpdatedCorpus"));
+  assert(attachEventsSource.includes('tutorialStartPromptClose.addEventListener("click"') && attachEventsSource.includes("state.tutorialPromptDismissed = true") && attachEventsSource.includes("renderTutorialLauncher()"), "The Quick Start message close button does not dismiss the callout for the current tab.");
+  assert(!tutorialCatalogSource.includes("recap:") && !full.html.includes("tutorial-answer-list") && !full.html.includes("Skip check"), "End-of-tutorial quiz questions remain in the tutorial system.");
+  assert(!full.html.includes("tutorial-practice-feedback") && !full.html.includes("That worked. Continue when you are ready."), "Practice completion still waits on low-contrast feedback instead of advancing.");
+  const tutorialPracticeSource = full.html.slice(full.html.indexOf("function tutorialPracticeSatisfied"), full.html.indexOf("function renderTutorialStep"));
+  assert(tutorialPracticeSource.includes("setTimeout(() =>") && tutorialPracticeSource.includes("advanceTutorial()") && tutorialPracticeSource.includes("submittedSearch"), "Successful tutorial practice does not automatically advance.");
+  const runSearchSource = full.html.slice(full.html.indexOf("function runSearch()"), full.html.indexOf("function shouldDeferBroadSearch"));
+  assert(runSearchSource.includes("showCurrentSearchResults(direct || state.results[0]);") && runSearchSource.includes("checkTutorialPractice();"), "A live citation result does not notify the active tutorial after it opens.");
+  assert(!/\.tutorial-highlight\s*\{[^}]*z-index:/s.test(full.html), "A highlighted reader panel can still rise above and cover the sticky search bar.");
+  assert(tutorialCatalogSource.includes("Highlight defined terms is off by default") && tutorialCatalogSource.includes("different meaning in context"), "The revised Definitions tutorial omits the optional, context-sensitive highlighting warning.");
+  assert(tutorialCatalogSource.includes("connect INASearch_Data.json") && !tutorialCatalogSource.includes("durable in-file notes"), "The saving tutorials still describe profile data as living inside the HTML file.");
   const initializeSource = full.html.slice(full.html.indexOf("function initialize()"), full.html.indexOf("window.INASearchTest"));
   assert(!initializeSource.includes("startTutorial("), "A tutorial is started automatically during initialization.");
   assert(/function captureTutorialState\(/.test(full.html) && /function restoreTutorialState\(/.test(full.html), "Tutorial state snapshot and restore support is incomplete.");
@@ -358,8 +454,28 @@ async function main() {
   assert(/id="inaSearchCorpusData" type="application\/json"/.test(uncompressed.html), "The uncompressed corpus is not embedded as plain JSON.");
   assert.deepStrictEqual(full.profile, blankProfile);
   assert.deepStrictEqual(uncompressed.profile, blankProfile, "The uncompressed build must retain the standard unanswered profile.");
-  assert.deepStrictEqual(full.corpus, fullSource, "Full corpus round trip changed data.");
+  assert.strictEqual(full.manifest.deliveryPacking, CORPUS_PACKING_FORMAT, "The standard build does not advertise its compact delivery format.");
+  assert.strictEqual(Object.hasOwn(uncompressed.manifest, "deliveryPacking"), false, "The uncompressed build advertises compact delivery packing.");
   assert.deepStrictEqual(uncompressed.corpus, fullSource, "Uncompressed corpus round trip changed data.");
+  assert(full.corpus.title8.sections.every(section => section.status), "Compact corpus hydration did not restore implied statutory status values.");
+  const statuteStatusCounts = Object.fromEntries(["current", "repealed", "transferred", "omitted"].map(status => [status, full.corpus.title8.sections.filter(section => section.status === status).length]));
+  assert.deepStrictEqual(statuteStatusCounts, { current: 286, repealed: 57, transferred: 18, omitted: 15 }, "Unexpected Title 8 disposition-status inventory.");
+  const transferredSections = full.corpus.title8.sections.filter(section => section.status === "transferred");
+  assert.strictEqual(transferredSections.flatMap(section => section.transferTargets || []).length, 44, "The reviewed transferred-section index does not contain all 44 source destinations.");
+  assert(full.corpus.title8.sections.filter(section => section.status !== "transferred").every(section => !Object.hasOwn(section, "transferTargets")), "Transfer destinations were duplicated onto non-transferred records.");
+  const transferTarget = (sectionLabel, source) => transferredSections.find(section => section.section === sectionLabel)?.transferTargets?.find(target => target.source === source);
+  assert.deepStrictEqual(plain(transferTarget("31, 32", "31")), { source: "31", title: 52, section: "10101" }, "8 U.S.C. 31 does not point to its reviewed current destination.");
+  assert.deepStrictEqual(plain(transferTarget("100, 101", "100")), { source: "100", title: 8, section: "1551" }, "8 U.S.C. 100 does not point to its reviewed current destination.");
+  assert.deepStrictEqual(plain(transferTarget("724a–1", "724a–1")), { source: "724a–1", title: 8, section: "1440", placement: "note" }, "The note placement for former 8 U.S.C. 724a–1 was lost.");
+  assert.deepStrictEqual(plain(transferTarget("109a to 109d", "109d")), { source: "109d", title: 8, section: "1555", relation: "see" }, "The House 'see' disposition for 8 U.S.C. 109d was flattened into a literal transfer.");
+  assert.deepStrictEqual(plain(transferTarget("53 to 56", "55")), { source: "55", title: 42, section: "1993", former: true }, "The former-destination qualifier for 8 U.S.C. 55 was lost.");
+  const packedStatusCorpus = packCorpusForDelivery(fullSource);
+  const packedCurrentSection = packedStatusCorpus.title8.sections.find(section => section.section === "1101");
+  const packedTransferredSection = packedStatusCorpus.title8.sections.find(section => section.section === "31, 32");
+  assert(!Object.hasOwn(packedCurrentSection, "status"), "The compact payload restates the implied current statutory status.");
+  assert(!Object.hasOwn(packedTransferredSection, "transferTargets") && Array.isArray(packedTransferredSection._t), "Transferred destinations were not stored in their compact tuple form.");
+  assert.strictEqual(JSON.stringify(packedTransferredSection._t), '[["31",52,"10101"],["32",52,"10102"]]', "Unexpected compact transfer tuple encoding.");
+  assert(full.corpus.title8.sections.flatMap(section => section.body || []).every(node => Array.isArray(node.path)), "Compact corpus hydration did not restore top-level statutory paths.");
   const hydratedSource = unpackLegalReferences(JSON.parse(JSON.stringify(fullSource)));
   for (const href of ["/us/usc/t8/s1101/a/15/H/i/b", "/us/pl/104/208", "/us/stat/110/3009", "/us/act/1952-06-27/ch477"]) {
     assert.strictEqual(expandHouseHref(compactHouseHref(href)), href, `Packed House href did not round-trip: ${href}`);
@@ -368,7 +484,7 @@ async function main() {
   assert.strictEqual(uncompressed.corpus.title8.sections.length, 376);
   assert(full.corpus.title8.sections.some(section => Array.isArray(section.body)), "Full corpus has no cached Title 8 bodies.");
   assert(uncompressed.corpus.title8.sections.some(section => Array.isArray(section.body)), "Uncompressed build has no cached Title 8 bodies.");
-  assert.strictEqual(full.corpus.schemaVersion, 3, "The combined corpus schema was not upgraded for structured House footnotes.");
+  assert.strictEqual(full.corpus.schemaVersion, 4, "The combined corpus schema was not upgraded after retiring classification-study data.");
   assert.strictEqual(full.corpus.cfr.ptarYear, 2025, "Unexpected CFR Parallel Table year.");
   assert.strictEqual(full.corpus.cfr.coverage.sectionCount, 3039, "Unexpected cached CFR section count.");
   assert.strictEqual(full.corpus.cfr.sections.length, 3039, "CFR section records do not match the manifest.");
@@ -426,68 +542,9 @@ async function main() {
   assert.strictEqual(Math.max(...cfrUnitDepths), 6, "The CFR corpus does not retain the complete six-level paragraph hierarchy.");
   assert(allCfrBlocks.every(block => (block.u || []).every(unit => /^\([A-Za-z0-9]+\)$/.test(String(block.x || "").slice(unit.s, unit.e)))), "A CFR unit offset does not point to its displayed marker.");
   assert.strictEqual(allCfrBlocks.filter(block => block.t === "graphic").length, 15, "Referenced CFR graphics were not retained in document order.");
-  assert.strictEqual(full.corpus.visaCategories.length, 85);
-  assert.strictEqual(full.corpus.visaTables.nonimmigrantTypes.length, 84);
-  assert.strictEqual(full.corpus.visaTables.immigrantTypes.length, 158);
-  assert.strictEqual(full.corpus.visaTables.immigrantDefinitionGroups.length, 8);
-  assert.strictEqual(full.corpus.verification.resourceUnlockQuestions, 49);
-  assert.strictEqual(full.corpus.verification.nonimmigrantResourceUnlockQuestions, 18);
-  assert.strictEqual(full.corpus.verification.immigrantResourceUnlockQuestions, 31);
-  const formQuestions = full.corpus.visaTables.formQuestions;
-  assert.strictEqual(formQuestions.nonimmigrant.length, 15, "Unexpected nonimmigrant form-question count.");
-  assert.strictEqual(formQuestions.immigrant.length, 22, "Unexpected immigrant form-question count.");
-  const allFormQuestions = [...formQuestions.nonimmigrant, ...formQuestions.immigrant];
-  assert.strictEqual(new Set(allFormQuestions.map(question => question.id)).size, allFormQuestions.length, "Form-question IDs must be unique.");
-  for (const kind of ["nonimmigrant", "immigrant"]) {
-    const validSymbols = new Set(full.corpus.visaTables[`${kind}Types`].map(record => record.symbol));
-    for (const question of formQuestions[kind]) {
-      assert(question.correctSymbols.length, `${question.id}: form question has no correct statuses.`);
-      assert(question.correctSymbols.every(symbol => validSymbols.has(symbol)), `${question.id}: form question references an unknown status.`);
-      assert(typeof question.answerLabel === "string" && question.answerLabel.length > 10, `${question.id}: form question has no concise multiple-choice answer label.`);
-      assert(question.form === null || question.prompt.includes("{form}"), `${question.id}: linked form is not present in the prompt.`);
-      assert(question.source?.label && question.source?.url, `${question.id}: missing specifically named source link.`);
-    }
-    assert.strictEqual(new Set(formQuestions[kind].map(question => question.answerLabel)).size, formQuestions[kind].length, `${kind}: form-question answer labels must be unique.`);
-  }
-  const nonimmigrantFormCoverage = new Set(formQuestions.nonimmigrant.flatMap(question => question.correctSymbols));
-  const immigrantFormCoverage = new Set(formQuestions.immigrant.flatMap(question => question.correctSymbols));
-  assert.strictEqual(nonimmigrantFormCoverage.size, 39, "Unexpected nonimmigrant form coverage.");
-  assert.strictEqual(immigrantFormCoverage.size, 151, "Unexpected immigrant form coverage.");
-  assert.deepStrictEqual(full.corpus.visaTables.nonimmigrantTypes.map(record => record.symbol).filter(symbol => !nonimmigrantFormCoverage.has(symbol)), ["A1", "A2", "A3", "B1", "B2", "B1/B2", "C1", "C1/D", "C2", "C3", "D", "E1", "E2", "E2C", "E3", "E3D", "E3R", "F1", "F2", "F3", "G1", "G2", "G3", "G4", "G5", "H1B1", "H1C", "H4", "I", "J1", "J2", "M1", "M2", "M3", "N8", "N9", "NATO1", "NATO2", "NATO3", "NATO4", "NATO5", "NATO6", "NATO7", "TN", "TD"], "Unsupported nonimmigrant form set changed.");
-  assert.deepStrictEqual(full.corpus.visaTables.immigrantTypes.map(record => record.symbol).filter(symbol => !immigrantFormCoverage.has(symbol)), ["SB1", "SC1", "SC2", "SP", "SS1", "SS2", "SS3"], "Unsupported immigrant form set changed.");
-  const derivativeQuestions = allFormQuestions.filter(question => question.id.includes("derivative"));
-  assert(derivativeQuestions.length && derivativeQuestions.every(question => question.card?.derivativeExplanation), "Every derivative question needs hover-detail text.");
-  assert(full.corpus.approvedDomains.includes("eforms.state.gov"), "Department of State form links require their exact approved host.");
-  assert(allFormQuestions.flatMap(question => [question.source?.url, question.form?.url]).filter(Boolean).every(url => full.corpus.approvedDomains.includes(new URL(url).hostname)), "A form question points outside the approved domains.");
-  const tDerivative = formQuestions.nonimmigrant.find(question => question.id === "resource-nonimmigrant-form-i-914a-derivative");
-  const uDerivative = formQuestions.nonimmigrant.find(question => question.id === "resource-nonimmigrant-form-i-918a-derivative");
-  assert.strictEqual(tDerivative.card.value, "Form I-914", "T derivatives must display the principal's form type.");
-  assert.strictEqual(uDerivative.card.value, "Form I-918", "U derivatives must display the principal's form type.");
-  const legacyInvestor = formQuestions.immigrant.find(question => question.id === "resource-immigrant-form-i-526-direct");
-  assert.strictEqual(legacyInvestor.card.valueBySymbol.R51, "Form I-526 (legacy)");
-  assert.strictEqual(legacyInvestor.card.valueBySymbol.I51, "Form I-526 (legacy)");
-  assert(full.html.includes('class="resource-choice-citation"'), "Resource citations should be the inspectable answer links.");
-  assert(!full.html.includes('class="resource-status-choices"'), "Form questions still render the oversized status checkbox list.");
-  assert(!full.html.includes('data-resource-status='), "The obsolete multi-status checkbox handler remains in the application.");
-  assert(full.html.includes('classificationQualifier("*derivative classification"'), "Derivative cards should display the asterisked derivative label.");
-  assert(full.html.includes('class="classification-tooltip" role="tooltip"'), "Derivative details should use a hoverable, focusable tooltip.");
-  assert.strictEqual((full.html.match(/resource-nonimmigrant-eos-cos/g) || []).length, 1, "EOS/COS must remain one combined resource question.");
-  assert(!allFormQuestions.some(question => /extension of stay|change of status|eos|cos/i.test(question.id)), "Initial-form questions must not duplicate the combined EOS/COS question.");
-  assert(!full.html.includes('>Open resource ↗</a>'), "Resource choices should not use a detached open-resource link.");
-  assert(full.html.includes('typeFieldLabel("Section of law", "type-law"'), "Section-of-law fields should expose source information.");
-  assert(full.html.includes('typeFieldLabel("Change of status", "type-cos"'), "Unlocked COS fields should expose source information.");
-  assert(full.html.includes('class="type-card-status"'), "Card unlock status should render at the top of each classification card.");
-  assert.deepStrictEqual(full.corpus.visaTables.immigrantDefinitionGroups.map(group => group.symbols.length), [120, 1, 3, 3, 3, 1, 6, 21]);
-  const inaOnlyDefinitionGroup = full.corpus.visaTables.immigrantDefinitionGroups.find(group => group.authority === "Immigration and Nationality Act (INA)");
-  assert(inaOnlyDefinitionGroup.scopeLabel.startsWith("IR, IH, CR"), "The large INA-only group should use compact root-prefix wording.");
-  assert(full.corpus.visaTables.immigrantDefinitionGroups.every(group => group.scopeLabel && group.sourceUrl), "Every immigrant definition group needs compact scope wording and an inspectable source link.");
-  const groupedImmigrantSymbols = full.corpus.visaTables.immigrantDefinitionGroups.flatMap(group => group.symbols);
-  assert.strictEqual(groupedImmigrantSymbols.length, full.corpus.visaTables.immigrantTypes.length, "Immigrant definition groups do not cover every classification exactly once.");
-  assert.strictEqual(new Set(groupedImmigrantSymbols).size, groupedImmigrantSymbols.length, "An immigrant classification appears in more than one definition group.");
-  assert.deepStrictEqual(new Set(groupedImmigrantSymbols), new Set(full.corpus.visaTables.immigrantTypes.map(record => record.symbol)));
-  assert.strictEqual(full.corpus.verification.quizQuestions, 442);
   assert.strictEqual(full.corpus.forms.length, 105);
   assert.strictEqual(full.corpus.namedActs.length, 5);
+  assert.deepStrictEqual(full.corpus.verification, {}, "Retired classification verification counters remain in the corpus.");
   assert(full.corpus.inaCrosswalk.length > 0);
   assert(full.corpus.policyManual.catalog.length > 0);
   assert.strictEqual(hydratedSource.title8.referenceMetadata.generatedReferences, 14799, "Unexpected House legal-reference count.");
@@ -857,10 +914,11 @@ async function main() {
 
   for (const build of [full, uncompressed]) {
     const scripts = executableScripts(build.html);
-    assert.strictEqual(scripts.length, 2);
+    assert.strictEqual(scripts.length, 5);
     scripts.forEach((source, index) => new vm.Script(source, { filename: `${build.fileName}:script-${index + 1}` }));
     assert(!/<script[^>]+src=/i.test(build.html), `${build.fileName}: external script detected.`);
-    assert(!/\bfetch\s*\(/.test(build.html), `${build.fileName}: automatic fetch code detected.`);
+    assert(build.html.includes('const ECFR_ORIGIN = "https://www.ecfr.gov";'), `${build.fileName}: direct eCFR updater missing.`);
+    assert(!/fetch\s*\([^)]*(?:github|inasearch)/i.test(build.html), `${build.fileName}: updater references a non-authoritative distribution source.`);
     const started = performance.now();
     const loaded = await runBootstrap(build);
     const elapsed = performance.now() - started;
@@ -920,6 +978,60 @@ async function main() {
     }
   }
 
+  const updaterTimers = [];
+  const updaterStatuses = [];
+  let updaterFetchCalls = 0, lastUpdaterSignal = null;
+  const updaterStorage = {
+    loadActiveCorpus: async () => null,
+    getMetadata: async () => null,
+    setMetadata: async () => null,
+    ensureActiveCorpus: async () => null
+  };
+  const updaterContext = {
+    globalThis: null,
+    AbortController,
+    Blob,
+    TextEncoder,
+    URL,
+    URLSearchParams,
+    performance: { now: () => 0 },
+    navigator: {},
+    structuredClone,
+    setTimeout(callback, delay) { const timer = { callback, delay, cancelled: false }; updaterTimers.push(timer); return timer; },
+    clearTimeout(timer) { if (timer) timer.cancelled = true; },
+    fetch(_url, options) {
+      updaterFetchCalls += 1;
+      lastUpdaterSignal = options.signal;
+      return new Promise((_resolve, reject) => options.signal.addEventListener("abort", () => {
+        const error = new Error("aborted");
+        error.name = "AbortError";
+        reject(error);
+      }, { once: true }));
+    },
+    INASearchStorage: updaterStorage
+  };
+  updaterContext.globalThis = updaterContext;
+  vm.createContext(updaterContext);
+  new vm.Script(scriptBody(full.html, "inaSearchUpdaterRuntime"), { filename: "inaSearchUpdaterRuntime" }).runInContext(updaterContext);
+  const updaterFixtureCorpus = { schemaVersion: 4, corpusVersion: "fixture", cfr: { parts: [], sections: [], appendices: [], currentThrough: {} } };
+  let updaterEnabled = false;
+  let stopUpdater = updaterContext.INASearchUpdater.start(updaterFixtureCorpus, { enabled: () => updaterEnabled, startDelayMs: 0, onStatus: status => updaterStatuses.push(plain(status)) });
+  await updaterTimers.shift().callback();
+  assert.strictEqual(updaterFetchCalls, 0, "Local-only startup made an eCFR request.");
+  stopUpdater();
+
+  updaterEnabled = true;
+  stopUpdater = updaterContext.INASearchUpdater.start(updaterFixtureCorpus, { enabled: () => updaterEnabled, startDelayMs: 0, onStatus: status => updaterStatuses.push(plain(status)) });
+  const activeRun = updaterTimers.shift().callback();
+  for (let attempt = 0; attempt < 10 && updaterFetchCalls === 0; attempt += 1) await Promise.resolve();
+  assert.strictEqual(updaterFetchCalls, 1, "The enabled updater did not begin its eCFR check.");
+  updaterEnabled = false;
+  stopUpdater();
+  await activeRun;
+  assert.strictEqual(lastUpdaterSignal.aborted, true, "Turning automatic updates off did not abort the active HTTP request.");
+  assert.strictEqual(updaterStatuses.at(-1)?.state, "disabled", "Cancelling an active update did not report local-only mode.");
+  assert.strictEqual(updaterStatuses.at(-1)?.networkActivity, false, "The disabled updater status does not promise zero automatic network activity.");
+
   const fullPayload = payloadBlock(full.html);
   const uncompressedPayload = corpusPayloadText(uncompressed.html);
   const rebuild = spawnSync(process.execPath, [path.join(root, "tools", "build-standalone.js")], { cwd: root, encoding: "utf8" });
@@ -930,6 +1042,101 @@ async function main() {
   const fallbackSource = fs.readFileSync(path.join(root, "src", "INASearch.template.html"), "utf8");
   assert(fallbackSource.includes('id="noteAssociations"') && fallbackSource.includes('data-note-unit-kind='), "The citation-associated Notes editor or legal-unit note buttons are missing.");
   assert(!fallbackSource.includes('id="courseStructureEditor"') && !fallbackSource.includes('data-note-week='), "Retired course-note controls remain in the application shell.");
+  const tutorialPracticeState = { citation: null, view: "search", filter: "all", searchScopeActive: false, searchScopeMode: "in", searchScope: null };
+  const tutorialPracticeElements = {
+    search: { value: "INA 203" },
+    definitionTermFilter: { value: "" },
+    noteBody: { value: "" }
+  };
+  const tutorialPracticeSatisfied = extractedFunction(fallbackSource, "tutorialPracticeSatisfied", "checkTutorialPractice", {
+    state: tutorialPracticeState,
+    els: tutorialPracticeElements,
+    normalize: value => String(value || "").toLowerCase().replace(/\s+/g, " ").trim(),
+    Boolean,
+    Number
+  });
+  assert.strictEqual(tutorialPracticeSatisfied({ kind: "search-exact", expected: "INA 203" }), false, "Exact text completes a citation-search tutorial step before INASearch recognizes a valid citation.");
+  tutorialPracticeState.citation = { valid: true };
+  assert.strictEqual(tutorialPracticeSatisfied({ kind: "search-exact", expected: "INA 203" }), true, "A recognized live result does not complete its tutorial step unless the user presses an unnecessary extra key.");
+  tutorialPracticeElements.noteBody.value = "A short practice note";
+  assert.strictEqual(tutorialPracticeSatisfied({ kind: "note-draft", minLength: 8 }), true, "A sufficient practice note does not complete its tutorial step.");
+  const tutorialAutoAdvanceState = { tutorialActive: { moduleId: "quick-start", stepIndex: 0, passedSteps: new Set() } };
+  const tutorialAutoAdvanceModule = { id: "quick-start", steps: [{ id: "practice-citation", practice: { kind: "search-exact", expected: "INA 203" } }] };
+  let tutorialAdvanceCount = 0;
+  let tutorialProgressCount = 0;
+  const checkTutorialPractice = extractedFunction(fallbackSource, "checkTutorialPractice", "renderTutorialStep", {
+    state: tutorialAutoAdvanceState,
+    TUTORIAL_BY_ID: new Map([[tutorialAutoAdvanceModule.id, tutorialAutoAdvanceModule]]),
+    tutorialPracticeSatisfied: () => true,
+    updateTutorialProgress: () => { tutorialProgressCount += 1; },
+    setTimeout: callback => { callback(); return 1; },
+    advanceTutorial: () => { tutorialAdvanceCount += 1; tutorialAutoAdvanceState.tutorialActive.stepIndex += 1; }
+  });
+  checkTutorialPractice({ type: "keydown", key: "Enter" });
+  assert(tutorialAutoAdvanceState.tutorialActive.passedSteps.has("practice-citation"), "Successful tutorial practice is not recorded before advancing.");
+  assert.strictEqual(tutorialProgressCount, 1, "Successful tutorial practice does not update progress exactly once.");
+  assert.strictEqual(tutorialAdvanceCount, 1, "Successful tutorial practice does not advance automatically exactly once.");
+  const tutorialPromptState = { tutorialActive: null, tutorialPromptDismissed: false };
+  const tutorialPromptProgress = { status: "not-started" };
+  const tutorialPromptAttributes = new Map();
+  const tutorialPromptElements = {
+    tutorialStartPrompt: { hidden: true },
+    tutorialStartPromptTitle: { textContent: "" },
+    tutorialStartPromptBody: { textContent: "" },
+    tutorialMenuButton: {
+      title: "",
+      classList: { toggle: () => {} },
+      setAttribute: (name, value) => tutorialPromptAttributes.set(name, value),
+      removeAttribute: name => tutorialPromptAttributes.delete(name)
+    }
+  };
+  let quickStartCompleteForPrompt = false;
+  const renderTutorialLauncher = extractedFunction(fallbackSource, "renderTutorialLauncher", "updateTutorialProgress", {
+    tutorialProgressEntry: () => tutorialPromptProgress,
+    quickStartCompleted: () => quickStartCompleteForPrompt,
+    state: tutorialPromptState,
+    els: tutorialPromptElements
+  });
+  renderTutorialLauncher();
+  assert.strictEqual(tutorialPromptElements.tutorialStartPrompt.hidden, false, "The Quick Start callout is not visible to a new user.");
+  assert.strictEqual(tutorialPromptElements.tutorialStartPromptTitle.textContent, "New to INASearch?", "The new-user callout has the wrong heading.");
+  assert.strictEqual(tutorialPromptAttributes.get("aria-describedby"), "tutorialStartPromptText", "The Tutorials button is not associated with its visible callout.");
+  tutorialPromptState.tutorialPromptDismissed = true;
+  renderTutorialLauncher();
+  assert.strictEqual(tutorialPromptElements.tutorialStartPrompt.hidden, true, "Closing the Quick Start callout does not keep it dismissed in the current tab.");
+  assert.strictEqual(tutorialPromptAttributes.has("aria-describedby"), false, "A dismissed callout remains in the Tutorials button accessibility description.");
+  quickStartCompleteForPrompt = true;
+  tutorialPromptState.tutorialPromptDismissed = false;
+  renderTutorialLauncher();
+  assert.strictEqual(tutorialPromptElements.tutorialStartPrompt.hidden, true, "The Quick Start callout returns after the tutorial is completed.");
+  let quickStartCompleteForHub = false;
+  let tutorialStartedFromLauncher = null;
+  let tutorialHubRenderCount = 0;
+  const tutorialHubState = { tutorialActive: null, tutorialReturnFocus: null };
+  const tutorialHubModal = { hidden: true };
+  const tutorialLauncherButton = {};
+  const openTutorialHub = extractedFunction(fallbackSource, "openTutorialHub", "closeTutorialHub", {
+    quickStartCompleted: () => quickStartCompleteForHub,
+    state: tutorialHubState,
+    pauseTutorial: () => assert.fail("The inactive launcher tried to pause a tutorial."),
+    startTutorial: (moduleId, returnFocus) => { tutorialStartedFromLauncher = { moduleId, returnFocus }; },
+    document: { activeElement: null },
+    els: { tutorialMenuButton: tutorialLauncherButton, tutorialHubModal },
+    renderTutorialHub: () => { tutorialHubRenderCount += 1; },
+    setTimeout: callback => { callback(); return 1; },
+    $: () => null
+  });
+  const tutorialLauncherFocus = {};
+  openTutorialHub(tutorialLauncherFocus);
+  assert.deepStrictEqual(tutorialStartedFromLauncher, { moduleId: "quick-start", returnFocus: tutorialLauncherFocus }, "The first Tutorials-button click did not start Quick Start directly.");
+  assert.strictEqual(tutorialHubRenderCount, 0, "The tutorial catalog rendered before Quick Start was completed.");
+  assert.strictEqual(tutorialHubModal.hidden, true, "The tutorial catalog opened before Quick Start was completed.");
+  quickStartCompleteForHub = true;
+  tutorialStartedFromLauncher = null;
+  openTutorialHub(tutorialLauncherFocus);
+  assert.strictEqual(tutorialStartedFromLauncher, null, "The Tutorials button restarted Quick Start after it was completed.");
+  assert.strictEqual(tutorialHubRenderCount, 1, "The tutorial catalog did not render after Quick Start was completed.");
+  assert.strictEqual(tutorialHubModal.hidden, false, "The tutorial catalog stayed closed after Quick Start was completed.");
   const splitAssociationEntries = extractedFunction(fallbackSource, "splitAssociationEntries", "inheritedAssociationCitation", { String });
   assert.deepStrictEqual(plain(splitAssociationEntries("INA 203(b)(1)(A)(i)–(iii); 8 CFR 214.2(h)(1), 8 U.S.C. 1154\nINA 204")), [
     "INA 203(b)(1)(A)(i)–(iii)", "8 CFR 214.2(h)(1)", "8 U.S.C. 1154", "INA 204"
@@ -952,10 +1159,10 @@ async function main() {
     parseAssociatedWith: value => String(value).includes("1153") ? { valid: true, associations: [migratedCitation] } : { valid: false, associations: [] },
     associationKey: association => `${association.family}:${association.start.unit}:${association.start.path.join("/")}`
   });
-  const linkMigrationProfile = { notes: [{ associations: [], links: [{ kind: "usc", citation: "8 U.S.C. 1153(b)(1)(A)", label: "statute" }, { kind: "visa", id: "visa:h-1b", label: "H-1B" }] }] };
+  const linkMigrationProfile = { notes: [{ associations: [], links: [{ kind: "usc", citation: "8 U.S.C. 1153(b)(1)(A)", label: "statute" }, { kind: "legacy", id: "legacy:h-1b", label: "H-1B" }] }] };
   upgradeProfileCitationLinks(linkMigrationProfile);
   assert.deepStrictEqual(plain(linkMigrationProfile.notes[0].associations), [migratedCitation], "A legacy citation link did not become a structured association.");
-  assert.deepStrictEqual(plain(linkMigrationProfile.notes[0].links.map(link => link.kind)), ["visa"], "A non-citation related item was removed during migration.");
+  assert.deepStrictEqual(plain(linkMigrationProfile.notes[0].links.map(link => link.kind)), ["legacy"], "A non-citation related item was removed during migration.");
   const expandPackedHouseHref = extractedFunction(fallbackSource, "expandPackedHouseHref", "hydrateLegalReferences", { String });
   for (const [packed, expanded] of [
     ["u8/s1184/i/1", "/us/usc/t8/s1184/i/1"],
@@ -1004,10 +1211,14 @@ async function main() {
   packLegalReferences(runtimeCfrInaFixture);
   hydrateLegalReferences(runtimeCfrInaFixture);
   assert.strictEqual(runtimeCfrInaFixture.source.references[0].ruleId, "context-cfr-ina-act-section", "The browser-side hydrator lost the packed CFR-to-INA parser rule.");
-  assert(fallbackSource.includes("const studyUnavailable = active || !corpus;"));
-  assert(fallbackSource.includes("Official navigation is available"));
+  assert(!fallbackSource.includes("scheduledStudy") && !fallbackSource.includes("studyAccessLocked"), "Scheduled study locking remains in the application.");
   assert(fallbackSource.includes("https://www.ecfr.gov/current/title-"));
-  assert(fallbackSource.includes("state.saveTimer = setTimeout(queueProfileWrite, 5000);"));
+  assert(fallbackSource.includes("state.saveTimer = setTimeout(queueProfileWrite, 500);"));
+  assert(fallbackSource.includes('suggestedName: "INASearch_Data.json"'));
+  assert(fallbackSource.includes('format: "INASearchData"'));
+  assert(fallbackSource.includes("Allow on every visit") && fallbackSource.includes("requestPersistentStorage"), "The vault reconnection flow does not explain persistent file permission or request persistent browser storage.");
+  assert(full.html.includes('Date.parse(result?.nextCheckAfter || "")') && full.html.includes("scheduledAt - Date.now()"), "A long-running copy does not schedule its next eCFR check from the cached authority deadline.");
+  assert(!fallbackSource.includes("showDirectoryPicker("), "Saving must not request access to a parent directory.");
   assert(fallbackSource.includes('id="savingMenuModal"'));
   assert(fallbackSource.includes('id="settingsMenuButton"') && fallbackSource.includes('<h2 id="savingMenuTitle">Settings</h2>'), "The saving controls were not moved into the gear-accessed Settings menu.");
   assert(fallbackSource.includes('id="inaCitationLinksToggle"') && fallbackSource.includes('Show INA citations in statutory links'), "The Settings menu lacks the INA statutory-link display preference.");
@@ -1016,19 +1227,59 @@ async function main() {
   assert(fallbackSource.includes('els.profileSetupNotice.hidden = mode !== "unsaved";'));
   assert(fallbackSource.includes('els.saveStatus.disabled = false;'));
   assert(fallbackSource.includes('button.status-chip { cursor: pointer; font-family: inherit; font-size: 11px; }'), "The Saving status button lost its compact status typography.");
-  assert(fallbackSource.includes("Import earlier progress"));
+  assert(fallbackSource.includes("Import saved data") && fallbackSource.includes("Download JSON backup"));
   assert(fallbackSource.includes("AuthoritySearch-Profile.js"), "The renamed build no longer explains how to import an older three-file AuthoritySearch profile.");
+  const vaultDeclarationsStart = fallbackSource.indexOf("    function makeVaultId(");
+  const vaultDeclarationsEnd = fallbackSource.indexOf("\n\n    function applyVaultProfile(", vaultDeclarationsStart);
+  assert(vaultDeclarationsStart >= 0 && vaultDeclarationsEnd > vaultDeclarationsStart, "Could not extract the JSON vault functions.");
+  const vaultState = { vaultId: "vault-fixture-1234", vaultRevision: 0 };
+  const vaultFunctions = vm.runInNewContext(`${fallbackSource.slice(vaultDeclarationsStart, vaultDeclarationsEnd)}\n({ validateVaultDocument, vaultFromText, serializeVault })`, {
+    Date,
+    JSON,
+    Number,
+    String,
+    globalThis: { crypto: { randomUUID: () => "vault-fixture-1234" } },
+    makeId: () => "vault-fixture-1234",
+    state: vaultState,
+    isValidProfile: value => Boolean(value && value.schemaVersion === 3 && Array.isArray(value.notes) && value.preferences),
+    normalizeProfile: value => JSON.parse(JSON.stringify(value))
+  });
+  const vaultText = vaultFunctions.serializeVault(blankProfile, 0);
+  const vaultRoundTrip = plain(vaultFunctions.vaultFromText(vaultText));
+  assert.strictEqual(vaultRoundTrip.format, "INASearchData", "The saved-data file lacks its format discriminator.");
+  assert.strictEqual(vaultRoundTrip.schemaVersion, 1, "The saved-data file lacks a stable vault schema.");
+  assert.strictEqual(vaultRoundTrip.vaultId, vaultState.vaultId, "The saved-data vault identity did not round-trip.");
+  assert.deepStrictEqual(vaultRoundTrip.profile, blankProfile, "The JSON vault changed the saved profile.");
+  assert.throws(() => vaultFunctions.vaultFromText(JSON.stringify({ format: "INASearchData", schemaVersion: 1, vaultId: "different-vault", revision: 0, profile: {} })), /valid profile/, "An invalid JSON vault was accepted.");
+  let fakeVaultText = vaultText, pendingVaultText = null;
+  const fakeVaultHandle = {
+    async getFile() { return { async text() { return fakeVaultText; } }; },
+    async createWritable() {
+      return {
+        async write(value) { pendingVaultText = String(value); },
+        async close() { fakeVaultText = pendingVaultText; pendingVaultText = null; }
+      };
+    }
+  };
+  const writeVaultStart = fallbackSource.indexOf("    async function writeVaultSnapshot(");
+  const writeVaultEnd = fallbackSource.indexOf("\n\n    async function queueProfileWrite(", writeVaultStart);
+  const writeVaultSnapshot = vm.runInNewContext(`(${fallbackSource.slice(writeVaultStart, writeVaultEnd).trim()})`, {
+    state: { ...vaultState, fileHandle: fakeVaultHandle },
+    vaultFromText: vaultFunctions.vaultFromText,
+    serializeVault: vaultFunctions.serializeVault
+  });
+  const writtenRevision = await writeVaultSnapshot(blankProfile, 7);
+  assert.strictEqual(writtenRevision, 7, "A verified vault write did not return its queued profile revision.");
+  assert.strictEqual(vaultFunctions.vaultFromText(fakeVaultText).revision, 1, "The verified vault write did not advance its file revision.");
+  fakeVaultText = JSON.stringify({ ...vaultFunctions.vaultFromText(fakeVaultText), revision: 9 });
+  await assert.rejects(() => writeVaultSnapshot(blankProfile, 8), /changed in another window or device/, "A newer external vault revision was silently overwritten.");
   assert(fallbackSource.includes('id="view-definitions"'));
   assert(fallbackSource.includes('data-view="definitions"'));
   assert(/<nav class="main-nav"[^>]*>\s*<button class="nav-button" data-view="definitions" aria-current="false">Definitions<\/button>/.test(fallbackSource), "Definitions is not the leftmost primary-page control or is incorrectly marked current on startup.");
   assert(fallbackSource.includes('id="view-search" aria-label="Search results"'), "Search is not the default visible view.");
   assert(fallbackSource.includes('id="view-definitions" hidden aria-labelledby="definitionsHeading"'), "Definitions remains the default visible view.");
   assert(fallbackSource.includes('view: "search"') && fallbackSource.includes('contentViewBeforeSearch: "definitions"'), "The startup state does not open search while retaining Definitions as the close destination.");
-  assert(fallbackSource.includes('id="view-visas" hidden aria-labelledby="visasHeading"'), "Nonimmigrant Types is still the default visible view.");
-  assert(!/<button class="nav-button" data-view="(?:visas|immigrants)"/.test(fallbackSource), "Immigration Types remain in the primary navigation.");
-  assert(fallbackSource.includes('data-study-view="visas">Nonimmigrant Types</button>') && fallbackSource.includes('data-study-view="immigrants">Immigrant Types</button>'), "Sources & About does not link to both Immigration Types pages.");
-  assert(!fallbackSource.includes('class="nav-button" data-view="quiz"'), "The classic Quiz remains in the primary navigation.");
-  assert(fallbackSource.includes('id="openClassicQuizButton"'), "Sources & About does not link to the classic quiz.");
+  assert(!/id="view-(?:visas|immigrants|quiz)"/.test(fallbackSource), "A retired classification-study view remains in the application.");
   assert(/<div class="search-field-shell">[\s\S]*?<input class="search-input"[\s\S]*?<button class="search-suggestion-inline" id="searchSuggestionButton"/.test(fallbackSource), "The rotating suggestion is not integrated into the main search field.");
   assert(/id="impliedUscTitle"[\s\S]*?>8<\/span>[\s\S]*?id="searchInput"/.test(fallbackSource), "The implied Title 8 marker is not positioned before the typed U.S.C. citation.");
   assert(fallbackSource.includes("No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup."), "The implied Title 8 warning is missing.");
@@ -1099,7 +1350,7 @@ async function main() {
   assert.strictEqual(startupSearchQuery({ search: "?q=INA%20203" }, ""), "INA 203", "A q value did not override an intentionally empty configured default.");
   assert.strictEqual(startupSearchQuery({ search: "" }), "INA 203b1a", "The no-argument startup citation is not the profile default.");
   assert.strictEqual(startupSearchQuery({ search: `?q=${"a".repeat(600)}` }, "INA 245").length, 500, "The startup query is not length-limited.");
-  assert(fallbackSource.includes("if (startupQuery) setTimeout(() => applySearchQuery(startupQuery, false, true), 0);"), "Initialization does not preserve the displayed formatting of the startup query.");
+  assert(fallbackSource.includes("if (startupQuery) applySearchQuery(startupQuery, false, true);"), "Initialization does not synchronously preserve the displayed formatting of the startup query.");
   const startupEditableSearch = { value: "" };
   const startupApplyState = { query: "", searchScopeActive: false };
   let startupActivatedScope = null;
@@ -1123,7 +1374,7 @@ async function main() {
   assert.deepStrictEqual(startupActivatedScope, { scope: "INA101a15s", focus: false, mode: "cites" }, "A supplied cites: query did not activate citation-source mode with its compact target intact.");
   assert.strictEqual(startupEditableSearch.value, "", "A bare cites: query leaked its tag into the ordinary text-search field.");
   assert(!fallbackSource.includes('data-filter="authorities"'), "The obsolete Authorities result filter remains visible.");
-  for (const filter of ["statutes", "regulations", "ina", "acts", "definitions", "statute-notes", "visas", "policy", "forms", "notes"]) {
+  for (const filter of ["statutes", "regulations", "ina", "acts", "definitions", "statute-notes", "policy", "forms", "notes"]) {
     assert(fallbackSource.includes(`data-filter="${filter}"`), `The ${filter} result filter is missing.`);
   }
   assert(!fallbackSource.includes('class="search-results-tools"') && !fallbackSource.includes('id="closeSearchResultsButton"'), "The redundant lookup-status panel remains in the search view.");
@@ -1136,7 +1387,7 @@ async function main() {
   assert(!fallbackSource.includes('openButton(part.url, "Current eCFR")'), "The separate CFR browse source button was not removed.");
   assert(fallbackSource.includes('id="citationResultsNotification"') && fallbackSource.includes('id="citationResultsNotificationCount"'), "The citation reader has no notification for other matching material.");
   assert(fallbackSource.includes("const collapsedAuthorityBrowse = isAuthorityBrowse() && !state.citationResultsExpanded;") && fallbackSource.includes("!collapsedAuthorityBrowse && !readingOnly"), "The ordinary filter strip is not suppressed while a curated authority list is displayed.");
-  for (const filter of ["all", "statutes", "regulations", "ina", "acts", "definitions", "statute-notes", "visas", "policy", "forms", "notes"]) {
+  for (const filter of ["all", "statutes", "regulations", "ina", "acts", "definitions", "statute-notes", "policy", "forms", "notes"]) {
     assert(new RegExp(`data-filter="${filter}"[^>]*>[\\s\\S]*?data-filter-count`).test(fallbackSource), `The ${filter} filter does not display a result count.`);
   }
   assert(fallbackSource.includes("state.citationResultsExpanded = true;") && fallbackSource.includes("showCurrentSearchResults(state.selected);"), "The citation-result notification does not reveal the full result pane.");
@@ -1165,16 +1416,40 @@ async function main() {
   assert(isCitationReadingMode(), "A direct citation does not default to reading mode.");
   directCitationState.citationResultsExpanded = true;
   assert(!isCitationReadingMode(), "Opening the other results does not reveal the search pane.");
-  assert(fallbackSource.includes("A wrong resource answer locks only that specific question for one minute and keeps it open"), "The Types pages do not explain the one-minute, stay-on-question resource lockout.");
-  assert(fallbackSource.includes('${questionLockout ? "disabled" : ""}></label>${link}</div>'), "Resource answer controls are not disabled independently from their linked sources during a lockout.");
-  const corpusStatusElement = { hidden: false, innerHTML: "", title: "", attributes: {}, setAttribute(name, value) { this.attributes[name] = value; }, removeAttribute(name) { delete this.attributes[name]; if (name === "title") this.title = ""; } };
-  const updateCorpusStatus = extractedFunction(fallbackSource, "updateCorpusStatus", "initialize", {
+  const corpusStatusClasses = new Map();
+  const corpusStatusElement = {
+    hidden: false, disabled: false, innerHTML: "", title: "", attributes: {},
+    classList: { remove(name) { corpusStatusClasses.set(name, false); }, toggle(name, enabled) { corpusStatusClasses.set(name, enabled); } },
+    setAttribute(name, value) { this.attributes[name] = value; },
+    removeAttribute(name) { delete this.attributes[name]; if (name === "title") this.title = ""; }
+  };
+  const updateCorpusStatus = extractedFunction(fallbackSource, "updateCorpusStatus", "disabledCorpusMaintenanceStatus", {
     corpus: { corpusVersion: "2026.08.02-7", capturedAt: "2026-07-30", verifiedAt: "2026-07-31" },
     els: { corpusStatus: corpusStatusElement },
-    loadErrors: {}
+    loadErrors: {},
+    window: {},
+    escapeHtml: value => String(value ?? "")
   });
   updateCorpusStatus();
   assert.strictEqual(corpusStatusElement.hidden, true, "A successful corpus load still occupies the top bar with a routine status.");
+  updateCorpusStatus({ state: "updated", reloadRequired: true, changedParts: ["5:1", "5:2", "8:1", "8:2", "8:3"], message: "5 CFR parts updated directly from eCFR. Reload to use the verified local copy.", metrics: { elapsedMs: 12400 } });
+  assert.strictEqual(corpusStatusElement.hidden, false, "A ready CFR update is hidden from the top bar.");
+  assert.strictEqual(corpusStatusElement.disabled, false, "The ready CFR update action is not clickable.");
+  assert.strictEqual(corpusStatusClasses.get("update-ready"), true, "The ready CFR update action lacks its actionable styling.");
+  assert(corpusStatusElement.innerHTML.includes("↻") && corpusStatusElement.innerHTML.includes("Reload 5 CFR parts"), "The ready CFR update action does not show an explicit refresh icon and count.");
+  assert(corpusStatusElement.attributes["aria-label"].includes("Activate to reload now") && corpusStatusElement.title.includes("Click to reload now"), "The ready CFR update action does not state what clicking it will do.");
+  assert(!fallbackSource.includes("Direct eCFR update ready:"), "The ready-to-reload notice remains buried and duplicated on the About page.");
+  let corpusReloads = 0;
+  const reloadState = { profileChanged: false, fileConnected: false };
+  const reloadWindow = { INA_SEARCH_UPDATE_STATUS: { state: "updated" } };
+  const reloadUpdatedCorpus = extractedFunction(fallbackSource, "reloadUpdatedCorpus", "updateCorpusStatus", {
+    window: reloadWindow,
+    state: reloadState,
+    confirm: () => true,
+    location: { reload() { corpusReloads += 1; } }
+  });
+  assert.strictEqual(reloadUpdatedCorpus(), true, "The update-ready action did not start a reload.");
+  assert.strictEqual(corpusReloads, 1, "The update-ready action did not reload exactly once.");
   assert(!fallbackSource.includes('>Corpus Loaded</span>'), "The removed Corpus Loaded success chip remains in the interface.");
   const saveStatusClasses = new Map();
   const saveStatusElement = {
@@ -1199,7 +1474,7 @@ async function main() {
   updateSaveStatus("Autosave queued", "warn");
   assert.strictEqual(saveStatusElement.innerHTML, '<span class="status-dot warn"></span>Saving On', "The connected saving chip exposes internal queue wording instead of the requested short label.");
   assert.strictEqual(saveStatusElement.attributes["aria-label"], "Saving is on. Autosave queued. Open settings.", "The connected saving chip lost its detailed accessible status.");
-  assert(/<div class="brand" id="inaSearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>INASearch<\/strong><small>Quick INA\/CFR Lookup<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area does not continuously wrap the full INASearch brand.");
+  assert(/<div class="brand" id="inaSearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>INASearch<\/strong><small>Statutes &amp; Regulations<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area does not continuously wrap the full INASearch brand.");
   assert(fallbackSource.includes("Inspired by the excellent work of 2604"), "The INASearch tribute text is missing.");
   assert(fallbackSource.includes('els.brand.addEventListener("mouseenter", beginBrandTributeHover);'), "The tribute timer is not attached to the continuous brand area.");
   assert(fallbackSource.includes('els.brand.addEventListener("mouseleave", endBrandTributeHover);'), "The tribute popup is not dismissed when the pointer leaves the brand area.");
@@ -1236,96 +1511,6 @@ async function main() {
   const pendingBrandTributeTimer = brandTributeState.brandTributeTimer;
   endBrandTributeHover();
   assert(clearedBrandTributeTimers.includes(pendingBrandTributeTimer), "Leaving the brand area did not cancel its pending tribute timer.");
-  const resourceLockoutProfile = { resourceChallengeLockouts: [{ questionId: "resource-other", revision: "test-revision", lockedUntil: "2026-08-03T12:45:00.000Z" }] };
-  let resourceLockoutChanges = 0;
-  const recordResourceLockout = extractedFunction(fallbackSource, "recordResourceLockout", "immigrantDefinitionQuestion", {
-    profile: resourceLockoutProfile,
-    markProfileChanged: () => { resourceLockoutChanges += 1; },
-    Date
-  });
-  const resourceQuestion = { id: "resource-test", revision: "test-revision" };
-  const lockoutStartedAt = Date.parse("2026-08-03T12:00:00.000Z");
-  recordResourceLockout(resourceQuestion, lockoutStartedAt);
-  assert.strictEqual(resourceLockoutChanges, 1, "Recording a resource lockout did not mark the profile changed.");
-  assert.deepStrictEqual(plain(resourceLockoutProfile.resourceChallengeLockouts), [
-    { questionId: "resource-other", revision: "test-revision", lockedUntil: "2026-08-03T12:45:00.000Z" },
-    { questionId: resourceQuestion.id, revision: resourceQuestion.revision, lockedUntil: "2026-08-03T12:01:00.000Z" }
-  ], "A resource-question lockout changed another question or was not exactly one minute.");
-  const activeResourceLockout = extractedFunction(fallbackSource, "activeResourceLockout", "recordResourceLockout", {
-    profile: resourceLockoutProfile,
-    Date
-  });
-  assert.strictEqual(activeResourceLockout(resourceQuestion, lockoutStartedAt).remainingMs, 60000);
-  assert.strictEqual(activeResourceLockout(resourceQuestion, lockoutStartedAt + 60000), null, "Resource lockout remained active after one minute.");
-  assert.strictEqual(activeResourceLockout({ ...resourceQuestion, revision: "new-revision" }, lockoutStartedAt), null, "A stale resource-question revision remained locked.");
-  const currentResourceQuestion = extractedFunction(fallbackSource, "currentResourceQuestion", "resourceQuestionLockouts", {
-    resourceQuestions: () => [{ id: "locked-question" }, { id: "available-question" }],
-    isResourceUnlocked: () => false,
-    activeResourceLockout: question => question.id === "locked-question" ? { remainingMs: 1000 } : null,
-    state: { resourceQuizQuestionId: { nonimmigrant: null } }
-  });
-  assert.strictEqual(currentResourceQuestion("nonimmigrant").id, "locked-question", "A wrong resource answer automatically jumped to another question.");
-  const formRotatedOptions = extractedFunction(fallbackSource, "rotatedOptions", "resourceOptions");
-  const formResourceOptions = extractedFunction(fallbackSource, "resourceOptions", "resourceQuestionPrompt", {
-    RESOURCE_CATALOG: {},
-    Set,
-    corpus: full.corpus,
-    normalize: value => String(value || "").normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(),
-    rotatedOptions: formRotatedOptions,
-    statusFormQuestions: kind => formQuestions[kind]
-  });
-  for (const kind of ["nonimmigrant", "immigrant"]) {
-    for (const question of formQuestions[kind]) {
-      const correctOptionId = `${question.id}:correct`;
-      const options = plain(formResourceOptions({ ...question, correctOptionId }));
-      assert.strictEqual(options.length, 6, `${question.id}: form question does not have exactly six answer choices.`);
-      assert.strictEqual(new Set(options.map(option => option.id)).size, 6, `${question.id}: form question has duplicate option IDs.`);
-      assert.strictEqual(new Set(options.map(option => option.label)).size, 6, `${question.id}: form question has duplicate answer labels.`);
-      assert.strictEqual(options.filter(option => option.id === correctOptionId).length, 1, `${question.id}: form question does not have exactly one correct option.`);
-      assert(options.every(option => option.url === question.source.url), `${question.id}: an answer option does not link to the question's approved source.`);
-    }
-  }
-  const nonimmigrantQuestionFour = plain(formResourceOptions({ ...formQuestions.nonimmigrant[0], correctOptionId: `${formQuestions.nonimmigrant[0].id}:correct` }));
-  assert.strictEqual(nonimmigrantQuestionFour.length, 6, "Nonimmigrant question 4 is not six-option multiple choice.");
-  assert(nonimmigrantQuestionFour.some(option => option.label === "Employment-based and related principal classifications (H, L, O, P, Q, and R principals)"), "Nonimmigrant question 4 lacks the grouped correct answer.");
-  const submitResourceQuizSource = extractedFunction(fallbackSource, "submitResourceQuiz", "visaTableRecords").toString();
-  assert(submitResourceQuizSource.includes("recordResourceLockout(question)"), "Wrong resource answers do not record a lockout.");
-  assert(!submitResourceQuizSource.includes("correctStatuses"), "Resource submission still expects a giant status-checkbox set.");
-  const wrongResourceQuestion = { id: "resource-stay-put", correctOptionId: "correct" };
-  const wrongResourceState = {
-    resourceQuizQuestionId: { nonimmigrant: wrongResourceQuestion.id },
-    resourceQuizSelection: { nonimmigrant: "wrong" },
-    resourceQuizFeedback: { nonimmigrant: "" }
-  };
-  let wrongResourceLockouts = 0;
-  let wrongResourceRenders = 0;
-  const submitResourceQuiz = extractedFunction(fallbackSource, "submitResourceQuiz", "visaTableRecords", {
-    studyAccessLocked: () => false,
-    resourceQuestions: () => [wrongResourceQuestion],
-    state: wrongResourceState,
-    isResourceUnlocked: () => false,
-    activeResourceLockout: () => null,
-    recordResourceLockout: () => { wrongResourceLockouts += 1; },
-    renderResourceQuiz: () => { wrongResourceRenders += 1; },
-    recordResourceUnlock: () => { throw new Error("A wrong answer must not unlock the question."); },
-    renderVisaGrid: () => {},
-    renderImmigrantGrid: () => {},
-    buildIndex: () => {}
-  });
-  submitResourceQuiz("nonimmigrant");
-  assert.strictEqual(wrongResourceLockouts, 1, "A wrong resource answer did not start its lockout.");
-  assert.strictEqual(wrongResourceRenders, 1, "A wrong resource answer did not redraw the retained question.");
-  assert.strictEqual(wrongResourceState.resourceQuizQuestionId.nonimmigrant, wrongResourceQuestion.id, "A wrong resource answer cleared the current question and advanced automatically.");
-  assert.strictEqual(wrongResourceState.resourceQuizSelection.nonimmigrant, null, "A wrong resource answer retained the selected choice.");
-  const submitSequenceQuizSource = extractedFunction(fallbackSource, "submitSequenceQuiz", "currentLink").toString();
-  assert(!submitSequenceQuizSource.includes("recordQuizLockout"), "Classic practice questions still record a retry lockout.");
-  const isQuizQuestionCandidate = extractedFunction(fallbackSource, "isQuizQuestionCandidate", "quizQuestionAtOrAfter", {
-    isQuizQuestionAvailable: () => true,
-    isQuizQuestionUnlocked: () => false,
-    quizQuestionLockout: () => { throw new Error("Classic candidates must ignore legacy lockouts."); },
-    state: { quizIncludeAnswered: false }
-  });
-  assert.strictEqual(isQuizQuestionCandidate({}), true, "A legacy lockout still removes a classic practice question from rotation.");
   assert(fallbackSource.includes('id="statuteNavigator"'), "The live statute hierarchy navigation is missing.");
   assert(fallbackSource.includes('data-statute-history="back"') && fallbackSource.includes('data-statute-history="forward"'), "The statute navigation bar is missing Back and Forward controls.");
   assert(fallbackSource.includes('event.target.closest("[data-statute-history]")'), "The statute history controls are not connected to delegated navigation events.");
@@ -1374,7 +1559,7 @@ async function main() {
   assert.deepStrictEqual(plain(parseDefinitionCommand(" DEFINE :  admitted ")), { query: "admitted" });
   assert.deepStrictEqual(plain(parseDefinitionCommand("define:")), { query: "" });
   assert.strictEqual(parseDefinitionCommand("definitions"), null);
-  const definitionMatchesQuery = extractedFunction(fallbackSource, "definitionMatchesQuery", "definitionScope", {
+  const definitionMatchesQuery = extractedFunction(fallbackSource, "definitionMatchesQuery", "definedTermHighlightingEnabled", {
     normalize: value => String(value || "").normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()
   });
   const childDefinition = definitionsFor("child")[0];
@@ -1488,6 +1673,67 @@ async function main() {
   const statutoryNormPart = value => String(value || "").normalize("NFKD").replace(/[^A-Za-z0-9]/g, "").toLowerCase();
   const statutoryCanonicalPath = pathParts => (pathParts || []).map(value => `(${value})`).join("");
   const houseSectionUrl = extractedFunction(fallbackSource, "houseSectionUrl", "houseSubstructureFragment", { encodeURIComponent, String });
+  const statuteStatus = extractedFunction(fallbackSource, "statuteStatus", "statuteStatusLabel", { String });
+  const statuteStatusLabel = extractedFunction(fallbackSource, "statuteStatusLabel", "statuteSectionForRecord");
+  const statuteSectionForRecord = extractedFunction(fallbackSource, "statuteSectionForRecord", "statuteRecordStatus", { inaMappedSection: row => row?.mappedSection || null });
+  const statuteRecordStatus = extractedFunction(fallbackSource, "statuteRecordStatus", "transferTargetLabel", { statuteStatus, statuteSectionForRecord });
+  const transferTargetLabel = extractedFunction(fallbackSource, "transferTargetLabel", "transferTargetUrl");
+  const transferTargetUrl = extractedFunction(fallbackSource, "transferTargetUrl", "transferSourceKey", { houseSectionUrl });
+  const transferSourceKey = extractedFunction(fallbackSource, "transferSourceKey", "transferTargetForSource", { normCitationPart: value => String(value || "").replace(/[^a-z0-9-]/gi, "").toLowerCase(), String });
+  const transferTargetForSource = extractedFunction(fallbackSource, "transferTargetForSource", "transferRecord", { transferSourceKey });
+  const transferRecord = extractedFunction(fallbackSource, "transferRecord", "transferStatusMessage", { normalize: searchNormalize, transferSourceKey, transferTargetLabel });
+  const transferStatusMessage = extractedFunction(fallbackSource, "transferStatusMessage", "statuteReaderCitationBase", { transferTargetLabel });
+  const statuteReaderCitationBase = extractedFunction(fallbackSource, "statuteReaderCitationBase", "safeUrl");
+  const repealedStatusSection = full.corpus.title8.sections.find(section => section.status === "repealed");
+  const transferredStatusSection = full.corpus.title8.sections.find(section => section.section === "31, 32");
+  const currentStatusSection = full.corpus.title8.sections.find(section => section.section === "1101");
+  assert.strictEqual(statuteStatus({}), "current", "An absent statutory status is not treated as implied current law.");
+  assert.strictEqual(statuteStatusLabel("transferred"), "Transferred", "The transferred-result badge label is unavailable.");
+  assert.strictEqual(statuteRecordStatus({ kind: "statutory-note", item: { section: repealedStatusSection } }), "repealed", "A child statutory note did not inherit its top-level section's repealed status.");
+  assert.strictEqual(statuteRecordStatus({ kind: "usc", item: currentStatusSection }), "current", "A current section was marked exceptional.");
+  assert.strictEqual(transferTargetLabel({ title: 8, section: "1440", placement: "note" }), "a note under 8 U.S.C. 1440", "A transferred note destination is mislabeled as operative text.");
+  assert.strictEqual(transferSourceKey("724a–1"), transferSourceKey("724a-1"), "A typographic dash and keyboard hyphen do not resolve to the same transferred source section.");
+  assert.strictEqual(statuteReaderCitationBase(currentStatusSection, { type: "usc", label: "8 U.S.C. 1101(a)(15)" }, null, null), "8 U.S.C. 1101", "A deep citation was reused as the reader's section base and would duplicate its paragraph path.");
+  assert.strictEqual(statuteReaderCitationBase(transferredStatusSection, { type: "usc" }, { source: "31", title: 52, section: "10101" }, null), "8 U.S.C. 31", "A transferred reader landing did not preserve the exact former source citation.");
+  assert.strictEqual(statuteReaderCitationBase(currentStatusSection, { type: "ina" }, null, { inaSection: "101" }), "INA 101", "An INA reader landing lost its citation system.");
+  assert(transferRecord(transferredStatusSection, transferredStatusSection.transferTargets[0]).text.includes("8 usc 31"), "A transferred source section was not pre-indexed under its exact former citation.");
+  const statuteStatusWarning = extractedFunction(fallbackSource, "statuteStatusWarning", "renderStatutoryNote", {
+    statuteStatus,
+    transferTargetLabel,
+    transferTargetUrl,
+    transferStatusMessage,
+    sectionMap: new Map([["1551", currentStatusSection]]),
+    normCitationPart: statutoryNormPart,
+    escapeHtml: escapeStatutoryHtml,
+    Number
+  });
+  assert.strictEqual(statuteStatusWarning(currentStatusSection), "", "A current section renders an unnecessary status warning.");
+  const repealedWarning = statuteStatusWarning(repealedStatusSection);
+  assert(repealedWarning.includes("has been repealed and is not current law") && repealedWarning.includes("existing official House source record"), "The repealed-statute warning does not explain status and source limits.");
+  const internalTransferWarning = statuteStatusWarning(full.corpus.title8.sections.find(section => section.section === "100, 101"), { source: "100", title: 8, section: "1551" });
+  assert(internalTransferWarning.includes('data-show-citation="8 U.S.C. 1551"') && internalTransferWarning.includes("was transferred and is not current at this location"), "An internal transferred-section warning does not link to the indexed destination.");
+  const externalTransferWarning = statuteStatusWarning(transferredStatusSection, transferredStatusSection.transferTargets[0]);
+  assert(externalTransferWarning.includes("data-open-url=") && externalTransferWarning.includes("52 U.S.C. 10101"), "A cross-title transferred-section warning does not link to the official destination.");
+  assert(/\.legal-status-warning\s*\{[\s\S]*?position:\s*sticky/.test(fallbackSource), "Exceptional statutory warnings are not sticky while the reader scrolls.");
+  let redirectedTransferQuery = "";
+  let openedTransferUrl = "";
+  const transferToasts = [];
+  const openTransferDestination = extractedFunction(fallbackSource, "openTransferDestination", "selectRecord", {
+    transferTargetLabel,
+    transferTargetUrl,
+    sectionMap: new Map([["1551", currentStatusSection]]),
+    normCitationPart: statutoryNormPart,
+    applySearchQuery: query => { redirectedTransferQuery = query; },
+    safeOpen: url => { openedTransferUrl = url; },
+    toast: message => { transferToasts.push(message); },
+    Number
+  });
+  assert(openTransferDestination({ cite: "8 U.S.C. 100", dispositionTarget: { source: "100", title: 8, section: "1551" } }), "An internal transfer destination was not actionable.");
+  assert.strictEqual(redirectedTransferQuery, "8 U.S.C. 1551", "Clicking an internal transferred result does not navigate to its current location.");
+  assert.strictEqual(openedTransferUrl, "", "An internal transferred result unnecessarily opened an external tab.");
+  assert(openTransferDestination({ cite: "8 U.S.C. 31", dispositionTarget: { source: "31", title: 52, section: "10101" } }), "A cross-title transfer destination was not actionable.");
+  assert(openedTransferUrl.includes("title52-section10101"), "Clicking a cross-title transferred result does not open its official House destination.");
+  assert.strictEqual(transferToasts.length, 2, "Transferred-result navigation did not provide confirmation for each path.");
   const houseSubstructureFragment = extractedFunction(fallbackSource, "houseSubstructureFragment", "officialTextFragment", { String });
   const officialTextFragment = extractedFunction(fallbackSource, "officialTextFragment", "cfrOfficialTextFragment", { houseSectionUrl, houseSubstructureFragment, decodeURIComponent, URL, String });
   const cfrOfficialTextFragment = extractedFunction(fallbackSource, "cfrOfficialTextFragment", "legalUnitTriggerHtml", { canonicalPath: statutoryCanonicalPath, String });
@@ -1590,6 +1836,13 @@ async function main() {
   assert(fallbackSource.includes('.cfr-block[data-cfr-depth="6"]'), "Deep CFR paragraph indentation styling is missing.");
   const cfrItemText = item => (item?.blocks || []).map(block => block.x || (block.rows || []).flat().map(cell => cell.x).join(" ") || "").join(" ");
   const cfrBlockPaths = blocks => (blocks || []).flatMap(block => [...cfrBlockUnitPaths(block), ...(block.t === "note" ? cfrBlockPaths(block.blocks) : [])]);
+  const letteredIdentifierFamily = extractedFunction(fallbackSource, "letteredIdentifierFamily", "statuteSectionFamilyResult", { normCitationPart: statutoryNormPart });
+  const statuteSectionFamilyResult = extractedFunction(fallbackSource, "statuteSectionFamilyResult", "componentTokens", {
+    String,
+    corpus: hydratedSource,
+    letteredIdentifierFamily,
+    INA_SOURCE_URL
+  });
   const parseCfr = extractedFunction(fallbackSource, "parseCfr", "parseAct", {
     Number, String, Set,
     cfrSectionMap, cfrSectionIdMap, cfrPartMap, cfrPartsByTitle, cfrRemovedPartMap,
@@ -1598,6 +1851,7 @@ async function main() {
     canonicalPath: cfrCanonicalPath,
     normCitationPart: statutoryNormPart,
     normalize: searchNormalize,
+    letteredIdentifierFamily,
     cfrItemText, cfrBlockPaths,
     cachedCfrBlockPaths: section => [...new Set(cfrBlockPaths(section?.blocks))]
   });
@@ -1627,6 +1881,12 @@ async function main() {
     assert(partResult.valid && partResult.level === "part" && partResult.part.id === "22:41", `Cached CFR part syntax did not resolve locally: ${raw}`);
   }
   assert(parseCfr("22", "42").valid && parseCfr("22", "42").level === "part", "22 CFR Part 42 is not treated as a valid local part.");
+  const cfr274Family = parseCfr("8", "274");
+  assert(cfr274Family.valid && cfr274Family.level === "part-family", "Bare 8 CFR 274 does not open its letter-suffixed part family.");
+  assert.deepStrictEqual(plain(cfr274Family.parts.map(part => String(part.part).toLowerCase())), ["274", "274a"], "8 CFR 274 does not include Part 274A as a separate matching part.");
+  assert(parseCfr("8", "Part 274").valid && parseCfr("8", "Part 274").level === "part" && parseCfr("8", "Part 274").part.part === "274", "Explicit 8 CFR Part 274 no longer selects the exact part.");
+  assert(parseCfr("8", "274A").valid && parseCfr("8", "274A").level === "part" && String(parseCfr("8", "274A").part.part).toLowerCase() === "274a", "Exact 8 CFR 274A no longer selects the lettered part.");
+  assert.strictEqual(parseCfr("8", "274(a)").valid, false, "8 CFR 274(a) was confused with the separate lettered Part 274A.");
   const reservedCfrPart = parseCfr("8", "109");
   assert(reservedCfrPart.valid && reservedCfrPart.level === "part" && reservedCfrPart.part.sectionIds.length === 0, "A reserved CFR part is not retained as a valid local part.");
   const rangedReservedCfrPart = parseCfr("8", "Part 242-243");
@@ -1644,13 +1904,19 @@ async function main() {
     legalReferenceTargets: () => [],
     normalize: searchNormalize
   });
-  const cfrTitleBrowseRecords = extractedFunction(fallbackSource, "cfrTitleBrowseRecords", "cfrPartBrowseRecords", {
+  const cfrTitleBrowseRecords = extractedFunction(fallbackSource, "cfrTitleBrowseRecords", "statuteSectionFamilyBrowseRecords", {
     normalize: searchNormalize
+  });
+  const statuteSectionFamilyBrowseRecords = extractedFunction(fallbackSource, "statuteSectionFamilyBrowseRecords", "cfrPartBrowseRecords", {
+    normalize: searchNormalize,
+    inaMappedSection
   });
   const title22Records = cfrTitleBrowseRecords(title22.parts);
   assert.strictEqual(title22Records.length, 12, "The 22 CFR title browser omits authoritative indexed parts.");
   assert.deepStrictEqual(plain(title22Records.map(record => record.cite)), plain(title22.parts.map(part => `22 CFR Part ${part.part}`)), "The CFR title browser does not preserve official corpus order.");
   assert(title22Records.some(record => record.cite === "22 CFR Part 42" && record.title === cfrPartMap.get("22:42").heading), "The CFR title browser does not use the authoritative stored Part 42 heading.");
+  const cfr274Records = cfrTitleBrowseRecords(cfr274Family.parts);
+  assert.deepStrictEqual(plain(cfr274Records.map(record => record.cite)), ["8 CFR Part 274", "8 CFR Part 274a"], "The CFR lettered-part browser does not expose both separate parts.");
   const inaAuthorityBrowseRecords = extractedFunction(fallbackSource, "inaAuthorityBrowseRecords", "inaTitleBrowseRecords", { normalize: searchNormalize });
   const inaTitleBrowseRecords = extractedFunction(fallbackSource, "inaTitleBrowseRecords", "cfrTitleBrowseRecords", { normalize: searchNormalize, inaMappedSection });
   assert.deepStrictEqual(plain(inaTitleGroups.map(title => [title.number, title.label, title.rows.length])), [
@@ -1669,6 +1935,12 @@ async function main() {
   const inaTitleFourRecords = inaTitleBrowseRecords(inaTitleGroups[3].rows);
   assert(inaTitleFourRecords.find(record => record.cite === "INA 404")?.inaSourceOnly, "A note-only INA entry is incorrectly treated as local operative text.");
   assert(inaTitleFourRecords.find(record => record.cite === "INA 401")?.inaSourceOnly, "An INA entry with no U.S.C. equivalent is incorrectly treated as local operative text.");
+  const ina274Records = statuteSectionFamilyBrowseRecords({
+    type: "ina",
+    rows: letteredIdentifierFamily("274", hydratedSource.inaCrosswalk, row => row.inaSection)
+  });
+  assert.deepStrictEqual(plain(ina274Records.map(record => record.cite)), ["INA 274", "INA 274A", "INA 274B", "INA 274C", "INA 274D"], "The INA lettered-section browser does not expose every separate section.");
+  assert(ina274Records.every(record => record.authorityBrowseDirect), "Lettered statute-family results do not open their selected section directly.");
   const authorityBrowseExplicitMatch = extractedFunction(fallbackSource, "authorityBrowseExplicitMatch", "authorityBrowseExtraRecords", { normalize: searchNormalize, compactLookup: testCompactLookup });
   assert(!authorityBrowseExplicitMatch({ cite: "8 U.S.C. 1571", text: searchNormalize("INA amendment enacted in 2009") }, "INA 200"), "A title-browse shortcut loosely matched a year or unrelated INA text as an extra result.");
   assert(authorityBrowseExplicitMatch({ cite: "My note", text: searchNormalize("Research attached to INA 200") }, "INA 200"), "An outside result containing the exact browsed citation is not recognized as extra material.");
@@ -1763,7 +2035,7 @@ async function main() {
   assert(!citesSearchScopeMatchesRecord({ kind: "definition", citedTargets: citesExactRecord.citedTargets }), "A non-statutory search record leaked into cites: results.");
   const parentCitesScope = { ...citesScopeState.searchScope, pathsBySection: new Map([["usc-1101", ["a", "15"]]]) };
   assert(citationScopeMatchesRecord(citesExactRecord, parentCitesScope), "A reference to a descendant did not match a broader cites: provision.");
-  const resultFilterGroups = new Set(["all", "statutes", "regulations", "ina", "acts", "definitions", "statute-notes", "policy", "forms", "visas", "notes"]);
+  const resultFilterGroups = new Set(["all", "statutes", "regulations", "ina", "acts", "definitions", "statute-notes", "policy", "forms", "notes"]);
   const searchResultCounts = extractedFunction(fallbackSource, "searchResultCounts", "updateSearchFilterCounts", { state: { allResults: [] }, RESULT_FILTER_GROUPS: resultFilterGroups, Object });
   const countedResults = searchResultCounts([
     { group: "statutes" }, { group: "statutes" }, { group: "regulations" }, { group: "policy" }
@@ -1941,7 +2213,7 @@ async function main() {
   const compactLookupStart = performance.now();
   for (let index = 0; index < 20_000; index++) compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, index % 2 ? "a15oiii" : "a15hib");
   assert(performance.now() - compactLookupStart < 250, "Cached compact-citation ambiguity lookup is too slow for responsive typing.");
-  const findKnownPrefix = extractedFunction(fallbackSource, "findKnownPrefix", "componentTokens", { String });
+  const findKnownPrefix = extractedFunction(fallbackSource, "findKnownPrefix", "letteredIdentifierFamily", { String });
   const componentTokensForParser = extractedFunction(fallbackSource, "componentTokens", "childEntries", { String });
   const childEntriesForParser = extractedFunction(fallbackSource, "childEntries", "resolveComponents", { normCitationPart: statutoryNormPart });
   const resolveComponentsForParser = extractedFunction(fallbackSource, "resolveComponents", "resolveKnownCitationPath", { componentTokens: componentTokensForParser, normCitationPart: statutoryNormPart });
@@ -1949,11 +2221,21 @@ async function main() {
   const section1182ForScopeRange = hydratedSource.title8.sections.find(section => String(section.section) === "1182");
   const section1185ForStartup = hydratedSource.title8.sections.find(section => String(section.section) === "1185");
   const section1161ForIna = hydratedSource.title8.sections.find(section => String(section.section) === "1161");
+  const section31ForTransfer = hydratedSource.title8.sections.find(section => String(section.section) === "31, 32");
+  const section100ForTransfer = hydratedSource.title8.sections.find(section => String(section.section) === "100, 101");
+  const section724ForTransfer = hydratedSource.title8.sections.find(section => String(section.section) === "724a–1");
+  const localParserSectionMap = new Map([["1101", section1101ForCompactPaths], ["1153", section1153ForCompactPaths], ["1161", section1161ForIna], ["1182", section1182ForScopeRange], ["1185", section1185ForStartup], ["1255", section1255ForCompactPaths]]);
+  for (const section of [section31ForTransfer, section100ForTransfer, section724ForTransfer]) {
+    for (const target of section.transferTargets) {
+      localParserSectionMap.set(statutoryNormPart(target.source), section);
+      localParserSectionMap.set(transferSourceKey(target.source), section);
+    }
+  }
   const parseLocalStatute = extractedFunction(fallbackSource, "parseLocalStatute", "parseFallbackStatute", {
     corpus: hydratedSource,
     hasLocalUscCache: true,
     inaMap: new Map([["101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["203", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["210a", full.corpus.inaCrosswalk.find(row => row.inaSection === "210A")], ["212", { inaSection: "212", uscSection: "1182", hasEquivalent: true }], ["215", { inaSection: "215", uscSection: "1185", hasEquivalent: true }], ["245", { inaSection: "245", uscSection: "1255", hasEquivalent: true }], ["401", full.corpus.inaCrosswalk.find(row => row.inaSection === "401")], ["404", full.corpus.inaCrosswalk.find(row => row.inaSection === "404")]]),
-    sectionMap: new Map([["1101", section1101ForCompactPaths], ["1153", section1153ForCompactPaths], ["1161", section1161ForIna], ["1182", section1182ForScopeRange], ["1185", section1185ForStartup], ["1255", section1255ForCompactPaths]]),
+    sectionMap: localParserSectionMap,
     uscToIna: new Map([["1101", { inaSection: "101", uscSection: "1101", hasEquivalent: true }], ["1153", { inaSection: "203", uscSection: "1153", hasEquivalent: true }], ["1161", full.corpus.inaCrosswalk.find(row => row.inaSection === "210A")], ["1182", { inaSection: "212", uscSection: "1182", hasEquivalent: true }], ["1185", { inaSection: "215", uscSection: "1185", hasEquivalent: true }], ["1255", { inaSection: "245", uscSection: "1255", hasEquivalent: true }]]),
     findKnownPrefix,
     resolveIndexedCompactStatutePath: compactPathApi.resolveIndexedCompactStatutePath,
@@ -1961,6 +2243,12 @@ async function main() {
     resolveKnownCitationPath: resolveKnownCitationPathForParser,
     canonicalPath: statutoryCanonicalPath,
     normCitationPart: statutoryNormPart,
+    normalize: searchNormalize,
+    statuteStatus,
+    transferTargetForSource,
+    transferRecord,
+    transferTargetUrl,
+    transferStatusMessage,
     inaMappedSection,
     inaSourceRecord,
     INA_SOURCE_URL,
@@ -1981,12 +2269,23 @@ async function main() {
   assert(noteOnlyIna404.valid && !noteOnlyIna404.section && noteOnlyIna404.record?.kind === "ina", "INA 404 incorrectly opens the unrelated local 8 U.S.C. 1101 operative text.");
   const noEquivalentIna401 = plain(parseLocalStatute("ina", "401"));
   assert(noEquivalentIna401.valid && !noEquivalentIna401.section && noEquivalentIna401.record?.kind === "ina", "INA 401 does not retain its authoritative source-only landing record.");
+  const parsedTransferred31 = plain(parseLocalStatute("usc", "31"));
+  assert(parsedTransferred31.valid && parsedTransferred31.label === "8 U.S.C. 31" && parsedTransferred31.dispositionTarget?.title === 52 && parsedTransferred31.dispositionTarget?.section === "10101", "The exact former citation 8 U.S.C. 31 does not resolve to its reviewed transfer destination.");
+  assert.strictEqual(parsedTransferred31.record?.key, `usc-transfer:${section31ForTransfer.id}:31`, "The transferred citation does not select its pre-indexed result record.");
+  const parsedTransferredParagraph = plain(parseLocalStatute("usc", "31(a)"));
+  assert(!parsedTransferredParagraph.valid && /does not contain/.test(parsedTransferredParagraph.message), "A nonexistent child paragraph under a transferred source was treated as locally navigable text.");
+  const parsedInternalTransfer = plain(parseLocalStatute("usc", "100"));
+  assert(parsedInternalTransfer.valid && parsedInternalTransfer.dispositionTarget?.title === 8 && parsedInternalTransfer.dispositionTarget?.section === "1551", "An internal Title 8 transfer does not resolve to its current section.");
+  const parsedTransferredNote = plain(parseLocalStatute("usc", "724a–1"));
+  assert(parsedTransferredNote.valid && parsedTransferredNote.dispositionTarget?.placement === "note" && parsedTransferredNote.dispositionTarget?.section === "1440", "A typographic-dash transferred note citation does not resolve to the indexed note destination.");
+  assert(parseLocalStatute("usc", "724a-1").valid, "The keyboard-hyphen spelling of transferred 8 U.S.C. 724a-1 is not recognized.");
   const inaTitleNumberFromBrowseInput = extractedFunction(fallbackSource, "inaTitleNumberFromBrowseInput", "parseIna", { String, Number, INA_TITLE_ROMAN });
   const parseIna = extractedFunction(fallbackSource, "parseIna", "parseCfr", {
     String,
     INA_SOURCE_URL,
     inaTitleGroups,
     inaTitleNumberFromBrowseInput,
+    statuteSectionFamilyResult,
     parseLocalStatute
   });
   const bareIna = parseIna("");
@@ -1998,10 +2297,15 @@ async function main() {
   assert(parseIna("203").valid && parseIna("203").mapping?.inaSection === "203" && !parseIna("203").level, "An exact INA section lost priority to title browsing.");
   assert(parseIna("0203").valid && parseIna("0203").mapping?.inaSection === "203", "Leading zeroes prevent navigation to an exact INA section.");
   assert(parseIna("210A").valid && parseIna("210A").mapping?.inaSection === "210A", "An alphanumeric INA section is intercepted by title browsing.");
+  const ina274Family = parseIna("274");
+  assert(ina274Family.valid && ina274Family.level === "section-family", "Bare INA 274 does not open its letter-suffixed section family.");
+  assert.deepStrictEqual(plain(ina274Family.rows.map(row => row.inaSection)), ["274", "274A", "274B", "274C", "274D"], "INA 274 does not include every separately numbered letter-suffixed section.");
+  assert.strictEqual(statuteSectionFamilyResult("ina", "274(a)"), null, "INA 274(a) was confused with the separate INA 274A section.");
   const parseCitationForImpliedUsc = extractedFunction(fallbackSource, "parseCitation", "pathStartsWith", {
     parseCfr: () => ({ type: "cfr" }),
     parseLocalStatute: (kind, raw) => ({ type: kind, recognized: true, valid: true, label: `8 U.S.C. ${raw}`, raw }),
     parseIna,
+    statuteSectionFamilyResult,
     parseAct: () => null
   });
   const impliedCompactUsc = plain(parseCitationForImpliedUsc("usc1101(a)(15)(H)"));
@@ -2011,6 +2315,10 @@ async function main() {
   assert.strictEqual(impliedPunctuatedUsc.raw, "1153(b)", "A punctuated titleless U.S.C. citation was not parsed as Title 8.");
   assert.strictEqual(parseCitationForImpliedUsc("USCIS Glossary"), null, "The Title 8 fallback incorrectly captures text beginning with USCIS.");
   assert.strictEqual(parseCitationForImpliedUsc("8 USC 1101").impliedUscTitle, undefined, "An explicit Title 8 citation was incorrectly marked as assumed.");
+  const usc1324Family = parseCitationForImpliedUsc("8 USC 1324");
+  assert(usc1324Family.valid && usc1324Family.level === "section-family", "Bare 8 U.S.C. 1324 does not open its letter-suffixed section family.");
+  assert.deepStrictEqual(plain(usc1324Family.sections.map(section => String(section.section).toLowerCase())), ["1324", "1324a", "1324b", "1324c", "1324d"], "8 U.S.C. 1324 does not include every separately numbered letter-suffixed section.");
+  assert.strictEqual(statuteSectionFamilyResult("usc", "1324(a)"), null, "8 U.S.C. 1324(a) was confused with the separate 8 U.S.C. 1324a section.");
   for (const raw of ["INA", "ina", "I.N.A."]) {
     const authorityResult = parseCitationForImpliedUsc(raw);
     assert(authorityResult?.valid && authorityResult.level === "authority" && authorityResult.titles.length === 5, `Flexible bare INA syntax did not open the title browser: ${raw}`);
@@ -2019,6 +2327,7 @@ async function main() {
     parseCfr,
     parseLocalStatute,
     parseIna,
+    statuteSectionFamilyResult,
     parseAct: () => null
   });
   const scopeSectionMap = new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section]));
@@ -2132,7 +2441,9 @@ async function main() {
   assert(searchFieldMarkup.indexOf('id="citationEquivalentIna"') < searchFieldMarkup.indexOf('class="citation-equivalent-arrow"') && searchFieldMarkup.indexOf('class="citation-equivalent-arrow"') < searchFieldMarkup.indexOf('id="citationEquivalentUsc"'), "The search crosswalk does not keep INA on the left and U.S.C. on the right.");
   assert((searchFieldMarkup.match(/<span aria-hidden="true">⧉<\/span>/g) || []).length === 2, "The search crosswalk does not provide one symbol-only copy control per citation.");
   assert(fallbackSource.includes('event.target.closest("[data-copy-citation]")') && fallbackSource.includes('event.target.closest("[data-citation-query]")'), "The search crosswalk does not separate copying from changing citation format.");
-  const citationCrosswalk = extractedFunction(fallbackSource, "citationCrosswalk", "inaCitationsFromText", {
+  const citationCrosswalkSource = fallbackSource.match(/function citationCrosswalk\(result\) \{[\s\S]*?\n    \}/)?.[0];
+  assert(citationCrosswalkSource, "Could not extract citationCrosswalk from the application source.");
+  const citationCrosswalk = vm.runInNewContext(`(${citationCrosswalkSource})`, {
     equivalentCitation: result => result.type === "ina"
       ? { system: "usc", label: "8 U.S.C. 1153(b)", query: "8 U.S.C. 1153(b)" }
       : { system: "ina", label: "INA 203(b)", query: "INA 203(b)" }
@@ -2319,6 +2630,7 @@ async function main() {
     scopedDefinitionMatches, renderSearchHighlightedText, escapeHtml: escapeStatutoryHtml,
     legalDefinitionEntriesById: legalDefinitionEntriesByIdForAnnotation,
     legalDefinitionScopesById: legalDefinitionScopesByIdForAnnotation,
+    definedTermHighlightingEnabled: () => true,
     Math, Number, String, JSON
   });
   const childFamilyDefinition = legalDefinitionEntriesForAnnotation.find(entry => entry.term.toLowerCase() === "child" && entry.citation === "INA 101(b)(1)");
@@ -2347,6 +2659,12 @@ async function main() {
   assert(!legalDefinitionApplies(cfrActDefinition, { kind: "cfr", title: "8", chapter: "V", path: [] }) && !legalDefinitionApplies(cfrActDefinition, { kind: "cfr", title: "22", chapter: "I", path: [] }), "An 8 CFR 1.2 definition leaked into another CFR chapter or title.");
   const scopedChildHtml = renderScopedDefinitionAnnotatedText("That child qualifies.", null, 0, undefined, nationalityContext);
   assert(scopedChildHtml.includes('class="scoped-defined-term"') && scopedChildHtml.includes(childNationalityDefinition.id) && !scopedChildHtml.includes(childFamilyDefinition.id), "Rendered definition annotation does not carry only the applicable definition record.");
+  const renderDefinedTermsDisabled = extractedFunction(fallbackSource, "renderScopedDefinitionAnnotatedText", "definitionFiltersForKind", {
+    scopedDefinitionMatches, renderSearchHighlightedText, escapeHtml: escapeStatutoryHtml,
+    definedTermHighlightingEnabled: () => false,
+    Math, Number, String, JSON
+  });
+  assert(!renderDefinedTermsDisabled("That child qualifies.", null, 0, undefined, nationalityContext).includes('class="scoped-defined-term"'), "Defined terms were highlighted while the experimental setting was disabled.");
   assert(!/href=|data-show-citation|data-definition-reference/.test(scopedChildHtml), "Clicking an annotated term can navigate directly instead of only opening its scoped preview.");
   assert(fallbackSource.includes('openDefinitionReference(query)') && fallbackSource.includes('id="scopedDefinitionPopoverJump"'), "The hover pane lacks its explicit Definitions-page jump control.");
   const houseFootnoteReferenceHtml = extractedFunction(fallbackSource, "houseFootnoteReferenceHtml", "linkifyStatutoryText", { escapeHtml: escapeStatutoryHtml, String });
@@ -2374,8 +2692,8 @@ async function main() {
   assert.strictEqual(statutoryLinkInaCitation({ family: "usc", targetTitle: "8", targetSection: "1153", targetPath: [], resolution: "unresolved" }), "", "An unresolved contextual reference was made to look like a precise INA citation.");
   assert.strictEqual(statutoryLinkInaCitation({ family: "ina", inaSection: "203", targetTitle: "8", targetSection: "1153", targetPath: ["b", "2"] }), "INA 203(b)(2)", "An explicit INA-family reference did not receive its full normalized INA label.");
   citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "usc";
-  const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
-  const scopedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches, renderScopedDefinitionAnnotatedText, houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
+  const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
+  const scopedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches, renderScopedDefinitionAnnotatedText, definedTermHighlightingEnabled: () => true, houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
   const specialImmigrantReferenceHtml = linkifyStatutoryText(specialImmigrantBlock.x, specialImmigrantActReferences);
   assert.strictEqual((specialImmigrantReferenceHtml.match(/data-legal-reference/g) || []).length, 2, "8 CFR 245.1(b)(4)(ii) does not render two independent statutory reference triggers.");
   assert(specialImmigrantReferenceHtml.includes('href="#usc-1101-a-27-h"') && specialImmigrantReferenceHtml.includes('href="#usc-1101-a-27-j"'), "The two special-immigrant alternatives do not navigate to their distinct local statutory units.");
@@ -2831,7 +3149,7 @@ async function main() {
   }
   assert.strictEqual(statutoryFormattingAudit.citationLinks + ancillaryCitationLinks, 15933, "Unexpected total generated-link count in displayed cached statutory material.");
 
-  const parseAssignedProfile = extractedFunction(fallbackSource, "assignedJsonObjectFromText", "validateStandaloneSource");
+  const parseAssignedProfile = extractedFunction(fallbackSource, "assignedJsonObjectFromText", "updateEmbeddedProfile");
   const migration = profileMigrationFunctions(fallbackSource);
   const tutorialProgress = tutorialProgressFunctions(fallbackSource);
   const completedProgress = {
@@ -2875,7 +3193,7 @@ async function main() {
   assert.throws(
     () => parseImportedProfile('<script src="AuthoritySearch-Profile.js"></script>'),
     /Select its AuthoritySearch-Profile\.js file instead/,
-    "Old three-file HTML did not explain where its progress is stored."
+    "Old three-file HTML did not explain where its saved data is stored."
   );
 
   const fixtureDirectory = path.join(root, "tools", "fixtures", "legacy-profiles");
@@ -2890,35 +3208,22 @@ async function main() {
 
   const comprehensive = importFixture("legacy-comprehensive-profile.js");
   assert.strictEqual(comprehensive.imported.profileId, "synthetic-legacy-comprehensive");
-  assert.strictEqual(Object.hasOwn(comprehensive.imported, "unlocks"), false, "Obsolete source-identification unlocks were retained.");
-  assert.strictEqual(comprehensive.imported.visaSummaryUnlocks.length, 2);
-  assert.strictEqual(comprehensive.imported.visaFactUnlocks.length, 2);
-  assert.deepStrictEqual(comprehensive.imported.visaChallengeLockouts.map(record => record.visaId), ["visa-a-1"], "Expired summary lockout was not removed.");
-  assert.deepStrictEqual(comprehensive.imported.visaFactChallengeLockouts.map(record => record.factId), ["visa-a-1:visa-row-001:cos"], "Expired fact lockout was not removed.");
-  assert.deepStrictEqual(comprehensive.imported.resourceChallengeLockouts, [], "A legacy profile without resource lockouts did not receive the new collection.");
-  assert.strictEqual(comprehensive.imported.schemaVersion, 2, "A legacy profile was not upgraded to notes schema v2.");
+  for (const field of retiredProfileFields) assert.strictEqual(Object.hasOwn(comprehensive.imported, field), false, `Legacy import retained ${field}.`);
+  assert.strictEqual(comprehensive.imported.schemaVersion, 3, "A legacy profile was not upgraded to saved-data schema v3.");
   assert.strictEqual(comprehensive.imported.notes.length, 4);
-  assert(comprehensive.imported.notes.every(note => !Object.hasOwn(note, "coursePlacement")), "Legacy course placements survived schema-v2 migration.");
-  assert.strictEqual(Object.hasOwn(comprehensive.imported, "courseStructure"), false, "Legacy course structure survived schema-v2 migration.");
+  assert(comprehensive.imported.notes.every(note => !Object.hasOwn(note, "coursePlacement")), "Legacy course placements survived schema-v3 migration.");
+  assert.strictEqual(Object.hasOwn(comprehensive.imported, "courseStructure"), false, "Legacy course structure survived schema-v3 migration.");
   assert.deepStrictEqual(comprehensive.imported.notes[0].tags, ["statutes", "day-note", "W2D4"]);
   assert.strictEqual(comprehensive.imported.notes[0].title, "", "A generated WNDM title was not replaced by its migration tag.");
   assert.deepStrictEqual(comprehensive.imported.notes[1].tags, ["module-note", "Block 2 — Synthetic Block Two", "Module 3 — Synthetic Module Three"]);
   assert.strictEqual(comprehensive.imported.notes[1].title, "", "A generated module title was not replaced by migration tags.");
-  assert.strictEqual(comprehensive.imported.notes[2].classificationNoteVisaId, "visa-h-1b");
+  assert.strictEqual(Object.hasOwn(comprehensive.imported.notes[2], "classificationNoteVisaId"), false, "A card-note identifier survived migration.");
+  assert(comprehensive.imported.notes[2].tags.includes("classification"), "A migrated card note lost its generic classification tag.");
+  assert(comprehensive.imported.notes[2].links.some(link => link.kind === "legacy" && link.label === "H-1B"), "A migrated card note lost its readable status label.");
   assert.strictEqual(comprehensive.imported.notes[2].body, "Classification note with parser-like text: }; and </script>, ampersand & Unicode — café 🚀.");
   assert.strictEqual(comprehensive.imported.notes[0].links.length, 2);
-  assert.deepStrictEqual(comprehensive.imported.preferences, { ...comprehensive.assigned.preferences, statutoryLinkCitationSystem: "usc", defaultStartupQuery: "INA 203b1a" });
-
-  const visaById = new Map(fullSource.visaCategories.map(visa => [visa.id, visa]));
-  const factById = new Map(fullSource.visaCategories.flatMap(visa => (visa.variants || []).flatMap(variant => variant.facts || [])).map(fact => [fact.id, fact]));
-  for (const record of comprehensive.imported.visaSummaryUnlocks) {
-    assert(visaById.has(record.visaId), `Synthetic summary unlock references missing visa ${record.visaId}.`);
-    assert.strictEqual(record.challengeRevision, visaById.get(record.visaId).summaryChallenge.revision, `Synthetic summary unlock revision is stale for ${record.visaId}.`);
-  }
-  for (const record of comprehensive.imported.visaFactUnlocks) {
-    assert(factById.has(record.factId), `Synthetic fact unlock references missing fact ${record.factId}.`);
-    assert.strictEqual(record.challengeRevision, factById.get(record.factId).challenge.revision, `Synthetic fact unlock revision is stale for ${record.factId}.`);
-  }
+  const { quizCursorKey: _retiredCursor, quizClassification: _retiredClassification, ...retainedComprehensivePreferences } = comprehensive.assigned.preferences;
+  assert.deepStrictEqual(comprehensive.imported.preferences, { ...retainedComprehensivePreferences, statutoryLinkCitationSystem: "usc", highlightDefinedTerms: false, automaticCfrUpdates: true, defaultStartupQuery: "INA 203b1a" });
   const embeddedComprehensive = replaceProfileOnly(full.html, comprehensive.imported);
   assert.deepStrictEqual(jsonBlock(embeddedComprehensive, "inaSearchProfileData"), comprehensive.imported, "Imported legacy data did not survive embedding in the standalone HTML.");
   const comprehensiveReload = await runBootstrap({ ...full, html: embeddedComprehensive, profile: comprehensive.imported });
@@ -2927,16 +3232,14 @@ async function main() {
   assert.deepStrictEqual(plain(parseImportedProfile(JSON.stringify(comprehensive.assigned))), comprehensive.imported, "Comprehensive JSON backup path differs from legacy JS import path.");
 
   const minimal = importFixture("legacy-minimal-profile.js");
-  assert.deepStrictEqual(minimal.imported.visaSummaryUnlocks, []);
-  assert.deepStrictEqual(minimal.imported.visaChallengeLockouts, []);
-  assert.deepStrictEqual(minimal.imported.visaFactUnlocks, []);
-  assert.deepStrictEqual(minimal.imported.visaFactChallengeLockouts, []);
-  assert.deepStrictEqual(minimal.imported.resourceChallengeLockouts, []);
+  for (const field of retiredProfileFields) assert.strictEqual(Object.hasOwn(minimal.imported, field), false, `Minimal legacy import retained ${field}.`);
   assert.strictEqual(Object.hasOwn(minimal.imported, "courseStructure"), false);
   assert.strictEqual(Object.hasOwn(minimal.imported.notes[0], "coursePlacement"), false);
-  assert.strictEqual(minimal.imported.preferences.quizCursorKey, null);
-  assert.strictEqual(minimal.imported.preferences.quizClassification, "all");
+  assert.strictEqual(Object.hasOwn(minimal.imported.preferences, "quizCursorKey"), false);
+  assert.strictEqual(Object.hasOwn(minimal.imported.preferences, "quizClassification"), false);
   assert.strictEqual(minimal.imported.preferences.statutoryLinkCitationSystem, "usc", "A legacy profile did not receive the safe U.S. Code citation-display default.");
+  assert.strictEqual(minimal.imported.preferences.highlightDefinedTerms, false, "A legacy profile did not receive the safe disabled defined-term-highlighting default.");
+  assert.strictEqual(minimal.imported.preferences.automaticCfrUpdates, true, "A legacy profile did not enable automatic CFR updates by default.");
   assert.strictEqual(minimal.imported.preferences.defaultStartupQuery, "INA 203b1a", "A legacy profile did not retain the historical startup citation.");
   assert.strictEqual(minimal.imported.notes[0].body, "Preserve this text.");
   const embeddedMinimal = replaceProfileOnly(full.html, minimal.imported);
@@ -2947,20 +3250,26 @@ async function main() {
   const normalized = importFixture("legacy-normalization-profile.js").imported;
   const explicitlyEmptyStartup = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, defaultStartupQuery: "" } }));
   assert.strictEqual(explicitlyEmptyStartup.preferences.defaultStartupQuery, "", "Profile normalization replaced an explicitly cleared startup citation.");
-  const normalizedResourceLockouts = plain(migration.normalizeProfile({
+  const localOnlyProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, automaticCfrUpdates: false } }));
+  assert.strictEqual(localOnlyProfile.preferences.automaticCfrUpdates, false, "Profile normalization did not retain the local-only update setting.");
+  const schemaTwoImport = plain(migration.normalizeProfile({
     ...blankProfile,
-    resourceChallengeLockouts: [
-      { questionId: "resource-active", revision: "1", lockedUntil: "2099-01-01T00:00:00.000Z" },
-      { questionId: "resource-expired", revision: "1", lockedUntil: "2000-01-01T00:00:00.000Z" }
-    ]
+    schemaVersion: 2,
+    visaSummaryUnlocks: [{ visaId: "legacy-record" }],
+    resourceChallengeLockouts: [{ questionId: "legacy-question" }],
+    preferences: { ...blankProfile.preferences, quizCursorKey: "legacy-cursor", quizClassification: "H" }
   }));
-  assert.deepStrictEqual(normalizedResourceLockouts.resourceChallengeLockouts.map(record => record.questionId), ["resource-active"], "Expired resource-question lockout was not removed during profile normalization.");
+  assert.strictEqual(schemaTwoImport.schemaVersion, 3, "A schema-v2 profile was not upgraded.");
+  for (const field of retiredProfileFields) assert.strictEqual(Object.hasOwn(schemaTwoImport, field), false, `Schema-v2 import retained ${field}.`);
+  assert.strictEqual(Object.hasOwn(schemaTwoImport.preferences, "quizCursorKey"), false);
+  assert.strictEqual(Object.hasOwn(schemaTwoImport.preferences, "quizClassification"), false);
   assert(normalized.notes.every(note => !Object.hasOwn(note, "coursePlacement")));
   assert.strictEqual(Object.hasOwn(normalized, "courseStructure"), false);
   assert.deepStrictEqual(normalized.notes[0].tags, ["W6D5"]);
   assert.strictEqual(normalized.notes[0].title, "String-number day", "A custom legacy note title was not preserved.");
-  assert.strictEqual(normalized.notes[1].classificationNoteVisaId, "visa-f-1");
-  assert.throws(() => parseImportedProfile('window.AUTHORITY_SEARCH_PROFILE = {"schemaVersion":3,"notes":[],"preferences":{}};'), /valid INASearch profile/, "Unsupported future profile schema was accepted.");
+  assert.strictEqual(Object.hasOwn(normalized.notes[1], "classificationNoteVisaId"), false);
+  assert(normalized.notes[1].tags.includes("classification") && normalized.notes[1].links.some(link => link.kind === "legacy" && link.label === "F-1"), "Normalized card note did not become an ordinary tagged note with a readable legacy item.");
+  assert.throws(() => parseImportedProfile('window.AUTHORITY_SEARCH_PROFILE = {"schemaVersion":4,"notes":[],"preferences":{}};'), /valid INASearch profile/, "Unsupported future profile schema was accepted.");
   assert.throws(() => parseImportedProfile('window.INA_SEARCH_PROFILE = {"schemaVersion":1,"notes":"not-an-array","preferences":{}};'), /valid INASearch profile/, "Malformed current notes collection was accepted.");
 
   console.log(`PASS INASearch.html: ${full.bytes} bytes; ${full.manifest.compressedBytes} gzip bytes`);
