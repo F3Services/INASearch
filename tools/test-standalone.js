@@ -427,7 +427,7 @@ async function main() {
   assert.deepStrictEqual(blankProfile.tutorialProgress, { schemaVersion: 1, modules: {} }, "Blank profiles must include optional, empty tutorial progress.");
   assert.strictEqual(blankProfile.preferences.statutoryLinkCitationSystem, "usc", "Blank profiles must default statutory link labels to the source U.S. Code wording.");
   assert.strictEqual(blankProfile.preferences.highlightDefinedTerms, false, "Blank profiles must disable experimental defined-term highlighting by default.");
-  assert.strictEqual(blankProfile.preferences.automaticCfrUpdates, true, "Blank profiles must enable automatic CFR updates by default.");
+  assert.strictEqual(blankProfile.preferences.automaticCfrUpdates, false, "Blank profiles must keep automatic CFR updates off by default.");
   assert.strictEqual(blankProfile.preferences.defaultStartupQuery, "", "Blank profiles must open without a startup citation by default.");
   assert.strictEqual(fs.existsSync(path.join(root, "INASearch-no-USC.html")), false, "The retired no-USC build still exists.");
   assert.strictEqual(fs.existsSync(path.join(root, "INASearch-AU.html")), false, "The retired all-unlocked build still exists.");
@@ -485,7 +485,7 @@ async function main() {
   assert(full.html.includes("Turn this off to move instantly to a requested citation without scrolling or sliding through the page."), "The citation-jump setting does not explain its immediate mode.");
   assert(/id="statuteSectionDisplaySelect"[\s\S]{0,500}<option value="hierarchy">Follow hierarchy button<\/option>[\s\S]{0,300}<option value="usc">U\.S\.C\.<\/option>[\s\S]{0,200}<option value="ina">INA<\/option>[\s\S]{0,200}<option value="both">Both<\/option>/.test(full.html), "The statute Section-display setting is missing one or more modes.");
   assert(/class="settings-info-button"[^>]*aria-describedby="automaticCfrUpdatesHelp"/.test(full.html), "The automatic CFR update setting is missing its compact information control.");
-  assert(full.html.includes("Turn this off for a local-only workflow") && full.html.includes("INASearch makes no network requests"), "The automatic CFR update information does not explain local-only mode.");
+  assert(full.html.includes("Off by default") && full.html.includes("Turn this on") && full.html.includes("INASearch makes no network requests"), "The automatic CFR update information does not explain its opt-in, local-only default.");
   assert(/id="tutorialHubModal" hidden/.test(full.html), "The tutorial hub is not closed at startup.");
   assert(/id="tutorialCoach"[^>]*aria-modal="false"[^>]*hidden/.test(full.html), "The nonmodal tutorial coach is not closed at startup.");
   assert(/id="tutorialMenuButton"[^>]*aria-describedby="tutorialStartPromptText"[\s\S]{0,700}id="tutorialStartPromptTitle">New to INASearch\?[\s\S]{0,250}id="tutorialStartPromptBody">Start with the basic tutorial here\.[\s\S]{0,250}id="tutorialStartPromptClose"[^>]*aria-label="Dismiss Quick Start message"/.test(full.html), "An unfinished Quick Start does not display a large, dismissible message pointing to the tutorial button.");
@@ -3572,6 +3572,11 @@ async function main() {
   automaticHierarchyProfile.preferences.automaticStatutoryNavigationSystem = true;
   automaticHierarchyState.navigationQueryInProgress = true;
   assert.strictEqual(applyAutomaticStatuteHierarchyAuthority({ type: "usc" }), false, "A navigation-generated query is incorrectly treated as a citation typed by the user.");
+  const automaticCfrProfile = { preferences: {} };
+  const automaticCfrUpdatesEnabled = extractedFunction(fallbackSource, "automaticCfrUpdatesEnabled", "setAutomaticCfrUpdates", { profile: automaticCfrProfile });
+  assert.strictEqual(automaticCfrUpdatesEnabled(), false, "A profile without an explicit CFR-update opt-in enables network maintenance.");
+  automaticCfrProfile.preferences.automaticCfrUpdates = true;
+  assert.strictEqual(automaticCfrUpdatesEnabled(), true, "An explicit CFR-update opt-in was ignored.");
   assert(fallbackSource.includes("data-hierarchy-expand") && fallbackSource.includes("data-hierarchy-expand-all") && fallbackSource.includes("data-hierarchy-collapse-all"), "Hierarchy pages lack distinct row expansion and page-level expansion controls.");
   assert(/\.workspace\.authority-browse \.result-list\s*\{[^}]*max-height:\s*none;[^}]*overflow:\s*visible/.test(fallbackSource), "Authority indexes still use a nested scroll pane.");
   assert.deepStrictEqual(plain(statuteNavigation.statuteSiblingNodes(section1101, ["a", "15"]).map(node => node.label)), plain(statuteNavigation.statuteNodeAtPath(section1101, ["a"]).children.map(node => node.label)), "Nested dropdown choices are not derived from the shared parent node.");
@@ -3913,7 +3918,7 @@ async function main() {
     statuteNavigationDepth: 8,
     cfrNavigationDepth: 6,
     highlightDefinedTerms: false,
-    automaticCfrUpdates: true,
+    automaticCfrUpdates: false,
     defaultStartupQuery: ""
   });
   const embeddedComprehensive = replaceProfileOnly(full.html, comprehensive.imported);
@@ -3939,7 +3944,7 @@ async function main() {
   assert.strictEqual(minimal.imported.preferences.statuteNavigationDepth, 8, "A legacy profile did not default to the smallest statutory unit.");
   assert.strictEqual(minimal.imported.preferences.cfrNavigationDepth, 6, "A legacy profile did not default to the smallest regulatory unit.");
   assert.strictEqual(minimal.imported.preferences.highlightDefinedTerms, false, "A legacy profile did not receive the safe disabled defined-term-highlighting default.");
-  assert.strictEqual(minimal.imported.preferences.automaticCfrUpdates, true, "A legacy profile did not enable automatic CFR updates by default.");
+  assert.strictEqual(minimal.imported.preferences.automaticCfrUpdates, false, "A legacy profile did not receive the disabled automatic-CFR-update default.");
   assert.strictEqual(minimal.imported.preferences.defaultStartupQuery, "", "A legacy profile without an explicit startup preference did not receive the blank default.");
   assert.strictEqual(minimal.imported.notes[0].body, "Preserve this text.");
   const embeddedMinimal = replaceProfileOnly(full.html, minimal.imported);
@@ -3954,6 +3959,8 @@ async function main() {
   assert.strictEqual(explicitlyConfiguredStartup.preferences.defaultStartupQuery, "INA 245", "Profile normalization discarded an explicitly configured startup citation.");
   const localOnlyProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, automaticCfrUpdates: false } }));
   assert.strictEqual(localOnlyProfile.preferences.automaticCfrUpdates, false, "Profile normalization did not retain the local-only update setting.");
+  const automaticUpdateProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, automaticCfrUpdates: true } }));
+  assert.strictEqual(automaticUpdateProfile.preferences.automaticCfrUpdates, true, "Profile normalization did not retain an explicit automatic-update opt-in.");
   const instantCitationJumpProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, animatedCitationJumps: false } }));
   assert.strictEqual(instantCitationJumpProfile.preferences.animatedCitationJumps, false, "Profile normalization did not retain disabled citation-jump animation.");
   const manualStatuteHierarchyProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, automaticStatutoryNavigationSystem: false } }));
