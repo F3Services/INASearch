@@ -27,6 +27,6 @@ window.INA_SEARCH_PROFILE = {
     "statutoryLinkCitationSystem": "usc",
     "highlightDefinedTerms": false,
     "automaticCfrUpdates": true,
-    "defaultStartupQuery": "INA 203b1a"
+    "defaultStartupQuery": ""
   }
 };
