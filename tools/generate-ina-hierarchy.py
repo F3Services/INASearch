@@ -4,11 +4,9 @@
 from __future__ import annotations
 
 import argparse
-import datetime as dt
 import hashlib
 import json
 import re
-import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -16,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS_PATH = ROOT / "src" / "INASearch-Corpus.js"
 OUTPUT_PATH = ROOT / "src" / "INASearch-INA-Hierarchy.js"
+MANIFEST_PATH = ROOT / "sources" / "legal" / "source-manifest.json"
 USLM_URL = "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml"
 DETAIL_URL = "https://www.govinfo.gov/app/details/COMPS-1376"
 INA_SOURCE_URL = "https://www.uscis.gov/legal-resources/immigration-and-nationality-act"
@@ -233,12 +232,24 @@ def build_hierarchy(xml_bytes: bytes, corpus: dict, captured_on: str) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", type=Path, help="Use a previously downloaded GovInfo USLM file")
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    govinfo_artifact = next(
+        artifact
+        for source in manifest["sources"]
+        for artifact in source.get("artifacts", [])
+        if artifact["id"] == "govinfo-comps-1376"
+    )
+    captured_source = ROOT / govinfo_artifact["path"]
+    parser.add_argument("--input", type=Path, default=captured_source, help="Captured GovInfo USLM file")
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
-    parser.add_argument("--capture-date", default=dt.date.today().isoformat())
+    parser.add_argument("--capture-date", default=manifest["capturedAt"])
     args = parser.parse_args()
-    xml_bytes = args.input.read_bytes() if args.input else urllib.request.urlopen(USLM_URL, timeout=60).read()
+    xml_bytes = args.input.read_bytes()
+    if args.input.resolve() == captured_source.resolve():
+        if len(xml_bytes) != govinfo_artifact["bytes"] or hashlib.sha256(xml_bytes).hexdigest() != govinfo_artifact["sha256"]:
+            raise ValueError("Captured GovInfo COMPS-1376 failed its manifest integrity check")
     hierarchy = build_hierarchy(xml_bytes, assigned_object(CORPUS_PATH), args.capture_date)
+    hierarchy["source"]["sourceArtifact"] = govinfo_artifact["path"]
     source = "window.INA_SEARCH_INA_HIERARCHY = " + json.dumps(hierarchy, indent=2, ensure_ascii=False) + ";\n"
     args.output.write_text(source, encoding="utf-8")
     chapter_count = sum(len(title["chapters"]) for title in hierarchy["titles"])

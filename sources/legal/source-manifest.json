@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-21",
+  "sources": [
+    {
+      "id": "house-title-8-uslm",
+      "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
+      "releasePoint": "119-102",
+      "currentThroughPublicLaw": "119-102",
+      "requestedUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
+      "finalUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
+      "lastModified": null,
+      "etag": null,
+      "artifacts": [
+        {
+          "id": "house-title-8-archive",
+          "role": "downloaded-archive",
+          "path": "sources/legal/raw/xml_usc08@119-102.zip",
+          "mediaType": "application/zip",
+          "bytes": 1232042,
+          "sha256": "2b5c6462f6bf9ef0494da0b99fb7455b29ad5ef875de93dd90da7b5973b07420"
+        },
+        {
+          "id": "house-title-8-xml",
+          "role": "extracted-uslm",
+          "path": "sources/legal/raw/usc08@119-102.xml",
+          "mediaType": "application/xml",
+          "bytes": 7384424,
+          "sha256": "69aaee9cc14dfd006daf6127ac0ffa5753af35f2e99cac56b4c84d7916e16fca"
+        }
+      ]
+    },
+    {
+      "id": "govinfo-ina-compilation",
+      "publisher": "U.S. Government Publishing Office",
+      "packageId": "COMPS-1376",
+      "requestedUrl": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml",
+      "finalUrl": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml",
+      "lastModified": "Fri, 23 Jan 2026 12:13:48 GMT",
+      "etag": null,
+      "artifacts": [
+        {
+          "id": "govinfo-comps-1376",
+          "role": "downloaded-uslm",
+          "path": "sources/legal/raw/COMPS-1376.xml",
+          "mediaType": "application/xml",
+          "bytes": 3368964,
+          "sha256": "b9ec47d7fa2897ceba296501aff7f33bb8d8c7f228488984e9df9d8e95e35c54"
+        }
+      ]
+    },
+    {
+      "id": "uscis-ina-crosswalk",
+      "publisher": "U.S. Citizenship and Immigration Services",
+      "requestedUrl": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
+      "finalUrl": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
+      "lastModified": "Fri, 21 Aug 2026 11:26:38 GMT",
+      "etag": "\"1787311598\"",
+      "artifacts": [
+        {
+          "id": "uscis-ina-crosswalk-html",
+          "role": "downloaded-html",
+          "path": "sources/legal/raw/uscis-ina-crosswalk.html",
+          "mediaType": "text/html",
+          "bytes": 122984,
+          "sha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005"
+        }
+      ]
+    }
+  ]
+}

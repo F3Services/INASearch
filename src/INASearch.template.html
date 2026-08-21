@@ -24,6 +24,9 @@
   <!-- INA_SEARCH_CORPUS_PACKING_RUNTIME_START -->
   <script id="inaSearchCorpusPackingRuntime"></script>
   <!-- INA_SEARCH_CORPUS_PACKING_RUNTIME_END -->
+  <!-- INA_SEARCH_LEGAL_REFERENCES_RUNTIME_START -->
+  <script id="inaSearchLegalReferencesRuntime"></script>
+  <!-- INA_SEARCH_LEGAL_REFERENCES_RUNTIME_END -->
   <!-- INA_SEARCH_UPDATER_RUNTIME_START -->
   <script id="inaSearchUpdaterRuntime"></script>
   <!-- INA_SEARCH_UPDATER_RUNTIME_END -->
@@ -1888,9 +1891,9 @@
       const legalTargets = value?.legalReferencePacking?.legalTargets || [];
       const properties = { t: "references", h: "headingReferences", p: "preambleReferences", s: "sourceCreditReferences", x: "xReferences", a: "authorityReferences", o: "sourceReferences" };
       const fields = { t: "text", h: "heading", p: "preamble", s: "sourceCredit", x: "x", a: "authority", o: "source" };
-      const keys = { i: "id", s: "start", e: "end", x: "text", f: "family", r: "resolution", k: "targetKind", t: "targetTitle", n: "targetSection", a: "targetPath", c: "targetCongress", l: "targetLaw", v: "targetVolume", g: "targetPage", h: "houseHref", u: "officialUrl", p: "provenance", q: "ruleId", z: "sourceKind", d: "inaSection" };
+      const keys = { i: "id", s: "start", e: "end", x: "text", f: "family", r: "resolution", k: "targetKind", t: "targetTitle", n: "targetSection", a: "targetPath", c: "targetCongress", l: "targetLaw", v: "targetVolume", g: "targetPage", h: "houseHref", u: "officialUrl", p: "provenance", q: "ruleId", z: "sourceKind", d: "inaSection", y: "policyScopeId" };
       const families = { u: "usc", i: "ina", c: "cfr", p: "public-law", s: "statutes-at-large", f: "federal-register", "?": "unknown" };
-      const rules = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent", "context-cfr-ina-act-section"];
+      const rules = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-cfr-the-act", "ambiguous-antecedent", "context-cfr-ina-act-section"];
       const visit = item => {
         if (!item || typeof item !== "object") return;
         if (Array.isArray(item)) { item.forEach(visit); return; }
@@ -1909,7 +1912,7 @@
                 const packedTarget = legalTargets[reference[3]] || [];
                 const target = typeof packedTarget === "string" ? packedTarget.split("|") : packedTarget;
                 if (typeof target[4] === "string") target[4] = target[4] ? target[4].split("/") : [];
-                Object.assign(expanded, { start, end, family: families[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: rules[Number(target[9] || 0)] || "", inaSection: target[10] || "" });
+                Object.assign(expanded, { start, end, family: families[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: rules[Number(target[9] || 0)] || "", inaSection: target[10] || "", policyScopeId: target[11] || "" });
               }
               else for (const [key, child] of Object.entries(reference)) expanded[keys[key] || key] = child;
               previousEnd = expanded.end;
@@ -1926,7 +1929,7 @@
                 else if ((match = expanded.houseHref.match(/^\/us\/stat\/([^/]+)\/([^/]+)(?:\/(.*))?$/))) Object.assign(expanded, { family: "statutes-at-large", targetKind: "statutes-at-large", targetVolume: match[1], targetPage: match[2], targetPath: match[3] ? match[3].split("/").filter(Boolean) : [], officialUrl: `https://www.govinfo.gov/app/details/STATUTE-${match[1]}/STATUTE-${match[1]}-Pg${match[2]}` });
                 else if (/^\/us\/act\//.test(expanded.houseHref)) Object.assign(expanded, { family: "public-law", targetKind: "act", targetPath: expanded.houseHref.split("/").filter(Boolean).slice(2), officialUrl: `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(expanded.text || "")}%22%7D` });
               } else {
-                expanded.provenance = String(expanded.ruleId || "").startsWith("context-") || expanded.ruleId === "ambiguous-antecedent" ? "deterministic-context" : "deterministic-parser";
+                expanded.provenance = expanded.ruleId === "context-cfr-the-act" ? "reviewed-semantic-policy" : String(expanded.ruleId || "").startsWith("context-") || expanded.ruleId === "ambiguous-antecedent" ? "deterministic-context" : "deterministic-parser";
                 expanded.targetKind = expanded.family === "ina" && expanded.resolution !== "local" ? "ina" : expanded.family;
                 if (expanded.family === "usc" && expanded.targetSection) expanded.officialUrl = houseSectionUrl(expanded.targetSection, expanded.targetTitle);
                 else if (expanded.family === "cfr" && expanded.targetSection) expanded.officialUrl = `https://www.ecfr.gov/current/title-${encodeURIComponent(expanded.targetTitle)}/part-${encodeURIComponent(String(expanded.targetSection).split(".")[0])}/section-${encodeURIComponent(expanded.targetSection)}`;
@@ -2411,6 +2414,11 @@
         const aliases = new Set([normCitationPart(target.source), transferSourceKey(target.source)]);
         for (const alias of aliases) if (alias && !sectionMap.has(alias)) sectionMap.set(alias, section);
       }
+    }
+    for (const row of corpus?.inaCrosswalk || []) {
+      if (!row.uscSection || !row.localSection) continue;
+      const local = sectionMap.get(normCitationPart(row.localSection));
+      if (local) sectionMap.set(normCitationPart(row.uscSection), local);
     }
     const cfrSectionMap = new Map((corpus?.cfr?.sections || []).map(section => [`${section.title}:${normCitationPart(section.section)}`, section]));
     const cfrSectionIdMap = new Map((corpus?.cfr?.sections || []).map(section => [section.id, section]));
@@ -3717,7 +3725,7 @@
 
     function inaMappedSection(row) {
       if (!row || row.isNote || !row.hasEquivalent || !row.uscSection) return null;
-      return sectionMap.get(normCitationPart(row.uscSection)) || null;
+      return sectionMap.get(normCitationPart(row.localSection || row.uscSection)) || null;
     }
 
     function inaSourceRecord(row) {
@@ -4376,7 +4384,7 @@
         const section = kind === "ina" ? inaMappedSection(mapping) : sectionMap.get(key);
         let path = componentTokens(rest);
         if (path === null) path = compactHierarchyTokens(rest);
-        const baseLabel = kind === "ina" ? `INA ${mapping?.inaSection || key}` : `8 U.S.C. ${section?.section || key}`;
+        const baseLabel = kind === "ina" ? `INA ${mapping?.inaSection || key}` : `8 U.S.C. ${uscToIna.get(key)?.uscSection || section?.section || key}`;
         const label = `${baseLabel}${canonicalPath(section ? path : [])}`;
         const officialUrl = section ? officialTextFragment(section.url || houseSectionUrl(section.section), path) : INA_SOURCE_URL;
         const record = section ? {
@@ -4414,7 +4422,7 @@
       const outcome = findKnownPrefix(raw, values, (key, rest) => {
         const mapping = kind === "ina" ? inaMap.get(key) : null;
         const section = kind === "ina" ? inaMappedSection(mapping) : sectionMap.get(key);
-        const baseLabel = kind === "ina" ? `INA ${mapping?.inaSection || key}` : `8 U.S.C. ${section?.section || key}`;
+        const baseLabel = kind === "ina" ? `INA ${mapping?.inaSection || key}` : `8 U.S.C. ${uscToIna.get(key)?.uscSection || section?.section || key}`;
         if (!section) {
           return {
             type: kind, recognized: true, valid: Boolean(mapping && !rest), externallyVerifiable: true,
@@ -4454,7 +4462,7 @@
         const knownResolution = !indexedResolution && !structuralResolution.valid ? resolveKnownCitationPath(kind, authoritySection, rest) : null;
         const resolution = indexedResolution || knownResolution || structuralResolution;
         const cite = `${baseLabel}${canonicalPath(resolution.path)}`;
-        const inaRow = kind === "ina" ? mapping : uscToIna.get(normCitationPart(section.section));
+        const inaRow = kind === "ina" ? mapping : uscToIna.get(key) || uscToIna.get(normCitationPart(section.section));
         const record = {
           key: `usc:${section.id}`, kind: "usc", group: kind === "ina" ? "ina" : "statutes", cite,
           title: section.heading || `Section ${section.section}`, item: section
@@ -5214,7 +5222,7 @@
       if (left.authority === "ina") {
         ordered = (corpus?.inaCrosswalk || []).map(row => ({
           authoritySection: String(row.inaSection),
-          id: sectionMap.get(normCitationPart(row.uscSection))?.id
+          id: sectionMap.get(normCitationPart(row.localSection || row.uscSection))?.id
         })).filter(item => item.id);
       } else if (left.authority === "usc") {
         ordered = (corpus?.title8?.sections || []).map(section => ({ authoritySection: String(section.section), id: section.id }));
@@ -6022,7 +6030,7 @@
       let text = "";
       let previewHtml = "";
       if (resolution === "local" && (family === "usc" || family === "ina")) {
-        const section = (corpus?.title8?.sections || []).find(item => String(item.section) === String(sectionNumber));
+        const section = sectionMap.get(normCitationPart(sectionNumber));
         text = statuteUnitText(section, path);
         previewHtml = statuteReferencePreviewHtml(section, path);
       } else if (resolution === "local" && family === "cfr") {
@@ -7525,7 +7533,7 @@
         applyNavigationQuery(`${section.title} CFR ${section.section}${canonicalPath(path)}`, displayQuery);
         return true;
       }
-      const section = (corpus?.title8?.sections || []).find(item => String(item.section) === sectionNumber);
+      const section = sectionMap.get(normCitationPart(sectionNumber));
       if (!section) return false;
       recordExplicitStatuteMove(section.id, path, "usc");
       applyNavigationQuery(`${title || 8} U.S.C. ${section.section}${canonicalPath(path)}`, displayQuery);

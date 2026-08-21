@@ -321,7 +321,7 @@ function deriveInaCatalog(corpus, definitionSource) {
   }
 
   for (const mapping of mappings) {
-    const section = sectionsByUsc.get(String(mapping.uscSection));
+    const section = sectionsByUsc.get(String(mapping.localSection || mapping.uscSection));
     if (section) walk(section, mapping, section.body);
   }
 

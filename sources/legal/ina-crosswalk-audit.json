@@ -1,0 +1,1693 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-21",
+  "crosswalkRows": 183,
+  "counts": {
+    "govinfo-direct-mapping": 161,
+    "govinfo-repealed-toc-house-codification": 10,
+    "govinfo-direct-malformed-source-normalized": 1,
+    "house-former-section-codification": 3,
+    "govinfo-direct-dash-normalized": 1,
+    "govinfo-no-equivalent": 3,
+    "govinfo-note-mapping": 4
+  },
+  "sources": {
+    "uscis": {
+      "path": "sources/legal/raw/uscis-ina-crosswalk.html",
+      "bytes": 122984,
+      "sha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005"
+    },
+    "govinfo": {
+      "path": "sources/legal/raw/COMPS-1376.xml",
+      "bytes": 3368964,
+      "sha256": "b9ec47d7fa2897ceba296501aff7f33bb8d8c7f228488984e9df9d8e95e35c54"
+    },
+    "house": {
+      "path": "sources/legal/raw/usc08@119-102.xml",
+      "bytes": 7384424,
+      "sha256": "69aaee9cc14dfd006daf6127ac0ffa5753af35f2e99cac56b4c84d7916e16fca"
+    }
+  },
+  "rows": [
+    {
+      "inaSection": "101",
+      "uscLabel": "8 U.S.C. 1101",
+      "localSection": "1101",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1101"
+      }
+    },
+    {
+      "inaSection": "102",
+      "uscLabel": "8 U.S.C. 1102",
+      "localSection": "1102",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1102"
+      }
+    },
+    {
+      "inaSection": "103",
+      "uscLabel": "8 U.S.C. 1103",
+      "localSection": "1103",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1103"
+      }
+    },
+    {
+      "inaSection": "104",
+      "uscLabel": "8 U.S.C. 1104",
+      "localSection": "1104",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1104"
+      }
+    },
+    {
+      "inaSection": "105",
+      "uscLabel": "8 U.S.C. 1105",
+      "localSection": "1105",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1105"
+      }
+    },
+    {
+      "inaSection": "106",
+      "uscLabel": "8 U.S.C. 1105a",
+      "localSection": "1105a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1105a"
+      }
+    },
+    {
+      "inaSection": "201",
+      "uscLabel": "8 U.S.C. 1151",
+      "localSection": "1151",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1151"
+      }
+    },
+    {
+      "inaSection": "202",
+      "uscLabel": "8 U.S.C. 1152",
+      "localSection": "1152",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1152"
+      }
+    },
+    {
+      "inaSection": "203",
+      "uscLabel": "8 U.S.C. 1153",
+      "localSection": "1153",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1153"
+      }
+    },
+    {
+      "inaSection": "204",
+      "uscLabel": "8 U.S.C. 1154",
+      "localSection": "1154",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1154"
+      }
+    },
+    {
+      "inaSection": "205",
+      "uscLabel": "8 U.S.C. 1155",
+      "localSection": "1155",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1155"
+      }
+    },
+    {
+      "inaSection": "206",
+      "uscLabel": "8 U.S.C. 1156",
+      "localSection": "1156",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1156"
+      }
+    },
+    {
+      "inaSection": "207",
+      "uscLabel": "8 U.S.C. 1157",
+      "localSection": "1157",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1157"
+      }
+    },
+    {
+      "inaSection": "208",
+      "uscLabel": "8 U.S.C. 1158",
+      "localSection": "1158",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1158"
+      }
+    },
+    {
+      "inaSection": "209",
+      "uscLabel": "8 U.S.C. 1159",
+      "localSection": "1159",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1159"
+      }
+    },
+    {
+      "inaSection": "210",
+      "uscLabel": "8 U.S.C. 1160",
+      "localSection": "1160",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1160"
+      }
+    },
+    {
+      "inaSection": "210A",
+      "uscLabel": "8 U.S.C. 1161",
+      "localSection": "1161",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1161"
+      }
+    },
+    {
+      "inaSection": "211",
+      "uscLabel": "8 U.S.C. 1181",
+      "localSection": "1181",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1181"
+      }
+    },
+    {
+      "inaSection": "212",
+      "uscLabel": "8 U.S.C. 1182",
+      "localSection": "1182",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1182"
+      }
+    },
+    {
+      "inaSection": "213",
+      "uscLabel": "8 U.S.C. 1183",
+      "localSection": "1183",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1183"
+      }
+    },
+    {
+      "inaSection": "213A",
+      "uscLabel": "8 U.S.C. 1183a",
+      "localSection": "1183a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1183a"
+      }
+    },
+    {
+      "inaSection": "214",
+      "uscLabel": "8 U.S.C. 1184",
+      "localSection": "1184",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1184"
+      }
+    },
+    {
+      "inaSection": "215",
+      "uscLabel": "8 U.S.C. 1185",
+      "localSection": "1185",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1185"
+      }
+    },
+    {
+      "inaSection": "216",
+      "uscLabel": "8 U.S.C. 1186a",
+      "localSection": "1186a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1186a"
+      }
+    },
+    {
+      "inaSection": "216A",
+      "uscLabel": "8 U.S.C. 1186b",
+      "localSection": "1186b",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1186b"
+      }
+    },
+    {
+      "inaSection": "217",
+      "uscLabel": "8 U.S.C. 1187",
+      "localSection": "1187",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1187"
+      }
+    },
+    {
+      "inaSection": "218",
+      "uscLabel": "8 U.S.C. 1188",
+      "localSection": "1188",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1188"
+      }
+    },
+    {
+      "inaSection": "219",
+      "uscLabel": "8 U.S.C. 1189",
+      "localSection": "1189",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1189"
+      }
+    },
+    {
+      "inaSection": "221",
+      "uscLabel": "8 U.S.C. 1201",
+      "localSection": "1201",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1201"
+      }
+    },
+    {
+      "inaSection": "222",
+      "uscLabel": "8 U.S.C. 1202",
+      "localSection": "1202",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1202"
+      }
+    },
+    {
+      "inaSection": "223",
+      "uscLabel": "8 U.S.C. 1203",
+      "localSection": "1203",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1203"
+      }
+    },
+    {
+      "inaSection": "224",
+      "uscLabel": "8 U.S.C. 1204",
+      "localSection": "1204",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1204"
+      }
+    },
+    {
+      "inaSection": "231",
+      "uscLabel": "8 U.S.C. 1221",
+      "localSection": "1221",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1221"
+      }
+    },
+    {
+      "inaSection": "232",
+      "uscLabel": "8 U.S.C. 1222",
+      "localSection": "1222",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1222"
+      }
+    },
+    {
+      "inaSection": "233",
+      "uscLabel": "8 U.S.C. 1223",
+      "localSection": "1223",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1223"
+      }
+    },
+    {
+      "inaSection": "234",
+      "uscLabel": "8 U.S.C. 1224",
+      "localSection": "1224",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1224"
+      }
+    },
+    {
+      "inaSection": "235",
+      "uscLabel": "8 U.S.C. 1225",
+      "localSection": "1225",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1225"
+      }
+    },
+    {
+      "inaSection": "235A",
+      "uscLabel": "8 U.S.C. 1225a",
+      "localSection": "1225a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1225a"
+      }
+    },
+    {
+      "inaSection": "236",
+      "uscLabel": "8 U.S.C. 1226",
+      "localSection": "1226",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1226"
+      }
+    },
+    {
+      "inaSection": "236A",
+      "uscLabel": "8 U.S.C. 1226a",
+      "localSection": "1226a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1226a"
+      }
+    },
+    {
+      "inaSection": "237",
+      "uscLabel": "8 U.S.C. 1227",
+      "localSection": "1227",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1227"
+      }
+    },
+    {
+      "inaSection": "238",
+      "uscLabel": "8 U.S.C. 1228",
+      "localSection": "1228",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1228"
+      }
+    },
+    {
+      "inaSection": "239",
+      "uscLabel": "8 U.S.C. 1229",
+      "localSection": "1229",
+      "outcome": "govinfo-direct-malformed-source-normalized",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1229"
+      }
+    },
+    {
+      "inaSection": "240",
+      "uscLabel": "8 U.S.C. 1229a",
+      "localSection": "1229a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1229a"
+      }
+    },
+    {
+      "inaSection": "240A",
+      "uscLabel": "8 U.S.C. 1229b",
+      "localSection": "1229b",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1229b"
+      }
+    },
+    {
+      "inaSection": "240B",
+      "uscLabel": "8 U.S.C. 1229c",
+      "localSection": "1229c",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1229c"
+      }
+    },
+    {
+      "inaSection": "240C",
+      "uscLabel": "8 U.S.C. 1230",
+      "localSection": "1230",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1230"
+      }
+    },
+    {
+      "inaSection": "241",
+      "uscLabel": "8 U.S.C. 1231",
+      "localSection": "1231",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1231"
+      }
+    },
+    {
+      "inaSection": "242",
+      "uscLabel": "8 U.S.C. 1252",
+      "localSection": "1252",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1252"
+      }
+    },
+    {
+      "inaSection": "242A",
+      "uscLabel": "8 U.S.C. 1252a",
+      "localSection": "1252a",
+      "outcome": "house-former-section-codification",
+      "evidence": {
+        "houseLocalSection": "1252a",
+        "proofPattern": "title\\s+II,\\s+ch\\.\\s*5,\\s*§\\s*242A"
+      }
+    },
+    {
+      "inaSection": "242B",
+      "uscLabel": "8 U.S.C. 1252b",
+      "localSection": "1252b",
+      "outcome": "house-former-section-codification",
+      "evidence": {
+        "houseLocalSection": "1252b",
+        "proofPattern": "title\\s+II,\\s+ch\\.\\s*5,\\s*§\\s*242B"
+      }
+    },
+    {
+      "inaSection": "243",
+      "uscLabel": "8 U.S.C. 1253",
+      "localSection": "1253",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1253"
+      }
+    },
+    {
+      "inaSection": "244",
+      "uscLabel": "8 U.S.C. 1254a",
+      "localSection": "1254a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1254a"
+      }
+    },
+    {
+      "inaSection": "245",
+      "uscLabel": "8 U.S.C. 1255",
+      "localSection": "1255",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1255"
+      }
+    },
+    {
+      "inaSection": "245A",
+      "uscLabel": "8 U.S.C. 1255a",
+      "localSection": "1255a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1255a"
+      }
+    },
+    {
+      "inaSection": "246",
+      "uscLabel": "8 U.S.C. 1256",
+      "localSection": "1256",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1256"
+      }
+    },
+    {
+      "inaSection": "247",
+      "uscLabel": "8 U.S.C. 1257",
+      "localSection": "1257",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1257"
+      }
+    },
+    {
+      "inaSection": "248",
+      "uscLabel": "8 U.S.C. 1258",
+      "localSection": "1258",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1258"
+      }
+    },
+    {
+      "inaSection": "249",
+      "uscLabel": "8 U.S.C. 1259",
+      "localSection": "1259",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1259"
+      }
+    },
+    {
+      "inaSection": "250",
+      "uscLabel": "8 U.S.C. 1260",
+      "localSection": "1260",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1260"
+      }
+    },
+    {
+      "inaSection": "251",
+      "uscLabel": "8 U.S.C. 1281",
+      "localSection": "1281",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1281"
+      }
+    },
+    {
+      "inaSection": "252",
+      "uscLabel": "8 U.S.C. 1282",
+      "localSection": "1282",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1282"
+      }
+    },
+    {
+      "inaSection": "253",
+      "uscLabel": "8 U.S.C. 1283",
+      "localSection": "1283",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1283"
+      }
+    },
+    {
+      "inaSection": "254",
+      "uscLabel": "8 U.S.C. 1284",
+      "localSection": "1284",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1284"
+      }
+    },
+    {
+      "inaSection": "255",
+      "uscLabel": "8 U.S.C. 1285",
+      "localSection": "1285",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1285"
+      }
+    },
+    {
+      "inaSection": "256",
+      "uscLabel": "8 U.S.C. 1286",
+      "localSection": "1286",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1286"
+      }
+    },
+    {
+      "inaSection": "257",
+      "uscLabel": "8 U.S.C. 1287",
+      "localSection": "1287",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1287"
+      }
+    },
+    {
+      "inaSection": "258",
+      "uscLabel": "8 U.S.C. 1288",
+      "localSection": "1288",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1288"
+      }
+    },
+    {
+      "inaSection": "261",
+      "uscLabel": "8 U.S.C. 1301",
+      "localSection": "1301",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1301"
+      }
+    },
+    {
+      "inaSection": "262",
+      "uscLabel": "8 U.S.C. 1302",
+      "localSection": "1302",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1302"
+      }
+    },
+    {
+      "inaSection": "263",
+      "uscLabel": "8 U.S.C. 1303",
+      "localSection": "1303",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1303"
+      }
+    },
+    {
+      "inaSection": "264",
+      "uscLabel": "8 U.S.C. 1304",
+      "localSection": "1304",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1304"
+      }
+    },
+    {
+      "inaSection": "265",
+      "uscLabel": "8 U.S.C. 1305",
+      "localSection": "1305",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1305"
+      }
+    },
+    {
+      "inaSection": "266",
+      "uscLabel": "8 U.S.C. 1306",
+      "localSection": "1306",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1306"
+      }
+    },
+    {
+      "inaSection": "271",
+      "uscLabel": "8 U.S.C. 1321",
+      "localSection": "1321",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1321"
+      }
+    },
+    {
+      "inaSection": "272",
+      "uscLabel": "8 U.S.C. 1322",
+      "localSection": "1322",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1322"
+      }
+    },
+    {
+      "inaSection": "273",
+      "uscLabel": "8 U.S.C. 1323",
+      "localSection": "1323",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1323"
+      }
+    },
+    {
+      "inaSection": "274",
+      "uscLabel": "8 U.S.C. 1324",
+      "localSection": "1324",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1324"
+      }
+    },
+    {
+      "inaSection": "274A",
+      "uscLabel": "8 U.S.C. 1324a",
+      "localSection": "1324a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1324a"
+      }
+    },
+    {
+      "inaSection": "274B",
+      "uscLabel": "8 U.S.C. 1324b",
+      "localSection": "1324b",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1324b"
+      }
+    },
+    {
+      "inaSection": "274C",
+      "uscLabel": "8 U.S.C. 1324c",
+      "localSection": "1324c",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1324c"
+      }
+    },
+    {
+      "inaSection": "274D",
+      "uscLabel": "8 U.S.C. 1324d",
+      "localSection": "1324d",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1324d"
+      }
+    },
+    {
+      "inaSection": "275",
+      "uscLabel": "8 U.S.C. 1325",
+      "localSection": "1325",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1325"
+      }
+    },
+    {
+      "inaSection": "276",
+      "uscLabel": "8 U.S.C. 1326",
+      "localSection": "1326",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1326"
+      }
+    },
+    {
+      "inaSection": "277",
+      "uscLabel": "8 U.S.C. 1327",
+      "localSection": "1327",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1327"
+      }
+    },
+    {
+      "inaSection": "278",
+      "uscLabel": "8 U.S.C. 1328",
+      "localSection": "1328",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1328"
+      }
+    },
+    {
+      "inaSection": "279",
+      "uscLabel": "8 U.S.C. 1329",
+      "localSection": "1329",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1329"
+      }
+    },
+    {
+      "inaSection": "280",
+      "uscLabel": "8 U.S.C. 1330",
+      "localSection": "1330",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1330"
+      }
+    },
+    {
+      "inaSection": "281",
+      "uscLabel": "8 U.S.C. 1351",
+      "localSection": "1351",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1351"
+      }
+    },
+    {
+      "inaSection": "282",
+      "uscLabel": "8 U.S.C. 1352",
+      "localSection": "1352",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1352"
+      }
+    },
+    {
+      "inaSection": "283",
+      "uscLabel": "8 U.S.C. 1353",
+      "localSection": "1353",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1353"
+      }
+    },
+    {
+      "inaSection": "284",
+      "uscLabel": "8 U.S.C. 1354",
+      "localSection": "1354",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1354"
+      }
+    },
+    {
+      "inaSection": "285",
+      "uscLabel": "8 U.S.C. 1355",
+      "localSection": "1355",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1355"
+      }
+    },
+    {
+      "inaSection": "286",
+      "uscLabel": "8 U.S.C. 1356",
+      "localSection": "1356",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1356"
+      }
+    },
+    {
+      "inaSection": "287",
+      "uscLabel": "8 U.S.C. 1357",
+      "localSection": "1357",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1357"
+      }
+    },
+    {
+      "inaSection": "288",
+      "uscLabel": "8 U.S.C. 1358",
+      "localSection": "1358",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1358"
+      }
+    },
+    {
+      "inaSection": "289",
+      "uscLabel": "8 U.S.C. 1359",
+      "localSection": "1359",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1359"
+      }
+    },
+    {
+      "inaSection": "290",
+      "uscLabel": "8 U.S.C. 1360",
+      "localSection": "1360",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1360"
+      }
+    },
+    {
+      "inaSection": "291",
+      "uscLabel": "8 U.S.C. 1361",
+      "localSection": "1361",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1361"
+      }
+    },
+    {
+      "inaSection": "292",
+      "uscLabel": "8 U.S.C. 1362",
+      "localSection": "1362",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1362"
+      }
+    },
+    {
+      "inaSection": "293",
+      "uscLabel": "8 U.S.C. 1363",
+      "localSection": "1363",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1363"
+      }
+    },
+    {
+      "inaSection": "294",
+      "uscLabel": "8 U.S.C. 1363a",
+      "localSection": "1363a",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1363a"
+      }
+    },
+    {
+      "inaSection": "295",
+      "uscLabel": "8 U.S.C. 1363b",
+      "localSection": "1363b",
+      "outcome": "house-former-section-codification",
+      "evidence": {
+        "houseLocalSection": "1363b",
+        "proofPattern": "title\\s+II,\\s+ch\\.\\s*9,\\s*§\\s*295"
+      }
+    },
+    {
+      "inaSection": "301",
+      "uscLabel": "8 U.S.C. 1401",
+      "localSection": "1401",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1401"
+      }
+    },
+    {
+      "inaSection": "302",
+      "uscLabel": "8 U.S.C. 1402",
+      "localSection": "1402",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1402"
+      }
+    },
+    {
+      "inaSection": "303",
+      "uscLabel": "8 U.S.C. 1403",
+      "localSection": "1403",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1403"
+      }
+    },
+    {
+      "inaSection": "304",
+      "uscLabel": "8 U.S.C. 1404",
+      "localSection": "1404",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1404"
+      }
+    },
+    {
+      "inaSection": "305",
+      "uscLabel": "8 U.S.C. 1405",
+      "localSection": "1405",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1405"
+      }
+    },
+    {
+      "inaSection": "306",
+      "uscLabel": "8 U.S.C. 1406",
+      "localSection": "1406",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1406"
+      }
+    },
+    {
+      "inaSection": "307",
+      "uscLabel": "8 U.S.C. 1407",
+      "localSection": "1407",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1407"
+      }
+    },
+    {
+      "inaSection": "308",
+      "uscLabel": "8 U.S.C. 1408",
+      "localSection": "1408",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1408"
+      }
+    },
+    {
+      "inaSection": "309",
+      "uscLabel": "8 U.S.C. 1409",
+      "localSection": "1409",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1409"
+      }
+    },
+    {
+      "inaSection": "310",
+      "uscLabel": "8 U.S.C. 1421",
+      "localSection": "1421",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1421"
+      }
+    },
+    {
+      "inaSection": "311",
+      "uscLabel": "8 U.S.C. 1422",
+      "localSection": "1422",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1422"
+      }
+    },
+    {
+      "inaSection": "312",
+      "uscLabel": "8 U.S.C. 1423",
+      "localSection": "1423",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1423"
+      }
+    },
+    {
+      "inaSection": "313",
+      "uscLabel": "8 U.S.C. 1424",
+      "localSection": "1424",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1424"
+      }
+    },
+    {
+      "inaSection": "314",
+      "uscLabel": "8 U.S.C. 1425",
+      "localSection": "1425",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1425"
+      }
+    },
+    {
+      "inaSection": "315",
+      "uscLabel": "8 U.S.C. 1426",
+      "localSection": "1426",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1426"
+      }
+    },
+    {
+      "inaSection": "316",
+      "uscLabel": "8 U.S.C. 1427",
+      "localSection": "1427",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1427"
+      }
+    },
+    {
+      "inaSection": "317",
+      "uscLabel": "8 U.S.C. 1428",
+      "localSection": "1428",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1428"
+      }
+    },
+    {
+      "inaSection": "318",
+      "uscLabel": "8 U.S.C. 1429",
+      "localSection": "1429",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1429"
+      }
+    },
+    {
+      "inaSection": "319",
+      "uscLabel": "8 U.S.C. 1430",
+      "localSection": "1430",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1430"
+      }
+    },
+    {
+      "inaSection": "320",
+      "uscLabel": "8 U.S.C. 1431",
+      "localSection": "1431",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1431"
+      }
+    },
+    {
+      "inaSection": "321",
+      "uscLabel": "8 U.S.C. 1432",
+      "localSection": "1432",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1432"
+      }
+    },
+    {
+      "inaSection": "322",
+      "uscLabel": "8 U.S.C. 1433",
+      "localSection": "1433",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1433"
+      }
+    },
+    {
+      "inaSection": "323",
+      "uscLabel": "8 U.S.C. 1434",
+      "localSection": "1434",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1434"
+      }
+    },
+    {
+      "inaSection": "324",
+      "uscLabel": "8 U.S.C. 1435",
+      "localSection": "1435",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1435"
+      }
+    },
+    {
+      "inaSection": "325",
+      "uscLabel": "8 U.S.C. 1436",
+      "localSection": "1436",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1436"
+      }
+    },
+    {
+      "inaSection": "326",
+      "uscLabel": "8 U.S.C. 1437",
+      "localSection": "1437",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1437"
+      }
+    },
+    {
+      "inaSection": "327",
+      "uscLabel": "8 U.S.C. 1438",
+      "localSection": "1438",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1438"
+      }
+    },
+    {
+      "inaSection": "328",
+      "uscLabel": "8 U.S.C. 1439",
+      "localSection": "1439",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1439"
+      }
+    },
+    {
+      "inaSection": "329",
+      "uscLabel": "8 U.S.C. 1440",
+      "localSection": "1440",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1440"
+      }
+    },
+    {
+      "inaSection": "329A",
+      "uscLabel": "8 U.S.C. 1440-1",
+      "localSection": "1440–1",
+      "outcome": "govinfo-direct-dash-normalized",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1440-1"
+      }
+    },
+    {
+      "inaSection": "330",
+      "uscLabel": "8 U.S.C. 1441",
+      "localSection": "1441",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1441"
+      }
+    },
+    {
+      "inaSection": "331",
+      "uscLabel": "8 U.S.C. 1442",
+      "localSection": "1442",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1442"
+      }
+    },
+    {
+      "inaSection": "332",
+      "uscLabel": "8 U.S.C. 1443",
+      "localSection": "1443",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1443"
+      }
+    },
+    {
+      "inaSection": "333",
+      "uscLabel": "8 U.S.C. 1444",
+      "localSection": "1444",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1444"
+      }
+    },
+    {
+      "inaSection": "334",
+      "uscLabel": "8 U.S.C. 1445",
+      "localSection": "1445",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1445"
+      }
+    },
+    {
+      "inaSection": "335",
+      "uscLabel": "8 U.S.C. 1446",
+      "localSection": "1446",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1446"
+      }
+    },
+    {
+      "inaSection": "336",
+      "uscLabel": "8 U.S.C. 1447",
+      "localSection": "1447",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1447"
+      }
+    },
+    {
+      "inaSection": "337",
+      "uscLabel": "8 U.S.C. 1448",
+      "localSection": "1448",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1448"
+      }
+    },
+    {
+      "inaSection": "338",
+      "uscLabel": "8 U.S.C. 1449",
+      "localSection": "1449",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1449"
+      }
+    },
+    {
+      "inaSection": "339",
+      "uscLabel": "8 U.S.C. 1450",
+      "localSection": "1450",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1450"
+      }
+    },
+    {
+      "inaSection": "340",
+      "uscLabel": "8 U.S.C. 1451",
+      "localSection": "1451",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1451"
+      }
+    },
+    {
+      "inaSection": "341",
+      "uscLabel": "8 U.S.C. 1452",
+      "localSection": "1452",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1452"
+      }
+    },
+    {
+      "inaSection": "342",
+      "uscLabel": "8 U.S.C. 1453",
+      "localSection": "1453",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1453"
+      }
+    },
+    {
+      "inaSection": "343",
+      "uscLabel": "8 U.S.C. 1454",
+      "localSection": "1454",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1454"
+      }
+    },
+    {
+      "inaSection": "344",
+      "uscLabel": "8 U.S.C. 1455",
+      "localSection": "1455",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1455"
+      }
+    },
+    {
+      "inaSection": "345",
+      "uscLabel": "8 U.S.C. 1456",
+      "localSection": "1456",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1456"
+      }
+    },
+    {
+      "inaSection": "346",
+      "uscLabel": "8 U.S.C. 1457",
+      "localSection": "1457",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1457"
+      }
+    },
+    {
+      "inaSection": "347",
+      "uscLabel": "8 U.S.C. 1458",
+      "localSection": "1458",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1458"
+      }
+    },
+    {
+      "inaSection": "348",
+      "uscLabel": "8 U.S.C. 1459",
+      "localSection": "1459",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1459"
+      }
+    },
+    {
+      "inaSection": "349",
+      "uscLabel": "8 U.S.C. 1481",
+      "localSection": "1481",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1481"
+      }
+    },
+    {
+      "inaSection": "350",
+      "uscLabel": "8 U.S.C. 1482",
+      "localSection": "1482",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1482"
+      }
+    },
+    {
+      "inaSection": "351",
+      "uscLabel": "8 U.S.C. 1483",
+      "localSection": "1483",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1483"
+      }
+    },
+    {
+      "inaSection": "352",
+      "uscLabel": "8 U.S.C. 1484",
+      "localSection": "1484 to 1487",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1484 to 1487"
+      }
+    },
+    {
+      "inaSection": "353",
+      "uscLabel": "8 U.S.C. 1485",
+      "localSection": "1484 to 1487",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1484 to 1487"
+      }
+    },
+    {
+      "inaSection": "354",
+      "uscLabel": "8 U.S.C. 1486",
+      "localSection": "1484 to 1487",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1484 to 1487"
+      }
+    },
+    {
+      "inaSection": "355",
+      "uscLabel": "8 U.S.C. 1487",
+      "localSection": "1484 to 1487",
+      "outcome": "govinfo-repealed-toc-house-codification",
+      "evidence": {
+        "govinfoToc": "Repealed",
+        "houseLocalSection": "1484 to 1487"
+      }
+    },
+    {
+      "inaSection": "356",
+      "uscLabel": "8 U.S.C. 1488",
+      "localSection": "1488",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1488"
+      }
+    },
+    {
+      "inaSection": "357",
+      "uscLabel": "8 U.S.C. 1489",
+      "localSection": "1489",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1489"
+      }
+    },
+    {
+      "inaSection": "358",
+      "uscLabel": "8 U.S.C. 1501",
+      "localSection": "1501",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1501"
+      }
+    },
+    {
+      "inaSection": "359",
+      "uscLabel": "8 U.S.C. 1502",
+      "localSection": "1502",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1502"
+      }
+    },
+    {
+      "inaSection": "360",
+      "uscLabel": "8 U.S.C. 1503",
+      "localSection": "1503",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1503"
+      }
+    },
+    {
+      "inaSection": "361",
+      "uscLabel": "8 U.S.C. 1504",
+      "localSection": "1504",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1504"
+      }
+    },
+    {
+      "inaSection": "401",
+      "uscLabel": "No equivalent",
+      "localSection": "",
+      "outcome": "govinfo-no-equivalent",
+      "evidence": {
+        "govinfoToc": "Repealed"
+      }
+    },
+    {
+      "inaSection": "402",
+      "uscLabel": "No equivalent",
+      "localSection": "",
+      "outcome": "govinfo-no-equivalent",
+      "evidence": {
+        "govinfoToc": "Amendments to other laws"
+      }
+    },
+    {
+      "inaSection": "403",
+      "uscLabel": "No equivalent",
+      "localSection": "",
+      "outcome": "govinfo-no-equivalent",
+      "evidence": {
+        "govinfoToc": "Laws repealed"
+      }
+    },
+    {
+      "inaSection": "404",
+      "uscLabel": "8 U.S.C. 1101, note",
+      "localSection": "",
+      "outcome": "govinfo-note-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1101, note"
+      }
+    },
+    {
+      "inaSection": "405",
+      "uscLabel": "8 U.S.C. 1101, note",
+      "localSection": "",
+      "outcome": "govinfo-note-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1101, note"
+      }
+    },
+    {
+      "inaSection": "406",
+      "uscLabel": "8 U.S.C. 1101, note",
+      "localSection": "",
+      "outcome": "govinfo-note-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1101, note"
+      }
+    },
+    {
+      "inaSection": "407",
+      "uscLabel": "8 U.S.C. 1101, note",
+      "localSection": "",
+      "outcome": "govinfo-note-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1101, note"
+      }
+    },
+    {
+      "inaSection": "411",
+      "uscLabel": "8 U.S.C. 1521",
+      "localSection": "1521",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1521"
+      }
+    },
+    {
+      "inaSection": "412",
+      "uscLabel": "8 U.S.C. 1522",
+      "localSection": "1522",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1522"
+      }
+    },
+    {
+      "inaSection": "413",
+      "uscLabel": "8 U.S.C. 1523",
+      "localSection": "1523",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1523"
+      }
+    },
+    {
+      "inaSection": "414",
+      "uscLabel": "8 U.S.C. 1524",
+      "localSection": "1524",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1524"
+      }
+    },
+    {
+      "inaSection": "501",
+      "uscLabel": "8 U.S.C. 1531",
+      "localSection": "1531",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1531"
+      }
+    },
+    {
+      "inaSection": "502",
+      "uscLabel": "8 U.S.C. 1532",
+      "localSection": "1532",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1532"
+      }
+    },
+    {
+      "inaSection": "503",
+      "uscLabel": "8 U.S.C. 1533",
+      "localSection": "1533",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1533"
+      }
+    },
+    {
+      "inaSection": "504",
+      "uscLabel": "8 U.S.C. 1534",
+      "localSection": "1534",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1534"
+      }
+    },
+    {
+      "inaSection": "505",
+      "uscLabel": "8 U.S.C. 1535",
+      "localSection": "1535",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1535"
+      }
+    },
+    {
+      "inaSection": "506",
+      "uscLabel": "8 U.S.C. 1536",
+      "localSection": "1536",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1536"
+      }
+    },
+    {
+      "inaSection": "507",
+      "uscLabel": "8 U.S.C. 1537",
+      "localSection": "1537",
+      "outcome": "govinfo-direct-mapping",
+      "evidence": {
+        "govinfoLocator": "8 U.S.C. 1537"
+      }
+    }
+  ]
+}
