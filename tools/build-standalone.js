@@ -180,9 +180,11 @@ function makeBuild(template, corpus, profile, options) {
 let template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
 template = replaceRuntimeBlock(template, "STORAGE", "inaSearchStorageRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Storage.js"), "utf8"));
 template = replaceRuntimeBlock(template, "CORPUS_PACKING", "inaSearchCorpusPackingRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Corpus-Packing.js"), "utf8"));
+template = replaceRuntimeBlock(template, "LEGAL_REFERENCES", "inaSearchLegalReferencesRuntime", fs.readFileSync(path.join(root, "tools", "legal-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "UPDATER", "inaSearchUpdaterRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Updater.js"), "utf8"));
 const fullCorpus = readAssignedObject("INASearch-Corpus.js", "INA_SEARCH_CORPUS");
 fullCorpus.inaHierarchy = readAssignedObject("INASearch-INA-Hierarchy.js", "INA_SEARCH_INA_HIERARCHY");
+fullCorpus.legalReferencePolicy = readAssignedObject("INASearch-Legal-Reference-Policy.js", "INA_SEARCH_LEGAL_REFERENCE_POLICY");
 const statuteFootnoteSource = readAssignedObject("INASearch-Statute-Footnotes.js", "INA_SEARCH_STATUTE_FOOTNOTES");
 applyStatuteFootnotes(fullCorpus, statuteFootnoteSource);
 fullCorpus.cfr = readAssignedObject("INASearch-CFR.js", "INA_SEARCH_CFR");

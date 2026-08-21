@@ -5,11 +5,12 @@ window.INA_SEARCH_INA_HIERARCHY = {
     "publisher": "GovInfo / U.S. Government Publishing Office",
     "url": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml",
     "detailUrl": "https://www.govinfo.gov/app/details/COMPS-1376",
-    "captureDate": "2026-08-15",
+    "captureDate": "2026-08-21",
     "processedDate": "2026-01-23",
     "currentThroughPublicLaw": "119–21",
     "bytes": 3368964,
-    "sha256": "b9ec47d7fa2897ceba296501aff7f33bb8d8c7f228488984e9df9d8e95e35c54"
+    "sha256": "b9ec47d7fa2897ceba296501aff7f33bb8d8c7f228488984e9df9d8e95e35c54",
+    "sourceArtifact": "sources/legal/raw/COMPS-1376.xml"
   },
   "crosswalkSourceUrl": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
   "titles": [
@@ -1602,7 +1603,7 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Repealed",
       "titleId": "ina:title:III",
       "chapterId": "ina:title:III:chapter:3",
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1485&num=0&edition=prelim"
     },
     {
       "id": "ina:section:354",
@@ -1610,7 +1611,7 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Repealed",
       "titleId": "ina:title:III",
       "chapterId": "ina:title:III:chapter:3",
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1486&num=0&edition=prelim"
     },
     {
       "id": "ina:section:355",
@@ -1618,7 +1619,7 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Repealed",
       "titleId": "ina:title:III",
       "chapterId": "ina:title:III:chapter:3",
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1487&num=0&edition=prelim"
     },
     {
       "id": "ina:section:356",

@@ -4,7 +4,10 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
   "corpusSchemaVersion": 3,
   "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
   "sourceReleasePoint": "119-102",
-  "capturedAt": "2026-08-02",
+  "capturedAt": "2026-08-21",
+  "sourceArtifact": "sources/legal/raw/usc08@119-102.xml",
+  "sourceBytes": 7384424,
+  "sourceSha256": "69aaee9cc14dfd006daf6127ac0ffa5753af35f2e99cac56b4c84d7916e16fca",
   "extraction": {
     "footnotes": 118,
     "references": 118,

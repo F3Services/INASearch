@@ -1,6 +1,13 @@
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  if (root) root.INASearchLegalReferences = Object.freeze(api);
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
 "use strict";
 
-const { referenceProperty } = require("./statute-references");
+function referenceProperty(field) {
+  return field === "text" || field === "x" ? (field === "x" ? "xReferences" : "references") : `${field}References`;
+}
 
 const LEVELS = ["subsection", "paragraph", "subparagraph", "clause", "subclause", "item", "subitem"];
 
@@ -72,18 +79,73 @@ function localCfrTarget(context, title, section, path) {
   return !path.length || context.cfrPaths?.has(`${title}:${section}:${path.join("/")}`) || false;
 }
 
-// These parts define “Act” as the INA; other CFR contexts must spell out the INA's name.
-const INA_ACT_CFR_SCOPES = new Set([
-  "20:655", "20:656",
-  "22:40", "22:41", "22:42",
-  "29:501", "29:502", "29:503",
-  "45:400"
-]);
+function cfrHierarchyNumber(record, kind) {
+  return String((record?.hierarchy || []).find(item => item.type === kind)?.number || "");
+}
+
+function cfrPartNumber(record) {
+  return String(record?.part || cfrHierarchyNumber(record, "part") || String(record?.partId || "").split(":").at(-1) || "");
+}
+
+function cfrChapterNumber(record) {
+  return String(record?.chapter || cfrHierarchyNumber(record, "chapter") || "");
+}
+
+function policyScopeMatches(scope, context) {
+  const match = scope?.match || {};
+  if (String(match.title || "") !== String(context.title || "")) return false;
+  if (match.chapter && String(match.chapter) !== String(context.chapter || "")) return false;
+  if (Array.isArray(match.parts) && !match.parts.map(String).includes(String(context.part || ""))) return false;
+  return Boolean(match.chapter || match.parts?.length);
+}
 
 function cfrContextUsesInaAct(context) {
   if (context.kind !== "cfr") return false;
-  if (String(context.title || "") === "8") return true;
-  return INA_ACT_CFR_SCOPES.has(`${context.title}:${context.part}`);
+  return (context.legalReferencePolicy?.scopes || []).some(scope => policyScopeMatches(scope, context));
+}
+
+function cfrRecordText(record) {
+  const values = [record?.heading || ""];
+  const visit = blocks => {
+    for (const block of blocks || []) {
+      if (block.x) values.push(block.x);
+      if (block.t === "table") {
+        for (const row of block.rows || []) for (const cell of row || []) if (cell?.x) values.push(cell.x);
+      }
+      if (block.blocks) visit(block.blocks);
+    }
+  };
+  visit(record?.blocks);
+  return values.join("\n");
+}
+
+function validateLegalReferencePolicy(corpus) {
+  const policy = corpus?.legalReferencePolicy;
+  if (!policy) return { schemaVersion: 1, scopes: 0 };
+  if (policy.schemaVersion !== 1 || !policy.reviewedAt || !Array.isArray(policy.scopes) || !policy.scopes.length) {
+    throw new Error("The legal-reference policy is missing its reviewed schema metadata.");
+  }
+  const sections = new Map((corpus.cfr?.sections || []).map(section => [section.id, section]));
+  const records = [...(corpus.cfr?.sections || []), ...(corpus.cfr?.appendices || [])];
+  const ids = new Set();
+  for (const scope of policy.scopes) {
+    if (!scope?.id || ids.has(scope.id)) throw new Error(`Duplicate or missing legal-reference policy scope id ${scope?.id || "(missing)"}.`);
+    ids.add(scope.id);
+    const basis = scope.basis || {};
+    if (!basis.citation || !basis.sectionId || !basis.excerpt || !/^https:\/\//.test(basis.sourceUrl || "")) {
+      throw new Error(`Legal-reference policy scope ${scope.id} lacks complete source provenance.`);
+    }
+    const source = sections.get(basis.sectionId);
+    if (!source) throw new Error(`Legal-reference policy source ${basis.sectionId} does not exist.`);
+    if (!cfrRecordText(source).includes(basis.excerpt)) {
+      throw new Error(`Legal-reference policy excerpt for ${scope.id} is not exact source text.`);
+    }
+    const covered = records.filter(record => policyScopeMatches(scope, {
+      title: String(record.title || ""), part: cfrPartNumber(record), chapter: cfrChapterNumber(record)
+    }));
+    if (!covered.length) throw new Error(`Legal-reference policy scope ${scope.id} covers no CFR records.`);
+  }
+  return { schemaVersion: policy.schemaVersion, scopes: policy.scopes.length, reviewedAt: policy.reviewedAt };
 }
 
 function inaReferenceTarget(context, inaSection, targetPath) {
@@ -305,13 +367,15 @@ function contextualReferenceCandidates(text, context) {
       provenance: "deterministic-context", ruleId: "ambiguous-antecedent"
     });
   }
-  if (context.kind === "cfr" && targetTitle === "8") {
-    for (const match of input.matchAll(/\bthe Act\b/g)) {
+  if (context.kind === "cfr" && cfrContextUsesInaAct(context)) {
+    for (const match of input.matchAll(/\bthe Act\b/gi)) {
+      if (/^\s+(?:of|entitled|approved|known\s+as|called)\b/i.test(input.slice(match.index + match[0].length))) continue;
       results.push({
-        id: makeId(context, match.index, "context-title8-cfr-the-act"), start: match.index, end: match.index + match[0].length, text: match[0],
+        id: makeId(context, match.index, "context-cfr-the-act"), start: match.index, end: match.index + match[0].length, text: match[0],
         family: "ina", targetKind: "ina", targetTitle: "8", targetSection: "", targetPath: [], resolution: "official-source-only",
         officialUrl: "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        provenance: "deterministic-context", ruleId: "context-title8-cfr-the-act"
+        provenance: "reviewed-semantic-policy", ruleId: "context-cfr-the-act",
+        policyScopeId: (context.legalReferencePolicy?.scopes || []).find(scope => policyScopeMatches(scope, context))?.id || ""
       });
     }
   }
@@ -332,12 +396,23 @@ function generatedReferences(text, context, existing = []) {
 }
 
 function legalReferenceContext(corpus) {
+  validateLegalReferencePolicy(corpus);
   const uscSections = new Map((corpus.title8?.sections || []).map(section => [`8:${section.section}`, section]));
+  const uscAliases = new Map();
+  for (const row of corpus.inaCrosswalk || []) {
+    if (!row.uscSection || !row.localSection) continue;
+    const record = uscSections.get(`8:${row.localSection}`);
+    if (!record) throw new Error(`INA ${row.inaSection} local section ${row.localSection} does not exist.`);
+    uscSections.set(`8:${row.uscSection}`, record);
+    if (!uscAliases.has(String(record.section))) uscAliases.set(String(record.section), new Set());
+    uscAliases.get(String(record.section)).add(String(row.uscSection));
+  }
   const uscPaths = new Set();
   function walkUsc(section, nodes, path = []) {
     for (const node of nodes || []) {
       const nodePath = [...path, String(node.label)];
       uscPaths.add(`${section}:${nodePath.join("/")}`);
+      for (const alias of uscAliases.get(String(section)) || []) uscPaths.add(`${alias}:${nodePath.join("/")}`);
       walkUsc(section, node.children, nodePath);
     }
   }
@@ -358,7 +433,7 @@ function legalReferenceContext(corpus) {
   };
   for (const section of corpus.cfr?.sections || []) collectCfr(section);
   const inaMap = new Map((corpus.inaCrosswalk || []).map(row => [String(row.inaSection || "").toLowerCase(), row]));
-  return { uscSections, uscPaths, cfrSections, cfrPaths, inaMap };
+  return { uscSections, uscPaths, cfrSections, cfrPaths, inaMap, legalReferencePolicy: corpus.legalReferencePolicy || null };
 }
 
 function applyGeneratedLegalReferences(corpus) {
@@ -393,7 +468,7 @@ function applyGeneratedLegalReferences(corpus) {
   const attachCfrBlocks = (section, blocks, pathPrefix = []) => {
     (blocks || []).forEach((block, index) => {
       const path = pathTokens(block.a || block.u?.at(-1)?.a || "");
-      const context = { kind: "cfr", title: String(section.title), part: String(section.partId || "").split(":").at(-1), section: String(section.section || ""), path, sourceId: `cfr-${section.id}-${[...pathPrefix, index].join("-")}`, suppressSelfReferences: true };
+      const context = { kind: "cfr", title: String(section.title), part: cfrPartNumber(section), chapter: cfrChapterNumber(section), section: String(section.section || ""), path, sourceId: `cfr-${section.id}-${[...pathPrefix, index].join("-")}`, suppressSelfReferences: true };
       attach(block, "x", context);
       if (block.t === "table") {
         (block.rows || []).forEach((row, rowIndex) => row.forEach((cell, cellIndex) => attach(cell, "x", { ...context, sourceId: `${context.sourceId}-cell-${rowIndex}-${cellIndex}` })));
@@ -402,11 +477,12 @@ function applyGeneratedLegalReferences(corpus) {
     });
   };
   for (const section of [...(corpus.cfr?.sections || []), ...(corpus.cfr?.appendices || [])]) {
-    attach(section, "heading", { kind: "cfr", title: String(section.title), part: String(section.partId || "").split(":").at(-1), section: String(section.section || ""), path: [], sourceId: `cfr-${section.id}-heading`, suppressSelfReferences: true, ...shared });
+    attach(section, "heading", { kind: "cfr", title: String(section.title), part: cfrPartNumber(section), chapter: cfrChapterNumber(section), section: String(section.section || ""), path: [], sourceId: `cfr-${section.id}-heading`, suppressSelfReferences: true, ...shared });
     attachCfrBlocks(section, section.blocks);
   }
   for (const part of corpus.cfr?.parts || []) {
-    const context = { kind: "cfr", title: String(part.title), part: String(part.part || part.id || "").split(":").at(-1), section: "", path: [], sourceId: `cfr-part-${part.id}` };
+    const context = { kind: "cfr", title: String(part.title), part: cfrPartNumber(part), chapter: cfrChapterNumber(part), section: "", path: [], sourceId: `cfr-part-${part.id}` };
+    attach(part, "heading", context);
     attach(part, "authority", context);
     attach(part, "source", context);
   }
@@ -418,16 +494,80 @@ function applyGeneratedLegalReferences(corpus) {
     suppressedSelfReferencesByFamily: referenceAudit.suppressedByFamily,
     generatedAtBuild: true,
     runtimeNetworkForPreviews: false,
-    rules: ["house-uslm-ref", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-cfr-ina-act-section", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent"]
+    policySchemaVersion: corpus.legalReferencePolicy?.schemaVersion || null,
+    policyReviewedAt: corpus.legalReferencePolicy?.reviewedAt || null,
+    policyScopes: corpus.legalReferencePolicy?.scopes?.length || 0,
+    rules: ["house-uslm-ref", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-cfr-ina-act-section", "context-named-unit", "context-path-this-section", "context-cfr-the-act", "ambiguous-antecedent"]
   };
   return corpus;
 }
 
-module.exports = {
+function applyCfrReferences(corpus, changedPartIds) {
+  const changed = new Set([...(changedPartIds || [])].map(String));
+  const referenceAudit = { suppressedSelfReferences: 0, suppressedByRule: {}, suppressedByFamily: {} };
+  const shared = { ...legalReferenceContext(corpus), referenceAudit };
+  let fields = 0;
+  let references = 0;
+  const attach = (source, field, context) => {
+    if (!source || !Object.hasOwn(source, field) || !source[field]) return;
+    const property = referenceProperty(field);
+    source[property] = generatedReferences(source[field], { ...shared, ...context }, []);
+    fields += 1;
+    references += source[property].length;
+  };
+  const attachBlocks = (section, blocks, pathPrefix = []) => {
+    (blocks || []).forEach((block, index) => {
+      const path = pathTokens(block.a || block.u?.at(-1)?.a || "");
+      const context = {
+        kind: "cfr", title: String(section.title), part: cfrPartNumber(section), chapter: cfrChapterNumber(section),
+        section: String(section.section || ""), path, sourceId: `runtime-cfr-${section.id}-${[...pathPrefix, index].join("-")}`,
+        suppressSelfReferences: true
+      };
+      attach(block, "x", context);
+      if (block.t === "table") {
+        (block.rows || []).forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
+          attach(cell, "x", { ...context, sourceId: `${context.sourceId}-cell-${rowIndex}-${cellIndex}` });
+        }));
+      }
+      if (block.t === "note") attachBlocks(section, block.blocks, [...pathPrefix, index]);
+    });
+  };
+  const records = [...(corpus.cfr?.sections || []), ...(corpus.cfr?.appendices || [])].filter(record => changed.has(String(record.partId)));
+  for (const record of records) {
+    const context = {
+      kind: "cfr", title: String(record.title), part: cfrPartNumber(record), chapter: cfrChapterNumber(record),
+      section: String(record.section || ""), path: [], sourceId: `runtime-cfr-${record.id}-heading`, suppressSelfReferences: true
+    };
+    attach(record, "heading", context);
+    attachBlocks(record, record.blocks);
+  }
+  for (const part of corpus.cfr?.parts || []) {
+    if (!changed.has(String(part.id))) continue;
+    const context = {
+      kind: "cfr", title: String(part.title), part: cfrPartNumber(part), chapter: cfrChapterNumber(part),
+      section: "", path: [], sourceId: `runtime-cfr-part-${part.id}`
+    };
+    attach(part, "heading", context);
+    attach(part, "authority", context);
+    attach(part, "source", context);
+  }
+  return {
+    engineVersion: 1,
+    changedParts: [...changed].sort(),
+    fields,
+    references,
+    suppressedSelfReferences: referenceAudit.suppressedSelfReferences
+  };
+}
+
+return {
+  applyCfrReferences,
   applyGeneratedLegalReferences,
   explicitReferenceCandidates,
   generatedReferences,
   inaActReferenceCandidates,
   legalReferenceContext,
-  pathTokens
+  pathTokens,
+  validateLegalReferencePolicy
 };
+});

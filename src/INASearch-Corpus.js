@@ -1,9 +1,9 @@
 /* INASearch public corpus. Replace as one reviewed unit. */
 window.INA_SEARCH_CORPUS = {
   "schemaVersion": 5,
-  "corpusVersion": "2026.08.15-1",
+  "corpusVersion": "2026.08.21-audit.1",
   "capturedAt": "2026-07-30",
-  "verifiedAt": "2026-07-31",
+  "verifiedAt": "2026-08-21",
   "verification": {},
   "approvedDomains": [
     "ecfr.gov",
@@ -24,15 +24,25 @@ window.INA_SEARCH_CORPUS = {
     "title8": {
       "name": "United States Code, Title 8 — Aliens and Nationality",
       "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
-      "url": "https://uscode.house.gov/download/download.shtml",
-      "capturedAt": "2026-07-30",
-      "currentThrough": "119-102"
+      "url": "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
+      "capturedAt": "2026-08-21",
+      "currentThrough": "119-102",
+      "sourceArtifact": "sources/legal/raw/usc08@119-102.xml",
+      "sourceBytes": 7384424,
+      "sourceSha256": "69aaee9cc14dfd006daf6127ac0ffa5753af35f2e99cac56b4c84d7916e16fca",
+      "manifest": "sources/legal/source-manifest.json"
     },
     "inaCrosswalk": {
       "name": "Immigration and Nationality Act",
       "publisher": "U.S. Citizenship and Immigration Services",
       "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-      "capturedAt": "2026-07-30"
+      "capturedAt": "2026-08-21",
+      "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+      "sourceBytes": 122984,
+      "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+      "manifest": "sources/legal/source-manifest.json",
+      "independentAudit": "sources/legal/ina-crosswalk-audit.json",
+      "independentAuditSource": "GovInfo COMPS-1376 with reviewed House evidence for omitted former and repealed mappings"
     },
     "policyManual": {
       "name": "USCIS Policy Manual",
@@ -114428,6 +114438,7 @@ window.INA_SEARCH_CORPUS = {
     {
       "inaSection": "101",
       "uscSection": "1101",
+      "localSection": "1101",
       "uscLabel": "8 U.S.C. 1101",
       "title": "Definitions.",
       "group": "Title I: General Provisions",
@@ -114438,13 +114449,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 101 > 8 U.S.C. 1101",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 101 | 8 U.S.C. 1101 | Definitions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 101 | 8 U.S.C. 1101 | Definitions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1101&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "102",
       "uscSection": "1102",
+      "localSection": "1102",
       "uscLabel": "8 U.S.C. 1102",
       "title": "Diplomatic and semidiplomatic immunities.",
       "group": "Title I: General Provisions",
@@ -114455,13 +114470,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 102 > 8 U.S.C. 1102",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 102 | 8 U.S.C. 1102 | Diplomatic and semidiplomatic immunities."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 102 | 8 U.S.C. 1102 | Diplomatic and semidiplomatic immunities.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1102&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "103",
       "uscSection": "1103",
+      "localSection": "1103",
       "uscLabel": "8 U.S.C. 1103",
       "title": "Powers and duties of the Secretary, the Under Secretary, and the Attorney General.",
       "group": "Title I: General Provisions",
@@ -114472,13 +114491,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 103 > 8 U.S.C. 1103",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 103 | 8 U.S.C. 1103 | Powers and duties of the Secretary, the Under Secretary, and the Attorney General."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 103 | 8 U.S.C. 1103 | Powers and duties of the Secretary, the Under Secretary, and the Attorney General.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1103&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "104",
       "uscSection": "1104",
+      "localSection": "1104",
       "uscLabel": "8 U.S.C. 1104",
       "title": "Powers and duties of Secretary of State.",
       "group": "Title I: General Provisions",
@@ -114489,13 +114512,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 104 > 8 U.S.C. 1104",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 104 | 8 U.S.C. 1104 | Powers and duties of Secretary of State."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 104 | 8 U.S.C. 1104 | Powers and duties of Secretary of State.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1104&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "105",
       "uscSection": "1105",
+      "localSection": "1105",
       "uscLabel": "8 U.S.C. 1105",
       "title": "Liaison with internal security officers; data exchange.",
       "group": "Title I: General Provisions",
@@ -114506,13 +114533,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 105 > 8 U.S.C. 1105",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 105 | 8 U.S.C. 1105 | Liaison with internal security officers; data exchange."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 105 | 8 U.S.C. 1105 | Liaison with internal security officers; data exchange.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1105&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "106",
       "uscSection": "1105a",
+      "localSection": "1105a",
       "uscLabel": "8 U.S.C. 1105a",
       "title": "Employment authorization for battered spouses of certain nonimmigrants.",
       "group": "Title I: General Provisions",
@@ -114523,13 +114554,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 106 > 8 U.S.C. 1105a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 106 | 8 U.S.C. 1105a | Employment authorization for battered spouses of certain nonimmigrants."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 106 | 8 U.S.C. 1105a | Employment authorization for battered spouses of certain nonimmigrants.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1105a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "201",
       "uscSection": "1151",
+      "localSection": "1151",
       "uscLabel": "8 U.S.C. 1151",
       "title": "Worldwide level of immigration.",
       "group": "Title II: Immigration",
@@ -114540,13 +114575,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 201 > 8 U.S.C. 1151",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 201 | 8 U.S.C. 1151 | Worldwide level of immigration."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 201 | 8 U.S.C. 1151 | Worldwide level of immigration.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1151&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "202",
       "uscSection": "1152",
+      "localSection": "1152",
       "uscLabel": "8 U.S.C. 1152",
       "title": "Numerical limitations on individual foreign states.",
       "group": "Title II: Immigration",
@@ -114557,13 +114596,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 202 > 8 U.S.C. 1152",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 202 | 8 U.S.C. 1152 | Numerical limitations on individual foreign states."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 202 | 8 U.S.C. 1152 | Numerical limitations on individual foreign states.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1152&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "203",
       "uscSection": "1153",
+      "localSection": "1153",
       "uscLabel": "8 U.S.C. 1153",
       "title": "Allocation of immigrant visas.",
       "group": "Title II: Immigration",
@@ -114574,13 +114617,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 203 > 8 U.S.C. 1153",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 203 | 8 U.S.C. 1153 | Allocation of immigrant visas."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 203 | 8 U.S.C. 1153 | Allocation of immigrant visas.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1153&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "204",
       "uscSection": "1154",
+      "localSection": "1154",
       "uscLabel": "8 U.S.C. 1154",
       "title": "Procedure for granting immigrant status.",
       "group": "Title II: Immigration",
@@ -114591,13 +114638,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 204 > 8 U.S.C. 1154",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 204 | 8 U.S.C. 1154 | Procedure for granting immigrant status."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 204 | 8 U.S.C. 1154 | Procedure for granting immigrant status.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1154&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "205",
       "uscSection": "1155",
+      "localSection": "1155",
       "uscLabel": "8 U.S.C. 1155",
       "title": "Revocation of approval of petitions; effective date.",
       "group": "Title II: Immigration",
@@ -114608,13 +114659,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 205 > 8 U.S.C. 1155",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 205 | 8 U.S.C. 1155 | Revocation of approval of petitions; effective date."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 205 | 8 U.S.C. 1155 | Revocation of approval of petitions; effective date.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1155&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "206",
       "uscSection": "1156",
+      "localSection": "1156",
       "uscLabel": "8 U.S.C. 1156",
       "title": "Unused immigrant visas.",
       "group": "Title II: Immigration",
@@ -114625,13 +114680,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 206 > 8 U.S.C. 1156",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 206 | 8 U.S.C. 1156 | Unused immigrant visas."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 206 | 8 U.S.C. 1156 | Unused immigrant visas.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1156&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "207",
       "uscSection": "1157",
+      "localSection": "1157",
       "uscLabel": "8 U.S.C. 1157",
       "title": "Annual admission of refugees and admission of emergency situation refugees.",
       "group": "Title II: Immigration",
@@ -114642,13 +114701,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 207 > 8 U.S.C. 1157",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 207 | 8 U.S.C. 1157 | Annual admission of refugees and admission of emergency situation refugees."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 207 | 8 U.S.C. 1157 | Annual admission of refugees and admission of emergency situation refugees.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1157&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "208",
       "uscSection": "1158",
+      "localSection": "1158",
       "uscLabel": "8 U.S.C. 1158",
       "title": "Asylum.",
       "group": "Title II: Immigration",
@@ -114659,13 +114722,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 208 > 8 U.S.C. 1158",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 208 | 8 U.S.C. 1158 | Asylum."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 208 | 8 U.S.C. 1158 | Asylum.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1158&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "209",
       "uscSection": "1159",
+      "localSection": "1159",
       "uscLabel": "8 U.S.C. 1159",
       "title": "Adjustment of status of refugees.",
       "group": "Title II: Immigration",
@@ -114676,13 +114743,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 209 > 8 U.S.C. 1159",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 209 | 8 U.S.C. 1159 | Adjustment of status of refugees."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 209 | 8 U.S.C. 1159 | Adjustment of status of refugees.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1159&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "210",
       "uscSection": "1160",
+      "localSection": "1160",
       "uscLabel": "8 U.S.C. 1160",
       "title": "Special agricultural workers.",
       "group": "Title II: Immigration",
@@ -114693,13 +114764,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 210 > 8 U.S.C. 1160",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 210 | 8 U.S.C. 1160 | Special agricultural workers."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 210 | 8 U.S.C. 1160 | Special agricultural workers.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1160&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "210A",
       "uscSection": "1161",
+      "localSection": "1161",
       "uscLabel": "8 U.S.C. 1161",
       "title": "Repealed.",
       "group": "Title II: Immigration",
@@ -114710,13 +114785,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 210A > 8 U.S.C. 1161",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 210A | 8 U.S.C. 1161 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 210A | 8 U.S.C. 1161 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1161&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "211",
       "uscSection": "1181",
+      "localSection": "1181",
       "uscLabel": "8 U.S.C. 1181",
       "title": "Admission of immigrants into the United States.",
       "group": "Title II: Immigration",
@@ -114727,13 +114806,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 211 > 8 U.S.C. 1181",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 211 | 8 U.S.C. 1181 | Admission of immigrants into the United States."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 211 | 8 U.S.C. 1181 | Admission of immigrants into the United States.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1181&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "212",
       "uscSection": "1182",
+      "localSection": "1182",
       "uscLabel": "8 U.S.C. 1182",
       "title": "Inadmissible aliens.",
       "group": "Title II: Immigration",
@@ -114744,13 +114827,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 212 > 8 U.S.C. 1182",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 212 | 8 U.S.C. 1182 | Inadmissible aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 212 | 8 U.S.C. 1182 | Inadmissible aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1182&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "213",
       "uscSection": "1183",
+      "localSection": "1183",
       "uscLabel": "8 U.S.C. 1183",
       "title": "Admission of aliens on giving bond or undertaking; return upon permanent departure.",
       "group": "Title II: Immigration",
@@ -114761,13 +114848,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 213 > 8 U.S.C. 1183",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 213 | 8 U.S.C. 1183 | Admission of aliens on giving bond or undertaking; return upon permanent departure."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 213 | 8 U.S.C. 1183 | Admission of aliens on giving bond or undertaking; return upon permanent departure.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1183&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "213A",
       "uscSection": "1183a",
+      "localSection": "1183a",
       "uscLabel": "8 U.S.C. 1183a",
       "title": "Requirements for sponsor's affidavit of support.",
       "group": "Title II: Immigration",
@@ -114778,13 +114869,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 213A > 8 U.S.C. 1183a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 213A | 8 U.S.C. 1183a | Requirements for sponsor's affidavit of support."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 213A | 8 U.S.C. 1183a | Requirements for sponsor's affidavit of support.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1183a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "214",
       "uscSection": "1184",
+      "localSection": "1184",
       "uscLabel": "8 U.S.C. 1184",
       "title": "Admission of nonimmigrants.",
       "group": "Title II: Immigration",
@@ -114795,13 +114890,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 214 > 8 U.S.C. 1184",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 214 | 8 U.S.C. 1184 | Admission of nonimmigrants."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 214 | 8 U.S.C. 1184 | Admission of nonimmigrants.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1184&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "215",
       "uscSection": "1185",
+      "localSection": "1185",
       "uscLabel": "8 U.S.C. 1185",
       "title": "Travel control of citizens and aliens.",
       "group": "Title II: Immigration",
@@ -114812,13 +114911,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 215 > 8 U.S.C. 1185",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 215 | 8 U.S.C. 1185 | Travel control of citizens and aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 215 | 8 U.S.C. 1185 | Travel control of citizens and aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1185&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "216",
       "uscSection": "1186a",
+      "localSection": "1186a",
       "uscLabel": "8 U.S.C. 1186a",
       "title": "Conditional permanent resident status for certain alien spouses and sons and daughters.",
       "group": "Title II: Immigration",
@@ -114829,13 +114932,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 216 > 8 U.S.C. 1186a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 216 | 8 U.S.C. 1186a | Conditional permanent resident status for certain alien spouses and sons and daughters."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 216 | 8 U.S.C. 1186a | Conditional permanent resident status for certain alien spouses and sons and daughters.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1186a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "216A",
       "uscSection": "1186b",
+      "localSection": "1186b",
       "uscLabel": "8 U.S.C. 1186b",
       "title": "Conditional permanent resident status for certain alien entrepreneurs, spouses, and children.",
       "group": "Title II: Immigration",
@@ -114846,13 +114953,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 216A > 8 U.S.C. 1186b",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 216A | 8 U.S.C. 1186b | Conditional permanent resident status for certain alien entrepreneurs, spouses, and children."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 216A | 8 U.S.C. 1186b | Conditional permanent resident status for certain alien entrepreneurs, spouses, and children.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1186b&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "217",
       "uscSection": "1187",
+      "localSection": "1187",
       "uscLabel": "8 U.S.C. 1187",
       "title": "Visa waiver program for certain visitors.",
       "group": "Title II: Immigration",
@@ -114863,13 +114974,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 217 > 8 U.S.C. 1187",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 217 | 8 U.S.C. 1187 | Visa waiver program for certain visitors."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 217 | 8 U.S.C. 1187 | Visa waiver program for certain visitors.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1187&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "218",
       "uscSection": "1188",
+      "localSection": "1188",
       "uscLabel": "8 U.S.C. 1188",
       "title": "Admission of temporary H–2A workers.",
       "group": "Title II: Immigration",
@@ -114880,13 +114995,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 218 > 8 U.S.C. 1188",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 218 | 8 U.S.C. 1188 | Admission of temporary H–2A workers."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 218 | 8 U.S.C. 1188 | Admission of temporary H–2A workers.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1188&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "219",
       "uscSection": "1189",
+      "localSection": "1189",
       "uscLabel": "8 U.S.C. 1189",
       "title": "Designation of foreign terrorist organizations.",
       "group": "Title II: Immigration",
@@ -114897,13 +115016,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 219 > 8 U.S.C. 1189",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 219 | 8 U.S.C. 1189 | Designation of foreign terrorist organizations."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 219 | 8 U.S.C. 1189 | Designation of foreign terrorist organizations.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1189&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "221",
       "uscSection": "1201",
+      "localSection": "1201",
       "uscLabel": "8 U.S.C. 1201",
       "title": "Issuance of visas.",
       "group": "Title II: Immigration",
@@ -114914,13 +115037,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 221 > 8 U.S.C. 1201",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 221 | 8 U.S.C. 1201 | Issuance of visas."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 221 | 8 U.S.C. 1201 | Issuance of visas.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1201&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "222",
       "uscSection": "1202",
+      "localSection": "1202",
       "uscLabel": "8 U.S.C. 1202",
       "title": "Application for visas.",
       "group": "Title II: Immigration",
@@ -114931,13 +115058,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 222 > 8 U.S.C. 1202",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 222 | 8 U.S.C. 1202 | Application for visas."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 222 | 8 U.S.C. 1202 | Application for visas.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1202&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "223",
       "uscSection": "1203",
+      "localSection": "1203",
       "uscLabel": "8 U.S.C. 1203",
       "title": "Reentry permit.",
       "group": "Title II: Immigration",
@@ -114948,13 +115079,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 223 > 8 U.S.C. 1203",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 223 | 8 U.S.C. 1203 | Reentry permit."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 223 | 8 U.S.C. 1203 | Reentry permit.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1203&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "224",
       "uscSection": "1204",
+      "localSection": "1204",
       "uscLabel": "8 U.S.C. 1204",
       "title": "Immediate relative and special immigrant visas.",
       "group": "Title II: Immigration",
@@ -114965,13 +115100,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 224 > 8 U.S.C. 1204",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 224 | 8 U.S.C. 1204 | Immediate relative and special immigrant visas."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 224 | 8 U.S.C. 1204 | Immediate relative and special immigrant visas.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1204&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "231",
       "uscSection": "1221",
+      "localSection": "1221",
       "uscLabel": "8 U.S.C. 1221",
       "title": "Lists of alien and citizen passengers arriving and departing.",
       "group": "Title II: Immigration",
@@ -114982,13 +115121,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 231 > 8 U.S.C. 1221",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 231 | 8 U.S.C. 1221 | Lists of alien and citizen passengers arriving and departing."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 231 | 8 U.S.C. 1221 | Lists of alien and citizen passengers arriving and departing.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1221&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "232",
       "uscSection": "1222",
+      "localSection": "1222",
       "uscLabel": "8 U.S.C. 1222",
       "title": "Detention of aliens for physical and mental examination.",
       "group": "Title II: Immigration",
@@ -114999,13 +115142,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 232 > 8 U.S.C. 1222",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 232 | 8 U.S.C. 1222 | Detention of aliens for physical and mental examination."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 232 | 8 U.S.C. 1222 | Detention of aliens for physical and mental examination.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1222&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "233",
       "uscSection": "1223",
+      "localSection": "1223",
       "uscLabel": "8 U.S.C. 1223",
       "title": "Entry through or from foreign territory and adjacent islands.",
       "group": "Title II: Immigration",
@@ -115016,13 +115163,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 233 > 8 U.S.C. 1223",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 233 | 8 U.S.C. 1223 | Entry through or from foreign territory and adjacent islands."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 233 | 8 U.S.C. 1223 | Entry through or from foreign territory and adjacent islands.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1223&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "234",
       "uscSection": "1224",
+      "localSection": "1224",
       "uscLabel": "8 U.S.C. 1224",
       "title": "Designation of ports of entry for aliens arriving by aircraft.",
       "group": "Title II: Immigration",
@@ -115033,13 +115184,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 234 > 8 U.S.C. 1224",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 234 | 8 U.S.C. 1224 | Designation of ports of entry for aliens arriving by aircraft."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 234 | 8 U.S.C. 1224 | Designation of ports of entry for aliens arriving by aircraft.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1224&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "235",
       "uscSection": "1225",
+      "localSection": "1225",
       "uscLabel": "8 U.S.C. 1225",
       "title": "Inspection by immigration officers; expedited removal of inadmissible arriving aliens; referral for hearing.",
       "group": "Title II: Immigration",
@@ -115050,13 +115205,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 235 > 8 U.S.C. 1225",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 235 | 8 U.S.C. 1225 | Inspection by immigration officers; expedited removal of inadmissible arriving aliens; referral for hearing."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 235 | 8 U.S.C. 1225 | Inspection by immigration officers; expedited removal of inadmissible arriving aliens; referral for hearing.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1225&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "235A",
       "uscSection": "1225a",
+      "localSection": "1225a",
       "uscLabel": "8 U.S.C. 1225a",
       "title": "Preinspection at foreign airports.",
       "group": "Title II: Immigration",
@@ -115067,13 +115226,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 235A > 8 U.S.C. 1225a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 235A | 8 U.S.C. 1225a | Preinspection at foreign airports."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 235A | 8 U.S.C. 1225a | Preinspection at foreign airports.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1225a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "236",
       "uscSection": "1226",
+      "localSection": "1226",
       "uscLabel": "8 U.S.C. 1226",
       "title": "Apprehension and detention of aliens.",
       "group": "Title II: Immigration",
@@ -115084,13 +115247,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 236 > 8 U.S.C. 1226",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 236 | 8 U.S.C. 1226 | Apprehension and detention of aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 236 | 8 U.S.C. 1226 | Apprehension and detention of aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1226&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "236A",
       "uscSection": "1226a",
+      "localSection": "1226a",
       "uscLabel": "8 U.S.C. 1226a",
       "title": "Mandatory detention of suspected terrorists; habeas corpus; judicial review.",
       "group": "Title II: Immigration",
@@ -115101,13 +115268,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 236A > 8 U.S.C. 1226a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 236A | 8 U.S.C. 1226a | Mandatory detention of suspected terrorists; habeas corpus; judicial review."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 236A | 8 U.S.C. 1226a | Mandatory detention of suspected terrorists; habeas corpus; judicial review.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1226a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "237",
       "uscSection": "1227",
+      "localSection": "1227",
       "uscLabel": "8 U.S.C. 1227",
       "title": "Deportable aliens.",
       "group": "Title II: Immigration",
@@ -115118,13 +115289,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 237 > 8 U.S.C. 1227",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 237 | 8 U.S.C. 1227 | Deportable aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 237 | 8 U.S.C. 1227 | Deportable aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1227&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "238",
       "uscSection": "1228",
+      "localSection": "1228",
       "uscLabel": "8 U.S.C. 1228",
       "title": "Expedited removal of aliens convicted of committing aggravated felonies.",
       "group": "Title II: Immigration",
@@ -115135,13 +115310,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 238 > 8 U.S.C. 1228",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 238 | 8 U.S.C. 1228 | Expedited removal of aliens convicted of committing aggravated felonies."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 238 | 8 U.S.C. 1228 | Expedited removal of aliens convicted of committing aggravated felonies.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1228&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "239",
       "uscSection": "1229",
+      "localSection": "1229",
       "uscLabel": "8 U.S.C. 1229",
       "title": "Initiation of removal proceedings.",
       "group": "Title II: Immigration",
@@ -115152,13 +115331,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 239 > 8 U.S.C. 1229",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 239 | 8 U.S.C. 1229 | Initiation of removal proceedings."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 239 | 8 U.S.C. 1229 | Initiation of removal proceedings.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1229&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "240",
       "uscSection": "1229a",
+      "localSection": "1229a",
       "uscLabel": "8 U.S.C. 1229a",
       "title": "Removal proceedings.",
       "group": "Title II: Immigration",
@@ -115169,13 +115352,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 240 > 8 U.S.C. 1229a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 240 | 8 U.S.C. 1229a | Removal proceedings."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 240 | 8 U.S.C. 1229a | Removal proceedings.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1229a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "240A",
       "uscSection": "1229b",
+      "localSection": "1229b",
       "uscLabel": "8 U.S.C. 1229b",
       "title": "Cancellation of removal; adjustment of status.",
       "group": "Title II: Immigration",
@@ -115186,13 +115373,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 240A > 8 U.S.C. 1229b",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 240A | 8 U.S.C. 1229b | Cancellation of removal; adjustment of status."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 240A | 8 U.S.C. 1229b | Cancellation of removal; adjustment of status.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1229b&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "240B",
       "uscSection": "1229c",
+      "localSection": "1229c",
       "uscLabel": "8 U.S.C. 1229c",
       "title": "Voluntary departure.",
       "group": "Title II: Immigration",
@@ -115203,13 +115394,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 240B > 8 U.S.C. 1229c",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 240B | 8 U.S.C. 1229c | Voluntary departure."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 240B | 8 U.S.C. 1229c | Voluntary departure.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1229c&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "240C",
       "uscSection": "1230",
+      "localSection": "1230",
       "uscLabel": "8 U.S.C. 1230",
       "title": "Records of admission.",
       "group": "Title II: Immigration",
@@ -115220,13 +115415,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 240C > 8 U.S.C. 1230",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 240C | 8 U.S.C. 1230 | Records of admission."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 240C | 8 U.S.C. 1230 | Records of admission.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1230&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "241",
       "uscSection": "1231",
+      "localSection": "1231",
       "uscLabel": "8 U.S.C. 1231",
       "title": "Detention and removal of aliens ordered removed.",
       "group": "Title II: Immigration",
@@ -115237,13 +115436,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 241 > 8 U.S.C. 1231",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 241 | 8 U.S.C. 1231 | Detention and removal of aliens ordered removed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 241 | 8 U.S.C. 1231 | Detention and removal of aliens ordered removed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1231&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "242",
       "uscSection": "1252",
+      "localSection": "1252",
       "uscLabel": "8 U.S.C. 1252",
       "title": "Judicial review of orders of removal.",
       "group": "Title II: Immigration",
@@ -115254,13 +115457,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 242 > 8 U.S.C. 1252",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 242 | 8 U.S.C. 1252 | Judicial review of orders of removal."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 242 | 8 U.S.C. 1252 | Judicial review of orders of removal.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1252&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "242A",
       "uscSection": "1252a",
+      "localSection": "1252a",
       "uscLabel": "8 U.S.C. 1252a",
       "title": "Transferred.",
       "group": "Title II: Immigration",
@@ -115271,13 +115478,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 242A > 8 U.S.C. 1252a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 242A | 8 U.S.C. 1252a | Transferred."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 242A | 8 U.S.C. 1252a | Transferred.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1252a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "242B",
       "uscSection": "1252b",
+      "localSection": "1252b",
       "uscLabel": "8 U.S.C. 1252b",
       "title": "Repealed.",
       "group": "Title II: Immigration",
@@ -115288,13 +115499,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 242B > 8 U.S.C. 1252b",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 242B | 8 U.S.C. 1252b | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 242B | 8 U.S.C. 1252b | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1252b&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "243",
       "uscSection": "1253",
+      "localSection": "1253",
       "uscLabel": "8 U.S.C. 1253",
       "title": "Penalties related to removal.",
       "group": "Title II: Immigration",
@@ -115305,13 +115520,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 243 > 8 U.S.C. 1253",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 243 | 8 U.S.C. 1253 | Penalties related to removal."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 243 | 8 U.S.C. 1253 | Penalties related to removal.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1253&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "244",
       "uscSection": "1254a",
+      "localSection": "1254a",
       "uscLabel": "8 U.S.C. 1254a",
       "title": "Temporary protected status.",
       "group": "Title II: Immigration",
@@ -115322,13 +115541,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 244 > 8 U.S.C. 1254a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 244 | 8 U.S.C. 1254a | Temporary protected status."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 244 | 8 U.S.C. 1254a | Temporary protected status.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1254a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "245",
       "uscSection": "1255",
+      "localSection": "1255",
       "uscLabel": "8 U.S.C. 1255",
       "title": "Adjustment of status of nonimmigrant to that of person admitted for permanent residence.",
       "group": "Title II: Immigration",
@@ -115339,13 +115562,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 245 > 8 U.S.C. 1255",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 245 | 8 U.S.C. 1255 | Adjustment of status of nonimmigrant to that of person admitted for permanent residence."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 245 | 8 U.S.C. 1255 | Adjustment of status of nonimmigrant to that of person admitted for permanent residence.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1255&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "245A",
       "uscSection": "1255a",
+      "localSection": "1255a",
       "uscLabel": "8 U.S.C. 1255a",
       "title": "Adjustment of status of certain entrants before January 1, 1982, to that of person admitted for lawful residence.",
       "group": "Title II: Immigration",
@@ -115356,13 +115583,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 245A > 8 U.S.C. 1255a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 245A | 8 U.S.C. 1255a | Adjustment of status of certain entrants before January 1, 1982, to that of person admitted for lawful residence."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 245A | 8 U.S.C. 1255a | Adjustment of status of certain entrants before January 1, 1982, to that of person admitted for lawful residence.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1255a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "246",
       "uscSection": "1256",
+      "localSection": "1256",
       "uscLabel": "8 U.S.C. 1256",
       "title": "Rescission of adjustment of status; effect upon naturalized citizen.",
       "group": "Title II: Immigration",
@@ -115373,13 +115604,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 246 > 8 U.S.C. 1256",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 246 | 8 U.S.C. 1256 | Rescission of adjustment of status; effect upon naturalized citizen."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 246 | 8 U.S.C. 1256 | Rescission of adjustment of status; effect upon naturalized citizen.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1256&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "247",
       "uscSection": "1257",
+      "localSection": "1257",
       "uscLabel": "8 U.S.C. 1257",
       "title": "Adjustment of status of certain resident aliens to nonimmigrant status; exceptions.",
       "group": "Title II: Immigration",
@@ -115390,13 +115625,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 247 > 8 U.S.C. 1257",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 247 | 8 U.S.C. 1257 | Adjustment of status of certain resident aliens to nonimmigrant status; exceptions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 247 | 8 U.S.C. 1257 | Adjustment of status of certain resident aliens to nonimmigrant status; exceptions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1257&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "248",
       "uscSection": "1258",
+      "localSection": "1258",
       "uscLabel": "8 U.S.C. 1258",
       "title": "Change of nonimmigrant classification.",
       "group": "Title II: Immigration",
@@ -115407,13 +115646,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 248 > 8 U.S.C. 1258",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 248 | 8 U.S.C. 1258 | Change of nonimmigrant classification."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 248 | 8 U.S.C. 1258 | Change of nonimmigrant classification.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1258&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "249",
       "uscSection": "1259",
+      "localSection": "1259",
       "uscLabel": "8 U.S.C. 1259",
       "title": "Record of admission for permanent residence in the case of certain aliens who entered the United States prior to January 1, 1972.",
       "group": "Title II: Immigration",
@@ -115424,13 +115667,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 249 > 8 U.S.C. 1259",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 249 | 8 U.S.C. 1259 | Record of admission for permanent residence in the case of certain aliens who entered the United States prior to January 1, 1972."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 249 | 8 U.S.C. 1259 | Record of admission for permanent residence in the case of certain aliens who entered the United States prior to January 1, 1972.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1259&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "250",
       "uscSection": "1260",
+      "localSection": "1260",
       "uscLabel": "8 U.S.C. 1260",
       "title": "Removal of aliens falling into distress.",
       "group": "Title II: Immigration",
@@ -115441,13 +115688,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 250 > 8 U.S.C. 1260",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 250 | 8 U.S.C. 1260 | Removal of aliens falling into distress."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 250 | 8 U.S.C. 1260 | Removal of aliens falling into distress.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1260&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "251",
       "uscSection": "1281",
+      "localSection": "1281",
       "uscLabel": "8 U.S.C. 1281",
       "title": "Alien crewmen.",
       "group": "Title II: Immigration",
@@ -115458,13 +115709,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 251 > 8 U.S.C. 1281",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 251 | 8 U.S.C. 1281 | Alien crewmen."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 251 | 8 U.S.C. 1281 | Alien crewmen.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1281&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "252",
       "uscSection": "1282",
+      "localSection": "1282",
       "uscLabel": "8 U.S.C. 1282",
       "title": "Conditional permits to land temporarily.",
       "group": "Title II: Immigration",
@@ -115475,13 +115730,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 252 > 8 U.S.C. 1282",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 252 | 8 U.S.C. 1282 | Conditional permits to land temporarily."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 252 | 8 U.S.C. 1282 | Conditional permits to land temporarily.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1282&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "253",
       "uscSection": "1283",
+      "localSection": "1283",
       "uscLabel": "8 U.S.C. 1283",
       "title": "Hospital treatment of alien crewmen afflicted with certain diseases.",
       "group": "Title II: Immigration",
@@ -115492,13 +115751,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 253 > 8 U.S.C. 1283",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 253 | 8 U.S.C. 1283 | Hospital treatment of alien crewmen afflicted with certain diseases."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 253 | 8 U.S.C. 1283 | Hospital treatment of alien crewmen afflicted with certain diseases.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1283&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "254",
       "uscSection": "1284",
+      "localSection": "1284",
       "uscLabel": "8 U.S.C. 1284",
       "title": "Control of alien crewmen.",
       "group": "Title II: Immigration",
@@ -115509,13 +115772,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 254 > 8 U.S.C. 1284",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 254 | 8 U.S.C. 1284 | Control of alien crewmen."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 254 | 8 U.S.C. 1284 | Control of alien crewmen.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1284&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "255",
       "uscSection": "1285",
+      "localSection": "1285",
       "uscLabel": "8 U.S.C. 1285",
       "title": "Employment on passenger vessels of aliens afflicted with certain disabilities.",
       "group": "Title II: Immigration",
@@ -115526,13 +115793,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 255 > 8 U.S.C. 1285",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 255 | 8 U.S.C. 1285 | Employment on passenger vessels of aliens afflicted with certain disabilities."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 255 | 8 U.S.C. 1285 | Employment on passenger vessels of aliens afflicted with certain disabilities.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1285&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "256",
       "uscSection": "1286",
+      "localSection": "1286",
       "uscLabel": "8 U.S.C. 1286",
       "title": "Discharge of alien crewmen; penalties.",
       "group": "Title II: Immigration",
@@ -115543,13 +115814,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 256 > 8 U.S.C. 1286",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 256 | 8 U.S.C. 1286 | Discharge of alien crewmen; penalties."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 256 | 8 U.S.C. 1286 | Discharge of alien crewmen; penalties.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1286&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "257",
       "uscSection": "1287",
+      "localSection": "1287",
       "uscLabel": "8 U.S.C. 1287",
       "title": "Alien crewmen brought into the United States with intent to evade immigration laws; penalties.",
       "group": "Title II: Immigration",
@@ -115560,13 +115835,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 257 > 8 U.S.C. 1287",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 257 | 8 U.S.C. 1287 | Alien crewmen brought into the United States with intent to evade immigration laws; penalties."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 257 | 8 U.S.C. 1287 | Alien crewmen brought into the United States with intent to evade immigration laws; penalties.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1287&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "258",
       "uscSection": "1288",
+      "localSection": "1288",
       "uscLabel": "8 U.S.C. 1288",
       "title": "Limitations on performance of longshore work by alien crewmen.",
       "group": "Title II: Immigration",
@@ -115577,13 +115856,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 258 > 8 U.S.C. 1288",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 258 | 8 U.S.C. 1288 | Limitations on performance of longshore work by alien crewmen."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 258 | 8 U.S.C. 1288 | Limitations on performance of longshore work by alien crewmen.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1288&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "261",
       "uscSection": "1301",
+      "localSection": "1301",
       "uscLabel": "8 U.S.C. 1301",
       "title": "Alien seeking entry; contents.",
       "group": "Title II: Immigration",
@@ -115594,13 +115877,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 261 > 8 U.S.C. 1301",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 261 | 8 U.S.C. 1301 | Alien seeking entry; contents."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 261 | 8 U.S.C. 1301 | Alien seeking entry; contents.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1301&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "262",
       "uscSection": "1302",
+      "localSection": "1302",
       "uscLabel": "8 U.S.C. 1302",
       "title": "Registration of aliens.",
       "group": "Title II: Immigration",
@@ -115611,13 +115898,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 262 > 8 U.S.C. 1302",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 262 | 8 U.S.C. 1302 | Registration of aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 262 | 8 U.S.C. 1302 | Registration of aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1302&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "263",
       "uscSection": "1303",
+      "localSection": "1303",
       "uscLabel": "8 U.S.C. 1303",
       "title": "Registration of special groups.",
       "group": "Title II: Immigration",
@@ -115628,13 +115919,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 263 > 8 U.S.C. 1303",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 263 | 8 U.S.C. 1303 | Registration of special groups."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 263 | 8 U.S.C. 1303 | Registration of special groups.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1303&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "264",
       "uscSection": "1304",
+      "localSection": "1304",
       "uscLabel": "8 U.S.C. 1304",
       "title": "Forms for registration and fingerprinting.",
       "group": "Title II: Immigration",
@@ -115645,13 +115940,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 264 > 8 U.S.C. 1304",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 264 | 8 U.S.C. 1304 | Forms for registration and fingerprinting."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 264 | 8 U.S.C. 1304 | Forms for registration and fingerprinting.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1304&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "265",
       "uscSection": "1305",
+      "localSection": "1305",
       "uscLabel": "8 U.S.C. 1305",
       "title": "Notices of change of address.",
       "group": "Title II: Immigration",
@@ -115662,13 +115961,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 265 > 8 U.S.C. 1305",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 265 | 8 U.S.C. 1305 | Notices of change of address."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 265 | 8 U.S.C. 1305 | Notices of change of address.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1305&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "266",
       "uscSection": "1306",
+      "localSection": "1306",
       "uscLabel": "8 U.S.C. 1306",
       "title": "Penalties.",
       "group": "Title II: Immigration",
@@ -115679,13 +115982,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 266 > 8 U.S.C. 1306",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 266 | 8 U.S.C. 1306 | Penalties."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 266 | 8 U.S.C. 1306 | Penalties.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1306&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "271",
       "uscSection": "1321",
+      "localSection": "1321",
       "uscLabel": "8 U.S.C. 1321",
       "title": "Prevention of unauthorized landing of aliens.",
       "group": "Title II: Immigration",
@@ -115696,13 +116003,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 271 > 8 U.S.C. 1321",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 271 | 8 U.S.C. 1321 | Prevention of unauthorized landing of aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 271 | 8 U.S.C. 1321 | Prevention of unauthorized landing of aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1321&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "272",
       "uscSection": "1322",
+      "localSection": "1322",
       "uscLabel": "8 U.S.C. 1322",
       "title": "Bringing in aliens subject to denial of admission on a health-related ground; persons liable; clearance papers; exceptions; \"person\" defined.",
       "group": "Title II: Immigration",
@@ -115713,13 +116024,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 272 > 8 U.S.C. 1322",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 272 | 8 U.S.C. 1322 | Bringing in aliens subject to denial of admission on a health-related ground; persons liable; clearance papers; exceptions; \"person\" defined."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 272 | 8 U.S.C. 1322 | Bringing in aliens subject to denial of admission on a health-related ground; persons liable; clearance papers; exceptions; \"person\" defined.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1322&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "273",
       "uscSection": "1323",
+      "localSection": "1323",
       "uscLabel": "8 U.S.C. 1323",
       "title": "Unlawful bringing of aliens into United States.",
       "group": "Title II: Immigration",
@@ -115730,13 +116045,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 273 > 8 U.S.C. 1323",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 273 | 8 U.S.C. 1323 | Unlawful bringing of aliens into United States."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 273 | 8 U.S.C. 1323 | Unlawful bringing of aliens into United States.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1323&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "274",
       "uscSection": "1324",
+      "localSection": "1324",
       "uscLabel": "8 U.S.C. 1324",
       "title": "Bringing in and harboring certain aliens.",
       "group": "Title II: Immigration",
@@ -115747,13 +116066,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274 > 8 U.S.C. 1324",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 274 | 8 U.S.C. 1324 | Bringing in and harboring certain aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 274 | 8 U.S.C. 1324 | Bringing in and harboring certain aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1324&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "274A",
       "uscSection": "1324a",
+      "localSection": "1324a",
       "uscLabel": "8 U.S.C. 1324a",
       "title": "Unlawful employment of aliens.",
       "group": "Title II: Immigration",
@@ -115764,13 +116087,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274A > 8 U.S.C. 1324a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 274A | 8 U.S.C. 1324a | Unlawful employment of aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 274A | 8 U.S.C. 1324a | Unlawful employment of aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1324a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "274B",
       "uscSection": "1324b",
+      "localSection": "1324b",
       "uscLabel": "8 U.S.C. 1324b",
       "title": "Unfair immigration-related employment practices.",
       "group": "Title II: Immigration",
@@ -115781,13 +116108,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274B > 8 U.S.C. 1324b",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 274B | 8 U.S.C. 1324b | Unfair immigration-related employment practices."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 274B | 8 U.S.C. 1324b | Unfair immigration-related employment practices.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1324b&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "274C",
       "uscSection": "1324c",
+      "localSection": "1324c",
       "uscLabel": "8 U.S.C. 1324c",
       "title": "Penalties for document fraud.",
       "group": "Title II: Immigration",
@@ -115798,13 +116129,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274C > 8 U.S.C. 1324c",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 274C | 8 U.S.C. 1324c | Penalties for document fraud."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 274C | 8 U.S.C. 1324c | Penalties for document fraud.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1324c&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "274D",
       "uscSection": "1324d",
+      "localSection": "1324d",
       "uscLabel": "8 U.S.C. 1324d",
       "title": "Civil penalties for failure to depart.",
       "group": "Title II: Immigration",
@@ -115815,13 +116150,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274D > 8 U.S.C. 1324d",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 274D | 8 U.S.C. 1324d | Civil penalties for failure to depart."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 274D | 8 U.S.C. 1324d | Civil penalties for failure to depart.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1324d&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "275",
       "uscSection": "1325",
+      "localSection": "1325",
       "uscLabel": "8 U.S.C. 1325",
       "title": "Improper entry by alien.",
       "group": "Title II: Immigration",
@@ -115832,13 +116171,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 275 > 8 U.S.C. 1325",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 275 | 8 U.S.C. 1325 | Improper entry by alien."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 275 | 8 U.S.C. 1325 | Improper entry by alien.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1325&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "276",
       "uscSection": "1326",
+      "localSection": "1326",
       "uscLabel": "8 U.S.C. 1326",
       "title": "Reentry of removed aliens.",
       "group": "Title II: Immigration",
@@ -115849,13 +116192,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 276 > 8 U.S.C. 1326",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 276 | 8 U.S.C. 1326 | Reentry of removed aliens."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 276 | 8 U.S.C. 1326 | Reentry of removed aliens.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1326&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "277",
       "uscSection": "1327",
+      "localSection": "1327",
       "uscLabel": "8 U.S.C. 1327",
       "title": "Aiding or assisting certain aliens to enter.",
       "group": "Title II: Immigration",
@@ -115866,13 +116213,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 277 > 8 U.S.C. 1327",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 277 | 8 U.S.C. 1327 | Aiding or assisting certain aliens to enter."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 277 | 8 U.S.C. 1327 | Aiding or assisting certain aliens to enter.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1327&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "278",
       "uscSection": "1328",
+      "localSection": "1328",
       "uscLabel": "8 U.S.C. 1328",
       "title": "Importation of alien for immoral purpose.",
       "group": "Title II: Immigration",
@@ -115883,13 +116234,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 278 > 8 U.S.C. 1328",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 278 | 8 U.S.C. 1328 | Importation of alien for immoral purpose."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 278 | 8 U.S.C. 1328 | Importation of alien for immoral purpose.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1328&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "279",
       "uscSection": "1329",
+      "localSection": "1329",
       "uscLabel": "8 U.S.C. 1329",
       "title": "Jurisdiction of district courts.",
       "group": "Title II: Immigration",
@@ -115900,13 +116255,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 279 > 8 U.S.C. 1329",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 279 | 8 U.S.C. 1329 | Jurisdiction of district courts."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 279 | 8 U.S.C. 1329 | Jurisdiction of district courts.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1329&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "280",
       "uscSection": "1330",
+      "localSection": "1330",
       "uscLabel": "8 U.S.C. 1330",
       "title": "Collection of penalties and expenses.",
       "group": "Title II: Immigration",
@@ -115917,13 +116276,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 280 > 8 U.S.C. 1330",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 280 | 8 U.S.C. 1330 | Collection of penalties and expenses."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 280 | 8 U.S.C. 1330 | Collection of penalties and expenses.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1330&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "281",
       "uscSection": "1351",
+      "localSection": "1351",
       "uscLabel": "8 U.S.C. 1351",
       "title": "Nonimmigrant visa fees.",
       "group": "Title II: Immigration",
@@ -115934,13 +116297,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 281 > 8 U.S.C. 1351",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 281 | 8 U.S.C. 1351 | Nonimmigrant visa fees."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 281 | 8 U.S.C. 1351 | Nonimmigrant visa fees.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1351&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "282",
       "uscSection": "1352",
+      "localSection": "1352",
       "uscLabel": "8 U.S.C. 1352",
       "title": "Printing of reentry permits and blank forms of manifest and crew lists; sale to public.",
       "group": "Title II: Immigration",
@@ -115951,13 +116318,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 282 > 8 U.S.C. 1352",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 282 | 8 U.S.C. 1352 | Printing of reentry permits and blank forms of manifest and crew lists; sale to public."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 282 | 8 U.S.C. 1352 | Printing of reentry permits and blank forms of manifest and crew lists; sale to public.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1352&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "283",
       "uscSection": "1353",
+      "localSection": "1353",
       "uscLabel": "8 U.S.C. 1353",
       "title": "Travel expenses and expense of transporting remains of officers and employees dying outside of United States.",
       "group": "Title II: Immigration",
@@ -115968,13 +116339,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 283 > 8 U.S.C. 1353",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 283 | 8 U.S.C. 1353 | Travel expenses and expense of transporting remains of officers and employees dying outside of United States."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 283 | 8 U.S.C. 1353 | Travel expenses and expense of transporting remains of officers and employees dying outside of United States.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1353&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "284",
       "uscSection": "1354",
+      "localSection": "1354",
       "uscLabel": "8 U.S.C. 1354",
       "title": "Applicability to members of the Armed Forces.",
       "group": "Title II: Immigration",
@@ -115985,13 +116360,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 284 > 8 U.S.C. 1354",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 284 | 8 U.S.C. 1354 | Applicability to members of the Armed Forces."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 284 | 8 U.S.C. 1354 | Applicability to members of the Armed Forces.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1354&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "285",
       "uscSection": "1355",
+      "localSection": "1355",
       "uscLabel": "8 U.S.C. 1355",
       "title": "Disposal of privileges at immigrant stations; rentals; retail sale; disposition of receipts.",
       "group": "Title II: Immigration",
@@ -116002,13 +116381,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 285 > 8 U.S.C. 1355",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 285 | 8 U.S.C. 1355 | Disposal of privileges at immigrant stations; rentals; retail sale; disposition of receipts."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 285 | 8 U.S.C. 1355 | Disposal of privileges at immigrant stations; rentals; retail sale; disposition of receipts.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1355&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "286",
       "uscSection": "1356",
+      "localSection": "1356",
       "uscLabel": "8 U.S.C. 1356",
       "title": "Disposition of moneys collected under the provisions of this subchapter.",
       "group": "Title II: Immigration",
@@ -116019,13 +116402,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 286 > 8 U.S.C. 1356",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 286 | 8 U.S.C. 1356 | Disposition of moneys collected under the provisions of this subchapter."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 286 | 8 U.S.C. 1356 | Disposition of moneys collected under the provisions of this subchapter.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1356&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "287",
       "uscSection": "1357",
+      "localSection": "1357",
       "uscLabel": "8 U.S.C. 1357",
       "title": "Powers of immigration officers and employees.",
       "group": "Title II: Immigration",
@@ -116036,13 +116423,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 287 > 8 U.S.C. 1357",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 287 | 8 U.S.C. 1357 | Powers of immigration officers and employees."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 287 | 8 U.S.C. 1357 | Powers of immigration officers and employees.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1357&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "288",
       "uscSection": "1358",
+      "localSection": "1358",
       "uscLabel": "8 U.S.C. 1358",
       "title": "Local jurisdiction over immigrant stations.",
       "group": "Title II: Immigration",
@@ -116053,13 +116444,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 288 > 8 U.S.C. 1358",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 288 | 8 U.S.C. 1358 | Local jurisdiction over immigrant stations."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 288 | 8 U.S.C. 1358 | Local jurisdiction over immigrant stations.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1358&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "289",
       "uscSection": "1359",
+      "localSection": "1359",
       "uscLabel": "8 U.S.C. 1359",
       "title": "Application to American Indians born in Canada.",
       "group": "Title II: Immigration",
@@ -116070,13 +116465,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 289 > 8 U.S.C. 1359",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 289 | 8 U.S.C. 1359 | Application to American Indians born in Canada."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 289 | 8 U.S.C. 1359 | Application to American Indians born in Canada.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1359&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "290",
       "uscSection": "1360",
+      "localSection": "1360",
       "uscLabel": "8 U.S.C. 1360",
       "title": "Establishment of central file; information from other departments and agencies.",
       "group": "Title II: Immigration",
@@ -116087,13 +116486,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 290 > 8 U.S.C. 1360",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 290 | 8 U.S.C. 1360 | Establishment of central file; information from other departments and agencies."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 290 | 8 U.S.C. 1360 | Establishment of central file; information from other departments and agencies.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1360&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "291",
       "uscSection": "1361",
+      "localSection": "1361",
       "uscLabel": "8 U.S.C. 1361",
       "title": "Burden of proof upon alien.",
       "group": "Title II: Immigration",
@@ -116104,13 +116507,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 291 > 8 U.S.C. 1361",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 291 | 8 U.S.C. 1361 | Burden of proof upon alien."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 291 | 8 U.S.C. 1361 | Burden of proof upon alien.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1361&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "292",
       "uscSection": "1362",
+      "localSection": "1362",
       "uscLabel": "8 U.S.C. 1362",
       "title": "Right to counsel.",
       "group": "Title II: Immigration",
@@ -116121,13 +116528,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 292 > 8 U.S.C. 1362",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 292 | 8 U.S.C. 1362 | Right to counsel."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 292 | 8 U.S.C. 1362 | Right to counsel.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1362&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "293",
       "uscSection": "1363",
+      "localSection": "1363",
       "uscLabel": "8 U.S.C. 1363",
       "title": "Deposit of and interest on cash received to secure immigration bonds.",
       "group": "Title II: Immigration",
@@ -116138,13 +116549,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 293 > 8 U.S.C. 1363",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 293 | 8 U.S.C. 1363 | Deposit of and interest on cash received to secure immigration bonds."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 293 | 8 U.S.C. 1363 | Deposit of and interest on cash received to secure immigration bonds.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1363&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "294",
       "uscSection": "1363a",
+      "localSection": "1363a",
       "uscLabel": "8 U.S.C. 1363a",
       "title": "Undercover investigation authority.",
       "group": "Title II: Immigration",
@@ -116155,13 +116570,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 294 > 8 U.S.C. 1363a",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 294 | 8 U.S.C. 1363a | Undercover investigation authority."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 294 | 8 U.S.C. 1363a | Undercover investigation authority.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1363a&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "295",
       "uscSection": "1363b",
+      "localSection": "1363b",
       "uscLabel": "8 U.S.C. 1363b",
       "title": "Repealed.",
       "group": "Title II: Immigration",
@@ -116172,13 +116591,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 295 > 8 U.S.C. 1363b",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 295 | 8 U.S.C. 1363b | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 295 | 8 U.S.C. 1363b | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1363b&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "301",
       "uscSection": "1401",
+      "localSection": "1401",
       "uscLabel": "8 U.S.C. 1401",
       "title": "Nationals and citizens of United States at birth.",
       "group": "Title III: Nationality and Naturalization",
@@ -116189,13 +116612,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 301 > 8 U.S.C. 1401",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 301 | 8 U.S.C. 1401 | Nationals and citizens of United States at birth."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 301 | 8 U.S.C. 1401 | Nationals and citizens of United States at birth.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1401&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "302",
       "uscSection": "1402",
+      "localSection": "1402",
       "uscLabel": "8 U.S.C. 1402",
       "title": "Persons born in Puerto Rico on or after April 11, 1899.",
       "group": "Title III: Nationality and Naturalization",
@@ -116206,13 +116633,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 302 > 8 U.S.C. 1402",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 302 | 8 U.S.C. 1402 | Persons born in Puerto Rico on or after April 11, 1899."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 302 | 8 U.S.C. 1402 | Persons born in Puerto Rico on or after April 11, 1899.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1402&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "303",
       "uscSection": "1403",
+      "localSection": "1403",
       "uscLabel": "8 U.S.C. 1403",
       "title": "Persons born in the Canal Zone or Republic of Panama on or after February 26, 1904.",
       "group": "Title III: Nationality and Naturalization",
@@ -116223,13 +116654,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 303 > 8 U.S.C. 1403",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 303 | 8 U.S.C. 1403 | Persons born in the Canal Zone or Republic of Panama on or after February 26, 1904."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 303 | 8 U.S.C. 1403 | Persons born in the Canal Zone or Republic of Panama on or after February 26, 1904.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1403&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "304",
       "uscSection": "1404",
+      "localSection": "1404",
       "uscLabel": "8 U.S.C. 1404",
       "title": "Persons born in Alaska on or after March 30, 1867.",
       "group": "Title III: Nationality and Naturalization",
@@ -116240,13 +116675,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 304 > 8 U.S.C. 1404",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 304 | 8 U.S.C. 1404 | Persons born in Alaska on or after March 30, 1867."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 304 | 8 U.S.C. 1404 | Persons born in Alaska on or after March 30, 1867.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1404&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "305",
       "uscSection": "1405",
+      "localSection": "1405",
       "uscLabel": "8 U.S.C. 1405",
       "title": "Persons born in Hawaii.",
       "group": "Title III: Nationality and Naturalization",
@@ -116257,13 +116696,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 305 > 8 U.S.C. 1405",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 305 | 8 U.S.C. 1405 | Persons born in Hawaii."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 305 | 8 U.S.C. 1405 | Persons born in Hawaii.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1405&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "306",
       "uscSection": "1406",
+      "localSection": "1406",
       "uscLabel": "8 U.S.C. 1406",
       "title": "Persons living in and born in the Virgin Islands.",
       "group": "Title III: Nationality and Naturalization",
@@ -116274,13 +116717,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 306 > 8 U.S.C. 1406",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 306 | 8 U.S.C. 1406 | Persons living in and born in the Virgin Islands."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 306 | 8 U.S.C. 1406 | Persons living in and born in the Virgin Islands.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1406&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "307",
       "uscSection": "1407",
+      "localSection": "1407",
       "uscLabel": "8 U.S.C. 1407",
       "title": "Persons living in and born in Guam.",
       "group": "Title III: Nationality and Naturalization",
@@ -116291,13 +116738,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 307 > 8 U.S.C. 1407",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 307 | 8 U.S.C. 1407 | Persons living in and born in Guam."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 307 | 8 U.S.C. 1407 | Persons living in and born in Guam.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1407&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "308",
       "uscSection": "1408",
+      "localSection": "1408",
       "uscLabel": "8 U.S.C. 1408",
       "title": "Nationals but not citizens of the United States at birth.",
       "group": "Title III: Nationality and Naturalization",
@@ -116308,13 +116759,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 308 > 8 U.S.C. 1408",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 308 | 8 U.S.C. 1408 | Nationals but not citizens of the United States at birth."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 308 | 8 U.S.C. 1408 | Nationals but not citizens of the United States at birth.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1408&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "309",
       "uscSection": "1409",
+      "localSection": "1409",
       "uscLabel": "8 U.S.C. 1409",
       "title": "Children born out of wedlock.",
       "group": "Title III: Nationality and Naturalization",
@@ -116325,13 +116780,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 309 > 8 U.S.C. 1409",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 309 | 8 U.S.C. 1409 | Children born out of wedlock."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 309 | 8 U.S.C. 1409 | Children born out of wedlock.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1409&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "310",
       "uscSection": "1421",
+      "localSection": "1421",
       "uscLabel": "8 U.S.C. 1421",
       "title": "Naturalization authority.",
       "group": "Title III: Nationality and Naturalization",
@@ -116342,13 +116801,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 310 > 8 U.S.C. 1421",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 310 | 8 U.S.C. 1421 | Naturalization authority."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 310 | 8 U.S.C. 1421 | Naturalization authority.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1421&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "311",
       "uscSection": "1422",
+      "localSection": "1422",
       "uscLabel": "8 U.S.C. 1422",
       "title": "Eligibility for naturalization.",
       "group": "Title III: Nationality and Naturalization",
@@ -116359,13 +116822,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 311 > 8 U.S.C. 1422",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 311 | 8 U.S.C. 1422 | Eligibility for naturalization."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 311 | 8 U.S.C. 1422 | Eligibility for naturalization.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1422&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "312",
       "uscSection": "1423",
+      "localSection": "1423",
       "uscLabel": "8 U.S.C. 1423",
       "title": "Requirements as to understanding the English language, history, principles and form of government of the United States.",
       "group": "Title III: Nationality and Naturalization",
@@ -116376,13 +116843,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 312 > 8 U.S.C. 1423",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 312 | 8 U.S.C. 1423 | Requirements as to understanding the English language, history, principles and form of government of the United States."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 312 | 8 U.S.C. 1423 | Requirements as to understanding the English language, history, principles and form of government of the United States.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1423&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "313",
       "uscSection": "1424",
+      "localSection": "1424",
       "uscLabel": "8 U.S.C. 1424",
       "title": "Prohibition upon the naturalization of persons opposed to government or law, or who favor totalitarian forms of government.",
       "group": "Title III: Nationality and Naturalization",
@@ -116393,13 +116864,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 313 > 8 U.S.C. 1424",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 313 | 8 U.S.C. 1424 | Prohibition upon the naturalization of persons opposed to government or law, or who favor totalitarian forms of government."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 313 | 8 U.S.C. 1424 | Prohibition upon the naturalization of persons opposed to government or law, or who favor totalitarian forms of government.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1424&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "314",
       "uscSection": "1425",
+      "localSection": "1425",
       "uscLabel": "8 U.S.C. 1425",
       "title": "Ineligibility to naturalization of deserters from the Armed Forces.",
       "group": "Title III: Nationality and Naturalization",
@@ -116410,13 +116885,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 314 > 8 U.S.C. 1425",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 314 | 8 U.S.C. 1425 | Ineligibility to naturalization of deserters from the Armed Forces."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 314 | 8 U.S.C. 1425 | Ineligibility to naturalization of deserters from the Armed Forces.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1425&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "315",
       "uscSection": "1426",
+      "localSection": "1426",
       "uscLabel": "8 U.S.C. 1426",
       "title": "Citizenship denied alien relieved of service in Armed Forces because of alienage.",
       "group": "Title III: Nationality and Naturalization",
@@ -116427,13 +116906,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 315 > 8 U.S.C. 1426",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 315 | 8 U.S.C. 1426 | Citizenship denied alien relieved of service in Armed Forces because of alienage."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 315 | 8 U.S.C. 1426 | Citizenship denied alien relieved of service in Armed Forces because of alienage.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1426&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "316",
       "uscSection": "1427",
+      "localSection": "1427",
       "uscLabel": "8 U.S.C. 1427",
       "title": "Requirements of naturalization.",
       "group": "Title III: Nationality and Naturalization",
@@ -116444,13 +116927,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 316 > 8 U.S.C. 1427",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 316 | 8 U.S.C. 1427 | Requirements of naturalization."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 316 | 8 U.S.C. 1427 | Requirements of naturalization.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1427&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "317",
       "uscSection": "1428",
+      "localSection": "1428",
       "uscLabel": "8 U.S.C. 1428",
       "title": "Temporary absence of persons performing religious duties.",
       "group": "Title III: Nationality and Naturalization",
@@ -116461,13 +116948,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 317 > 8 U.S.C. 1428",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 317 | 8 U.S.C. 1428 | Temporary absence of persons performing religious duties."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 317 | 8 U.S.C. 1428 | Temporary absence of persons performing religious duties.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1428&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "318",
       "uscSection": "1429",
+      "localSection": "1429",
       "uscLabel": "8 U.S.C. 1429",
       "title": "Prerequisite to naturalization; burden of proof.",
       "group": "Title III: Nationality and Naturalization",
@@ -116478,13 +116969,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 318 > 8 U.S.C. 1429",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 318 | 8 U.S.C. 1429 | Prerequisite to naturalization; burden of proof."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 318 | 8 U.S.C. 1429 | Prerequisite to naturalization; burden of proof.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1429&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "319",
       "uscSection": "1430",
+      "localSection": "1430",
       "uscLabel": "8 U.S.C. 1430",
       "title": "Married persons and employees of certain nonprofit organizations.",
       "group": "Title III: Nationality and Naturalization",
@@ -116495,13 +116990,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 319 > 8 U.S.C. 1430",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 319 | 8 U.S.C. 1430 | Married persons and employees of certain nonprofit organizations."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 319 | 8 U.S.C. 1430 | Married persons and employees of certain nonprofit organizations.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1430&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "320",
       "uscSection": "1431",
+      "localSection": "1431",
       "uscLabel": "8 U.S.C. 1431",
       "title": "Children born outside the United States and residing permanently in the United States; conditions under which citizenship automatically acquired; determinations of name and birth date.",
       "group": "Title III: Nationality and Naturalization",
@@ -116512,13 +117011,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 320 > 8 U.S.C. 1431",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 320 | 8 U.S.C. 1431 | Children born outside the United States and residing permanently in the United States; conditions under which citizenship automatically acquired; determinations of name and birth date."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 320 | 8 U.S.C. 1431 | Children born outside the United States and residing permanently in the United States; conditions under which citizenship automatically acquired; determinations of name and birth date.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1431&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "321",
       "uscSection": "1432",
+      "localSection": "1432",
       "uscLabel": "8 U.S.C. 1432",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
@@ -116529,13 +117032,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 321 > 8 U.S.C. 1432",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 321 | 8 U.S.C. 1432 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 321 | 8 U.S.C. 1432 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1432&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "322",
       "uscSection": "1433",
+      "localSection": "1433",
       "uscLabel": "8 U.S.C. 1433",
       "title": "Children born and residing outside the United States; conditions for acquiring certificate of citizenship.",
       "group": "Title III: Nationality and Naturalization",
@@ -116546,13 +117053,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 322 > 8 U.S.C. 1433",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 322 | 8 U.S.C. 1433 | Children born and residing outside the United States; conditions for acquiring certificate of citizenship."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 322 | 8 U.S.C. 1433 | Children born and residing outside the United States; conditions for acquiring certificate of citizenship.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1433&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "323",
       "uscSection": "1434",
+      "localSection": "1434",
       "uscLabel": "8 U.S.C. 1434",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
@@ -116563,13 +117074,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 323 > 8 U.S.C. 1434",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 323 | 8 U.S.C. 1434 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 323 | 8 U.S.C. 1434 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1434&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "324",
       "uscSection": "1435",
+      "localSection": "1435",
       "uscLabel": "8 U.S.C. 1435",
       "title": "Former citizens regaining citizenship.",
       "group": "Title III: Nationality and Naturalization",
@@ -116580,13 +117095,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 324 > 8 U.S.C. 1435",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 324 | 8 U.S.C. 1435 | Former citizens regaining citizenship."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 324 | 8 U.S.C. 1435 | Former citizens regaining citizenship.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1435&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "325",
       "uscSection": "1436",
+      "localSection": "1436",
       "uscLabel": "8 U.S.C. 1436",
       "title": "Nationals but not citizens; residence within outlying possessions.",
       "group": "Title III: Nationality and Naturalization",
@@ -116597,13 +117116,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 325 > 8 U.S.C. 1436",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 325 | 8 U.S.C. 1436 | Nationals but not citizens; residence within outlying possessions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 325 | 8 U.S.C. 1436 | Nationals but not citizens; residence within outlying possessions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1436&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "326",
       "uscSection": "1437",
+      "localSection": "1437",
       "uscLabel": "8 U.S.C. 1437",
       "title": "Resident Philippine citizens excepted from certain requirements.",
       "group": "Title III: Nationality and Naturalization",
@@ -116614,13 +117137,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 326 > 8 U.S.C. 1437",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 326 | 8 U.S.C. 1437 | Resident Philippine citizens excepted from certain requirements."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 326 | 8 U.S.C. 1437 | Resident Philippine citizens excepted from certain requirements.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1437&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "327",
       "uscSection": "1438",
+      "localSection": "1438",
       "uscLabel": "8 U.S.C. 1438",
       "title": "Former citizens losing citizenship by entering armed forces of foreign countries during World War II.",
       "group": "Title III: Nationality and Naturalization",
@@ -116631,13 +117158,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 327 > 8 U.S.C. 1438",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 327 | 8 U.S.C. 1438 | Former citizens losing citizenship by entering armed forces of foreign countries during World War II."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 327 | 8 U.S.C. 1438 | Former citizens losing citizenship by entering armed forces of foreign countries during World War II.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1438&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "328",
       "uscSection": "1439",
+      "localSection": "1439",
       "uscLabel": "8 U.S.C. 1439",
       "title": "Naturalization through service in the armed forces.",
       "group": "Title III: Nationality and Naturalization",
@@ -116648,13 +117179,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 328 > 8 U.S.C. 1439",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 328 | 8 U.S.C. 1439 | Naturalization through service in the armed forces."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 328 | 8 U.S.C. 1439 | Naturalization through service in the armed forces.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1439&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "329",
       "uscSection": "1440",
+      "localSection": "1440",
       "uscLabel": "8 U.S.C. 1440",
       "title": "Naturalization through active-duty service in the Armed Forces during World War I, World War II, Korean hostilities, Vietnam hostilities, or other periods of military hostilities.",
       "group": "Title III: Nationality and Naturalization",
@@ -116665,13 +117200,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 329 > 8 U.S.C. 1440",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 329 | 8 U.S.C. 1440 | Naturalization through active-duty service in the Armed Forces during World War I, World War II, Korean hostilities, Vietnam hostilities, or other periods of military hostilities."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 329 | 8 U.S.C. 1440 | Naturalization through active-duty service in the Armed Forces during World War I, World War II, Korean hostilities, Vietnam hostilities, or other periods of military hostilities.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1440&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "329A",
       "uscSection": "1440-1",
+      "localSection": "1440–1",
       "uscLabel": "8 U.S.C. 1440-1",
       "title": "Posthumous citizenship through death while on active-duty service in armed forces during World War I, World War II, the Korean hostilities, the Vietnam hostilities, or in other periods of military hostilities.",
       "group": "Title III: Nationality and Naturalization",
@@ -116682,13 +117221,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 329A > 8 U.S.C. 1440-1",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 329A | 8 U.S.C. 1440-1 | Posthumous citizenship through death while on active-duty service in armed forces during World War I, World War II, the Korean hostilities, the Vietnam hostilities, or in other periods of military hostilities."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 329A | 8 U.S.C. 1440-1 | Posthumous citizenship through death while on active-duty service in armed forces during World War I, World War II, the Korean hostilities, the Vietnam hostilities, or in other periods of military hostilities.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1440-1&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "330",
       "uscSection": "1441",
+      "localSection": "1441",
       "uscLabel": "8 U.S.C. 1441",
       "title": "Constructive residence through service on certain United States vessels.",
       "group": "Title III: Nationality and Naturalization",
@@ -116699,13 +117242,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 330 > 8 U.S.C. 1441",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 330 | 8 U.S.C. 1441 | Constructive residence through service on certain United States vessels."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 330 | 8 U.S.C. 1441 | Constructive residence through service on certain United States vessels.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1441&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "331",
       "uscSection": "1442",
+      "localSection": "1442",
       "uscLabel": "8 U.S.C. 1442",
       "title": "Alien enemies.",
       "group": "Title III: Nationality and Naturalization",
@@ -116716,13 +117263,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 331 > 8 U.S.C. 1442",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 331 | 8 U.S.C. 1442 | Alien enemies."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 331 | 8 U.S.C. 1442 | Alien enemies.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1442&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "332",
       "uscSection": "1443",
+      "localSection": "1443",
       "uscLabel": "8 U.S.C. 1443",
       "title": "Administration.",
       "group": "Title III: Nationality and Naturalization",
@@ -116733,13 +117284,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 332 > 8 U.S.C. 1443",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 332 | 8 U.S.C. 1443 | Administration."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 332 | 8 U.S.C. 1443 | Administration.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1443&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "333",
       "uscSection": "1444",
+      "localSection": "1444",
       "uscLabel": "8 U.S.C. 1444",
       "title": "Photographs; number.",
       "group": "Title III: Nationality and Naturalization",
@@ -116750,13 +117305,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 333 > 8 U.S.C. 1444",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 333 | 8 U.S.C. 1444 | Photographs; number."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 333 | 8 U.S.C. 1444 | Photographs; number.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1444&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "334",
       "uscSection": "1445",
+      "localSection": "1445",
       "uscLabel": "8 U.S.C. 1445",
       "title": "Application for naturalization; declaration of intention.",
       "group": "Title III: Nationality and Naturalization",
@@ -116767,13 +117326,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 334 > 8 U.S.C. 1445",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 334 | 8 U.S.C. 1445 | Application for naturalization; declaration of intention."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 334 | 8 U.S.C. 1445 | Application for naturalization; declaration of intention.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1445&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "335",
       "uscSection": "1446",
+      "localSection": "1446",
       "uscLabel": "8 U.S.C. 1446",
       "title": "Investigation of applicants; examination of applications.",
       "group": "Title III: Nationality and Naturalization",
@@ -116784,13 +117347,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 335 > 8 U.S.C. 1446",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 335 | 8 U.S.C. 1446 | Investigation of applicants; examination of applications."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 335 | 8 U.S.C. 1446 | Investigation of applicants; examination of applications.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1446&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "336",
       "uscSection": "1447",
+      "localSection": "1447",
       "uscLabel": "8 U.S.C. 1447",
       "title": "Hearings on denials of applications for naturalization.",
       "group": "Title III: Nationality and Naturalization",
@@ -116801,13 +117368,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 336 > 8 U.S.C. 1447",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 336 | 8 U.S.C. 1447 | Hearings on denials of applications for naturalization."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 336 | 8 U.S.C. 1447 | Hearings on denials of applications for naturalization.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1447&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "337",
       "uscSection": "1448",
+      "localSection": "1448",
       "uscLabel": "8 U.S.C. 1448",
       "title": "Oath of renunciation and allegiance.",
       "group": "Title III: Nationality and Naturalization",
@@ -116818,13 +117389,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 337 > 8 U.S.C. 1448",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 337 | 8 U.S.C. 1448 | Oath of renunciation and allegiance."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 337 | 8 U.S.C. 1448 | Oath of renunciation and allegiance.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1448&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "338",
       "uscSection": "1449",
+      "localSection": "1449",
       "uscLabel": "8 U.S.C. 1449",
       "title": "Certificate of naturalization; contents.",
       "group": "Title III: Nationality and Naturalization",
@@ -116835,13 +117410,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 338 > 8 U.S.C. 1449",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 338 | 8 U.S.C. 1449 | Certificate of naturalization; contents."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 338 | 8 U.S.C. 1449 | Certificate of naturalization; contents.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1449&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "339",
       "uscSection": "1450",
+      "localSection": "1450",
       "uscLabel": "8 U.S.C. 1450",
       "title": "Functions and duties of clerks and records of declarations of intention and applications for naturalization.",
       "group": "Title III: Nationality and Naturalization",
@@ -116852,13 +117431,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 339 > 8 U.S.C. 1450",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 339 | 8 U.S.C. 1450 | Functions and duties of clerks and records of declarations of intention and applications for naturalization."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 339 | 8 U.S.C. 1450 | Functions and duties of clerks and records of declarations of intention and applications for naturalization.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1450&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "340",
       "uscSection": "1451",
+      "localSection": "1451",
       "uscLabel": "8 U.S.C. 1451",
       "title": "Revocation of naturalization.",
       "group": "Title III: Nationality and Naturalization",
@@ -116869,13 +117452,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 340 > 8 U.S.C. 1451",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 340 | 8 U.S.C. 1451 | Revocation of naturalization."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 340 | 8 U.S.C. 1451 | Revocation of naturalization.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1451&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "341",
       "uscSection": "1452",
+      "localSection": "1452",
       "uscLabel": "8 U.S.C. 1452",
       "title": "Certificates of citizenship or U.S. national status; procedure.",
       "group": "Title III: Nationality and Naturalization",
@@ -116886,13 +117473,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 341 > 8 U.S.C. 1452",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 341 | 8 U.S.C. 1452 | Certificates of citizenship or U.S. national status; procedure."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 341 | 8 U.S.C. 1452 | Certificates of citizenship or U.S. national status; procedure.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1452&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "342",
       "uscSection": "1453",
+      "localSection": "1453",
       "uscLabel": "8 U.S.C. 1453",
       "title": "Cancellation of certificates issued by Attorney General, the Commissioner or a Deputy Commissioner; action not to affect citizenship status.",
       "group": "Title III: Nationality and Naturalization",
@@ -116903,13 +117494,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 342 > 8 U.S.C. 1453",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 342 | 8 U.S.C. 1453 | Cancellation of certificates issued by Attorney General, the Commissioner or a Deputy Commissioner; action not to affect citizenship status."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 342 | 8 U.S.C. 1453 | Cancellation of certificates issued by Attorney General, the Commissioner or a Deputy Commissioner; action not to affect citizenship status.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1453&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "343",
       "uscSection": "1454",
+      "localSection": "1454",
       "uscLabel": "8 U.S.C. 1454",
       "title": "Documents and copies issued by Attorney General.",
       "group": "Title III: Nationality and Naturalization",
@@ -116920,13 +117515,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 343 > 8 U.S.C. 1454",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 343 | 8 U.S.C. 1454 | Documents and copies issued by Attorney General."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 343 | 8 U.S.C. 1454 | Documents and copies issued by Attorney General.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1454&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "344",
       "uscSection": "1455",
+      "localSection": "1455",
       "uscLabel": "8 U.S.C. 1455",
       "title": "Fiscal provisions.",
       "group": "Title III: Nationality and Naturalization",
@@ -116937,13 +117536,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 344 > 8 U.S.C. 1455",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 344 | 8 U.S.C. 1455 | Fiscal provisions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 344 | 8 U.S.C. 1455 | Fiscal provisions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1455&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "345",
       "uscSection": "1456",
+      "localSection": "1456",
       "uscLabel": "8 U.S.C. 1456",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
@@ -116954,13 +117557,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 345 > 8 U.S.C. 1456",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 345 | 8 U.S.C. 1456 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 345 | 8 U.S.C. 1456 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1456&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "346",
       "uscSection": "1457",
+      "localSection": "1457",
       "uscLabel": "8 U.S.C. 1457",
       "title": "Publication and distribution of citizenship textbooks; use of naturalization fees.",
       "group": "Title III: Nationality and Naturalization",
@@ -116971,13 +117578,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 346 > 8 U.S.C. 1457",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 346 | 8 U.S.C. 1457 | Publication and distribution of citizenship textbooks; use of naturalization fees."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 346 | 8 U.S.C. 1457 | Publication and distribution of citizenship textbooks; use of naturalization fees.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1457&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "347",
       "uscSection": "1458",
+      "localSection": "1458",
       "uscLabel": "8 U.S.C. 1458",
       "title": "Compilation of naturalization statistics and payment for equipment.",
       "group": "Title III: Nationality and Naturalization",
@@ -116988,13 +117599,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 347 > 8 U.S.C. 1458",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 347 | 8 U.S.C. 1458 | Compilation of naturalization statistics and payment for equipment."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 347 | 8 U.S.C. 1458 | Compilation of naturalization statistics and payment for equipment.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1458&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "348",
       "uscSection": "1459",
+      "localSection": "1459",
       "uscLabel": "8 U.S.C. 1459",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
@@ -117005,13 +117620,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 348 > 8 U.S.C. 1459",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 348 | 8 U.S.C. 1459 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 348 | 8 U.S.C. 1459 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1459&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "349",
       "uscSection": "1481",
+      "localSection": "1481",
       "uscLabel": "8 U.S.C. 1481",
       "title": "Loss of nationality by native-born or naturalized citizen; voluntary action; burden of proof; presumptions.",
       "group": "Title III: Nationality and Naturalization",
@@ -117022,13 +117641,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 349 > 8 U.S.C. 1481",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 349 | 8 U.S.C. 1481 | Loss of nationality by native-born or naturalized citizen; voluntary action; burden of proof; presumptions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 349 | 8 U.S.C. 1481 | Loss of nationality by native-born or naturalized citizen; voluntary action; burden of proof; presumptions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1481&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "350",
       "uscSection": "1482",
+      "localSection": "1482",
       "uscLabel": "8 U.S.C. 1482",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
@@ -117039,13 +117662,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 350 > 8 U.S.C. 1482",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 350 | 8 U.S.C. 1482 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 350 | 8 U.S.C. 1482 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1482&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "351",
       "uscSection": "1483",
+      "localSection": "1483",
       "uscLabel": "8 U.S.C. 1483",
       "title": "Restrictions on loss of nationality.",
       "group": "Title III: Nationality and Naturalization",
@@ -117056,13 +117683,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 351 > 8 U.S.C. 1483",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 351 | 8 U.S.C. 1483 | Restrictions on loss of nationality."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 351 | 8 U.S.C. 1483 | Restrictions on loss of nationality.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1483&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "352",
       "uscSection": "1484",
+      "localSection": "1484 to 1487",
       "uscLabel": "8 U.S.C. 1484",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
@@ -117073,64 +117704,80 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 352 > 8 U.S.C. 1484",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 352 | 8 U.S.C. 1484 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 352 | 8 U.S.C. 1484 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "353",
       "uscSection": "1485",
+      "localSection": "1484 to 1487",
       "uscLabel": "8 U.S.C. 1485",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
-      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim",
+      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1485&num=0&edition=prelim",
       "isNote": false,
       "hasEquivalent": true,
       "source": {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 353 > 8 U.S.C. 1485",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 353 | 8 U.S.C. 1485 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 353 | 8 U.S.C. 1485 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "354",
       "uscSection": "1486",
+      "localSection": "1484 to 1487",
       "uscLabel": "8 U.S.C. 1486",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
-      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim",
+      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1486&num=0&edition=prelim",
       "isNote": false,
       "hasEquivalent": true,
       "source": {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 354 > 8 U.S.C. 1486",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 354 | 8 U.S.C. 1486 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 354 | 8 U.S.C. 1486 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "355",
       "uscSection": "1487",
+      "localSection": "1484 to 1487",
       "uscLabel": "8 U.S.C. 1487",
       "title": "Repealed.",
       "group": "Title III: Nationality and Naturalization",
-      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim",
+      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1487&num=0&edition=prelim",
       "isNote": false,
       "hasEquivalent": true,
       "source": {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 355 > 8 U.S.C. 1487",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 355 | 8 U.S.C. 1487 | Repealed."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 355 | 8 U.S.C. 1487 | Repealed.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1484&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "356",
       "uscSection": "1488",
+      "localSection": "1488",
       "uscLabel": "8 U.S.C. 1488",
       "title": "Nationality lost solely from performance of acts or fulfillment of conditions.",
       "group": "Title III: Nationality and Naturalization",
@@ -117141,13 +117788,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 356 > 8 U.S.C. 1488",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 356 | 8 U.S.C. 1488 | Nationality lost solely from performance of acts or fulfillment of conditions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 356 | 8 U.S.C. 1488 | Nationality lost solely from performance of acts or fulfillment of conditions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1488&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "357",
       "uscSection": "1489",
+      "localSection": "1489",
       "uscLabel": "8 U.S.C. 1489",
       "title": "Application of treaties; exceptions.",
       "group": "Title III: Nationality and Naturalization",
@@ -117158,13 +117809,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 357 > 8 U.S.C. 1489",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 357 | 8 U.S.C. 1489 | Application of treaties; exceptions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 357 | 8 U.S.C. 1489 | Application of treaties; exceptions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1489&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "358",
       "uscSection": "1501",
+      "localSection": "1501",
       "uscLabel": "8 U.S.C. 1501",
       "title": "Certificate of diplomatic or consular officer of United States as to loss of American nationality.",
       "group": "Title III: Nationality and Naturalization",
@@ -117175,13 +117830,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 358 > 8 U.S.C. 1501",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 358 | 8 U.S.C. 1501 | Certificate of diplomatic or consular officer of United States as to loss of American nationality."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 358 | 8 U.S.C. 1501 | Certificate of diplomatic or consular officer of United States as to loss of American nationality.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1501&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "359",
       "uscSection": "1502",
+      "localSection": "1502",
       "uscLabel": "8 U.S.C. 1502",
       "title": "Certificate of nationality issued by Secretary of State for person not a naturalized citizen of United States for use in proceedings of a foreign state.",
       "group": "Title III: Nationality and Naturalization",
@@ -117192,13 +117851,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 359 > 8 U.S.C. 1502",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 359 | 8 U.S.C. 1502 | Certificate of nationality issued by Secretary of State for person not a naturalized citizen of United States for use in proceedings of a foreign state."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 359 | 8 U.S.C. 1502 | Certificate of nationality issued by Secretary of State for person not a naturalized citizen of United States for use in proceedings of a foreign state.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1502&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "360",
       "uscSection": "1503",
+      "localSection": "1503",
       "uscLabel": "8 U.S.C. 1503",
       "title": "Denial of rights and privileges as national.",
       "group": "Title III: Nationality and Naturalization",
@@ -117209,13 +117872,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 360 > 8 U.S.C. 1503",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 360 | 8 U.S.C. 1503 | Denial of rights and privileges as national."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 360 | 8 U.S.C. 1503 | Denial of rights and privileges as national.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1503&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "361",
       "uscSection": "1504",
+      "localSection": "1504",
       "uscLabel": "8 U.S.C. 1504",
       "title": "Cancellation of United States passports and Consular Reports of Birth.",
       "group": "Title III: Nationality and Naturalization",
@@ -117226,13 +117893,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 361 > 8 U.S.C. 1504",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 361 | 8 U.S.C. 1504 | Cancellation of United States passports and Consular Reports of Birth."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 361 | 8 U.S.C. 1504 | Cancellation of United States passports and Consular Reports of Birth.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1504&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "401",
       "uscSection": "",
+      "localSection": "",
       "uscLabel": "No equivalent",
       "title": "Repealed.",
       "group": "Title IV: Refugee Assistance",
@@ -117243,13 +117914,16 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 401 > No equivalent",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
         "supportingExcerpt": "INA 401 | No equivalent | Repealed."
       }
     },
     {
       "inaSection": "402",
       "uscSection": "",
+      "localSection": "",
       "uscLabel": "No equivalent",
       "title": "Omitted as executed.",
       "group": "Title IV: Refugee Assistance",
@@ -117260,13 +117934,16 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 402 > No equivalent",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
         "supportingExcerpt": "INA 402 | No equivalent | Omitted as executed."
       }
     },
     {
       "inaSection": "403",
       "uscSection": "",
+      "localSection": "",
       "uscLabel": "No equivalent",
       "title": "Omitted as executed.",
       "group": "Title IV: Refugee Assistance",
@@ -117277,13 +117954,16 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 403 > No equivalent",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
         "supportingExcerpt": "INA 403 | No equivalent | Omitted as executed."
       }
     },
     {
       "inaSection": "404",
       "uscSection": "1101",
+      "localSection": "",
       "uscLabel": "8 U.S.C. 1101, note",
       "title": "Authorization of Appropriations.",
       "group": "Title IV: Refugee Assistance",
@@ -117294,13 +117974,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 404 > 8 U.S.C. 1101, note",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 404 | 8 U.S.C. 1101, note | Authorization of Appropriations."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 404 | 8 U.S.C. 1101, note | Authorization of Appropriations.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1101&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "405",
       "uscSection": "1101",
+      "localSection": "",
       "uscLabel": "8 U.S.C. 1101, note",
       "title": "Savings Clauses.",
       "group": "Title IV: Refugee Assistance",
@@ -117311,13 +117995,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 405 > 8 U.S.C. 1101, note",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 405 | 8 U.S.C. 1101, note | Savings Clauses."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 405 | 8 U.S.C. 1101, note | Savings Clauses.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1101&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "406",
       "uscSection": "1101",
+      "localSection": "",
       "uscLabel": "8 U.S.C. 1101, note",
       "title": "Separability.",
       "group": "Title IV: Refugee Assistance",
@@ -117328,13 +118016,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 406 > 8 U.S.C. 1101, note",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 406 | 8 U.S.C. 1101, note | Separability."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 406 | 8 U.S.C. 1101, note | Separability.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1101&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "407",
       "uscSection": "1101",
+      "localSection": "",
       "uscLabel": "8 U.S.C. 1101, note",
       "title": "Effective Date.",
       "group": "Title IV: Refugee Assistance",
@@ -117345,13 +118037,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 407 > 8 U.S.C. 1101, note",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 407 | 8 U.S.C. 1101, note | Effective Date."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 407 | 8 U.S.C. 1101, note | Effective Date.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1101&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "411",
       "uscSection": "1521",
+      "localSection": "1521",
       "uscLabel": "8 U.S.C. 1521",
       "title": "Office of Refugee Resettlement; establishment; appointment of Director; functions.",
       "group": "Title IV: Refugee Assistance",
@@ -117362,13 +118058,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 411 > 8 U.S.C. 1521",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 411 | 8 U.S.C. 1521 | Office of Refugee Resettlement; establishment; appointment of Director; functions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 411 | 8 U.S.C. 1521 | Office of Refugee Resettlement; establishment; appointment of Director; functions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1521&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "412",
       "uscSection": "1522",
+      "localSection": "1522",
       "uscLabel": "8 U.S.C. 1522",
       "title": "Authorization for programs for domestic resettlement of and assistance to refugees.",
       "group": "Title IV: Refugee Assistance",
@@ -117379,13 +118079,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 412 > 8 U.S.C. 1522",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 412 | 8 U.S.C. 1522 | Authorization for programs for domestic resettlement of and assistance to refugees."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 412 | 8 U.S.C. 1522 | Authorization for programs for domestic resettlement of and assistance to refugees.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1522&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "413",
       "uscSection": "1523",
+      "localSection": "1523",
       "uscLabel": "8 U.S.C. 1523",
       "title": "Congressional reports.",
       "group": "Title IV: Refugee Assistance",
@@ -117396,13 +118100,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 413 > 8 U.S.C. 1523",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 413 | 8 U.S.C. 1523 | Congressional reports."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 413 | 8 U.S.C. 1523 | Congressional reports.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1523&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "414",
       "uscSection": "1524",
+      "localSection": "1524",
       "uscLabel": "8 U.S.C. 1524",
       "title": "Authorization of appropriations.",
       "group": "Title IV: Refugee Assistance",
@@ -117413,13 +118121,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 414 > 8 U.S.C. 1524",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 414 | 8 U.S.C. 1524 | Authorization of appropriations."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 414 | 8 U.S.C. 1524 | Authorization of appropriations.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1524&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "501",
       "uscSection": "1531",
+      "localSection": "1531",
       "uscLabel": "8 U.S.C. 1531",
       "title": "Definitions.",
       "group": "Title V: Alien Terrorist Removal Procedures",
@@ -117430,13 +118142,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 501 > 8 U.S.C. 1531",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 501 | 8 U.S.C. 1531 | Definitions."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 501 | 8 U.S.C. 1531 | Definitions.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1531&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "502",
       "uscSection": "1532",
+      "localSection": "1532",
       "uscLabel": "8 U.S.C. 1532",
       "title": "Establishment of removal court.",
       "group": "Title V: Alien Terrorist Removal Procedures",
@@ -117447,13 +118163,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 502 > 8 U.S.C. 1532",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 502 | 8 U.S.C. 1532 | Establishment of removal court."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 502 | 8 U.S.C. 1532 | Establishment of removal court.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1532&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "503",
       "uscSection": "1533",
+      "localSection": "1533",
       "uscLabel": "8 U.S.C. 1533",
       "title": "Removal court procedure.",
       "group": "Title V: Alien Terrorist Removal Procedures",
@@ -117464,13 +118184,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 503 > 8 U.S.C. 1533",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 503 | 8 U.S.C. 1533 | Removal court procedure."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 503 | 8 U.S.C. 1533 | Removal court procedure.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1533&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "504",
       "uscSection": "1534",
+      "localSection": "1534",
       "uscLabel": "8 U.S.C. 1534",
       "title": "Removal hearing.",
       "group": "Title V: Alien Terrorist Removal Procedures",
@@ -117481,13 +118205,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 504 > 8 U.S.C. 1534",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 504 | 8 U.S.C. 1534 | Removal hearing."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 504 | 8 U.S.C. 1534 | Removal hearing.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1534&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "505",
       "uscSection": "1535",
+      "localSection": "1535",
       "uscLabel": "8 U.S.C. 1535",
       "title": "Appeals.",
       "group": "Title V: Alien Terrorist Removal Procedures",
@@ -117498,13 +118226,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 505 > 8 U.S.C. 1535",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 505 | 8 U.S.C. 1535 | Appeals."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 505 | 8 U.S.C. 1535 | Appeals.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1535&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "506",
       "uscSection": "1536",
+      "localSection": "1536",
       "uscLabel": "8 U.S.C. 1536",
       "title": "Custody and release pending removal hearing.",
       "group": "Title V: Alien Terrorist Removal Procedures",
@@ -117515,13 +118247,17 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 506 > 8 U.S.C. 1536",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 506 | 8 U.S.C. 1536 | Custody and release pending removal hearing."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 506 | 8 U.S.C. 1536 | Custody and release pending removal hearing.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1536&num=0&edition=prelim"
       }
     },
     {
       "inaSection": "507",
       "uscSection": "1537",
+      "localSection": "1537",
       "uscLabel": "8 U.S.C. 1537",
       "title": "Custody and release after removal hearing.",
       "group": "Title V: Alien Terrorist Removal Procedures",
@@ -117532,8 +118268,11 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 507 > 8 U.S.C. 1537",
         "url": "https://www.uscis.gov/legal-resources/immigration-and-nationality-act",
-        "captureDate": "2026-07-30",
-        "supportingExcerpt": "INA 507 | 8 U.S.C. 1537 | Custody and release after removal hearing."
+        "captureDate": "2026-08-21",
+        "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
+        "sourceSha256": "e41d92a7d3d886ff22ece29ef8d5fa1c6156f89e617161738118faf82d30a005",
+        "supportingExcerpt": "INA 507 | 8 U.S.C. 1537 | Custody and release after removal hearing.",
+        "sourceHref": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1537&num=0&edition=prelim"
       }
     }
   ],

@@ -602,6 +602,9 @@
     cfr.appendices.sort((left, right) => left.title - right.title || String(left.partId).localeCompare(String(right.partId), "en", { numeric: true }) || String(left.id).localeCompare(String(right.id), "en", { numeric: true }));
     rebuildCoverage(cfr);
     if (plan.changedParts.has("8:1")) refreshCfrDefinitions(updated);
+    const referenceEngine = globalThis.INASearchLegalReferences;
+    if (!referenceEngine?.applyCfrReferences) throw new Error("The shared legal-reference engine is unavailable; the CFR update was not activated.");
+    const citationMaintenance = referenceEngine.applyCfrReferences(updated, plan.changedParts);
     const maximumDate = [...plan.targetDates.values()].sort().at(-1);
     updated.corpusVersion = runtimeCorpusVersion(updated.corpusVersion, maximumDate);
     updated.verifiedAt = nowIso();
@@ -611,6 +614,11 @@
       checkedAt: plan.checkedAt,
       currentThrough: Object.fromEntries(plan.targetDates),
       changedParts: tasks.map(task => task.key),
+      citationReferencesRegenerated: true,
+      citationReferenceParts: citationMaintenance.changedParts,
+      citationReferenceFields: citationMaintenance.fields,
+      citationReferenceCount: citationMaintenance.references,
+      citationReferenceEngineVersion: citationMaintenance.engineVersion,
       requestPattern: "fixed-corpus-coverage",
       navigationIndependent: true
     };

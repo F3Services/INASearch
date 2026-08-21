@@ -4,12 +4,25 @@
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const crypto = require("crypto");
 const { statuteNodeMap, statuteSourceMap } = require("./statute-references");
 const { applyStatuteFootnotes } = require("./statute-footnotes");
 
 const root = path.resolve(__dirname, "..");
-const xmlPath = process.argv[2];
-if (!xmlPath) throw new Error("Usage: node tools/generate-statute-references.js /path/to/usc08.xml");
+const manifestPath = path.join(root, "sources", "legal", "source-manifest.json");
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+const houseArtifact = manifest.sources.flatMap(source => source.artifacts || []).find(artifact => artifact.id === "house-title-8-xml");
+if (!houseArtifact) throw new Error("The legal-source manifest does not contain the House Title 8 XML artifact.");
+const xmlPath = process.argv[2] || path.join(root, houseArtifact.path);
+const xmlBytes = fs.readFileSync(xmlPath);
+const xmlSha256 = crypto.createHash("sha256").update(xmlBytes).digest("hex");
+if (path.resolve(xmlPath) === path.resolve(root, houseArtifact.path) && (xmlBytes.length !== houseArtifact.bytes || xmlSha256 !== houseArtifact.sha256)) {
+  throw new Error("The committed House Title 8 XML does not match the legal-source manifest.");
+}
+
+function normalizeSectionNumber(value) {
+  return String(value || "").replace(/\.\.\./g, " to ");
+}
 
 function readAssigned(fileName, propertyName) {
   const sandbox = { window: {} };
@@ -141,8 +154,8 @@ function extractReferences(xml) {
       if (structural.has(name) && identifier) {
         const match = identifier.match(/^\/us\/usc\/t8\/s([^/\s]+)(?:\/(.*))?$/);
         if (match && !/\s/.test(match[2] || "")) {
-          sectionNumber = match[1];
-          const baseKey = match[2] ? `${match[1]}:${match[2]}` : `${match[1]}:preamble`;
+          sectionNumber = normalizeSectionNumber(match[1]);
+          const baseKey = match[2] ? `${sectionNumber}:${match[2]}` : `${sectionNumber}:preamble`;
           const occurrence = (structuralOccurrences.get(baseKey) || 0) + 1;
           structuralOccurrences.set(baseKey, occurrence);
           sourceKey = occurrence === 1 ? baseKey : `${baseKey}#${occurrence}`;
@@ -207,7 +220,7 @@ applyStatuteFootnotes(corpus, readAssigned("INASearch-Statute-Footnotes.js", "IN
 const sourceMap = statuteSourceMap(corpus);
 const localSections = new Set((corpus.title8?.sections || []).map(section => String(section.section)));
 const localNodes = statuteNodeMap(corpus);
-const extracted = extractReferences(fs.readFileSync(xmlPath, "utf8"));
+const extracted = extractReferences(xmlBytes.toString("utf8"));
 const grouped = new Map();
 let missingSourceRecord = 0;
 let sourceTextMismatch = 0;
@@ -257,11 +270,17 @@ for (const [, group] of [...grouped.entries()].sort(([a], [b]) => a.localeCompar
 }
 
 const accepted = outputSources.flatMap(source => source.references);
+if (missingSourceRecord || sourceTextMismatch || accepted.length !== extracted.references.length) {
+  throw new Error(`House reference extraction skipped ${missingSourceRecord} missing-source and ${sourceTextMismatch} text-mismatch references. First skips: ${JSON.stringify(skipped.slice(0, 5))}`);
+}
 const result = {
   schemaVersion: 3,
   sourceUrl: "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
   sourceReleasePoint: "119-102",
-  capturedAt: "2026-08-02",
+  capturedAt: manifest.capturedAt,
+  sourceArtifact: houseArtifact.path,
+  sourceBytes: xmlBytes.length,
+  sourceSha256: xmlSha256,
   unitTypes: extracted.unitTypes,
   extraction: {
     displayedReferencesSeen: extracted.references.length,

@@ -30,22 +30,19 @@ PTAR_URL = "https://www.govinfo.gov/content/pkg/GPO-CFR-INDEX-{year}/html/GPO-CF
 TITLES_URL = "https://www.ecfr.gov/api/versioner/v1/titles.json"
 FULL_URL = "https://www.ecfr.gov/api/versioner/v1/full/{date}/title-{title}.xml"
 VERSIONS_URL = "https://www.ecfr.gov/api/versioner/v1/versions/title-{title}.json?part={part}"
-
-# The complete Title 8 CFR is always in scope. These are the cross-title parts
-# expected from the 2025 PTAR Title 8 U.S.C. block; a refresh fails if it drifts.
+CFR_SCOPE_POLICY_PATH = ROOT / "sources" / "legal" / "cfr-scope-policy.json"
+CFR_SCOPE_POLICY_BYTES = CFR_SCOPE_POLICY_PATH.read_bytes()
+CFR_SCOPE_POLICY = json.loads(CFR_SCOPE_POLICY_BYTES)
+if CFR_SCOPE_POLICY.get("schemaVersion") != 1:
+    raise ValueError("Unsupported CFR scope-policy schema")
 EXPECTED_CROSS_TITLE_PARTS = {
-    6: ["19", "115"],
-    19: ["4"],
-    20: ["416", "654", "655", "656"],
-    22: ["22", "40", "41", "42", "46", "50", "51", "53", "62", "89", "131", "172"],
-    28: ["8", "9", "44", "65", "68", "1100"],
-    29: ["501", "502", "503", "504", "506", "507", "508"],
-    31: ["501", "597"],
-    34: ["676", "692"],
-    42: ["34"],
-    45: ["50", "51", "400", "401", "402", "410"],
+    int(title): [str(part) for part in parts]
+    for title, parts in CFR_SCOPE_POLICY["crossTitleCoverage"]["expectedParts"].items()
 }
-REMOVED_PARTS = {(45, "402")}
+REMOVED_PARTS = {
+    (int(value.split(":", 1)[0]), value.split(":", 1)[1])
+    for value in CFR_SCOPE_POLICY["crossTitleCoverage"].get("removedParts", [])
+}
 GRAPHIC_FALLBACKS = {
     "/graphics/er15ja25.063.gif": {
         "asset": ROOT / "tools" / "cfr-assets" / "er15ja25.063.png",
@@ -170,19 +167,30 @@ def intersect_ptar_mappings(mappings: dict[tuple[int, str], list[str]]) -> dict[
     return {key: [locator for locator in locators if locator_intersects_cache(locator, sections)] for key, locators in mappings.items() if any(locator_intersects_cache(locator, sections) for locator in locators)}
 
 
+def validate_reviewed_scope(mappings: dict[tuple[int, str], list[str]], year: int) -> None:
+    reviewed_year = int(CFR_SCOPE_POLICY["crossTitleCoverage"]["ptarYear"])
+    if year != reviewed_year:
+        raise ValueError(f"CFR scope policy reviews PTAR year {reviewed_year}, not {year}; update the policy before refreshing")
+    selected = {key for key in mappings if key[0] != 8}
+    expected = {(title, part) for title, parts in EXPECTED_CROSS_TITLE_PARTS.items() for part in parts}
+    if selected != expected:
+        missing = sorted(expected - selected)
+        added = sorted(selected - expected)
+        raise ValueError(f"PTAR coverage drifted. Missing expected mappings: {missing}; unexpected mappings: {added}")
+
+
 def refresh(cache: pathlib.Path, year: int) -> None:
+    reviewed_year = int(CFR_SCOPE_POLICY["crossTitleCoverage"]["ptarYear"])
+    if year != reviewed_year:
+        raise ValueError(f"CFR scope policy reviews PTAR year {reviewed_year}, not {year}; update the policy before refreshing")
     cache.mkdir(parents=True, exist_ok=True)
     captured_at = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     ptar_url = PTAR_URL.format(year=year)
     ptar = fetch(ptar_url)
     ptar_record = write_capture(cache / "ptar.html", ptar)
     mappings = intersect_ptar_mappings(parse_ptar(ptar))
+    validate_reviewed_scope(mappings, year)
     selected = {key for key in mappings if key[0] != 8}
-    expected = {(title, part) for title, parts in EXPECTED_CROSS_TITLE_PARTS.items() for part in parts}
-    if year == 2025 and selected != expected:
-        missing = sorted(expected - selected)
-        added = sorted(selected - expected)
-        raise ValueError(f"PTAR coverage drifted. Missing expected mappings: {missing}; unexpected mappings: {added}")
 
     titles_raw = fetch(TITLES_URL)
     title_record = write_capture(cache / "titles.json", titles_raw)
@@ -634,6 +642,13 @@ def generate(cache: pathlib.Path, output: pathlib.Path) -> dict:
     ptar = read_verified(cache / "ptar.html", capture["ptar"], "Parallel Table")
     read_verified(cache / "titles.json", capture["titleMetadata"], "eCFR title metadata")
     mappings = intersect_ptar_mappings(parse_ptar(ptar))
+    validate_reviewed_scope(mappings, int(capture["ptarYear"]))
+    captured_removed = {
+        (int(record["title"]), str(record["part"]))
+        for record in capture.get("removedSources", {}).values()
+    }
+    if captured_removed != REMOVED_PARTS:
+        raise ValueError(f"Removed-part coverage drifted. Policy: {sorted(REMOVED_PARTS)}; capture: {sorted(captured_removed)}")
     graphics = load_graphics(cache)
     parts: list[dict] = []
     sections: list[dict] = []
@@ -670,6 +685,14 @@ def generate(cache: pathlib.Path, output: pathlib.Path) -> dict:
     result = {
         "schemaVersion": 1,
         "ptarYear": capture["ptarYear"],
+        "scopePolicy": {
+            "path": CFR_SCOPE_POLICY_PATH.relative_to(ROOT).as_posix(),
+            "schemaVersion": CFR_SCOPE_POLICY["schemaVersion"],
+            "reviewedAt": CFR_SCOPE_POLICY["reviewedAt"],
+            "bytes": len(CFR_SCOPE_POLICY_BYTES),
+            "sha256": sha256(CFR_SCOPE_POLICY_BYTES),
+            "limitations": CFR_SCOPE_POLICY["limitations"],
+        },
         "captureTime": capture["captureTime"],
         "ptar": {**capture["ptar"], "mappingCount": len(mappings)},
         "titleMetadata": capture["titleMetadata"],

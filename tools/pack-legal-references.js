@@ -15,12 +15,12 @@ const REFERENCE_KEYS = {
   id: "i", start: "s", end: "e", text: "x", family: "f", resolution: "r", targetKind: "k",
   targetTitle: "t", targetSection: "n", targetPath: "a", targetCongress: "c", targetLaw: "l",
   targetVolume: "v", targetPage: "g", houseHref: "h", officialUrl: "u", provenance: "p",
-  ruleId: "q", sourceKind: "z", inaSection: "d"
+  ruleId: "q", sourceKind: "z", inaSection: "d", policyScopeId: "y"
 };
 const KEY_REFERENCES = Object.fromEntries(Object.entries(REFERENCE_KEYS).map(([property, key]) => [key, property]));
 const FAMILY_CODES = { usc: "u", ina: "i", cfr: "c", "public-law": "p", "statutes-at-large": "s", "federal-register": "f", unknown: "?" };
 const CODE_FAMILIES = Object.fromEntries(Object.entries(FAMILY_CODES).map(([family, code]) => [code, family]));
-const RULES = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-title8-cfr-the-act", "ambiguous-antecedent", "context-cfr-ina-act-section"];
+const RULES = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-cfr-the-act", "ambiguous-antecedent", "context-cfr-ina-act-section"];
 
 function pathTokens(value) {
   return [...String(value || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]);
@@ -51,7 +51,8 @@ function compactReference(reference, houseHrefIndex = () => 0, legalTargetIndex 
   const target = [FAMILY_CODES[reference.family] || "?", resolution,
     reference.targetTitle || 0, reference.targetSection || 0, !derivedPath && reference.targetPath?.length ? reference.targetPath : 0,
     reference.targetCongress || 0, reference.targetLaw || 0, reference.targetVolume || 0, reference.targetPage || 0,
-    Math.max(0, RULES.indexOf(reference.ruleId || "")), reference.inaSection || 0];
+    Math.max(0, RULES.indexOf(reference.ruleId || "")), reference.inaSection || 0,
+    reference.policyScopeId || 0];
   while (target.at(-1) === 0) target.pop();
   return [1, reference.start - previousEnd, reference.end - reference.start, legalTargetIndex(target)];
 }
@@ -65,7 +66,7 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     const packedTarget = legalTargets[reference[3]] || [];
     const target = typeof packedTarget === "string" ? packedTarget.split("|") : packedTarget;
     if (typeof target[4] === "string") target[4] = target[4] ? target[4].split("/") : [];
-    Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "" });
+    Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "", policyScopeId: target[11] || "" });
   }
   else for (const [key, value] of Object.entries(reference || {})) output[KEY_REFERENCES[key] || key] = value;
   output.resolution = output.resolution === 1 ? "local" : output.resolution === 2 ? "unresolved" : "official-source-only";
@@ -81,7 +82,7 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     else if ((match = output.houseHref.match(/^\/us\/stat\/([^/]+)\/([^/]+)(?:\/(.*))?$/))) Object.assign(output, { family: "statutes-at-large", targetKind: "statutes-at-large", targetVolume: match[1], targetPage: match[2], targetPath: match[3] ? match[3].split("/").filter(Boolean) : [], officialUrl: `https://www.govinfo.gov/app/details/STATUTE-${match[1]}/STATUTE-${match[1]}-Pg${match[2]}` });
     else if (/^\/us\/act\//.test(output.houseHref)) Object.assign(output, { family: "public-law", targetKind: "act", targetPath: output.houseHref.split("/").filter(Boolean).slice(2), officialUrl: `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(output.text || "")}%22%7D` });
   } else {
-    output.provenance = String(output.ruleId || "").startsWith("context-") || output.ruleId === "ambiguous-antecedent" ? "deterministic-context" : "deterministic-parser";
+    output.provenance = output.ruleId === "context-cfr-the-act" ? "reviewed-semantic-policy" : String(output.ruleId || "").startsWith("context-") || output.ruleId === "ambiguous-antecedent" ? "deterministic-context" : "deterministic-parser";
     output.targetKind = output.family === "ina" && output.resolution !== "local" ? "ina" : output.family;
     if (output.family === "usc" && output.targetSection) output.officialUrl = `https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=${encodeURIComponent(`granuleid:USC-prelim-title${output.targetTitle}-section${output.targetSection}`)}`;
     else if (output.family === "cfr" && output.targetSection) output.officialUrl = `https://www.ecfr.gov/current/title-${encodeURIComponent(output.targetTitle)}/part-${encodeURIComponent(String(output.targetSection).split(".")[0])}/section-${encodeURIComponent(output.targetSection)}`;

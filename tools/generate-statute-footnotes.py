@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import itertools
 import json
 import re
@@ -14,6 +15,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS_PATH = ROOT / "src" / "INASearch-Corpus.js"
 OUTPUT_PATH = ROOT / "src" / "INASearch-Statute-Footnotes.js"
+MANIFEST_PATH = ROOT / "sources" / "legal" / "source-manifest.json"
 STRUCTURAL = {"section", "subsection", "paragraph", "subparagraph", "clause", "subclause", "item", "subitem", "subsubitem", "level"}
 OWN_TEXT_EXCLUSIONS = STRUCTURAL | {"num", "heading", "sourceCredit", "notes"}
 SENTINEL_PATTERN = re.compile(r"\ue000(\d+)\ue001")
@@ -25,6 +27,10 @@ def local_name(tag: str) -> str:
 
 def normalize(value: str) -> str:
     return re.sub(r"\s+", " ", value or "").strip()
+
+
+def normalize_section_number(value: str) -> str:
+    return str(value or "").replace("...", " to ")
 
 
 def read_assigned_json(path: Path, property_name: str) -> dict:
@@ -256,12 +262,24 @@ def safe_js_json(value: dict) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("xml", type=Path, help="Official House USLM usc08.xml")
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    house_artifact = next(
+        artifact
+        for source in manifest["sources"]
+        for artifact in source.get("artifacts", [])
+        if artifact["id"] == "house-title-8-xml"
+    )
+    source_path = ROOT / house_artifact["path"]
+    parser.add_argument("xml", nargs="?", type=Path, default=source_path, help="Official House USLM usc08.xml")
     args = parser.parse_args()
+    xml_bytes = args.xml.read_bytes()
+    xml_sha256 = hashlib.sha256(xml_bytes).hexdigest()
+    if args.xml.resolve() == source_path.resolve() and (len(xml_bytes) != house_artifact["bytes"] or xml_sha256 != house_artifact["sha256"]):
+        raise RuntimeError("The committed House Title 8 XML does not match the legal-source manifest")
 
     corpus = read_assigned_json(CORPUS_PATH, "INA_SEARCH_CORPUS")
     sources = corpus_sources(corpus)
-    root = ET.parse(args.xml).getroot()
+    root = ET.fromstring(xml_bytes)
     occurrences: dict[str, int] = {}
     fields: dict[str, dict] = {}
     section_notes: dict[str, dict[str, dict]] = {}
@@ -275,7 +293,7 @@ def main() -> None:
         match = re.match(r"^/us/usc/t8/s([^/\s]+)(?:/(.*))?$", identifier)
         if not match or (match.group(2) and re.search(r"\s", match.group(2))):
             continue
-        section_number = match.group(1)
+        section_number = normalize_section_number(match.group(1))
         base_key = f"{section_number}:{match.group(2)}" if match.group(2) else f"{section_number}:preamble"
         occurrence = occurrences.get(base_key, 0) + 1
         occurrences[base_key] = occurrence
@@ -318,7 +336,10 @@ def main() -> None:
         "corpusSchemaVersion": 3,
         "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
         "sourceReleasePoint": "119-102",
-        "capturedAt": "2026-08-02",
+        "capturedAt": manifest["capturedAt"],
+        "sourceArtifact": house_artifact["path"],
+        "sourceBytes": len(xml_bytes),
+        "sourceSha256": xml_sha256,
         "extraction": {"footnotes": footnote_count, "references": reference_count, "affectedFields": affected_source_fields},
         "sections": sections,
         "fields": fields,
