@@ -1804,7 +1804,7 @@
         <section class="settings-section" aria-labelledby="updateSettingsHeading">
           <h3 class="settings-section-heading" id="updateSettingsHeading">Updates</h3>
           <div class="settings-toggle">
-            <span><span class="settings-toggle-title"><label for="automaticCfrUpdatesToggle"><strong>Automatically update CFR material</strong></label><button class="settings-info-button" type="button" aria-label="About automatic CFR updates" aria-describedby="automaticCfrUpdatesHelp">i<span class="settings-experimental-tooltip" id="automaticCfrUpdatesHelp" role="tooltip">On by default. INASearch checks the included CFR material directly against eCFR in the background. Turn this off for a local-only workflow: the local CFR text remains available and INASearch makes no network requests. The choice is saved with other settings when INASearch_Data.json is connected.</span></button></span><small>On by default; checks the included CFR material directly against eCFR.</small></span>
+            <span><span class="settings-toggle-title"><label for="automaticCfrUpdatesToggle"><strong>Automatically update CFR material</strong></label><button class="settings-info-button" type="button" aria-label="About automatic CFR updates" aria-describedby="automaticCfrUpdatesHelp">i<span class="settings-experimental-tooltip" id="automaticCfrUpdatesHelp" role="tooltip">Off by default. Turn this on to check the included CFR material directly against eCFR in the background. When it is off, the local CFR text remains available and INASearch makes no network requests. The choice is saved with other settings when INASearch_Data.json is connected.</span></button></span><small>Off by default; turn on to check the included CFR material directly against eCFR.</small></span>
             <input id="automaticCfrUpdatesToggle" type="checkbox" role="switch" aria-describedby="automaticCfrUpdatesHelp">
           </div>
         </section>
@@ -2293,7 +2293,7 @@
       corpusVersionSeen: corpus?.corpusVersion || null,
       notes: [],
       tutorialProgress: { schemaVersion: 1, modules: {} },
-      preferences: { theme: "system", resultFilter: "all", compactResults: false, statutoryLinkCitationSystem: "usc", statutoryNavigationSystem: "usc", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, navigationUpdatesSearch: true, scrollUpdatesSearch: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: true, defaultStartupQuery: DEFAULT_STARTUP_QUERY }
+      preferences: { theme: "system", resultFilter: "all", compactResults: false, statutoryLinkCitationSystem: "usc", statutoryNavigationSystem: "usc", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, navigationUpdatesSearch: true, scrollUpdatesSearch: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, defaultStartupQuery: DEFAULT_STARTUP_QUERY }
     });
 
     function isValidProfile(value) {
@@ -2344,7 +2344,7 @@
       normalized.preferences.statuteNavigationDepth = Math.max(0, Math.min(STATUTE_NAVIGATION_DEPTHS.length - 1, Number.isInteger(Number(normalized.preferences.statuteNavigationDepth)) ? Number(normalized.preferences.statuteNavigationDepth) : STATUTE_NAVIGATION_DEPTHS.length - 1));
       normalized.preferences.cfrNavigationDepth = Math.max(0, Math.min(CFR_NAVIGATION_DEPTHS.length - 1, Number.isInteger(Number(normalized.preferences.cfrNavigationDepth)) ? Number(normalized.preferences.cfrNavigationDepth) : CFR_NAVIGATION_DEPTHS.length - 1));
       normalized.preferences.highlightDefinedTerms = normalized.preferences.highlightDefinedTerms === true;
-      normalized.preferences.automaticCfrUpdates = normalized.preferences.automaticCfrUpdates !== false;
+      normalized.preferences.automaticCfrUpdates = normalized.preferences.automaticCfrUpdates === true;
       normalized.preferences.defaultStartupQuery = Object.hasOwn(normalized.preferences, "defaultStartupQuery")
         ? String(normalized.preferences.defaultStartupQuery || "").trim().slice(0, 500)
         : DEFAULT_STARTUP_QUERY;
@@ -8438,7 +8438,7 @@
     }
 
     function automaticCfrUpdatesEnabled() {
-      return profile?.preferences?.automaticCfrUpdates !== false;
+      return profile?.preferences?.automaticCfrUpdates === true;
     }
 
     function setAutomaticCfrUpdates(value) {

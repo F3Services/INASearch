@@ -26,7 +26,7 @@ window.INA_SEARCH_PROFILE = {
     "compactResults": false,
     "statutoryLinkCitationSystem": "usc",
     "highlightDefinedTerms": false,
-    "automaticCfrUpdates": true,
+    "automaticCfrUpdates": false,
     "defaultStartupQuery": ""
   }
 };
