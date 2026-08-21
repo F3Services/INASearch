@@ -1,7 +1,7 @@
 /* INASearch public corpus. Replace as one reviewed unit. */
 window.INA_SEARCH_CORPUS = {
-  "schemaVersion": 4,
-  "corpusVersion": "2026.08.13-1",
+  "schemaVersion": 5,
+  "corpusVersion": "2026.08.15-1",
   "capturedAt": "2026-07-30",
   "verifiedAt": "2026-07-31",
   "verification": {},

@@ -154,9 +154,11 @@ function indexStatuteRunIns(corpus) {
         let previousInlinePath = null;
         for (const marker of markers) {
           const candidates = runInPathCandidates(currentPath, marker.tokens, previousInlinePath);
-          const inlinePath = candidates.find(path => indexedIdentities.has(pathIdentity(path)))
+          const directPath = candidates[0];
+          let inlinePath = candidates.find(path => indexedIdentities.has(pathIdentity(path)) && !structuralIdentities.has(pathIdentity(path)))
             || inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
             || fallbackRunInPath(currentPath, parentPath, marker.tokens);
+          if (structuralIdentities.has(pathIdentity(inlinePath)) && !structuralIdentities.has(pathIdentity(directPath))) inlinePath = directPath;
           const identity = pathIdentity(inlinePath);
           previousInlinePath = inlinePath;
           stats.markers += 1;

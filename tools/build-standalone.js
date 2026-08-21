@@ -182,6 +182,7 @@ template = replaceRuntimeBlock(template, "STORAGE", "inaSearchStorageRuntime", f
 template = replaceRuntimeBlock(template, "CORPUS_PACKING", "inaSearchCorpusPackingRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Corpus-Packing.js"), "utf8"));
 template = replaceRuntimeBlock(template, "UPDATER", "inaSearchUpdaterRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Updater.js"), "utf8"));
 const fullCorpus = readAssignedObject("INASearch-Corpus.js", "INA_SEARCH_CORPUS");
+fullCorpus.inaHierarchy = readAssignedObject("INASearch-INA-Hierarchy.js", "INA_SEARCH_INA_HIERARCHY");
 const statuteFootnoteSource = readAssignedObject("INASearch-Statute-Footnotes.js", "INA_SEARCH_STATUTE_FOOTNOTES");
 applyStatuteFootnotes(fullCorpus, statuteFootnoteSource);
 fullCorpus.cfr = readAssignedObject("INASearch-CFR.js", "INA_SEARCH_CFR");
