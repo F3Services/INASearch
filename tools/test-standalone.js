@@ -2457,6 +2457,14 @@ async function main() {
     ["1", "2", "3", "4", "5", "6", "7", "8"].map(number => ["c", number]),
     "The generated run-in index does not contain every paragraph of 8 U.S.C. 1255(c)."
   );
+  assert.deepStrictEqual(
+    plain(section1101ForCompactPaths.runInPaths.filter(pathParts => pathParts.slice(0, 3).join("/") === "a/15/H")),
+    [
+      ["a", "15", "H", "i"], ["a", "15", "H", "i", "a"], ["a", "15", "H", "i", "b"], ["a", "15", "H", "i", "c"],
+      ["a", "15", "H", "ii"], ["a", "15", "H", "ii", "a"], ["a", "15", "H", "ii", "b"], ["a", "15", "H", "iii"]
+    ],
+    "The generated run-in index collapses parent clauses (i) or (ii) into their first nested items."
+  );
   const compactComponentTokens = raw => {
     const value = String(raw || "").trim();
     if (!value) return [];
@@ -2528,6 +2536,14 @@ async function main() {
   assert.strictEqual(compactH1b.valid, true);
   assert.strictEqual(compactH1b.virtual, true, "Flattened H-1B run-in units were incorrectly treated as structural nodes.");
   assert.strictEqual(compactH1b.ambiguity, null, "A uniquely valid lowercase Roman path was marked ambiguous.");
+  const compactH1 = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15h1"));
+  assert(compactH1?.valid && JSON.stringify(compactH1.path) === JSON.stringify(["a", "15", "H", "i"]), "INA 101(a)(15)(H)(i) is absent from the generated run-in index.");
+  const compactH2 = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15h2"));
+  assert(compactH2?.valid && JSON.stringify(compactH2.path) === JSON.stringify(["a", "15", "H", "ii"]), "INA 101(a)(15)(H)(ii) is absent from the generated run-in index.");
+  const compactH1a = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15h1a"));
+  assert(compactH1a?.valid && JSON.stringify(compactH1a.path) === JSON.stringify(["a", "15", "H", "i", "a"]), "INA 101(a)(15)(H)(i)(a) does not resolve as a child of clause (i).");
+  const compactH2a = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15h2a"));
+  assert(compactH2a?.valid && JSON.stringify(compactH2a.path) === JSON.stringify(["a", "15", "H", "ii", "a"]), "INA 101(a)(15)(H)(ii)(a) does not resolve as a child of clause (ii).");
   const compactIna245c2 = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "245", section1255ForCompactPaths, "c2"));
   assert.deepStrictEqual(compactIna245c2.path, ["c", "2"], "Compact INA 245(c)(2) did not resolve through the generated run-in index.");
   assert.strictEqual(compactIna245c2.virtual, true, "INA 245(c)(2) was incorrectly treated as a structural corpus node.");
@@ -2572,7 +2588,7 @@ async function main() {
       }
     }
   }
-  assert.strictEqual(auditedGeneratedRunInPaths, 257, "The exhaustive compact-citation audit did not visit every generated statutory run-in path.");
+  assert.strictEqual(auditedGeneratedRunInPaths, 261, "The exhaustive compact-citation audit did not visit every generated statutory run-in path.");
   const lowercaseRomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15oiii"));
   assert.deepStrictEqual(lowercaseRomanAmbiguity.path, ["a", "15", "O", "iii"], "The longest valid clause was not selected for an ambiguous lowercase Roman sequence.");
   assert.deepStrictEqual(lowercaseRomanAmbiguity.ambiguity.options.map(option => option.path), [["a", "15", "O", "iii"], ["a", "15", "O", "ii", "I"]], "The valid lowercase Roman interpretations were not listed in priority order.");
@@ -3216,6 +3232,10 @@ async function main() {
   assert(crosswalkedInaHtml.includes('data-reference-source-text="section 1101(a)(15)(S) of this title"'), "A converted INA-format link does not retain the exact wording from the source text for independent verification.");
   assert(crosswalkedInaHtml.includes('data-show-citation="INA 101(a)(15)(S)"'), "A crosswalked INA link still opens its target in U.S. Code display mode.");
   assert(crosswalkedInaHtml.includes('href="#usc-1101-a-15-s"') && crosswalkedInaHtml.includes('data-reference-section="1101"'), "Changing a link to INA display mode changed its underlying local target.");
+  const nativeInaReference = { text: "INA 203(b)(2)", family: "ina", inaSection: "203", targetKind: "usc", targetTitle: "8", targetSection: "1153", targetPath: ["b", "2"], resolution: "local", officialUrl: "https://uscode.house.gov/" };
+  const nativeInaHtml = legalReferenceHtml(nativeInaReference, "INA 203(b)(2)");
+  assert(nativeInaHtml.endsWith(">INA 203(b)(2)</a>"), "The INA display preference changed the wording of a native INA citation.");
+  assert(!nativeInaHtml.includes("citation-display-ina"), "A native INA citation incorrectly carries the amber converted-text warning style.");
   assert.strictEqual(statutoryLinkInaCitation({ family: "usc", targetTitle: "18", targetSection: "1001", targetPath: [] }), "", "The INA display preference rewrote a cross-title U.S. Code citation without an INA crosswalk.");
   assert.strictEqual(statutoryLinkInaCitation({ family: "usc", targetTitle: "8", targetSection: "1153", targetPath: [], resolution: "unresolved" }), "", "An unresolved contextual reference was made to look like a precise INA citation.");
   assert.strictEqual(statutoryLinkInaCitation({ family: "ina", inaSection: "203", targetTitle: "8", targetSection: "1153", targetPath: ["b", "2"] }), "INA 203(b)(2)", "An explicit INA-family reference did not receive its full normalized INA label.");
@@ -3319,7 +3339,7 @@ async function main() {
   const structuralStatutePathExists = extractedFunction(fallbackSource, "structuralStatutePathExists", "resolvedRunInStatutePath", { corpus: hydratedSource, statuteNodeAtPath: testStatuteNodeAtPath, Boolean });
   const resolvedRunInStatutePath = extractedFunction(fallbackSource, "resolvedRunInStatutePath", "formatStatutoryRunInText", { indexedStatutePathExists, structuralStatutePathExists });
   const formatStatutoryRunInText = extractedFunction(fallbackSource, "formatStatutoryRunInText", "renderHouseEditorialFootnotes", { statutoryRunInMarkers, escapeHtml: escapeStatutoryHtml, linkifyStatutoryText, legalUnitTriggerHtml, componentTokens: testComponentTokens, canonicalPath: statutoryCanonicalPath, resolvedRunInStatutePath, structuralStatutePathExists, normCitationPart: statutoryNormPart, JSON, Set, Number, String, Boolean });
-  const statutoryRunInSegments = extractedFunction(fallbackSource, "statutoryRunInSegments", "scrollToRenderedStatuteTarget", { statutoryRunInMarkers, componentTokens: testComponentTokens, resolvedRunInStatutePath, String });
+  const statutoryRunInSegments = extractedFunction(fallbackSource, "statutoryRunInSegments", "scrollToRenderedStatuteTarget", { statutoryRunInMarkers, componentTokens: testComponentTokens, resolvedRunInStatutePath, normCitationPart: statutoryNormPart, Math, String });
   const scopeStatuteNodeAtPath = testStatuteNodeAtPath;
   const nearestStructuralPathForScope = (section, pathParts) => {
     const result = [];
@@ -3346,6 +3366,12 @@ async function main() {
   assert.strictEqual(scopedStatuteSearchTarget(section1255ForCompactPaths, "admitted in transit without visa", ["c", "2"]), null, "A run-in scoped search matched text from the next numbered item.");
   const ina245cNode = scopeStatuteNodeAtPath(section1255ForCompactPaths, ["c"]);
   assert.strictEqual(searchNormalize(ina245cNode.text.slice(scopedIna245c2Target.match.start, scopedIna245c2Target.match.end)), "unauthorized employment", "A run-in scoped match lost its original source offsets for highlighting.");
+  const ina101h1Projection = statuteScopeProjection(section1101ForCompactPaths, ["a", "15", "H", "i"]);
+  const ina101h1SearchText = ina101h1Projection.map(field => field.text).join(" ");
+  assert(/specialty occupation/i.test(ina101h1SearchText) && !/agricultural labor/i.test(ina101h1SearchText), "INA 101(a)(15)(H)(i) does not include its nested items or leaks into sibling clause (ii).");
+  const ina101h2Projection = statuteScopeProjection(section1101ForCompactPaths, ["a", "15", "H", "ii"]);
+  const ina101h2SearchText = ina101h2Projection.map(field => field.text).join(" ");
+  assert(/agricultural labor/i.test(ina101h2SearchText) && !/as a trainee/i.test(ina101h2SearchText), "INA 101(a)(15)(H)(ii) does not include its nested items or leaks into sibling clause (iii).");
   const scopedScoreState = { searchScopeActive: true };
   const scopedIna245c2Record = { kind: "usc", title: section1255ForCompactPaths.heading, cite: "8 U.S.C. 1255", item: section1255ForCompactPaths, text: searchNormalize([section1255ForCompactPaths.heading, ina245cNode.text].join(" ")) };
   const scopedScoreRecord = extractedFunction(fallbackSource, "scoreRecord", "searchResultCounts", {
@@ -3768,10 +3794,11 @@ async function main() {
   assert.strictEqual((formatted1812ReferencesNote.match(/class="statute-citation-link legal-reference-link/g) || []).length, 4, "Generated citations in a statutory note were not linked.");
 
   const formattedHDefinition = formatStatutoryRunInText(statutoryNode(hydratedSource, "1101", ["a", "15", "H"]).text, "H");
-  assert(formattedHDefinition.includes('<strong class="inline-address">(i)(a)</strong>'));
-  assert(formattedHDefinition.includes('<strong class="inline-address">(ii)(a)</strong>'));
-  assert(/class="statutory-runin-line" style="--depth:2"[^>]*><strong class="inline-address">\(i\)\(a\)<\/strong>/.test(formattedHDefinition), "A two-level run-in unit does not receive two levels of standard indentation.");
+  assert(/class="statutory-runin-line" style="--depth:1"[^>]*><strong class="inline-address">\(i\)<\/strong>/.test(formattedHDefinition), "Run-in parent clause (i) is not rendered as its own statutory unit.");
+  assert(/class="statutory-runin-line" style="--depth:2"[^>]*><strong class="inline-address">\(a\)<\/strong>/.test(formattedHDefinition), "The first item under clause (i) is not rendered at its own nested level.");
+  assert(/class="statutory-runin-line" style="--depth:1"[^>]*><strong class="inline-address">\(ii\)<\/strong>/.test(formattedHDefinition), "Run-in parent clause (ii) is not rendered as its own statutory unit.");
   const actionableHDefinition = formatStatutoryRunInText(statutoryNode(hydratedSource, "1101", ["a", "15", "H"]).text, "H", [], null, { sectionId: section1101ForCompactPaths.id, currentPath: ["a", "15", "H"], parentPath: ["a", "15"], citationBase: "8 U.S.C. 1101", targetPath: ["a", "15", "H", "i", "b"] });
+  assert(actionableHDefinition.includes('data-legal-unit-citation="8 U.S.C. 1101(a)(15)(H)(i)"'), "Run-in parent clause (i) does not receive its own citation action trigger.");
   assert(actionableHDefinition.includes('data-legal-unit-citation="8 U.S.C. 1101(a)(15)(H)(i)(a)"'), "A run-in statutory unit does not receive its own citation action trigger.");
   assert(actionableHDefinition.includes('data-legal-unit-citation="8 U.S.C. 1101(a)(15)(H)(i)(b)"'), "H-1B's run-in statutory unit does not receive its complete indexed citation path.");
   assert(actionableHDefinition.includes('data-statute-inline-target aria-label="Citation target"'), "A virtual run-in citation does not become the visible scroll target.");
@@ -3801,7 +3828,7 @@ async function main() {
     assert(!formatStatutoryRunInText(node.text, node.label).includes("statutory-runin-line"), `Reference-only text was split into false statutory lines at 8 U.S.C. ${section}${pathParts.map(value => `(${value})`).join("")}.`);
   }
 
-  const statutoryFormattingAudit = { nodes: 0, formattedNodes: 0, runInLines: 0, citationLinks: 0, indexedRunInPaths: 0, structuralDuplicateRunIns: 0 };
+  const statutoryFormattingAudit = { nodes: 0, formattedNodes: 0, runInLines: 0, nestedRunInLevels: 0, citationLinks: 0, indexedRunInPaths: 0, structuralDuplicateRunIns: 0 };
   const generatedRunInPathIdentities = new Set();
   const renderedVirtualRunInPathIdentities = new Set();
   const pathIdentity = pathParts => pathParts.map(token => `${String(token).length}:${String(token)}`).join("|");
@@ -3823,7 +3850,9 @@ async function main() {
       statutoryFormattingAudit.nodes += 1;
       const output = formatStatutoryRunInText(node.text || "", node.label || "", node.references || []);
       const addresses = [...output.matchAll(/class="inline-address">([^<]+)<\/strong>/g)].map(match => match[1]);
-      assert.deepStrictEqual(addresses, statuteRunInMarkers(node.text || "", node.label || "").map(marker => marker.address), `The build-time and browser run-in recognizers disagree at 8 U.S.C. ${section.section}${statutoryCanonicalPath(currentPath)}.`);
+      const recognizedMarkers = statuteRunInMarkers(node.text || "", node.label || "");
+      assert.deepStrictEqual(addresses, recognizedMarkers.map(marker => marker.address), `The build-time and browser run-in recognizers disagree at 8 U.S.C. ${section.section}${statutoryCanonicalPath(currentPath)}.`);
+      statutoryFormattingAudit.nestedRunInLevels += recognizedMarkers.filter(marker => marker.nestedAfterPrevious).length;
       if (addresses.length) statutoryFormattingAudit.formattedNodes += 1;
       statutoryFormattingAudit.runInLines += addresses.length;
       statutoryFormattingAudit.citationLinks += (output.match(/class="statute-citation-link legal-reference-link/g) || []).length;
@@ -3849,8 +3878,9 @@ async function main() {
   for (const section of hydratedSource.title8.sections) auditStatutoryNodes(section, section.body, [], collectStructuralPathIdentities(section.body));
   assert.strictEqual(statutoryFormattingAudit.nodes, 6973, "The statutory formatting audit did not visit every cached node.");
   assert.strictEqual(statutoryFormattingAudit.formattedNodes, 103, "Unexpected change in the set of cached nodes requiring run-in formatting.");
-  assert.strictEqual(statutoryFormattingAudit.runInLines, 261, "Unexpected change in the number of formatted cached run-in provisions.");
-  assert.strictEqual(statutoryFormattingAudit.indexedRunInPaths, 259, "The corpus-wide audit found a missing or duplicate navigable statutory run-in path.");
+  assert.strictEqual(statutoryFormattingAudit.runInLines, 265, "Unexpected change in the number of formatted cached run-in provisions.");
+  assert.strictEqual(statutoryFormattingAudit.nestedRunInLevels, 4, "The corpus-wide audit did not preserve all four formerly collapsed nested run-in levels.");
+  assert.strictEqual(statutoryFormattingAudit.indexedRunInPaths, 263, "The corpus-wide audit found a missing or duplicate navigable statutory run-in path.");
   assert.strictEqual(statutoryFormattingAudit.structuralDuplicateRunIns, 2, "The corpus-wide audit did not isolate the two non-navigable condition markers that duplicate structural paths.");
   assert.deepStrictEqual([...renderedVirtualRunInPathIdentities].sort(), [...generatedRunInPathIdentities].sort(), "The generated corpus run-in index has a missing or stale virtual path.");
   assert.strictEqual(statutoryFormattingAudit.citationLinks, 1765, "Unexpected generated-link count in operative statutory text.");

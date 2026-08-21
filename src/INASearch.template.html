@@ -2948,6 +2948,20 @@
       const referenceWords = new Set(["section", "sections", "subsection", "subsections", "paragraph", "paragraphs", "subparagraph", "subparagraphs", "clause", "clauses", "subclause", "subclauses", "item", "items", "subdivision", "subdivisions", "part", "parts", "chapter", "chapters", "title", "titles", "under"]);
       const referenceConnector = /^[\s,()[\]]*(?:(?:and|or|through|to)[\s,()[\]]*)*$/i;
       const isAddressToken = token => /^\d{1,3}$/.test(token) || /^[A-Za-z]$/.test(token) || romanPattern.test(token) || /^([a-z])\1{1,2}$/.test(token) || /^([A-Z])\1$/.test(token);
+      const romanNumber = token => ({ i: 1, ii: 2, iii: 3, iv: 4, v: 5, vi: 6, vii: 7, viii: 8, ix: 9, x: 10, xi: 11, xii: 12, xiii: 13, xiv: 14, xv: 15, xvi: 16, xvii: 17, xviii: 18, xix: 19, xx: 20 })[String(token || "").toLowerCase()] || 0;
+      const isImmediateSibling = (previous, next) => {
+        const left = String(previous || "");
+        const right = String(next || "");
+        if (/^\d+$/.test(left) && /^\d+$/.test(right)) return Number(right) === Number(left) + 1;
+        const leftRoman = romanNumber(left);
+        const rightRoman = romanNumber(right);
+        const sameCase = (left === left.toUpperCase() && right === right.toUpperCase()) || (left === left.toLowerCase() && right === right.toLowerCase());
+        if (leftRoman && rightRoman && sameCase && rightRoman === leftRoman + 1) return true;
+        const leftLetters = left.match(/^([A-Za-z])\1*$/)?.[0] || "";
+        const rightLetters = right.match(/^([A-Za-z])\1*$/)?.[0] || "";
+        const sameLetterCase = (leftLetters === leftLetters.toUpperCase() && rightLetters === rightLetters.toUpperCase()) || (leftLetters === leftLetters.toLowerCase() && rightLetters === rightLetters.toLowerCase());
+        return Boolean(leftLetters && rightLetters && leftLetters.length === rightLetters.length && sameLetterCase && rightLetters.charCodeAt(0) === leftLetters.charCodeAt(0) + 1);
+      };
       const candidates = [];
       let referenceChainEnd = -1;
       let match;
@@ -2963,7 +2977,7 @@
         const referenceNumberPrefix = /\b(?:section|sections|subsection|subsections|paragraph|paragraphs|subparagraph|subparagraphs|clause|clauses|subclause|subclauses|item|items)\s+\d+[A-Za-z-]*\s*$/i.test(prefix) || /\b\d{3,}[A-Za-z-]*\s*$/.test(prefix);
         const isReference = referenceContinuation || referenceWords.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(previousChar);
         if (isReference) { referenceChainEnd = end; continue; }
-        candidates.push({ start, end, address: match[0], token, prefixText: "" });
+        candidates.push({ start, end, address: match[0], token, prefixText: "", nestedAfterPrevious: false });
         referenceChainEnd = -1;
       }
       let markers = candidates;
@@ -2980,17 +2994,34 @@
         if (onlyReferenceConnectors && referenceListEnding) markers = [];
       }
       if (!markers.length) return [];
-      const combined = [];
+      const separated = [];
       for (const marker of markers) {
-        const previous = combined.at(-1);
+        const previous = separated.at(-1);
         const between = previous ? input.slice(previous.end, marker.start) : "";
+        // Adjacent addresses are separate hierarchy levels, not one compound label.
+        // Keep both so the parent and its first child remain independently citable.
         if (previous && /^\s*\[?\s*$/.test(between)) {
-          previous.address += marker.address;
-          previous.prefixText += between.includes("[") ? "[" : "";
-          previous.end = marker.end;
-        } else combined.push({ ...marker });
+          marker.nestedAfterPrevious = true;
+          marker.prefixText = between.includes("[") ? "[" : "";
+        }
+        separated.push({ ...marker });
       }
-      return combined;
+      let previousRelativePath = null;
+      for (const marker of separated) {
+        let relativePath = marker.nestedAfterPrevious && previousRelativePath?.length ? [...previousRelativePath, marker.token] : null;
+        if (!relativePath && previousRelativePath?.length) {
+          for (let count = 1; count <= previousRelativePath.length; count++) {
+            if (isImmediateSibling(previousRelativePath.at(-count), marker.token)) {
+              relativePath = [...previousRelativePath.slice(0, -count), marker.token];
+              break;
+            }
+          }
+        }
+        relativePath ||= [marker.token];
+        marker.relativeDepth = relativePath.length;
+        previousRelativePath = relativePath;
+      }
+      return separated;
     }
 
     function flattenNode(node) {
@@ -3867,7 +3898,7 @@
         };
         const segment = statutoryRunInSegments(scopedNode.text, scopedNode.label, legalUnit)
           .find(item => item.path.length === requestedPath.length && item.path.every((token, index) => normCitationPart(token) === normCitationPart(requestedPath[index])));
-        return segment ? [{ kind: "node-text", path: requestedPath, text: String(scopedNode.text || "").slice(segment.start, segment.contentEnd), sourceStart: segment.start }] : [];
+        return segment ? [{ kind: "node-text", path: requestedPath, text: String(scopedNode.text || "").slice(segment.start, segment.scopeEnd), sourceStart: segment.start }] : [];
       }
       const fields = [];
       const addNodes = (nodes, path = []) => {
@@ -6026,7 +6057,8 @@
       const citation = inaCitation || legalReferenceCitation(reference);
       const displayedContents = inaCitation ? escapeHtml(inaCitation) : contents;
       const resolution = reference.resolution || "unresolved";
-      const classes = `statute-citation-link legal-reference-link${inaCitation ? " citation-display-ina" : ""}${resolution === "unresolved" ? " reference-unavailable" : resolution === "official-source-only" ? " reference-official-only" : ""}`;
+      const convertedFromUsc = Boolean(inaCitation && reference.family === "usc");
+      const classes = `statute-citation-link legal-reference-link${convertedFromUsc ? " citation-display-ina" : ""}${resolution === "unresolved" ? " reference-unavailable" : resolution === "official-source-only" ? " reference-official-only" : ""}`;
       const localUsc = resolution === "local" && (reference.targetKind === "usc" || reference.family === "usc" || reference.family === "ina");
       const localCfr = resolution === "local" && (reference.targetKind === "cfr" || reference.family === "cfr");
       const fragment = localUsc ? `usc-${normCitationPart(reference.targetSection)}-${(reference.targetPath || []).map(normCitationPart).join("-")}`.replace(/-$/, "") : "";
@@ -7728,18 +7760,31 @@
       const input = String(value || "");
       const markers = statutoryRunInMarkers(input, currentLabel);
       let previousInlinePath = null;
-      return markers.map((marker, index) => {
+      const segments = markers.map((marker, index) => {
         const nextStart = markers[index + 1]?.start ?? input.length;
-        const rawContent = input.slice(marker.end, nextStart);
+        const nextMarkerIsNested = Boolean(markers[index + 1]?.nestedAfterPrevious);
+        const rawContent = nextMarkerIsNested ? "" : input.slice(marker.end, nextStart);
         const leading = rawContent.length - rawContent.trimStart().length;
         const trailing = rawContent.length - rawContent.trimEnd().length;
         const contentStart = marker.end + leading;
-        const contentEnd = Math.max(contentStart, nextStart - trailing);
+        const contentEnd = nextMarkerIsNested ? contentStart : Math.max(contentStart, nextStart - trailing);
         const addressTokens = componentTokens(marker.address) || [marker.token];
-        const path = legalUnit ? resolvedRunInStatutePath(legalUnit, addressTokens, previousInlinePath) : [];
+        const path = legalUnit ? resolvedRunInStatutePath(legalUnit, addressTokens, previousInlinePath, marker.nestedAfterPrevious) : [];
         previousInlinePath = path;
         return { ...marker, path, contentStart, contentEnd, text: `${marker.address} ${input.slice(contentStart, contentEnd)}`.trim() };
       });
+      for (let index = 0; index < segments.length; index++) {
+        const segment = segments[index];
+        let scopeEnd = segment.contentEnd;
+        for (const candidate of segments.slice(index + 1)) {
+          const descendant = segment.path.length > 0 && candidate.path.length > segment.path.length
+            && segment.path.every((token, pathIndex) => normCitationPart(token) === normCitationPart(candidate.path[pathIndex]));
+          if (!descendant) break;
+          scopeEnd = Math.max(scopeEnd, candidate.contentEnd);
+        }
+        segment.scopeEnd = scopeEnd;
+      }
+      return segments;
     }
 
     function scrollToRenderedStatuteTarget() {
@@ -7825,8 +7870,12 @@
       return Boolean(section && path?.length && statuteNodeAtPath(section, path));
     }
 
-    function resolvedRunInStatutePath(legalUnit, inlineTokens, previousInlinePath) {
+    function resolvedRunInStatutePath(legalUnit, inlineTokens, previousInlinePath, nestedAfterPrevious = false) {
       if (!legalUnit) return [];
+      if (nestedAfterPrevious && previousInlinePath?.length) {
+        const nestedPath = [...previousInlinePath, ...inlineTokens];
+        if (indexedStatutePathExists(legalUnit, nestedPath)) return nestedPath;
+      }
       const candidates = [];
       const add = path => {
         const key = path.map(token => `${String(token).length}:${String(token)}`).join("|");
@@ -7862,14 +7911,15 @@
       let previousInlinePath = null;
       markers.forEach((marker, index) => {
         const nextStart = markers[index + 1]?.start ?? input.length;
-        const rawContent = input.slice(marker.end, nextStart);
+        const nextMarkerIsNested = Boolean(markers[index + 1]?.nestedAfterPrevious);
+        const rawContent = nextMarkerIsNested ? "" : input.slice(marker.end, nextStart);
         const leading = rawContent.length - rawContent.trimStart().length;
         const trailing = rawContent.length - rawContent.trimEnd().length;
         const contentStart = marker.end + leading;
-        const contentEnd = Math.max(contentStart, nextStart - trailing);
+        const contentEnd = nextMarkerIsNested ? contentStart : Math.max(contentStart, nextStart - trailing);
         const addressTokens = componentTokens(marker.address);
         if (!addressTokens.length) addressTokens.push(marker.token);
-        const inlinePath = legalUnit ? resolvedRunInStatutePath(legalUnit, addressTokens, previousInlinePath) : [];
+        const inlinePath = legalUnit ? resolvedRunInStatutePath(legalUnit, addressTokens, previousInlinePath, marker.nestedAfterPrevious) : [];
         previousInlinePath = inlinePath;
         const structuralDuplicate = structuralStatutePathExists(legalUnit, inlinePath);
         const navigableInline = Boolean(legalUnit?.sectionId && inlinePath.length && !structuralDuplicate);
@@ -7877,7 +7927,7 @@
         const content = `${escapeHtml(marker.prefixText)}${linkifyStatutoryText(input, references, contentStart, contentEnd, searchMatch, footnoteReferences, inlineDefinitionContext)}`;
         const displayDepth = legalUnit && inlinePath.length
           ? Math.max(0, inlinePath.length - (legalUnit.currentPath?.length || 0))
-          : Math.max(1, addressTokens.length);
+          : marker.relativeDepth || Math.max(1, addressTokens.length);
         const inlineCitation = navigableInline ? `${legalUnit.citationBase || ""}${canonicalPath(inlinePath)}` : "";
         const isInlineTarget = navigableInline && legalUnit?.targetPath?.length === inlinePath.length && inlinePath.every((token, pathIndex) => normCitationPart(token) === normCitationPart(legalUnit.targetPath[pathIndex]));
         const address = navigableInline

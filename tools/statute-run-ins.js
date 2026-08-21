@@ -34,7 +34,7 @@ function statuteRunInMarkers(value, currentLabel = "") {
       referenceChainEnd = end;
       continue;
     }
-    candidates.push({ start, end, address: match[0], token });
+    candidates.push({ start, end, address: match[0], token, prefixText: "", nestedAfterPrevious: false });
     referenceChainEnd = -1;
   }
 
@@ -53,18 +53,28 @@ function statuteRunInMarkers(value, currentLabel = "") {
   }
   if (!markers.length) return [];
 
-  const combined = [];
+  const separated = [];
   for (const marker of markers) {
-    const previous = combined.at(-1);
+    const previous = separated.at(-1);
     const between = previous ? input.slice(previous.end, marker.start) : "";
+    // Adjacent addresses are separate hierarchy levels, not one compound label.
+    // Keep both so the parent and its first child remain independently citable.
     if (previous && /^\s*\[?\s*$/.test(between)) {
-      previous.address += marker.address;
-      previous.end = marker.end;
-    } else {
-      combined.push({ ...marker });
+      marker.nestedAfterPrevious = true;
+      marker.prefixText = between.includes("[") ? "[" : "";
     }
+    separated.push({ ...marker });
   }
-  return combined.map(marker => ({ ...marker, tokens: addressTokens(marker.address) }));
+  const enriched = separated.map(marker => ({ ...marker, tokens: addressTokens(marker.address) }));
+  let previousRelativePath = null;
+  for (const marker of enriched) {
+    const relativePath = marker.nestedAfterPrevious && previousRelativePath?.length
+      ? [...previousRelativePath, ...marker.tokens]
+      : inferredSiblingPath([], marker.tokens, previousRelativePath) || [...marker.tokens];
+    marker.relativeDepth = relativePath.length;
+    previousRelativePath = relativePath;
+  }
+  return enriched;
 }
 
 function pathIdentity(path) {
@@ -155,9 +165,11 @@ function indexStatuteRunIns(corpus) {
         for (const marker of markers) {
           const candidates = runInPathCandidates(currentPath, marker.tokens, previousInlinePath);
           const directPath = candidates[0];
-          let inlinePath = candidates.find(path => indexedIdentities.has(pathIdentity(path)) && !structuralIdentities.has(pathIdentity(path)))
-            || inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
-            || fallbackRunInPath(currentPath, parentPath, marker.tokens);
+          let inlinePath = marker.nestedAfterPrevious && previousInlinePath?.length
+            ? [...previousInlinePath, ...marker.tokens]
+            : candidates.find(path => indexedIdentities.has(pathIdentity(path)) && !structuralIdentities.has(pathIdentity(path)))
+              || inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
+              || fallbackRunInPath(currentPath, parentPath, marker.tokens);
           if (structuralIdentities.has(pathIdentity(inlinePath)) && !structuralIdentities.has(pathIdentity(directPath))) inlinePath = directPath;
           const identity = pathIdentity(inlinePath);
           previousInlinePath = inlinePath;
