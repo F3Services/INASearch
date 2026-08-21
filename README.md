@@ -52,10 +52,10 @@ You can turn updates on in **Settings**. When enabled, INASearch checks the CFR 
 
 ## Where the legal text comes from
 
-- Title 8 U.S.C. comes from the House Office of the Law Revision Counsel.
-- The INA crosswalk comes from USCIS and is checked against GovInfo and House records.
-- Regulations come from eCFR. Cross-title CFR coverage is selected using a reviewed GovInfo authority table.
-- Definitions come from the USCIS Glossary, INA 101, and 8 CFR 1.2.
+- Title 8 U.S.C. comes from the [House Office of the Law Revision Counsel](https://uscode.house.gov/).
+- The INA crosswalk comes from [USCIS](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act) and is checked against [GovInfo](https://www.govinfo.gov/app/details/COMPS-1376) and House records.
+- Regulations come from [eCFR](https://www.ecfr.gov/current/title-8). Cross-title CFR coverage is selected using GovInfo's [Parallel Table of Authorities and Rules](https://www.govinfo.gov/content/pkg/GPO-CFR-INDEX-2025/html/GPO-CFR-INDEX-2025-4.htm).
+- Definitions come from the [USCIS Glossary](https://www.uscis.gov/tools/glossary), [INA 101](https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1101&num=0&edition=prelim), and [8 CFR 1.2](https://www.ecfr.gov/current/title-8/part-1/section-1.2).
 
 The **About** page shows the capture dates and coverage for the copy you are using. Official-source links are available throughout the reader when you need to confirm current law.
 

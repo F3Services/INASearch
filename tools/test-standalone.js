@@ -2769,21 +2769,52 @@ async function main() {
     String,
     focusedCitationSegments,
     citationListEntryLooksLegal,
-    parseCitation: value => citationListEntryLooksLegal(value) ? { recognized: true, valid: !/999x/i.test(value), label: value.trim() } : null
+    parseCitation: value => citationListEntryLooksLegal(value) ? { recognized: true, valid: !/999x/i.test(value), label: value.trim() } : null,
+    focusedCitationRecord: result => result?.valid ? { kind: "usc" } : null
   });
   assert.deepStrictEqual(plain(focusedCitationSegments("INA203(a), 8 CFR 214.2(h)(1), USC1182").map(segment => segment.text)), ["INA203(a)", "8 CFR 214.2(h)(1)", "USC1182"], "Focused citation splitting did not preserve the entered citation order.");
   assert.deepStrictEqual(plain(focusedCitationSegments("INA 203(a,b), 8 CFR 214.2").map(segment => segment.text)), ["INA 203(a,b)", "8 CFR 214.2"], "A comma inside citation parentheses incorrectly created another reader pane.");
   const focusedMixed = parseFocusedCitationInput("INA203, 8 CFR 214.2(h), USC1182(a)(6)");
   assert(focusedMixed && focusedMixed.entries.length === 3 && focusedMixed.entries.every(entry => entry.result?.recognized), "Mixed flexible INA, CFR, and U.S.C. citations do not activate focused mode.");
   assert.strictEqual(parseFocusedCitationInput("waiver, extreme hardship"), null, "Ordinary comma-separated search text incorrectly activates focused citation mode.");
+  const focusedTrailingPane = parseFocusedCitationInput("INA203,");
+  assert(focusedTrailingPane && focusedTrailingPane.entries.length === 2 && focusedTrailingPane.entries[1].text === "", "Typing a comma after one valid citation does not preserve that reader while the next citation is entered.");
+  assert.strictEqual(parseFocusedCitationInput("waiver,"), null, "A trailing comma after ordinary search text incorrectly activates focused citation mode.");
   assert(parseFocusedCitationInput("INA203, INA999x"), "A malformed but citation-shaped entry drops the entire focused comparison instead of receiving a pane-level error.");
   assert.strictEqual(parseFocusedCitationInput("INA203, unfinished"), null, "Ordinary comma text can activate focused mode without an existing comparison.");
   const focusedEditInProgress = parseFocusedCitationInput("INA203, 8 CFR 214.2(h), ", true);
   assert(focusedEditInProgress && focusedEditInProgress.entries.length === 3 && focusedEditInProgress.entries[2].text === "", "Adding an unfinished citation tears down existing focused panes instead of retaining an error pane while the user types.");
   const focusedCitationPaneLayout = extractedFunction(fallbackSource, "focusedCitationPaneLayout", "focusedCitationPaneRows");
-  const focusedCitationPaneRows = extractedFunction(fallbackSource, "focusedCitationPaneRows", "enterFocusedCitationMode", { Math });
+  const focusedCitationPaneRows = extractedFunction(fallbackSource, "focusedCitationPaneRows", "reconcileFocusedCitationPaneElements", { Math });
   assert.deepStrictEqual([2, 3, 4, 5, 8].map(focusedCitationPaneLayout), ["two", "three", "four", "many", "many"], "Focused citation counts do not select the requested two-column, featured-three, 2-by-2, and three-wide layouts.");
   assert.deepStrictEqual([2, 3, 4, 5, 6, 7, 10].map(focusedCitationPaneRows), [1, 2, 2, 2, 2, 3, 4], "Focused citation rows do not divide every pane count within one shared viewport.");
+  const focusedPaneElements = [
+    { id: "first", scrollRoot: { scrollTop: 4000 } },
+    { id: "second", scrollRoot: { scrollTop: 4001 } }
+  ];
+  const focusedPaneContainer = {
+    children: [...focusedPaneElements],
+    insertions: 0,
+    insertBefore(element, before) {
+      this.insertions++;
+      const existingIndex = this.children.indexOf(element);
+      if (existingIndex >= 0) {
+        this.children.splice(existingIndex, 1);
+        element.scrollRoot.scrollTop = 0;
+      }
+      const beforeIndex = before ? this.children.indexOf(before) : -1;
+      this.children.splice(beforeIndex >= 0 ? beforeIndex : this.children.length, 0, element);
+    }
+  };
+  const reconcileFocusedCitationPaneElements = extractedFunction(fallbackSource, "reconcileFocusedCitationPaneElements", "enterFocusedCitationMode", {
+    els: { focusedCitationPanes: focusedPaneContainer }
+  });
+  const stableFocusedPanes = focusedPaneElements.map(element => ({ element, scrollRoot: element.scrollRoot }));
+  reconcileFocusedCitationPaneElements(stableFocusedPanes);
+  assert.strictEqual(focusedPaneContainer.insertions, 0, "Stable focused panes are still detached and reinserted on every citation keystroke.");
+  assert.deepStrictEqual(stableFocusedPanes.map(pane => pane.scrollRoot.scrollTop), [4000, 4001], "Reconciling stable focused panes changed their reading positions.");
+  reconcileFocusedCitationPaneElements([stableFocusedPanes[1], stableFocusedPanes[0]]);
+  assert.deepStrictEqual(focusedPaneContainer.children, [focusedPaneElements[1], focusedPaneElements[0]], "Focused pane reconciliation did not apply a real citation reorder.");
   const focusedReplaceElements = { search: { value: "INA203,  8CFR214.2(h)" } };
   const replaceFocusedCitationSegment = extractedFunction(fallbackSource, "replaceFocusedCitationSegment", "removeFocusedCitationPane", {
     els: focusedReplaceElements,

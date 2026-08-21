@@ -12,10 +12,10 @@
   "variant": "standard",
   "displayName": "INASearch",
   "fileName": "INASearch.html",
-  "instanceId": "074a8848590f8f256357d0b6",
+  "instanceId": "a0344a468c0d707327255a5b",
   "hasLocalUscCache": true,
   "corpusCompression": "gzip",
-  "generatedAt": "2026-08-21T12:38:24.730Z"
+  "generatedAt": "2026-08-21T13:58:16.228Z"
 }</script>
   <!-- INA_SEARCH_BUILD_DATA_END -->
   <!-- INA_SEARCH_CORPUS_MANIFEST_DATA_START -->
@@ -6947,9 +6947,14 @@ return {
 
     function parseFocusedCitationInput(value, preserveFocusedMode = false) {
       const segments = focusedCitationSegments(value);
-      if (segments.length < 2 || (!preserveFocusedMode && segments.filter(segment => segment.text).length < 2)) return null;
+      if (segments.length < 2) return null;
       const entries = segments.map(segment => ({ ...segment, result: segment.text ? parseCitation(segment.text) : null }));
-      if (!preserveFocusedMode && !entries.every(entry => entry.result?.recognized || citationListEntryLooksLegal(entry.text))) return null;
+      const beginsWithTrailingPane = !preserveFocusedMode
+        && entries.length === 2
+        && !entries[1].text
+        && Boolean(focusedCitationRecord(entries[0].result));
+      if (!preserveFocusedMode && !beginsWithTrailingPane && entries.filter(entry => entry.text).length < 2) return null;
+      if (!preserveFocusedMode && !entries.every(entry => (!entry.text && beginsWithTrailingPane) || entry.result?.recognized || citationListEntryLooksLegal(entry.text))) return null;
       return { source: String(value || ""), entries };
     }
 
@@ -7174,6 +7179,14 @@ return {
       return Math.ceil(count / 3);
     }
 
+    function reconcileFocusedCitationPaneElements(panes) {
+      const container = els.focusedCitationPanes;
+      panes.forEach((pane, index) => {
+        const elementAtIndex = container.children[index] || null;
+        if (elementAtIndex !== pane.element) container.insertBefore(pane.element, elementAtIndex);
+      });
+    }
+
     function enterFocusedCitationMode(parsed) {
       if (!state.focusedCitationMode) {
         setStatuteNavigationVisible(false);
@@ -7213,8 +7226,13 @@ return {
       });
       const nextLayout = focusedCitationPaneLayout(next.length);
       const layoutChanged = els.focusedCitationPanes.dataset.paneLayout !== nextLayout;
+      const panePositionsChanged = next.some((pane, index) => {
+        const previousIndex = previous.indexOf(pane);
+        return previousIndex >= 0 && previousIndex !== index;
+      });
+      const preserveReadingAnchors = layoutChanged || panePositionsChanged;
       const layoutAnchors = new Map();
-      if (layoutChanged) next.forEach(pane => {
+      if (preserveReadingAnchors) next.forEach(pane => {
         const anchor = captureFocusedPaneReadingAnchor(pane) || pane.readingAnchor;
         if (anchor) layoutAnchors.set(pane.id, anchor);
         pane.layoutAnchorRestorePending = true;
@@ -7226,7 +7244,7 @@ return {
       state.focusedCitationPanes = next;
       els.focusedCitationPanes.dataset.paneLayout = nextLayout;
       els.focusedCitationPanes.style.setProperty("--focused-pane-rows", String(focusedCitationPaneRows(next.length)));
-      next.forEach(pane => els.focusedCitationPanes.append(pane.element));
+      reconcileFocusedCitationPaneElements(next);
       els.focusedCitationStatus.textContent = `Viewing ${next.length} citations in focused comparison mode.`;
       state.citation = null;
       state.selected = null;
@@ -7234,7 +7252,7 @@ return {
       updateSearchFilterVisibility();
       updateCitationResultsNotification();
       requestAnimationFrame(() => next.forEach(pane => withFocusedCitationPane(pane, () => {
-        if (layoutChanged) restoreFocusedPaneReadingAnchor(pane, layoutAnchors.get(pane.id));
+        if (preserveReadingAnchors) restoreFocusedPaneReadingAnchor(pane, layoutAnchors.get(pane.id));
         else rememberFocusedPaneReadingAnchor(pane);
         fitStatuteNavigation();
         syncStatuteNavigationOffset();
