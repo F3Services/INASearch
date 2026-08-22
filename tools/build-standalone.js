@@ -180,6 +180,7 @@ function makeBuild(template, corpus, profile, options) {
 let template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
 template = replaceRuntimeBlock(template, "STORAGE", "inaSearchStorageRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Storage.js"), "utf8"));
 template = replaceRuntimeBlock(template, "CORPUS_PACKING", "inaSearchCorpusPackingRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Corpus-Packing.js"), "utf8"));
+template = replaceRuntimeBlock(template, "EMBEDDED_REFERENCES", "inaSearchEmbeddedReferencesRuntime", fs.readFileSync(path.join(root, "tools", "embedded-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "LEGAL_REFERENCES", "inaSearchLegalReferencesRuntime", fs.readFileSync(path.join(root, "tools", "legal-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "UPDATER", "inaSearchUpdaterRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Updater.js"), "utf8"));
 const fullCorpus = readAssignedObject("INASearch-Corpus.js", "INA_SEARCH_CORPUS");
@@ -190,8 +191,9 @@ applyStatuteFootnotes(fullCorpus, statuteFootnoteSource);
 fullCorpus.cfr = readAssignedObject("INASearch-CFR.js", "INA_SEARCH_CFR");
 const statuteReferenceSource = readAssignedObject("INASearch-Statute-References.js", "INA_SEARCH_STATUTE_REFERENCES");
 applyStatuteReferences(fullCorpus, statuteReferenceSource);
-applyGeneratedLegalReferences(fullCorpus);
 indexStatuteRunIns(fullCorpus);
+fullCorpus.legalReferenceExceptions = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "embedded-reference-exceptions.json"), "utf8"));
+applyGeneratedLegalReferences(fullCorpus);
 applyStatuteStatusMetadata(fullCorpus);
 const definitionSource = readAssignedObject("INASearch-Definitions.js", "INA_SEARCH_DEFINITIONS");
 const uscisGlossarySource = readAssignedObject("INASearch-USCIS-Glossary.js", "INA_SEARCH_USCIS_GLOSSARY");
