@@ -2410,6 +2410,18 @@ async function main() {
   progressiveNavigatorWide = true;
   assert.strictEqual(fitStatuteNavigation(), 0, "Mixed-height navigator controls on one row are incorrectly treated as wrapped.");
   assert(progressiveSegments.every(segment => !segment.classList.contains("unit-name-hidden")), "The navigator did not restore every unit name after more room became available.");
+  const stickyOffsetProperties = new Map();
+  const syncStatuteNavigationOffset = extractedFunction(fallbackSource, "syncStatuteNavigationOffset", "fitStatuteNavigation", {
+    $: () => ({ getBoundingClientRect: () => ({ height: 113.1953125 }) }),
+    els: { statuteNavigator: { hidden: false, getBoundingClientRect: () => ({ height: 46.25 }) } },
+    state: { focusedActivePaneId: null },
+    focusedPaneById: () => null,
+    document: { documentElement: { style: { setProperty: (name, value) => stickyOffsetProperties.set(name, value) } } },
+    Math
+  });
+  syncStatuteNavigationOffset();
+  assert.strictEqual(stickyOffsetProperties.get("--topbar-height"), "113.1953125px", "The sticky navigator offset rounds the top pane upward and exposes scrolling content in the resulting gap.");
+  assert.strictEqual(stickyOffsetProperties.get("--statute-nav-height"), "46.25px", "The measured navigator height is not preserved for downstream sticky elements.");
   const navigationVisibilityCalls = [];
   const navigationVisibilityState = { view: "search", statuteNavigationKind: "usc", statuteNavigationSectionId: "8-1153", statuteNavigationPath: ["b"] };
   const navigationVisibilityElements = { statuteNavigator: { hidden: true }, statuteNavigatorInner: { innerHTML: "contents", classList: testClassList() } };
@@ -2556,7 +2568,9 @@ async function main() {
   assert.strictEqual(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15H1100"), null, "The lettered item (c) was incorrectly aliased as Roman numeral 100.");
   const decimalRomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "z99Q11"));
   assert.deepStrictEqual(decimalRomanAmbiguity.path, ["z", "99", "Q", "xi"], "The largest valid decimal clause was not selected greedily.");
+  assert.strictEqual(decimalRomanAmbiguity.ambiguity.commonLabel, "INA 101(z)(99)(Q)", "A decimal ambiguity does not expose its shared citation prefix once.");
   assert.deepStrictEqual(decimalRomanAmbiguity.ambiguity.options.map(option => option.path), [["z", "99", "Q", "xi"], ["z", "99", "Q", "i", "I"]], "A compact decimal ambiguity did not include both valid tokenizations in numeric priority order.");
+  assert.deepStrictEqual(decimalRomanAmbiguity.ambiguity.options.map(option => option.label), ["(xi)", "(i)(I)"], "Decimal ambiguity choices do not limit their visible labels to the distinct citation suffixes.");
   assert.deepStrictEqual(decimalRomanAmbiguity.ambiguity.options.map(option => option.compactSuffix), ["xi", "iI"], "Decimal ambiguity choices lack exact compact Roman interpretations.");
   const explicitDecimalClause = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "(z)(99)(Q)(11)"));
   assert.deepStrictEqual(explicitDecimalClause.path, ["z", "99", "Q", "xi"], "An explicit decimal token did not resolve only as clause (xi).");
@@ -2591,7 +2605,9 @@ async function main() {
   assert.strictEqual(auditedGeneratedRunInPaths, 261, "The exhaustive compact-citation audit did not visit every generated statutory run-in path.");
   const lowercaseRomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15oiii"));
   assert.deepStrictEqual(lowercaseRomanAmbiguity.path, ["a", "15", "O", "iii"], "The longest valid clause was not selected for an ambiguous lowercase Roman sequence.");
+  assert.strictEqual(lowercaseRomanAmbiguity.ambiguity.commonLabel, "INA 101(a)(15)(O)", "A lowercase Roman ambiguity does not expose its shared citation prefix once.");
   assert.deepStrictEqual(lowercaseRomanAmbiguity.ambiguity.options.map(option => option.path), [["a", "15", "O", "iii"], ["a", "15", "O", "ii", "I"]], "The valid lowercase Roman interpretations were not listed in priority order.");
+  assert.deepStrictEqual(lowercaseRomanAmbiguity.ambiguity.options.map(option => option.label), ["(iii)", "(ii)(I)"], "Roman ambiguity choices do not limit their visible labels to the distinct citation suffixes.");
   assert.deepStrictEqual(lowercaseRomanAmbiguity.ambiguity.options.map(option => option.compactSuffix), ["iii", "iiI"], "Roman ambiguity choices do not retain exact compact suffixes.");
   const lowercaseSubclauseOption = lowercaseRomanAmbiguity.ambiguity.options.find(option => option.compactSuffix === "iiI");
   assert.strictEqual(compactPathApi.citationWithStatuteInterpretation("INA101a15oiii", lowercaseRomanAmbiguity.ambiguity, lowercaseSubclauseOption), "INA101a15oiiI", "Choosing an interpretation changed more than the required Roman-numeral suffix.");
@@ -2959,13 +2975,17 @@ async function main() {
     search: { value: "INA101a15oiii", closest: () => ambiguityShell, scrollLeft: 0 },
     searchInputMirror: { textContent: "", innerHTML: "", scrollLeft: 0 },
     citationAmbiguity: { hidden: true },
+    citationAmbiguityCommon: { textContent: "" },
     citationAmbiguityOptions: { innerHTML: "" }
   };
   const renderCitationAmbiguity = extractedFunction(fallbackSource, "renderCitationAmbiguity", "renderCitationFeedback", { els: ambiguityElements, canonicalPath: statutoryCanonicalPath, citationAmbiguityRange: compactPathApi.citationAmbiguityRange, citationWithStatuteInterpretation: compactPathApi.citationWithStatuteInterpretation, escapeHtml: escapeStatutoryHtml, Boolean });
   renderCitationAmbiguity({ type: "ina", ambiguity: lowercaseRomanAmbiguity.ambiguity });
   assert(ambiguityShellClasses.has("has-citation-ambiguity") && !ambiguityElements.citationAmbiguity.hidden, "Ambiguous citation styling and choices were not activated.");
   assert.strictEqual((ambiguityElements.searchInputMirror.innerHTML.match(/<mark>i<\/mark>/g) || []).length, 3, "The ambiguous lowercase i sequence is not highlighted yellow in the search bar.");
-  assert(ambiguityElements.citationAmbiguityOptions.innerHTML.includes("INA 101(a)(15)(O)(iii)") && ambiguityElements.citationAmbiguityOptions.innerHTML.includes("INA 101(a)(15)(O)(ii)(I)"), "The ambiguity panel does not render every valid interpretation.");
+  assert.strictEqual(ambiguityElements.citationAmbiguityCommon.textContent, "INA 101(a)(15)(O)", "The ambiguity panel does not list the common citation prefix once.");
+  assert.deepStrictEqual(ambiguityElements.citationAmbiguityOptions.innerHTML.match(/<span>[^<]+<\/span>/g), ["<span>(iii)</span>", "<span>(ii)(I)</span>"], "The ambiguity buttons do not show only the distinct citation suffixes.");
+  assert.strictEqual((ambiguityElements.citationAmbiguityOptions.innerHTML.match(/>Current<\/span>/g) || []).length, 1, "The ambiguity panel does not mark exactly one interpretation as Current.");
+  assert(ambiguityElements.citationAmbiguityOptions.innerHTML.includes('aria-current="true" aria-label="INA 101(a)(15)(O)(iii)"><span>(iii)</span><span class="citation-ambiguity-option-current">Current</span>'), "The selected ambiguity button does not place the compact Current label beneath its distinct suffix.");
   assert(ambiguityElements.citationAmbiguityOptions.innerHTML.includes('data-citation-interpretation="INA101a15oiiI"'), "The alternate interpretation does not preserve the user's compact citation format.");
   assert(!ambiguityElements.citationAmbiguityOptions.innerHTML.includes('data-citation-interpretation="INA 101('), "An ambiguity choice still rewrites the typed citation with canonical spacing or parentheses.");
   ambiguityElements.search.value = "INA212a3bivii";
@@ -2976,7 +2996,8 @@ async function main() {
   assert.strictEqual((ambiguityElements.searchInputMirror.innerHTML.match(/<mark>1<\/mark>/g) || []).length, 2, "Only the ambiguous decimal suffix is not highlighted in the search bar.");
   assert(!ambiguityElements.searchInputMirror.innerHTML.includes("<mark>101</mark>") && !ambiguityElements.searchInputMirror.innerHTML.includes("<mark>99</mark>"), "Unambiguous section or paragraph digits were highlighted as part of a decimal ambiguity.");
   assert(ambiguityElements.citationAmbiguityOptions.innerHTML.includes('data-citation-interpretation="INA101z99Qxi"') && ambiguityElements.citationAmbiguityOptions.innerHTML.includes('data-citation-interpretation="INA101z99QiI"'), "Decimal ambiguity buttons do not contain exact compact Roman interpretations.");
-  assert(fallbackSource.includes("This citation has more than one valid interpretation. The largest valid clause is selected unless you choose another."), "The ambiguity warning still describes only lowercase Roman input.");
+  assert(fallbackSource.includes('<span class="citation-ambiguity-intro">This citation has more than one valid interpretation.</span>'), "The ambiguity window no longer identifies why the choices are shown.");
+  assert(!fallbackSource.includes("The largest valid clause is selected unless you choose another."), "The ambiguity window still explains the default selection instead of labeling it Current.");
   const searchFieldStart = fallbackSource.indexOf('<div class="search-field-shell">');
   const searchFieldEnd = fallbackSource.indexOf('</div>\n      </div>', searchFieldStart);
   const searchFieldMarkup = fallbackSource.slice(searchFieldStart, searchFieldEnd);
@@ -3239,6 +3260,15 @@ async function main() {
   assert.strictEqual(statutoryLinkInaCitation({ family: "usc", targetTitle: "18", targetSection: "1001", targetPath: [] }), "", "The INA display preference rewrote a cross-title U.S. Code citation without an INA crosswalk.");
   assert.strictEqual(statutoryLinkInaCitation({ family: "usc", targetTitle: "8", targetSection: "1153", targetPath: [], resolution: "unresolved" }), "", "An unresolved contextual reference was made to look like a precise INA citation.");
   assert.strictEqual(statutoryLinkInaCitation({ family: "ina", inaSection: "203", targetTitle: "8", targetSection: "1153", targetPath: ["b", "2"] }), "INA 203(b)(2)", "An explicit INA-family reference did not receive its full normalized INA label.");
+  const ambiguousAntecedentReference = { text: "such subsection", family: "usc", targetKind: "usc", targetTitle: "8", targetSection: "1182", targetPath: [], resolution: "unresolved", ruleId: "ambiguous-antecedent", officialUrl: "https://uscode.house.gov/" };
+  assert.strictEqual(legalReferenceHtml(ambiguousAntecedentReference, "such subsection"), "such subsection", "An ambiguous antecedent is still announced as a legal-reference link.");
+  assert.strictEqual(legalReferenceHtml(ambiguousAntecedentReference, "<mark>such</mark> subsection"), "<mark>such</mark> subsection", "Removing an ambiguous antecedent link also removed its search highlighting.");
+  const exactUnresolvedReference = { text: "(h)(10)(iv)(B)", family: "usc", targetKind: "usc", targetTitle: "8", targetSection: "1182", targetPath: ["h", "10", "iv", "B"], resolution: "unresolved", ruleId: "context-path-this-section", officialUrl: "https://uscode.house.gov/" };
+  const exactUnresolvedHtml = legalReferenceHtml(exactUnresolvedReference, "(h)(10)(iv)(B)");
+  assert(exactUnresolvedHtml.startsWith('<a class="statute-citation-link legal-reference-link reference-unavailable"') && exactUnresolvedHtml.includes('data-reference-path="[&quot;h&quot;,&quot;10&quot;,&quot;iv&quot;,&quot;B&quot;]"'), "An exact contextual target outside the local corpus lost its existing reference link.");
+  const officialOnlyReference = { text: "18 U.S.C. 1001", family: "usc", targetKind: "usc", targetTitle: "18", targetSection: "1001", targetPath: [], resolution: "official-source-only", ruleId: "explicit-usc", officialUrl: "https://uscode.house.gov/" };
+  const officialOnlyHtml = legalReferenceHtml(officialOnlyReference, "18 U.S.C. 1001");
+  assert(officialOnlyHtml.includes("reference-official-only") && officialOnlyHtml.includes('href="https://uscode.house.gov/"'), "A recognized out-of-corpus citation lost its existing official-source link.");
   citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "usc";
   const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
   const scopedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches, renderScopedDefinitionAnnotatedText, definedTermHighlightingEnabled: () => true, houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
@@ -3883,7 +3913,7 @@ async function main() {
   assert.strictEqual(statutoryFormattingAudit.indexedRunInPaths, 263, "The corpus-wide audit found a missing or duplicate navigable statutory run-in path.");
   assert.strictEqual(statutoryFormattingAudit.structuralDuplicateRunIns, 2, "The corpus-wide audit did not isolate the two non-navigable condition markers that duplicate structural paths.");
   assert.deepStrictEqual([...renderedVirtualRunInPathIdentities].sort(), [...generatedRunInPathIdentities].sort(), "The generated corpus run-in index has a missing or stale virtual path.");
-  assert.strictEqual(statutoryFormattingAudit.citationLinks, 1765, "Unexpected generated-link count in operative statutory text.");
+  assert.strictEqual(statutoryFormattingAudit.citationLinks, 1701, "Unexpected generated-link count in operative statutory text.");
   let ancillaryCitationLinks = 0;
   for (const section of hydratedSource.title8.sections) {
     ancillaryCitationLinks += (linkifyStatutoryText(section.preamble || "", section.preambleReferences || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
@@ -3891,7 +3921,7 @@ async function main() {
     for (const note of section.notes || []) ancillaryCitationLinks += (linkifyStatutoryText(note.text || "", note.references || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
     for (const footnote of section.houseEditorialFootnotes || []) ancillaryCitationLinks += (linkifyStatutoryText(footnote.text || "", footnote.references || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
   }
-  assert.strictEqual(statutoryFormattingAudit.citationLinks + ancillaryCitationLinks, 16618, "Unexpected total generated-link count in displayed cached statutory material.");
+  assert.strictEqual(statutoryFormattingAudit.citationLinks + ancillaryCitationLinks, 16520, "Unexpected total generated-link count in displayed cached statutory material.");
 
   const parseAssignedProfile = extractedFunction(fallbackSource, "assignedJsonObjectFromText", "updateEmbeddedProfile");
   const migration = profileMigrationFunctions(fallbackSource);
