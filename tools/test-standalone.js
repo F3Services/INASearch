@@ -13,7 +13,8 @@ const { performance } = require("perf_hooks");
 const { buildDefinitionCatalog, definitionStatementGroups, deriveInaCatalog } = require("./definition-catalog");
 const { applyStatuteReferences, statuteSourceMap } = require("./statute-references");
 const { applyStatuteFootnotes, reconstructFlattenedField } = require("./statute-footnotes");
-const { applyCfrReferences, applyGeneratedLegalReferences, generatedReferences, legalReferenceContext, validateLegalReferencePolicy } = require("./legal-references");
+const { applyCfrReferences, applyGeneratedLegalReferences, generatedReferences, legalReferenceContext, validateEmbeddedReferenceExceptions, validateLegalReferencePolicy } = require("./legal-references");
+const embeddedReferences = require("./embedded-references");
 const { compactHouseHref, expandHouseHref, packLegalReferences, unpackLegalReferences } = require("./pack-legal-references");
 const { indexStatuteRunIns, statuteRunInMarkers } = require("./statute-run-ins");
 const { applyStatuteStatusMetadata } = require("./statute-status");
@@ -46,8 +47,9 @@ function sourceCorpus() {
   const uscisGlossary = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_USCIS_GLOSSARY));
   const statuteReferences = JSON.parse(JSON.stringify(sandbox.window.INA_SEARCH_STATUTE_REFERENCES));
   applyStatuteReferences(corpus, statuteReferences);
-  applyGeneratedLegalReferences(corpus);
   indexStatuteRunIns(corpus);
+  corpus.legalReferenceExceptions = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "embedded-reference-exceptions.json"), "utf8"));
+  applyGeneratedLegalReferences(corpus);
   applyStatuteStatusMetadata(corpus);
   corpus.definitions = buildDefinitionCatalog(corpus, definitions, uscisGlossary);
   packLegalReferences(corpus);
@@ -127,7 +129,7 @@ function executableScripts(html) {
 
 async function runBootstrap(build, overrides = {}) {
   const scripts = executableScripts(build.html);
-  assert.strictEqual(scripts.length, 6, `${build.fileName}: executable script count`);
+  assert.strictEqual(scripts.length, 7, `${build.fileName}: executable script count`);
   const manifestAttributes = Object.fromEntries(Object.entries({
     "schema-version": String(build.manifest.schemaVersion),
     "corpus-schema-version": String(build.manifest.corpusSchemaVersion),
@@ -172,8 +174,9 @@ async function runBootstrap(build, overrides = {}) {
   vm.createContext(context);
   new vm.Script(scripts[0], { filename: `${build.fileName}:storage` }).runInContext(context);
   new vm.Script(scripts[1], { filename: `${build.fileName}:corpus-packing` }).runInContext(context);
-  new vm.Script(scripts[2], { filename: `${build.fileName}:legal-references` }).runInContext(context);
-  new vm.Script(scripts[4], { filename: `${build.fileName}:bootstrap` }).runInContext(context);
+  new vm.Script(scripts[2], { filename: `${build.fileName}:embedded-references` }).runInContext(context);
+  new vm.Script(scripts[3], { filename: `${build.fileName}:legal-references` }).runInContext(context);
+  new vm.Script(scripts[5], { filename: `${build.fileName}:bootstrap` }).runInContext(context);
   const corpus = await context.INA_SEARCH_CORPUS_READY;
   return { corpus, profile: context.INA_SEARCH_PROFILE, errors: context.INA_SEARCH_LOAD_ERRORS };
 }
@@ -779,16 +782,71 @@ async function main() {
   assert.deepStrictEqual(retainedAncestorReferences, [], "The built corpus retains verified links to the current operative unit or one of its ancestors.");
   const sharedLegalContext = legalReferenceContext(hydratedSource);
   assert.deepStrictEqual(validateLegalReferencePolicy(hydratedSource), { schemaVersion: 1, scopes: 9, reviewedAt: "2026-08-21" }, "The reviewed semantic legal-reference policy did not validate against exact CFR source text.");
+  assert.deepStrictEqual(validateEmbeddedReferenceExceptions(hydratedSource.legalReferenceExceptions), { schemaVersion: 1, resolverVersion: "embedded-v1", exceptions: 0, reviewedAt: "2026-08-22" }, "The embedded-reference exception manifest did not validate.");
   const tamperedPolicyCorpus = JSON.parse(JSON.stringify(hydratedSource));
   tamperedPolicyCorpus.legalReferencePolicy.scopes[0].basis.excerpt += " altered";
   assert.throws(() => validateLegalReferencePolicy(tamperedPolicyCorpus), /not exact source text/, "A stale semantic-policy excerpt was accepted.");
+  assert.throws(() => validateEmbeddedReferenceExceptions({ schemaVersion: 1, resolverVersion: "embedded-v1", reviewedAt: "2026-08-22", exceptions: [{ id: "incomplete" }] }), /incomplete/, "An incomplete embedded-reference exception was accepted.");
+  const staleExceptionCorpus = {
+    title8: { sections: [] }, cfr: { sections: [], appendices: [], parts: [] }, inaCrosswalk: [],
+    legalReferenceExceptions: {
+      schemaVersion: 1, resolverVersion: "embedded-v1", reviewedAt: "2026-08-22",
+      exceptions: [{
+        id: "stale", sourceArtifact: "fixture", sourceId: "missing", sourceField: "text", sourceTextSha256: "0".repeat(64),
+        start: 0, end: 3, text: "(a)", reason: "fixture", officialUrl: "https://uscode.house.gov/",
+        reviewedAt: "2026-08-22", target: { family: "usc", title: "8", section: "1182", path: ["a"] }
+      }]
+    }
+  };
+  assert.throws(() => applyGeneratedLegalReferences(staleExceptionCorpus), /Stale embedded-reference exceptions/, "A stale embedded-reference exception survived corpus generation.");
+
+  const section1182ForEmbeddedReferences = hydratedSource.title8.sections.find(section => section.section === "1182");
+  const waiverNode = statutoryNode(hydratedSource, "1182", ["h"]);
+  const waiverTargets = (waiverNode.references || []).filter(reference => reference.ruleId?.startsWith("embedded-")).map(reference => [reference.text, reference.targetPath.join("/"), reference.ruleId]);
+  assert.deepStrictEqual(waiverTargets, [
+    ["(A)(i)(I)", "a/2/A/i/I", "embedded-explicit-container"],
+    ["(B)", "a/2/B", "embedded-explicit-container"],
+    ["(D)", "a/2/D", "embedded-explicit-container"],
+    ["(E)", "a/2/E", "embedded-explicit-container"],
+    ["(A)(i)(II)", "a/2/A/i/II", "embedded-such-container"]
+  ], "INA 212(h) did not resolve its five written embedded targets exactly.");
+  const waiverChildTargets = (statutoryNode(hydratedSource, "1182", ["h", "1", "A", "i"]).references || [])
+    .filter(reference => reference.ruleId === "embedded-such-container")
+    .map(reference => [reference.text, reference.targetPath.join("/")]);
+  assert.deepStrictEqual(waiverChildTargets, [["(D)(i)", "a/2/D/i"], ["(D)(ii)", "a/2/D/ii"]], "INA 212(h)(1)(A)(i) did not inherit the proved subsection antecedent.");
+  assert(!(waiverNode.references || []).some(reference => /\bsuch subsection\b/i.test(reference.text)), "INA 212(h) still emits ‘such subsection’ as a link span.");
+  assert(section1182ForEmbeddedReferences, "INA 212 is absent from the embedded-reference audit fixture.");
+
+  const navigableReferences = [];
+  const collectNavigableReferences = value => {
+    if (!value || typeof value !== "object") return;
+    if (Array.isArray(value)) { value.forEach(collectNavigableReferences); return; }
+    if (Number.isInteger(value.start) && Number.isInteger(value.end) && value.ruleId && value.resolution) navigableReferences.push(value);
+    for (const child of Object.values(value)) collectNavigableReferences(child);
+  };
+  collectNavigableReferences(hydratedSource);
+  assert.strictEqual(navigableReferences.filter(reference => reference.ruleId === "ambiguous-antecedent").length, 0, "The rebuilt corpus still contains legacy ambiguous-antecedent links.");
+  const embeddedNavigableReferences = navigableReferences.filter(reference => reference.ruleId.startsWith("embedded-"));
+  assert.strictEqual(hydratedSource.legalReferenceEvidence.format, "indexed-arrays-v1", "Embedded-reference evidence was not compactly indexed for delivery.");
+  assert.strictEqual(new Set(embeddedNavigableReferences.map(reference => reference.evidenceId)).size, hydratedSource.legalReferenceEvidence.records.length, "A generated embedded-reference evidence record is missing or orphaned.");
+  assert(embeddedNavigableReferences.every(reference => Number.isInteger(reference.evidenceId) && hydratedSource.legalReferenceEvidence.records[reference.evidenceId]), "An embedded-reference evidence ID does not survive packing and hydration.");
+  const repeatedLegalCorpus = sourceCorpus();
+  assert.deepStrictEqual(repeatedLegalCorpus.legalReferenceAudit, fullSource.legalReferenceAudit, "Two corpus-generator runs produced different embedded-reference audits.");
+  assert.deepStrictEqual(repeatedLegalCorpus.legalReferenceEvidence, fullSource.legalReferenceEvidence, "Two corpus-generator runs produced different embedded-reference evidence.");
 
   const goldenReferenceFixtures = JSON.parse(fs.readFileSync(path.join(root, "tools", "fixtures", "legal-reference-golden.json"), "utf8"));
   assert.strictEqual(goldenReferenceFixtures.schemaVersion, 1, "Unexpected legal-reference fixture schema.");
   const browserReferenceContext = { globalThis: null };
   browserReferenceContext.globalThis = browserReferenceContext;
   vm.createContext(browserReferenceContext);
+  new vm.Script(scriptBody(full.html, "inaSearchEmbeddedReferencesRuntime"), { filename: "inaSearchEmbeddedReferencesRuntime" }).runInContext(browserReferenceContext);
   new vm.Script(scriptBody(full.html, "inaSearchLegalReferencesRuntime"), { filename: "inaSearchLegalReferencesRuntime" }).runInContext(browserReferenceContext);
+  const embeddedParserFixture = "subparagraphs (A)(i)(I), (B), (D), and (E) of subsection (a)(2); subparagraph (A)(i)(II) of such subsection; clauses (i) and (ii) of preceding subparagraph";
+  assert.deepStrictEqual(
+    plain(browserReferenceContext.INASearchEmbeddedReferences.parseEmbeddedReferenceAst(embeddedParserFixture)),
+    plain(embeddedReferences.parseEmbeddedReferenceAst(embeddedParserFixture)),
+    "The Node and embedded-browser parsers produced different statutory-reference syntax trees."
+  );
   const simplifyGoldenReference = reference => ({
     text: reference.text,
     family: reference.family,
@@ -819,10 +877,14 @@ async function main() {
   assert.deepStrictEqual([...new Set(familyReferences.map(reference => reference.family))].sort(), ["cfr", "federal-register", "ina", "public-law", "statutes-at-large", "usc"], "A supported legal citation family was not generated.");
   assert(familyReferences.every(reference => familyFixture.slice(reference.start, reference.end) === reference.text), "An explicit citation fixture lost its exact source span.");
   const relativeFixture = "paragraphs (1) and (2) of this subsection; (a)(2) of this section; such paragraph";
-  const relativeReferences = generatedReferences(relativeFixture, fixtureContext);
-  assert.deepStrictEqual(relativeReferences.filter(reference => reference.ruleId === "context-named-unit").map(reference => reference.targetPath), [["b", "1"], ["b", "2"]], "A contextual statutory list did not produce a separate target for each written unit.");
+  const relativeAudit = { suppressedSelfReferences: 0, suppressedByRule: {}, suppressedByFamily: {}, embeddedCandidates: 0, embeddedByStatus: {}, embeddedByRule: {}, embeddedIssues: [] };
+  const relativeReferences = generatedReferences(relativeFixture, { ...fixtureContext, referenceAudit: relativeAudit });
+  assert.deepStrictEqual(relativeReferences.filter(reference => reference.ruleId === "embedded-this-container").map(reference => reference.targetPath), [["b", "1"], ["b", "2"]], "A contextual statutory list did not produce a separate target for each written unit.");
   assert(relativeReferences.some(reference => reference.ruleId === "context-path-this-section" && reference.targetPath.join("/") === "a/2"), "A chained path relative to this section was not resolved.");
-  assert(relativeReferences.some(reference => reference.ruleId === "ambiguous-antecedent" && reference.resolution === "unresolved"), "An uncertain antecedent was guessed instead of marked unresolved.");
+  assert(!relativeReferences.some(reference => reference.text === "such paragraph" || reference.ruleId === "ambiguous-antecedent"), "An uncertain antecedent was emitted as a navigable reference.");
+  assert(relativeAudit.embeddedIssues.some(issue => issue.text === "such paragraph" && issue.status === "unresolved"), "An uncertain antecedent was not retained in the non-navigable build audit.");
+  const exactOfficialOnlyReference = generatedReferences("See (h)(10)(iv)(B) of this section.", fixtureContext).find(reference => reference.ruleId === "context-path-this-section");
+  assert(exactOfficialOnlyReference && exactOfficialOnlyReference.resolution === "official-source-only" && exactOfficialOnlyReference.targetPath.join("/") === "h/10/iv/B", "An exact contextual citation outside the local corpus lost its official-source link.");
   const bareSelfAudit = { suppressedSelfReferences: 0, suppressedByRule: {}, suppressedByFamily: {} };
   assert.strictEqual(generatedReferences("Transport is forbidden by this section.", { ...fixtureContext, referenceAudit: bareSelfAudit }).length, 0, "A bare reference to its own section remains clickable.");
   assert.strictEqual(bareSelfAudit.suppressedByRule["context-this-unit"], 1, "The bare self-reference was not recorded in the build audit.");
@@ -1080,7 +1142,7 @@ async function main() {
 
   for (const build of [full, uncompressed]) {
     const scripts = executableScripts(build.html);
-    assert.strictEqual(scripts.length, 6);
+    assert.strictEqual(scripts.length, 7);
     scripts.forEach((source, index) => new vm.Script(source, { filename: `${build.fileName}:script-${index + 1}` }));
     assert(!/<script[^>]+src=/i.test(build.html), `${build.fileName}: external script detected.`);
     assert(build.html.includes('const ECFR_ORIGIN = "https://www.ecfr.gov";'), `${build.fileName}: direct eCFR updater missing.`);
@@ -2950,7 +3012,7 @@ async function main() {
     ...hydratedSource.cfr.appendices.map(appendix => ({ key: `cfr-appendix:${appendix.id}`, kind: "cfr-appendix", item: appendix, citedTargets: legalReferenceTargets(appendix, "cfr") }))
   ];
   const compactInaSSources = allLegalCitationSourceRecords.filter(record => citationScopeMatchesRecord(record, compactInaSReferenceScope));
-  assert.strictEqual(compactInaSSources.length, 24, "cites:INA101a15s did not return every uniquely indexed source citing that provision or one of its descendants.");
+  assert.strictEqual(compactInaSSources.length, 25, "cites:INA101a15s did not return every uniquely indexed source citing that provision or one of its descendants.");
   assert(compactInaSSources.some(record => record.key === "usc:8-1182") && compactInaSSources.some(record => record.key === "cfr:8:245.1") && compactInaSSources.some(record => record.key === "cfr:22:41.12"), "The compact cites: example omitted a known statute, Title 8 regulation, or cross-title regulation.");
   const firstCfrToCfrSource = hydratedSource.cfr.sections.map(section => ({ section, targets: legalReferenceTargets(section, "cfr") })).find(record => record.targets.some(target => target.family === "cfr"));
   assert(firstCfrToCfrSource && citationScopeMatchesRecord({ kind: "cfr", citedTargets: firstCfrToCfrSource.targets }, (() => {
@@ -3913,7 +3975,7 @@ async function main() {
   assert.strictEqual(statutoryFormattingAudit.indexedRunInPaths, 263, "The corpus-wide audit found a missing or duplicate navigable statutory run-in path.");
   assert.strictEqual(statutoryFormattingAudit.structuralDuplicateRunIns, 2, "The corpus-wide audit did not isolate the two non-navigable condition markers that duplicate structural paths.");
   assert.deepStrictEqual([...renderedVirtualRunInPathIdentities].sort(), [...generatedRunInPathIdentities].sort(), "The generated corpus run-in index has a missing or stale virtual path.");
-  assert.strictEqual(statutoryFormattingAudit.citationLinks, 1701, "Unexpected generated-link count in operative statutory text.");
+  assert.strictEqual(statutoryFormattingAudit.citationLinks, 4620, "Unexpected generated-link count in operative statutory text.");
   let ancillaryCitationLinks = 0;
   for (const section of hydratedSource.title8.sections) {
     ancillaryCitationLinks += (linkifyStatutoryText(section.preamble || "", section.preambleReferences || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
@@ -3921,7 +3983,7 @@ async function main() {
     for (const note of section.notes || []) ancillaryCitationLinks += (linkifyStatutoryText(note.text || "", note.references || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
     for (const footnote of section.houseEditorialFootnotes || []) ancillaryCitationLinks += (linkifyStatutoryText(footnote.text || "", footnote.references || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
   }
-  assert.strictEqual(statutoryFormattingAudit.citationLinks + ancillaryCitationLinks, 16520, "Unexpected total generated-link count in displayed cached statutory material.");
+  assert.strictEqual(statutoryFormattingAudit.citationLinks + ancillaryCitationLinks, 20285, "Unexpected total generated-link count in displayed cached statutory material.");
 
   const parseAssignedProfile = extractedFunction(fallbackSource, "assignedJsonObjectFromText", "updateEmbeddedProfile");
   const migration = profileMigrationFunctions(fallbackSource);

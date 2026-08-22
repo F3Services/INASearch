@@ -60,8 +60,8 @@
       "context": { "kind": "usc", "title": "8", "section": "1154", "path": ["b", "1", "A"] },
       "extraUscPaths": ["1154:b/1", "1154:b/2"],
       "expected": [
-        { "text": "(1)", "family": "usc", "ruleId": "context-named-unit", "resolution": "local", "targetSection": "1154", "targetPath": ["b", "1"], "provenance": "deterministic-context", "policyScopeId": "" },
-        { "text": "(2)", "family": "usc", "ruleId": "context-named-unit", "resolution": "local", "targetSection": "1154", "targetPath": ["b", "2"], "provenance": "deterministic-context", "policyScopeId": "" }
+        { "text": "(1)", "family": "usc", "ruleId": "embedded-this-container", "resolution": "local", "targetSection": "1154", "targetPath": ["b", "1"], "provenance": "deterministic-context", "policyScopeId": "" },
+        { "text": "(2)", "family": "usc", "ruleId": "embedded-this-container", "resolution": "local", "targetSection": "1154", "targetPath": ["b", "2"], "provenance": "deterministic-context", "policyScopeId": "" }
       ]
     },
     {
