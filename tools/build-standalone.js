@@ -45,7 +45,7 @@ function replaceDataBlock(html, name, id, value) {
   const replacement = `${start}\n  <script id="${id}" type="application/json">${safeJson(value)}</script>\n  ${end}`;
   const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
   if (!expression.test(html)) throw new Error(`Template is missing the ${name} data block.`);
-  return html.replace(expression, replacement);
+  return html.replace(expression, () => replacement);
 }
 
 function replaceRuntimeBlock(html, name, id, source) {
@@ -54,7 +54,7 @@ function replaceRuntimeBlock(html, name, id, source) {
   const replacement = `${start}\n  <script id="${id}">${source.replace(/<\/script/gi, "<\\/script")}</script>\n  ${end}`;
   const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
   if (!expression.test(html)) throw new Error(`Template is missing the ${name} runtime block.`);
-  return html.replace(expression, replacement);
+  return html.replace(expression, () => replacement);
 }
 
 function sha256(value) {
@@ -134,7 +134,7 @@ function replaceCorpusBlock(html, payload, manifest) {
   const replacement = `${start}\n  <script id="inaSearchCorpusData" type="${scriptType}" ${attributes}>${payload}</script>\n  ${end}`;
   const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
   if (!expression.test(html)) throw new Error("Template is missing the CORPUS data block.");
-  return html.replace(expression, replacement);
+  return html.replace(expression, () => replacement);
 }
 
 function makeBuild(template, corpus, profile, options) {
@@ -180,6 +180,10 @@ function makeBuild(template, corpus, profile, options) {
 let template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
 template = replaceRuntimeBlock(template, "STORAGE", "inaSearchStorageRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Storage.js"), "utf8"));
 template = replaceRuntimeBlock(template, "CORPUS_PACKING", "inaSearchCorpusPackingRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Corpus-Packing.js"), "utf8"));
+template = replaceRuntimeBlock(template, "INSERTIONS", "inaSearchInsertionsRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Insertions.js"), "utf8"));
+template = replaceRuntimeBlock(template, "COMMAND", "inaSearchCommandRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Command.js"), "utf8"));
+template = replaceRuntimeBlock(template, "WORKSPACE", "inaSearchWorkspaceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Workspace.js"), "utf8"));
+template = replaceRuntimeBlock(template, "OCCURRENCE", "inaSearchOccurrenceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Occurrence.js"), "utf8"));
 template = replaceRuntimeBlock(template, "EMBEDDED_REFERENCES", "inaSearchEmbeddedReferencesRuntime", fs.readFileSync(path.join(root, "tools", "embedded-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "LEGAL_REFERENCES", "inaSearchLegalReferencesRuntime", fs.readFileSync(path.join(root, "tools", "legal-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "UPDATER", "inaSearchUpdaterRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Updater.js"), "utf8"));
@@ -207,7 +211,8 @@ const results = [
     displayName: "INASearch",
     fileName: "INASearch.html",
     hasLocalUscCache: true,
-    compactCorpus: true
+    compactCorpus: true,
+    compactShell: true
   }),
   makeBuild(template, fullCorpus, defaultProfile, {
     variant: "uncompressed",

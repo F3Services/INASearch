@@ -6,23 +6,21 @@
       "id": "title-8-bare-act",
       "text": "For purposes of the Act, this section applies.",
       "context": { "kind": "cfr", "title": "8", "chapter": "I", "part": "214", "section": "214.2", "path": ["h"] },
-      "expected": [
-        { "text": "the Act", "family": "ina", "ruleId": "context-cfr-the-act", "resolution": "official-source-only", "targetSection": "", "targetPath": [], "provenance": "reviewed-semantic-policy", "policyScopeId": "title-8-chapter-i" }
-      ]
+      "expected": []
     },
     {
       "id": "cross-title-bare-act",
       "text": "For purposes of the Act, this filing applies.",
       "context": { "kind": "cfr", "title": "20", "part": "655", "section": "655.1", "path": [] },
-      "expected": [
-        { "text": "the Act", "family": "ina", "ruleId": "context-cfr-the-act", "resolution": "official-source-only", "targetSection": "", "targetPath": [], "provenance": "reviewed-semantic-policy", "policyScopeId": "title-20-part-655" }
-      ]
+      "expected": []
     },
     {
       "id": "social-security-act-not-ina",
       "text": "section 1110(b) of the Act",
       "context": { "kind": "cfr", "title": "20", "part": "416", "section": "416.250", "path": [] },
-      "expected": []
+      "expected": [
+        { "text": "section 1110(b)", "family": "usc", "ruleId": "context-cfr-scoped-act-section", "resolution": "official-source-only", "targetSection": "1310", "targetPath": ["b"], "provenance": "reviewed-semantic-policy", "policyScopeId": "title-20-part-416" }
+      ]
     },
     {
       "id": "named-historical-act-not-bare",
@@ -60,8 +58,8 @@
       "context": { "kind": "usc", "title": "8", "section": "1154", "path": ["b", "1", "A"] },
       "extraUscPaths": ["1154:b/1", "1154:b/2"],
       "expected": [
-        { "text": "(1)", "family": "usc", "ruleId": "embedded-this-container", "resolution": "local", "targetSection": "1154", "targetPath": ["b", "1"], "provenance": "deterministic-context", "policyScopeId": "" },
-        { "text": "(2)", "family": "usc", "ruleId": "embedded-this-container", "resolution": "local", "targetSection": "1154", "targetPath": ["b", "2"], "provenance": "deterministic-context", "policyScopeId": "" }
+        { "text": "(1)", "family": "usc", "ruleId": "embedded-a-shared-trailing-container", "resolution": "local", "targetSection": "1154", "targetPath": ["b", "1"], "provenance": "deterministic-context", "policyScopeId": "" },
+        { "text": "(2)", "family": "usc", "ruleId": "embedded-a-shared-trailing-container", "resolution": "local", "targetSection": "1154", "targetPath": ["b", "2"], "provenance": "deterministic-context", "policyScopeId": "" }
       ]
     },
     {

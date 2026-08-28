@@ -22,11 +22,27 @@ window.INA_SEARCH_PROFILE = {
   },
   "preferences": {
     "theme": "system",
+    "showDetailedStatus": false,
+    "hideTopThemeControls": false,
+    "hideQuickStartPrompt": false,
     "resultFilter": "all",
     "compactResults": false,
-    "statutoryLinkCitationSystem": "usc",
+    "statutoryLinkCitationSystem": "ina",
+    "highlightInaCitationLinks": false,
     "highlightDefinedTerms": false,
     "automaticCfrUpdates": false,
+    "backupReminder": "weekly",
+    "emptySearchView": "ina",
+    "closeBlankCompanionOnSectionOpen": false,
+    "legalNavigatorVisibility": "single",
+    "scrollUpdatesSearch": false,
+    "expandSearchResultsByDefault": true,
+    "syncCfrCommonDepthFromStatute": true,
+    "persistInlineReferenceInsertions": false,
     "defaultStartupQuery": ""
+  },
+  "referenceInsertions": {
+    "schemaVersion": 1,
+    "records": []
   }
 };

@@ -14,21 +14,33 @@ Yes. The HTML file contains the legal corpus needed for searching and reading. A
 
 Official-source buttons still require an internet connection because they open the [House U.S. Code](https://uscode.house.gov/), [eCFR](https://www.ecfr.gov/), [USCIS](https://www.uscis.gov/), or [GovInfo](https://www.govinfo.gov/) website.
 
+### Does INASearch support light and dark themes?
+
+Yes. INASearch follows the operating system's light or dark preference by default and responds when that preference changes. The sun/moon button in the top bar and **Settings → Appearance** switches to the theme shown on the button. The laptop button returns to System mode; its smaller sun or moon shows the operating system's current theme. The light theme uses a blue, white, and soft-gray palette inspired by the [USCIS Policy Manual](https://www.uscis.gov/policy-manual).
+
+The theme choice is part of the saved profile, so it travels through browser saving, connected data files, imports, and JSON backups. The standalone files use local font fallbacks and do not download USCIS fonts or other theme assets.
+
+Appearance also has separate settings for hiding the Updates display, save-status display, or theme buttons in the top bar. These are disabled by default. Hiding the top-bar theme buttons leaves both theme controls available in Settings.
+
 ### Why Edge or Chrome?
 
-The search and reader use ordinary browser features. The limiting feature is durable autosaving: INASearch uses `showSaveFilePicker()` and a writable file handle so it can save changes directly to the `INASearch_Data.json` file you selected. [That API is not available in every major browser](https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker).
+The search, reader, and automatic browser-profile saving use ordinary browser features, including IndexedDB. The limiting feature for the stronger connected-file workflow is `showSaveFilePicker()`: INASearch uses a writable file handle to save changes directly to the `INASearch_Data.json` file you selected. [That API is not available in every major browser](https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker).
 
 - Firefox does not provide the required local-file picker and writable-handle workflow.
 - Safari supports an origin-private file system, but [that storage belongs to the website](https://webkit.org/blog/12257/the-file-system-access-api-with-origin-private-file-system/); it does not provide the picker INASearch needs to keep writing to a user-selected JSON file. Chrome and Edge on iOS use the same WebKit engine and have the same limitation.
 - Other desktop Chromium browsers, such as Brave, Opera, and Vivaldi, may expose the required API, but they are not in the project's test matrix and their privacy or security settings may block it.
 
-Firefox and Safari may still run the reader, and INASearch can still download a JSON backup there, but they cannot provide the connected-file autosave workflow. Current desktop Edge and Chrome are therefore the fully supported browsers.
+Firefox and Safari may still run the reader, save a profile in their own browser storage, and download JSON backups, but they cannot provide the connected-file autosave workflow. Current desktop Edge and Chrome are therefore the fully supported browsers.
 
 ## Notes, settings, and privacy
 
 ### How are my notes saved?
 
-Open **Saving & data** and select or create `INASearch_Data.json`. INASearch can then save notes, preferences, and tutorial progress to that file.
+INASearch automatically saves notes, preferences, and tutorial progress in browser-owned IndexedDB storage. “Saved in browser” means the current browser profile contains the latest verified copy; it does not mean the data is a durable filesystem document.
+
+Browser storage can disappear if you clear site data, use a private window, change browser profiles, run short of storage, or open the standalone HTML from a location the browser treats as a different storage context. INASearch requests persistent storage when supported, but the browser may decline and users can always clear browser data.
+
+For stronger protection, open **Saving & data** and select or create `INASearch_Data.json`. INASearch then saves to that file and mirrors the verified file copy into browser storage. You can also download a portable JSON backup. Weekly reminders are on by default when no data file is connected and can be disabled in Settings.
 
 The browser grants access only to the file you selected. INASearch does not receive permission to browse the surrounding folder. It checks the file before writing and reads it back afterward to confirm that the save succeeded.
 
@@ -44,11 +56,11 @@ INASearch opens each citation in its own reader pane. The panes remain visible t
 
 ### What if I want to anyways?
 
-You can open multiple windows, but INASearch does not create a separate save file for each one. Saving is built around one user-selected file, normally `INASearch_Data.json`. Each window has its own working copy in memory, and multiple windows can be connected to the same file.
+You can open multiple windows, but each window has its own working copy. Browser-profile and connected-file writes both use revisions so a stale window cannot silently overwrite a newer one.
 
-The windows do not live-sync. Suppose window A and window B both opened revision 10. If A saves, the file becomes revision 11. B keeps showing the copy it already loaded. When B next tries to save, it sees revision 11, refuses to overwrite it, turns autosaving off in B, and shows the error in B only. A does not require any action.
+The windows do not live-sync. Suppose window A and window B opened the same browser-profile revision. If A saves first, B's next browser write is rejected. B keeps its work in memory and offers to reload the newer copy, explicitly merge its notes and settings, or download B's copy before resolving the conflict. The same refusal occurs when a connected data file has a newer revision.
 
-To continue in B, use **Reconnect data file** there and select the same file. If B has unsaved work, B asks whether to merge those notes and settings into the newer file. You do not need to repeat that action in A.
+An explicit merge retains notes from both copies, keeps B's version of same-ID notes and settings, and combines tutorial progress at the highest achieved state. Reconnect the data file afterward if its copy also needs reconciliation.
 
 You can deliberately connect different files in different windows, but those files are independent and do not sync. The most recently connected file is the one that browser profile will try to remember for the next session.
 
@@ -129,8 +141,8 @@ The cross-title corpus should therefore be understood as a consistent, reviewabl
 They are off by default. If a user turns them on, INASearch checks the covered material against [eCFR](https://www.ecfr.gov/):
 
 1. asks eCFR whether any of the already covered titles or parts may have changed;
-2. downloads XML only for covered parts reported as changed;
-3. normalizes the new text and stores the source artifact with its hash;
+2. downloads both the dated XML and the same-date enhanced renderer only for covered parts reported as changed;
+3. uses renderer paragraph IDs to normalize hierarchy and line boundaries, verifies complete XML/renderer inventory parity, and stores both source artifacts with their hashes;
 4. regenerates definitions and inline citations affected by the change;
 5. stages and verifies the new corpus; and
 6. activates it for use after a reload while retaining the previous corpus for rollback.
@@ -202,9 +214,9 @@ Links back to the current provision or one of its ancestors are suppressed becau
 
 ### How is “the Act” interpreted in CFR text?
 
-A bare “the Act” is treated as the INA only in a reviewed CFR scope whose definitions support that meaning. `src/INASearch-Legal-Reference-Policy.js` records each scope, its controlling CFR citation, an exact source excerpt, and the official URL. For example, the Title 8 policy is grounded in [8 CFR 1.2](https://www.ecfr.gov/current/title-8/part-1/section-1.2).
+A bare “the Act” is intentionally left as ordinary text; it is too repetitive to be a useful link. A citation such as “section 101(a)(15)(H) of the Act” is interpreted as an INA citation only in a reviewed CFR scope whose definitions support that meaning. `src/INASearch-Legal-Reference-Policy.js` records each scope, its controlling CFR citation, an exact source excerpt, and the official URL. For example, the Title 8 policy is grounded in [8 CFR 1.2](https://www.ecfr.gov/current/title-8/part-1/section-1.2).
 
-The build verifies that every excerpt still appears in the captured CFR source. Named historical laws such as “the Act of February 5, 1917” are not treated as bare references to the INA. An explicit phrase such as “the Immigration and Nationality Act” can be recognized outside those bare-Act scopes.
+The build verifies that every excerpt still appears in the captured CFR source. Named historical laws such as “the Act of February 5, 1917” are not treated as references to the INA. An explicit phrase such as “the Immigration and Nationality Act” can be recognized outside those scoped uses. Candidate inline references that cannot be resolved are retained only as plain text, not underlined or linked.
 
 ### Are build-time and runtime citations handled differently?
 
@@ -244,6 +256,8 @@ python3 tools/capture-legal-sources.py capture --capture-date YYYY-MM-DD --refre
 ```
 
 Refreshing is deliberately explicit. After capture, the crosswalk, hierarchy, statute references, footnotes, CFR corpus, and distributable files must be regenerated and reviewed as one release change.
+
+For CFR structure, the capture includes both the eCFR XML text and the same-date enhanced renderer for every included part. The XML supplies the regulatory text; the renderer's canonical paragraph IDs supply hierarchy and legal-line boundaries that the flat XML does not encode. `tools/audit-cfr-structure.py` independently verifies record inventories, complete XML text preservation, rendered paragraph order and boundaries, and every addressable paragraph path.
 
 ## Builds and project structure
 

@@ -14,14 +14,14 @@
   const TEXT_BLOCK_TAGS = new Set(["P", "P2", "FP", "FP-1", "FP-2", "FP-DASH", "LI", "PSPACE", "CITA", "FR", "FRP", "SECAUTH", "PARAUTH", "XREF", "CROSSREF", "APPRO"]);
   const HEADING_TAGS = new Set(["HED", "HD1", "HD2", "HD3", "HD4"]);
   const CONTAINER_TAGS = new Set(["DIV", "EXTRACT", "EXAMPLE", "SCOL2", "NOTE", "EDNOTE", "EFFDNOT", "AUTH", "SOURCE"]);
+  const NOTE_TYPES = Object.freeze({ NOTE: "ordinary", EDNOTE: "editorial", EFFDNOT: "effective-date" });
   const TABLE_CONTAINER_TAGS = new Set(["THEAD", "TBODY", "TFOOT"]);
   const INLINE_STYLES = Object.freeze({ I: "i", E: "b", B: "b", strong: "b", SU: "sup", sup: "sup", SUB: "sub" });
   const IGNORED_EMPTY_TAGS = new Set(["PRTPAGE", "HALFDASH", "BR", "HR", "FTREF"]);
   const CFR_MARKER_RE = /\(([A-Za-z0-9ivxlcdmIVXLCDM]+)\)/g;
   const CFR_LEADING_MARKERS_RE = /^\s*((?:\([A-Za-z0-9ivxlcdmIVXLCDM]+\))+)/;
   const CFR_LEADING_RANGE_RE = /^\s*(\(([A-Za-z0-9ivxlcdmIVXLCDM]+)\))\s*[-–—]\s*(\(([A-Za-z0-9ivxlcdmIVXLCDM]+)\))/;
-  const CFR_RUN_IN_MARKERS_RE = /[—–.:;]\s*((?:\([A-Za-z0-9ivxlcdmIVXLCDM]+\))+)(?=\s|$)/g;
-  const CFR_ROMAN_RE = /^[ivxlcdm]+$/;
+  const CFR_MATCH_EQUIVALENTS = Object.freeze({ "–": "-", "—": "-", "−": "-", "‐": "-", "‑": "-", "“": '"', "”": '"', "‘": "'", "’": "'", "⁄": "/", "\u00ad": "" });
 
   const nowIso = () => new Date().toISOString();
   const cleanText = value => String(value || "").replace(/\s+/g, " ").trim();
@@ -98,101 +98,211 @@
     catch { throw new Error(`eCFR returned malformed JSON for ${new URL(url).pathname}.`); }
   }
 
-  function markerMatchesLevel(token, level) {
-    if (level === 2 || level === 5) return /^\d+$/.test(token);
-    if (level === 3 || level === 6) return token === token.toLowerCase() && CFR_ROMAN_RE.test(token);
-    if (level === 4) return /^[A-Z]+$/.test(token);
-    return /^[a-z]+$/.test(token);
-  }
+  const paragraphPath = tokens => (tokens || []).map(value => `(${value})`).join("");
+  const markerMatches = value => [...String(value || "").matchAll(CFR_MARKER_RE)];
 
-  function romanValue(token) {
-    const values = { i: 1, v: 5, x: 10, l: 50, c: 100, d: 500, m: 1000 };
-    let total = 0, previous = 0;
-    for (const character of token.toLowerCase().split("").reverse()) {
-      const value = values[character] || 0;
-      total += value < previous ? -value : value;
-      previous = Math.max(previous, value);
+  function canonicalMatchText(value) {
+    let result = "";
+    for (const character of String(value || "")) {
+      const translated = Object.hasOwn(CFR_MATCH_EQUIVALENTS, character) ? CFR_MATCH_EQUIVALENTS[character] : character;
+      for (const output of translated) if (!/\s/.test(output)) result += output;
     }
-    return total;
+    return result;
   }
 
-  function alphaValue(token) {
-    let value = 0;
-    for (const character of token.toLowerCase()) value = value * 26 + character.charCodeAt(0) - 96;
-    return value;
-  }
-
-  function markerValue(token, level) {
-    if (level === 2 || level === 5) return Number(token);
-    if (level === 3 || level === 6) return romanValue(token);
-    return alphaValue(token);
-  }
-
-  function markerLevel(token, stack) {
-    const candidates = [1, 2, 3, 4, 5, 6].filter(level => markerMatchesLevel(token, level));
-    if (!candidates.length) return 1;
-    const startingChildren = candidates.filter(level => level === stack.length + 1 && markerValue(token, level) === 1);
-    if (startingChildren.length) return startingChildren[0];
-    const successors = candidates.filter(level => level <= stack.length && stack[level - 1] !== "?" && markerValue(token, level) === markerValue(stack[level - 1], level) + 1);
-    if (successors.length) return Math.max(...successors);
-    const children = candidates.filter(level => level === stack.length + 1);
-    if (children.length) return children[0];
-    const repeated = candidates.filter(level => level <= stack.length && String(stack[level - 1]).toLowerCase() === token.toLowerCase());
-    if (repeated.length) return Math.max(...repeated);
-    const deeper = candidates.filter(level => level > stack.length);
-    if (deeper.length) return Math.min(...deeper);
-    const available = candidates.filter(level => level <= stack.length);
-    return available.length ? Math.max(...available) : Math.min(...candidates);
-  }
-
-  function appendMarker(stack, token, level = markerLevel(token, stack)) {
-    stack.splice(level - 1);
-    while (stack.length < level - 1) stack.push("?");
-    stack.push(token);
-    return stack.filter(value => value !== "?").map(value => `(${value})`).join("");
-  }
-
-  function markerMatches(value) {
-    return [...String(value || "").matchAll(CFR_MARKER_RE)];
-  }
-
-  function paragraphUnits(text, stack) {
-    const leadingRange = CFR_LEADING_RANGE_RE.exec(text);
-    const leading = leadingRange || CFR_LEADING_MARKERS_RE.exec(text);
-    if (!leading) return [];
-    const units = [];
-    const recordGroup = (group, offset = 0, forceChildren = false) => {
-      const tokens = markerMatches(group[1]);
-      const trial = [...stack];
-      const records = [];
-      for (const tokenMatch of tokens) {
-        const token = tokenMatch[1], expected = trial.length + 1;
-        if (forceChildren && !markerMatchesLevel(token, expected)) return false;
-        const level = forceChildren ? expected : markerLevel(token, trial);
-        const path = appendMarker(trial, token, level);
-        const start = offset + group.index + group[0].indexOf(group[1]) + tokenMatch.index;
-        records.push({ a: path, s: start, e: start + tokenMatch[0].length });
+  function canonicalMatchMap(value) {
+    const text = String(value || ""), characters = [], offsets = [];
+    for (let index = 0; index < text.length; index += 1) {
+      const character = text[index];
+      const translated = Object.hasOwn(CFR_MATCH_EQUIVALENTS, character) ? CFR_MATCH_EQUIVALENTS[character] : character;
+      for (const output of translated) {
+        if (/\s/.test(output)) continue;
+        characters.push(output);
+        offsets.push(index);
       }
-      stack.splice(0, stack.length, ...trial);
-      units.push(...records);
-      return true;
-    };
-    if (leadingRange) {
-      const level = markerLevel(leadingRange[2], stack);
-      units.push({ a: appendMarker(stack, leadingRange[2], level), s: leadingRange.index + leadingRange[0].indexOf(leadingRange[1]), e: leadingRange.index + leadingRange[0].indexOf(leadingRange[1]) + leadingRange[1].length });
-      const lastStart = leadingRange.index + leadingRange[0].lastIndexOf(leadingRange[3]);
-      units.push({ a: appendMarker(stack, leadingRange[4], level), s: lastStart, e: lastStart + leadingRange[3].length });
-    } else recordGroup(leading);
-    CFR_RUN_IN_MARKERS_RE.lastIndex = leading.index + leading[0].length;
-    let runIn;
-    while ((runIn = CFR_RUN_IN_MARKERS_RE.exec(text))) {
-      if (runIn.index - (leading.index + leading[0].length) > 600) break;
-      recordGroup(runIn, 0, true);
     }
-    return units;
+    return { text: characters.join(""), offsets };
   }
 
-  const paragraphPath = stack => stack.filter(value => value !== "?").map(value => `(${value})`).join("");
+  function parseEnhancedHtml(raw, { title, part }) {
+    if (!(globalThis.DOMParser)) throw new Error("This browser does not provide the HTML parser required for verified eCFR updates.");
+    const documentNode = new DOMParser().parseFromString(raw, "text/html");
+    const partRoot = documentNode.getElementById(`part-${part}`);
+    if (!partRoot) throw new Error(`The enhanced eCFR response did not contain Title ${title} Part ${part}.`);
+    const sectionRecords = new Map(), appendices = [];
+    const recordNodes = [...partRoot.querySelectorAll("div.section, div.appendix")].filter(node => !node.parentElement?.closest("div.section, div.appendix"));
+    for (const recordNode of recordNodes) {
+      const kind = recordNode.classList.contains("section") ? "section" : "appendix";
+      const record = { kind, id: recordNode.id || "", paragraphs: [] };
+      for (const element of recordNode.querySelectorAll("p, h1, h2, h3, h4, h5, h6, table")) {
+        if (element.parentElement?.closest("div.section, div.appendix") !== recordNode) continue;
+        if (element.closest(".footnote, .footnotes")) continue;
+        const tag = element.tagName.toLowerCase();
+        if (tag !== "table" && element.closest("table")) continue;
+        if (tag === "table" && element.parentElement?.closest("table")) continue;
+        const parent = element.closest('div[id^="p-"]');
+        const canonicalId = element.id?.startsWith("p-") ? element.id : parent?.id || "";
+        let paragraph;
+        if (tag === "table") {
+          paragraph = { dataTitle: "", canonicalId, addressable: false, term: false, disabled: false, heading: false, indent: 0, elementKind: "table", text: cleanText(element.textContent) };
+        } else if (tag === "p") {
+          const classes = [...element.classList];
+          const indent = Number(classes.map(value => /^(?:indent|flush-paragraph)-(\d+)$/.exec(value)?.[1]).find(Boolean) || 0);
+          paragraph = {
+            dataTitle: element.getAttribute("data-title") || "", canonicalId,
+            addressable: element.hasAttribute("data-title"), term: String(element.getAttribute("data-term") || "").toLowerCase() === "true",
+            disabled: String(element.getAttribute("data-disable") || "").toLowerCase() === "true",
+            heading: classes.some(value => /^hd\d+-paragraph$/.test(value)), indent, elementKind: "p", text: cleanText(element.textContent)
+          };
+        } else {
+          if (!canonicalId) continue;
+          paragraph = { dataTitle: element.getAttribute("data-title") || "", canonicalId, addressable: element.hasAttribute("data-title"), term: false, disabled: false, heading: true, indent: 0, elementKind: "heading", text: cleanText(element.textContent) };
+        }
+        if (paragraph.text) record.paragraphs.push(paragraph);
+      }
+      const prefix = `p-${record.id}`;
+      for (const paragraph of record.paragraphs) {
+        if (paragraph.canonicalId && !paragraph.canonicalId.startsWith(prefix)) throw new Error(`The enhanced eCFR paragraph ${paragraph.dataTitle || paragraph.canonicalId} is outside ${record.id}.`);
+        paragraph.path = paragraph.canonicalId ? markerMatches(paragraph.canonicalId.slice(prefix.length)).map(match => match[1]) : [];
+        if (!paragraph.addressable && paragraph.path.length) {
+          const leading = CFR_LEADING_MARKERS_RE.exec(paragraph.text);
+          const visible = leading ? markerMatches(leading[1]).map(match => match[1]) : [];
+          const dotted = paragraph.path.at(-1) || "";
+          if ((visible.length && paragraph.path.slice(-visible.length).join("\u0000") === visible.join("\u0000")) || (dotted.endsWith(".") && paragraph.text.trimStart().startsWith(dotted))) paragraph.addressable = true;
+        }
+      }
+      if (kind === "section") {
+        if (!record.id || sectionRecords.has(record.id)) throw new Error(`The enhanced eCFR response has a duplicate or empty section id ${record.id || "(empty)"}.`);
+        sectionRecords.set(record.id, record);
+      } else appendices.push(record);
+    }
+    return { title: Number(title), part: String(part), sections: sectionRecords, appendices };
+  }
+
+  class ParagraphOracle {
+    constructor(record, label) {
+      if (!record) throw new Error(`The enhanced eCFR response has no record for ${label}.`);
+      this.entries = record.paragraphs;
+      this.index = 0;
+      this.currentPath = [];
+      this.currentContext = [];
+      this.currentDepth = 0;
+      this.label = label;
+    }
+
+    entryUnits(entry, text, entryStart) {
+      if (!entry.addressable || entry.term || entry.disabled) return [];
+      const leadingRange = CFR_LEADING_RANGE_RE.exec(entry.text);
+      const leading = leadingRange || CFR_LEADING_MARKERS_RE.exec(entry.text);
+      if (!leading) {
+        const token = entry.path.at(-1) || "";
+        const renderedStart = entry.text.length - entry.text.trimStart().length;
+        const sourceStart = entryStart + text.slice(entryStart).length - text.slice(entryStart).trimStart().length;
+        if (token.endsWith(".") && entry.text.startsWith(token, renderedStart) && text.startsWith(token, sourceStart)) return [{ a: paragraphPath(entry.path), s: sourceStart, e: sourceStart + token.length }];
+        throw new Error(`Rendered ${this.label} paragraph ${entry.dataTitle || entry.canonicalId} lacks a recognized visible marker.`);
+      }
+      const sourceLeading = (leadingRange ? CFR_LEADING_RANGE_RE : CFR_LEADING_MARKERS_RE).exec(text.slice(entryStart));
+      if (!sourceLeading) throw new Error(`XML text for rendered ${entry.dataTitle || entry.canonicalId} does not expose its marker at offset ${entryStart}.`);
+      if (leadingRange) {
+        const firstToken = leadingRange[2], lastToken = leadingRange[4];
+        if (!entry.path.length || entry.path.at(-1) !== firstToken) throw new Error(`Rendered range ${entry.dataTitle || entry.canonicalId} disagrees with its first marker ${firstToken}.`);
+        const firstStart = entryStart + sourceLeading[0].indexOf(sourceLeading[1]);
+        const lastStart = entryStart + sourceLeading[0].lastIndexOf(sourceLeading[3]);
+        return [
+          { a: paragraphPath(entry.path), s: firstStart, e: firstStart + sourceLeading[1].length },
+          { a: paragraphPath([...entry.path.slice(0, -1), lastToken]), s: lastStart, e: lastStart + sourceLeading[3].length }
+        ];
+      }
+      const visibleTokens = markerMatches(leading[1]).map(match => match[1]);
+      if (!entry.path.length || visibleTokens.length > entry.path.length || entry.path.slice(-visibleTokens.length).join("\u0000") !== visibleTokens.join("\u0000")) throw new Error(`Rendered path ${entry.dataTitle || entry.canonicalId} disagrees with its visible markers.`);
+      const baseLength = entry.path.length - visibleTokens.length;
+      const sourceMarkers = markerMatches(sourceLeading[1]).slice(0, visibleTokens.length);
+      if (sourceMarkers.length !== visibleTokens.length) throw new Error(`XML text for rendered ${entry.dataTitle || entry.canonicalId} exposes ${sourceMarkers.length} markers, expected ${visibleTokens.length}.`);
+      const markerGroupStart = sourceLeading[0].indexOf(sourceLeading[1]);
+      return sourceMarkers.map((match, index) => {
+        const start = entryStart + markerGroupStart + match.index;
+        return { a: paragraphPath(entry.path.slice(0, baseLength + index + 1)), s: start, e: start + match[0].length };
+      });
+    }
+
+    consume(text) {
+      const canonical = canonicalMatchMap(text);
+      let searchFrom = 0;
+      const units = [], consumedEntries = [];
+      const startingIndex = this.index;
+      while (this.index < this.entries.length) {
+        const entry = this.entries[this.index];
+        const expected = canonicalMatchText(entry.text);
+        if (!expected) throw new Error(`Rendered ${this.label} paragraph ${entry.dataTitle || entry.canonicalId} has no visible text.`);
+        let found = canonical.text.indexOf(expected, searchFrom), consumedLength = expected.length;
+        if (found < 0) {
+          const probe = canonicalMatchText(entry.text.split(/\[[A-Za-z0-9-]+\]/, 1)[0]);
+          if (probe && probe !== expected) { found = canonical.text.indexOf(probe, searchFrom); consumedLength = probe.length; }
+        }
+        if (found < 0) break;
+        const entryStart = canonical.offsets[found];
+        const entryUnits = this.entryUnits(entry, text, entryStart);
+        units.push(...entryUnits);
+        consumedEntries.push({ entry, start: entryStart, units: entryUnits });
+        this.index += 1;
+        searchFrom = found + consumedLength;
+        this.currentDepth = entry.indent || (!entry.addressable ? entry.path.length : 0);
+        if (entry.term || entry.disabled) { this.currentPath = []; this.currentContext = []; }
+        else if (!entry.addressable) { this.currentPath = []; this.currentContext = [...entry.path]; }
+        else if (units.length) { this.currentPath = markerMatches(units.at(-1).a).map(match => match[1]); this.currentContext = [...this.currentPath]; }
+      }
+      const consumed = this.index !== startingIndex;
+      const segments = consumedEntries.map((item, index) => {
+        const rawStart = index === 0 ? 0 : item.start;
+        const rawEnd = consumedEntries[index + 1]?.start ?? text.length;
+        const raw = text.slice(rawStart, rawEnd);
+        const start = rawStart + raw.length - raw.trimStart().length;
+        const end = rawEnd - (raw.length - raw.trimEnd().length);
+        const entryUnits = item.units.filter(unit => start <= unit.s && unit.s < unit.e && unit.e <= end).map(unit => ({ ...unit, s: unit.s - start, e: unit.e - start }));
+        const address = item.entry.addressable && !item.entry.term && !item.entry.disabled ? entryUnits.at(-1)?.a || paragraphPath(item.entry.path) : "";
+        const context = address || (item.entry.path.length && !item.entry.term && !item.entry.disabled ? paragraphPath(item.entry.path) : "");
+        const depth = item.entry.indent || (!item.entry.addressable ? item.entry.path.length : 0);
+        return { start, end, a: address, c: context, d: depth, u: entryUnits };
+      });
+      return { units, path: consumed ? paragraphPath(this.currentPath) : "", depth: consumed ? this.currentDepth : 0, context: consumed ? paragraphPath(this.currentContext) : "", segments };
+    }
+
+    consumeNonaddressableWrapper(text) {
+      if (this.index >= this.entries.length) return false;
+      const entry = this.entries[this.index];
+      if (entry.elementKind !== "p" || (entry.addressable && !(entry.term || entry.disabled))) return false;
+      const expected = canonicalMatchText(entry.text);
+      if (!expected || !canonicalMatchText(text).includes(expected)) return false;
+      this.index += 1;
+      this.currentDepth = entry.indent;
+      this.currentPath = [];
+      this.currentContext = !entry.addressable ? [...entry.path] : [];
+      return true;
+    }
+
+    consumeHeading(text) {
+      if (this.index >= this.entries.length) return { units: [], path: "", depth: 0, context: "" };
+      const entry = this.entries[this.index];
+      if (!entry.heading || canonicalMatchText(entry.text) !== canonicalMatchText(text)) return { units: [], path: "", depth: 0, context: "" };
+      this.index += 1;
+      this.currentPath = entry.addressable ? [...entry.path] : [];
+      this.currentContext = [...entry.path];
+      this.currentDepth = entry.indent || entry.path.length;
+      const units = [];
+      if (entry.addressable && entry.path.length) {
+        const token = entry.path.at(-1), start = text.length - text.trimStart().length;
+        if (!text.startsWith(token, start)) throw new Error(`Rendered heading path ${entry.dataTitle || entry.canonicalId} is not visible in its XML heading.`);
+        units.push({ a: paragraphPath(entry.path), s: start, e: start + token.length });
+      }
+      return { units, path: paragraphPath(this.currentPath), depth: this.currentDepth, context: paragraphPath(this.currentContext) };
+    }
+
+    finish() {
+      if (this.index === this.entries.length) return;
+      const entry = this.entries[this.index];
+      throw new Error(`XML normalization did not consume rendered ${this.label} paragraph ${entry.dataTitle || entry.canonicalId}: ${entry.text.slice(0, 160)}`);
+    }
+  }
 
   function inlineRuns(element) {
     const runs = [];
@@ -218,6 +328,23 @@
     }
     const filtered = runs.filter(run => run.x);
     return filtered.length === 1 && !("s" in filtered[0]) ? [] : filtered;
+  }
+
+  function sliceInlineRuns(runs, start, end) {
+    if (!runs?.length || end <= start) return [];
+    const sliced = [];
+    let cursor = 0;
+    for (const run of runs) {
+      const runStart = cursor, runEnd = cursor + run.x.length;
+      cursor = runEnd;
+      const overlapStart = Math.max(start, runStart), overlapEnd = Math.min(end, runEnd);
+      if (overlapEnd <= overlapStart) continue;
+      const item = { x: run.x.slice(overlapStart - runStart, overlapEnd - runStart) };
+      if (run.s) item.s = run.s;
+      if (sliced.length && sliced.at(-1).s === item.s) sliced.at(-1).x += item.x;
+      else sliced.push(item);
+    }
+    return sliced.length === 1 && !("s" in sliced[0]) ? [] : sliced;
   }
 
   function tableBlock(element) {
@@ -251,7 +378,7 @@
     return result;
   }
 
-  function normalizedBlocks(element, graphics, stack = []) {
+  function normalizedBlocks(element, graphics, oracle, defaultDepth = 0, defaultContext = "") {
     const blocks = [];
     for (const child of element.children || []) {
       const tag = child.tagName;
@@ -259,19 +386,48 @@
       if (TEXT_BLOCK_TAGS.has(tag)) {
         const text = flattened(child);
         if (!text) continue;
-        const block = { t: "p", x: text };
-        const units = paragraphUnits(text, stack);
-        const path = paragraphPath(stack);
-        if (path) block.a = path;
-        if (units.length) block.u = units;
         const runs = inlineRuns(child);
-        if (runs.length) block.r = runs;
-        if (["CITA", "SECAUTH", "XREF", "CROSSREF"].includes(tag)) block.k = "citation";
-        blocks.push(block);
+        const consumed = oracle.consume(text);
+        const segments = consumed.segments.length ? consumed.segments : [{ start: 0, end: text.length, a: consumed.path, c: consumed.context, d: consumed.depth, u: consumed.units }];
+        for (const segment of segments) {
+          const segmentText = text.slice(segment.start, segment.end);
+          if (!segmentText) continue;
+          const block = { t: "p", x: segmentText };
+          if (segment.a) block.a = segment.a;
+          if (segment.c && segment.c !== segment.a) block.c = segment.c;
+          else if (defaultContext && !segment.a && !segment.c) block.c = defaultContext;
+          if (segment.u?.length) block.u = segment.u;
+          const displayDepth = segment.d || defaultDepth;
+          if (displayDepth && displayDepth !== markerMatches(segment.a).length) block.d = displayDepth;
+          const segmentRuns = sliceInlineRuns(runs, segment.start, segment.end);
+          if (segmentRuns.length) {
+            if (segmentRuns.map(run => run.x).join("") !== segmentText) throw new Error(`Formatting runs do not align after splitting rendered ${oracle.label} at ${segment.start}:${segment.end}.`);
+            block.r = segmentRuns;
+          }
+          if (["CITA", "SECAUTH", "XREF", "CROSSREF"].includes(tag)) block.k = "citation";
+          blocks.push(block);
+        }
       } else if (HEADING_TAGS.has(tag)) {
         const text = flattened(child);
-        if (text) blocks.push({ t: "h", x: text, l: /\d$/.test(tag) ? Number(tag.at(-1)) : 4 });
-      } else if (tag === "TABLE") blocks.push(tableBlock(child));
+        if (text) {
+          const block = { t: "h", x: text, l: /\d$/.test(tag) ? Number(tag.at(-1)) : 4 };
+          const consumed = oracle.consumeHeading(text);
+          if (consumed.path) block.a = consumed.path;
+          if (consumed.context && consumed.context !== consumed.path) block.c = consumed.context;
+          else if (defaultContext && !consumed.path) block.c = defaultContext;
+          if (consumed.units.length) block.u = consumed.units;
+          if (consumed.depth && consumed.depth !== markerMatches(consumed.path).length) block.d = consumed.depth;
+          blocks.push(block);
+        }
+      } else if (tag === "TABLE") {
+        const block = tableBlock(child);
+        const consumed = oracle.consume(flattened(child));
+        if (consumed.units.length || consumed.path) throw new Error(`Rendered ${oracle.label} table unexpectedly declares an addressable paragraph.`);
+        if (consumed.context) block.c = consumed.context;
+        const displayDepth = consumed.depth || defaultDepth;
+        if (displayDepth) block.d = displayDepth;
+        blocks.push(block);
+      }
       else if (tag.toLowerCase() === "img") {
         const sourcePath = child.getAttribute("src") || "";
         const preserved = graphics.get(sourcePath);
@@ -279,13 +435,18 @@
         if (preserved) Object.assign(block, preserved);
         else block.unavailable = true;
         blocks.push(block);
-      } else if (TABLE_CONTAINER_TAGS.has(tag)) blocks.push(...normalizedBlocks(child, graphics, stack));
+      } else if (TABLE_CONTAINER_TAGS.has(tag)) blocks.push(...normalizedBlocks(child, graphics, oracle, defaultDepth, defaultContext));
       else if (tag === "FTNT") {
         const text = flattened(child);
         if (text) blocks.push({ t: "footnote", x: text });
       } else if (CONTAINER_TAGS.has(tag)) {
-        const nested = normalizedBlocks(child, graphics, stack);
-        if (nested.length) blocks.push(...(["NOTE", "EDNOTE", "EFFDNOT"].includes(tag) ? [{ t: "note", blocks: nested }] : nested));
+        let nestedDepth = defaultDepth, nestedContext = defaultContext;
+        if (tag === "EXAMPLE" && oracle.consumeNonaddressableWrapper(flattened(child))) {
+          nestedDepth = oracle.currentDepth;
+          nestedContext = paragraphPath(oracle.currentContext);
+        }
+        const nested = normalizedBlocks(child, graphics, oracle, nestedDepth, nestedContext);
+        if (nested.length) blocks.push(...(NOTE_TYPES[tag] ? [{ t: "note", noteType: NOTE_TYPES[tag], blocks: nested }] : nested));
       } else if (tag.startsWith("DIV")) continue;
       else if (IGNORED_EMPTY_TAGS.has(tag) || (!flattened(child) && !child.children.length)) continue;
       else throw new Error(`The current eCFR XML contains an unsupported text element <${tag}>.`);
@@ -308,19 +469,23 @@
     return section ? `${path}/section-${section}` : path;
   }
 
-  function normalizeEcfrXml(raw, { title, mappings = [], graphics = new Map() }) {
+  function normalizeEcfrXml(raw, { title, part: expectedPart = "", rendererHtml, mappings = [], graphics = new Map() }) {
     if (!(globalThis.DOMParser)) throw new Error("This browser does not provide the XML parser required for eCFR updates.");
+    if (!rendererHtml) throw new Error("A same-date enhanced eCFR rendering is required to verify paragraph hierarchy.");
+    const renderedPart = parseEnhancedHtml(rendererHtml, { title: Number(title), part: String(expectedPart) });
     const documentNode = new DOMParser().parseFromString(raw, "application/xml");
     const parserError = documentNode.getElementsByTagName("parsererror")[0];
     if (parserError) throw new Error(`The current eCFR XML could not be parsed: ${cleanText(parserError.textContent).slice(0, 180)}`);
     const root = documentNode.documentElement;
     if (!root?.tagName?.startsWith("DIV")) throw new Error("The current eCFR response did not contain the expected regulatory XML root.");
     const parts = [], sections = [], appendices = [];
+    const rendererUsage = { sections: new Set(), appendixCount: 0 };
     const walk = (node, ancestors, partRecord = null) => {
       const nodeType = String(node.getAttribute("TYPE") || "").toLowerCase();
       const current = node.tagName.startsWith("DIV") && nodeType ? breadcrumb(node, ancestors) : ancestors;
       if (node.tagName === "DIV5" && nodeType === "part") {
         const part = node.getAttribute("N") || "";
+        if (expectedPart && String(part) !== String(expectedPart)) throw new Error(`The eCFR XML returned Part ${part || "(empty)"} while Part ${expectedPart} was requested.`);
         partRecord = {
           id: `${title}:${part}`, title: Number(title), part, heading: childText(node, "HEAD"), hierarchy: current,
           authority: flattened(directChild(node, "AUTH")), source: flattened(directChild(node, "SOURCE")),
@@ -329,29 +494,50 @@
         parts.push(partRecord);
       } else if (node.tagName === "DIV8" && nodeType === "section" && partRecord) {
         const number = node.getAttribute("N") || "", head = childText(node, "HEAD");
+        const oracle = new ParagraphOracle(renderedPart.sections.get(number), `${title} CFR ${number}`);
         const record = {
           id: `${title}:${number}`, title: Number(title), section: number, partId: partRecord.id,
-          heading: head.replace(/^§\s*[^ ]+\s*/, ""), hierarchy: current, blocks: normalizedBlocks(node, graphics, []),
+          heading: head.replace(/^§\s*[^ ]+\s*/, ""), hierarchy: current, blocks: normalizedBlocks(node, graphics, oracle),
           url: sourceUrl(title, current.slice(0, -1), number)
         };
+        oracle.finish();
         sections.push(record);
         partRecord.sectionIds.push(record.id);
+        rendererUsage.sections.add(number);
         return;
       } else if (node.tagName === "DIV9" && partRecord) {
         const number = node.getAttribute("N") || childText(node, "HEAD");
+        if (rendererUsage.appendixCount >= renderedPart.appendices.length) throw new Error(`The enhanced eCFR response has no appendix record for ${title} CFR ${number}.`);
+        const oracle = new ParagraphOracle(renderedPart.appendices[rendererUsage.appendixCount], `${title} CFR ${number}`);
         const record = {
           id: `${partRecord.id}:appendix:${appendices.length + 1}`, title: Number(title), partId: partRecord.id,
-          label: number, heading: childText(node, "HEAD"), hierarchy: current, blocks: normalizedBlocks(node, graphics, []), url: partRecord.url
+          label: number, heading: childText(node, "HEAD"), hierarchy: current, blocks: normalizedBlocks(node, graphics, oracle), url: partRecord.url
         };
+        oracle.finish();
         appendices.push(record);
         partRecord.appendixIds.push(record.id);
+        rendererUsage.appendixCount += 1;
         return;
       }
       for (const child of node.children || []) if (child.tagName.startsWith("DIV")) walk(child, current, partRecord);
     };
     walk(root, []);
     if (parts.length !== 1) throw new Error(`The eCFR part response produced ${parts.length} part records instead of one.`);
-    return { parts, sections, appendices };
+    const rendererOnlySections = [...renderedPart.sections.keys()].filter(section => !rendererUsage.sections.has(section)).sort();
+    const xmlOnlySections = [...rendererUsage.sections].filter(section => !renderedPart.sections.has(section)).sort();
+    if (rendererOnlySections.length || xmlOnlySections.length) throw new Error(`The XML/enhanced-renderer section inventories differ; renderer-only=${rendererOnlySections.join(",") || "none"}; XML-only=${xmlOnlySections.join(",") || "none"}.`);
+    if (rendererUsage.appendixCount !== renderedPart.appendices.length) throw new Error(`The XML has ${rendererUsage.appendixCount} appendices but the enhanced renderer has ${renderedPart.appendices.length}.`);
+    const rendererElements = [...renderedPart.sections.values(), ...renderedPart.appendices].flatMap(record => record.paragraphs);
+    return {
+      parts, sections, appendices,
+      structureMetrics: {
+        recordCount: renderedPart.sections.size + renderedPart.appendices.length,
+        paragraphCount: rendererElements.filter(element => element.elementKind === "p").length,
+        elementCount: rendererElements.length,
+        addressableElementCount: rendererElements.filter(element => element.addressable && element.path.length && !element.term && !element.disabled).length,
+        contextElementCount: rendererElements.filter(element => element.path.length && !element.addressable).length
+      }
+    };
   }
 
   function coverage(cfr) {
@@ -556,17 +742,23 @@
     const downloads = await mapConcurrent(tasks, FETCH_CONCURRENCY, async task => {
       throwIfAborted(signal);
       const url = `${ECFR_ORIGIN}/api/versioner/v1/full/${encodeURIComponent(task.date)}/title-${encodeURIComponent(task.title)}.xml?part=${encodeURIComponent(task.part)}`;
+      const rendererUrl = `${ECFR_ORIGIN}/api/renderer/v1/content/enhanced/${encodeURIComponent(task.date)}/title-${encodeURIComponent(task.title)}?part=${encodeURIComponent(task.part)}`;
       try {
-        const { text } = await fetchAuthority(url, "application/xml", metrics, signal);
+        const [{ text }, { text: rendererHtml }] = await Promise.all([
+          fetchAuthority(url, "application/xml", metrics, signal),
+          fetchAuthority(rendererUrl, "text/html", metrics, signal)
+        ]);
         throwIfAborted(signal);
         const artifact = await sourceArtifact(`ecfr:${task.title}:${task.part}:${task.date}`, text, { mediaType: "application/xml", sourceUrl: url });
+        const rendererArtifact = await sourceArtifact(`ecfr-renderer:${task.title}:${task.part}:${task.date}`, rendererHtml, { mediaType: "text/html", sourceUrl: rendererUrl });
         await globalThis.INASearchStorage.storeSourceArtifact(`ecfr:${task.title}:${task.part}:${task.date}`, artifact);
+        await globalThis.INASearchStorage.storeSourceArtifact(`ecfr-renderer:${task.title}:${task.part}:${task.date}`, rendererArtifact);
         const mappings = existingParts.get(task.key)?.uscMappings || [];
-        const normalized = normalizeEcfrXml(text, { title: Number(task.title), mappings, graphics });
+        const normalized = normalizeEcfrXml(text, { title: Number(task.title), part: task.part, rendererHtml, mappings, graphics });
         retainExactReferences(cfr, normalized, existingParts.get(task.key));
-        return { ...task, url, text, artifact, normalized };
+        return { ...task, url, rendererUrl, text, artifact, rendererArtifact, normalized };
       } catch (error) {
-        if (/HTTP 404/.test(error?.message || "")) return { ...task, url, removed: true };
+        if (/HTTP 404 for \/api\/versioner\/v1\/full\//.test(error?.message || "")) return { ...task, url, removed: true };
         throw error;
       }
     });
@@ -590,9 +782,15 @@
         cfr.appendices.push(...download.normalized.appendices);
       }
       cfr.sources = (cfr.sources || []).filter(source => !(String(source.title) === download.title && String(source.part || "") === download.part));
+      cfr.structureSources = (cfr.structureSources || []).filter(source => !(String(source.title) === download.title && String(source.part || "") === download.part));
       if (!download.removed) cfr.sources.push({
         title: Number(download.title), part: download.part, url: download.url, bytes: download.artifact.bytes,
         sha256: download.artifact.sha256, currentThrough: download.date, runtimeUpdate: true
+      });
+      if (!download.removed) cfr.structureSources.push({
+        title: Number(download.title), part: download.part, url: download.rendererUrl, bytes: download.rendererArtifact.bytes,
+        sha256: download.rendererArtifact.sha256, currentThrough: download.date, runtimeUpdate: true,
+        ...download.normalized.structureMetrics
       });
     }
 
@@ -619,6 +817,8 @@
       citationReferenceFields: citationMaintenance.fields,
       citationReferenceCount: citationMaintenance.references,
       citationReferenceEngineVersion: citationMaintenance.engineVersion,
+      structureRendererVerified: true,
+      structureRendererParts: tasks.map(task => task.key),
       requestPattern: "fixed-corpus-coverage",
       navigationIndependent: true
     };
