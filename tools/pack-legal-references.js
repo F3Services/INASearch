@@ -20,7 +20,18 @@ const REFERENCE_KEYS = {
 const KEY_REFERENCES = Object.fromEntries(Object.entries(REFERENCE_KEYS).map(([property, key]) => [key, property]));
 const FAMILY_CODES = { usc: "u", ina: "i", cfr: "c", "public-law": "p", "statutes-at-large": "s", "federal-register": "f", unknown: "?" };
 const CODE_FAMILIES = Object.fromEntries(Object.entries(FAMILY_CODES).map(([family, code]) => [code, family]));
-const RULES = ["", "explicit-usc", "explicit-ina", "explicit-cfr", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "context-named-unit", "context-path-this-section", "context-cfr-the-act", "ambiguous-antecedent", "context-cfr-ina-act-section", "embedded-explicit-container", "embedded-this-container", "embedded-such-container", "embedded-relative-container", "embedded-exception"];
+const RULES = [
+  "",
+  "explicit-usc", "explicit-usc-continuation", "explicit-ina", "explicit-ina-continuation", "explicit-cfr", "explicit-cfr-continuation",
+  "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register",
+  "source-authority-section", "source-authority-section-list", "source-authority-section-continuation",
+  "context-named-unit", "context-bare-usc-section", "context-bare-usc-address", "context-bare-historical-act-section", "context-bare-trailing-title-section",
+  "context-path-this-section", "context-cfr-ina-act-section", "context-cfr-scoped-act-section", "ambiguous-antecedent",
+  "embedded-a-explicit-container-base", "embedded-a-preceding-container", "embedded-a-shared-trailing-container",
+  "embedded-explicit-container", "embedded-this-container", "embedded-such-container", "embedded-relative-container",
+  "embedded-numbered-section-list", "embedded-named-act-section", "embedded-named-instrument-section", "embedded-inferred-unit", "embedded-exception",
+  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction"
+];
 const EVIDENCE_UNITS = ["", "section", "subsection", "paragraph", "subparagraph", "clause", "subclause", "item", "subitem"];
 
 function pathTokens(value) {
@@ -86,7 +97,8 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     else if ((match = output.houseHref.match(/^\/us\/stat\/([^/]+)\/([^/]+)(?:\/(.*))?$/))) Object.assign(output, { family: "statutes-at-large", targetKind: "statutes-at-large", targetVolume: match[1], targetPage: match[2], targetPath: match[3] ? match[3].split("/").filter(Boolean) : [], officialUrl: `https://www.govinfo.gov/app/details/STATUTE-${match[1]}/STATUTE-${match[1]}-Pg${match[2]}` });
     else if (/^\/us\/act\//.test(output.houseHref)) Object.assign(output, { family: "public-law", targetKind: "act", targetPath: output.houseHref.split("/").filter(Boolean).slice(2), officialUrl: `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(output.text || "")}%22%7D` });
   } else {
-    output.provenance = output.ruleId === "context-cfr-the-act" ? "reviewed-semantic-policy"
+    output.provenance = output.ruleId === "context-cfr-scoped-act-section" ? "reviewed-semantic-policy"
+      : output.ruleId === "house-editorial-correction" ? "house-editorial-correction"
       : output.ruleId === "embedded-exception" ? "reviewed-exception"
       : String(output.ruleId || "").startsWith("context-") || String(output.ruleId || "").startsWith("embedded-") ? "deterministic-context"
       : "deterministic-parser";
@@ -97,6 +109,7 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     else if (output.family === "statutes-at-large") output.officialUrl = `https://www.govinfo.gov/app/details/STATUTE-${output.targetVolume}/STATUTE-${output.targetVolume}-Pg${output.targetPage}`;
     else if (output.family === "federal-register") output.officialUrl = `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(output.text || "")}%22%7D`;
     else if (output.family === "ina") output.officialUrl = output.targetSection ? `https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=${encodeURIComponent(`granuleid:USC-prelim-title8-section${output.targetSection}`)}` : "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act";
+    else if (output.family === "unknown") output.officialUrl = `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(`${output.targetTitle || output.text || ""} section ${output.targetSection || ""}${(output.targetPath || []).map(token => `(${token})`).join("")}`)}%22%7D`;
   }
   return output;
 }
@@ -233,4 +246,4 @@ function unpackLegalReferences(corpus) {
   return corpus;
 }
 
-module.exports = { compactHouseHref, expandHouseHref, compactReference, expandReference, packLegalReferences, packReferenceEvidence, unpackLegalReferences };
+module.exports = { RULES, compactHouseHref, expandHouseHref, compactReference, expandReference, packLegalReferences, packReferenceEvidence, unpackLegalReferences };

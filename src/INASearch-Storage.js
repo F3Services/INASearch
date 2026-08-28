@@ -3,11 +3,14 @@
   "use strict";
 
   const DB_NAME = "INASearchStandalone";
-  const DB_VERSION = 3;
+  const DB_VERSION = 4;
   const PRIMARY_VAULT_HANDLE_KEY = "primary-vault";
   const ACTIVE_CORPUS_KEY = "active";
   const PREVIOUS_CORPUS_KEY = "previous";
   const STAGING_CORPUS_KEY = "staging";
+  const ACTIVE_PROFILE_KEY = "active";
+  const PREVIOUS_PROFILE_KEY = "previous";
+  const STAGING_PROFILE_KEY = "staging";
 
   function requestResult(request) {
     return new Promise((resolve, reject) => {
@@ -22,7 +25,7 @@
       const request = indexedDB.open(DB_NAME, DB_VERSION);
       request.onupgradeneeded = () => {
         const database = request.result;
-        for (const storeName of ["handles", "corpus", "metadata", "sources"]) {
+        for (const storeName of ["handles", "corpus", "metadata", "sources", "profiles"]) {
           if (!database.objectStoreNames.contains(storeName)) database.createObjectStore(storeName);
         }
       };
@@ -133,6 +136,102 @@
     return corpus;
   }
 
+  function validProfileRecord(record) {
+    return Boolean(
+      record && record.recordSchemaVersion === 1 && record.storageFormat === "json" &&
+      Number.isSafeInteger(record.cacheRevision) && record.cacheRevision > 0 &&
+      Number.isSafeInteger(record.bytes) && record.bytes > 0 &&
+      typeof record.sha256 === "string" && /^[0-9a-f]{64}$/.test(record.sha256) &&
+      record.payload instanceof Blob
+    );
+  }
+
+  async function profileRecord(vault, details = {}) {
+    const text = JSON.stringify(vault);
+    const bytes = new TextEncoder().encode(text);
+    const expectedRevision = Math.max(0, Number(details.expectedRevision) || 0);
+    return {
+      recordSchemaVersion: 1,
+      storageFormat: "json",
+      cacheRevision: expectedRevision + 1,
+      bytes: bytes.byteLength,
+      sha256: await sha256Bytes(bytes),
+      storedAt: new Date().toISOString(),
+      reason: String(details.reason || "profile-autosave"),
+      fileSyncState: details.fileSyncState && typeof details.fileSyncState === "object" ? details.fileSyncState : { status: "none" },
+      payload: new Blob([bytes], { type: "application/json;charset=utf-8" })
+    };
+  }
+
+  async function decodeProfileRecord(record) {
+    if (!validProfileRecord(record)) throw new Error("The saved browser profile record is malformed.");
+    const bytes = new Uint8Array(await record.payload.arrayBuffer());
+    if (bytes.byteLength !== record.bytes) throw new Error("The saved browser profile byte count does not match its manifest.");
+    if (await sha256Bytes(bytes) !== record.sha256) throw new Error("The saved browser profile failed its SHA-256 integrity check.");
+    const vault = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+    if (!vault || vault.format !== "INASearchData" || Number(vault.schemaVersion) !== 1 || typeof vault.vaultId !== "string" || !Number.isSafeInteger(vault.revision) || vault.revision < 0 || ![1, 2, 3].includes(Number(vault.profile?.schemaVersion)) || !Array.isArray(vault.profile?.notes) || !vault.profile?.preferences || typeof vault.profile.preferences !== "object") {
+      throw new Error("The saved browser profile payload is invalid.");
+    }
+    return vault;
+  }
+
+  async function loadActiveProfile() {
+    for (const key of [ACTIVE_PROFILE_KEY, PREVIOUS_PROFILE_KEY]) {
+      const record = await read("profiles", key);
+      if (!record) continue;
+      try {
+        return { vault: await decodeProfileRecord(record), record, slot: key };
+      } catch (error) {
+        if (key === ACTIVE_PROFILE_KEY) await remove("profiles", ACTIVE_PROFILE_KEY).catch(() => {});
+        await write("metadata", "last-profile-cache-error", { at: new Date().toISOString(), slot: key, message: error?.message || String(error) }).catch(() => {});
+      }
+    }
+    return null;
+  }
+
+  async function saveProfile(vault, details = {}) {
+    const expectedRevision = Math.max(0, Number(details.expectedRevision) || 0);
+    const staged = await profileRecord(vault, { ...details, expectedRevision });
+    // Verify the exact record shape and payload before it can become active.
+    await decodeProfileRecord(staged);
+    const stagingKey = `${STAGING_PROFILE_KEY}:${globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`}`;
+    let database = null;
+    let conflictError = null;
+    try {
+      if (!(await write("profiles", stagingKey, staged))) throw new Error("Browser profile storage is unavailable.");
+      const persistedStage = await read("profiles", stagingKey);
+      await decodeProfileRecord(persistedStage);
+      database = await openDatabase();
+      if (!database) throw new Error("Browser profile storage is unavailable.");
+      await new Promise((resolve, reject) => {
+        const transaction = database.transaction("profiles", "readwrite");
+        const store = transaction.objectStore("profiles");
+        const currentRequest = store.get(ACTIVE_PROFILE_KEY);
+        currentRequest.onsuccess = () => {
+          const current = currentRequest.result;
+          const actualRevision = Number.isSafeInteger(current?.cacheRevision) ? current.cacheRevision : 0;
+          if (actualRevision !== expectedRevision) {
+            conflictError = new Error(`The browser profile changed in another window (expected revision ${expectedRevision}, found ${actualRevision}).`);
+            conflictError.name = "ProfileConflictError";
+            transaction.abort();
+            return;
+          }
+          if (current) store.put(current, PREVIOUS_PROFILE_KEY);
+          store.put(persistedStage, ACTIVE_PROFILE_KEY);
+          store.delete(stagingKey);
+        };
+        currentRequest.onerror = () => transaction.abort();
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(conflictError || transaction.error || new Error("The browser profile could not be saved."));
+        transaction.onabort = () => reject(conflictError || transaction.error || new Error("The browser profile save was aborted."));
+      });
+      return { vault: await decodeProfileRecord(persistedStage), record: persistedStage, cacheRevision: persistedStage.cacheRevision };
+    } finally {
+      database?.close();
+      await remove("profiles", stagingKey).catch(() => {});
+    }
+  }
+
   async function loadActiveCorpus(options = {}) {
     for (const key of [ACTIVE_CORPUS_KEY, PREVIOUS_CORPUS_KEY]) {
       const record = await read("corpus", key);
@@ -221,6 +320,10 @@
     activateCorpus,
     ensureActiveCorpus,
     decodeCorpusRecord,
+    loadActiveProfile,
+    saveProfile,
+    profileRecord,
+    decodeProfileRecord,
     storeSourceArtifact,
     requestPersistentStorage,
     loadVaultHandle: () => read("handles", PRIMARY_VAULT_HANDLE_KEY),

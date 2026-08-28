@@ -1,12 +1,12 @@
 "use strict";
 
-const markerPattern = /\((\d{1,3}|[A-Za-z]{1,4})\)/g;
+const markerPattern = /\((\d{1,3}|[A-Za-z]{1,4}|[a-z]\d{1,3})\)/g;
 const romanPattern = /^(?:i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)$/i;
 const referenceWords = new Set(["section", "sections", "subsection", "subsections", "paragraph", "paragraphs", "subparagraph", "subparagraphs", "clause", "clauses", "subclause", "subclauses", "item", "items", "subdivision", "subdivisions", "part", "parts", "chapter", "chapters", "title", "titles", "under"]);
 const referenceConnector = /^[\s,()[\]]*(?:(?:and|or|through|to)[\s,()[\]]*)*$/i;
 
 function isAddressToken(token) {
-  return /^\d{1,3}$/.test(token) || /^[A-Za-z]$/.test(token) || romanPattern.test(token) || /^([a-z])\1{1,2}$/.test(token) || /^([A-Z])\1$/.test(token);
+  return /^\d{1,3}$/.test(token) || /^[A-Za-z]$/.test(token) || /^[a-z]\d{1,3}$/.test(token) || romanPattern.test(token) || /^([a-z])\1{1,2}$/.test(token) || /^([A-Z])\1$/.test(token);
 }
 
 function addressTokens(address) {
@@ -29,7 +29,8 @@ function statuteRunInMarkers(value, currentLabel = "") {
     const previousChar = input[start - 1] || "";
     const referenceContinuation = referenceChainEnd >= 0 && referenceConnector.test(input.slice(referenceChainEnd, start));
     const referenceNumberPrefix = /\b(?:section|sections|subsection|subsections|paragraph|paragraphs|subparagraph|subparagraphs|clause|clauses|subclause|subclauses|item|items)\s+\d+[A-Za-z-]*\s*$/i.test(prefix) || /\b\d{3,}[A-Za-z-]*\s*$/.test(prefix);
-    const isReference = referenceContinuation || referenceWords.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(previousChar);
+    const structuralSibling = Boolean(currentLabel) && isImmediateSibling(currentLabel, token) && /\b(?:and|or)\s*$/i.test(prefix) && /^\s+if\b/i.test(input.slice(end));
+    const isReference = !structuralSibling && (referenceContinuation || referenceWords.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(previousChar));
     if (isReference) {
       referenceChainEnd = end;
       continue;
@@ -116,6 +117,9 @@ function isImmediateSibling(previous, next) {
   const leftLetters = left.match(/^([A-Za-z])\1*$/)?.[0] || "";
   const rightLetters = right.match(/^([A-Za-z])\1*$/)?.[0] || "";
   const sameLetterCase = (leftLetters === leftLetters.toUpperCase() && rightLetters === rightLetters.toUpperCase()) || (leftLetters === leftLetters.toLowerCase() && rightLetters === rightLetters.toLowerCase());
+  if (/^[a-z]$/.test(left) && new RegExp(`^${left}\\d+$`).test(right)) return true;
+  const suffixedLetter = left.match(/^([a-z])\d+$/)?.[1] || "";
+  if (suffixedLetter && /^[a-z]$/.test(right) && right.charCodeAt(0) === suffixedLetter.charCodeAt(0) + 1) return true;
   return Boolean(leftLetters && rightLetters && leftLetters.length === rightLetters.length && sameLetterCase && rightLetters.charCodeAt(0) === leftLetters.charCodeAt(0) + 1);
 }
 
@@ -169,6 +173,7 @@ function indexStatuteRunIns(corpus) {
             ? [...previousInlinePath, ...marker.tokens]
             : candidates.find(path => indexedIdentities.has(pathIdentity(path)) && !structuralIdentities.has(pathIdentity(path)))
               || inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
+              || (isImmediateSibling(currentPath.at(-1), marker.tokens[0]) ? [...parentPath, ...marker.tokens] : null)
               || fallbackRunInPath(currentPath, parentPath, marker.tokens);
           if (structuralIdentities.has(pathIdentity(inlinePath)) && !structuralIdentities.has(pathIdentity(directPath))) inlinePath = directPath;
           const identity = pathIdentity(inlinePath);
@@ -194,4 +199,22 @@ function indexStatuteRunIns(corpus) {
   return stats;
 }
 
-module.exports = { addressTokens, indexStatuteRunIns, statuteRunInMarkers };
+function statuteRunInPathMarkers(section, node, currentPath = []) {
+  const markers = statuteRunInMarkers(node?.text, node?.label);
+  const virtualIdentities = new Set((section?.runInPaths || []).map(pathIdentity));
+  const parentPath = currentPath.slice(0, -1);
+  let previousInlinePath = null;
+  return markers.map(marker => {
+    const candidates = runInPathCandidates(currentPath, marker.tokens, previousInlinePath);
+    const path = marker.nestedAfterPrevious && previousInlinePath?.length
+      ? [...previousInlinePath, ...marker.tokens]
+      : candidates.find(candidate => virtualIdentities.has(pathIdentity(candidate)))
+        || inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
+        || (isImmediateSibling(currentPath.at(-1), marker.tokens[0]) ? [...parentPath, ...marker.tokens] : null)
+        || fallbackRunInPath(currentPath, parentPath, marker.tokens);
+    previousInlinePath = path;
+    return { ...marker, path };
+  });
+}
+
+module.exports = { addressTokens, indexStatuteRunIns, statuteRunInMarkers, statuteRunInPathMarkers };

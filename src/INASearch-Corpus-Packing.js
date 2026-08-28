@@ -9,6 +9,8 @@
   ]);
   const CONTEXT_CODES = Object.freeze({ "source credit": "s", "statutory note": "n", "operative text": "o" });
   const CODE_CONTEXTS = Object.freeze({ s: "source credit", n: "statutory note", o: "operative text" });
+  const CFR_NOTE_TYPE_CODES = Object.freeze({ ordinary: 0, editorial: 1, "effective-date": 2 });
+  const CFR_CODE_NOTE_TYPES = Object.freeze(["ordinary", "editorial", "effective-date"]);
 
   function clone(value) {
     return typeof structuredClone === "function" ? structuredClone(value) : JSON.parse(JSON.stringify(value));
@@ -274,6 +276,12 @@
 
   function packCfrBlocks(blocks) {
     for (const block of blocks || []) {
+      if (block.t === "note") {
+        const code = CFR_NOTE_TYPE_CODES[block.noteType] ?? CFR_NOTE_TYPE_CODES.ordinary;
+        if (code) block.n = code;
+        else delete block.n;
+        delete block.noteType;
+      }
       if (block.t === "p") delete block.t;
       if (Array.isArray(block.u)) block.u = block.u.map(unit => [unit.a, unit.s, unit.e]);
       if (Array.isArray(block.r)) {
@@ -289,6 +297,10 @@
   function hydrateCfrBlocks(blocks) {
     for (const block of blocks || []) {
       if (!block.t) block.t = "p";
+      if (block.t === "note") {
+        block.noteType = CFR_CODE_NOTE_TYPES[Number(block.n)] || CFR_CODE_NOTE_TYPES[0];
+        delete block.n;
+      }
       if (Array.isArray(block.u)) block.u = block.u.map(unit => Array.isArray(unit) ? { a: unit[0], s: unit[1], e: unit[2] } : unit);
       if (block.r?.v) block.r = block.r.v;
       else if (Array.isArray(block.r)) {

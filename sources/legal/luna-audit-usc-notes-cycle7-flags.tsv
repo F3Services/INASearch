@@ -1,0 +1,2 @@
+source_id	source_path	offset	text	current_target	verdict	proposed_target	rationale
+8-1443a	title8.sections[258].preambleReferences	434	322(d)	UNKNOWN III of the Immigration and Nationality Act:322/d (official-source-only)	incorrect	USC 8:1433/d (local)	The preamble expressly identifies section 322(d) of title III of the Immigration and Nationality Act and immediately supplies its codification as 8 U.S.C. 1433(d); the generated generic Act search omits the explicit current USC target.
