@@ -169,7 +169,7 @@
     if (bytes.byteLength !== record.bytes) throw new Error("The saved browser profile byte count does not match its manifest.");
     if (await sha256Bytes(bytes) !== record.sha256) throw new Error("The saved browser profile failed its SHA-256 integrity check.");
     const vault = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
-    if (!vault || vault.format !== "INASearchData" || Number(vault.schemaVersion) !== 1 || typeof vault.vaultId !== "string" || !Number.isSafeInteger(vault.revision) || vault.revision < 0 || ![1, 2, 3].includes(Number(vault.profile?.schemaVersion)) || !Array.isArray(vault.profile?.notes) || !vault.profile?.preferences || typeof vault.profile.preferences !== "object") {
+    if (!vault || vault.format !== "INASearchData" || Number(vault.schemaVersion) !== 1 || typeof vault.vaultId !== "string" || !Number.isSafeInteger(vault.revision) || vault.revision < 0 || ![1, 2, 3, 4].includes(Number(vault.profile?.schemaVersion)) || !Array.isArray(vault.profile?.notes) || !vault.profile?.preferences || typeof vault.profile.preferences !== "object") {
       throw new Error("The saved browser profile payload is invalid.");
     }
     return vault;

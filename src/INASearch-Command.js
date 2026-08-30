@@ -22,9 +22,17 @@
     "paragraph-4", "paragraph-5", "paragraph-6"
   ]);
   const COMMON_AUTHORITIES = Object.freeze(["statute", "cfr"]);
+  const CONTENT_SCOPES = Object.freeze(["ina", "cfr", "notes", "highlights"]);
+  const ARTIFACT_KINDS = Object.freeze(["notes", "highlights"]);
 
   const issue = (code, message, index = null) => ({ code, message, ...(index === null ? {} : { index }) });
   const normalizedWord = value => String(value || "").trim().toLowerCase();
+
+  function modifierListComma(input, index, tokenStart) {
+    if (input[index] !== "," || !input[index + 1] || /[\s,)]/.test(input[index + 1])) return false;
+    const token = input.slice(tokenStart, index);
+    return /^(?:in|is|has):[^\s()]*$/i.test(token) || /^common:[^,\s()]*$/i.test(token);
+  }
 
   function normalizeAuthority(value) {
     const authority = normalizedWord(value).replace(/[.\s]/g, "");
@@ -44,7 +52,7 @@
     const joined = compact.replace(/-/g, "");
     if (["deepest", "deepestcitableunit", "smallest", "smallestunit"].includes(joined)) return "deepest";
     if (joined === "section") return "section";
-    const cfrParagraph = compact.match(/^paragraph(?:-?level)?-?([1-6])$/) || compact.match(/^paragraph-([1-6])$/);
+    const cfrParagraph = compact.match(/^p([1-6])$/) || compact.match(/^paragraph(?:-?level)?-?([1-6])$/) || compact.match(/^paragraph-([1-6])$/);
     if (cfrParagraph) return `paragraph-${cfrParagraph[1]}`;
     if (normalizedAuthority === "cfr" && joined === "paragraph") return "paragraph-1";
     const statuteAliases = {
@@ -130,7 +138,9 @@
         else depth -= 1;
         continue;
       }
-      if (character === "," && depth === 0) {
+      const tokenStart = Math.max(input.lastIndexOf(" ", index - 1), input.lastIndexOf("\t", index - 1), input.lastIndexOf("\n", index - 1), input.lastIndexOf("(", index - 1), input.lastIndexOf(")", index - 1)) + 1;
+      const modifierComma = depth === 0 && modifierListComma(input, index, tokenStart);
+      if (character === "," && depth === 0 && !modifierComma) {
         hasTopLevelComma = true;
         boundaries.push([start, index]);
         start = index + 1;
@@ -244,6 +254,11 @@
         depth = Math.max(0, depth - 1);
         continue;
       }
+      const commaTokenStart = wordStart < 0 ? index : wordStart;
+      if (character === "," && depth === 0 && modifierListComma(input, index, commaTokenStart)) {
+        word += character;
+        continue;
+      }
       if (character === "," && depth === 0) {
         flushWord(index);
         tokens.push({ type: "comma", raw: character, start: index, end: index + 1 });
@@ -258,15 +273,46 @@
     return { input, status, ok: status === "valid", tokens, hadQuote, errors };
   }
 
-  function parseInModifier(value) {
-    const match = String(value || "").match(/^in:(ina|usc|statute|cfr)$/i);
+  function parseModifierList(value, prefix, allowed) {
+    const match = String(value || "").match(new RegExp(`^${prefix}:(.*)$`, "i"));
     if (!match) return null;
-    const authority = normalizeAuthority(match[1]);
+    const rawValues = match[1].split(",");
+    if (!match[1] || rawValues.some(item => !item.trim())) return { error: issue(`missing-${prefix}-value`, `Choose a value after ${prefix}:`) };
+    const values = [];
+    for (const rawValue of rawValues) {
+      const normalized = normalizedWord(rawValue).replace(/[.\s]/g, "");
+      const value = prefix === "in" && ["usc", "statute", "statutes", "statutory"].includes(normalized) ? "ina" : normalized;
+      if (!allowed.includes(value)) return { error: issue(`invalid-${prefix}-modifier`, `“${rawValue}” is not a valid ${prefix}: value.`) };
+      if (!values.includes(value)) values.push(value);
+    }
+    return { values, rawValues };
+  }
+
+  function parseInModifier(value) {
+    const parsed = parseModifierList(value, "in", CONTENT_SCOPES);
+    if (!parsed || parsed.error) return parsed;
+    const authorities = [...new Set(parsed.values.filter(item => ["ina", "cfr"].includes(item)).map(item => item === "ina" ? "statute" : "cfr"))];
+    const authority = authorities.length === 1 && parsed.values.every(item => ["ina", "cfr"].includes(item)) ? authorities[0] : null;
+    const rawLegalValues = parsed.rawValues.map(item => normalizedWord(item).replace(/[.\s]/g, "")).filter(item => ["ina", "usc", "statute", "statutes", "statutory", "cfr", "regulation", "regulations", "regulatory"].includes(item));
+    const citationSystem = authorities.length === 1
+      ? authorities[0] === "cfr" ? "cfr" : rawLegalValues.some(item => item === "usc") ? "usc" : "ina"
+      : null;
     return {
+      ...parsed,
+      contentScopes: parsed.values,
+      authorities,
       authority,
-      citationSystem: normalizedWord(match[1]) === "ina" ? "ina" : authority === "statute" ? "usc" : "cfr",
-      rawValue: match[1]
+      citationSystem,
+      rawValue: parsed.rawValues.join(",")
     };
+  }
+
+  function parseIsModifier(value) {
+    return parseModifierList(value, "is", ARTIFACT_KINDS);
+  }
+
+  function parseHasModifier(value) {
+    return parseModifierList(value, "has", ARTIFACT_KINDS);
   }
 
   function parseCommonModifier(value) {
@@ -274,6 +320,12 @@
     if (!match) return null;
     const body = match[1];
     if (!body) return { error: issue("missing-common-level", "Choose a Common level after common:.") };
+    if (body.includes(",")) {
+      if (body.includes("=") || body.split(",").length !== 2) return { error: issue("invalid-common-pair", "Use common:STATUTE-LEVEL,CFR-LEVEL to set the two authorities separately.") };
+      const [statuteLevel, cfrLevel] = body.split(",");
+      if (!statuteLevel || !cfrLevel) return { error: issue("missing-common-level", "Choose both a statutory level and a CFR P-number after common:.") };
+      return { authority: null, pairLevels: { statute: statuteLevel, cfr: cfrLevel }, raw: value };
+    }
     const equals = body.indexOf("=");
     if (equals !== body.lastIndexOf("=")) return { error: issue("invalid-common-modifier", "A Common modifier may contain only one equals sign.") };
     if (equals < 0) return { authority: null, rawLevel: body, raw: value };
@@ -293,49 +345,58 @@
     const adjustments = [];
     let unqualified = null;
 
+    const assignLevel = (authority, rawLevel) => {
+      if (!activeAuthorities.includes(authority)) {
+        errors.push(issue("common-authority-out-of-scope", `The ${authority === "statute" ? "INA/U.S.C." : "CFR"} Common level is outside this search scope.`));
+        return false;
+      }
+      if (assigned.has(authority)) {
+        errors.push(issue("duplicate-common-authority", `The ${authority === "statute" ? "INA/U.S.C." : "CFR"} Common level is specified more than once.`));
+        return false;
+      }
+      const level = normalizeCommonLevel(rawLevel, authority);
+      if (!level || !commonLevelsForAuthority(authority).includes(level)) {
+        errors.push(issue("invalid-common-level", `“${rawLevel}” is not a valid ${authority === "statute" ? "statutory" : "CFR"} Common level.`));
+        return false;
+      }
+      levels[authority] = level;
+      assigned.add(authority);
+      return true;
+    };
+
     for (const entry of entries || []) {
       if (entry?.error) { errors.push(entry.error); continue; }
+      if (entry?.pairLevels) {
+        if (activeAuthorities.length !== 2) {
+          errors.push(issue("common-pair-out-of-scope", "A comma-separated Common pair is available only when both statutes and CFR are searched."));
+          continue;
+        }
+        assignLevel("statute", entry.pairLevels.statute);
+        assignLevel("cfr", entry.pairLevels.cfr);
+        continue;
+      }
       if (!entry?.authority) {
         if (unqualified) errors.push(issue("duplicate-common-level", "Only one unqualified Common modifier may be used."));
         else unqualified = entry;
         continue;
       }
-      if (!activeAuthorities.includes(entry.authority)) {
-        errors.push(issue("common-authority-out-of-scope", `The ${entry.authority === "statute" ? "INA/U.S.C." : "CFR"} Common level is outside this search scope.`));
-        continue;
-      }
-      if (assigned.has(entry.authority)) {
-        errors.push(issue("duplicate-common-authority", `The ${entry.authority === "statute" ? "INA/U.S.C." : "CFR"} Common level is specified more than once.`));
-        continue;
-      }
-      const level = normalizeCommonLevel(entry.rawLevel, entry.authority);
-      if (!level || !commonLevelsForAuthority(entry.authority).includes(level)) {
-        errors.push(issue("invalid-common-level", `“${entry.rawLevel}” is not a valid ${entry.authority === "statute" ? "statutory" : "CFR"} Common level.`));
-        continue;
-      }
-      levels[entry.authority] = level;
-      assigned.add(entry.authority);
+      assignLevel(entry.authority, entry.rawLevel);
     }
 
     if (unqualified) {
-      const compatible = activeAuthorities.map(authority => ({ authority, level: normalizeCommonLevel(unqualified.rawLevel, authority) }))
-        .filter(item => item.level && commonLevelsForAuthority(item.authority).includes(item.level));
-      if (!compatible.length) {
+      const rawLevel = unqualified.rawLevel;
+      const direct = activeAuthorities.length === 1
+        ? { authority: activeAuthorities[0], level: normalizeCommonLevel(rawLevel, activeAuthorities[0]) }
+        : /^p(?:aragraph(?:-?level)?-?)?[1-6]$/i.test(String(rawLevel).replace(/[\s_]+/g, "-"))
+          ? { authority: "cfr", level: normalizeCommonLevel(rawLevel, "cfr") }
+          : { authority: "statute", level: normalizeCommonLevel(rawLevel, "statute") };
+      if (!direct.level || !commonLevelsForAuthority(direct.authority).includes(direct.level)) {
         errors.push(issue("invalid-common-level", `“${unqualified.rawLevel}” is not valid for this search scope.`));
-      } else if (compatible.length === 2) {
-        for (const item of compatible) {
-          if (assigned.has(item.authority)) errors.push(issue("duplicate-common-authority", `The ${item.authority === "statute" ? "INA/U.S.C." : "CFR"} Common level is specified more than once.`));
-          else { levels[item.authority] = item.level; assigned.add(item.authority); }
-        }
       } else {
-        const item = compatible[0];
-        if (assigned.has(item.authority)) errors.push(issue("duplicate-common-authority", `The ${item.authority === "statute" ? "INA/U.S.C." : "CFR"} Common level is specified more than once.`));
-        else {
-          levels[item.authority] = item.level;
-          assigned.add(item.authority);
-          const otherAuthority = item.authority === "statute" ? "cfr" : "statute";
+        if (assignLevel(direct.authority, rawLevel)) {
+          const otherAuthority = direct.authority === "statute" ? "cfr" : "statute";
           if (activeAuthorities.includes(otherAuthority) && !assigned.has(otherAuthority)) {
-            const mapped = mapCommonLevel(item.level, item.authority, otherAuthority);
+            const mapped = mapCommonLevel(direct.level, direct.authority, otherAuthority);
             if (mapped.ok) {
               levels[otherAuthority] = mapped.level;
               assigned.add(otherAuthority);
@@ -366,13 +427,19 @@
       return [authority, level && commonLevelsForAuthority(authority).includes(level) ? level : "deepest"];
     }));
     const includeDeepest = options.includeDeepest === true;
+    const cfrSyntax = level => /^paragraph-([1-6])$/.test(level) ? `P${level.match(/[1-6]/)[0]}` : level;
     if (authorities.length === 1) {
       const level = normalized[authorities[0]];
-      return level === "deepest" && !includeDeepest ? "" : `common:${level}`;
+      return level === "deepest" && !includeDeepest ? "" : `common:${authorities[0] === "cfr" ? cfrSyntax(level) : level}`;
     }
     if (authorities.length === 2) {
       if (!includeDeepest && authorities.every(authority => normalized[authority] === "deepest")) return "";
-      return `common:INA=${normalized.statute || "deepest"} common:CFR=${normalized.cfr || "deepest"}`;
+      const statuteLevel = normalized.statute || "deepest";
+      const cfrLevel = normalized.cfr || "deepest";
+      const analogous = mapCommonLevel(statuteLevel, "statute", "cfr");
+      return analogous.ok && analogous.level === cfrLevel
+        ? `common:${statuteLevel}`
+        : `common:${statuteLevel},${cfrSyntax(cfrLevel)}`;
     }
     return "";
   }
@@ -408,10 +475,12 @@
     const levels = { ...initialized.levels, [selectedAuthority]: selectedLevel };
     const adjustments = [...initialized.adjustments];
     let synchronized = false;
-    if (selectedAuthority === "statute" && authorities.includes("cfr") && options.syncCfrFromStatute !== false) {
-      const mapped = mapCommonLevel(selectedLevel, "statute", "cfr");
+    const syncAcrossAuthorities = options.syncAcrossAuthorities ?? options.syncCfrFromStatute !== false;
+    const otherAuthority = selectedAuthority === "statute" ? "cfr" : "statute";
+    if (authorities.includes(otherAuthority) && syncAcrossAuthorities) {
+      const mapped = mapCommonLevel(selectedLevel, selectedAuthority, otherAuthority);
       if (mapped.ok) {
-        levels.cfr = mapped.level;
+        levels[otherAuthority] = mapped.level;
         synchronized = true;
         if (mapped.clamped) adjustments.push(mapped);
       }
@@ -438,8 +507,10 @@
 
     const filtered = [];
     const commonEntries = [];
+    const has = [];
     const errors = [];
     let scope = null;
+    let listing = null;
     let depth = 0;
     for (let index = 0; index < lexed.tokens.length; index += 1) {
       const token = lexed.tokens[index];
@@ -453,19 +524,27 @@
       const combinedCommon = modifierTokenValue(lexed.tokens, index, "common");
       const commonModifier = parseCommonModifier(combinedCommon);
       const looksLikeCommonModifier = lower.startsWith("common:");
-      if (!inModifier && !commonModifier && !looksLikeInModifier && !looksLikeCommonModifier) { filtered.push(token); continue; }
+      const combinedIs = modifierTokenValue(lexed.tokens, index, "is");
+      const isModifier = parseIsModifier(combinedIs);
+      const looksLikeIsModifier = lower.startsWith("is:");
+      const combinedHas = modifierTokenValue(lexed.tokens, index, "has");
+      const hasModifier = parseHasModifier(combinedHas);
+      const looksLikeHasModifier = lower.startsWith("has:");
+      const recognizedModifier = inModifier || commonModifier || isModifier || hasModifier;
+      const looksLikeModifier = looksLikeInModifier || looksLikeCommonModifier || looksLikeIsModifier || looksLikeHasModifier;
+      if (!recognizedModifier && !looksLikeModifier) { filtered.push(token); continue; }
       if (depth > 0) {
         errors.push(issue("modifier-inside-group", "Search modifiers cannot appear inside a parenthesized alternative group.", token.start));
         continue;
       }
-      if (inModifier) {
+      if (inModifier && !inModifier.error) {
         if (scope) errors.push(issue("duplicate-in-modifier", "Only one in: authority scope may be used.", token.start));
         else scope = inModifier;
         if (normalizedWord(token.value) === "in:") index += 1;
         continue;
       }
       if (looksLikeInModifier) {
-        errors.push(issue("invalid-in-modifier", "Use in:INA or in:CFR for an authority-wide search.", token.start));
+        errors.push(inModifier?.error || issue("invalid-in-modifier", "Use in:INA, in:CFR, in:notes, or in:highlights.", token.start));
         continue;
       }
       if (commonModifier) {
@@ -473,11 +552,30 @@
         if (normalizedWord(token.value) === "common:") index += 1;
         continue;
       }
-      errors.push(issue("invalid-common-modifier", "The Common modifier is not valid.", token.start));
+      if (looksLikeCommonModifier) {
+        errors.push(commonModifier?.error || issue("invalid-common-modifier", "The Common modifier is not valid.", token.start));
+        continue;
+      }
+      if (isModifier && !isModifier.error) {
+        if (listing) errors.push(issue("duplicate-is-modifier", "Only one is: listing modifier may be used.", token.start));
+        else listing = { kinds: isModifier.values, rawValues: isModifier.rawValues };
+        if (normalizedWord(token.value) === "is:") index += 1;
+        continue;
+      }
+      if (looksLikeIsModifier) {
+        errors.push(isModifier?.error || issue("invalid-is-modifier", "Use is:notes, is:highlights, or is:notes,highlights.", token.start));
+        continue;
+      }
+      if (hasModifier && !hasModifier.error) {
+        has.push({ kinds: hasModifier.values, rawValues: hasModifier.rawValues });
+        if (normalizedWord(token.value) === "has:") index += 1;
+        continue;
+      }
+      errors.push(hasModifier?.error || issue("invalid-has-modifier", "Use has:notes, has:highlights, or has:notes,highlights.", token.start));
     }
 
-    const authorities = normalizeAuthorities(options.authorities, scope ? [scope.authority] : COMMON_AUTHORITIES);
-    const activeAuthorities = scope ? [scope.authority] : authorities;
+    const authorities = normalizeAuthorities(options.authorities, scope?.authorities?.length ? scope.authorities : COMMON_AUTHORITIES);
+    const activeAuthorities = scope ? scope.authorities : authorities;
     const common = resolveCommonModifiers(commonEntries, activeAuthorities);
     errors.push(...common.errors);
 
@@ -551,6 +649,16 @@
       clauses.push({ type: "clause", operator: alternatives.length > 1 || grouped ? "OR" : "ATOM", alternatives });
     }
 
+    if (listing && (scope || has.length || commonEntries.length || clauses.length)) {
+      errors.push(issue("is-exclusive", "is: only lists notes or highlights. Use in:notes or in:highlights to search their text."));
+    }
+    if (has.length && scope?.contentScopes?.some(item => ARTIFACT_KINDS.includes(item))) {
+      errors.push(issue("has-artifact-scope", "has: returns legal-text rows, so its in: scope may contain only INA or CFR."));
+    }
+    if (commonEntries.length && !activeAuthorities.length) {
+      errors.push(issue("common-without-legal-scope", "common: is available only when INA or CFR is in scope."));
+    }
+
     const status = errors.length ? "invalid" : "valid";
     return {
       type: "search",
@@ -559,6 +667,8 @@
       ok: status === "valid",
       forcedSearch: lexed.hadQuote,
       scope,
+      listing,
+      has,
       common,
       clauses,
       errors
@@ -572,20 +682,23 @@
   function serializeAtom(atom) {
     if (atom?.kind === "phrase") return escapePhrase(atom.value);
     const value = String(atom?.value || "");
-    if (/^(?:or|not)$/i.test(value) || /^(?:in|common):/i.test(value)) return `\\${value}`;
+    if (/^(?:or|not)$/i.test(value) || /^(?:in|is|has|common):/i.test(value)) return `\\${value}`;
     return value.replace(/([\\\s(),"])/g, "\\$1");
   }
 
   function serializeCommand(ast, options = {}) {
     if (!ast || ast.type !== "search" || ast.status !== "valid") return "";
     const parts = [];
-    if (ast.scope?.authority === "statute") parts.push("in:INA");
+    if (ast.listing?.kinds?.length) parts.push(`is:${ast.listing.kinds.join(",")}`);
+    if (ast.scope?.contentScopes?.length) parts.push(`in:${ast.scope.contentScopes.map(value => value === "ina" ? "INA" : value === "cfr" ? "CFR" : value).join(",")}`);
+    else if (ast.scope?.authority === "statute") parts.push("in:INA");
     else if (ast.scope?.authority === "cfr") parts.push("in:CFR");
     const commonText = canonicalizeCommon(ast.common?.levels, {
       authorities: ast.common?.authorities || (ast.scope ? [ast.scope.authority] : options.authorities),
       includeDeepest: options.includeDeepestCommon === true
     });
     if (commonText) parts.push(commonText);
+    for (const clause of ast.has || []) if (clause.kinds?.length) parts.push(`has:${clause.kinds.join(",")}`);
     for (const clause of ast.clauses || []) {
       const alternatives = (clause.alternatives || []).map(serializeAtom);
       if (!alternatives.length) continue;
@@ -623,7 +736,7 @@
       if (token.type === "close") { depth = Math.max(0, depth - 1); continue; }
       if (token.type !== "atom" || token.kind !== "word" || token.escaped || depth > 0) continue;
       const value = normalizedWord(token.value);
-      if (/^(?:in|common):/.test(value) || value === "or" || value === "not") return true;
+      if (/^(?:in|is|has|common):/.test(value) || value === "or" || value === "not") return true;
     }
     return false;
   }
@@ -688,6 +801,8 @@
     STATUTE_COMMON_LEVELS,
     CFR_COMMON_LEVELS,
     COMMON_AUTHORITIES,
+    CONTENT_SCOPES,
+    ARTIFACT_KINDS,
     normalizeAuthority,
     normalizeAuthorities,
     normalizeCommonLevel,
@@ -699,6 +814,8 @@
     splitTopLevelCommands,
     lexCommand,
     parseInModifier,
+    parseIsModifier,
+    parseHasModifier,
     parseCommonModifier,
     resolveCommonModifiers,
     canonicalizeCommon,

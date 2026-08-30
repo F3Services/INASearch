@@ -178,9 +178,11 @@ function makeBuild(template, corpus, profile, options) {
 }
 
 let template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
+const annotationRuntimeSource = fs.readFileSync(path.join(sourceDir, "INASearch-Annotations.js"), "utf8");
 template = replaceRuntimeBlock(template, "STORAGE", "inaSearchStorageRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Storage.js"), "utf8"));
 template = replaceRuntimeBlock(template, "CORPUS_PACKING", "inaSearchCorpusPackingRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Corpus-Packing.js"), "utf8"));
 template = replaceRuntimeBlock(template, "INSERTIONS", "inaSearchInsertionsRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Insertions.js"), "utf8"));
+template = replaceRuntimeBlock(template, "ANNOTATIONS", "inaSearchAnnotationsRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Annotations.js"), "utf8"));
 template = replaceRuntimeBlock(template, "COMMAND", "inaSearchCommandRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Command.js"), "utf8"));
 template = replaceRuntimeBlock(template, "WORKSPACE", "inaSearchWorkspaceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Workspace.js"), "utf8"));
 template = replaceRuntimeBlock(template, "OCCURRENCE", "inaSearchOccurrenceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Occurrence.js"), "utf8"));
@@ -204,6 +206,16 @@ const uscisGlossarySource = readAssignedObject("INASearch-USCIS-Glossary.js", "I
 fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
 packLegalReferences(fullCorpus);
 const defaultProfile = readAssignedObject("INASearch-Profile.js", "INA_SEARCH_PROFILE");
+const shellStyle = template.match(/<style>([\s\S]*?)<\/style>/)?.[1] || "";
+const annotationCssSource = shellStyle.split("\n").filter(line => /sticky-note|user-highlight|annotation-selection|artifact-note|data-artifact-kind|note-drop/.test(line)).join("\n");
+const embeddedFontBytes = [...template.matchAll(/data:font\/[^;]+;base64,([A-Za-z0-9+/=]+)/g)].reduce((sum, match) => sum + Buffer.from(match[1], "base64").byteLength, 0);
+if (/\b(?:from|require\s*\()\s*["'](?:@[^"']+\/)?pretext["']/i.test(template)) throw new Error("Pretext was accidentally included in the standalone shell.");
+const annotationBundleReport = {
+  javascriptBytes: Buffer.byteLength(annotationRuntimeSource),
+  cssBytes: Buffer.byteLength(annotationCssSource),
+  fontBytes: embeddedFontBytes,
+  pretextIncluded: false
+};
 
 const results = [
   makeBuild(template, fullCorpus, defaultProfile, {
@@ -230,3 +242,4 @@ for (const result of results) {
     : `${result.manifest.uncompressedBytes} uncompressed JSON bytes`;
   console.log(`${result.fileName}\t${result.bytes} bytes\t${result.instanceId}\t${corpusSize}`);
 }
+console.log(`annotations\t${annotationBundleReport.javascriptBytes} JS bytes\t${annotationBundleReport.cssBytes} CSS bytes\t${annotationBundleReport.fontBytes} font bytes\tPretext ${annotationBundleReport.pretextIncluded ? "included" : "absent"}`);
