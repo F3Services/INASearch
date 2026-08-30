@@ -1102,6 +1102,7 @@
   function finalizeSearch(state, started) {
     const finalizeStarted = now(), buckets = [...state.buckets.values()]
       .filter(bucket => state.compiled.clauses.length > 0 && bucket.clauseMatches.every(Boolean))
+      .filter(bucket => typeof state.options.bucketFilter !== "function" || state.options.bucketFilter(bucket, { projection: state.projection, compiled: state.compiled, options: state.options }) !== false)
       .sort((left, right) => left.firstSourceOrder - right.firstSourceOrder);
     const hierarchyAggregates = new Map();
     for (const bucket of buckets) {

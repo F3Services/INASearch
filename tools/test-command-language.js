@@ -68,19 +68,19 @@ function testBooleanGrammar() {
 function testScopesAndCommonParsing() {
   const ina = command.parseCommand("in:INA common:subsection waiver");
   assert.strictEqual(ina.ok, true);
-  assert.deepStrictEqual(plain(ina.scope), { authority: "statute", citationSystem: "ina", rawValue: "INA" });
+  assert.deepStrictEqual(plain(ina.scope), { values: ["ina"], rawValues: ["INA"], contentScopes: ["ina"], authorities: ["statute"], authority: "statute", citationSystem: "ina", rawValue: "INA" });
   assert.deepStrictEqual(plain(ina.common.levels), { statute: "subsection" });
   assert.strictEqual(command.serializeCommand(ina), "in:INA common:subsection waiver");
 
   const spacedCfr = command.parseCommand("in: CFR common: paragraph-3 admission");
   assert.strictEqual(spacedCfr.ok, true, "Spaced modifier editing did not parse.");
   assert.deepStrictEqual(plain(spacedCfr.common.levels), { cfr: "paragraph-3" });
-  assert.strictEqual(command.serializeCommand(spacedCfr), "in:CFR common:paragraph-3 admission");
+  assert.strictEqual(command.serializeCommand(spacedCfr), "in:CFR common:P3 admission");
 
   const dual = command.parseCommand("common:USC=subsection common:CFR=paragraph-3 good moral character");
   assert.strictEqual(dual.ok, true);
   assert.deepStrictEqual(plain(dual.common.levels), { statute: "subsection", cfr: "paragraph-3" }, "Explicit dual Common values were synchronized over one another.");
-  assert.strictEqual(command.serializeCommand(dual), "common:INA=subsection common:CFR=paragraph-3 good moral character");
+  assert.strictEqual(command.serializeCommand(dual), "common:subsection,P3 good moral character");
   const dualRoundTrip = command.parseCommand(command.serializeCommand(dual));
   assert.deepStrictEqual(plain(dualRoundTrip.common.levels), plain(dual.common.levels));
 
@@ -90,6 +90,11 @@ function testScopesAndCommonParsing() {
   assert.deepStrictEqual(plain(inferredStatute.common.levels), { statute: "subparagraph", cfr: "paragraph-3" }, "A statutory dual-scope Common level did not initialize its analogous CFR level.");
   const inferredCfr = command.parseCommand("common:paragraph-5 waiver");
   assert.deepStrictEqual(plain(inferredCfr.common.levels), { statute: "subclause", cfr: "paragraph-5" }, "A CFR dual-scope Common level did not initialize its analogous statutory level.");
+  const pAlias = command.parseCommand("common:P4 waiver");
+  assert.deepStrictEqual(plain(pAlias.common.levels), { statute: "clause", cfr: "paragraph-4" }, "A CFR P-number did not infer the analogous statutory level.");
+  const separateDepths = command.parseCommand("common:subsection,P4 waiver");
+  assert.deepStrictEqual(plain(separateDepths.common.levels), { statute: "subsection", cfr: "paragraph-4" }, "A comma-separated Common pair did not preserve independent authority depths.");
+  assert.strictEqual(command.scanCommandSegments("common:subsection,P4 waiver").hasTopLevelComma, false, "A Common depth pair was mistaken for a second workspace pane.");
 
   assert(codes(command.parseCommand("in:INA in:CFR waiver")).includes("duplicate-in-modifier"), "Duplicate in: modifiers were silently accepted.");
   assert(codes(command.parseCommand("in:INA common:CFR=section waiver")).includes("common-authority-out-of-scope"), "An out-of-scope CFR Common modifier was accepted in an INA-only search.");
@@ -97,8 +102,26 @@ function testScopesAndCommonParsing() {
   assert(codes(command.parseCommand("in:TITLE waiver")).includes("invalid-in-modifier"));
   assert(codes(command.parseCommand("common:CFR=subsection waiver")).includes("invalid-common-level"));
   assert.strictEqual(command.canonicalizeCommon({ statute: "deepest", cfr: "deepest" }), "");
-  assert.strictEqual(command.canonicalizeCommon({ statute: "section", cfr: "paragraph-2" }), "common:INA=section common:CFR=paragraph-2");
+  assert.strictEqual(command.canonicalizeCommon({ statute: "section", cfr: "paragraph-2" }), "common:section,P2");
   assert.strictEqual(command.canonicalizeCommon({ statute: "subsection" }), "common:subsection", "A single-authority Common state serialized as a dual state.");
+
+  const contentUnion = command.parseCommand("in:INA,notes,highlights president");
+  assert.strictEqual(contentUnion.ok, true);
+  assert.deepStrictEqual(plain(contentUnion.scope.contentScopes), ["ina", "notes", "highlights"]);
+  assert.deepStrictEqual(plain(contentUnion.scope.authorities), ["statute"]);
+  assert.strictEqual(command.scanCommandSegments("in:INA,notes,highlights president").hasTopLevelComma, false, "A content-scope list became a workspace.");
+  assert.strictEqual(command.splitTopLevelCommands("is:notes, INA 212").hasTopLevelComma, true, "A comma followed by a new command was swallowed by is:.");
+
+  const listing = command.parseCommand("is:notes,highlights");
+  assert.deepStrictEqual(plain(listing.listing.kinds), ["notes", "highlights"]);
+  assert(codes(command.parseCommand("president is:notes")).includes("is-exclusive"), "is: accepted an ordinary term.");
+  assert(codes(command.parseCommand("is:notes has:highlights")).includes("is-exclusive"), "is: accepted another modifier.");
+
+  const hasOr = command.parseCommand("president has:notes,highlights");
+  assert.deepStrictEqual(plain(hasOr.has.map(item => item.kinds)), [["notes", "highlights"]]);
+  const hasAnd = command.parseCommand("has:notes has:highlights");
+  assert.deepStrictEqual(plain(hasAnd.has.map(item => item.kinds)), [["notes"], ["highlights"]]);
+  assert(codes(command.parseCommand("in:notes president has:notes")).includes("has-artifact-scope"), "has: accepted an artifact-returning in: scope.");
 }
 
 function testCommonDepthState() {
@@ -123,21 +146,21 @@ function testCommonDepthState() {
 
   const statuteSelection = command.applyCommonSelection(
     { statute: "section", cfr: "paragraph-5" }, "INA", "paragraph",
-    { authorities: ["statute", "cfr"], syncCfrFromStatute: true }
+    { authorities: ["statute", "cfr"], syncAcrossAuthorities: true }
   );
   assert.deepStrictEqual(plain(statuteSelection.levels), { statute: "paragraph", cfr: "paragraph-2" });
   assert.strictEqual(statuteSelection.synchronized, true);
 
   const cfrSelection = command.applyCommonSelection(
     statuteSelection.levels, "CFR", "paragraph-6",
-    { authorities: ["statute", "cfr"], syncCfrFromStatute: true }
+    { authorities: ["statute", "cfr"], syncAcrossAuthorities: true }
   );
-  assert.deepStrictEqual(plain(cfrSelection.levels), { statute: "paragraph", cfr: "paragraph-6" }, "CFR selection incorrectly drove the INA selector.");
-  assert.strictEqual(cfrSelection.synchronized, false);
+  assert.deepStrictEqual(plain(cfrSelection.levels), { statute: "item", cfr: "paragraph-6" }, "CFR selection did not drive the INA selector to its analogous unit.");
+  assert.strictEqual(cfrSelection.synchronized, true);
 
   const syncDisabled = command.applyCommonSelection(
     { statute: "section", cfr: "paragraph-5" }, "statute", "subsection",
-    { authorities: ["statute", "cfr"], syncCfrFromStatute: false }
+    { authorities: ["statute", "cfr"], syncAcrossAuthorities: false }
   );
   assert.deepStrictEqual(plain(syncDisabled.levels), { statute: "subsection", cfr: "paragraph-5" });
 }
