@@ -137,6 +137,28 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
     raw_flattened: list[str] = [element.text or ""]
     events: list[dict] = []
 
+    def append_standalone_superscript(child: ET.Element, clean: list[str], flattened: list[str]) -> None:
+        """Record a repeated House footnote marker written as a bare ``sup``.
+
+        USLM uses a paired ``ref.footnoteRef``/``note`` for the first marker,
+        but some later references to the same editorial note are represented
+        only by ``<sup>N</sup>``. They must be removed from operative text in
+        exactly the same way and linked to the section's canonical note after
+        all fields in the section have been examined.
+        """
+        number = normalize(all_text(child))
+        if not re.fullmatch(r"\d{1,3}", number):
+            raise RuntimeError(f"Unsupported standalone superscript {number!r} at {source_key}.{field_name}")
+        event_index = len(events)
+        clean.append(f"\ue000{event_index}\ue001")
+        flattened.append(all_text(child))
+        events.append({
+            "number": number,
+            "flattenedInsertion": number,
+            "sourceLocation": {"sourceKey": source_key, "field": field_name},
+            "reusedReference": True,
+        })
+
     def append_container(container: ET.Element, clean: list[str], flattened: list[str]) -> None:
         clean.append(container.text or "")
         flattened.append(container.text or "")
@@ -189,6 +211,12 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
                 continue
             if name == "note" and child.attrib.get("type") == "footnote":
                 raise RuntimeError(f"Unpaired House footnote at {source_key}.{field_name}")
+            if name == "sup":
+                append_standalone_superscript(child, clean, flattened)
+                clean.append(child.tail or "")
+                flattened.append(child.tail or "")
+                index += 1
+                continue
             append_container(child, clean, flattened)
             clean.append(child.tail or "")
             flattened.append(child.tail or "")
@@ -217,6 +245,12 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
             raw_clean.extend(clean_tail)
             raw_flattened.extend(flat_tail)
             break
+        if name == "sup":
+            append_standalone_superscript(child, raw_clean, raw_flattened)
+            raw_clean.append(child.tail or "")
+            raw_flattened.append(child.tail or "")
+            index += 1
+            continue
         append_container(child, raw_clean, raw_flattened)
         raw_clean.append(child.tail or "")
         raw_flattened.append(child.tail or "")
@@ -251,7 +285,8 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
     for event, (prefix, suffix) in zip(events, found):
         event["reconstructionPrefix"] = prefix
         event["reconstructionSuffix"] = suffix
-        notes[event["xmlId"]]["sourceLocation"]["offset"] = event["offset"]
+        if event.get("xmlId"):
+            notes[event["xmlId"]]["sourceLocation"]["offset"] = event["offset"]
         references.append(event)
     return {"flattenedText": flattened_text, "cleanText": clean_text, "footnoteReferences": references}
 
@@ -325,11 +360,31 @@ def main() -> None:
                 fields.setdefault(source_key, {})["preamble"] = extracted
                 affected_source_fields += 1
 
+    repeated_reference_count = 0
+    for source_key, source_fields in fields.items():
+        section_number = source_key.split(":", 1)[0]
+        notes = list(section_notes.get(section_number, {}).values())
+        for field in source_fields.values():
+            for reference in field["footnoteReferences"]:
+                if not reference.get("reusedReference"):
+                    continue
+                matches = [note for note in notes if note["number"] == reference["number"]]
+                if len(matches) != 1:
+                    raise RuntimeError(
+                        f"Standalone footnote {reference['number']} at {source_key} has {len(matches)} canonical matches"
+                    )
+                reference["id"] = matches[0]["id"]
+                reference["xmlId"] = matches[0]["xmlId"]
+                repeated_reference_count += 1
+
     sections = {section: list(records.values()) for section, records in section_notes.items() if records}
     footnote_count = sum(len(records) for records in sections.values())
     reference_count = sum(len(field["footnoteReferences"]) for record in fields.values() for field in record.values())
-    if (footnote_count, reference_count, affected_source_fields) != (118, 118, 116):
-        raise RuntimeError(f"Expected 118 footnotes/references across 116 fields; got {footnote_count}/{reference_count}/{affected_source_fields}")
+    if (footnote_count, reference_count, affected_source_fields, repeated_reference_count) != (118, 151, 143, 33):
+        raise RuntimeError(
+            "Expected 118 footnotes and 151 references (33 repeated superscripts) "
+            f"across 143 fields; got {footnote_count}/{reference_count}/{repeated_reference_count}/{affected_source_fields}"
+        )
 
     result = {
         "schemaVersion": 1,

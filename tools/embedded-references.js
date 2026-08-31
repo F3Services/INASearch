@@ -614,7 +614,14 @@ function parseNumberedSectionReferences(text) {
   for (const entry of starts.sort((left, right) => left.start - right.start || Number(right.hasUnitWord) - Number(left.hasUnitWord))) {
     if (candidates.some(candidate => entry.start >= candidate.start && entry.start < candidate.end)) continue;
     const sequence = parseSectionAddressSequence(input, entry.start, entry.hasUnitWord);
-    if (!sequence || !sequence.members.some(member => member.tokens?.length)) continue;
+    // A coordinated section list does not need a parenthetical sub-unit to
+    // be a complete citation.  Lists such as “section 1229b, 1229c, 1255,
+    // 1258, or 1259 of this title” are just as structurally explicit as
+    // “sections 1158 or 1231(b)(3) of this title”.  Keep the old path
+    // requirement for a lone address so ordinary single-section references
+    // remain the responsibility of the narrower direct-reference parser.
+    if (!sequence || !sequence.members.length ||
+        (!sequence.members.some(member => member.tokens?.length) && sequence.members.length < 2)) continue;
     candidates.push({
       type: "numbered-section-list",
       kind: "numbered-section-list",

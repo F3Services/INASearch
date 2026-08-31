@@ -458,6 +458,7 @@ function inaActReferenceCandidates(text, context) {
     if (!parsed) continue;
     let currentSection = "";
     let currentPath = [];
+    let finalCitationAdded = false;
     parsed.forEach((citation, index) => {
       let targetPath = citation.path;
       if (citation.relative) {
@@ -477,7 +478,13 @@ function inaActReferenceCandidates(text, context) {
         ruleId: "context-cfr-ina-act-section",
         ...inaReferenceTarget(context, currentSection, targetPath)
       });
+      if (index === parsed.length - 1) finalCitationAdded = true;
     });
+    if (finalCitationAdded) {
+      const reference = results.at(-1);
+      reference.end = suffix.index + suffix[0].length;
+      reference.text = input.slice(reference.start, reference.end);
+    }
   }
   const assumesIna = cfrContextUsesInaAct(context) || /\b(?:INA|Immigration\s+and\s+Nationality\s+Act)\b/i.test(input);
   if (assumesIna) {
@@ -486,6 +493,7 @@ function inaActReferenceCandidates(text, context) {
       if (!parsed?.citations?.length) continue;
       const suffixText = input.slice(parsed.end, parsed.end + 240);
       const writtenActSuffix = suffixText.match(/^\s+of\s+([^.;]{1,220}?\bAct(?:\s+of\s+\d{4})?)\b/i)?.[1] || "";
+      const acceptedSuffixMatch = suffixText.match(/^\s+of\s+(?:(?:the|this|such|that)\s+Act\b|INA\b|(?:the\s+)?Immigration\s+and\s+Nationality\s+Act\b)/i);
       const acceptedActSuffix = /^(?:(?:the|this|such|that)\s+Act|INA|Immigration\s+and\s+Nationality\s+Act)\b/i.test(writtenActSuffix);
       const normalizedSuffix = suffixText.trimStart().toLowerCase();
       const catalogNamedActSuffix = [...(context.namedActs?.keys?.() || [])].some(name => {
@@ -500,6 +508,7 @@ function inaActReferenceCandidates(text, context) {
       if (!acceptedActSuffix && (writtenActSuffix || catalogNamedActSuffix || structuredNamedActSuffix)) continue;
       let currentSection = "";
       let currentPath = [];
+      let finalCitationAdded = false;
       for (const [index, citation] of parsed.citations.entries()) {
         let targetPath = citation.path;
         if (citation.relative) {
@@ -520,6 +529,12 @@ function inaActReferenceCandidates(text, context) {
           ruleId: "context-cfr-ina-act-section",
           ...inaReferenceTarget(context, currentSection, targetPath)
         });
+        if (index === parsed.citations.length - 1) finalCitationAdded = true;
+      }
+      if (finalCitationAdded && acceptedSuffixMatch) {
+        const reference = results.at(-1);
+        reference.end = parsed.end + acceptedSuffixMatch[0].length;
+        reference.text = input.slice(reference.start, reference.end);
       }
     }
     for (const [index, match] of [...input.matchAll(/\bsections?\s+(\d+[A-Za-z-]*)((?:\s*\([A-Za-z0-9-]+\))+)(\s+is\s+divided\s+to\s+create\s+an?\s+)((?:\([A-Za-z0-9-]+\))+)/gi)].entries()) {
@@ -2284,7 +2299,10 @@ function writtenBaseTarget(candidate, anchorReferences = []) {
   if (!candidate?.baseSection) return null;
   const expectedPath = (candidate.baseTokens || []).map(String);
   const reference = anchorReferences.find(item => {
-    if (item.start < candidate.base.start || item.end > candidate.base.end) return false;
+    // A CFR-to-INA anchor may intentionally extend through its trailing
+    // “of the Act” wording, beyond the parser's structural base span. Its
+    // start still identifies the exact written section container.
+    if (item.start < candidate.base.start || item.start >= candidate.base.end) return false;
     const sourceSection = String(item.inaSection || item.targetSection || "");
     return sourceSection.toLowerCase() === String(candidate.baseSection).toLowerCase() &&
       pathEndsWith((item.targetPath || []).map(String), expectedPath);
@@ -3006,18 +3024,29 @@ function embeddedReferenceCandidates(text, context, anchorReferences = []) {
       recordEmbeddedAudit(context, "ambiguous", phrase, { ruleId: "embedded-inferred-unit", reason: `no-unique-${baseKind || "container"}` });
       continue;
     }
+    // Resolve the written phrase before removing flattened run-in markers:
+    // their presence can be necessary evidence that the preceding member is
+    // local, but they must never become references or seed resolver state.
+    const members = phrase.members.filter(member => !(context.inlineUnitMarkers || [])
+      .some(marker => marker.start <= member.start && marker.end >= member.end));
+    if (!members.length) continue;
+    const resolvedPhrase = members.length === phrase.members.length ? phrase : {
+      ...phrase,
+      members,
+      list: { ...phrase.list, members, listMembers: members, tokens: members.map(member => member.tokens), listTokens: members.map(member => member.tokens) }
+    };
     const base = { ...container, kind: baseKind, sourceId: context.sourceId, sourceField: context.sourceField || "text", start: phrase.start, end: phrase.unitSpan.end, text: phrase.unitSpan.text };
-    const candidate = { ...phrase, ruleId: "embedded-inferred-unit" };
+    const candidate = { ...resolvedPhrase, ruleId: "embedded-inferred-unit" };
     const targets = [];
     const references = [];
     const expandedTargets = expandedEmbeddedTargets(context, base, candidate);
-    phrase.members.forEach((member, index) => {
+    candidate.members.forEach((member, index) => {
       const target = expandedTargets[index] || targetFrom(base.family, base.title, base.section, [...base.path, ...member.tokens]);
       const reference = makeReference(member, candidate, target, base, "embedded-inferred-unit", index);
       if (reference) { results.push(reference); references.push(reference); targets.push(target); }
     });
     auditResolution(candidate, references, "embedded-inferred-unit");
-    if (!phrase.unitPlural && targets.length === 1) addEmbeddedFrame(state, { ...targets[0], kind: phrase.unitKind, sourceId: context.sourceId, sourceField: context.sourceField || "text", start: phrase.start, end: phrase.end, text: phrase.text, ruleId: "embedded-inferred-unit" });
+    if (!candidate.unitPlural && targets.length === 1) addEmbeddedFrame(state, { ...targets[0], kind: candidate.unitKind, sourceId: context.sourceId, sourceField: context.sourceField || "text", start: candidate.start, end: candidate.end, text: candidate.text, ruleId: "embedded-inferred-unit" });
   }
 
   const consumedAnaphors = new Set(parsed.filter(candidate => candidate.anaphor).map(candidate => `${candidate.anaphor.start}:${candidate.anaphor.end}`));

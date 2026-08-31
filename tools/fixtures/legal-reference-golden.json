@@ -33,7 +33,7 @@
       "text": "section 101(a)(27)(H) of the Immigration and Nationality Act",
       "context": { "kind": "cfr", "title": "28", "part": "65", "section": "65.1", "path": [] },
       "expected": [
-        { "text": "section 101(a)(27)(H)", "family": "ina", "ruleId": "context-cfr-ina-act-section", "resolution": "local", "targetSection": "1101", "targetPath": ["a", "27", "H"], "provenance": "deterministic-context", "policyScopeId": "" }
+        { "text": "section 101(a)(27)(H) of the Immigration and Nationality Act", "family": "ina", "ruleId": "context-cfr-ina-act-section", "resolution": "local", "targetSection": "1101", "targetPath": ["a", "27", "H"], "provenance": "deterministic-context", "policyScopeId": "" }
       ]
     },
     {

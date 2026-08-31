@@ -1,6 +1,26 @@
 {
   "schemaVersion": 1,
   "resolverVersion": "embedded-v1",
-  "reviewedAt": "2026-08-22",
-  "exceptions": []
+  "reviewedAt": "2026-08-31",
+  "exceptions": [
+    {
+      "id": "usc-1229-a-1-E-subsection-b-2",
+      "sourceArtifact": "sources/legal/raw/usc08@119-102.xml",
+      "sourceId": "usc-1229-a-1-E",
+      "sourceField": "text",
+      "sourceTextSha256": "668841f2be04f8984c54e045696a145eb00742b67a8951f4732fcb07542ccb78",
+      "start": 195,
+      "end": 201,
+      "text": "(b)(2)",
+      "reason": "The flattened subparagraph contains structural clauses (i) and (ii); this subsection reference is to 8 U.S.C. 1229(b)(2), not the removal-proceedings section introduced in the parent paragraph.",
+      "officialUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1229",
+      "reviewedAt": "2026-08-31",
+      "target": {
+        "family": "usc",
+        "title": "8",
+        "section": "1229",
+        "path": ["b", "2"]
+      }
+    }
+  ]
 }
