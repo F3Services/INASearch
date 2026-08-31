@@ -3407,11 +3407,15 @@ async function main() {
     state: { focusedActivePaneId: null },
     focusedPaneById: () => null,
     document: { documentElement: { style: { setProperty: (name, value) => stickyOffsetProperties.set(name, value) } } },
-    Math
+    window: { innerHeight: 900 },
+    Math,
+    Number
   });
   syncStatuteNavigationOffset();
   assert.strictEqual(stickyOffsetProperties.get("--topbar-height"), "113.1953125px", "The sticky navigator offset rounds the top pane upward and exposes scrolling content in the resulting gap.");
   assert.strictEqual(stickyOffsetProperties.get("--statute-nav-height"), "46.25px", "The measured navigator height is not preserved for downstream sticky elements.");
+  assert.strictEqual(stickyOffsetProperties.get("--citation-entry-space"), "185.138671875px", "The reader does not reserve enough leading space to place a section-level citation on the top-quarter reading line.");
+  assert(fallbackSource.includes('spacer.style.setProperty("--citation-entry-inset", `${inset}px`)'), "Section-level citation spacing does not subtract the reader panel's existing top inset before alignment.");
   const navigationVisibilityCalls = [];
   const navigationVisibilityState = { view: "search", statuteNavigationKind: "usc", statuteNavigationSectionId: "8-1153", statuteNavigationPath: ["b"] };
   const navigationVisibilityElements = { statuteNavigator: { hidden: true }, statuteNavigatorInner: { innerHTML: "contents", classList: testClassList() } };
@@ -3899,7 +3903,7 @@ async function main() {
   assert(duplicateCfrAlternatives.includes('class="section-family-alternatives"') && duplicateCfrAlternatives.includes("Other titles:") && duplicateCfrAlternatives.includes('data-show-cfr-citation="45 CFR 50.1"'), "A CFR section shared across titles does not reuse the compact section-alternatives presentation with a clickable peer.");
   assert(!duplicateCfrAlternatives.includes('data-show-cfr-citation="22 CFR 50.1"') && cfrSectionTitleAlternativesHtml(cfr501Title45).includes('data-show-cfr-citation="22 CFR 50.1"'), "The CFR title-alternatives list includes the current section or cannot navigate back to the preferred title.");
   assert.strictEqual(cfrSectionTitleAlternativesHtml(full.corpus.cfr.sections.find(section => section.id === "8:214.2")), "", "A unique CFR section displays a spurious other-title list.");
-  const includedCfrReaderStart = fallbackSource.indexOf('els.detail.innerHTML = `<div class="detail-content" data-cfr-start>', fallbackSource.indexOf("function renderCfr("));
+  const includedCfrReaderStart = fallbackSource.indexOf('els.detail.innerHTML = `<div class="citation-entry-space" aria-hidden="true"></div><div class="detail-content" data-cfr-start>', fallbackSource.indexOf("function renderCfr("));
   assert(includedCfrReaderStart >= 0 && fallbackSource.indexOf("cfrSectionTitleAlternativesHtml(section)", includedCfrReaderStart) < fallbackSource.indexOf('<div class="detail-heading-row">', includedCfrReaderStart), "Same-numbered CFR title alternatives are not rendered at the top of the included regulation reader.");
   const parseFocusedCitationInputWithCorpus = extractedFunction(fallbackSource, "parseFocusedCitationInput", "commandCitationClassifier", {
     String,
@@ -4585,9 +4589,18 @@ async function main() {
     $: () => ({ getBoundingClientRect: () => ({ bottom: 100 }) }),
     els: { statuteNavigator: { hidden: false, getBoundingClientRect: () => ({ bottom: 150 }) } },
     window: { innerHeight: 950 },
-    Math
+    Math,
+    Number
   });
-  assert.strictEqual(statuteReadingLine(), 150, "The statute reading line does not begin immediately below the sticky bars.");
+  assert.strictEqual(statuteReadingLine(), 350, "The statute reading line does not leave 75 percent of the usable viewport below a requested citation.");
+  const focusedStatuteReadingLine = extractedFunction(fallbackSource, "statuteReadingLine", "scrollStatuteAnchorToReadingLine", {
+    focusedPaneById: () => ({ scrollRoot: { clientHeight: 600, getBoundingClientRect: () => ({ top: 100, height: 600 }) } }),
+    state: { focusedActivePaneId: "focused-pane" },
+    window: { innerHeight: 950 },
+    Math,
+    Number
+  });
+  assert.strictEqual(focusedStatuteReadingLine(), 250, "A focused citation pane does not keep its requested citation at the same top-quarter reading line.");
   const scrollStatuteAnchorToReadingLine = extractedFunction(fallbackSource, "scrollStatuteAnchorToReadingLine", "currentStatutePathAtReadingLine", {
     statuteReadingLine: () => 200,
     animatedCitationJumpsEnabled: () => true,
