@@ -1015,7 +1015,6 @@
     .panel-head-tools { justify-content: flex-end; }
     .settings-section-heading-row { justify-content: space-between; }
     .detail-panel { min-height: 470px; overflow: hidden; }
-    .citation-entry-space { height: max(0px, calc(var(--citation-entry-space, 0px) - var(--citation-entry-inset, 0px))); pointer-events: none; }
     .detail-content { padding: clamp(17px, 3vw, 27px); }
     .legal-status-warning { position: sticky; z-index: 18; top: calc(var(--topbar-height, 0px) + var(--statute-nav-height, 0px) + 8px); margin: calc(0px - clamp(17px, 3vw, 27px)) calc(0px - clamp(17px, 3vw, 27px)) 18px; border: 0; border-bottom: 2px solid currentColor; border-radius: 0; padding: 11px clamp(17px, 3vw, 27px); box-shadow: 0 5px 15px rgba(16, 42, 67, .16); }
     .legal-status-warning strong { display: block; margin-bottom: 2px; }
@@ -1035,6 +1034,10 @@
     .detail-title { margin: 0; color: var(--navy); font-family: var(--serif); font-size: clamp(23px, 3vw, 32px); line-height: 1.17; }
     .detail-heading-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px; }
     .detail-heading-row > :first-child { min-width: 0; width: 100%; }
+    .detail-heading-row.legal-reader-heading { grid-template-rows: auto auto; column-gap: 10px; row-gap: 4px; }
+    .legal-reader-heading .detail-heading-citation { grid-column: 1 / -1; grid-row: 1; min-width: 0; width: 100%; }
+    .legal-reader-heading .detail-heading-title { grid-column: 1; grid-row: 2; min-width: 0; width: 100%; }
+    .legal-reader-heading .detail-heading-actions { grid-column: 2; grid-row: 2; }
     .detail-heading-actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; justify-content: flex-end; gap: 6px; margin: 0; }
     .detail-heading-actions .button { min-height: 30px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }
     .detail-subtitle { margin: 7px 0 0; color: var(--muted); font-family: var(--mono); font-size: 13px; }
@@ -1751,7 +1754,7 @@
     }
     .statute-nav-segment.unit-name-hidden summary small { display: none; }
     @media print {
-      .topbar, .statute-navigator, .profile-setup-alert, .results-panel, .detail-actions, .detail-heading-actions, .profile-bar, .button, .legal-unit-menu, .scoped-definition-popover, .legal-reference-popover, .legal-unit-note-button, .inline-notes-panel, .tutorial-coach, .inserted-reference-card-actions, .inserted-reference-connector, .citation-entry-space { display: none !important; }
+      .topbar, .statute-navigator, .profile-setup-alert, .results-panel, .detail-actions, .detail-heading-actions, .profile-bar, .button, .legal-unit-menu, .scoped-definition-popover, .legal-reference-popover, .legal-unit-note-button, .inline-notes-panel, .tutorial-coach, .inserted-reference-card-actions, .inserted-reference-connector { display: none !important; }
       .app-shell { padding: 0; }
       .workspace { display: block; }
       .detail-panel, .panel { border: 0; box-shadow: none; }
@@ -8146,7 +8149,7 @@
     function contextualNoteHost(button) {
       if (!button) return null;
       const heading = button.closest(".detail-heading-row");
-      if (heading) return heading.firstElementChild || heading;
+      if (heading) return heading;
       return button.closest(".statutory-runin-line[data-statute-inline-path], .statutory-node[data-statute-path], .cfr-block") || null;
     }
 
@@ -8158,7 +8161,7 @@
       if (!element?.closest || !els.detail.contains(element)) return null;
       const direct = element.closest("[data-note-unit-kind]");
       if (direct && els.detail.contains(direct)) return direct;
-      const host = element.closest(".statutory-runin-line[data-statute-inline-path], .statutory-node[data-statute-path], .cfr-block, .detail-heading-row > div:first-child");
+      const host = element.closest(".statutory-runin-line[data-statute-inline-path], .statutory-node[data-statute-path], .cfr-block, .detail-heading-row");
       if (!host) return null;
       const candidates = [...host.querySelectorAll("[data-note-unit-kind]")].filter(button => contextualNoteHost(button) === host);
       if (!candidates.length) return null;
@@ -8167,7 +8170,7 @@
       if (encodedPath !== undefined) {
         try { path = JSON.parse(encodedPath).map(String); } catch { path = []; }
       } else if (host.classList.contains("cfr-block") && host.dataset.cfrPath) path = componentTokens(host.dataset.cfrPath) || [];
-      else if (host.closest(".detail-heading-row")) path = [];
+      else if (host.classList.contains("detail-heading-row")) path = [];
       return path ? candidates.find(button => sameContextualNotePath(noteButtonPath(button), path)) || candidates[0] : candidates[0];
     }
 
@@ -10877,19 +10880,12 @@
       const navigatorHeight = els.statuteNavigator.hidden ? 0 : Math.max(0, els.statuteNavigator.getBoundingClientRect?.().height || 0);
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
       if (focusedPane) {
-        const readerHeight = Math.max(0, focusedPane.scrollRoot.clientHeight || focusedPane.scrollRoot.getBoundingClientRect?.().height || 0);
         focusedPane.element.style.setProperty("--topbar-height", "0px");
         focusedPane.element.style.setProperty("--statute-nav-height", `${navigatorHeight}px`);
-        focusedPane.element.style.setProperty("--citation-entry-space", `${readerHeight * .25}px`);
         return;
       }
-      const visualViewportBottom = window.visualViewport
-        ? window.visualViewport.offsetTop + window.visualViewport.height
-        : window.innerHeight;
-      const readerHeight = Math.max(0, (Number(visualViewportBottom) || 0) - height - navigatorHeight);
       document.documentElement.style.setProperty("--topbar-height", `${height}px`);
       document.documentElement.style.setProperty("--statute-nav-height", `${navigatorHeight}px`);
-      document.documentElement.style.setProperty("--citation-entry-space", `${readerHeight * .25}px`);
     }
 
     function fitStatuteNavigation() {
@@ -11440,19 +11436,8 @@
 
     function scrollStatuteAnchorToReadingLine(anchor) {
       if (!anchor?.getBoundingClientRect) return;
-      const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
-      const spacer = typeof $ === "function" && typeof els !== "undefined" ? $(".citation-entry-space", els.detail) : null;
-      const sectionStart = spacer ? $("[data-statute-start], [data-cfr-start]", els.detail) : null;
-      if (spacer?.style?.setProperty && sectionStart?.getBoundingClientRect) {
-        const topbarBottom = focusedPane ? focusedPane.scrollRoot.getBoundingClientRect().top : Math.max(0, $(".topbar")?.getBoundingClientRect?.().bottom || 0);
-        const readerTop = focusedPane || els.statuteNavigator.hidden
-          ? topbarBottom
-          : Math.max(topbarBottom, els.statuteNavigator.getBoundingClientRect().bottom);
-        const scrollTop = focusedPane ? focusedPane.scrollRoot.scrollTop : window.scrollY;
-        const inset = Math.max(0, sectionStart.getBoundingClientRect().top + scrollTop - spacer.getBoundingClientRect().height - readerTop);
-        spacer.style.setProperty("--citation-entry-inset", `${inset}px`);
-      }
       const delta = anchor.getBoundingClientRect().top - statuteReadingLine();
+      const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
       (focusedPane?.scrollRoot || window).scrollBy({ top: delta, behavior: focusedPane || !animatedCitationJumpsEnabled() ? "auto" : "smooth" });
     }
 
@@ -11866,8 +11851,8 @@
         </div>`;
         return;
       }
-      els.detail.innerHTML = `<div class="citation-entry-space" aria-hidden="true"></div><div class="detail-content" data-statute-start>${statuteSectionAlternativesHtml(citationResult, section)}${statuteStatusWarning(section, selectedTransferTarget)}
-        <div class="detail-heading-row"><div>${legalUnitTriggerHtml("usc", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}<h2 class="detail-title">${linkifyStatutoryText(section.heading || `Section ${section.section}`, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, [], headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(officialTextFragment(section.url, citationTargetPath), "Open in House.gov")}</div></div>
+      els.detail.innerHTML = `<div class="detail-content" data-statute-start>${statuteSectionAlternativesHtml(citationResult, section)}${statuteStatusWarning(section, selectedTransferTarget)}
+        <div class="detail-heading-row legal-reader-heading"><div class="detail-heading-citation">${legalUnitTriggerHtml("usc", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}</div><div class="detail-heading-title"><h2 class="detail-title">${linkifyStatutoryText(section.heading || `Section ${section.section}`, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, [], headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(officialTextFragment(section.url, citationTargetPath), "Open in House.gov")}</div></div>
         ${section.preamble ? `<p class="statute-preamble">${linkifyStatutoryText(section.preamble, section.preambleReferences || [], 0, undefined, searchTarget?.kind === "preamble" ? searchTarget.match : null, section.preambleFootnoteReferences || [], preambleReferenceContext)}</p>` : ""}
         ${legalAugmentationSlotHtml("usc", 8, section.section, [], citationBase)}
         <div class="statute-body">${(section.body || []).map(node => renderStatutoryNode(node, citationTargetPath, [], 0, searchTarget, citationBase, section.id, baseDefinitionContext)).join("")}</div>
@@ -12384,7 +12369,7 @@
       state.hierarchyPageNodeId = null;
       if (section.id) activateNavigationLocation(normalizedStatuteHistoryLocation(section.id, citationResult?.path || [], "cfr"));
       const headingInsertionLocator = { recordPath: ["heading"], kind: "cfr-heading", field: "heading", start: 0, end: String(section.heading || cite).length };
-      els.detail.innerHTML = `<div class="citation-entry-space" aria-hidden="true"></div><div class="detail-content" data-cfr-start>${cfrSectionTitleAlternativesHtml(section)}<div class="detail-heading-row"><div>${legalUnitTriggerHtml("cfr", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}<h2 class="detail-title">${linkifyCfrText(section.heading || cite, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(cfrOfficialTextFragment(section, citationResult?.path || []), "Current eCFR")}</div></div>${legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, [], citationBase, "div", headingInsertionLocator)}<div class="cfr-body">${(section.blocks || []).map((block, index) => renderCfrBlock(block, [index], targetPath, searchTarget, section, citationBase, baseDefinitionContext)).join("")}</div><details class="regulation-source-details"><summary>Source details</summary><div class="source-banner">This regulation text is from the eCFR edition current through ${escapeHtml(currentThrough)}. Use “Current eCFR” to check for changes.${part?.authority ? `<br><strong>Authority:</strong> ${linkifyCfrText(part.authority, part.authorityReferences || [])}` : ""}${part?.source ? `<br><strong>Source:</strong> ${linkifyCfrText(part.source, part.sourceReferences || [])}` : ""}</div></details></div>`;
+      els.detail.innerHTML = `<div class="detail-content" data-cfr-start>${cfrSectionTitleAlternativesHtml(section)}<div class="detail-heading-row legal-reader-heading"><div class="detail-heading-citation">${legalUnitTriggerHtml("cfr", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}</div><div class="detail-heading-title"><h2 class="detail-title">${linkifyCfrText(section.heading || cite, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(cfrOfficialTextFragment(section, citationResult?.path || []), "Current eCFR")}</div></div>${legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, [], citationBase, "div", headingInsertionLocator)}<div class="cfr-body">${(section.blocks || []).map((block, index) => renderCfrBlock(block, [index], targetPath, searchTarget, section, citationBase, baseDefinitionContext)).join("")}</div><details class="regulation-source-details"><summary>Source details</summary><div class="source-banner">This regulation text is from the eCFR edition current through ${escapeHtml(currentThrough)}. Use “Current eCFR” to check for changes.${part?.authority ? `<br><strong>Authority:</strong> ${linkifyCfrText(part.authority, part.authorityReferences || [])}` : ""}${part?.source ? `<br><strong>Source:</strong> ${linkifyCfrText(part.source, part.sourceReferences || [])}` : ""}</div></details></div>`;
       renderInsertedReferenceGroups(els.detail);
       renderInlineLegalNotes();
       renderCfrNavigation(section, citationResult?.path || (searchTarget?.path ? componentTokens(searchTarget.path) || [] : []));
