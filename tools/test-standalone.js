@@ -2789,7 +2789,9 @@ async function main() {
   assert(fallbackSource.includes('.statutory-node > .statutory-line { position: relative; padding: 5px 26px 7px 7px; }'), "Statutory text lines no longer retain their compact note-control spacing after removing citation gutters.");
   assert(fallbackSource.includes('.detail-heading-row > div:first-child, .cfr-block { padding-inline-end: 26px; }'), "Legal headings and CFR blocks do not reserve a fixed compact note-control gutter.");
   assert(fallbackSource.includes('.detail-heading-row { display: grid; grid-template-columns: minmax(0, 1fr) auto;'), "Legal-reader official-source actions are not kept in the section-title row.");
-  assert(fallbackSource.includes('.detail-heading-row > :first-child { min-width: 0; width: 100%; }'), "Legal-reader titles cannot use all space remaining beside their official-source action.");
+  assert(fallbackSource.includes('.legal-reader-heading .detail-heading-title { grid-column: 1; grid-row: 2; min-width: 0; width: 100%; }'), "Legal-reader titles cannot use all space remaining beside their official-source action.");
+  assert(fallbackSource.includes('.legal-reader-heading .detail-heading-citation { grid-column: 1 / -1; grid-row: 1;') && fallbackSource.includes('.legal-reader-heading .detail-heading-actions { grid-column: 2; grid-row: 2; }'), "The citation number and official-source action are not assigned to separate heading rows.");
+  assert(!fallbackSource.includes("citation-entry-space") && !fallbackSource.includes("citation-entry-inset"), "Citation navigation still inserts artificial blank space above the section reader.");
   assert(fallbackSource.includes('.detail-heading-actions .button { min-height: 30px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }'), "A title-row official-source button can wrap into an unintended second line.");
   const stickyCardSource = fallbackSource.slice(fallbackSource.indexOf("function stickyNoteCardHtml"), fallbackSource.indexOf("function prepareInlineNotePage"));
   assert(stickyCardSource.includes("noteReferenceHtml(note)") && stickyCardSource.includes("data-sticky-note-editor"), "Sticky-note view/edit modes are not both rendered.");
@@ -3407,15 +3409,11 @@ async function main() {
     state: { focusedActivePaneId: null },
     focusedPaneById: () => null,
     document: { documentElement: { style: { setProperty: (name, value) => stickyOffsetProperties.set(name, value) } } },
-    window: { innerHeight: 900 },
-    Math,
-    Number
+    Math
   });
   syncStatuteNavigationOffset();
   assert.strictEqual(stickyOffsetProperties.get("--topbar-height"), "113.1953125px", "The sticky navigator offset rounds the top pane upward and exposes scrolling content in the resulting gap.");
   assert.strictEqual(stickyOffsetProperties.get("--statute-nav-height"), "46.25px", "The measured navigator height is not preserved for downstream sticky elements.");
-  assert.strictEqual(stickyOffsetProperties.get("--citation-entry-space"), "185.138671875px", "The reader does not reserve enough leading space to place a section-level citation on the top-quarter reading line.");
-  assert(fallbackSource.includes('spacer.style.setProperty("--citation-entry-inset", `${inset}px`)'), "Section-level citation spacing does not subtract the reader panel's existing top inset before alignment.");
   const navigationVisibilityCalls = [];
   const navigationVisibilityState = { view: "search", statuteNavigationKind: "usc", statuteNavigationSectionId: "8-1153", statuteNavigationPath: ["b"] };
   const navigationVisibilityElements = { statuteNavigator: { hidden: true }, statuteNavigatorInner: { innerHTML: "contents", classList: testClassList() } };
@@ -3903,7 +3901,7 @@ async function main() {
   assert(duplicateCfrAlternatives.includes('class="section-family-alternatives"') && duplicateCfrAlternatives.includes("Other titles:") && duplicateCfrAlternatives.includes('data-show-cfr-citation="45 CFR 50.1"'), "A CFR section shared across titles does not reuse the compact section-alternatives presentation with a clickable peer.");
   assert(!duplicateCfrAlternatives.includes('data-show-cfr-citation="22 CFR 50.1"') && cfrSectionTitleAlternativesHtml(cfr501Title45).includes('data-show-cfr-citation="22 CFR 50.1"'), "The CFR title-alternatives list includes the current section or cannot navigate back to the preferred title.");
   assert.strictEqual(cfrSectionTitleAlternativesHtml(full.corpus.cfr.sections.find(section => section.id === "8:214.2")), "", "A unique CFR section displays a spurious other-title list.");
-  const includedCfrReaderStart = fallbackSource.indexOf('els.detail.innerHTML = `<div class="citation-entry-space" aria-hidden="true"></div><div class="detail-content" data-cfr-start>', fallbackSource.indexOf("function renderCfr("));
+  const includedCfrReaderStart = fallbackSource.indexOf('els.detail.innerHTML = `<div class="detail-content" data-cfr-start>', fallbackSource.indexOf("function renderCfr("));
   assert(includedCfrReaderStart >= 0 && fallbackSource.indexOf("cfrSectionTitleAlternativesHtml(section)", includedCfrReaderStart) < fallbackSource.indexOf('<div class="detail-heading-row">', includedCfrReaderStart), "Same-numbered CFR title alternatives are not rendered at the top of the included regulation reader.");
   const parseFocusedCitationInputWithCorpus = extractedFunction(fallbackSource, "parseFocusedCitationInput", "commandCitationClassifier", {
     String,
