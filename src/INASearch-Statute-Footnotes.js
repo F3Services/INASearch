@@ -10,8 +10,8 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
   "sourceSha256": "69aaee9cc14dfd006daf6127ac0ffa5753af35f2e99cac56b4c84d7916e16fca",
   "extraction": {
     "footnotes": 118,
-    "references": 118,
-    "affectedFields": 116
+    "references": 151,
+    "affectedFields": 143
   },
   "sections": {
     "1101": [
@@ -1125,7 +1125,7 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         "sourceLocation": {
           "sourceKey": "1372:c/1/D",
           "field": "text",
-          "offset": 412
+          "offset": 411
         },
         "uslmReferences": []
       },
@@ -1361,7 +1361,7 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         "sourceLocation": {
           "sourceKey": "1612:a/2/F/ii",
           "field": "text",
-          "offset": 228
+          "offset": 226
         },
         "uslmReferences": []
       },
@@ -1589,6 +1589,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1101:a/15/K": {
+      "text": {
+        "flattenedText": "subject to subsections (d) and (p) 1 of section 1184 of this title, an alien who—",
+        "cleanText": "subject to subsections (d) and (p) of section 1184 of this title, an alien who—",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1101:a/15/K",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 34,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1101-fn002000",
+            "xmlId": "fn002000"
+          }
+        ]
+      }
+    },
     "1101:a/15/T/i/IV": {
       "text": {
         "flattenedText": "the alien 22 So in original. The words “the alien” probably should not appear. would suffer extreme hardship involving unusual and severe harm upon removal; and",
@@ -1627,6 +1649,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 26,
             "reconstructionPrefix": "",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1101:a/27/C/ii/III": {
+      "text": {
+        "flattenedText": "before September 30, 2015,3 in order to work for the organization (or for a bona fide organization which is affiliated with the religious denomination and is exempt from taxation as an organization described in section 501(c)(3) of title 26) at the request of the organization in a religious vocation or occupation; and",
+        "cleanText": "before September 30, 2015, in order to work for the organization (or for a bona fide organization which is affiliated with the religious denomination and is exempt from taxation as an organization described in section 501(c)(3) of title 26) at the request of the organization in a religious vocation or occupation; and",
+        "footnoteReferences": [
+          {
+            "number": "3",
+            "flattenedInsertion": "3",
+            "sourceLocation": {
+              "sourceKey": "1101:a/27/C/ii/III",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 26,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1101-fn002002",
+            "xmlId": "fn002002"
           }
         ]
       }
@@ -1673,6 +1717,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1101:a/43/G": {
+      "text": {
+        "flattenedText": "a theft offense (including receipt of stolen property) or burglary offense for which the term of imprisonment at 5 least one year;",
+        "cleanText": "a theft offense (including receipt of stolen property) or burglary offense for which the term of imprisonment at least one year;",
+        "footnoteReferences": [
+          {
+            "number": "5",
+            "flattenedInsertion": "5",
+            "sourceLocation": {
+              "sourceKey": "1101:a/43/G",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 112,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1101-fn002004",
+            "xmlId": "fn002004"
+          }
+        ]
+      }
+    },
     "1101:a/43/N": {
       "text": {
         "flattenedText": "an offense described in paragraph (1)(A) or (2) of section 1324(a) of this title (relating to alien smuggling), except in the case of a first offense for which the alien has affirmatively shown that the alien committed the offense for the purpose of assisting, abetting, or aiding only the alien’s spouse, child, or parent (and no other individual) to violate a provision of this chapter 66 So in original. Probably should be followed by a semicolon.",
@@ -1690,6 +1756,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 387,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1101:c/1": {
+      "text": {
+        "flattenedText": "The term “child” means an unmarried person under twenty-one years of age and includes a child legitimated under the law of the child’s residence or domicile, or under the law of the father’s residence or domicile, whether in the United States or elsewhere, and, except as otherwise provided in sections 1431 and 1432 1 of this title, a child adopted in the United States, if such legitimation or adoption takes place before the child reaches the age of 16 years (except to the extent that the child is described in subparagraph (E)(ii) or (F)(ii) of subsection (b)(1)), and the child is in the legal custody of the legitimating or adopting parent or parents at the time of such legitimation or adoption.",
+        "cleanText": "The term “child” means an unmarried person under twenty-one years of age and includes a child legitimated under the law of the child’s residence or domicile, or under the law of the father’s residence or domicile, whether in the United States or elsewhere, and, except as otherwise provided in sections 1431 and 1432 of this title, a child adopted in the United States, if such legitimation or adoption takes place before the child reaches the age of 16 years (except to the extent that the child is described in subparagraph (E)(ii) or (F)(ii) of subsection (b)(1)), and the child is in the legal custody of the legitimating or adopting parent or parents at the time of such legitimation or adoption.",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1101:c/1",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 316,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1101-fn002000",
+            "xmlId": "fn002000"
           }
         ]
       }
@@ -1799,6 +1887,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1154:j": {
+      "text": {
+        "flattenedText": "A petition under subsection (a)(1)(D) 4 for an individual whose application for adjustment of status pursuant to section 1255 of this title has been filed and remained unadjudicated for 180 days or more shall remain valid with respect to a new job if the individual changes jobs or employers if the new job is in the same or a similar occupational classification as the job for which the petition was filed.",
+        "cleanText": "A petition under subsection (a)(1)(D) for an individual whose application for adjustment of status pursuant to section 1255 of this title has been filed and remained unadjudicated for 180 days or more shall remain valid with respect to a new job if the individual changes jobs or employers if the new job is in the same or a similar occupational classification as the job for which the petition was filed.",
+        "footnoteReferences": [
+          {
+            "number": "4",
+            "flattenedInsertion": "4",
+            "sourceLocation": {
+              "sourceKey": "1154:j",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 37,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1154-fn002010",
+            "xmlId": "fn002010"
+          }
+        ]
+      }
+    },
     "1158:c/3": {
       "text": {
         "flattenedText": "An alien described in paragraph (2) is subject to any applicable grounds of inadmissibility or deportability under section 11 So in original. Probably should be “sections”. 1182(a) and 1227(a) of this title, and the alien’s removal or return shall be directed by the Attorney General in accordance with sections 1229a and 1231 of this title.",
@@ -1837,6 +1947,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 169,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1182:a/1/C/ii": {
+      "text": {
+        "flattenedText": "is described in subparagraph (F) or (G) of section 1101(b)(1) of this title; 1 and",
+        "cleanText": "is described in subparagraph (F) or (G) of section 1101(b)(1) of this title; and",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1182:a/1/C/ii",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 76,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1182-fn002012",
+            "xmlId": "fn002012"
           }
         ]
       }
@@ -1967,6 +2099,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1182:d/14": {
+      "text": {
+        "flattenedText": "The Secretary of Homeland Security shall determine whether a ground of inadmissibility exists with respect to a nonimmigrant described in section 1101(a)(15)(U) of this title. The Secretary of Homeland Security, in the Attorney General’s 6 discretion, may waive the application of subsection (a) (other than paragraph (3)(E)) in the case of a nonimmigrant described in section 1101(a)(15)(U) of this title, if the Secretary of Homeland Security considers it to be in the public or national interest to do so.",
+        "cleanText": "The Secretary of Homeland Security shall determine whether a ground of inadmissibility exists with respect to a nonimmigrant described in section 1101(a)(15)(U) of this title. The Secretary of Homeland Security, in the Attorney General’s discretion, may waive the application of subsection (a) (other than paragraph (3)(E)) in the case of a nonimmigrant described in section 1101(a)(15)(U) of this title, if the Secretary of Homeland Security considers it to be in the public or national interest to do so.",
+        "footnoteReferences": [
+          {
+            "number": "6",
+            "flattenedInsertion": "6",
+            "sourceLocation": {
+              "sourceKey": "1182:d/14",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 237,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1182-fn002017",
+            "xmlId": "fn002017"
+          }
+        ]
+      }
+    },
     "1182:n/1/E/ii": {
       "text": {
         "flattenedText": "An application described in this clause is an application filed on or after the date final regulations are first promulgated to carry out this subparagraph, and before 88 So in original. by an H–1B-dependent employer (as defined in paragraph (3)) or by an employer that has been found, on or after October 21, 1998, under paragraph (2)(C) or (5) to have committed a willful failure or misrepresentation during the 5-year period preceding the filing of the application. An application is not described in this clause if the only H–1B nonimmigrants sought in the application are exempt H–1B nonimmigrants.",
@@ -2009,6 +2163,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1182:n/2/G/iv/II": {
+      "text": {
+        "flattenedText": "was lawfully obtained by the Secretary of Labor in the course of lawfully conducting another Department of Labor investigation under this chapter of 9 any other Act.",
+        "cleanText": "was lawfully obtained by the Secretary of Labor in the course of lawfully conducting another Department of Labor investigation under this chapter of any other Act.",
+        "footnoteReferences": [
+          {
+            "number": "9",
+            "flattenedInsertion": "9",
+            "sourceLocation": {
+              "sourceKey": "1182:n/2/G/iv/II",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 148,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1182-fn002020",
+            "xmlId": "fn002020"
+          }
+        ]
+      }
+    },
     "1182:n/2/G/vii": {
       "text": {
         "flattenedText": "The Secretary of Labor shall provide notice to an employer with respect to whom there is reasonable cause to initiate an investigation described in clauses 1010 So in original. Probably should be “clause”. (i) or (ii), prior to the commencement of an investigation under such clauses, of the intent to conduct an investigation. The notice shall be provided in such a manner, and shall contain sufficient detail, to permit the employer to respond to the allegations before an investigation is commenced. The Secretary of Labor is not required to comply with this clause if the Secretary of Labor determines that to do so would interfere with an effort by the Secretary of Labor to secure compliance by the employer with the requirements of this subsection. There shall be no judicial review of a determination by the Secretary of Labor under this clause.",
@@ -2026,6 +2202,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 155,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1182:n/2/G/viii": {
+      "text": {
+        "flattenedText": "An investigation under clauses 10 (i) or (ii) may be conducted for a period of up to 60 days. If the Secretary of Labor determines after such an investigation that a reasonable basis exists to make a finding that the employer has committed a willful failure to meet a condition of paragraph (1)(A), (1)(B), (1)(C), (1)(E), (1)(F), or (1)(G)(i)(I), has engaged in a pattern or practice of failures to meet such a condition, or has committed a substantial failure to meet such a condition that affects multiple employees, the Secretary of Labor shall provide for notice of such determination to the interested parties and an opportunity for a hearing in accordance with section 556 of title 5 within 120 days after the date of the determination. If such a hearing is requested, the Secretary of Labor shall make a finding concerning the matter by not later than 120 days after the date of the hearing.",
+        "cleanText": "An investigation under clauses (i) or (ii) may be conducted for a period of up to 60 days. If the Secretary of Labor determines after such an investigation that a reasonable basis exists to make a finding that the employer has committed a willful failure to meet a condition of paragraph (1)(A), (1)(B), (1)(C), (1)(E), (1)(F), or (1)(G)(i)(I), has engaged in a pattern or practice of failures to meet such a condition, or has committed a substantial failure to meet such a condition that affects multiple employees, the Secretary of Labor shall provide for notice of such determination to the interested parties and an opportunity for a hearing in accordance with section 556 of title 5 within 120 days after the date of the determination. If such a hearing is requested, the Secretary of Labor shall make a finding concerning the matter by not later than 120 days after the date of the hearing.",
+        "footnoteReferences": [
+          {
+            "number": "10",
+            "flattenedInsertion": "10",
+            "sourceLocation": {
+              "sourceKey": "1182:n/2/G/viii",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 30,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1182-fn002021",
+            "xmlId": "fn002021"
           }
         ]
       }
@@ -2156,6 +2354,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1184:d/3/A": {
+      "text": {
+        "flattenedText": "The terms “domestic violence”, “sexual assault”, “child abuse and neglect”, “dating violence”, “elder abuse”, and “stalking” have the meaning given such terms in section 3 of the Violence Against Women and Department of Justice Reauthorization Act of 2005.1",
+        "cleanText": "The terms “domestic violence”, “sexual assault”, “child abuse and neglect”, “dating violence”, “elder abuse”, and “stalking” have the meaning given such terms in section 3 of the Violence Against Women and Department of Justice Reauthorization Act of 2005.",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1184:d/3/A",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 256,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1184-fn002026",
+            "xmlId": "fn002026"
+          }
+        ]
+      }
+    },
     "1184:r/1": {
       "text": {
         "flattenedText": "A visa shall not be issued under the provisions of section 1101(a)(15)(K)(ii) of this title until the consular officer has received a petition filed in the United States by the spouse of the applying alien and approved by the Attorney General. The petition shall be in such form and contain such information as the Attorney General shall, by regulation, prescribe. Such information shall include information on any criminal convictions of the petitioner for any specified crime described in paragraph (5)(B) and information on any permanent protection or restraining order issued against the petitioner related to any specified crime described in subsection 33 So in original. Probably should be “paragraph”. (5)(B)(i).",
@@ -2173,6 +2393,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 657,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1184:r/5/A": {
+      "text": {
+        "flattenedText": "The terms “domestic violence”, “sexual assault”, “child abuse and neglect”, “dating violence”, “elder abuse”, and “stalking” have the meaning given such terms in section 3 of the Violence Against Women and Department of Justice Reauthorization Act of 2005.1",
+        "cleanText": "The terms “domestic violence”, “sexual assault”, “child abuse and neglect”, “dating violence”, “elder abuse”, and “stalking” have the meaning given such terms in section 3 of the Violence Against Women and Department of Justice Reauthorization Act of 2005.",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1184:r/5/A",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 256,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1184-fn002026",
+            "xmlId": "fn002026"
           }
         ]
       }
@@ -2257,6 +2499,50 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 79,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1187:a/12/A/ii/II": {
+      "text": {
+        "flattenedText": "a country that is designated, at the time the alien applies for admission, by the Secretary of State under section 4605(j) 2 of title 50 (as continued in effect under the International Emergency Economic Powers Act (50 U.S.C. 1701 et seq.)), section 2780 of title 22, section 2371 of title 22, or any other provision of law, as a country, the government of which has repeatedly provided support of acts of international terrorism; or",
+        "cleanText": "a country that is designated, at the time the alien applies for admission, by the Secretary of State under section 4605(j) of title 50 (as continued in effect under the International Emergency Economic Powers Act (50 U.S.C. 1701 et seq.)), section 2780 of title 22, section 2371 of title 22, or any other provision of law, as a country, the government of which has repeatedly provided support of acts of international terrorism; or",
+        "footnoteReferences": [
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1187:a/12/A/ii/II",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 122,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1187-fn002032",
+            "xmlId": "fn002032"
+          }
+        ]
+      }
+    },
+    "1187:e/3/A": {
+      "text": {
+        "flattenedText": "For purposes of this section, a domestic corporation conducting operations under part 91 of title 14, Code of Federal Regulations 1 that owns or operates a noncommercial aircraft is a corporation that is organized under the laws of any of the States of the United States or the District of Columbia and is accredited by or a member of a national organization that sets business aviation standards. The Secretary of Homeland Security shall prescribe by regulation the provision of such information as the Secretary of Homeland Security deems necessary to identify the domestic corporation, its officers, employees, shareholders, its place of business, and its business activities.",
+        "cleanText": "For purposes of this section, a domestic corporation conducting operations under part 91 of title 14, Code of Federal Regulations that owns or operates a noncommercial aircraft is a corporation that is organized under the laws of any of the States of the United States or the District of Columbia and is accredited by or a member of a national organization that sets business aviation standards. The Secretary of Homeland Security shall prescribe by regulation the provision of such information as the Secretary of Homeland Security deems necessary to identify the domestic corporation, its officers, employees, shareholders, its place of business, and its business activities.",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1187:e/3/A",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 129,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1187-fn002031",
+            "xmlId": "fn002031"
           }
         ]
       }
@@ -2429,6 +2715,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1202:h/2/E/iii": {
+      "text": {
+        "flattenedText": "within that class of nonimmigrants enumerated in section 1101(a)(15)(C)(iii) 3 of this title (referred to as the “C–3 visa” category); or",
+        "cleanText": "within that class of nonimmigrants enumerated in section 1101(a)(15)(C)(iii) of this title (referred to as the “C–3 visa” category); or",
+        "footnoteReferences": [
+          {
+            "number": "3",
+            "flattenedInsertion": "3",
+            "sourceLocation": {
+              "sourceKey": "1202:h/2/E/iii",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 76,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1202-fn002040",
+            "xmlId": "fn002040"
+          }
+        ]
+      }
+    },
     "1226:c/1/C": {
       "text": {
         "flattenedText": "is deportable under section 1227(a)(2)(A)(i) of this title on the basis of an offense for which the alien has been sentence 11 So in original. Probably should be “sentenced”. to a term of imprisonment of at least 1 year,",
@@ -2513,6 +2821,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1228:c#2": {
+      "heading": {
+        "flattenedText": "1 Judicial removal",
+        "cleanText": "Judicial removal",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1228:c#2",
+              "field": "heading"
+            },
+            "reusedReference": true,
+            "offset": 0,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": " ",
+            "id": "usc-1228-fn002044",
+            "xmlId": "fn002044"
+          }
+        ]
+      }
+    },
     "1228:c/2/B": {
       "text": {
         "flattenedText": "Notwithstanding section 1252b 22 See References in Text note below. of this title, the United States Attorney, with the concurrence of the Commissioner, shall file at least 30 days prior to the date set for sentencing a charge containing factual allegations regarding the alienage of the defendant and identifying the crime or crimes which make the defendant deportable under section 1227(a)(2)(A) of this title.",
@@ -2530,6 +2860,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 29,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1228:c/3/B": {
+      "text": {
+        "flattenedText": "As soon as is practicable after entry of a judicial order of removal, the Commissioner shall provide the defendant with written notice of the order of removal, which shall designate the defendant’s country of choice for removal and any alternate country pursuant to section 1253(a) 2 of this title.",
+        "cleanText": "As soon as is practicable after entry of a judicial order of removal, the Commissioner shall provide the defendant with written notice of the order of removal, which shall designate the defendant’s country of choice for removal and any alternate country pursuant to section 1253(a) of this title.",
+        "footnoteReferences": [
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1228:c/3/B",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 281,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1228-fn002045",
+            "xmlId": "fn002045"
           }
         ]
       }
@@ -2572,6 +2924,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 123,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1229a:c/7/C/iv/I": {
+      "text": {
+        "flattenedText": "if the basis for the motion is to apply for relief under clause (iii) or (iv) of section 1154(a)(1)(A) of this title, clause (ii) or (iii) of section 1154(a)(1)(B) of this title,,1 section 1229b(b) of this title, or section 1254(a)(3) of this title (as in effect on March 31, 1997);",
+        "cleanText": "if the basis for the motion is to apply for relief under clause (iii) or (iv) of section 1154(a)(1)(A) of this title, clause (ii) or (iii) of section 1154(a)(1)(B) of this title,, section 1229b(b) of this title, or section 1254(a)(3) of this title (as in effect on March 31, 1997);",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1229a:c/7/C/iv/I",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 179,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1229a-fn002046",
+            "xmlId": "fn002046"
           }
         ]
       }
@@ -2711,6 +3085,72 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 70,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1232:d/4/A": {
+      "text": {
+        "flattenedText": "A child who has been granted special immigrant status under section 101(a)(27)(J) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(27)(J)) and who was in the custody of the Secretary of Health and Human Services at the time a dependency order was granted for such child, was receiving services pursuant to section 501(a) of the Refugee Education Assistance Act of 1980 (8 U.S.C. 1522 note) at the time such dependency order was granted, or has been granted status under section 101(a)(15)(U) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(15)(U)),,2 shall be eligible for placement and services under section 412(d) of the Immigration and Nationality Act (8 U.S.C. 1522(d)) until the earlier of—",
+        "cleanText": "A child who has been granted special immigrant status under section 101(a)(27)(J) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(27)(J)) and who was in the custody of the Secretary of Health and Human Services at the time a dependency order was granted for such child, was receiving services pursuant to section 501(a) of the Refugee Education Assistance Act of 1980 (8 U.S.C. 1522 note) at the time such dependency order was granted, or has been granted status under section 101(a)(15)(U) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(15)(U)),, shall be eligible for placement and services under section 412(d) of the Immigration and Nationality Act (8 U.S.C. 1522(d)) until the earlier of—",
+        "footnoteReferences": [
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1232:d/4/A",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 566,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1232-fn002054",
+            "xmlId": "fn002054"
+          }
+        ]
+      }
+    },
+    "1232:d/4/B": {
+      "text": {
+        "flattenedText": "Subject to the availability of appropriations, if State foster care funds are expended on behalf of a child who is not described in subparagraph (A) and has been granted special immigrant status under section 101(a)(27)(J) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(27)(J)), or status under section 101(a)(15)(U) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(15)(U)),,2 the Federal Government shall reimburse the State in which the child resides for such expenditures by the State.",
+        "cleanText": "Subject to the availability of appropriations, if State foster care funds are expended on behalf of a child who is not described in subparagraph (A) and has been granted special immigrant status under section 101(a)(27)(J) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(27)(J)), or status under section 101(a)(15)(U) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(15)(U)),, the Federal Government shall reimburse the State in which the child resides for such expenditures by the State.",
+        "footnoteReferences": [
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1232:d/4/B",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 393,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1232-fn002054",
+            "xmlId": "fn002054"
+          }
+        ]
+      }
+    },
+    "1232:e": {
+      "text": {
+        "flattenedText": "The Secretary of State, the Secretary of Homeland Security, the Secretary of Health and Human Services, and the Attorney General shall provide specialized training to all Federal personnel, and upon request, state 1 and local personnel, who have substantive contact with unaccompanied alien children. Such personnel shall be trained to work with unaccompanied alien children, including identifying children who are victims of severe forms of trafficking in persons, and children for whom asylum or special immigrant relief may be appropriate, including children described in subsection (a)(2).",
+        "cleanText": "The Secretary of State, the Secretary of Homeland Security, the Secretary of Health and Human Services, and the Attorney General shall provide specialized training to all Federal personnel, and upon request, state and local personnel, who have substantive contact with unaccompanied alien children. Such personnel shall be trained to work with unaccompanied alien children, including identifying children who are victims of severe forms of trafficking in persons, and children for whom asylum or special immigrant relief may be appropriate, including children described in subsection (a)(2).",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1232:e",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 213,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1232-fn002053",
+            "xmlId": "fn002053"
           }
         ]
       }
@@ -3030,6 +3470,56 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
         ]
       }
     },
+    "1324b:k/2": {
+      "text": {
+        "flattenedText": "The provisions of this section shall terminate 30 calendar days after receipt of the last report required to be transmitted under section 1324a(j) 2 of this title if— The provisions of subsections (m) and (n) 2 of section 1324a of this title shall apply to any joint resolution under subparagraph (B) in the same manner as they apply to a joint resolution under subsection (l) 2 of such section.",
+        "cleanText": "The provisions of this section shall terminate 30 calendar days after receipt of the last report required to be transmitted under section 1324a(j) of this title if— The provisions of subsections (m) and (n) of section 1324a of this title shall apply to any joint resolution under subparagraph (B) in the same manner as they apply to a joint resolution under subsection (l) of such section.",
+        "footnoteReferences": [
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1324b:k/2",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 146,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1324b-fn002069",
+            "xmlId": "fn002069"
+          },
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1324b:k/2",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 206,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1324b-fn002069",
+            "xmlId": "fn002069"
+          },
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1324b:k/2",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 372,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1324b-fn002069",
+            "xmlId": "fn002069"
+          }
+        ]
+      }
+    },
     "1326:b/3": {
       "text": {
         "flattenedText": "who has been excluded from the United States pursuant to section 1225(c) of this title because the alien was excludable under section 1182(a)(3)(B) of this title or who has been removed from the United States pursuant to the provisions of subchapter V, and who thereafter, without the permission of the Attorney General, enters the United States, or attempts to do so, shall be fined under title 18 and imprisoned for a period of 10 years, which sentence shall not run concurrently with any other sentence.11 So in original. The period probably should be a semicolon. or",
@@ -3319,8 +3809,22 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
     "1372:c/1/D": {
       "text": {
         "flattenedText": "in the case of a student at an approved institution of higher education, or other approved educational institution,,1 any disciplinary action taken by the institution against the alien as a result of the alien’s being convicted of a crime or, in the case of a participant in a designated exchange visitor program, any change in the alien’s participation as a result of the alien’s being convicted of a crime; and 22 So in original. The word “and” probably should not appear.",
-        "cleanText": "in the case of a student at an approved institution of higher education, or other approved educational institution,,1 any disciplinary action taken by the institution against the alien as a result of the alien’s being convicted of a crime or, in the case of a participant in a designated exchange visitor program, any change in the alien’s participation as a result of the alien’s being convicted of a crime; and",
+        "cleanText": "in the case of a student at an approved institution of higher education, or other approved educational institution,, any disciplinary action taken by the institution against the alien as a result of the alien’s being convicted of a crime or, in the case of a participant in a designated exchange visitor program, any change in the alien’s participation as a result of the alien’s being convicted of a crime; and",
         "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1372:c/1/D",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 116,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1372-fn002083",
+            "xmlId": "fn002083"
+          },
           {
             "id": "usc-1372-fn002084",
             "xmlId": "fn002084",
@@ -3330,9 +3834,31 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
               "sourceKey": "1372:c/1/D",
               "field": "text"
             },
-            "offset": 412,
+            "offset": 411,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1372:d/1/A": {
+      "text": {
+        "flattenedText": "in the case of an approved institution of higher education, or other approved educational institution,,1 the continued approval of the institution under subparagraph (F) or (M) of section 1101(a)(15) of this title; and",
+        "cleanText": "in the case of an approved institution of higher education, or other approved educational institution,, the continued approval of the institution under subparagraph (F) or (M) of section 1101(a)(15) of this title; and",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1372:d/1/A",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 103,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1372-fn002083",
+            "xmlId": "fn002083"
           }
         ]
       }
@@ -3396,6 +3922,50 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 86,
             "reconstructionPrefix": "",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1375a:f/1/A": {
+      "text": {
+        "flattenedText": "on the impact of this section and section 832 2 on the K nonimmigrant visa process, including specifically—",
+        "cleanText": "on the impact of this section and section 832 on the K nonimmigrant visa process, including specifically—",
+        "footnoteReferences": [
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1375a:f/1/A",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 45,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1375a-fn002087",
+            "xmlId": "fn002087"
+          }
+        ]
+      }
+    },
+    "1375a:f/1/C": {
+      "text": {
+        "flattenedText": "that assesses the accuracy and completeness of information gathered under section 832 2 and this section from clients and petitioners by international marriage brokers, the Department of State, or the Department of Homeland Security;",
+        "cleanText": "that assesses the accuracy and completeness of information gathered under section 832 and this section from clients and petitioners by international marriage brokers, the Department of State, or the Department of Homeland Security;",
+        "footnoteReferences": [
+          {
+            "number": "2",
+            "flattenedInsertion": "2",
+            "sourceLocation": {
+              "sourceKey": "1375a:f/1/C",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 85,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1375a-fn002087",
+            "xmlId": "fn002087"
           }
         ]
       }
@@ -3697,8 +4267,22 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
     "1612:a/2/F/ii": {
       "text": {
         "flattenedText": "in the case of the specified Federal program described in paragraph (3)(B), is receiving benefits or assistance for blindness or disability (within the meaning of section 3(j) of the Food Stamp Act of 1977 1 (7 U.S.C. 2012(r))).22 So in original. Probably should be “2012(j))).”.",
-        "cleanText": "in the case of the specified Federal program described in paragraph (3)(B), is receiving benefits or assistance for blindness or disability (within the meaning of section 3(j) of the Food Stamp Act of 1977 1 (7 U.S.C. 2012(r))).",
+        "cleanText": "in the case of the specified Federal program described in paragraph (3)(B), is receiving benefits or assistance for blindness or disability (within the meaning of section 3(j) of the Food Stamp Act of 1977 (7 U.S.C. 2012(r))).",
         "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1612:a/2/F/ii",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 205,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1612-fn002101",
+            "xmlId": "fn002101"
+          },
           {
             "id": "usc-1612-fn002102",
             "xmlId": "fn002102",
@@ -3708,9 +4292,31 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
               "sourceKey": "1612:a/2/F/ii",
               "field": "text"
             },
-            "offset": 228,
+            "offset": 226,
             "reconstructionPrefix": "",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1612:a/3/B": {
+      "text": {
+        "flattenedText": "The food stamp program as defined in section 3(l) of the Food Stamp Act of 1977.1",
+        "cleanText": "The food stamp program as defined in section 3(l) of the Food Stamp Act of 1977.",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1612:a/3/B",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 80,
+            "reconstructionPrefix": "",
+            "reconstructionSuffix": "",
+            "id": "usc-1612-fn002101",
+            "xmlId": "fn002101"
           }
         ]
       }
@@ -3718,7 +4324,7 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
     "1612:b/2/A/i/V": {
       "text": {
         "flattenedText": "an alien 33 So in original. Probably should be “alien is”. admitted to the United States as an Amerasian immigrant as described in subsection (a)(2)(A)(i)(V) 1 until 5 years after the date of such alien’s entry into the United States.",
-        "cleanText": "an alien admitted to the United States as an Amerasian immigrant as described in subsection (a)(2)(A)(i)(V) 1 until 5 years after the date of such alien’s entry into the United States.",
+        "cleanText": "an alien admitted to the United States as an Amerasian immigrant as described in subsection (a)(2)(A)(i)(V) until 5 years after the date of such alien’s entry into the United States.",
         "footnoteReferences": [
           {
             "id": "usc-1612-fn002103",
@@ -3732,6 +4338,56 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 8,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          },
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1612:b/2/A/i/V",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 107,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1612-fn002101",
+            "xmlId": "fn002101"
+          }
+        ]
+      }
+    },
+    "1612:b/2/A/ii/V": {
+      "text": {
+        "flattenedText": "an alien 3 admitted to the United States as an Amerasian immigrant as described in subsection (a)(2)(A)(i)(V) 1 until 5 years after the date of such alien’s entry into the United States.",
+        "cleanText": "an alien admitted to the United States as an Amerasian immigrant as described in subsection (a)(2)(A)(i)(V) until 5 years after the date of such alien’s entry into the United States.",
+        "footnoteReferences": [
+          {
+            "number": "3",
+            "flattenedInsertion": "3",
+            "sourceLocation": {
+              "sourceKey": "1612:b/2/A/ii/V",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 8,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1612-fn002103",
+            "xmlId": "fn002103"
+          },
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1612:b/2/A/ii/V",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 107,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1612-fn002101",
+            "xmlId": "fn002101"
           }
         ]
       }
@@ -3774,6 +4430,28 @@ window.INA_SEARCH_STATUTE_FOOTNOTES = {
             "offset": 178,
             "reconstructionPrefix": " ",
             "reconstructionSuffix": ""
+          }
+        ]
+      }
+    },
+    "1613:c/2/L": {
+      "text": {
+        "flattenedText": "Assistance or benefits provided to individuals under the age of 18 under the Food Stamp Act of 1977 1 (7 U.S.C. 2011 et seq.).",
+        "cleanText": "Assistance or benefits provided to individuals under the age of 18 under the Food Stamp Act of 1977 (7 U.S.C. 2011 et seq.).",
+        "footnoteReferences": [
+          {
+            "number": "1",
+            "flattenedInsertion": "1",
+            "sourceLocation": {
+              "sourceKey": "1613:c/2/L",
+              "field": "text"
+            },
+            "reusedReference": true,
+            "offset": 99,
+            "reconstructionPrefix": " ",
+            "reconstructionSuffix": "",
+            "id": "usc-1613-fn002104",
+            "xmlId": "fn002104"
           }
         ]
       }

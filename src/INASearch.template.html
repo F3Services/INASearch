@@ -633,22 +633,6 @@
     .citation-equivalent.citation-labels-collapsed .citation-equivalent-short { display: inline; }
     .citation-equivalent.cfr-only .citation-equivalent-arrow, .citation-equivalent.cfr-only .citation-equivalent-side-usc { display: none; }
     .citation-equivalent.cfr-only .citation-equivalent-side-ina { color: #a8dcff; background: #123b59; }
-    .search-field-shell.citation-crosswalk-below { padding-bottom: 36px; }
-    .search-field-shell.citation-crosswalk-below .citation-equivalent {
-      top: auto;
-      right: 44px;
-      bottom: 0;
-      left: 45px !important;
-      translate: 0;
-      justify-content: center;
-      width: auto;
-      max-width: none;
-    }
-    .search-field-shell.citation-crosswalk-below .citation-equivalent-side { flex: 1 1 0; }
-    .search-field-shell.citation-crosswalk-below .search-icon,
-    .search-field-shell.citation-crosswalk-below .kbd,
-    .search-field-shell.citation-crosswalk-below .implied-usc-title { top: 21px; }
-    .search-field-shell.citation-crosswalk-below .search-input-mirror { bottom: auto; height: 42px; }
     .implied-usc-title {
       position: absolute;
       z-index: 4;
@@ -1193,6 +1177,13 @@
     .statute-citation-link.citation-display-ina:focus-visible { outline-color: var(--warning); }
     .legal-reference-link.reference-unavailable { text-decoration-style: dotted; }
     .legal-reference-link.reference-official-only { text-decoration-style: dashed; }
+    .statute-citation-link.reference-repealed { color: #b42318; background: color-mix(in srgb, #b42318 8%, transparent); text-decoration-color: currentColor; }
+    .statute-citation-link.reference-repealed:hover { color: #7a1710; background: color-mix(in srgb, #b42318 14%, transparent); }
+    .statute-citation-link.reference-repealed:focus-visible { outline-color: #b42318; }
+    .statute-citation-link.reference-transferred { color: var(--warning); text-decoration: none; }
+    .statute-citation-link.reference-transferred:hover { color: var(--navy); background: var(--warning-soft); }
+    .reference-transferred-original { text-decoration-line: underline line-through; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    .reference-transferred-target { margin-inline-start: .28em; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
     .legal-reference-link::after { content: none; }
     .legal-reference-link.reference-unavailable::after { content: " ◌"; font-size: .72em; text-decoration: none; }
     .legal-reference-popover {
@@ -3598,7 +3589,10 @@
         const previousChar = input[start - 1] || "";
         const referenceContinuation = referenceChainEnd >= 0 && referenceConnector.test(input.slice(referenceChainEnd, start));
         const referenceNumberPrefix = /\b(?:section|sections|subsection|subsections|paragraph|paragraphs|subparagraph|subparagraphs|clause|clauses|subclause|subclauses|item|items)\s+\d+[A-Za-z-]*\s*$/i.test(prefix) || /\b\d{3,}[A-Za-z-]*\s*$/.test(prefix);
-        const structuralSibling = Boolean(currentLabel) && isImmediateSibling(currentLabel, token) && /\b(?:and|or)\s*$/i.test(prefix) && /^\s+if\b/i.test(input.slice(end));
+        const priorStructuralMarker = candidates.at(-1);
+        const structuralSibling = (Boolean(currentLabel) && isImmediateSibling(currentLabel, token) && /\b(?:and|or)\s*$/i.test(prefix) && /^\s+if\b/i.test(input.slice(end))) ||
+          (Boolean(priorStructuralMarker) && isImmediateSibling(priorStructuralMarker.token, token) &&
+            /\b(?:and|or)\s*$/i.test(prefix) && /^\s+(?:a|an|the|if|when|where|who|which|that|to|by|for|is|are|shall|may|has|have)\b/i.test(input.slice(end)));
         const isReference = !structuralSibling && (referenceContinuation || referenceWords.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(previousChar));
         if (isReference) { referenceChainEnd = end; continue; }
         candidates.push({ start, end, address: match[0], token, prefixText: "", nestedAfterPrevious: false });
@@ -9076,6 +9070,16 @@
       return `<${tag} class="legal-augmentation-slot" data-legal-augmentation-slot data-insertion-host="${escapeHtml(JSON.stringify(identity.host))}" data-insertion-host-key="${escapeHtml(identity.hostKey)}" data-insertion-group-id="${escapeHtml(identity.id + locatorSuffix)}" data-insertion-source-label="${escapeHtml(sourceLabel)}"${locator ? ` data-insertion-source-locator="${escapeHtml(locatorKey)}"` : ""}></${tag}>`;
     }
 
+    function legalReferenceDisposition(reference) {
+      const family = String(reference?.family || reference?.targetKind || "").toLowerCase();
+      const title = String(reference?.targetTitle || (family === "ina" ? "8" : ""));
+      if (!['usc', 'ina'].includes(family) || title !== "8" || !reference?.targetSection) return { status: "current", section: null, transferTarget: null };
+      const section = sectionMap.get(normCitationPart(reference.targetSection)) || null;
+      const status = statuteStatus(section);
+      const transferTarget = status === "transferred" ? transferTargetForSource(section, reference.targetSection) : null;
+      return { status, section, transferTarget };
+    }
+
     function legalReferenceHtml(reference, contents, sourceContext = null) {
       const resolution = reference?.resolution || "unresolved";
       if (resolution === "unresolved") return contents ?? escapeHtml(reference?.text || "");
@@ -9085,15 +9089,26 @@
       const displayedContents = inaCitation ? escapeHtml(inaCitation) : contents;
       const convertedToIna = Boolean(inaCitation && ["usc", "ina"].includes(reference.family));
       const highlightInaCitation = convertedToIna && profile?.preferences?.highlightInaCitationLinks === true;
-      const classes = `statute-citation-link legal-reference-link${highlightInaCitation ? " citation-display-ina" : ""}${resolution === "unresolved" ? " reference-unavailable" : resolution === "official-source-only" ? " reference-official-only" : ""}`;
+      const disposition = legalReferenceDisposition(reference);
+      const classes = `statute-citation-link legal-reference-link${highlightInaCitation ? " citation-display-ina" : ""}${resolution === "unresolved" ? " reference-unavailable" : resolution === "official-source-only" ? " reference-official-only" : ""}${disposition.status === "repealed" ? " reference-repealed" : disposition.status === "transferred" ? " reference-transferred" : ""}`;
       const localUsc = resolution === "local" && (reference.targetKind === "usc" || reference.family === "usc" || reference.family === "ina");
       const localCfr = resolution === "local" && (reference.targetKind === "cfr" || reference.family === "cfr");
       const fragment = localUsc ? `usc-${normCitationPart(reference.targetSection)}-${(reference.targetPath || []).map(normCitationPart).join("-")}`.replace(/-$/, "") : "";
-      const href = localUsc ? `#${fragment}` : localCfr ? "#" : reference.officialUrl || "#";
+      const transferUrl = disposition.transferTarget ? transferTargetUrl(disposition.transferTarget) : "";
+      const href = transferUrl || (localUsc ? `#${fragment}` : localCfr ? "#" : reference.officialUrl || "#");
       const preferredInaNavigation = profile?.preferences?.statutoryLinkCitationSystem === "ina" ? crosswalk?.ina || "" : "";
-      const navigation = localUsc ? ` data-show-citation="${escapeHtml(preferredInaNavigation || `${reference.targetTitle || 8} U.S.C. ${reference.targetSection}${canonicalPath(reference.targetPath || [])}`)}"` : localCfr ? ` data-show-cfr-citation="${escapeHtml(`${reference.targetTitle} CFR ${reference.targetSection}${canonicalPath(reference.targetPath || [])}`)}"` : "";
+      const navigation = localUsc && disposition.status === "current" ? ` data-show-citation="${escapeHtml(preferredInaNavigation || `${reference.targetTitle || 8} U.S.C. ${reference.targetSection}${canonicalPath(reference.targetPath || [])}`)}"` : localCfr ? ` data-show-cfr-citation="${escapeHtml(`${reference.targetTitle} CFR ${reference.targetSection}${canonicalPath(reference.targetPath || [])}`)}"` : "";
       const insertionRecord = legalReferenceInsertionRecord(reference, sourceContext);
-      return `<a class="${classes}" href="${escapeHtml(href)}" data-legal-reference data-reference-family="${escapeHtml(reference.family || "unknown")}" data-reference-resolution="${escapeHtml(resolution)}" data-reference-title="${escapeHtml(reference.targetTitle || "")}" data-reference-section="${escapeHtml(reference.targetSection || "")}" data-reference-path="${escapeHtml(JSON.stringify(reference.targetPath || []))}" data-reference-url="${escapeHtml(reference.officialUrl || "")}" data-reference-citation="${escapeHtml(citation)}" data-reference-source-text="${escapeHtml(reference.text || "")}"${crosswalk ? ` data-reference-ina-citation="${escapeHtml(crosswalk.ina)}" data-reference-usc-citation="${escapeHtml(crosswalk.usc)}"` : ""}${navigation}${legalReferenceSourceAttributes(insertionRecord)} title="${escapeHtml(resolution === "local" ? `Preview ${citation} and its reference actions.` : resolution === "official-source-only" ? `Open information for ${citation}` : `Target unavailable locally for ${citation}`)}">${displayedContents}</a>`;
+      const transferCitation = disposition.transferTarget ? transferTargetLabel(disposition.transferTarget) : "";
+      const renderedContents = disposition.status === "transferred"
+        ? `<span class="reference-transferred-original">${displayedContents}</span><span class="reference-transferred-target" aria-label="Transferred to ${escapeHtml(transferCitation)}">→ ${escapeHtml(transferCitation)}</span>`
+        : displayedContents;
+      const linkTitle = disposition.status === "repealed"
+        ? `${citation} has been repealed. Open its status and official source.`
+        : disposition.status === "transferred"
+          ? `${citation} was transferred${transferCitation ? ` to ${transferCitation}` : ""}. Open its status.`
+          : resolution === "local" ? `Preview ${citation} and its reference actions.` : resolution === "official-source-only" ? `Open information for ${citation}` : `Target unavailable locally for ${citation}`;
+      return `<a class="${classes}" href="${escapeHtml(href)}" data-legal-reference data-reference-family="${escapeHtml(reference.family || "unknown")}" data-reference-resolution="${escapeHtml(resolution)}" data-reference-status="${escapeHtml(disposition.status)}" data-reference-title="${escapeHtml(reference.targetTitle || "")}" data-reference-section="${escapeHtml(reference.targetSection || "")}" data-reference-path="${escapeHtml(JSON.stringify(reference.targetPath || []))}" data-reference-url="${escapeHtml(transferUrl || reference.officialUrl || "")}" data-reference-citation="${escapeHtml(citation)}" data-reference-source-text="${escapeHtml(reference.text || "")}"${transferCitation ? ` data-reference-transfer-citation="${escapeHtml(transferCitation)}"` : ""}${crosswalk ? ` data-reference-ina-citation="${escapeHtml(crosswalk.ina)}" data-reference-usc-citation="${escapeHtml(crosswalk.usc)}"` : ""}${navigation}${legalReferenceSourceAttributes(insertionRecord)} title="${escapeHtml(linkTitle)}">${renderedContents}</a>`;
     }
 
     function legalReferenceContextForElement(trigger) {
@@ -9106,6 +9121,8 @@
       const sectionNumber = trigger.dataset.referenceSection || "";
       const citation = trigger.dataset.referenceCitation || trigger.textContent?.trim() || "Legal reference";
       const sourceText = trigger.dataset.referenceSourceText || trigger.textContent?.trim() || citation;
+      const referenceStatus = trigger.dataset.referenceStatus || "current";
+      const transferCitation = trigger.dataset.referenceTransferCitation || "";
       let insertionRecord = null;
       if (trigger.dataset.referenceInsertionKey) {
         try {
@@ -9121,8 +9138,9 @@
       let previewHtml = "";
       let displayText = "";
       let heading = citation;
-      if (resolution === "local" && (family === "usc" || family === "ina")) {
-        const section = sectionMap.get(normCitationPart(sectionNumber));
+      const statuteSection = (family === "usc" || family === "ina") && (!title || title === "8") ? sectionMap.get(normCitationPart(sectionNumber)) : null;
+      if (referenceStatus === "current" && resolution === "local" && (family === "usc" || family === "ina")) {
+        const section = statuteSection;
         text = statuteUnitText(section, path);
         previewHtml = statuteReferencePreviewHtml(section, path);
         heading = section?.heading || `Section ${section?.section || sectionNumber}`;
@@ -9133,8 +9151,10 @@
         displayText = contentStart >= 0 ? text.slice(contentStart + 2) : text;
         heading = section?.heading || `§ ${sectionNumber}`;
       }
+      if (referenceStatus !== "current" && statuteSection?.heading) heading = statuteSection.heading;
       return {
         trigger, family, resolution, title, sectionNumber, path, citation, sourceText, text, previewHtml, displayText, heading, insertionRecord,
+        referenceStatus, transferCitation,
         inaCitation: trigger.dataset.referenceInaCitation || "",
         uscCitation: trigger.dataset.referenceUscCitation || "",
         url: trigger.dataset.referenceUrl || ""
@@ -9863,7 +9883,7 @@
           delete copyElement.dataset.copySystem;
         }
       }
-      const hasLocalText = context.resolution === "local" && Boolean(context.text);
+      const hasLocalText = context.referenceStatus === "current" && context.resolution === "local" && Boolean(context.text);
       const copyNoun = context.family === "cfr" ? "regulation" : "statute";
       els.legalReferencePopoverTitle.textContent = context.heading || context.citation;
       const copyLabel = `Copy complete ${copyNoun} text`;
@@ -9874,7 +9894,15 @@
       els.copyLegalReferenceTextButton.disabled = !hasLocalText;
       els.openLegalReferenceFocusedButton.disabled = !hasLocalText;
       updateLegalReferenceInsertButton(state.legalReferenceContext);
-      if (context.previewHtml) els.legalReferencePopoverContent.innerHTML = context.previewHtml;
+      const statusMessage = context.referenceStatus === "repealed"
+        ? "This referenced provision has been repealed. It is retained only as historical source material; the official House source confirms the repeal."
+        : context.referenceStatus === "transferred"
+          ? `This provision was transferred${context.transferCitation ? ` to ${context.transferCitation}` : " to the destination identified by the House codification note"}. The struck-through citation is the original location; the citation after the arrow is the current destination.`
+          : context.referenceStatus === "omitted"
+            ? "This provision has been omitted from the current Code. The official House source contains its disposition information."
+            : "";
+      if (statusMessage) els.legalReferencePopoverContent.innerHTML = `<p class="legal-reference-popover-message">${escapeHtml(statusMessage)}</p>`;
+      else if (context.previewHtml) els.legalReferencePopoverContent.innerHTML = context.previewHtml;
       else if (context.text) els.legalReferencePopoverContent.innerHTML = `<pre>${escapeHtml(context.displayText || context.text)}</pre>`;
       else els.legalReferencePopoverContent.innerHTML = `<p class="legal-reference-popover-message">${escapeHtml(context.resolution === "unresolved" ? "INASearch recognized this reference but could not determine one exact target from the source wording. No target was inferred." : "This authority is not included in the offline corpus. INASearch has not generated or substituted any legal text for it.")}</p>`;
       els.legalReferencePopover.hidden = false;
@@ -10264,26 +10292,25 @@
     function positionCitationEquivalent() {
       const shell = els.search.closest(".search-field-shell");
       if (!shell) return;
+      shell.classList.remove("citation-crosswalk-below");
       if (els.citationEquivalent.hidden) {
-        shell.classList.remove("citation-crosswalk-below");
         return;
       }
       els.citationEquivalent.classList.remove("citation-labels-collapsed");
-      if (shell.clientWidth < 500 || els.citationEquivalent.scrollWidth > Math.max(150, shell.clientWidth - 90)) els.citationEquivalent.classList.add("citation-labels-collapsed");
-      shell.classList.remove("citation-crosswalk-below");
       els.citationEquivalent.style.left = "";
       if (!searchTextMeasureContext) searchTextMeasureContext = document.createElement("canvas").getContext("2d");
       const style = getComputedStyle(els.search);
       searchTextMeasureContext.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
       const textWidth = searchTextMeasureContext.measureText(els.search.value).width;
       const preferred = parseFloat(style.paddingLeft || "0") + textWidth + 10 - els.search.scrollLeft;
-      const availableInline = shell.clientWidth - preferred - 46;
-      if (els.citationEquivalent.offsetWidth > Math.max(180, availableInline)) {
-        shell.classList.add("citation-crosswalk-below");
-        return;
+      const rightInset = 46;
+      const leftInset = 45;
+      const fullWidth = els.citationEquivalent.offsetWidth;
+      if (shell.clientWidth < 500 || fullWidth > shell.clientWidth - leftInset - rightInset || preferred + fullWidth > shell.clientWidth - rightInset) {
+        els.citationEquivalent.classList.add("citation-labels-collapsed");
       }
       const maximum = shell.clientWidth - els.citationEquivalent.offsetWidth - 46;
-      els.citationEquivalent.style.left = `${Math.round(Math.max(45, Math.min(preferred, maximum)))}px`;
+      els.citationEquivalent.style.left = `${Math.round(Math.max(leftInset, Math.min(preferred, maximum)))}px`;
     }
 
     function renderImpliedUscTitle(result) {
@@ -11298,7 +11325,6 @@
 
     let legalCitationHoverHost = null;
     const LEGAL_CITATION_INTERACTIVE_SELECTOR = "a, button, input, textarea, select, summary, [contenteditable], [data-scoped-definition-ids], [data-definition-reference]";
-    const LEGAL_CITATION_INTERACTIVE_DEAD_ZONE = 8;
 
     function legalCitationSelectionForElement(element) {
       return element?.closest?.("[data-legal-citation-select]") || null;
@@ -11319,17 +11345,7 @@
     }
 
     function clickIntersectsCitationInteractiveArea(event, selection) {
-      if (!event || !selection) return false;
-      if (event.target?.closest?.(LEGAL_CITATION_INTERACTIVE_SELECTOR)) return true;
-      const x = Number(event.clientX), y = Number(event.clientY);
-      if (!Number.isFinite(x) || !Number.isFinite(y)) return false;
-      return [...selection.querySelectorAll(LEGAL_CITATION_INTERACTIVE_SELECTOR)].some(element => {
-        const rect = element.getBoundingClientRect();
-        return x >= rect.left - LEGAL_CITATION_INTERACTIVE_DEAD_ZONE
-          && x <= rect.right + LEGAL_CITATION_INTERACTIVE_DEAD_ZONE
-          && y >= rect.top - LEGAL_CITATION_INTERACTIVE_DEAD_ZONE
-          && y <= rect.bottom + LEGAL_CITATION_INTERACTIVE_DEAD_ZONE;
-      });
+      return Boolean(event && selection && event.target?.closest?.(LEGAL_CITATION_INTERACTIVE_SELECTOR));
     }
 
     function selectLegalCitationLocation(kind, sectionId, path = []) {

@@ -34230,9 +34230,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1101-a-15-K-text-40-1",
-          "start": 40,
-          "end": 66,
+          "id": "house-1101-a-15-K-text-38-1",
+          "start": 38,
+          "end": 64,
           "text": "section 1184 of this title",
           "family": "usc",
           "resolution": "local",
@@ -34830,9 +34830,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1101-a-27-C-ii-III-text-211-1",
-          "start": 211,
-          "end": 240,
+          "id": "house-1101-a-27-C-ii-III-text-210-1",
+          "start": 210,
+          "end": 239,
           "text": "section 501(c)(3) of title 26",
           "family": "usc",
           "resolution": "official-source-only",
@@ -88188,9 +88188,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1154-j-text-113-1",
-          "start": 113,
-          "end": 139,
+          "id": "house-1154-j-text-111-1",
+          "start": 111,
+          "end": 137,
           "text": "section 1255 of this title",
           "family": "usc",
           "resolution": "local",
@@ -106146,9 +106146,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
           "ruleId": "house-uslm-ref"
         },
         {
-          "id": "house-1182-d-14-text-369-2",
-          "start": 369,
-          "end": 405,
+          "id": "house-1182-d-14-text-367-2",
+          "start": 367,
+          "end": 403,
           "text": "section 1101(a)(15)(U) of this title",
           "family": "usc",
           "resolution": "local",
@@ -107136,9 +107136,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1182-n-2-G-viii-text-668-1",
-          "start": 668,
-          "end": 690,
+          "id": "house-1182-n-2-G-viii-text-665-1",
+          "start": 665,
+          "end": 687,
           "text": "section 556 of title 5",
           "family": "usc",
           "resolution": "official-source-only",
@@ -151267,9 +151267,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1187-a-12-A-ii-II-text-216-1",
-          "start": 216,
-          "end": 230,
+          "id": "house-1187-a-12-A-ii-II-text-214-1",
+          "start": 214,
+          "end": 228,
           "text": "50 U.S.C. 1701",
           "family": "usc",
           "resolution": "official-source-only",
@@ -151284,9 +151284,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
           "ruleId": "house-uslm-ref"
         },
         {
-          "id": "house-1187-a-12-A-ii-II-text-242-2",
-          "start": 242,
-          "end": 266,
+          "id": "house-1187-a-12-A-ii-II-text-240-2",
+          "start": 240,
+          "end": 264,
           "text": "section 2780 of title 22",
           "family": "usc",
           "resolution": "official-source-only",
@@ -151301,9 +151301,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
           "ruleId": "house-uslm-ref"
         },
         {
-          "id": "house-1187-a-12-A-ii-II-text-268-3",
-          "start": 268,
-          "end": 292,
+          "id": "house-1187-a-12-A-ii-II-text-266-3",
+          "start": 266,
+          "end": 290,
           "text": "section 2371 of title 22",
           "family": "usc",
           "resolution": "official-source-only",
@@ -181800,9 +181800,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
           "ruleId": "house-uslm-ref"
         },
         {
-          "id": "house-1229a-c-7-C-iv-I-text-181-3",
-          "start": 181,
-          "end": 211,
+          "id": "house-1229a-c-7-C-iv-I-text-180-3",
+          "start": 180,
+          "end": 210,
           "text": "section 1229b(b) of this title",
           "family": "usc",
           "resolution": "local",
@@ -181819,9 +181819,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
           "ruleId": "house-uslm-ref"
         },
         {
-          "id": "house-1229a-c-7-C-iv-I-text-216-4",
-          "start": 216,
-          "end": 248,
+          "id": "house-1229a-c-7-C-iv-I-text-215-4",
+          "start": 215,
+          "end": 247,
           "text": "section 1254(a)(3) of this title",
           "family": "usc",
           "resolution": "official-source-only",
@@ -188488,9 +188488,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
           "ruleId": "house-uslm-ref"
         },
         {
-          "id": "house-1232-d-4-A-text-674-4",
-          "start": 674,
-          "end": 690,
+          "id": "house-1232-d-4-A-text-673-4",
+          "start": 673,
+          "end": 689,
           "text": "8 U.S.C. 1522(d)",
           "family": "usc",
           "resolution": "local",
@@ -234729,9 +234729,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1324b-k-2-text-214-1",
-          "start": 214,
-          "end": 241,
+          "id": "house-1324b-k-2-text-210-1",
+          "start": 210,
+          "end": 237,
           "text": "section 1324a of this title",
           "family": "usc",
           "resolution": "local",
@@ -259789,9 +259789,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1372-d-1-A-text-180-1",
-          "start": 180,
-          "end": 213,
+          "id": "house-1372-d-1-A-text-179-1",
+          "start": 179,
+          "end": 212,
           "text": "section 1101(a)(15) of this title",
           "family": "usc",
           "resolution": "local",
@@ -308808,9 +308808,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1612-a-2-F-ii-text-209-1",
-          "start": 209,
-          "end": 225,
+          "id": "house-1612-a-2-F-ii-text-207-1",
+          "start": 207,
+          "end": 223,
           "text": "7 U.S.C. 2012(r)",
           "family": "usc",
           "resolution": "official-source-only",
@@ -313462,9 +313462,9 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
       "sourceKind": "operative",
       "references": [
         {
-          "id": "house-1613-c-2-L-text-103-1",
-          "start": 103,
-          "end": 116,
+          "id": "house-1613-c-2-L-text-101-1",
+          "start": 101,
+          "end": 114,
           "text": "7 U.S.C. 2011",
           "family": "usc",
           "resolution": "official-source-only",

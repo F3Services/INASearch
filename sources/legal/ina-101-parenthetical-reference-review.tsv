@@ -1,7 +1,7 @@
 # INA 101 parenthetical-reference review manifest
 # Manually target-reviewed 2026-08-23. Scope: every parenthetical sequence in the operative body of 8 U.S.C. 1101.
 # The annotation row is deliberately non-navigable; every other row identifies one or more working legal-reference or run-in links.
-# operative-text-sha256: a58b8a2d2ef0df5bce9d387acc5d11f534d03e4fbeedaaa4282f595026c49810
+# operative-text-sha256: 5689c34ef461a3d18f9081c59c0a322f2b1b177e59a424885efeeec103133f79
 # counts: reference=203 run-in=41 annotation=1 total=245
 source_path	start	sequence	disposition	links
 a/1	105	(b)	reference	93:122 "section 1104(b) of this title" -> USC 8:1104/b [local;house-uslm-ref]
@@ -55,8 +55,8 @@ a/15/H	2176	(f)	reference	2165:2191 "section 203(f) of title 29" -> USC 29:203/f
 a/15/H	2279	(b)	run-in	2279:2282 (b) -> RUN-IN a/15/H/ii/b
 a/15/H	2706	(iii)	run-in	2706:2711 (iii) -> RUN-IN a/15/H/iii
 a/15/J	774	(j)	reference	762:791 "section 1182(j) of this title" -> USC 8:1182/j [local;house-uslm-ref]
-a/15/K	23	(d)	reference	23:26 "(d)" -> USC 8:1184/d [local;embedded-explicit-container]
-a/15/K	31	(p)	reference	31:34 "(p)" -> USC 8:1184/p [local;embedded-explicit-container]
+a/15/K	23	(d)	reference	23:26 "(d)" -> USC 8:1184/d [local;embedded-a-shared-trailing-container]
+a/15/K	31	(p)	reference	31:34 "(p)" -> USC 8:1184/p [local;embedded-a-shared-trailing-container]
 a/15/K/i	108	(a)(1)(A)(viii)(I)	reference	96:140 "section 1154(a)(1)(A)(viii)(I) of this title" -> USC 8:1154/a/1/A/viii/I [local;house-uslm-ref]
 a/15/K/ii	114	(a)(1)(A)(viii)(I)	reference	102:146 "section 1154(a)(1)(A)(viii)(I) of this title" -> USC 8:1154/a/1/A/viii/I [local;house-uslm-ref]
 a/15/K/ii	241	(b)(2)(A)(i)	reference	229:267 "section 1151(b)(2)(A)(i) of this title" -> USC 8:1151/b/2/A/i [local;house-uslm-ref]
@@ -120,7 +120,7 @@ a/22	47	(A)	run-in	47:50 (A) -> RUN-IN a/22/A
 a/22	86	(B)	run-in	86:89 (B) -> RUN-IN a/22/B
 a/24	43	(m)(1)	reference	10:49 "Pub. L. 102–232, title III, § 305(m)(1)" -> PL 102-232/tIII/s305/m/1 [official-source-only;house-uslm-ref]
 a/27/B	79	(a)	reference	67:82 "section 1435(a)" -> USC 8:1435/a [local;context-bare-usc-section]
-a/27/C/ii/III	222	(c)(3)	reference	211:240 "section 501(c)(3) of title 26" -> USC 26:501/c/3 [official-source-only;house-uslm-ref]
+a/27/C/ii/III	221	(c)(3)	reference	210:239 "section 501(c)(3) of title 26" -> USC 26:501/c/3 [official-source-only;house-uslm-ref]
 a/27/C/iii	133	(i)	reference	133:136 "(i)" -> USC 8:1101/a/27/C/i [local;embedded-inferred-unit]
 a/27/E	226	(a)(1)	reference	214:244 "section 3602(a)(1) of title 22" -> USC 22:3602/a/1 [official-source-only;house-uslm-ref]
 a/27/F	89	(i)	run-in	89:92 (i) -> RUN-IN a/27/F/i
@@ -231,9 +231,9 @@ b/2	236	(1)(F)	reference	236:242 "(1)(F)" -> USC 8:1101/b/1/F [local;embedded-in
 b/2	297	(1)(G)(i)	reference	297:306 "(1)(G)(i)" -> USC 8:1101/b/1/G/i [local;embedded-inferred-unit]
 b/2	373	(1)(D)	reference	373:379 "(1)(D)" -> USC 8:1101/b/1/D [local;embedded-inferred-unit]
 b/2	412	(1)(C)	reference	412:418 "(1)(C)" -> USC 8:1101/b/1/C [local;embedded-inferred-unit]
-c/1	528	(E)(ii)	reference	528:535 "(E)(ii)" -> USC 8:1101/b/1/E/ii [local;embedded-explicit-container]
-c/1	539	(F)(ii)	reference	539:546 "(F)(ii)" -> USC 8:1101/b/1/F/ii [local;embedded-explicit-container]
-c/1	561	(b)(1)	reference	550:567 "subsection (b)(1)" -> USC 8:1101/b/1 [local;embedded-a-explicit-container-base]
+c/1	526	(E)(ii)	reference	526:533 "(E)(ii)" -> USC 8:1101/b/1/E/ii [local;embedded-explicit-container]
+c/1	537	(F)(ii)	reference	537:544 "(F)(ii)" -> USC 8:1101/b/1/F/ii [local;embedded-explicit-container]
+c/1	559	(b)(1)	reference	548:565 "subsection (b)(1)" -> USC 8:1101/b/1 [local;embedded-a-explicit-container-base]
 d	30	(a)(3)	reference	10:36 "Pub. L. 100–525, § 9(a)(3)" -> PL 100-525/s9/a/3 [official-source-only;house-uslm-ref]
 f/2	29	(c)(1)	reference	10:35 "Pub. L. 97–116, § 2(c)(1)" -> PL 97-116/s2/c/1 [official-source-only;house-uslm-ref]
 f/3	104	(2)(D)	reference	104:110 "(2)(D)" -> USC 8:1182/a/2/D [local;embedded-a-shared-trailing-container]

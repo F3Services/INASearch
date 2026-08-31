@@ -42,8 +42,8 @@ function reconstructFlattenedField(cleanText, references) {
 }
 
 function applyStatuteFootnotes(corpus, footnoteSource) {
-  if (!footnoteSource || Number(footnoteSource.extraction?.footnotes) !== 118 || Number(footnoteSource.extraction?.affectedFields) !== 116) {
-    throw new Error("The House footnote overlay is incomplete; expected 118 footnotes across 116 fields.");
+  if (!footnoteSource || Number(footnoteSource.extraction?.footnotes) !== 118 || Number(footnoteSource.extraction?.references) !== 151 || Number(footnoteSource.extraction?.affectedFields) !== 143) {
+    throw new Error("The House footnote overlay is incomplete; expected 118 footnotes and 151 references across 143 fields.");
   }
   const sources = statuteFootnoteSourceMap(corpus);
   let cleanedFields = 0;
@@ -74,7 +74,7 @@ function applyStatuteFootnotes(corpus, footnoteSource) {
     section.houseEditorialFootnotes = clone(records);
     footnotes += records.length;
   }
-  if (cleanedFields !== 116 || references !== 118 || footnotes !== 118) {
+  if (cleanedFields !== 143 || references !== 151 || footnotes !== 118) {
     throw new Error(`House footnote application count mismatch (${footnotes} notes, ${references} references, ${cleanedFields} fields).`);
   }
   corpus.schemaVersion = Math.max(Number(corpus.schemaVersion) || 1, Number(footnoteSource.corpusSchemaVersion) || 3);

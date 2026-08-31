@@ -29,7 +29,16 @@ function statuteRunInMarkers(value, currentLabel = "") {
     const previousChar = input[start - 1] || "";
     const referenceContinuation = referenceChainEnd >= 0 && referenceConnector.test(input.slice(referenceChainEnd, start));
     const referenceNumberPrefix = /\b(?:section|sections|subsection|subsections|paragraph|paragraphs|subparagraph|subparagraphs|clause|clauses|subclause|subclauses|item|items)\s+\d+[A-Za-z-]*\s*$/i.test(prefix) || /\b\d{3,}[A-Za-z-]*\s*$/.test(prefix);
-    const structuralSibling = Boolean(currentLabel) && isImmediateSibling(currentLabel, token) && /\b(?:and|or)\s*$/i.test(prefix) && /^\s+if\b/i.test(input.slice(end));
+    const priorStructuralMarker = candidates.at(-1);
+    const structuralSibling = (Boolean(currentLabel) && isImmediateSibling(currentLabel, token) && /\b(?:and|or)\s*$/i.test(prefix) && /^\s+if\b/i.test(input.slice(end))) ||
+      // A real inline list can contain a complete citation between two of
+      // its markers: “provided (i) ... under subsection (b)(1) and (ii)
+      // ...”.  In that construction the citation's closing (1) must not
+      // make the immediately sequential (ii) look like another member of
+      // the citation.  The earlier accepted inline marker supplies the
+      // structural sequence evidence.
+      (Boolean(priorStructuralMarker) && isImmediateSibling(priorStructuralMarker.token, token) &&
+        /\b(?:and|or)\s*$/i.test(prefix) && /^\s+(?:a|an|the|if|when|where|who|which|that|to|by|for|is|are|shall|may|has|have)\b/i.test(input.slice(end)));
     const isReference = !structuralSibling && (referenceContinuation || referenceWords.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(previousChar));
     if (isReference) {
       referenceChainEnd = end;
