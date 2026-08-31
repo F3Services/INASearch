@@ -1,5 +1,7 @@
 # INASearch
 
+**Try INASearch:** [Open the live app at inasearch.pages.dev](https://inasearch.pages.dev/).
+
 INASearch is a fast reference tool for federal immigration statutes and regulations. It runs as a single HTML file and includes its legal corpus, so you can search and read it without installing software or relying on an internet connection.
 
 Enter an INA, U.S.C., or CFR citation to open the provision, browse its structure, follow cross-references, and jump to the official source when needed.
