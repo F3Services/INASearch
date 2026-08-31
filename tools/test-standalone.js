@@ -267,16 +267,21 @@ function hierarchyParsingFunctions(source, context = {}) {
   });
 }
 
+function tipByIdFromSource(source) {
+  const start = source.indexOf("    const TIP_CATEGORIES = Object.freeze([");
+  const end = source.indexOf("\n    const TIP_BY_ID", start);
+  assert(start >= 0 && end > start, "Could not extract the About tip catalog.");
+  const ids = [...source.slice(start, end).matchAll(/\[\s*(\d+),\s*"/g)].map(match => Number(match[1]));
+  return new Map(ids.map(id => [id, { id }]));
+}
+
 function profileMigrationFunctions(source) {
   const start = source.indexOf("    function normalizeCourseStructure(");
   const end = source.indexOf("\n\n    const cachedVaultValid =", start);
   assert(start >= 0 && end > start, "Could not extract the profile normalization functions.");
   const declarations = source.slice(start, end);
   const normalizeThemePreference = extractedFunction(source, "normalizeThemePreference", "systemThemePreference");
-  const tutorialCatalog = [
-    ["quick-start", 6], ["advanced-search", 5], ["legal-reader", 4],
-    ["definitions", 4], ["saving-progress", 4]
-  ].map(([id, revision]) => ({ id, revision }));
+  const tutorialCatalog = [["quick-start", 6]].map(([id, revision]) => ({ id, revision }));
   return vm.runInNewContext(`${declarations}\n({ normalizeCourseStructure, normalizeCoursePlacement, isValidProfile, normalizeProfile })`, {
     Array,
     Date,
@@ -288,6 +293,7 @@ function profileMigrationFunctions(source) {
     TUTORIAL_CATALOG: tutorialCatalog,
     TUTORIAL_BY_ID: new Map(tutorialCatalog.map(module => [module.id, module])),
     TUTORIAL_STATUS_RANK: Object.freeze({ "not-started": 0, "in-progress": 1, viewed: 2, completed: 3 }),
+    TIP_BY_ID: tipByIdFromSource(source),
     DEFAULT_STARTUP_QUERY: "",
     STATUTE_NAVIGATION_DEPTHS: ["Section", "Subsection", "Paragraph", "Subparagraph", "Clause", "Subclause", "Item", "Subitem", "Subsubitem"],
     CFR_NAVIGATION_DEPTHS: ["Section", "Paragraph", "Paragraph level 2", "Paragraph level 3", "Paragraph level 4", "Paragraph level 5", "Paragraph level 6"],
@@ -304,11 +310,8 @@ function tutorialProgressFunctions(source) {
   const end = source.indexOf("\n\n    const defaultProfile", start);
   assert(start >= 0 && end > start, "Could not extract tutorial progress normalization.");
   const declarations = source.slice(start, end);
-  const catalog = [
-    ["quick-start", 6], ["advanced-search", 5], ["legal-reader", 4],
-    ["definitions", 4], ["saving-progress", 4]
-  ].map(([id, revision]) => ({ id, revision }));
-  return vm.runInNewContext(`${declarations}\n({ normalizeTutorialProgress, mergeTutorialProgress })`, {
+  const catalog = [["quick-start", 6]].map(([id, revision]) => ({ id, revision }));
+  return vm.runInNewContext(`${declarations}\n({ normalizeTutorialProgress, mergeTutorialProgress, normalizeTipProgress, mergeTipProgress })`, {
     Array,
     Date,
     JSON,
@@ -320,6 +323,7 @@ function tutorialProgressFunctions(source) {
     TUTORIAL_CATALOG: catalog,
     TUTORIAL_BY_ID: new Map(catalog.map(module => [module.id, module])),
     TUTORIAL_STATUS_RANK: Object.freeze({ "not-started": 0, "in-progress": 1, viewed: 2, completed: 3 }),
+    TIP_BY_ID: tipByIdFromSource(source),
     structuredCloneSafe: value => JSON.parse(JSON.stringify(value))
   });
 }
@@ -488,12 +492,13 @@ async function main() {
   assert.strictEqual(blankProfile.schemaVersion, 4, "Blank profiles must use saved-data schema v4.");
   assert.strictEqual(Object.hasOwn(blankProfile, "courseStructure"), false, "Blank profiles must not retain the retired course structure.");
   assert.deepStrictEqual(blankProfile.tutorialProgress, { schemaVersion: 1, modules: {} }, "Blank profiles must include optional, empty tutorial progress.");
-  assert.strictEqual(blankProfile.preferences.theme, "system", "Blank profiles must follow the operating-system theme by default.");
+  assert.deepStrictEqual(blankProfile.tipProgress, { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null }, "Blank profiles must include empty daily-tip progress.");
+  assert.strictEqual(blankProfile.preferences.theme, "light", "Blank profiles must start in the Day theme.");
   assert.strictEqual(blankProfile.preferences.showDetailedStatus, false, "Blank profiles must hide detailed top-bar status by default.");
   assert.strictEqual(Object.hasOwn(blankProfile.preferences, "hideUpdateStatus"), false, "Blank profiles retained the superseded update-status flag.");
   assert.strictEqual(Object.hasOwn(blankProfile.preferences, "hideSaveStatus"), false, "Blank profiles retained the superseded save-status flag.");
   assert.strictEqual(blankProfile.preferences.hideTopThemeControls, false, "Blank profiles must show top-bar theme controls by default.");
-  assert.strictEqual(blankProfile.preferences.hideQuickStartPrompt, false, "Blank profiles must offer the Quick Start prompt by default.");
+  assert.strictEqual(Object.hasOwn(blankProfile.preferences, "hideQuickStartPrompt"), false, "Blank profiles retained the retired Quick Start prompt preference.");
   assert.strictEqual(blankProfile.preferences.hideLocalShareWarning, false, "Blank profiles must show local-link warnings by default.");
   assert.strictEqual(blankProfile.preferences.splitAuthoritySearchPanes, false, "Blank profiles must default search results to one combined authority stream.");
   assert.strictEqual(Object.hasOwn(blankProfile.preferences, "resultFilter"), false, "Blank profiles retained the retired result-filter preference.");
@@ -572,7 +577,7 @@ async function main() {
   assert.deepStrictEqual(persistenceResult, { supported: true, persisted: true, requested: true }, "The storage-persistence request did not report a granted persistent bucket.");
   assert.strictEqual(persistenceRequests, 1, "The storage-persistence fixture did not exercise the browser persistence request exactly once.");
   for (const retiredCorpusKey of ["visaCategories", "visaQuizGroups", "visaTables"]) assert.strictEqual(Object.hasOwn(full.corpus, retiredCorpusKey), false, `Corpus still contains ${retiredCorpusKey}.`);
-  assert(/id="tutorialMenuButton"/.test(full.html), "The explicit tutorial launcher is missing.");
+  assert(!/id="tutorialMenuButton"/.test(full.html), "The retired top-bar tutorial launcher remains.");
   assert(/id="definedTermHighlightingToggle"/.test(full.html), "The defined-term highlighting setting is missing.");
   assert(full.html.includes("A highlighted word may be used in a different grammatical or contextual sense from its legal definition"), "The experimental defined-term warning does not explain the risk of a misleading match.");
   assert(/id="automaticCfrUpdatesToggle"[^>]*type="checkbox"[^>]*role="switch"/.test(full.html), "The automatic CFR update setting is missing.");
@@ -585,26 +590,19 @@ async function main() {
   assert(/id="statuteSectionDisplaySelect"[\s\S]{0,500}<option value="hierarchy">Follow hierarchy button<\/option>[\s\S]{0,300}<option value="usc">U\.S\.C\.<\/option>[\s\S]{0,200}<option value="ina">INA<\/option>[\s\S]{0,200}<option value="both">Both<\/option>/.test(full.html), "The statute Section-display setting is missing one or more modes.");
   assert(/class="settings-info-button"[^>]*aria-describedby="automaticCfrUpdatesHelp"/.test(full.html), "The automatic CFR update setting is missing its compact information control.");
   assert(full.html.includes("Off by default") && full.html.includes("Turn this on") && full.html.includes("INASearch makes no network requests"), "The automatic CFR update information does not explain its opt-in, local-only default.");
-  assert(/id="tutorialHubModal" hidden/.test(full.html), "The tutorial hub is not closed at startup.");
   assert(/id="tutorialCoach"[^>]*aria-modal="false"[^>]*hidden/.test(full.html), "The nonmodal tutorial coach is not closed at startup.");
-  assert(/id="tutorialStartPrompt" hidden/.test(full.html), "The Quick Start prompt is visible before saved profile settings are loaded.");
-  assert(/id="tutorialMenuButton"[^>]*aria-describedby="tutorialStartPromptText"[\s\S]{0,700}id="tutorialStartPromptTitle">New to INASearch\?[\s\S]{0,250}id="tutorialStartPromptBody">Start with the basic tutorial here\.[\s\S]{0,250}id="tutorialStartPromptDisable"[^>]*>Don't ask again<[\s\S]{0,250}id="tutorialStartPromptClose"[^>]*aria-label="Dismiss Quick Start message"/.test(full.html), "An unfinished Quick Start does not display a dismissible prompt with a persistent opt-out.");
-  assert(/id="tutorialMenuButton"[\s\S]{0,1200}id="corpusStatus"[\s\S]{0,300}id="saveStatus"[\s\S]{0,300}id="topThemeControls"[\s\S]{0,1400}id="settingsMenuButton"/.test(full.html), "The Tutorials button is not the leftmost application-status button, or the theme controls are not immediately left of Settings.");
-  assert(/\.tutorial-start-prompt\s*\{[^}]*position:\s*absolute[^}]*width:\s*min\(300px,/s.test(full.html) && /\.tutorial-start-prompt-copy strong\s*\{[^}]*font-size:\s*14px/s.test(full.html), "The Quick Start message is still rendered as a small inline status pill.");
+  assert(!/id="tutorialHubModal"|id="tutorialStartPrompt"|class="tutorial-module-card"/.test(full.html), "A legacy tutorial hub or prompt remains in the application.");
   assert(!/\bsessionStorage\b/.test(full.html), "Tutorial progress must not rely on hidden session storage.");
   const localStorageCalls = [...full.html.matchAll(/localStorage\.(?:getItem|setItem)\([^)]*\)/g)].map(match => match[0]);
   assert.deepStrictEqual(localStorageCalls, ['localStorage.getItem("ina-search-theme")', 'localStorage.setItem(THEME_STORAGE_KEY, theme)'], "Browser-local metadata must be limited to the early-paint theme mirror.");
   const tutorialCatalogSource = full.html.slice(full.html.indexOf("const TUTORIAL_CATALOG"), full.html.indexOf("const TUTORIAL_BY_ID"));
   const tutorialModuleIds = [...tutorialCatalogSource.matchAll(/(?:^|\n)\s*\{\s*\n\s*id:\s*"([^"]+)"/g)].map(match => match[1]);
-  assert.deepStrictEqual(tutorialModuleIds, ["quick-start", "advanced-search", "legal-reader", "definitions", "saving-progress"], "The tutorial catalog does not contain the intentionally compact lesson set in its intended order.");
-  for (const moduleId of ["advanced-search", "legal-reader", "definitions", "saving-progress"]) {
-    assert(full.html.includes(`data-tutorial-module="${moduleId}"`) || full.html.includes(`data-tutorial-module=\\"${moduleId}\\"`), `Missing passive ${moduleId} tutorial entry point.`);
+  assert.deepStrictEqual(tutorialModuleIds, ["quick-start"], "Quick Start must be the only remaining tutorial module.");
+  for (const moduleId of ["advanced-search", "legal-reader", "definitions", "saving-progress", "lettered-citations", "former-provisions", "cfr-updates", "source-literacy"]) {
+    assert(!tutorialCatalogSource.includes(`id: "${moduleId}"`) && !full.html.includes(`data-tutorial-module="${moduleId}"`), `Retired ${moduleId} tutorial content remains.`);
   }
-  for (const removedModule of ["lettered-citations", "former-provisions", "cfr-updates", "source-literacy"]) assert(!tutorialCatalogSource.includes(`id: "${removedModule}"`), `${removedModule} remains as an unnecessary standalone tutorial.`);
-  assert(!tutorialCatalogSource.includes("lettered-units") && !tutorialCatalogSource.includes("Part 274 and Part 274A"), "Letter-suffixed citations remain tutorial material after being removed from the lesson plan.");
-  assert(tutorialCatalogSource.includes("Notice former provisions") && tutorialCatalogSource.includes("sticky warning") && tutorialCatalogSource.includes("reviewed transfer destination"), "The Legal Reader tutorial is missing its brief former-provision warning.");
-  assert(!full.html.includes('data-tutorial-module="source-literacy"') && !full.html.includes('data-tutorial-module="cfr-updates"'), "A removed source or update tutorial still has an entry point.");
-  assert((tutorialCatalogSource.match(/setup: "blank-search"/g) || []).length >= 4, "Search tutorials do not consistently clear a loaded startup citation before practice.");
+  assert(!full.html.includes("function renderTutorialHub") && !full.html.includes("function openTutorialHub") && !full.html.includes("data-tutorial-start"), "The retired tutorial-catalog runtime remains.");
+  assert.strictEqual((tutorialCatalogSource.match(/setup: "blank-search"/g) || []).length, 2, "Quick Start does not reset both of its citation-search steps.");
   assert(tutorialCatalogSource.includes('target: ".global-search .search-field-shell", focus: "#searchInput"'), "Search tutorials still highlight the input over the INA/U.S.C. crosswalk instead of the complete search shell.");
   const tutorialSetupSource = full.html.slice(full.html.indexOf("function runTutorialSetup"), full.html.indexOf("function restoreTutorialState"));
   assert(tutorialSetupSource.includes('setup === "blank-search"') && tutorialSetupSource.includes("resetSearchState()") && tutorialSetupSource.includes('tutorialSwitchView("search")'), "The blank tutorial search setup is incomplete.");
@@ -618,37 +616,37 @@ async function main() {
   for (const [pageStep, setup, heading] of [["definitions-page", "definitions-page", "#definitionsHeading"], ["about-page", "about-page", "#sourcesHeading"]]) {
     assert(tutorialCatalogSource.includes(`id: "${pageStep}"`) && tutorialCatalogSource.includes(`target: "${heading}", setup: "${setup}"`), `Quick Start does not open and explain ${pageStep} as its own page.`);
   }
-  assert(!tutorialCatalogSource.includes("offerModules: true"), "Quick Start still piles the remaining tutorial catalog onto a first-time user at completion.");
-  const tutorialLauncherSource = full.html.slice(full.html.indexOf("function quickStartCompleted"), full.html.indexOf("function renderTutorialHub"));
-  assert(tutorialLauncherSource.includes('tutorialProgressEntry("quick-start").status === "completed"'), "The Tutorials launcher does not require actual Quick Start completion.");
-  assert(tutorialLauncherSource.includes("const promptVisible = !completed && !active && !state.tutorialPromptDismissed && profile.preferences.hideQuickStartPrompt !== true") && tutorialLauncherSource.includes("els.tutorialStartPrompt.hidden = !promptVisible") && tutorialLauncherSource.includes('classList.toggle("needs-introduction", !completed)'), "The Quick Start prompt and emphasized launcher do not track completion, temporary dismissal, or the saved opt-out.");
-  const openTutorialHubSource = full.html.slice(full.html.indexOf("function openTutorialHub"), full.html.indexOf("function closeTutorialHub"));
-  assert(openTutorialHubSource.includes("if (!quickStartCompleted())") && openTutorialHubSource.includes('startTutorial("quick-start"'), "The Tutorials button can open the catalog before starting or resuming Quick Start.");
-  const tutorialPauseSource = full.html.slice(full.html.indexOf("function pauseTutorial"), full.html.indexOf("function finishTutorial"));
-  assert(tutorialPauseSource.includes("endTutorial(openHub && quickStartCompleted())"), "Pausing an unfinished Quick Start still opens the tutorial catalog.");
-  const tutorialFinishSource = full.html.slice(full.html.indexOf("function finishTutorial"), full.html.indexOf("function advanceTutorial"));
-  assert(tutorialFinishSource.includes("else if (quickStartCompleted())") && tutorialFinishSource.includes("openTutorialHub(returnFocus)"), "The tutorial catalog is not gated until Quick Start completion.");
   const attachEventsSource = full.html.slice(full.html.indexOf("function attachEvents"), full.html.indexOf("function reloadUpdatedCorpus"));
-  assert(attachEventsSource.includes('tutorialStartPromptClose.addEventListener("click"') && attachEventsSource.includes("state.tutorialPromptDismissed = true") && attachEventsSource.includes("renderTutorialLauncher()"), "The Quick Start message close button does not dismiss the callout for the current tab.");
-  assert(attachEventsSource.includes('tutorialStartPromptDisable.addEventListener("click", disableQuickStartPrompt)') && full.html.includes("profile.preferences.hideQuickStartPrompt = true;") && full.html.includes("markProfileChanged();"), "The Quick Start don't-ask-again action is not persisted through the profile.");
+  assert(attachEventsSource.includes('event.target.closest("[data-tutorial-module]")') && attachEventsSource.includes("startTutorial(contextual.dataset.tutorialModule, contextual)"), "The About Quick Start control is not wired to the remaining tutorial.");
+  assert(!attachEventsSource.includes("tutorialStartPrompt") && !attachEventsSource.includes("tutorialHub"), "Legacy tutorial prompt or hub event handlers remain.");
   assert(!tutorialCatalogSource.includes("recap:") && !full.html.includes("tutorial-answer-list") && !full.html.includes("Skip check"), "End-of-tutorial quiz questions remain in the tutorial system.");
   assert(!full.html.includes("tutorial-practice-feedback") && !full.html.includes("That worked. Continue when you are ready."), "Practice completion still waits on low-contrast feedback instead of advancing.");
   const tutorialPracticeSource = full.html.slice(full.html.indexOf("function tutorialPracticeSatisfied"), full.html.indexOf("function renderTutorialStep"));
-  assert(tutorialPracticeSource.includes("setTimeout(() =>") && tutorialPracticeSource.includes("advanceTutorial()") && tutorialPracticeSource.includes("submittedSearch"), "Successful tutorial practice does not automatically advance.");
+  assert(tutorialPracticeSource.includes("setTimeout(() =>") && tutorialPracticeSource.includes("advanceTutorial()"), "Successful Quick Start practice does not automatically advance.");
   assert(tutorialCatalogSource.includes('practice: { kind: "citation-result", authority: "ina", section: "203", path: [] }') && !tutorialCatalogSource.includes('kind: "search-exact"'), "Quick Start still grades the characters typed instead of the citation result INASearch resolved.");
   assert(tutorialPracticeSource.includes("result.type !== practice.authority") && tutorialPracticeSource.includes("result.mapping?.inaSection") && !tutorialPracticeSource.includes("normalize(els.search.value) ==="), "Citation tutorial completion is not based on the resolved legal citation.");
-  assert(tutorialCatalogSource.includes('practice: { kind: "search-results", query: "waiver" }') && !tutorialCatalogSource.includes('kind: "search-contains"'), "The phrase-search tutorial still grades the input characters without confirming that results appeared.");
-  assert(tutorialCatalogSource.includes('kind: "scope", mode: "in", authority: "ina", section: "212", path: [], query: "waiver"') && tutorialCatalogSource.includes('kind: "scope", mode: "cites", authority: "ina", section: "101", path: ["a", "15", "S"]'), "An advanced citation-scope exercise does not grade the resolved legal target.");
-  assert(tutorialCatalogSource.includes('practice: { kind: "definition-results", query: "child" }') && !tutorialCatalogSource.includes('kind: "definition-term"'), "The Definitions tutorial still grades typed characters without confirming that matching definitions appeared.");
   const runSearchSource = full.html.slice(full.html.indexOf("function runSearch()"), full.html.indexOf("function shouldDeferBroadSearch"));
   assert(runSearchSource.includes("showCurrentSearchResults(direct);") && runSearchSource.includes("checkTutorialPractice();"), "A live citation result does not notify the active tutorial after it opens.");
   assert(!/\.tutorial-highlight\s*\{[^}]*z-index:/s.test(full.html), "A highlighted reader panel can still rise above and cover the sticky search bar.");
-  assert(tutorialCatalogSource.includes("Highlight defined terms is off by default") && tutorialCatalogSource.includes("different meaning in context"), "The revised Definitions tutorial omits the optional, context-sensitive highlighting warning.");
-  assert(tutorialCatalogSource.includes("Browser saving is automatic") && tutorialCatalogSource.includes("Browser data can still be cleared"), "The saving tutorials do not explain automatic browser saving and its durability boundary.");
+  const tipCatalogSource = full.html.slice(full.html.indexOf("const TIP_CATEGORIES"), full.html.indexOf("const TIP_BY_ID"));
+  const tipCategoryIds = [...tipCatalogSource.matchAll(/(?:^|\n)\s*id:\s*"([^"]+)",\s*title:/g)].map(match => match[1]);
+  assert.deepStrictEqual(tipCategoryIds, ["finding", "scoped-search", "common", "panes-history", "navigation", "reading", "definitions", "annotations", "saving", "sources"], "The About tip catalog is not grouped into the intended categories.");
+  const tipIds = [...tipCatalogSource.matchAll(/\[\s*(\d+),\s*"/g)].map(match => Number(match[1]));
+  assert.strictEqual(tipIds.length, 80, "The compiled About tip catalog is incomplete.");
+  assert.strictEqual(new Set(tipIds).size, tipIds.length, "The About tip catalog contains duplicate IDs.");
+  const renderSourcesSource = full.html.slice(full.html.indexOf("function renderSources()"), full.html.indexOf("function cycleSearchSuggestion"));
+  assert(renderSourcesSource.includes('<article class="source-card source-card-full"><h3>Official shortcuts</h3>') && renderSourcesSource.includes('id="aboutTipsCard"') && renderSourcesSource.includes("tipCatalogMarkup()"), "About does not render full-width Official shortcuts and Tips cards.");
+  assert.strictEqual((renderSourcesSource.match(/<article class="source-card source-card-full"/g) || []).length, 2, "About renders source-detail cards beyond the two requested full-width cards.");
+  assert(!renderSourcesSource.includes("cfrCard") && !renderSourcesSource.includes("Object.values(sources)") && !renderSourcesSource.includes("Automatic-update boundary"), "Retired CFR/source cards or the automatic-update boundary remain on About.");
+  assert(!full.html.includes("Important boundaries"), "The retired Important boundaries section remains on About.");
+  assert(renderSourcesSource.includes('data-tutorial-module="quick-start"') && renderSourcesSource.includes("renderTutorialEntryLabels(els.sourcesGrid)"), "The About Tips card cannot start or resume Quick Start.");
+  assert(full.html.includes("Complete Quick Start to begin daily tips") && full.html.includes("Dismiss for today") && full.html.includes("data-show-daily-tip"), "The daily-tip experience is incomplete.");
+  const markProfileChangedSource = full.html.slice(full.html.indexOf("function markProfileChanged()"), full.html.indexOf("function profileSnapshotWithTutorialProgress"));
+  assert(markProfileChangedSource.includes('state.view === "sources" && !state.tutorialActive'), "Saving Quick Start progress replaces the highlighted About card while the tutorial is active.");
   const initializeSource = full.html.slice(full.html.indexOf("function initialize()"), full.html.indexOf("window.INASearchTest"));
   assert(!initializeSource.includes("startTutorial("), "A tutorial is started automatically during initialization.");
   assert(/function captureTutorialState\(/.test(full.html) && /function restoreTutorialState\(/.test(full.html), "Tutorial state snapshot and restore support is incomplete.");
-  assert(/savingMenuEnableButton[\s\S]{0,200}savingMenuImportButton[\s\S]{0,200}resetSettingsButton/.test(full.html), "Saving tutorial safeguards are incomplete.");
+  assert(/savingMenuEnableButton[\s\S]{0,200}savingMenuImportButton[\s\S]{0,200}resetSettingsButton/.test(full.html), "Settings saving controls are incomplete.");
   assert.strictEqual(full.build.variant, "standard");
   assert.strictEqual(full.build.hasLocalUscCache, true);
   assert.strictEqual(full.build.corpusCompression, "gzip");
@@ -1941,28 +1939,6 @@ async function main() {
   assert.strictEqual(tutorialPracticeSatisfied(ina203Practice), false, "Quick Start accepts a different valid INA section instead of the requested INA 203 result.");
   tutorialPracticeState.citation = { valid: true, type: "ina", mapping: { inaSection: "203" }, path: ["b"], label: "INA 203(b)" };
   assert.strictEqual(tutorialPracticeSatisfied(ina203Practice), false, "Quick Start accepts a child paragraph instead of the requested whole INA 203 section.");
-  tutorialPracticeElements.search.value = "fee waiver";
-  tutorialPracticeState.query = "fee waiver";
-  tutorialPracticeState.occurrenceMainResult = { totalOccurrences: 1 };
-  assert.strictEqual(tutorialPracticeSatisfied({ kind: "search-results", query: "waiver" }), true, "The phrase tutorial does not complete when matching search results appear.");
-  tutorialPracticeState.occurrenceMainResult = { totalOccurrences: 0 };
-  assert.strictEqual(tutorialPracticeSatisfied({ kind: "search-results", query: "waiver" }), false, "The phrase tutorial completes even though no matching result appeared.");
-  tutorialPracticeState.occurrenceMainResult = { totalOccurrences: 1 };
-  tutorialPracticeState.query = "different search";
-  assert.strictEqual(tutorialPracticeSatisfied({ kind: "search-results", query: "waiver" }), false, "The phrase tutorial accepts stale results from a different search.");
-  const ina212ScopePractice = { kind: "scope", mode: "in", authority: "ina", section: "212", path: [], query: "waiver" };
-  tutorialPracticeState.searchScopeActive = true;
-  tutorialPracticeState.searchScopeMode = "in";
-  tutorialPracticeState.searchScope = { valid: true, authority: "ina", authoritySection: "212", pathsBySection: new Map() };
-  tutorialPracticeState.query = "waiver";
-  assert.strictEqual(tutorialPracticeSatisfied(ina212ScopePractice, { type: "keydown", key: "Enter" }), true, "A parser-resolved compact INA 212 scope does not complete the in: exercise.");
-  tutorialPracticeState.searchScope.authoritySection = "101";
-  assert.strictEqual(tutorialPracticeSatisfied(ina212ScopePractice, { type: "keydown", key: "Enter" }), false, "The in: exercise accepts the wrong resolved citation scope.");
-  tutorialPracticeState.definitionQuery = "child";
-  tutorialPracticeElements.definitionNoResults.hidden = false;
-  assert.strictEqual(tutorialPracticeSatisfied({ kind: "definition-results", query: "child" }), true, "The Definitions exercise does not complete when matching definition groups appear.");
-  tutorialPracticeElements.definitionNoResults.hidden = true;
-  assert.strictEqual(tutorialPracticeSatisfied({ kind: "definition-results", query: "child" }), false, "The Definitions exercise completes despite showing no matching definitions.");
   const tutorialAutoAdvanceState = { tutorialActive: { moduleId: "quick-start", stepIndex: 0, passedSteps: new Set() } };
   const tutorialAutoAdvanceModule = { id: "quick-start", steps: [{ id: "practice-citation", practice: ina203Practice }] };
   let tutorialAdvanceCount = 0;
@@ -1979,74 +1955,6 @@ async function main() {
   assert(tutorialAutoAdvanceState.tutorialActive.passedSteps.has("practice-citation"), "Successful tutorial practice is not recorded before advancing.");
   assert.strictEqual(tutorialProgressCount, 1, "Successful tutorial practice does not update progress exactly once.");
   assert.strictEqual(tutorialAdvanceCount, 1, "Successful tutorial practice does not advance automatically exactly once.");
-  const tutorialPromptState = { tutorialActive: null, tutorialPromptDismissed: false };
-  const tutorialPromptProfile = { preferences: { hideQuickStartPrompt: false } };
-  const tutorialPromptProgress = { status: "not-started" };
-  const tutorialPromptAttributes = new Map();
-  const tutorialPromptElements = {
-    tutorialStartPrompt: { hidden: true },
-    tutorialStartPromptTitle: { textContent: "" },
-    tutorialStartPromptBody: { textContent: "" },
-    tutorialMenuButton: {
-      title: "",
-      classList: { toggle: () => {} },
-      setAttribute: (name, value) => tutorialPromptAttributes.set(name, value),
-      removeAttribute: name => tutorialPromptAttributes.delete(name)
-    }
-  };
-  let quickStartCompleteForPrompt = false;
-  const renderTutorialLauncher = extractedFunction(fallbackSource, "renderTutorialLauncher", "updateTutorialProgress", {
-    tutorialProgressEntry: () => tutorialPromptProgress,
-    quickStartCompleted: () => quickStartCompleteForPrompt,
-    state: tutorialPromptState,
-    profile: tutorialPromptProfile,
-    els: tutorialPromptElements
-  });
-  renderTutorialLauncher();
-  assert.strictEqual(tutorialPromptElements.tutorialStartPrompt.hidden, false, "The Quick Start callout is not visible to a new user.");
-  assert.strictEqual(tutorialPromptElements.tutorialStartPromptTitle.textContent, "New to INASearch?", "The new-user callout has the wrong heading.");
-  assert.strictEqual(tutorialPromptAttributes.get("aria-describedby"), "tutorialStartPromptText", "The Tutorials button is not associated with its visible callout.");
-  tutorialPromptState.tutorialPromptDismissed = true;
-  renderTutorialLauncher();
-  assert.strictEqual(tutorialPromptElements.tutorialStartPrompt.hidden, true, "Closing the Quick Start callout does not keep it dismissed in the current tab.");
-  assert.strictEqual(tutorialPromptAttributes.has("aria-describedby"), false, "A dismissed callout remains in the Tutorials button accessibility description.");
-  tutorialPromptState.tutorialPromptDismissed = false;
-  tutorialPromptProfile.preferences.hideQuickStartPrompt = true;
-  renderTutorialLauncher();
-  assert.strictEqual(tutorialPromptElements.tutorialStartPrompt.hidden, true, "The saved Quick Start opt-out did not suppress the callout in a later session.");
-  quickStartCompleteForPrompt = true;
-  tutorialPromptState.tutorialPromptDismissed = false;
-  tutorialPromptProfile.preferences.hideQuickStartPrompt = false;
-  renderTutorialLauncher();
-  assert.strictEqual(tutorialPromptElements.tutorialStartPrompt.hidden, true, "The Quick Start callout returns after the tutorial is completed.");
-  let quickStartCompleteForHub = false;
-  let tutorialStartedFromLauncher = null;
-  let tutorialHubRenderCount = 0;
-  const tutorialHubState = { tutorialActive: null, tutorialReturnFocus: null };
-  const tutorialHubModal = { hidden: true };
-  const tutorialLauncherButton = {};
-  const openTutorialHub = extractedFunction(fallbackSource, "openTutorialHub", "closeTutorialHub", {
-    quickStartCompleted: () => quickStartCompleteForHub,
-    state: tutorialHubState,
-    pauseTutorial: () => assert.fail("The inactive launcher tried to pause a tutorial."),
-    startTutorial: (moduleId, returnFocus) => { tutorialStartedFromLauncher = { moduleId, returnFocus }; },
-    document: { activeElement: null },
-    els: { tutorialMenuButton: tutorialLauncherButton, tutorialHubModal },
-    renderTutorialHub: () => { tutorialHubRenderCount += 1; },
-    setTimeout: callback => { callback(); return 1; },
-    $: () => null
-  });
-  const tutorialLauncherFocus = {};
-  openTutorialHub(tutorialLauncherFocus);
-  assert.deepStrictEqual(tutorialStartedFromLauncher, { moduleId: "quick-start", returnFocus: tutorialLauncherFocus }, "The first Tutorials-button click did not start Quick Start directly.");
-  assert.strictEqual(tutorialHubRenderCount, 0, "The tutorial catalog rendered before Quick Start was completed.");
-  assert.strictEqual(tutorialHubModal.hidden, true, "The tutorial catalog opened before Quick Start was completed.");
-  quickStartCompleteForHub = true;
-  tutorialStartedFromLauncher = null;
-  openTutorialHub(tutorialLauncherFocus);
-  assert.strictEqual(tutorialStartedFromLauncher, null, "The Tutorials button restarted Quick Start after it was completed.");
-  assert.strictEqual(tutorialHubRenderCount, 1, "The tutorial catalog did not render after Quick Start was completed.");
-  assert.strictEqual(tutorialHubModal.hidden, false, "The tutorial catalog stayed closed after Quick Start was completed.");
   const splitAssociationEntries = extractedFunction(fallbackSource, "splitAssociationEntries", "inheritedAssociationCitation", { String });
   assert.deepStrictEqual(plain(splitAssociationEntries("INA 203(b)(1)(A)(i)–(iii); 8 CFR 214.2(h)(1), 8 U.S.C. 1154\nINA 204")), [
     "INA 203(b)(1)(A)(i)–(iii)", "8 CFR 214.2(h)(1)", "8 U.S.C. 1154", "INA 204"
@@ -2177,16 +2085,18 @@ async function main() {
   assert(fallbackSource.includes('id="reloadBrowserProfileButton"') && fallbackSource.includes('id="mergeBrowserProfileButton"'), "Browser-profile conflicts do not expose explicit reconciliation actions.");
   assert(fallbackSource.includes('id="settingsMenuButton"') && fallbackSource.includes('<h2 id="savingMenuTitle">Settings</h2>'), "The saving controls were not moved into the gear-accessed Settings menu.");
   assert(fallbackSource.includes('id="appearanceSettingsHeading"') && fallbackSource.includes('id="settingsThemeControls"'), "Settings lacks the appearance theme controls.");
-  for (const id of ["themeCycleButton", "systemThemeButton", "settingsThemeSelect", "settingsThemeSystemToggle"]) assert(fallbackSource.includes(`id="${id}"`), `Theme control ${id} is missing.`);
-  assert(/id="settingsThemeSelect"[\s\S]{0,220}<option value="light">Light<\/option>[\s\S]{0,100}<option value="dark">Dark<\/option>/.test(fallbackSource), "Settings does not offer the requested Light/Dark dropdown.");
+  for (const id of ["themeCycleButton", "settingsThemeSelect", "settingsThemeSystemToggle"]) assert(fallbackSource.includes(`id="${id}"`), `Theme control ${id} is missing.`);
+  assert(!fallbackSource.includes('id="systemThemeButton"'), "The retired second top-bar System-theme button remains.");
+  assert(/id="settingsThemeSelect"[\s\S]{0,220}<option value="light">Day<\/option>[\s\S]{0,100}<option value="dark">Night<\/option>/.test(fallbackSource), "Settings does not use the Day/Night theme names.");
   assert(fallbackSource.includes('<span>Sync with system</span>') && fallbackSource.includes('els.settingsThemeSelect.disabled = profile.preferences.theme === "system";'), "Settings lacks an independent system-theme synchronization switch.");
-  assert(fallbackSource.includes('class="theme-system-laptop"') && fallbackSource.includes("data-system-theme-indicator"), "The system-theme control lacks its laptop or current-system-theme indicator.");
+  assert(/<span class="theme-controls" id="topThemeControls">\s*<button class="settings-menu-button" id="themeCycleButton"[\s\S]{0,180}<\/button>\s*<\/span>/.test(fallbackSource), "The top bar does not expose one compact cycling theme button.");
   for (const id of ["showDetailedStatusToggle", "hideTopThemeControlsToggle"]) assert(fallbackSource.includes(`id="${id}"`), `Top-bar visibility preference ${id} is missing.`);
   assert(!fallbackSource.includes('id="hideUpdateStatusToggle"') && !fallbackSource.includes('id="hideSaveStatusToggle"'), "The separate update/save status controls remain in Settings.");
   assert(fallbackSource.includes("Show Detailed Status") && fallbackSource.includes("Shows update availability and browser-saving status in the top bar"), "The combined status setting does not explain what enabling it displays.");
   assert(fallbackSource.includes('localStorage.getItem("ina-search-theme")') && fallbackSource.includes("applyThemePreference(profile.preferences.theme);"), "The last theme is not mirrored before paint and reconciled with the authoritative profile.");
-  assert(fallbackSource.includes('els.themeCycleButton.addEventListener("click", cycleThemePreference)') && fallbackSource.includes('els.systemThemeButton.addEventListener("click", () => setThemePreference("system"))') && fallbackSource.includes("profile.preferences.theme = next;\n      markProfileChanged();"), "Theme buttons do not flow through profile autosave.");
-  assert(fallbackSource.includes('SYSTEM_THEME_MEDIA?.addEventListener?.("change", syncThemeControls)') && fallbackSource.includes('effectiveThemePreference(profile.preferences.theme)'), "Theme buttons do not respond to the current or live system theme.");
+  assert(fallbackSource.includes('els.themeCycleButton.addEventListener("click", cycleThemePreference)') && fallbackSource.includes("profile.preferences.theme = next;\n      markProfileChanged();"), "The cycling theme button does not flow through profile autosave.");
+  assert(fallbackSource.includes('const nextTheme = { light: "dark", dark: "system", system: "light" }[theme];') && fallbackSource.includes('const labels = { light: "Day", dark: "Night", system: "System" };'), "The top-bar theme button does not advertise the Day → Night → System cycle.");
+  assert(fallbackSource.includes('SYSTEM_THEME_MEDIA?.addEventListener?.("change", syncThemeControls)') && fallbackSource.includes('effectiveThemePreference(theme)'), "Theme controls do not respond to the current or live system theme.");
   assert(fallbackSource.includes('const showDetailedStatus = profile.preferences.showDetailedStatus === true;') && fallbackSource.includes('els.saveStatus.hidden = !showDetailedStatus;') && fallbackSource.includes('els.corpusStatus.hidden = profile.preferences.showDetailedStatus !== true;') && fallbackSource.includes('els.topThemeControls.hidden = profile.preferences.hideTopThemeControls === true;'), "The combined detailed-status preference is not applied to both top-bar status displays.");
   assert(fallbackSource.includes(':root[data-theme="dark"]') && fallbackSource.includes(':root:not([data-theme="light"]):not([data-theme="dark"])'), "Manual and system dark-theme selectors are incomplete.");
   for (const token of ["--blue: #005288", "--canvas: #f5f7f9", "--ink: #1b1b1b", "--muted: #565c65", "--line: #dfe1e2", "--topbar: #005288"]) {
@@ -2208,7 +2118,29 @@ async function main() {
   assert(fallbackSource.includes('id="highlightInaCitationLinksToggle"') && fallbackSource.includes('Highlight INA citations in yellow'), "The Settings menu lacks the independent INA-link color preference.");
   assert(fallbackSource.includes('id="defaultStartupQueryInput"') && fallbackSource.includes('Default citation on startup'), "Settings lacks the configurable startup citation.");
   assert(fallbackSource.includes('id="clearDefaultStartupQueryButton"') && fallbackSource.includes('Clear this field to open with an empty search bar'), "Settings does not provide a clear empty-startup path.");
-  assert(fallbackSource.includes('if (state.browserSaveConflict) return "conflict";') && fallbackSource.includes('state.backupReminderDue'));
+  assert(fallbackSource.includes('id="profileSetupTitle">Save a data file to protect your notes</strong>') && fallbackSource.includes("your notes, highlights, and other research exist only in this browser and can be lost"), "The data-file warning does not explain which annotations are at risk.");
+  const protectableProfile = { notes: [], highlights: [], referenceInsertions: { records: [] }, preferences: { backupReminder: "weekly" } };
+  const profileHasProtectableContent = extractedFunction(fallbackSource, "profileHasProtectableContent", "profileSetupMode", { profile: protectableProfile, Boolean });
+  assert.strictEqual(profileHasProtectableContent(), false, "A settings-only profile is treated as annotation data needing a file warning.");
+  protectableProfile.notes = [{ id: "note" }];
+  assert.strictEqual(profileHasProtectableContent(), true, "A note does not activate durable-data protection.");
+  protectableProfile.notes = [];
+  protectableProfile.highlights = [{ id: "highlight" }];
+  assert.strictEqual(profileHasProtectableContent(), true, "A highlight does not activate durable-data protection.");
+  protectableProfile.highlights = [];
+  protectableProfile.referenceInsertions.records = [{ key: "insertion" }];
+  assert.strictEqual(profileHasProtectableContent(), true, "A persisted reference insertion does not activate durable-data protection.");
+  protectableProfile.referenceInsertions.records = [];
+  const protectableState = { browserSaveConflict: false, browserSaveError: "", browserStorageAvailable: true, profileChanged: true, backupReminderDue: true, fileConnected: false };
+  const profileSetupMode = extractedFunction(fallbackSource, "profileSetupMode", "renderProfileSetupNotice", { profile: protectableProfile, state: protectableState, profileHasProtectableContent });
+  assert.strictEqual(profileSetupMode(), "idle", "Changing settings alone displays the bold data-file warning.");
+  protectableProfile.notes = [{ id: "note" }];
+  assert.strictEqual(profileSetupMode(), "backup", "A due reminder is not shown after the user creates a note.");
+  protectableState.browserSaveConflict = true;
+  assert.strictEqual(profileSetupMode(), "conflict", "An annotation-bearing profile does not surface its save conflict.");
+  protectableState.browserSaveConflict = false;
+  protectableState.browserSaveError = "fixture failure";
+  assert.strictEqual(profileSetupMode(), "error", "An annotation-bearing profile does not surface its save error.");
   assert(fallbackSource.includes('els.saveStatus.disabled = false;'));
   assert(fallbackSource.includes('button.status-chip { cursor: pointer; font-family: inherit; font-size: 11px; }'), "The Saving status button lost its compact status typography.");
   assert(fallbackSource.includes("Import saved data") && !fallbackSource.includes('id="savingMenuDownloadButton"'), "The settings dialog retained its redundant JSON-download action.");
@@ -2244,7 +2176,7 @@ async function main() {
     profile: resetProfile,
     referenceInsertionSessionRecords: () => resetInsertionRecords,
     structuredCloneSafe: value => JSON.parse(JSON.stringify(value)),
-    defaultProfile: () => ({ preferences: { theme: "system", statutoryNavigationSystem: "usc", persistInlineReferenceInsertions: false, automaticCfrUpdates: false } }),
+    defaultProfile: () => ({ preferences: { theme: "light", statutoryNavigationSystem: "usc", persistInlineReferenceInsertions: false, automaticCfrUpdates: false } }),
     referenceInsertionPersistenceRoot: (_enabled, records) => ({ schemaVersion: 1, records: [...records] }),
     $$: () => [],
     applyThemePreference: () => {},
@@ -2268,7 +2200,7 @@ async function main() {
   assert.strictEqual(resetProfile.notes, resetNotes, "Reset Settings replaced or removed notes.");
   assert.strictEqual(resetProfile.tutorialProgress, resetTutorialProgress, "Reset Settings replaced tutorial progress.");
   assert.deepStrictEqual(resetProfile.referenceInsertions.records, resetInsertionRecords, "Reset Settings removed inserted-reference records.");
-  assert.strictEqual(resetProfile.preferences.theme, "system", "Reset Settings did not restore default preferences.");
+  assert.strictEqual(resetProfile.preferences.theme, "light", "Reset Settings did not restore the default Day theme.");
   assert.strictEqual(resetProfile.preferences.customNondefault, undefined, "Reset Settings retained a nondefault preference.");
   assert.strictEqual(resetProfile.preferences.persistInlineReferenceInsertions, true, "Reset Settings disabled persistence needed to retain existing inserted references.");
   assert.strictEqual(resetMarks, 1, "Reset Settings did not queue exactly one profile save.");
@@ -2287,15 +2219,26 @@ async function main() {
   assert.strictEqual(themeRuntime.normalizeThemePreference("system"), "system");
   assert.strictEqual(themeRuntime.normalizeThemePreference("light"), "light");
   assert.strictEqual(themeRuntime.normalizeThemePreference("dark"), "dark");
-  assert.strictEqual(themeRuntime.normalizeThemePreference("sepia"), "system", "Unsupported themes must normalize to System.");
+  assert.strictEqual(themeRuntime.normalizeThemePreference("sepia"), "light", "Unsupported themes must normalize to Day.");
   assert.strictEqual(themeRuntime.systemThemePreference(), "dark", "The system-theme indicator did not read the dark OS preference.");
   assert.strictEqual(themeRuntime.effectiveThemePreference("system"), "dark", "System mode did not resolve to the current OS theme.");
   assert.strictEqual(themeRuntime.effectiveThemePreference("light"), "light", "Manual Light was replaced by the OS theme.");
   assert.strictEqual(themeRuntime.applyThemePreference("light"), "light");
   assert.strictEqual(themeDocument.documentElement.dataset.theme, "light", "Manual Light did not apply to the document root.");
   assert.strictEqual(themeMetadata.get("ina-search-theme"), "light", "The early-paint theme mirror was not updated.");
-  assert.strictEqual(themeRuntime.applyThemePreference("invalid"), "system");
-  assert.strictEqual(themeDocument.documentElement.dataset.theme, "system", "An invalid theme did not fall back to System.");
+  assert.strictEqual(themeRuntime.applyThemePreference("invalid"), "light");
+  assert.strictEqual(themeDocument.documentElement.dataset.theme, "light", "An invalid theme did not fall back to Day.");
+  const cyclingThemeProfile = { preferences: { theme: "light" } };
+  const cyclingThemeSequence = [];
+  const cycleThemePreference = extractedFunction(fallbackSource, "cycleThemePreference", "setTopBarVisibilityPreference", {
+    profile: cyclingThemeProfile,
+    normalizeThemePreference: themeRuntime.normalizeThemePreference,
+    setThemePreference: value => { cyclingThemeSequence.push(value); cyclingThemeProfile.preferences.theme = value; }
+  });
+  cycleThemePreference();
+  cycleThemePreference();
+  cycleThemePreference();
+  assert.deepStrictEqual(cyclingThemeSequence, ["dark", "system", "light"], "The theme button does not cycle Day → Night → System → Day.");
   const vaultDeclarationsStart = fallbackSource.indexOf("    function makeVaultId(");
   const vaultDeclarationsEnd = fallbackSource.indexOf("\n\n    function applyVaultProfile(", vaultDeclarationsStart);
   assert(vaultDeclarationsStart >= 0 && vaultDeclarationsEnd > vaultDeclarationsStart, "Could not extract the JSON vault functions.");
@@ -2381,10 +2324,13 @@ async function main() {
   assert.strictEqual(conflictState.profileChanged, true, "A stale browser write discarded the conflicting in-memory work.");
   assert(fallbackSource.includes('id="view-definitions"'));
   assert(fallbackSource.includes('data-view="definitions"'));
-  assert(/<nav class="main-nav"[^>]*aria-label="Resources">[\s\S]{0,180}<details class="resources-menu" id="resourcesMenu">[\s\S]{0,120}<summary id="resourcesMenuSummary">Resources<\/summary>[\s\S]{0,220}<button class="nav-button"[^>]*data-view="definitions" aria-current="false">Definitions<\/button>/.test(fallbackSource), "Definitions is not the first item in the Resources dropdown or is incorrectly marked current on startup.");
-  assert(fallbackSource.includes('.topbar {\n      position: sticky;') && fallbackSource.includes('grid-template-columns: auto minmax(260px, 1fr) auto auto;') && fallbackSource.includes('.topbar-main { display: contents; }'), "The wide header is not composed as one logo/search/resources/status row.");
-  assert(fallbackSource.includes('@media (max-width: 1100px)') && fallbackSource.includes('.global-search { grid-column: 1 / -1; grid-row: 2; width: 100%; }'), "The complete search toolset does not move together to a second row at the narrow breakpoint.");
-  assert(fallbackSource.includes('els.resourcesMenu.open = false;') && fallbackSource.includes('!event.target.closest("#resourcesMenu")'), "The Resources dropdown does not close after selection or outside interaction.");
+  assert(/<span class="top-view-controls"[^>]*aria-label="About and definitions">[\s\S]{0,240}<button class="top-view-button about-view-button" id="aboutMenuButton"[^>]*data-view="sources"[^>]*aria-label="Open About"[\s\S]{0,420}<button class="top-view-button" id="definitionsMenuButton"[^>]*data-view="definitions"[^>]*aria-label="Open Definitions"[\s\S]{0,220}<svg class="topbar-icon-svg"/.test(fallbackSource), "About and Definitions are not exposed as adjacent question-mark and book controls.");
+  assert(!fallbackSource.includes('id="resourcesMenu"') && !fallbackSource.includes('id="resourcesMenuSummary"') && !fallbackSource.includes('>Resources</summary>'), "The retired Resources dropdown remains in the header.");
+  assert(fallbackSource.includes('.topbar {\n      position: sticky;') && fallbackSource.includes('grid-template-columns: auto minmax(120px, 1fr) auto;') && fallbackSource.includes('.topbar-main { display: contents; }'), "The wide header is not composed as one compact logo/search/status row.");
+  assert(fallbackSource.includes('.global-search .search-field-shell { flex: 1; min-width: 120px; }'), "The search field cannot shrink enough to keep the complete header on one row.");
+  assert(fallbackSource.includes('@media (max-width: 900px)') && fallbackSource.includes('.brand small { display: none; }'), "The brand subtitle does not yield space before an 864-pixel viewport.");
+  assert(fallbackSource.includes('@media (max-width: 760px)') && fallbackSource.includes('.global-search { grid-column: 1 / -1; grid-row: 2; width: 100%; }'), "The complete search toolset does not move together below the compact single-row breakpoint.");
+  assert(fallbackSource.includes('for (const button of [els.aboutMenuButton, els.definitionsMenuButton]) button.addEventListener("click", () => closeSearchResults(button.dataset.view));'), "The direct About and Definitions controls are not wired to their views.");
   assert(fallbackSource.includes('id="view-search" aria-label="Search results"'), "Search is not the default visible view.");
   assert(fallbackSource.includes('id="view-definitions" hidden aria-labelledby="definitionsHeading"'), "Definitions remains the default visible view.");
   assert(fallbackSource.includes('view: "search"'), "The startup state does not open the legal search view.");
@@ -2392,7 +2338,8 @@ async function main() {
   assert(/<div class="search-field-shell">[\s\S]*?<input class="search-input"[\s\S]*?<button class="search-suggestion-inline" id="searchSuggestionButton"/.test(fallbackSource), "The rotating suggestion is not integrated into the main search field.");
   assert(fallbackSource.includes('placeholder="Search INA, CFR, notes, and highlights"'), "The main search placeholder does not match the active search sources.");
   assert(/id="impliedUscTitle"[\s\S]*?>8<\/span>[\s\S]*?id="searchInput"/.test(fallbackSource), "The implied Title 8 marker is not positioned before the typed U.S.C. citation.");
-  assert(fallbackSource.includes("No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup."), "The implied Title 8 warning is missing.");
+  assert(!fallbackSource.includes("No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup.") && !fallbackSource.includes("impliedUscTitleNotice") && !fallbackSource.includes("implied-usc-title-notice"), "The retired implied Title 8 warning remains in the application shell.");
+  assert(!fallbackSource.includes("has-implied-usc-title.has-citation-ambiguity"), "Citation ambiguity still reserves space for the retired implied Title 8 warning.");
   assert(fallbackSource.includes("updateSearchSuggestionVisibility();"), "The integrated search suggestion does not hide when a query is present.");
   assert(fallbackSource.includes('id="searchScopeToken"') && fallbackSource.includes('id="searchScopeLabel"') && fallbackSource.includes('id="searchScopeInput"'), "The inline citation-filter editor is missing from the main search field.");
   assert(fallbackSource.includes("background: rgba(46,110,156,.22)") && fallbackSource.includes("has-search-scope"), "The inline in: citation editor is not presented as a subtle blue embedded field.");
@@ -2700,15 +2647,20 @@ async function main() {
   assert.strictEqual(saveStatusElement.hidden, true, "Disabling detailed status did not hide a saving-attention state.");
   const reminderWrites = [];
   const reminderState = { fileConnected: false, browserSaveConflict: false, browserSaveError: "", lastBackupReminderAt: null, lastFilesystemProtectionAt: null, backupReminderDue: false };
-  const reminderProfile = { updatedAt: "2026-08-25T00:00:00.000Z", preferences: { backupReminder: "weekly" } };
+  const reminderProfile = { updatedAt: "2026-08-25T00:00:00.000Z", notes: [], highlights: [], referenceInsertions: { records: [] }, preferences: { backupReminder: "weekly" } };
   const maybeShowBackupReminder = extractedFunction(fallbackSource, "maybeShowBackupReminder", "dismissBackupReminder", {
     state: reminderState,
     profile: reminderProfile,
+    profileHasProtectableContent: () => Boolean(reminderProfile.notes.length || reminderProfile.highlights.length || reminderProfile.referenceInsertions.records.length),
     BACKUP_REMINDER_INTERVAL_MS: 7 * 24 * 60 * 60 * 1000,
     Date,
     globalThis: { INASearchStorage: { async setMetadata(key, value) { reminderWrites.push([key, value]); } } },
     renderProfileSetupNotice: () => {}
   });
+  assert.strictEqual(await maybeShowBackupReminder(), false, "Changing only settings scheduled a filesystem reminder.");
+  assert.strictEqual(reminderState.backupReminderDue, false, "Changing only settings exposed the bold data-file warning.");
+  assert.strictEqual(reminderWrites.length, 0, "Changing only settings stored a backup-reminder timestamp.");
+  reminderProfile.notes.push({ id: "note" });
   assert.strictEqual(await maybeShowBackupReminder(), true, "The first substantive browser-saved change did not schedule a filesystem reminder.");
   assert.strictEqual(reminderState.backupReminderDue, true, "The due filesystem reminder was not exposed to the UI.");
   assert.strictEqual(reminderWrites.length, 1, "The first filesystem reminder timestamp was not stored exactly once.");
@@ -2764,8 +2716,8 @@ async function main() {
   assert(fallbackSource.includes('id="mainSearchHistoryBack"') && fallbackSource.includes('id="mainSearchHistoryForward"'), "The main search row is missing Back and Forward controls.");
   assert(fallbackSource.includes('els.mainSearchHistoryBack.addEventListener("click", () => navigateMainHistory(-1))'), "The main Back control is not connected to navigation history.");
   assert(fallbackSource.includes('data-statute-path='), "Rendered statutory nodes do not expose their hierarchy paths.");
-  assert(/<button class="nav-button"[^>]*data-view="sources">About<\/button>/.test(fallbackSource), "The Resources dropdown does not use the shortened About label.");
-  assert(!/<button class="nav-button"[^>]*data-view="sources">Sources &amp; About<\/button>/.test(fallbackSource), "The former Sources & About resource label remains visible.");
+  assert(/id="aboutMenuButton"[^>]*data-view="sources"[^>]*title="About"/.test(fallbackSource), "The question-mark control does not open About directly.");
+  assert(!fallbackSource.includes("Sources &amp; About"), "The former Sources & About resource label remains visible.");
   assert(fallbackSource.includes('id="legalUnitMenu"') && fallbackSource.includes('data-legal-unit-action="copy-usc-citation"'), "The structural legal-unit action menu is missing.");
   for (const label of ["Copy Link to Statute", "Print Statute", "Open in House.gov"]) assert(fallbackSource.includes(label), `The legal-unit menu is missing ${label}.`);
   assert(!fallbackSource.includes('>Copy USC Citation</button>') && !fallbackSource.includes('>Copy INA Citation</button>'), "Redundant textual citation-copy menu items remain visible.");
@@ -2836,8 +2788,9 @@ async function main() {
   assert(!fallbackSource.includes("note-unit-current-host") && !fallbackSource.includes("note-unit-hovered-host"), "Contextual note visibility still changes host classes and can rewrap legal text.");
   assert(fallbackSource.includes('.statutory-node > .statutory-line { position: relative; padding: 5px 26px 7px 7px; }'), "Statutory text lines no longer retain their compact note-control spacing after removing citation gutters.");
   assert(fallbackSource.includes('.detail-heading-row > div:first-child, .cfr-block { padding-inline-end: 26px; }'), "Legal headings and CFR blocks do not reserve a fixed compact note-control gutter.");
-  assert(fallbackSource.includes('.detail-heading-row { display: grid; grid-template-columns: minmax(0, 1fr);'), "Legal-reader headings still divide title width with their action buttons.");
-  assert(fallbackSource.includes('.detail-heading-row > :first-child { min-width: 0; width: 100%; }'), "Legal-reader titles do not span the full pane width.");
+  assert(fallbackSource.includes('.detail-heading-row { display: grid; grid-template-columns: minmax(0, 1fr) auto;'), "Legal-reader official-source actions are not kept in the section-title row.");
+  assert(fallbackSource.includes('.detail-heading-row > :first-child { min-width: 0; width: 100%; }'), "Legal-reader titles cannot use all space remaining beside their official-source action.");
+  assert(fallbackSource.includes('.detail-heading-actions .button { min-height: 30px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }'), "A title-row official-source button can wrap into an unintended second line.");
   const stickyCardSource = fallbackSource.slice(fallbackSource.indexOf("function stickyNoteCardHtml"), fallbackSource.indexOf("function prepareInlineNotePage"));
   assert(stickyCardSource.includes("noteReferenceHtml(note)") && stickyCardSource.includes("data-sticky-note-editor"), "Sticky-note view/edit modes are not both rendered.");
   for (const control of ["data-note-color-choice", "data-note-dock-choice", "data-note-boundary-choice", "data-note-associations-input", "data-note-delete"]) assert(stickyCardSource.includes(control), `Sticky notes are missing ${control}.`);
@@ -3402,7 +3355,11 @@ async function main() {
   assert(!fallbackSource.includes('<div class="breadcrumb">${hierarchy}</div>'), "The regulation detail repeats the sticky navigator hierarchy.");
   assert(fallbackSource.includes('<details class="regulation-source-details"><summary>Source details</summary>'), "Regulation provenance is not collapsed under Source details.");
   assert(fallbackSource.indexOf('<div class="cfr-body">${(section.blocks || []).map') < fallbackSource.indexOf('<details class="regulation-source-details"><summary>Source details</summary>'), "Regulation source details are not placed after the regulation text.");
-  assert(fallbackSource.includes('class="detail-heading-actions"') && fallbackSource.includes('"Current eCFR"'), "Regulation actions are not compactly aligned with the heading.");
+  const renderStatuteSource = fallbackSource.slice(fallbackSource.indexOf("function renderStatute("), fallbackSource.indexOf("const statuteReferenceUnitIndexCache"));
+  assert(renderStatuteSource.includes('"Open in House.gov"'), "The statute heading does not use the requested House.gov label.");
+  assert(!renderStatuteSource.includes('"Current U.S. Code"') && !renderStatuteSource.includes('"Open INA crosswalk"') && !renderStatuteSource.includes('"INA crosswalk"'), "A legacy statute-heading source button remains.");
+  const renderCfrSource = fallbackSource.slice(fallbackSource.indexOf("function renderCfr("), fallbackSource.indexOf("function renderAct("));
+  assert(renderCfrSource.includes('class="detail-heading-actions"') && renderCfrSource.includes('"Current eCFR"'), "The Current eCFR action is not compactly aligned with the regulation heading.");
   assert(!fallbackSource.includes('eCFR text current through'), "The regulation detail still repeats its citation and date subtitle.");
   assert(fallbackSource.includes('function fitStatuteNavigation()') && fallbackSource.includes('const preferredLabels = ["chapter", "subchapter", "part"]') && fallbackSource.includes('classList.add("unit-name-hidden")'), "The statute navigator does not use the requested hierarchy-first label compaction order.");
   assert(fallbackSource.includes('child.getClientRects().length'), "Hidden navigator elements are still included in the wrapping calculation.");
@@ -3942,7 +3899,8 @@ async function main() {
   assert(duplicateCfrAlternatives.includes('class="section-family-alternatives"') && duplicateCfrAlternatives.includes("Other titles:") && duplicateCfrAlternatives.includes('data-show-cfr-citation="45 CFR 50.1"'), "A CFR section shared across titles does not reuse the compact section-alternatives presentation with a clickable peer.");
   assert(!duplicateCfrAlternatives.includes('data-show-cfr-citation="22 CFR 50.1"') && cfrSectionTitleAlternativesHtml(cfr501Title45).includes('data-show-cfr-citation="22 CFR 50.1"'), "The CFR title-alternatives list includes the current section or cannot navigate back to the preferred title.");
   assert.strictEqual(cfrSectionTitleAlternativesHtml(full.corpus.cfr.sections.find(section => section.id === "8:214.2")), "", "A unique CFR section displays a spurious other-title list.");
-  assert(fallbackSource.indexOf("cfrSectionTitleAlternativesHtml(section)") < fallbackSource.indexOf('<div class="detail-heading-row">', fallbackSource.indexOf("function renderCfr(")), "Same-numbered CFR title alternatives are not rendered at the top of the regulation reader.");
+  const includedCfrReaderStart = fallbackSource.indexOf('els.detail.innerHTML = `<div class="detail-content" data-cfr-start>', fallbackSource.indexOf("function renderCfr("));
+  assert(includedCfrReaderStart >= 0 && fallbackSource.indexOf("cfrSectionTitleAlternativesHtml(section)", includedCfrReaderStart) < fallbackSource.indexOf('<div class="detail-heading-row">', includedCfrReaderStart), "Same-numbered CFR title alternatives are not rendered at the top of the included regulation reader.");
   const parseFocusedCitationInputWithCorpus = extractedFunction(fallbackSource, "parseFocusedCitationInput", "commandCitationClassifier", {
     String,
     focusedCitationSegments,
@@ -4038,14 +3996,13 @@ async function main() {
   const impliedTitleShell = { classList: { toggle: (name, active) => active ? impliedTitleShellClasses.add(name) : impliedTitleShellClasses.delete(name) } };
   const impliedTitleElements = {
     search: { value: "usc1101", closest: () => impliedTitleShell },
-    impliedUscTitle: { hidden: true },
-    impliedUscTitleNotice: { hidden: true }
+    impliedUscTitle: { hidden: true }
   };
   const renderImpliedUscTitle = extractedFunction(fallbackSource, "renderImpliedUscTitle", "renderCitationAmbiguity", { els: impliedTitleElements, Boolean });
   assert.strictEqual(renderImpliedUscTitle(impliedCompactUsc), true, "The implied Title 8 presentation was not activated.");
-  assert(impliedTitleShellClasses.has("has-implied-usc-title") && !impliedTitleElements.impliedUscTitle.hidden && !impliedTitleElements.impliedUscTitleNotice.hidden, "The implied Title 8 marker or warning remains hidden.");
+  assert(impliedTitleShellClasses.has("has-implied-usc-title") && !impliedTitleElements.impliedUscTitle.hidden, "The implied Title 8 marker remains hidden.");
   impliedTitleElements.search.value = "8usc1101";
-  assert.strictEqual(renderImpliedUscTitle({ type: "usc", valid: true }), false, "An explicit Title 8 citation still displays the assumption warning.");
+  assert.strictEqual(renderImpliedUscTitle({ type: "usc", valid: true }), false, "An explicit Title 8 citation still displays the implied-title marker.");
   const ambiguityShellClasses = new Set();
   const ambiguityShell = { classList: { toggle: (name, active) => active ? ambiguityShellClasses.add(name) : ambiguityShellClasses.delete(name) } };
   const ambiguityElements = {
@@ -5198,11 +5155,11 @@ async function main() {
     assert.strictEqual(themedProfile.preferences.theme, theme, `Profile normalization discarded the ${theme} theme.`);
   }
   const invalidThemeProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, theme: "sepia" } }));
-  assert.strictEqual(invalidThemeProfile.preferences.theme, "system", "An unsupported profile theme did not fall back to System.");
+  assert.strictEqual(invalidThemeProfile.preferences.theme, "light", "An unsupported profile theme did not fall back to Day.");
   const missingThemePreferences = { ...blankProfile.preferences };
   delete missingThemePreferences.theme;
   const missingThemeProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: missingThemePreferences }));
-  assert.strictEqual(missingThemeProfile.preferences.theme, "system", "A legacy profile without a theme did not default to System.");
+  assert.strictEqual(missingThemeProfile.preferences.theme, "light", "A legacy profile without a theme did not default to Day.");
   for (const preference of ["showDetailedStatus", "hideTopThemeControls", "hideLocalShareWarning", "highlightInaCitationLinks"]) {
     const enabled = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, [preference]: true } }));
     const legacyPreferences = { ...blankProfile.preferences };
@@ -5235,10 +5192,21 @@ async function main() {
   const mergedTutorialProgress = plain(tutorialProgress.mergeTutorialProgress(completedProgress, importedInProgress));
   assert.strictEqual(mergedTutorialProgress.modules["quick-start"].status, "completed", "Importing lower tutorial status downgraded a completed module.");
   assert.strictEqual(mergedTutorialProgress.modules["quick-start"].lastStepId, "summary", "The highest-status tutorial record did not retain its completed position.");
-  assert.strictEqual(mergedTutorialProgress.modules["advanced-search"].status, "viewed", "A separate imported tutorial status was lost.");
+  assert.strictEqual(Object.hasOwn(mergedTutorialProgress.modules, "advanced-search"), false, "Retired advanced tutorial progress survived import.");
   assert.strictEqual(Object.hasOwn(mergedTutorialProgress.modules, "unknown-module"), false, "Unknown tutorial content was accepted into the profile.");
-  const normalizedTutorialProgress = plain(tutorialProgress.normalizeTutorialProgress({ modules: { "saving-progress": { revision: "1", status: "completed", passedStepIds: ["status", "status"], skippedStepIds: [] } } }));
-  assert.deepStrictEqual(normalizedTutorialProgress.modules["saving-progress"].passedStepIds, ["status"], "Tutorial resume steps were not normalized and deduplicated.");
+  const normalizedTutorialProgress = plain(tutorialProgress.normalizeTutorialProgress({ modules: { "quick-start": { revision: "6", status: "completed", passedStepIds: ["practice-citation", "practice-citation"], skippedStepIds: [] } } }));
+  assert.deepStrictEqual(normalizedTutorialProgress.modules["quick-start"].passedStepIds, ["practice-citation"], "Quick Start resume steps were not normalized and deduplicated.");
+  assert.strictEqual(Object.hasOwn(plain(tutorialProgress.normalizeTutorialProgress({ modules: { "saving-progress": { status: "completed" } } })).modules, "saving-progress"), false, "Retired saving tutorial progress survived normalization.");
+  assert.deepStrictEqual(plain(tutorialProgress.normalizeTipProgress({ currentTipId: 1, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: "not-a-date" })), {
+    schemaVersion: 1, currentTipId: 1, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: null
+  }, "Daily-tip progress did not normalize a valid catalog entry and local date.");
+  assert.strictEqual(tutorialProgress.normalizeTipProgress({ currentTipId: 57 }).currentTipId, null, "A missing/retired tip identifier survived normalization.");
+  assert.deepStrictEqual(plain(tutorialProgress.mergeTipProgress(
+    { currentTipId: 1, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: "2026-08-22" },
+    { currentTipId: 2, lastAdvancedLocalDate: "2026-08-21", dismissedLocalDate: "2026-08-19" }
+  )), { schemaVersion: 1, currentTipId: 2, lastAdvancedLocalDate: "2026-08-21", dismissedLocalDate: "2026-08-22" }, "Daily-tip merge did not preserve the latest selection and dismissal dates.");
+  const connectVaultSource = fallbackSource.slice(fallbackSource.indexOf("async function connectVaultHandle"), fallbackSource.indexOf("async function connectProfile"));
+  assert(connectVaultSource.includes("const sessionTipProgress = normalizeTipProgress(profile.tipProgress);") && connectVaultSource.includes("mergeTipProgress(profile.tipProgress, sessionTipProgress)"), "Connecting a data file discards clean browser daily-tip progress.");
   const legacyProfile = JSON.parse(JSON.stringify(blankProfile));
   legacyProfile.notes = [{ id: "old-note", title: "Old", body: "Text containing }; inside a string", tags: [], links: [], createdAt: "2020-01-01T00:00:00.000Z", updatedAt: "2020-01-01T00:00:00.000Z" }];
   const legacyJs = `/* Old three-file profile */\nwindow.AUTHORITY_SEARCH_PROFILE = ${JSON.stringify(legacyProfile, null, 2)};`;
@@ -5293,12 +5261,11 @@ async function main() {
   assert(comprehensive.imported.notes[2].text.includes("Classification note with parser-like text: }; and </script>, ampersand & Unicode — café 🚀."), "A migrated card note lost its exact body text.");
   assert(comprehensive.imported.notes[0].text.includes("Links:"), "A migrated note lost its related-item section.");
   assert(comprehensive.imported.notes.every(note => !Object.hasOwn(note, "title") && !Object.hasOwn(note, "body") && !Object.hasOwn(note, "tags") && !Object.hasOwn(note, "links")), "Legacy rich-note fields remain in NoteV4.");
-  const { quizCursorKey: _retiredCursor, quizClassification: _retiredClassification, navigationUpdatesSearch: _retiredNavigationSync, resultFilter: _retiredFilter, compactResults: _retiredCompactResults, ...retainedComprehensivePreferences } = comprehensive.assigned.preferences;
+  const { quizCursorKey: _retiredCursor, quizClassification: _retiredClassification, navigationUpdatesSearch: _retiredNavigationSync, hideQuickStartPrompt: _retiredQuickStartPrompt, resultFilter: _retiredFilter, compactResults: _retiredCompactResults, ...retainedComprehensivePreferences } = comprehensive.assigned.preferences;
   assert.deepStrictEqual(comprehensive.imported.preferences, {
     ...retainedComprehensivePreferences,
     showDetailedStatus: false,
     hideTopThemeControls: false,
-    hideQuickStartPrompt: false,
     hideLocalShareWarning: false,
     statutoryLinkCitationSystem: "ina",
     highlightInaCitationLinks: false,
@@ -5337,7 +5304,7 @@ async function main() {
   assert.strictEqual(Object.hasOwn(minimal.imported.preferences, "hideUpdateStatus"), false, "A legacy profile retained the retired update-status setting.");
   assert.strictEqual(Object.hasOwn(minimal.imported.preferences, "hideSaveStatus"), false, "A legacy profile retained the retired save-status setting.");
   assert.strictEqual(minimal.imported.preferences.hideTopThemeControls, false, "A legacy profile hid top-bar theme controls by default.");
-  assert.strictEqual(minimal.imported.preferences.hideQuickStartPrompt, false, "A legacy profile unexpectedly disabled the Quick Start prompt.");
+  assert.strictEqual(Object.hasOwn(minimal.imported.preferences, "hideQuickStartPrompt"), false, "A legacy profile retained the retired Quick Start prompt preference.");
   assert.strictEqual(minimal.imported.preferences.hideLocalShareWarning, false, "A legacy profile unexpectedly disabled local-link warnings.");
   for (const field of retiredProfileFields) assert.strictEqual(Object.hasOwn(minimal.imported, field), false, `Minimal legacy import retained ${field}.`);
   assert.strictEqual(Object.hasOwn(minimal.imported, "courseStructure"), false);

@@ -21,11 +21,16 @@ window.INA_SEARCH_PROFILE = {
     "schemaVersion": 1,
     "modules": {}
   },
+  "tipProgress": {
+    "schemaVersion": 1,
+    "currentTipId": null,
+    "lastAdvancedLocalDate": null,
+    "dismissedLocalDate": null
+  },
   "preferences": {
-    "theme": "system",
+    "theme": "light",
     "showDetailedStatus": false,
     "hideTopThemeControls": false,
-    "hideQuickStartPrompt": false,
     "hideLocalShareWarning": false,
     "statutoryLinkCitationSystem": "ina",
     "highlightInaCitationLinks": false,

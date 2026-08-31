@@ -175,7 +175,7 @@
     (() => {
       const supportedThemes = new Set(["system", "light", "dark"]);
       const embeddedTheme = window.INA_SEARCH_PROFILE?.preferences?.theme;
-      let initialTheme = supportedThemes.has(embeddedTheme) ? embeddedTheme : "system";
+      let initialTheme = supportedThemes.has(embeddedTheme) ? embeddedTheme : "light";
       try {
         const mirroredTheme = localStorage.getItem("ina-search-theme");
         if (supportedThemes.has(mirroredTheme)) initialTheme = mirroredTheme;
@@ -298,7 +298,7 @@
       top: 0;
       z-index: 20;
       display: grid;
-      grid-template-columns: auto minmax(260px, 1fr) auto auto;
+      grid-template-columns: auto minmax(120px, 1fr) auto;
       align-items: center;
       gap: 0 12px;
       padding: 10px clamp(16px, 3vw, 42px);
@@ -343,41 +343,6 @@
       pointer-events: none;
     }
     .brand-tribute::before { position: absolute; top: -6px; left: 17px; width: 10px; height: 10px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); background: var(--panel); content: ""; transform: rotate(45deg); }
-    .main-nav { position: relative; grid-column: 3; min-width: max-content; }
-    .resources-menu { position: relative; }
-    .resources-menu > summary {
-      display: flex;
-      min-height: 31px;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 8px;
-      padding: 5px 9px;
-      color: #d8e9f8;
-      background: rgba(255,255,255,.06);
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 750;
-      list-style: none;
-    }
-    .resources-menu > summary::-webkit-details-marker { display: none; }
-    .resources-menu > summary::after { color: #9fc5e3; content: "▾"; font-size: 8px; }
-    .resources-menu > summary:hover, .resources-menu > summary:focus-visible, .resources-menu[open] > summary { border-color: rgba(103,183,255,.72); color: #fff; background: rgba(103,183,255,.18); }
-    .resources-menu-list { position: absolute; top: calc(100% + 7px); right: 0; z-index: 75; display: grid; gap: 2px; min-width: 150px; border: 1px solid var(--line); border-radius: 9px; padding: 5px; color: var(--ink); background: var(--panel); box-shadow: var(--shadow); }
-    .nav-button {
-      width: 100%;
-      border: 0;
-      border-radius: 6px;
-      padding: 8px 9px;
-      color: var(--ink);
-      text-align: left;
-      background: transparent;
-      cursor: pointer;
-      font-weight: 750;
-      font-size: 12px;
-    }
-    .nav-button:hover, .nav-button:focus-visible, .nav-button[aria-current="page"] { color: var(--navy); background: var(--blue-soft); }
-    .nav-button:disabled { color: var(--muted); background: var(--canvas); cursor: not-allowed; }
     .statute-navigator { position: sticky; top: var(--topbar-height, 0px); z-index: 19; border-bottom: 1px solid color-mix(in srgb, var(--blue) 48%, var(--line)); padding: 7px clamp(16px, 3vw, 42px); background: color-mix(in srgb, var(--panel) 78%, var(--blue) 22%); box-shadow: 0 3px 10px rgba(16, 42, 67, .12); }
     .statute-nav-inner { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; max-width: 1500px; margin: 0 auto; }
     .statute-history-controls { display: flex; align-items: center; gap: 3px; align-self: stretch; margin-right: 4px; border-right: 1px solid color-mix(in srgb, var(--blue) 28%, var(--line)); padding-right: 8px; }
@@ -440,7 +405,7 @@
     .statute-nav-depth-handle::after { position: absolute; top: 50%; left: 2px; width: 11px; height: 13px; border: 1px solid color-mix(in srgb, var(--blue) 55%, var(--line)); border-radius: 4px; background: var(--panel); box-shadow: 0 2px 5px rgba(16,42,67,.15); content: ""; translate: 0 -50%; }
     .statute-nav-depth-handle:hover::after, .statute-nav-depth-handle:focus-visible::after { border-color: var(--blue); background: var(--blue-soft); }
     .statute-nav-depth-handle:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-    .top-status { display: flex; grid-column: 4; align-items: center; gap: 8px; min-width: max-content; }
+    .top-status { display: flex; grid-column: 3; align-items: center; gap: 7px; min-width: max-content; }
     .status-chip {
       display: inline-flex;
       align-items: center;
@@ -460,53 +425,8 @@
     button.status-chip.update-ready { border-color: #6bd6a4; color: #dcffef; background: rgba(24, 113, 78, .38); font-weight: 850; }
     button.status-chip.update-ready:hover { background: rgba(29, 137, 94, .56); }
     .status-refresh-icon { font-size: 15px; font-weight: 950; line-height: .8; }
-    .theme-controls {
-      display: inline-flex;
-      flex: 0 0 auto;
-      align-items: center;
-      gap: 2px;
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 999px;
-      padding: 2px;
-      background: rgba(255,255,255,.06);
-    }
-    .theme-control-button {
-      position: relative;
-      display: grid;
-      place-items: center;
-      width: 27px;
-      height: 25px;
-      border: 0;
-      border-radius: 999px;
-      padding: 0;
-      color: #d8e9f8;
-      background: transparent;
-      cursor: pointer;
-      line-height: 1;
-    }
-    .theme-control-button:hover { color: #fff; background: rgba(255,255,255,.13); }
-    .theme-control-button:focus-visible { outline: 3px solid rgba(120,196,255,.58); outline-offset: 2px; }
-    .theme-control-button[aria-pressed="true"] { color: #fff; background: rgba(103,183,255,.24); }
+    .theme-controls { display: inline-flex; flex: 0 0 auto; }
     .theme-cycle-icon { font-family: Arial, sans-serif; font-size: 17px; line-height: 1; }
-    .theme-system-icon { position: relative; display: grid; width: 19px; height: 17px; place-items: center; }
-    .theme-system-laptop { width: 18px; height: 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; }
-    .theme-system-indicator {
-      position: absolute;
-      right: -3px;
-      bottom: -3px;
-      display: grid;
-      width: 10px;
-      height: 10px;
-      place-items: center;
-      border: 1px solid color-mix(in srgb, var(--topbar) 74%, white);
-      border-radius: 50%;
-      color: #fff;
-      background: var(--topbar);
-      font-family: Arial, sans-serif;
-      font-size: 7px;
-      font-weight: 900;
-      line-height: 1;
-    }
     .settings-theme-fields { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px 12px; }
     .settings-theme-select { min-width: 92px; height: 34px; border: 1px solid var(--line); border-radius: 7px; padding: 0 28px 0 9px; color: var(--ink); background: var(--panel); font: 750 12px/1 var(--sans); }
     .settings-theme-select:disabled { color: var(--muted); background: var(--canvas); opacity: .72; }
@@ -529,33 +449,34 @@
     }
     .settings-menu-button:hover { color: white; background: rgba(255,255,255,.13); }
     .settings-menu-button:focus-visible { outline: 3px solid rgba(120,196,255,.58); outline-offset: 2px; }
-    .tutorial-launcher { position: relative; flex: 0 0 auto; }
-    .tutorial-menu-button { font-family: var(--serif); font-size: 18px; font-weight: 800; }
-    .tutorial-menu-button.needs-introduction { border-color: #7ac4ff; color: #fff; background: rgba(43, 133, 201, .34); box-shadow: 0 0 0 3px rgba(91, 173, 235, .14); }
-    .tutorial-start-prompt {
-      position: absolute;
-      z-index: 58;
-      top: calc(100% + 11px);
-      right: -2px;
-      display: flex;
-      width: min(300px, calc(100vw - 28px));
-      border: 1px solid color-mix(in srgb, var(--blue) 58%, var(--line));
-      border-radius: 12px;
-      padding: 13px 42px 13px 14px;
-      color: var(--ink);
-      text-align: left;
-      background: color-mix(in srgb, var(--panel) 92%, var(--blue) 8%);
-      box-shadow: 0 16px 38px rgba(5, 23, 38, .32);
+    .top-view-controls {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 2px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      padding: 2px;
+      background: rgba(255,255,255,.06);
     }
-    .tutorial-start-prompt::before { position: absolute; top: -7px; right: 11px; width: 12px; height: 12px; border-top: 1px solid color-mix(in srgb, var(--blue) 58%, var(--line)); border-left: 1px solid color-mix(in srgb, var(--blue) 58%, var(--line)); background: color-mix(in srgb, var(--panel) 92%, var(--blue) 8%); content: ""; transform: rotate(45deg); }
-    .tutorial-start-prompt-copy { display: grid; justify-items: start; gap: 3px; }
-    .tutorial-start-prompt-copy strong { color: var(--navy); font-size: 14px; line-height: 1.25; }
-    .tutorial-start-prompt-copy span { color: var(--muted); font-size: 12px; line-height: 1.4; }
-    .tutorial-start-prompt-disable { border: 0; padding: 2px 0 0; color: var(--muted); background: transparent; cursor: pointer; font-size: 10px; font-weight: 750; line-height: 1.3; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
-    .tutorial-start-prompt-disable:hover { color: var(--navy); text-decoration-thickness: 2px; }
-    .tutorial-start-prompt-disable:focus-visible { border-radius: 2px; outline: 2px solid var(--blue); outline-offset: 2px; }
-    .tutorial-start-prompt-close { position: absolute; top: 7px; right: 7px; display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 50%; padding: 0; color: var(--muted); background: transparent; cursor: pointer; font-size: 19px; line-height: 1; }
-    .tutorial-start-prompt-close:hover { color: var(--ink); background: var(--blue-soft); }
+    .top-view-button {
+      display: grid;
+      width: 27px;
+      height: 25px;
+      place-items: center;
+      border: 0;
+      border-radius: 999px;
+      padding: 0;
+      color: #d8e9f8;
+      background: transparent;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .top-view-button:hover { color: #fff; background: rgba(255,255,255,.13); }
+    .top-view-button:focus-visible { outline: 3px solid rgba(120,196,255,.58); outline-offset: 2px; }
+    .top-view-button[aria-current="page"] { color: #fff; background: rgba(103,183,255,.24); }
+    .about-view-button { font-family: var(--serif); font-size: 18px; font-weight: 800; }
+    .topbar-icon-svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #6bd6a4; }
     .status-dot.warn { background: #ffc86d; }
     .status-dot.bad { background: #ff8b82; }
@@ -584,7 +505,7 @@
     .common-depth-choice:hover, .common-depth-choice:focus-visible { color: var(--navy); background: var(--blue-soft); }
     .common-depth-choice[aria-checked="true"] { color: #fff; background: var(--blue); }
     .common-search-note { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 9px; line-height: 1.4; }
-    .global-search .search-field-shell { flex: 1; min-width: 210px; }
+    .global-search .search-field-shell { flex: 1; min-width: 120px; }
     .global-search .search-input {
       position: relative;
       z-index: 3;
@@ -750,24 +671,6 @@
     }
     .search-field-shell.has-implied-usc-title .search-input,
     .search-field-shell.has-implied-usc-title .search-input-mirror { padding-left: 66px; }
-    .implied-usc-title-notice {
-      position: absolute;
-      z-index: 56;
-      top: calc(100% + 7px);
-      left: 39px;
-      width: max-content;
-      max-width: min(390px, calc(100% - 46px));
-      border: 1px solid #d8a94d;
-      border-radius: 8px;
-      padding: 7px 9px;
-      color: #fff0c2;
-      background: #33290f;
-      box-shadow: 0 9px 22px rgba(0,0,0,.28);
-      font-size: 10px;
-      font-weight: 800;
-      line-height: 1.35;
-    }
-    .search-field-shell.has-implied-usc-title.has-citation-ambiguity .citation-ambiguity { top: calc(100% + 48px); }
     .search-input-mirror {
       position: absolute;
       z-index: 2;
@@ -1111,24 +1014,6 @@
     .panel-head-tools, .page-heading-actions, .settings-section-heading-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
     .panel-head-tools { justify-content: flex-end; }
     .settings-section-heading-row { justify-content: space-between; }
-    .tutorial-entry-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      min-height: 28px;
-      border: 1px solid color-mix(in srgb, var(--blue) 42%, var(--line));
-      border-radius: 999px;
-      padding: 4px 9px;
-      color: var(--blue);
-      background: color-mix(in srgb, var(--panel) 86%, var(--blue) 14%);
-      cursor: pointer;
-      font-size: 10px;
-      font-weight: 850;
-      line-height: 1.2;
-    }
-    .tutorial-entry-button::before { content: "?"; display: grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; color: #fff; background: var(--blue); font-family: var(--serif); font-size: 10px; }
-    .tutorial-entry-button:hover { border-color: var(--blue); background: var(--blue-soft); }
-    .workspace.authority-browse .panel-head .tutorial-entry-button { display: none; }
     .detail-panel { min-height: 470px; overflow: hidden; }
     .detail-content { padding: clamp(17px, 3vw, 27px); }
     .legal-status-warning { position: sticky; z-index: 18; top: calc(var(--topbar-height, 0px) + var(--statute-nav-height, 0px) + 8px); margin: calc(0px - clamp(17px, 3vw, 27px)) calc(0px - clamp(17px, 3vw, 27px)) 18px; border: 0; border-bottom: 2px solid currentColor; border-radius: 0; padding: 11px clamp(17px, 3vw, 27px); box-shadow: 0 5px 15px rgba(16, 42, 67, .16); }
@@ -1147,10 +1032,10 @@
 
     .eyebrow { margin: 0 0 5px; color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
     .detail-title { margin: 0; color: var(--navy); font-family: var(--serif); font-size: clamp(23px, 3vw, 32px); line-height: 1.17; }
-    .detail-heading-row { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 10px; }
+    .detail-heading-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px; }
     .detail-heading-row > :first-child { min-width: 0; width: 100%; }
     .detail-heading-actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; justify-content: flex-end; gap: 6px; margin: 0; }
-    .detail-heading-actions .button { min-height: 30px; padding: 4px 8px; font-size: 11px; }
+    .detail-heading-actions .button { min-height: 30px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }
     .detail-subtitle { margin: 7px 0 0; color: var(--muted); font-family: var(--mono); font-size: 13px; }
     .detail-content > blockquote { margin: 16px 0; border-left: 4px solid var(--blue); padding: 10px 13px; color: var(--muted); background: var(--canvas); white-space: pre-wrap; }
     .detail-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 17px 0; }
@@ -1572,11 +1457,27 @@
 
     .sources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
     .source-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--panel); }
+    .source-card-full { grid-column: 1 / -1; }
     .source-card h3 { margin: 0 0 6px; color: var(--navy); font-size: 15px; }
     .source-card p { margin: 5px 0; color: var(--muted); font-size: 12px; }
     .source-card dl { display: grid; grid-template-columns: auto 1fr; gap: 5px 10px; margin: 12px 0; font-size: 11px; }
     .source-card dt { color: var(--muted); }
     .source-card dd { margin: 0; }
+    .tips-card-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+    .tips-card-head p { max-width: 760px; }
+    .today-tip { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px 18px; margin: 14px 0; border-left: 4px solid var(--blue); border-radius: 9px; padding: 12px 14px; background: var(--blue-soft); }
+    .today-tip-copy { min-width: 0; }
+    .today-tip-kicker { display: block; margin-bottom: 3px; color: var(--blue); font-size: 9px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .today-tip strong { display: block; color: var(--navy); font-size: 13px; }
+    .today-tip p { margin: 4px 0 0; color: var(--ink); font-size: 11px; line-height: 1.5; }
+    .today-tip-dismissed { border-left-color: var(--line); background: var(--canvas); }
+    .tip-category-list { display: grid; gap: 8px; margin-top: 14px; }
+    .tip-category { border: 1px solid var(--line); border-radius: 10px; background: var(--canvas); }
+    .tip-category > summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 13px; color: var(--navy); cursor: pointer; font-size: 12px; font-weight: 850; list-style-position: inside; }
+    .tip-category > summary small { color: var(--muted); font-size: 9px; font-weight: 750; white-space: nowrap; }
+    .tip-list { display: grid; gap: 10px; margin: 0; border-top: 1px solid var(--line); padding: 12px 18px 14px 42px; }
+    .tip-list li { padding-left: 4px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .tip-list strong { color: var(--ink); }
     .definitions-toolbar { position: relative; z-index: 20; display: grid; grid-template-columns: minmax(220px, 1fr) repeat(2, minmax(210px, .58fr)); align-items: start; gap: 10px; margin-bottom: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 13px; background: var(--panel); }
     .definitions-toolbar > label { display: grid; gap: 5px; color: var(--navy); font-size: 11px; font-weight: 850; }
     .definition-filter-control { display: grid; min-width: 0; gap: 5px; }
@@ -1770,22 +1671,6 @@
     .modal-head p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
     .icon-button { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); cursor: pointer; font-size: 18px; }
     .modal-body { padding: 20px; }
-    .tutorial-hub { width: min(880px, 100%); }
-    .tutorial-hub-intro { margin: 0 0 15px; color: var(--muted); font-size: 12px; line-height: 1.55; }
-    .tutorial-hub-progress-note { margin: 0 0 15px; border-left: 3px solid var(--blue); padding: 8px 11px; color: var(--muted); background: var(--blue-soft); font-size: 11px; }
-    .tutorial-module-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
-    .tutorial-module-card { display: grid; grid-template-rows: auto auto 1fr auto; gap: 7px; border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: var(--canvas); }
-    .tutorial-module-card.quick { grid-column: 1 / -1; border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); background: color-mix(in srgb, var(--canvas) 88%, var(--blue) 12%); }
-    .tutorial-module-card-head { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
-    .tutorial-module-card h3 { margin: 0; color: var(--navy); font-size: 15px; }
-    .tutorial-module-time { flex: 0 0 auto; color: var(--muted); font-family: var(--mono); font-size: 9px; }
-    .tutorial-module-status { justify-self: start; border-radius: 999px; padding: 3px 7px; color: var(--muted); background: var(--panel); font-size: 9px; font-weight: 850; text-transform: uppercase; }
-    .tutorial-module-status.completed { color: #17643f; background: #def5e8; }
-    .tutorial-module-status.viewed { color: #72500a; background: #fff0c7; }
-    .tutorial-module-status.in-progress { color: var(--blue); background: var(--blue-soft); }
-    .tutorial-module-card p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
-    .tutorial-module-card-actions { display: flex; justify-content: flex-end; }
-    .tutorial-updated { color: #8a5700; font-size: 9px; font-weight: 850; }
     .tutorial-coach {
       position: fixed;
       z-index: 130;
@@ -1808,9 +1693,6 @@
     .tutorial-coach-body { padding: 14px; }
     .tutorial-coach-body p { margin: 0; color: var(--ink); font-size: 12px; line-height: 1.55; }
     .tutorial-coach-body p + p { margin-top: 9px; }
-    .tutorial-next-modules { display: grid; gap: 6px; margin-top: 12px; }
-    .tutorial-next-module { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 9px; color: var(--ink); text-align: left; background: var(--canvas); cursor: pointer; font-size: 10px; font-weight: 750; }
-    .tutorial-next-module:hover { border-color: var(--blue); background: var(--blue-soft); }
     .tutorial-coach-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; border-top: 1px solid var(--line); padding: 11px 14px; }
     .tutorial-coach-footer .button { min-height: 29px; padding: 5px 9px; font-size: 10px; }
     .tutorial-coach-footer .tutorial-next { margin-left: auto; }
@@ -1820,6 +1702,7 @@
     .toast { position: fixed; z-index: 120; right: 18px; bottom: 18px; max-width: 380px; border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; color: var(--ink); background: var(--panel); box-shadow: var(--shadow); font-size: 12px; }
 
     @media (max-width: 900px) {
+      .brand small { display: none; }
       .statute-navigator { padding-block: 6px; }
       .statute-nav-inner { gap: 4px; }
       .statute-nav-segment summary { min-height: 28px; padding: 3px 6px; }
@@ -1829,11 +1712,10 @@
       .workspace.authority-browse .results-panel { width: 100%; }
       .workspace.authority-browse .result-list { max-height: none; min-height: 0; }
     }
-    @media (max-width: 1100px) {
-      .topbar { grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px 12px; }
+    @media (max-width: 760px) {
+      .topbar { grid-template-columns: auto minmax(0, 1fr); gap: 6px 10px; }
       .brand { grid-column: 1; grid-row: 1; }
-      .main-nav { grid-column: 2; grid-row: 1; justify-self: end; }
-      .top-status { grid-column: 3; grid-row: 1; }
+      .top-status { grid-column: 2; grid-row: 1; justify-self: end; }
       .global-search { grid-column: 1 / -1; grid-row: 2; width: 100%; }
       .focused-citation-panes[data-pane-layout="two"] { grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(2, minmax(0, 1fr)); }
     }
@@ -1861,15 +1743,14 @@
       .profile-setup-alert { grid-template-columns: auto minmax(0, 1fr); }
       .profile-setup-alert-actions { grid-column: 2; justify-content: flex-start; }
       .results-panel { width: calc(100% - 20px); }
-      .tutorial-module-grid { grid-template-columns: 1fr; }
-      .tutorial-start-prompt { position: fixed; top: 62px; right: 12px; left: 12px; width: auto; }
-      .tutorial-start-prompt::before { display: none; }
-      .tutorial-module-card.quick { grid-column: auto; }
+      .tips-card-head { align-items: stretch; flex-direction: column; }
+      .tips-card-head .button { align-self: start; }
+      .today-tip { grid-template-columns: 1fr; }
       .tutorial-coach { top: auto !important; right: 10px !important; bottom: 10px !important; left: 10px !important; width: auto; max-height: 46vh; }
     }
     .statute-nav-segment.unit-name-hidden summary small { display: none; }
     @media print {
-      .topbar, .statute-navigator, .profile-setup-alert, .results-panel, .detail-actions, .detail-heading-actions, .profile-bar, .button, .legal-unit-menu, .scoped-definition-popover, .legal-reference-popover, .legal-unit-note-button, .inline-notes-panel, .tutorial-coach, .tutorial-entry-button, .inserted-reference-card-actions, .inserted-reference-connector { display: none !important; }
+      .topbar, .statute-navigator, .profile-setup-alert, .results-panel, .detail-actions, .detail-heading-actions, .profile-bar, .button, .legal-unit-menu, .scoped-definition-popover, .legal-reference-popover, .legal-unit-note-button, .inline-notes-panel, .tutorial-coach, .inserted-reference-card-actions, .inserted-reference-connector { display: none !important; }
       .app-shell { padding: 0; }
       .workspace { display: block; }
       .detail-panel, .panel { border: 0; box-shadow: none; }
@@ -1914,7 +1795,7 @@
           </div>
           <div class="search-input-mirror" id="searchInputMirror" aria-hidden="true"></div>
           <input class="search-input" id="searchInput" type="search" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"
-            aria-describedby="impliedUscTitleNotice" placeholder="Search INA, CFR, notes, and highlights">
+            placeholder="Search INA, CFR, notes, and highlights">
           <div class="citation-equivalent" id="citationEquivalent" role="group" aria-label="INA and U.S.C. citation crosswalk" hidden>
             <button class="citation-equivalent-side citation-equivalent-side-ina" id="citationEquivalentIna" type="button">
               <span class="citation-equivalent-label" id="citationEquivalentInaLabel"></span>
@@ -1928,7 +1809,6 @@
           </div>
           <button class="search-suggestion-inline" id="searchSuggestionButton" type="button">Try H-1B</button>
           <kbd class="kbd" aria-hidden="true">/</kbd>
-          <div class="implied-usc-title-notice" id="impliedUscTitleNotice" role="status" hidden>No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup.</div>
           <div class="citation-ambiguity" id="citationAmbiguity" role="region" aria-label="Valid interpretations of ambiguous citation" hidden>
             <span class="citation-ambiguity-intro">This citation has more than one valid interpretation.</span>
             <div class="citation-ambiguity-choices">
@@ -1953,28 +1833,15 @@
         </button>
       </span>
     </div>
-    <nav class="main-nav" aria-label="Resources">
-      <details class="resources-menu" id="resourcesMenu">
-        <summary id="resourcesMenuSummary">Resources</summary>
-        <div class="resources-menu-list" role="menu">
-          <button class="nav-button" type="button" role="menuitem" data-view="definitions" aria-current="false">Definitions</button>
-          <button class="nav-button" type="button" role="menuitem" data-view="sources">About</button>
-        </div>
-      </details>
-    </nav>
     <div class="top-status" aria-label="Settings and application status">
-      <div class="tutorial-launcher">
-        <button class="settings-menu-button tutorial-menu-button needs-introduction" id="tutorialMenuButton" type="button" aria-label="Start the Quick Start tutorial" aria-describedby="tutorialStartPromptText" title="Start Quick Start"><span aria-hidden="true">?</span></button>
-        <div class="tutorial-start-prompt" id="tutorialStartPrompt" hidden>
-          <span class="tutorial-start-prompt-copy" id="tutorialStartPromptText"><strong id="tutorialStartPromptTitle">New to INASearch?</strong><span id="tutorialStartPromptBody">Start with the basic tutorial here.</span><button class="tutorial-start-prompt-disable" id="tutorialStartPromptDisable" type="button">Don't ask again</button></span>
-          <button class="tutorial-start-prompt-close" id="tutorialStartPromptClose" type="button" aria-label="Dismiss Quick Start message">×</button>
-        </div>
-      </div>
+      <span class="top-view-controls" role="group" aria-label="About and definitions">
+        <button class="top-view-button about-view-button" id="aboutMenuButton" type="button" data-view="sources" aria-label="Open About" title="About" aria-current="false"><span aria-hidden="true">?</span></button>
+        <button class="top-view-button" id="definitionsMenuButton" type="button" data-view="definitions" aria-label="Open Definitions" title="Definitions" aria-current="false"><svg class="topbar-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5.2c2.7-.9 5.5-.4 8.5 1.4v12c-3-1.8-5.8-2.3-8.5-1.4z"></path><path d="M20.5 5.2c-2.7-.9-5.5-.4-8.5 1.4v12c3-1.8 5.8-2.3 8.5-1.4z"></path></svg></button>
+      </span>
       <button class="status-chip" id="corpusStatus" type="button" disabled hidden><span class="status-dot bad"></span>Corpus Unavailable</button>
       <button class="status-chip" id="saveStatus" type="button" aria-label="Saved in this browser. Open settings." hidden><span class="status-dot"></span>Saved in browser</button>
-      <span class="theme-controls" id="topThemeControls" role="group" aria-label="Theme controls">
-        <button class="theme-control-button" id="themeCycleButton" type="button"><span class="theme-cycle-icon" data-theme-cycle-icon aria-hidden="true">☾</span></button>
-        <button class="theme-control-button" id="systemThemeButton" type="button"><span class="theme-system-icon" aria-hidden="true"><svg class="theme-system-laptop" viewBox="0 0 24 20"><rect x="4" y="2.5" width="16" height="11" rx="1.5"></rect><path d="M2.5 16h19l-1.5 1.5H4z"></path></svg><span class="theme-system-indicator" data-system-theme-indicator>☀</span></span></button>
+      <span class="theme-controls" id="topThemeControls">
+        <button class="settings-menu-button" id="themeCycleButton" type="button"><span class="theme-cycle-icon" data-theme-cycle-icon aria-hidden="true">☀</span></button>
       </span>
       <button class="settings-menu-button" id="settingsMenuButton" type="button" aria-label="Open settings" title="Settings"><span aria-hidden="true">⚙</span></button>
     </div>
@@ -1987,7 +1854,7 @@
 
   <section class="profile-setup-alert" id="profileSetupNotice" aria-live="polite" hidden>
     <span class="profile-setup-alert-icon" aria-hidden="true">!</span>
-    <span><strong id="profileSetupTitle">Keep a filesystem copy of your profile</strong><small id="profileSetupMessage">Browser-saved data can be cleared. Connect a data file or download a backup.</small></span>
+    <span><strong id="profileSetupTitle">Save a data file to protect your notes</strong><small id="profileSetupMessage">Without a saved data file, your notes, highlights, and other research exist only in this browser and can be lost if its site data is cleared.</small></span>
     <span class="profile-setup-alert-actions">
       <button class="profile-setup-alert-dismiss" id="backupReminderDisableButton" type="button">Don't ask again</button>
       <span class="profile-setup-alert-buttons">
@@ -2003,7 +1870,7 @@
       <div class="sr-only" id="citationFeedback" role="status" aria-live="polite">Type a citation or search phrase.</div>
       <div class="workspace" id="searchWorkspace">
         <section class="panel results-panel" id="resultsPanel" aria-labelledby="resultsHeading">
-          <div class="panel-head"><h2 id="resultsHeading">Results</h2><div class="panel-head-tools"><button class="tutorial-entry-button" type="button" data-tutorial-module="advanced-search">Learn advanced search</button><span class="results-scroll-cue">Scrollable pane</span><small id="resultCount">Ready</small></div></div>
+          <div class="panel-head"><h2 id="resultsHeading">Results</h2><div class="panel-head-tools"><span class="results-scroll-cue">Scrollable pane</span><small id="resultCount">Ready</small></div></div>
           <div class="authority-browse-header" id="authorityBrowseHeader" hidden></div>
           <div class="result-list" id="resultList" role="listbox" aria-label="Search results"></div>
         </section>
@@ -2024,10 +1891,7 @@
     </section>
 
     <section class="view" id="view-definitions" hidden aria-labelledby="definitionsHeading">
-      <div class="page-heading">
-        <div><h1 id="definitionsHeading">Definitions</h1><p>USCIS Glossary explanations and exact statutory and regulatory definitions, kept separate by source and applicability.</p></div>
-        <button class="tutorial-entry-button" type="button" data-tutorial-module="definitions">Learn Definitions</button>
-      </div>
+      <div class="page-heading"><div><h1 id="definitionsHeading">Definitions</h1><p>USCIS Glossary explanations and exact statutory and regulatory definitions, kept separate by source and applicability.</p></div></div>
       <div class="definitions-toolbar" aria-label="Definition filters">
         <label for="definitionTermFilter">Term contains
           <input class="field" id="definitionTermFilter" type="search" autocomplete="off" spellcheck="false" placeholder="Try alien, child, admission…">
@@ -2054,7 +1918,7 @@
 
     <section class="view" id="view-sources" hidden aria-labelledby="sourcesHeading">
       <div class="page-heading">
-        <div><h1 id="sourcesHeading">Sources &amp; About</h1><p>Coverage, capture dates, provenance rules, and operational limits.</p></div>
+        <div><h1 id="sourcesHeading">About</h1><p>Help, official shortcuts, and embedded-corpus details.</p></div>
       </div>
       <div id="sourceWarnings"></div>
       <div class="sources-grid" id="sourcesGrid"></div>
@@ -2071,13 +1935,6 @@
         <p><strong>PowerShell extraction example</strong></p>
         <pre id="corpusAuditPowerShell"></pre>
       </details>
-      <div class="section-card" style="margin-top:14px">
-        <h2 style="margin-top:0;color:var(--navy)">Important boundaries</h2>
-        <p>The Definitions catalog preserves USCIS Glossary explanations and explicit “the term” definitions throughout the included INA, along with 8 CFR 1.2, as separate source records. Glossary entries are categorized as USCIS Policy; statutory and regulatory entries are categorized as Law. Applicability labels retain the governing source scope, and INASearch does not merge competing definitions or infer a universal meaning.</p>
-        <p>In the standard build, official House cross-references whose targets are included in Title 8 are rendered as local links. References outside the included Title 8 material remain plain text rather than being assigned an unverified local target.</p>
-        <p>INASearch is an offline legal reference, not legal advice and not a substitute for checking the current official source. <span id="uscCoverageBoundary">This build includes dated offline U.S. Code and CFR snapshots; current-source actions remain available.</span></p>
-        <p>INA citations and U.S.C. citations are preserved as distinct citation systems. A crosswalk is shown only when the USCIS INA table directly supplies it. Named-Act results are references found in approved sources—not complete reproductions of those Acts.</p>
-      </div>
     </section>
   </main>
 
@@ -2129,8 +1986,8 @@
             <span><strong>Color theme</strong><small id="themeControlsDescription">Choose a fixed theme or keep it synchronized with this device.</small></span>
             <div class="settings-theme-fields" id="settingsThemeControls" role="group" aria-label="Theme controls" aria-describedby="themeControlsDescription">
               <select class="settings-theme-select" id="settingsThemeSelect" aria-label="Color theme">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+                <option value="light">Day</option>
+                <option value="dark">Night</option>
               </select>
               <label class="settings-theme-system-sync" for="settingsThemeSystemToggle"><input id="settingsThemeSystemToggle" type="checkbox" role="switch"><span>Sync with system</span></label>
             </div>
@@ -2140,7 +1997,7 @@
             <input id="showDetailedStatusToggle" type="checkbox" role="switch">
           </label>
           <label class="settings-toggle" for="hideTopThemeControlsToggle">
-            <span><strong>Hide theme buttons in the top bar</strong><small>The theme buttons in Settings remain available.</small></span>
+            <span><strong>Hide the theme button in the top bar</strong><small>The theme controls in Settings remain available.</small></span>
             <input id="hideTopThemeControlsToggle" type="checkbox" role="switch">
           </label>
         </section>
@@ -2269,7 +2126,7 @@
           </div>
         </section>
         <section class="settings-section" aria-labelledby="savingSettingsHeading">
-          <div class="settings-section-heading-row"><h3 class="settings-section-heading" id="savingSettingsHeading">Saving &amp; data</h3><button class="tutorial-entry-button" type="button" data-tutorial-module="saving-progress">Learn saving</button></div>
+          <h3 class="settings-section-heading" id="savingSettingsHeading">Saving &amp; data</h3>
           <p class="settings-section-description">Protect current work or bring saved data forward from an earlier file.</p>
           <div class="profile-bar">
             <strong id="profileSummary">Saved in this browser</strong>
@@ -2311,20 +2168,6 @@
           <p class="settings-section-description" id="resetSettingsDescription">Notes, inserted references, and other saved content will not be removed.</p>
           <button class="settings-reset-button" id="resetSettingsButton" type="button" aria-describedby="resetSettingsDescription" data-hold-duration="1500">Hold to reset settings</button>
         </section>
-      </div>
-    </section>
-  </div>
-
-  <div class="modal-backdrop" id="tutorialHubModal" hidden>
-    <section class="modal tutorial-hub" role="dialog" aria-modal="true" aria-labelledby="tutorialHubTitle" aria-describedby="tutorialHubDescription">
-      <div class="modal-head">
-        <div><h2 id="tutorialHubTitle">Tutorials</h2><p id="tutorialHubDescription">Short, optional lessons that leave your current work intact.</p></div>
-        <button class="icon-button" id="closeTutorialHubButton" type="button" aria-label="Close tutorials">×</button>
-      </div>
-      <div class="modal-body">
-        <p class="tutorial-hub-intro">Start with the core lookup flow, or choose one focused tool. Tutorials use small practice actions and restore your prior page when you leave.</p>
-        <p class="tutorial-hub-progress-note" id="tutorialHubProgressNote"></p>
-        <div class="tutorial-module-grid" id="tutorialModuleGrid"></div>
       </div>
     </section>
   </div>
@@ -2491,67 +2334,141 @@
           { id: "reader", title: "The matching law opens here", target: ".detail-heading-row", text: "You are now reading INA 203 from the local copy included with INASearch. The section title and statutory text appear together, so you can begin reading without leaving the file." },
           { id: "hierarchy", title: "See exactly where you are", target: "#statuteNavigator", text: "This bar places INA 203 within Title 8. Open a segment to move to a nearby chapter, part, or section. When you open a subsection or paragraph, those levels appear here too." },
           { id: "definitions-page", title: "Definitions keeps meanings tied to their source", target: "#definitionsHeading", setup: "definitions-page", text: "Use this page when the meaning of a term matters. Each entry shows the wording, where it came from, and where INASearch records that definition as applying." },
-          { id: "about-page", title: "About tells you what is included", target: "#sourcesHeading", setup: "about-page", text: "Use this page to check source coverage and capture dates, and to open current official material when you need to confirm that the local text is still current." },
-          { id: "summary", title: "Your basic workflow", target: "#tutorialMenuButton", text: "Start with the citation from your casework. INASearch will show the matching local text, the equivalent INA or U.S.C. citation when available, and the hierarchy around the provision. Definitions and About remain available from the top of every page; is:notes lists saved annotations.", summary: true }
-        ]
-      },
-      {
-        id: "advanced-search", title: "Advanced Search", shortTitle: "Advanced search", minutes: "3–4 min", revision: 6,
-        description: "Search the authority stream and narrow it with in:, has:, and cites:.",
-        steps: [
-          { id: "goal", title: "Search beyond exact citations", target: ".global-search .search-field-shell", focus: "#searchInput", setup: "blank-search", text: "Ordinary words search INA and CFR text, plus your notes and highlights. Legal results appear in one scrolling authority stream by default; the optional split-pane search setting shows INA and CFR side by side." },
-          { id: "practice-phrase", title: "Search for a phrase", target: ".global-search .search-field-shell", focus: "#searchInput", setup: "blank-search", text: "Type waiver to search INA and CFR text plus your annotations. The tutorial will continue when the matching results appear.", practice: { kind: "search-results", query: "waiver" } },
-          { id: "practice-in", title: "Search inside INA 212", target: ".global-search .search-field-shell", focus: "#searchInput", text: "Type in:INA 212, enter two spaces, then type waiver and press Enter. The in: tag limits the search to that provision.", practice: { kind: "scope", mode: "in", authority: "ina", section: "212", path: [], query: "waiver" } },
-          { id: "practice-cites", title: "Find material that cites a provision", target: ".global-search .search-field-shell", focus: "#searchInput", text: "Type cites:INA101a15s and press Enter. The cites: tag finds indexed statutes and regulations that refer to the target.", practice: { kind: "scope", mode: "cites", authority: "ina", section: "101", path: ["a", "15", "S"] } },
-          { id: "summary", title: "Advanced search complete", target: "#detailPanel", text: "Use broad text when exploring, in: to choose source families or limit where words are found, has: to require annotations, and cites: to locate referencing authority.", summary: true }
-        ]
-      },
-      {
-        id: "legal-reader", title: "Legal Reader", shortTitle: "Legal reader", minutes: "3–4 min", revision: 5,
-        description: "Navigate legal hierarchy, recognize provision status, preview references, and locate official text.",
-        steps: [
-          { id: "goal", title: "Read from the exact unit", target: ".detail-heading-row", setup: "reader-sample", text: "The reader opens the requested statutory or regulatory unit and preserves the surrounding hierarchy needed to understand where it sits." },
-          { id: "practice-navigator", title: "Open the live hierarchy", target: ".statute-nav-segment summary", text: "Open any hierarchy segment in the navigation bar. The tutorial will continue as soon as the menu opens.", practice: { kind: "click", selector: ".statute-nav-segment summary" } },
-          { id: "crosswalk", title: "Switch citation systems", target: "#citationEquivalent", text: "When USCIS supplies a direct crosswalk, the search field shows the corresponding INA and U.S.C. citations. Either label reruns the same lookup in that format, and the adjacent control copies it." },
-          { id: "references", title: "Preview internal references", target: ".legal-reference-link, #detailPanel a[href^=\"#\"]", text: "Indexed internal references open locally or preview their target. Unavailable material stays linked only to an approved official source; INASearch does not invent a local destination." },
-          { id: "status", title: "Notice former provisions", target: ".detail-heading-row", text: "Repealed, Transferred, or Omitted labels mark historical records. Read the sticky warning and follow a reviewed transfer destination when one is shown." },
-          { id: "notes", title: "Notes follow the reading context", target: "[data-note-unit-kind]", text: "The note control appears for the live navigation unit and the legal unit under the pointer. It links research to that exact citation without crowding every paragraph." },
-          { id: "compare", title: "Compare exact citations", target: ".global-search .search-field-shell", text: "Separate two or more citations with commas to open focused reader panes. Each pane opens at the requested legal unit and scrolls independently; remove the commas to return to the ordinary reader." },
-          { id: "official", title: "Check the current official source", target: ".detail-heading-actions", text: "Offline text is a dated snapshot. The heading action opens the corresponding current House U.S. Code or eCFR page when you choose it; tutorials never open external pages for you." },
-          { id: "summary", title: "Legal reader complete", target: "#statuteNavigator", text: "Use the live hierarchy for structure, read status warnings before relying on older material, preview included references, and use official-source actions to confirm current law.", summary: true }
-        ]
-      },
-      {
-        id: "definitions", title: "Definitions", shortTitle: "Definitions", minutes: "2–3 min", revision: 4,
-        description: "Separate a term’s wording, source, and recorded applicability.",
-        steps: [
-          { id: "goal", title: "Definitions are source-specific", target: "#definitionsHeading", setup: "definitions-page", text: "USCIS Glossary explanations and explicit statutory or regulatory definitions remain separate. Similar wording is never silently merged into a universal meaning." },
-          { id: "practice-term", title: "Find the term child", target: "#definitionTermFilter", text: "Type child in Term contains. The tutorial will continue when the matching definition groups appear.", practice: { kind: "definition-results", query: "child" } },
-          { id: "defined-in", title: "Filter where wording comes from", target: "#definitionSourceDropdown", text: "Defined in identifies the authority or policy source that supplied the wording." },
-          { id: "applies-in", title: "Filter recorded applicability", target: "#definitionScopeDropdown", text: "Applicable in identifies the recorded legal or policy scope. A definition outside checked applicability may remain visible only when another definition for the same term matches." },
-          { id: "highlights", title: "In-text highlights are optional", target: "#settingsMenuButton", text: "Highlight defined terms is off by default and can be turned on in Settings. Treat each highlight as a prompt to verify the word's role and scope; the same word can carry a different meaning in context." },
-          { id: "summary", title: "Definitions complete", target: "#definitionsHeading", text: "Read each definition with its source and applicability. Optional in-text highlights can help spot possible definitions, but the surrounding provision controls how a word is being used.", summary: true }
-        ]
-      },
-      {
-        id: "saving-progress", title: "Saving & Data", shortTitle: "Saving", minutes: "2–3 min", revision: 4,
-        description: "Understand browser saving, filesystem autosaving, and imports.",
-        steps: [
-          { id: "goal", title: "Browser saving is automatic", target: "#savingSettingsHeading", setup: "settings-saving", text: "Notes, settings, and tutorial progress save in this browser automatically. Browser data can still be cleared, so filesystem protection remains available." },
-          { id: "status", title: "Read the status first", target: "#saveStatus", text: "Saved in browser is the normal state. File saving on means INASearch_Data.json is also current; Saving needs attention means a write or conflict must be resolved." },
-          { id: "autosave", title: "Filesystem autosaving uses one file", target: "#savingMenuEnableButton", text: "Connect filesystem autosaving creates or reconnects INASearch_Data.json. INASearch receives access to that file—not its containing folder. The tutorial will not open the picker or request permission." },
-          { id: "import", title: "Import saved data", target: "#savingMenuImportButton", text: "Import replaces the loaded notes and settings after confirmation, while compatible tutorial state is merged by the highest achieved status." },
-          { id: "summary", title: "Saving complete", target: "#savingSettingsHeading", text: "Browser saving is automatic but can be cleared. Connect INASearch_Data.json for filesystem autosaving, or import when bringing saved data forward.", summary: true }
+          { id: "about-page", title: "About keeps help and official links together", target: "#sourcesHeading", setup: "about-page", text: "Use About to revisit every tip, inspect the embedded corpus, and open approved current official sources." },
+          { id: "summary", title: "Your basic workflow", target: "#aboutTipsCard", text: "Start with the citation from your work. INASearch shows the matching local text, an INA or U.S.C. equivalent when available, and the surrounding hierarchy. The paired ? and book controls open About and Definitions; is:notes lists saved annotations.", summary: true }
         ]
       }
     ]);
     const TUTORIAL_BY_ID = new Map(TUTORIAL_CATALOG.map(module => [module.id, module]));
+    const TIP_CATEGORIES = Object.freeze([
+      {
+        id: "finding", title: "Finding things", tips: [
+          [1, "You can type a citation directly.", "Examples include INA 245(a), 8 U.S.C. 1255(a), 8 CFR 245.1, and ina245a."],
+          [2, "U.S.C. citations can omit Title 8.", "USC 1101(a)(15)(H), usc1101a15h, and 8 U.S.C. 1101(a)(15)(H) all identify Title 8; INASearch visibly shows when it supplied the 8."],
+          [3, "INA and U.S.C. numbers describe the same statutory text differently.", "INASearch automatically shows the corresponding citation when a crosswalk exists."],
+          [4, "Citation-equivalent buttons copy.", "Click anywhere on an INA, U.S.C., or CFR citation button to copy the displayed citation; it does not replace your search."],
+          [5, "INASearch checks ambiguous Roman numerals.", "When characters such as i, v, or x have multiple valid interpretations, the choices show the complete resulting citations and identify the current interpretation."],
+          [6, "The INASearch name is Home.", "Clicking the icon or name clears the search and returns to the configured empty-search view. Settings controls whether Home shows the INA menu, CFR menu, or both."],
+          [7, "Quotes and OR solve different problems.", "Use \"good moral character\" for that exact phrase; use asylum OR refugee when either word is acceptable."],
+          [8, "Press / to return to search.", "The shortcut focuses the main search field from elsewhere in the interface."],
+          [9, "Use in: to choose what gets searched.", "in:INA,CFR,notes,highlights president searches the selected kinds of content; without in:, ordinary searches include all four."],
+          [10, "Very short text searches wait for more letters.", "This prevents a one- or two-letter fragment from producing an enormous, mostly useless result set."],
+          [11, "The suggested search is only a starting point.", "Clicking it runs that example; it does not change any saved preference."]
+        ]
+      },
+      {
+        id: "scoped-search", title: "Searching within law and finding citations", tips: [
+          [12, "in: searches inside a provision.", "Enter the citation in the separate citation field, then type the words to find—for example, in:INA 212  waiver."],
+          [13, "The in: citation can be a range.", "in:INA 101-106 searches the indexed provisions across that range."],
+          [14, "CFR paragraphs can be searched narrowly.", "in:8 CFR 214.2(h)(13) limits the text search to that paragraph and its descendants."],
+          [15, "Press Space twice to leave the citation field.", "After entering an in: or cites: citation, the second space moves the cursor into the main search field. It no longer adds a stray period."],
+          [16, "cites: reverses the question.", "cites:INA 101(a)(15)(S) finds statutes and regulations that cite that provision."],
+          [17, "Words can further narrow a cites: search.", "Add text in the main field to keep only citing provisions that also contain those words."],
+          [18, "cites: works across the content you select.", "Legal hits center the inline reference; notes match saved detected references, and highlights match references overlapped by the selected text."]
+        ]
+      },
+      {
+        id: "common", title: "Common matching units", tips: [
+          [19, "Text searches match at the deepest citable unit by default.", "Common lets you combine nearby hits at a broader level such as section, subsection, or paragraph."],
+          [20, "A statutory Common level also chooses the analogous CFR level.", "In a combined search, common:subparagraph uses CFR Paragraph 3 because both occupy the same structural depth."],
+          [21, "CFR depth can be entered as P[N].", "For example, common:P4 uses CFR Paragraph 4 and infers the analogous statutory clause level."],
+          [22, "Comma-separated Common values keep the authorities different.", "common:subsection,P4 uses statutory subsections and CFR Paragraph 4 explicitly."],
+          [23, "The Common setting works in both directions.", "Changing either authority's selector updates the other to the analogous depth by default. Match INA and CFR Common levels in Settings controls this behavior."]
+        ]
+      },
+      {
+        id: "panes-history", title: "Side-by-side views and history", tips: [
+          [24, "A comma opens side-by-side legal views.", "Try INA 212, 8 CFR 212.7."],
+          [25, "Comparison panes can contain different kinds of views.", "A hierarchy menu, section reader, and text-search result can coexist."],
+          [26, "Each pane has its own search field.", "Editing one pane changes that pane without rebuilding the others."],
+          [27, "Closing one of two panes expands the remaining view.", "Its citation, reading position, and available history stay with it."],
+          [28, "Home can open both legal menus.", "Choose Both menus under When the search bar is empty in Settings."],
+          [29, "Opening a section closes the other blank menu by default.", "Turn off Close the other blank menu after opening a section if you prefer to keep it beside the reader."],
+          [30, "Pane history records meaningful navigation.", "Opening a section or search result, choosing a citation, and explicitly selecting a legal unit create Back/Forward destinations; ordinary scrolling does not."],
+          [31, "Main Back and Forward work the same way.", "They follow legal locations and searches you deliberately opened, not every incidental interface action."]
+        ]
+      },
+      {
+        id: "navigation", title: "Legal navigation bar", tips: [
+          [32, "The legal navigation bar can be enabled in Settings.", "Legal navigation bar can hide it, show it only for a single reader, or show it in every legal view.", "hidden"],
+          [33, "Each navigation button represents part of the legal structure.", "Clicking one opens its choices and changes the structure displayed in the bar.", "visible"],
+          [34, "The Section button's wording is configurable.", "Section display in Settings can show INA, U.S.C., both, or whichever numbering system the current hierarchy uses.", "visible"],
+          [35, "The INA/USC switch changes the upper statutory hierarchy.", "It changes how titles, chapters, and sections are organized without changing the underlying statutory text.", "visible"],
+          [36, "Navigation menus provide direct choices.", "Open a title, chapter, part, section, or paragraph button to jump to another available unit at that level.", "visible"],
+          [37, "The last navigation button can offer immediate children.", "This makes it possible to descend into the next legal level without returning to a separate menu page.", "visible"],
+          [38, "Settings controls the smallest unit shown in navigation.", "Statutes and CFR have separate depth settings.", "visible"],
+          [39, "Scrolling can update the search citation.", "Enable Update search while scrolling in Settings if you want the field to follow the provision currently at the top of the reader.", "visible"]
+        ]
+      },
+      {
+        id: "reading", title: "Reading and references", tips: [
+          [40, "Clicking a legal unit selects it without moving the page.", "The search field, blue highlight, navigation bar, and history update while the current reading position stays fixed."],
+          [41, "Citation jumps align to the top of the visible reader.", "The selected provision begins immediately below the top bar and legal navigation bar."],
+          [42, "Citation-jump animation is optional.", "Animate citation jumps in Settings controls whether main-reader jumps move smoothly or instantly."],
+          [43, "Click an inline legal reference to preview it.", "The preview shows the actual referenced wording and its citation before you decide whether to open it."],
+          [44, "The reference preview's Copy button copies the complete referenced unit.", "The copied text includes the complete legal unit shown in the preview."],
+          [45, "The Split button opens the referenced location in another viewer pane.", "Use it when you want to keep the citing and cited provisions visible together."],
+          [46, "Insert places the cited excerpt after the provision that cites it.", "The inserted card remains visually connected to its source reference."],
+          [47, "An inserted excerpt's source button opens its original legal location.", "Use it to move from the excerpt back to the complete source context."],
+          [48, "Inserted excerpts can be remembered.", "Save inserted reference excerpts in Settings controls whether they return with saved data or last only for the current session."],
+          [49, "A legal unit's citation button opens its action menu.", "From there you can copy citations, copy the complete text, copy a link, print, or open the official source."],
+          [50, "Copying a complete statute unit includes any House footnotes referenced by that unit.", "Publisher-supplied footnotes remain attached to the copied statutory context."],
+          [51, "Print produces a focused legal-unit page.", "It uses a light, text-oriented layout rather than printing the surrounding application."],
+          [52, "The official-source button opens that provision's location on House.gov or eCFR.gov.", "Use it to confirm the dated offline text against the current official source."],
+          [53, "CFR readers show the current-through date.", "It appears in the regulation's source details."],
+          [54, "Repealed, transferred, and omitted sections remain listed and are clearly labeled.", "Read the status warning before relying on historical material."],
+          [55, "Typing a transferred Title 8 section opens its current section.", "The current reader still provides its official-source button."],
+          [56, "House footnotes are editorial.", "Superscript-numbered House footnotes are publisher-supplied context, not operative statutory text."],
+          [59, "CFR source details contain authority and publication information.", "Expand them below the regulation when you need that background."]
+        ]
+      },
+      {
+        id: "definitions", title: "Definitions", tips: [
+          [60, "Defined terms include their legal scope.", "A definition preview states where the definition applies instead of assuming it governs every appearance of the word."],
+          [61, "Experimental: highlight defined terms.", "Turn it on in Settings to preview possibly applicable definitions while reading; always check the stated scope and context."],
+          [62, "The Definitions view can filter by source and applicability.", "This helps distinguish an INA definition, a regulatory definition, and a general USCIS glossary explanation."],
+          [63, "A definition's official-source button opens the location from which it was taken.", "The paired book icon in the top bar opens the complete Definitions view."],
+          [82, "USCIS Glossary definitions are general agency explanations.", "Their source label distinguishes them from controlling statutory or regulatory definitions."]
+        ]
+      },
+      {
+        id: "annotations", title: "Notes, highlights, and annotation search", tips: [
+          [64, "Create notes and highlights while reading.", "Select text for a highlight or linked note, or add a citation-level sticky note without leaving the reader."],
+          [65, "Sticky notes edit in place.", "Click a card to edit it; its text and color stay synchronized everywhere that note appears."],
+          [66, "Search annotation text directly.", "in:notes president searches complete note bodies, while in:highlights president searches the exact highlighted text."],
+          [67, "One note can appear at several citations.", "Text and color stay synchronized, while each citation keeps its own card placement and width."],
+          [80, "List every note or highlight association.", "is:notes, is:highlights, or is:notes,highlights shows one row for each associated citation."],
+          [81, "Filter legal searches by your annotations.", "president has:notes returns ordinary legal-text hits covered by a note; has:notes,highlights accepts either kind."]
+        ]
+      },
+      {
+        id: "saving", title: "Saving, offline use, and appearance", tips: [
+          [68, "Browser saving and a connected data file serve different purposes.", "Browser saving is automatic on this device; a connected file gives you a portable copy you control."],
+          [69, "The save warning appears when personal work needs protection.", "Changing settings alone does not trigger it; notes, highlights, and other saved research do until you save or connect a data file."],
+          [70, "A warning sign marks local-file links.", "Such a link works only on this device while the HTML file stays in the same location; Don't remind me again controls the automatic reminder."],
+          [71, "INASearch normally works offline.", "With automatic CFR updates off, searches and local readers make no network requests; official-source buttons intentionally open government sites."],
+          [72, "Automatic CFR updates are optional.", "Enabling the setting checks included CFR material directly against eCFR; it does not update the U.S. Code, INA crosswalk, forms, or Policy Manual snapshot."],
+          [73, "The top status controls summarize saved-data and corpus health.", "Their detailed visibility can be changed in Settings."],
+          [74, "The theme button cycles Day, Night, and System.", "INASearch starts in Day unless you choose another preference."],
+          [75, "The startup search is configurable.", "Set a citation or query to open automatically, or leave it blank to start at Home."],
+          [76, "Statutory links can display INA or U.S.C. citations.", "Citation style for statutory links in Settings controls the wording without changing their destinations."],
+          [77, "INA citation links can be highlighted.", "The separate highlighting setting changes their appearance, not their meaning."]
+        ]
+      },
+      {
+        id: "sources", title: "About and official sources", tips: [
+          [78, "About keeps help and official links together.", "It contains the grouped tip catalog, corpus inspection details, and a full-width set of approved official shortcuts."],
+          [79, "Official shortcuts remain available when local material is absent.", "They open approved government resources rather than inventing a local result."]
+        ]
+      }
+    ]);
+    const TIP_BY_ID = new Map(TIP_CATEGORIES.flatMap(category => category.tips.map(([id, title, text, eligibility]) => [id, { id, title, text, eligibility: eligibility || "always", categoryId: category.id, categoryTitle: category.title }])));
     const STATUTE_NAVIGATION_DEPTHS = ["Section", "Subsection", "Paragraph", "Subparagraph", "Clause", "Subclause", "Item", "Subitem", "Subsubitem"];
     const CFR_NAVIGATION_DEPTHS = ["Section", "Paragraph", "Paragraph level 2", "Paragraph level 3", "Paragraph level 4", "Paragraph level 5", "Paragraph level 6"];
     const THEME_STORAGE_KEY = "ina-search-theme";
     const SYSTEM_THEME_MEDIA = typeof globalThis.matchMedia === "function" ? globalThis.matchMedia("(prefers-color-scheme: dark)") : null;
     function normalizeThemePreference(value) {
-      return ["system", "light", "dark"].includes(value) ? value : "system";
+      return ["system", "light", "dark"].includes(value) ? value : "light";
     }
     function systemThemePreference() {
       return SYSTEM_THEME_MEDIA?.matches ? "dark" : "light";
@@ -2677,7 +2594,7 @@
       definitionScopeFilters: ["all"],
       tutorialSessionProgress: null,
       tutorialActive: null,
-      tutorialPromptDismissed: false,
+      tipProgressSaveScheduled: false,
       tutorialTarget: null,
       tutorialReturnFocus: null,
       tutorialPositionFrame: null,
@@ -2833,6 +2750,30 @@
       return merged;
     }
 
+    function normalizeTipProgress(value) {
+      const source = value && typeof value === "object" ? value : {};
+      const localDate = key => /^\d{4}-\d{2}-\d{2}$/.test(String(source[key] || "")) ? String(source[key]) : null;
+      const currentTipId = Number(source.currentTipId);
+      return {
+        schemaVersion: 1,
+        currentTipId: TIP_BY_ID.has(currentTipId) ? currentTipId : null,
+        lastAdvancedLocalDate: localDate("lastAdvancedLocalDate"),
+        dismissedLocalDate: localDate("dismissedLocalDate")
+      };
+    }
+
+    function mergeTipProgress(first, second) {
+      const left = normalizeTipProgress(first), right = normalizeTipProgress(second);
+      const leftDate = left.lastAdvancedLocalDate || "", rightDate = right.lastAdvancedLocalDate || "";
+      const current = rightDate > leftDate ? right : left;
+      return {
+        schemaVersion: 1,
+        currentTipId: current.currentTipId,
+        lastAdvancedLocalDate: current.lastAdvancedLocalDate,
+        dismissedLocalDate: [left.dismissedLocalDate, right.dismissedLocalDate].filter(Boolean).sort().at(-1) || null
+      };
+    }
+
     function emptyReferenceInsertions() {
       return { schemaVersion: 1, records: [] };
     }
@@ -2852,7 +2793,8 @@
       highlights: [],
       annotationOrdinals: {},
       tutorialProgress: { schemaVersion: 1, modules: {} },
-      preferences: { theme: "system", showDetailedStatus: false, hideTopThemeControls: false, hideQuickStartPrompt: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "ina", highlightInaCitationLinks: false, lastNoteColor: "yellow", notesUseRuleFont: false, statutoryNavigationSystem: "usc", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, emptySearchView: "ina", splitAuthoritySearchPanes: false, closeBlankCompanionOnSectionOpen: true, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
+      tipProgress: { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null },
+      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "ina", highlightInaCitationLinks: false, lastNoteColor: "yellow", notesUseRuleFont: false, statutoryNavigationSystem: "usc", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, emptySearchView: "ina", splitAuthoritySearchPanes: false, closeBlankCompanionOnSectionOpen: true, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
       referenceInsertions: emptyReferenceInsertions()
     });
 
@@ -2901,7 +2843,7 @@
       normalized.preferences.theme = normalizeThemePreference(normalized.preferences.theme);
       normalized.preferences.showDetailedStatus = showDetailedStatus;
       normalized.preferences.hideTopThemeControls = normalized.preferences.hideTopThemeControls === true;
-      normalized.preferences.hideQuickStartPrompt = normalized.preferences.hideQuickStartPrompt === true;
+      delete normalized.preferences.hideQuickStartPrompt;
       normalized.preferences.hideLocalShareWarning = normalized.preferences.hideLocalShareWarning === true;
       normalized.preferences.statutoryLinkCitationSystem = normalized.preferences.statutoryLinkCitationSystem === "usc" ? "usc" : "ina";
       normalized.preferences.highlightInaCitationLinks = normalized.preferences.highlightInaCitationLinks === true;
@@ -2932,6 +2874,7 @@
         ? normalizeReferenceInsertions(normalized.referenceInsertions)
         : emptyReferenceInsertions();
       normalized.tutorialProgress = normalizeTutorialProgress(normalized.tutorialProgress);
+      normalized.tipProgress = normalizeTipProgress(normalized.tipProgress);
       return globalThis.INA_SEARCH_ANNOTATIONS?.normalizeProfile?.(normalized, { makeId }) || normalized;
     }
 
@@ -2980,14 +2923,13 @@
       searchInputMirror: $("#searchInputMirror"), citationEquivalent: $("#citationEquivalent"),
       citationEquivalentIna: $("#citationEquivalentIna"), citationEquivalentInaLabel: $("#citationEquivalentInaLabel"), citationEquivalentInaCopy: $("#citationEquivalentInaCopy"),
       citationEquivalentUsc: $("#citationEquivalentUsc"), citationEquivalentUscLabel: $("#citationEquivalentUscLabel"), citationEquivalentUscCopy: $("#citationEquivalentUscCopy"),
-      impliedUscTitle: $("#impliedUscTitle"), impliedUscTitleNotice: $("#impliedUscTitleNotice"),
+      impliedUscTitle: $("#impliedUscTitle"),
       citationAmbiguity: $("#citationAmbiguity"), citationAmbiguityCommon: $("#citationAmbiguityCommon"), citationAmbiguityOptions: $("#citationAmbiguityOptions"), feedback: $("#citationFeedback"), resultList: $("#resultList"),
       searchSuggestion: $("#searchSuggestionButton"), searchWorkspace: $("#searchWorkspace"), focusedCitationWorkspace: $("#focusedCitationWorkspace"), focusedCitationPanes: $("#focusedCitationPanes"), focusedCitationStatus: $("#focusedCitationStatus"), resultsPanel: $("#resultsPanel"), authorityBrowseHeader: $("#authorityBrowseHeader"),
       resultCount: $("#resultCount"), detail: $("#detailPanel"), corpusStatus: $("#corpusStatus"),
       brand: $("#inaSearchBrand"), brandTribute: $("#brandTribute"),
-      saveStatus: $("#saveStatus"), topThemeControls: $("#topThemeControls"), themeCycleButton: $("#themeCycleButton"), systemThemeButton: $("#systemThemeButton"), settingsThemeSelect: $("#settingsThemeSelect"), settingsThemeSystemToggle: $("#settingsThemeSystemToggle"),
-      resourcesMenu: $("#resourcesMenu"), resourcesMenuSummary: $("#resourcesMenuSummary"), settingsMenuButton: $("#settingsMenuButton"), tutorialMenuButton: $("#tutorialMenuButton"), tutorialStartPrompt: $("#tutorialStartPrompt"),
-      tutorialStartPromptTitle: $("#tutorialStartPromptTitle"), tutorialStartPromptBody: $("#tutorialStartPromptBody"), tutorialStartPromptDisable: $("#tutorialStartPromptDisable"), tutorialStartPromptClose: $("#tutorialStartPromptClose"),
+      saveStatus: $("#saveStatus"), topThemeControls: $("#topThemeControls"), themeCycleButton: $("#themeCycleButton"), settingsThemeSelect: $("#settingsThemeSelect"), settingsThemeSystemToggle: $("#settingsThemeSystemToggle"),
+      aboutMenuButton: $("#aboutMenuButton"), definitionsMenuButton: $("#definitionsMenuButton"), settingsMenuButton: $("#settingsMenuButton"),
       profileSetupNotice: $("#profileSetupNotice"), profileSetupTitle: $("#profileSetupTitle"),
       profileSetupMessage: $("#profileSetupMessage"), backupReminderConnectButton: $("#backupReminderConnectButton"), backupReminderDownloadButton: $("#backupReminderDownloadButton"),
       backupReminderLaterButton: $("#backupReminderLaterButton"), backupReminderDisableButton: $("#backupReminderDisableButton"),
@@ -3001,7 +2943,6 @@
       backupReminderToggle: $("#backupReminderToggle"),
       defaultStartupQueryForm: $("#defaultStartupQueryForm"), defaultStartupQueryInput: $("#defaultStartupQueryInput"), defaultStartupQueryFeedback: $("#defaultStartupQueryFeedback"),
       profileSummary: $("#profileSummary"), sourcesGrid: $("#sourcesGrid"),
-      uscCoverageBoundary: $("#uscCoverageBoundary"),
       importProfileInput: $("#importProfileInput"),
       corpusManifestDetails: $("#corpusManifestDetails"), corpusAuditPowerShell: $("#corpusAuditPowerShell"),
       sourceWarnings: $("#sourceWarnings"),
@@ -3025,29 +2966,20 @@
       scopedDefinitionPopoverStatus: $("#scopedDefinitionPopoverStatus"), scopedDefinitionPopoverBody: $("#scopedDefinitionPopoverBody"),
       scopedDefinitionPopoverClose: $("#scopedDefinitionPopoverClose"), scopedDefinitionPopoverJump: $("#scopedDefinitionPopoverJump"),
       annotationSelectionToolbar: $("#annotationSelectionToolbar"),
-      tutorialHubModal: $("#tutorialHubModal"), tutorialHubProgressNote: $("#tutorialHubProgressNote"), tutorialModuleGrid: $("#tutorialModuleGrid"),
       tutorialCoach: $("#tutorialCoach"), tutorialCoachKicker: $("#tutorialCoachKicker"), tutorialCoachTitle: $("#tutorialCoachTitle"), tutorialCoachBody: $("#tutorialCoachBody"),
       tutorialProgressValue: $("#tutorialProgressValue"), tutorialPauseButton: $("#tutorialPauseButton"), tutorialBackButton: $("#tutorialBackButton"), tutorialSkipButton: $("#tutorialSkipButton"), tutorialNextButton: $("#tutorialNextButton"),
       toast: $("#toast")
     };
 
     function syncThemeControls() {
-      const systemTheme = systemThemePreference();
-      const effectiveTheme = effectiveThemePreference(profile.preferences.theme);
-      const nextTheme = effectiveTheme === "dark" ? "light" : "dark";
-      const nextIcon = nextTheme === "light" ? "☀" : "☾";
-      const systemIcon = systemTheme === "light" ? "☀" : "☾";
-      for (const button of [els.themeCycleButton]) {
-        button.querySelector("[data-theme-cycle-icon]").textContent = nextIcon;
-        button.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
-        button.title = `Switch to ${nextTheme} theme`;
-      }
-      for (const button of [els.systemThemeButton]) {
-        button.querySelector("[data-system-theme-indicator]").textContent = systemIcon;
-        button.setAttribute("aria-label", `Use system theme. System is currently ${systemTheme}.`);
-        button.setAttribute("aria-pressed", profile.preferences.theme === "system" ? "true" : "false");
-        button.title = `Use system theme (${systemTheme})`;
-      }
+      const theme = normalizeThemePreference(profile.preferences.theme);
+      const effectiveTheme = effectiveThemePreference(theme);
+      const nextTheme = { light: "dark", dark: "system", system: "light" }[theme];
+      const labels = { light: "Day", dark: "Night", system: "System" };
+      const icons = { light: "☀", dark: "☾", system: "◐" };
+      els.themeCycleButton.querySelector("[data-theme-cycle-icon]").textContent = icons[theme];
+      els.themeCycleButton.setAttribute("aria-label", `${labels[theme]} theme. Switch to ${labels[nextTheme]}.`);
+      els.themeCycleButton.title = `${labels[theme]} → ${labels[nextTheme]}`;
       els.settingsThemeSelect.value = effectiveTheme;
       els.settingsThemeSelect.disabled = profile.preferences.theme === "system";
       els.settingsThemeSystemToggle.checked = profile.preferences.theme === "system";
@@ -10355,7 +10287,6 @@
       const shell = els.search.closest(".search-field-shell");
       shell?.classList.toggle("has-implied-usc-title", active);
       els.impliedUscTitle.hidden = !active;
-      els.impliedUscTitleNotice.hidden = !active;
       return active;
     }
 
@@ -10475,7 +10406,7 @@
           ? `<div class="empty-state" style="min-height:360px"><div><strong>${state.searchScope?.valid ? `No indexed statutes or regulations cite ${escapeHtml(state.searchScope.label)}` : "Enter a valid citation target"}</strong><p style="margin-top:5px">${state.searchScope?.valid ? "Try a broader provision or citation range." : escapeHtml(state.searchScope?.message || "Enter a citation or citation range in the cites: field.")}</p></div></div>`
           : state.searchScopeActive
             ? `<div class="empty-state" style="min-height:360px"><div><strong>${state.searchScope?.valid ? `Search within ${escapeHtml(state.searchScope.label)}` : "Enter a valid citation scope"}</strong><p style="margin-top:5px">${state.searchScope?.valid ? "Type the words or phrase you want to find in this part of the law." : escapeHtml(state.searchScope?.message || "Enter a citation or citation range in the in: field.")}</p></div></div>`
-          : `<div class="empty-state" style="min-height:360px"><div><strong>Fast local lookup</strong><p style="margin-top:5px">Search INA and CFR text, plus your notes and highlights. Definitions and source links remain available from Resources.</p></div></div>`;
+          : `<div class="empty-state" style="min-height:360px"><div><strong>Fast local lookup</strong><p style="margin-top:5px">Search INA and CFR text, plus your notes and highlights. Use the paired book and question-mark buttons for Definitions and About.</p></div></div>`;
         return;
       }
       if (!results.length && authorityBrowse) {
@@ -10811,13 +10742,6 @@
       else if (record.kind === "form") renderForm(record.item);
       else if (record.kind === "definition-index") renderDefinitionCatalogPreview();
       else if (record.kind === "definition") renderDefinitionPreview(record.item);
-      if (["usc", "ina", "cfr", "cfr-appendix", "statutory-note", "editorial-note", "usc-note", "source-credit"].includes(record.kind)) {
-        const actions = $(".detail-heading-actions, .detail-actions", els.detail);
-        if (actions && !$("[data-tutorial-module=\"legal-reader\"]", actions)) {
-          actions.insertAdjacentHTML("afterbegin", '<button class="tutorial-entry-button" type="button" data-tutorial-module="legal-reader">Learn legal reader</button>');
-          renderTutorialEntryLabels(actions);
-        }
-      }
     }
 
     function renderDefinitionCatalogPreview() {
@@ -11903,25 +11827,22 @@
       const headingReferenceContext = { ...baseDefinitionContext, sourceRecord: { kind: "section-heading", recordPath: [], field: "heading" } };
       const preambleReferenceContext = { ...baseDefinitionContext, sourceRecord: { kind: "section-preamble", recordPath: [], field: "preamble" } };
       const requestedLabel = citationResult?.label || `8 U.S.C. ${section.section}`;
-      const legalStatus = statuteStatus(section);
       const selectedTransferTarget = citationResult?.dispositionTarget || state.selected?.dispositionTarget || null;
       const citationBase = statuteReaderCitationBase(section, citationResult, selectedTransferTarget, mapping);
-      const officialSourceLabel = legalStatus === "current" ? "Current U.S. Code" : "Official House record";
       const breadcrumb = (section.breadcrumb || []).map(x => `<span>${escapeHtml(`${x.kind} ${x.number} — ${x.title}`)}</span>`).join("");
       if (!hasLocalUscCache) {
         setStatuteNavigationVisible(false);
         els.detail.innerHTML = `<div class="detail-content">
           <p class="eyebrow">Official U.S. Code navigation</p>
-          <h2 class="detail-title">${escapeHtml(section.heading || `Section ${section.section}`)}</h2>
+          <div class="detail-heading-row"><div><h2 class="detail-title">${escapeHtml(section.heading || `Section ${section.section}`)}</h2></div><div class="detail-heading-actions">${openButton(officialTextFragment(section.url || houseSectionUrl(section.section), citationResult?.path || []), "Open in House.gov")}</div></div>
           <p class="detail-subtitle">${escapeHtml(requestedLabel)}</p>
           <div class="breadcrumb">${breadcrumb}</div>
-          <div class="detail-actions">${openButton(officialTextFragment(section.url || houseSectionUrl(section.section), citationResult?.path || []), "Open on uscode.house.gov")}${mapping ? openButton("https://www.uscis.gov/legal-resources/immigration-and-nationality-act", "Open INA crosswalk") : ""}</div>
           <div class="source-banner">This version omits full U.S. Code section text. It retains citation, crosswalk, and focused definitions-catalog records, and opens the official House source for ordinary U.S.C. results.</div>
         </div>`;
         return;
       }
       els.detail.innerHTML = `<div class="detail-content" data-statute-start>${statuteSectionAlternativesHtml(citationResult, section)}${statuteStatusWarning(section, selectedTransferTarget)}
-        <div class="detail-heading-row"><div>${legalUnitTriggerHtml("usc", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}<h2 class="detail-title">${linkifyStatutoryText(section.heading || `Section ${section.section}`, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, [], headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(officialTextFragment(section.url, citationTargetPath), officialSourceLabel)}${mapping ? openButton("https://www.uscis.gov/legal-resources/immigration-and-nationality-act", "INA crosswalk") : ""}</div></div>
+        <div class="detail-heading-row"><div>${legalUnitTriggerHtml("usc", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}<h2 class="detail-title">${linkifyStatutoryText(section.heading || `Section ${section.section}`, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, [], headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(officialTextFragment(section.url, citationTargetPath), "Open in House.gov")}</div></div>
         ${section.preamble ? `<p class="statute-preamble">${linkifyStatutoryText(section.preamble, section.preambleReferences || [], 0, undefined, searchTarget?.kind === "preamble" ? searchTarget.match : null, section.preambleFootnoteReferences || [], preambleReferenceContext)}</p>` : ""}
         ${legalAugmentationSlotHtml("usc", 8, section.section, [], citationBase)}
         <div class="statute-body">${(section.body || []).map(node => renderStatutoryNode(node, citationTargetPath, [], 0, searchTarget, citationBase, section.id, baseDefinitionContext)).join("")}</div>
@@ -12415,7 +12336,7 @@
     function renderCfr(item, citationResult = null) {
       if (item?.external) {
         setStatuteNavigationVisible(false);
-        els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Regulation not included</p><h2 class="detail-title">${escapeHtml(item.label)}</h2><p class="detail-subtitle">Outside this edition</p><div class="detail-actions">${openButton(item.url, "Open current eCFR")}<button class="button" data-link-current>＋ Link to note</button></div><div class="notice warning">This citation format is valid, but its text is not included in INASearch. Use current eCFR to check the regulation and any recent changes.</div></div>`;
+        els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Regulation not included</p><div class="detail-heading-row"><div><h2 class="detail-title">${escapeHtml(item.label)}</h2></div><div class="detail-heading-actions">${openButton(item.url, "Current eCFR")}</div></div><p class="detail-subtitle">Outside this edition</p><div class="detail-actions"><button class="button" data-link-current>＋ Link to note</button></div><div class="notice warning">This citation format is valid, but its text is not included in INASearch. Use current eCFR to check the regulation and any recent changes.</div></div>`;
         return;
       }
       const section = item;
@@ -12546,7 +12467,7 @@
       updateProfileSummary();
       clearTimeout(state.saveTimer);
       if (!state.browserSaveConflict) state.saveTimer = setTimeout(queueProfileWrite, 500);
-      if (state.view === "sources") renderSources();
+      if (state.view === "sources" && !state.tutorialActive) renderSources();
     }
 
     function profileSnapshotWithTutorialProgress() {
@@ -12574,7 +12495,16 @@
 
     const BACKUP_REMINDER_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000;
 
+    function profileHasProtectableContent(candidate = profile) {
+      return Boolean(
+        (candidate?.notes || []).length ||
+        (candidate?.highlights || []).length ||
+        (candidate?.referenceInsertions?.records || []).length
+      );
+    }
+
     function profileSetupMode() {
+      if (!profileHasProtectableContent()) return "idle";
       if (state.browserSaveConflict) return "conflict";
       if (state.browserSaveError || (!state.browserStorageAvailable && state.profileChanged)) return "error";
       if (state.backupReminderDue && !state.fileConnected && profile.preferences.backupReminder !== "disabled") return "backup";
@@ -12590,12 +12520,12 @@
         ? "Saving stopped because another window changed this profile"
         : mode === "error"
           ? "Saving in this browser needs attention"
-          : "Keep a filesystem copy of your profile";
+          : "Save a data file to protect your notes";
       els.profileSetupMessage.textContent = mode === "conflict"
         ? "Open Settings to reload, merge, or export this window before resolving the conflict."
         : mode === "error"
           ? `${state.browserSaveError || "Browser storage is unavailable."} Download or connect a data file before closing this tab.`
-          : "Browser-saved data can be cleared. Connect a data file or download a backup.";
+          : "Without a saved data file, your notes, highlights, and other research exist only in this browser and can be lost if its site data is cleared.";
       els.backupReminderLaterButton.hidden = problem;
       els.backupReminderDisableButton.hidden = problem;
     }
@@ -12687,7 +12617,8 @@
     }
 
     function cycleThemePreference() {
-      setThemePreference(effectiveThemePreference(profile.preferences.theme) === "dark" ? "light" : "dark");
+      const current = normalizeThemePreference(profile.preferences.theme);
+      setThemePreference({ light: "dark", dark: "system", system: "light" }[current]);
     }
 
     function setTopBarVisibilityPreference(key, hidden) {
@@ -13046,7 +12977,6 @@
       }
       state.statuteHierarchyAuthority = profile.preferences.statutoryNavigationSystem;
       state.lastScrollSyncedCitation = "";
-      state.tutorialPromptDismissed = false;
       applyThemePreference(profile.preferences.theme);
       syncCitationJumpAnimationPreference();
       syncAppearanceControls();
@@ -13146,7 +13076,7 @@
     }
 
     async function maybeShowBackupReminder() {
-      if (state.fileConnected || !profile.updatedAt || profile.preferences.backupReminder === "disabled" || state.browserSaveConflict || state.browserSaveError) return false;
+      if (!profileHasProtectableContent() || state.fileConnected || !profile.updatedAt || profile.preferences.backupReminder === "disabled" || state.browserSaveConflict || state.browserSaveError) return false;
       const baseline = Math.max(Date.parse(state.lastBackupReminderAt || 0) || 0, Date.parse(state.lastFilesystemProtectionAt || 0) || 0);
       if (baseline && Date.now() - baseline < BACKUP_REMINDER_INTERVAL_MS) return false;
       const at = new Date().toISOString();
@@ -13175,41 +13105,12 @@
       renderSavingMenu();
     }
 
-    function tutorialStatusLabel(status) {
-      return ({ "not-started": "Not started", "in-progress": "In progress", viewed: "Viewed", completed: "Completed" })[status] || "Not started";
-    }
-
     function tutorialProgressEntry(moduleId) {
       return state.tutorialSessionProgress?.modules?.[moduleId] || { revision: 0, status: "not-started", lastStepId: null };
     }
 
     function quickStartCompleted() {
       return tutorialProgressEntry("quick-start").status === "completed";
-    }
-
-    function disableQuickStartPrompt() {
-      state.tutorialPromptDismissed = true;
-      if (profile.preferences.hideQuickStartPrompt !== true) {
-        profile.preferences.hideQuickStartPrompt = true;
-        markProfileChanged();
-      }
-      renderTutorialLauncher();
-      els.tutorialMenuButton.focus();
-    }
-
-    function renderTutorialLauncher() {
-      const progress = tutorialProgressEntry("quick-start");
-      const completed = quickStartCompleted();
-      const active = state.tutorialActive?.moduleId === "quick-start";
-      const promptVisible = !completed && !active && !state.tutorialPromptDismissed && profile.preferences.hideQuickStartPrompt !== true;
-      els.tutorialStartPrompt.hidden = !promptVisible;
-      els.tutorialStartPromptTitle.textContent = progress.status === "in-progress" ? "Finish Quick Start" : "New to INASearch?";
-      els.tutorialStartPromptBody.textContent = progress.status === "in-progress" ? "Continue the basic tutorial here." : "Start with the basic tutorial here.";
-      els.tutorialMenuButton.classList.toggle("needs-introduction", !completed);
-      els.tutorialMenuButton.setAttribute("aria-label", completed ? "Open tutorials" : progress.status === "in-progress" ? "Resume the Quick Start tutorial" : "Start the Quick Start tutorial");
-      els.tutorialMenuButton.title = completed ? "Tutorials" : progress.status === "in-progress" ? "Resume Quick Start" : "Start Quick Start";
-      if (promptVisible) els.tutorialMenuButton.setAttribute("aria-describedby", "tutorialStartPromptText");
-      else els.tutorialMenuButton.removeAttribute("aria-describedby");
     }
 
     function updateTutorialProgress(moduleId, status, lastStepId = null, contentReviewed = false) {
@@ -13235,7 +13136,6 @@
       state.tutorialSessionProgress = progress;
       mergeSessionTutorialProgressIntoProfile();
       renderTutorialEntryLabels();
-      if (!els.tutorialHubModal.hidden) renderTutorialHub();
     }
 
     function renderTutorialEntryLabels(root = document) {
@@ -13247,46 +13147,6 @@
         button.textContent = `${action} ${module.shortTitle}`;
         button.setAttribute("aria-label", `${action} the ${module.title} tutorial`);
       });
-      renderTutorialLauncher();
-    }
-
-    function renderTutorialHub() {
-      const savingNote = state.fileConnected
-        ? `Tutorial progress is saved in this browser and included in ${state.vaultFileName}.`
-        : "Tutorial progress is saved in this browser. Connect or download a data file for filesystem protection.";
-      els.tutorialHubProgressNote.textContent = savingNote;
-      els.tutorialModuleGrid.innerHTML = TUTORIAL_CATALOG.map(module => {
-        const entry = tutorialProgressEntry(module.id);
-        const status = entry.status || "not-started";
-        const action = status === "in-progress" ? "Resume" : TUTORIAL_STATUS_RANK[status] >= TUTORIAL_STATUS_RANK.viewed ? "Review" : "Start";
-        const updated = TUTORIAL_STATUS_RANK[status] >= TUTORIAL_STATUS_RANK.viewed && entry.revision < module.revision;
-        return `<article class="tutorial-module-card${module.quick ? " quick" : ""}">
-          <div class="tutorial-module-card-head"><h3>${escapeHtml(module.title)}</h3><span class="tutorial-module-time">${escapeHtml(module.minutes)}</span></div>
-          <span class="tutorial-module-status ${escapeHtml(status)}">${escapeHtml(tutorialStatusLabel(status))}</span>
-          <p>${escapeHtml(module.description)}</p>
-          ${updated ? `<span class="tutorial-updated">Updated—review available</span>` : ""}
-          <div class="tutorial-module-card-actions"><button class="button${module.quick ? " primary" : ""}" type="button" data-tutorial-start="${escapeHtml(module.id)}">${action}</button></div>
-        </article>`;
-      }).join("");
-    }
-
-    function openTutorialHub(returnFocus = null) {
-      if (!quickStartCompleted()) {
-        if (state.tutorialActive) { pauseTutorial(false); return; }
-        startTutorial("quick-start", returnFocus || document.activeElement || els.tutorialMenuButton);
-        return;
-      }
-      if (state.tutorialActive) { pauseTutorial(true); return; }
-      renderTutorialHub();
-      state.tutorialReturnFocus = returnFocus || document.activeElement || els.tutorialMenuButton;
-      els.tutorialHubModal.hidden = false;
-      setTimeout(() => $("[data-tutorial-start]", els.tutorialHubModal)?.focus(), 0);
-    }
-
-    function closeTutorialHub(restoreFocus = true) {
-      els.tutorialHubModal.hidden = true;
-      if (restoreFocus) (state.tutorialReturnFocus || els.tutorialMenuButton).focus();
-      if (restoreFocus) state.tutorialReturnFocus = null;
     }
 
     function captureTutorialState() {
@@ -13324,13 +13184,8 @@
           resetSearchState();
           tutorialSwitchView("search");
         }
-        else if (setup === "reader-sample") applySearchQuery("INA 203b1a", false);
         else if (setup === "definitions-page") tutorialSwitchView("definitions");
         else if (setup === "about-page") tutorialSwitchView("sources");
-        else if (setup === "settings-saving") {
-          if (!els.tutorialHubModal.hidden) closeTutorialHub(false);
-          openSavingMenu("saving", els.tutorialMenuButton);
-        }
       } finally { state.tutorialNavigating = false; }
     }
 
@@ -13396,9 +13251,7 @@
 
     function blockTutorialControls(moduleId) {
       restoreTutorialBlockedControls();
-      const selectors = moduleId === "saving-progress"
-          ? ["#savingMenuEnableButton", "#savingMenuImportButton", "#resetSettingsButton", "#inaCitationLinksToggle", "#definedTermHighlightingToggle", "#defaultStartupQueryInput", "#applyDefaultStartupQueryButton", "#clearDefaultStartupQueryButton"]
-          : [];
+      const selectors = [];
       for (const selector of selectors) {
         const element = $(selector);
         if (!element) continue;
@@ -13500,11 +13353,7 @@
       els.tutorialCoachKicker.textContent = `${module.title} · ${active.stepIndex + 1} of ${module.steps.length}`;
       els.tutorialCoachTitle.textContent = step.title;
       els.tutorialProgressValue.style.width = `${((active.stepIndex + 1) / module.steps.length) * 100}%`;
-      let body = `<p id="tutorialCoachText">${escapeHtml(step.text)}</p>`;
-      if (step.offerModules) {
-        body += `<div class="tutorial-next-modules">${TUTORIAL_CATALOG.filter(item => !item.quick).map(item => `<button class="tutorial-next-module" type="button" data-tutorial-next-module="${escapeHtml(item.id)}"><span>${escapeHtml(item.title)}</span><small>${escapeHtml(item.minutes)}</small></button>`).join("")}</div>`;
-      }
-      els.tutorialCoachBody.innerHTML = body;
+      els.tutorialCoachBody.innerHTML = `<p id="tutorialCoachText">${escapeHtml(step.text)}</p>`;
       els.tutorialBackButton.disabled = active.stepIndex === 0;
       els.tutorialSkipButton.hidden = !step.practice;
       els.tutorialSkipButton.textContent = "Skip practice";
@@ -13540,7 +13389,7 @@
       if (state.tutorialActive) endTutorial(false);
       const progress = tutorialProgressEntry(moduleId);
       const resumeIndex = progress.status === "in-progress" ? module.steps.findIndex(step => step.id === progress.lastStepId) : -1;
-      state.tutorialReturnFocus = returnFocus || document.activeElement || els.tutorialMenuButton;
+      state.tutorialReturnFocus = returnFocus || document.activeElement || els.aboutMenuButton;
       state.tutorialActive = {
         moduleId,
         stepIndex: Math.max(0, resumeIndex),
@@ -13548,12 +13397,11 @@
         passedSteps: new Set(progress.status === "in-progress" ? progress.passedStepIds || [] : []),
         skippedSteps: new Set(progress.status === "in-progress" ? progress.skippedStepIds || [] : [])
       };
-      if (!els.tutorialHubModal.hidden) closeTutorialHub(false);
       updateTutorialProgress(moduleId, "in-progress", module.steps[state.tutorialActive.stepIndex]?.id || null);
       renderTutorialStep();
     }
 
-    function endTutorial(openHub = false) {
+    function endTutorial() {
       const active = state.tutorialActive;
       if (!active) return;
       const snapshot = active.snapshot, returnFocus = state.tutorialReturnFocus;
@@ -13564,34 +13412,27 @@
       els.tutorialCoach.style.top = "";
       document.body.classList.remove("tutorial-active");
       state.tutorialActive = null;
-      renderTutorialLauncher();
       restoreTutorialState(snapshot);
-      if (openHub) setTimeout(() => openTutorialHub(returnFocus), 0);
-      else {
-        state.tutorialReturnFocus = null;
-        setTimeout(() => returnFocus?.focus?.(), 0);
-      }
+      state.tutorialReturnFocus = null;
+      setTimeout(() => (returnFocus?.isConnected ? returnFocus : els.aboutMenuButton)?.focus?.(), 0);
     }
 
-    function pauseTutorial(openHub = true) {
+    function pauseTutorial() {
       const active = state.tutorialActive;
       if (!active) return;
       const module = TUTORIAL_BY_ID.get(active.moduleId), step = module?.steps[active.stepIndex];
       updateTutorialProgress(active.moduleId, "in-progress", step?.id || null);
-      endTutorial(openHub && quickStartCompleted());
+      endTutorial();
     }
 
-    function finishTutorial(nextModuleId = null) {
+    function finishTutorial() {
       const active = state.tutorialActive;
       if (!active) return;
       const module = TUTORIAL_BY_ID.get(active.moduleId);
       const required = module.steps.filter(step => step.practice).map(step => step.id);
       const completed = required.every(stepId => active.passedSteps.has(stepId)) && !active.skippedSteps.size;
       updateTutorialProgress(module.id, completed ? "completed" : "viewed", module.steps.at(-1)?.id || null, true);
-      const returnFocus = state.tutorialReturnFocus;
-      endTutorial(false);
-      if (nextModuleId) setTimeout(() => startTutorial(nextModuleId, returnFocus), 0);
-      else if (quickStartCompleted()) setTimeout(() => openTutorialHub(returnFocus), 0);
+      endTutorial();
     }
 
     function advanceTutorial() {
@@ -13741,6 +13582,7 @@
           : [];
       merged.referenceInsertions = { schemaVersion: 1, records: mergedInsertionRecords };
       merged.tutorialProgress = mergeTutorialProgress(merged.tutorialProgress, workingProfile.tutorialProgress);
+      merged.tipProgress = mergeTipProgress(merged.tipProgress, workingProfile.tipProgress);
       merged.updatedAt = new Date().toISOString();
       return merged;
     }
@@ -13867,6 +13709,7 @@
     async function connectVaultHandle(handle, { allowEmpty = false } = {}) {
       if (!(await requestWritePermission(handle))) throw new Error("Read/write permission was not granted for the data file.");
       const sessionTutorialProgress = normalizeTutorialProgress(state.tutorialSessionProgress);
+      const sessionTipProgress = normalizeTipProgress(profile.tipProgress);
       const file = await handle.getFile();
       if (file.size > 50_000_000) throw new Error("The selected file is too large to be an INASearch data vault.");
       const text = await file.text();
@@ -13893,9 +13736,18 @@
       await globalThis.INASearchStorage?.storeVaultHandle(handle);
       await requestProfileStoragePersistence();
       const mergedTutorialProgress = mergeTutorialProgress(profile.tutorialProgress, sessionTutorialProgress);
+      const mergedTipProgress = mergeTipProgress(profile.tipProgress, sessionTipProgress);
+      let progressChanged = false;
       if (JSON.stringify(normalizeTutorialProgress(profile.tutorialProgress)) !== JSON.stringify(mergedTutorialProgress)) {
         profile.tutorialProgress = mergedTutorialProgress;
         state.tutorialSessionProgress = normalizeTutorialProgress(mergedTutorialProgress);
+        progressChanged = true;
+      }
+      if (JSON.stringify(normalizeTipProgress(profile.tipProgress)) !== JSON.stringify(mergedTipProgress)) {
+        profile.tipProgress = mergedTipProgress;
+        progressChanged = true;
+      }
+      if (progressChanged) {
         profile.updatedAt = new Date().toISOString();
         state.profileChanged = true;
         state.profileRevision += 1;
@@ -13986,6 +13838,7 @@
         const imported = upgradeProfileCitationLinks(profileFromImportedText(await file.text()));
         if (!confirm("Replace the notes, settings, and tutorial state currently loaded in INASearch with the selected file?")) return;
         imported.tutorialProgress = mergeTutorialProgress(imported.tutorialProgress, state.tutorialSessionProgress);
+        imported.tipProgress = mergeTipProgress(imported.tipProgress, profile.tipProgress);
         profile = imported;
         refreshStaleNoteReferences();
         resetAnnotationIndex();
@@ -14114,8 +13967,58 @@ $json = [regex]::Match($html, $pattern).Groups[1].Value
 Get-FileHash $outJson -Algorithm SHA256`;
     }
 
+    function localCalendarDate(date = new Date()) {
+      const pad = value => String(value).padStart(2, "0");
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+    }
+
+    function eligibleDailyTips() {
+      const navigationHidden = profile.preferences.legalNavigatorVisibility === "never";
+      return [...TIP_BY_ID.values()].filter(tip => tip.eligibility === "always" || (navigationHidden ? tip.eligibility === "hidden" : tip.eligibility === "visible"));
+    }
+
+    function scheduleTipProgressSave() {
+      if (state.tipProgressSaveScheduled) return;
+      state.tipProgressSaveScheduled = true;
+      setTimeout(() => {
+        state.tipProgressSaveScheduled = false;
+        markProfileChanged();
+      }, 0);
+    }
+
+    function currentDailyTip() {
+      if (!quickStartCompleted()) return null;
+      const today = localCalendarDate();
+      const progress = normalizeTipProgress(profile.tipProgress);
+      const eligible = eligibleDailyTips();
+      if (!eligible.length) return null;
+      const currentIndex = eligible.findIndex(tip => tip.id === progress.currentTipId);
+      if (progress.lastAdvancedLocalDate !== today || currentIndex < 0) {
+        const nextIndex = progress.lastAdvancedLocalDate ? (Math.max(-1, currentIndex) + 1) % eligible.length : 0;
+        profile.tipProgress = { schemaVersion: 1, currentTipId: eligible[nextIndex].id, lastAdvancedLocalDate: today, dismissedLocalDate: null };
+        scheduleTipProgressSave();
+      } else profile.tipProgress = progress;
+      return profile.tipProgress.dismissedLocalDate === today ? null : TIP_BY_ID.get(profile.tipProgress.currentTipId) || null;
+    }
+
+    function dismissDailyTip(dismissed = true) {
+      const progress = normalizeTipProgress(profile.tipProgress);
+      profile.tipProgress = { ...progress, dismissedLocalDate: dismissed ? localCalendarDate() : null };
+      markProfileChanged();
+    }
+
+    function tipCatalogMarkup() {
+      return TIP_CATEGORIES.map(category => `<details class="tip-category" data-tip-category="${escapeHtml(category.id)}"><summary><span>${escapeHtml(category.title)}</span><small>${category.tips.length} tip${category.tips.length === 1 ? "" : "s"}</small></summary><ol class="tip-list">${category.tips.map(([id, title, text, eligibility]) => `<li value="${id}" data-tip-id="${id}"><strong>${escapeHtml(title)}</strong> ${escapeHtml(text)}${eligibility === "hidden" ? " <em>Shown when legal navigation is hidden.</em>" : eligibility === "visible" ? " <em>Shown when legal navigation is visible.</em>" : ""}</li>`).join("")}</ol></details>`).join("");
+    }
+
+    function todayTipMarkup() {
+      if (!quickStartCompleted()) return `<div class="today-tip"><div class="today-tip-copy"><span class="today-tip-kicker">Start here</span><strong>Complete Quick Start to begin daily tips</strong><p>The brief walkthrough opens a citation, explains the reader, and shows where About and Definitions live.</p></div><button class="button primary" type="button" data-tutorial-module="quick-start">Start Quick Start</button></div>`;
+      const tip = currentDailyTip();
+      if (!tip) return `<div class="today-tip today-tip-dismissed"><div class="today-tip-copy"><span class="today-tip-kicker">Today's tip</span><strong>Dismissed until tomorrow</strong><p>The complete catalog remains available below.</p></div><button class="button small" type="button" data-show-daily-tip>Show again</button></div>`;
+      return `<div class="today-tip" data-featured-tip-id="${tip.id}"><div class="today-tip-copy"><span class="today-tip-kicker">Today's tip · ${escapeHtml(tip.categoryTitle)}</span><strong>${escapeHtml(tip.title)}</strong><p>${escapeHtml(tip.text)}</p></div><button class="button small" type="button" data-dismiss-daily-tip>Dismiss for today</button></div>`;
+    }
+
     function renderSources() {
-      const sources = corpus?.sources || {};
       const shortcuts = corpus?.shortcuts || [
         { title: "USCIS", url: "https://www.uscis.gov/" },
         { title: "USCIS search", url: "https://www.uscis.gov/search" },
@@ -14136,21 +14039,14 @@ Get-FileHash $outJson -Algorithm SHA256`;
             : updateStatus?.checkedAt
               ? `<div class="notice success"><strong>CFR currency checked directly with eCFR:</strong> ${escapeHtml(new Date(updateStatus.checkedAt).toLocaleString())}. The check used the complete fixed corpus coverage, not browsing activity.</div>`
               : `<div class="notice"><strong>CFR maintenance:</strong> When automatic updates are enabled, INASearch checks all fixed CFR coverage directly with eCFR after startup and every 12 hours while it remains open.</div>`;
-      const groupedCoverage = cfr ? [...new Set((cfr.parts || []).map(part => part.title))].sort((a, b) => a - b).map(title => {
-        const parts = (cfr.parts || []).filter(part => part.title === title).map(part => part.part);
-        return `<dt>Title ${title}</dt><dd>${title === 8 ? `Complete title (${parts.length} parts)` : `Parts ${parts.join(", ")}`} · ${Number(cfr.coverage?.sectionCountsByTitle?.[String(title)] || 0).toLocaleString()} sections · current through ${escapeHtml(cfr.currentThrough?.[String(title)] || "unavailable")}</dd>`;
-      }).join("") : "";
-      const sourceHashes = cfr ? (cfr.sources || []).map(source => `<tr><td>${escapeHtml(source.part ? `${source.title} CFR Part ${source.part}` : `Title ${source.title}`)}</td><td>${escapeHtml(source.currentThrough)}</td><td>${Number(source.bytes || 0).toLocaleString()}</td><td><code>${escapeHtml(source.sha256)}</code></td></tr>`).join("") : "";
-      const graphicHashes = cfr ? (cfr.graphics || []).map(graphic => `<tr><td>${escapeHtml(graphic.sourcePath)}${graphic.fallbackSource ? `<br><small>Reviewed crop from GovInfo PDF page ${graphic.fallbackSource.page}</small>` : ""}</td><td>${graphic.available ? Number(graphic.bytes || 0).toLocaleString() : "Unavailable"}</td><td>${graphic.sha256 ? `<code>${escapeHtml(graphic.sha256)}</code>${graphic.fallbackSource ? `<br><small>Source PDF: ${Number(graphic.fallbackSource.bytes || 0).toLocaleString()} bytes · <code>${escapeHtml(graphic.fallbackSource.sha256)}</code></small>` : ""}` : escapeHtml(graphic.error || "No captured bytes")}</td></tr>`).join("") : "";
-      const removed = cfr ? (cfr.removedParts || []).map(part => `<li><strong>${part.title} CFR Part ${escapeHtml(part.part)}</strong> — removed ${escapeHtml(part.removedOn || "date unavailable")}; retained as a mapping tombstone only. Version record: ${Number(part.sourceBytes || 0).toLocaleString()} bytes · <code>${escapeHtml(part.sourceSha256 || "hash unavailable")}</code> ${openButton(part.historyUrl, "Open version history")}</li>`).join("") : "";
       const profileWarning = state.browserSaveConflict || state.browserSaveError
         ? `<div class="notice warning"><strong>Profile saving needs attention:</strong> ${escapeHtml(state.browserSaveError || "Another window changed the saved browser profile.")} Open Settings before closing this tab.</div>`
         : state.fileSyncPending
           ? `<div class="notice warning">This profile is saved in the browser, but the connected data file needs reconciliation.</div>`
           : "";
-      els.sourceWarnings.innerHTML = `${!corpus ? `<div class="notice danger"><strong>The embedded corpus could not be opened.</strong><br>${escapeHtml(loadErrors.corpusMessage || "The embedded data is missing, incompatible, or malformed.")} Local statute, regulation, and reference catalogs are unavailable; use the official shortcuts below to open current sources.</div>` : ""}${profileWarning}${updateNotice}${corpus ? `<div class="notice warning"><strong>Automatic-update boundary:</strong> The Office of the Law Revision Counsel and USCIS official sites do not currently allow a standalone local HTML file to read their update resources through browser CORS. INASearch therefore cannot honestly claim automatic runtime currency for U.S. Code, the INA crosswalk, Policy Manual metadata, forms, or glossary data. Those embedded snapshots remain dated below and link to their official sources.</div>` : ""}${cfr?.coverage?.unavailableGraphics?.length ? `<div class="notice warning">${cfr.coverage.unavailableGraphics.length} referenced official graphic could not be embedded or retained from the release snapshot. Its official location is preserved and the local reader labels the omission.</div>` : ""}`;
-      const cfrCard = cfr ? `<article class="source-card"><h3>Code of Federal Regulations</h3><p>${escapeHtml(cfr.coverage.core)} plus the active ${cfr.ptarYear} Parallel Table mappings from the included Title 8 U.S.C. records.</p><dl><dt>Captured</dt><dd>${escapeHtml(cfr.captureTime)}</dd><dt>Parallel Table</dt><dd>${cfr.ptarYear} · ${Number(cfr.ptar.bytes || 0).toLocaleString()} bytes · SHA-256 <code>${escapeHtml(cfr.ptar.sha256)}</code></dd><dt>eCFR title metadata</dt><dd>${Number(cfr.titleMetadata?.bytes || 0).toLocaleString()} bytes · SHA-256 <code>${escapeHtml(cfr.titleMetadata?.sha256 || "unavailable")}</code></dd><dt>Coverage</dt><dd>${cfr.coverage.partCount} parts · ${cfr.coverage.sectionCount.toLocaleString()} sections · ${cfr.coverage.appendixCount} appendices · ${cfr.coverage.embeddedGraphicsCount}/${cfr.coverage.graphicsCount} graphics embedded</dd></dl><details><summary>Complete grouped coverage</summary><dl>${groupedCoverage}</dl></details><details><summary>Regulatory source hashes</summary><div class="cfr-table-wrap"><table class="cfr-table"><thead><tr><th>Source</th><th>Current through</th><th>Bytes</th><th>SHA-256</th></tr></thead><tbody>${sourceHashes}</tbody></table></div></details><details><summary>Graphic source hashes</summary><div class="cfr-table-wrap"><table class="cfr-table"><thead><tr><th>Graphic</th><th>Bytes</th><th>SHA-256 / capture status</th></tr></thead><tbody>${graphicHashes}</tbody></table></div></details>${removed ? `<details><summary>Removed mappings</summary><ul>${removed}</ul></details>` : ""}${openButton(cfr.ptar.url, `Open ${cfr.ptarYear} Parallel Table`)}</article>` : "";
-      els.sourcesGrid.innerHTML = `<article class="source-card"><h3>Official shortcuts</h3><p>Open an approved resource or its native search.</p><div class="detail-actions">${shortcuts.map(item => openButton(item.url, item.title)).join("")}</div></article>${cfrCard}` + Object.values(sources).map(source => `<article class="source-card"><h3>${escapeHtml(source.name)}</h3><p>${escapeHtml(source.publisher || "")}</p><dl><dt>Captured</dt><dd>${escapeHtml(source.capturedAt || "Navigation only")}</dd>${source.currentThrough ? `<dt>Current through</dt><dd>${escapeHtml(source.currentThrough)}</dd>` : ""}${source.coverage ? `<dt>Coverage</dt><dd>${escapeHtml(source.coverage)}</dd>` : ""}</dl>${openButton(source.url)}</article>`).join("");
+      els.sourceWarnings.innerHTML = `${!corpus ? `<div class="notice danger"><strong>The embedded corpus could not be opened.</strong><br>${escapeHtml(loadErrors.corpusMessage || "The embedded data is missing, incompatible, or malformed.")} Local statute, regulation, and reference catalogs are unavailable; use the official shortcuts below to open current sources.</div>` : ""}${profileWarning}${updateNotice}${cfr?.coverage?.unavailableGraphics?.length ? `<div class="notice warning">${cfr.coverage.unavailableGraphics.length} referenced official graphic could not be embedded or retained from the release snapshot. Its official location is preserved and the local reader labels the omission.</div>` : ""}`;
+      els.sourcesGrid.innerHTML = `<article class="source-card source-card-full"><h3>Official shortcuts</h3><p>Open an approved government resource or its native search.</p><div class="detail-actions">${shortcuts.map(item => openButton(item.url, item.title)).join("")}</div></article><article class="source-card source-card-full" id="aboutTipsCard"><div class="tips-card-head"><div><h3>Tips &amp; Quick Start</h3><p>Learn one feature at a time, or expand any category to revisit the complete tip catalog.</p></div><button class="button" type="button" data-tutorial-module="quick-start">Start Quick Start</button></div>${todayTipMarkup()}<div class="tip-category-list">${tipCatalogMarkup()}</div></article>`;
+      renderTutorialEntryLabels(els.sourcesGrid);
     }
 
     function cycleSearchSuggestion(random = Math.random) {
@@ -14532,13 +14428,13 @@ Get-FileHash $outJson -Algorithm SHA256`;
       const tutorialExpectsSearch = ["citation-result", "search-results", "scope"].includes(tutorialStep?.practice?.kind);
       if (state.tutorialActive && !state.tutorialNavigating && view !== state.view && !(view === "search" && tutorialExpectsSearch)) {
         pauseTutorial(false);
-        toast("Tutorial paused. Resume it from the ? menu when you are ready.");
+        toast("Quick Start paused. Resume it from About when you are ready.");
       }
       if (!els.scopedDefinitionPopover.hidden) closeScopedDefinitionPopover(true);
       state.view = view;
       if (view !== "search") setStatuteNavigationVisible(false);
       $$(".view").forEach(x => x.hidden = x.id !== `view-${view}`);
-      $$(".nav-button").forEach(x => x.setAttribute("aria-current", x.dataset.view === view ? "page" : "false"));
+      $$('[data-view]').forEach(x => x.setAttribute("aria-current", x.dataset.view === view ? "page" : "false"));
       if (view === "search" && focusSearch) setTimeout(() => els.search.focus(), 0);
       if (refresh) {
         if (view === "definitions") renderDefinitions();
@@ -14786,18 +14682,10 @@ Get-FileHash $outJson -Algorithm SHA256`;
         const openDropdown = definitionFilterDropdowns.find(dropdown => dropdown.open);
         if (openDropdown) { openDropdown.open = false; openDropdown.querySelector("summary")?.focus(); }
       });
-      $$(".nav-button").forEach(button => button.addEventListener("click", () => {
-        els.resourcesMenu.open = false;
-        closeSearchResults(button.dataset.view);
-      }));
-      document.addEventListener("click", event => {
-        if (els.resourcesMenu.open && !event.target.closest("#resourcesMenu")) els.resourcesMenu.open = false;
-      });
-      els.resourcesMenu.addEventListener("keydown", event => {
-        if (event.key !== "Escape" || !els.resourcesMenu.open) return;
-        event.preventDefault();
-        els.resourcesMenu.open = false;
-        els.resourcesMenuSummary.focus();
+      for (const button of [els.aboutMenuButton, els.definitionsMenuButton]) button.addEventListener("click", () => closeSearchResults(button.dataset.view));
+      els.sourcesGrid.addEventListener("click", event => {
+        if (event.target.closest("[data-dismiss-daily-tip]")) dismissDailyTip(true);
+        else if (event.target.closest("[data-show-daily-tip]")) dismissDailyTip(false);
       });
       els.mainSearchHistoryBack.addEventListener("click", () => navigateMainHistory(-1));
       els.mainSearchHistoryForward.addEventListener("click", () => navigateMainHistory(1));
@@ -15053,7 +14941,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
         }
         if (event.key === "/" && !/input|textarea|select/i.test(document.activeElement?.tagName || "")) { event.preventDefault(); els.search.focus(); }
         if (event.key === "Escape" && state.tutorialActive) { event.preventDefault(); pauseTutorial(false); }
-        else if (event.key === "Escape" && !els.tutorialHubModal.hidden) { event.preventDefault(); closeTutorialHub(); }
         else if (event.key === "Escape" && !els.scopedDefinitionPopover.hidden) { const trigger = state.scopedDefinitionContext?.trigger; event.preventDefault(); closeScopedDefinitionPopover(true); trigger?.focus(); }
         else if (event.key === "Escape" && !els.legalReferencePopover.hidden) { const trigger = state.legalReferenceContext?.trigger; event.preventDefault(); closeLegalReferencePopover(true); trigger?.focus(); }
         else if (event.key === "Escape" && !els.legalUnitMenu.hidden) { event.preventDefault(); closeLegalUnitMenu(true); }
@@ -15304,7 +15191,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
       els.saveStatus.addEventListener("click", beginProfileSavingSetup);
       els.corpusStatus.addEventListener("click", reloadUpdatedCorpus);
       els.themeCycleButton.addEventListener("click", cycleThemePreference);
-      els.systemThemeButton.addEventListener("click", () => setThemePreference("system"));
       els.settingsThemeSelect.addEventListener("change", () => setThemePreference(els.settingsThemeSelect.value));
       els.settingsThemeSystemToggle.addEventListener("change", () => setThemePreference(els.settingsThemeSystemToggle.checked ? "system" : els.settingsThemeSelect.value));
       SYSTEM_THEME_MEDIA?.addEventListener?.("change", syncThemeControls);
@@ -15361,23 +15247,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
         if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
       });
-      els.tutorialMenuButton.addEventListener("click", event => openTutorialHub(event.currentTarget));
-      els.tutorialStartPromptDisable.addEventListener("click", disableQuickStartPrompt);
-      els.tutorialStartPromptClose.addEventListener("click", () => {
-        state.tutorialPromptDismissed = true;
-        renderTutorialLauncher();
-        els.tutorialMenuButton.focus();
-      });
-      $("#closeTutorialHubButton").addEventListener("click", () => closeTutorialHub());
-      els.tutorialHubModal.addEventListener("click", event => { if (event.target === els.tutorialHubModal) closeTutorialHub(); });
-      els.tutorialHubModal.addEventListener("keydown", event => {
-        if (event.key !== "Tab") return;
-        const focusable = $$("button:not([disabled])", els.tutorialHubModal).filter(item => !item.hidden);
-        if (!focusable.length) return;
-        const first = focusable[0], last = focusable[focusable.length - 1];
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-      });
       $("#tutorialCoachExit").addEventListener("click", () => pauseTutorial(false));
       els.tutorialPauseButton.addEventListener("click", () => pauseTutorial(true));
       els.tutorialBackButton.addEventListener("click", backTutorial);
@@ -15390,14 +15259,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
           startTutorial(contextual.dataset.tutorialModule, contextual);
           return;
         }
-        const hubStart = event.target.closest("[data-tutorial-start]");
-        if (hubStart) {
-          event.preventDefault();
-          startTutorial(hubStart.dataset.tutorialStart, state.tutorialReturnFocus || els.tutorialMenuButton);
-          return;
-        }
-        const nextModule = event.target.closest("[data-tutorial-next-module]");
-        if (nextModule) { finishTutorial(nextModule.dataset.tutorialNextModule); return; }
         checkTutorialPractice(event);
       });
       document.addEventListener("input", checkTutorialPractice);
@@ -15535,9 +15396,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
         state.topbarResizeObserver.observe($(".topbar"));
       }
       renderSources(); renderCorpusAudit(); renderDefinitionFilterOptions(); renderDefinitions();
-      els.uscCoverageBoundary.textContent = hasLocalUscCache
-        ? "This build includes captured local U.S. Code and CFR editions. Every regulation view retains an action to check current eCFR."
-        : "This build omits full U.S. Code section text but includes the dated CFR corpus; official-source actions remain available.";
       const startupQuery = startupSearchQuery();
       if (startupQuery) applySearchQuery(startupQuery, false, true);
       else openClearedSearchHierarchy();
@@ -15592,13 +15450,17 @@ Get-FileHash $outJson -Algorithm SHA256`;
       serializeProfile: () => serializeProfile(),
       normalizeTutorialProgress,
       mergeTutorialProgress,
+      normalizeTipProgress,
+      mergeTipProgress,
       profileSnapshotWithTutorialProgress,
       tutorialPracticeSatisfied,
       getTutorialCatalog: () => TUTORIAL_CATALOG.map(module => structuredCloneSafe(module)),
+      getTipCatalog: () => TIP_CATEGORIES.map(category => structuredCloneSafe(category)),
       profileFromImportedText,
       assignedJsonObjectFromText,
       updateEmbeddedProfile,
       cycleSearchSuggestion,
+      profileHasProtectableContent,
       profileSetupMode,
       renderProfileSetupNotice,
       beginProfileSavingSetup,
