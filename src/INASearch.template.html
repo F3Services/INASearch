@@ -428,6 +428,9 @@
     .theme-controls { display: inline-flex; flex: 0 0 auto; }
     .theme-cycle-icon { font-family: Arial, sans-serif; font-size: 17px; line-height: 1; }
     .settings-theme-fields { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px 12px; }
+    .settings-percentage-field { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 6px; }
+    .settings-percentage-field .field { width: 76px; min-width: 0; text-align: end; }
+    .settings-percentage-field span { color: var(--muted); font-size: 12px; font-weight: 800; }
     .settings-theme-select { min-width: 92px; height: 34px; border: 1px solid var(--line); border-radius: 7px; padding: 0 28px 0 9px; color: var(--ink); background: var(--panel); font: 750 12px/1 var(--sans); }
     .settings-theme-select:disabled { color: var(--muted); background: var(--canvas); opacity: .72; }
     .settings-theme-select:focus-visible, .settings-theme-system-sync:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
@@ -1552,12 +1555,15 @@
     .notice-inline-action { border: 0; padding: 0; color: inherit; background: transparent; cursor: pointer; font: inherit; font-weight: 800; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
     .notice-inline-action:hover { color: var(--navy); text-decoration-thickness: 2px; }
     .notice-inline-action:focus-visible { border-radius: 2px; outline: 2px solid var(--blue); outline-offset: 2px; }
-    .settings-reset-button { position: relative; isolation: isolate; overflow: hidden; width: 100%; min-height: 43px; border: 1px solid color-mix(in srgb, var(--danger) 52%, var(--line)); border-radius: 9px; padding: 9px 13px; color: var(--danger); background: var(--panel); cursor: pointer; font-weight: 850; }
+    .settings-reset-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+    .settings-reset-button { position: relative; isolation: isolate; overflow: hidden; width: 100%; min-height: 43px; border: 1px solid color-mix(in srgb, var(--danger) 52%, var(--line)); border-radius: 9px; padding: 9px 13px; color: var(--danger); background: var(--panel); cursor: pointer; font-weight: 850; touch-action: manipulation; user-select: none; -webkit-touch-callout: none; -webkit-user-select: none; }
     .settings-reset-button::before { position: absolute; z-index: -1; inset: 0; background: color-mix(in srgb, var(--danger) 17%, transparent); content: ""; transform: scaleX(0); transform-origin: left center; }
-    .settings-reset-button.is-holding::before { animation: settings-reset-hold 1.5s linear forwards; }
+    .settings-reset-button.is-holding::before { animation: settings-reset-hold var(--settings-reset-hold-duration, 1.5s) linear forwards; }
     .settings-reset-button:hover { border-color: var(--danger); }
     .settings-reset-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--danger) 45%, transparent); outline-offset: 2px; }
+    .settings-reset-everything-description { margin: 9px 0 0; color: var(--danger); font-size: 10px; line-height: 1.45; }
     @keyframes settings-reset-hold { to { transform: scaleX(1); } }
+    @media (max-width: 520px) { .settings-reset-actions { grid-template-columns: 1fr; } }
     .settings-section + .settings-section { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 18px; }
     .settings-section-heading { margin: 0 0 9px; color: var(--navy); font-size: 14px; }
     .settings-section-description { margin: -3px 0 11px; color: var(--muted); font-size: 11px; line-height: 1.45; }
@@ -1588,8 +1594,8 @@
     .settings-toggle strong, .settings-toggle small { display: block; }
     .settings-toggle strong { color: var(--navy); font-size: 13px; }
     .settings-toggle small { margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.4; }
-    .settings-toggle input { width: 19px; height: 19px; margin: 0; accent-color: var(--blue); cursor: pointer; }
-    .settings-toggle input:disabled { cursor: not-allowed; }
+    .settings-toggle input[type="checkbox"] { width: 19px; height: 19px; margin: 0; accent-color: var(--blue); cursor: pointer; }
+    .settings-toggle input[type="checkbox"]:disabled { cursor: not-allowed; }
     .settings-toggle + .settings-toggle { margin-top: 10px; }
     .settings-inline-status { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; margin: 8px 0 12px; color: var(--muted); font-size: 11px; }
     .settings-inline-status .button { padding: 6px 9px; font-size: 10px; }
@@ -1995,9 +2001,13 @@
             <span><strong>Hide the theme button in the top bar</strong><small>The theme controls in Settings remain available.</small></span>
             <input id="hideTopThemeControlsToggle" type="checkbox" role="switch">
           </label>
+          <label class="settings-toggle" for="notesUseRuleFontToggle">
+            <span><strong>Use the rule-text font for sticky notes</strong><small>Off by default. When off, notes use a handwritten-style system font.</small></span>
+            <input id="notesUseRuleFontToggle" type="checkbox" role="switch">
+          </label>
         </section>
         <section class="settings-section" aria-labelledby="legalReaderSettingsHeading">
-          <h3 class="settings-section-heading" id="legalReaderSettingsHeading">Legal reader</h3>
+          <h3 class="settings-section-heading" id="legalReaderSettingsHeading">Legal text &amp; citations</h3>
           <label class="settings-toggle" for="inaCitationLinksToggle">
             <span><strong>Show INA citations in statutory links</strong><small>When a linked Title 8 provision has an INA equivalent, display the full INA citation instead of the source wording. Link destinations do not change.</small></span>
             <input id="inaCitationLinksToggle" type="checkbox" role="switch">
@@ -2010,10 +2020,9 @@
             <span><span class="settings-toggle-title"><label for="definedTermHighlightingToggle"><strong>Highlight defined terms</strong></label><button class="settings-experimental-label" type="button" aria-label="Experimental feature warning" aria-describedby="definedTermExperimentalWarning">⚠ Experimental<span class="settings-experimental-tooltip" id="definedTermExperimentalWarning" role="tooltip">Text matching cannot determine how a word functions in every sentence. A highlighted word may be used in a different grammatical or contextual sense from its legal definition, so relying on the preview could misread the provision. Verify the usage before applying the definition.</span></button></span><small id="definedTermHighlightingDescription">Mark words that may have an applicable statutory or regulatory definition; hover a highlight to preview it.</small></span>
             <input id="definedTermHighlightingToggle" type="checkbox" role="switch" aria-describedby="definedTermHighlightingDescription">
           </div>
-          <label class="settings-toggle" for="notesUseRuleFontToggle">
-            <span><strong>Use the rule-text font for sticky notes</strong><small>Off by default. When off, notes use a handwritten-style system font.</small></span>
-            <input id="notesUseRuleFontToggle" type="checkbox" role="switch">
-          </label>
+        </section>
+        <section class="settings-section" aria-labelledby="workspaceSettingsHeading">
+          <h3 class="settings-section-heading" id="workspaceSettingsHeading">Search &amp; workspace</h3>
           <form class="settings-input-block" id="defaultStartupQueryForm">
             <label for="defaultStartupQueryInput"><strong>Default citation on startup</strong><small>Used only when the page URL has no <code>?q=</code> value. Clear this field to open with an empty search bar.</small></label>
             <div class="settings-input-row">
@@ -2023,9 +2032,6 @@
             </div>
             <p class="settings-input-feedback" id="defaultStartupQueryFeedback" role="status" aria-live="polite"></p>
           </form>
-        </section>
-        <section class="settings-section" aria-labelledby="workspaceSettingsHeading">
-          <h3 class="settings-section-heading" id="workspaceSettingsHeading">Workspace</h3>
           <div class="settings-toggle">
             <span><label for="emptySearchViewSelect"><strong>When the search bar is empty</strong></label><small>Open the INA menu, the CFR menu, or both legal menus side by side.</small></span>
             <select class="field" id="emptySearchViewSelect" aria-label="Menus shown when the search bar is empty">
@@ -2042,18 +2048,6 @@
             <span><strong>Split INA and CFR searches into separate panes</strong><small>Off by default. When off, search results form one scrolling list with sticky authority headers. This does not change the empty-search menus above.</small></span>
             <input id="splitAuthoritySearchPanesToggle" type="checkbox" role="switch">
           </label>
-          <div class="settings-toggle">
-            <span><label for="legalNavigatorVisibilitySelect"><strong>Legal navigation bar</strong></label><small>Hide it, show it only for a single citation, or show it in every legal view.</small></span>
-            <select class="field" id="legalNavigatorVisibilitySelect" aria-label="Legal navigation bar visibility">
-              <option value="never">Do not display</option>
-              <option value="single">Single citation only</option>
-              <option value="all">All legal views</option>
-            </select>
-          </div>
-          <label class="settings-toggle" for="syncCfrCommonDepthFromStatuteToggle">
-            <span><strong>Match INA and CFR Common levels</strong><small>On by default. In a dual-authority search, changing either Common level selects the analogous level for the other authority.</small></span>
-            <input id="syncCfrCommonDepthFromStatuteToggle" type="checkbox" role="switch">
-          </label>
           <label class="settings-toggle" for="expandSearchResultsByDefaultToggle">
             <span><strong>Expand search results when loaded</strong><small>On by default. Open every matching hierarchy branch and section list when a legal-text search finishes.</small></span>
             <input id="expandSearchResultsByDefaultToggle" type="checkbox" role="switch">
@@ -2064,18 +2058,22 @@
           </label>
         </section>
         <section class="settings-section" aria-labelledby="navigationSettingsHeading">
-          <h3 class="settings-section-heading" id="navigationSettingsHeading">Navigation</h3>
+          <h3 class="settings-section-heading" id="navigationSettingsHeading">Navigation &amp; scrolling</h3>
+          <div class="settings-toggle">
+            <span><label for="legalNavigatorVisibilitySelect"><strong>Legal navigation bar</strong></label><small>Hide it, show it only for a single citation, or show it in every legal view.</small></span>
+            <select class="field" id="legalNavigatorVisibilitySelect" aria-label="Legal navigation bar visibility">
+              <option value="never">Do not display</option>
+              <option value="single">Single citation only</option>
+              <option value="all">All legal views</option>
+            </select>
+          </div>
           <label class="settings-toggle" for="automaticStatutoryNavigationSystemToggle">
             <span><strong>Match statute hierarchy to typed citations</strong><small>On by default. An INA citation switches the upper navigation levels to the INA structure and a U.S.C. citation switches them to the U.S.C. structure. The compact INA/U.S.C. button remains available either way.</small></span>
             <input id="automaticStatutoryNavigationSystemToggle" type="checkbox" role="switch">
           </label>
-          <label class="settings-toggle" for="scrollUpdatesSearchToggle">
-            <span><strong>Update the search bar while scrolling</strong><small>Off by default. When on, the citation and target highlighting follow the legal unit crossing the reading line.</small></span>
-            <input id="scrollUpdatesSearchToggle" type="checkbox" role="switch">
-          </label>
-          <label class="settings-toggle" for="animatedCitationJumpsToggle">
-            <span><strong>Animate citation jumps</strong><small>On by default. Turn this off to move instantly to a requested citation without scrolling or sliding through the page.</small></span>
-            <input id="animatedCitationJumpsToggle" type="checkbox" role="switch">
+          <label class="settings-toggle" for="syncCfrCommonDepthFromStatuteToggle">
+            <span><strong>Match INA and CFR Common levels</strong><small>On by default. In a dual-authority search, changing either Common level selects the analogous level for the other authority.</small></span>
+            <input id="syncCfrCommonDepthFromStatuteToggle" type="checkbox" role="switch">
           </label>
           <div class="settings-toggle">
             <span><label for="statuteSectionDisplaySelect"><strong>Section display in statute navigation</strong></label><small>Choose whether the Section control shows the U.S.C. citation, INA citation, both, or follows the active INA/U.S.C. hierarchy button.</small></span>
@@ -2112,6 +2110,22 @@
               <option value="6">Paragraph level 6</option>
             </select>
           </div>
+          <label class="settings-toggle" for="scrollUpdatesSearchToggle">
+            <span><strong>Update the search bar while scrolling</strong><small>Off by default. When on, the citation and target highlighting follow the legal unit crossing the navigation tracking position below.</small></span>
+            <input id="scrollUpdatesSearchToggle" type="checkbox" role="switch">
+          </label>
+          <label class="settings-toggle" for="citationJumpOffsetInput">
+            <span><strong>Citation jump position</strong><small>Positions a requested citation this far down the readable area. 0% is the top; 100% places its top at the bottom edge.</small></span>
+            <span class="settings-percentage-field"><input class="field" id="citationJumpOffsetInput" type="number" min="0" max="100" step="1" inputmode="numeric" aria-label="Citation jump position percentage"><span aria-hidden="true">%</span></span>
+          </label>
+          <label class="settings-toggle" for="navigationTrackingOffsetInput">
+            <span><strong>Navigation tracking position</strong><small>The navigation bar treats the legal unit crossing this point as the unit currently being viewed. 0% is the top; 100% is the bottom edge.</small></span>
+            <span class="settings-percentage-field"><input class="field" id="navigationTrackingOffsetInput" type="number" min="0" max="100" step="1" inputmode="numeric" aria-label="Navigation tracking position percentage"><span aria-hidden="true">%</span></span>
+          </label>
+          <label class="settings-toggle" for="animatedCitationJumpsToggle">
+            <span><strong>Animate citation jumps</strong><small>On by default. Turn this off to move instantly to a requested citation without scrolling or sliding through the page.</small></span>
+            <input id="animatedCitationJumpsToggle" type="checkbox" role="switch">
+          </label>
         </section>
         <section class="settings-section" aria-labelledby="updateSettingsHeading">
           <h3 class="settings-section-heading" id="updateSettingsHeading">Updates</h3>
@@ -2159,9 +2173,13 @@
           </div>
         </section>
         <section class="settings-section" aria-labelledby="resetSettingsHeading">
-          <h3 class="settings-section-heading" id="resetSettingsHeading">Reset settings</h3>
+          <h3 class="settings-section-heading" id="resetSettingsHeading">Reset</h3>
           <p class="settings-section-description" id="resetSettingsDescription">Notes, inserted references, and other saved content will not be removed.</p>
-          <button class="settings-reset-button" id="resetSettingsButton" type="button" aria-describedby="resetSettingsDescription" data-hold-duration="1500">Hold to reset settings</button>
+          <div class="settings-reset-actions">
+            <button class="settings-reset-button" id="resetSettingsButton" type="button" aria-describedby="resetSettingsDescription" data-hold-duration="1500">Hold to reset settings</button>
+            <button class="settings-reset-button" id="resetEverythingButton" type="button" aria-describedby="resetEverythingDescription" data-hold-duration="3000">Hold to reset everything</button>
+          </div>
+          <p class="settings-reset-everything-description" id="resetEverythingDescription">Reset everything deletes notes, highlights, inserted references, tutorial progress, daily-tip progress, and settings. A connected data file remains connected so the reset can be saved.</p>
         </section>
       </div>
     </section>
@@ -2460,6 +2478,12 @@
     const TIP_BY_ID = new Map(TIP_CATEGORIES.flatMap(category => category.tips.map(([id, title, text, eligibility]) => [id, { id, title, text, eligibility: eligibility || "always", categoryId: category.id, categoryTitle: category.title }])));
     const STATUTE_NAVIGATION_DEPTHS = ["Section", "Subsection", "Paragraph", "Subparagraph", "Clause", "Subclause", "Item", "Subitem", "Subsubitem"];
     const CFR_NAVIGATION_DEPTHS = ["Section", "Paragraph", "Paragraph level 2", "Paragraph level 3", "Paragraph level 4", "Paragraph level 5", "Paragraph level 6"];
+    const DEFAULT_READING_OFFSET_PERCENT = 5;
+    const normalizeReadingOffsetPercent = value => {
+      if (value === null || value === undefined || String(value).trim() === "") return DEFAULT_READING_OFFSET_PERCENT;
+      const number = Number(value);
+      return Number.isFinite(number) ? Math.max(0, Math.min(100, Math.round(number))) : DEFAULT_READING_OFFSET_PERCENT;
+    };
     const THEME_STORAGE_KEY = "ina-search-theme";
     const SYSTEM_THEME_MEDIA = typeof globalThis.matchMedia === "function" ? globalThis.matchMedia("(prefers-color-scheme: dark)") : null;
     function normalizeThemePreference(value) {
@@ -2596,6 +2620,7 @@
       tutorialNavigating: false,
       tutorialBlockedControls: [],
       settingsResetTimer: null,
+      resetEverythingTimer: null,
     };
 
     function normalizeCourseStructure(value) {
@@ -2789,7 +2814,7 @@
       annotationOrdinals: {},
       tutorialProgress: { schemaVersion: 1, modules: {} },
       tipProgress: { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null },
-      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "ina", highlightInaCitationLinks: false, lastNoteColor: "yellow", notesUseRuleFont: false, statutoryNavigationSystem: "usc", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, emptySearchView: "ina", splitAuthoritySearchPanes: false, closeBlankCompanionOnSectionOpen: true, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
+      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "ina", highlightInaCitationLinks: false, lastNoteColor: "yellow", notesUseRuleFont: false, statutoryNavigationSystem: "usc", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, emptySearchView: "ina", splitAuthoritySearchPanes: false, closeBlankCompanionOnSectionOpen: true, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, citationJumpOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, navigationTrackingOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
       referenceInsertions: emptyReferenceInsertions()
     });
 
@@ -2850,6 +2875,8 @@
       normalized.preferences.closeBlankCompanionOnSectionOpen = normalized.preferences.closeBlankCompanionOnSectionOpen !== false;
       normalized.preferences.legalNavigatorVisibility = ["never", "single", "all"].includes(normalized.preferences.legalNavigatorVisibility) ? normalized.preferences.legalNavigatorVisibility : "single";
       normalized.preferences.scrollUpdatesSearch = normalized.preferences.scrollUpdatesSearch === true;
+      normalized.preferences.citationJumpOffsetPercent = normalizeReadingOffsetPercent(normalized.preferences.citationJumpOffsetPercent);
+      normalized.preferences.navigationTrackingOffsetPercent = normalizeReadingOffsetPercent(normalized.preferences.navigationTrackingOffsetPercent);
       normalized.preferences.expandSearchResultsByDefault = normalized.preferences.expandSearchResultsByDefault !== false;
       normalized.preferences.showCfrChapterSubchapterInSearchHierarchy = normalized.preferences.showCfrChapterSubchapterInSearchHierarchy === true;
       normalized.preferences.syncCfrCommonDepthFromStatute = normalized.preferences.syncCfrCommonDepthFromStatute !== false;
@@ -2929,11 +2956,11 @@
       profileSetupMessage: $("#profileSetupMessage"), backupReminderConnectButton: $("#backupReminderConnectButton"), backupReminderDownloadButton: $("#backupReminderDownloadButton"),
       backupReminderLaterButton: $("#backupReminderLaterButton"), backupReminderDisableButton: $("#backupReminderDisableButton"),
       savingMenuModal: $("#savingMenuModal"), savingMenuStatus: $("#savingMenuStatus"),
-      savingMenuEnableButton: $("#savingMenuEnableButton"), savingMenuImportButton: $("#savingMenuImportButton"), resetSettingsButton: $("#resetSettingsButton"),
+      savingMenuEnableButton: $("#savingMenuEnableButton"), savingMenuImportButton: $("#savingMenuImportButton"), resetSettingsButton: $("#resetSettingsButton"), resetEverythingButton: $("#resetEverythingButton"),
       showDetailedStatusToggle: $("#showDetailedStatusToggle"), hideTopThemeControlsToggle: $("#hideTopThemeControlsToggle"), inaCitationLinksToggle: $("#inaCitationLinksToggle"), highlightInaCitationLinksToggle: $("#highlightInaCitationLinksToggle"), definedTermHighlightingToggle: $("#definedTermHighlightingToggle"), notesUseRuleFontToggle: $("#notesUseRuleFontToggle"), automaticCfrUpdatesToggle: $("#automaticCfrUpdatesToggle"),
       browserConflictActions: $("#browserConflictActions"), reloadBrowserProfileButton: $("#reloadBrowserProfileButton"), mergeBrowserProfileButton: $("#mergeBrowserProfileButton"),
       emptySearchViewSelect: $("#emptySearchViewSelect"), closeBlankCompanionSetting: $("#closeBlankCompanionSetting"), closeBlankCompanionOnSectionOpenToggle: $("#closeBlankCompanionOnSectionOpenToggle"), splitAuthoritySearchPanesToggle: $("#splitAuthoritySearchPanesToggle"), legalNavigatorVisibilitySelect: $("#legalNavigatorVisibilitySelect"), syncCfrCommonDepthFromStatuteToggle: $("#syncCfrCommonDepthFromStatuteToggle"), expandSearchResultsByDefaultToggle: $("#expandSearchResultsByDefaultToggle"), showCfrChapterSubchapterInSearchHierarchyToggle: $("#showCfrChapterSubchapterInSearchHierarchyToggle"),
-      automaticStatutoryNavigationSystemToggle: $("#automaticStatutoryNavigationSystemToggle"), scrollUpdatesSearchToggle: $("#scrollUpdatesSearchToggle"), animatedCitationJumpsToggle: $("#animatedCitationJumpsToggle"), statuteSectionDisplaySelect: $("#statuteSectionDisplaySelect"), statuteNavigationDepthSelect: $("#statuteNavigationDepthSelect"), cfrNavigationDepthSelect: $("#cfrNavigationDepthSelect"),
+      automaticStatutoryNavigationSystemToggle: $("#automaticStatutoryNavigationSystemToggle"), scrollUpdatesSearchToggle: $("#scrollUpdatesSearchToggle"), citationJumpOffsetInput: $("#citationJumpOffsetInput"), navigationTrackingOffsetInput: $("#navigationTrackingOffsetInput"), animatedCitationJumpsToggle: $("#animatedCitationJumpsToggle"), statuteSectionDisplaySelect: $("#statuteSectionDisplaySelect"), statuteNavigationDepthSelect: $("#statuteNavigationDepthSelect"), cfrNavigationDepthSelect: $("#cfrNavigationDepthSelect"),
       persistInlineReferenceInsertionsToggle: $("#persistInlineReferenceInsertionsToggle"), referenceInsertionsUnavailableCount: $("#referenceInsertionsUnavailableCount"), removeUnavailableReferenceInsertionsButton: $("#removeUnavailableReferenceInsertionsButton"),
       backupReminderToggle: $("#backupReminderToggle"),
       defaultStartupQueryForm: $("#defaultStartupQueryForm"), defaultStartupQueryInput: $("#defaultStartupQueryInput"), defaultStartupQueryFeedback: $("#defaultStartupQueryFeedback"),
@@ -3914,7 +3941,7 @@
       let cursor = start;
       for (const match of matches) {
         parts.push(renderSearchHighlightedText(input, searchMatch, cursor, match.start));
-        parts.push(`<span class="scoped-defined-term" tabindex="0" aria-haspopup="dialog" aria-expanded="false" data-scoped-definition-ids="${escapeHtml(JSON.stringify(match.entryIds))}" title="Scoped legal definition">${renderSearchHighlightedText(input, searchMatch, match.start, match.end)}</span>`);
+        parts.push(`<span class="scoped-defined-term" tabindex="0" aria-haspopup="dialog" aria-expanded="false" data-scoped-definition-ids="${escapeHtml(JSON.stringify(match.entryIds))}">${renderSearchHighlightedText(input, searchMatch, match.start, match.end)}</span>`);
         cursor = match.end;
       }
       parts.push(renderSearchHighlightedText(input, searchMatch, cursor, end));
@@ -8209,7 +8236,7 @@
       for (const span of spans) {
         if (span.start < cursor || span.end > input.length) continue;
         parts.push(escapeHtml(input.slice(cursor, span.start)));
-        parts.push(`<span class="sticky-note-reference" tabindex="0" data-note-reference="${escapeHtml(span.citation)}" data-note-reference-raw="${escapeHtml(span.raw || input.slice(span.start, span.end))}" title="${escapeHtml(span.citation)}">${escapeHtml(input.slice(span.start, span.end))}</span>`);
+        parts.push(`<span class="sticky-note-reference" tabindex="0" data-note-reference="${escapeHtml(span.citation)}" data-note-reference-raw="${escapeHtml(span.raw || input.slice(span.start, span.end))}">${escapeHtml(input.slice(span.start, span.end))}</span>`);
         cursor = span.end;
       }
       parts.push(escapeHtml(input.slice(cursor)));
@@ -8676,6 +8703,7 @@
     function prepareNoteReferenceTrigger(trigger) {
       const parsed = parseCitation(trigger?.dataset.noteReference || "");
       if (!parsed?.valid) return false;
+      trigger.removeAttribute("title");
       const crosswalk = citationCrosswalk(parsed);
       trigger.dataset.legalReference = "";
       trigger.dataset.referenceFamily = parsed.type;
@@ -8996,6 +9024,38 @@
       };
     }
 
+    function coordinatedStatutoryInaLists(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length, sourceContext = null) {
+      if (profile?.preferences?.statutoryLinkCitationSystem !== "ina" || sourceContext?.kind !== "ina" || !sourceContext.uscSection) return [];
+      const input = String(value || "");
+      const start = Math.max(0, Number(segmentStart) || 0);
+      const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
+      const parser = globalThis.INASearchEmbeddedReferences?.parseCoordinatedSectionReferences;
+      if (typeof parser !== "function") return [];
+      const supportedScope = scope => ["this-title", "such-title"].includes(scope?.type) || (scope?.type === "numbered-title" && String(scope.title) === "8");
+      const parsed = parser(input).filter(candidate => candidate.start >= start && candidate.end <= end &&
+        input.slice(candidate.start, candidate.end) === candidate.text && supportedScope(candidate.scope));
+      const groups = parsed.map(candidate => {
+        const members = candidate.members.map(member => (references || [])
+          .filter(reference => reference?.resolution !== "unresolved" && ["usc", "ina"].includes(reference?.family) &&
+            Number.isInteger(reference.start) && Number.isInteger(reference.end) &&
+            reference.start >= candidate.start && reference.end <= candidate.end &&
+            reference.start <= member.start && reference.end >= member.end)
+          .sort((left, right) => (left.end - left.start) - (right.end - right.start) ||
+            Math.abs(left.start - member.start) - Math.abs(right.start - member.start))[0]);
+        if (members.some(member => !member) || new Set(members).size !== candidate.members.length) return null;
+        if (candidate.grammar === "relative-unit-list" && members.some(member => normCitationPart(member.targetSection) !== normCitationPart(candidate.baseSection))) return null;
+        const crosswalks = members.map(statutoryReferenceCrosswalk);
+        if (crosswalks.some(crosswalk => !crosswalk)) return null;
+        return { ...candidate, members, crosswalks, parsedMembers: candidate.members };
+      }).filter(Boolean).sort((left, right) => left.start - right.start || right.end - left.end);
+      const nonoverlapping = [];
+      for (const group of groups) {
+        if (nonoverlapping.some(previous => group.start < previous.end && group.end > previous.start)) continue;
+        nonoverlapping.push(group);
+      }
+      return nonoverlapping;
+    }
+
     function statutoryLinkUsesConvertibleUscWording(reference, sourceContext = null) {
       if (reference?.ruleId === "context-cfr-ina-act-section" && reference.family === "ina") return true;
       if (reference?.family !== "usc" || sourceContext?.kind !== "ina" || !sourceContext.uscSection) return false;
@@ -9080,13 +9140,13 @@
       return { status, section, transferTarget };
     }
 
-    function legalReferenceHtml(reference, contents, sourceContext = null) {
+    function legalReferenceHtml(reference, contents, sourceContext = null, displayOptions = null) {
       const resolution = reference?.resolution || "unresolved";
       if (resolution === "unresolved") return contents ?? escapeHtml(reference?.text || "");
       const crosswalk = statutoryReferenceCrosswalk(reference);
-      const inaCitation = statutoryLinkInaCitation(reference, sourceContext);
+      const inaCitation = displayOptions?.inaCitation || statutoryLinkInaCitation(reference, sourceContext);
       const citation = inaCitation || legalReferenceCitation(reference);
-      const displayedContents = inaCitation ? escapeHtml(inaCitation) : contents;
+      const displayedContents = inaCitation ? displayOptions?.preserveContents ? contents : escapeHtml(inaCitation) : contents;
       const convertedToIna = Boolean(inaCitation && ["usc", "ina"].includes(reference.family));
       const highlightInaCitation = convertedToIna && profile?.preferences?.highlightInaCitationLinks === true;
       const disposition = legalReferenceDisposition(reference);
@@ -9103,12 +9163,7 @@
       const renderedContents = disposition.status === "transferred"
         ? `<span class="reference-transferred-original">${displayedContents}</span><span class="reference-transferred-target" aria-label="Transferred to ${escapeHtml(transferCitation)}">→ ${escapeHtml(transferCitation)}</span>`
         : displayedContents;
-      const linkTitle = disposition.status === "repealed"
-        ? `${citation} has been repealed. Open its status and official source.`
-        : disposition.status === "transferred"
-          ? `${citation} was transferred${transferCitation ? ` to ${transferCitation}` : ""}. Open its status.`
-          : resolution === "local" ? `Preview ${citation} and its reference actions.` : resolution === "official-source-only" ? `Open information for ${citation}` : `Target unavailable locally for ${citation}`;
-      return `<a class="${classes}" href="${escapeHtml(href)}" data-legal-reference data-reference-family="${escapeHtml(reference.family || "unknown")}" data-reference-resolution="${escapeHtml(resolution)}" data-reference-status="${escapeHtml(disposition.status)}" data-reference-title="${escapeHtml(reference.targetTitle || "")}" data-reference-section="${escapeHtml(reference.targetSection || "")}" data-reference-path="${escapeHtml(JSON.stringify(reference.targetPath || []))}" data-reference-url="${escapeHtml(transferUrl || reference.officialUrl || "")}" data-reference-citation="${escapeHtml(citation)}" data-reference-source-text="${escapeHtml(reference.text || "")}"${transferCitation ? ` data-reference-transfer-citation="${escapeHtml(transferCitation)}"` : ""}${crosswalk ? ` data-reference-ina-citation="${escapeHtml(crosswalk.ina)}" data-reference-usc-citation="${escapeHtml(crosswalk.usc)}"` : ""}${navigation}${legalReferenceSourceAttributes(insertionRecord)} title="${escapeHtml(linkTitle)}">${renderedContents}</a>`;
+      return `<a class="${classes}" href="${escapeHtml(href)}" data-legal-reference data-reference-family="${escapeHtml(reference.family || "unknown")}" data-reference-resolution="${escapeHtml(resolution)}" data-reference-status="${escapeHtml(disposition.status)}" data-reference-title="${escapeHtml(reference.targetTitle || "")}" data-reference-section="${escapeHtml(reference.targetSection || "")}" data-reference-path="${escapeHtml(JSON.stringify(reference.targetPath || []))}" data-reference-url="${escapeHtml(transferUrl || reference.officialUrl || "")}" data-reference-citation="${escapeHtml(citation)}" data-reference-source-text="${escapeHtml(reference.text || "")}"${transferCitation ? ` data-reference-transfer-citation="${escapeHtml(transferCitation)}"` : ""}${crosswalk ? ` data-reference-ina-citation="${escapeHtml(crosswalk.ina)}" data-reference-usc-citation="${escapeHtml(crosswalk.usc)}"` : ""}${navigation}${legalReferenceSourceAttributes(insertionRecord)}>${renderedContents}</a>`;
     }
 
     function legalReferenceContextForElement(trigger) {
@@ -11433,8 +11488,8 @@
       else applySearchQuery(query, false);
     }
 
-    function statuteReadingLine() {
-      const topOffsetRatio = .25;
+    function statuteReadingLine(offsetPercent = profile?.preferences?.navigationTrackingOffsetPercent) {
+      const topOffsetRatio = normalizeReadingOffsetPercent(offsetPercent) / 100;
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
       if (focusedPane) {
         const rootRect = focusedPane.scrollRoot.getBoundingClientRect();
@@ -11450,9 +11505,13 @@
       return navigatorBottom + (viewportBottom - navigatorBottom) * topOffsetRatio;
     }
 
+    function statuteJumpLine() {
+      return statuteReadingLine(profile?.preferences?.citationJumpOffsetPercent);
+    }
+
     function scrollStatuteAnchorToReadingLine(anchor) {
       if (!anchor?.getBoundingClientRect) return;
-      const delta = anchor.getBoundingClientRect().top - statuteReadingLine();
+      const delta = anchor.getBoundingClientRect().top - statuteJumpLine();
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
       (focusedPane?.scrollRoot || window).scrollBy({ top: delta, behavior: focusedPane || !animatedCitationJumpsEnabled() ? "auto" : "smooth" });
     }
@@ -12032,18 +12091,53 @@
       return `<sup class="house-footnote-reference"><a id="${escapeHtml(referenceId)}" href="#house-footnote-${escapeHtml(reference.id)}" data-house-footnote-jump="${escapeHtml(reference.id)}" aria-label="House editorial footnote ${escapeHtml(reference.number)}">${escapeHtml(reference.number)}</a></sup>`;
     }
 
+    function coordinatedInaListHtml(group, input, references, searchMatch, footnoteReferences, definitionContext) {
+      const footnotes = (footnoteReferences || []).filter(reference => Number.isInteger(reference.offset) && reference.offset >= group.start && reference.offset <= group.end).sort((left, right) => left.offset - right.offset);
+      const parts = [];
+      let footnoteIndex = 0;
+      const renderFootnotesThrough = offset => {
+        while (footnoteIndex < footnotes.length && footnotes[footnoteIndex].offset <= offset) parts.push(houseFootnoteReferenceHtml(footnotes[footnoteIndex++]));
+      };
+      group.members.forEach((reference, index) => {
+        if (index) {
+          const previous = group.members[index - 1];
+          let cursor = previous.end;
+          while (footnoteIndex < footnotes.length && footnotes[footnoteIndex].offset <= reference.start) {
+            const footnote = footnotes[footnoteIndex++];
+            parts.push(renderScopedDefinitionAnnotatedText(input, searchMatch, cursor, footnote.offset, definitionContext));
+            parts.push(houseFootnoteReferenceHtml(footnote));
+            cursor = footnote.offset;
+          }
+          parts.push(renderScopedDefinitionAnnotatedText(input, searchMatch, cursor, reference.start, definitionContext));
+        }
+        const crosswalk = group.crosswalks[index];
+        const label = index ? crosswalk.ina.replace(/^INA\s+/i, "") : crosswalk.ina;
+        const referenceContext = definitionContext ? { ...definitionContext, referenceOrdinal: Math.max(0, (references || []).indexOf(reference)) } : null;
+        parts.push(legalReferenceHtml(reference, escapeHtml(label), referenceContext, { inaCitation: crosswalk.ina, preserveContents: true }));
+        if (!index) renderFootnotesThrough(reference.start);
+      });
+      renderFootnotesThrough(group.end);
+      return parts.join("");
+    }
+
     function linkifyStatutoryText(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length, searchMatch = null, footnoteReferences = [], definitionContext = null) {
       const input = String(value || "");
       const start = Math.max(0, Number(segmentStart) || 0);
       const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
       const protectedDefinitionRanges = definedTermHighlightingEnabled() ? scopedDefinitionMatches(input, definitionContext, start, end) : [];
+      const coordinatedLists = coordinatedStatutoryInaLists(input, references, start, end, definitionContext);
+      const coordinatedMembers = new Set(coordinatedLists.flatMap(group => group.members));
+      const coordinatedFootnotes = new Set(coordinatedLists.flatMap(group => (footnoteReferences || []).filter(reference => Number.isInteger(reference.offset) && reference.offset >= group.start && reference.offset <= group.end)));
       const eligibleReferences = (references || [])
         .filter(reference => Number.isInteger(reference.start) && Number.isInteger(reference.end) && reference.start >= start && reference.end <= end && reference.end > reference.start && input.slice(reference.start, reference.end) === reference.text && !protectedDefinitionRanges.some(match => reference.start < match.end && reference.end > match.start))
+        .filter(reference => !coordinatedMembers.has(reference))
         .map(reference => ({ kind: "citation", start: reference.start, end: reference.end, reference }));
       const eligibleFootnotes = (footnoteReferences || [])
         .filter(reference => Number.isInteger(reference.offset) && reference.offset >= start && (reference.offset < end || (end === input.length && reference.offset === end)))
+        .filter(reference => !coordinatedFootnotes.has(reference))
         .map(reference => ({ kind: "footnote", start: reference.offset, end: reference.offset, reference }));
-      const eligible = [...eligibleReferences, ...eligibleFootnotes].sort((a, b) => a.start - b.start || (a.kind === "footnote" ? -1 : 1) || a.end - b.end);
+      const eligibleLists = coordinatedLists.map(group => ({ kind: "citation-list", start: group.start, end: group.end, group }));
+      const eligible = [...eligibleReferences, ...eligibleFootnotes, ...eligibleLists].sort((a, b) => a.start - b.start || (a.kind === "footnote" ? -1 : 1) || a.end - b.end);
       if (!eligible.length) return renderScopedDefinitionAnnotatedText(input, searchMatch, start, end, definitionContext);
       const parts = [];
       let cursor = start;
@@ -12054,6 +12148,9 @@
         if (annotation.kind === "footnote") {
           parts.push(houseFootnoteReferenceHtml(reference));
           cursor = annotation.start;
+        } else if (annotation.kind === "citation-list") {
+          parts.push(coordinatedInaListHtml(annotation.group, input, references, searchMatch, footnoteReferences, definitionContext));
+          cursor = annotation.end;
         } else {
           const referenceContext = definitionContext ? { ...definitionContext, referenceOrdinal: Math.max(0, (references || []).indexOf(reference)) } : null;
           parts.push(legalReferenceHtml(reference, renderSearchHighlightedText(input, searchMatch, reference.start, reference.end), referenceContext));
@@ -12591,6 +12688,8 @@
       els.closeBlankCompanionSetting.setAttribute("aria-disabled", companionSettingEnabled ? "false" : "true");
       els.legalNavigatorVisibilitySelect.value = profile.preferences.legalNavigatorVisibility;
       els.scrollUpdatesSearchToggle.checked = profile.preferences.scrollUpdatesSearch === true;
+      els.citationJumpOffsetInput.value = String(normalizeReadingOffsetPercent(profile.preferences.citationJumpOffsetPercent));
+      els.navigationTrackingOffsetInput.value = String(normalizeReadingOffsetPercent(profile.preferences.navigationTrackingOffsetPercent));
       els.expandSearchResultsByDefaultToggle.checked = profile.preferences.expandSearchResultsByDefault !== false;
       els.showCfrChapterSubchapterInSearchHierarchyToggle.checked = profile.preferences.showCfrChapterSubchapterInSearchHierarchy === true;
       els.syncCfrCommonDepthFromStatuteToggle.checked = profile.preferences.syncCfrCommonDepthFromStatute !== false;
@@ -12880,6 +12979,17 @@
       if (next) scheduleStatuteNavigationUpdate();
     }
 
+    function setReadingOffsetPreference(key, value) {
+      if (!["citationJumpOffsetPercent", "navigationTrackingOffsetPercent"].includes(key)) return false;
+      const next = normalizeReadingOffsetPercent(value);
+      if (profile.preferences[key] === next) { renderSavingMenu(); return false; }
+      profile.preferences[key] = next;
+      markProfileChanged();
+      renderSavingMenu();
+      if (key === "navigationTrackingOffsetPercent") scheduleStatuteNavigationUpdate();
+      return true;
+    }
+
     function animatedCitationJumpsEnabled() {
       return profile?.preferences?.animatedCitationJumps !== false;
     }
@@ -13022,28 +13132,111 @@
       toast("Settings restored to defaults. Notes and inserted references were not changed.");
     }
 
-    function cancelSettingsResetHold(event = null) {
+    function resetProfileContentToDefaults() {
+      const profileId = profile.profileId;
+      const createdAt = profile.createdAt;
+      const defaults = structuredCloneSafe(defaultProfile());
+      defaults.profileId = profileId || defaults.profileId;
+      defaults.createdAt = createdAt || defaults.createdAt;
+      for (const key of Object.keys(profile)) delete profile[key];
+      Object.assign(profile, defaults);
+      state.tutorialSessionProgress = normalizeTutorialProgress(profile.tutorialProgress);
+      replaceReferenceInsertionSession([]);
+      return profile;
+    }
+
+    function stopTutorialForReset() {
+      if (!state.tutorialActive) return;
+      clearTutorialTarget();
+      restoreTutorialBlockedControls();
+      els.tutorialCoach.hidden = true;
+      els.tutorialCoach.style.left = "";
+      els.tutorialCoach.style.top = "";
+      document.body.classList.remove("tutorial-active");
+      state.tutorialActive = null;
+      state.tutorialReturnFocus = null;
+    }
+
+    function resetEverythingToDefaults() {
+      const blankWorkspace = state.view === "search" && !String(els.search.value || "").trim() && !state.searchScopeActive;
+      stopTutorialForReset();
+      for (const timer of state.annotationAutosaveTimers.values()) clearTimeout(timer);
+      state.annotationAutosaveTimers.clear();
+      state.annotationDrag = null;
+      state.annotationSelection = null;
+      state.pendingAnnotationFocus = null;
+      state.focusedAnnotation = null;
+      state.inlineNoteEditor = null;
+      state.openNotePanels = new Set();
+      state.backupReminderDue = false;
+      resetProfileContentToDefaults();
+      insertedReferenceMaterializedKeys.clear();
+      resetAnnotationIndex();
+      state.statuteHierarchyAuthority = profile.preferences.statutoryNavigationSystem;
+      state.lastScrollSyncedCitation = "";
+      applyThemePreference(profile.preferences.theme);
+      document.body.classList.toggle("notes-use-rule-font", profile.preferences.notesUseRuleFont === true);
+      syncCitationJumpAnimationPreference();
+      syncAppearanceControls();
+      stopCorpusMaintenance(true);
+      renderTutorialEntryLabels();
+      buildIndex();
+      markProfileChanged();
+      renderNotesList();
+      if (blankWorkspace) openClearedSearchHierarchy();
+      else if (state.view === "search" && String(els.search.value || "").trim()) applySearchQuery(els.search.value, false, true);
+      else {
+        refreshStatutoryCitationDisplay();
+        refreshLegalNavigatorVisibility();
+        syncNavigationDepthSettings();
+        rerenderOccurrenceExpansionPreference();
+      }
+      rerenderAllInsertedReferenceGroups();
+      renderSavingMenu();
+      els.resetEverythingButton.focus();
+      toast("Everything reset. Notes, highlights, inserted references, tutorial progress, daily-tip progress, and settings were removed.");
+    }
+
+    function cancelResetHold(timerKey, button, event = null) {
       if (event?.type === "keyup" && ![" ", "Enter"].includes(event.key)) return;
-      if (!state.settingsResetTimer) return;
+      if (!state[timerKey]) return;
       if (event?.cancelable) event.preventDefault();
-      clearTimeout(state.settingsResetTimer);
-      state.settingsResetTimer = null;
-      els.resetSettingsButton.classList.remove("is-holding");
-      els.resetSettingsButton.removeAttribute("aria-busy");
+      clearTimeout(state[timerKey]);
+      state[timerKey] = null;
+      button.classList.remove("is-holding");
+      button.removeAttribute("aria-busy");
+    }
+
+    function beginResetHold(timerKey, button, complete, event) {
+      if (event.type === "keydown" && (![" ", "Enter"].includes(event.key) || event.repeat)) return;
+      if (state[timerKey]) return;
+      if (event.cancelable) event.preventDefault();
+      const holdDuration = Math.max(1, Number(button.dataset.holdDuration) || 1500);
+      button.style.setProperty("--settings-reset-hold-duration", `${holdDuration}ms`);
+      button.classList.add("is-holding");
+      button.setAttribute("aria-busy", "true");
+      state[timerKey] = setTimeout(() => {
+        state[timerKey] = null;
+        button.classList.remove("is-holding");
+        button.removeAttribute("aria-busy");
+        complete();
+      }, holdDuration);
+    }
+
+    function cancelSettingsResetHold(event = null) {
+      cancelResetHold("settingsResetTimer", els.resetSettingsButton, event);
     }
 
     function beginSettingsResetHold(event) {
-      if (event.type === "keydown" && (![" ", "Enter"].includes(event.key) || event.repeat)) return;
-      if (state.settingsResetTimer) return;
-      if (event.cancelable) event.preventDefault();
-      els.resetSettingsButton.classList.add("is-holding");
-      els.resetSettingsButton.setAttribute("aria-busy", "true");
-      state.settingsResetTimer = setTimeout(() => {
-        state.settingsResetTimer = null;
-        els.resetSettingsButton.classList.remove("is-holding");
-        els.resetSettingsButton.removeAttribute("aria-busy");
-        resetSettingsToDefaults();
-      }, 1500);
+      beginResetHold("settingsResetTimer", els.resetSettingsButton, resetSettingsToDefaults, event);
+    }
+
+    function cancelEverythingResetHold(event = null) {
+      cancelResetHold("resetEverythingTimer", els.resetEverythingButton, event);
+    }
+
+    function beginEverythingResetHold(event) {
+      beginResetHold("resetEverythingTimer", els.resetEverythingButton, resetEverythingToDefaults, event);
     }
 
     function beginProfileSavingSetup(event = null) {
@@ -15238,6 +15431,13 @@ Get-FileHash $outJson -Algorithm SHA256`;
       els.resetSettingsButton.addEventListener("keyup", cancelSettingsResetHold);
       els.resetSettingsButton.addEventListener("blur", cancelSettingsResetHold);
       els.resetSettingsButton.addEventListener("click", event => event.preventDefault());
+      els.resetEverythingButton.addEventListener("pointerdown", beginEverythingResetHold);
+      for (const type of ["pointerup", "pointercancel", "pointerleave"]) els.resetEverythingButton.addEventListener(type, cancelEverythingResetHold);
+      els.resetEverythingButton.addEventListener("keydown", beginEverythingResetHold);
+      els.resetEverythingButton.addEventListener("keyup", cancelEverythingResetHold);
+      els.resetEverythingButton.addEventListener("blur", cancelEverythingResetHold);
+      els.resetEverythingButton.addEventListener("click", event => event.preventDefault());
+      for (const button of [els.resetSettingsButton, els.resetEverythingButton]) button.addEventListener("contextmenu", event => event.preventDefault());
       els.reloadBrowserProfileButton.addEventListener("click", reloadBrowserProfile);
       els.mergeBrowserProfileButton.addEventListener("click", mergeBrowserProfile);
       els.showDetailedStatusToggle.addEventListener("change", () => setDetailedStatus(els.showDetailedStatusToggle.checked));
@@ -15254,6 +15454,8 @@ Get-FileHash $outJson -Algorithm SHA256`;
       els.splitAuthoritySearchPanesToggle.addEventListener("change", () => setSplitAuthoritySearchPanes(els.splitAuthoritySearchPanesToggle.checked));
       els.legalNavigatorVisibilitySelect.addEventListener("change", () => setLegalNavigatorVisibility(els.legalNavigatorVisibilitySelect.value));
       els.scrollUpdatesSearchToggle.addEventListener("change", () => setScrollUpdatesSearch(els.scrollUpdatesSearchToggle.checked));
+      els.citationJumpOffsetInput.addEventListener("change", () => setReadingOffsetPreference("citationJumpOffsetPercent", els.citationJumpOffsetInput.value));
+      els.navigationTrackingOffsetInput.addEventListener("change", () => setReadingOffsetPreference("navigationTrackingOffsetPercent", els.navigationTrackingOffsetInput.value));
       els.syncCfrCommonDepthFromStatuteToggle.addEventListener("change", () => setSyncCfrCommonDepthFromStatute(els.syncCfrCommonDepthFromStatuteToggle.checked));
       els.expandSearchResultsByDefaultToggle.addEventListener("change", () => setExpandSearchResultsByDefault(els.expandSearchResultsByDefaultToggle.checked));
       els.showCfrChapterSubchapterInSearchHierarchyToggle.addEventListener("change", () => setShowCfrChapterSubchapterInSearchHierarchy(els.showCfrChapterSubchapterInSearchHierarchyToggle.checked));
@@ -15456,6 +15658,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
       statuteNodeAtPath,
       statuteSiblingNodes,
       statuteReadingLine,
+      statuteJumpLine,
       currentStatutePathAtReadingLine,
       scrollToRenderedStatuteTarget,
       normalizeCourseStructure,

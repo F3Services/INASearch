@@ -76,6 +76,8 @@ function testProfileContracts() {
     closeBlankCompanionOnSectionOpen: profile.preferences.closeBlankCompanionOnSectionOpen,
     legalNavigatorVisibility: profile.preferences.legalNavigatorVisibility,
     scrollUpdatesSearch: profile.preferences.scrollUpdatesSearch,
+    citationJumpOffsetPercent: profile.preferences.citationJumpOffsetPercent,
+    navigationTrackingOffsetPercent: profile.preferences.navigationTrackingOffsetPercent,
     expandSearchResultsByDefault: profile.preferences.expandSearchResultsByDefault,
     showCfrChapterSubchapterInSearchHierarchy: profile.preferences.showCfrChapterSubchapterInSearchHierarchy,
     syncCfrCommonDepthFromStatute: profile.preferences.syncCfrCommonDepthFromStatute,
@@ -87,6 +89,8 @@ function testProfileContracts() {
     closeBlankCompanionOnSectionOpen: true,
     legalNavigatorVisibility: "single",
     scrollUpdatesSearch: false,
+    citationJumpOffsetPercent: 5,
+    navigationTrackingOffsetPercent: 5,
     expandSearchResultsByDefault: true,
     showCfrChapterSubchapterInSearchHierarchy: false,
     syncCfrCommonDepthFromStatute: true,
@@ -99,7 +103,7 @@ function testProfileContracts() {
   for (const id of [
     "emptySearchViewSelect", "splitAuthoritySearchPanesToggle", "closeBlankCompanionOnSectionOpenToggle", "legalNavigatorVisibilitySelect",
     "scrollUpdatesSearchToggle", "syncCfrCommonDepthFromStatuteToggle", "expandSearchResultsByDefaultToggle", "showCfrChapterSubchapterInSearchHierarchyToggle", "persistInlineReferenceInsertionsToggle",
-    "referenceInsertionsUnavailableCount", "removeUnavailableReferenceInsertionsButton", "statuteNavigationDepthSelect", "cfrNavigationDepthSelect"
+    "referenceInsertionsUnavailableCount", "removeUnavailableReferenceInsertionsButton", "statuteNavigationDepthSelect", "cfrNavigationDepthSelect", "citationJumpOffsetInput", "navigationTrackingOffsetInput"
   ]) assert(template.includes(`id="${id}"`), `Missing overhaul setting control ${id}.`);
   assert(template.includes('const companionSettingEnabled = profile.preferences.emptySearchView === "both"')
     && template.includes("els.closeBlankCompanionOnSectionOpenToggle.disabled = !companionSettingEnabled"), "The companion-close setting is not conditionally disabled.");
