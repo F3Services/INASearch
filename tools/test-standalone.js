@@ -281,6 +281,12 @@ function profileMigrationFunctions(source) {
   assert(start >= 0 && end > start, "Could not extract the profile normalization functions.");
   const declarations = source.slice(start, end);
   const normalizeThemePreference = extractedFunction(source, "normalizeThemePreference", "systemThemePreference");
+  const defaultReadingOffsetPercent = 5;
+  const normalizeReadingOffsetPercent = value => {
+    if (value === null || value === undefined || String(value).trim() === "") return defaultReadingOffsetPercent;
+    const number = Number(value);
+    return Number.isFinite(number) ? Math.max(0, Math.min(100, Math.round(number))) : defaultReadingOffsetPercent;
+  };
   const tutorialCatalog = [["quick-start", 6]].map(([id, revision]) => ({ id, revision }));
   return vm.runInNewContext(`${declarations}\n({ normalizeCourseStructure, normalizeCoursePlacement, isValidProfile, normalizeProfile })`, {
     Array,
@@ -295,10 +301,12 @@ function profileMigrationFunctions(source) {
     TUTORIAL_STATUS_RANK: Object.freeze({ "not-started": 0, "in-progress": 1, viewed: 2, completed: 3 }),
     TIP_BY_ID: tipByIdFromSource(source),
     DEFAULT_STARTUP_QUERY: "",
+    DEFAULT_READING_OFFSET_PERCENT: defaultReadingOffsetPercent,
     STATUTE_NAVIGATION_DEPTHS: ["Section", "Subsection", "Paragraph", "Subparagraph", "Clause", "Subclause", "Item", "Subitem", "Subsubitem"],
     CFR_NAVIGATION_DEPTHS: ["Section", "Paragraph", "Paragraph level 2", "Paragraph level 3", "Paragraph level 4", "Paragraph level 5", "Paragraph level 6"],
     corpus: null,
     makeId: () => "synthetic-default-id",
+    normalizeReadingOffsetPercent,
     normalizeThemePreference,
     structuredCloneSafe: value => JSON.parse(JSON.stringify(value)),
     globalThis: { INA_SEARCH_ANNOTATIONS: annotations }
@@ -505,6 +513,8 @@ async function main() {
   assert.strictEqual(Object.hasOwn(blankProfile.preferences, "compactResults"), false, "Blank profiles retained the retired compact-results preference.");
   assert.strictEqual(blankProfile.preferences.statutoryLinkCitationSystem, "ina", "Blank profiles must default mapped statutory link labels to INA citations.");
   assert.strictEqual(blankProfile.preferences.highlightInaCitationLinks, false, "Blank profiles must use standard blue styling for INA-format statutory links.");
+  assert.strictEqual(blankProfile.preferences.citationJumpOffsetPercent, 5, "Blank profiles must default citation jumps to five percent of the readable area.");
+  assert.strictEqual(blankProfile.preferences.navigationTrackingOffsetPercent, 5, "Blank profiles must default navigation tracking to five percent of the readable area.");
   assert.strictEqual(blankProfile.preferences.showCfrChapterSubchapterInSearchHierarchy, false, "Blank profiles must omit CFR chapters and subchapters from search-result hierarchies by default.");
   assert.strictEqual(blankProfile.preferences.highlightDefinedTerms, false, "Blank profiles must disable experimental defined-term highlighting by default.");
   assert.strictEqual(blankProfile.preferences.automaticCfrUpdates, false, "Blank profiles must keep automatic CFR updates off by default.");
@@ -585,6 +595,8 @@ async function main() {
   assert(full.html.includes("On by default. An INA citation switches the upper navigation levels to the INA structure"), "The automatic statute-hierarchy setting does not explain its enabled default.");
   assert(!/id="navigationUpdatesSearchToggle"/.test(full.html), "The retired navigation-to-search synchronization setting remains visible.");
   assert(/id="scrollUpdatesSearchToggle"[^>]*type="checkbox"[^>]*role="switch"/.test(full.html), "The scroll-to-search synchronization setting is missing.");
+  assert(/id="citationJumpOffsetInput"[^>]*type="number"[^>]*min="0"[^>]*max="100"/.test(full.html), "The citation-jump percentage setting is missing or unbounded.");
+  assert(/id="navigationTrackingOffsetInput"[^>]*type="number"[^>]*min="0"[^>]*max="100"/.test(full.html), "The navigation-tracking percentage setting is missing or unbounded.");
   assert(/id="animatedCitationJumpsToggle"[^>]*type="checkbox"[^>]*role="switch"/.test(full.html), "The animated citation-jump setting is missing.");
   assert(full.html.includes("Turn this off to move instantly to a requested citation without scrolling or sliding through the page."), "The citation-jump setting does not explain its immediate mode.");
   assert(/id="statuteSectionDisplaySelect"[\s\S]{0,500}<option value="hierarchy">Follow hierarchy button<\/option>[\s\S]{0,300}<option value="usc">U\.S\.C\.<\/option>[\s\S]{0,200}<option value="ina">INA<\/option>[\s\S]{0,200}<option value="both">Both<\/option>/.test(full.html), "The statute Section-display setting is missing one or more modes.");
@@ -646,7 +658,8 @@ async function main() {
   const initializeSource = full.html.slice(full.html.indexOf("function initialize()"), full.html.indexOf("window.INASearchTest"));
   assert(!initializeSource.includes("startTutorial("), "A tutorial is started automatically during initialization.");
   assert(/function captureTutorialState\(/.test(full.html) && /function restoreTutorialState\(/.test(full.html), "Tutorial state snapshot and restore support is incomplete.");
-  assert(/savingMenuEnableButton[\s\S]{0,200}savingMenuImportButton[\s\S]{0,200}resetSettingsButton/.test(full.html), "Settings saving controls are incomplete.");
+  const settingsControlOrder = ["savingMenuEnableButton", "savingMenuImportButton", "resetSettingsButton", "resetEverythingButton"].map(id => full.html.indexOf(`id="${id}"`));
+  assert(settingsControlOrder.every((position, index) => position >= 0 && (!index || position > settingsControlOrder[index - 1])), "Settings saving and reset controls are incomplete or out of order.");
   assert.strictEqual(full.build.variant, "standard");
   assert.strictEqual(full.build.hasLocalUscCache, true);
   assert.strictEqual(full.build.corpusCompression, "gzip");
@@ -964,6 +977,19 @@ async function main() {
   assert.deepStrictEqual(plain(embeddedReferences.parseNumberedSectionReferences("under sections 1158 or 1231(b)(3) of this title")[0]?.members.map(member => ({ text: member.text, tokens: member.tokens }))), [
     { text: "1158", tokens: [] }, { text: "1231(b)(3)", tokens: ["b", "3"] }
   ], "The pure parser did not retain a mixed bare/parenthesized sections … or … of this title list.");
+  assert.deepStrictEqual(plain(embeddedReferences.parseCoordinatedSectionReferences("under subsection (a) or (b) of section 1153 of this title, the Attorney General shall").map(candidate => ({
+    grammar: candidate.grammar, text: candidate.text, unit: candidate.memberUnitKind, baseSection: candidate.baseSection,
+    members: candidate.members.map(member => member.text), scope: candidate.scope.type
+  }))), [{
+    grammar: "relative-unit-list", text: "subsection (a) or (b) of section 1153 of this title", unit: "subsection", baseSection: "1153",
+    members: ["(a)", "(b)"], scope: "this-title"
+  }], "The coordinated parser did not normalize a relative subsection list and its trailing section container.");
+  assert.deepStrictEqual(plain(embeddedReferences.parseCoordinatedSectionReferences("for classification under section 1151(b), 1153(a)(1), or 1153(a)(3) of this title, as appropriate.").map(candidate => ({
+    grammar: candidate.grammar, text: candidate.text, members: candidate.members.map(member => member.text), scope: candidate.scope.type
+  }))), [{
+    grammar: "numbered-section-list", text: "section 1151(b), 1153(a)(1), or 1153(a)(3) of this title",
+    members: ["1151(b)", "1153(a)(1)", "1153(a)(3)"], scope: "this-title"
+  }], "The coordinated parser did not retain a mixed-section list under one trailing title scope.");
   assert.deepStrictEqual(plain(embeddedReferences.parseNumberedSectionReferences("section 1229b")), [], "The coordinated-list parser expanded its grammar to an unscoped lone bare section number.");
   const staleExceptionCorpus = {
     title8: { sections: [] }, cfr: { sections: [], appendices: [], parts: [] }, inaCrosswalk: [],
@@ -2161,6 +2187,16 @@ async function main() {
   assert(fallbackSource.includes('id="highlightInaCitationLinksToggle"') && fallbackSource.includes('Highlight INA citations in yellow'), "The Settings menu lacks the independent INA-link color preference.");
   assert(fallbackSource.includes('id="defaultStartupQueryInput"') && fallbackSource.includes('Default citation on startup'), "Settings lacks the configurable startup citation.");
   assert(fallbackSource.includes('id="clearDefaultStartupQueryButton"') && fallbackSource.includes('Clear this field to open with an empty search bar'), "Settings does not provide a clear empty-startup path.");
+  const appearanceSettingsStart = fallbackSource.indexOf('id="appearanceSettingsHeading"');
+  const legalTextSettingsStart = fallbackSource.indexOf('id="legalReaderSettingsHeading">Legal text &amp; citations');
+  const workspaceSettingsStart = fallbackSource.indexOf('id="workspaceSettingsHeading">Search &amp; workspace');
+  const navigationSettingsStart = fallbackSource.indexOf('id="navigationSettingsHeading">Navigation &amp; scrolling');
+  assert(appearanceSettingsStart < legalTextSettingsStart && legalTextSettingsStart < workspaceSettingsStart && workspaceSettingsStart < navigationSettingsStart, "Settings sections are not arranged from appearance through reading, workspace, and navigation.");
+  assert(fallbackSource.indexOf('id="notesUseRuleFontToggle"') < legalTextSettingsStart, "Sticky-note typography is not grouped with appearance controls.");
+  assert(fallbackSource.indexOf('id="defaultStartupQueryInput"') > workspaceSettingsStart && fallbackSource.indexOf('id="defaultStartupQueryInput"') < navigationSettingsStart, "Startup behavior is not grouped with search and workspace controls.");
+  for (const id of ["legalNavigatorVisibilitySelect", "syncCfrCommonDepthFromStatuteToggle", "citationJumpOffsetInput", "navigationTrackingOffsetInput"]) assert(fallbackSource.indexOf(`id="${id}"`) > navigationSettingsStart, `${id} is not grouped with navigation and scrolling.`);
+  assert(fallbackSource.includes('setReadingOffsetPreference("citationJumpOffsetPercent"') && fallbackSource.includes('setReadingOffsetPreference("navigationTrackingOffsetPercent"'), "The independent percentage controls are not wired to persisted reading offsets.");
+  assert(fallbackSource.includes('.settings-toggle input[type="checkbox"] { width: 19px; height: 19px;') && !fallbackSource.includes('.settings-toggle input { width: 19px; height: 19px;'), "The settings checkbox rule still collapses percentage inputs to checkbox dimensions.");
   assert(fallbackSource.includes('id="profileSetupTitle">Save a data file to protect your notes</strong>') && fallbackSource.includes("your notes, highlights, and other research exist only in this browser and can be lost"), "The data-file warning does not explain which annotations are at risk.");
   const protectableProfile = { notes: [], highlights: [], referenceInsertions: { records: [] }, preferences: { backupReminder: "weekly" } };
   const profileHasProtectableContent = extractedFunction(fallbackSource, "profileHasProtectableContent", "profileSetupMode", { profile: protectableProfile, Boolean });
@@ -2193,12 +2229,56 @@ async function main() {
     && fallbackSource.includes('event.target.closest("[data-connect-filesystem-autosaving]")')
     && fallbackSource.includes("connectFilesystemAutosavingFromSettings()"), "The inline connect-a-data-file action does not share the filesystem-autosaving flow.");
   assert(/id="resetSettingsButton"[^>]*data-hold-duration="1500"[^>]*>Hold to reset settings</.test(fallbackSource)
-    && fallbackSource.includes("animation: settings-reset-hold 1.5s linear forwards")
+    && fallbackSource.includes("animation: settings-reset-hold var(--settings-reset-hold-duration, 1.5s) linear forwards")
     && fallbackSource.includes('resetSettingsButton.addEventListener("pointerdown", beginSettingsResetHold)')
     && fallbackSource.includes('resetSettingsButton.addEventListener("keydown", beginSettingsResetHold)')
-    && fallbackSource.includes('setTimeout(() => {\n        state.settingsResetTimer = null;')
-    && fallbackSource.includes("}, 1500);"), "The Reset Settings control does not require a visible continuous 1.5-second hold.");
+    && fallbackSource.includes('beginResetHold("settingsResetTimer", els.resetSettingsButton, resetSettingsToDefaults, event)')
+    && fallbackSource.includes("Number(button.dataset.holdDuration)"), "The Reset Settings control does not require a visible continuous 1.5-second hold.");
+  assert(/id="resetEverythingButton"[^>]*data-hold-duration="3000"[^>]*>Hold to reset everything</.test(fallbackSource)
+    && fallbackSource.includes('resetEverythingButton.addEventListener("pointerdown", beginEverythingResetHold)')
+    && fallbackSource.includes('resetEverythingButton.addEventListener("keydown", beginEverythingResetHold)')
+    && fallbackSource.includes('beginResetHold("resetEverythingTimer", els.resetEverythingButton, resetEverythingToDefaults, event)')
+    && fallbackSource.includes("--settings-reset-hold-duration"), "Reset Everything does not require a visible continuous three-second hold.");
   assert(!fallbackSource.includes("Hold continuously for 1.5 seconds to restore the default settings."), "The Reset Settings description redundantly repeats the button's hold instruction.");
+  const holdState = { resetEverythingTimer: null };
+  const holdClasses = new Set();
+  const holdAttributes = new Map();
+  const holdStyles = new Map();
+  const holdButton = {
+    dataset: { holdDuration: "3000" },
+    style: { setProperty: (key, value) => holdStyles.set(key, value) },
+    classList: { add: value => holdClasses.add(value), remove: value => holdClasses.delete(value) },
+    setAttribute: (key, value) => holdAttributes.set(key, value),
+    removeAttribute: key => holdAttributes.delete(key)
+  };
+  let holdCallback = null;
+  let holdDelay = null;
+  let holdCompletions = 0;
+  let clearedHoldTimer = null;
+  const beginResetHold = extractedFunction(fallbackSource, "beginResetHold", "cancelSettingsResetHold", {
+    state: holdState,
+    setTimeout: (callback, delay) => { holdCallback = callback; holdDelay = delay; return "hold-timer"; },
+    Math,
+    Number
+  });
+  const cancelResetHold = extractedFunction(fallbackSource, "cancelResetHold", "beginResetHold", {
+    state: holdState,
+    clearTimeout: timer => { clearedHoldTimer = timer; }
+  });
+  const holdEvent = { type: "pointerdown", cancelable: true, preventDefault() {} };
+  beginResetHold("resetEverythingTimer", holdButton, () => { holdCompletions += 1; }, holdEvent);
+  assert.strictEqual(holdDelay, 3000, "Reset Everything does not wait exactly three seconds.");
+  assert.strictEqual(holdStyles.get("--settings-reset-hold-duration"), "3000ms", "Reset Everything's visible hold progress does not match its timer.");
+  assert(holdClasses.has("is-holding") && holdAttributes.get("aria-busy") === "true", "Reset Everything does not expose its active hold state.");
+  cancelResetHold("resetEverythingTimer", holdButton, { type: "pointerup", cancelable: true, preventDefault() {} });
+  assert.strictEqual(clearedHoldTimer, "hold-timer", "Releasing Reset Everything early did not cancel its timer.");
+  assert.strictEqual(holdCompletions, 0, "Releasing Reset Everything early activated the reset.");
+  assert.strictEqual(holdState.resetEverythingTimer, null, "The canceled Reset Everything timer remained active.");
+  beginResetHold("resetEverythingTimer", holdButton, () => { holdCompletions += 1; }, holdEvent);
+  holdCallback();
+  assert.strictEqual(holdCompletions, 1, "A continuous three-second Reset Everything hold did not activate exactly once.");
+  assert.strictEqual(holdState.resetEverythingTimer, null, "The completed Reset Everything timer remained active.");
+  assert(!holdClasses.has("is-holding") && !holdAttributes.has("aria-busy"), "Reset Everything retained its active hold state after completion.");
   const resetNotes = [{ id: "note-kept" }];
   const resetTutorialProgress = { schemaVersion: 1, modules: { notes: { status: "completed" } } };
   const resetInsertionRecords = [{ key: "insertion-kept" }];
@@ -2213,7 +2293,7 @@ async function main() {
   let resetMarks = 0;
   let resetFocuses = 0;
   let resetToast = "";
-  const resetSettingsToDefaults = extractedFunction(fallbackSource, "resetSettingsToDefaults", "cancelSettingsResetHold", {
+  const resetSettingsToDefaults = extractedFunction(fallbackSource, "resetSettingsToDefaults", "resetProfileContentToDefaults", {
     state: resetState,
     els: { search: { value: "president" }, resetSettingsButton: { focus() { resetFocuses += 1; } } },
     profile: resetProfile,
@@ -2249,6 +2329,62 @@ async function main() {
   assert.strictEqual(resetMarks, 1, "Reset Settings did not queue exactly one profile save.");
   assert.strictEqual(resetFocuses, 1, "Reset Settings did not return focus to its hold control.");
   assert(resetToast.includes("Notes and inserted references were not changed"), "Reset Settings did not confirm its data-preservation boundary.");
+  const resetEverythingProfile = {
+    schemaVersion: 4,
+    profileId: "profile-kept",
+    createdAt: "2025-01-02T03:04:05.000Z",
+    updatedAt: "2026-08-31T12:00:00.000Z",
+    notes: [{ id: "note-removed" }],
+    highlights: [{ id: "highlight-removed" }],
+    annotationOrdinals: { "usc:1101": 4 },
+    tutorialProgress: { schemaVersion: 1, modules: { "quick-start": { status: "completed" } } },
+    tipProgress: { schemaVersion: 1, currentTipId: 12, lastAdvancedLocalDate: "2026-08-31", dismissedLocalDate: null },
+    referenceInsertions: { schemaVersion: 1, records: [{ key: "insertion-removed" }] },
+    preferences: { theme: "dark", customNondefault: true }
+  };
+  const resetEverythingDefaults = {
+    schemaVersion: 4,
+    profileId: "new-profile-id",
+    createdAt: "2026-09-01T12:00:00.000Z",
+    updatedAt: null,
+    notes: [],
+    highlights: [],
+    annotationOrdinals: {},
+    tutorialProgress: { schemaVersion: 1, modules: {} },
+    tipProgress: { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null },
+    referenceInsertions: { schemaVersion: 1, records: [] },
+    preferences: { theme: "light", statutoryNavigationSystem: "usc" }
+  };
+  const resetEverythingState = { tutorialSessionProgress: resetEverythingProfile.tutorialProgress };
+  let replacementInsertionRecords = null;
+  const resetProfileContentToDefaults = extractedFunction(fallbackSource, "resetProfileContentToDefaults", "stopTutorialForReset", {
+    profile: resetEverythingProfile,
+    state: resetEverythingState,
+    structuredCloneSafe: value => JSON.parse(JSON.stringify(value)),
+    defaultProfile: () => resetEverythingDefaults,
+    normalizeTutorialProgress: value => JSON.parse(JSON.stringify(value)),
+    replaceReferenceInsertionSession: records => { replacementInsertionRecords = records; }
+  });
+  const resetEverythingResult = resetProfileContentToDefaults();
+  assert.strictEqual(resetEverythingResult, resetEverythingProfile, "Reset Everything replaced the live profile object instead of clearing it in place.");
+  assert.strictEqual(resetEverythingProfile.profileId, "profile-kept", "Reset Everything replaced the active profile identity.");
+  assert.strictEqual(resetEverythingProfile.createdAt, "2025-01-02T03:04:05.000Z", "Reset Everything replaced the profile creation date.");
+  assert.deepStrictEqual(resetEverythingProfile.notes, [], "Reset Everything retained notes.");
+  assert.deepStrictEqual(resetEverythingProfile.highlights, [], "Reset Everything retained highlights.");
+  assert.deepStrictEqual(resetEverythingProfile.annotationOrdinals, {}, "Reset Everything retained annotation counters.");
+  assert.deepStrictEqual(resetEverythingProfile.referenceInsertions.records, [], "Reset Everything retained inserted references.");
+  assert.deepStrictEqual(resetEverythingProfile.tutorialProgress.modules, {}, "Reset Everything retained tutorial progress.");
+  assert.strictEqual(resetEverythingProfile.tipProgress.currentTipId, null, "Reset Everything retained daily-tip progress.");
+  assert.strictEqual(resetEverythingProfile.preferences.theme, "light", "Reset Everything did not restore default settings.");
+  assert.strictEqual(resetEverythingProfile.preferences.customNondefault, undefined, "Reset Everything retained a nondefault preference.");
+  assert.strictEqual(replacementInsertionRecords?.length, 0, "Reset Everything did not clear the live inserted-reference session.");
+  assert.deepStrictEqual(resetEverythingState.tutorialSessionProgress.modules, {}, "Reset Everything did not clear live tutorial progress.");
+  const resetEverythingSource = fallbackSource.slice(fallbackSource.indexOf("function resetEverythingToDefaults()"), fallbackSource.indexOf("function cancelResetHold"));
+  assert(resetEverythingSource.includes("state.annotationAutosaveTimers.clear()")
+    && resetEverythingSource.includes("insertedReferenceMaterializedKeys.clear()")
+    && resetEverythingSource.includes("resetAnnotationIndex()")
+    && resetEverythingSource.includes("markProfileChanged()")
+    && resetEverythingSource.includes("rerenderAllInsertedReferenceGroups()"), "Reset Everything does not clear and rerender all live saved-content surfaces.");
   const themeDeclarationsStart = fallbackSource.indexOf('    const THEME_STORAGE_KEY = "ina-search-theme";');
   const themeDeclarationsEnd = fallbackSource.indexOf("\n    const state = {", themeDeclarationsStart);
   assert(themeDeclarationsStart >= 0 && themeDeclarationsEnd > themeDeclarationsStart, "Could not extract the theme preference functions.");
@@ -2836,6 +2972,9 @@ async function main() {
   assert(fallbackSource.includes('.detail-heading-actions .button { min-height: 30px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }'), "A title-row official-source button can wrap into an unintended second line.");
   const stickyCardSource = fallbackSource.slice(fallbackSource.indexOf("function stickyNoteCardHtml"), fallbackSource.indexOf("function prepareInlineNotePage"));
   assert(stickyCardSource.includes("noteReferenceHtml(note)") && stickyCardSource.includes("data-sticky-note-editor"), "Sticky-note view/edit modes are not both rendered.");
+  const stickyNoteReferenceSource = fallbackSource.slice(fallbackSource.indexOf("function noteReferenceHtml"), fallbackSource.indexOf("function stickyNoteCardHtml"));
+  const prepareNoteReferenceSource = fallbackSource.slice(fallbackSource.indexOf("function prepareNoteReferenceTrigger"), fallbackSource.indexOf("function mappedUscResultForIna"));
+  assert(!stickyNoteReferenceSource.includes(" title=") && prepareNoteReferenceSource.includes('removeAttribute("title")'), "Sticky-note citation references can still show a redundant browser tooltip over their reference hover card.");
   for (const control of ["data-note-color-choice", "data-note-dock-choice", "data-note-boundary-choice", "data-note-associations-input", "data-note-delete"]) assert(stickyCardSource.includes(control), `Sticky notes are missing ${control}.`);
   assert(fallbackSource.includes("scheduleStickyNoteTextSave(card)") && fallbackSource.includes("}, 500);"), "Sticky-note text is not debounced for 500 ms.");
   assert(fallbackSource.includes("saveStickyNoteText(card, true)") && fallbackSource.includes('event.target.closest?.("[data-sticky-note-editor]")'), "Sticky-note blur does not save immediately.");
@@ -2849,7 +2988,7 @@ async function main() {
   assert(focusedOccurrenceSource.includes("await Promise.resolve();") && focusedOccurrenceSource.indexOf("await Promise.resolve();") < focusedOccurrenceSource.indexOf("!pane.element.isConnected"), "A synchronous bare has: result can be discarded before its focused pane is attached.");
   assert(fallbackSource.includes('toggleInlineNoteManagement(noteUnitButton)') && fallbackSource.includes("startInlineNoteEditor"), "Existing note icons do not open their sticky-note editor.");
   assert(fallbackSource.includes('html{color-scheme:light}') && fallbackSource.includes('background:#fff'), "Legal-unit printing does not force a light text-only page.");
-  assert(fallbackSource.includes("const topOffsetRatio = .25;") && fallbackSource.includes("return rootRect.top + rootHeight * topOffsetRatio;") && fallbackSource.includes("return navigatorBottom + (viewportBottom - navigatorBottom) * topOffsetRatio;"), "The statute and focused-pane reading lines do not use the same visible-area offset.");
+  assert(fallbackSource.includes("const topOffsetRatio = normalizeReadingOffsetPercent(offsetPercent) / 100;") && fallbackSource.includes("return rootRect.top + rootHeight * topOffsetRatio;") && fallbackSource.includes("return navigatorBottom + (viewportBottom - navigatorBottom) * topOffsetRatio;"), "The statute and focused-pane reading lines do not share the selected percentage offset.");
   assert(fallbackSource.includes('.statutory-node { position: relative; margin: 5px 0 5px 15px; padding: 0; border-radius: 6px; }'), "Nested statutory nodes do not use one fixed indentation increment without stacking horizontal padding.");
   assert(fallbackSource.includes('.statute-body > .statutory-node { margin-inline-start: 0; }'), "Top-level statutory nodes retain an unnecessary indentation increment.");
   assert(/\.statutory-runin-line \{ position: relative; margin: 5px 0 5px min\(calc\(var\(--depth, 0\) \* 15px\), 90px\); padding: 5px 7px 7px; border-radius: 6px; \}/.test(fallbackSource), "Run-in statutory units lost their independent source-address indentation.");
@@ -4306,6 +4445,7 @@ async function main() {
   assert(!legalDefinitionApplies(cfrActDefinition, { kind: "cfr", title: "8", chapter: "V", path: [] }) && !legalDefinitionApplies(cfrActDefinition, { kind: "cfr", title: "22", chapter: "I", path: [] }), "An 8 CFR 1.2 definition leaked into another CFR chapter or title.");
   const scopedChildHtml = renderScopedDefinitionAnnotatedText("That child qualifies.", null, 0, undefined, nationalityContext);
   assert(scopedChildHtml.includes('class="scoped-defined-term"') && scopedChildHtml.includes(childNationalityDefinition.id) && !scopedChildHtml.includes(childFamilyDefinition.id), "Rendered definition annotation does not carry only the applicable definition record.");
+  assert(!scopedChildHtml.includes(" title="), "A defined-term trigger still shows a redundant browser tooltip over its substantive hover card.");
   const renderDefinedTermsDisabled = extractedFunction(fallbackSource, "renderScopedDefinitionAnnotatedText", "definitionFiltersForKind", {
     scopedDefinitionMatches, renderSearchHighlightedText, escapeHtml: escapeStatutoryHtml,
     definedTermHighlightingEnabled: () => false,
@@ -4314,7 +4454,7 @@ async function main() {
   assert(!renderDefinedTermsDisabled("That child qualifies.", null, 0, undefined, nationalityContext).includes('class="scoped-defined-term"'), "Defined terms were highlighted while the experimental setting was disabled.");
   assert(!/href=|data-show-citation|data-definition-reference/.test(scopedChildHtml), "Clicking an annotated term can navigate directly instead of only opening its scoped preview.");
   assert(fallbackSource.includes('openDefinitionReference(query)') && fallbackSource.includes('id="scopedDefinitionPopoverJump"'), "The hover pane lacks its explicit Definitions-page jump control.");
-  const houseFootnoteReferenceHtml = extractedFunction(fallbackSource, "houseFootnoteReferenceHtml", "linkifyStatutoryText", { escapeHtml: escapeStatutoryHtml, String });
+  const houseFootnoteReferenceHtml = extractedFunction(fallbackSource, "houseFootnoteReferenceHtml", "coordinatedInaListHtml", { escapeHtml: escapeStatutoryHtml, String });
   const legalReferenceCitation = extractedFunction(fallbackSource, "legalReferenceCitation", "statutoryReferenceCrosswalk", { canonicalPath: statutoryCanonicalPath, String });
   const citationPreferenceProfile = { preferences: { statutoryLinkCitationSystem: "usc", highlightInaCitationLinks: false } };
   const citationPreferenceUscCrosswalk = new Map([
@@ -4322,10 +4462,15 @@ async function main() {
     ["1153", { inaSection: "203", uscSection: "1153", hasEquivalent: true, isNote: false }]
   ]);
   const citationPreferenceInaCrosswalk = new Map([...citationPreferenceUscCrosswalk.values()].map(row => [row.inaSection, row]));
-  const statutoryReferenceCrosswalk = extractedFunction(fallbackSource, "statutoryReferenceCrosswalk", "statutoryLinkUsesConvertibleUscWording", { inaMap: citationPreferenceInaCrosswalk, uscToIna: citationPreferenceUscCrosswalk, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, String });
+  const statutoryReferenceCrosswalk = extractedFunction(fallbackSource, "statutoryReferenceCrosswalk", "coordinatedStatutoryInaLists", { inaMap: citationPreferenceInaCrosswalk, uscToIna: citationPreferenceUscCrosswalk, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, String });
   const statutoryLinkUsesConvertibleUscWording = extractedFunction(fallbackSource, "statutoryLinkUsesConvertibleUscWording", "statutoryLinkInaCitation", { normCitationPart: statutoryNormPart, String });
   const statutoryLinkInaCitation = extractedFunction(fallbackSource, "statutoryLinkInaCitation", "legalReferenceTargetIdentity", { profile: citationPreferenceProfile, statutoryReferenceCrosswalk, statutoryLinkUsesConvertibleUscWording });
   const legalReferenceHtml = extractedFunction(fallbackSource, "legalReferenceHtml", "legalReferenceContextForElement", { profile: citationPreferenceProfile, escapeHtml: escapeStatutoryHtml, legalReferenceCitation, statutoryReferenceCrosswalk, statutoryLinkInaCitation, legalReferenceDisposition: () => ({ status: "current", section: null, transferTarget: null }), transferTargetUrl: () => "", transferTargetLabel: () => "", legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => "", canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, JSON, String });
+  const completeUscToIna = new Map(hydratedSource.inaCrosswalk.map(row => [statutoryNormPart(row.uscSection), row]));
+  const completeInaMap = new Map(hydratedSource.inaCrosswalk.map(row => [statutoryNormPart(row.inaSection), row]));
+  const completeStatutoryReferenceCrosswalk = extractedFunction(fallbackSource, "statutoryReferenceCrosswalk", "coordinatedStatutoryInaLists", { inaMap: completeInaMap, uscToIna: completeUscToIna, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, String });
+  const coordinatedStatutoryInaLists = extractedFunction(fallbackSource, "coordinatedStatutoryInaLists", "statutoryLinkUsesConvertibleUscWording", { profile: citationPreferenceProfile, INASearchEmbeddedReferences: embeddedReferences, statutoryReferenceCrosswalk: completeStatutoryReferenceCrosswalk, normCitationPart: statutoryNormPart, Map, Math, Number, String, Set });
+  const coordinatedLegalReferenceHtml = extractedFunction(fallbackSource, "legalReferenceHtml", "legalReferenceContextForElement", { profile: citationPreferenceProfile, escapeHtml: escapeStatutoryHtml, legalReferenceCitation, statutoryReferenceCrosswalk: completeStatutoryReferenceCrosswalk, statutoryLinkInaCitation, legalReferenceDisposition: () => ({ status: "current", section: null, transferTarget: null }), transferTargetUrl: () => "", transferTargetLabel: () => "", legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => "", canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, JSON, String });
   const statusSectionMap = new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section]));
   const legalReferenceDisposition = extractedFunction(fallbackSource, "legalReferenceDisposition", "legalReferenceHtml", {
     sectionMap: statusSectionMap,
@@ -4342,7 +4487,8 @@ async function main() {
     legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => "", canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, JSON, String
   });
   const repealedReferenceHtml = statusLegalReferenceHtml({ text: "section 1254(a)(3) of this title", family: "usc", targetKind: "usc", targetTitle: "8", targetSection: "1254", targetPath: ["a", "3"], resolution: "official-source-only", officialUrl: "https://uscode.house.gov/" }, "section 1254(a)(3) of this title");
-  assert(repealedReferenceHtml.includes("reference-repealed") && repealedReferenceHtml.includes('data-reference-status="repealed"') && repealedReferenceHtml.includes("has been repealed"), "A repealed statutory reference is not rendered with explicit red/status semantics.");
+  assert(repealedReferenceHtml.includes("reference-repealed") && repealedReferenceHtml.includes('data-reference-status="repealed"'), "A repealed statutory reference is not rendered with explicit red/status semantics.");
+  assert(!repealedReferenceHtml.includes(" title="), "A repealed inline reference still shows a redundant browser tooltip over its status hover card.");
   const transferredReferenceHtml = statusLegalReferenceHtml({ text: "section 1251(a)(4)(B) of this title", family: "usc", targetKind: "usc", targetTitle: "8", targetSection: "1251", targetPath: ["a", "4", "B"], resolution: "official-source-only", officialUrl: "https://uscode.house.gov/" }, "section 1251(a)(4)(B) of this title");
   assert(transferredReferenceHtml.includes("reference-transferred-original") && transferredReferenceHtml.includes("→ 8 U.S.C. 1227") && transferredReferenceHtml.includes("section1227"), "A transferred statutory reference does not strike its original citation and identify/link its reviewed destination.");
   const crosswalkedReference = { text: "section 1101(a)(15)(S) of this title", family: "usc", targetKind: "usc", targetTitle: "8", targetSection: "1101", targetPath: ["a", "15", "S"], resolution: "local", officialUrl: "https://uscode.house.gov/" };
@@ -4356,6 +4502,7 @@ async function main() {
   citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "ina";
   const crosswalkedInaHtml = legalReferenceHtml(crosswalkedReference, "section 1101(a)(15)(S) of this title", differentSectionStatuteContext);
   assert(crosswalkedInaHtml.endsWith(">INA 101(a)(15)(S)</a>"), "The INA display preference did not replace a crosswalked link with its full INA citation.");
+  assert(!crosswalkedInaHtml.includes(" title="), "An inline legal reference still shows an explanatory browser tooltip over its reference hover card.");
   assert(!crosswalkedInaHtml.includes("citation-display-ina"), "A converted INA-format statutory link is yellow while the independent color preference is disabled.");
   citationPreferenceProfile.preferences.highlightInaCitationLinks = true;
   const highlightedCrosswalkedInaHtml = legalReferenceHtml(crosswalkedReference, "section 1101(a)(15)(S) of this title", differentSectionStatuteContext);
@@ -4397,8 +4544,100 @@ async function main() {
   const officialOnlyHtml = legalReferenceHtml(officialOnlyReference, "18 U.S.C. 1001");
   assert(officialOnlyHtml.includes("reference-official-only") && officialOnlyHtml.includes('href="https://uscode.house.gov/"'), "A recognized out-of-corpus citation lost its existing official-source link.");
   citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "usc";
-  const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
-  const scopedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches, renderScopedDefinitionAnnotatedText, definedTermHighlightingEnabled: () => true, houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String });
+  const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists: () => [], coordinatedInaListHtml: () => "", houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
+  const scopedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches, renderScopedDefinitionAnnotatedText, definedTermHighlightingEnabled: () => true, coordinatedStatutoryInaLists: () => [], coordinatedInaListHtml: () => "", houseFootnoteReferenceHtml, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
+  const coordinatedInaListHtml = extractedFunction(fallbackSource, "coordinatedInaListHtml", "linkifyStatutoryText", { escapeHtml: escapeStatutoryHtml, renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), houseFootnoteReferenceHtml, legalReferenceHtml: coordinatedLegalReferenceHtml, Math, Number, String });
+  const coordinatedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists, coordinatedInaListHtml, houseFootnoteReferenceHtml, legalReferenceHtml: coordinatedLegalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
+  citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "ina";
+  const ina209Section = hydratedSource.title8.sections.find(section => section.section === "1159");
+  const ina209a1 = ina209Section.body.find(node => node.label === "a").children.find(node => node.label === "1");
+  const ina209Context = { kind: "ina", inaSection: "209", uscSection: "1159", path: ["a", "1"] };
+  const ina209ListHtml = coordinatedLinkifyStatutoryText(ina209a1.text, ina209a1.references, 0, undefined, null, ina209a1.textFootnoteReferences || [], ina209Context);
+  assert(ina209ListHtml.replace(/<[^>]+>/g, "").includes("with the provisions of INA 235, 240, and 241."), "INA 209(a)(1)'s coordinated Title 8 list was not converted to one natural INA-format citation list.");
+  assert.strictEqual((ina209ListHtml.match(/data-reference-ina-citation=/g) || []).length, 4, "INA 209(a)(1) did not retain independent links and crosswalk metadata for every converted citation.");
+  const incompleteCoordinatedLists = extractedFunction(fallbackSource, "coordinatedStatutoryInaLists", "statutoryLinkUsesConvertibleUscWording", { profile: citationPreferenceProfile, INASearchEmbeddedReferences: embeddedReferences, statutoryReferenceCrosswalk: reference => reference.targetSection === "1231" ? null : completeStatutoryReferenceCrosswalk(reference), normCitationPart: statutoryNormPart, Map, Math, Number, String, Set });
+  const nativeFallbackLinkify = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists: incompleteCoordinatedLists, coordinatedInaListHtml, houseFootnoteReferenceHtml, legalReferenceHtml: coordinatedLegalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
+  const ina209NativeHtml = nativeFallbackLinkify(ina209a1.text, ina209a1.references, 0, undefined, null, [], ina209Context);
+  assert(ina209NativeHtml.replace(/<[^>]+>/g, "").includes("sections 1225, 1229a, and 1231 of this title"), "A partially crosswalked coordinated list did not fall back to its complete native wording.");
+  const ina240Section = hydratedSource.title8.sections.find(section => section.section === "1229a");
+  const ina240c7cii = ina240Section.body.find(node => node.label === "c").children.find(node => node.label === "7").children.find(node => node.label === "C").children.find(node => node.label === "ii");
+  const ina240ListHtml = coordinatedLinkifyStatutoryText(ina240c7cii.text, ina240c7cii.references, 0, undefined, null, ina240c7cii.textFootnoteReferences || [], { kind: "ina", inaSection: "240", uscSection: "1229a", path: ["c", "7", "C", "ii"] });
+  assert(ina240ListHtml.replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/g, "").replace(/<[^>]+>/g, "").includes("under INA 208 or 241(b)(3)"), "A mixed-path coordinated list did not convert all crosswalked members to INA format.");
+  assert(ina240ListHtml.includes('class="house-footnote-reference"') && ina240ListHtml.includes('data-house-footnote-jump="usc-1229a-fn002046"'), "Converting a coordinated citation list discarded its House editorial footnote marker.");
+  const ina204Section = hydratedSource.title8.sections.find(section => section.section === "1154");
+  const ina204b = ina204Section.body.find(node => node.label === "b");
+  const ina204bContext = { kind: "ina", inaSection: "204", uscSection: "1154", path: ["b"] };
+  const ina204bGroup = coordinatedStatutoryInaLists(ina204b.text, ina204b.references, 0, undefined, ina204bContext)
+    .find(group => group.text === "subsection (a) or (b) of section 1153 of this title");
+  const ina204bListHtml = coordinatedInaListHtml(ina204bGroup, ina204b.text, ina204b.references, null, ina204b.textFootnoteReferences || [], ina204bContext);
+  assert.strictEqual(ina204bListHtml.replace(/<[^>]+>/g, ""), "INA 203(a) or 203(b)", "INA 204(b)'s relative subsection alternatives did not convert to one INA-format citation list.");
+  assert.strictEqual((ina204bListHtml.match(/data-reference-ina-citation=/g) || []).length, 2, "INA 204(b) lost a clickable crosswalk target while converting its relative subsection list.");
+  const ina204f1 = ina204Section.body.find(node => node.label === "f").children.find(node => node.label === "1");
+  const ina204f1Context = { kind: "ina", inaSection: "204", uscSection: "1154", path: ["f", "1"] };
+  const ina204f1Group = coordinatedStatutoryInaLists(ina204f1.text, ina204f1.references, 0, undefined, ina204f1Context)
+    .find(group => group.text === "section 1151(b), 1153(a)(1), or 1153(a)(3) of this title");
+  const ina204f1ListHtml = coordinatedInaListHtml(ina204f1Group, ina204f1.text, ina204f1.references, null, ina204f1.textFootnoteReferences || [], ina204f1Context);
+  assert.strictEqual(ina204f1ListHtml.replace(/<[^>]+>/g, ""), "INA 201(b), 203(a)(1), or 203(a)(3)", "INA 204(f)(1)'s mixed-section alternatives did not convert to one INA-format citation list.");
+  assert.strictEqual((ina204f1ListHtml.match(/data-reference-ina-citation=/g) || []).length, 3, "INA 204(f)(1) lost a clickable crosswalk target while converting its mixed-section list.");
+  const coordinatedInaDisplayAudit = {
+    fields: 0, groups: 0, members: 0,
+    grammars: {
+      "numbered-section-list": { groups: 0, members: 0 },
+      "relative-unit-list": { groups: 0, members: 0 }
+    }
+  };
+  const auditCoordinatedInaField = (source, field, context) => {
+    const value = String(source?.[field] || "");
+    const references = source?.[field === "text" ? "references" : `${field}References`] || [];
+    const footnotes = source?.[`${field}FootnoteReferences`] || [];
+    const groups = coordinatedStatutoryInaLists(value, references, 0, undefined, context);
+    if (!groups.length) return;
+    coordinatedInaDisplayAudit.fields += 1;
+    for (const group of groups) {
+      const html = coordinatedInaListHtml(group, value, references, null, footnotes, context);
+      const visible = html.replace(/<[^>]+>/g, "");
+      assert(visible.startsWith("INA ") && !/^sections?\b/i.test(visible) && !/\bof\s+(?:(?:this|such)\s+title|title\s+8)\b/i.test(visible), `A coordinated INA list retained native U.S. Code wrapper wording: ${visible}`);
+      assert.strictEqual((html.match(/data-reference-ina-citation=/g) || []).length, group.members.length, `A coordinated INA list lost an independently clickable member: ${visible}`);
+      assert(group.crosswalks.every(Boolean), `A partially crosswalked coordinated list was converted: ${visible}`);
+      coordinatedInaDisplayAudit.groups += 1;
+      coordinatedInaDisplayAudit.members += group.members.length;
+      coordinatedInaDisplayAudit.grammars[group.grammar].groups += 1;
+      coordinatedInaDisplayAudit.grammars[group.grammar].members += group.members.length;
+    }
+  };
+  const auditCoordinatedInaNodes = (section, nodes, context, path = []) => {
+    for (const node of nodes || []) {
+      const nodeContext = { ...context, path: [...path, String(node.label)] };
+      auditCoordinatedInaField(node, "heading", nodeContext);
+      auditCoordinatedInaField(node, "text", nodeContext);
+      auditCoordinatedInaNodes(section, node.children, context, nodeContext.path);
+    }
+  };
+  for (const section of hydratedSource.title8.sections) {
+    const mapping = completeUscToIna.get(statutoryNormPart(section.section));
+    if (!mapping?.inaSection) continue;
+    const context = { kind: "ina", inaSection: String(mapping.inaSection), uscSection: String(section.section), path: [] };
+    auditCoordinatedInaField(section, "heading", context);
+    auditCoordinatedInaField(section, "preamble", context);
+    auditCoordinatedInaField(section, "sourceCredit", context);
+    auditCoordinatedInaNodes(section, section.body, context);
+    for (const note of section.notes || []) {
+      auditCoordinatedInaField(note, "heading", context);
+      auditCoordinatedInaField(note, "text", context);
+    }
+    for (const footnote of section.houseEditorialFootnotes || []) auditCoordinatedInaField(footnote, "text", context);
+  }
+  assert.deepStrictEqual(coordinatedInaDisplayAudit, {
+    fields: 226,
+    groups: 337,
+    members: 960,
+    grammars: {
+      "numbered-section-list": { groups: 206, members: 627 },
+      "relative-unit-list": { groups: 131, members: 333 }
+    }
+  }, "The reviewed corpus-wide coordinated INA display inventory changed.");
+  console.log(`PASS coordinated INA display audit: ${coordinatedInaDisplayAudit.groups} fully crosswalked lists across ${coordinatedInaDisplayAudit.fields} fields; ${coordinatedInaDisplayAudit.members} independently linked members`);
+  citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "usc";
   const specialImmigrantReferenceHtml = linkifyStatutoryText(specialImmigrantBlock.x, specialImmigrantActReferences);
   assert.strictEqual((specialImmigrantReferenceHtml.match(/data-legal-reference/g) || []).length, 2, "8 CFR 245.1(b)(4)(ii) does not render two independent statutory reference triggers.");
   assert(specialImmigrantReferenceHtml.includes('href="#usc-1101-a-27-h"') && specialImmigrantReferenceHtml.includes('href="#usc-1101-a-27-j"'), "The two special-immigrant alternatives do not navigate to their distinct local statutory units.");
@@ -4645,31 +4884,45 @@ async function main() {
   for (const footnote of footnotedSection1154.houseEditorialFootnotes) assert(copiedSection1154.includes(`${footnote.number}. ${footnote.text}`), "A selected statute unit omitted its referenced House footnote text.");
   assert(fallbackSource.includes("body{margin:.65in;color:#111;background:#fff"), "Legal-unit printing does not force a light text-only page.");
   const statuteScrollCalls = [];
-  const statuteReadingLine = extractedFunction(fallbackSource, "statuteReadingLine", "scrollStatuteAnchorToReadingLine", {
+  const testNormalizeReadingOffsetPercent = value => Number.isFinite(Number(value)) ? Math.max(0, Math.min(100, Math.round(Number(value)))) : 5;
+  const readingOffsetProfile = { preferences: { citationJumpOffsetPercent: 5, navigationTrackingOffsetPercent: 5 } };
+  const statuteReadingLine = extractedFunction(fallbackSource, "statuteReadingLine", "statuteJumpLine", {
     $: () => ({ getBoundingClientRect: () => ({ bottom: 100 }) }),
     els: { statuteNavigator: { hidden: false, getBoundingClientRect: () => ({ bottom: 150 }) } },
+    profile: readingOffsetProfile,
+    state: { focusedActivePaneId: null },
+    normalizeReadingOffsetPercent: testNormalizeReadingOffsetPercent,
     window: { innerHeight: 950 },
     Math,
     Number
   });
-  assert.strictEqual(statuteReadingLine(), 350, "The statute reading line does not leave 75 percent of the usable viewport below a requested citation.");
-  const focusedStatuteReadingLine = extractedFunction(fallbackSource, "statuteReadingLine", "scrollStatuteAnchorToReadingLine", {
+  assert.strictEqual(statuteReadingLine(), 190, "The navigation reading line does not default to 5 percent of the usable viewport.");
+  assert.strictEqual(statuteReadingLine(0), 150, "A zero-percent reading offset does not align with the top of the usable reader.");
+  assert.strictEqual(statuteReadingLine(100), 950, "A 100-percent reading offset does not align with the bottom of the usable reader.");
+  const focusedStatuteReadingLine = extractedFunction(fallbackSource, "statuteReadingLine", "statuteJumpLine", {
     focusedPaneById: () => ({ scrollRoot: { clientHeight: 600, getBoundingClientRect: () => ({ top: 100, height: 600 }) } }),
     state: { focusedActivePaneId: "focused-pane" },
+    profile: readingOffsetProfile,
+    normalizeReadingOffsetPercent: testNormalizeReadingOffsetPercent,
     window: { innerHeight: 950 },
     Math,
     Number
   });
-  assert.strictEqual(focusedStatuteReadingLine(), 250, "A focused citation pane does not keep its requested citation at the same top-quarter reading line.");
+  assert.strictEqual(focusedStatuteReadingLine(), 130, "A focused citation pane does not use the default five-percent reading line.");
+  const statuteJumpLine = extractedFunction(fallbackSource, "statuteJumpLine", "scrollStatuteAnchorToReadingLine", { profile: readingOffsetProfile, statuteReadingLine });
+  assert.strictEqual(statuteJumpLine(), 190, "Citation jumps do not use their independent persisted offset.");
+  readingOffsetProfile.preferences.citationJumpOffsetPercent = 40;
+  assert.strictEqual(statuteJumpLine(), 470, "Changing the citation-jump offset did not leave navigation tracking independent.");
+  assert.strictEqual(statuteReadingLine(), 190, "Changing the citation-jump offset also changed the navigation tracking line.");
   const scrollStatuteAnchorToReadingLine = extractedFunction(fallbackSource, "scrollStatuteAnchorToReadingLine", "currentStatutePathAtReadingLine", {
-    statuteReadingLine: () => 200,
+    statuteJumpLine: () => 200,
     animatedCitationJumpsEnabled: () => true,
     window: { scrollBy: options => statuteScrollCalls.push(options) }
   });
   scrollStatuteAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 500 }) });
   assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "smooth" }, "Statute navigation did not align an anchor to the top reading line.");
   const instantStatuteAnchorToReadingLine = extractedFunction(fallbackSource, "scrollStatuteAnchorToReadingLine", "currentStatutePathAtReadingLine", {
-    statuteReadingLine: () => 200,
+    statuteJumpLine: () => 200,
     animatedCitationJumpsEnabled: () => false,
     window: { scrollBy: options => statuteScrollCalls.push(options) }
   });
@@ -4874,7 +5127,7 @@ async function main() {
   assert(fallbackSource.includes('statuteNavigationDepthSelect.addEventListener("change"') && fallbackSource.includes('cfrNavigationDepthSelect.addEventListener("change"'), "The Settings unit-depth selectors are not wired to their persisted preferences.");
   assert(fallbackSource.includes('id="mainShareButton"') && fallbackSource.includes('.main-share-button {') && fallbackSource.includes('.main-share-icon {'), "The former unit-depth space does not contain the icon-only global share control.");
   assert(fallbackSource.includes("STATUTE_NAVIGATION_DEPTHS") && fallbackSource.includes("CFR_NAVIGATION_DEPTHS"), "The navigation bar lacks separate persisted statute and regulation depth options.");
-  assert(fallbackSource.includes('statutoryNavigationSystem: "usc"') && fallbackSource.includes('statuteSectionDisplay: "hierarchy"') && fallbackSource.includes("automaticStatutoryNavigationSystem: true") && fallbackSource.includes('emptySearchView: "ina"') && fallbackSource.includes("splitAuthoritySearchPanes: false") && fallbackSource.includes("closeBlankCompanionOnSectionOpen: true") && fallbackSource.includes('legalNavigatorVisibility: "single"') && fallbackSource.includes("scrollUpdatesSearch: false") && fallbackSource.includes("expandSearchResultsByDefault: true") && fallbackSource.includes("showCfrChapterSubchapterInSearchHierarchy: false") && fallbackSource.includes("syncCfrCommonDepthFromStatute: true") && fallbackSource.includes("persistInlineReferenceInsertions: false") && fallbackSource.includes("animatedCitationJumps: true"), "Viewer and navigation preference defaults do not match the overhaul contract.");
+  assert(fallbackSource.includes('statutoryNavigationSystem: "usc"') && fallbackSource.includes('statuteSectionDisplay: "hierarchy"') && fallbackSource.includes("automaticStatutoryNavigationSystem: true") && fallbackSource.includes('emptySearchView: "ina"') && fallbackSource.includes("splitAuthoritySearchPanes: false") && fallbackSource.includes("closeBlankCompanionOnSectionOpen: true") && fallbackSource.includes('legalNavigatorVisibility: "single"') && fallbackSource.includes("scrollUpdatesSearch: false") && fallbackSource.includes("citationJumpOffsetPercent: DEFAULT_READING_OFFSET_PERCENT") && fallbackSource.includes("navigationTrackingOffsetPercent: DEFAULT_READING_OFFSET_PERCENT") && fallbackSource.includes("expandSearchResultsByDefault: true") && fallbackSource.includes("showCfrChapterSubchapterInSearchHierarchy: false") && fallbackSource.includes("syncCfrCommonDepthFromStatute: true") && fallbackSource.includes("persistInlineReferenceInsertions: false") && fallbackSource.includes("animatedCitationJumps: true"), "Viewer and navigation preference defaults do not match the overhaul contract.");
   assert(!fallbackSource.includes("navigationUpdatesSearch: true"), "The retired explicit-navigation synchronization preference remains in defaults.");
   assert(fallbackSource.includes("syncSearchToScrolledLegalLocation(\"statute\"") && fallbackSource.includes("syncSearchToScrolledLegalLocation(\"cfr\""), "Scroll-follow mode is not connected to both statutory and regulatory readers.");
   const emptyRunSearchSource = fallbackSource.slice(fallbackSource.indexOf("function runSearch()"), fallbackSource.indexOf("function shouldDeferBroadSearch"));
@@ -5301,6 +5554,10 @@ async function main() {
   assert.strictEqual(lightThemeImport.preferences.theme, "light", "A JSON backup did not preserve its manual Light preference.");
   const hiddenTopBarImport = plain(parseImportedProfile(JSON.stringify({ ...blankProfile, preferences: { ...blankProfile.preferences, showDetailedStatus: false, hideTopThemeControls: true } })));
   assert.deepStrictEqual(plain([hiddenTopBarImport.preferences.showDetailedStatus, hiddenTopBarImport.preferences.hideTopThemeControls]), [false, true], "A JSON backup did not preserve top-bar visibility preferences.");
+  const boundedReadingOffsetsImport = plain(parseImportedProfile(JSON.stringify({ ...blankProfile, preferences: { ...blankProfile.preferences, citationJumpOffsetPercent: -25, navigationTrackingOffsetPercent: 140 } })));
+  assert.deepStrictEqual(plain([boundedReadingOffsetsImport.preferences.citationJumpOffsetPercent, boundedReadingOffsetsImport.preferences.navigationTrackingOffsetPercent]), [0, 100], "Imported reading offsets were not clamped to the available 0–100 percent range.");
+  const emptyReadingOffsetsImport = plain(parseImportedProfile(JSON.stringify({ ...blankProfile, preferences: { ...blankProfile.preferences, citationJumpOffsetPercent: "", navigationTrackingOffsetPercent: null } })));
+  assert.deepStrictEqual(plain([emptyReadingOffsetsImport.preferences.citationJumpOffsetPercent, emptyReadingOffsetsImport.preferences.navigationTrackingOffsetPercent]), [5, 5], "Empty imported reading offsets did not restore the five-percent default.");
   const splitSearchImport = plain(parseImportedProfile(JSON.stringify({ ...blankProfile, preferences: { ...blankProfile.preferences, splitAuthoritySearchPanes: true } })));
   assert.strictEqual(splitSearchImport.preferences.splitAuthoritySearchPanes, true, "A profile import did not preserve the explicit split-authority search opt-in.");
   assert.throws(
@@ -5350,6 +5607,8 @@ async function main() {
     closeBlankCompanionOnSectionOpen: true,
     legalNavigatorVisibility: "single",
     scrollUpdatesSearch: false,
+    citationJumpOffsetPercent: 5,
+    navigationTrackingOffsetPercent: 5,
     expandSearchResultsByDefault: true,
     showCfrChapterSubchapterInSearchHierarchy: false,
     syncCfrCommonDepthFromStatute: true,
@@ -5397,6 +5656,8 @@ async function main() {
   assert.strictEqual(minimal.imported.preferences.closeBlankCompanionOnSectionOpen, true, "A legacy profile did not receive the blank-companion closing default.");
   assert.strictEqual(minimal.imported.preferences.legalNavigatorVisibility, "single", "A legacy profile did not receive the single-reader navigator default.");
   assert.strictEqual(minimal.imported.preferences.scrollUpdatesSearch, false, "A legacy profile enabled scroll-to-search synchronization by default.");
+  assert.strictEqual(minimal.imported.preferences.citationJumpOffsetPercent, 5, "A legacy profile did not receive the five-percent citation-jump default.");
+  assert.strictEqual(minimal.imported.preferences.navigationTrackingOffsetPercent, 5, "A legacy profile did not receive the five-percent navigation-tracking default.");
   assert.strictEqual(minimal.imported.preferences.expandSearchResultsByDefault, true, "A legacy profile did not default to expanded search results.");
   assert.strictEqual(minimal.imported.preferences.showCfrChapterSubchapterInSearchHierarchy, false, "A legacy profile unexpectedly enabled CFR chapters and subchapters in search results.");
   assert.strictEqual(minimal.imported.preferences.syncCfrCommonDepthFromStatute, true, "A legacy profile did not enable bidirectional Common-depth synchronization by default.");

@@ -638,6 +638,57 @@ function parseNumberedSectionReferences(text) {
   return candidates;
 }
 
+/*
+ * Normalize the two source grammars which express a coordinated list under
+ * one Title 8 section:
+ *
+ *   section 1151(b), 1153(a)(1), or 1153(a)(3) of this title
+ *   subsection (a) or (b) of section 1153 of this title
+ *
+ * The reference resolver intentionally handles those grammars separately,
+ * because the first writes every section address while the second writes a
+ * list of relative units before one trailing section container.  Consumers
+ * which operate on the complete citation envelope (notably INA presentation)
+ * need one source-preserving view of both.  This helper performs no target
+ * resolution: it only returns coordinated syntax with exact source offsets.
+ */
+function parseCoordinatedSectionReferences(text) {
+  const input = String(text || "");
+  const numbered = parseNumberedSectionReferences(input)
+    .filter(candidate => candidate.members.length > 1)
+    .map(candidate => ({
+      ...candidate,
+      type: "coordinated-section-reference",
+      kind: "coordinated-section-reference",
+      grammar: "numbered-section-list",
+      nativeKind: candidate.kind,
+      memberUnitKind: "section"
+    }));
+  const relative = parseEmbeddedStatutoryReferences(input)
+    .filter(candidate => candidate.members.length > 1 && candidate.containerType === "explicit" &&
+      candidate.baseKind === "section" && candidate.baseSection && candidate.base?.scope)
+    .map(candidate => ({
+      type: "coordinated-section-reference",
+      kind: "coordinated-section-reference",
+      ruleId: "embedded-coordinated-section-reference",
+      grammar: "relative-unit-list",
+      nativeKind: candidate.kind,
+      start: candidate.start,
+      end: candidate.base.scope.end,
+      text: input.slice(candidate.start, candidate.base.scope.end),
+      unitWord: candidate.unitText,
+      memberUnitKind: candidate.unitKind,
+      members: candidate.members.map(member => ({ ...member, type: "relative-section-address", relative: true })),
+      connectors: candidate.list?.connectors || [],
+      scope: candidate.base.scope,
+      baseSection: candidate.baseSection,
+      baseTokens: [...(candidate.baseTokens || [])],
+      base: candidate.base
+    }));
+  return [...numbered, ...relative]
+    .sort((left, right) => left.start - right.start || right.end - left.end || left.grammar.localeCompare(right.grammar));
+}
+
 return {
   UNIT_KINDS,
   canonicalUnitName,
@@ -646,6 +697,7 @@ return {
   parseEmbeddedReferences: parseEmbeddedStatutoryReferences,
   parseEmbeddedStatutoryReference,
   parseEmbeddedStatutoryReferences,
+  parseCoordinatedSectionReferences,
   parseNumberedSectionReferences,
   parseUnitList
 };

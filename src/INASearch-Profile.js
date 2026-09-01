@@ -44,6 +44,8 @@ window.INA_SEARCH_PROFILE = {
     "closeBlankCompanionOnSectionOpen": true,
     "legalNavigatorVisibility": "single",
     "scrollUpdatesSearch": false,
+    "citationJumpOffsetPercent": 5,
+    "navigationTrackingOffsetPercent": 5,
     "expandSearchResultsByDefault": true,
     "showCfrChapterSubchapterInSearchHierarchy": false,
     "syncCfrCommonDepthFromStatute": true,
