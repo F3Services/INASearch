@@ -142,7 +142,7 @@ const EXPECTED_EXECUTABLE_SCRIPT_IDS = Object.freeze([
 
 function executableScriptEntries(html) {
   return [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)]
-    .filter(match => !/type="application\/(?:json|gzip)"/.test(match[1]))
+    .filter(match => !/type="(?:application\/(?:json|gzip)|text\/plain)"/.test(match[1]))
     .map(match => ({ id: match[1].match(/\bid="([^"]+)"/)?.[1] || "", source: match[2] }));
 }
 
@@ -497,7 +497,7 @@ async function main() {
   assert(cfrStructureAudit.baselineStructureMismatches.some(item => item.id === "8:204.2" && item.differences.some(difference => difference.actual === "(h)(2)(i)")), "The audit no longer records the reported false 8 CFR 204.2(h)(2)(i) hierarchy.");
   assert.strictEqual(cfrStructureAudit.inputs.corpus.sha256, sha256(fs.readFileSync(path.join(root, "src", "INASearch-CFR.js"))), "The CFR structure audit is not bound to the committed generated corpus.");
 
-  assert.strictEqual(blankProfile.schemaVersion, 4, "Blank profiles must use saved-data schema v4.");
+  assert.strictEqual(blankProfile.schemaVersion, 5, "Blank profiles must use saved-data schema v5.");
   assert.strictEqual(Object.hasOwn(blankProfile, "courseStructure"), false, "Blank profiles must not retain the retired course structure.");
   assert.deepStrictEqual(blankProfile.tutorialProgress, { schemaVersion: 1, modules: {} }, "Blank profiles must include optional, empty tutorial progress.");
   assert.deepStrictEqual(blankProfile.tipProgress, { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null }, "Blank profiles must include empty daily-tip progress.");
@@ -513,6 +513,10 @@ async function main() {
   assert.strictEqual(Object.hasOwn(blankProfile.preferences, "compactResults"), false, "Blank profiles retained the retired compact-results preference.");
   assert.strictEqual(blankProfile.preferences.statutoryLinkCitationSystem, "ina", "Blank profiles must default mapped statutory link labels to INA citations.");
   assert.strictEqual(blankProfile.preferences.highlightInaCitationLinks, false, "Blank profiles must use standard blue styling for INA-format statutory links.");
+  assert.strictEqual(blankProfile.preferences.noteDisplayPosition, "top", "Blank profiles must display notes above their citations by default.");
+  assert.strictEqual(blankProfile.preferences.notesUseHandwrittenFont, false, "Blank profiles must use rule-text typography for notes by default.");
+  assert.strictEqual(Object.hasOwn(blankProfile.preferences, "lastNoteColor"), false, "Blank profiles retained the obsolete note-color preference.");
+  assert.strictEqual(Object.hasOwn(blankProfile.preferences, "notesUseRuleFont"), false, "Blank profiles retained the inverse note-font preference.");
   assert.strictEqual(blankProfile.preferences.citationJumpOffsetPercent, 5, "Blank profiles must default citation jumps to five percent of the readable area.");
   assert.strictEqual(blankProfile.preferences.navigationTrackingOffsetPercent, 5, "Blank profiles must default navigation tracking to five percent of the readable area.");
   assert.strictEqual(blankProfile.preferences.showCfrChapterSubchapterInSearchHierarchy, false, "Blank profiles must omit CFR chapters and subchapters from search-result hierarchies by default.");
@@ -558,7 +562,7 @@ async function main() {
   };
   assert.deepStrictEqual(plain(await storageContext.INASearchStorage.decodeCorpusRecord(cachedFixtureRecord)), cachedFixtureCorpus, "A valid uncompressed IndexedDB corpus record did not round-trip.");
   await assert.rejects(() => storageContext.INASearchStorage.decodeCorpusRecord({ ...cachedFixtureRecord, sha256: "0".repeat(64) }), /integrity check/, "A corrupted IndexedDB corpus record passed its SHA-256 check.");
-  assert.strictEqual(storageContext.INASearchStorage.DB_VERSION, 4, "Browser storage was not upgraded for versioned profiles.");
+  assert.strictEqual(storageContext.INASearchStorage.DB_VERSION, 5, "Browser storage was not upgraded for persistent search indexes.");
   const cachedFixtureVault = { format: "INASearchData", schemaVersion: 1, vaultId: "vault-fixture-1234", revision: 3, updatedAt: "2026-08-25T00:00:00.000Z", application: "INASearch", profile: blankProfile };
   const cachedProfileBytes = new TextEncoder().encode(JSON.stringify(cachedFixtureVault));
   const cachedProfileRecord = {
@@ -579,7 +583,19 @@ async function main() {
   assert.deepStrictEqual(plain(stagedProfileRecord.fileSyncState), { status: "current" }, "A browser-profile record lost its filesystem synchronization state.");
   assert.deepStrictEqual(plain(await storageContext.INASearchStorage.decodeProfileRecord(stagedProfileRecord)), cachedFixtureVault, "A staged browser profile did not verify before activation.");
   const storageRuntimeSource = scriptBody(full.html, "inaSearchStorageRuntime");
-  assert(storageRuntimeSource.includes('["handles", "corpus", "metadata", "sources", "profiles"]'), "The IndexedDB v4 migration does not preserve existing stores while adding profiles.");
+  for (const store of ["handles", "corpus", "metadata", "sources", "profiles", "search-indexes"]) assert(storageRuntimeSource.includes(`"${store}"`), `The IndexedDB v5 migration is missing the ${store} store.`);
+  for (const method of ["loadStartupSnapshot", "loadSearchIndex", "saveSearchIndex", "removeStaleSearchIndexes"]) assert.strictEqual(typeof storageContext.INASearchStorage[method], "function", `Browser storage does not expose ${method}.`);
+  assert.deepStrictEqual(plain(await storageContext.INASearchStorage.loadStartupSnapshot()), { available: false, corpus: null, profile: null, metadata: {}, errors: {} }, "Startup did not degrade cleanly when IndexedDB was unavailable.");
+  await assert.rejects(() => storageContext.INASearchStorage.saveSearchIndex({ key: "fixture", recordSchemaVersion: 1, payload: { fragments: [], hierarchyNodes: [], citationSources: [] } }), /unavailable/, "An unavailable IndexedDB search-index write was reported as successful.");
+  const workerRuntimeSource = scriptBody(full.html, "inaSearchSearchWorkerRuntime");
+  new vm.Script(workerRuntimeSource, { filename: "inaSearchSearchWorkerRuntime" });
+  for (const protocolType of ["projection-cache", "search-result", "page-result", "citation-search", "corpus-change"]) assert(workerRuntimeSource.includes(protocolType), `The embedded search worker is missing its ${protocolType} protocol.`);
+  assert(full.html.includes("worker-src blob:") && full.html.includes('type="text/plain"'), "The standalone build cannot create its inert Blob search worker.");
+  assert(full.html.includes('class="workspace authority-browse boot-workspace"') && full.html.includes('class="boot-title-list"'), "The initial HTML does not contain the modern INA title-list loading shell.");
+  for (const mark of ["boot-shell", "storage-snapshot", "corpus-ready", "projection-cache-hit", "projection-cache-miss", "projection-ready", "title-list-rendered", "first-search-completed"]) assert(full.html.includes(`"${mark}"`), `The standalone build is missing its ${mark} performance mark.`);
+  assert(!full.html.includes("hydrateLegalReferences(corpus)"), "Boot still expands legal references across the whole corpus.");
+  assert(!full.html.includes("setTimeout(buildIndex,0)"), "Boot still schedules the legacy general search index.");
+  assert(!full.html.includes("renderSources(); renderCorpusAudit(); renderDefinitionFilterOptions(); renderDefinitions();"), "Boot still renders hidden secondary views before the INA title list.");
   assert(storageRuntimeSource.includes("actualRevision !== expectedRevision") && storageRuntimeSource.includes('conflictError.name = "ProfileConflictError"'), "Browser-profile writes do not enforce compare-and-swap conflicts.");
   const persistenceResult = plain(await storageContext.INASearchStorage.requestPersistentStorage());
   assert(!Number.isNaN(Date.parse(persistenceResult.checkedAt)), "The storage-persistence check did not record its time.");
@@ -1980,7 +1996,7 @@ async function main() {
 
   const fallbackSource = fs.readFileSync(path.join(root, "src", "INASearch.template.html"), "utf8");
   assert(fallbackSource.includes('scrollStatuteAnchorToReadingLine(searchMatch || citationTarget || $("[data-cfr-start]", els.detail))'), "CFR citation scrolling does not prioritize the requested unit over the earlier section wrapper.");
-  assert(fallbackSource.includes('data-note-associations-input') && fallbackSource.includes('data-note-unit-kind='), "The citation-associated sticky-note editor or legal-unit note buttons are missing.");
+  assert(fallbackSource.includes('data-note-associations-input') && fallbackSource.includes('data-legal-unit-kind='), "The citation-note editor or legal-unit citation actions are missing.");
   assert(!fallbackSource.includes('id="courseStructureEditor"') && !fallbackSource.includes('data-note-week='), "Retired course-note controls remain in the application shell.");
   const tutorialPracticeState = { citation: null, query: "", occurrenceMainResult: null, focusedCitationPanes: [], view: "search", searchScopeActive: false, searchScopeMode: "in", searchScope: null, definitionQuery: "" };
   const tutorialPracticeElements = {
@@ -2041,7 +2057,7 @@ async function main() {
     canonicalPath: pathParts => (pathParts || []).join("/"), Number
   });
   const largeRows = Array.from({ length: 1501 }, (_, index) => ({ occurrenceKey: `legal-${index}`, path: [String(index)], citation: `INA ${index}` }));
-  const mergedLargeResult = mergeOccurrenceResults({
+  const mergedLargeResult = await mergeOccurrenceResults({
     sections: [{ id: "large", citation: "INA 101", totalOccurrences: largeRows.length, firstSourceOrder: 0 }], hierarchy: [], totalOccurrences: largeRows.length,
     materializeOccurrences: ({ start, limit }) => ({ rows: largeRows.slice(start, start + Math.min(limit, 1000)) })
   }, {
@@ -2052,7 +2068,7 @@ async function main() {
   const associationPathStartsWith = (pathParts, prefix) => prefix.length <= pathParts.length && prefix.every((token, index) => associationNorm(token) === associationNorm(pathParts[index]));
   const rangeRanks = new Map(["b/1/a/i", 1, "b/1/a/ii", 2, "b/1/a/iii", 3, "b/1/a/iii/i", 4, "b/1/b", 5].reduce((pairs, value, index, values) => index % 2 ? pairs : pairs.concat([[value, values[index + 1]]]), []));
   const compareAssociationLocations = (_family, _title, left, right) => (Number(left.unit) - Number(right.unit)) || ((rangeRanks.get((left.path || []).map(associationNorm).join("/")) || 0) - (rangeRanks.get((right.path || []).map(associationNorm).join("/")) || 0));
-  const associationCoversLocation = extractedFunction(fallbackSource, "associationCoversLocation", "upgradeProfileCitationLinks", { sameAssociationLocation, compareAssociationLocations, pathStartsWith: associationPathStartsWith, normCitationPart: associationNorm, Number });
+  const associationCoversLocation = extractedFunction(fallbackSource, "associationCoversLocation", "legalUnitNoteLocation", { sameAssociationLocation, compareAssociationLocations, pathStartsWith: associationPathStartsWith, normCitationPart: associationNorm, Number });
   const exactAssociation = { family: "usc", title: 8, start: { unit: "1153", path: ["b", "1", "A"] } };
   assert(associationCoversLocation(exactAssociation, { family: "usc", title: 8, unit: "1153", path: ["b", "1", "A"] }), "An exact association did not match its legal unit.");
   assert(!associationCoversLocation(exactAssociation, { family: "usc", title: 8, unit: "1153", path: ["b", "1", "A", "i"] }), "An exact association incorrectly matched a descendant.");
@@ -2060,16 +2076,6 @@ async function main() {
   assert(associationCoversLocation(rangeAssociation, { family: "usc", title: 8, unit: "1153", path: ["b", "1", "A", "ii"] }), "A deep range omitted an intervening subitem.");
   assert(associationCoversLocation(rangeAssociation, { family: "usc", title: 8, unit: "1153", path: ["b", "1", "A", "iii", "I"] }), "A deep range omitted the ending endpoint's descendants.");
   assert(!associationCoversLocation(rangeAssociation, { family: "usc", title: 8, unit: "1153", path: ["b", "1", "B"] }), "A deep range extended beyond its ending subtree.");
-  const migratedCitation = { family: "usc", title: 8, citationSystem: "usc", start: { unit: "1153", path: ["b", "1", "A"] }, label: "8 U.S.C. 1153(b)(1)(A)" };
-  const upgradeProfileCitationLinks = extractedFunction(fallbackSource, "upgradeProfileCitationLinks", "legalUnitNoteLocation", {
-    parseAssociatedWith: value => String(value).includes("1153") ? { valid: true, associations: [migratedCitation] } : { valid: false, associations: [] },
-    associationKey: association => `${association.family}:${association.start.unit}:${association.start.path.join("/")}`
-  });
-  const linkMigrationProfile = { notes: [{ text: "Original note", associations: [], links: [{ kind: "usc", citation: "8 U.S.C. 1153(b)(1)(A)", label: "statute" }, { kind: "legacy", id: "legacy:h-1b", label: "H-1B" }] }] };
-  upgradeProfileCitationLinks(linkMigrationProfile);
-  assert.deepStrictEqual(plain(linkMigrationProfile.notes[0].associations), [migratedCitation], "A legacy citation link did not become a structured association.");
-  assert(linkMigrationProfile.notes[0].text.includes("Original note") && linkMigrationProfile.notes[0].text.includes("H-1B"), "A non-citation related item was not folded losslessly into plain note text.");
-  assert.strictEqual(Object.hasOwn(linkMigrationProfile.notes[0], "links"), false, "Legacy structured links remain in NoteV4.");
   const expandPackedHouseHref = extractedFunction(fallbackSource, "expandPackedHouseHref", "hydrateLegalReferences", { String });
   for (const [packed, expanded] of [
     ["u8/s1184/i/1", "/us/usc/t8/s1184/i/1"],
@@ -2078,10 +2084,11 @@ async function main() {
     ["a1952-06-27/ch477", "/us/act/1952-06-27/ch477"]
   ]) assert.strictEqual(expandPackedHouseHref(packed), expanded, `The browser did not expand packed House target ${packed}.`);
   const hydrateStart = fallbackSource.indexOf("    function hydrateLegalReferences(");
-  const hydrateEnd = fallbackSource.indexOf("\n    if (corpus) hydrateLegalReferences(corpus);", hydrateStart);
+  const hydrateEnd = fallbackSource.indexOf("\n    if (loadedCorpus && !corpus)", hydrateStart);
   assert(hydrateStart >= 0 && hydrateEnd > hydrateStart, "Could not extract the browser legal-reference hydrator.");
   const hydrateLegalReferences = vm.runInNewContext(`(${fallbackSource.slice(hydrateStart, hydrateEnd).trim()})`, {
     expandPackedHouseHref,
+    hydratedLegalReferenceRoots: new WeakSet(),
     componentTokens: () => [],
     houseSectionUrl: (section, title = 8) => `https://uscode.house.gov/view.xhtml?req=${encodeURIComponent(`granuleid:USC-prelim-title${title}-section${section}`)}&num=0&edition=prelim`,
     encodeURIComponent,
@@ -2179,7 +2186,8 @@ async function main() {
   assert.strictEqual(fs.existsSync(path.join(root, "src", "PatrickHand-Regular.ttf.base64")), false, "The retired Patrick Hand font payload remains in the source tree.");
   assert.strictEqual(fs.existsSync(path.join(root, "src", "PatrickHand-OFL.txt")), false, "The unused Patrick Hand license remains after removing its bundled asset.");
   assert(!fallbackSource.includes('font-family: "Patrick Hand"') && !fallbackSource.includes("__PATRICK_HAND_FONT_BASE64__"), "The standalone template still references the retired Patrick Hand bundle.");
-  assert(fallbackSource.includes('font: 18px/1.34 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;'), "Sticky notes lost their zero-byte system handwritten font stack.");
+  assert(fallbackSource.includes('font-family: "Segoe Print","Bradley Hand","Comic Sans MS",var(--serif);'), "Citation notes lost their installed-system handwritten font stack and rule-text fallback.");
+  assert(!/citation-note[^}]*\bcursive\b/.test(fallbackSource), "Citation notes still use a generic cursive fallback.");
   const standaloneBuildSource = fs.readFileSync(path.join(root, "tools", "build-standalone.js"), "utf8");
   assert(!standaloneBuildSource.includes("PatrickHand-Regular.ttf.base64") && !standaloneBuildSource.includes("__PATRICK_HAND_FONT_BASE64__"), "The standalone builder still reads or injects Patrick Hand.");
   assert(!/@font-face[^}]+https?:/s.test(fallbackSource), "The standalone page downloads a font instead of embedding it.");
@@ -2192,7 +2200,7 @@ async function main() {
   const workspaceSettingsStart = fallbackSource.indexOf('id="workspaceSettingsHeading">Search &amp; workspace');
   const navigationSettingsStart = fallbackSource.indexOf('id="navigationSettingsHeading">Navigation &amp; scrolling');
   assert(appearanceSettingsStart < legalTextSettingsStart && legalTextSettingsStart < workspaceSettingsStart && workspaceSettingsStart < navigationSettingsStart, "Settings sections are not arranged from appearance through reading, workspace, and navigation.");
-  assert(fallbackSource.indexOf('id="notesUseRuleFontToggle"') < legalTextSettingsStart, "Sticky-note typography is not grouped with appearance controls.");
+  assert(fallbackSource.indexOf('id="noteDisplayPositionSelect"') < legalTextSettingsStart && fallbackSource.indexOf('id="notesUseHandwrittenFontToggle"') < legalTextSettingsStart, "Citation-note display settings are not grouped with appearance controls.");
   assert(fallbackSource.indexOf('id="defaultStartupQueryInput"') > workspaceSettingsStart && fallbackSource.indexOf('id="defaultStartupQueryInput"') < navigationSettingsStart, "Startup behavior is not grouped with search and workspace controls.");
   for (const id of ["legalNavigatorVisibilitySelect", "syncCfrCommonDepthFromStatuteToggle", "citationJumpOffsetInput", "navigationTrackingOffsetInput"]) assert(fallbackSource.indexOf(`id="${id}"`) > navigationSettingsStart, `${id} is not grouped with navigation and scrolling.`);
   assert(fallbackSource.includes('setReadingOffsetPreference("citationJumpOffsetPercent"') && fallbackSource.includes('setReadingOffsetPreference("navigationTrackingOffsetPercent"'), "The independent percentage controls are not wired to persisted reading offsets.");
@@ -2330,7 +2338,7 @@ async function main() {
   assert.strictEqual(resetFocuses, 1, "Reset Settings did not return focus to its hold control.");
   assert(resetToast.includes("Notes and inserted references were not changed"), "Reset Settings did not confirm its data-preservation boundary.");
   const resetEverythingProfile = {
-    schemaVersion: 4,
+    schemaVersion: 5,
     profileId: "profile-kept",
     createdAt: "2025-01-02T03:04:05.000Z",
     updatedAt: "2026-08-31T12:00:00.000Z",
@@ -2343,7 +2351,7 @@ async function main() {
     preferences: { theme: "dark", customNondefault: true }
   };
   const resetEverythingDefaults = {
-    schemaVersion: 4,
+    schemaVersion: 5,
     profileId: "new-profile-id",
     createdAt: "2026-09-01T12:00:00.000Z",
     updatedAt: null,
@@ -2430,7 +2438,7 @@ async function main() {
     globalThis: { crypto: { randomUUID: () => "vault-fixture-1234" } },
     makeId: () => "vault-fixture-1234",
     state: vaultState,
-    isValidProfile: value => Boolean(value && value.schemaVersion === 4 && Array.isArray(value.notes) && value.preferences),
+    isValidProfile: value => Boolean(value && value.schemaVersion === 5 && Array.isArray(value.notes) && value.preferences),
     normalizeProfile: value => JSON.parse(JSON.stringify(value))
   });
   const vaultText = vaultFunctions.serializeVault(blankProfile, 0);
@@ -2958,35 +2966,69 @@ async function main() {
   assert(readerClickSource.includes("hasNativeTextSelection") && readerClickSource.includes("!hasNativeTextSelection"), "A completed native text selection can still fall through to citation-unit activation.");
   assert(fallbackSource.includes("setLegalCitationHover(legalCitationSelectionForElement(event.target))") && fallbackSource.includes("setLegalCitationHover(legalCitationSelectionForElement(event.relatedTarget))"), "Pointer movement does not switch the temporary hover between nested citation units.");
   assert(fallbackSource.includes('event.target.closest("[data-legal-unit-kind]")'), "Structural citation markers do not open the legal-unit menu.");
-  assert(fallbackSource.includes('.legal-unit-note-button[data-note-unit-kind] {') && fallbackSource.includes('visibility: hidden;') && fallbackSource.includes('pointer-events: none;'), "Per-unit note controls are not hidden by default.");
-  assert(fallbackSource.includes('.note-unit-current') && fallbackSource.includes('.note-unit-hovered'), "Contextual note controls do not distinguish the live-navigation unit from the hovered unit.");
-  assert(fallbackSource.includes('sameContextualNotePath(path, state.statuteNavigationPath || [])'), "The live hierarchy path is not connected to contextual note-control visibility.");
-  assert(fallbackSource.includes('contextualNoteButtonForElement(event.target)'), "Hovering inside a legal unit does not reveal its contextual note control.");
-  assert(!fallbackSource.includes("note-unit-current-host") && !fallbackSource.includes("note-unit-hovered-host"), "Contextual note visibility still changes host classes and can rewrap legal text.");
-  assert(fallbackSource.includes('.statutory-node > .statutory-line { position: relative; padding: 5px 26px 7px 7px; }'), "Statutory text lines no longer retain their compact note-control spacing after removing citation gutters.");
-  assert(fallbackSource.includes('.detail-heading-row > div:first-child, .cfr-block { padding-inline-end: 26px; }'), "Legal headings and CFR blocks do not reserve a fixed compact note-control gutter.");
+  assert(fallbackSource.includes('data-legal-unit-action="add-note"') && fallbackSource.includes('action === "add-note"') && fallbackSource.includes("startInlineNoteEditor(trigger)"), "The citation-actions menu does not create citation notes.");
+  assert(!/legal-unit-note-button|data-note-unit-kind|note-unit-current|note-unit-hovered|contextualNoteButtonForElement/.test(fallbackSource), "A separate contextual note icon or its hover tracking remains.");
+  assert(!fallbackSource.includes('.statutory-node > .statutory-line { position: relative; padding: 5px 26px 7px 7px; }') && !fallbackSource.includes('.detail-heading-row > div:first-child, .cfr-block { padding-inline-end: 26px; }'), "Legal units still reserve a note-control gutter.");
   assert(fallbackSource.includes('.detail-heading-row { display: grid; grid-template-columns: minmax(0, 1fr) auto;'), "Legal-reader official-source actions are not kept in the section-title row.");
   assert(fallbackSource.includes('.legal-reader-heading .detail-heading-title { grid-column: 1; grid-row: 2; min-width: 0; width: 100%; }'), "Legal-reader titles cannot use all space remaining beside their official-source action.");
   assert(fallbackSource.includes('.legal-reader-heading .detail-heading-citation { grid-column: 1 / -1; grid-row: 1;') && fallbackSource.includes('.legal-reader-heading .detail-heading-actions { grid-column: 2; grid-row: 2; }'), "The citation number and official-source action are not assigned to separate heading rows.");
   assert(!fallbackSource.includes("citation-entry-space") && !fallbackSource.includes("citation-entry-inset"), "Citation navigation still inserts artificial blank space above the section reader.");
   assert(fallbackSource.includes('.detail-heading-actions .button { min-height: 30px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }'), "A title-row official-source button can wrap into an unintended second line.");
-  const stickyCardSource = fallbackSource.slice(fallbackSource.indexOf("function stickyNoteCardHtml"), fallbackSource.indexOf("function prepareInlineNotePage"));
-  assert(stickyCardSource.includes("noteReferenceHtml(note)") && stickyCardSource.includes("data-sticky-note-editor"), "Sticky-note view/edit modes are not both rendered.");
-  const stickyNoteReferenceSource = fallbackSource.slice(fallbackSource.indexOf("function noteReferenceHtml"), fallbackSource.indexOf("function stickyNoteCardHtml"));
+  const citationNoteSource = fallbackSource.slice(fallbackSource.indexOf("function citationNoteHtml"), fallbackSource.indexOf("function prepareInlineNotePage"));
+  assert(citationNoteSource.includes("noteReferenceHtml(note)") && citationNoteSource.includes("data-citation-note-editor"), "Citation-note view/edit modes are not both rendered.");
+  const noteReferenceSource = fallbackSource.slice(fallbackSource.indexOf("function noteReferenceHtml"), fallbackSource.indexOf("function citationNoteHtml"));
   const prepareNoteReferenceSource = fallbackSource.slice(fallbackSource.indexOf("function prepareNoteReferenceTrigger"), fallbackSource.indexOf("function mappedUscResultForIna"));
-  assert(!stickyNoteReferenceSource.includes(" title=") && prepareNoteReferenceSource.includes('removeAttribute("title")'), "Sticky-note citation references can still show a redundant browser tooltip over their reference hover card.");
-  for (const control of ["data-note-color-choice", "data-note-dock-choice", "data-note-boundary-choice", "data-note-associations-input", "data-note-delete"]) assert(stickyCardSource.includes(control), `Sticky notes are missing ${control}.`);
-  assert(fallbackSource.includes("scheduleStickyNoteTextSave(card)") && fallbackSource.includes("}, 500);"), "Sticky-note text is not debounced for 500 ms.");
-  assert(fallbackSource.includes("saveStickyNoteText(card, true)") && fallbackSource.includes('event.target.closest?.("[data-sticky-note-editor]")'), "Sticky-note blur does not save immediately.");
-  assert(fallbackSource.includes("horizontal < .25") && fallbackSource.includes("vertical < .5") && fallbackSource.includes("dataset.noteDropTarget"), "Sticky-note drag zones do not use outer-quarter docking and half-height boundaries.");
-  assert(fallbackSource.includes("sticky-note-exclusion") && fallbackSource.includes("ResizeObserver") && fallbackSource.includes("--exclusion-height"), "Edge notes do not maintain native wrapping exclusions as their geometry changes.");
-  assert(fallbackSource.includes("const bounds = card.getBoundingClientRect();") && !fallbackSource.includes("const { width, height } = entry.contentRect"), "Sticky-note resize persistence can progressively shrink a card by storing content-box geometry as its outer width.");
-  assert(stickyCardSource.includes("state.focusedAnnotation") && stickyCardSource.includes("is-focused"), "Opening an annotation result cannot preserve visual focus across a reader rerender.");
+  assert(!noteReferenceSource.includes(" title=") && prepareNoteReferenceSource.includes('removeAttribute("title")'), "Note-body citation references can still show a redundant browser tooltip over their reference hover card.");
+  for (const control of ["data-note-associations-input", "data-note-delete"]) assert(citationNoteSource.includes(control), `Citation notes are missing ${control}.`);
+  assert(fallbackSource.includes("scheduleCitationNoteTextSave(card)") && fallbackSource.includes("}, 500);"), "Citation-note text is not debounced for 500 ms.");
+  assert(fallbackSource.includes("saveCitationNoteText(card, true)") && fallbackSource.includes('event.target.closest?.("[data-citation-note-editor]")'), "Citation-note blur does not save immediately.");
+  assert(citationNoteSource.includes("state.focusedAnnotation") && citationNoteSource.includes("is-focused"), "Opening an annotation result cannot preserve visual focus across a reader rerender.");
+  const noteRenderSource = fallbackSource.slice(fallbackSource.indexOf("function renderInlineLegalNotes"), fallbackSource.indexOf("function startInlineNoteEditor"));
+  assert(noteRenderSource.includes('profile.preferences.noteDisplayPosition === "bottom" ? "afterend" : "beforebegin"'), "The global top/bottom note position is not applied during rendering.");
+  assert(noteRenderSource.includes("for (const note of profile.notes || [])") && noteRenderSource.includes("for (const association of note.associations || [])") && noteRenderSource.includes("associationStartsAtLocation"), "Citation notes do not preserve profile order, repeat at each association, or render legacy ranges at their start.");
+  assert(fallbackSource.includes("for (const pane of state.focusedCitationPanes) withFocusedCitationPane(pane, renderInlineLegalNotes)"), "Immediate note-position changes do not refresh focused citation panes.");
+  assert(!/sticky-note|data-note-(?:color|dock|boundary|drag)|note-drop|preferredWidthPx|primaryHighlightId|beginStickyNoteDrag|updateStickyNotePlacement/.test(fallbackSource), "Sticky styling, drag/drop, width, or per-note placement code remains.");
+  assert(!/data-link-current|＋ Link to note/.test(fallbackSource), "A non-citation Link to note action remains.");
+  const highlightCreationSource = fallbackSource.slice(fallbackSource.indexOf("function createHighlightFromSelection"), fallbackSource.indexOf("function updateAnnotationSelectionToolbar"));
+  const noteDeletionSource = fallbackSource.slice(fallbackSource.indexOf("function deleteNoteById"), fallbackSource.indexOf("function repairUnassociatedNote"));
+  const highlightDeletionSource = fallbackSource.slice(fallbackSource.indexOf("function deleteHighlightById"), fallbackSource.indexOf("function citationNoteRecord"));
+  assert(highlightCreationSource.includes("if (linkNote)") && highlightCreationSource.includes('upsertNote({ text: "", associations })') && !highlightCreationSource.includes("highlight.noteId"), "Highlight + note no longer creates both independent artifacts.");
+  assert(!noteDeletionSource.includes("profile.highlights") && !highlightDeletionSource.includes("profile.notes"), "Deleting a note or highlight still mutates the other artifact type.");
+  const renderedNoteGroups = [];
+  const makeNoteHost = name => ({ name, insertions: [], insertAdjacentElement(position, section) { this.insertions.push({ position, section }); renderedNoteGroups.push(section); } });
+  const noteHostA = makeNoteHost("A"), noteHostB = makeNoteHost("B");
+  const noteTriggers = [{ location: { family: "usc", title: 8, unit: "1182", path: ["a"] }, host: noteHostA }, { location: { family: "usc", title: 8, unit: "1184", path: ["b"] }, host: noteHostB }];
+  const noteAssociation = (unit, path, end = null) => ({ family: "usc", title: 8, start: { unit, path }, ...(end ? { end } : {}) });
+  const noteRenderProfile = { preferences: { noteDisplayPosition: "top" }, notes: [
+    { id: "first", associations: [noteAssociation("1182", ["a"])] },
+    { id: "multi", associations: [noteAssociation("1182", ["a"]), noteAssociation("1184", ["b"])] },
+    { id: "range", associations: [noteAssociation("1182", ["a"], { unit: "1184", path: ["b"] })] }
+  ] };
+  const renderCitationNotes = extractedFunction(fallbackSource, "renderInlineLegalNotes", "startInlineNoteEditor", {
+    state: { view: "search", pendingAnnotationFocus: null },
+    els: { detail: {} },
+    $$: selector => selector === ".citation-notes" ? renderedNoteGroups.filter(group => !group.removed) : selector === "[data-legal-unit-kind]" ? noteTriggers : [],
+    locationFromLegalUnitTrigger: trigger => trigger.location,
+    legalUnitNoteHost: trigger => trigger.host,
+    associationStartsAtLocation: (association, location) => association.family === location.family && association.title === location.title && association.start.unit === location.unit && JSON.stringify(association.start.path) === JSON.stringify(location.path),
+    profile: noteRenderProfile,
+    document: { createElement: () => ({ className: "", attributes: {}, innerHTML: "", removed: false, setAttribute(name, value) { this.attributes[name] = value; }, remove() { this.removed = true; } }) },
+    citationNoteHtml: (note, association) => `[${note.id}:${association.start.unit}]`,
+    renderUserHighlights: () => {},
+    Map
+  });
+  renderCitationNotes();
+  assert.strictEqual(noteHostA.insertions[0].position, "beforebegin", "Top-position notes were not inserted immediately above their citation.");
+  assert.strictEqual(noteHostA.insertions[0].section.innerHTML, "[first:1182][multi:1182][range:1182]", "Multiple notes did not retain saved-profile order or a migrated range did not render once at its start.");
+  assert.strictEqual(noteHostB.insertions[0].section.innerHTML, "[multi:1184]", "A note associated with multiple citations did not render at every exact citation.");
+  noteRenderProfile.preferences.noteDisplayPosition = "bottom";
+  noteHostA.insertions = []; noteHostB.insertions = [];
+  renderCitationNotes();
+  assert(noteHostA.insertions.every(insertion => insertion.position === "afterend") && noteHostB.insertions.every(insertion => insertion.position === "afterend"), "Bottom-position notes were not immediately rerendered below their citations.");
   const occurrenceRoutingSource = fallbackSource.slice(fallbackSource.indexOf("function tryRunOccurrenceSearch"), fallbackSource.indexOf("function runSearch", fallbackSource.indexOf("function tryRunOccurrenceSearch")));
   assert(occurrenceRoutingSource.includes('classList.remove("authority-browse", "single-legal-result")') && occurrenceRoutingSource.includes("renderAuthorityBrowseHeader(null)"), "Occurrence searches can remain hidden by a prior citation/authority-browse layout.");
   const focusedOccurrenceSource = fallbackSource.slice(fallbackSource.indexOf("async function renderFocusedOccurrencePane"), fallbackSource.indexOf("function occurrenceReaderTarget", fallbackSource.indexOf("async function renderFocusedOccurrencePane")));
   assert(focusedOccurrenceSource.includes("await Promise.resolve();") && focusedOccurrenceSource.indexOf("await Promise.resolve();") < focusedOccurrenceSource.indexOf("!pane.element.isConnected"), "A synchronous bare has: result can be discarded before its focused pane is attached.");
-  assert(fallbackSource.includes('toggleInlineNoteManagement(noteUnitButton)') && fallbackSource.includes("startInlineNoteEditor"), "Existing note icons do not open their sticky-note editor.");
   assert(fallbackSource.includes('html{color-scheme:light}') && fallbackSource.includes('background:#fff'), "Legal-unit printing does not force a light text-only page.");
   assert(fallbackSource.includes("const topOffsetRatio = normalizeReadingOffsetPercent(offsetPercent) / 100;") && fallbackSource.includes("return rootRect.top + rootHeight * topOffsetRatio;") && fallbackSource.includes("return navigatorBottom + (viewportBottom - navigatorBottom) * topOffsetRatio;"), "The statute and focused-pane reading lines do not share the selected percentage offset.");
   assert(fallbackSource.includes('.statutory-node { position: relative; margin: 5px 0 5px 15px; padding: 0; border-radius: 6px; }'), "Nested statutory nodes do not use one fixed indentation increment without stacking horizontal padding.");
@@ -3603,13 +3645,12 @@ async function main() {
     els: navigationVisibilityElements,
     fitStatuteNavigation: () => navigationVisibilityCalls.push("fit"),
     syncStatuteNavigationOffset: () => navigationVisibilityCalls.push("offset"),
-    syncContextualNoteButtons: () => navigationVisibilityCalls.push("notes"),
     legalNavigatorVisibleForCurrentContext: () => true,
     syncNavigationDepthSettings: () => {},
     Boolean
   });
   setStatuteNavigationVisible(true);
-  assert.deepStrictEqual(navigationVisibilityCalls, ["fit", "offset", "notes"], "The new citation is exposed before its one-row navigation fit and sticky offset are resolved.");
+  assert.deepStrictEqual(navigationVisibilityCalls, ["fit", "offset"], "The new citation is exposed before its one-row navigation fit and sticky offset are resolved.");
   assert.strictEqual(navigationVisibilityElements.statuteNavigator.hidden, false, "A fitted statute navigator was not shown.");
   const navigationVisibilitySource = fallbackSource.slice(fallbackSource.indexOf("function setStatuteNavigationVisible"), fallbackSource.indexOf("function normalizedStatuteHistoryLocation"));
   assert(!navigationVisibilitySource.includes("requestAnimationFrame") && navigationVisibilitySource.indexOf("fitStatuteNavigation()") < navigationVisibilitySource.indexOf("syncStatuteNavigationOffset()"), "Navigation fitting is still deferred or its two-row height is measured before compaction.");
@@ -4145,6 +4186,7 @@ async function main() {
   assert.strictEqual(parseSearchScope("INA 101-8 CFR 214.2").valid, false, "A mixed-authority citation range was silently accepted.");
   const cfrSectionMapForCites = new Map(hydratedSource.cfr.sections.map(section => [section.id, section]));
   const legalReferenceTargets = extractedFunction(fallbackSource, "legalReferenceTargets", "noteResultKind", {
+    hydrateLegalReferences: value => value,
     sectionMap: scopeSectionMap,
     cfrSectionIdMap: cfrSectionMapForCites,
     normCitationPart: statutoryNormPart,
@@ -5580,7 +5622,7 @@ async function main() {
   assert.strictEqual(comprehensive.imported.profileId, "synthetic-legacy-comprehensive");
   assert.strictEqual(comprehensive.imported.preferences.theme, "dark", "A legacy manual Dark preference was not preserved.");
   for (const field of retiredProfileFields) assert.strictEqual(Object.hasOwn(comprehensive.imported, field), false, `Legacy import retained ${field}.`);
-  assert.strictEqual(comprehensive.imported.schemaVersion, 4, "A legacy profile was not upgraded to saved-data schema v4.");
+  assert.strictEqual(comprehensive.imported.schemaVersion, 5, "A legacy profile was not upgraded to saved-data schema v5.");
   assert.strictEqual(comprehensive.imported.notes.length, 4);
   assert(comprehensive.imported.notes.every(note => !Object.hasOwn(note, "coursePlacement")), "Legacy course placements survived schema-v3 migration.");
   assert.strictEqual(Object.hasOwn(comprehensive.imported, "courseStructure"), false, "Legacy course structure survived schema-v3 migration.");
@@ -5590,8 +5632,9 @@ async function main() {
   assert(comprehensive.imported.notes[2].text.includes("Tags: classification") && comprehensive.imported.notes[2].text.includes("H-1B"), "A migrated card note lost its classification label or readable legacy item.");
   assert(comprehensive.imported.notes[2].text.includes("Classification note with parser-like text: }; and </script>, ampersand & Unicode — café 🚀."), "A migrated card note lost its exact body text.");
   assert(comprehensive.imported.notes[0].text.includes("Links:"), "A migrated note lost its related-item section.");
-  assert(comprehensive.imported.notes.every(note => !Object.hasOwn(note, "title") && !Object.hasOwn(note, "body") && !Object.hasOwn(note, "tags") && !Object.hasOwn(note, "links")), "Legacy rich-note fields remain in NoteV4.");
-  const { quizCursorKey: _retiredCursor, quizClassification: _retiredClassification, navigationUpdatesSearch: _retiredNavigationSync, hideQuickStartPrompt: _retiredQuickStartPrompt, resultFilter: _retiredFilter, compactResults: _retiredCompactResults, ...retainedComprehensivePreferences } = comprehensive.assigned.preferences;
+  assert(comprehensive.imported.notes.every(note => !Object.hasOwn(note, "title") && !Object.hasOwn(note, "body") && !Object.hasOwn(note, "tags") && !Object.hasOwn(note, "links") && !Object.hasOwn(note, "color")), "Legacy rich or visual note fields remain in NoteV5.");
+  assert(comprehensive.imported.notes.every(note => (note.associations || []).every(association => !Object.hasOwn(association, "placement"))), "Legacy per-association placement survived schema-v5 migration.");
+  const { quizCursorKey: _retiredCursor, quizClassification: _retiredClassification, navigationUpdatesSearch: _retiredNavigationSync, hideQuickStartPrompt: _retiredQuickStartPrompt, resultFilter: _retiredFilter, compactResults: _retiredCompactResults, lastNoteColor: _retiredNoteColor, notesUseRuleFont: _retiredNoteFont, ...retainedComprehensivePreferences } = comprehensive.assigned.preferences;
   assert.deepStrictEqual(comprehensive.imported.preferences, {
     ...retainedComprehensivePreferences,
     showDetailedStatus: false,
@@ -5617,8 +5660,8 @@ async function main() {
     statuteNavigationDepth: 8,
     cfrNavigationDepth: 6,
     highlightDefinedTerms: false,
-    lastNoteColor: "yellow",
-    notesUseRuleFont: false,
+    noteDisplayPosition: "top",
+    notesUseHandwrittenFont: false,
     automaticCfrUpdates: false,
     backupReminder: "weekly",
     defaultStartupQuery: ""
@@ -5666,8 +5709,10 @@ async function main() {
   assert.strictEqual(minimal.imported.preferences.statuteNavigationDepth, 8, "A legacy profile did not default to the smallest statutory unit.");
   assert.strictEqual(minimal.imported.preferences.cfrNavigationDepth, 6, "A legacy profile did not default to the smallest regulatory unit.");
   assert.strictEqual(minimal.imported.preferences.highlightDefinedTerms, false, "A legacy profile did not receive the safe disabled defined-term-highlighting default.");
-  assert.strictEqual(minimal.imported.preferences.lastNoteColor, "yellow", "A legacy profile did not receive the sticky-note color default.");
-  assert.strictEqual(minimal.imported.preferences.notesUseRuleFont, false, "A legacy profile unexpectedly enabled rule-text note typography.");
+  assert.strictEqual(minimal.imported.preferences.noteDisplayPosition, "top", "A legacy profile did not receive the top note-position default.");
+  assert.strictEqual(minimal.imported.preferences.notesUseHandwrittenFont, false, "A legacy profile unexpectedly enabled handwritten note typography.");
+  assert.strictEqual(Object.hasOwn(minimal.imported.preferences, "lastNoteColor"), false, "A legacy profile retained the note-color preference.");
+  assert.strictEqual(Object.hasOwn(minimal.imported.preferences, "notesUseRuleFont"), false, "A legacy profile retained the inverse note-font preference.");
   assert.strictEqual(minimal.imported.preferences.automaticCfrUpdates, false, "A legacy profile did not receive the disabled automatic-CFR-update default.");
   assert.strictEqual(minimal.imported.preferences.defaultStartupQuery, "", "A legacy profile without an explicit startup preference did not receive the blank default.");
   assert.deepStrictEqual(minimal.imported.referenceInsertions, { schemaVersion: 1, records: [] }, "A legacy profile did not receive an empty insertion-record root.");
@@ -5697,7 +5742,7 @@ async function main() {
     resourceChallengeLockouts: [{ questionId: "legacy-question" }],
     preferences: { ...blankProfile.preferences, quizCursorKey: "legacy-cursor", quizClassification: "H" }
   }));
-  assert.strictEqual(schemaTwoImport.schemaVersion, 4, "A schema-v2 profile was not upgraded.");
+  assert.strictEqual(schemaTwoImport.schemaVersion, 5, "A schema-v2 profile was not upgraded.");
   for (const field of retiredProfileFields) assert.strictEqual(Object.hasOwn(schemaTwoImport, field), false, `Schema-v2 import retained ${field}.`);
   assert.strictEqual(Object.hasOwn(schemaTwoImport.preferences, "quizCursorKey"), false);
   assert.strictEqual(Object.hasOwn(schemaTwoImport.preferences, "quizClassification"), false);
@@ -5706,7 +5751,19 @@ async function main() {
   assert(normalized.notes[0].text.includes("String-number day") && normalized.notes[0].text.includes("Tags: W6D5"), "A custom legacy note title or migration tag was not preserved in plain text.");
   assert.strictEqual(Object.hasOwn(normalized.notes[1], "classificationNoteVisaId"), false);
   assert(normalized.notes[1].text.includes("Tags: classification") && normalized.notes[1].text.includes("F-1"), "Normalized card note did not retain its classification tag and readable legacy item in plain text.");
-  assert.throws(() => parseImportedProfile('window.AUTHORITY_SEARCH_PROFILE = {"schemaVersion":5,"notes":[],"preferences":{}};'), /valid INASearch profile/, "Unsupported future profile schema was accepted.");
+  const schemaFourVisualFields = plain(migration.normalizeProfile({
+    ...blankProfile,
+    schemaVersion: 4,
+    notes: [{ id: "v4-note", text: "Preserve me", color: "pink", associations: [{ family: "usc", title: 8, citationSystem: "ina", start: { unit: "1182", path: ["a", "2"] }, end: { unit: "1182", path: ["a", "3"] }, label: "INA 212(a)(2)–(3)", placement: { dock: "right", boundary: "after", preferredWidthPx: 400, order: 3, primaryHighlightId: "segment" } }], textReferences: { parserVersion: 2, textHash: "fixture", spans: [] }, createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-02T00:00:00.000Z" }],
+    highlights: [{ id: "v4-highlight", noteId: "v4-note", color: "pink", segments: [{ id: "segment", association: { family: "usc", title: 8, citationSystem: "ina", start: { unit: "1182", path: ["a", "2"] }, placement: { dock: "right", primaryHighlightId: "segment" } }, anchor: { exact: "Preserve", start: 0, end: 8 } }], createdAt: "2026-01-01T00:00:00.000Z", updatedAt: "2026-01-02T00:00:00.000Z" }],
+    preferences: { ...blankProfile.preferences, lastNoteColor: "pink", notesUseRuleFont: true }
+  }));
+  assert.strictEqual(schemaFourVisualFields.notes[0].text, "Preserve me", "Schema-v4 note text was not preserved.");
+  assert(schemaFourVisualFields.notes[0].associations[0].end, "A legacy citation-range association was not preserved.");
+  assert(!Object.hasOwn(schemaFourVisualFields.notes[0], "color") && !Object.hasOwn(schemaFourVisualFields.notes[0].associations[0], "placement"), "Schema-v4 note visual fields survived migration.");
+  assert.strictEqual(schemaFourVisualFields.highlights[0].color, "pink", "A schema-v4 highlight color was not preserved.");
+  assert(!Object.hasOwn(schemaFourVisualFields.highlights[0], "noteId") && !Object.hasOwn(schemaFourVisualFields.highlights[0].segments[0].association, "placement"), "Schema-v4 note/highlight linkage survived migration.");
+  assert.throws(() => parseImportedProfile('window.AUTHORITY_SEARCH_PROFILE = {"schemaVersion":6,"notes":[],"preferences":{}};'), /valid INASearch profile/, "Unsupported future profile schema was accepted.");
   assert.throws(() => parseImportedProfile('window.INA_SEARCH_PROFILE = {"schemaVersion":1,"notes":"not-an-array","preferences":{}};'), /valid INASearch profile/, "Malformed current notes collection was accepted.");
 
   console.log(`PASS INASearch.html: ${full.bytes} bytes; ${full.manifest.compressedBytes} gzip bytes`);

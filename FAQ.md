@@ -38,6 +38,8 @@ Firefox and Safari may still run the reader, save a profile in their own browser
 
 INASearch automatically saves notes, preferences, and tutorial progress in browser-owned IndexedDB storage. “Saved in browser” means the current browser profile contains the latest verified copy; it does not mean the data is a durable filesystem document.
 
+Create a note from an exact INA, U.S.C., or CFR citation's actions menu. Notes use a neutral full-width layout, may be associated with several exact citations, and appear immediately above or below each citation according to the global setting. The optional handwritten-font setting uses an installed system font when available and otherwise keeps the normal rule-text font.
+
 Browser storage can disappear if you clear site data, use a private window, change browser profiles, run short of storage, or open the standalone HTML from a location the browser treats as a different storage context. INASearch requests persistent storage when supported, but the browser may decline and users can always clear browser data.
 
 For stronger protection, open **Saving & data** and select or create `INASearch_Data.json`. INASearch then saves to that file and mirrors the verified file copy into browser storage. You can also download a portable JSON backup. Weekly reminders are on by default when no data file is connected and can be disabled in Settings.

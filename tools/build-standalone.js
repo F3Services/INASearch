@@ -57,6 +57,15 @@ function replaceRuntimeBlock(html, name, id, source) {
   return html.replace(expression, () => replacement);
 }
 
+function replaceInertRuntimeBlock(html, name, id, source) {
+  const start = `<!-- INA_SEARCH_${name}_RUNTIME_START -->`;
+  const end = `<!-- INA_SEARCH_${name}_RUNTIME_END -->`;
+  const replacement = `${start}\n  <script id="${id}" type="text/plain">${source.replace(/<\/script/gi, "<\\/script")}</script>\n  ${end}`;
+  const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
+  if (!expression.test(html)) throw new Error(`Template is missing the ${name} runtime block.`);
+  return html.replace(expression, () => replacement);
+}
+
 function sha256(value) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
@@ -186,6 +195,7 @@ template = replaceRuntimeBlock(template, "ANNOTATIONS", "inaSearchAnnotationsRun
 template = replaceRuntimeBlock(template, "COMMAND", "inaSearchCommandRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Command.js"), "utf8"));
 template = replaceRuntimeBlock(template, "WORKSPACE", "inaSearchWorkspaceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Workspace.js"), "utf8"));
 template = replaceRuntimeBlock(template, "OCCURRENCE", "inaSearchOccurrenceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Occurrence.js"), "utf8"));
+template = replaceInertRuntimeBlock(template, "SEARCH_WORKER", "inaSearchSearchWorkerRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Search-Worker.js"), "utf8"));
 template = replaceRuntimeBlock(template, "EMBEDDED_REFERENCES", "inaSearchEmbeddedReferencesRuntime", fs.readFileSync(path.join(root, "tools", "embedded-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "LEGAL_REFERENCES", "inaSearchLegalReferencesRuntime", fs.readFileSync(path.join(root, "tools", "legal-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "UPDATER", "inaSearchUpdaterRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Updater.js"), "utf8"));
@@ -207,7 +217,7 @@ fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, us
 packLegalReferences(fullCorpus);
 const defaultProfile = readAssignedObject("INASearch-Profile.js", "INA_SEARCH_PROFILE");
 const shellStyle = template.match(/<style>([\s\S]*?)<\/style>/)?.[1] || "";
-const annotationCssSource = shellStyle.split("\n").filter(line => /sticky-note|user-highlight|annotation-selection|artifact-note|data-artifact-kind|note-drop/.test(line)).join("\n");
+const annotationCssSource = shellStyle.split("\n").filter(line => /citation-note|user-highlight|annotation-selection|artifact-note|data-artifact-kind/.test(line)).join("\n");
 const embeddedFontBytes = [...template.matchAll(/data:font\/[^;]+;base64,([A-Za-z0-9+/=]+)/g)].reduce((sum, match) => sum + Buffer.from(match[1], "base64").byteLength, 0);
 if (/\b(?:from|require\s*\()\s*["'](?:@[^"']+\/)?pretext["']/i.test(template)) throw new Error("Pretext was accidentally included in the standalone shell.");
 const annotationBundleReport = {

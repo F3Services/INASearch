@@ -82,6 +82,30 @@ function syntheticCorpus() {
 
 async function syntheticTests() {
   const corpus = syntheticCorpus(), projection = occurrence.buildProjection(corpus);
+  const persistedIdentity = occurrence.projectionIdentity(corpus, { corpusSchemaVersion: 5, corpusSha256: "a".repeat(64) });
+  const persisted = occurrence.toPersistedProjection(projection, persistedIdentity, { citationSources: [{ recordId: "fixture", targets: [] }] });
+  assert(!Object.hasOwn(persisted.payload, "hierarchyById"), "The persisted projection contains its transient hierarchy Map.");
+  const restored = occurrence.restorePersistedProjection(structuredClone(persisted), persistedIdentity);
+  assert(restored.hierarchyById instanceof Map && restored.hierarchyById.size === projection.hierarchyById.size, "A persisted projection did not reconstruct its hierarchy Map.");
+  assert.strictEqual(restored.citationSources[0].recordId, "fixture", "The persisted projection lost its reverse citation index.");
+  const persistedSearchCases = [
+    ["beta", { authorities: "cfr" }],
+    ['"Beta repeated"', { authorities: "cfr" }],
+    ["(alpha OR gamma) beta", { authorities: "cfr", common: { cfr: "section" } }],
+    ["alpha", { authorities: "ina", scope: { ina: { inaSections: ["101"] } } }]
+  ];
+  for (const [query, options] of persistedSearchCases) {
+    const fresh = occurrence.search(projection, query, options);
+    const cachedResult = occurrence.search(restored, query, options);
+    const shape = result => ({
+      totalOccurrences: result.totalOccurrences,
+      sections: result.sections,
+      hierarchy: result.hierarchy,
+      page: result.materializeOccurrences({ start: 0, limit: 200 })
+    });
+    assert.deepStrictEqual(shape(cachedResult), shape(fresh), `A restored projection changed results for ${query}.`);
+  }
+  assert.throws(() => occurrence.restorePersistedProjection({ ...persisted, corpusSha256: "b".repeat(64) }, persistedIdentity), /different corpus/, "A projection from a different corpus identity was accepted.");
   const cached = occurrence.getProjection(corpus);
   assert.strictEqual(occurrence.getProjection(corpus), cached, "Projection caching is not stable for one corpus version.");
   occurrence.clearProjection(corpus);

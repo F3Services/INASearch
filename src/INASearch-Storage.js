@@ -3,7 +3,7 @@
   "use strict";
 
   const DB_NAME = "INASearchStandalone";
-  const DB_VERSION = 4;
+  const DB_VERSION = 5;
   const PRIMARY_VAULT_HANDLE_KEY = "primary-vault";
   const ACTIVE_CORPUS_KEY = "active";
   const PREVIOUS_CORPUS_KEY = "previous";
@@ -11,6 +11,8 @@
   const ACTIVE_PROFILE_KEY = "active";
   const PREVIOUS_PROFILE_KEY = "previous";
   const STAGING_PROFILE_KEY = "staging";
+  const SEARCH_INDEX_STORE = "search-indexes";
+  const STARTUP_METADATA_KEYS = ["last-backup-reminder-at", "last-filesystem-protection-at", "storage-persistence"];
 
   function requestResult(request) {
     return new Promise((resolve, reject) => {
@@ -25,7 +27,7 @@
       const request = indexedDB.open(DB_NAME, DB_VERSION);
       request.onupgradeneeded = () => {
         const database = request.result;
-        for (const storeName of ["handles", "corpus", "metadata", "sources", "profiles"]) {
+        for (const storeName of ["handles", "corpus", "metadata", "sources", "profiles", SEARCH_INDEX_STORE]) {
           if (!database.objectStoreNames.contains(storeName)) database.createObjectStore(storeName);
         }
       };
@@ -100,7 +102,7 @@
 
   function validCorpusRecord(record) {
     return Boolean(
-      record && record.recordSchemaVersion === 1 && record.storageFormat === "json" &&
+      record && ((record.recordSchemaVersion === 1 && record.storageFormat === "json") || (record.recordSchemaVersion === 2 && record.storageFormat === "runtime-json")) &&
       Number.isSafeInteger(record.bytes) && record.bytes > 0 &&
       typeof record.sha256 === "string" && /^[0-9a-f]{64}$/.test(record.sha256) &&
       record.payload instanceof Blob
@@ -111,13 +113,15 @@
     const text = JSON.stringify(corpus);
     const bytes = new TextEncoder().encode(text);
     return {
-      recordSchemaVersion: 1,
-      storageFormat: "json",
+      recordSchemaVersion: 2,
+      storageFormat: "runtime-json",
       corpusSchemaVersion: Number(corpus?.schemaVersion),
       corpusVersion: String(corpus?.corpusVersion || ""),
       bytes: bytes.byteLength,
       sha256: await sha256Bytes(bytes),
+      sourceCorpusSha256: typeof details.sourceCorpusSha256 === "string" ? details.sourceCorpusSha256 : "",
       storedAt: new Date().toISOString(),
+      legalReferencesPacked: details.legalReferencesPacked === true,
       sourceState: details.sourceState || null,
       reason: String(details.reason || ""),
       payload: new Blob([bytes], { type: "application/json;charset=utf-8" })
@@ -169,7 +173,7 @@
     if (bytes.byteLength !== record.bytes) throw new Error("The saved browser profile byte count does not match its manifest.");
     if (await sha256Bytes(bytes) !== record.sha256) throw new Error("The saved browser profile failed its SHA-256 integrity check.");
     const vault = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
-    if (!vault || vault.format !== "INASearchData" || Number(vault.schemaVersion) !== 1 || typeof vault.vaultId !== "string" || !Number.isSafeInteger(vault.revision) || vault.revision < 0 || ![1, 2, 3, 4].includes(Number(vault.profile?.schemaVersion)) || !Array.isArray(vault.profile?.notes) || !vault.profile?.preferences || typeof vault.profile.preferences !== "object") {
+    if (!vault || vault.format !== "INASearchData" || Number(vault.schemaVersion) !== 1 || typeof vault.vaultId !== "string" || !Number.isSafeInteger(vault.revision) || vault.revision < 0 || ![1, 2, 3, 4, 5].includes(Number(vault.profile?.schemaVersion)) || !Array.isArray(vault.profile?.notes) || !vault.profile?.preferences || typeof vault.profile.preferences !== "object") {
       throw new Error("The saved browser profile payload is invalid.");
     }
     return vault;
@@ -238,6 +242,7 @@
       if (!record) continue;
       if (Number(record.corpusSchemaVersion) !== Number(options.corpusSchemaVersion)) continue;
       if (options.minimumVersion && compareVersions(record.corpusVersion, options.minimumVersion) < 0) continue;
+      if (Number(options.preferRecordSchemaVersion) > Number(record.recordSchemaVersion) && (!options.minimumVersion || compareVersions(record.corpusVersion, options.minimumVersion) <= 0)) continue;
       try {
         return { corpus: await decodeCorpusRecord(record), record, slot: key };
       } catch (error) {
@@ -246,6 +251,105 @@
       }
     }
     return null;
+  }
+
+  async function loadStartupSnapshot(options = {}) {
+    const database = await openDatabase();
+    if (!database) return { available: false, corpus: null, profile: null, metadata: {}, errors: {} };
+    let values;
+    try {
+      const transaction = database.transaction(["corpus", "profiles", "metadata"], "readonly");
+      const corpusStore = transaction.objectStore("corpus");
+      const profileStore = transaction.objectStore("profiles");
+      const metadataStore = transaction.objectStore("metadata");
+      values = await Promise.all([
+        requestResult(corpusStore.get(ACTIVE_CORPUS_KEY)),
+        requestResult(corpusStore.get(PREVIOUS_CORPUS_KEY)),
+        requestResult(profileStore.get(ACTIVE_PROFILE_KEY)),
+        requestResult(profileStore.get(PREVIOUS_PROFILE_KEY)),
+        ...STARTUP_METADATA_KEYS.map(key => requestResult(metadataStore.get(key)))
+      ]);
+    } finally {
+      database.close();
+    }
+    const errors = {};
+    const chooseCorpus = async () => {
+      for (const [index, slot] of [ACTIVE_CORPUS_KEY, PREVIOUS_CORPUS_KEY].entries()) {
+        const record = values[index];
+        if (!record || Number(record.corpusSchemaVersion) !== Number(options.corpusSchemaVersion)) continue;
+        if (options.minimumVersion && compareVersions(record.corpusVersion, options.minimumVersion) < 0) continue;
+        if (Number(options.preferRecordSchemaVersion) > Number(record.recordSchemaVersion) && (!options.minimumVersion || compareVersions(record.corpusVersion, options.minimumVersion) <= 0)) continue;
+        try { return { corpus: await decodeCorpusRecord(record), record, slot }; }
+        catch (error) { errors[`corpus:${slot}`] = error?.message || String(error); }
+      }
+      return null;
+    };
+    const chooseProfile = async () => {
+      for (const [offset, slot] of [ACTIVE_PROFILE_KEY, PREVIOUS_PROFILE_KEY].entries()) {
+        const record = values[2 + offset];
+        if (!record) continue;
+        try { return { vault: await decodeProfileRecord(record), record, slot }; }
+        catch (error) { errors[`profile:${slot}`] = error?.message || String(error); }
+      }
+      return null;
+    };
+    const [corpus, profile] = await Promise.all([chooseCorpus(), chooseProfile()]);
+    const metadata = Object.fromEntries(STARTUP_METADATA_KEYS.map((key, index) => [key, values[4 + index]]));
+    return { available: true, corpus, profile, metadata, errors };
+  }
+
+  async function loadSearchIndex(identity) {
+    const key = typeof identity === "string" ? identity : identity?.key;
+    if (!key) return null;
+    return await read(SEARCH_INDEX_STORE, key) || null;
+  }
+
+  async function removeStaleSearchIndexes(currentKey = "") {
+    const database = await openDatabase();
+    if (!database) return false;
+    try {
+      await new Promise((resolve, reject) => {
+        const transaction = database.transaction(SEARCH_INDEX_STORE, "readwrite");
+        const store = transaction.objectStore(SEARCH_INDEX_STORE);
+        const request = store.getAllKeys();
+        request.onsuccess = () => {
+          for (const key of request.result || []) if (String(key) !== String(currentKey)) store.delete(key);
+        };
+        request.onerror = () => transaction.abort();
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(transaction.error || new Error("Stale search indexes could not be removed."));
+        transaction.onabort = () => reject(transaction.error || new Error("Search-index cleanup was aborted."));
+      });
+      return true;
+    } finally {
+      database.close();
+    }
+  }
+
+  async function saveSearchIndex(record) {
+    if (!record?.key || record.recordSchemaVersion !== 1 || !record.payload || !Array.isArray(record.payload.fragments) || !Array.isArray(record.payload.hierarchyNodes) || !Array.isArray(record.payload.citationSources)) {
+      throw new Error("The search-index cache record is malformed.");
+    }
+    const database = await openDatabase();
+    if (!database) throw new Error("Browser search-index storage is unavailable.");
+    try {
+      await new Promise((resolve, reject) => {
+        const transaction = database.transaction(SEARCH_INDEX_STORE, "readwrite");
+        const store = transaction.objectStore(SEARCH_INDEX_STORE);
+        store.put(record, record.key);
+        const keysRequest = store.getAllKeys();
+        keysRequest.onsuccess = () => {
+          for (const key of keysRequest.result || []) if (String(key) !== String(record.key)) store.delete(key);
+        };
+        keysRequest.onerror = () => transaction.abort();
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(transaction.error || new Error("The search index could not be saved."));
+        transaction.onabort = () => reject(transaction.error || new Error("The search-index save was aborted."));
+      });
+      return true;
+    } finally {
+      database.close();
+    }
   }
 
   async function activateCorpus(corpus, details = {}) {
@@ -279,7 +383,7 @@
 
   async function ensureActiveCorpus(corpus, details = {}) {
     const current = await read("corpus", ACTIVE_CORPUS_KEY);
-    if (current && Number(current.corpusSchemaVersion) === Number(corpus?.schemaVersion) && compareVersions(current.corpusVersion, corpus?.corpusVersion) >= 0) {
+    if (current && Number(current.recordSchemaVersion) >= 2 && Number(current.corpusSchemaVersion) === Number(corpus?.schemaVersion) && compareVersions(current.corpusVersion, corpus?.corpusVersion) >= 0) {
       try { await decodeCorpusRecord(current); return false; }
       catch { await remove("corpus", ACTIVE_CORPUS_KEY).catch(() => {}); }
     }
@@ -309,6 +413,7 @@
   const api = Object.freeze({
     DB_NAME,
     DB_VERSION,
+    SEARCH_INDEX_STORE,
     PRIMARY_VAULT_HANDLE_KEY,
     compareVersions,
     sha256Bytes,
@@ -317,9 +422,13 @@
     write,
     remove,
     loadActiveCorpus,
+    loadStartupSnapshot,
     activateCorpus,
     ensureActiveCorpus,
     decodeCorpusRecord,
+    loadSearchIndex,
+    saveSearchIndex,
+    removeStaleSearchIndexes,
     loadActiveProfile,
     saveProfile,
     profileRecord,
