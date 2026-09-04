@@ -61,15 +61,18 @@ function testRuntimeBlocks() {
   assert.strictEqual(typeof require(path.join(root, "src", "INASearch-Insertions")).ReferenceInsertionSession, "function");
   assert.strictEqual(typeof require(path.join(root, "src", "INASearch-Workspace")).blankWorkspaceSpec, "function");
   assert.strictEqual(typeof require(path.join(root, "src", "INASearch-Occurrence")).createSearchSession, "function");
+  assert(template.includes('id="inaSearchSearchWorkerRuntime" type="text/plain"'), "The search worker is not embedded as inert standalone source.");
+  assert(buildSource.includes('replaceInertRuntimeBlock(template, "SEARCH_WORKER", "inaSearchSearchWorkerRuntime"'), "The standalone builder does not embed the search worker.");
+  assert(template.includes("worker-src blob:"), "The standalone CSP does not allow its embedded Blob worker.");
 }
 
 function testProfileContracts() {
   const profile = assignedObject("INASearch-Profile.js", "INA_SEARCH_PROFILE");
-  assert.strictEqual(profile.schemaVersion, 4, "The annotation overhaul did not publish profile schema version 4.");
+  assert.strictEqual(profile.schemaVersion, 5, "The simplified annotation system did not publish profile schema version 5.");
   assert.deepStrictEqual(profile.highlights, []);
   assert.deepStrictEqual(profile.annotationOrdinals, {});
-  assert.strictEqual(profile.preferences.lastNoteColor, "yellow");
-  assert.strictEqual(profile.preferences.notesUseRuleFont, false);
+  assert.strictEqual(profile.preferences.noteDisplayPosition, "top");
+  assert.strictEqual(profile.preferences.notesUseHandwrittenFont, false);
   assert.deepStrictEqual(plain({
     emptySearchView: profile.preferences.emptySearchView,
     splitAuthoritySearchPanes: profile.preferences.splitAuthoritySearchPanes,
@@ -103,7 +106,8 @@ function testProfileContracts() {
   for (const id of [
     "emptySearchViewSelect", "splitAuthoritySearchPanesToggle", "closeBlankCompanionOnSectionOpenToggle", "legalNavigatorVisibilitySelect",
     "scrollUpdatesSearchToggle", "syncCfrCommonDepthFromStatuteToggle", "expandSearchResultsByDefaultToggle", "showCfrChapterSubchapterInSearchHierarchyToggle", "persistInlineReferenceInsertionsToggle",
-    "referenceInsertionsUnavailableCount", "removeUnavailableReferenceInsertionsButton", "statuteNavigationDepthSelect", "cfrNavigationDepthSelect", "citationJumpOffsetInput", "navigationTrackingOffsetInput"
+    "referenceInsertionsUnavailableCount", "removeUnavailableReferenceInsertionsButton", "statuteNavigationDepthSelect", "cfrNavigationDepthSelect", "citationJumpOffsetInput", "navigationTrackingOffsetInput",
+    "noteDisplayPositionSelect", "notesUseHandwrittenFontToggle"
   ]) assert(template.includes(`id="${id}"`), `Missing overhaul setting control ${id}.`);
   assert(template.includes('const companionSettingEnabled = profile.preferences.emptySearchView === "both"')
     && template.includes("els.closeBlankCompanionOnSectionOpenToggle.disabled = !companionSettingEnabled"), "The companion-close setting is not conditionally disabled.");
@@ -266,7 +270,7 @@ function testChildHardScopes() {
   assert(normalizeSource.includes("scope: entry?.scope || descriptor.scope || null"), "Child hard-fence state is lost during pane normalization.");
 }
 
-function testSectionMaterializationHooks() {
+async function testSectionMaterializationHooks() {
   const calls = [];
   const sectionIds = ["cfr:8:204.1", "cfr:8:204.2"];
   const containers = sectionIds.map(sectionId => ({ dataset: { occurrenceSectionRows: encodeURIComponent(sectionId) }, innerHTML: "" }));
@@ -300,8 +304,10 @@ function testSectionMaterializationHooks() {
     }
   };
   const pane = { detail: {}, searchState: { result, offset: 0, activeSectionId: sectionIds[0], sectionOffsets: new Map(), rowsBySection: new Map(), visibleRows: [], virtualizedRows: true } };
-  helpers.renderOccurrenceRows(pane, 0, sectionIds[0], { windowed: true, limit: 80 });
-  helpers.renderOccurrenceRows(pane, 0, sectionIds[1], { windowed: true, limit: 80, activate: false });
+  await Promise.all([
+    helpers.renderOccurrenceRows(pane, 0, sectionIds[0], { windowed: true, limit: 80 }),
+    helpers.renderOccurrenceRows(pane, 0, sectionIds[1], { windowed: true, limit: 80, activate: false })
+  ]);
   assert.deepStrictEqual(plain(calls[0]), { sectionId: sectionIds[0], start: 0, limit: 80, contextCharacters: 60 }, "A large section did not use a bounded viewport window.");
   assert.strictEqual(pane.searchState.visibleRows.length, 160, "Nearby section windows cannot remain populated together.");
   assert.strictEqual(count(containers[0].innerHTML, /data-occurrence-row=/g), 80, "The first nearby section was evicted when another section populated.");
@@ -322,7 +328,7 @@ function testSectionMaterializationHooks() {
     const total = options.sectionId === sectionIds[0] ? 20 : 33;
     return { total, returned: total, rows: Array.from({ length: total }, (_, index) => ({ citation: `Hit ${index}` })) };
   };
-  helpers.renderAllOccurrenceSections(pane);
+  await helpers.renderAllOccurrenceSections(pane);
   assert.strictEqual(pane.searchState.visibleRows.length, 53, "A 53-hit search was not rendered completely.");
   assert.strictEqual(count(containers.map(container => container.innerHTML).join(""), /data-occurrence-row=/g), 53, "Small-result rows were omitted from the DOM.");
 
@@ -381,7 +387,7 @@ function testSectionMaterializationHooks() {
   assert(template.includes('id="searchScopeClear" type="button" tabindex="-1"')
     && template.includes('event.key === "Tab" && !event.shiftKey')
     && template.includes('els.search.focus();'), "Forward Tab from the scope editor is not guaranteed to enter the main search field.");
-  const copySource = between("    async function copyOccurrenceRowData(", "\n\n    function renderOccurrenceRows(");
+  const copySource = between("    async function copyOccurrenceRowData(", "\n\n    async function renderOccurrenceRows(");
   assert(copySource.includes("occurrenceRowUnitText(row)") && copySource.includes("row.citation"), "Result copy actions do not distinguish full citation from complete unit text.");
   const resultSource = between("    function renderOccurrenceSearchResult(", "\n\n    async function renderFocusedOccurrencePane(");
   assert(resultSource.includes('class="occurrence-search-summary"') && resultSource.includes('hitCount === 1 ? "hit" : "hits"') && resultSource.includes('sectionCount === 1 ? "section" : "sections"'), "Search result totals are not integrated as ‘N hits in M sections’ with singular handling.");
@@ -576,18 +582,18 @@ function testInsertionExclusions() {
   assert(groupSource.includes("api.compareSourceOrder"), "Multiple insertions have no source-order contract.");
 }
 
-function main() {
+async function main() {
   testRuntimeBlocks();
   testProfileContracts();
   testQuoteSafeLegacyScopeExtraction();
   testOccurrenceRouting();
   testCommonControls();
   testChildHardScopes();
-  testSectionMaterializationHooks();
+  await testSectionMaterializationHooks();
   testAuthorityStreamAndLegacySearchRetirement();
   testPaneModesAndHistory();
   testInsertionExclusions();
   console.log("Viewer overhaul tests passed.");
 }
 
-main();
+main().catch(error => { console.error(error); process.exitCode = 1; });

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src https://www.ecfr.gov; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; worker-src blob:; style-src 'unsafe-inline'; img-src data:; connect-src https://www.ecfr.gov; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>INASearch</title>
   <!-- INA_SEARCH_BUILD_DATA_START -->
   <script id="inaSearchBuildData" type="application/json">{"variant":"template","instanceId":"template"}</script>
@@ -39,6 +39,9 @@
   <!-- INA_SEARCH_OCCURRENCE_RUNTIME_START -->
   <script id="inaSearchOccurrenceRuntime"></script>
   <!-- INA_SEARCH_OCCURRENCE_RUNTIME_END -->
+  <!-- INA_SEARCH_SEARCH_WORKER_RUNTIME_START -->
+  <script id="inaSearchSearchWorkerRuntime" type="text/plain"></script>
+  <!-- INA_SEARCH_SEARCH_WORKER_RUNTIME_END -->
   <!-- INA_SEARCH_EMBEDDED_REFERENCES_RUNTIME_START -->
   <script id="inaSearchEmbeddedReferencesRuntime"></script>
   <!-- INA_SEARCH_EMBEDDED_REFERENCES_RUNTIME_END -->
@@ -50,6 +53,13 @@
   <!-- INA_SEARCH_UPDATER_RUNTIME_END -->
   <script>
     window.INA_SEARCH_LOAD_ERRORS = { corpus: false, profile: false, build: false, corpusMessage: "", dataMessages: {} };
+    window.INA_SEARCH_PERFORMANCE = [];
+    const markINASearchPerformance = (name, detail = {}) => {
+      try { performance.mark(`inasearch:${name}`); } catch {}
+      window.INA_SEARCH_PERFORMANCE.push({ name, at: typeof performance !== "undefined" ? performance.now() : Date.now(), detail });
+    };
+    window.INA_SEARCH_MARK_PERFORMANCE = markINASearchPerformance;
+    markINASearchPerformance("boot-script-start");
     const readINASearchText = id => {
       const element = document.getElementById(id);
       if (!element) throw new Error(`The embedded data element “${id}” is missing.`);
@@ -130,6 +140,7 @@
           const uncompressed = new TextEncoder().encode(text);
           if (uncompressed.byteLength !== manifest.uncompressedBytes) throw new Error("The uncompressed corpus has an unexpected byte count.");
           if (await sha256(uncompressed) !== manifest.uncompressedSha256) throw new Error("The uncompressed corpus failed its SHA-256 integrity check.");
+          window.INA_SEARCH_EMBEDDED_CORPUS_PAYLOAD = new Blob([uncompressed], { type: "application/json;charset=utf-8" });
           const parsed = JSON.parse(text);
           return globalThis.INASearchCorpusPacking?.hydratePackedCorpus(parsed) || parsed;
         }
@@ -146,6 +157,7 @@
         const uncompressed = new Uint8Array(await new Response(stream).arrayBuffer());
         if (uncompressed.byteLength !== manifest.uncompressedBytes) throw new Error("The decompressed corpus has an unexpected byte count.");
         if (await sha256(uncompressed) !== manifest.uncompressedSha256) throw new Error("The decompressed corpus failed its SHA-256 integrity check.");
+        window.INA_SEARCH_EMBEDDED_CORPUS_PAYLOAD = new Blob([uncompressed], { type: "application/json;charset=utf-8" });
         const parsed = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(uncompressed));
         return globalThis.INASearchCorpusPacking?.hydratePackedCorpus(parsed) || parsed;
       } catch (error) {
@@ -154,23 +166,32 @@
         return null;
       }
     };
+    const startupManifest = window.INA_SEARCH_CORPUS_MANIFEST;
+    window.INA_SEARCH_STARTUP_SNAPSHOT_READY = globalThis.INASearchStorage?.loadStartupSnapshot?.({
+      corpusSchemaVersion: startupManifest?.corpusSchemaVersion,
+      minimumVersion: startupManifest?.corpusVersion,
+      preferRecordSchemaVersion: 2
+    }).catch(error => ({ available: false, corpus: null, profile: null, metadata: {}, errors: { startup: error?.message || String(error) } })) || Promise.resolve({ available: false, corpus: null, profile: null, metadata: {}, errors: {} });
     window.INA_SEARCH_CORPUS_READY = (async () => {
-      const manifest = window.INA_SEARCH_CORPUS_MANIFEST;
+      const manifest = startupManifest;
       try {
-        const cached = await globalThis.INASearchStorage?.loadActiveCorpus({
-          corpusSchemaVersion: manifest?.corpusSchemaVersion,
-          minimumVersion: manifest?.corpusVersion
-        });
+        const snapshot = await window.INA_SEARCH_STARTUP_SNAPSHOT_READY;
+        window.INA_SEARCH_STARTUP_SNAPSHOT = snapshot;
+        markINASearchPerformance("storage-snapshot", { available: snapshot.available });
+        const cached = snapshot.corpus;
         if (cached?.corpus) {
           window.INA_SEARCH_CORPUS_LOAD_SOURCE = cached.slot === "previous" ? "indexeddb-previous" : "indexeddb";
           window.INA_SEARCH_ACTIVE_CORPUS_RECORD = cached.record;
+          markINASearchPerformance("corpus-ready", { source: window.INA_SEARCH_CORPUS_LOAD_SOURCE });
           return cached.corpus;
         }
       } catch (error) {
         window.INA_SEARCH_LOAD_ERRORS.dataMessages.indexedDbCorpus = error?.message || String(error);
       }
       window.INA_SEARCH_CORPUS_LOAD_SOURCE = "embedded";
-      return loadEmbeddedINASearchCorpus();
+      const embedded = await loadEmbeddedINASearchCorpus();
+      markINASearchPerformance("corpus-ready", { source: "embedded" });
+      return embedded;
     })();
     (() => {
       const supportedThemes = new Set(["system", "light", "dark"]);
@@ -942,6 +963,11 @@
     .authority-browse-title { width: 100%; margin: 0; color: var(--navy); font-family: var(--serif); font-size: clamp(21px, 3vw, 29px); line-height: 1.16; }
     .authority-browse-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; margin-top: 9px; }
     .authority-browse-meta { margin: 0; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+    .boot-title-list { display: grid; }
+    .boot-title-row { display: grid; gap: 8px; min-height: 76px; padding: 15px 18px; border-bottom: 1px solid var(--line); background: var(--panel); }
+    .boot-title-row::before, .boot-title-row::after { display: block; border-radius: 999px; content: ""; background: color-mix(in srgb, var(--blue) 12%, var(--canvas)); }
+    .boot-title-row::before { width: min(240px, 54%); height: 13px; }
+    .boot-title-row::after { width: min(390px, 82%); height: 10px; }
     .authority-browse-footer .results-scroll-cue { margin-left: 0; }
     .section-family-alternatives { display: flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px; margin: 0 0 14px; border: 1px solid color-mix(in srgb, var(--blue) 25%, var(--line)); border-radius: 8px; padding: 7px 10px; color: var(--muted); background: color-mix(in srgb, var(--blue) 5%, var(--panel)); font-size: 13px; line-height: 1.5; }
     .section-family-alternatives-label { flex: 0 0 auto; color: var(--ink); font-weight: 800; }
@@ -1079,7 +1105,7 @@
     .statutory-node.search-target { background: var(--amber-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 35%, transparent); }
     .statute-search-match { border-radius: 3px; padding: 1px 2px; color: var(--search-hit-ink); background: var(--search-hit); box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 30%, transparent); }
     .statutory-line { display: block; line-height: 1.55; }
-    .statutory-node > .statutory-line { position: relative; padding: 5px 26px 7px 7px; }
+    .statutory-node > .statutory-line { position: relative; padding: 5px 7px 7px; }
     [data-legal-citation-select] { cursor: pointer; }
     .statutory-node .node-number,
     .statutory-runin-line .inline-address { display: inline-block; margin-right: 7px; color: var(--navy); font-family: var(--mono); font-weight: 950; }
@@ -1357,68 +1383,26 @@
 
     .note-editor-help, .note-association-error { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
     .note-association-error { color: var(--danger); font-weight: 750; }
-    .legal-unit-controls { display: inline-flex; align-items: baseline; gap: 3px; }
-    .legal-unit-note-button { display: inline-grid; place-items: center; width: 20px; height: 20px; border: 0; border-radius: 5px; padding: 0; color: var(--muted); background: transparent; cursor: pointer; vertical-align: middle; }
-    .legal-unit-note-button:hover, .legal-unit-note-button:focus-visible, .legal-unit-note-button.has-notes { color: var(--blue); background: var(--blue-soft); }
-    .legal-unit-note-button svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
-    .legal-unit-note-button.has-notes svg { fill: color-mix(in srgb, var(--blue) 16%, transparent); }
-    .detail-heading-row > div:first-child, .cfr-block { position: relative; }
-    .legal-unit-note-button[data-note-unit-kind] {
-      position: absolute;
-      top: 4px;
-      right: 4px;
-      z-index: 3;
-      visibility: hidden;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-2px);
-      transition: opacity .12s ease, transform .12s ease, visibility .12s ease;
-    }
-    .legal-unit-note-button[data-note-unit-kind].note-unit-current,
-    .legal-unit-note-button[data-note-unit-kind].note-unit-hovered {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-    .detail-heading-row > div:first-child, .cfr-block { padding-inline-end: 26px; }
-    .statutory-runin-line[data-statute-inline-path] .legal-unit-note-button[data-note-unit-kind] { right: -22px; }
-    .sticky-note-card { --note-bg:#ffe66d; --note-ink:#312800; position: relative; z-index: 4; box-sizing: border-box; min-width: 220px; max-width: min(640px,100%); margin: 10px 0; border: 1px solid color-mix(in srgb,var(--note-ink) 28%,transparent); border-radius: 3px 3px 10px 3px; padding: 10px 11px 11px; color: var(--note-ink); background: var(--note-bg); box-shadow: 0 7px 16px rgba(16,42,67,.18); font: 18px/1.34 "Segoe Print","Bradley Hand","Comic Sans MS",cursive; transition: width .18s ease, margin .18s ease, transform .18s ease, box-shadow .18s ease; }
-    .sticky-note-card[data-note-color="pink"], .user-highlight[data-highlight-color="pink"] { --note-bg:#ff63b5; --note-ink:#351026; }
-    .sticky-note-card[data-note-color="orange"], .user-highlight[data-highlight-color="orange"] { --note-bg:#ff9f43; --note-ink:#351b00; }
-    .sticky-note-card[data-note-color="lime"], .user-highlight[data-highlight-color="lime"] { --note-bg:#a9ef4f; --note-ink:#183000; }
-    .sticky-note-card[data-note-color="cyan"], .user-highlight[data-highlight-color="cyan"] { --note-bg:#55dff3; --note-ink:#00313a; }
-    .sticky-note-card[data-note-color="violet"], .user-highlight[data-highlight-color="violet"] { --note-bg:#bd83ff; --note-ink:#24113d; }
-    .sticky-note-card[data-note-color="yellow"], .user-highlight[data-highlight-color="yellow"] { --note-bg:#ffe66d; --note-ink:#312800; }
-    body.notes-use-rule-font .sticky-note-card { font-family: var(--serif); font-size: 15px; }
-    .sticky-note-card[data-note-dock="left"] { float: left; clear: left; margin: 4px 16px 10px 0; resize: horizontal; overflow: auto; }
-    .sticky-note-card[data-note-dock="right"] { float: right; clear: right; margin: 4px 0 10px 16px; resize: horizontal; overflow: auto; }
-    .sticky-note-card[data-note-dock="full"] { clear: both; width: 100% !important; }
-    .sticky-note-exclusion { display: block; width: var(--exclusion-width,320px); height: var(--exclusion-height,80px); pointer-events: none; }
-    .sticky-note-exclusion[data-note-dock="left"] { float: left; clear: left; margin-right: 16px; }
-    .sticky-note-exclusion[data-note-dock="right"] { float: right; clear: right; margin-left: 16px; }
-    .sticky-note-card:focus-within, .sticky-note-card.is-focused { box-shadow: 0 9px 24px rgba(16,42,67,.28), 0 0 0 3px color-mix(in srgb,var(--blue) 42%,transparent); }
-    .sticky-note-card.is-dragging { opacity: .74; transform: rotate(-1deg) scale(1.01); }
-    .sticky-note-drag { position: absolute; top: 4px; left: 5px; width: 26px; height: 24px; border: 0; padding: 0; color: color-mix(in srgb,var(--note-ink) 65%,transparent); background: transparent; cursor: grab; font: 900 14px/1 var(--sans); opacity: 0; }
-    .sticky-note-card:hover .sticky-note-drag, .sticky-note-card:focus-within .sticky-note-drag { opacity: 1; }
-    .sticky-note-drag:active { cursor: grabbing; }
-    .sticky-note-view { min-height: 48px; padding: 17px 2px 2px; white-space: pre-wrap; overflow-wrap: anywhere; cursor: text; }
-    .sticky-note-view:empty::before { content: "Click to write a note…"; opacity: .55; }
-    .sticky-note-editor { display: block; box-sizing: border-box; width: 100%; min-height: 92px; margin-top: 17px; border: 1px solid color-mix(in srgb,var(--note-ink) 25%,transparent); border-radius: 5px; padding: 7px; color: inherit; background: color-mix(in srgb,var(--note-bg) 82%,white 18%); resize: vertical; font: inherit; }
-    .sticky-note-reference { border-bottom: 1px dotted currentColor; border-radius: 2px; cursor: help; font-weight: 750; }
-    .sticky-note-reference:hover, .sticky-note-reference:focus-visible { background: color-mix(in srgb,white 38%,transparent); outline: 2px solid color-mix(in srgb,var(--note-ink) 36%,transparent); }
-    .sticky-note-controls { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 5px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .16s ease, opacity .16s ease, margin .16s ease; }
-    .sticky-note-card:hover .sticky-note-controls, .sticky-note-card:focus-within .sticky-note-controls { max-height: 190px; margin-top: 8px; overflow: visible; opacity: 1; }
-    .sticky-note-swatches, .sticky-note-layout-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
-    .sticky-note-swatch { width: 20px; height: 20px; border: 1px solid color-mix(in srgb,#000 28%,transparent); border-radius: 50%; padding: 0; background: var(--swatch); cursor: pointer; }
-    .sticky-note-swatch[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--note-ink); }
-    .sticky-note-action { min-width: 25px; min-height: 24px; border: 1px solid color-mix(in srgb,var(--note-ink) 22%,transparent); border-radius: 5px; padding: 3px 6px; color: inherit; background: color-mix(in srgb,white 24%,transparent); cursor: pointer; font: 800 10px/1 var(--sans); }
-    .sticky-note-associations { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 5px; }
-    .sticky-note-associations input { min-width: 0; border: 1px solid color-mix(in srgb,var(--note-ink) 25%,transparent); border-radius: 5px; padding: 5px 7px; color: inherit; background: color-mix(in srgb,white 28%,transparent); font: 700 10px/1.3 var(--sans); }
-    [data-note-drop-target] { transition: background .14s ease, box-shadow .14s ease; }
-    [data-note-drop-target].note-drop-preview { background: color-mix(in srgb,var(--blue-soft) 72%,transparent); box-shadow: inset 0 0 0 2px var(--blue); }
-    .note-drop-indicator { position: fixed; z-index: 150; border-radius: 6px; padding: 5px 8px; color: #fff; background: var(--navy); box-shadow: var(--shadow); pointer-events: none; font: 800 11px/1.2 var(--sans); }
-    .user-highlight { --note-bg:#ffe66d; border-radius: 2px; padding: 0 1px; color: inherit; background: color-mix(in srgb,var(--note-bg) 58%,transparent); box-decoration-break: clone; -webkit-box-decoration-break: clone; cursor: pointer; }
+    .citation-notes { display: grid; gap: 8px; margin: 10px 0; }
+    .citation-note { position: relative; z-index: 4; box-sizing: border-box; width: 100%; border: 1px solid var(--line); border-left: 3px solid var(--blue); border-radius: 7px; padding: 9px 10px; color: var(--ink); background: var(--panel); font: 15px/1.5 var(--serif); }
+    body.notes-use-handwritten-font .citation-note { font-family: "Segoe Print","Bradley Hand","Comic Sans MS",var(--serif); font-size: 17px; }
+    .citation-note:focus-within, .citation-note.is-focused { box-shadow: 0 0 0 3px color-mix(in srgb,var(--blue) 24%,transparent); }
+    .citation-note-view { min-height: 24px; white-space: pre-wrap; overflow-wrap: anywhere; cursor: text; }
+    .citation-note-view:empty::before { content: "Click to write a note…"; color: var(--muted); }
+    .citation-note-editor { display: block; box-sizing: border-box; width: 100%; min-height: 92px; border: 1px solid var(--line); border-radius: 5px; padding: 7px; color: inherit; background: var(--canvas); resize: none; font: inherit; }
+    .citation-note-reference { border-bottom: 1px dotted currentColor; border-radius: 2px; cursor: help; font-weight: 750; }
+    .citation-note-reference:hover, .citation-note-reference:focus-visible { background: var(--blue-soft); outline: 2px solid color-mix(in srgb,var(--blue) 36%,transparent); }
+    .citation-note-controls { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 5px; margin-top: 8px; }
+    .citation-note-action { min-width: 25px; min-height: 26px; border: 1px solid var(--line); border-radius: 5px; padding: 4px 7px; color: var(--blue); background: var(--canvas); cursor: pointer; font: 800 10px/1 var(--sans); }
+    .citation-note-associations { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 5px; }
+    .citation-note-associations input { min-width: 0; border: 1px solid var(--line); border-radius: 5px; padding: 5px 7px; color: var(--ink); background: var(--canvas); font: 700 10px/1.3 var(--sans); }
+    .user-highlight { --highlight-bg:#ffe66d; border-radius: 2px; padding: 0 1px; color: inherit; background: color-mix(in srgb,var(--highlight-bg) 58%,transparent); box-decoration-break: clone; -webkit-box-decoration-break: clone; cursor: pointer; }
+    .user-highlight[data-highlight-color="pink"] { --highlight-bg:#ff63b5; }
+    .user-highlight[data-highlight-color="orange"] { --highlight-bg:#ff9f43; }
+    .user-highlight[data-highlight-color="lime"] { --highlight-bg:#a9ef4f; }
+    .user-highlight[data-highlight-color="cyan"] { --highlight-bg:#55dff3; }
+    .user-highlight[data-highlight-color="violet"] { --highlight-bg:#bd83ff; }
+    .user-highlight[data-highlight-color="yellow"] { --highlight-bg:#ffe66d; }
     .user-highlight.is-focused { outline: 2px solid color-mix(in srgb,var(--blue) 72%,transparent); outline-offset: 1px; }
     .user-highlight[data-highlight-status="needs-review"] { background: transparent; outline: 1px dashed var(--warning); }
     .user-highlight-needs-review { display: block; clear: both; margin: 7px 0; border: 1px dashed var(--warning); border-radius: 6px; padding: 6px 8px; color: var(--ink); background: var(--warning-soft); cursor: pointer; font: 700 11px/1.35 var(--sans); text-align: left; }
@@ -1428,8 +1412,6 @@
     .artifact-note-text { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; white-space: pre-wrap; }
     .occurrence-row[data-artifact-kind] { border-left: 4px solid var(--artifact-color,var(--blue)); }
     .occurrence-row[data-artifact-kind="highlight"] .occurrence-row-text mark { color: inherit; background: color-mix(in srgb,var(--artifact-color) 58%,transparent); }
-    @media (max-width:720px) { .sticky-note-card[data-note-dock] { float: none; width: 100% !important; max-width: 100%; margin: 10px 0; resize: none; } }
-    @media (prefers-reduced-motion:reduce) { .sticky-note-card, .sticky-note-controls, [data-note-drop-target] { transition: none !important; } }
     .inspection-guide { margin: 12px 0; }
     .inspection-guide summary { cursor: pointer; color: var(--navy); font-weight: 900; }
     .inspection-guide pre { overflow: auto; margin: 12px 0; border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: var(--canvas); color: var(--ink); font-size: 12px; line-height: 1.5; }
@@ -1751,7 +1733,7 @@
     }
     .statute-nav-segment.unit-name-hidden summary small { display: none; }
     @media print {
-      .topbar, .statute-navigator, .profile-setup-alert, .results-panel, .detail-actions, .detail-heading-actions, .profile-bar, .button, .legal-unit-menu, .scoped-definition-popover, .legal-reference-popover, .legal-unit-note-button, .inline-notes-panel, .tutorial-coach, .inserted-reference-card-actions, .inserted-reference-connector { display: none !important; }
+      .topbar, .statute-navigator, .profile-setup-alert, .results-panel, .detail-actions, .detail-heading-actions, .profile-bar, .button, .legal-unit-menu, .scoped-definition-popover, .legal-reference-popover, .inline-notes-panel, .tutorial-coach, .inserted-reference-card-actions, .inserted-reference-connector { display: none !important; }
       .app-shell { padding: 0; }
       .workspace { display: block; }
       .detail-panel, .panel { border: 0; box-shadow: none; }
@@ -1869,11 +1851,11 @@
   <main class="app-shell">
     <section class="view" id="view-search" aria-label="Search results">
       <div class="sr-only" id="citationFeedback" role="status" aria-live="polite">Type a citation or search phrase.</div>
-      <div class="workspace" id="searchWorkspace">
+      <div class="workspace authority-browse boot-workspace" id="searchWorkspace">
         <section class="panel results-panel" id="resultsPanel" aria-labelledby="resultsHeading">
           <div class="panel-head"><h2 id="resultsHeading">Results</h2><div class="panel-head-tools"><span class="results-scroll-cue">Scrollable pane</span><small id="resultCount">Ready</small></div></div>
-          <div class="authority-browse-header" id="authorityBrowseHeader" hidden></div>
-          <div class="result-list" id="resultList" role="listbox" aria-label="Search results"></div>
+          <div class="authority-browse-header" id="authorityBrowseHeader"><h2 class="authority-browse-title" id="authorityBrowseTitle">Immigration and Nationality Act</h2><div class="authority-browse-footer"><p class="authority-browse-meta">Loading INA titles…</p></div></div>
+          <div class="result-list" id="resultList" role="listbox" aria-label="INA titles loading" aria-busy="true"><div class="boot-title-list" aria-hidden="true"><div class="boot-title-row"></div><div class="boot-title-row"></div><div class="boot-title-row"></div><div class="boot-title-row"></div></div></div>
         </section>
         <article class="panel detail-panel" id="detailPanel" aria-live="polite">
           <div class="empty-state">
@@ -1948,6 +1930,7 @@
       <div class="legal-unit-menu-citation-row"><strong class="legal-unit-menu-citation" id="legalUnitMenuTextPreview"></strong><button class="legal-unit-citation-copy" type="button" role="menuitem" id="copyLegalUnitTextButton" data-legal-unit-action="copy-text" aria-label="Copy complete legal text" title="Copy complete legal text"><span aria-hidden="true">⧉</span></button></div>
     </div>
     <button class="legal-unit-menu-action-with-icon" type="button" role="menuitem" id="copyLegalUnitShareLinkButton" data-legal-unit-action="copy-share-link" aria-label="Copy link"><span id="copyLegalUnitShareLinkLabel">Copy Link to Statute</span><span class="legal-unit-menu-action-symbols"><span class="legal-unit-menu-local-warning" id="legalUnitMenuLocalWarning" role="img" aria-label="Local-file link warning" hidden>⚠</span><span class="legal-unit-menu-action-copy" aria-hidden="true">⧉</span></span></button>
+    <button type="button" role="menuitem" id="addLegalUnitNoteButton" data-legal-unit-action="add-note">Add note</button>
     <button type="button" role="menuitem" id="printLegalUnitButton" data-legal-unit-action="print">Print Statute</button>
     <button type="button" role="menuitem" id="openLegalUnitButton" data-legal-unit-action="open">Open in House.gov</button>
   </div>
@@ -2001,9 +1984,16 @@
             <span><strong>Hide the theme button in the top bar</strong><small>The theme controls in Settings remain available.</small></span>
             <input id="hideTopThemeControlsToggle" type="checkbox" role="switch">
           </label>
-          <label class="settings-toggle" for="notesUseRuleFontToggle">
-            <span><strong>Use the rule-text font for sticky notes</strong><small>Off by default. When off, notes use a handwritten-style system font.</small></span>
-            <input id="notesUseRuleFontToggle" type="checkbox" role="switch">
+          <div class="settings-toggle">
+            <span><label for="noteDisplayPositionSelect"><strong>Display notes</strong></label><small>Place every note immediately above or below each citation it is attached to.</small></span>
+            <select class="settings-theme-select" id="noteDisplayPositionSelect" aria-label="Note position">
+              <option value="top">Above citations</option>
+              <option value="bottom">Below citations</option>
+            </select>
+          </div>
+          <label class="settings-toggle" for="notesUseHandwrittenFontToggle">
+            <span><strong>Use a handwritten note font</strong><small>Off by default. When on, an installed handwriting font is used when available; otherwise notes use the rule-text font.</small></span>
+            <input id="notesUseHandwrittenFontToggle" type="checkbox" role="switch">
           </label>
         </section>
         <section class="settings-section" aria-labelledby="legalReaderSettingsHeading">
@@ -2201,6 +2191,7 @@
   </section>
 
   <script>
+  window.INA_SEARCH_MARK_PERFORMANCE?.("boot-shell");
   (async () => {
     "use strict";
 
@@ -2218,18 +2209,15 @@
     const loadErrors = window.INA_SEARCH_LOAD_ERRORS || {};
     const loadedCorpus = await window.INA_SEARCH_CORPUS_READY;
     const corpus = isValidCorpus(loadedCorpus) ? loadedCorpus : null;
-    let cachedProfileLoad = null;
-    let browserStorageAvailableAtStartup = false;
-    try {
-      const profileDatabase = await globalThis.INASearchStorage?.openDatabase?.();
-      browserStorageAvailableAtStartup = Boolean(profileDatabase);
-      profileDatabase?.close?.();
-      cachedProfileLoad = await globalThis.INASearchStorage?.loadActiveProfile?.() || null;
-    } catch (error) {
+    const startupSnapshot = window.INA_SEARCH_STARTUP_SNAPSHOT || await window.INA_SEARCH_STARTUP_SNAPSHOT_READY;
+    const cachedProfileLoad = startupSnapshot?.profile || null;
+    const browserStorageAvailableAtStartup = Boolean(startupSnapshot?.available);
+    if (startupSnapshot?.errors && Object.keys(startupSnapshot.errors).length) {
       loadErrors.dataMessages ||= {};
-      loadErrors.dataMessages.indexedDbProfile = error?.message || String(error);
+      Object.assign(loadErrors.dataMessages, startupSnapshot.errors);
     }
 
+    const hydratedLegalReferenceRoots = new WeakSet();
     function expandPackedHouseHref(value) {
       const input = String(value || "");
       if (input.startsWith("u")) return `/us/usc/t${input.slice(1)}`;
@@ -2240,8 +2228,10 @@
     }
 
     function hydrateLegalReferences(value) {
-      const houseHrefs = value?.legalReferencePacking?.houseHrefs || [];
-      const legalTargets = value?.legalReferencePacking?.legalTargets || [];
+      if (!value || typeof value !== "object" || hydratedLegalReferenceRoots.has(value)) return value;
+      const packingRoot = typeof corpus !== "undefined" && corpus ? corpus : value;
+      const houseHrefs = packingRoot?.legalReferencePacking?.houseHrefs || [];
+      const legalTargets = packingRoot?.legalReferencePacking?.legalTargets || [];
       const properties = { t: "references", h: "headingReferences", p: "preambleReferences", s: "sourceCreditReferences", x: "xReferences", a: "authorityReferences", o: "sourceReferences" };
       const fields = { t: "text", h: "heading", p: "preamble", s: "sourceCredit", x: "x", a: "authority", o: "source" };
       const keys = { i: "id", s: "start", e: "end", x: "text", f: "family", r: "resolution", k: "targetKind", t: "targetTitle", n: "targetSection", a: "targetPath", c: "targetCongress", l: "targetLaw", v: "targetVolume", g: "targetPage", h: "houseHref", u: "officialUrl", p: "provenance", q: "ruleId", z: "sourceKind", d: "inaSection", y: "policyScopeId", b: "evidenceId" };
@@ -2312,9 +2302,9 @@
         Object.values(item).forEach(visit);
       };
       visit(value);
+      hydratedLegalReferenceRoots.add(value);
       return value;
     }
-    if (corpus) hydrateLegalReferences(corpus);
     if (loadedCorpus && !corpus) {
       loadErrors.corpus = true;
       loadErrors.corpusMessage = "The loaded data does not match the INASearch corpus schema.";
@@ -2446,10 +2436,10 @@
       },
       {
         id: "annotations", title: "Notes, highlights, and annotation search", tips: [
-          [64, "Create notes and highlights while reading.", "Select text for a highlight or linked note, or add a citation-level sticky note without leaving the reader."],
-          [65, "Sticky notes edit in place.", "Click a card to edit it; its text and color stay synchronized everywhere that note appears."],
+          [64, "Create notes and highlights while reading.", "Select text for a highlight or note, or add a citation note from the citation-actions menu."],
+          [65, "Citation notes edit in place.", "Click a note to edit it; its text stays synchronized everywhere that note appears."],
           [66, "Search annotation text directly.", "in:notes president searches complete note bodies, while in:highlights president searches the exact highlighted text."],
-          [67, "One note can appear at several citations.", "Text and color stay synchronized, while each citation keeps its own card placement and width."],
+          [67, "One note can appear at several citations.", "Its text stays synchronized wherever it is attached; Settings places all notes above or below their legal units."],
           [80, "List every note or highlight association.", "is:notes, is:highlights, or is:notes,highlights shows one row for each associated citation."],
           [81, "Filter legal searches by your annotations.", "president has:notes returns ordinary legal-text hits covered by a note; has:notes,highlights accepts either kind."]
         ]
@@ -2562,6 +2552,10 @@
       focusedWorkspaceSymmetricQuery: "",
       occurrenceProjection: null,
       occurrenceProjectionPromise: null,
+      searchWorkerClient: null,
+      searchWorkerFailure: "",
+      searchWorkerReady: false,
+      firstSearchCompleted: false,
       occurrenceSearchSession: null,
       occurrenceSearchGeneration: 0,
       occurrenceMainResult: null,
@@ -2574,7 +2568,7 @@
       promotingPane: false,
       pendingPromotedHistoryRestore: null,
       lastSearchQuery: "",
-      indexReady: false,
+      indexReady: true,
       profileValid: false,
       profileChanged: false,
       profileRevision: 0,
@@ -2598,16 +2592,12 @@
       annotationIndex: null,
       annotationIndexRevision: -1,
       annotationIndexCacheTimer: null,
-      annotationDrag: null,
-      annotationSelection: null,
       pendingAnnotationFocus: null,
       focusedAnnotation: null,
       annotationAutosaveTimers: new Map(),
       inlineNoteEditor: null,
       inlineNotePageKey: "",
-      openNotePanels: new Set(),
       referenceInsertionSession: null,
-      contextualNoteHoverButton: null,
       definitionQuery: "",
       definitionSourceFilters: ["all"],
       definitionScopeFilters: ["all"],
@@ -2717,8 +2707,7 @@
         citationSystem: value.citationSystem === "ina" ? "ina" : value.family,
         start,
         ...(end ? { end } : {}),
-        label: String(value.label || "").trim(),
-        placement: globalThis.INA_SEARCH_ANNOTATIONS?.placement?.(value.placement) || { dock: "full", boundary: "before", preferredWidthPx: 320, order: 0, primaryHighlightId: null }
+        label: String(value.label || "").trim()
       };
     }
 
@@ -2804,7 +2793,7 @@
     }
 
     const defaultProfile = () => ({
-      schemaVersion: 4,
+      schemaVersion: 5,
       profileId: makeId("profile"),
       createdAt: new Date().toISOString(),
       updatedAt: null,
@@ -2814,12 +2803,12 @@
       annotationOrdinals: {},
       tutorialProgress: { schemaVersion: 1, modules: {} },
       tipProgress: { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null },
-      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "ina", highlightInaCitationLinks: false, lastNoteColor: "yellow", notesUseRuleFont: false, statutoryNavigationSystem: "usc", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, emptySearchView: "ina", splitAuthoritySearchPanes: false, closeBlankCompanionOnSectionOpen: true, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, citationJumpOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, navigationTrackingOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
+      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "ina", highlightInaCitationLinks: false, noteDisplayPosition: "top", notesUseHandwrittenFont: false, statutoryNavigationSystem: "usc", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, emptySearchView: "ina", splitAuthoritySearchPanes: false, closeBlankCompanionOnSectionOpen: true, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, citationJumpOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, navigationTrackingOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
       referenceInsertions: emptyReferenceInsertions()
     });
 
     function isValidProfile(value) {
-      return Boolean(value && [1, 2, 3, 4].includes(Number(value.schemaVersion)) && Array.isArray(value.notes) && value.preferences && typeof value.preferences === "object");
+      return Boolean(value && [1, 2, 3, 4, 5].includes(Number(value.schemaVersion)) && Array.isArray(value.notes) && value.preferences && typeof value.preferences === "object");
     }
 
     function normalizeProfile(value) {
@@ -2858,7 +2847,7 @@
         return note;
       });
       delete normalized.courseStructure;
-      normalized.schemaVersion = 4;
+      normalized.schemaVersion = 5;
       for (const key of RETIRED_PREFERENCE_KEYS) delete normalized.preferences[key];
       normalized.preferences.theme = normalizeThemePreference(normalized.preferences.theme);
       normalized.preferences.showDetailedStatus = showDetailedStatus;
@@ -2885,8 +2874,10 @@
       normalized.preferences.statuteNavigationDepth = Math.max(0, Math.min(STATUTE_NAVIGATION_DEPTHS.length - 1, Number.isInteger(Number(normalized.preferences.statuteNavigationDepth)) ? Number(normalized.preferences.statuteNavigationDepth) : STATUTE_NAVIGATION_DEPTHS.length - 1));
       normalized.preferences.cfrNavigationDepth = Math.max(0, Math.min(CFR_NAVIGATION_DEPTHS.length - 1, Number.isInteger(Number(normalized.preferences.cfrNavigationDepth)) ? Number(normalized.preferences.cfrNavigationDepth) : CFR_NAVIGATION_DEPTHS.length - 1));
       normalized.preferences.highlightDefinedTerms = normalized.preferences.highlightDefinedTerms === true;
-      normalized.preferences.lastNoteColor = globalThis.INA_SEARCH_ANNOTATIONS?.color?.(normalized.preferences.lastNoteColor) || "yellow";
-      normalized.preferences.notesUseRuleFont = normalized.preferences.notesUseRuleFont === true;
+      normalized.preferences.noteDisplayPosition = normalized.preferences.noteDisplayPosition === "bottom" ? "bottom" : "top";
+      normalized.preferences.notesUseHandwrittenFont = normalized.preferences.notesUseHandwrittenFont === true;
+      delete normalized.preferences.lastNoteColor;
+      delete normalized.preferences.notesUseRuleFont;
       normalized.preferences.automaticCfrUpdates = normalized.preferences.automaticCfrUpdates === true;
       normalized.preferences.backupReminder = normalized.preferences.backupReminder === "disabled" ? "disabled" : "weekly";
       normalized.preferences.defaultStartupQuery = Object.hasOwn(normalized.preferences, "defaultStartupQuery")
@@ -2897,7 +2888,10 @@
         : emptyReferenceInsertions();
       normalized.tutorialProgress = normalizeTutorialProgress(normalized.tutorialProgress);
       normalized.tipProgress = normalizeTipProgress(normalized.tipProgress);
-      return globalThis.INA_SEARCH_ANNOTATIONS?.normalizeProfile?.(normalized, { makeId }) || normalized;
+      return globalThis.INA_SEARCH_ANNOTATIONS?.normalizeProfile?.(normalized, {
+        makeId,
+        now: normalized.updatedAt || normalized.createdAt || new Date().toISOString()
+      }) || normalized;
     }
 
     function replaceReferenceInsertionSession(records) {
@@ -2927,7 +2921,7 @@
         ? normalizeProfile(window.INA_SEARCH_PROFILE)
         : defaultProfile();
     applyThemePreference(profile.preferences.theme);
-    document.body?.classList.toggle("notes-use-rule-font", profile.preferences.notesUseRuleFont === true);
+    document.body?.classList.toggle("notes-use-handwritten-font", profile.preferences.notesUseHandwrittenFont === true);
     replaceReferenceInsertionSession(profile.referenceInsertions?.records || []);
     state.profileValid = cachedVaultValid || isValidProfile(window.INA_SEARCH_PROFILE);
     state.browserProfileLoaded = cachedVaultValid;
@@ -2957,7 +2951,7 @@
       backupReminderLaterButton: $("#backupReminderLaterButton"), backupReminderDisableButton: $("#backupReminderDisableButton"),
       savingMenuModal: $("#savingMenuModal"), savingMenuStatus: $("#savingMenuStatus"),
       savingMenuEnableButton: $("#savingMenuEnableButton"), savingMenuImportButton: $("#savingMenuImportButton"), resetSettingsButton: $("#resetSettingsButton"), resetEverythingButton: $("#resetEverythingButton"),
-      showDetailedStatusToggle: $("#showDetailedStatusToggle"), hideTopThemeControlsToggle: $("#hideTopThemeControlsToggle"), inaCitationLinksToggle: $("#inaCitationLinksToggle"), highlightInaCitationLinksToggle: $("#highlightInaCitationLinksToggle"), definedTermHighlightingToggle: $("#definedTermHighlightingToggle"), notesUseRuleFontToggle: $("#notesUseRuleFontToggle"), automaticCfrUpdatesToggle: $("#automaticCfrUpdatesToggle"),
+      showDetailedStatusToggle: $("#showDetailedStatusToggle"), hideTopThemeControlsToggle: $("#hideTopThemeControlsToggle"), inaCitationLinksToggle: $("#inaCitationLinksToggle"), highlightInaCitationLinksToggle: $("#highlightInaCitationLinksToggle"), definedTermHighlightingToggle: $("#definedTermHighlightingToggle"), noteDisplayPositionSelect: $("#noteDisplayPositionSelect"), notesUseHandwrittenFontToggle: $("#notesUseHandwrittenFontToggle"), automaticCfrUpdatesToggle: $("#automaticCfrUpdatesToggle"),
       browserConflictActions: $("#browserConflictActions"), reloadBrowserProfileButton: $("#reloadBrowserProfileButton"), mergeBrowserProfileButton: $("#mergeBrowserProfileButton"),
       emptySearchViewSelect: $("#emptySearchViewSelect"), closeBlankCompanionSetting: $("#closeBlankCompanionSetting"), closeBlankCompanionOnSectionOpenToggle: $("#closeBlankCompanionOnSectionOpenToggle"), splitAuthoritySearchPanesToggle: $("#splitAuthoritySearchPanesToggle"), legalNavigatorVisibilitySelect: $("#legalNavigatorVisibilitySelect"), syncCfrCommonDepthFromStatuteToggle: $("#syncCfrCommonDepthFromStatuteToggle"), expandSearchResultsByDefaultToggle: $("#expandSearchResultsByDefaultToggle"), showCfrChapterSubchapterInSearchHierarchyToggle: $("#showCfrChapterSubchapterInSearchHierarchyToggle"),
       automaticStatutoryNavigationSystemToggle: $("#automaticStatutoryNavigationSystemToggle"), scrollUpdatesSearchToggle: $("#scrollUpdatesSearchToggle"), citationJumpOffsetInput: $("#citationJumpOffsetInput"), navigationTrackingOffsetInput: $("#navigationTrackingOffsetInput"), animatedCitationJumpsToggle: $("#animatedCitationJumpsToggle"), statuteSectionDisplaySelect: $("#statuteSectionDisplaySelect"), statuteNavigationDepthSelect: $("#statuteNavigationDepthSelect"), cfrNavigationDepthSelect: $("#cfrNavigationDepthSelect"),
@@ -3018,6 +3012,7 @@
     function syncAppearanceControls() {
       syncThemeControls();
       syncTopBarVisibility();
+      document.body.classList.toggle("notes-use-handwritten-font", profile.preferences.notesUseHandwrittenFont === true);
     }
 
     const sectionMap = new Map((corpus?.title8?.sections || []).map(s => [normCitationPart(s.section), s]));
@@ -3725,6 +3720,7 @@
     }
 
     function legalReferenceTargets(item, kind) {
+      hydrateLegalReferences(item);
       const targets = [];
       const seen = new Set();
       const pathTokens = value => [...String(value || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]);
@@ -4301,6 +4297,7 @@
 
     function buildIndex() {
       state.indexBuildRequested = true;
+      state.indexReady = false;
       if (!state.indexPromise) {
         state.indexPromise = rebuildSearchIndex().finally(() => { state.indexPromise = null; });
       }
@@ -4698,27 +4695,23 @@
           const sessions = [];
           pane.occurrenceSession = { cancel: () => sessions.forEach(session => session.cancel?.()) };
           const citationSourceMode = Boolean(pane.citesScope?.valid);
-          if (citationSourceMode) {
-            try { await buildIndex(); } catch {}
-          }
           const bareHas = !citationSourceMode && pane.entry.ast?.has?.length && !pane.entry.ast?.clauses?.length;
-          const projection = !citationSourceMode && !bareHas ? await ensureOccurrenceProjection() : null;
-          if (pane.occurrenceGeneration !== generation || state.mainOccurrencePane !== pane) return;
           const entries = await Promise.all(authorities.map(async authority => {
             let legal = emptyOccurrenceResult();
-            if (citationSourceMode) legal = citationSourceResult(authority, pane.citesScope, pane.entry.ast);
+            if (citationSourceMode) legal = await citationSourceResult(authority, pane.citesScope, pane.entry.ast);
             else if (bareHas) legal = bareHasOccurrenceResult(pane.entry.ast, authority);
             else {
-              const session = globalThis.INA_SEARCH_OCCURRENCE.createSearchSession(projection, { sliceMs: 8 });
+              const bucketFilter = annotationBucketFilter(pane.entry.ast);
+              const session = await createLegalOccurrenceSession({ sliceMs: 8 }, typeof bucketFilter === "function");
               sessions.push(session);
-              legal = await session.search(pane.entry.ast, { authorities: [authority], common: pane.entry.ast.common, scope: pane.scope || undefined, bucketFilter: annotationBucketFilter(pane.entry.ast), sliceMs: 8 });
+              legal = await session.search(pane.entry.ast, { authorities: [authority], common: pane.entry.ast.common, scope: pane.scope || undefined, bucketFilter, sliceMs: 8 });
             }
             const artifacts = annotationResult(pane.entry.ast, authority, {
               locationScope: pane.scope || null,
               citesScope: pane.citesScope || null,
               includeRecovery: authority !== "cfr"
             });
-            return { authority, result: mergeOccurrenceResults(legal, artifacts) };
+            return { authority, result: await mergeOccurrenceResults(legal, artifacts) };
           }));
           if (pane.occurrenceGeneration !== generation || state.mainOccurrencePane !== pane) return;
           const result = combineAuthorityOccurrenceResults(entries);
@@ -4730,14 +4723,15 @@
         let result = emptyOccurrenceResult();
         if (includeLegal && pane.entry.ast?.has?.length && !pane.entry.ast?.clauses?.length) result = bareHasOccurrenceResult(pane.entry.ast, pane.entry.authority);
         else if (includeLegal) {
-          const projection = await ensureOccurrenceProjection();
+          const bucketFilter = annotationBucketFilter(pane.entry.ast);
+          pane.occurrenceSession?.cancel?.();
+          pane.occurrenceSession = await createLegalOccurrenceSession({ sliceMs: 8 }, typeof bucketFilter === "function");
           if (pane.occurrenceGeneration !== generation || state.mainOccurrencePane !== pane) return;
-          if (!pane.occurrenceSession) pane.occurrenceSession = globalThis.INA_SEARCH_OCCURRENCE.createSearchSession(projection, { sliceMs: 8 });
-          result = await pane.occurrenceSession.search(pane.entry.ast, { authorities: [pane.entry.authority], common: pane.entry.ast.common, scope: pane.scope || undefined, bucketFilter: annotationBucketFilter(pane.entry.ast), sliceMs: 8 });
+          result = await pane.occurrenceSession.search(pane.entry.ast, { authorities: [pane.entry.authority], common: pane.entry.ast.common, scope: pane.scope || undefined, bucketFilter, sliceMs: 8 });
         }
         const artifactAuthority = pane.entry.annotationAuthority || pane.entry.authority;
         const artifacts = annotationResult(pane.entry.ast, artifactAuthority, { locationScope: pane.scope || null, citesScope: pane.citesScope || null, includeRecovery: artifactAuthority === "annotations" || pane.entry.authority !== "cfr" });
-        result = mergeOccurrenceResults(result, artifacts);
+        result = await mergeOccurrenceResults(result, artifacts);
         if (pane.occurrenceGeneration !== generation || state.mainOccurrencePane !== pane) return;
         state.occurrenceMainResult = result;
         renderOccurrenceSearchResult(pane, result);
@@ -4833,10 +4827,9 @@
         const pane = mainOccurrencePane(descriptor, null);
         pane.citesScope = state.searchScope;
         void (async () => {
-          if (legalAuthorities.length) { try { await buildIndex(); } catch {} }
-          const legal = legalAuthorities.length ? citationSourceResult(authority, state.searchScope, ast) : emptyOccurrenceResult();
+          const legal = legalAuthorities.length ? await citationSourceResult(authority, state.searchScope, ast) : emptyOccurrenceResult();
           const artifacts = annotationResult(ast, descriptor.annotationAuthority, { citesScope: state.searchScope, includeRecovery: false });
-          renderOccurrenceSearchResult(pane, mergeOccurrenceResults(legal, artifacts));
+          renderOccurrenceSearchResult(pane, await mergeOccurrenceResults(legal, artifacts));
         })();
       }
       renderMainCommonSearchControl(null);
@@ -5583,7 +5576,7 @@
       "statuteNavigationSectionId", "statuteNavigationPath", "statuteNavigationValues", "statuteNavigationFrame",
       "statuteNavigationKind", "statuteNavigationLocation", "statuteNavigationHistory", "statuteNavigationHistoryIndex",
       "suppressNavigationHistory", "hierarchyPageNodeId", "hierarchyExpanded", "pendingHierarchyExpanded", "statuteHierarchyAuthority", "lastScrollSyncedCitation",
-      "explicitOccurrenceTarget", "inlineNotePageKey", "openNotePanels", "inlineNoteEditor", "contextualNoteHoverButton"
+      "explicitOccurrenceTarget", "inlineNotePageKey", "inlineNoteEditor"
     ];
     let focusedCitationPaneSequence = 0;
     const FOCUSED_PANE_TYPING_COMMIT_DELAY = 750;
@@ -5842,7 +5835,7 @@
         suppressNavigationHistory: false, hierarchyPageNodeId: null,
         hierarchyExpanded: new Set(), pendingHierarchyExpanded: null,
         statuteHierarchyAuthority: result?.type === "ina" ? "ina" : result?.type === "usc" ? "usc" : state.statuteHierarchyAuthority,
-        lastScrollSyncedCitation: "", inlineNotePageKey: null, openNotePanels: new Set(), inlineNoteEditor: null, contextualNoteHoverButton: null,
+        lastScrollSyncedCitation: "", inlineNotePageKey: null, inlineNoteEditor: null,
         explicitOccurrenceTarget: null, searchState: null
       };
     }
@@ -6257,6 +6250,210 @@
       withFocusedCitationPane(pane, () => renderHierarchyNavigation(result));
     }
 
+    function searchWorkerCorpusIdentity() {
+      const record = window.INA_SEARCH_ACTIVE_CORPUS_RECORD || null;
+      return globalThis.INA_SEARCH_OCCURRENCE?.projectionIdentity?.(corpus, {
+        corpusSchemaVersion: corpusManifest?.corpusSchemaVersion || corpus?.schemaVersion,
+        corpusVersion: corpus?.corpusVersion || corpusManifest?.corpusVersion || "",
+        corpusSha256: record?.sourceCorpusSha256 || record?.sha256 || corpusManifest?.uncompressedSha256 || "",
+        authorities: ["ina", "cfr"]
+      }) || null;
+    }
+
+    function cloneableSearchOptions(options = {}) {
+      const cloneable = { ...options };
+      for (const key of ["signal", "isCancelled", "onProgress", "yieldControl", "bucketFilter"]) delete cloneable[key];
+      return cloneable;
+    }
+
+    function markFirstSearchCompleted(detail = {}) {
+      if (state.firstSearchCompleted) return;
+      state.firstSearchCompleted = true;
+      window.INA_SEARCH_MARK_PERFORMANCE?.("first-search-completed", detail);
+    }
+
+    let embeddedBaselineFallbackScheduled = false;
+    function scheduleEmbeddedBaselinePersistence() {
+      if (embeddedBaselineFallbackScheduled || !corpus || window.INA_SEARCH_CORPUS_LOAD_SOURCE !== "embedded") return;
+      embeddedBaselineFallbackScheduled = true;
+      const persistBaseline = () => void (async () => {
+        const payload = window.INA_SEARCH_EMBEDDED_CORPUS_PAYLOAD;
+        const baseline = payload instanceof Blob
+          ? globalThis.INASearchCorpusPacking?.hydratePackedCorpus(JSON.parse(await payload.text())) || corpus
+          : corpus;
+        await globalThis.INASearchStorage?.ensureActiveCorpus?.(baseline, {
+          reason: "automatic-embedded-baseline-fallback",
+          legalReferencesPacked: true,
+          sourceCorpusSha256: corpusManifest?.uncompressedSha256 || "",
+          sourceState: { authority: "embedded-release" }
+        });
+      })().catch(error => {
+        loadErrors.dataMessages ||= {};
+        loadErrors.dataMessages.indexedDbCorpusWrite = error?.message || String(error);
+      });
+      if (typeof requestIdleCallback === "function") requestIdleCallback(persistBaseline, { timeout: 2000 });
+      else setTimeout(persistBaseline, 0);
+    }
+
+    function createSearchWorkerClient() {
+      if (typeof Worker !== "function" || typeof Blob !== "function" || typeof URL?.createObjectURL !== "function") return null;
+      const runtimeIds = ["inaSearchStorageRuntime", "inaSearchCorpusPackingRuntime", "inaSearchOccurrenceRuntime", "inaSearchSearchWorkerRuntime"];
+      const source = runtimeIds.map(id => document.getElementById(id)?.textContent || "").join("\n");
+      if (runtimeIds.some(id => !document.getElementById(id)?.textContent?.trim())) return null;
+      const url = URL.createObjectURL(new Blob([source], { type: "text/javascript" }));
+      let worker;
+      try { worker = new Worker(url); }
+      finally { URL.revokeObjectURL(url); }
+      let sequence = 0;
+      let failed = false;
+      const searches = new Map();
+      const pages = new Map();
+      const rejectPending = error => {
+        for (const pending of searches.values()) pending.reject(error);
+        for (const pending of pages.values()) pending.reject(error);
+        searches.clear(); pages.clear();
+      };
+      const remoteResult = dto => ({
+        ...dto,
+        materializeOccurrences(options = {}) {
+          if (failed) return Promise.reject(new Error(state.searchWorkerFailure || "The search worker is unavailable."));
+          const pageId = `page-${++sequence}`;
+          return new Promise((resolve, reject) => {
+            pages.set(pageId, { resolve, reject });
+            worker.postMessage({ type: "materialize", pageId, requestId: dto.requestId, options });
+          });
+        },
+        dispose() { worker.postMessage({ type: "dispose-result", requestId: dto.requestId }); }
+      });
+      worker.addEventListener("message", event => {
+        const message = event.data || {};
+        if (message.type === "ready") {
+          state.searchWorkerReady = true;
+          window.INA_SEARCH_MARK_PERFORMANCE?.("projection-ready", { source: message.source, fragments: message.fragments });
+          return;
+        }
+        if (message.type === "metric") {
+          window.INA_SEARCH_MARK_PERFORMANCE?.(message.name, { ...(message.detail || {}), duration: message.duration, worker: true });
+          return;
+        }
+        if (message.type === "cache-warning") {
+          loadErrors.dataMessages ||= {};
+          loadErrors.dataMessages[`worker-${message.cache || "cache"}`] = message.message;
+          return;
+        }
+        if (message.type === "search-result") {
+          const pending = searches.get(`${message.sessionId}:${message.generation}`);
+          if (!pending) return;
+          searches.delete(`${message.sessionId}:${message.generation}`);
+          markFirstSearchCompleted({ worker: true });
+          pending.resolve(remoteResult(message.result));
+          return;
+        }
+        if (message.type === "search-error") {
+          const key = `${message.sessionId}:${message.generation}`;
+          const pending = searches.get(key);
+          if (!pending) return;
+          searches.delete(key);
+          pending.reject(new Error(message.message || "The search worker could not complete the query."));
+          return;
+        }
+        if (message.type === "page-result" || message.type === "page-error") {
+          const pending = pages.get(String(message.pageId));
+          if (!pending) return;
+          pages.delete(String(message.pageId));
+          if (message.type === "page-result") pending.resolve(message.page);
+          else pending.reject(new Error(message.message || "The search-result page is unavailable."));
+          return;
+        }
+        if (message.type === "fatal") {
+          failed = true;
+          state.searchWorkerFailure = message.message || "The search worker could not start.";
+          state.searchWorkerReady = false;
+          rejectPending(new Error(state.searchWorkerFailure));
+          scheduleEmbeddedBaselinePersistence();
+        }
+      });
+      worker.addEventListener("error", event => {
+        failed = true;
+        state.searchWorkerFailure = event.message || "The search worker stopped unexpectedly.";
+        state.searchWorkerReady = false;
+        rejectPending(new Error(state.searchWorkerFailure));
+        scheduleEmbeddedBaselinePersistence();
+      });
+      const identity = searchWorkerCorpusIdentity();
+      worker.postMessage({
+        type: "init",
+        identity,
+        source: window.INA_SEARCH_CORPUS_LOAD_SOURCE || "embedded",
+        legalReferencesPacked: window.INA_SEARCH_ACTIVE_CORPUS_RECORD?.legalReferencesPacked === true,
+        embeddedPayload: window.INA_SEARCH_CORPUS_LOAD_SOURCE === "embedded" ? window.INA_SEARCH_EMBEDDED_CORPUS_PAYLOAD || null : null
+      });
+      return {
+        get failed() { return failed; },
+        createSession(defaults = {}) {
+          const sessionId = `session-${++sequence}`;
+          let generation = 0;
+          return {
+            search(query, options = {}) {
+              if (failed) return Promise.reject(new Error(state.searchWorkerFailure || "The search worker is unavailable."));
+              generation += 1;
+              const key = `${sessionId}:${generation}`;
+              const requestId = `search-${++sequence}`;
+              return new Promise((resolve, reject) => {
+                searches.set(key, { resolve, reject, sessionId, generation });
+                worker.postMessage({ type: "search", sessionId, generation, requestId, query, options: cloneableSearchOptions({ ...defaults, ...options }) });
+              });
+            },
+            cancel() {
+              generation += 1;
+              worker.postMessage({ type: "cancel", sessionId, generation });
+              for (const [key, pending] of searches) {
+                if (pending.sessionId !== sessionId) continue;
+                const error = new Error("The occurrence search was cancelled.");
+                error.name = "AbortError";
+                pending.reject(error);
+                searches.delete(key);
+              }
+            }
+          };
+        },
+        createCitationSession(defaults = {}) {
+          const sessionId = `citation-session-${++sequence}`;
+          let generation = 0;
+          return {
+            search(scope, query, authorities = []) {
+              if (failed) return Promise.reject(new Error(state.searchWorkerFailure || "The search worker is unavailable."));
+              generation += 1;
+              const key = `${sessionId}:${generation}`;
+              const requestId = `citation-search-${++sequence}`;
+              return new Promise((resolve, reject) => {
+                searches.set(key, { resolve, reject, sessionId, generation });
+                worker.postMessage({ type: "citation-search", sessionId, generation, requestId, scope, query, authorities, ...defaults });
+              });
+            },
+            cancel() {
+              generation += 1;
+              worker.postMessage({ type: "cancel", sessionId, generation });
+              for (const [key, pending] of searches) {
+                if (pending.sessionId !== sessionId) continue;
+                const error = new Error("The citation search was cancelled."); error.name = "AbortError";
+                pending.reject(error); searches.delete(key);
+              }
+            }
+          };
+        },
+        terminate() { failed = true; rejectPending(new Error("The search worker was stopped.")); worker.terminate(); }
+      };
+    }
+
+    function ensureSearchWorker() {
+      if (state.searchWorkerClient && !state.searchWorkerClient.failed) return state.searchWorkerClient;
+      if (state.searchWorkerFailure) return null;
+      try { state.searchWorkerClient = createSearchWorkerClient(); }
+      catch (error) { state.searchWorkerFailure = error?.message || String(error); }
+      return state.searchWorkerClient;
+    }
+
     function ensureOccurrenceProjection() {
       if (state.occurrenceProjection) return Promise.resolve(state.occurrenceProjection);
       if (state.occurrenceProjectionPromise) return state.occurrenceProjectionPromise;
@@ -6273,6 +6470,39 @@
         throw error;
       });
       return state.occurrenceProjectionPromise;
+    }
+
+    async function createLegalOccurrenceSession(defaults = {}, requiresMainThread = false) {
+      const workerClient = requiresMainThread ? null : ensureSearchWorker();
+      if (workerClient) {
+        const remote = workerClient.createSession(defaults);
+        let fallback = null;
+        return {
+          async search(query, options = {}) {
+            try { return await remote.search(query, options); }
+            catch (error) {
+              if (error?.name === "AbortError") throw error;
+              state.searchWorkerFailure ||= error?.message || String(error);
+              const projection = await ensureOccurrenceProjection();
+              fallback ||= globalThis.INA_SEARCH_OCCURRENCE.createSearchSession(projection, { sliceMs: 8, ...defaults });
+              const result = await fallback.search(query, options);
+              markFirstSearchCompleted({ worker: false, fallback: true });
+              return result;
+            }
+          },
+          cancel() { remote.cancel(); fallback?.cancel?.(); }
+        };
+      }
+      const projection = await ensureOccurrenceProjection();
+      const local = globalThis.INA_SEARCH_OCCURRENCE.createSearchSession(projection, { sliceMs: 8, ...defaults });
+      return {
+        async search(query, options = {}) {
+          const result = await local.search(query, options);
+          markFirstSearchCompleted({ worker: false, fallback: true });
+          return result;
+        },
+        cancel() { local.cancel?.(); }
+      };
     }
 
     function emptyOccurrenceResult() {
@@ -6391,16 +6621,15 @@
       if (!info) return null;
       const path = [...(association.start?.path || [])], citation = associationLabel(association);
       const text = artifactKind === "note" ? String(artifact.text || "") : String(segment?.anchor?.exact || "");
-      const placement = association.placement || {};
       return {
         ...info, citation, readerCommand: `${info.readerBase}${canonicalPath(path)}`, path,
         kind: artifactKind, occurrenceKey: `${artifactKind}:${artifact.id}:${segment?.id || associationKey(association)}`,
         artifactKind, artifactId: artifact.id, artifactSegmentId: segment?.id || "", artifactAssociationKey: associationKey(association),
-        artifactText: text, artifactColor: artifact.color || "yellow", artifactNeedsReview: segment?.anchor?.status === "needs-review",
+        artifactText: text, artifactColor: artifactKind === "highlight" ? artifact.color || "yellow" : "", artifactNeedsReview: segment?.anchor?.status === "needs-review",
         artifactPrefix: String(segment?.anchor?.prefix || ""), artifactSuffix: String(segment?.anchor?.suffix || ""),
         artifactSourceStart: Number(segment?.anchor?.start) || 0,
         artifactSourceEnd: Number(segment?.anchor?.end) || 0, artifactSourceLength: Number(segment?.anchor?.sourceLength) || 0,
-        artifactSort: { path, boundary: placement.boundary || "before", order: Number(placement.order) || Number(segment?.ordinal) || 0 },
+        artifactSort: { path, order: Number(segment?.ordinal) || 0 },
         target: { field: "annotation", path, start: 0, end: text.length }
       };
     }
@@ -6433,7 +6662,7 @@
         if (options.citesScope && !storedTargetsMatchCitationScope((note.textReferences?.spans || []).map(span => span.targetKey || span.citation), options.citesScope)) continue;
         if (!(note.associations || []).length) {
           if (!includeRecovery) continue;
-          const row = { authority: "annotations", recordId: "annotation-unassociated", recordKind: "annotation", citation: "Unassociated", readerCommand: "is:notes", path: [], kind: "note", occurrenceKey: `note:${note.id}:unassociated`, artifactKind: "note", artifactId: note.id, artifactAssociationKey: "", artifactText: String(note.text || ""), artifactColor: note.color || "yellow", artifactUnassociated: true, artifactSort: { path: [], boundary: "after", order: Number.MAX_SAFE_INTEGER }, target: { field: "annotation", path: [], start: 0, end: String(note.text || "").length } };
+          const row = { authority: "annotations", recordId: "annotation-unassociated", recordKind: "annotation", citation: "Unassociated", readerCommand: "is:notes", path: [], kind: "note", occurrenceKey: `note:${note.id}:unassociated`, artifactKind: "note", artifactId: note.id, artifactAssociationKey: "", artifactText: String(note.text || ""), artifactColor: "", artifactUnassociated: true, artifactSort: { path: [], order: Number.MAX_SAFE_INTEGER }, target: { field: "annotation", path: [], start: 0, end: String(note.text || "").length } };
           const leafId = "annotations:unassociated";
           if (!hierarchy.has(leafId)) hierarchy.set(leafId, { id: leafId, parentId: "", authority: "annotations", kind: "authority", number: "Unassociated", heading: "Notes needing an association", totalOccurrences: 0 });
           hierarchy.get(leafId).totalOccurrences += 1;
@@ -6456,8 +6685,7 @@
       for (const section of sections.values()) section.annotationRows.sort((left, right) => {
         const path = canonicalPath(left.path || []).localeCompare(canonicalPath(right.path || []), undefined, { numeric: true, sensitivity: "base" });
         if (path) return path;
-        const boundary = (left.artifactSort?.boundary === "before" ? 0 : 2) - (right.artifactSort?.boundary === "before" ? 0 : 2);
-        return boundary || Number(left.artifactSort?.order || 0) - Number(right.artifactSort?.order || 0);
+        return Number(left.artifactSort?.order || 0) - Number(right.artifactSort?.order || 0);
       });
       const orderedSections = [...sections.values()].sort((left, right) => left.firstSourceOrder - right.firstSourceOrder || left.citation.localeCompare(right.citation, undefined, { numeric: true }));
       const totalOccurrences = orderedSections.reduce((sum, section) => sum + section.totalOccurrences, 0);
@@ -6539,7 +6767,7 @@
       };
     }
 
-    function mergeOccurrenceResults(baseResult, artifactResult) {
+    async function mergeOccurrenceResults(baseResult, artifactResult) {
       const base = baseResult || emptyOccurrenceResult(), artifacts = artifactResult || emptyOccurrenceResult();
       if (!artifacts.totalOccurrences) return base;
       if (!base.totalOccurrences) return artifacts;
@@ -6559,14 +6787,14 @@
       for (const section of base.sections || []) {
         const mergedRows = [];
         for (let start = 0; start < section.totalOccurrences; start += 1000) {
-          const page = base.materializeOccurrences({ sectionId: section.id, start, limit: Math.min(1000, section.totalOccurrences - start), contextCharacters: 90 });
+          const page = await Promise.resolve(base.materializeOccurrences({ sectionId: section.id, start, limit: Math.min(1000, section.totalOccurrences - start), contextCharacters: 90 }));
           mergedRows.push(...page.rows);
           if (!page.rows?.length) break;
         }
         sections.set(sectionMergeKey(section), { ...section, mergedRows });
       }
       for (const artifactSection of artifacts.sections || []) {
-        const page = artifacts.materializeOccurrences({ sectionId: artifactSection.id, start: 0, limit: artifactSection.totalOccurrences });
+        const page = await Promise.resolve(artifacts.materializeOccurrences({ sectionId: artifactSection.id, start: 0, limit: artifactSection.totalOccurrences }));
         const key = sectionMergeKey(artifactSection);
         const current = sections.get(key);
         if (current) {
@@ -6577,7 +6805,7 @@
       for (const section of sections.values()) section.mergedRows.sort((left, right) => {
         const path = canonicalPath(left.path || []).localeCompare(canonicalPath(right.path || []), undefined, { numeric: true, sensitivity: "base" });
         if (path) return path;
-        const rank = row => !row.artifactKind ? 1 : row.artifactSort?.boundary === "before" ? 0 : 2;
+        const rank = row => row.artifactKind === "note" ? (profile.preferences.noteDisplayPosition === "bottom" ? 2 : 0) : 1;
         return rank(left) - rank(right) || Number(left.artifactSort?.order || 0) - Number(right.artifactSort?.order || 0);
       });
       const ordered = [...sections.values()].sort((left, right) => Number(left.firstSourceOrder || 0) - Number(right.firstSourceOrder || 0) || left.citation.localeCompare(right.citation, undefined, { numeric: true }));
@@ -6695,7 +6923,7 @@
         const leading = row.artifactSourceStart > prefix.length ? "…" : "";
         const trailing = row.artifactSourceLength ? row.artifactSourceEnd + suffix.length < row.artifactSourceLength ? "…" : "" : suffix.length >= 80 ? "…" : "";
         const review = row.artifactNeedsReview ? `<small class="artifact-needs-review">Needs review</small>` : "";
-        return `<span class="occurrence-snippet-segment">${leading}${escapeHtml(prefix)}<mark data-highlight-color="${escapeHtml(row.artifactColor || "yellow")}" style="--artifact-color:${escapeHtml(STICKY_NOTE_COLOR_HEX[row.artifactColor] || STICKY_NOTE_COLOR_HEX.yellow)}">${escapeHtml(exact)}</mark>${escapeHtml(suffix)}${trailing}${review}</span>`;
+        return `<span class="occurrence-snippet-segment">${leading}${escapeHtml(prefix)}<mark data-highlight-color="${escapeHtml(row.artifactColor || "yellow")}" style="--artifact-color:${escapeHtml(HIGHLIGHT_COLOR_HEX[row.artifactColor] || HIGHLIGHT_COLOR_HEX.yellow)}">${escapeHtml(exact)}</mark>${escapeHtml(suffix)}${trailing}${review}</span>`;
       }
       const snippets = row?.snippets?.length ? row.snippets : row?.snippet ? [row.snippet] : [];
       return snippets.map(snippet => `<span class="occurrence-snippet-segment">${occurrenceSnippetPartsHtml(snippet)}</span>`).join("");
@@ -6845,7 +7073,7 @@
       return copied;
     }
 
-    function renderOccurrenceRows(pane, offset = 0, sectionId = pane?.searchState?.activeSectionId || pane?.searchState?.result?.sections?.[0]?.id || "", options = {}) {
+    async function renderOccurrenceRows(pane, offset = 0, sectionId = pane?.searchState?.activeSectionId || pane?.searchState?.result?.sections?.[0]?.id || "", options = {}) {
       const result = pane?.searchState?.result;
       if (!result || !sectionId) return;
       const section = occurrenceSectionById(result, sectionId);
@@ -6853,7 +7081,17 @@
       const windowed = options.windowed ?? pane.searchState.virtualizedRows;
       const maximum = Math.max(1, Math.min(section.totalOccurrences || 1, Number(options.limit) || (windowed ? OCCURRENCE_WINDOW_ROW_LIMIT : section.totalOccurrences || 1)));
       const start = Math.max(0, Math.min(Number(offset) || 0, Math.max(0, section.totalOccurrences - maximum)));
-      const materialized = result.materializeOccurrences({ sectionId, start, limit: maximum, contextCharacters: windowed ? 60 : 90 });
+      pane.searchState.pageGenerations ||= new Map();
+      const pageGeneration = (pane.searchState.pageGenerations.get(sectionId) || 0) + 1;
+      pane.searchState.pageGenerations.set(sectionId, pageGeneration);
+      let materialized;
+      try { materialized = await Promise.resolve(result.materializeOccurrences({ sectionId, start, limit: maximum, contextCharacters: windowed ? 60 : 90 })); }
+      catch (error) {
+        const failedContainer = occurrenceSectionRowsContainer(pane, sectionId);
+        if (failedContainer && pane.searchState?.result === result) failedContainer.innerHTML = `<p class="hierarchy-empty">${escapeHtml(error?.message || "This result page could not be loaded.")}</p>`;
+        return;
+      }
+      if (pane.searchState?.result !== result || pane.searchState.pageGenerations.get(sectionId) !== pageGeneration) return;
       const sectionToken = occurrenceSectionDomToken(sectionId);
       if (options.activate !== false) {
         pane.searchState.offset = start;
@@ -6863,7 +7101,7 @@
       pane.searchState.rowsBySection.set(sectionId, { start, rows: materialized.rows });
       pane.searchState.visibleRows = [...pane.searchState.rowsBySection.values()].flatMap(windowState => windowState.rows);
       const rows = materialized.rows.map((row, index) => {
-        const artifactStyle = row.artifactKind ? ` data-artifact-kind="${escapeHtml(row.artifactKind)}" style="--artifact-color:${escapeHtml(STICKY_NOTE_COLOR_HEX[row.artifactColor] || STICKY_NOTE_COLOR_HEX.yellow)}"` : "";
+        const artifactStyle = row.artifactKind ? ` data-artifact-kind="${escapeHtml(row.artifactKind)}"${row.artifactKind === "highlight" ? ` style="--artifact-color:${escapeHtml(HIGHLIGHT_COLOR_HEX[row.artifactColor] || HIGHLIGHT_COLOR_HEX.yellow)}"` : ""}` : "";
         const copyControls = row.artifactUnassociated
           ? `<span class="occurrence-row-copy-controls" role="group" aria-label="Repair note"><button class="occurrence-row-copy" type="button" data-artifact-repair="${escapeHtml(row.artifactId)}" title="Repair association">↗</button><button class="occurrence-row-copy" type="button" data-artifact-delete="${escapeHtml(row.artifactId)}" title="Delete note">×</button></span>`
           : `<span class="occurrence-row-copy-controls" role="group" aria-label="Copy result data"><button class="occurrence-row-copy" type="button" data-occurrence-copy="citation" data-copy-tooltip="Copy Citation" aria-label="Copy the exact associated citation" title="Copy Citation"><span class="occurrence-row-copy-arrow" aria-hidden="true">←</span><span class="occurrence-row-copy-icon" aria-hidden="true">⧉</span></button>${row.artifactKind ? "" : `<button class="occurrence-row-copy" type="button" data-occurrence-copy="text" data-copy-tooltip="Copy Text" aria-label="Copy the complete legal-unit text to the right" title="Copy Text"><span class="occurrence-row-copy-icon" aria-hidden="true">⧉</span><span class="occurrence-row-copy-arrow" aria-hidden="true">→</span></button>`}</span>`;
@@ -6880,9 +7118,9 @@
       if (details) details.open = true;
     }
 
-    function renderAllOccurrenceSections(pane) {
+    async function renderAllOccurrenceSections(pane) {
       const sections = pane?.searchState?.result?.sections || [];
-      for (const section of sections) renderOccurrenceRows(pane, 0, section.id, { activate: false, windowed: false, limit: section.totalOccurrences });
+      await Promise.all(sections.map(section => renderOccurrenceRows(pane, 0, section.id, { activate: false, windowed: false, limit: section.totalOccurrences })));
       if (sections.length && !pane.searchState.activeSectionId) pane.searchState.activeSectionId = sections[0].id;
       pane.searchState.offset = pane.searchState.sectionOffsets.get(pane.searchState.activeSectionId) || 0;
     }
@@ -6947,7 +7185,7 @@
       const activeSectionId = result.sections?.some(section => section.id === previousSectionId) ? previousSectionId : result.sections?.[0]?.id || "";
       const sectionOffsets = sameCommand && pane.searchState?.sectionOffsets instanceof Map ? pane.searchState.sectionOffsets : new Map();
       const virtualizedRows = Number(result.totalOccurrences || 0) > OCCURRENCE_EAGER_ROW_LIMIT;
-      pane.searchState = { result, command: pane.entry?.text || "", offset: activeSectionId ? sectionOffsets.get(activeSectionId) || 0 : 0, activeSectionId, sectionOffsets, rowsBySection: new Map(), visibleRows: [], virtualizedRows, visibleSectionFrame: null };
+      pane.searchState = { result, command: pane.entry?.text || "", offset: activeSectionId ? sectionOffsets.get(activeSectionId) || 0 : 0, activeSectionId, sectionOffsets, rowsBySection: new Map(), pageGenerations: new Map(), visibleRows: [], virtualizedRows, visibleSectionFrame: null };
       const expandResults = profile.preferences.expandSearchResultsByDefault !== false;
       const hitCount = Number(result.totalOccurrences || 0);
       const sectionCount = Number(result.sections?.length || 0);
@@ -7002,7 +7240,7 @@
       };
     }
 
-    function citationSourceResult(authority, scope, ast = null) {
+    function citationSourceResultLocal(authority, scope, ast = null) {
       const hierarchy = new Map();
       const sections = [];
       const addHierarchy = (leaf, occurrenceCount) => {
@@ -7069,7 +7307,22 @@
       };
     }
 
-    function renderFocusedCitationSourcePane(pane) {
+    async function citationSourceResult(authority, scope, ast = null) {
+      const workerClient = ensureSearchWorker();
+      if (workerClient) {
+        try { return await workerClient.createCitationSession().search(scope, ast, [authority]); }
+        catch (error) {
+          if (error?.name === "AbortError") throw error;
+          state.searchWorkerFailure ||= error?.message || String(error);
+        }
+      }
+      await buildIndex();
+      const result = citationSourceResultLocal(authority, scope, ast);
+      markFirstSearchCompleted({ worker: false, fallback: true, citations: true });
+      return result;
+    }
+
+    async function renderFocusedCitationSourcePane(pane) {
       if (profile.preferences.legalNavigatorVisibility === "all") {
         const rootResult = parseCitation(pane.entry.authority === "cfr" ? "CFR" : "INA");
         withFocusedCitationPane(pane, () => renderHierarchyNavigation(rootResult));
@@ -7077,9 +7330,9 @@
         pane.navigator.hidden = true;
         pane.navigatorInner.innerHTML = "";
       }
-      const legal = legalAuthoritiesForAst(pane.entry.ast).includes(pane.entry.authority) ? citationSourceResult(pane.entry.authority, pane.entry.citesScope, pane.entry.ast) : emptyOccurrenceResult();
+      const legal = legalAuthoritiesForAst(pane.entry.ast).includes(pane.entry.authority) ? await citationSourceResult(pane.entry.authority, pane.entry.citesScope, pane.entry.ast) : emptyOccurrenceResult();
       const artifacts = annotationResult(pane.entry.ast, pane.entry.authority, { citesScope: pane.entry.citesScope, includeRecovery: pane.entry.authority !== "cfr" });
-      renderOccurrenceSearchResult(pane, mergeOccurrenceResults(legal, artifacts));
+      renderOccurrenceSearchResult(pane, await mergeOccurrenceResults(legal, artifacts));
     }
 
     async function renderFocusedOccurrencePane(pane) {
@@ -7102,16 +7355,17 @@
         let result = emptyOccurrenceResult();
         if (includeLegal && pane.entry.ast?.has?.length && !pane.entry.ast?.clauses?.length) result = bareHasOccurrenceResult(pane.entry.ast, pane.entry.authority);
         else if (includeLegal) {
-          const projection = await ensureOccurrenceProjection();
+          const bucketFilter = annotationBucketFilter(pane.entry.ast);
+          pane.occurrenceSession?.cancel?.();
+          pane.occurrenceSession = await createLegalOccurrenceSession({ sliceMs: 8 }, typeof bucketFilter === "function");
           if (!pane.element.isConnected || pane.occurrenceGeneration !== generation || pane.entry.mode !== "search-tree") return;
-          if (!pane.occurrenceSession) pane.occurrenceSession = globalThis.INA_SEARCH_OCCURRENCE.createSearchSession(projection, { sliceMs: 8 });
           pane.detail.innerHTML = `<div class="occurrence-progress" role="status">Searching ${pane.entry.authority === "cfr" ? "CFR" : "INA"}…</div>`;
           result = await pane.occurrenceSession.search(pane.entry.ast, {
             authorities: [pane.entry.authority], common: pane.entry.ast?.common, scope: pane.entry.scope || undefined,
-            bucketFilter: annotationBucketFilter(pane.entry.ast), sliceMs: 8
+            bucketFilter, sliceMs: 8
           });
         }
-        result = mergeOccurrenceResults(result, annotationResult(pane.entry.ast, pane.entry.authority, { locationScope: pane.entry.scope || null, includeRecovery: pane.entry.authority !== "cfr" }));
+        result = await mergeOccurrenceResults(result, annotationResult(pane.entry.ast, pane.entry.authority, { locationScope: pane.entry.scope || null, includeRecovery: pane.entry.authority !== "cfr" }));
         if (!pane.element.isConnected || pane.occurrenceGeneration !== generation || pane.entry.mode !== "search-tree") return;
         renderOccurrenceSearchResult(pane, result);
       } catch (error) {
@@ -7957,31 +8211,6 @@
       return afterStart && (beforeEnd || withinEndSubtree);
     }
 
-    function upgradeProfileCitationLinks(targetProfile) {
-      for (const note of targetProfile?.notes || []) {
-        const associations = [...(note.associations || [])];
-        const seen = new Set(associations.map(associationKey));
-        const remainingLinks = [];
-        for (const link of note.legacyLinks || note.links || []) {
-          const candidate = link.citation || link.label || "";
-          const parsed = parseAssociatedWith(candidate);
-          if (parsed.valid && parsed.associations.length === 1) {
-            const association = parsed.associations[0];
-            const key = associationKey(association);
-            if (!seen.has(key)) { seen.add(key); associations.push(association); }
-          } else remainingLinks.push(link);
-        }
-        note.associations = associations;
-        if (remainingLinks.length) {
-          const retained = `Links:\n${remainingLinks.map(link => String(link?.label || link?.citation || link?.url || JSON.stringify(link))).join("\n")}`;
-          if (!String(note.text || "").includes(retained)) note.text = [note.text, retained].filter(Boolean).join("\n\n");
-        }
-        delete note.links;
-        delete note.legacyLinks;
-      }
-      return targetProfile;
-    }
-
     function legalUnitNoteLocation(kind, sectionId, path = [], citation = "") {
       if (kind === "usc") {
         const section = (corpus?.title8?.sections || []).find(item => item.id === sectionId);
@@ -7994,19 +8223,10 @@
       return null;
     }
 
-    function legalUnitLocationKey(location) {
-      return `${location.family}:${location.title}:${associationEndpointKey(location)}`;
-    }
-
-    function notesCoveringLocation(location) {
-      return (profile?.notes || []).filter(note => (note.associations || []).some(association => associationCoversLocation(association, location)));
-    }
-
     function associationForLocation(location) {
       return {
         family: location.family, title: location.title, citationSystem: /^INA\b/i.test(location.citation || "") ? "ina" : location.family,
-        start: { unit: location.unit, path: [...(location.path || [])] }, label: location.citation,
-        placement: globalThis.INA_SEARCH_ANNOTATIONS?.placement?.() || { dock: "full", boundary: "before", preferredWidthPx: 320, order: 0, primaryHighlightId: null }
+        start: { unit: location.unit, path: [...(location.path || [])] }, label: location.citation
       };
     }
 
@@ -8151,82 +8371,21 @@
       };
     }
 
-    function locationFromNoteButton(button) {
-      if (!button) return null;
+    function locationFromLegalUnitTrigger(trigger) {
+      if (!trigger) return null;
       let path = [];
-      try { path = JSON.parse(button.dataset.noteUnitPath || "[]"); } catch {}
-      return legalUnitNoteLocation(button.dataset.noteUnitKind, button.dataset.noteUnitSection, path, button.dataset.noteUnitCitation || "");
+      try { path = JSON.parse(trigger.dataset.legalUnitPath || "[]"); } catch {}
+      return legalUnitNoteLocation(trigger.dataset.legalUnitKind, trigger.dataset.legalUnitSection, path, trigger.dataset.legalUnitCitation || "");
     }
 
-    function inlineNoteHost(button) {
-      return button?.closest(".statutory-line, .statute-preamble, .detail-heading-row, .cfr-block") || button?.parentElement;
-    }
-
-    function noteButtonPath(button) {
-      try { return JSON.parse(button?.dataset.noteUnitPath || "[]").map(String); }
-      catch { return []; }
-    }
-
-    function contextualNoteHost(button) {
-      if (!button) return null;
-      const heading = button.closest(".detail-heading-row");
+    function legalUnitNoteHost(trigger) {
+      if (!trigger) return null;
+      const heading = trigger.closest(".detail-heading-row");
       if (heading) return heading;
-      return button.closest(".statutory-runin-line[data-statute-inline-path], .statutory-node[data-statute-path], .cfr-block") || null;
+      return trigger.closest(".statutory-runin-line[data-statute-inline-path], .statutory-node[data-statute-path], .statutory-line, .statute-preamble, .cfr-block") || trigger.parentElement;
     }
 
-    function sameContextualNotePath(left, right) {
-      return left.length === right.length && left.every((token, index) => normCitationPart(token) === normCitationPart(right[index]));
-    }
-
-    function contextualNoteButtonForElement(element) {
-      if (!element?.closest || !els.detail.contains(element)) return null;
-      const direct = element.closest("[data-note-unit-kind]");
-      if (direct && els.detail.contains(direct)) return direct;
-      const host = element.closest(".statutory-runin-line[data-statute-inline-path], .statutory-node[data-statute-path], .cfr-block, .detail-heading-row");
-      if (!host) return null;
-      const candidates = [...host.querySelectorAll("[data-note-unit-kind]")].filter(button => contextualNoteHost(button) === host);
-      if (!candidates.length) return null;
-      let path = null;
-      const encodedPath = host.dataset.statuteInlinePath ?? host.dataset.statutePath;
-      if (encodedPath !== undefined) {
-        try { path = JSON.parse(encodedPath).map(String); } catch { path = []; }
-      } else if (host.classList.contains("cfr-block") && host.dataset.cfrPath) path = componentTokens(host.dataset.cfrPath) || [];
-      else if (host.classList.contains("detail-heading-row")) path = [];
-      return path ? candidates.find(button => sameContextualNotePath(noteButtonPath(button), path)) || candidates[0] : candidates[0];
-    }
-
-    function syncContextualNoteButtons() {
-      const buttons = $$('[data-note-unit-kind]', els.detail);
-      const hoverButton = state.contextualNoteHoverButton?.isConnected && els.detail.contains(state.contextualNoteHoverButton)
-        ? state.contextualNoteHoverButton
-        : null;
-      if (!hoverButton) state.contextualNoteHoverButton = null;
-      for (const button of buttons) {
-        const path = noteButtonPath(button);
-        const current = button.dataset.noteUnitKind === state.statuteNavigationKind
-          && button.dataset.noteUnitSection === state.statuteNavigationSectionId
-          && sameContextualNotePath(path, state.statuteNavigationPath || []);
-        const hovered = button === hoverButton;
-        button.classList.toggle("note-unit-current", current);
-        button.classList.toggle("note-unit-hovered", hovered);
-        button.tabIndex = current || hovered ? 0 : -1;
-        button.setAttribute("aria-hidden", current || hovered ? "false" : "true");
-      }
-    }
-
-    function isElementVisible(element, fully = false) {
-      if (!element?.getBoundingClientRect) return false;
-      const rect = element.getBoundingClientRect();
-      const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
-      if (focusedPane) {
-        const viewport = focusedPane.scrollRoot.getBoundingClientRect();
-        return fully ? rect.top >= viewport.top && rect.bottom <= viewport.bottom : rect.bottom > viewport.top && rect.top < viewport.bottom;
-      }
-      const top = Math.max(0, $(".topbar")?.getBoundingClientRect?.().bottom || 0, els.statuteNavigator.hidden ? 0 : els.statuteNavigator.getBoundingClientRect().bottom);
-      return fully ? rect.top >= top && rect.bottom <= window.innerHeight : rect.bottom > top && rect.top < window.innerHeight;
-    }
-
-    const STICKY_NOTE_COLOR_HEX = Object.freeze({ yellow: "#ffe66d", pink: "#ff63b5", orange: "#ff9f43", lime: "#a9ef4f", cyan: "#55dff3", violet: "#bd83ff" });
+    const HIGHLIGHT_COLOR_HEX = Object.freeze({ yellow: "#ffe66d", pink: "#ff63b5", orange: "#ff9f43", lime: "#a9ef4f", cyan: "#55dff3", violet: "#bd83ff" });
 
     function noteReferenceHtml(note) {
       const input = String(note?.text || ""), spans = [...(note?.textReferences?.spans || [])].sort((left, right) => left.start - right.start);
@@ -8236,26 +8395,23 @@
       for (const span of spans) {
         if (span.start < cursor || span.end > input.length) continue;
         parts.push(escapeHtml(input.slice(cursor, span.start)));
-        parts.push(`<span class="sticky-note-reference" tabindex="0" data-note-reference="${escapeHtml(span.citation)}" data-note-reference-raw="${escapeHtml(span.raw || input.slice(span.start, span.end))}">${escapeHtml(input.slice(span.start, span.end))}</span>`);
+        parts.push(`<span class="citation-note-reference" tabindex="0" data-note-reference="${escapeHtml(span.citation)}" data-note-reference-raw="${escapeHtml(span.raw || input.slice(span.start, span.end))}">${escapeHtml(input.slice(span.start, span.end))}</span>`);
         cursor = span.end;
       }
       parts.push(escapeHtml(input.slice(cursor)));
       return parts.join("");
     }
 
-    function stickyNoteCardHtml(note, association) {
-      const placement = globalThis.INA_SEARCH_ANNOTATIONS?.placement?.(association.placement) || association.placement;
-      association.placement = placement;
+    function citationNoteHtml(note, association) {
       const instanceKey = associationKey(association);
       const editing = state.inlineNoteEditor?.noteId === note.id && state.inlineNoteEditor?.associationKey === instanceKey;
       const focused = state.focusedAnnotation?.kind === "note" && state.focusedAnnotation.id === note.id
         && (!state.focusedAnnotation.associationKey || state.focusedAnnotation.associationKey === instanceKey);
-      const swatches = Object.entries(STICKY_NOTE_COLOR_HEX).map(([name, value]) => `<button class="sticky-note-swatch" type="button" data-note-color-choice="${name}" style="--swatch:${value}" aria-label="Use ${name} sticky-note color" aria-pressed="${note.color === name}"></button>`).join("");
-      return `<article class="sticky-note-card${state.inlineNoteEditor?.focusNoteId === note.id || focused ? " is-focused" : ""}" tabindex="-1" data-sticky-note-id="${escapeHtml(note.id)}" data-sticky-note-association="${escapeHtml(instanceKey)}" data-note-color="${escapeHtml(note.color || "yellow")}" data-note-dock="${escapeHtml(placement.dock)}" data-note-boundary="${escapeHtml(placement.boundary)}" style="width:${placement.dock === "full" ? "100%" : `${placement.preferredWidthPx}px`}">
-        <button class="sticky-note-drag" type="button" data-note-drag aria-label="Move sticky note" title="Drag to move; use layout buttons for keyboard placement">⋮⋮</button>
-        ${editing ? `<textarea class="sticky-note-editor" data-sticky-note-editor aria-label="Note text" placeholder="Type your note…">${escapeHtml(note.text || "")}</textarea>` : `<div class="sticky-note-view" data-sticky-note-view tabindex="0" aria-label="Edit note">${noteReferenceHtml(note)}</div>`}
-        <div class="sticky-note-controls"><div class="sticky-note-swatches" role="group" aria-label="Sticky-note color">${swatches}</div><div class="sticky-note-layout-actions" role="group" aria-label="Sticky-note placement"><button class="sticky-note-action" type="button" data-note-dock-choice="left" aria-label="Dock left">L</button><button class="sticky-note-action" type="button" data-note-dock-choice="full" aria-label="Use full width">↔</button><button class="sticky-note-action" type="button" data-note-dock-choice="right" aria-label="Dock right">R</button><button class="sticky-note-action" type="button" data-note-boundary-choice="before" aria-label="Place before citation">↑</button><button class="sticky-note-action" type="button" data-note-boundary-choice="after" aria-label="Place after citation">↓</button><button class="sticky-note-action" type="button" data-note-delete aria-label="Delete note">×</button></div>
-          <div class="sticky-note-associations"><input value="${escapeHtml(associationListText(note.associations))}" aria-label="Associated citations, comma separated" data-note-associations-input><button class="sticky-note-action" type="button" data-note-associations-save>Apply</button></div>
+      return `<article class="citation-note${focused ? " is-focused" : ""}" tabindex="-1" data-citation-note-id="${escapeHtml(note.id)}" data-citation-note-association="${escapeHtml(instanceKey)}">
+        ${editing ? `<textarea class="citation-note-editor" data-citation-note-editor aria-label="Note text" placeholder="Type your note…">${escapeHtml(note.text || "")}</textarea>` : `<div class="citation-note-view" data-citation-note-view tabindex="0" aria-label="Edit note">${noteReferenceHtml(note)}</div>`}
+        <div class="citation-note-controls">
+          <div class="citation-note-associations"><input value="${escapeHtml(associationListText(note.associations))}" aria-label="Associated citations, comma separated" data-note-associations-input><button class="citation-note-action" type="button" data-note-associations-save>Apply</button></div>
+          <button class="citation-note-action" type="button" data-note-delete aria-label="Delete note">Delete</button>
         </div>
       </article>`;
     }
@@ -8263,134 +8419,88 @@
     function prepareInlineNotePage(key) {
       if (state.inlineNotePageKey === key) return;
       state.inlineNotePageKey = key;
-      state.openNotePanels = new Set();
       state.inlineNoteEditor = null;
-      state.contextualNoteHoverButton = null;
     }
 
     function renderInlineLegalNotes() {
       if (state.view !== "search") return;
-      $$(".sticky-note-card", els.detail).forEach(card => card.remove());
-      $$(".sticky-note-exclusion", els.detail).forEach(exclusion => exclusion.remove());
-      const candidates = $$('[data-note-unit-kind]', els.detail).map((button, index) => ({ button, index, location: locationFromNoteButton(button) })).filter(item => item.location);
-      for (const candidate of candidates) {
-        const host = contextualNoteHost(candidate.button) || inlineNoteHost(candidate.button);
-        if (host) { host.dataset.noteDropTarget = "true"; host.__noteButton = candidate.button; }
-      }
-      const routes = [];
+      $$(".citation-notes", els.detail).forEach(group => group.remove());
+      const candidates = $$('[data-legal-unit-kind]', els.detail).map((trigger, index) => ({
+        trigger, index, location: locationFromLegalUnitTrigger(trigger), host: legalUnitNoteHost(trigger)
+      })).filter(item => item.location && item.host);
+      const groups = new Map();
       for (const note of profile.notes || []) {
         for (const association of note.associations || []) {
           const chosen = candidates.find(candidate => associationStartsAtLocation(association, candidate.location));
-          if (chosen) routes.push({ note, association, ...chosen });
+          if (!chosen) continue;
+          const group = groups.get(chosen.trigger) || { ...chosen, notes: [] };
+          group.notes.push({ note, association });
+          groups.set(chosen.trigger, group);
         }
       }
-      routes.sort((left, right) => left.index - right.index || Number(left.association.placement?.order || 0) - Number(right.association.placement?.order || 0));
-      for (const route of routes) {
-        const host = contextualNoteHost(route.button) || inlineNoteHost(route.button);
-        if (!host) continue;
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = stickyNoteCardHtml(route.note, route.association);
-        const card = wrapper.firstElementChild, placement = route.association.placement;
-        if (placement.dock === "full") host.insertAdjacentElement(placement.boundary === "before" ? "beforebegin" : "afterend", card);
-        else host.insertAdjacentElement(placement.boundary === "before" ? "afterbegin" : "beforeend", card);
-        if (placement.dock !== "full" && globalThis.ResizeObserver) {
-          const position = candidates.findIndex(candidate => candidate.button === route.button);
-          const adjacent = candidates[position + (placement.boundary === "before" ? -1 : 1)];
-          const adjacentHost = adjacent ? contextualNoteHost(adjacent.button) || inlineNoteHost(adjacent.button) : null;
-          const exclusion = adjacentHost && adjacentHost !== host ? document.createElement("span") : null;
-          if (exclusion) {
-            exclusion.className = "sticky-note-exclusion";
-            exclusion.dataset.noteDock = placement.dock;
-            exclusion.dataset.noteExclusionFor = `${route.note.id}:${associationKey(route.association)}`;
-            adjacentHost.insertAdjacentElement(placement.boundary === "before" ? "beforeend" : "afterbegin", exclusion);
-          }
-          let resizeTimer = null, resizeFrame = null;
-          const observer = new ResizeObserver(() => {
-            cancelAnimationFrame(resizeFrame);
-            resizeFrame = requestAnimationFrame(() => {
-              const bounds = card.getBoundingClientRect();
-              const width = Math.round(bounds.width), height = Math.round(bounds.height);
-              if (exclusion) {
-                exclusion.style.setProperty("--exclusion-width", `${width}px`);
-                exclusion.style.setProperty("--exclusion-height", `${Math.max(24, Math.round(height / 2))}px`);
-              }
-              if (!width || Math.abs(width - Number(route.association.placement.preferredWidthPx || 0)) < 2) return;
-              route.association.placement.preferredWidthPx = width;
-              clearTimeout(resizeTimer);
-              resizeTimer = setTimeout(() => { markProfileChanged(); annotationIndexNote(route.note); }, 300);
-            });
-          });
-          observer.observe(card);
-        }
+      const position = profile.preferences.noteDisplayPosition === "bottom" ? "afterend" : "beforebegin";
+      for (const group of [...groups.values()].sort((left, right) => right.index - left.index)) {
+        const section = document.createElement("section");
+        section.className = "citation-notes";
+        section.setAttribute("aria-label", `Notes for ${group.location.citation}`);
+        section.innerHTML = group.notes.map(({ note, association }) => citationNoteHtml(note, association)).join("");
+        group.host.insertAdjacentElement(position, section);
       }
-      for (const candidate of candidates) candidate.button.classList.toggle("has-notes", notesCoveringLocation(candidate.location).length > 0);
       renderUserHighlights();
-      requestAnimationFrame(alignEdgeNotesToPrimaryHighlights);
-      syncContextualNoteButtons();
       if (state.pendingAnnotationFocus) requestAnimationFrame(() => requestAnimationFrame(() => {
         const pending = state.pendingAnnotationFocus;
         const candidates = pending.kind === "note"
-          ? $$(`[data-sticky-note-id="${CSS.escape(pending.id)}"]`, els.detail)
+          ? $$(`[data-citation-note-id="${CSS.escape(pending.id)}"]`, els.detail)
           : $$(`[data-highlight-id="${CSS.escape(pending.id)}"]`, els.detail);
         const target = candidates.find(candidate => pending.kind === "note"
-          ? !pending.associationKey || candidate.dataset.stickyNoteAssociation === pending.associationKey
+          ? !pending.associationKey || candidate.dataset.citationNoteAssociation === pending.associationKey
           : !pending.segmentId || candidate.dataset.highlightSegmentId === pending.segmentId)
           || (candidates.length === 1 ? candidates[0] : null);
         if (!target) return;
         target.scrollIntoView({ block: "center", behavior: animatedCitationJumpsEnabled() ? "smooth" : "auto" });
         target.classList?.add?.("is-focused");
-        (pending.edit ? $("[data-sticky-note-editor]", target) : target).focus?.();
+        (pending.edit ? $("[data-citation-note-editor]", target) : target).focus?.();
         state.focusedAnnotation = { ...pending };
         state.pendingAnnotationFocus = null;
         setTimeout(() => {
           const focused = state.focusedAnnotation;
           if (!focused || focused.kind !== pending.kind || focused.id !== pending.id) return;
           const settledCandidates = focused.kind === "note"
-            ? $$(`[data-sticky-note-id="${CSS.escape(focused.id)}"]`, els.detail)
+            ? $$(`[data-citation-note-id="${CSS.escape(focused.id)}"]`, els.detail)
             : $$(`[data-highlight-id="${CSS.escape(focused.id)}"]`, els.detail);
           const settled = settledCandidates.find(candidate => focused.kind === "note"
-            ? !focused.associationKey || candidate.dataset.stickyNoteAssociation === focused.associationKey
+            ? !focused.associationKey || candidate.dataset.citationNoteAssociation === focused.associationKey
             : !focused.segmentId || candidate.dataset.highlightSegmentId === focused.segmentId)
             || (settledCandidates.length === 1 ? settledCandidates[0] : null);
           if (!settled) return;
           settled.classList.add("is-focused");
-          (focused.edit ? $("[data-sticky-note-editor]", settled) : settled).focus?.({ preventScroll: true });
+          (focused.edit ? $("[data-citation-note-editor]", settled) : settled).focus?.({ preventScroll: true });
         }, 160);
       }));
     }
 
-    function toggleInlineNoteManagement(button) {
-      const location = locationFromNoteButton(button);
-      if (!location) return;
-      const notes = notesCoveringLocation(location);
-      if (!notes.length) { startInlineNoteEditor(button); return; }
-      const note = notes[0], association = note.associations.find(item => associationStartsAtLocation(item, location));
-      startInlineNoteEditor(button, note.id, association ? associationKey(association) : "");
-    }
-
-    function startInlineNoteEditor(button, noteId = "", preferredAssociationKey = "") {
-      const location = noteId ? null : locationFromNoteButton(button);
+    function startInlineNoteEditor(trigger, noteId = "", preferredAssociationKey = "") {
+      const location = noteId ? null : locationFromLegalUnitTrigger(trigger);
       let note = noteId ? profile.notes.find(item => item.id === noteId) : null;
       if (!note && location) {
-        note = upsertNote({ text: "", color: profile.preferences.lastNoteColor || "yellow", associations: [associationForLocation(location)] });
+        note = upsertNote({ text: "", associations: [associationForLocation(location)] });
       }
       if (!note) return;
       const association = note.associations.find(item => preferredAssociationKey ? associationKey(item) === preferredAssociationKey : true);
-      state.inlineNoteEditor = { noteId: note.id, associationKey: association ? associationKey(association) : "", dirty: false };
+      state.inlineNoteEditor = { noteId: note.id, associationKey: association ? associationKey(association) : "" };
       renderInlineLegalNotes();
       const paneId = state.focusedActivePaneId;
-      requestAnimationFrame(() => runInFocusedPane(paneId, () => $("[data-sticky-note-editor]", els.detail)?.focus()));
+      requestAnimationFrame(() => runInFocusedPane(paneId, () => $("[data-citation-note-editor]", els.detail)?.focus()));
     }
 
     function deleteNoteById(id, inline = false) {
       const note = profile.notes.find(item => item.id === id);
       if (!note || !confirm(`Delete “${noteLabel(note)}”? This is included in the next autosave.`)) return false;
       profile.notes = profile.notes.filter(item => item !== note);
-      for (const highlight of profile.highlights || []) if (highlight.noteId === id) { highlight.noteId = null; highlight.color = "yellow"; annotationIndexHighlight(highlight); }
       if (state.inlineNoteEditor?.noteId === id) state.inlineNoteEditor = null;
       ensureAnnotationIndex()?.removeNote?.(id);
       markProfileChanged();
-      renderNotesList();
+      updateProfileSummary();
       if (inline) renderInlineLegalNotes();
       scheduleAnnotationIndexCache();
       return true;
@@ -8403,7 +8513,7 @@
       if (value == null) return false;
       const parsed = parseAssociatedWith(value, { allowRanges: false });
       if (!parsed.valid || !parsed.associations.length) { toast(parsed.message || "Enter at least one exact citation."); return false; }
-      note.associations = parsed.associations.map((association, index) => ({ ...association, placement: globalThis.INA_SEARCH_ANNOTATIONS?.placement?.({ order: index }) }));
+      note.associations = parsed.associations;
       note.updatedAt = new Date().toISOString();
       markProfileChanged(); annotationIndexNote(note);
       applySearchQuery("is:notes", false, true);
@@ -8415,7 +8525,7 @@
       const nodes = [], walker = document.createTreeWalker(host, NodeFilter.SHOW_TEXT, {
         acceptNode(node) {
           const parent = node.parentElement;
-          if (!node.nodeValue || !parent || parent.closest(".sticky-note-card, .legal-unit-note-button, .inserted-reference-card-actions, script, style")) return NodeFilter.FILTER_REJECT;
+          if (!node.nodeValue || !parent || parent.closest(".citation-note, .legal-unit-trigger, .inserted-reference-card-actions, script, style")) return NodeFilter.FILTER_REJECT;
           return NodeFilter.FILTER_ACCEPT;
         }
       });
@@ -8470,11 +8580,11 @@
 
     function renderUserHighlights() {
       unwrapUserHighlights();
-      const candidates = $$('[data-note-unit-kind]', els.detail).map(button => ({ button, location: locationFromNoteButton(button) })).filter(item => item.location);
+      const candidates = $$('[data-legal-unit-kind]', els.detail).map(trigger => ({ trigger, location: locationFromLegalUnitTrigger(trigger) })).filter(item => item.location);
       const changedHighlights = new Set();
       for (const highlight of profile.highlights || []) for (const segment of highlight.segments || []) {
         const candidate = candidates.find(item => associationStartsAtLocation(segment.association, item.location));
-        const host = candidate ? contextualNoteHost(candidate.button) || inlineNoteHost(candidate.button) : null;
+        const host = candidate ? legalUnitNoteHost(candidate.trigger) : null;
         const outcome = host ? wrapUserHighlight(host, highlight, segment) : null;
         if (host && outcome && !outcome.wrapped) {
           const notice = document.createElement("button");
@@ -8490,18 +8600,6 @@
       if (changedHighlights.size) {
         markProfileChanged();
         for (const highlight of changedHighlights) annotationIndexHighlight(highlight);
-      }
-    }
-
-    function alignEdgeNotesToPrimaryHighlights() {
-      for (const card of $$('.sticky-note-card[data-note-dock="left"], .sticky-note-card[data-note-dock="right"]', els.detail)) {
-        const record = stickyNoteRecord(card), segmentId = record?.association?.placement?.primaryHighlightId;
-        if (!segmentId) continue;
-        const highlight = $(`[data-highlight-segment-id="${CSS.escape(segmentId)}"]`, els.detail);
-        const host = card.closest("[data-note-drop-target]");
-        if (!highlight || !host) continue;
-        const offset = Math.max(0, Math.round(highlight.getBoundingClientRect().top - host.getBoundingClientRect().top));
-        card.style.marginTop = `${offset + 4}px`;
       }
     }
 
@@ -8546,7 +8644,7 @@
     function createHighlightFromSelection(linkNote = false) {
       const selection = getSelection(), range = selection?.rangeCount ? selection.getRangeAt(0).cloneRange() : null;
       if (!range || range.collapsed || !els.detail.contains(range.commonAncestorContainer)) return null;
-      const candidates = $$('[data-note-unit-kind]', els.detail).map(button => ({ button, location: locationFromNoteButton(button), host: contextualNoteHost(button) || inlineNoteHost(button) })).filter(item => item.location && item.host);
+      const candidates = $$('[data-legal-unit-kind]', els.detail).map(trigger => ({ trigger, location: locationFromLegalUnitTrigger(trigger), host: legalUnitNoteHost(trigger) })).filter(item => item.location && item.host);
       const segments = [];
       for (const candidate of candidates) {
         try { if (!range.intersectsNode(candidate.host)) continue; } catch { continue; }
@@ -8562,21 +8660,19 @@
       }
       if (!segments.length) return null;
       const now = new Date().toISOString();
-      const highlight = { id: makeId("highlight"), noteId: null, color: "yellow", segments, createdAt: now, updatedAt: now };
+      const highlight = { id: makeId("highlight"), color: "yellow", segments, createdAt: now, updatedAt: now };
       profile.highlights.push(highlight);
       if (linkNote) {
-        const associations = segments.map(segment => ({ ...structuredCloneSafe(segment.association), placement: { ...segment.association.placement, primaryHighlightId: segment.id } }));
-        const note = upsertNote({ text: "", color: profile.preferences.lastNoteColor || "yellow", associations });
-        highlight.noteId = note.id;
-        highlight.color = note.color;
-        state.inlineNoteEditor = { noteId: note.id, associationKey: associationKey(note.associations[0]), dirty: false };
+        const associations = segments.map(segment => structuredCloneSafe(segment.association));
+        const note = upsertNote({ text: "", associations });
+        state.inlineNoteEditor = { noteId: note.id, associationKey: associationKey(note.associations[0]) };
       }
       annotationIndexHighlight(highlight);
       markProfileChanged();
       selection.removeAllRanges();
       els.annotationSelectionToolbar.hidden = true;
       renderInlineLegalNotes();
-      requestAnimationFrame(() => $("[data-sticky-note-editor]", els.detail)?.focus());
+      requestAnimationFrame(() => $("[data-citation-note-editor]", els.detail)?.focus());
       return highlight;
     }
 
@@ -8584,12 +8680,10 @@
       const selection = getSelection(), range = selection?.rangeCount ? selection.getRangeAt(0) : null;
       if (!range || range.collapsed || !els.detail.contains(range.commonAncestorContainer) || !String(selection).trim()) {
         els.annotationSelectionToolbar.hidden = true;
-        state.annotationSelection = null;
         return;
       }
       const rect = range.getBoundingClientRect();
       if (!rect.width && !rect.height) { els.annotationSelectionToolbar.hidden = true; return; }
-      state.annotationSelection = range.cloneRange();
       els.annotationSelectionToolbar.hidden = false;
       els.annotationSelectionToolbar.style.left = `${Math.max(8, Math.min(window.innerWidth - 220, rect.left + rect.width / 2 - 90))}px`;
       els.annotationSelectionToolbar.style.top = `${Math.max(8, rect.top - 44)}px`;
@@ -8597,26 +8691,21 @@
 
     function deleteHighlightById(id) {
       const highlight = profile.highlights.find(item => item.id === id);
-      if (!highlight || !confirm("Delete this highlight? The linked note, if any, will be kept.")) return false;
+      if (!highlight || !confirm("Delete this highlight?")) return false;
       profile.highlights = profile.highlights.filter(item => item !== highlight);
-      for (const note of profile.notes || []) for (const association of note.associations || []) {
-        if (!highlight.segments.some(segment => association.placement?.primaryHighlightId === segment.id)) continue;
-        const replacement = (profile.highlights || []).filter(item => item.noteId === note.id).flatMap(item => item.segments || []).find(segment => associationKey(segment.association) === associationKey(association));
-        association.placement.primaryHighlightId = replacement?.id || null;
-      }
       ensureAnnotationIndex()?.removeHighlight?.(id);
       markProfileChanged(); scheduleAnnotationIndexCache(); renderInlineLegalNotes();
       return true;
     }
 
-    function stickyNoteRecord(card) {
-      const note = profile.notes.find(item => item.id === card?.dataset.stickyNoteId);
-      const association = note?.associations?.find(item => associationKey(item) === card.dataset.stickyNoteAssociation);
+    function citationNoteRecord(card) {
+      const note = profile.notes.find(item => item.id === card?.dataset.citationNoteId);
+      const association = note?.associations?.find(item => associationKey(item) === card.dataset.citationNoteAssociation);
       return note && association ? { note, association } : null;
     }
 
-    function saveStickyNoteText(card, finish = false) {
-      const record = stickyNoteRecord(card), editor = $("[data-sticky-note-editor]", card);
+    function saveCitationNoteText(card, finish = false) {
+      const record = citationNoteRecord(card), editor = $("[data-citation-note-editor]", card);
       if (!record || !editor) return;
       record.note.text = editor.value;
       record.note.updatedAt = new Date().toISOString();
@@ -8628,76 +8717,24 @@
       }
     }
 
-    function scheduleStickyNoteTextSave(card) {
-      const record = stickyNoteRecord(card);
+    function scheduleCitationNoteTextSave(card) {
+      const record = citationNoteRecord(card);
       if (!record) return;
       clearTimeout(state.annotationAutosaveTimers.get(record.note.id));
-      const timer = setTimeout(() => { state.annotationAutosaveTimers.delete(record.note.id); saveStickyNoteText(card, false); }, 500);
+      const timer = setTimeout(() => { state.annotationAutosaveTimers.delete(record.note.id); saveCitationNoteText(card, false); }, 500);
       state.annotationAutosaveTimers.set(record.note.id, timer);
     }
 
-    function applyStickyNoteAssociations(card) {
-      const record = stickyNoteRecord(card), input = $("[data-note-associations-input]", card);
+    function applyCitationNoteAssociations(card) {
+      const record = citationNoteRecord(card), input = $("[data-note-associations-input]", card);
       if (!record || !input) return;
       const parsed = parseAssociatedWith(input.value, { allowRanges: false });
       if (!parsed.valid || !parsed.associations.length) { input.setCustomValidity(parsed.message || "Add at least one exact citation."); input.reportValidity(); return; }
       input.setCustomValidity("");
-      const placements = new Map(record.note.associations.map(item => [associationKey(item), item.placement]));
-      record.note.associations = parsed.associations.map((association, index) => ({ ...association, placement: globalThis.INA_SEARCH_ANNOTATIONS?.placement?.(placements.get(associationKey(association)) || { order: index }) }));
+      record.note.associations = parsed.associations;
       record.note.updatedAt = new Date().toISOString();
       markProfileChanged(); annotationIndexNote(record.note); renderInlineLegalNotes();
       toast("Note associations updated.");
-    }
-
-    function updateStickyNotePlacement(card, changes) {
-      const record = stickyNoteRecord(card);
-      if (!record) return;
-      record.association.placement = globalThis.INA_SEARCH_ANNOTATIONS?.placement?.({ ...record.association.placement, ...changes });
-      record.note.updatedAt = new Date().toISOString();
-      markProfileChanged(); annotationIndexNote(record.note); renderInlineLegalNotes();
-    }
-
-    function beginStickyNoteDrag(event, handle) {
-      if (event.button !== 0) return;
-      const card = handle.closest(".sticky-note-card"), record = stickyNoteRecord(card);
-      if (!card || !record) return;
-      event.preventDefault();
-      handle.setPointerCapture?.(event.pointerId);
-      card.classList.add("is-dragging");
-      const indicator = document.createElement("div");
-      indicator.className = "note-drop-indicator";
-      indicator.textContent = "Move note";
-      document.body.append(indicator);
-      const drag = { pointerId: event.pointerId, card, record, indicator, target: null, location: null, placement: null };
-      state.annotationDrag = drag;
-      const move = moveEvent => {
-        if (moveEvent.pointerId !== drag.pointerId) return;
-        indicator.style.left = `${Math.min(window.innerWidth - indicator.offsetWidth - 8, moveEvent.clientX + 12)}px`;
-        indicator.style.top = `${Math.min(window.innerHeight - indicator.offsetHeight - 8, moveEvent.clientY + 12)}px`;
-        const target = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY)?.closest?.("[data-note-drop-target]");
-        if (drag.target !== target) { drag.target?.classList.remove("note-drop-preview"); drag.target = target; target?.classList.add("note-drop-preview"); }
-        const button = target?.__noteButton || target?.querySelector?.("[data-note-unit-kind]");
-        const location = locationFromNoteButton(button);
-        if (!target || !location) { drag.location = null; indicator.textContent = "Move note"; return; }
-        const rect = target.getBoundingClientRect(), horizontal = (moveEvent.clientX - rect.left) / Math.max(1, rect.width), vertical = (moveEvent.clientY - rect.top) / Math.max(1, rect.height);
-        const dock = horizontal < .25 ? "left" : horizontal > .75 ? "right" : "full";
-        const boundary = vertical < .5 ? "before" : "after";
-        drag.location = location; drag.placement = { dock, boundary, preferredWidthPx: record.association.placement.preferredWidthPx, order: record.association.placement.order };
-        indicator.textContent = `${location.citation} · ${boundary} · ${dock}`;
-      };
-      const finish = upEvent => {
-        if (upEvent.pointerId !== drag.pointerId) return;
-        handle.removeEventListener("pointermove", move); handle.removeEventListener("pointerup", finish); handle.removeEventListener("pointercancel", finish);
-        drag.target?.classList.remove("note-drop-preview"); drag.card.classList.remove("is-dragging"); drag.indicator.remove(); state.annotationDrag = null;
-        if (!drag.location || !drag.placement) return;
-        const next = associationForLocation(drag.location), currentIndex = drag.record.note.associations.indexOf(drag.record.association), duplicateIndex = drag.record.note.associations.findIndex(item => item !== drag.record.association && associationKey(item) === associationKey(next));
-        next.placement = globalThis.INA_SEARCH_ANNOTATIONS?.placement?.(drag.placement);
-        if (duplicateIndex >= 0) drag.record.note.associations.splice(currentIndex, 1);
-        else drag.record.note.associations.splice(currentIndex, 1, next);
-        drag.record.note.updatedAt = new Date().toISOString();
-        markProfileChanged(); annotationIndexNote(drag.record.note); renderInlineLegalNotes();
-      };
-      handle.addEventListener("pointermove", move); handle.addEventListener("pointerup", finish); handle.addEventListener("pointercancel", finish);
     }
 
     function prepareNoteReferenceTrigger(trigger) {
@@ -8794,10 +8831,7 @@
 
     function legalUnitTriggerHtml(kind, sectionId, path, citation, contents, className = "") {
       const encodedPath = escapeHtml(JSON.stringify(path || []));
-      const location = typeof legalUnitNoteLocation === "function" ? legalUnitNoteLocation(kind, sectionId, path || [], citation) : null;
-      const noteCount = location && typeof notesCoveringLocation === "function" ? notesCoveringLocation(location).length : 0;
-      const noteButton = location ? `<button type="button" class="legal-unit-note-button${noteCount ? " has-notes" : ""}" data-note-unit-kind="${escapeHtml(kind)}" data-note-unit-section="${escapeHtml(sectionId)}" data-note-unit-path="${encodedPath}" data-note-unit-citation="${escapeHtml(citation)}" aria-label="Add or view notes for ${escapeHtml(citation)}" title="Add or view notes for ${escapeHtml(citation)}${noteCount ? ` · ${noteCount} saved` : ""}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h8l3 3v14h-11z"/><path d="M14.5 3.5v4h3M9 11h6M9 14.5h6"/></svg></button>` : "";
-      return `<span class="legal-unit-controls"><button type="button" class="legal-unit-trigger${className ? ` ${className}` : ""}" data-legal-unit-kind="${escapeHtml(kind)}" data-legal-unit-section="${escapeHtml(sectionId)}" data-legal-unit-path="${encodedPath}" data-legal-unit-citation="${escapeHtml(citation)}" aria-haspopup="menu" aria-expanded="false" title="Citation actions for ${escapeHtml(citation)}">${contents}</button>${noteButton}</span>`;
+      return `<button type="button" class="legal-unit-trigger${className ? ` ${className}` : ""}" data-legal-unit-kind="${escapeHtml(kind)}" data-legal-unit-section="${escapeHtml(sectionId)}" data-legal-unit-path="${encodedPath}" data-legal-unit-citation="${escapeHtml(citation)}" aria-haspopup="menu" aria-expanded="false" title="Citation actions for ${escapeHtml(citation)}">${contents}</button>`;
     }
 
     function superscriptNumber(value) {
@@ -10334,6 +10368,11 @@
         const copied = await copyLegalText(context.shareLink);
         toast(copied ? `Link to ${context.noun.toLowerCase()} copied.` : "The link could not be copied.");
         if (context.shareLinkIsLocal && profile.preferences.hideLocalShareWarning !== true && showLocalShareWarning(true, els.copyLegalUnitShareLinkButton, true)) return true;
+      } else if (action === "add-note") {
+        const trigger = context.trigger;
+        closeLegalUnitMenu(false);
+        startInlineNoteEditor(trigger);
+        return true;
       } else if (action === "print") {
         printLegalUnit(context);
       } else if (action === "open") {
@@ -10816,6 +10855,7 @@
 
     function renderDetail(record) {
       if (!record) return;
+      hydrateLegalReferences(record.item);
       if (!["usc", "cfr", "cfr-appendix"].includes(record.kind)) setStatuteNavigationVisible(false);
       const citationResult = record.citationResult || (state.citation?.record?.key === record.key ? state.citation : null);
       if (record.kind === "usc") renderStatute(record.item, citationResult);
@@ -11013,7 +11053,6 @@
       }
       if (show) fitStatuteNavigation();
       syncStatuteNavigationOffset();
-      syncContextualNoteButtons();
       syncNavigationDepthSettings();
     }
 
@@ -11272,7 +11311,6 @@
       state.statuteNavigationValues = segments.map(segment => segment.value);
       setStatuteNavigationVisible(true);
       updateStatuteHistoryButtons();
-      syncContextualNoteButtons();
     }
 
     function renderHierarchyNavigation(result) {
@@ -11895,6 +11933,7 @@
     }
 
     function renderStatute(section, citationResult) {
+      hydrateLegalReferences(section);
       prepareInlineNotePage(`usc:${section.id}`);
       const citationTargetPath = citationResult?.path || [];
       const scopedPath = state.searchScopeActive && state.searchScopeMode !== "cites" ? state.searchScope?.pathsBySection?.get(section.id) || [] : [];
@@ -12286,7 +12325,7 @@
       const definitionContext = statuteDefinitionContext(section, uscToIna.get(normCitationPart(section.section)), []);
       els.detail.innerHTML = `<div class="detail-content">${statuteStatusWarning(section)}<p class="eyebrow">${escapeHtml(kindLabel(noteKind || noteResultKind(note.topic)))}</p><h2 class="detail-title">${linkifyStatutoryText(note.heading || titleCaseTopic(note.topic), note.headingReferences || [], 0, undefined, null, [], definitionContext)}</h2>
         <p class="detail-subtitle">8 U.S.C. ${escapeHtml(section.section)} — ${escapeHtml(section.heading)}</p>
-        <div class="detail-actions">${openButton(section.url)}<button class="button" data-show-section="${escapeHtml(section.id)}">View section context</button><button class="button" data-link-current>＋ Link to note</button></div>
+        <div class="detail-actions">${openButton(section.url)}<button class="button" data-show-section="${escapeHtml(section.id)}">View section context</button></div>
         <div class="source-banner">This is labeled separately from operative statutory text. Note topic: ${escapeHtml(note.topic)}.</div>
         <p style="white-space:pre-wrap">${linkifyStatutoryText(note.text, note.references || [], 0, undefined, null, [], definitionContext)}</p></div>`;
     }
@@ -12296,7 +12335,7 @@
       const definitionContext = statuteDefinitionContext(section, uscToIna.get(normCitationPart(section.section)), []);
       els.detail.innerHTML = `<div class="detail-content">${statuteStatusWarning(section)}<p class="eyebrow">Source credit</p><h2 class="detail-title">${escapeHtml(section.heading || `8 U.S.C. ${section.section}`)}</h2>
         <p class="detail-subtitle">8 U.S.C. ${escapeHtml(section.section)}</p>
-        <div class="detail-actions">${openButton(section.url)}<button class="button" data-show-section="${escapeHtml(section.id)}">View section context</button><button class="button" data-link-current>＋ Link to note</button></div>
+        <div class="detail-actions">${openButton(section.url)}<button class="button" data-show-section="${escapeHtml(section.id)}">View section context</button></div>
         <div class="source-banner">This legislative source credit is indexed separately from operative statutory text.</div>
         <p style="white-space:pre-wrap">${linkifyStatutoryText(item.text, section.sourceCreditReferences || [], 0, undefined, null, [], definitionContext)}</p></div>`;
     }
@@ -12312,7 +12351,7 @@
             : "This relationship is taken directly from the USCIS INA crosswalk; the linked local text is the separately sourced House U.S. Code record.";
       els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">USCIS INA crosswalk</p><h2 class="detail-title">${escapeHtml(row.title || `INA ${row.inaSection}`)}</h2>
         <p class="detail-subtitle">INA ${escapeHtml(row.inaSection)} ${row.uscLabel ? `↔ ${escapeHtml(row.uscLabel)}` : ""}</p>
-        <div class="detail-actions">${openButton(INA_SOURCE_URL, "Open USCIS crosswalk")}${row.url ? openButton(row.url, "Open linked House record") : ""}${section ? `<button class="button" data-show-section="${escapeHtml(section.id)}">Read local U.S.C. text</button>` : ""}<button class="button" data-link-current>＋ Link to note</button></div>
+        <div class="detail-actions">${openButton(INA_SOURCE_URL, "Open USCIS crosswalk")}${row.url ? openButton(row.url, "Open linked House record") : ""}${section ? `<button class="button" data-show-section="${escapeHtml(section.id)}">Read local U.S.C. text</button>` : ""}</div>
         <div class="${section ? "source-banner" : "notice warning"}">${escapeHtml(status)}</div>
         ${row.source?.supportingExcerpt ? `<blockquote>${escapeHtml(row.source.supportingExcerpt)}</blockquote>` : ""}
         <dl><dt>INA location</dt><dd>${escapeHtml(row.group)}</dd><dt>U.S. Code entry</dt><dd>${escapeHtml(row.uscLabel || "No equivalent listed")}</dd><dt>Crosswalk captured</dt><dd>${escapeHtml(row.source?.captureDate || corpus?.sources?.inaCrosswalk?.capturedAt || "date unavailable")}</dd></dl></div>`;
@@ -12457,14 +12496,16 @@
     }
 
     function renderCfr(item, citationResult = null) {
+      hydrateLegalReferences(item);
       if (item?.external) {
         setStatuteNavigationVisible(false);
-        els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Regulation not included</p><div class="detail-heading-row"><div><h2 class="detail-title">${escapeHtml(item.label)}</h2></div><div class="detail-heading-actions">${openButton(item.url, "Current eCFR")}</div></div><p class="detail-subtitle">Outside this edition</p><div class="detail-actions"><button class="button" data-link-current>＋ Link to note</button></div><div class="notice warning">This citation format is valid, but its text is not included in INASearch. Use current eCFR to check the regulation and any recent changes.</div></div>`;
+        els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Regulation not included</p><div class="detail-heading-row"><div><h2 class="detail-title">${escapeHtml(item.label)}</h2></div><div class="detail-heading-actions">${openButton(item.url, "Current eCFR")}</div></div><p class="detail-subtitle">Outside this edition</p><div class="notice warning">This citation format is valid, but its text is not included in INASearch. Use current eCFR to check the regulation and any recent changes.</div></div>`;
         return;
       }
       const section = item;
       prepareInlineNotePage(`cfr:${section.id}`);
       const part = cfrPartMap.get(section.partId);
+      hydrateLegalReferences(part);
       const cite = citationResult?.label || (section.section ? `${section.title} CFR ${section.section}` : `${section.title} CFR Part ${part?.part || ""}`);
       const citationBase = section.section ? `${section.title} CFR ${section.section}` : `${section.title} CFR ${section.label || `Part ${part?.part || ""}`}`;
       const requestedTargetPath = canonicalPath(citationResult?.path || []);
@@ -12498,7 +12539,6 @@
       const refs = act.activeReferences || act.references || [];
       els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">Named Act references in approved sources</p><h2 class="detail-title">${escapeHtml(act.name)}</h2>
         <p class="detail-subtitle">Public Law ${escapeHtml(act.publicLaw)}${act.activeLocator ? ` · § ${escapeHtml(act.activeLocator)}` : ""}</p>
-        <div class="detail-actions"><button class="button" data-link-current>＋ Link to note</button></div>
         <div class="notice warning">These are direct references found in the approved House Title 8 source. They are not complete Act text and do not reconstruct the Act.</div>
         <div class="reference-list">${refs.length ? refs.slice(0, 120).map(ref => `<div class="reference-row"><strong>${escapeHtml(`8 U.S.C. ${ref.uscSection} · ${ref.contextType}${ref.actLocator ? ` · Act § ${ref.actLocator}` : ""}`)}</strong><p>${escapeHtml(truncate(ref.source?.supportingExcerpt || "", 620))}</p><button class="button small" data-open-url="${escapeHtml(ref.url)}">Open House source</button></div>`).join("") : `<p>No approved-source text is indexed for this locator.</p>`}</div>
         ${refs.length > 120 ? `<p class="notice">Showing the first 120 of ${refs.length} indexed references. Narrow the Act citation to a section locator.</p>` : ""}</div>`;
@@ -12507,27 +12547,14 @@
     function renderPolicy(item) {
       els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">USCIS Policy Manual ${escapeHtml(item.kind)}</p><h2 class="detail-title">${escapeHtml(item.title)}</h2>
         <div class="breadcrumb">${(item.path || []).map(x => `<span>${escapeHtml(x)}</span>`).join("")}</div>
-        <div class="detail-actions">${openButton(item.url)}<button class="button" data-link-current>＋ Link to note</button></div>
+        <div class="detail-actions">${openButton(item.url)}</div>
         <div class="source-banner">Only hierarchy and resource metadata are stored locally. The complete Policy Manual text remains on USCIS.gov.</div></div>`;
     }
 
     function renderForm(form) {
       els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">USCIS form catalog</p><h2 class="detail-title">${escapeHtml(form.title)}</h2><p class="detail-subtitle">${escapeHtml(form.number)}</p>
-        <div class="detail-actions">${openButton(form.url, "Open official form page")}<button class="button" data-link-current>＋ Link to note</button></div>
+        <div class="detail-actions">${openButton(form.url, "Open official form page")}</div>
         <div class="source-banner">INASearch includes only the form number, title, and official page link because form content can change.</div></div>`;
-    }
-
-    function currentResultAssociation() {
-      const record = state.selected;
-      if (!record || !["usc", "ina", "cfr", "cfr-appendix"].includes(record.kind) || record.item?.external) return null;
-      if (record.kind === "ina") return associationFromCitationResult(parseCitation(record.cite || `INA ${record.item?.inaSection || ""}`));
-      const citationResult = record.citationResult || (state.citation?.record?.key === record.key ? state.citation : null);
-      if (citationResult) return associationFromCitationResult(citationResult);
-      const family = record.kind === "usc" ? "usc" : "cfr";
-      const title = family === "usc" ? 8 : Number(record.item.title);
-      const unit = family === "usc" ? record.item.section : record.item.section;
-      if (!unit) return null;
-      return { family, title, citationSystem: family, start: { unit: String(unit), path: [] }, label: record.cite || `${family === "usc" ? "8 U.S.C." : `${title} CFR`} ${unit}` };
     }
 
     function noteLabel(note) {
@@ -12537,37 +12564,23 @@
       return "Untitled note";
     }
 
-    function noteHasContent(note) {
-      return Boolean(note && (String(note.text ?? note.body ?? "").trim() || (note.associations || []).length));
-    }
-
-    function renderNotesList() {
-      updateProfileSummary();
-    }
-
     function editNote(id) {
       const note = profile.notes.find(x => x.id === id);
       if (!note) return;
       const association = note.associations?.[0];
       if (!association) { applySearchQuery("is:notes", true, true); return; }
       state.pendingAnnotationFocus = { kind: "note", id: note.id, associationKey: associationKey(association), edit: true };
-      state.inlineNoteEditor = { noteId: note.id, associationKey: associationKey(association), dirty: false };
+      state.inlineNoteEditor = { noteId: note.id, associationKey: associationKey(association) };
       applySearchQuery(associationLabel(association), true, true);
     }
 
     function upsertNote(values, requestedId = "") {
       const now = new Date().toISOString();
       const existing = profile.notes.find(note => note.id === requestedId) || null;
-      const requestedAssociations = structuredCloneSafe(values.associations || existing?.associations || []);
-      const existingPlacements = new Map((existing?.associations || []).map(association => [associationKey(association), association.placement]));
-      const associations = requestedAssociations.map((association, index) => ({
-        ...association,
-        placement: globalThis.INA_SEARCH_ANNOTATIONS?.placement?.(association.placement || existingPlacements.get(associationKey(association)) || { order: index })
-      }));
+      const associations = structuredCloneSafe(values.associations || existing?.associations || []);
       const note = {
         id: existing?.id || requestedId || makeId("note"),
         text: String(values.text ?? values.body ?? ""),
-        color: globalThis.INA_SEARCH_ANNOTATIONS?.color?.(values.color || existing?.color || profile.preferences.lastNoteColor) || "yellow",
         createdAt: existing?.createdAt || now,
         updatedAt: now,
         associations,
@@ -12575,7 +12588,6 @@
       };
       refreshNoteReferences(note);
       if (existing) Object.assign(existing, note); else profile.notes.push(note);
-      profile.preferences.lastNoteColor = note.color;
       markProfileChanged();
       annotationIndexNote(existing || note);
       return existing || note;
@@ -12676,7 +12688,8 @@
       els.inaCitationLinksToggle.checked = profile.preferences.statutoryLinkCitationSystem === "ina";
       els.highlightInaCitationLinksToggle.checked = profile.preferences.highlightInaCitationLinks === true;
       els.definedTermHighlightingToggle.checked = definedTermHighlightingEnabled();
-      els.notesUseRuleFontToggle.checked = profile.preferences.notesUseRuleFont === true;
+      els.noteDisplayPositionSelect.value = profile.preferences.noteDisplayPosition === "bottom" ? "bottom" : "top";
+      els.notesUseHandwrittenFontToggle.checked = profile.preferences.notesUseHandwrittenFont === true;
       els.automaticCfrUpdatesToggle.checked = automaticCfrUpdatesEnabled();
       els.automaticStatutoryNavigationSystemToggle.checked = profile.preferences.automaticStatutoryNavigationSystem === true;
       els.emptySearchViewSelect.value = profile.preferences.emptySearchView;
@@ -12788,11 +12801,28 @@
       refreshStatutoryCitationDisplay();
     }
 
-    function setNotesUseRuleFont(value) {
+    function refreshVisibleCitationNotes() {
+      if (state.focusedCitationMode) {
+        for (const pane of state.focusedCitationPanes) withFocusedCitationPane(pane, renderInlineLegalNotes);
+        return;
+      }
+      renderInlineLegalNotes();
+    }
+
+    function setNoteDisplayPosition(value) {
+      const next = value === "bottom" ? "bottom" : "top";
+      if (profile.preferences.noteDisplayPosition === next) return;
+      profile.preferences.noteDisplayPosition = next;
+      markProfileChanged();
+      refreshVisibleCitationNotes();
+      renderSavingMenu();
+    }
+
+    function setNotesUseHandwrittenFont(value) {
       const next = value === true;
-      if (profile.preferences.notesUseRuleFont === next) return;
-      profile.preferences.notesUseRuleFont = next;
-      document.body.classList.toggle("notes-use-rule-font", next);
+      if (profile.preferences.notesUseHandwrittenFont === next) return;
+      profile.preferences.notesUseHandwrittenFont = next;
+      document.body.classList.toggle("notes-use-handwritten-font", next);
       markProfileChanged();
       renderSavingMenu();
     }
@@ -13162,12 +13192,9 @@
       stopTutorialForReset();
       for (const timer of state.annotationAutosaveTimers.values()) clearTimeout(timer);
       state.annotationAutosaveTimers.clear();
-      state.annotationDrag = null;
-      state.annotationSelection = null;
       state.pendingAnnotationFocus = null;
       state.focusedAnnotation = null;
       state.inlineNoteEditor = null;
-      state.openNotePanels = new Set();
       state.backupReminderDue = false;
       resetProfileContentToDefaults();
       insertedReferenceMaterializedKeys.clear();
@@ -13175,14 +13202,12 @@
       state.statuteHierarchyAuthority = profile.preferences.statutoryNavigationSystem;
       state.lastScrollSyncedCitation = "";
       applyThemePreference(profile.preferences.theme);
-      document.body.classList.toggle("notes-use-rule-font", profile.preferences.notesUseRuleFont === true);
       syncCitationJumpAnimationPreference();
       syncAppearanceControls();
       stopCorpusMaintenance(true);
       renderTutorialEntryLabels();
-      buildIndex();
       markProfileChanged();
-      renderNotesList();
+      updateProfileSummary();
       if (blankWorkspace) openClearedSearchHierarchy();
       else if (state.view === "search" && String(els.search.value || "").trim()) applySearchQuery(els.search.value, false, true);
       else {
@@ -13271,11 +13296,12 @@
 
     async function loadBackupReminderMetadata() {
       try {
-        const [lastReminder, lastProtection, persistence] = await Promise.all([
-          globalThis.INASearchStorage?.getMetadata?.("last-backup-reminder-at"),
-          globalThis.INASearchStorage?.getMetadata?.("last-filesystem-protection-at"),
-          globalThis.INASearchStorage?.getMetadata?.("storage-persistence")
-        ]);
+        const snapshotMetadata = startupSnapshot?.metadata || {};
+        const [lastReminder, lastProtection, persistence] = [
+          snapshotMetadata["last-backup-reminder-at"],
+          snapshotMetadata["last-filesystem-protection-at"],
+          snapshotMetadata["storage-persistence"]
+        ];
         state.lastBackupReminderAt = lastReminder?.at || null;
         state.lastFilesystemProtectionAt = lastProtection?.at || null;
         state.persistenceStatus = persistence || null;
@@ -13384,7 +13410,6 @@
         definitionSourceFilters: [...state.definitionSourceFilters],
         definitionScopeFilters: [...state.definitionScopeFilters],
         openDetails: $$("details[open]").map(item => ({ id: item.id || "", summary: item.querySelector("summary")?.textContent?.trim() || "" })),
-        openNotePanels: [...state.openNotePanels],
         inlineNoteEditor: structuredCloneSafe(state.inlineNoteEditor)
       };
     }
@@ -13437,7 +13462,6 @@
         state.definitionScopeFilters = [...snapshot.definitionScopeFilters];
         els.definitionTermFilter.value = snapshot.definitionQuery;
         if (snapshot.view === "definitions") { renderDefinitionFilterOptions(); renderDefinitions(); }
-        state.openNotePanels = new Set(snapshot.openNotePanels);
         state.inlineNoteEditor = structuredCloneSafe(snapshot.inlineNoteEditor);
         if (snapshot.settingsOpen) openSavingMenu("citation", state.tutorialReturnFocus || els.settingsMenuButton);
       } finally { state.tutorialNavigating = false; }
@@ -13752,7 +13776,7 @@
     }
 
     function applyVaultProfile(vault) {
-      profile = upgradeProfileCitationLinks(normalizeProfile(vault.profile));
+      profile = normalizeProfile(vault.profile);
       const annotationReferencesChanged = refreshStaleNoteReferences();
       resetAnnotationIndex();
       applyThemePreference(profile.preferences.theme);
@@ -13764,11 +13788,9 @@
       state.profileValid = true;
       state.profileChanged = false;
       state.tutorialSessionProgress = normalizeTutorialProgress(profile.tutorialProgress);
-      renderNotesList();
       renderTutorialEntryLabels();
       updateProfileSummary();
       if (!els.savingMenuModal.hidden) renderSavingMenu();
-      buildIndex();
       if (state.view === "sources") renderSources();
       if (state.view === "definitions") renderDefinitions();
       else if (state.focusedCitationMode) {
@@ -14054,7 +14076,7 @@
       const file = els.importProfileInput.files?.[0];
       if (!file) return;
       try {
-        const imported = upgradeProfileCitationLinks(profileFromImportedText(await file.text()));
+        const imported = profileFromImportedText(await file.text());
         if (!confirm("Replace the notes, settings, and tutorial state currently loaded in INASearch with the selected file?")) return;
         imported.tutorialProgress = mergeTutorialProgress(imported.tutorialProgress, state.tutorialSessionProgress);
         imported.tipProgress = mergeTipProgress(imported.tipProgress, profile.tipProgress);
@@ -14067,8 +14089,6 @@
         resolveSavedReferenceInsertions();
         state.tutorialSessionProgress = normalizeTutorialProgress(profile.tutorialProgress);
         state.profileValid = true;
-        buildIndex();
-        renderNotesList();
         markProfileChanged();
         refreshStatutoryCitationDisplay();
         toast(state.fileConnected ? "Saved data imported and queued for browser and filesystem autosave." : "Saved data imported and queued for browser autosave.");
@@ -14238,6 +14258,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
     }
 
     function renderSources() {
+      renderCorpusAudit();
       const shortcuts = corpus?.shortcuts || [
         { title: "USCIS", url: "https://www.uscis.gov/" },
         { title: "USCIS search", url: "https://www.uscis.gov/search" },
@@ -15133,19 +15154,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
         if (option) applySearchQuery(option.dataset.citationInterpretation, true);
       });
       document.addEventListener("keydown", event => {
-        const noteHandle = event.target.closest?.("[data-note-drag]");
-        const noteCard = noteHandle?.closest?.(".sticky-note-card");
-        if (noteHandle && noteCard && ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
-          event.preventDefault();
-          const record = stickyNoteRecord(noteCard);
-          if (!record) return;
-          if (event.altKey && ["ArrowLeft", "ArrowRight"].includes(event.key)) {
-            const delta = event.key === "ArrowLeft" ? -24 : 24;
-            updateStickyNotePlacement(noteCard, { preferredWidthPx: Math.max(180, Math.min(560, Number(record.association.placement.preferredWidthPx || 288) + delta)) });
-          } else if (["ArrowLeft", "ArrowRight"].includes(event.key)) updateStickyNotePlacement(noteCard, { dock: event.key === "ArrowLeft" ? "left" : "right" });
-          else updateStickyNotePlacement(noteCard, { boundary: event.key === "ArrowUp" ? "before" : "after" });
-          return;
-        }
         const focusedHighlight = event.target.closest?.("[data-highlight-id]");
         if (focusedHighlight && (event.key === "Delete" || event.key === "Backspace")) {
           event.preventDefault();
@@ -15201,13 +15209,11 @@ Get-FileHash $outJson -Algorithm SHA256`;
         }
         const legalUnitAction = event.target.closest("[data-legal-unit-action]");
         if (legalUnitAction) { event.preventDefault(); void handleLegalUnitAction(legalUnitAction.dataset.legalUnitAction); return; }
-        const noteUnitButton = event.target.closest("[data-note-unit-kind]");
-        if (noteUnitButton) { event.preventDefault(); toggleInlineNoteManagement(noteUnitButton); return; }
-        const stickyCard = event.target.closest(".sticky-note-card");
-        const stickyView = event.target.closest("[data-sticky-note-view]");
-        if (stickyView && stickyCard && !event.target.closest("[data-note-reference]")) {
+        const citationNote = event.target.closest(".citation-note");
+        const citationNoteView = event.target.closest("[data-citation-note-view]");
+        if (citationNoteView && citationNote && !event.target.closest("[data-note-reference]")) {
           event.preventDefault();
-          const record = stickyNoteRecord(stickyCard);
+          const record = citationNoteRecord(citationNote);
           if (record) startInlineNoteEditor(null, record.note.id, associationKey(record.association));
           return;
         }
@@ -15217,27 +15223,11 @@ Get-FileHash $outJson -Algorithm SHA256`;
           if (prepareNoteReferenceTrigger(noteReference)) openLegalReferencePopover(noteReference, true);
           return;
         }
-        const colorChoice = event.target.closest("[data-note-color-choice]");
-        if (colorChoice && stickyCard) {
+        if (event.target.closest("[data-note-associations-save]") && citationNote) { event.preventDefault(); applyCitationNoteAssociations(citationNote); return; }
+        if (event.target.closest("[data-note-delete]") && citationNote) {
           event.preventDefault();
-          const record = stickyNoteRecord(stickyCard);
-          if (!record) return;
-          record.note.color = globalThis.INA_SEARCH_ANNOTATIONS?.color?.(colorChoice.dataset.noteColorChoice) || "yellow";
-          record.note.updatedAt = new Date().toISOString();
-          profile.preferences.lastNoteColor = record.note.color;
-          for (const highlight of profile.highlights || []) if (highlight.noteId === record.note.id) { highlight.color = record.note.color; annotationIndexHighlight(highlight); }
-          markProfileChanged(); annotationIndexNote(record.note); renderInlineLegalNotes();
-          return;
-        }
-        const dockChoice = event.target.closest("[data-note-dock-choice]");
-        if (dockChoice && stickyCard) { event.preventDefault(); updateStickyNotePlacement(stickyCard, { dock: dockChoice.dataset.noteDockChoice }); return; }
-        const boundaryChoice = event.target.closest("[data-note-boundary-choice]");
-        if (boundaryChoice && stickyCard) { event.preventDefault(); updateStickyNotePlacement(stickyCard, { boundary: boundaryChoice.dataset.noteBoundaryChoice }); return; }
-        if (event.target.closest("[data-note-associations-save]") && stickyCard) { event.preventDefault(); applyStickyNoteAssociations(stickyCard); return; }
-        if (event.target.closest("[data-note-delete]") && stickyCard) {
-          event.preventDefault();
-          const record = stickyNoteRecord(stickyCard);
-          if (record && deleteNoteById(record.note.id, true)) toast("Note deleted; linked highlights were preserved.");
+          const record = citationNoteRecord(citationNote);
+          if (record && deleteNoteById(record.note.id, true)) toast("Note deleted.");
           return;
         }
         const highlightedText = event.target.closest("[data-highlight-id]");
@@ -15286,9 +15276,12 @@ Get-FileHash $outJson -Algorithm SHA256`;
         const show = event.target.closest("[data-show-section]"); if (show) {
           const section = (corpus?.title8?.sections || []).find(x => x.id === show.dataset.showSection);
           if (section) {
-            if (!state.indexReady) buildIndex();
-            const record = state.records.find(x => x.key === `usc:${section.id}`);
-            if (record) openSearchRecord(record); else safeOpen(section.url);
+            const record = {
+              key: `usc:${section.id}`, kind: "usc", group: "statutes", cite: `8 U.S.C. ${section.section}`,
+              title: section.heading || `Section ${section.section}`, item: section,
+              text: normalize([`8 U.S.C. ${section.section}`, section.heading, section.preamble].join(" "))
+            };
+            openSearchRecord(record);
           }
         }
         const showCitation = event.target.closest("[data-show-citation]");
@@ -15299,17 +15292,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
         if (definitionReference) { event.preventDefault(); openDefinitionReference(definitionReference.dataset.definitionReference); }
         const openDefinitionCatalog = event.target.closest("[data-open-definitions]");
         if (openDefinitionCatalog) openDefinitions(openDefinitionCatalog.dataset.openDefinitions || "");
-        if (event.target.closest("[data-link-current]")) {
-          const association = currentResultAssociation();
-          if (association) {
-            const query = associationLabel(association);
-            applySearchQuery(query, true, true);
-            requestAnimationFrame(() => {
-              const button = $$('[data-note-unit-kind]', els.detail).find(item => associationStartsAtLocation(association, locationFromNoteButton(item)));
-              if (button) startInlineNoteEditor(button);
-            });
-          }
-        }
         const edit = event.target.closest("[data-edit-note]"); if (edit) editNote(edit.dataset.editNote);
         };
         const pane = focusedPaneForElement(event.target);
@@ -15318,11 +15300,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
       document.addEventListener("mouseover", event => {
         const handleReaderMouseover = () => {
         setLegalCitationHover(legalCitationSelectionForElement(event.target));
-        const contextualNoteButton = contextualNoteButtonForElement(event.target);
-        if (contextualNoteButton !== state.contextualNoteHoverButton) {
-          state.contextualNoteHoverButton = contextualNoteButton;
-          syncContextualNoteButtons();
-        }
         const definedTerm = event.target.closest?.("[data-scoped-definition-ids]");
         if (definedTerm && !definedTerm.contains(event.relatedTarget)) scheduleScopedDefinitionPreview(definedTerm, false);
         if (event.target.closest?.("#scopedDefinitionPopover")) clearTimeout(state.scopedDefinitionCloseTimer);
@@ -15338,10 +15315,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
       document.addEventListener("mouseout", event => {
         const handleReaderMouseout = () => {
         setLegalCitationHover(legalCitationSelectionForElement(event.relatedTarget));
-        if (!event.relatedTarget && state.contextualNoteHoverButton) {
-          state.contextualNoteHoverButton = null;
-          syncContextualNoteButtons();
-        }
         const definedTerm = event.target.closest?.("[data-scoped-definition-ids]");
         if (definedTerm && !definedTerm.contains(event.relatedTarget) && !els.scopedDefinitionPopover.contains(event.relatedTarget)) scheduleScopedDefinitionClose();
         if (event.target.closest?.("#scopedDefinitionPopover") && !els.scopedDefinitionPopover.contains(event.relatedTarget)) scheduleScopedDefinitionClose();
@@ -15366,12 +15339,12 @@ Get-FileHash $outJson -Algorithm SHA256`;
       });
       document.addEventListener("focusout", event => {
         const handleReaderFocusout = () => {
-        const editor = event.target.closest?.("[data-sticky-note-editor]");
-        const card = editor?.closest?.(".sticky-note-card");
+        const editor = event.target.closest?.("[data-citation-note-editor]");
+        const card = editor?.closest?.(".citation-note");
         if (editor && card && !card.contains(event.relatedTarget)) {
-          clearTimeout(state.annotationAutosaveTimers.get(card.dataset.stickyNoteId));
-          state.annotationAutosaveTimers.delete(card.dataset.stickyNoteId);
-          saveStickyNoteText(card, true);
+          clearTimeout(state.annotationAutosaveTimers.get(card.dataset.citationNoteId));
+          state.annotationAutosaveTimers.delete(card.dataset.citationNoteId);
+          saveCitationNoteText(card, true);
         }
         if (event.target.closest?.("[data-scoped-definition-ids], #scopedDefinitionPopover") && !event.relatedTarget?.closest?.("[data-scoped-definition-ids], #scopedDefinitionPopover")) scheduleScopedDefinitionClose();
         if (event.target.closest?.("[data-legal-reference], #legalReferencePopover") && !event.relatedTarget?.closest?.("[data-legal-reference], #legalReferencePopover")) scheduleLegalReferenceClose();
@@ -15381,18 +15354,12 @@ Get-FileHash $outJson -Algorithm SHA256`;
       });
       document.addEventListener("input", event => {
         const handleReaderInput = () => {
-          const editor = event.target.closest?.("[data-sticky-note-editor]");
-          const card = editor?.closest?.(".sticky-note-card");
-          if (editor && card) { if (state.inlineNoteEditor) state.inlineNoteEditor.dirty = true; scheduleStickyNoteTextSave(card); }
+          const editor = event.target.closest?.("[data-citation-note-editor]");
+          const card = editor?.closest?.(".citation-note");
+          if (editor && card) scheduleCitationNoteTextSave(card);
         };
         const pane = focusedPaneForElement(event.target);
         return pane ? withFocusedCitationPane(pane, handleReaderInput) : handleReaderInput();
-      });
-      document.addEventListener("pointerdown", event => {
-        const handle = event.target.closest?.("[data-note-drag]");
-        if (!handle) return;
-        const pane = focusedPaneForElement(handle);
-        return pane ? withFocusedCitationPane(pane, () => beginStickyNoteDrag(event, handle)) : beginStickyNoteDrag(event, handle);
       });
       els.annotationSelectionToolbar.addEventListener("mousedown", event => event.preventDefault());
       els.annotationSelectionToolbar.addEventListener("click", event => {
@@ -15446,7 +15413,8 @@ Get-FileHash $outJson -Algorithm SHA256`;
       els.inaCitationLinksToggle.addEventListener("change", () => setStatutoryLinkCitationSystem(els.inaCitationLinksToggle.checked ? "ina" : "usc"));
       els.highlightInaCitationLinksToggle.addEventListener("change", () => setInaCitationLinkHighlighting(els.highlightInaCitationLinksToggle.checked));
       els.definedTermHighlightingToggle.addEventListener("change", () => setDefinedTermHighlighting(els.definedTermHighlightingToggle.checked));
-      els.notesUseRuleFontToggle.addEventListener("change", () => setNotesUseRuleFont(els.notesUseRuleFontToggle.checked));
+      els.noteDisplayPositionSelect.addEventListener("change", () => setNoteDisplayPosition(els.noteDisplayPositionSelect.value));
+      els.notesUseHandwrittenFontToggle.addEventListener("change", () => setNotesUseHandwrittenFont(els.notesUseHandwrittenFontToggle.checked));
       els.automaticCfrUpdatesToggle.addEventListener("change", () => setAutomaticCfrUpdates(els.automaticCfrUpdatesToggle.checked));
       els.automaticStatutoryNavigationSystemToggle.addEventListener("change", () => setAutomaticStatutoryNavigationSystem(els.automaticStatutoryNavigationSystemToggle.checked));
       els.emptySearchViewSelect.addEventListener("change", () => setEmptySearchView(els.emptySearchViewSelect.value));
@@ -15593,7 +15561,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
 
     async function initialize() {
       await loadBackupReminderMetadata();
-      upgradeProfileCitationLinks(profile);
       if (refreshStaleNoteReferences()) markProfileChanged();
       resolveSavedReferenceInsertions();
       syncCitationJumpAnimationPreference();
@@ -15604,6 +15571,8 @@ Get-FileHash $outJson -Algorithm SHA256`;
       syncMainShareWarning();
       attachEvents();
       syncMainToolbarMode();
+      const searchWorker = ensureSearchWorker();
+      if (!searchWorker) scheduleEmbeddedBaselinePersistence();
       renderTutorialEntryLabels();
       cycleSearchSuggestion();
       state.searchSuggestionTimer = setInterval(cycleSearchSuggestion, 8000);
@@ -15623,12 +15592,14 @@ Get-FileHash $outJson -Algorithm SHA256`;
         state.topbarResizeObserver = new ResizeObserver(syncStatuteNavigationOffset);
         state.topbarResizeObserver.observe($(".topbar"));
       }
-      renderSources(); renderCorpusAudit(); renderDefinitionFilterOptions(); renderDefinitions();
       const startupQuery = startupSearchQuery();
       if (startupQuery) applySearchQuery(startupQuery, false, true);
       else openClearedSearchHierarchy();
+      els.searchWorkspace.classList.remove("boot-workspace");
+      els.resultList.removeAttribute("aria-busy");
+      els.resultList.setAttribute("aria-label", "Search results");
+      requestAnimationFrame(() => window.INA_SEARCH_MARK_PERFORMANCE?.("title-list-rendered", { source: window.INA_SEARCH_CORPUS_LOAD_SOURCE || "unknown" }));
       syncMainShareWarning();
-      setTimeout(buildIndex, 0);
       requestAnimationFrame(() => hydrateAnnotationIndexAfterPaint());
       await restoreHandle();
       if (!state.fileConnected) void maybeShowBackupReminder();
@@ -15667,8 +15638,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
       associationCoversLocation,
       compareAssociationLocations,
       noteLabel,
-      noteHasContent,
-      renderNotesList,
       editNote,
       upsertNote,
       deleteNoteById,

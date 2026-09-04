@@ -7,11 +7,10 @@
 })(function createINASearchAnnotations() {
   "use strict";
 
-  const PROFILE_SCHEMA_VERSION = 4;
+  const PROFILE_SCHEMA_VERSION = 5;
   const REFERENCE_PARSER_VERSION = 2;
-  const NOTE_COLORS = Object.freeze(["yellow", "pink", "orange", "lime", "cyan", "violet"]);
-  const DEFAULT_COLOR = "yellow";
-  const DEFAULT_PLACEMENT = Object.freeze({ dock: "full", boundary: "before", preferredWidthPx: 320, order: 0, primaryHighlightId: null });
+  const HIGHLIGHT_COLORS = Object.freeze(["yellow", "pink", "orange", "lime", "cyan", "violet"]);
+  const DEFAULT_HIGHLIGHT_COLOR = "yellow";
 
   const clone = value => value == null ? value : JSON.parse(JSON.stringify(value));
   const text = value => String(value ?? "");
@@ -27,16 +26,8 @@
     return (hash >>> 0).toString(16).padStart(8, "0");
   }
 
-  function color(value, fallback = DEFAULT_COLOR) {
-    return NOTE_COLORS.includes(value) ? value : fallback;
-  }
-
-  function placement(value = {}) {
-    const dock = ["full", "left", "right"].includes(value?.dock) ? value.dock : DEFAULT_PLACEMENT.dock;
-    const boundary = value?.boundary === "after" ? "after" : "before";
-    const preferredWidthPx = Math.max(220, Math.min(640, Number(value?.preferredWidthPx) || DEFAULT_PLACEMENT.preferredWidthPx));
-    const order = Number.isFinite(Number(value?.order)) ? Number(value.order) : 0;
-    return { dock, boundary, preferredWidthPx, order, primaryHighlightId: value?.primaryHighlightId ? text(value.primaryHighlightId) : null };
+  function highlightColor(value, fallback = DEFAULT_HIGHLIGHT_COLOR) {
+    return HIGHLIGHT_COLORS.includes(value) ? value : fallback;
   }
 
   function legacyText(note) {
@@ -52,10 +43,10 @@
     return parts.join("\n\n");
   }
 
-  function normalizeAssociation(value, index = 0) {
+  function normalizeAssociation(value) {
     if (!value || typeof value !== "object") return null;
     const association = clone(value);
-    association.placement = placement(value.placement || { order: index });
+    delete association.placement;
     delete association.titleText;
     return association;
   }
@@ -78,14 +69,11 @@
     const normalized = {
       id: text(value?.id || options.makeId?.("note") || `note-${Date.now()}`),
       text: noteText,
-      color: color(value?.color, options.defaultColor || DEFAULT_COLOR),
       associations,
       textReferences: normalizeReferenceRoot(value?.textReferences, noteText),
       createdAt: text(value?.createdAt || now),
       updatedAt: text(value?.updatedAt || value?.createdAt || now)
     };
-    const legacyLinks = Array.isArray(value?.legacyLinks) ? value.legacyLinks : Array.isArray(value?.links) ? value.links : [];
-    if (legacyLinks.length) normalized.legacyLinks = clone(legacyLinks);
     return normalized;
   }
 
@@ -122,8 +110,7 @@
     const now = options.now || new Date().toISOString();
     return {
       id: text(value?.id || options.makeId?.("highlight") || `highlight-${Date.now()}`),
-      noteId: value?.noteId ? text(value.noteId) : null,
-      color: color(value?.color, DEFAULT_COLOR),
+      color: highlightColor(value?.color),
       segments: (Array.isArray(value?.segments) ? value.segments : []).map(normalizeSegment).filter(Boolean),
       createdAt: text(value?.createdAt || now),
       updatedAt: text(value?.updatedAt || value?.createdAt || now)
@@ -136,8 +123,10 @@
     profile.notes = (Array.isArray(profile.notes) ? profile.notes : []).map(note => normalizeNote(note, options));
     profile.highlights = (Array.isArray(profile.highlights) ? profile.highlights : []).map(highlight => normalizeHighlight(highlight, options));
     profile.preferences ||= {};
-    profile.preferences.lastNoteColor = color(profile.preferences.lastNoteColor);
-    profile.preferences.notesUseRuleFont = profile.preferences.notesUseRuleFont === true;
+    profile.preferences.noteDisplayPosition = profile.preferences.noteDisplayPosition === "bottom" ? "bottom" : "top";
+    profile.preferences.notesUseHandwrittenFont = profile.preferences.notesUseHandwrittenFont === true;
+    delete profile.preferences.lastNoteColor;
+    delete profile.preferences.notesUseRuleFont;
     profile.annotationOrdinals = profile.annotationOrdinals && typeof profile.annotationOrdinals === "object" ? profile.annotationOrdinals : {};
     return profile;
   }
@@ -358,8 +347,8 @@
   }
 
   return Object.freeze({
-    PROFILE_SCHEMA_VERSION, REFERENCE_PARSER_VERSION, NOTE_COLORS, DEFAULT_COLOR, DEFAULT_PLACEMENT,
-    normalizedText, tokens, hashText, color, placement, legacyText, normalizeAssociation, normalizeNote,
+    PROFILE_SCHEMA_VERSION, REFERENCE_PARSER_VERSION, HIGHLIGHT_COLORS, DEFAULT_HIGHLIGHT_COLOR,
+    normalizedText, tokens, hashText, highlightColor, legacyText, normalizeAssociation, normalizeNote,
     normalizeHighlight, normalizeProfile, compactReferenceCandidate, detectReferences, quoteAnchor,
     resolveQuoteAnchor, AnnotationIndex
   });

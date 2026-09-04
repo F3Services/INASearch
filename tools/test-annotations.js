@@ -8,18 +8,28 @@ const associationKey = association => `${association.family}:${association.title
 const association = (unit = "1182", path = ["a", "2", "D"]) => ({ family: "usc", title: 8, citationSystem: "ina", start: { unit, path }, label: "INA 212(a)(2)(D)" });
 
 function testLegacyMigration() {
+  const noteAssociation = { ...association(), placement: { dock: "right", boundary: "after", preferredWidthPx: 412, order: 9, primaryHighlightId: "segment-1" } };
   const migrated = annotations.normalizeProfile({
-    schemaVersion: 3,
-    notes: [{ id: "legacy", title: "Issue", body: "Keep this wording.", tags: ["urgent"], links: [{ label: "INA 212" }], associations: [association()] }],
-    preferences: {}
+    schemaVersion: 4,
+    notes: [{ id: "legacy", title: "Issue", body: "Keep this wording.", tags: ["urgent"], color: "pink", links: [{ label: "INA 212" }], associations: [noteAssociation], createdAt: "2025-01-01T00:00:00.000Z", updatedAt: "2025-01-02T00:00:00.000Z" }],
+    highlights: [{ id: "highlight-1", noteId: "legacy", color: "violet", segments: [{ id: "segment-1", association: noteAssociation, anchor: { exact: "Keep", start: 0, end: 4 } }], createdAt: "2025-01-01T00:00:00.000Z", updatedAt: "2025-01-02T00:00:00.000Z" }],
+    preferences: { lastNoteColor: "pink", notesUseRuleFont: true }
   });
-  assert.strictEqual(migrated.schemaVersion, 4);
+  assert.strictEqual(migrated.schemaVersion, 5);
   assert(migrated.notes[0].text.includes("Issue"));
   assert(migrated.notes[0].text.includes("Keep this wording."));
   assert(migrated.notes[0].text.includes("Tags: urgent"));
-  assert.deepStrictEqual(migrated.notes[0].associations[0].placement, annotations.DEFAULT_PLACEMENT);
-  assert.deepStrictEqual(migrated.highlights, []);
-  assert.strictEqual(migrated.preferences.lastNoteColor, "yellow");
+  assert.strictEqual(migrated.notes[0].createdAt, "2025-01-01T00:00:00.000Z");
+  assert.strictEqual(migrated.notes[0].updatedAt, "2025-01-02T00:00:00.000Z");
+  assert.strictEqual(Object.hasOwn(migrated.notes[0], "color"), false);
+  assert.strictEqual(Object.hasOwn(migrated.notes[0].associations[0], "placement"), false);
+  assert.strictEqual(migrated.highlights[0].color, "violet");
+  assert.strictEqual(Object.hasOwn(migrated.highlights[0], "noteId"), false);
+  assert.strictEqual(Object.hasOwn(migrated.highlights[0].segments[0].association, "placement"), false);
+  assert.strictEqual(migrated.preferences.noteDisplayPosition, "top");
+  assert.strictEqual(migrated.preferences.notesUseHandwrittenFont, false);
+  assert.strictEqual(Object.hasOwn(migrated.preferences, "lastNoteColor"), false);
+  assert.strictEqual(Object.hasOwn(migrated.preferences, "notesUseRuleFont"), false);
 }
 
 function testReferencesStayVerbatim() {
@@ -30,6 +40,15 @@ function testReferencesStayVerbatim() {
   assert.strictEqual(text.slice(detected.spans[1].start, detected.spans[1].end), "INA 212(a)(2)(D)");
   assert.strictEqual(detected.spans.length, 2);
   assert.strictEqual(detected.textHash, annotations.hashText(text));
+}
+
+function testDisplayPreferences() {
+  const persisted = annotations.normalizeProfile({ schemaVersion: 5, notes: [], highlights: [], preferences: { noteDisplayPosition: "bottom", notesUseHandwrittenFont: true } });
+  assert.strictEqual(persisted.preferences.noteDisplayPosition, "bottom");
+  assert.strictEqual(persisted.preferences.notesUseHandwrittenFont, true);
+  const invalid = annotations.normalizeProfile({ schemaVersion: 5, notes: [], highlights: [], preferences: { noteDisplayPosition: "side", notesUseHandwrittenFont: "yes" } });
+  assert.strictEqual(invalid.preferences.noteDisplayPosition, "top");
+  assert.strictEqual(invalid.preferences.notesUseHandwrittenFont, false);
 }
 
 function testAnchorsAndNeedsReview() {
@@ -82,7 +101,8 @@ function testSyntheticScale() {
 
 testLegacyMigration();
 testReferencesStayVerbatim();
+testDisplayPreferences();
 testAnchorsAndNeedsReview();
 testIncrementalIndexesAndAliases();
 testSyntheticScale();
-console.log("PASS annotations: migration, references, anchors, incremental indexes, aliases, and synthetic scale");
+console.log("PASS annotations: schema-5 migration, references, anchors, incremental indexes, aliases, and synthetic scale");

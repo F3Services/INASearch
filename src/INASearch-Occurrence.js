@@ -19,6 +19,8 @@
   "use strict";
 
   const SCHEMA_VERSION = 1;
+  const PERSISTED_PROJECTION_SCHEMA_VERSION = 1;
+  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}`;
   const DEFAULT_SLICE_MS = 8;
   const STATUTE_DEPTHS = Object.freeze({
     section: 0, subsection: 1, paragraph: 2, subparagraph: 3, clause: 4,
@@ -583,6 +585,84 @@
     return {
       cacheKey: `${options.cacheKey || "default"}\u0000${projectionAuthorityKey(options)}\u0000${options.deferNormalization ? "raw" : "normalized"}`,
       version: `${corpus.corpusVersion || ""}\u0000${corpus.cfr?.captureTime || ""}`
+    };
+  }
+
+  function projectionIdentity(corpus, options = {}) {
+    const authorityKey = typeof options.authorityKey === "string" && options.authorityKey ? options.authorityKey : projectionAuthorityKey(options);
+    const corpusVersion = String(options.corpusVersion || corpus?.corpusVersion || corpus?.cfr?.captureTime || "");
+    const corpusSha256 = String(options.corpusSha256 || "");
+    return {
+      projectionSchemaVersion: PERSISTED_PROJECTION_SCHEMA_VERSION,
+      searchAlgorithmVersion: SEARCH_ALGORITHM_VERSION,
+      corpusSchemaVersion: Number(options.corpusSchemaVersion ?? corpus?.schemaVersion ?? 0),
+      corpusVersion,
+      corpusSha256,
+      authorityKey,
+      key: [PERSISTED_PROJECTION_SCHEMA_VERSION, SEARCH_ALGORITHM_VERSION, Number(options.corpusSchemaVersion ?? corpus?.schemaVersion ?? 0), corpusVersion, corpusSha256 || "unhashed", authorityKey].join(":"),
+    };
+  }
+
+  function toPersistedProjection(projection, identity = {}, extras = {}) {
+    if (!projection || !Array.isArray(projection.fragments) || !Array.isArray(projection.hierarchyNodes)) {
+      throw new TypeError("A completed occurrence projection is required.");
+    }
+    const normalizedIdentity = projectionIdentity(null, {
+      ...identity,
+      corpusVersion: identity.corpusVersion || projection.corpusVersion,
+      corpusSchemaVersion: identity.corpusSchemaVersion,
+    });
+    return {
+      recordSchemaVersion: 1,
+      ...normalizedIdentity,
+      storedAt: new Date().toISOString(),
+      fragmentCount: projection.fragments.length,
+      hierarchyNodeCount: projection.hierarchyNodes.length,
+      payload: {
+        fragments: projection.fragments,
+        hierarchyNodes: projection.hierarchyNodes,
+        citationSources: Array.isArray(extras.citationSources) ? extras.citationSources : Array.isArray(projection.citationSources) ? projection.citationSources : [],
+      },
+    };
+  }
+
+  function restorePersistedProjection(record, expectedIdentity = null) {
+    if (!record || record.recordSchemaVersion !== 1 || record.projectionSchemaVersion !== PERSISTED_PROJECTION_SCHEMA_VERSION || record.searchAlgorithmVersion !== SEARCH_ALGORITHM_VERSION) {
+      throw new Error("The saved search projection has an unsupported schema.");
+    }
+    if (expectedIdentity) {
+      const expected = projectionIdentity(null, expectedIdentity);
+      for (const field of ["key", "corpusSchemaVersion", "corpusVersion", "corpusSha256", "authorityKey"]) {
+        if (String(record[field] ?? "") !== String(expected[field] ?? "")) throw new Error("The saved search projection belongs to a different corpus.");
+      }
+    }
+    const fragments = record.payload?.fragments;
+    const hierarchyNodes = record.payload?.hierarchyNodes;
+    const citationSources = record.payload?.citationSources;
+    if (!Array.isArray(fragments) || !Array.isArray(hierarchyNodes) || !Array.isArray(citationSources) || fragments.length !== record.fragmentCount || hierarchyNodes.length !== record.hierarchyNodeCount) {
+      throw new Error("The saved search projection is incomplete.");
+    }
+    const hierarchyById = new Map();
+    for (const node of hierarchyNodes) {
+      if (!node || typeof node.id !== "string" || hierarchyById.has(node.id)) throw new Error("The saved search projection hierarchy is malformed.");
+      hierarchyById.set(node.id, node);
+    }
+    if (fragments.some(fragment => !fragment || typeof fragment.id !== "string" || typeof fragment.normalized !== "string")) {
+      throw new Error("The saved search projection fragments are malformed.");
+    }
+    return {
+      schemaVersion: SCHEMA_VERSION,
+      corpusVersion: record.corpusVersion,
+      fragments,
+      hierarchyNodes,
+      hierarchyById,
+      citationSources,
+      stats: {
+        restored: true,
+        fragmentCount: fragments.length,
+        hierarchyNodeCount: hierarchyNodes.length,
+        buildMs: 0,
+      },
     };
   }
 
@@ -1397,6 +1477,8 @@
 
   return Object.freeze({
     SCHEMA_VERSION,
+    PERSISTED_PROJECTION_SCHEMA_VERSION,
+    SEARCH_ALGORITHM_VERSION,
     DEFAULT_SLICE_MS,
     STATUTE_LEVEL_NAMES,
     CFR_LEVEL_NAMES,
@@ -1405,6 +1487,9 @@
     compileQuery,
     buildProjection,
     buildProjectionAsync,
+    projectionIdentity,
+    toPersistedProjection,
+    restorePersistedProjection,
     getProjection,
     getProjectionAsync,
     clearProjection,

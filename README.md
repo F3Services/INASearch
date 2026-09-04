@@ -13,7 +13,7 @@ Enter an INA, U.S.C., or CFR citation to open the provision, browse its structur
 - Open exact subsections and paragraphs in a structured legal reader.
 - Preview many cross-referenced provisions without leaving the page.
 - Find source-specific definitions and links to USCIS forms and Policy Manual resources.
-- Attach searchable notes to legal provisions, citation ranges, forms, and other resources.
+- Attach searchable, full-width notes to exact legal citations and place all visible notes above or below their citations.
 - Browse repealed, transferred, omitted, and note-based statutory material with clear labels.
 
 ## Get started
@@ -44,7 +44,7 @@ INASearch follows your device's light or dark setting by default. In the top bar
 
 Appearance also provides independent, off-by-default options to hide the Updates display, save-status display, or top-bar theme buttons. Hiding the top-bar theme buttons does not remove the controls from Settings.
 
-The typography uses offline system font stacks inspired by the USCIS Policy Manual. INASearch does not download webfonts or require an internet connection to display either theme.
+The typography uses offline system font stacks inspired by the USCIS Policy Manual. Citation notes use the normal rule-text font by default; an optional setting tries installed handwriting fonts and falls back to the rule-text font. INASearch does not download webfonts or require an internet connection to display either theme.
 
 ## Saving notes and settings
 
