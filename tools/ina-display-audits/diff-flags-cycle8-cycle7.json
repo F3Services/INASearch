@@ -1,0 +1,538 @@
+{
+  "summary": {
+    "baseline": {
+      "file": "/Users/dave/Documents/HD QuickLookup/tmp/ina-display-cycle7/display.jsonl",
+      "sha256": "00778c3a8f16e4db94c4a6e855f476076263fb791844c8cc6cbd3cc633039138",
+      "records": 57663
+    },
+    "current": {
+      "file": "/Users/dave/Documents/HD QuickLookup/tmp/ina-display-cycle8/display.jsonl",
+      "sha256": "c8ec1ac2604d5c7aa6ba08b8481cc47e2d44a6f63477fba87710fe8362c853c8",
+      "records": 57663
+    },
+    "fieldKeys": {
+      "baseline": 57663,
+      "current": 57663,
+      "onlyBaseline": 0,
+      "onlyCurrent": 0
+    },
+    "sourceReferences": {
+      "baseline": 53031,
+      "current": 53038,
+      "exactArrayDifferences": 4,
+      "added": 7,
+      "dropped": 0,
+      "changedOccurrences": 0,
+      "changedDimensions": {}
+    },
+    "renderedLinks": {
+      "baseline": 53031,
+      "current": 53038,
+      "added": 7,
+      "dropped": 0,
+      "targetDifferences": 0,
+      "falsePositiveLinks": 0,
+      "lostDetections": 0,
+      "orderMismatches": 0
+    },
+    "fields": {
+      "linkDifferences": 5,
+      "displayedTextDifferences": 5,
+      "groupDifferences": 5
+    },
+    "presentationChanges": {
+      "count": 1,
+      "byScope": {
+        "cfr": 1
+      },
+      "byDimension": {
+        "text": 1
+      }
+    },
+    "addedClassifications": {
+      "restored-cfr-act-continuation-reference": 7
+    },
+    "droppedClassifications": {},
+    "checks": {
+      "currentLinksMatchSourceReferences": true,
+      "currentLinksAreOrdered": true,
+      "sourceReferenceArraysStable": false
+    }
+  },
+  "flags": [
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "cfr|cfr.records[8:214.2].blocks[1000]|x",
+      "sourceReference": {
+        "start": 284,
+        "end": 298,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "context": "on modeling. An H-1B alien in a specialty occupation or an alien of distinguished merit and ability who has spent six years in the United States under section 101(a)(15)(H) and/or (L) of the Act may not seek extension, change status, or be readmitted to the United States under section 101(a)(15) (H) or (L) of the Act unless the alien has resided and been physically presen"
+    },
+    {
+      "type": "rendered-link-added",
+      "verdict": "valid-restoration",
+      "classification": "restored-cfr-act-continuation-reference",
+      "field": "cfr|cfr.records[8:214.2].blocks[1000]|x",
+      "sourceReference": {
+        "start": 284,
+        "end": 298,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "currentLink": {
+        "text": "(L)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "L"
+        ],
+        "sourceText": "(L) of the Act",
+        "ina": "INA 101(a)(15)(L)",
+        "citation": "INA 101(a)(15)(L)",
+        "navigation": "INA 101(a)(15)(L)"
+      },
+      "baselineGroups": [],
+      "context": "on modeling. An H-1B alien in a specialty occupation or an alien of distinguished merit and ability who has spent six years in the United States under section 101(a)(15)(H) and/or (L) of the Act may not seek extension, change status, or be readmitted to the United States under section 101(a)(15) (H) or (L) of the Act unless the alien has resided and been physically presen"
+    },
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "cfr|cfr.records[8:214.2].blocks[1001]|x",
+      "sourceReference": {
+        "start": 239,
+        "end": 253,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "context": "roduction project. An H-1B alien involved in a DOD research and development or coproduction project who has spent 10 years in the United States under section 101(a)(15) (H) and/or (L) of the Act may not seek extension, change status, or be readmitted to the United States under section 101(a)(15) (H) or (L) of the Act to perform services involving a DOD research and develo"
+    },
+    {
+      "type": "rendered-link-added",
+      "verdict": "valid-restoration",
+      "classification": "restored-cfr-act-continuation-reference",
+      "field": "cfr|cfr.records[8:214.2].blocks[1001]|x",
+      "sourceReference": {
+        "start": 239,
+        "end": 253,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "currentLink": {
+        "text": "(L)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "L"
+        ],
+        "sourceText": "(L) of the Act",
+        "ina": "INA 101(a)(15)(L)",
+        "citation": "INA 101(a)(15)(L)",
+        "navigation": "INA 101(a)(15)(L)"
+      },
+      "baselineGroups": [],
+      "context": "roduction project. An H-1B alien involved in a DOD research and development or coproduction project who has spent 10 years in the United States under section 101(a)(15) (H) and/or (L) of the Act may not seek extension, change status, or be readmitted to the United States under section 101(a)(15) (H) or (L) of the Act to perform services involving a DOD research and develo"
+    },
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "cfr|cfr.records[8:214.2].blocks[1031]|x",
+      "sourceReference": {
+        "start": 171,
+        "end": 185,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "context": "(iv) H-3 limitation on admission. An H-3 alien participant in a special education program who has spent 18 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act; and an H-3 alien trainee who has spent 24 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act may not seek extension, change status, or be readmitted t"
+    },
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "cfr|cfr.records[8:214.2].blocks[1031]|x",
+      "sourceReference": {
+        "start": 171,
+        "end": 185,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "context": "(iv) H-3 limitation on admission. An H-3 alien participant in a special education program who has spent 18 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act; and an H-3 alien trainee who has spent 24 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act may not seek extension, change status, or be readmitted t"
+    },
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "cfr|cfr.records[8:214.2].blocks[1031]|x",
+      "sourceReference": {
+        "start": 171,
+        "end": 185,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "context": "(iv) H-3 limitation on admission. An H-3 alien participant in a special education program who has spent 18 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act; and an H-3 alien trainee who has spent 24 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act may not seek extension, change status, or be readmitted t"
+    },
+    {
+      "type": "rendered-link-added",
+      "verdict": "valid-restoration",
+      "classification": "restored-cfr-act-continuation-reference",
+      "field": "cfr|cfr.records[8:214.2].blocks[1031]|x",
+      "sourceReference": {
+        "start": 421,
+        "end": 435,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "currentLink": {
+        "text": "(L)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "L"
+        ],
+        "sourceText": "(L) of the Act",
+        "ina": "INA 101(a)(15)(L)",
+        "citation": "INA 101(a)(15)(L)",
+        "navigation": "INA 101(a)(15)(L)"
+      },
+      "baselineGroups": [],
+      "context": "e United States under sections 101(a)(15)(H) and/or (L) of the Act may not seek extension, change status, or be readmitted to the United States under sections 101(a)(15)(H) and/or (L) of the Act unless the alien has resided and been physically present outside the United States for the immediate prior 6 months."
+    },
+    {
+      "type": "rendered-link-added",
+      "verdict": "valid-restoration",
+      "classification": "restored-cfr-act-continuation-reference",
+      "field": "cfr|cfr.records[8:214.2].blocks[1031]|x",
+      "sourceReference": {
+        "start": 293,
+        "end": 307,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "currentLink": {
+        "text": "(L)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "L"
+        ],
+        "sourceText": "(L) of the Act",
+        "ina": "INA 101(a)(15)(L)",
+        "citation": "INA 101(a)(15)(L)",
+        "navigation": "INA 101(a)(15)(L)"
+      },
+      "baselineGroups": [],
+      "context": "in the United States under sections 101(a)(15)(H) and/or (L) of the Act; and an H-3 alien trainee who has spent 24 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act may not seek extension, change status, or be readmitted to the United States under sections 101(a)(15)(H) and/or (L) of the Act unless the alien has resided and been physically pr"
+    },
+    {
+      "type": "rendered-link-added",
+      "verdict": "valid-restoration",
+      "classification": "restored-cfr-act-continuation-reference",
+      "field": "cfr|cfr.records[8:214.2].blocks[1031]|x",
+      "sourceReference": {
+        "start": 171,
+        "end": 185,
+        "text": "(L) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "L"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "currentLink": {
+        "text": "(L)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "L"
+        ],
+        "sourceText": "(L) of the Act",
+        "ina": "INA 101(a)(15)(L)",
+        "citation": "INA 101(a)(15)(L)",
+        "navigation": "INA 101(a)(15)(L)"
+      },
+      "baselineGroups": [],
+      "context": "(iv) H-3 limitation on admission. An H-3 alien participant in a special education program who has spent 18 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act; and an H-3 alien trainee who has spent 24 months in the United States under sections 101(a)(15)(H) and/or (L) of the Act may not seek extension, change status, or be readmitted t"
+    },
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "cfr|cfr.records[8:214.2].blocks[1275]|x",
+      "sourceReference": {
+        "start": 213,
+        "end": 227,
+        "text": "(H) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "H"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "context": "t five years in the United States in a specialized knowledge capacity or seven years in the United States in a managerial or executive capacity under section 101(a)(15) (L) and/or (H) of the Act may not be readmitted to the United States under section 101(a)(15) (L) or (H) of the Act unless the alien has resided and been physically present outside the United States, excep"
+    },
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "cfr|cfr.records[8:214.2].blocks[1275]|x",
+      "sourceReference": {
+        "start": 213,
+        "end": 227,
+        "text": "(H) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "H"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "context": "t five years in the United States in a specialized knowledge capacity or seven years in the United States in a managerial or executive capacity under section 101(a)(15) (L) and/or (H) of the Act may not be readmitted to the United States under section 101(a)(15) (L) or (H) of the Act unless the alien has resided and been physically present outside the United States, excep"
+    },
+    {
+      "type": "rendered-link-added",
+      "verdict": "valid-restoration",
+      "classification": "restored-cfr-act-continuation-reference",
+      "field": "cfr|cfr.records[8:214.2].blocks[1275]|x",
+      "sourceReference": {
+        "start": 773,
+        "end": 787,
+        "text": "(H) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "H"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "currentLink": {
+        "text": "(H)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "H"
+        ],
+        "sourceText": "(H) of the Act",
+        "ina": "INA 101(a)(15)(H)",
+        "citation": "INA 101(a)(15)(H)",
+        "navigation": "INA 101(a)(15)(H)"
+      },
+      "baselineGroups": [],
+      "context": "view of this restriction, a new individual petition may not be approved for an alien who has spent the maximum time period in the United States under section 101(a)(15) (L) and/or (H) of the Act, unless the alien has resided and been physically present outside the United States, except for brief visits for business or pleasure, for the immediate prior year. The petitioner"
+    },
+    {
+      "type": "rendered-link-added",
+      "verdict": "valid-restoration",
+      "classification": "restored-cfr-act-continuation-reference",
+      "field": "cfr|cfr.records[8:214.2].blocks[1275]|x",
+      "sourceReference": {
+        "start": 213,
+        "end": 227,
+        "text": "(H) of the Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "H"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "currentLink": {
+        "text": "(H)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "H"
+        ],
+        "sourceText": "(H) of the Act",
+        "ina": "INA 101(a)(15)(H)",
+        "citation": "INA 101(a)(15)(H)",
+        "navigation": "INA 101(a)(15)(H)"
+      },
+      "baselineGroups": [],
+      "context": "t five years in the United States in a specialized knowledge capacity or seven years in the United States in a managerial or executive capacity under section 101(a)(15) (L) and/or (H) of the Act may not be readmitted to the United States under section 101(a)(15) (L) or (H) of the Act unless the alien has resided and been physically present outside the United States, excep"
+    }
+  ],
+  "presentationChanges": [
+    {
+      "type": "presentation-change",
+      "dimensions": [
+        "text"
+      ],
+      "field": "cfr|cfr.records[8:214.4].blocks[2]|x",
+      "sourceReference": {
+        "start": 624,
+        "end": 676,
+        "text": "101(a)(15)(M) of the Immigration and Nationality Act",
+        "family": "ina",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a",
+          "15",
+          "M"
+        ],
+        "ruleId": "context-cfr-ina-act-section",
+        "provenance": "deterministic-context"
+      },
+      "baselineLink": {
+        "text": "INA 101(a)(15)(M)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "M"
+        ],
+        "sourceText": "101(a)(15)(M) of the Immigration and Nationality Act",
+        "ina": "INA 101(a)(15)(M)",
+        "citation": "INA 101(a)(15)(M)",
+        "navigation": "INA 101(a)(15)(M)"
+      },
+      "currentLink": {
+        "text": "(M)",
+        "family": "ina",
+        "section": "1101",
+        "path": [
+          "a",
+          "15",
+          "M"
+        ],
+        "sourceText": "101(a)(15)(M) of the Immigration and Nationality Act",
+        "ina": "INA 101(a)(15)(M)",
+        "citation": "INA 101(a)(15)(M)",
+        "navigation": "INA 101(a)(15)(M)"
+      },
+      "context": "e at the discretion of the Director of SEVP. SEVP certification of a school or school system for the attendance of nonimmigrant students, pursuant to sections 101(a)(15)(F) and/or 101(a)(15)(M) of the Immigration and Nationality Act, will be withdrawn on notice subsequent to out-of-cycle review, or recertification denied, if the school or school system is determined to no longer be entitled to certification f"
+    }
+  ]
+}

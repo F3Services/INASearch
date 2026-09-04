@@ -1,0 +1,1234 @@
+{
+  "schemaVersion": 1,
+  "artifact": {
+    "path": "tmp/ina-display-baseline/INASearch-Uncompressed.html",
+    "sha256": "931491856a869e0ad1d62d761e6bc7b682a7a4e392dfa48a122218764aa8179b"
+  },
+  "inventories": {
+    "usc-operative": "b956f15ec195569d91bbde6134489fa8b8b49be5910d7ba9795c39bafcf3390e",
+    "usc-notes": "971ca8e71aeb58921da1a9c227b7ae2210106b208ee5c9beca99f15b03cfb18e",
+    "cfr": "b8bb09afd3cb764ddd99f05968c4dac24e7a7977e848a0e7733ca42d23f6f1a2"
+  },
+  "coverage": {
+    "usc-operative": {
+      "references": 5645,
+      "parentheticalCandidates": 5007,
+      "candidateCoverage": {
+        "linked": 4690,
+        "partial": 0,
+        "structural": 288,
+        "unlinked": 29
+      }
+    },
+    "usc-notes": {
+      "references": 19875,
+      "parentheticalCandidates": 18662,
+      "candidateCoverage": {
+        "linked": 8880,
+        "partial": 0,
+        "structural": 0,
+        "unlinked": 9782
+      }
+    },
+    "cfr": {
+      "references": 27493,
+      "parentheticalCandidates": 48098,
+      "candidateCoverage": {
+        "linked": 13382,
+        "partial": 0,
+        "structural": 30165,
+        "unlinked": 4551
+      }
+    }
+  },
+  "integrity": {
+    "fields": 57663,
+    "spanMismatches": [],
+    "overlapMismatches": [],
+    "emptyReferenceText": 0,
+    "unknownFamilies": [],
+    "findingSpanMismatches": [],
+    "inventoryByteMismatches": 0
+  },
+  "contextAudit": {
+    "stats": {
+      "references": 53013,
+      "localTargets": 28681,
+      "localTargetSectionPresent": 28681,
+      "localTargetSectionMissing": 0,
+      "historicalCueLocal": 165,
+      "explicitTargetMetadataMissing": 0
+    },
+    "missingSections": [],
+    "historicalCueExamples": [
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1 to 18-note-3",
+        "sourcePath": "title8.sections[1 to 18].notes[2]",
+        "field": "text",
+        "start": 328,
+        "text": "section 1401 of this title",
+        "target": "usc:8:1401/ (local)",
+        "context": "992, which was revised from act Apr. 9, 1866, ch. 31, § 1, 14 Stat. 27. Similar provisions were contained in former section 601(a) of this title. See section 1401 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-106 to 106c-note-1",
+        "sourcePath": "title8.sections[106 to 106c].notes[0]",
+        "field": "text",
+        "start": 373,
+        "text": "1230",
+        "target": "usc:8:1230/ (local)",
+        "context": "t. 1243, related to registry of aliens. Similar provisions were contained in former sections 728, 729, 742(b), and 746(l) of this title. See sections 1230 and 1259 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-106 to 106c-note-1",
+        "sourcePath": "title8.sections[106 to 106c].notes[0]",
+        "field": "text",
+        "start": 382,
+        "text": "1259",
+        "target": "usc:8:1259/ (local)",
+        "context": "related to registry of aliens. Similar provisions were contained in former sections 728, 729, 742(b), and 746(l) of this title. See sections 1230 and 1259 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-351 to 416-note-5",
+        "sourcePath": "title8.sections[351 to 416].notes[4]",
+        "field": "text",
+        "start": 449,
+        "text": "section 1422 of this title",
+        "target": "usc:8:1422/ (local)",
+        "context": "nd Naturalization Service stated that it was the opinion of that office that said section 359 was superseded by former section 703 of this title. See section 1422 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-606-note-2",
+        "sourcePath": "title8.sections[606].notes[1]",
+        "field": "text",
+        "start": 137,
+        "text": "section 1407 of this title",
+        "target": "usc:8:1407/ (local)",
+        "context": "Codification Section transferred to section 1421l of Title 48, Territories and Insular Possessions. That section was later repealed. See section 1407 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-701 to 724a-note-17",
+        "sourcePath": "title8.sections[701 to 724a].notes[16]",
+        "field": "text",
+        "start": 168,
+        "text": "1435(a)",
+        "target": "usc:8:1435/a (local)",
+        "context": "ct. 14, 1940, ch. 876, title I, subchap. III, § 317, 54 Stat. 1146, related to former citizens being excepted from certain requirements. See sections 1435(a), (c) and 1482 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-701 to 724a-note-17",
+        "sourcePath": "title8.sections[701 to 724a].notes[16]",
+        "field": "text",
+        "start": 177,
+        "text": "(c)",
+        "target": "usc:8:1435/c (local)",
+        "context": "940, ch. 876, title I, subchap. III, § 317, 54 Stat. 1146, related to former citizens being excepted from certain requirements. See sections 1435(a), (c) and 1482 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-701 to 724a-note-17",
+        "sourcePath": "title8.sections[701 to 724a].notes[16]",
+        "field": "text",
+        "start": 185,
+        "text": "1482",
+        "target": "usc:8:1482/ (local)",
+        "context": "876, title I, subchap. III, § 317, 54 Stat. 1146, related to former citizens being excepted from certain requirements. See sections 1435(a), (c) and 1482 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1001 to 1006-note-4",
+        "sourcePath": "title8.sections[1001 to 1006].notes[3]",
+        "field": "text",
+        "start": 180,
+        "text": "section 1440 of this title",
+        "target": "usc:8:1440/ (local)",
+        "context": "0, ch. 876, title III, § 704, as added Mar. 27, 1942, ch. 199, title X, § 1001, 56 Stat. 183, related to persons excepted from former subchapter. See section 1440 of this title."
+      },
+      {
+        "scope": "usc-operative",
+        "sourceId": "8-1101-a-15-H",
+        "sourcePath": "title8.sections[1101].body[0/14/7]",
+        "field": "text",
+        "start": 98,
+        "text": "section 1182(j)(2) of this title",
+        "target": "usc:8:1182/j/2 (local)",
+        "context": "an alien (i) [(a) Repealed. Pub. L. 106–95, § 2(c), Nov. 12, 1999, 113 Stat. 1316] (b) subject to section 1182(j)(2) of this title, who is coming temporarily to the United States to perform services (other than services described in subclause (a) during the period in which such s"
+      },
+      {
+        "scope": "usc-operative",
+        "sourceId": "8-1101-a-27-I-i",
+        "sourcePath": "title8.sections[1101].body[0/26/8/0]",
+        "field": "text",
+        "start": 169,
+        "text": "(15)(G)(i)",
+        "target": "usc:8:1101/a/15/G/i (local)",
+        "context": "the unmarried son or daughter of an officer or employee, or of a former officer or employee, of an international organization described in paragraph (15)(G)(i), and who (I) while maintaining the status of a nonimmigrant under paragraph (15)(G)(iv) or paragraph (15)(N), has resided and been physically present"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1101-note-17",
+        "sourcePath": "title8.sections[1101].notes[16]",
+        "field": "text",
+        "start": 7486,
+        "text": "8 U.S.C. 1229b",
+        "target": "usc:8:1229b/ (local)",
+        "context": "a) of the Immigration and Nationality Act [former 8 U.S.C. 1254(a)] (as in effect before the title III–A effective date) or section 240A of such Act [8 U.S.C. 1229b] (as in effect after the title III–A effective date), subparagraph (A) of this paragraph and paragraphs (1) and (2) of section 240A(d) of the Immigra"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1101-note-17",
+        "sourcePath": "title8.sections[1101].notes[16]",
+        "field": "text",
+        "start": 12997,
+        "text": "240A(e)",
+        "target": "usc:8:1229b/e (local)",
+        "context": "ty Act [former 8 U.S.C. 1254] (as in effect before the title III–A effective date) of any alien in any fiscal year, except in accordance with section 240A(e) of such Act [8 U.S.C. 1229b(e)]. The previous sentence shall apply regardless of when an alien applied for such suspension and adjustment. “(d) Trans"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1101-note-17",
+        "sourcePath": "title8.sections[1101].notes[16]",
+        "field": "text",
+        "start": 17986,
+        "text": "240A(b)",
+        "target": "usc:8:1229b/b (local)",
+        "context": "ion and Nationality Act [8 U.S.C. 1254a(a)], as in effect before the title III–A effective date; or “(B) cancellation of removal, pursuant to section 240A(b) of the Immigration and Nationality Act [8 U.S.C. 1229b(b)] and subsection (f) of this section; shall not be barred from applying for such relief by o"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1151-note-22",
+        "sourcePath": "title8.sections[1151].notes[21]",
+        "field": "text",
+        "start": 166,
+        "text": "(e)",
+        "target": "usc:8:1151/e (local)",
+        "context": "uota DeductionsPub. L. 85–316, § 10, Sept. 11, 1957, 71 Stat. 642, provided that the quota deductions required under the provisions of former subsec. (e) of this section, the Displaced Persons Act of 1948, the act of June 30, 1950, and the act of April 9, 1952, were terminated effective July 1, 1957."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1153-note-3",
+        "sourcePath": "title8.sections[1153].notes[2]",
+        "field": "text",
+        "start": 5084,
+        "text": "section 1151(a)",
+        "target": "usc:8:1151/a (local)",
+        "context": "Subsec. (a). Pub. L. 101–649, § 111(2), added subsec. (a) and struck out former subsec. (a) which related to allocation of visas of aliens subject to section 1151(a) limitations. Subsec. (a)(7). Pub. L. 101–649, § 603(a)(3), substituted “section 1182(a)(5) of this title” for “section 1182(a)(14) of this title”. Su"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1153-note-29",
+        "sourcePath": "title8.sections[1153].notes[28]",
+        "field": "text",
+        "start": 685,
+        "text": "section 1182(e) of this title",
+        "target": "usc:8:1182/e (local)",
+        "context": "lified for issuance of such visa but for numerical and fiscal year limitations on issuance of such visas, former section 1182(a)(19) of this title or section 1182(e) of this title, or fact that immigrant was a national, but not a native, of foreign state described in section 314 of Pub. L. 99–603."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1153-note-35",
+        "sourcePath": "title8.sections[1153].notes[34]",
+        "field": "text",
+        "start": 584,
+        "text": "207",
+        "target": "usc:8:1157/ (local)",
+        "context": "and Nationality Act [subsec. (a)(7) of this section] shall be deemed to be a reference to such section as in effect before such date and to sections 207 and 208 of the Immigration and Nationality Act [sections 1157 and 1158 of this title].”"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1153-note-35",
+        "sourcePath": "title8.sections[1153].notes[34]",
+        "field": "text",
+        "start": 592,
+        "text": "208",
+        "target": "usc:8:1158/ (local)",
+        "context": "ionality Act [subsec. (a)(7) of this section] shall be deemed to be a reference to such section as in effect before such date and to sections 207 and 208 of the Immigration and Nationality Act [sections 1157 and 1158 of this title].”"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1153-note-35",
+        "sourcePath": "title8.sections[1153].notes[34]",
+        "field": "text",
+        "start": 645,
+        "text": "1157",
+        "target": "usc:8:1157/ (local)",
+        "context": "e deemed to be a reference to such section as in effect before such date and to sections 207 and 208 of the Immigration and Nationality Act [sections 1157 and 1158 of this title].”"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1153-note-35",
+        "sourcePath": "title8.sections[1153].notes[34]",
+        "field": "text",
+        "start": 654,
+        "text": "1158",
+        "target": "usc:8:1158/ (local)",
+        "context": "to be a reference to such section as in effect before such date and to sections 207 and 208 of the Immigration and Nationality Act [sections 1157 and 1158 of this title].”"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1154-note-3",
+        "sourcePath": "title8.sections[1154].notes[2]",
+        "field": "text",
+        "start": 11433,
+        "text": "section 1152(e) of this title",
+        "target": "usc:8:1152/e (local)",
+        "context": ", redesignated subsec. (g) as (f) and struck out former subsec. (f) which related to applicability of provisions to qualified immigrants specified in section 1152(e) of this title. Subsec. (f)(1). Pub. L. 101–649, § 162(b)(4), substituted reference to section 1153(a)(3) of this title for reference to section 1153(a)(4) of this"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1159-note-3",
+        "sourcePath": "title8.sections[1159].notes[2]",
+        "field": "text",
+        "start": 680,
+        "text": "section 1157(a) of this title",
+        "target": "usc:8:1157/a (local)",
+        "context": "tory provisions and struck out former introductory provisions which read as follows: “Not more than 10,000 of the refugee admissions authorized under section 1157(a) of this title in any fiscal year may be made available by the Attorney General, in the Attorney General’s discretion and under such regulations as the Attorney Gen"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1159-note-10",
+        "sourcePath": "title8.sections[1159].notes[9]",
+        "field": "text",
+        "start": 742,
+        "text": "(2)",
+        "target": "usc:8:1159/b/2 (local)",
+        "context": "r adjustment of status under such section on or before June 1, 1990. “(d) Adjustment of Certain Former Asylees.—“(1) In general.—Subject to paragraph (2), the provisions of section 209(b) of the Immigration and Nationality Act [8 U.S.C. 1159(b)] shall also apply to an alien—“(A) who was granted asylum"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1159-note-10",
+        "sourcePath": "title8.sections[1159].notes[9]",
+        "field": "text",
+        "start": 773,
+        "text": "209(b)",
+        "target": "usc:8:1159/b (local)",
+        "context": "ch section on or before June 1, 1990. “(d) Adjustment of Certain Former Asylees.—“(1) In general.—Subject to paragraph (2), the provisions of section 209(b) of the Immigration and Nationality Act [8 U.S.C. 1159(b)] shall also apply to an alien—“(A) who was granted asylum before the date of the enactment o"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1160-note-2",
+        "sourcePath": "title8.sections[1160].notes[1]",
+        "field": "text",
+        "start": 962,
+        "text": "Section 1105a of this title",
+        "target": "usc:8:1105a/ (local)",
+        "context": "er section 2601 of Title 22, Foreign Relations and Intercourse, and was repealed by Pub. L. 96–212, title III, § 312(c), Mar. 17, 1980, 94 Stat. 117. Section 1105a of this title, referred to in subsec. (e)(3)(A), was repealed by Pub. L. 104–208, div. C, title III, § 306(b), Sept. 30, 1996, 110 Stat. 3009–612. The Social Secur"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1160-note-3",
+        "sourcePath": "title8.sections[1160].notes[2]",
+        "field": "text",
+        "start": 1672,
+        "text": "section 1105a of this title",
+        "target": "usc:8:1105a/ (local)",
+        "context": "o the location or identity of the alien.” Subsec. (e)(3)(A). Pub. L. 104–208, § 308(g)(2)(B), inserted “(as in effect before October 1, 1996)” after “section 1105a of this title”. Subsec. (f). Pub. L. 104–193 substituted “assistance under a State program funded under” for “aid under a State plan approved under” in two places."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1182-note-5",
+        "sourcePath": "title8.sections[1182].notes[4]",
+        "field": "text",
+        "start": 34544,
+        "text": "(a)(1)(A)(ii)",
+        "target": "usc:8:1182/a/1/A/ii (local)",
+        "context": "ar. (1) concluding provisions, and substituted pars. (2) and (3) for former par. (2) and concluding provisions which read as follows: “(2) subsection (a)(1)(A)(ii) of this section in the case of any alien, in accordance with such terms, conditions, and controls, if any, including the giving of bond, as the Attor"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1182-note-5",
+        "sourcePath": "title8.sections[1182].notes[4]",
+        "field": "text",
+        "start": 65384,
+        "text": "section 1101(a)(27)(A) of this title",
+        "target": "usc:8:1101/a/27/A (local)",
+        "context": "nd introductory provision of last sentence making exclusion of aliens under par. (14) applicable to special immigrants defined in former provision of section 1101(a)(27)(A) of this title (other than the parents, spouses, or children of United States citizens or of aliens lawfully admitted to the United States for permanent residence)."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1183a-note-3",
+        "sourcePath": "title8.sections[1183a].notes[2]",
+        "field": "text",
+        "start": 185,
+        "text": "section 1154 of this title",
+        "target": "usc:8:1154/ (local)",
+        "context": ", (ii). Pub. L. 111–83, added cls. (i) and (ii) and struck out former cls. (i) and (ii), which read as follows: “(i) the individual petitioning under section 1154 of this title for the classification of such alien died after the approval of such petition; and “(ii) the Attorney General has determined for humanitarian reasons"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1184-note-5",
+        "sourcePath": "title8.sections[1184].notes[4]",
+        "field": "text",
+        "start": 13740,
+        "text": "section 1101(a)(15)(U)",
+        "target": "usc:8:1101/a/15/U (local)",
+        "context": "ars. (4) to (6). Subsec. (o). Pub. L. 108–193, § 8(a)(3), redesignated subsec. (n) as (o). Former subsec. (o), relating to requirements applicable to section 1101(a)(15)(U) visas, redesignated (p). Another former subsec. (o), relating to employment of nonimmigrants described in section 1101(a)(15)(V) of this title, redes"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1184-note-5",
+        "sourcePath": "title8.sections[1184].notes[4]",
+        "field": "text",
+        "start": 13869,
+        "text": "section 1101(a)(15)(V) of this title",
+        "target": "usc:8:1101/a/15/V (local)",
+        "context": "ements applicable to section 1101(a)(15)(U) visas, redesignated (p). Another former subsec. (o), relating to employment of nonimmigrants described in section 1101(a)(15)(V) of this title, redesignated (q). Subsec. (p). Pub. L. 108–193, § 8(a)(3), redesignated subsec. (o), relating to requirements applicable to section 1101(a)(15)(U) v"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1186a-note-4",
+        "sourcePath": "title8.sections[1186a].notes[3]",
+        "field": "text",
+        "start": 1590,
+        "text": "section 1154(a) of this title",
+        "target": "usc:8:1154/a (local)",
+        "context": "L. 112–58, § 1(a), added subsec. (g) and redesignated former subsec. (g) as (h). 2000—Subsecs. (b)(1)(B), (d)(1)(A)(ii). Pub. L. 106–553 substituted “section 1154(a) of this title or subsection (d) or (p) of section 1184 of this title” for “section 1154(a) or 1184(d) of this title”. 1996—Subsec. (b)(1)(A)(i). Pub. L. 104–208, §"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1203-note-2",
+        "sourcePath": "title8.sections[1203].notes[1]",
+        "field": "text",
+        "start": 216,
+        "text": "section 1101(a)(15)(E) of this title",
+        "target": "usc:8:1101/a/15/E (local)",
+        "context": "f 1924, referred to in subsec. (a), which was classified to section 203(6) of this title, was repealed by section 403(a)(2) of act June 27, 1952. See section 1101(a)(15)(E) of this title. This chapter, referred to in subsec. (e), was in the original, “this Act”, meaning act June 27, 1952, ch. 477, 66 Stat. 163, known as the Immigratio"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1225-note-8",
+        "sourcePath": "title8.sections[1225].notes[7]",
+        "field": "text",
+        "start": 458,
+        "text": "8 U.S.C. 1101",
+        "target": "usc:8:1101/ (local)",
+        "context": "ng this section and section 1227 of this title, and enacting provisions set out as a note above] is repealed and the Immigration and Nationality Act [8 U.S.C. 1101 et seq.] shall be applied as if such section had not been enacted.”"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1227-note-4",
+        "sourcePath": "title8.sections[1227].notes[3]",
+        "field": "text",
+        "start": 9118,
+        "text": "section 1182(a)(6)(C)(i)",
+        "target": "usc:8:1182/a/6/C/i (local)",
+        "context": "Pub. L. 102–232, § 307(h)(4), added cl. (ii) and redesignated former cl. (ii) as (iii). Subsec. (a)(1)(G). Pub. L. 102–232, § 307(h)(5), substituted “section 1182(a)(6)(C)(i)” for “section 1182(a)(5)(C)(i)”. Subsec. (a)(1)(H). Pub. L. 102–232, § 307(h)(6), substituted “paragraph (4)(D)” for “paragraph (6) or (7)”. Subsec."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1227-note-4",
+        "sourcePath": "title8.sections[1227].notes[3]",
+        "field": "text",
+        "start": 9149,
+        "text": "section 1182(a)(5)(C)(i)",
+        "target": "usc:8:1182/a/5/C/i (local)",
+        "context": "dded cl. (ii) and redesignated former cl. (ii) as (iii). Subsec. (a)(1)(G). Pub. L. 102–232, § 307(h)(5), substituted “section 1182(a)(6)(C)(i)” for “section 1182(a)(5)(C)(i)”. Subsec. (a)(1)(H). Pub. L. 102–232, § 307(h)(6), substituted “paragraph (4)(D)” for “paragraph (6) or (7)”. Subsec. (a)(2)(D). Pub. L. 102–232, § 3"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1227-note-4",
+        "sourcePath": "title8.sections[1227].notes[3]",
+        "field": "text",
+        "start": 10748,
+        "text": "(a)(4)",
+        "target": "usc:8:1227/a/4 (local)",
+        "context": "(4) of subsection (a)” for “subsection (a)(6) or (7) of this section” and struck out former subsec. (b) which related to nonapplicability of subsec. (a)(4) of this section. Pub. L. 101–649, § 505(a), struck out “(1)” after “crimes shall not apply” and “, or (2) if the court sentencing such alien for such"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1227-note-7",
+        "sourcePath": "title8.sections[1227].notes[6]",
+        "field": "text",
+        "start": 1035,
+        "text": "8 U.S.C. 1101",
+        "target": "usc:8:1101/ (local)",
+        "context": "of 2004 (Public Law 108–458) [Dec. 17, 2004], section 5402 of such Act [amending this section] is repealed, and the Immigration and Nationality Act [8 U.S.C. 1101 et seq.] shall be applied as if such section had not been enacted.”"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1228-note-2",
+        "sourcePath": "title8.sections[1228].notes[1]",
+        "field": "text",
+        "start": 655,
+        "text": "Section 1253 of this title",
+        "target": "usc:8:1253/ (local)",
+        "context": "of this title, referred to in subsec. (c)(2)(B), was repealed by Pub. L. 104–208, div. C, title III, § 308(b)(6), Sept. 30, 1996, 110 Stat. 3009–615. Section 1253 of this title, referred to in subsec. (c)(3)(B), was amended generally by Pub. L. 104–208, div. C, title III, § 307(a), Sept. 30, 1996, 110 Stat. 3009–612, and, as"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1228-note-2",
+        "sourcePath": "title8.sections[1228].notes[1]",
+        "field": "text",
+        "start": 982,
+        "text": "section 1253",
+        "target": "usc:8:1253/ (local)",
+        "context": "so amended, subsec. (a) no longer contains provisions relating to alternate countries. Provisions similar to those contained in former subsec. (a) of section 1253 are now contained in section 1231(b) of this title. Federal Rule of Criminal Procedure 11, referred to in subsec. (c)(5), is set out in the Appendix"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1228-note-2",
+        "sourcePath": "title8.sections[1228].notes[1]",
+        "field": "text",
+        "start": 1016,
+        "text": "section 1231(b) of this title",
+        "target": "usc:8:1231/b (local)",
+        "context": "contains provisions relating to alternate countries. Provisions similar to those contained in former subsec. (a) of section 1253 are now contained in section 1231(b) of this title. Federal Rule of Criminal Procedure 11, referred to in subsec. (c)(5), is set out in the Appendix to Title 18, Crimes and Criminal Procedure."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1229b-note-2",
+        "sourcePath": "title8.sections[1229b].notes[1]",
+        "field": "text",
+        "start": 220,
+        "text": "Section 1182(c) of this title",
+        "target": "usc:8:1182/c (local)",
+        "context": "(b)(2)(B), (C), (4), (c)(6), and (e)(1), (3)(B), was repealed by Pub. L. 104–208, div. C, title III, § 308(b)(7), Sept. 30, 1996, 110 Stat. 3009–615. Section 1182(c) of this title, referred to in subsec. (c)(6), was repealed by Pub. L. 104–208, div. C, title III, § 304(b), Sept. 30, 1996, 110 Stat. 3009–597. Section 309 of the"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1252-note-2",
+        "sourcePath": "title8.sections[1252].notes[1]",
+        "field": "text",
+        "start": 672,
+        "text": "section 1253",
+        "target": "usc:8:1253/ (local)",
+        "context": "t. 30, 1996, 110 Stat. 3009–612, and, as so amended, no longer contains a subsec. (g). Provisions similar to those contained in former subsec. (g) of section 1253 are now contained in subsec. (d) of section 1253. Rule 23 of the Federal Rules of Civil Procedure, referred to in subsec. (e)(1)(B), is set out in th"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1252-note-2",
+        "sourcePath": "title8.sections[1252].notes[1]",
+        "field": "text",
+        "start": 721,
+        "text": "section 1253",
+        "target": "usc:8:1253/ (local)",
+        "context": "ed, no longer contains a subsec. (g). Provisions similar to those contained in former subsec. (g) of section 1253 are now contained in subsec. (d) of section 1253. Rule 23 of the Federal Rules of Civil Procedure, referred to in subsec. (e)(1)(B), is set out in the Appendix to Title 28, Judiciary and Judicial Pr"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1255a-note-5",
+        "sourcePath": "title8.sections[1255a].notes[4]",
+        "field": "text",
+        "start": 1251,
+        "text": "section 1252 of this title",
+        "target": "usc:8:1252/ (local)",
+        "context": "Job Training Partnership Act.” 1996—Subsec. (a)(1)(B). Pub. L. 104–208, § 308(g)(5)(A)(iii), inserted “(as in effect before October 1, 1996)” after “section 1252 of this title”. Subsec. (c)(5). Pub. L. 104–208, § 623(a), amended heading and text of par. (5) generally, substituting subpars. (A) to (E) for former par. consist"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1255a-note-5",
+        "sourcePath": "title8.sections[1255a].notes[4]",
+        "field": "text",
+        "start": 3100,
+        "text": "section 1105a of this title",
+        "target": "usc:8:1105a/ (local)",
+        "context": "reflect the probable intent of Congress. Subsec. (f)(4)(A). Pub. L. 104–208, § 308(g)(2)(B), inserted “(as in effect before October 1, 1996)” after “section 1105a of this title”. Subsec. (f)(4)(C). Pub. L. 104–208, § 377(a), added subpar. (C). Subsec. (h)(1)(A)(i). Pub. L. 104–193, § 110(s)(2)(A), substituted “State program"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1255a-note-5",
+        "sourcePath": "title8.sections[1255a].notes[4]",
+        "field": "text",
+        "start": 4450,
+        "text": "(3)",
+        "target": "usc:8:1255a/b/3 (local)",
+        "context": "(III), redesignated former subcl. (III) as (II) and former subcl. (II) as (IV), and struck out former subcl. (IV) which read as follows: “Paragraphs (3) (relating to security and related grounds), other than subparagraph (E) thereof.” 1990—Subsec. (b)(1)(A). Pub. L. 101–649, § 703(a)(1), substituted “"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1288-note-3",
+        "sourcePath": "title8.sections[1288].notes[2]",
+        "field": "text",
+        "start": 1246,
+        "text": "(d)(1)",
+        "target": "usc:8:1288/d/1 (local)",
+        "context": "amended subsec. (a) identically, was repealed by Pub. L. 103–416, § 219(gg). Subsec. (c)(4)(A). Pub. L. 103–206, § 323(b)(2), inserted “or subsection (d)(1)” after “paragraph (1)” in two places. Pub. L. 103–198, § 8(b)(2), which amended subpar. (A) identically, was repealed by Pub. L. 103–416, § 219(gg)."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1356-note-4",
+        "sourcePath": "title8.sections[1356].notes[3]",
+        "field": "text",
+        "start": 25740,
+        "text": "(b)",
+        "target": "usc:8:1356/b (local)",
+        "context": "e as of Oct. 30, 1986. 1981—Subsecs. (b), (c). Pub. L. 97–116 added subsec. (b), redesignated former subsec. (b) as (c), and inserted “and subsection (b)” after “subsection (a)”."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1356-note-4",
+        "sourcePath": "title8.sections[1356].notes[3]",
+        "field": "text",
+        "start": 25763,
+        "text": "(a)",
+        "target": "usc:8:1356/a (local)",
+        "context": "1981—Subsecs. (b), (c). Pub. L. 97–116 added subsec. (b), redesignated former subsec. (b) as (c), and inserted “and subsection (b)” after “subsection (a)”."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1375a-note-3",
+        "sourcePath": "title8.sections[1375a].notes[2]",
+        "field": "text",
+        "start": 400,
+        "text": "section 1375 of this title",
+        "target": "usc:8:1375/ (local)",
+        "context": "lity Act which comprises this chapter. Section is comprised of section 833 of Pub. L. 109–162. Subsec. (g) of section 833 of Pub. L. 109–162 repealed section 1375 of this title."
+      },
+      {
+        "scope": "usc-operative",
+        "sourceId": "8-1435-d-1",
+        "sourcePath": "title8.sections[1435].body[3/0]",
+        "field": "text",
+        "start": 288,
+        "text": "section 1448 of this title",
+        "target": "usc:8:1448/ (local)",
+        "context": "uirements under section 1401(b) of this title (as in effect before October 10, 1978), shall, from and after taking the oath of allegiance required by section 1448 of this title be a citizen of the United States and have the status of a citizen of the United States by birth, without filing an application for naturalization, a"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1435-note-2",
+        "sourcePath": "title8.sections[1435].notes[1]",
+        "field": "text",
+        "start": 253,
+        "text": "(c)",
+        "target": "usc:8:1435/c (local)",
+        "context": "d (c)(1), which was classified to section 717(a) and (b) of this title, was repealed by section 403(a)(42) of act June 27, 1952. See subsecs. (a) and (c) of this section."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1438-note-2",
+        "sourcePath": "title8.sections[1438].notes[1]",
+        "field": "text",
+        "start": 210,
+        "text": "(a)",
+        "target": "usc:8:1438/a (local)",
+        "context": ", referred to in subsec. (c), which was classified to section 723 of this title, was repealed by section 403(a)(42) of act June 27, 1952. See subsec. (a) of this section."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1451-note-2",
+        "sourcePath": "title8.sections[1451].notes[1]",
+        "field": "text",
+        "start": 215,
+        "text": "section 1440 of this title",
+        "target": "usc:8:1440/ (local)",
+        "context": "amended, referred to in subsec. (g), which was classified to section 1002 of this title, was repealed by section 403(a)(42) of act June 27, 1952. See section 1440 of this title."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1455-note-3",
+        "sourcePath": "title8.sections[1455].notes[2]",
+        "field": "text",
+        "start": 1567,
+        "text": "(a)",
+        "target": "usc:8:1421/a (local)",
+        "context": "from applicants residing in”, and struck out former subsec. (c) which read as follows: “The clerk of any naturalization court specified in subsection (a) of section 1421 of this title (except the courts specified in subsection (d) of this section) shall account for and pay over to the Attorney General"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1455-note-3",
+        "sourcePath": "title8.sections[1455].notes[2]",
+        "field": "text",
+        "start": 1574,
+        "text": "section 1421 of this title",
+        "target": "usc:8:1421/ (local)",
+        "context": "plicants residing in”, and struck out former subsec. (c) which read as follows: “The clerk of any naturalization court specified in subsection (a) of section 1421 of this title (except the courts specified in subsection (d) of this section) shall account for and pay over to the Attorney General one-half of all fees up to the"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1455-note-3",
+        "sourcePath": "title8.sections[1455].notes[2]",
+        "field": "text",
+        "start": 3578,
+        "text": "(c)",
+        "target": "usc:8:1455/c (local)",
+        "context": "for references to clerk of court wherever appearing, and struck out former subsec. (e) which read as follows: “The accounting required by subsections (c) and (d) of this section shall be made and the fees paid over to the Attorney General by such respective clerks in their quarterly accounts which they"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1455-note-3",
+        "sourcePath": "title8.sections[1455].notes[2]",
+        "field": "text",
+        "start": 3586,
+        "text": "(d)",
+        "target": "usc:8:1455/d (local)",
+        "context": "rences to clerk of court wherever appearing, and struck out former subsec. (e) which read as follows: “The accounting required by subsections (c) and (d) of this section shall be made and the fees paid over to the Attorney General by such respective clerks in their quarterly accounts which they are req"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1481-note-3",
+        "sourcePath": "title8.sections[1481].notes[2]",
+        "field": "text",
+        "start": 2901,
+        "text": "(b)",
+        "target": "usc:8:1481/b (local)",
+        "context": "–653, § 19, as amended by Pub. L. 100–525, § 8(n), redesignated former subsec. (c) as (b) and substituted “Any” for “Except as provided in subsection (b) of this section, any”, and struck out former subsec. (b) which read as follows: “Any person who commits or performs any act specified in subsection ("
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1481-note-3",
+        "sourcePath": "title8.sections[1481].notes[2]",
+        "field": "text",
+        "start": 3053,
+        "text": "(a)",
+        "target": "usc:8:1481/a (local)",
+        "context": ") of this section, any”, and struck out former subsec. (b) which read as follows: “Any person who commits or performs any act specified in subsection (a) of this section shall be conclusively presumed to have done so voluntarily and without having been subjected to duress of any kind, if such person at"
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1534-note-2",
+        "sourcePath": "title8.sections[1534].notes[1]",
+        "field": "text",
+        "start": 902,
+        "text": "section 1254a of this title",
+        "target": "usc:8:1254a/ (local)",
+        "context": ", title III, § 308(b)(7), Sept. 30, 1996, 110 Stat. 3009–615, repealed section 244 and renumbered section 244A as section 244, which is classified to section 1254a of this title. For provisions relating to voluntary departure, see section 1229c of this title. The USA PATRIOT Act of 2001, referred to in subsec. (l), is Pub. L."
+      },
+      {
+        "scope": "usc-notes",
+        "sourceId": "8-1812-note-2",
+        "sourcePath": "title8.sections[1812].notes[1]",
+        "field": "text",
+        "start": 195,
+        "text": "section 1229a(b)(5)(C)(ii) of this title",
+        "target": "usc:8:1229a/b/5/C/ii (local)",
+        "context": "his title, referred to in subsec. (g)(3)(B), was repealed by Pub. L. 104–208, div. C, title III, § 308(b)(6), Sept. 30, 1996, 110 Stat. 3009–615. See section 1229a(b)(5)(C)(ii) of this title."
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:106.2",
+        "sourcePath": "cfr.records[8:106.2].blocks[41]",
+        "field": "x",
+        "start": 41,
+        "text": "Section 212(c) of the Immigration and Nationality Act",
+        "target": "ina:8:1182/c (local)",
+        "context": "(12) Application for Relief Under Former Section 212(c) of the Immigration and Nationality Act (INA), Form I-191. For filing an application for discretionary relief under section 212(c) of the Act: $930."
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:106.3",
+        "sourcePath": "cfr.records[8:106.3].blocks[9]",
+        "field": "x",
+        "start": 40,
+        "text": "Section 212(c) of the Immigration and Nationality Act",
+        "target": "ina:8:1182/c (local)",
+        "context": "(B) Application for Relief Under Former Section 212(c) of the Immigration and Nationality Act (Form I-191);"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:212.6",
+        "sourcePath": "cfr.records[8:212.6].blocks[16]",
+        "field": "x",
+        "start": 56,
+        "text": "section 242 of the Act",
+        "target": "ina:8:1252/ (local)",
+        "context": "(2) Within the United States. In accordance with former section 242 of the Act (before amended by section 306 of the IIRIRA of 1996, Div. C, Public Law 104-208, 110 Stat. 3009 (Sept. 30, 1996,) or current sections 235(b), 238, a"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.3",
+        "sourcePath": "cfr.records[8:214.3].blocks[93]",
+        "field": "x",
+        "start": 94,
+        "text": "8 CFR 214.2(f)(10)(ii)(C)(6)",
+        "target": "cfr:8:214.2/f/10/ii/C/6 (local)",
+        "context": "(2) The end date of the student's employment reported by a former employer in accordance with 8 CFR 214.2(f)(10)(ii)(C)(6)."
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.14",
+        "sourcePath": "cfr.records[8:214.14].blocks[34]",
+        "field": "x",
+        "start": 203,
+        "text": "sections 236",
+        "target": "ina:8:1226/ (local)",
+        "context": "n alien who is in removal proceedings under section 240 of the Act, 8 U.S.C. 1229a, or in exclusion or deportation proceedings initiated under former sections 236 or 242 of the Act, 8 U.S.C. 1226 and 1252 (as in effect prior to April 1, 1997), and who would like to apply for U nonimmigrant status must file a Fo"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.14",
+        "sourcePath": "cfr.records[8:214.14].blocks[34]",
+        "field": "x",
+        "start": 219,
+        "text": "242 of the Act",
+        "target": "ina:8:1252/ (local)",
+        "context": "n removal proceedings under section 240 of the Act, 8 U.S.C. 1229a, or in exclusion or deportation proceedings initiated under former sections 236 or 242 of the Act, 8 U.S.C. 1226 and 1252 (as in effect prior to April 1, 1997), and who would like to apply for U nonimmigrant status must file a Form I-918 directly"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.14",
+        "sourcePath": "cfr.records[8:214.14].blocks[34]",
+        "field": "x",
+        "start": 235,
+        "text": "8 U.S.C. 1226",
+        "target": "usc:8:1226/ (local)",
+        "context": "dings under section 240 of the Act, 8 U.S.C. 1229a, or in exclusion or deportation proceedings initiated under former sections 236 or 242 of the Act, 8 U.S.C. 1226 and 1252 (as in effect prior to April 1, 1997), and who would like to apply for U nonimmigrant status must file a Form I-918 directly with USCIS. U.S"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.14",
+        "sourcePath": "cfr.records[8:214.14].blocks[34]",
+        "field": "x",
+        "start": 253,
+        "text": "1252",
+        "target": "usc:8:1252/ (local)",
+        "context": "n 240 of the Act, 8 U.S.C. 1229a, or in exclusion or deportation proceedings initiated under former sections 236 or 242 of the Act, 8 U.S.C. 1226 and 1252 (as in effect prior to April 1, 1997), and who would like to apply for U nonimmigrant status must file a Form I-918 directly with USCIS. U.S. Immigra"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.14",
+        "sourcePath": "cfr.records[8:214.14].blocks[72]",
+        "field": "x",
+        "start": 258,
+        "text": "sections 236",
+        "target": "ina:8:1226/ (local)",
+        "context": "member who is in removal proceedings under section 240 of the Act, 8 U.S.C. 1229a, or in exclusion or deportation proceedings initiated under former sections 236 or 242 of the Act, 8 U.S.C. 1226 and 1252 (as in effect prior to April 1, 1997), and who is seeking U nonimmigrant status, must file a Form I-918, Su"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.14",
+        "sourcePath": "cfr.records[8:214.14].blocks[72]",
+        "field": "x",
+        "start": 274,
+        "text": "242 of the Act",
+        "target": "ina:8:1252/ (local)",
+        "context": "n removal proceedings under section 240 of the Act, 8 U.S.C. 1229a, or in exclusion or deportation proceedings initiated under former sections 236 or 242 of the Act, 8 U.S.C. 1226 and 1252 (as in effect prior to April 1, 1997), and who is seeking U nonimmigrant status, must file a Form I-918, Supplement A directl"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.14",
+        "sourcePath": "cfr.records[8:214.14].blocks[72]",
+        "field": "x",
+        "start": 290,
+        "text": "8 U.S.C. 1226",
+        "target": "usc:8:1226/ (local)",
+        "context": "dings under section 240 of the Act, 8 U.S.C. 1229a, or in exclusion or deportation proceedings initiated under former sections 236 or 242 of the Act, 8 U.S.C. 1226 and 1252 (as in effect prior to April 1, 1997), and who is seeking U nonimmigrant status, must file a Form I-918, Supplement A directly with USCIS. I"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.14",
+        "sourcePath": "cfr.records[8:214.14].blocks[72]",
+        "field": "x",
+        "start": 308,
+        "text": "1252",
+        "target": "usc:8:1252/ (local)",
+        "context": "n 240 of the Act, 8 U.S.C. 1229a, or in exclusion or deportation proceedings initiated under former sections 236 or 242 of the Act, 8 U.S.C. 1226 and 1252 (as in effect prior to April 1, 1997), and who is seeking U nonimmigrant status, must file a Form I-918, Supplement A directly with USCIS. ICE counse"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.204",
+        "sourcePath": "cfr.records[8:214.204].blocks[3]",
+        "field": "x",
+        "start": 126,
+        "text": "sections 236",
+        "target": "ina:8:1226/ (local)",
+        "context": "(i) An applicant in removal proceedings under section 240 of the Act, or in exclusion or deportation proceedings under former sections 236 or 242 of the Act (as in effect prior to April 1, 1997), and who wishes to apply for T-1 nonimmigrant status must file an Application for T Nonimmigr"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.204",
+        "sourcePath": "cfr.records[8:214.204].blocks[3]",
+        "field": "x",
+        "start": 142,
+        "text": "242 of the Act",
+        "target": "ina:8:1252/ (local)",
+        "context": "(i) An applicant in removal proceedings under section 240 of the Act, or in exclusion or deportation proceedings under former sections 236 or 242 of the Act (as in effect prior to April 1, 1997), and who wishes to apply for T-1 nonimmigrant status must file an Application for T Nonimmigrant Status directl"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.205",
+        "sourcePath": "cfr.records[8:214.205].blocks[23]",
+        "field": "x",
+        "start": 349,
+        "text": "sections 236",
+        "target": "ina:8:1226/ (local)",
+        "context": "s have been deemed bona fide and who are in removal proceedings under section 240 of the Act, or in exclusion or deportation proceedings under former sections 236 or 242 of the Act (as in effect prior to April 1, 1997). In such cases, ICE may exercise prosecutorial discretion, as appropriate, while USCIS adjudi"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.205",
+        "sourcePath": "cfr.records[8:214.205].blocks[23]",
+        "field": "x",
+        "start": 365,
+        "text": "242 of the Act",
+        "target": "ina:8:1252/ (local)",
+        "context": "ed bona fide and who are in removal proceedings under section 240 of the Act, or in exclusion or deportation proceedings under former sections 236 or 242 of the Act (as in effect prior to April 1, 1997). In such cases, ICE may exercise prosecutorial discretion, as appropriate, while USCIS adjudicates an Applicati"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.211",
+        "sourcePath": "cfr.records[8:214.211].blocks[11]",
+        "field": "x",
+        "start": 145,
+        "text": "sections 236",
+        "target": "ina:8:1226/ (local)",
+        "context": "(i) If an eligible family member is in removal proceedings under section 240 of the Act, or in exclusion or deportation proceedings under former sections 236 or 242 of the Act (as in effect prior to April 1, 1997), the principal applicant or T-1 nonimmigrant must file an Application for Derivative T Nonimm"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:214.211",
+        "sourcePath": "cfr.records[8:214.211].blocks[11]",
+        "field": "x",
+        "start": 161,
+        "text": "242 of the Act",
+        "target": "ina:8:1252/ (local)",
+        "context": "ligible family member is in removal proceedings under section 240 of the Act, or in exclusion or deportation proceedings under former sections 236 or 242 of the Act (as in effect prior to April 1, 1997), the principal applicant or T-1 nonimmigrant must file an Application for Derivative T Nonimmigrant Status dire"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:236.1",
+        "sourcePath": "cfr.records[8:236.1].blocks[7]",
+        "field": "x",
+        "start": 458,
+        "text": "section 236 of the Act",
+        "target": "ina:8:1226/ (local)",
+        "context": "roceedings, subject to a final order of deportation, or in removal proceedings. The TPCR do not apply to aliens in exclusion proceedings under former section 236 of the Act, aliens in expedited removal proceedings under section 235(b)(1) of the Act, or aliens subject to a final order of removal."
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:236.1",
+        "sourcePath": "cfr.records[8:236.1].blocks[7]",
+        "field": "x",
+        "start": 528,
+        "text": "section 235(b)(1) of the Act",
+        "target": "ina:8:1225/b/1 (local)",
+        "context": "ceedings. The TPCR do not apply to aliens in exclusion proceedings under former section 236 of the Act, aliens in expedited removal proceedings under section 235(b)(1) of the Act, or aliens subject to a final order of removal."
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.21",
+        "sourcePath": "cfr.records[8:240.21]",
+        "field": "heading",
+        "start": 178,
+        "text": "section 240A(b) of the Act",
+        "target": "ina:8:1229b/b (local)",
+        "context": "d adjustment of status under section 244(a) of the Act (as in effect before April 1, 1997) and cancellation of removal and adjustment of status under section 240A(b) of the Act for certain nonpermanent residents."
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.21",
+        "sourcePath": "cfr.records[8:240.21].blocks[2]",
+        "field": "x",
+        "start": 193,
+        "text": "section 240A(b) of the Act",
+        "target": "ina:8:1229b/b (local)",
+        "context": "grants of suspension of deportation pursuant to section 244(a) of the Act (as in effect before April 1, 1997) or cancellation of removal pursuant to section 240A(b) of the Act that are subject to a numerical limitation in section 240A(e) of the Act for any fiscal year. This section does not apply to grants of suspension of"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.64",
+        "sourcePath": "cfr.records[8:240.64].blocks[2]",
+        "field": "x",
+        "start": 69,
+        "text": "section 244 of the Act",
+        "target": "ina:8:1254a/ (local)",
+        "context": "(1) For applications for suspension of deportation made under former section 244 of the Act, as in effect prior to April 1, 1997, the burden of proof is on the applicant to establish that any breaks in continuous physical presence were brief"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.65",
+        "sourcePath": "cfr.records[8:240.65].blocks[0]",
+        "field": "x",
+        "start": 226,
+        "text": "section 244 of the Act",
+        "target": "ina:8:1254a/ (local)",
+        "context": "of deportation under this section, the applicant must be an individual described in § 240.61; must establish that he or she is eligible under former section 244 of the Act, as in effect prior to April 1, 1997; must not be subject to any bars to eligibility in former section 242B(e) of the Act, as in effect prior to Apri"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.65",
+        "sourcePath": "cfr.records[8:240.65].blocks[0]",
+        "field": "x",
+        "start": 533,
+        "text": "section 241(a)(4)(D) of the Act",
+        "target": "ina:8:1231/a/4/D (local)",
+        "context": "t prior to April 1, 1997, or any other provisions of law; and must not have been convicted of an aggravated felony or be an alien described in former section 241(a)(4)(D) of the Act, as in effect prior to April 1, 1997 (relating to Nazi persecution and genocide)."
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.65",
+        "sourcePath": "cfr.records[8:240.65].blocks[1]",
+        "field": "x",
+        "start": 86,
+        "text": "section 244(a)(1) of the Act",
+        "target": "ina:8:1254a/a/1 (local)",
+        "context": "(b) General rule. To establish eligibility for suspension of deportation under former section 244(a)(1) of the Act, as in effect prior to April 1, 1997, an alien must be deportable under any law of the United States, except the provisions specified in paragraph (c"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.65",
+        "sourcePath": "cfr.records[8:240.65].blocks[5]",
+        "field": "x",
+        "start": 128,
+        "text": "section 244(a)(2) of the Act",
+        "target": "ina:8:1254a/a/2 (local)",
+        "context": "(c) Aliens deportable on criminal or certain other grounds. To establish eligibility for suspension of deportation under former section 244(a)(2) of the Act, as in effect prior to April 1, 1997, an alien who is deportable under former section 241(a) (2), (3), or (4) of the Act, as in effect prior to April"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.65",
+        "sourcePath": "cfr.records[8:240.65].blocks[5]",
+        "field": "x",
+        "start": 235,
+        "text": "section 241(a) (2)",
+        "target": "ina:8:1231/a/2 (local)",
+        "context": "for suspension of deportation under former section 244(a)(2) of the Act, as in effect prior to April 1, 1997, an alien who is deportable under former section 241(a) (2), (3), or (4) of the Act, as in effect prior to April 1, 1997 (relating to criminal activity, document fraud, failure to register, and security threat"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.65",
+        "sourcePath": "cfr.records[8:240.65].blocks[5]",
+        "field": "x",
+        "start": 255,
+        "text": "(3)",
+        "target": "ina:8:1231/a/3 (local)",
+        "context": "portation under former section 244(a)(2) of the Act, as in effect prior to April 1, 1997, an alien who is deportable under former section 241(a) (2), (3), or (4) of the Act, as in effect prior to April 1, 1997 (relating to criminal activity, document fraud, failure to register, and security threats), m"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.65",
+        "sourcePath": "cfr.records[8:240.65].blocks[5]",
+        "field": "x",
+        "start": 263,
+        "text": "(4) of the Act",
+        "target": "ina:8:1231/a/4 (local)",
+        "context": "n under former section 244(a)(2) of the Act, as in effect prior to April 1, 1997, an alien who is deportable under former section 241(a) (2), (3), or (4) of the Act, as in effect prior to April 1, 1997 (relating to criminal activity, document fraud, failure to register, and security threats), must establish that:"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.65",
+        "sourcePath": "cfr.records[8:240.65].blocks[9]",
+        "field": "x",
+        "start": 103,
+        "text": "section 244(a)(3) of the Act",
+        "target": "ina:8:1254a/a/3 (local)",
+        "context": "(d) Battered spouses and children. To establish eligibility for suspension of deportation under former section 244(a)(3) of the Act, as in effect prior to April 1, 1997, an alien must be deportable under any law of the United States, except under former section 241(a)(1)(G) of the"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.70",
+        "sourcePath": "cfr.records[8:240.70].blocks[1]",
+        "field": "x",
+        "start": 218,
+        "text": "section 244(a)(1) of the Act",
+        "target": "ina:8:1254a/a/1 (local)",
+        "context": "suspension of deportation to an applicant eligible to apply for this relief with the Service who qualifies for suspension of deportation under former section 244(a)(1) of the Act, as in effect prior to April 1, 1997, who is not an alien described in former section 241(a)(4)(D) of the Act, as in effect prior to April 1, 1997, a"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.70",
+        "sourcePath": "cfr.records[8:240.70].blocks[1]",
+        "field": "x",
+        "start": 325,
+        "text": "section 241(a)(4)(D) of the Act",
+        "target": "ina:8:1231/a/4/D (local)",
+        "context": "for suspension of deportation under former section 244(a)(1) of the Act, as in effect prior to April 1, 1997, who is not an alien described in former section 241(a)(4)(D) of the Act, as in effect prior to April 1, 1997, and who admits deportability under any law of the United States, excluding former section 241(a)(2), (3), or (4"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.70",
+        "sourcePath": "cfr.records[8:240.70].blocks[1]",
+        "field": "x",
+        "start": 477,
+        "text": "section 241(a)(2)",
+        "target": "ina:8:1231/a/2 (local)",
+        "context": "ction 241(a)(4)(D) of the Act, as in effect prior to April 1, 1997, and who admits deportability under any law of the United States, excluding former section 241(a)(2), (3), or (4) of the Act, as in effect prior to April 1, 1997. If the Service has made a preliminary decision to grant the applicant suspension of dep"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.70",
+        "sourcePath": "cfr.records[8:240.70].blocks[1]",
+        "field": "x",
+        "start": 496,
+        "text": "(3)",
+        "target": "ina:8:1231/a/3 (local)",
+        "context": "of the Act, as in effect prior to April 1, 1997, and who admits deportability under any law of the United States, excluding former section 241(a)(2), (3), or (4) of the Act, as in effect prior to April 1, 1997. If the Service has made a preliminary decision to grant the applicant suspension of deportat"
+      },
+      {
+        "scope": "cfr",
+        "sourceId": "cfr-8:240.70",
+        "sourcePath": "cfr.records[8:240.70].blocks[1]",
+        "field": "x",
+        "start": 504,
+        "text": "(4) of the Act",
+        "target": "ina:8:1231/a/4 (local)",
+        "context": "ct, as in effect prior to April 1, 1997, and who admits deportability under any law of the United States, excluding former section 241(a)(2), (3), or (4) of the Act, as in effect prior to April 1, 1997. If the Service has made a preliminary decision to grant the applicant suspension of deportation under this subp"
+      }
+    ],
+    "inventoryComparisons": {
+      "usc-operative": {
+        "byteEqual": true,
+        "generatedSha256": "b956f15ec195569d91bbde6134489fa8b8b49be5910d7ba9795c39bafcf3390e",
+        "frozenSha256": "b956f15ec195569d91bbde6134489fa8b8b49be5910d7ba9795c39bafcf3390e"
+      },
+      "usc-notes": {
+        "byteEqual": true,
+        "generatedSha256": "971ca8e71aeb58921da1a9c227b7ae2210106b208ee5c9beca99f15b03cfb18e",
+        "frozenSha256": "971ca8e71aeb58921da1a9c227b7ae2210106b208ee5c9beca99f15b03cfb18e"
+      },
+      "cfr": {
+        "byteEqual": true,
+        "generatedSha256": "b8bb09afd3cb764ddd99f05968c4dac24e7a7977e848a0e7733ca42d23f6f1a2",
+        "frozenSha256": "b8bb09afd3cb764ddd99f05968c4dac24e7a7977e848a0e7733ca42d23f6f1a2"
+      }
+    }
+  },
+  "reviewedDispositions": [
+    {
+      "status": "rejected",
+      "scope": "cfr",
+      "sourceId": "cfr-20:416.1165",
+      "sourcePath": "cfr.records[20:416.1165].blocks[33]",
+      "start": 180,
+      "text": "(e)(3)",
+      "reason": "Stale prior-cycle row: this text span is not present in the frozen block, so it fails the exact field/text guard."
+    },
+    {
+      "status": "rejected",
+      "scope": "usc-notes",
+      "sourceId": "8-801 to 810-note-7",
+      "sourcePath": "title8.sections[801 to 810].notes[6]",
+      "start": 181,
+      "text": "section 1487 of this title",
+      "reason": "The House corpus supplies a combined local repealed record for sections 1484 to 1487; the prior official-only rationale was false."
+    },
+    {
+      "status": "rejected",
+      "scope": "usc-notes",
+      "sourceId": "8-801 to 810-note-9",
+      "sourcePath": "title8.sections[801 to 810].notes[8]",
+      "start": 321,
+      "text": "section 1487 of this title",
+      "reason": "The House corpus supplies a combined local repealed record for sections 1484 to 1487; the prior official-only rationale was false."
+    },
+    {
+      "status": "rejected",
+      "scope": "usc-notes",
+      "sourceId": "8-1229a-note-11",
+      "sourcePath": "title8.sections[1229a].notes[10]",
+      "start": 2513,
+      "text": "8 U.S.C. 1101",
+      "reason": "This occurrence is the parenthetical locator '(8 U.S.C. 1101 note)' for IIRIRA section 309, not the preceding historical whole-INA citation; the local resolution is appropriate."
+    },
+    {
+      "status": "rejected",
+      "scope": "usc-operative",
+      "sourceId": "8-1324a-a-1-B-i",
+      "sourcePath": "title8.sections[1324a].body[0/0/1/0]",
+      "start": 119,
+      "text": "(ii)",
+      "reason": "Run-in marker introducing clause text ('if the person ...'), not a cross-reference mention."
+    },
+    {
+      "status": "rejected",
+      "scope": "usc-operative",
+      "sourceId": "8-1441",
+      "sourcePath": "title8.sections[1441]",
+      "start": 448,
+      "text": "(i)",
+      "reason": "Run-in marker introducing clause text ('which is registered ...'), not a cross-reference mention."
+    },
+    {
+      "status": "rejected",
+      "scope": "usc-operative",
+      "sourceId": "8-1441",
+      "sourcePath": "title8.sections[1441]",
+      "start": 512,
+      "text": "(ii)",
+      "reason": "Run-in marker introducing clause text ('the full ... title ...'), not a cross-reference mention."
+    }
+  ],
+  "findings": [
+    {
+      "scope": "cfr",
+      "sourceId": "cfr-8:1240.66",
+      "sourcePath": "cfr.records[8:1240.66].blocks[2]",
+      "field": "x",
+      "start": 51,
+      "end": 57,
+      "text": "(a)(2)",
+      "context": "(1) The alien is not inadmissible under section 212(a)(2) or (3) or deportable under section 237(a)(2), (3) or (4) of the Act (relating to criminal activity, document fraud, failure to register, and security threats);",
+      "currentTarget": "none (no generated link)",
+      "verdict": "missing-link",
+      "proposedTarget": "ina:8:1182/a/2 (local)",
+      "rationale": "Explicit statutory citation in displayed source text; frozen candidate is unlinked with no overlapping generated target.",
+      "sourceEvidence": [
+        "sources/legal/luna-audit-cfr-cycle11-flags.tsv"
+      ]
+    },
+    {
+      "scope": "cfr",
+      "sourceId": "cfr-8:240.66",
+      "sourcePath": "cfr.records[8:240.66].blocks[2]",
+      "field": "x",
+      "start": 51,
+      "end": 57,
+      "text": "(a)(2)",
+      "context": "(1) The alien is not inadmissible under section 212(a)(2) or (3) or deportable under section 237(a)(2), (3) or (4) of the Act (relating to criminal activity, document fraud, failure to register, and security threats);",
+      "currentTarget": "none (no generated link)",
+      "verdict": "missing-link",
+      "proposedTarget": "ina:8:1182/a/2 (local)",
+      "rationale": "Explicit statutory citation in displayed source text; frozen candidate is unlinked with no overlapping generated target.",
+      "sourceEvidence": [
+        "sources/legal/luna-audit-cfr-cycle11-flags.tsv"
+      ]
+    },
+    {
+      "scope": "usc-notes",
+      "sourceId": "8-1101-note-17",
+      "sourcePath": "title8.sections[1101].notes[16]",
+      "field": "text",
+      "start": 4391,
+      "end": 4394,
+      "text": "(b)",
+      "context": "106 of the Immigration and Nationality Act [former 8 U.S.C. 1105a] (as in effect as of the date of the enactment of this Act) to the contrary—“(A) in the case of judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deport",
+      "currentTarget": "usc:8:1105a/b (local)",
+      "verdict": "incorrect-resolution",
+      "proposedTarget": "usc:8:1105a/b (official-source-only)",
+      "rationale": "The preceding citation expressly identifies former INA section 106 (former 8 U.S.C. 1105a), and 'subsection (b) of such section' refers to that historical section; local current-text resolution is incorrect.",
+      "sourceEvidence": [
+        "sources/legal/luna-audit-usc-notes-cycle11-flags.tsv",
+        "independent-baseline-adjudication"
+      ]
+    },
+    {
+      "scope": "usc-notes",
+      "sourceId": "8-1101-note-17",
+      "sourcePath": "title8.sections[1101].notes[16]",
+      "start": 4513,
+      "text": "(a)",
+      "verdict": "incorrect-target",
+      "proposedTarget": "usc:8:1105a/a (official-source-only)",
+      "rationale": "In the quoted transition rule, 'such section' refers to former INA section 106 (former 8 U.S.C. 1105a), so this subsection locator must remain historical and official-source-only rather than being inferred under current section 1101.",
+      "end": 4516,
+      "context": "ct) to the contrary—“(A) in the case of judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section 2347(c) of title 28, United States Code;",
+      "currentTarget": "usc:8:1101/a (local)",
+      "sourceEvidence": [
+        "independent-baseline-adjudication"
+      ]
+    },
+    {
+      "scope": "usc-notes",
+      "sourceId": "8-1101-note-17",
+      "sourcePath": "title8.sections[1101].notes[16]",
+      "start": 4521,
+      "text": "(c)",
+      "verdict": "incorrect-target",
+      "proposedTarget": "usc:8:1105a/c (official-source-only)",
+      "rationale": "In the quoted transition rule, 'such section' refers to former INA section 106 (former 8 U.S.C. 1105a), so this subsection locator must remain historical and official-source-only rather than being inferred under current section 1101.",
+      "end": 4524,
+      "context": "he contrary—“(A) in the case of judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section 2347(c) of title 28, United States Code; “(C) th",
+      "currentTarget": "usc:8:1101/c (local)",
+      "sourceEvidence": [
+        "independent-baseline-adjudication"
+      ]
+    }
+  ]
+}

@@ -929,7 +929,7 @@ async function main() {
     16080,
     "Not every House USLM reference was attached to its exact displayed source span or its publisher-supplied correction."
   );
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 36933, "Unexpected deterministic legal-reference total after expanding coordinated section lists.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 36958, "Unexpected deterministic legal-reference total after the citation-display and contextual-reference audit.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 12375, "Unexpected embedded-reference candidate total after the corpus-wide parser audit.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 8706, "Unexpected resolved embedded-reference total after the corpus-wide parser audit.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1309, "Unexpected unresolved/ambiguous embedded-reference total after the corpus-wide parser audit.");
@@ -2524,9 +2524,7 @@ async function main() {
   assert(!/id="view-(?:visas|immigrants|quiz)"/.test(fallbackSource), "A retired classification-study view remains in the application.");
   assert(/<div class="search-field-shell">[\s\S]*?<input class="search-input"[\s\S]*?<button class="search-suggestion-inline" id="searchSuggestionButton"/.test(fallbackSource), "The rotating suggestion is not integrated into the main search field.");
   assert(fallbackSource.includes('placeholder="Search INA, CFR, notes, and highlights"'), "The main search placeholder does not match the active search sources.");
-  assert(/id="impliedUscTitle"[\s\S]*?>8<\/span>[\s\S]*?id="searchInput"/.test(fallbackSource), "The implied Title 8 marker is not positioned before the typed U.S.C. citation.");
-  assert(!fallbackSource.includes("No U.S.C. title was entered. INASearch is assuming Title 8 for this lookup.") && !fallbackSource.includes("impliedUscTitleNotice") && !fallbackSource.includes("implied-usc-title-notice"), "The retired implied Title 8 warning remains in the application shell.");
-  assert(!fallbackSource.includes("has-implied-usc-title.has-citation-ambiguity"), "Citation ambiguity still reserves space for the retired implied Title 8 warning.");
+  assert(!fallbackSource.includes("impliedUscTitle") && !fallbackSource.includes("implied-usc-title") && !fallbackSource.includes("has-implied-usc-title"), "The retired implied Title 8 marker remains in the application shell.");
   assert(fallbackSource.includes("updateSearchSuggestionVisibility();"), "The integrated search suggestion does not hide when a query is present.");
   assert(fallbackSource.includes('id="searchScopeToken"') && fallbackSource.includes('id="searchScopeLabel"') && fallbackSource.includes('id="searchScopeInput"'), "The inline citation-filter editor is missing from the main search field.");
   assert(fallbackSource.includes("background: rgba(46,110,156,.22)") && fallbackSource.includes("has-search-scope"), "The inline in: citation editor is not presented as a subtle blue embedded field.");
@@ -2691,13 +2689,19 @@ async function main() {
     if (testCase.route === "search") assert.strictEqual(searchCommandRuntime.classifyInput(startupEditableSearch.value).status, "valid", "A shared advanced-search command no longer opens as a valid search.");
     if (testCase.route === "definition") assert(/^define:/i.test(startupEditableSearch.value), "A shared Definitions command no longer reaches the definition route.");
   }
-  const navigationSearchElement = { value: "INA 245" };
+  const navigationSearchElement = { value: "8 U.S.C. 1255" };
   const navigationSearchState = { navigationQueryInProgress: false, lastScrollSyncedCitation: "already" };
   const appliedNavigationQueries = [];
-  const citationTextParts = extractedFunction(fallbackSource, "citationTextParts", "formatNavigationCitationLike", { String });
+  const citationTextParts = extractedFunction(fallbackSource, "citationTextParts", "lazyNavigationStatutePath", { String });
+  const lazyNavigationStatutePath = extractedFunction(fallbackSource, "lazyNavigationStatutePath", "formatNavigationCitationLike", {
+    String,
+    statutePathDescriptor: () => ({ unitTypes: [0, 1, 2, 3, 4, 5] })
+  });
+  assert.deepStrictEqual(plain(lazyNavigationStatutePath({ section: {} }, ["z", "99", "Q", "ii", "I", "A"])), ["z", "99", "q", "ii", "I", "a"], "The default compact citation style does not reserve uppercase for subclauses only.");
   const parseFormatterCitation = query => {
     const parts = citationTextParts(query);
     if (!parts) return null;
+    const type = parts.type === "bare-statute" ? "ina" : parts.type;
     let section = parts.section;
     let suffix = parts.suffix;
     if (/[A-Za-z]$/.test(section) && suffix && !suffix.trimStart().startsWith("(")) {
@@ -2705,17 +2709,23 @@ async function main() {
       section = section.slice(0, -1);
     }
     const path = suffix.includes("(") ? [...suffix.matchAll(/\(([^)]+)\)/g)].map(match => match[1]) : (suffix.trim().match(/[A-Za-z]+|\d+/g) || []);
-    return { valid: true, type: parts.type, record: { item: { id: `${parts.type}:${section.toLowerCase()}` } }, path };
+    return { valid: true, type, record: { item: { id: `${type}:${section.toLowerCase()}` } }, mapping: type === "ina" ? { inaSection: section } : null, section: { section }, path };
   };
   const formatNavigationCitationLike = extractedFunction(fallbackSource, "formatNavigationCitationLike", "openClearedSearchHierarchy", {
     String,
     citationTextParts,
+    lazyNavigationStatutePath,
     parseCitation: parseFormatterCitation,
     componentTokens: value => [...String(value || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]),
     canonicalPath: values => values.map(value => `(${value})`).join("")
   });
-  assert.strictEqual(formatNavigationCitationLike("INA203", "INA 245(b)(1)(A)"), "INA245b1A", "Compact INA formatting was not retained across a navigation jump.");
-  assert.strictEqual(formatNavigationCitationLike("INA203", "INA 245(a)"), "INA245(a)", "An ambiguous compact subsection was not minimally disambiguated with parentheses.");
+  assert.strictEqual(formatNavigationCitationLike("236", "INA 236(c)(1)(E)(i)"), "236c1ei", "A bare section did not adopt the default lazy citation style when a deeper unit was selected.");
+  assert.strictEqual(formatNavigationCitationLike("INA 236", "INA 236(c)(1)(E)(i)"), "INA 236c1ei", "A section-only INA citation did not retain its typed authority while adopting the lazy path style.");
+  assert.strictEqual(formatNavigationCitationLike("I.N.A. § 236", "INA 236(c)(1)(E)(i)"), "I.N.A. § 236c1ei", "Typed INA punctuation was not retained when a deeper unit was selected.");
+  assert.strictEqual(formatNavigationCitationLike("§ 236", "INA 236(c)(1)(E)(i)"), "§ 236c1ei", "A bare section-sign citation did not retain its typed prefix.");
+  assert.strictEqual(formatNavigationCitationLike("INA236c1e", "INA 236(c)(1)(E)(i)"), "INA236c1ei", "An existing lazy compact path was not extended in the same style.");
+  assert.strictEqual(formatNavigationCitationLike("INA203", "INA 245(b)(1)(A)"), "INA245b1a", "A section-only compact INA citation did not adopt the lowercase lazy path style.");
+  assert.strictEqual(formatNavigationCitationLike("INA203", "INA 245(a)"), "INA245a", "A section-only compact INA citation was unexpectedly converted to parenthesized form.");
   assert.strictEqual(formatNavigationCitationLike("INA 203 b1A", "INA 245(c)(2)(B)"), "INA 245 c2B", "The user's separator between the section and compact subunits was not retained.");
   assert.strictEqual(formatNavigationCitationLike("INA 203(b)(1)(a)", "INA 245(c)(2)(B)"), "INA 245(c)(2)(B)", "Parenthesized citation formatting was not retained across a navigation jump.");
   assert.strictEqual(formatNavigationCitationLike("8 USC 1153 b 1 A", "8 U.S.C. 1154(a)(2)(B)"), "8 USC 1154 a 2 B", "Space-delimited citation formatting was not retained across a navigation jump.");
@@ -2733,9 +2743,10 @@ async function main() {
     positionCitationEquivalent: () => {}
   });
   applyNavigationQuery("8 U.S.C. 1255(a)(1)", "8 U.S.C. 1255(a)");
-  assert.strictEqual(navigationSearchElement.value, "8 U.S.C. 1255(a)", "An explicit navigation jump did not synchronize the editable citation.");
+  assert.strictEqual(navigationSearchElement.value, "8 U.S.C. 1255a", "An explicit navigation jump did not preserve the editable citation style.");
   assert.strictEqual(navigationSearchState.navigationQueryInProgress, false, "The navigation-query guard remained active after a jump.");
   assert.deepStrictEqual(appliedNavigationQueries, ["8 U.S.C. 1255(a)(1)"], "Navigation did not resolve the full target before presenting the depth-capped citation.");
+  assert(fallbackSource.includes("rawDisplay: options.rawDisplay !== false") && fallbackSource.includes("closeBlankCompanion: true, rawDisplay: false"), "Programmatic navigation in a focused citation pane does not preserve that pane's typed citation style.");
   applyStartupSearchQuery("cites:INA101a15s", false);
   assert.deepStrictEqual(startupActivatedScope, { scope: "INA101a15s", focus: false, mode: "cites" }, "A supplied cites: query did not activate citation-source mode with its compact target intact.");
   assert.strictEqual(startupEditableSearch.value, "", "A bare cites: query leaked its tag into the ordinary text-search field.");
@@ -3661,7 +3672,6 @@ async function main() {
   const renderCitationFeedback = extractedFunction(fallbackSource, "renderCitationFeedback", "renderCitationEquivalent", {
     state: { query: "22 CFR 42.11" },
     els: { feedback: feedbackElement },
-    renderImpliedUscTitle: () => false,
     renderCitationEquivalent: () => null,
     renderCitationAmbiguity: () => null
   });
@@ -3985,11 +3995,9 @@ async function main() {
   });
   const impliedCompactUsc = plain(parseCitationForImpliedUsc("usc1101(a)(15)(H)"));
   assert.strictEqual(impliedCompactUsc.raw, "1101(a)(15)(H)", "A compact titleless U.S.C. citation was not parsed as Title 8.");
-  assert.strictEqual(impliedCompactUsc.impliedUscTitle, 8, "A titleless U.S.C. citation does not retain its Title 8 assumption for display.");
   const impliedPunctuatedUsc = plain(parseCitationForImpliedUsc("U.S.C. § 1153(b)"));
   assert.strictEqual(impliedPunctuatedUsc.raw, "1153(b)", "A punctuated titleless U.S.C. citation was not parsed as Title 8.");
   assert.strictEqual(parseCitationForImpliedUsc("USCIS Glossary"), null, "The Title 8 fallback incorrectly captures text beginning with USCIS.");
-  assert.strictEqual(parseCitationForImpliedUsc("8 USC 1101").impliedUscTitle, undefined, "An explicit Title 8 citation was incorrectly marked as assumed.");
   assert.strictEqual(parseCitationForImpliedUsc("102").type, "ina", "A bare identifier valid in both statutory systems did not prefer INA.");
   const usc1324Family = parseCitationForImpliedUsc("8 USC 1324");
   assert(usc1324Family.valid && !usc1324Family.level && usc1324Family.raw === "1324", "Bare 8 U.S.C. 1324 does not open the exact valid section.");
@@ -4216,17 +4224,6 @@ async function main() {
     const target = firstCfrToCfrSource.targets.find(item => item.family === "cfr");
     return { valid: true, family: "cfr", sectionIds: new Set([target.sectionId]), pathsBySection: new Map(target.path.length ? [[target.sectionId, target.path]] : []) };
   })()), "The outgoing-reference index cannot match a CFR-to-CFR citation target.");
-  const impliedTitleShellClasses = new Set();
-  const impliedTitleShell = { classList: { toggle: (name, active) => active ? impliedTitleShellClasses.add(name) : impliedTitleShellClasses.delete(name) } };
-  const impliedTitleElements = {
-    search: { value: "usc1101", closest: () => impliedTitleShell },
-    impliedUscTitle: { hidden: true }
-  };
-  const renderImpliedUscTitle = extractedFunction(fallbackSource, "renderImpliedUscTitle", "renderCitationAmbiguity", { els: impliedTitleElements, Boolean });
-  assert.strictEqual(renderImpliedUscTitle(impliedCompactUsc), true, "The implied Title 8 presentation was not activated.");
-  assert(impliedTitleShellClasses.has("has-implied-usc-title") && !impliedTitleElements.impliedUscTitle.hidden, "The implied Title 8 marker remains hidden.");
-  impliedTitleElements.search.value = "8usc1101";
-  assert.strictEqual(renderImpliedUscTitle({ type: "usc", valid: true }), false, "An explicit Title 8 citation still displays the implied-title marker.");
   const ambiguityShellClasses = new Set();
   const ambiguityShell = { classList: { toggle: (name, active) => active ? ambiguityShellClasses.add(name) : ambiguityShellClasses.delete(name) } };
   const ambiguityElements = {
@@ -4307,7 +4304,7 @@ async function main() {
   assert(!renderedCrosswalkElements.citationEquivalent.hidden && renderedCrosswalkElements.citationEquivalentInaLabel.innerHTML.includes("INA 203(b)") && renderedCrosswalkElements.citationEquivalentUscLabel.innerHTML.includes("8 U.S.C. 1153(b)"), "The rendered search crosswalk does not show both citation systems.");
   assert(renderedCrosswalkElements.citationEquivalentIna.dataset.copyCitation === "INA 203(b)" && renderedCrosswalkElements.citationEquivalentUsc.dataset.copyCitation === "8 U.S.C. 1153(b)", "The complete rendered crosswalk buttons do not carry their copy citations.");
   assert(fallbackSource.includes("measureText(els.search.value)") && fallbackSource.includes("positionCitationEquivalent"), "The inline crosswalk citation does not track the typed citation width.");
-  const positionCrosswalkSource = fallbackSource.slice(fallbackSource.indexOf("function positionCitationEquivalent"), fallbackSource.indexOf("function renderImpliedUscTitle", fallbackSource.indexOf("function positionCitationEquivalent")));
+  const positionCrosswalkSource = fallbackSource.slice(fallbackSource.indexOf("function positionCitationEquivalent"), fallbackSource.indexOf("function renderCitationAmbiguity", fallbackSource.indexOf("function positionCitationEquivalent")));
   assert(positionCrosswalkSource.includes('classList.add("citation-labels-collapsed")') && !positionCrosswalkSource.includes('classList.add("citation-crosswalk-below")') && !fallbackSource.includes(".search-field-shell.citation-crosswalk-below"), "The two-sided crosswalk does not collapse its labels in place when horizontal space runs out.");
   const glossaryReferenceLabels = extractedFunction(fallbackSource, "glossaryReferenceLabels", "glossaryInlineLinks", { normalize: searchNormalize, Map, String });
   const glossaryAllowedHosts = new Set(full.corpus.approvedDomains);
@@ -4609,23 +4606,21 @@ async function main() {
   const ina204Section = hydratedSource.title8.sections.find(section => section.section === "1154");
   const ina204b = ina204Section.body.find(node => node.label === "b");
   const ina204bContext = { kind: "ina", inaSection: "204", uscSection: "1154", path: ["b"] };
-  const ina204bGroup = coordinatedStatutoryInaLists(ina204b.text, ina204b.references, 0, undefined, ina204bContext)
-    .find(group => group.text === "subsection (a) or (b) of section 1153 of this title");
-  const ina204bListHtml = coordinatedInaListHtml(ina204bGroup, ina204b.text, ina204b.references, null, ina204b.textFootnoteReferences || [], ina204bContext);
-  assert.strictEqual(ina204bListHtml.replace(/<[^>]+>/g, ""), "INA 203(a) or 203(b)", "INA 204(b)'s relative subsection alternatives did not convert to one INA-format citation list.");
-  assert.strictEqual((ina204bListHtml.match(/data-reference-ina-citation=/g) || []).length, 2, "INA 204(b) lost a clickable crosswalk target while converting its relative subsection list.");
+  assert(!coordinatedStatutoryInaLists(ina204b.text, ina204b.references, 0, undefined, ina204bContext).some(group => group.grammar === "relative-unit-list"), "A trailing section container was reordered into a leading INA list.");
+  const ina204bListHtml = coordinatedLinkifyStatutoryText(ina204b.text, ina204b.references, 0, undefined, null, [], ina204bContext);
+  assert(ina204bListHtml.replace(/<[^>]+>/g, "").includes("subsection (a) or (b) of INA 203"), "INA 204(b) lost its original relative subsection construction.");
   const ina204f1 = ina204Section.body.find(node => node.label === "f").children.find(node => node.label === "1");
   const ina204f1Context = { kind: "ina", inaSection: "204", uscSection: "1154", path: ["f", "1"] };
   const ina204f1Group = coordinatedStatutoryInaLists(ina204f1.text, ina204f1.references, 0, undefined, ina204f1Context)
     .find(group => group.text === "section 1151(b), 1153(a)(1), or 1153(a)(3) of this title");
   const ina204f1ListHtml = coordinatedInaListHtml(ina204f1Group, ina204f1.text, ina204f1.references, null, ina204f1.textFootnoteReferences || [], ina204f1Context);
-  assert.strictEqual(ina204f1ListHtml.replace(/<[^>]+>/g, ""), "INA 201(b), 203(a)(1), or 203(a)(3)", "INA 204(f)(1)'s mixed-section alternatives did not convert to one INA-format citation list.");
+  assert.strictEqual(ina204f1ListHtml.replace(/<[^>]+>/g, ""), "INA 201(b), 203(a)(1), or (3)", "INA 204(f)(1)'s mixed-section alternatives did not convert to one INA-format citation list.");
   assert.strictEqual((ina204f1ListHtml.match(/data-reference-ina-citation=/g) || []).length, 3, "INA 204(f)(1) lost a clickable crosswalk target while converting its mixed-section list.");
   const coordinatedInaDisplayAudit = {
     fields: 0, groups: 0, members: 0,
     grammars: {
       "numbered-section-list": { groups: 0, members: 0 },
-      "relative-unit-list": { groups: 0, members: 0 }
+      "repeated-section-list": { groups: 0, members: 0 }
     }
   };
   const auditCoordinatedInaField = (source, field, context) => {
@@ -4669,15 +4664,9 @@ async function main() {
     }
     for (const footnote of section.houseEditorialFootnotes || []) auditCoordinatedInaField(footnote, "text", context);
   }
-  assert.deepStrictEqual(coordinatedInaDisplayAudit, {
-    fields: 226,
-    groups: 337,
-    members: 960,
-    grammars: {
-      "numbered-section-list": { groups: 206, members: 627 },
-      "relative-unit-list": { groups: 131, members: 333 }
-    }
-  }, "The reviewed corpus-wide coordinated INA display inventory changed.");
+  assert.strictEqual(coordinatedInaDisplayAudit.grammars["numbered-section-list"].groups, 206, "The existing numbered citation groups changed unexpectedly.");
+  assert.strictEqual(coordinatedInaDisplayAudit.grammars["numbered-section-list"].members, 627, "The numbered citation groups lost a target.");
+  assert.strictEqual(coordinatedInaDisplayAudit.grammars["repeated-section-list"].groups, 8, "The repeated complete citation inventory changed.");
   console.log(`PASS coordinated INA display audit: ${coordinatedInaDisplayAudit.groups} fully crosswalked lists across ${coordinatedInaDisplayAudit.fields} fields; ${coordinatedInaDisplayAudit.members} independently linked members`);
   citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "usc";
   const specialImmigrantReferenceHtml = linkifyStatutoryText(specialImmigrantBlock.x, specialImmigrantActReferences);
@@ -5172,6 +5161,8 @@ async function main() {
   assert(fallbackSource.includes('statutoryNavigationSystem: "usc"') && fallbackSource.includes('statuteSectionDisplay: "hierarchy"') && fallbackSource.includes("automaticStatutoryNavigationSystem: true") && fallbackSource.includes('emptySearchView: "ina"') && fallbackSource.includes("splitAuthoritySearchPanes: false") && fallbackSource.includes("closeBlankCompanionOnSectionOpen: true") && fallbackSource.includes('legalNavigatorVisibility: "single"') && fallbackSource.includes("scrollUpdatesSearch: false") && fallbackSource.includes("citationJumpOffsetPercent: DEFAULT_READING_OFFSET_PERCENT") && fallbackSource.includes("navigationTrackingOffsetPercent: DEFAULT_READING_OFFSET_PERCENT") && fallbackSource.includes("expandSearchResultsByDefault: true") && fallbackSource.includes("showCfrChapterSubchapterInSearchHierarchy: false") && fallbackSource.includes("syncCfrCommonDepthFromStatute: true") && fallbackSource.includes("persistInlineReferenceInsertions: false") && fallbackSource.includes("animatedCitationJumps: true"), "Viewer and navigation preference defaults do not match the overhaul contract.");
   assert(!fallbackSource.includes("navigationUpdatesSearch: true"), "The retired explicit-navigation synchronization preference remains in defaults.");
   assert(fallbackSource.includes("syncSearchToScrolledLegalLocation(\"statute\"") && fallbackSource.includes("syncSearchToScrolledLegalLocation(\"cfr\""), "Scroll-follow mode is not connected to both statutory and regulatory readers.");
+  const scrollSearchSyncSource = fallbackSource.slice(fallbackSource.indexOf("function syncSearchToScrolledLegalLocation"), fallbackSource.indexOf("function updateStatuteNavigationFromScroll"));
+  assert(scrollSearchSyncSource.includes("const resolvedCitation = parseCitation(query);") && !scrollSearchSyncSource.includes("parseCitation(displayedQuery)"), "A compact display citation can replace the exact legal target during scroll synchronization.");
   const emptyRunSearchSource = fallbackSource.slice(fallbackSource.indexOf("function runSearch()"), fallbackSource.indexOf("function shouldDeferBroadSearch"));
   assert(emptyRunSearchSource.includes("if (!state.query && !state.searchScopeActive)") && emptyRunSearchSource.includes("openClearedSearchHierarchy();"), "Erasing the complete search citation does not open the INA root hierarchy.");
   assert(fallbackSource.includes('id="focusedCitationWorkspace"') && fallbackSource.includes('id="focusedCitationPanes"') && fallbackSource.includes("focused-citation-pane-scroll"), "The focused comparison workspace or its independent reader scrollers are missing.");

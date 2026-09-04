@@ -1,0 +1,438 @@
+{
+  "summary": {
+    "baseline": {
+      "file": "/Users/dave/Documents/HD QuickLookup/tmp/ina-display-cycle4/display.jsonl",
+      "sha256": "c79a095a39b80edaabbf4cf5fafe4e9c82d9d7e1219fadac0bf7b3a7194baea8",
+      "records": 57663
+    },
+    "current": {
+      "file": "/Users/dave/Documents/HD QuickLookup/tmp/ina-display-cycle5/display.jsonl",
+      "sha256": "d739608e3941dbb553d7be826267867660d128e1e4e088d6375e113f8dbeb78f",
+      "records": 57663
+    },
+    "fieldKeys": {
+      "baseline": 57663,
+      "current": 57663,
+      "onlyBaseline": 0,
+      "onlyCurrent": 0
+    },
+    "sourceReferences": {
+      "baseline": 53013,
+      "current": 53013,
+      "exactArrayDifferences": 1,
+      "added": 2,
+      "dropped": 2,
+      "changedOccurrences": 3,
+      "changedDimensions": {
+        "resolution": 3,
+        "targetSection": 2,
+        "ruleId": 2,
+        "officialUrl": 2
+      }
+    },
+    "renderedLinks": {
+      "baseline": 53013,
+      "current": 53013,
+      "added": 0,
+      "dropped": 0,
+      "targetDifferences": 2,
+      "falsePositiveLinks": 0,
+      "lostDetections": 0,
+      "orderMismatches": 0
+    },
+    "fields": {
+      "linkDifferences": 1,
+      "displayedTextDifferences": 0,
+      "groupDifferences": 0
+    },
+    "presentationChanges": {
+      "count": 2,
+      "byScope": {
+        "usc-notes": 2
+      },
+      "byDimension": {
+        "citation": 2
+      }
+    },
+    "addedClassifications": {},
+    "droppedClassifications": {},
+    "checks": {
+      "currentLinksMatchSourceReferences": true,
+      "currentLinksAreOrdered": true,
+      "sourceReferenceArraysStable": false
+    }
+  },
+  "flags": [
+    {
+      "type": "source-reference-changed",
+      "verdict": "reference-change",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "beforeReference": {
+        "start": 4391,
+        "end": 4394,
+        "text": "(b)",
+        "family": "usc",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "b"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "afterReference": {
+        "start": 4391,
+        "end": 4394,
+        "text": "(b)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "b"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "changeDimensions": [
+        "resolution"
+      ],
+      "context": "ct [former 8 U.S.C. 1105a] (as in effect as of the date of the enactment of this Act) to the contrary—“(A) in the case of judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they appl"
+    },
+    {
+      "type": "source-reference-changed",
+      "verdict": "reference-change",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "beforeReference": {
+        "start": 4513,
+        "end": 4516,
+        "text": "(a)",
+        "family": "usc",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a"
+        ],
+        "ruleId": "embedded-inferred-unit",
+        "provenance": "deterministic-context"
+      },
+      "afterReference": {
+        "start": 4513,
+        "end": 4516,
+        "text": "(a)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "a"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "changeDimensions": [
+        "resolution",
+        "targetSection",
+        "ruleId",
+        "officialUrl"
+      ],
+      "context": "judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section"
+    },
+    {
+      "type": "source-reference-changed",
+      "verdict": "reference-change",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "beforeReference": {
+        "start": 4521,
+        "end": 4524,
+        "text": "(c)",
+        "family": "usc",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "c"
+        ],
+        "ruleId": "embedded-inferred-unit",
+        "provenance": "deterministic-context"
+      },
+      "afterReference": {
+        "start": 4521,
+        "end": 4524,
+        "text": "(c)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "c"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "changeDimensions": [
+        "resolution",
+        "targetSection",
+        "ruleId",
+        "officialUrl"
+      ],
+      "context": "review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section 2347(c)"
+    },
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "sourceReference": {
+        "start": 4513,
+        "end": 4516,
+        "text": "(a)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "a"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "context": "judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section"
+    },
+    {
+      "type": "detected-reference-added",
+      "verdict": "detection-delta",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "sourceReference": {
+        "start": 4521,
+        "end": 4524,
+        "text": "(c)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "c"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "context": "review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section 2347(c)"
+    },
+    {
+      "type": "detected-reference-dropped",
+      "verdict": "detection-delta",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "sourceReference": {
+        "start": 4513,
+        "end": 4516,
+        "text": "(a)",
+        "family": "usc",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "a"
+        ],
+        "ruleId": "embedded-inferred-unit",
+        "provenance": "deterministic-context"
+      },
+      "context": "judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section"
+    },
+    {
+      "type": "detected-reference-dropped",
+      "verdict": "detection-delta",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "sourceReference": {
+        "start": 4521,
+        "end": 4524,
+        "text": "(c)",
+        "family": "usc",
+        "resolution": "local",
+        "targetTitle": "8",
+        "targetSection": "1101",
+        "targetPath": [
+          "c"
+        ],
+        "ruleId": "embedded-inferred-unit",
+        "provenance": "deterministic-context"
+      },
+      "context": "review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section 2347(c)"
+    },
+    {
+      "type": "rendered-link-target-changed",
+      "verdict": "target-difference",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "sourceReference": {
+        "start": 4521,
+        "end": 4524,
+        "text": "(c)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "c"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "baselineLink": {
+        "text": "(c)",
+        "family": "usc",
+        "section": "1101",
+        "path": [
+          "c"
+        ],
+        "sourceText": "(c)",
+        "citation": "8 U.S.C. 1101(c)",
+        "navigation": "8 U.S.C. 1101(c)"
+      },
+      "currentLink": {
+        "text": "(c)",
+        "family": "usc",
+        "section": "1105a",
+        "path": [
+          "c"
+        ],
+        "sourceText": "(c)",
+        "ina": "INA 106(c)",
+        "citation": "8 U.S.C. 1105a(c)"
+      },
+      "context": "review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section 2347(c)"
+    },
+    {
+      "type": "rendered-link-target-changed",
+      "verdict": "target-difference",
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "sourceReference": {
+        "start": 4513,
+        "end": 4516,
+        "text": "(a)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "a"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "baselineLink": {
+        "text": "(a)",
+        "family": "usc",
+        "section": "1101",
+        "path": [
+          "a"
+        ],
+        "sourceText": "(a)",
+        "citation": "8 U.S.C. 1101(a)",
+        "navigation": "8 U.S.C. 1101(a)"
+      },
+      "currentLink": {
+        "text": "(a)",
+        "family": "usc",
+        "section": "1105a",
+        "path": [
+          "a"
+        ],
+        "sourceText": "(a)",
+        "ina": "INA 106(a)",
+        "citation": "8 U.S.C. 1105a(a)"
+      },
+      "context": "judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section"
+    }
+  ],
+  "presentationChanges": [
+    {
+      "type": "presentation-change",
+      "dimensions": [
+        "citation"
+      ],
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "sourceReference": {
+        "start": 4521,
+        "end": 4524,
+        "text": "(c)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "c"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "baselineLink": {
+        "text": "(c)",
+        "family": "usc",
+        "section": "1101",
+        "path": [
+          "c"
+        ],
+        "sourceText": "(c)",
+        "citation": "8 U.S.C. 1101(c)",
+        "navigation": "8 U.S.C. 1101(c)"
+      },
+      "currentLink": {
+        "text": "(c)",
+        "family": "usc",
+        "section": "1105a",
+        "path": [
+          "c"
+        ],
+        "sourceText": "(c)",
+        "ina": "INA 106(c)",
+        "citation": "8 U.S.C. 1105a(c)"
+      },
+      "context": "review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section 2347(c)"
+    },
+    {
+      "type": "presentation-change",
+      "dimensions": [
+        "citation"
+      ],
+      "field": "usc-notes|title8.sections[1101].notes[16]|text",
+      "sourceReference": {
+        "start": 4513,
+        "end": 4516,
+        "text": "(a)",
+        "family": "usc",
+        "resolution": "official-source-only",
+        "targetTitle": "8",
+        "targetSection": "1105a",
+        "targetPath": [
+          "a"
+        ],
+        "ruleId": "embedded-such-container",
+        "provenance": "deterministic-context"
+      },
+      "baselineLink": {
+        "text": "(a)",
+        "family": "usc",
+        "section": "1101",
+        "path": [
+          "a"
+        ],
+        "sourceText": "(a)",
+        "citation": "8 U.S.C. 1101(a)",
+        "navigation": "8 U.S.C. 1101(a)"
+      },
+      "currentLink": {
+        "text": "(a)",
+        "family": "usc",
+        "section": "1105a",
+        "path": [
+          "a"
+        ],
+        "sourceText": "(a)",
+        "ina": "INA 106(a)",
+        "citation": "8 U.S.C. 1105a(a)"
+      },
+      "context": "judicial review of a final order of exclusion, subsection (b) of such section shall not apply and the action for judicial review shall be governed by the provisions of subsections (a) and (c) of such [section] in the same manner as they apply to judicial review of orders of deportation; “(B) a court may not order the taking of additional evidence under section"
+    }
+  ]
+}

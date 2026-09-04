@@ -191,6 +191,14 @@ Other House references use the same grammar. The generator translates publisher 
 
 House range identifiers use `...` where the normalized corpus uses ` to `. That single identifier difference is normalized before matching. This recovered 1,281 source-authored links that were previously skipped; the audited release accepts all 16,080 displayed House references with zero skips.
 
+### How does “Show INA citations in statutory links” affect citation lists?
+
+The setting uses the INA crosswalk for supported statutory citations and keeps abbreviated references short. For example, `section 1227(a)(2)(A)(ii), (A)(iii), (B), (C), or (D) of this title` reads `INA 237(a)(2)(A)(ii), (A)(iii), (B), (C), or (D)`.
+
+The original order, connecting words, and punctuation remain intact. A trailing section stays at the end: `paragraph (6)(A), (6)(C), or (7) of section 1182(a) of this title` reads `paragraph (6)(A), (6)(C), or (7) of INA 212(a)`. Repeated complete citations in a list can share their common section and subsection. The same approach applies to supported INA citations within CFR text.
+
+Each abbreviated link retains its complete target and original source wording in the reference preview. Turning the setting off restores the source wording.
+
 ### How are citations without a House link recognized?
 
 INASearch uses a deterministic parser for citations written as ordinary text. Recognized patterns include:
@@ -272,6 +280,7 @@ Both contain the same expanded corpus at runtime. `INASearch.html` compresses an
 ```bash
 node tools/build-standalone.js
 node tools/test-standalone.js
+node tools/test-ina-display.js
 ```
 
 The test suite checks source hashes, the INA crosswalk, CFR coverage, legal-reference spans and targets, policy excerpts, browser loading, profile migration, deterministic output, search performance, and size limits.
