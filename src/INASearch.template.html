@@ -657,28 +657,6 @@
     .citation-equivalent.citation-labels-collapsed .citation-equivalent-short { display: inline; }
     .citation-equivalent.cfr-only .citation-equivalent-arrow, .citation-equivalent.cfr-only .citation-equivalent-side-usc { display: none; }
     .citation-equivalent.cfr-only .citation-equivalent-side-ina { color: #a8dcff; background: #123b59; }
-    .implied-usc-title {
-      position: absolute;
-      z-index: 4;
-      top: 50%;
-      left: 44px;
-      translate: 0 -50%;
-      display: grid;
-      place-items: center;
-      min-width: 17px;
-      height: 22px;
-      border: 1px solid #d8a94d;
-      border-radius: 5px;
-      padding: 0 3px;
-      color: #1f1700;
-      background: #ffd66b;
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 950;
-      line-height: 1;
-    }
-    .search-field-shell.has-implied-usc-title .search-input,
-    .search-field-shell.has-implied-usc-title .search-input-mirror { padding-left: 66px; }
     .search-input-mirror {
       position: absolute;
       z-index: 2;
@@ -1770,7 +1748,6 @@
         <div class="search-field-shell">
           <span class="search-icon" aria-hidden="true">⌕</span>
           <label class="sr-only" for="searchInput">Search INA, CFR, notes, and highlights</label>
-          <span class="implied-usc-title" id="impliedUscTitle" aria-hidden="true" hidden>8</span>
           <div class="search-scope-token" id="searchScopeToken" hidden>
             <span class="search-scope-label" id="searchScopeLabel" aria-hidden="true">in:</span>
             <input class="search-scope-input" id="searchScopeInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" maxlength="160" aria-label="Citation or citation range to search within">
@@ -1999,7 +1976,7 @@
         <section class="settings-section" aria-labelledby="legalReaderSettingsHeading">
           <h3 class="settings-section-heading" id="legalReaderSettingsHeading">Legal text &amp; citations</h3>
           <label class="settings-toggle" for="inaCitationLinksToggle">
-            <span><strong>Show INA citations in statutory links</strong><small>When a linked Title 8 provision has an INA equivalent, display the full INA citation instead of the source wording. Link destinations do not change.</small></span>
+            <span><strong>Show INA citations in statutory links</strong><small>Use INA citations for supported statutory links, keeping shared citation units abbreviated and preserving the original sentence structure.</small></span>
             <input id="inaCitationLinksToggle" type="checkbox" role="switch">
           </label>
           <label class="settings-toggle" for="highlightInaCitationLinksToggle">
@@ -2939,7 +2916,6 @@
       searchInputMirror: $("#searchInputMirror"), citationEquivalent: $("#citationEquivalent"),
       citationEquivalentIna: $("#citationEquivalentIna"), citationEquivalentInaLabel: $("#citationEquivalentInaLabel"), citationEquivalentInaCopy: $("#citationEquivalentInaCopy"),
       citationEquivalentUsc: $("#citationEquivalentUsc"), citationEquivalentUscLabel: $("#citationEquivalentUscLabel"), citationEquivalentUscCopy: $("#citationEquivalentUscCopy"),
-      impliedUscTitle: $("#impliedUscTitle"),
       citationAmbiguity: $("#citationAmbiguity"), citationAmbiguityCommon: $("#citationAmbiguityCommon"), citationAmbiguityOptions: $("#citationAmbiguityOptions"), feedback: $("#citationFeedback"), resultList: $("#resultList"),
       searchSuggestion: $("#searchSuggestionButton"), searchWorkspace: $("#searchWorkspace"), focusedCitationWorkspace: $("#focusedCitationWorkspace"), focusedCitationPanes: $("#focusedCitationPanes"), focusedCitationStatus: $("#focusedCitationStatus"), resultsPanel: $("#resultsPanel"), authorityBrowseHeader: $("#authorityBrowseHeader"),
       resultCount: $("#resultCount"), detail: $("#detailPanel"), corpusStatus: $("#corpusStatus"),
@@ -5533,7 +5509,7 @@
       const usc = input.match(/^\s*8\s*u\.?\s*s\.?\s*c\.?\s*(.*)$/i);
       if (usc) return parseUscHierarchy(usc[1]) || parseStatuteSectionOrFamily("usc", usc[1]);
       const impliedUsc = input.match(/^\s*u\.?\s*s\.?\s*c\.?(?=\s|§|\d|$)\s*(?:§+\s*)?(.*)$/i);
-      if (impliedUsc) return { ...parseStatuteSectionOrFamily("usc", impliedUsc[1]), impliedUscTitle: 8 };
+      if (impliedUsc) return parseStatuteSectionOrFamily("usc", impliedUsc[1]);
       const ina = input.match(/^\s*i\.?\s*n\.?\s*a\.?(?=\s|§|\d|[ivx]|title|$)\s*(.*)$/i);
       if (ina) return parseIna(ina[1]);
 
@@ -5563,9 +5539,9 @@
         const inaResult = parseStatuteSectionOrFamily("ina", rawSection);
         if (inaResult?.valid) return { ...inaResult, impliedStatuteAuthority: "ina" };
         const uscResult = parseStatuteSectionOrFamily("usc", rawSection);
-        if (uscResult?.valid) return { ...uscResult, impliedStatuteAuthority: "usc", impliedUscTitle: 8 };
+        if (uscResult?.valid) return { ...uscResult, impliedStatuteAuthority: "usc" };
         if (inaResult?.mapping || inaResult?.section || inaResult?.partial) return { ...inaResult, impliedStatuteAuthority: "ina" };
-        if (uscResult?.mapping || uscResult?.section || uscResult?.partial) return { ...uscResult, impliedStatuteAuthority: "usc", impliedUscTitle: 8 };
+        if (uscResult?.mapping || uscResult?.section || uscResult?.partial) return { ...uscResult, impliedStatuteAuthority: "usc" };
       }
       return parseAct(input);
     }
@@ -7399,7 +7375,7 @@
       if (!descriptor.ok) return false;
       const wasBlankHierarchy = options.closeBlankCompanion === true && state.focusedWorkspaceOrigin === "blank-both" && pane.blankCompanion && pane.entry.mode === "hierarchy";
       const opened = descriptor.mode === "reader"
-        ? withFocusedCitationPane(pane, () => applyFocusedPaneNavigation(pane, query, displayQuery, { rawDisplay: true }))
+        ? withFocusedCitationPane(pane, () => applyFocusedPaneNavigation(pane, query, displayQuery, { rawDisplay: options.rawDisplay !== false }))
         : withFocusedCitationPane(pane, () => applyFocusedPaneCommand(pane, query, descriptor, { rawDisplay: true }));
       if (opened && descriptor.mode === "reader" && wasBlankHierarchy && profile.preferences.closeBlankCompanionOnSectionOpen === true) promoteFocusedPaneToMain(pane);
       return opened;
@@ -9059,39 +9035,94 @@
     }
 
     function coordinatedStatutoryInaLists(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length, sourceContext = null) {
-      if (profile?.preferences?.statutoryLinkCitationSystem !== "ina" || sourceContext?.kind !== "ina" || !sourceContext.uscSection) return [];
+      if (profile?.preferences?.statutoryLinkCitationSystem !== "ina") return [];
       const input = String(value || "");
       const start = Math.max(0, Number(segmentStart) || 0);
       const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
       const parser = globalThis.INASearchEmbeddedReferences?.parseCoordinatedSectionReferences;
       if (typeof parser !== "function") return [];
-      const supportedScope = scope => ["this-title", "such-title"].includes(scope?.type) || (scope?.type === "numbered-title" && String(scope.title) === "8");
-      const parsed = parser(input).filter(candidate => candidate.start >= start && candidate.end <= end &&
-        input.slice(candidate.start, candidate.end) === candidate.text && supportedScope(candidate.scope));
+      const statutoryContext = sourceContext?.kind === "ina" && sourceContext.uscSection;
+      const supportedScope = scope => statutoryContext && (["this-title", "such-title"].includes(scope?.type) || (scope?.type === "numbered-title" && String(scope.title) === "8"));
+      const eligible = references.filter(reference => reference?.resolution !== "unresolved" && ["usc", "ina"].includes(reference?.family) &&
+        Number.isInteger(reference.start) && Number.isInteger(reference.end) && reference.start >= start && reference.end <= end &&
+        input.slice(reference.start, reference.end) === reference.text);
+      // A trailing section container stays in its original position. Its unit
+      // references are already abbreviated and are rendered individually.
+      const parsed = parser(input).filter(candidate => candidate.grammar === "numbered-section-list" && candidate.start >= start && candidate.end <= end &&
+        supportedScope(candidate.scope));
       const groups = parsed.map(candidate => {
-        const members = candidate.members.map(member => (references || [])
-          .filter(reference => reference?.resolution !== "unresolved" && ["usc", "ina"].includes(reference?.family) &&
-            Number.isInteger(reference.start) && Number.isInteger(reference.end) &&
-            reference.start >= candidate.start && reference.end <= candidate.end &&
-            reference.start <= member.start && reference.end >= member.end)
-          .sort((left, right) => (left.end - left.start) - (right.end - right.start) ||
-            Math.abs(left.start - member.start) - Math.abs(right.start - member.start))[0]);
+        const members = candidate.members.map(member => eligible.filter(reference => reference.start >= candidate.start && reference.end <= candidate.end &&
+          reference.start <= member.start && reference.end >= member.end)
+          .sort((left, right) => (left.end - left.start) - (right.end - right.start))[0]);
         if (members.some(member => !member) || new Set(members).size !== candidate.members.length) return null;
-        if (candidate.grammar === "relative-unit-list" && members.some(member => normCitationPart(member.targetSection) !== normCitationPart(candidate.baseSection))) return null;
+        // Never swallow another independently resolved reference inside a group.
+        if (eligible.some(reference => reference.start < candidate.end && reference.end > candidate.start && !members.includes(reference))) return null;
         const crosswalks = members.map(statutoryReferenceCrosswalk);
         if (crosswalks.some(crosswalk => !crosswalk)) return null;
         return { ...candidate, members, crosswalks, parsedMembers: candidate.members };
-      }).filter(Boolean).sort((left, right) => left.start - right.start || right.end - left.end);
+      }).filter(Boolean);
+      const actReferences = eligible.filter(reference => reference.ruleId === "context-cfr-ina-act-section" && statutoryReferenceCrosswalk(reference));
+      let actRun = [];
+      const finishActRun = () => {
+        if (actRun.length > 1 && /^(?:sections?\s+)?\d/i.test(actRun[0].text)) {
+          groups.push({ start: actRun[0].start, end: actRun.at(-1).end, grammar: "cfr-act-list", members: actRun,
+            crosswalks: actRun.map(statutoryReferenceCrosswalk), parsedMembers: actRun.map(reference => ({ start: reference.start, end: reference.end,
+              text: reference.text.replace(/\s+of\s+the\s+Act$/i, ""), relative: /^\(/.test(reference.text) })) });
+        }
+        actRun = [];
+      };
+      for (const reference of actReferences) {
+        if (actRun.length && !/^\s*(?:,\s*(?:(?:and\/or|and|or)\s+)?|(?:and\/or|and|or)\s+|(?:through|to)\s+)$/i.test(input.slice(actRun.at(-1).end, reference.start))) finishActRun();
+        actRun.push(reference);
+      }
+      finishActRun();
+      // Repeated complete citations can share their written context too, but
+      // only across list punctuation/conjunctions, never across intervening prose.
+      const complete = eligible.filter(reference => !groups.some(group => reference.start < group.end && reference.end > group.start) &&
+        ((statutoryContext && /^section\s+\d[\s\S]*\s+of\s+this\s+title$/i.test(reference.text)) ||
+        (reference.ruleId === "context-cfr-ina-act-section" && /^(?:section\s+)?\d/.test(reference.text))) && statutoryReferenceCrosswalk(reference))
+        .sort((left, right) => left.start - right.start);
+      let run = [];
+      const finishRun = () => {
+        if (run.length > 1) groups.push({ start: run[0].start, end: run.at(-1).end, grammar: "repeated-section-list", members: run,
+          crosswalks: run.map(statutoryReferenceCrosswalk), parsedMembers: run.map(reference => ({ start: reference.start, end: reference.end, text: reference.text })) });
+        run = [];
+      };
+      for (const reference of complete) {
+        if (run.length && !/^\s*(?:,\s*(?:(?:and\/or|and|or)\s+)?|(?:and\/or|and|or)\s+)$/i.test(input.slice(run.at(-1).end, reference.start))) finishRun();
+        run.push(reference);
+      }
+      finishRun();
       const nonoverlapping = [];
-      for (const group of groups) {
+      for (const group of groups.sort((left, right) => left.start - right.start || right.end - left.end)) {
         if (nonoverlapping.some(previous => group.start < previous.end && group.end > previous.start)) continue;
+        group.labels = group.members.map((reference, index) => {
+          const full = group.crosswalks[index].ina;
+          const written = group.parsedMembers[index];
+          if (!index) return full;
+          if (reference.targetSection !== group.members[index - 1].targetSection) return full.replace(/^INA\s+/i, "");
+          // Use the common ancestor of the entire contiguous same-section run.
+          // Keep at least one unit when an address repeats or names an ancestor.
+          let first = index - 1, last = index;
+          while (first > 0 && group.members[first - 1].targetSection === reference.targetSection) first--;
+          while (last + 1 < group.members.length && group.members[last + 1].targetSection === reference.targetSection) last++;
+          const path = reference.targetPath || [];
+          let common = 0;
+          while (common < path.length && group.members.slice(first, last + 1).every(member => member.targetPath?.[common] === path[common])) common++;
+          const tail = path.slice(Math.min(common, Math.max(0, path.length - 1)));
+          const abbreviated = tail.length ? tail.map(token => `(${token})`).join("") : full.replace(/^INA\s+/i, "");
+          // Source abbreviations may already omit more than the shared prefix.
+          // Never expand them, but remove a repeated ancestor when it is shared
+          // by every member of this same-section run.
+          return written.relative && written.text.length <= abbreviated.length ? written.text : abbreviated;
+        });
         nonoverlapping.push(group);
       }
       return nonoverlapping;
     }
 
     function statutoryLinkUsesConvertibleUscWording(reference, sourceContext = null) {
-      if (reference?.ruleId === "context-cfr-ina-act-section" && reference.family === "ina") return true;
+      if (reference?.ruleId === "context-cfr-ina-act-section" && reference.family === "ina") return /^(?:sections?\s+)?\d/i.test(String(reference.text || "").trim());
       if (reference?.family !== "usc" || sourceContext?.kind !== "ina" || !sourceContext.uscSection) return false;
       if (normCitationPart(reference.targetSection) === normCitationPart(sourceContext.uscSection)) return false;
       const sourceText = String(reference.text || "").trim();
@@ -10407,14 +10438,6 @@
       els.citationEquivalent.style.left = `${Math.round(Math.max(leftInset, Math.min(preferred, maximum)))}px`;
     }
 
-    function renderImpliedUscTitle(result) {
-      const active = !(typeof state !== "undefined" && state.focusedCitationMode) && Boolean(result?.impliedUscTitle || /^\s*u\.?\s*s\.?\s*c\.?(?=\s|§|\d|$)/i.test(els.search.value));
-      const shell = els.search.closest(".search-field-shell");
-      shell?.classList.toggle("has-implied-usc-title", active);
-      els.impliedUscTitle.hidden = !active;
-      return active;
-    }
-
     function renderCitationAmbiguity(result) {
       const ambiguity = result?.ambiguity;
       const active = !(typeof state !== "undefined" && state.focusedCitationMode) && Boolean(ambiguity?.options?.length > 1);
@@ -10441,7 +10464,6 @@
     }
 
     function renderCitationFeedback(result) {
-      renderImpliedUscTitle(result);
       renderCitationEquivalent(result);
       renderCitationAmbiguity(result);
       els.feedback.className = "sr-only";
@@ -11626,11 +11648,12 @@
       const query = `${base}${canonicalPath(displayPath)}`;
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
       const displayedQuery = formatNavigationCitationLike(focusedPane?.entry.text || els.search.value, query);
+      const resolvedCitation = parseCitation(query);
       if (displayedQuery === state.lastScrollSyncedCitation) return false;
       state.lastScrollSyncedCitation = displayedQuery;
       if (focusedPane) {
         replaceFocusedCitationSegment(focusedPane, displayedQuery);
-        focusedPane.result = parseCitation(displayedQuery);
+        focusedPane.result = resolvedCitation;
         focusedPane.record = focusedCitationRecord(focusedPane.result);
         focusedPane.entry = { ...focusedPane.entry, text: displayedQuery, result: focusedPane.result };
         focusedPane.input.value = displayedQuery;
@@ -11638,7 +11661,7 @@
         renderFocusedPaneCitationActions(focusedPane);
       } else els.search.value = displayedQuery;
       state.query = displayedQuery;
-      state.citation = parseCitation(displayedQuery);
+      state.citation = resolvedCitation;
       renderCitationFeedback(state.citation);
       updateSearchSuggestionVisibility();
       return true;
@@ -12139,21 +12162,30 @@
       };
       group.members.forEach((reference, index) => {
         if (index) {
-          const previous = group.members[index - 1];
+          const previous = group.parsedMembers[index - 1];
           let cursor = previous.end;
-          while (footnoteIndex < footnotes.length && footnotes[footnoteIndex].offset <= reference.start) {
+          const nextStart = group.parsedMembers[index].start;
+          while (footnoteIndex < footnotes.length && footnotes[footnoteIndex].offset <= nextStart) {
             const footnote = footnotes[footnoteIndex++];
             parts.push(renderScopedDefinitionAnnotatedText(input, searchMatch, cursor, footnote.offset, definitionContext));
             parts.push(houseFootnoteReferenceHtml(footnote));
             cursor = footnote.offset;
           }
-          parts.push(renderScopedDefinitionAnnotatedText(input, searchMatch, cursor, reference.start, definitionContext));
+          // A repeated 'section' is citation wording, not connecting prose.
+          const gap = input.slice(cursor, nextStart);
+          const repeatedWord = gap.match(/sections?\s*$/i);
+          parts.push(renderScopedDefinitionAnnotatedText(input, searchMatch, cursor, repeatedWord ? nextStart - repeatedWord[0].length : nextStart, definitionContext));
         }
         const crosswalk = group.crosswalks[index];
-        const label = index ? crosswalk.ina.replace(/^INA\s+/i, "") : crosswalk.ina;
+        const written = group.parsedMembers[index];
+        const label = group.labels[index];
+        const contents = label === input.slice(written.start, written.end)
+          ? renderScopedDefinitionAnnotatedText(input, searchMatch, written.start, written.end, definitionContext)
+          : searchMatch && searchMatch.start < written.end && searchMatch.end > (index ? written.start : group.start)
+            ? `<mark class="statute-search-match" data-statute-search-match>${escapeHtml(label)}</mark>` : escapeHtml(label);
         const referenceContext = definitionContext ? { ...definitionContext, referenceOrdinal: Math.max(0, (references || []).indexOf(reference)) } : null;
-        parts.push(legalReferenceHtml(reference, escapeHtml(label), referenceContext, { inaCitation: crosswalk.ina, preserveContents: true }));
-        if (!index) renderFootnotesThrough(reference.start);
+        parts.push(legalReferenceHtml(reference, contents, referenceContext, { inaCitation: crosswalk.ina, preserveContents: true }));
+        renderFootnotesThrough(reference.end);
       });
       renderFootnotesThrough(group.end);
       return parts.join("");
@@ -14548,7 +14580,13 @@ Get-FileHash $outJson -Algorithm SHA256`;
         const match = text.match(pattern);
         if (match) return { type, authority: match[1], separator: match[2], section: match[3], suffix: match[4] || "" };
       }
-      return null;
+      const bareStatute = text.match(/^((?:§+\s*)?)(\d+)(.*)$/);
+      return bareStatute ? { type: "bare-statute", authority: bareStatute[1], separator: "", section: bareStatute[2], suffix: bareStatute[3] || "" } : null;
+    }
+
+    function lazyNavigationStatutePath(result, path) {
+      const unitTypes = statutePathDescriptor(result?.section, path).unitTypes;
+      return (path || []).map((token, index) => unitTypes[index] === 4 ? String(token).toUpperCase() : String(token).toLowerCase());
     }
 
     function formatNavigationCitationLike(previousValue, destinationValue) {
@@ -14557,19 +14595,45 @@ Get-FileHash $outJson -Algorithm SHA256`;
       const previous = citationTextParts(previousValue);
       const destination = citationTextParts(destinationText);
       if (!previous || !destination) return destinationText;
-      const authority = previous.type === destination.type ? previous.authority : destination.authority;
-      const separator = previous.separator;
+      const previousResult = parseCitation(String(previousValue || "").trim());
+      const previousIsBareStatute = previous.type === "bare-statute" && previousResult?.valid && ["ina", "usc"].includes(previousResult.type);
+      if (previous.type === "bare-statute" && !previousIsBareStatute) return destinationText;
+      const sameAuthority = previous.type === destination.type || (previousIsBareStatute && ["ina", "usc"].includes(destination.type));
+      const authority = sameAuthority ? previous.authority : destination.authority;
+      const separator = sameAuthority ? previous.separator : destination.separator;
       const path = componentTokens(destination.suffix || "") || [];
       const pathLead = previous.suffix.match(/^\s+/)?.[0] || "";
+      const expected = parseCitation(destinationText);
+      const statutePath = ["ina", "usc"].includes(expected?.type);
+      const previousPath = previousResult?.path || [];
+      let previousSuffix = previous.suffix;
+      if (previousPath.length && !previousSuffix.trimStart().startsWith("(")) {
+        const previousSection = previousResult.type === "ina" ? previousResult.mapping?.inaSection : previousResult.section?.section;
+        const typedSection = String(previous.section || "");
+        const sectionText = String(previousSection || "");
+        if (sectionText && typedSection.length > sectionText.length && typedSection.toLowerCase().startsWith(sectionText.toLowerCase())) {
+          previousSuffix = `${typedSection.slice(sectionText.length)}${previousSuffix}`;
+        }
+      }
+      const parenthesized = previousSuffix.includes("(");
+      const spaced = !parenthesized && /\s/.test(previousSuffix.trim());
+      const previousCompact = previousSuffix.replace(/[^A-Za-z0-9]/g, "");
+      let lazyCase = statutePath && !parenthesized;
+      if (statutePath && !parenthesized && previousPath.length && previousCompact) {
+        const canonicalPrevious = previousPath.map(String).join("");
+        const lazyPrevious = lazyNavigationStatutePath(previousResult, previousPath).join("");
+        if (previousCompact === canonicalPrevious && previousCompact !== lazyPrevious) lazyCase = false;
+        else if (previousCompact === lazyPrevious && previousCompact !== canonicalPrevious) lazyCase = true;
+      }
+      const pathTokens = statutePath && lazyCase ? lazyNavigationStatutePath(expected, path) : path.map(String);
       let suffix = "";
       if (path.length) {
-        if (previous.suffix.includes("(")) suffix = `${pathLead}${canonicalPath(path)}`;
-        else if (/\s/.test(previous.suffix.trim())) suffix = `${pathLead}${path.map(String).join(" ")}`;
-        else suffix = `${pathLead}${path.map(String).join("")}`;
+        if (parenthesized) suffix = `${pathLead}${canonicalPath(pathTokens)}`;
+        else if (spaced) suffix = `${pathLead}${pathTokens.join(" ")}`;
+        else suffix = `${pathLead}${pathTokens.join("")}`;
       }
       const formatted = `${authority}${separator}${destination.section}${suffix}`;
-      if (!path.length || suffix.includes("(")) return formatted;
-      const expected = parseCitation(destinationText);
+      if (!path.length || suffix.includes("(") || statutePath) return formatted;
       const candidate = parseCitation(formatted);
       const identity = result => {
         const recordId = result?.record?.item?.id || result?.record?.key || "";
@@ -14611,15 +14675,14 @@ Get-FileHash $outJson -Algorithm SHA256`;
 
     function applyNavigationQuery(query, displayQuery = query) {
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
-      if (focusedPane) return applyFocusedPaneExplicitCommand(focusedPane, query, displayQuery, { closeBlankCompanion: true });
+      if (focusedPane) return applyFocusedPaneExplicitCommand(focusedPane, query, displayQuery, { closeBlankCompanion: true, rawDisplay: false });
       const previousDisplay = els.search.value;
       const nextDisplay = formatNavigationCitationLike(previousDisplay, String(displayQuery ?? ""));
       state.navigationQueryInProgress = true;
       try { applySearchQuery(query, false); }
       finally { state.navigationQueryInProgress = false; }
       if (els.search.value !== nextDisplay) els.search.value = nextDisplay;
-      const displayedCitation = parseCitation(nextDisplay.trim());
-      renderCitationFeedback(displayedCitation);
+      renderCitationFeedback(state.citation);
       updateSearchSuggestionVisibility();
       state.lastScrollSyncedCitation = "";
       requestAnimationFrame(positionCitationEquivalent);

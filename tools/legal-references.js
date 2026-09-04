@@ -367,7 +367,7 @@ function parseInaActCitationList(input, start, end) {
       cursor += sectionWord[0].length;
       continue;
     }
-    const connector = remainder.match(/^(?:and|or|through|to|respectively)\b/i);
+    const connector = remainder.match(/^(?:and\/or|and|or|through|to|respectively)\b/i);
     if (connector) { cursor += connector[0].length; continue; }
     const punctuation = remainder.match(/^[,;:\-–—]+/);
     if (punctuation) { cursor += punctuation[0].length; continue; }
@@ -426,7 +426,7 @@ function parseInaActCitationPrefix(input, start) {
   if (!readCitation(start)) return null;
   while (cursor < input.length) {
     const remainder = input.slice(cursor);
-    const separator = remainder.match(/^(?:\s+(?=\([A-Za-z0-9-]+\))|\s*\)*\s*[,;]\s*(?:(?:and|or)\s+)?|\s+(?:and|or)\s+)(?=(?:sections?\s+)?(?:\d+[A-Za-z-]*|\([A-Za-z0-9-]+\)))/i);
+    const separator = remainder.match(/^(?:\s+(?=\([A-Za-z0-9-]+\))|\s*\)*\s*[,;]\s*(?:(?:and\/or|and|or)\s+)?|\s+(?:and\/or|and|or)\s+)(?=(?:sections?\s+)?(?:\d+[A-Za-z-]*|\([A-Za-z0-9-]+\)))/i);
     if (!separator) break;
     const nextStart = cursor + separator[0].length;
     const sectionWord = input.slice(nextStart).match(/^sections?\s+/i);
@@ -500,7 +500,7 @@ function inaActReferenceCandidates(text, context) {
         const prefix = `of ${String(name).toLowerCase()}`;
         return normalizedSuffix.startsWith(prefix) && !/[a-z0-9]/.test(normalizedSuffix[prefix.length] || " ");
       });
-      const structuredNamedActSuffix = /^\s*,?\s*(?:(?:division|title)\b[^.;]{0,200}?\s+of\s+)?(?:the\s+)?[A-Z][^.;]{0,200}\bAct\b/i.test(suffixText);
+      const structuredNamedActSuffix = !/^\s*(?:and|or)\b/i.test(suffixText) && /^\s*,?\s*(?:(?:division|title)\b[^.;]{0,200}?\s+of\s+)?(?:the\s+)?[A-Z][^.;]{0,200}\bAct\b/i.test(suffixText);
       // A written, specifically named Act is affirmative evidence against the
       // CFR scope's default INA meaning, even when the catalog stores a longer
       // formal title (for example, a trailing "of 1996"). Let the named-Act
@@ -1138,7 +1138,10 @@ function applyHistoricalSourceContext(references, context) {
       reference.start - candidate.end <= 420).at(-1);
     if (!antecedent) continue;
     const bridge = input.slice(antecedent.end, reference.start);
-    if (!/[.!?][”"')\]]*\s+[A-Z]/.test(bridge) && /\b(?:such|said)\s+section\b/i.test(bridge)) historical.add(reference);
+    const followingContainer = input.slice(reference.end, reference.end + 64);
+    const carriesSection = /\b(?:such|said)\s+\[?section\b/i.test(bridge) ||
+      /^\s+of\s+(?:such|said)\s+\[?section\b/i.test(followingContainer);
+    if (!/[.!?][”"')\]]*\s+[A-Z]/.test(bridge) && carriesSection) historical.add(reference);
   }
   return (references || []).map(reference => historical.has(reference)
     ? { ...reference, forceOfficial: true, resolution: "official-source-only" }
@@ -1575,7 +1578,18 @@ function sharedTrailingContainerReferenceCandidates(text, context, anchorReferen
       const simpleTail = /^\s*(?:\([^()]{1,120}\)\s*)?(?:of|if\s+section)\s*$/i.test(afterList);
       const coordinatedTail = context.sourceKind !== "usc-note" && /\b(?:of|if\s+section)\s*$/i.test(afterList) &&
         (/[()]/.test(afterList) || new RegExp(`\\b${kind}s?\\b`, "i").test(afterList));
-      if (!simpleTail && !coordinatedTail) continue;
+      // A shared container may follow list connectors and parenthetical
+      // exceptions, but not an intervening relative clause or other prose.
+      // Strip balanced parentheses only for this grammar check; source spans
+      // and all nested exception references remain untouched.
+      let outsideParentheses = afterList;
+      while (/\([^()]*\)/.test(outsideParentheses)) outsideParentheses = outsideParentheses.replace(/\([^()]*\)/g, " ");
+      // A comma-delimited qualification belongs to its coordinated member.
+      outsideParentheses = outsideParentheses.replace(/,\s*with\s+respect\s+to\b[^,;]*,/gi, " ");
+      const nestedException = /\(\s*(?:other\s+than|except(?:ing)?)\s*$/i.test(input.slice(Math.max(0, unit.index - 80), unit.index));
+      if (nestedException) outsideParentheses = outsideParentheses.replace(/^\s*\)/, " ");
+      const citationTail = new RegExp(`^(?:[\\s,;]|\\b(?:and|or|through|to|of|if|section|${kind}s?)\\b)*$`, "i").test(outsideParentheses);
+      if (!simpleTail && !(coordinatedTail && citationTail)) continue;
       if (topLevelUnitWordBetween(input, initialList.end, anchor.start, kind) || parentheticalDepthAtEnd(input, initialList.end, anchor.start) > 0) continue;
     }
     const base = packedTargetBase(anchor);

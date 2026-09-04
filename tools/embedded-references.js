@@ -326,12 +326,18 @@ function readContainerAfterOf(input, position) {
   const anaphorMatch = ANAPHOR_WORD.exec(input);
   if (anaphorMatch && anaphorMatch.index === cursor) {
     const anaphorType = anaphorMatch[1].toLowerCase();
-    const kindStart = skipWhitespace(input, cursor + anaphorMatch[0].length);
+    const wordStart = skipWhitespace(input, cursor + anaphorMatch[0].length);
+    // House editorial insertions can supply the unit noun: "such [section]".
+    // Require the closing bracket immediately after a recognized noun.
+    const bracketed = input[wordStart] === "[";
+    const kindStart = bracketed ? wordStart + 1 : wordStart;
     const kindMatch = input.slice(kindStart).match(/^(sections?|subsections?|paragraphs?|subdivisions?|subparagraphs?|clauses?|subclauses?|items?|subitems?)\b/i);
     if (!kindMatch) return null;
     const baseWord = kindMatch[0];
     const baseKind = canonicalUnitName(baseWord);
-    const baseEnd = kindStart + baseWord.length;
+    const unitEnd = kindStart + baseWord.length;
+    if (bracketed && input[unitEnd] !== "]") return null;
+    const baseEnd = unitEnd + (bracketed ? 1 : 0);
     const address = readBaseAddress(input, baseEnd);
     const base = makeBase(input, baseKind, baseWord, kindStart, address, {
       type: anaphorType,
@@ -342,7 +348,7 @@ function readContainerAfterOf(input, position) {
     base.anaphor = { type: anaphorType, start: cursor, end: baseEnd, text: input.slice(cursor, baseEnd) };
     base.anaphorType = anaphorType;
     base.unitStart = kindStart;
-    base.unitEnd = baseEnd;
+    base.unitEnd = unitEnd;
     return base;
   }
 
