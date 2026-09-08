@@ -1,27 +1,38 @@
-# INASearch Beta7 — draft release notes
+# INASearch Beta7
 
-INASearch Beta7 adds text highlights, improves citation notes and reader navigation, and makes startup faster. This release also refines citation formatting, corrects additional reference links, and introduces Quick Start and daily tips.
+Beta7 makes taking notes, marking useful passages, and reading the law easier.
 
-## Features and improvements
+## What’s new
 
-- **Text highlights:** Select and highlight passages of legal text to mark material you want to revisit.
-- **Improved citation notes:** Edit notes directly in the reader and attach one note to multiple citations. Notes can appear above or below their provisions, and supported citations written inside notes become navigable links.
-- **Faster startup and searching:** Background searching and a reusable browser search cache reduce repeated loading work.
-- **More reader controls:** Choose how much of the legal hierarchy appears in navigation, where citation jumps land, and whether jumps animate. An optional setting updates the search bar to follow the provision being read.
-- **Search refinements:** Control whether results expand automatically and whether CFR chapters and subchapters appear. INA and CFR Common matching levels can stay synchronized or be set independently.
-- **Quick Start and daily tips:** A shorter walkthrough introduces the main features, with daily tips and a complete tip catalog available on About.
-- **Clearer citation formatting:** Convert supported citation links in statutes and regulations to INA format, with optional yellow highlighting. Citation lists abbreviate shared units while retaining individual links and the surrounding sentence structure.
-- **Easier browsing:** Expand definition-filter branches, find related CFR parts, and see clearer labels and destinations for repealed, omitted, and transferred provisions.
-- **Interface improvements:** Copy exact citations or complete legal-unit text from results, copy a link to the current view, and use separate hold-to-reset controls for settings or all saved research.
+- **Highlight and take notes:** Highlight passages you want to revisit. Write and edit notes beside the law, and use the same note in more than one place.
+- **Faster loading:** INASearch opens faster on return visits.
+- **Simpler help:** A short Quick Start explains the basics, while daily tips introduce useful features.
+- **Easier reading:** Cleaner headings and less repetitive citations make the text easier to follow. New settings let you adjust scrolling to your preference.
 
-## Fixes
+## What’s fixed
 
-- Fixed additional statutory hierarchy cases where an inline list label could be mistaken for part of the preceding citation.
-- Corrected additional citation-authority mix-ups involving named Acts, Public Laws, U.S.C. references, and visa-classification tables.
-- Improved links for bare section references, coordinated citation lists, and references ending in “of the Act.”
-- Refined abbreviated citation display to preserve punctuation, conjunctions, reference order, and surrounding legal prose.
-- Fixed citation jump positioning so navigation controls do not obscure the requested provision.
-- Improved incomplete CFR-part lookup, including entries ending with a period, and navigation between matching or related part numbers.
-- Improved status handling and transfer destinations for repealed, omitted, and transferred provisions.
-- Cleaned up reader headings, official-source actions, navigation capitalization, and legacy browsing layouts.
-- Updated Quick Start steps to match the current Home and hierarchy views, and clarified the System theme indicator.
+- Corrected more citation links that opened the wrong law or paragraph, or did not work.
+- Made it clearer when a provision has been repealed or moved, with better links to its new location.
+- Fixed navigation problems that could leave the passage you opened hidden behind the toolbar, and improved recognition of partly typed CFR citations.
+
+## Highlights in action
+
+Select a passage, then choose **Highlight** or **Highlight + note**.
+
+![Select text to highlight](https://github.com/F3Services/INASearch/releases/download/Beta7/beta7-select-to-highlight.png)
+
+Your highlighted passage stays marked as you read.
+
+![Highlighted legal text](https://github.com/F3Services/INASearch/releases/download/Beta7/beta7-highlights.png)
+
+## Downloads
+
+- **INASearch.html** — download this file for everyday use.
+- **INASearch-Uncompressed.html** — the same app with its included data stored in a more inspectable format.
+
+Download either file and open it in Chrome or Edge. Both include the legal text for offline use.
+
+### SHA-256 checksums
+
+- `INASearch.html`: `ba4c8179728a1da890e6015b71b8b2c9074caf9bb1818b7fcdbb567f43dda0b8`
+- `INASearch-Uncompressed.html`: `319e8231db692bcae891609e99cce8bceca1851bf0013272da971bd3daa6bfc3`
