@@ -479,6 +479,8 @@ function readNumericSectionAddress(input, position) {
   let end = start + section.length;
   const groups = [];
   let cursor = skipWhitespace(input, end);
+  // Some published tables print a separator dot: "Sec. 11.(3)".
+  if (input[cursor] === "." && input[skipWhitespace(input, cursor + 1)] === "(") cursor = skipWhitespace(input, cursor + 1);
   while (input[cursor] === "(") {
     const group = readParenthetical(input, cursor);
     if (!group) break;
@@ -511,11 +513,13 @@ function readRelativeSectionAddress(input, position) {
 function readSectionScope(input, position) {
   const start = skipWhitespace(input, position);
   const value = input.slice(start);
+  const codeOrAct = value.match(/^of\s+(?:the\s+)?(Internal\s+Revenue\s+Code(?:\s+of\s+(?:1954|1986))?|IRC|NACARA)\b/i);
+  if (codeOrAct) return { start, end: start + codeOrAct[0].length, text: codeOrAct[0], type: "named-act", title: "", actName: codeOrAct[1] };
   let match = value.match(/^of\s+(this|that|such)\s+title\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: `${match[1].toLowerCase()}-title`, title: "" };
   match = value.match(/^of\s+title\s+(\d+)\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: "numbered-title", title: match[1] };
-  match = value.match(/^of\s+(?:division|div\.)\s+([A-Z0-9-]+)\s+of\s+(?:Public\s+Law|Pub\.\s*L\.)\s*(\d+)[–—-](\d+)\b/i);
+  match = value.match(/^of\s+(?:division|div\.)\s+([A-Z0-9-]+)\.?\s+of\s+(?:Public\s+Law|Pub\.\s*L\.)\s*(\d+)[–—-](\d+)\b/i);
   if (match) return {
     start,
     end: start + match[0].length,
@@ -554,10 +558,12 @@ function readSectionScope(input, position) {
   // A bare "of the Act" is contextual, not a named-Act citation. Requiring
   // a real name token before "Act" also prevents this expression from
   // consuming prose until it encounters a later occurrence of that word.
-  match = value.match(/^of\s+(?:the\s+)?((?!Act\b)[A-Z0-9][A-Za-z0-9’'&.,\-–—]*(?:\s+[A-Za-z0-9][A-Za-z0-9’'&.,\-–—]*){0,24}\s+Act(?:\s+of\s+\d{4}|,\s*\d{4}|\s+for\s+Fiscal\s+Year\s+\d{4}|,\s*Fiscal\s+Years?\s+\d{4}(?:\s+and\s+\d{4})?)?)\b/);
+  match = value.match(/^of\s+(?:the\s+)?((?!Act\b)[A-Z0-9][A-Za-z0-9’'&.,\-–—]*(?:\s+[A-Za-z0-9][A-Za-z0-9’'&.,\-–—]*){0,24}?\s+Act(?:\s+of\s+\d{4}|,\s*\d{4}|\s+for\s+Fiscal\s+Year\s+\d{4}|,\s*Fiscal\s+Years?\s+\d{4}(?:\s+and\s+\d{4})?)?)\b/);
   if (match) return { start, end: start + match[0].length, text: match[0], type: "named-act", title: "", actName: match[1].trim() };
   match = value.match(/^of\s+(?:the\s+)?(Agreement\s+regarding\s+the\s+Headquarters\s+of\s+the\s+United\s+Nations)\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: "named-instrument", title: "", instrumentName: match[1].trim() };
+  match = value.match(/^of\s+(?:the\s+)?Headquarters\s+Agreement\b/i);
+  if (match && /United\s+Nations/i.test(input.slice(0, start))) return { start, end: start + match[0].length, text: match[0], type: "named-instrument", title: "", instrumentName: "Agreement regarding the Headquarters of the United Nations" };
   return null;
 }
 
@@ -567,7 +573,7 @@ function parseSectionAddressSequence(input, start, hasUnitWord) {
   const connectors = [];
   let needsConnector = false;
   if (hasUnitWord) {
-    const word = input.slice(cursor).match(/^sections?\b/i);
+    const word = input.slice(cursor).match(/^(?:sections?\b|secs?\.)/i);
     if (!word) return null;
     cursor += word[0].length;
   }
@@ -592,7 +598,7 @@ function parseSectionAddressSequence(input, start, hasUnitWord) {
       needsConnector = false;
       continue;
     }
-    const repeatedWord = input.slice(cursor).match(/^sections?\b/i);
+    const repeatedWord = input.slice(cursor).match(/^(?:sections?\b|secs?\.)/i);
     if (repeatedWord) { cursor += repeatedWord[0].length; continue; }
     const absolute = readNumericSectionAddress(input, cursor);
     const relative = absolute ? null : readRelativeSectionAddress(input, cursor);
@@ -611,7 +617,7 @@ function parseSectionAddressSequence(input, start, hasUnitWord) {
 function parseNumberedSectionReferences(text) {
   const input = String(text || "");
   const starts = [];
-  for (const match of input.matchAll(/\bsections?\b/gi)) starts.push({ start: match.index, hasUnitWord: true });
+  for (const match of input.matchAll(/\b(?:sections?\b|secs?\.)/gi)) starts.push({ start: match.index, hasUnitWord: true });
   for (const match of input.matchAll(/\b(?:\d+[A-Za-z]+-\d+[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?)(?=\s*\([A-Za-z0-9-]+\))/g)) {
     if (/\bsections?\s*$/i.test(input.slice(Math.max(0, match.index - 18), match.index))) continue;
     starts.push({ start: match.index, hasUnitWord: false });
@@ -624,10 +630,11 @@ function parseNumberedSectionReferences(text) {
     // be a complete citation.  Lists such as “section 1229b, 1229c, 1255,
     // 1258, or 1259 of this title” are just as structurally explicit as
     // “sections 1158 or 1231(b)(3) of this title”.  Keep the old path
-    // requirement for a lone address so ordinary single-section references
-    // remain the responsibility of the narrower direct-reference parser.
+    // requirement for a lone address unless it has an explicit named owner.
+    // "Section 1059 of Public Law 109-163" is complete without sub-units.
+    const explicitOwner = entry.hasUnitWord && ["public-law", "named-act", "named-instrument"].includes(sequence?.scope?.type);
     if (!sequence || !sequence.members.length ||
-        (!sequence.members.some(member => member.tokens?.length) && sequence.members.length < 2)) continue;
+        (!explicitOwner && !sequence.members.some(member => member.tokens?.length) && sequence.members.length < 2)) continue;
     candidates.push({
       type: "numbered-section-list",
       kind: "numbered-section-list",
@@ -635,7 +642,7 @@ function parseNumberedSectionReferences(text) {
       start: entry.start,
       end: sequence.end,
       text: input.slice(entry.start, sequence.end),
-      unitWord: entry.hasUnitWord ? input.slice(entry.start).match(/^sections?\b/i)[0] : "",
+      unitWord: entry.hasUnitWord ? input.slice(entry.start).match(/^(?:sections?\b|secs?\.)/i)[0] : "",
       members: sequence.members,
       connectors: sequence.connectors,
       scope: sequence.scope
