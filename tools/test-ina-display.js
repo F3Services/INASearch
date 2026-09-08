@@ -80,3 +80,51 @@ for (const field of fields) {
   count += links.length;
 }
 console.log(`PASS INA display: examples, repeated citation ancestors, CFR alternatives, prose boundaries, preference off, and ${count} source links in exact order`);
+
+// Bare section citations use their resolved Title 8 target, including notes
+// and regulation text; the preference must never rewrite the stored source.
+const bareExample = fields.find(field => field.sourceId === '8-1182-d-3-B-i' && field.field === 'text');
+const bareReference = bareExample.references.find(reference => reference.text === 'section 1252(a)(2)(D)');
+assert.equal(bareReference.targetSection, '1252');
+const bareHtml = render(bareExample.text, bareExample.references, contextFor(bareExample, corpus));
+assert(plain(bareHtml).includes('to the extent provided in INA 242(a)(2)(D).'));
+assert(bareHtml.includes('data-reference-source-text="section 1252(a)(2)(D)"'));
+api.profile.preferences.statutoryLinkCitationSystem = 'usc';
+assert.equal(plain(render(bareExample.text, bareExample.references, contextFor(bareExample, corpus))), bareExample.text);
+api.profile.preferences.statutoryLinkCitationSystem = 'ina';
+const bareText = 'Review under section 1252(a)(2)(D) remains available.';
+const bareRefs = refsFor(bareText, ['section 1252(a)(2)(D)'], [['a','2','D']], 'usc', '1252');
+for (const context of [{kind:'ina',uscSection:'1182'}, {kind:'ina',uscSection:'1252'}, {kind:'cfr',title:'8'}, {kind:'usc',uscSection:'15'}, null]) {
+  assert.equal(plain(render(bareText, bareRefs, context)), 'Review under INA 242(a)(2)(D) remains available.');
+}
+const otherAuthority = bareRefs.map(reference => ({...reference, targetTitle:'28', resolution:'official-source-only'}));
+assert.equal(plain(render(bareText, otherAuthority, sectionContext)), bareText, 'Other U.S.C. titles must not inherit an INA crosswalk.');
+console.log('PASS bare-section INA display: exact user example, source metadata, preference off, self-reference, CFR context and other-title exclusion');
+const mixedQualifiedField = fields.find(field => field.sourceId === '8-1327' && field.field === 'preamble');
+assert(mixedQualifiedField, 'Missing qualified INA 277 citation-list fixture');
+const qualifiedDisplay = plain(render(mixedQualifiedField.text, mixedQualifiedField.references, contextFor(mixedQualifiedField, corpus)));
+assert(qualifiedDisplay.includes('INA 212(a)(2)') && qualifiedDisplay.includes('INA 212(a)(3) (other than subparagraph (E) thereof) to enter'), 'Qualified list must convert both addresses and retain the parenthetical without a dangling USC title');
+const selfQualifiedText = 'Review under section 1252(a)(2)(D) of this title remains available.';
+const selfQualifiedRefs = refsFor(selfQualifiedText, ['section 1252(a)(2)(D)'], [['a','2','D']], 'usc', '1252');
+assert.equal(plain(render(selfQualifiedText, selfQualifiedRefs, sectionContext)), 'Review under INA 242(a)(2)(D) remains available.');
+const sharedPrefixText = '8 U.S.C. 1182(a)(2), (3), 1227(a)(3), (4)';
+const sharedPrefixRefs = refsFor(sharedPrefixText, ['8 U.S.C. 1182(a)(2)', '(3)', '1227(a)(3)', '(4)'], [['a','2'],['a','3'],['a','3'],['a','4']]);
+sharedPrefixRefs.forEach((reference,index)=>{ reference.targetSection = index<2?'1182':'1227'; reference.ruleId='explicit-usc-continuation'; });
+assert.equal(plain(render(sharedPrefixText, sharedPrefixRefs, sectionContext)), sharedPrefixText, 'A member of a shared USC prefix must not be converted in isolation');
+const title28Fields = fields.filter(field => field.text.includes('section 1361 or 1651 of such title'));
+assert.equal(title28Fields.length, 2);
+for(const field of title28Fields) assert.equal(field.references.find(reference=>reference.text==='section 1361').targetTitle, '28', 'Such title must inherit Title 28 rather than collide with INA 291');
+const executiveField = fields.find(field=>field.text.includes('section 1101(4) of Ex. Ord. No. 12656'));
+assert(!executiveField.references.some(reference=>reference.targetTitle==='8'&&reference.targetSection==='1101'), 'Executive Order section 1101 must not resolve to INA 101');
+const former22Field = fields.find(field=>field.text.includes('former section 1501 et seq. of title 22'));
+assert.equal(former22Field.references.find(reference=>reference.text==='section 1501').targetTitle,'22', 'Et seq. must not hide an explicit Title 22 scope');
+console.log('PASS reviewed authority tails, qualified continuation list, shared-prefix preservation, Title 28, executive-order and former Title 22 regressions');
+const historicAlternative = fields.find(field => field.sourceId === '8-1229b-b-4-A-ii' && field.field === 'text');
+const historicAlternativeDisplay = plain(render(historicAlternative.text, historicAlternative.references, contextFor(historicAlternative, corpus)));
+assert(historicAlternativeDisplay.includes('INA 240A(b)(2) or 8 U.S.C. 1254(a)(3) (as in effect before'), 'An unmapped historical alternative must retain explicit USC authority and its temporal qualifier');
+const oldRange = fields.find(field=>field.sourceId==='8-701 to 724a-note-26'&&field.field==='text');
+assert(plain(render(oldRange.text,oldRange.references,contextFor(oldRange,corpus))).endsWith('See INA 329(a)–(c).'), 'A relative paragraph range must preserve endpoints and remove the dangling title container');
+const longListStart = performance.now();
+assert.equal(api.inUnfinishedStatutoryList('sections '+'1'.repeat(12000)+' unrelated prose'),false);
+assert(performance.now()-longListStart<250,'Section-list scope scanning backtracks on a long numeric token');
+console.log('PASS mixed historical list, relative range and linear list-scope scanning');

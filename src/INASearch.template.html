@@ -447,7 +447,8 @@
     button.status-chip.update-ready:hover { background: rgba(29, 137, 94, .56); }
     .status-refresh-icon { font-size: 15px; font-weight: 950; line-height: .8; }
     .theme-controls { display: inline-flex; flex: 0 0 auto; }
-    .theme-cycle-icon { font-family: Arial, sans-serif; font-size: 17px; line-height: 1; }
+    .theme-cycle-icon { position: relative; display: inline-flex; font-family: Arial, sans-serif; font-size: 17px; line-height: 1; }
+    .theme-system-indicator { position: absolute; right: -5px; bottom: -3px; display: grid; place-items: center; width: 11px; height: 11px; border-radius: 50%; background: var(--topbar); font-size: 11px; line-height: 1; }
     .settings-theme-fields { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px 12px; }
     .settings-percentage-field { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 6px; }
     .settings-percentage-field .field { width: 76px; min-width: 0; text-align: end; }
@@ -758,9 +759,7 @@
     .citation-feedback.invalid { color: var(--danger); font-weight: 600; }
     .citation-feedback.external { color: var(--warning); }
     .workspace {
-      display: grid;
-      grid-template-columns: minmax(300px, .42fr) minmax(440px, 1fr);
-      gap: 16px;
+      display: block;
       margin-top: 16px;
       align-items: start;
     }
@@ -770,7 +769,6 @@
     .workspace.authority-browse .results-panel { width: 100%; margin-inline: 0; }
     .workspace.authority-browse .results-panel .panel-head, .workspace.authority-browse .detail-panel { display: none; }
     .workspace.authority-browse .results-panel { overflow: visible; }
-    .workspace.authority-browse .results-panel::after { display: none; }
     .workspace.authority-browse .result-list { max-height: none; min-height: 0; overflow: visible; border-bottom: 0; scrollbar-gutter: auto; }
     body.focused-citation-mode { display: flex; flex-direction: column; height: 100dvh; min-height: 0; overflow: hidden; }
     body.focused-citation-mode > .topbar,
@@ -928,13 +926,12 @@
     }
     .panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: 0 5px 20px rgba(16,42,67,.05); }
     .results-panel { position: relative; overflow: hidden; border-color: color-mix(in srgb, var(--blue) 38%, var(--line)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--blue) 8%, transparent), 0 8px 24px rgba(16,42,67,.09); }
-    .results-panel::after { position: absolute; right: 11px; bottom: 8px; width: 20px; height: 34px; border-right: 3px solid color-mix(in srgb, var(--blue) 70%, var(--line)); border-bottom: 3px solid color-mix(in srgb, var(--blue) 70%, var(--line)); border-radius: 0 0 7px; content: ""; opacity: .65; pointer-events: none; }
     .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 51px; padding: 11px 15px; border-bottom: 1px solid var(--line); }
     .panel-head h2, .panel-head h3 { margin: 0; color: var(--navy); font-size: 14px; }
     .panel-head small { color: var(--muted); }
     .results-scroll-cue { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; border: 1px solid color-mix(in srgb, var(--blue) 30%, var(--line)); border-radius: 999px; padding: 3px 7px; color: var(--blue); background: var(--blue-soft); font-size: 9px; font-weight: 800; letter-spacing: .02em; }
     .results-scroll-cue::before { content: "↕"; font-family: var(--mono); font-size: 12px; }
-    .authority-browse-header { padding: clamp(17px, 3vw, 25px); border-bottom: 1px solid color-mix(in srgb, var(--blue) 28%, var(--line)); background: linear-gradient(135deg, color-mix(in srgb, var(--blue) 9%, var(--panel)), var(--panel) 62%); }
+    .authority-browse-header { border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0; padding: clamp(17px, 3vw, 25px); border-bottom: 1px solid color-mix(in srgb, var(--blue) 28%, var(--line)); background: linear-gradient(135deg, color-mix(in srgb, var(--blue) 9%, var(--panel)), var(--panel) 62%); }
     .authority-browse-header[hidden] { display: none; }
     .authority-browse-source { display: inline-flex; align-items: center; gap: 5px; margin: 0 0 7px; border: 0; padding: 0; color: var(--blue); background: transparent; cursor: pointer; font: inherit; font-size: 11px; font-weight: 900; letter-spacing: .08em; text-align: left; text-transform: uppercase; }
     .authority-browse-source:hover, .authority-browse-source:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
@@ -963,51 +960,40 @@
     .hierarchy-expand[aria-expanded="true"] .hierarchy-expand-icon { transform: rotate(90deg); }
     .hierarchy-expand-icon { transition: transform .12s ease; }
     .hierarchy-label { grid-row: 1; grid-column: 2; display: grid; grid-template-columns: minmax(125px, auto) minmax(0, 1fr) auto; align-items: center; gap: 10px 18px; width: 100%; border: 0; padding: 12px 15px; color: var(--ink); text-align: left; background: transparent; cursor: pointer; }
+    .hierarchy-row[data-row-size="intermediate"] > .hierarchy-row-main { min-height: calc(62px * 2 / 3); }
+    .hierarchy-row[data-row-size="intermediate"] > .hierarchy-row-main > .hierarchy-label { padding-block: 6px; }
+    .hierarchy-row[data-row-size="section"] > .hierarchy-row-main { min-height: 31px; }
+    .hierarchy-row[data-row-size="section"] > .hierarchy-row-main > .hierarchy-label { padding-block: 0; row-gap: 1px; }
     .hierarchy-label:hover, .hierarchy-label:focus-visible { background: var(--blue-soft); }
     .hierarchy-citation { color: var(--blue); font-family: var(--mono); font-size: 12px; font-weight: 850; }
     .hierarchy-heading { font-size: 14px; font-weight: 720; line-height: 1.35; }
     .hierarchy-status { justify-self: end; border: 1px solid currentColor; border-radius: 999px; padding: 2px 6px; font-size: 9px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
     .hierarchy-status.repealed { color: var(--danger); background: var(--danger-soft); }
+    .hierarchy-heading-with-status { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .hierarchy-heading-with-status > .hierarchy-status { flex-shrink: 0; }
     .hierarchy-status.transferred { color: var(--warning); background: var(--warning-soft); }
     .hierarchy-status.omitted { color: var(--muted); background: var(--canvas); }
     .hierarchy-status.note-only, .hierarchy-status.no-equivalent { color: var(--blue); background: var(--blue-soft); }
     .hierarchy-status.hierarchy-status-title { justify-self: start; }
     .hierarchy-children { display: grid; gap: 7px; border-top: 1px solid var(--line); padding: 9px 9px 9px 41px; background: color-mix(in srgb, var(--canvas) 70%, var(--panel)); }
+    .hierarchy-list, .hierarchy-children { --row-spacing-scale: 1; }
+    :is(.hierarchy-list, .hierarchy-children):has(> .hierarchy-row[data-row-size="section"]) { --row-spacing-scale: .5; }
+    :is(.hierarchy-list, .hierarchy-children):has(> .hierarchy-row[data-row-size="intermediate"]) { --row-spacing-scale: calc(2 / 3); }
+    :is(.hierarchy-list, .hierarchy-children):has(> .hierarchy-row[data-row-size="top"]) { --row-spacing-scale: 1; }
+    .hierarchy-list { row-gap: calc(10px * var(--row-spacing-scale)); padding-block: calc(clamp(12px, 2.4vw, 20px) * var(--row-spacing-scale)); }
+    .hierarchy-children { row-gap: calc(7px * var(--row-spacing-scale)); padding-block: calc(9px * var(--row-spacing-scale)); }
     .hierarchy-children[hidden] { display: none; }
     .hierarchy-children .hierarchy-row { border-radius: 8px; box-shadow: none; }
     .hierarchy-empty { padding: 24px; color: var(--muted); text-align: center; }
-    .result-list { max-height: calc(100vh - 270px); min-height: 360px; overflow: auto; border-bottom: 1px solid color-mix(in srgb, var(--blue) 22%, var(--line)); scrollbar-color: color-mix(in srgb, var(--blue) 65%, var(--line)) color-mix(in srgb, var(--panel) 82%, var(--canvas)); scrollbar-gutter: stable; }
-    .result-list::-webkit-scrollbar { width: 12px; }
-    .result-list::-webkit-scrollbar-track { border-left: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 82%, var(--canvas)); }
-    .result-list::-webkit-scrollbar-thumb { border: 3px solid color-mix(in srgb, var(--panel) 82%, var(--canvas)); border-radius: 999px; background: color-mix(in srgb, var(--blue) 68%, var(--line)); }
-    .result-item {
-      display: block;
-      width: 100%;
-      padding: 13px 15px;
-      border: 0;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      background: transparent;
-      cursor: pointer;
-    }
-    .result-item:hover, .result-item.selected { background: var(--blue-soft); }
-    .result-item.selected { box-shadow: inset 4px 0 0 var(--blue); }
-    .result-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
-    .result-kind { color: var(--blue); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-    .result-status { flex: 0 0 auto; margin-left: auto; border: 1px solid currentColor; border-radius: 999px; padding: 2px 6px; font-size: 9px; font-weight: 900; letter-spacing: .06em; line-height: 1.2; text-transform: uppercase; }
-    .result-status.repealed { color: var(--danger); background: var(--danger-soft); }
-    .result-status.transferred { color: var(--warning); background: var(--warning-soft); }
-    .result-status.omitted { color: var(--muted); background: var(--canvas); }
-    .result-cite { color: var(--muted); font-family: var(--mono); font-size: 11px; }
-    .result-cite.result-type { font-family: inherit; font-size: 10px; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
-    .result-title { display: block; color: var(--ink); font-size: 14px; font-weight: 700; line-height: 1.3; }
-    .result-snippet { display: -webkit-box; margin-top: 5px; overflow: hidden; color: var(--muted); font-size: 12px; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .result-list { min-height: 0; overflow: visible; }
     .panel-head-tools, .page-heading-actions, .settings-section-heading-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
     .panel-head-tools { justify-content: flex-end; }
     .settings-section-heading-row { justify-content: space-between; }
-    .detail-panel { min-height: 470px; overflow: hidden; }
+    /* Clip rounded panel edges without creating a scroll container for sticky warnings. */
+    .detail-panel { min-height: 470px; overflow: clip; }
     .detail-content { padding: clamp(17px, 3vw, 27px); }
     .legal-status-warning { position: sticky; z-index: 18; top: calc(var(--topbar-height, 0px) + var(--statute-nav-height, 0px) + 8px); margin: calc(0px - clamp(17px, 3vw, 27px)) calc(0px - clamp(17px, 3vw, 27px)) 18px; border: 0; border-bottom: 2px solid currentColor; border-radius: 0; padding: 11px clamp(17px, 3vw, 27px); box-shadow: 0 5px 15px rgba(16, 42, 67, .16); }
+    .ina-source-record > .legal-status-warning { position: static; }
     .legal-status-warning strong { display: block; margin-bottom: 2px; }
     .legal-status-warning p { margin: 0; font-size: 12px; line-height: 1.45; }
     .legal-status-warning.repealed { color: #7f1d16; background: #fff0ee; }
@@ -1251,11 +1237,10 @@
       display: grid;
       gap: 10px;
       margin: 10px 0 12px;
-      padding-left: 38px;
+      padding: 0;
       isolation: isolate;
     }
-    .inserted-reference-connector { position: absolute; inset: 0 auto 0 0; z-index: 0; width: 38px; height: 100%; overflow: visible; color: var(--inserted-reference); pointer-events: none; }
-    .inserted-reference-connector path { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .inserted-reference-number { margin-left: .25em; color: var(--inserted-reference-strong); font: inherit; white-space: nowrap; }
     .inserted-reference-card {
       position: relative;
       z-index: 1;
@@ -1268,21 +1253,15 @@
       background: color-mix(in srgb, var(--panel) 78%, var(--inserted-reference-soft) 22%);
       box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--inserted-reference) 10%, transparent), 0 5px 16px rgba(35, 16, 66, .08);
     }
-    .inserted-reference-card-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px; border-bottom: 1px solid color-mix(in srgb, var(--inserted-reference) 24%, var(--line)); padding: 9px 10px 8px; }
-    .inserted-reference-card-title { min-width: 0; }
-    .inserted-reference-badge { display: block; width: fit-content; margin-bottom: 3px; color: var(--inserted-reference-strong); font-size: 9px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
-    .inserted-reference-citation { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; color: var(--inserted-reference-strong); font-family: var(--mono); font-size: 11px; font-weight: 850; }
-    .inserted-reference-heading { display: block; margin-top: 3px; color: var(--navy); font-family: var(--serif); font-size: 13px; line-height: 1.3; }
-    .inserted-reference-card-actions { min-width: 0; }
-    .inserted-reference-card-actions > summary { display: none; }
-    .inserted-reference-card-action-items { display: flex !important; flex-wrap: wrap; justify-content: end; gap: 4px; }
-    .inserted-reference-card-actions[data-compact="true"] { width: fit-content; }
-    .inserted-reference-card-actions[data-compact="true"] > summary { display: list-item; }
-    .inserted-reference-card-actions[data-compact="true"] .inserted-reference-card-action-items { display: none !important; margin-top: 4px; justify-content: start; }
-    .inserted-reference-card-actions[data-compact="true"][open] .inserted-reference-card-action-items { display: flex !important; }
-    .inserted-reference-card-actions button, .inserted-reference-card-actions > summary { min-height: 28px; border: 1px solid color-mix(in srgb, var(--inserted-reference) 38%, var(--line)); border-radius: 6px; padding: 4px 7px; color: var(--inserted-reference-strong); background: var(--panel); cursor: pointer; font-size: 10px; font-weight: 800; }
-    .inserted-reference-card-actions button:hover, .inserted-reference-card-actions button:focus-visible, .inserted-reference-card-actions > summary:hover, .inserted-reference-card-actions > summary:focus-visible { border-color: var(--inserted-reference); background: var(--inserted-reference-soft); }
-    .inserted-reference-body { position: relative; max-height: 18rem; overflow: hidden; padding: 10px 12px; font: 12px/1.55 var(--serif); }
+    .inserted-reference-card-head { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; border-bottom: 1px solid color-mix(in srgb, var(--inserted-reference) 24%, var(--line)); padding: 4px 8px; font: inherit; }
+    .inserted-reference-card-title { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0; flex: 1; color: var(--inserted-reference-strong); }
+    .inserted-reference-card-actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .inserted-reference-card-head button { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; min-height: 26px; border: 1px solid transparent; border-radius: 4px; padding: 2px 4px; color: var(--inserted-reference-strong); background: transparent; cursor: pointer; font: inherit; }
+    .inserted-reference-card-head button:hover, .inserted-reference-card-head button:focus-visible { border-color: var(--inserted-reference); background: var(--inserted-reference-soft); }
+    .inserted-reference-card-head button svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .inserted-reference-card > [data-inserted-toggle-full] { margin: 0 9px 7px; border: 0; border-radius: 4px; padding: 3px 5px; color: var(--inserted-reference-strong); background: transparent; font: inherit; font-size: .8em; cursor: pointer; }
+    .inserted-reference-card > [data-inserted-toggle-full]:hover { background: var(--inserted-reference-soft); }
+    .inserted-reference-body { position: relative; max-height: 18rem; overflow: hidden; padding: 7px 9px; font: inherit; }
     .inserted-reference-card[data-expanded="true"] .inserted-reference-body { max-height: none; overflow: visible; }
     .inserted-reference-card:not([data-expanded="true"]) .inserted-reference-body[data-overflowing="true"]::after { position: absolute; right: 0; bottom: 0; left: 0; height: 3.2rem; background: linear-gradient(transparent, color-mix(in srgb, var(--panel) 78%, var(--inserted-reference-soft) 22%)); content: ""; pointer-events: none; }
     .inserted-reference-excerpt { min-width: 0; }
@@ -1291,17 +1270,10 @@
     .inserted-reference-excerpt-unit { display: block; margin: 4px 0; }
     .inserted-reference-excerpt-address { margin-right: 5px; font-weight: 800; }
     .inserted-reference-excerpt-table-wrap { overflow-x: auto; }
-    .inserted-reference-excerpt table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .inserted-reference-excerpt table { width: 100%; border-collapse: collapse; font: inherit; }
     .inserted-reference-excerpt th, .inserted-reference-excerpt td { border: 1px solid var(--line); padding: 5px; vertical-align: top; text-align: left; }
     .inserted-reference-source-label { margin: 0 0 5px; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
-    @media (max-width: 640px) {
-      .inserted-reference-group { padding-left: 21px; }
-      .inserted-reference-connector { width: 21px; }
-      .inserted-reference-card-head { grid-template-columns: minmax(0, 1fr); }
-    }
     @media (forced-colors: active) {
-      .inserted-reference-connector { display: none; }
-      .inserted-reference-group { border-left: 2px solid CanvasText; padding-left: 12px; }
       .inserted-reference-card { border: 2px solid CanvasText; }
     }
     .scoped-defined-term {
@@ -1668,8 +1640,6 @@
       .statute-nav-inner { gap: 4px; }
       .statute-nav-segment summary { min-height: 28px; padding: 3px 6px; }
       .workspace, .notes-layout { grid-template-columns: 1fr; }
-      .results-panel { width: min(720px, calc(100% - 44px)); margin-inline: auto; }
-      .result-list { max-height: min(42vh, 360px); min-height: 220px; }
       .workspace.authority-browse .results-panel { width: 100%; }
       .workspace.authority-browse .result-list { max-height: none; min-height: 0; }
     }
@@ -1703,7 +1673,6 @@
       .statute-nav-separator { display: none; }
       .profile-setup-alert { grid-template-columns: auto minmax(0, 1fr); }
       .profile-setup-alert-actions { grid-column: 2; justify-content: flex-start; }
-      .results-panel { width: calc(100% - 20px); }
       .tips-card-head { align-items: stretch; flex-direction: column; }
       .tips-card-head .button { align-self: start; }
       .today-tip { grid-template-columns: 1fr; }
@@ -1711,7 +1680,7 @@
     }
     .statute-nav-segment.unit-name-hidden summary small { display: none; }
     @media print {
-      .topbar, .statute-navigator, .profile-setup-alert, .results-panel, .detail-actions, .detail-heading-actions, .profile-bar, .button, .legal-unit-menu, .scoped-definition-popover, .legal-reference-popover, .inline-notes-panel, .tutorial-coach, .inserted-reference-card-actions, .inserted-reference-connector { display: none !important; }
+      .topbar, .statute-navigator, .profile-setup-alert, .results-panel, .detail-actions, .detail-heading-actions, .profile-bar, .button, .legal-unit-menu, .scoped-definition-popover, .legal-reference-popover, .inline-notes-panel, .tutorial-coach, .inserted-reference-card-actions { display: none !important; }
       .app-shell { padding: 0; }
       .workspace { display: block; }
       .detail-panel, .panel { border: 0; box-shadow: none; }
@@ -1829,16 +1798,15 @@
     <section class="view" id="view-search" aria-label="Search results">
       <div class="sr-only" id="citationFeedback" role="status" aria-live="polite">Type a citation or search phrase.</div>
       <div class="workspace authority-browse boot-workspace" id="searchWorkspace">
-        <section class="panel results-panel" id="resultsPanel" aria-labelledby="resultsHeading">
-          <div class="panel-head"><h2 id="resultsHeading">Results</h2><div class="panel-head-tools"><span class="results-scroll-cue">Scrollable pane</span><small id="resultCount">Ready</small></div></div>
+        <section class="panel results-panel" id="resultsPanel" aria-labelledby="authorityBrowseTitle">
           <div class="authority-browse-header" id="authorityBrowseHeader"><h2 class="authority-browse-title" id="authorityBrowseTitle">Immigration and Nationality Act</h2><div class="authority-browse-footer"><p class="authority-browse-meta">Loading INA titles…</p></div></div>
-          <div class="result-list" id="resultList" role="listbox" aria-label="INA titles loading" aria-busy="true"><div class="boot-title-list" aria-hidden="true"><div class="boot-title-row"></div><div class="boot-title-row"></div><div class="boot-title-row"></div><div class="boot-title-row"></div></div></div>
+          <div class="result-list" id="resultList" role="list" aria-label="INA titles loading" aria-busy="true"><div class="boot-title-list" aria-hidden="true"><div class="boot-title-row"></div><div class="boot-title-row"></div><div class="boot-title-row"></div><div class="boot-title-row"></div></div></div>
         </section>
         <article class="panel detail-panel" id="detailPanel" aria-live="polite">
           <div class="empty-state">
             <div>
               <span class="empty-icon" aria-hidden="true">§</span>
-              <h2>Choose a result</h2>
+              <h2>Open a citation or search</h2>
               <p>INASearch validates local statute paths as you type and builds current official links for regulations.</p>
             </div>
           </div>
@@ -1976,11 +1944,11 @@
         <section class="settings-section" aria-labelledby="legalReaderSettingsHeading">
           <h3 class="settings-section-heading" id="legalReaderSettingsHeading">Legal text &amp; citations</h3>
           <label class="settings-toggle" for="inaCitationLinksToggle">
-            <span><strong>Show INA citations in statutory links</strong><small>Use INA citations for supported statutory links, keeping shared citation units abbreviated and preserving the original sentence structure.</small></span>
+            <span><strong>Convert citations to INA format</strong><small>Convert supported citation links in both statutes and regulations to INA format, keeping shared citation units abbreviated and preserving the original sentence structure.</small></span>
             <input id="inaCitationLinksToggle" type="checkbox" role="switch">
           </label>
           <label class="settings-toggle" for="highlightInaCitationLinksToggle">
-            <span><strong>Highlight INA citations in yellow</strong><small>Uses the existing yellow treatment for INA-format statutory links. When off, those links use the standard blue link color.</small></span>
+            <span><strong>Highlight INA citations in yellow</strong><small>Highlights INA-format citation links in both statutes and regulations. When off, those links use the standard blue link color.</small></span>
             <input id="highlightInaCitationLinksToggle" type="checkbox" role="switch">
           </label>
           <div class="settings-toggle">
@@ -2305,17 +2273,20 @@
     const TUTORIAL_STATUS_RANK = Object.freeze({ "not-started": 0, "in-progress": 1, viewed: 2, completed: 3 });
     const TUTORIAL_CATALOG = Object.freeze([
       {
-        id: "quick-start", title: "Quick Start", shortTitle: "Quick Start", minutes: "2–3 min", revision: 6, quick: true,
-        description: "Open a citation and learn the basic reading screen.",
+        id: "quick-start", title: "Quick Start", shortTitle: "Quick Start", minutes: "3–4 min", revision: 7, quick: true,
+        description: "Open law, browse related provisions, and search the current results tree.",
         steps: [
           { id: "goal", title: "Start with the citation from your work", target: ".global-search .search-field-shell", focus: "#searchInput", setup: "blank-search", text: "When your casework points you to an INA, U.S.C., or CFR provision, start here. The same search box accepts all three citation formats." },
           { id: "practice-citation", title: "Open INA 203", target: ".global-search .search-field-shell", focus: "#searchInput", setup: "blank-search", text: "Type INA 203 in the search box. Spaces and punctuation are optional. As soon as INASearch recognizes INA 203, it will open the section that lists the immigrant visa preference categories.", practice: { kind: "citation-result", authority: "ina", section: "203", path: [] } },
-          { id: "crosswalk", title: "The same provision has two citations", target: "#citationEquivalent", text: "INA 203 is codified at 8 U.S.C. 1153, so both citations now appear beside your search. Use either one to reopen the provision in that form; the adjacent copy button copies that citation." },
+          { id: "crosswalk", title: "The same provision has two citations", target: "#citationEquivalent", text: "INA 203 is codified at 8 U.S.C. 1153, so both citations now appear beside your search. Click either citation button to copy its displayed citation. The buttons do not replace your search." },
           { id: "reader", title: "The matching law opens here", target: ".detail-heading-row", text: "You are now reading INA 203 from the local copy included with INASearch. The section title and statutory text appear together, so you can begin reading without leaving the file." },
-          { id: "hierarchy", title: "See exactly where you are", target: "#statuteNavigator", text: "This bar places INA 203 within Title 8. Open a segment to move to a nearby chapter, part, or section. When you open a subsection or paragraph, those levels appear here too." },
+          { id: "hierarchy", title: "See exactly where you are", target: "#statuteNavigator", text: "This bar shows the active INA or U.S.C. hierarchy. Open a segment to move to a nearby title, chapter, part, or section. When you open a subsection or paragraph, those levels appear here too." },
+          { id: "cfr-parts", title: "Browse CFR parts and alternatives", target: "#authorityBrowseHeader", setup: "cfr-parts", text: "8 CFR Part 274 opens its own hierarchy page. Other parts at the top links to Part 274a. When the same part number exists in another included CFR title, Other titles links to those pages. Typing 41. opens 22 CFR Part 41 using the CFR title precedence." },
+          { id: "text-search", title: "Search the words in the law", target: ".global-search .search-field-shell", focus: "#searchInput", setup: "blank-search", text: "Type naturalization and press Enter. Text searches show matching provisions in a results tree. Expand the hierarchy to inspect matches; Common controls how broadly nearby matches are grouped.", practice: { kind: "search-results", query: "naturalization" } },
+          { id: "search-tree", title: "Read matches in the results tree", target: "#view-search", text: "The search view keeps matches with their legal hierarchy. A valid search with no matches shows an empty state in this same view. An incomplete quote or citation instead asks you to finish the input across the whole pane." },
           { id: "definitions-page", title: "Definitions keeps meanings tied to their source", target: "#definitionsHeading", setup: "definitions-page", text: "Use this page when the meaning of a term matters. Each entry shows the wording, where it came from, and where INASearch records that definition as applying." },
           { id: "about-page", title: "About keeps help and official links together", target: "#sourcesHeading", setup: "about-page", text: "Use About to revisit every tip, inspect the embedded corpus, and open approved current official sources." },
-          { id: "summary", title: "Your basic workflow", target: "#aboutTipsCard", text: "Start with the citation from your work. INASearch shows the matching local text, an INA or U.S.C. equivalent when available, and the surrounding hierarchy. The paired ? and book controls open About and Definitions; is:notes lists saved annotations.", summary: true }
+          { id: "summary", title: "Your basic workflow", target: "#aboutTipsCard", text: "Start with a citation to read the law, or words to search its text. Use the hierarchy and the Other parts or Other titles links to move between provisions. Citation buttons copy. The paired ? and book controls open About and Definitions; is:notes lists saved annotations.", summary: true }
         ]
       }
     ]);
@@ -2332,7 +2303,7 @@
           [7, "Quotes and OR solve different problems.", "Use \"good moral character\" for that exact phrase; use asylum OR refugee when either word is acceptable."],
           [8, "Press / to return to search.", "The shortcut focuses the main search field from elsewhere in the interface."],
           [9, "Use in: to choose what gets searched.", "in:INA,CFR,notes,highlights president searches the selected kinds of content; without in:, ordinary searches include all four."],
-          [10, "Very short text searches wait for more letters.", "This prevents a one- or two-letter fragment from producing an enormous, mostly useless result set."],
+          [10, "Unfinished citations stay in navigation.", "Finish a citation prefix to open a provision. A trailing dot after a CFR part number opens that part using the usual title precedence: 41. opens 22 CFR Part 41."],
           [11, "The suggested search is only a starting point.", "Clicking it runs that example; it does not change any saved preference."]
         ]
       },
@@ -2341,7 +2312,7 @@
           [12, "in: searches inside a provision.", "Enter the citation in the separate citation field, then type the words to find—for example, in:INA 212  waiver."],
           [13, "The in: citation can be a range.", "in:INA 101-106 searches the indexed provisions across that range."],
           [14, "CFR paragraphs can be searched narrowly.", "in:8 CFR 214.2(h)(13) limits the text search to that paragraph and its descendants."],
-          [15, "Press Space twice to leave the citation field.", "After entering an in: or cites: citation, the second space moves the cursor into the main search field. It no longer adds a stray period."],
+          [15, "Press Space twice to leave the citation field.", "After entering an in: or cites: citation, the second space moves the cursor into the main search field."],
           [16, "cites: reverses the question.", "cites:INA 101(a)(15)(S) finds statutes and regulations that cite that provision."],
           [17, "Words can further narrow a cites: search.", "Add text in the main field to keep only citing provisions that also contain those words."],
           [18, "cites: works across the content you select.", "Legal hits center the inline reference; notes match saved detected references, and highlights match references overlapped by the selected text."]
@@ -2385,7 +2356,7 @@
           [40, "Clicking a legal unit selects it without moving the page.", "The search field, blue highlight, navigation bar, and history update while the current reading position stays fixed."],
           [41, "Citation jumps align to the top of the visible reader.", "The selected provision begins immediately below the top bar and legal navigation bar."],
           [42, "Citation-jump animation is optional.", "Animate citation jumps in Settings controls whether main-reader jumps move smoothly or instantly."],
-          [43, "Click an inline legal reference to preview it.", "The preview shows the actual referenced wording and its citation before you decide whether to open it."],
+          [43, "Hover over an inline legal reference to preview it.", "The preview shows the referenced wording and its citation. Click the reference to navigate to it; local citations also update the search bar."],
           [44, "The reference preview's Copy button copies the complete referenced unit.", "The copied text includes the complete legal unit shown in the preview."],
           [45, "The Split button opens the referenced location in another viewer pane.", "Use it when you want to keep the citing and cited provisions visible together."],
           [46, "Insert places the cited excerpt after the provision that cites it.", "The inserted card remains visually connected to its source reference."],
@@ -2431,7 +2402,7 @@
           [73, "The top status controls summarize saved-data and corpus health.", "Their detailed visibility can be changed in Settings."],
           [74, "The theme button cycles Day, Night, and System.", "INASearch starts in Day unless you choose another preference."],
           [75, "The startup search is configurable.", "Set a citation or query to open automatically, or leave it blank to start at Home."],
-          [76, "Statutory links can display INA or U.S.C. citations.", "Citation style for statutory links in Settings controls the wording without changing their destinations."],
+          [76, "Citation links in statutes and regulations can display INA or U.S.C. citations.", "Convert citations to INA format in Settings controls the wording without changing link destinations."],
           [77, "INA citation links can be highlighted.", "The separate highlighting setting changes their appearance, not their meaning."]
         ]
       },
@@ -2918,7 +2889,7 @@
       citationEquivalentUsc: $("#citationEquivalentUsc"), citationEquivalentUscLabel: $("#citationEquivalentUscLabel"), citationEquivalentUscCopy: $("#citationEquivalentUscCopy"),
       citationAmbiguity: $("#citationAmbiguity"), citationAmbiguityCommon: $("#citationAmbiguityCommon"), citationAmbiguityOptions: $("#citationAmbiguityOptions"), feedback: $("#citationFeedback"), resultList: $("#resultList"),
       searchSuggestion: $("#searchSuggestionButton"), searchWorkspace: $("#searchWorkspace"), focusedCitationWorkspace: $("#focusedCitationWorkspace"), focusedCitationPanes: $("#focusedCitationPanes"), focusedCitationStatus: $("#focusedCitationStatus"), resultsPanel: $("#resultsPanel"), authorityBrowseHeader: $("#authorityBrowseHeader"),
-      resultCount: $("#resultCount"), detail: $("#detailPanel"), corpusStatus: $("#corpusStatus"),
+      detail: $("#detailPanel"), corpusStatus: $("#corpusStatus"),
       brand: $("#inaSearchBrand"), brandTribute: $("#brandTribute"),
       saveStatus: $("#saveStatus"), topThemeControls: $("#topThemeControls"), themeCycleButton: $("#themeCycleButton"), settingsThemeSelect: $("#settingsThemeSelect"), settingsThemeSystemToggle: $("#settingsThemeSystemToggle"),
       aboutMenuButton: $("#aboutMenuButton"), definitionsMenuButton: $("#definitionsMenuButton"), settingsMenuButton: $("#settingsMenuButton"),
@@ -2968,10 +2939,11 @@
       const effectiveTheme = effectiveThemePreference(theme);
       const nextTheme = { light: "dark", dark: "system", system: "light" }[theme];
       const labels = { light: "Day", dark: "Night", system: "System" };
-      const icons = { light: "☀", dark: "☾", system: "◐" };
-      els.themeCycleButton.querySelector("[data-theme-cycle-icon]").textContent = icons[theme];
-      els.themeCycleButton.setAttribute("aria-label", `${labels[theme]} theme. Switch to ${labels[nextTheme]}.`);
-      els.themeCycleButton.title = `${labels[theme]} → ${labels[nextTheme]}`;
+      const icons = { light: "☀", dark: "☾", system: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><rect x="4" y="3" width="16" height="12" rx="1.5"/><path d="M4 15 2 20h20l-2-5M9 20h6"/></svg>' };
+      els.themeCycleButton.querySelector("[data-theme-cycle-icon]").innerHTML = icons[theme] + (theme === "system" ? `<span class="theme-system-indicator">${icons[effectiveTheme]}</span>` : "");
+      const currentThemeLabel = theme === "system" ? `System theme (currently ${labels[effectiveTheme]})` : `${labels[theme]} theme`;
+      els.themeCycleButton.setAttribute("aria-label", `${currentThemeLabel}. Switch to ${labels[nextTheme]}.`);
+      els.themeCycleButton.title = `${currentThemeLabel} → ${labels[nextTheme]}`;
       els.settingsThemeSelect.value = effectiveTheme;
       els.settingsThemeSelect.disabled = profile.preferences.theme === "system";
       els.settingsThemeSystemToggle.checked = profile.preferences.theme === "system";
@@ -3099,14 +3071,14 @@
             const source = inaSectionNodes.get(sectionId);
             const row = inaMap.get(normCitationPart(source?.inaSection));
             const mapped = inaMappedSection(row);
-            createHierarchyNode({ id: sectionId, authority: "ina", kind: "section", number: source?.inaSection || "", heading: source?.heading || row?.title || "", parentId: chapter.id, url: source?.sourceUrl || row?.url || INA_SOURCE_URL, readerTarget: mapped ? { kind: "usc", id: mapped.id } : null, query: `INA ${source?.inaSection || ""}`, status: mapped ? statuteStatus(mapped) : row?.title?.toLowerCase().includes("repealed") ? "repealed" : row?.title?.toLowerCase().includes("transferred") ? "transferred" : "current", marker: row?.isNote ? "note-only" : row?.hasEquivalent === false ? "no-equivalent" : "" });
+            createHierarchyNode({ id: sectionId, authority: "ina", kind: "section", number: source?.inaSection || "", heading: statuteStatus(mapped) === "transferred" && mapped.transferTargets?.length ? `Transferred to ${mapped.transferTargets.map(target => { const ina = Number(target.title) === 8 && uscToIna.get(normCitationPart(target.section)); return `${ina ? `INA ${ina.inaSection} / ` : ""}${transferTargetLabel(target)}`; }).join("; ")}` : source?.heading || row?.title || "", parentId: chapter.id, url: source?.sourceUrl || row?.url || INA_SOURCE_URL, readerTarget: mapped ? { kind: "usc", id: mapped.id } : null, query: `INA ${source?.inaSection || ""}`, status: statuteStatus(mapped || row), marker: row?.isNote ? "note-only" : row?.hasEquivalent === false ? "no-equivalent" : "" });
           }
         }
         for (const sectionId of titleSource.sectionIds || []) {
           const source = inaSectionNodes.get(sectionId);
           const row = inaMap.get(normCitationPart(source?.inaSection));
           const mapped = inaMappedSection(row);
-          createHierarchyNode({ id: sectionId, authority: "ina", kind: "section", number: source?.inaSection || "", heading: source?.heading || row?.title || "", parentId: title.id, url: source?.sourceUrl || row?.url || INA_SOURCE_URL, readerTarget: mapped ? { kind: "usc", id: mapped.id } : null, query: `INA ${source?.inaSection || ""}`, status: mapped ? statuteStatus(mapped) : "current", marker: row?.isNote ? "note-only" : row?.hasEquivalent === false ? "no-equivalent" : "" });
+          createHierarchyNode({ id: sectionId, authority: "ina", kind: "section", number: source?.inaSection || "", heading: statuteStatus(mapped) === "transferred" && mapped.transferTargets?.length ? `Transferred to ${mapped.transferTargets.map(target => { const ina = Number(target.title) === 8 && uscToIna.get(normCitationPart(target.section)); return `${ina ? `INA ${ina.inaSection} / ` : ""}${transferTargetLabel(target)}`; }).join("; ")}` : source?.heading || row?.title || "", parentId: title.id, url: source?.sourceUrl || row?.url || INA_SOURCE_URL, readerTarget: mapped ? { kind: "usc", id: mapped.id } : null, query: `INA ${source?.inaSection || ""}`, status: statuteStatus(mapped || row), marker: row?.isNote ? "note-only" : row?.hasEquivalent === false ? "no-equivalent" : "" });
         }
       }
 
@@ -3473,8 +3445,34 @@
     function titleCaseTopic(value) {
       return String(value || "Statutory note").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\b\w/g, m => m.toUpperCase());
     }
+    // Display-only title case for navigation headings; source text and citation tokens stay intact.
+    function navigationTitleCase(value) {
+      const input = String(value || "");
+      const minor = new Set("a an the and but or nor for so yet as at by down in of off on out per to up via with from into onto over than upon under about after before behind below beside between beyond during except inside outside through toward towards underneath until without within".split(" "));
+      const acronyms = new Set("INA CFR USC USCIS DHS DOJ DOS DOL HHS INS ICE CBP EOIR BIA AAO FBI CIA SSA IRS OMB DHS TSA FEMA NATO UN USA US HIV AIDS DNA TPS DACA DAPA VAWA SIJ SIJS SEVIS SEVP ESTA USVISIT FOIA FLSA PDF ID NATO NAFTA USMCA GATT WTO OECD IIRIRA AEDPA IRCA IMMACT SAVE EAD OPT CPT STEM".split(" "));
+      const words = [...input.matchAll(/(?:[A-Za-z]\.){2,}|[A-Za-z0-9]+(?:[’'][A-Za-z]+)?(?:\([A-Za-z0-9]+\))*/g)];
+      let index = 0;
+      return input.replace(/(?:[A-Za-z]\.){2,}|[A-Za-z0-9]+(?:[’'][A-Za-z]+)?(?:\([A-Za-z0-9]+\))*/g, (word, offset) => {
+        const position = index++;
+        const lower = word.toLowerCase();
+        const upper = word.toUpperCase();
+        if (/\d|\(|\./.test(word)) return word;
+        if (lower === "ecfr") return "eCFR";
+        if (lower === "govinfo") return "GovInfo";
+        const base = upper.replace(/[’']S$/, "");
+        if (acronyms.has(base)) return base + (/[’']s$/i.test(word) ? word.slice(-2).toLowerCase() : "");
+        if (/^(?=[MDCLXVI]+$)M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/.test(word)) return word;
+        // Retain intentional internal capitals in names such as McCarran and AmeriCorps.
+        if (/[a-z][A-Z]/.test(word)) return word;
+        const previousEnd = position ? words[position - 1].index + words[position - 1][0].length : 0;
+        const startsSubtitle = /[:;—–]/.test(input.slice(previousEnd, offset));
+        if (position > 0 && position < words.length - 1 && !startsSubtitle && minor.has(lower)) return lower;
+        return lower[0].toUpperCase() + lower.slice(1);
+      });
+    }
+
     function statuteStatus(section) {
-      const status = String(section?.status || "current").toLowerCase();
+      const status = String(section?.status || String(section?.title || "").match(/^(repealed|transferred|omitted)\b/i)?.[1] || "current").toLowerCase();
       return ["repealed", "transferred", "omitted"].includes(status) ? status : "current";
     }
     function statuteStatusLabel(status) {
@@ -3483,7 +3481,7 @@
     function statuteSectionForRecord(record) {
       if (record?.kind === "usc") return record.item || null;
       if (["statutory-note", "editorial-note", "usc-note", "source-credit"].includes(record?.kind)) return record.item?.section || null;
-      if (["ina", "ina-section"].includes(record?.kind)) return inaMappedSection(record.item);
+      if (["ina", "ina-section"].includes(record?.kind)) return inaMappedSection(record.item) || record.item;
       return null;
     }
     function statuteRecordStatus(record) {
@@ -3504,7 +3502,8 @@
     }
     function transferTargetForSource(section, source) {
       const key = transferSourceKey(source);
-      return (section?.transferTargets || []).find(target => transferSourceKey(target.source) === key) || null;
+      const targets = (section?.transferTargets || []).filter(target => transferSourceKey(target.source) === key);
+      return targets.length === 1 ? targets[0] : null;
     }
     function transferRecord(section, target, group = "statutes") {
       const cite = `8 U.S.C. ${target.source}`;
@@ -3524,7 +3523,7 @@
       if (target?.relation === "see") return `Transferred record; the House codification note directs readers to ${transferTargetLabel(target)}. Clicking opens that location.`;
       if (target) return `Transferred record; clicking opens ${transferTargetLabel(target)}.`;
       if (targets.length === 1) return `Transferred record; the current location is ${transferTargetLabel(targets[0])}.`;
-      return `Transferred record with ${targets.length.toLocaleString()} indexed destinations.`;
+      return targets.length ? `Transferred record with ${targets.length.toLocaleString()} indexed destinations. The codification notes below describe the material moved to each location.` : "The local source does not identify a verified destination. Consult the official source record below.";
     }
     function statuteReaderCitationBase(section, citationResult, selectedTransferTarget, mapping) {
       if (citationResult?.type === "ina" && mapping?.inaSection) return `INA ${mapping.inaSection}`;
@@ -3790,7 +3789,8 @@
     }
 
     function statuteDefinitionContext(section, mapping, path = []) {
-      if (!section || !mapping?.inaSection) return null;
+      if (!section) return null;
+      if (!mapping?.inaSection) return { kind: "usc", uscSection: String(section.section || ""), path: (path || []).map(String) };
       const subchapter = (section.breadcrumb || []).find(item => String(item.kind || "").toLowerCase() === "subchapter")?.number || "";
       return { kind: "ina", inaSection: String(mapping.inaSection), uscSection: String(section.section || ""), subchapter: String(subchapter), path: (path || []).map(String) };
     }
@@ -4611,8 +4611,11 @@
       }
       if (isAuthorityBrowse()) {
         setSearchResults(authorityBrowseRecords(), { limit: Infinity });
+        const next = state.results[0] || null;
+        if (next?.cite) { applySearchQuery(next.cite, false); return next; }
         state.selected = null;
-        renderResults(state.results);
+        renderResults();
+        renderNoResults();
         return null;
       } else {
         setSearchResults(state.allResults);
@@ -4620,7 +4623,13 @@
       const preferred = preferredRecord && state.results.find(record => record.key === preferredRecord.key);
       const next = preferred || state.results[0] || null;
       if (next) selectRecord(next, false);
-      else { state.selected = null; renderResults([]); renderNoResults(); }
+      else {
+        state.selected = null;
+        renderResults([]);
+        if (!state.citation?.recognized && state.pendingCommandClassification?.mode === "navigation-prefix") {
+          els.detail.innerHTML = `<div class="empty-state"><div><span class="empty-icon" aria-hidden="true">§</span><h2>Finish the citation</h2><p>Enter an INA, U.S.C., or CFR citation.</p></div></div>`;
+        } else renderNoResults();
+      }
       return next;
     }
 
@@ -4827,6 +4836,9 @@
         if (state.focusedCitationMode) exitFocusedCitationMode();
         resetOccurrenceWorkspacePresentation();
         showSearchResults(false);
+        state.citation = null;
+        state.selected = null;
+        renderCitationFeedback(null);
         setSearchResults([]);
         renderResults([]);
         els.detail.innerHTML = `<div class="empty-state"><div><span class="empty-icon">⌕</span><h2>Finish the search expression</h2><p>${escapeHtml(classification.errors?.[0]?.message || "Close the quote or parenthesized alternatives to run the search.")}</p></div></div>`;
@@ -4836,6 +4848,9 @@
         if (state.focusedCitationMode) exitFocusedCitationMode();
         resetOccurrenceWorkspacePresentation();
         showSearchResults(false);
+        state.citation = null;
+        state.selected = null;
+        renderCitationFeedback(null);
         setSearchResults([]);
         renderResults([]);
         els.detail.innerHTML = `<div class="empty-state"><div><span class="empty-icon">!</span><h2>Check the search expression</h2><p>${escapeHtml(classification.errors?.[0]?.message || "This search expression is not valid.")}</p></div></div>`;
@@ -4916,6 +4931,7 @@
       if (state.citation?.valid
         && state.citation.record?.kind === "usc"
         && statuteRecordStatus(state.citation.record) === "transferred"
+        && !transferTarget?.former && transferTarget?.placement !== "note"
         && Number(transferTarget?.title) === 8
         && sectionMap.has(normCitationPart(transferTarget?.section))) {
         openTransferDestination({ ...state.citation.record, citationResult: state.citation, dispositionTarget: transferTarget });
@@ -4970,7 +4986,7 @@
         const rest = canonical.slice(candidate.length);
         const outcome = resolver(candidate, rest);
         if (!fallback) fallback = outcome;
-        if (outcome.valid) return outcome;
+        if (!rest || outcome.section?.status === "transferred" || outcome.valid) return outcome;
       }
       return fallback;
     }
@@ -5043,7 +5059,7 @@
           let deepest = null;
           for (const node of matches) {
             const outcome = visit(node.children || [], index + 1, [...path, node.label]);
-            if (outcome.valid) return outcome;
+            if (!rest || outcome.section?.status === "transferred" || outcome.valid) return outcome;
             if (!deepest || outcome.path.length > deepest.path.length) deepest = outcome;
           }
           return deepest;
@@ -5060,7 +5076,7 @@
         let deepest = null;
         for (const choice of choices) {
           const outcome = visitCompact(choice.node.children || [], remaining.slice(choice.key.length), [...path, choice.node.label]);
-          if (outcome.valid) return outcome;
+          if (!rest || outcome.section?.status === "transferred" || outcome.valid) return outcome;
           if (!deepest || outcome.path.length > deepest.path.length) deepest = outcome;
         }
         return deepest;
@@ -5174,7 +5190,7 @@
                   : "USCIS lists no U.S. Code equivalent for this INA entry."
           };
         }
-        const transferTarget = kind === "usc" && statuteStatus(section) === "transferred" ? transferTargetForSource(section, key) : null;
+        const transferTarget = statuteStatus(section) === "transferred" ? transferTargetForSource(section, kind === "ina" ? mapping.localSection || mapping.uscSection : key) : null;
         if (statuteStatus(section) === "transferred") {
           const transferredLabel = kind === "usc" && transferTarget ? `8 U.S.C. ${transferTarget.source}` : baseLabel;
           const record = transferTarget ? transferRecord(section, transferTarget, kind === "ina" ? "ina" : "statutes") : {
@@ -5183,14 +5199,14 @@
             text: normalize([transferredLabel, section.heading, ...(section.notes || []).map(note => note.text)].join(" "))
           };
           return {
-            type: kind, recognized: true, valid: Boolean(!rest && transferTarget), label: transferredLabel,
+            type: kind, recognized: true, valid: !rest, label: transferredLabel,
             section, mapping: kind === "ina" ? mapping : null, path: [], renderPath: [], dispositionTarget: transferTarget,
             url: transferTargetUrl(transferTarget) || section.url, record,
             message: rest
               ? "A transferred section does not contain a locally navigable paragraph path."
               : transferTarget
                 ? transferStatusMessage(section, transferTarget)
-                : "This transferred range must be opened through one of its separately indexed source sections."
+                : transferStatusMessage(section)
           };
         }
         const authoritySection = kind === "ina" ? mapping?.inaSection : section.section;
@@ -5292,7 +5308,7 @@
       return {
         type: node.authority, level: "hierarchy", recognized: true, valid: true,
         hierarchyNodeId: node.id, label: hierarchyNodeCitation(node), heading: node.heading,
-        url: hierarchyOfficialUrl(node), message: message || `${node.children.length.toLocaleString()} immediate ${node.children.length === 1 ? "entry" : "entries"}.`
+        url: hierarchyOfficialUrl(node), message
       };
     }
 
@@ -5384,7 +5400,7 @@
 
     function parseCfr(title, raw) {
       const titleNumber = Number(title);
-      const rawCitation = String(raw || "").trim();
+      const rawCitation = String(raw || "").trim().replace(/^(\d+[a-z]?)\.$/i, "$1");
       if (/^appendix\b/i.test(rawCitation)) {
         const appendix = (corpus?.cfr?.appendices || []).find(item => Number(item.title) === titleNumber && [item.label, item.heading].some(value => normCitationPart(value) === normCitationPart(rawCitation)));
         if (appendix) {
@@ -5419,12 +5435,10 @@
       if (explicitPart || !section.includes(".")) {
         if (!explicitPart && !suffix) {
           const matchingParts = letteredIdentifierFamily(section, cfrPartsByTitle.get(titleNumber), part => part.part);
-          if (matchingParts.length > 1) return {
-            type: "cfr", level: "part-family", recognized: true, valid: true,
-            title: titleNumber, section, parts: matchingParts,
-            label: `${titleNumber} CFR ${section}`, url: `https://www.ecfr.gov/current/title-${titleNumber}`,
-            message: `${matchingParts.length} indexed CFR parts share the numeric stem ${section}; letter suffixes identify separate parts, not paragraphs.`
-          };
+          if (matchingParts.length > 1) {
+            const primary = matchingParts.find(part => normCitationPart(part.part) === normCitationPart(section)) || matchingParts[0];
+            return hierarchyBrowseResult(authorityHierarchyNodes.get(cfrPartHierarchyNode.get(primary.id)));
+          }
         }
         const part = cfrPartMap.get(`${titleNumber}:${normCitationPart(section)}`);
         const removed = cfrRemovedPartMap.get(`${titleNumber}:${normCitationPart(section)}`);
@@ -5513,6 +5527,12 @@
       const ina = input.match(/^\s*i\.?\s*n\.?\s*a\.?(?=\s|§|\d|[ivx]|title|$)\s*(.*)$/i);
       if (ina) return parseIna(ina[1]);
 
+      const incompleteCfrPart = input.match(/^\s*§?\s*(\d+[a-z]?)\.\s*$/i);
+      if (incompleteCfrPart) {
+        const matches = cfrPartsByNumber.get(cfrSectionNumberKey(incompleteCfrPart[1])) || [];
+        const title = Number(matches[0]?.title || 8);
+        return { ...parseCfr(title, incompleteCfrPart[1]), impliedCfrTitle: title };
+      }
       const impliedCfrPart = input.match(/^\s*p(?:art)?\s*§?\s*(\d+[a-z]?(?:-\d+[a-z]?)?)\s*$/i);
       if (impliedCfrPart) {
         const part = cfrPartsByNumber.get(cfrSectionNumberKey(impliedCfrPart[1]))?.[0];
@@ -6208,7 +6228,7 @@
         if (!node) return "";
         const children = node.children || [];
         const label = hierarchyRowCitation(node);
-        const contents = `<button class="pane-hierarchy-label" type="button" data-pane-hierarchy-open="${escapeHtml(node.id)}"><span>${escapeHtml(label)}</span>${node.heading ? `<small>${escapeHtml(node.heading)}</small>` : ""}</button>`;
+        const contents = `<button class="pane-hierarchy-label" type="button" data-pane-hierarchy-open="${escapeHtml(node.id)}"><span>${escapeHtml(label)}</span>${node.heading ? `<small>${escapeHtml(navigationTitleCase(node.heading))}</small>` : ""}</button>`;
         return children.length
           ? `<details class="pane-hierarchy-node" data-pane-hierarchy-node="${escapeHtml(node.id)}"${expanded.has(node.id) ? " open" : ""}><summary>${contents}<span aria-hidden="true">›</span></summary><div class="pane-hierarchy-list">${paneHierarchyRows(children, expanded)}</div></details>`
           : `<div class="pane-hierarchy-node">${contents}</div>`;
@@ -6222,7 +6242,7 @@
       const title = result?.level === "hierarchy-matches" ? result.label : hierarchyNodeCitation(node) || result?.label || pane.entry.text;
       const heading = result?.message || node?.heading || result?.heading || "Choose a legal unit.";
       const expanded = pane.readerState.hierarchyExpanded instanceof Set ? pane.readerState.hierarchyExpanded : new Set();
-      pane.detail.innerHTML = `<section class="pane-hierarchy"><header class="pane-view-heading"><h2>${escapeHtml(title)}</h2><span class="occurrence-count">${roots.length.toLocaleString()} entries</span><p>${escapeHtml(heading)}</p></header><div class="pane-hierarchy-list">${paneHierarchyRows(roots, expanded)}</div></section>`;
+      pane.detail.innerHTML = `<section class="pane-hierarchy">${cfrPartAlternativesHtml(node)}<header class="pane-view-heading"><h2>${escapeHtml(title)}</h2><span class="occurrence-count">${roots.length.toLocaleString()} entries</span><p>${escapeHtml(heading)}</p></header><div class="pane-hierarchy-list">${paneHierarchyRows(roots, expanded)}</div></section>`;
       withFocusedCitationPane(pane, () => renderHierarchyNavigation(result));
     }
 
@@ -6861,7 +6881,7 @@
       }
       const sectionHtml = section => {
         const token = occurrenceSectionDomToken(section.id);
-        return `<details class="occurrence-section" data-occurrence-section="${escapeHtml(token)}"${expandResults ? " open" : ""}><summary aria-label="Expand or collapse results for ${escapeHtml(section.citation)}"><span class="occurrence-section-disclosure" aria-hidden="true">›</span><button class="occurrence-section-label" type="button" data-occurrence-section-open="${escapeHtml(token)}" aria-label="Open ${escapeHtml(section.citation)}" title="Open ${escapeHtml(section.citation)}">${escapeHtml(section.citation)}${section.heading ? `<small>— ${escapeHtml(section.heading)}</small>` : ""}</button><span class="occurrence-count">${Number(section.totalOccurrences || 0).toLocaleString()}</span></summary><div class="occurrence-section-rows" data-occurrence-section-rows="${escapeHtml(token)}"></div></details>`;
+        return `<details class="occurrence-section" data-occurrence-section="${escapeHtml(token)}"${expandResults ? " open" : ""}><summary aria-label="Expand or collapse results for ${escapeHtml(section.citation)}"><span class="occurrence-section-disclosure" aria-hidden="true">›</span><button class="occurrence-section-label" type="button" data-occurrence-section-open="${escapeHtml(token)}" aria-label="Open ${escapeHtml(section.citation)}" title="Open ${escapeHtml(section.citation)}">${escapeHtml(section.citation)}${section.heading ? `<small>— ${escapeHtml(navigationTitleCase(section.heading))}</small>` : ""}</button><span class="occurrence-count">${Number(section.totalOccurrences || 0).toLocaleString()}</span></summary><div class="occurrence-section-rows" data-occurrence-section-rows="${escapeHtml(token)}"></div></details>`;
       };
       const render = node => {
         const sections = sectionsByLeaf.get(node.id) || [];
@@ -6873,7 +6893,7 @@
           (profile.preferences.showCfrChapterSubchapterInSearchHierarchy !== true && ["chapter", "subchapter"].includes(node.kind))
         );
         if (node.kind === "authority" || flattenCfrUnit) return children;
-        return `<details class="pane-hierarchy-node"${expandResults ? " open" : ""}><summary><span class="pane-hierarchy-label"><span>${escapeHtml([titleCaseTopic(node.kind), node.number].filter(Boolean).join(" "))}</span>${node.heading ? `<small>${escapeHtml(node.heading)}</small>` : ""}</span><span class="occurrence-count">${Number(node.totalOccurrences || 0).toLocaleString()}</span></summary><div class="occurrence-hierarchy">${children}</div></details>`;
+        return `<details class="pane-hierarchy-node"${expandResults ? " open" : ""}><summary><span class="pane-hierarchy-label"><span>${escapeHtml([titleCaseTopic(node.kind), node.number].filter(Boolean).join(" "))}</span>${node.heading ? `<small>${escapeHtml(navigationTitleCase(node.heading))}</small>` : ""}</span><span class="occurrence-count">${Number(node.totalOccurrences || 0).toLocaleString()}</span></summary><div class="occurrence-hierarchy">${children}</div></details>`;
       };
       return roots.map(render).join("");
     }
@@ -9034,6 +9054,13 @@
       };
     }
 
+    function inUnfinishedStatutoryList(prefix) {
+      const start = [...String(prefix || "").matchAll(/\bsections\s+(?=\d)/gi)].at(-1);
+      if (!start) return false;
+      const tail = String(prefix).slice(start.index + start[0].length);
+      return tail.replace(/\([^()]*\)|\d+[A-Za-z]?|\b(?:and|or|to|through)\b|[\s,–—-]+/gi, "") === "";
+    }
+
     function coordinatedStatutoryInaLists(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length, sourceContext = null) {
       if (profile?.preferences?.statutoryLinkCitationSystem !== "ina") return [];
       const input = String(value || "");
@@ -9041,7 +9068,7 @@
       const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
       const parser = globalThis.INASearchEmbeddedReferences?.parseCoordinatedSectionReferences;
       if (typeof parser !== "function") return [];
-      const statutoryContext = sourceContext?.kind === "ina" && sourceContext.uscSection;
+      const statutoryContext = ["ina", "usc"].includes(sourceContext?.kind) && sourceContext.uscSection;
       const supportedScope = scope => statutoryContext && (["this-title", "such-title"].includes(scope?.type) || (scope?.type === "numbered-title" && String(scope.title) === "8"));
       const eligible = references.filter(reference => reference?.resolution !== "unresolved" && ["usc", "ina"].includes(reference?.family) &&
         Number.isInteger(reference.start) && Number.isInteger(reference.end) && reference.start >= start && reference.end <= end &&
@@ -9051,14 +9078,18 @@
       const parsed = parser(input).filter(candidate => candidate.grammar === "numbered-section-list" && candidate.start >= start && candidate.end <= end &&
         supportedScope(candidate.scope));
       const groups = parsed.map(candidate => {
+        // A parser-recognized tail must not convert in isolation from a
+        // preceding section range that belongs to the same plural list.
+        if (!candidate.unitWord && inUnfinishedStatutoryList(input.slice(0, candidate.start))) return null;
         const members = candidate.members.map(member => eligible.filter(reference => reference.start >= candidate.start && reference.end <= candidate.end &&
           reference.start <= member.start && reference.end >= member.end)
           .sort((left, right) => (left.end - left.start) - (right.end - right.start))[0]);
         if (members.some(member => !member) || new Set(members).size !== candidate.members.length) return null;
         // Never swallow another independently resolved reference inside a group.
         if (eligible.some(reference => reference.start < candidate.end && reference.end > candidate.start && !members.includes(reference))) return null;
-        const crosswalks = members.map(statutoryReferenceCrosswalk);
-        if (crosswalks.some(crosswalk => !crosswalk)) return null;
+        const mappedCrosswalks = members.map(statutoryReferenceCrosswalk);
+        if (!mappedCrosswalks.some(Boolean) || members.some(reference => String(reference.targetTitle || "8") !== "8")) return null;
+        const crosswalks = mappedCrosswalks.map((crosswalk, index) => crosswalk || { ina: legalReferenceCitation(members[index]), usc: legalReferenceCitation(members[index]), isIna: false });
         return { ...candidate, members, crosswalks, parsedMembers: candidate.members };
       }).filter(Boolean);
       const actReferences = eligible.filter(reference => reference.ruleId === "context-cfr-ina-act-section" && statutoryReferenceCrosswalk(reference));
@@ -9100,7 +9131,7 @@
           const full = group.crosswalks[index].ina;
           const written = group.parsedMembers[index];
           if (!index) return full;
-          if (reference.targetSection !== group.members[index - 1].targetSection) return full.replace(/^INA\s+/i, "");
+          if (reference.targetSection !== group.members[index - 1].targetSection) return group.crosswalks[index].isIna === false || group.crosswalks[index - 1].isIna === false ? full : full.replace(/^INA\s+/i, "");
           // Use the common ancestor of the entire contiguous same-section run.
           // Keep at least one unit when an address repeats or names an ancestor.
           let first = index - 1, last = index;
@@ -9123,10 +9154,32 @@
 
     function statutoryLinkUsesConvertibleUscWording(reference, sourceContext = null) {
       if (reference?.ruleId === "context-cfr-ina-act-section" && reference.family === "ina") return /^(?:sections?\s+)?\d/i.test(String(reference.text || "").trim());
-      if (reference?.family !== "usc" || sourceContext?.kind !== "ina" || !sourceContext.uscSection) return false;
-      if (normCitationPart(reference.targetSection) === normCitationPart(sourceContext.uscSection)) return false;
+      if (reference?.family !== "usc") return false;
       const sourceText = String(reference.text || "").trim();
-      return /^section\s+\d[A-Za-z0-9\u2010-\u2014-]*(?:\s*\([^()]+\))*\s+of\s+this\s+title$/i.test(sourceText);
+      const wording = sourceText.match(/^(section\s+)?(\d[A-Za-z0-9\u2010-\u2014-]*)(?:\s*\([^()]+\))*(?:\s+of\s+this\s+title)?$/i);
+      if (wording && !wording[1] && Number.isInteger(reference.start)) {
+        // Bracketed/parenthesized parallel USC lists retain one shared title
+        // prefix. Do not substitute an INA label for a single member.
+        const source = String(sourceContext?.referenceSourceText || "");
+        const prefix = source.slice(0, reference.start);
+        // Plural lists are rendered together above, including mixed mapped
+        // and unmapped members. Preserve any unparsed list as one USC list.
+        if (inUnfinishedStatutoryList(prefix)) return false;
+        const explicit = [...prefix.matchAll(/\b\d+\s*U\.?\s*S\.?\s*C\.?\s+(?:former\s+)?\d+[A-Za-z]?(?:\([^()]+\))*/gi)].at(-1);
+        if (explicit && /^(?:\s|,|[–—-]|\b(?:and|or|to|through|former|now)\b|\d+[A-Za-z]?|\([^()]*\))*$/i.test(prefix.slice(explicit.index + explicit[0].length))) return false;
+        const containers = [];
+        for (let index = 0; index < reference.start && index < source.length; index++) {
+          const character = source[index];
+          if (character === "[" || character === "(") containers.push(index);
+          else if (character === "]" || character === ")") containers.pop();
+        }
+        if (containers.some(index => /^[[(]\s*\d+\s*U\.?\s*S\.?\s*C\.?\s/i.test(source.slice(index)))) return false;
+      }
+      // A bare numeric continuation is eligible only when the parser resolved
+      // it as a standalone USC address. Shared-prefix lists are converted by
+      // coordinatedStatutoryInaLists as a whole; rewriting one member would
+      // mix INA labels with a still-active USC prefix or an unmapped member.
+      return Boolean(wording && (wording[1] || (reference.ruleId === "context-bare-usc-address" && normCitationPart(wording[2]) === normCitationPart(reference.targetSection))));
     }
 
     function statutoryLinkInaCitation(reference, sourceContext = null) {
@@ -9205,6 +9258,17 @@
       return { status, section, transferTarget };
     }
 
+    function legalReferenceSourceDiscrepancy(reference, sourceContext) {
+      const host = sourceContext?.sourceHost;
+      // The AM rows print 100-102. GovInfo COMPS-10577 identifies the
+      // Amerasian provision as §584, contained in §101(e) of 100-202.
+      if (host?.kind === "cfr" && Number(host.title) === 22 && host.section === "42.11" &&
+          reference?.family === "public-law" && String(reference.targetCongress) === "100" && String(reference.targetLaw) === "102") {
+        return "Source discrepancy: this table prints Public Law 100-102. The Amerasian provision is section 584, contained in section 101(e) of Public Law 100-202. This link preserves the printed citation.";
+      }
+      return "";
+    }
+
     function legalReferenceHtml(reference, contents, sourceContext = null, displayOptions = null) {
       const resolution = reference?.resolution || "unresolved";
       if (resolution === "unresolved") return contents ?? escapeHtml(reference?.text || "");
@@ -9212,7 +9276,7 @@
       const inaCitation = displayOptions?.inaCitation || statutoryLinkInaCitation(reference, sourceContext);
       const citation = inaCitation || legalReferenceCitation(reference);
       const displayedContents = inaCitation ? displayOptions?.preserveContents ? contents : escapeHtml(inaCitation) : contents;
-      const convertedToIna = Boolean(inaCitation && ["usc", "ina"].includes(reference.family));
+      const convertedToIna = Boolean(inaCitation && displayOptions?.isInaConversion !== false && ["usc", "ina"].includes(reference.family));
       const highlightInaCitation = convertedToIna && profile?.preferences?.highlightInaCitationLinks === true;
       const disposition = legalReferenceDisposition(reference);
       const classes = `statute-citation-link legal-reference-link${highlightInaCitation ? " citation-display-ina" : ""}${resolution === "unresolved" ? " reference-unavailable" : resolution === "official-source-only" ? " reference-official-only" : ""}${disposition.status === "repealed" ? " reference-repealed" : disposition.status === "transferred" ? " reference-transferred" : ""}`;
@@ -9224,11 +9288,12 @@
       const preferredInaNavigation = profile?.preferences?.statutoryLinkCitationSystem === "ina" ? crosswalk?.ina || "" : "";
       const navigation = localUsc && disposition.status === "current" ? ` data-show-citation="${escapeHtml(preferredInaNavigation || `${reference.targetTitle || 8} U.S.C. ${reference.targetSection}${canonicalPath(reference.targetPath || [])}`)}"` : localCfr ? ` data-show-cfr-citation="${escapeHtml(`${reference.targetTitle} CFR ${reference.targetSection}${canonicalPath(reference.targetPath || [])}`)}"` : "";
       const insertionRecord = legalReferenceInsertionRecord(reference, sourceContext);
+      const sourceDiscrepancy = legalReferenceSourceDiscrepancy(reference, sourceContext);
       const transferCitation = disposition.transferTarget ? transferTargetLabel(disposition.transferTarget) : "";
       const renderedContents = disposition.status === "transferred"
         ? `<span class="reference-transferred-original">${displayedContents}</span><span class="reference-transferred-target" aria-label="Transferred to ${escapeHtml(transferCitation)}">→ ${escapeHtml(transferCitation)}</span>`
         : displayedContents;
-      return `<a class="${classes}" href="${escapeHtml(href)}" data-legal-reference data-reference-family="${escapeHtml(reference.family || "unknown")}" data-reference-resolution="${escapeHtml(resolution)}" data-reference-status="${escapeHtml(disposition.status)}" data-reference-title="${escapeHtml(reference.targetTitle || "")}" data-reference-section="${escapeHtml(reference.targetSection || "")}" data-reference-path="${escapeHtml(JSON.stringify(reference.targetPath || []))}" data-reference-url="${escapeHtml(transferUrl || reference.officialUrl || "")}" data-reference-citation="${escapeHtml(citation)}" data-reference-source-text="${escapeHtml(reference.text || "")}"${transferCitation ? ` data-reference-transfer-citation="${escapeHtml(transferCitation)}"` : ""}${crosswalk ? ` data-reference-ina-citation="${escapeHtml(crosswalk.ina)}" data-reference-usc-citation="${escapeHtml(crosswalk.usc)}"` : ""}${navigation}${legalReferenceSourceAttributes(insertionRecord)}>${renderedContents}</a>`;
+      return `<a class="${classes}" href="${escapeHtml(href)}" data-legal-reference data-reference-family="${escapeHtml(reference.family || "unknown")}" data-reference-resolution="${escapeHtml(resolution)}" data-reference-status="${escapeHtml(disposition.status)}" data-reference-title="${escapeHtml(reference.targetTitle || "")}" data-reference-section="${escapeHtml(reference.targetSection || "")}" data-reference-path="${escapeHtml(JSON.stringify(reference.targetPath || []))}" data-reference-url="${escapeHtml(transferUrl || reference.officialUrl || "")}" data-reference-citation="${escapeHtml(citation)}" data-reference-source-text="${escapeHtml(reference.text || "")}"${transferCitation ? ` data-reference-transfer-citation="${escapeHtml(transferCitation)}"` : ""}${crosswalk ? ` data-reference-ina-citation="${escapeHtml(crosswalk.ina)}" data-reference-usc-citation="${escapeHtml(crosswalk.usc)}"` : ""}${navigation}${sourceDiscrepancy ? ` data-reference-source-discrepancy="${escapeHtml(sourceDiscrepancy)}"` : ""}${legalReferenceSourceAttributes(insertionRecord)}>${renderedContents}</a>`;
     }
 
     function legalReferenceContextForElement(trigger) {
@@ -9275,6 +9340,7 @@
       return {
         trigger, family, resolution, title, sectionNumber, path, citation, sourceText, text, previewHtml, displayText, heading, insertionRecord,
         referenceStatus, transferCitation,
+        sourceDiscrepancy: trigger.dataset.referenceSourceDiscrepancy || "",
         inaCitation: trigger.dataset.referenceInaCitation || "",
         uscCitation: trigger.dataset.referenceUscCitation || "",
         url: trigger.dataset.referenceUrl || ""
@@ -9282,7 +9348,6 @@
     }
 
     const insertedReferenceObserverByRoot = new WeakMap();
-    const insertedReferenceConnectorFrameByRoot = new WeakMap();
     const insertedReferenceIntersectionObserverByRoot = new WeakMap();
     const insertedReferenceMaterializedKeys = new Set();
     let insertedReferencePrintExpandedKeys = null;
@@ -9420,26 +9485,30 @@
     }
 
     function insertedReferenceExcerptHtml(target, expanded = false) {
+      // Insertions can display a section before its normal reader has hydrated its links.
+      hydrateLegalReferences(target?.section);
       return target?.kind === "usc" ? insertedStatuteExcerptHtml(target, expanded) : target?.kind === "cfr" ? insertedCfrExcerptHtml(target, expanded) : "";
     }
 
-    function insertedReferenceCitationHtml(target) {
-      if (target.kind !== "usc" || !target.inaCitation) return `<button type="button" data-inserted-open-citation="${escapeHtml(target.citation)}">${escapeHtml(target.citation)}</button><button type="button" data-inserted-copy-citation="${escapeHtml(target.citation)}" aria-label="Copy ${escapeHtml(target.citation)}">⧉</button>`;
-      return `<button type="button" data-inserted-open-citation="${escapeHtml(target.inaCitation)}">${escapeHtml(target.inaCitation)}</button><button type="button" data-inserted-copy-citation="${escapeHtml(target.inaCitation)}" aria-label="Copy ${escapeHtml(target.inaCitation)}">⧉</button><span aria-hidden="true">↔</span><button type="button" data-inserted-open-citation="${escapeHtml(target.citation)}">${escapeHtml(target.citation)}</button><button type="button" data-inserted-copy-citation="${escapeHtml(target.citation)}" aria-label="Copy ${escapeHtml(target.citation)}">⧉</button>`;
+    function insertedReferenceCopyIconHtml() {
+      return '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M13 7V3H3v10h4"/></svg>';
     }
 
-    function insertedReferenceCardHtml(record, sourceLabel = "", instanceId = "single") {
+    function insertedReferenceCitationHtml(target) {
+      const citation = target.inaCitation || target.citation;
+      return `<span>${escapeHtml(citation)}</span><button type="button" data-inserted-copy-citation="${escapeHtml(citation)}" aria-label="Copy ${escapeHtml(citation)}" title="Copy citation">${insertedReferenceCopyIconHtml()}</button>`;
+    }
+
+    function insertedReferenceCardHtml(record, number = 1, instanceId = "single") {
       const target = insertionTargetContext(record);
       if (!target) return "";
       const expanded = Boolean(state.referenceInsertionSession?.expanded?.has(record.key));
       const idToken = `${record.key}-${instanceId}`.replace(/[^a-z0-9-]/gi, "-");
       const titleId = `inserted-reference-title-${idToken}`;
-      const sourceId = `inserted-reference-source-${idToken}`;
       const bodyId = `inserted-reference-body-${idToken}`;
-      const sourceDescription = sourceLabel ? `Cited from ${sourceLabel}` : "Cited from this provision";
       const materialized = expanded || insertedReferenceMaterializedKeys.has(record.key);
       const body = materialized ? insertedReferenceExcerptHtml(target, expanded) : `<p class="inserted-reference-lazy-placeholder">Excerpt loads when this card enters view.</p>`;
-      return `<aside class="inserted-reference-card" role="listitem" data-inserted-reference-key="${escapeHtml(record.key)}" data-expanded="${expanded ? "true" : "false"}" aria-labelledby="${escapeHtml(titleId)}" aria-describedby="${escapeHtml(sourceId)}"><header class="inserted-reference-card-head"><div class="inserted-reference-card-title"><span class="inserted-reference-badge">Inserted reference</span><span class="inserted-reference-citation">${insertedReferenceCitationHtml(target)}</span><strong class="inserted-reference-heading" id="${escapeHtml(titleId)}">${escapeHtml(target.heading)}</strong><p class="inserted-reference-source-label" id="${escapeHtml(sourceId)}">${escapeHtml(sourceDescription)}</p></div><details class="inserted-reference-card-actions"><summary>Actions</summary><div class="inserted-reference-card-action-items"><button type="button" data-inserted-copy-text="${escapeHtml(record.key)}">Copy text</button><button type="button" data-inserted-open-pane="${escapeHtml(record.key)}">Open as pane</button><button type="button" data-inserted-toggle-full="${escapeHtml(record.key)}" aria-controls="${escapeHtml(bodyId)}" aria-expanded="${expanded ? "true" : "false"}">${expanded ? "Collapse" : "Show full"}</button><button type="button" data-inserted-remove="${escapeHtml(record.key)}">Remove</button></div></details></header><div class="inserted-reference-body" id="${escapeHtml(bodyId)}" role="region" aria-label="Inserted text for ${escapeHtml(target.citation)}" data-inserted-body-key="${escapeHtml(record.key)}"${materialized ? "" : " data-inserted-body-pending"}>${body}</div></aside>`;
+      return `<aside class="inserted-reference-card" role="listitem" data-inserted-reference-key="${escapeHtml(record.key)}" data-expanded="${expanded ? "true" : "false"}" aria-labelledby="${escapeHtml(titleId)}"><header class="inserted-reference-card-head"><div class="inserted-reference-card-title" id="${escapeHtml(titleId)}"><span>(${number}) -</span>${insertedReferenceCitationHtml(target)}</div><div class="inserted-reference-card-actions"><button type="button" data-inserted-remove="${escapeHtml(record.key)}" aria-label="Remove inserted reference" title="Remove inserted reference"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m5 5 10 10M15 5 5 15"/></svg></button></div></header><div class="inserted-reference-body" id="${escapeHtml(bodyId)}" role="region" aria-label="Inserted text for ${escapeHtml(target.inaCitation || target.citation)}" data-inserted-body-key="${escapeHtml(record.key)}"${materialized ? "" : " data-inserted-body-pending"}>${body}</div><button type="button" data-inserted-toggle-full="${escapeHtml(record.key)}" aria-controls="${escapeHtml(bodyId)}" aria-expanded="${expanded ? "true" : "false"}">${expanded ? "Collapse" : "Show full"}</button></aside>`;
     }
 
     function insertionRecordFromTrigger(trigger) {
@@ -9574,65 +9643,19 @@
       return { resolved: resolvedCount, unavailable: session.unavailableCount };
     }
 
-    function sourceAnchorForInsertionSlot(slot) {
-      const previous = slot.previousElementSibling;
-      return previous?.querySelector?.(".legal-unit-trigger") || (previous?.matches?.(".legal-unit-trigger") && previous)
-        || previous
-        || slot.parentElement?.querySelector?.(".legal-unit-trigger")
-        || slot.closest?.(".statutory-node, .cfr-block, .detail-content")?.querySelector?.(".legal-unit-trigger")
-        || slot;
-    }
-
-    function updateInsertedReferenceConnectors(root) {
-      insertedReferenceConnectorFrameByRoot.delete(root);
-      for (const group of $$(".inserted-reference-group", root)) {
-        const svg = $(".inserted-reference-connector", group);
-        const cards = $$(".inserted-reference-card", group);
-        const slot = group.closest("[data-legal-augmentation-slot]");
-        const anchor = slot ? sourceAnchorForInsertionSlot(slot) : null;
-        if (!svg || !cards.length || !anchor) continue;
-        const groupRect = group.getBoundingClientRect();
-        const anchorRect = anchor.getBoundingClientRect();
-        const gutter = Math.max(10, Math.min(18, groupRect.width * .04));
-        const sourceX = Math.max(gutter, Math.min(groupRect.width, anchorRect.left + anchorRect.width / 2 - groupRect.left));
-        const sourceY = anchorRect.top + anchorRect.height / 2 - groupRect.top;
-        const headerCenters = cards.map(card => {
-          const rect = $(".inserted-reference-card-head", card)?.getBoundingClientRect() || card.getBoundingClientRect();
-          return rect.top + rect.height / 2 - groupRect.top;
-        });
-        const firstY = headerCenters[0], lastY = headerCenters.at(-1);
-        const branchEnd = Math.max(gutter + 8, Number.parseFloat(getComputedStyle(group).paddingLeft) || 38);
-        const path = [`M ${sourceX.toFixed(1)} ${sourceY.toFixed(1)} H ${gutter} V ${lastY.toFixed(1)}`];
-        for (const center of headerCenters) path.push(`M ${gutter} ${center.toFixed(1)} H ${branchEnd}`);
-        svg.setAttribute("viewBox", `0 0 ${Math.max(1, groupRect.width)} ${Math.max(1, groupRect.height)}`);
-        svg.setAttribute("width", String(Math.max(1, groupRect.width)));
-        svg.setAttribute("height", String(Math.max(1, groupRect.height)));
-        $("path", svg)?.setAttribute("d", path.join(" "));
-      }
-    }
-
-    function scheduleInsertedReferenceConnectors(root = els.detail) {
-      if (!root || insertedReferenceConnectorFrameByRoot.has(root)) return;
-      const frame = requestAnimationFrame(() => updateInsertedReferenceConnectors(root));
-      insertedReferenceConnectorFrameByRoot.set(root, frame);
-      if (!insertedReferenceObserverByRoot.has(root) && typeof ResizeObserver === "function") {
-        const observer = new ResizeObserver(() => {
-          syncInsertedReferenceActionMenus(root);
-          scheduleInsertedReferenceConnectors(root);
-        });
-        observer.observe(root);
-        insertedReferenceObserverByRoot.set(root, observer);
-      }
-    }
-
-    function syncInsertedReferenceActionMenus(root = els.detail) {
-      const compact = Math.max(0, root?.getBoundingClientRect?.().width || 0) <= 600;
-      for (const menu of $$(".inserted-reference-card-actions", root)) {
-        const wasCompact = menu.dataset.compact === "true";
-        menu.dataset.compact = compact ? "true" : "false";
-        if (!compact) menu.open = true;
-        else if (!wasCompact) menu.open = false;
-      }
+    function observeInsertedReferenceLayout(root = els.detail) {
+      if (!root || insertedReferenceObserverByRoot.has(root) || typeof ResizeObserver !== "function") return;
+      const observer = new ResizeObserver(() => {
+        for (const body of $$(".inserted-reference-body:not([data-inserted-body-pending])", root)) {
+          const card = body.closest(".inserted-reference-card");
+          const overflowing = body.scrollHeight > body.clientHeight + 2;
+          body.dataset.overflowing = overflowing ? "true" : "false";
+          const toggle = $("[data-inserted-toggle-full]", card);
+          if (toggle) toggle.hidden = card.dataset.expanded !== "true" && !overflowing;
+        }
+      });
+      observer.observe(root);
+      insertedReferenceObserverByRoot.set(root, observer);
     }
 
     function materializeInsertedReferenceBody(body) {
@@ -9650,7 +9673,7 @@
         body.dataset.overflowing = overflowing ? "true" : "false";
         const toggle = $("[data-inserted-toggle-full]", body.closest(".inserted-reference-card"));
         if (toggle) toggle.hidden = !overflowing;
-        scheduleInsertedReferenceConnectors(body.closest(".detail-panel") || els.detail);
+        observeInsertedReferenceLayout(body.closest(".detail-panel") || els.detail);
         restoreInsertionReadingAnchors(anchors);
       });
       return true;
@@ -9690,6 +9713,7 @@
         if (!sessionRecordsByHost.has(key)) sessionRecordsByHost.set(key, []);
         sessionRecordsByHost.get(key).push(record);
       }
+      for (const marker of $$("[data-inserted-reference-number]", root)) marker.remove();
       const renderedCandidatesByHost = new Map();
       for (const trigger of $$('[data-reference-insertion-key]', root)) {
         trigger.removeAttribute("aria-controls");
@@ -9719,24 +9743,29 @@
         }).filter(Boolean).sort((left, right) => api.compareSourceOrder(left.record, right.record));
         if (!records.length) continue;
         const groupId = `${slot.dataset.insertionGroupId}-${paneId}`;
-        const cards = records.map(({ record }) => insertedReferenceCardHtml(record, slot.dataset.insertionSourceLabel || "", paneId)).join("");
+        const cards = records.map(({ record }, index) => insertedReferenceCardHtml(record, index + 1, paneId)).join("");
         if (!cards) continue;
         const wrapper = document.createElement("div");
         wrapper.className = "inserted-reference-group";
         wrapper.id = groupId;
         wrapper.setAttribute("role", "list");
         wrapper.setAttribute("aria-label", `Inserted references cited from ${slot.dataset.insertionSourceLabel || "this provision"}`);
-        wrapper.innerHTML = `<svg class="inserted-reference-connector" aria-hidden="true" focusable="false"><path></path></svg>${cards}`;
+        wrapper.innerHTML = cards;
         slot.append(wrapper);
-        for (const { record, candidate } of records) {
+        for (const [index, { record, candidate }] of records.entries()) {
           const trigger = candidateEntries.find(entry => entry.record.key === candidate?.key)?.trigger;
           if (trigger) {
             trigger.setAttribute("aria-controls", groupId);
             trigger.dataset.activeInsertionKey = record.key;
+            const marker = document.createElement("span");
+            marker.className = "inserted-reference-number";
+            marker.dataset.insertedReferenceNumber = String(index + 1);
+            marker.textContent = `(${index + 1})`;
+            marker.setAttribute("aria-label", `Inserted reference ${index + 1}`);
+            trigger.after(marker);
           }
         }
       }
-      syncInsertedReferenceActionMenus(root);
       requestAnimationFrame(() => {
         for (const body of $$(".inserted-reference-body", root)) {
           const card = body.closest(".inserted-reference-card");
@@ -9746,7 +9775,7 @@
           if (toggle) toggle.hidden = card.dataset.expanded !== "true" && !overflowing;
         }
         observeInsertedReferenceBodies(root);
-        scheduleInsertedReferenceConnectors(root);
+        observeInsertedReferenceLayout(root);
       });
       if (profile.preferences.persistInlineReferenceInsertions === true) syncReferenceInsertionSessionToProfile(false);
       return true;
@@ -9869,8 +9898,6 @@
         const root = state.focusedCitationMode ? focusedPaneForElement(returnFocus)?.detail || document : document;
         const button = $$('[data-inserted-toggle-full]', root).find(candidate => candidate.dataset.insertedToggleFull === key);
         if (button) {
-          const menu = button.closest(".inserted-reference-card-actions");
-          if (menu?.dataset.compact === "true") menu.open = true;
           button.focus({ preventScroll: true });
         }
       });
@@ -10024,7 +10051,8 @@
       if (statusMessage) els.legalReferencePopoverContent.innerHTML = `<p class="legal-reference-popover-message">${escapeHtml(statusMessage)}</p>`;
       else if (context.previewHtml) els.legalReferencePopoverContent.innerHTML = context.previewHtml;
       else if (context.text) els.legalReferencePopoverContent.innerHTML = `<pre>${escapeHtml(context.displayText || context.text)}</pre>`;
-      else els.legalReferencePopoverContent.innerHTML = `<p class="legal-reference-popover-message">${escapeHtml(context.resolution === "unresolved" ? "INASearch recognized this reference but could not determine one exact target from the source wording. No target was inferred." : "This authority is not included in the offline corpus. INASearch has not generated or substituted any legal text for it.")}</p>`;
+      else els.legalReferencePopoverContent.innerHTML = `<p class="legal-reference-popover-message">${escapeHtml(context.resolution === "unresolved" ? "INASearch recognized this reference but could not determine one exact target from the source wording. No target was inferred." : "This authority is not included in the offline corpus.")}</p>`;
+      if (context.sourceDiscrepancy) els.legalReferencePopoverContent.insertAdjacentHTML("afterbegin", `<p class="legal-reference-popover-message">${escapeHtml(context.sourceDiscrepancy)} <a href="https://www.govinfo.gov/content/pkg/COMPS-10577/pdf/COMPS-10577.pdf" target="_blank" rel="noopener noreferrer">View the Amerasian provision in Public Law 100-202.</a></p>`);
       els.legalReferencePopover.hidden = false;
       positionLegalReferencePopover(trigger);
       return true;
@@ -10530,123 +10558,32 @@
       return Boolean(direct && state.selected?.key === direct.key);
     }
 
-    function updateSearchResultLayout(results = state.results) {
-      const authorityBrowse = isAuthorityBrowse();
-      const readingOnly = !authorityBrowse && (isCitationReadingMode() || isSingleLegalResult(results));
-      els.searchWorkspace.classList.toggle("single-legal-result", readingOnly);
-      els.searchWorkspace.classList.toggle("authority-browse", authorityBrowse);
-      els.resultsPanel.hidden = !authorityBrowse && readingOnly;
-      return readingOnly;
+    function updateSearchResultLayout() {
+      const hierarchy = isHierarchyBrowse();
+      els.searchWorkspace.classList.toggle("single-legal-result", !hierarchy);
+      els.searchWorkspace.classList.toggle("authority-browse", hierarchy);
+      els.resultsPanel.hidden = !hierarchy;
+      return !hierarchy;
     }
 
-    function renderResults(results) {
-      const authorityBrowse = isAuthorityBrowse();
-      renderAuthorityBrowseHeader(authorityBrowse ? state.citation : null);
-      updateSearchResultLayout(results);
+    function renderResults() {
+      // Legal menus have their own hierarchy renderer. All readers, search
+      // messages and empty states occupy the full detail pane.
+      updateSearchResultLayout();
       if (!isHierarchyBrowse()) {
-        els.resultList.setAttribute("role", "listbox");
-        els.resultList.setAttribute("aria-label", "Search results");
+        els.resultList.replaceChildren();
+        renderAuthorityBrowseHeader(null);
       }
-      els.resultCount.textContent = !state.indexReady ? "Indexing…" : state.filteredResultCount > results.length ? `${results.length} of ${state.filteredResultCount.toLocaleString()}` : state.filteredResultCount.toLocaleString();
-      if (!state.query && !results.length) {
-        els.resultList.innerHTML = state.searchScopeActive && state.searchScopeMode === "cites"
-          ? `<div class="empty-state" style="min-height:360px"><div><strong>${state.searchScope?.valid ? `No indexed statutes or regulations cite ${escapeHtml(state.searchScope.label)}` : "Enter a valid citation target"}</strong><p style="margin-top:5px">${state.searchScope?.valid ? "Try a broader provision or citation range." : escapeHtml(state.searchScope?.message || "Enter a citation or citation range in the cites: field.")}</p></div></div>`
-          : state.searchScopeActive
-            ? `<div class="empty-state" style="min-height:360px"><div><strong>${state.searchScope?.valid ? `Search within ${escapeHtml(state.searchScope.label)}` : "Enter a valid citation scope"}</strong><p style="margin-top:5px">${state.searchScope?.valid ? "Type the words or phrase you want to find in this part of the law." : escapeHtml(state.searchScope?.message || "Enter a citation or citation range in the in: field.")}</p></div></div>`
-          : `<div class="empty-state" style="min-height:360px"><div><strong>Fast local lookup</strong><p style="margin-top:5px">Search INA and CFR text, plus your notes and highlights. Use the paired book and question-mark buttons for Definitions and About.</p></div></div>`;
-        return;
-      }
-      if (!results.length && authorityBrowse) {
-        const result = state.citation;
-        const part = result?.part;
-        const childCount = (part?.sectionIds?.length || 0) + (part?.appendixIds?.length || 0);
-        const heading = isInaAuthorityBrowse(result)
-          ? "No INA titles are available"
-          : isInaTitleBrowse(result)
-            ? "No INA sections are available"
-          : isCfrTitleBrowse(result)
-          ? "No indexed parts are available"
-          : result?.removed
-          ? "Removed from the current eCFR"
-          : childCount
-            ? "No part pages are available"
-            : "This part has no separate pages";
-        const message = isInaAuthorityBrowse(result) || isInaTitleBrowse(result)
-          ? "The local INA crosswalk does not contain entries for this level."
-          : isCfrTitleBrowse(result)
-          ? "The local CFR corpus does not contain parts for this title."
-          : result?.removed
-          ? `Part ${escapeHtml(result.section)} is retained only as a removal record.`
-          : childCount
-            ? "The local CFR corpus does not contain separate pages for this part."
-            : "The locally indexed part is reserved and contains no separately published sections or appendices.";
-        els.resultList.innerHTML = `<div class="empty-state" style="min-height:300px"><div><strong>${heading}</strong><p style="margin-top:5px">${message}</p></div></div>`;
-        return;
-      }
-      if (!results.length) {
-        const scopedMessage = state.searchScopeActive && state.searchScope?.valid
-          ? state.searchScopeMode === "cites"
-            ? `No citing statute or regulation also matched those words for ${escapeHtml(state.searchScope.label)}. Try fewer words or a wider citation range.`
-            : `No matches were found within ${escapeHtml(state.searchScope.label)}. Try fewer words or a wider citation range.`
-          : "Check spelling, try fewer words, or use an official shortcut in About.";
-        els.resultList.innerHTML = `<div class="empty-state" style="min-height:300px"><div><strong>No indexed matches</strong><p style="margin-top:5px">${scopedMessage}</p></div></div>`;
-        return;
-      }
-      els.resultList.innerHTML = results.map((record, index) => {
-        const snippet = resultSnippet(record);
-        const browseRow = Boolean(record.authorityBrowseRecord);
-        const primaryMeta = browseRow ? record.cite || "" : kindLabel(record.kind);
-        const secondaryMeta = browseRow ? kindLabel(record.kind) : record.cite || "";
-        const status = statuteRecordStatus(record);
-        const statusBadge = status === "current" ? "" : `<span class="result-status ${escapeHtml(status)}">${escapeHtml(statuteStatusLabel(status))}</span>`;
-        return `<button class="result-item${state.selected?.key === record.key ? " selected" : ""}" role="option" aria-selected="${state.selected?.key === record.key}" data-index="${index}">
-          <span class="result-meta"><span class="result-kind">${escapeHtml(primaryMeta)}</span>${statusBadge}<span class="result-cite${browseRow ? " result-type" : ""}">${escapeHtml(secondaryMeta)}</span></span>
-          <span class="result-title">${escapeHtml(record.title)}</span>${snippet ? `<span class="result-snippet">${escapeHtml(snippet)}</span>` : ""}</button>`;
-      }).join("");
     }
 
     function kindLabel(kind) {
       return ({ usc: "U.S. Code", ina: "INA crosswalk", "ina-title": "INA title", "ina-section": "INA section", "source-credit": "Source credit", "statutory-note": "Statutory note", "editorial-note": "Editorial note", "usc-note": "Title 8 note", act: "Named Act reference", cfr: "Regulation", "cfr-part": "Regulation part", "cfr-appendix": "Regulation appendix", policy: "Policy Manual", form: "USCIS form", "definition-index": "Reference catalog", definition: "Defined term" })[kind] || kind;
     }
-    function resultSnippet(record) {
-      if (record.kind === "ina-title") return `${record.item.rows.length.toLocaleString()} indexed entr${record.item.rows.length === 1 ? "y" : "ies"}`;
-      if (record.kind === "ina-section") {
-        if (record.item.isNote) return `${record.item.uscLabel || "USCIS crosswalk entry"} · set out in statutory notes`;
-        if (!record.item.uscLabel) return "No U.S. Code equivalent listed";
-        return record.inaSourceOnly ? `${record.item.uscLabel} · local operative text unavailable` : record.item.uscLabel;
-      }
-      if (record.kind === "usc" && statuteRecordStatus(record) === "transferred") return transferStatusMessage(record.item, record.dispositionTarget || record.citationResult?.dispositionTarget);
-      if (record.kind === "usc" && statuteRecordStatus(record) === "repealed") return "Repealed source record retained for historical research; it is not current law.";
-      if (record.kind === "usc" && statuteRecordStatus(record) === "omitted") return "Omitted source record retained with the House codification notes.";
-      if (record.authorityBrowseRecord) return "";
-      if (state.searchScopeActive && state.searchScopeMode === "cites") {
-        const matches = citationScopeMatchingTargets(record).map(target => target.sourceText).filter(Boolean);
-        if (matches.length) return truncate(`References ${matches.slice(0, 2).map(text => `“${text}”`).join(" and ")}`);
-      }
-      if (record.kind === "usc") return hasLocalUscCache ? truncate(record.item.preamble || record.item.sourceCredit || "Local statute text") : "Opens the official House U.S. Code source";
-      if (["statutory-note", "editorial-note", "usc-note"].includes(record.kind)) return truncate(record.item.note.text);
-      if (record.kind === "source-credit") return truncate(record.item.text);
-      if (record.kind === "ina") return record.item.uscLabel;
-      if (record.kind === "cfr" || record.kind === "cfr-appendix") {
-        const target = record.cfrTarget || cfrSearchTarget(record.item, state.query, record.cite, record.cfrFields);
-        if (!target) return record.item.external ? "Not included · opens current eCFR" : "Regulation text";
-        const source = String(target.text || "");
-        const start = Math.max(0, (target.match?.start || 0) - 80);
-        const end = Math.min(source.length, (target.match?.end || 0) + 130);
-        const context = `${start ? "…" : ""}${source.slice(start, end)}${end < source.length ? "…" : ""}`;
-        return `${target.matchType === "metadata" ? "Metadata match · " : ""}${context}`;
-      }
-      if (record.kind === "policy") return (record.item.path || []).join(" › ");
-      if (record.kind === "form") return "Official form-page link";
-      if (record.kind === "act") return `${record.item.references?.length || 0} direct references in indexed Title 8 text and notes`;
-      if (record.kind === "definition-index") return "Browse exact definitions throughout the INA and in 8 CFR 1.2, with source and applicability filters";
-      if (record.kind === "definition") return truncate(`${record.item.locator} · ${definitionScope(record.item)?.label || "scope unavailable"}`);
-      return "";
-    }
+
 
     function openTransferDestination(record) {
       const target = record?.dispositionTarget || record?.citationResult?.dispositionTarget || null;
-      if (!target) return false;
+      if (!target || target.former || target.placement === "note") return false;
       const destination = transferTargetLabel(target);
       if (Number(target.title) === 8 && sectionMap.has(normCitationPart(target.section))) {
         applySearchQuery(`8 U.S.C. ${target.section}`, false);
@@ -10699,13 +10636,13 @@
 
     function hierarchyStatusReplacesHeading(node) {
       const status = node?.status || "current";
-      if (node?.marker || !["repealed", "transferred"].includes(status)) return false;
+      if (!["repealed", "transferred", "omitted"].includes(status)) return false;
       return normalize(node.heading || "") === normalize(statuteStatusLabel(status));
     }
 
     function hierarchyStatusBadge(node, inHeading = false) {
       const placementClass = inHeading ? " hierarchy-status-title" : "";
-      if (node.marker) return `<span class="hierarchy-status${placementClass} ${escapeHtml(node.marker)}">${escapeHtml(node.marker === "note-only" ? "Note only" : "No equivalent")}</span>`;
+      if (node.marker && (!node.status || node.status === "current")) return `<span class="hierarchy-status${placementClass} ${escapeHtml(node.marker)}">${escapeHtml(node.marker === "note-only" ? "Note only" : "No equivalent")}</span>`;
       const status = node.status || "current";
       return status === "current" ? "" : `<span class="hierarchy-status${placementClass} ${escapeHtml(status)}">${escapeHtml(statuteStatusLabel(status))}</span>`;
     }
@@ -10726,6 +10663,9 @@
       return (nodeIds || []).map(nodeId => {
         const node = authorityHierarchyNodes.get(nodeId);
         if (!node) return "";
+        const parent = authorityHierarchyNodes.get(node.parentId);
+        const rowSize = ["section", "appendix"].includes(node.kind) ? "section"
+          : ["authority", "title"].includes(node.kind) || parent?.kind === "authority" ? "top" : "intermediate";
         const expandable = node.children.length > 0;
         const expanded = expandable && state.hierarchyExpanded.has(node.id);
         const toggle = expandable
@@ -10734,8 +10674,10 @@
         const statusReplacesHeading = hierarchyStatusReplacesHeading(node);
         const heading = statusReplacesHeading
           ? hierarchyStatusBadge(node, true)
-          : `<span class="hierarchy-heading">${escapeHtml(node.heading || hierarchyNodeCitation(node))}</span>${hierarchyStatusBadge(node)}`;
-        return `<article class="hierarchy-row" data-hierarchy-row="${escapeHtml(node.id)}"><div class="hierarchy-row-main">${toggle}<button class="hierarchy-label" type="button" data-hierarchy-open="${escapeHtml(node.id)}"><span class="hierarchy-citation">${escapeHtml(hierarchyRowCitation(node))}</span>${heading}</button></div>${expandable ? `<div class="hierarchy-children" data-hierarchy-children="${escapeHtml(node.id)}"${expanded ? "" : " hidden"}>${expanded ? renderHierarchyRows(node.children) : ""}</div>` : ""}</article>`;
+          : node.status === "transferred"
+            ? `<span class="hierarchy-heading-with-status">${hierarchyStatusBadge(node, true)}<span class="hierarchy-heading">${escapeHtml(navigationTitleCase(node.heading || hierarchyNodeCitation(node)))}</span></span>`
+            : `<span class="hierarchy-heading">${escapeHtml(navigationTitleCase(node.heading || hierarchyNodeCitation(node)))}</span>${hierarchyStatusBadge(node)}`;
+        return `<article class="hierarchy-row" data-row-size="${rowSize}" data-hierarchy-row="${escapeHtml(node.id)}"><div class="hierarchy-row-main">${toggle}<button class="hierarchy-label" type="button" data-hierarchy-open="${escapeHtml(node.id)}"><span class="hierarchy-citation">${escapeHtml(hierarchyRowCitation(node))}</span>${heading}</button></div>${expandable ? `<div class="hierarchy-children" data-hierarchy-children="${escapeHtml(node.id)}"${expanded ? "" : " hidden"}>${expanded ? renderHierarchyRows(node.children) : ""}</div>` : ""}</article>`;
       }).join("");
     }
 
@@ -10746,6 +10688,21 @@
 
     function hierarchySourceLabel(authority) {
       return authority === "ina" ? "GovInfo INA structure" : authority === "usc" ? "House U.S. Code" : "eCFR";
+    }
+
+    function cfrPartAlternativesHtml(node) {
+      if (node?.authority !== "cfr" || node.kind !== "part") return "";
+      const current = [...cfrPartMap.values()].find(part => cfrPartHierarchyNode.get(part.id) === node.id);
+      if (!current) return "";
+      const otherTitles = (cfrPartsByNumber.get(cfrSectionNumberKey(current.part)) || []).filter(part => part.id !== current.id);
+      const stem = String(current.part).match(/^(\d+)[a-z]*$/i)?.[1];
+      const otherParts = stem ? letteredIdentifierFamily(stem, cfrPartsByTitle.get(Number(current.title)), part => part.part).filter(part => part.id !== current.id) : [];
+      const row = (label, description, parts) => parts.length ? `<nav class="section-family-alternatives" aria-label="${description}"><span class="section-family-alternatives-label">${label}</span><span class="section-family-alternatives-list">${parts.map(part => {
+        const cite = `${part.title} CFR Part ${part.part}`;
+        return `<a class="section-family-alternative" href="#" data-show-cfr-citation="${escapeHtml(cite)}"><strong>${escapeHtml(cite)}</strong> ${escapeHtml(part.heading || "")}</a>`;
+      }).join(", ")}</span></nav>` : "";
+      return row("Other titles:", "Same-numbered parts in other CFR titles", otherTitles)
+        + row("Other parts:", "Other separately numbered CFR parts", otherParts);
     }
 
     function renderHierarchyPage(result) {
@@ -10763,9 +10720,9 @@
       const expandableCount = rowIds.filter(id => authorityHierarchyNodes.get(id)?.children?.length).length;
       els.authorityBrowseHeader.hidden = false;
       els.resultsPanel.setAttribute("aria-labelledby", "authorityBrowseTitle");
-      els.authorityBrowseHeader.innerHTML = `${authorityBrowseHeading({
+      els.authorityBrowseHeader.innerHTML = `${cfrPartAlternativesHtml(node)}${authorityBrowseHeading({
         sourceLabel: hierarchySourceLabel(result.type), sourceUrl,
-        title, meta: `${heading}${heading && rowIds.length ? " · " : ""}${rowIds.length.toLocaleString()} immediate ${rowIds.length === 1 ? "entry" : "entries"}`
+        title, meta: navigationTitleCase(heading)
       })}${expandableCount ? `<div class="hierarchy-page-actions"><button class="button small" type="button" data-hierarchy-expand-all>Expand All</button><button class="button small" type="button" data-hierarchy-collapse-all>Collapse All</button></div>` : ""}`;
       els.resultList.setAttribute("role", "list");
       els.resultList.setAttribute("aria-label", `${title} index`);
@@ -10785,82 +10742,10 @@
     }
 
     function renderAuthorityBrowseHeader(result) {
-      const browsing = isAuthorityBrowse(result);
-      els.authorityBrowseHeader.hidden = !browsing;
-      els.resultsPanel.setAttribute("aria-labelledby", browsing ? "authorityBrowseTitle" : "resultsHeading");
-      if (!browsing) {
-        setStatuteNavigationVisible(false);
-        els.authorityBrowseHeader.innerHTML = "";
-        return;
-      }
       if (isHierarchyBrowse(result)) return;
+      els.authorityBrowseHeader.hidden = true;
+      els.authorityBrowseHeader.replaceChildren();
       setStatuteNavigationVisible(false);
-      if (isInaAuthorityBrowse(result)) {
-        const rowCount = result.titles.reduce((count, title) => count + title.rows.length, 0);
-        const capturedAt = corpus?.sources?.inaCrosswalk?.capturedAt || "date unavailable";
-        els.authorityBrowseHeader.innerHTML = authorityBrowseHeading({
-          sourceLabel: "INA", sourceUrl: result.url,
-          title: corpus?.sources?.inaCrosswalk?.name || "Immigration and Nationality Act",
-          meta: `${result.titles.length.toLocaleString()} titles · ${rowCount.toLocaleString()} indexed entries · USCIS crosswalk captured ${capturedAt}`
-        });
-        return;
-      }
-      if (isInaTitleBrowse(result)) {
-        const capturedAt = corpus?.sources?.inaCrosswalk?.capturedAt || "date unavailable";
-        els.authorityBrowseHeader.innerHTML = authorityBrowseHeading({
-          sourceLabel: result.label, sourceUrl: result.url, title: result.heading,
-          meta: `${result.rows.length.toLocaleString()} indexed section entr${result.rows.length === 1 ? "y" : "ies"} · USCIS crosswalk captured ${capturedAt}`
-        });
-        return;
-      }
-      if (isStatuteSectionFamilyBrowse(result)) {
-        const count = result.type === "ina" ? result.rows.length : result.sections.length;
-        const sourceUrl = result.type === "ina" ? result.url : corpus?.sources?.title8?.url;
-        els.authorityBrowseHeader.innerHTML = authorityBrowseHeading({
-          sourceLabel: result.label, sourceUrl,
-          title: `Sections beginning with ${result.label}`,
-          meta: `${count.toLocaleString()} separately numbered section${count === 1 ? "" : "s"} · a letter suffix is part of the section number`
-        });
-        return;
-      }
-      if (isCfrPartFamilyBrowse(result)) {
-        const currentThrough = corpus?.cfr?.currentThrough?.[String(result.title)] || "date unavailable";
-        els.authorityBrowseHeader.innerHTML = authorityBrowseHeading({
-          sourceLabel: result.label, sourceUrl: result.url,
-          title: `Parts beginning with ${result.title} CFR ${result.section}`,
-          meta: `${result.parts.length.toLocaleString()} separately numbered part${result.parts.length === 1 ? "" : "s"} · current through ${currentThrough}`
-        });
-        return;
-      }
-      if (isCfrTitleBrowse(result)) {
-        const parts = result.parts || [];
-        const currentThrough = corpus?.cfr?.currentThrough?.[String(result.title)] || "date unavailable";
-        els.authorityBrowseHeader.innerHTML = authorityBrowseHeading({
-          sourceLabel: result.label, sourceUrl: result.url, title: result.label,
-          meta: `${parts.length.toLocaleString()} indexed part${parts.length === 1 ? "" : "s"} · current through ${currentThrough}`
-        });
-        return;
-      }
-      if (result.removed) {
-        const removed = result.item || {};
-        els.authorityBrowseHeader.innerHTML = `${authorityBrowseHeading({ sourceLabel: result.label || "CFR part", sourceUrl: removed.historyUrl, title: "Removed from the current eCFR", meta: `Removed ${removed.removedOn || "date unavailable"}` })}<div class="notice warning" style="margin-top:14px">${escapeHtml(removed.message || result.message || "This part is no longer current and no outdated regulatory text is included.")}</div>`;
-        return;
-      }
-      const part = result.part;
-      if (!part) {
-        els.authorityBrowseHeader.hidden = true;
-        return;
-      }
-      const sectionCount = part.sectionIds?.length || 0;
-      const appendixCount = part.appendixIds?.length || 0;
-      const childCount = sectionCount + appendixCount;
-      const currentThrough = corpus?.cfr?.currentThrough?.[String(part.title)] || "date unavailable";
-      const counts = `${sectionCount.toLocaleString()} section${sectionCount === 1 ? "" : "s"} · ${appendixCount.toLocaleString()} ${appendixCount === 1 ? "appendix" : "appendices"}`;
-      els.authorityBrowseHeader.innerHTML = authorityBrowseHeading({
-        sourceLabel: result.label, sourceUrl: part.url, title: part.heading || result.label,
-        meta: `${counts} · current through ${currentThrough}`,
-        cue: childCount ? "Scrollable page list" : ""
-      });
     }
 
     function openButton(url, label = "Open official source") {
@@ -10957,7 +10842,7 @@
         const parentPath = path.slice(0, index);
         const options = new Map(siblings.map(node => [String(node.label), {
           value: `(${node.label})`,
-          description: node.heading || truncate(node.text || "", 100),
+          description: navigationTitleCase(node.heading) || truncate(node.text || "", 100),
           sectionId: section.id,
           path: [...parentPath, node.label],
           current: normCitationPart(node.label) === normCitationPart(token)
@@ -11190,7 +11075,7 @@
         const siblings = item.kind === "authority" ? [item] : (parent?.children || []).map(id => authorityHierarchyNodes.get(id)).filter(candidate => candidate?.kind === item.kind);
         return {
           label: titleCaseTopic(item.kind), value: item.number,
-          options: siblings.map(candidate => ({ value: hierarchyRowCitation(candidate), description: candidate.heading || "", nodeId: candidate.id, current: candidate.id === item.id }))
+          options: siblings.map(candidate => ({ value: hierarchyRowCitation(candidate), description: navigationTitleCase(candidate.heading), nodeId: candidate.id, current: candidate.id === item.id }))
         };
       });
     }
@@ -11203,7 +11088,7 @@
       return {
         label: childLabel,
         value: "",
-        options: children.map(child => ({ value: hierarchyRowCitation(child), description: child.heading || "", nodeId: child.id, current: false }))
+        options: children.map(child => ({ value: hierarchyRowCitation(child), description: navigationTitleCase(child.heading), nodeId: child.id, current: false }))
       };
     }
 
@@ -11278,7 +11163,7 @@
       const parent = prefix.length ? statuteNodeAtPath(section, prefix) : null;
       const directChildren = prefix.length ? (parent?.children || []) : (section?.body || []);
       for (const node of directChildren) choices.set(normCitationPart(node.label), {
-        value: `(${node.label})`, description: node.heading || truncate(node.text || "", 100), sectionId: section.id, path: [...prefix, node.label], current: false, family: "usc"
+        value: `(${node.label})`, description: navigationTitleCase(node.heading) || truncate(node.text || "", 100), sectionId: section.id, path: [...prefix, node.label], current: false, family: "usc"
       });
       for (const candidate of statuteNavigationPaths(section)) {
         if (candidate.length <= prefix.length || !prefix.every((token, index) => normCitationPart(token) === normCitationPart(candidate[index]))) continue;
@@ -11354,7 +11239,18 @@
     function navigateHierarchyNode(nodeId) {
       const node = authorityHierarchyNodes.get(nodeId);
       if (!node) return false;
-      applyNavigationQuery(node.query || hierarchyNodeCitation(node));
+      let query = node.query || hierarchyNodeCitation(node);
+      if (node.status === "transferred") {
+        const result = parseCitation(query);
+        const target = result?.valid && result.dispositionTarget;
+        if (target && !target.former && target.placement !== "note") {
+          if (Number(target.title) === 8 && sectionMap.has(normCitationPart(target.section))) {
+            const mapping = node.authority === "ina" && uscToIna.get(normCitationPart(target.section));
+            query = mapping ? `INA ${mapping.inaSection}` : `8 U.S.C. ${target.section}`;
+          } else { safeOpen(transferTargetUrl(target)); return true; }
+        }
+      }
+      applyNavigationQuery(query);
       return true;
     }
 
@@ -11950,7 +11846,7 @@
       if (!alternatives.length) return "";
       const links = alternatives.map(record => {
         const number = family.type === "ina" ? String(record.cite || "").replace(/^INA\s+/i, "") : String(record.item?.section || "");
-        return `<a class="section-family-alternative" href="#" data-show-citation="${escapeHtml(record.cite)}"><strong>${escapeHtml(number)}</strong> ${escapeHtml(record.title)}</a>`;
+        return `<a class="section-family-alternative" href="#" data-show-citation="${escapeHtml(record.cite)}"><strong>${escapeHtml(number)}</strong> ${escapeHtml(navigationTitleCase(record.title))}</a>`;
       }).join(", ");
       return `<nav class="section-family-alternatives" aria-label="Other separately numbered sections"><span class="section-family-alternatives-label">Other sections:</span><span class="section-family-alternatives-list">${links}</span></nav>`;
     }
@@ -12184,7 +12080,7 @@
           : searchMatch && searchMatch.start < written.end && searchMatch.end > (index ? written.start : group.start)
             ? `<mark class="statute-search-match" data-statute-search-match>${escapeHtml(label)}</mark>` : escapeHtml(label);
         const referenceContext = definitionContext ? { ...definitionContext, referenceOrdinal: Math.max(0, (references || []).indexOf(reference)) } : null;
-        parts.push(legalReferenceHtml(reference, contents, referenceContext, { inaCitation: crosswalk.ina, preserveContents: true }));
+        parts.push(legalReferenceHtml(reference, contents, referenceContext, { inaCitation: crosswalk.ina, preserveContents: true, isInaConversion: crosswalk.isIna !== false }));
         renderFootnotesThrough(reference.end);
       });
       renderFootnotesThrough(group.end);
@@ -12193,6 +12089,7 @@
 
     function linkifyStatutoryText(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length, searchMatch = null, footnoteReferences = [], definitionContext = null) {
       const input = String(value || "");
+      definitionContext = { ...(definitionContext || {}), referenceSourceText: input };
       const start = Math.max(0, Number(segmentStart) || 0);
       const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
       const protectedDefinitionRanges = definedTermHighlightingEnabled() ? scopedDefinitionMatches(input, definitionContext, start, end) : [];
@@ -12203,12 +12100,24 @@
         .filter(reference => Number.isInteger(reference.start) && Number.isInteger(reference.end) && reference.start >= start && reference.end <= end && reference.end > reference.start && input.slice(reference.start, reference.end) === reference.text && !protectedDefinitionRanges.some(match => reference.start < match.end && reference.end > match.start))
         .filter(reference => !coordinatedMembers.has(reference))
         .map(reference => ({ kind: "citation", start: reference.start, end: reference.end, reference }));
+      // A source link can end before its authority phrase. Once the link says
+      // INA, consume only that redundant phrase, retaining every other word.
+      const authoritySuffixes = eligibleReferences.flatMap(annotation => {
+        if (!statutoryLinkInaCitation(annotation.reference, definitionContext)) return [];
+        const suffix = input.slice(annotation.end, end).match(/^((?:\s*(?:(?:,|[–—-]|and|or|through|to)\s*)?[“"]?\((?:[^()]|\([^()]*\))*\)[”"]?)*)(,?\s+of\s+(?:this\s+title|the\s+Immigration\s+and\s+Nationality\s+Act|(?:such|the|this)\s+Act)\b)/i);
+        if (!suffix) return [];
+        const suffixStart = annotation.end + suffix[1].length;
+        const suffixEnd = annotation.end + suffix[0].length;
+        if ((references || []).some(reference => reference.start >= suffixStart && reference.start < suffixEnd) ||
+            (footnoteReferences || []).some(reference => reference.offset >= suffixStart && reference.offset < suffixEnd)) return [];
+        return [{ kind: "citation-authority-suffix", start: suffixStart, end: suffixEnd }];
+      });
       const eligibleFootnotes = (footnoteReferences || [])
         .filter(reference => Number.isInteger(reference.offset) && reference.offset >= start && (reference.offset < end || (end === input.length && reference.offset === end)))
         .filter(reference => !coordinatedFootnotes.has(reference))
         .map(reference => ({ kind: "footnote", start: reference.offset, end: reference.offset, reference }));
       const eligibleLists = coordinatedLists.map(group => ({ kind: "citation-list", start: group.start, end: group.end, group }));
-      const eligible = [...eligibleReferences, ...eligibleFootnotes, ...eligibleLists].sort((a, b) => a.start - b.start || (a.kind === "footnote" ? -1 : 1) || a.end - b.end);
+      const eligible = [...eligibleReferences, ...eligibleFootnotes, ...eligibleLists, ...authoritySuffixes].sort((a, b) => a.start - b.start || (a.kind === "footnote" ? -1 : 1) || a.end - b.end);
       if (!eligible.length) return renderScopedDefinitionAnnotatedText(input, searchMatch, start, end, definitionContext);
       const parts = [];
       let cursor = start;
@@ -12216,7 +12125,9 @@
         if (annotation.start < cursor) continue;
         parts.push(renderScopedDefinitionAnnotatedText(input, searchMatch, cursor, annotation.start, definitionContext));
         const reference = annotation.reference;
-        if (annotation.kind === "footnote") {
+        if (annotation.kind === "citation-authority-suffix") {
+          cursor = annotation.end;
+        } else if (annotation.kind === "footnote") {
           parts.push(houseFootnoteReferenceHtml(reference));
           cursor = annotation.start;
         } else if (annotation.kind === "citation-list") {
@@ -12345,7 +12256,7 @@
       const targets = selectedTarget ? [selectedTarget] : section?.transferTargets || [];
       const actions = targets.map(target => {
         const label = transferTargetLabel(target);
-        return Number(target.title) === 8 && sectionMap.has(normCitationPart(target.section))
+        return Number(target.title) === 8 && !target.former && target.placement !== "note" && sectionMap.has(normCitationPart(target.section))
           ? `<button class="button small" type="button" data-show-citation="${escapeHtml(`8 U.S.C. ${target.section}`)}">→ ${escapeHtml(label)}</button>`
           : `<button class="button small" type="button" data-open-url="${escapeHtml(transferTargetUrl(target))}">↗ ${escapeHtml(label)}</button>`;
       }).join("");
@@ -12381,7 +12292,9 @@
           : !section
             ? "The linked U.S. Code section is not included in this local corpus."
             : "This relationship is taken directly from the USCIS INA crosswalk; the linked local text is the separately sourced House U.S. Code record.";
-      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">USCIS INA crosswalk</p><h2 class="detail-title">${escapeHtml(row.title || `INA ${row.inaSection}`)}</h2>
+      const disposition = statuteStatus(section || row);
+      const warning = disposition === "current" ? "" : `<div class="legal-status-warning ${disposition}" role="alert"><strong>${disposition === "repealed" ? "Warning: this provision has been repealed and is not current law." : disposition === "omitted" ? "Warning: this provision was omitted as executed." : "Warning: this provision was transferred."}</strong><p>This status is recorded in the official USCIS INA crosswalk.</p></div>`;
+      els.detail.innerHTML = `<div class="detail-content ina-source-record">${warning}<p class="eyebrow">USCIS INA crosswalk</p><h2 class="detail-title">${escapeHtml(row.title || `INA ${row.inaSection}`)}</h2>
         <p class="detail-subtitle">INA ${escapeHtml(row.inaSection)} ${row.uscLabel ? `↔ ${escapeHtml(row.uscLabel)}` : ""}</p>
         <div class="detail-actions">${openButton(INA_SOURCE_URL, "Open USCIS crosswalk")}${row.url ? openButton(row.url, "Open linked House record") : ""}${section ? `<button class="button" data-show-section="${escapeHtml(section.id)}">Read local U.S.C. text</button>` : ""}</div>
         <div class="${section ? "source-banner" : "notice warning"}">${escapeHtml(status)}</div>
@@ -12522,7 +12435,7 @@
       if (!alternatives.length) return "";
       const links = alternatives.map(section => {
         const cite = `${section.title} CFR ${section.section}`;
-        return `<a class="section-family-alternative" href="#" data-show-cfr-citation="${escapeHtml(cite)}"><strong>${escapeHtml(cite)}</strong> ${escapeHtml(section.heading || cite)}</a>`;
+        return `<a class="section-family-alternative" href="#" data-show-cfr-citation="${escapeHtml(cite)}"><strong>${escapeHtml(cite)}</strong> ${escapeHtml(navigationTitleCase(section.heading || cite))}</a>`;
       }).join(", ");
       return `<nav class="section-family-alternatives" aria-label="Same-numbered sections in other CFR titles"><span class="section-family-alternatives-label">Other titles:</span><span class="section-family-alternatives-list">${links}</span></nav>`;
     }
@@ -13457,9 +13370,9 @@
       state.tutorialNavigating = true;
       try {
         if (setup === "blank-search") {
-          resetSearchState();
-          tutorialSwitchView("search");
+          openClearedSearchHierarchy();
         }
+        else if (setup === "cfr-parts") applySearchQuery("8 CFR 274", false);
         else if (setup === "definitions-page") tutorialSwitchView("definitions");
         else if (setup === "about-page") tutorialSwitchView("sources");
       } finally { state.tutorialNavigating = false; }
@@ -13482,8 +13395,7 @@
             const selected = state.allResults.find(record => record.key === snapshot.selectedKey) || state.results.find(record => record.key === snapshot.selectedKey);
             if (selected) selectRecord(selected, false);
           } else {
-            resetSearchState();
-            tutorialSwitchView("search");
+            openClearedSearchHierarchy();
           }
         } else {
           resetSearchState(false);
@@ -14559,7 +14471,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
       renderCitationFeedback(null);
       if (renderSearchShell) {
         renderResults([]);
-        els.detail.innerHTML = `<div class="empty-state"><div><span class="empty-icon" aria-hidden="true">§</span><h2>Choose a result</h2><p>INASearch validates local statute paths as you type and builds current official links for regulations.</p></div></div>`;
+        els.detail.innerHTML = `<div class="empty-state"><div><span class="empty-icon" aria-hidden="true">§</span><h2>Open a citation or search</h2><p>INASearch validates local statute paths as you type and builds current official links for regulations.</p></div></div>`;
       }
     }
 
@@ -14599,7 +14511,9 @@ Get-FileHash $outJson -Algorithm SHA256`;
       const previousIsBareStatute = previous.type === "bare-statute" && previousResult?.valid && ["ina", "usc"].includes(previousResult.type);
       if (previous.type === "bare-statute" && !previousIsBareStatute) return destinationText;
       const sameAuthority = previous.type === destination.type || (previousIsBareStatute && ["ina", "usc"].includes(destination.type));
-      const authority = sameAuthority ? previous.authority : destination.authority;
+      const authority = sameAuthority && destination.type === "cfr"
+        ? previous.authority.replace(/^\d+/, destination.authority.match(/^\d+/)[0])
+        : sameAuthority ? previous.authority : destination.authority;
       const separator = sameAuthority ? previous.separator : destination.separator;
       const path = componentTokens(destination.suffix || "") || [];
       const pathLead = previous.suffix.match(/^\s+/)?.[0] || "";
@@ -14903,7 +14817,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
         positionCitationEquivalent();
       }, { passive: true });
       els.search.addEventListener("keydown", event => {
-        if (event.key === "ArrowDown") { event.preventDefault(); $(".result-item", els.resultList)?.focus(); }
+        if (event.key === "ArrowDown" && isHierarchyBrowse()) { event.preventDefault(); $("[data-hierarchy-open]", els.resultList)?.focus(); }
         if (event.key === "Enter") {
           clearTimeout(searchTimer);
           runSearch();
@@ -14929,8 +14843,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
         }
         const hierarchyLink = event.target.closest("[data-hierarchy-open]");
         if (hierarchyLink) { navigateHierarchyNode(hierarchyLink.dataset.hierarchyOpen); return; }
-        const button = event.target.closest("[data-index]");
-        if (button) selectRecord(state.results[Number(button.dataset.index)], true, true);
       });
       els.authorityBrowseHeader.addEventListener("click", event => {
         if (event.target.closest("[data-hierarchy-expand-all]")) {
@@ -14943,11 +14855,6 @@ Get-FileHash $outJson -Algorithm SHA256`;
           state.hierarchyExpanded.clear();
           refreshHierarchyRows();
         }
-      });
-      els.resultList.addEventListener("keydown", event => {
-        const current = event.target.closest("[data-index]"); if (!current) return;
-        const next = event.key === "ArrowDown" ? current.nextElementSibling : event.key === "ArrowUp" ? current.previousElementSibling : null;
-        if (next) { event.preventDefault(); next.focus(); }
       });
       els.definitionTermFilter.addEventListener("input", () => {
         state.definitionQuery = els.definitionTermFilter.value.trim();
@@ -15283,7 +15190,8 @@ Get-FileHash $outJson -Algorithm SHA256`;
         const noteReference = event.target.closest("[data-note-reference]");
         if (noteReference) {
           event.preventDefault();
-          if (prepareNoteReferenceTrigger(noteReference)) openLegalReferencePopover(noteReference, true);
+          closeLegalReferencePopover(false);
+          applyNavigationQuery(noteReference.dataset.noteReference);
           return;
         }
         if (event.target.closest("[data-note-associations-save]") && citationNote) { event.preventDefault(); applyCitationNoteAssociations(citationNote); return; }
@@ -15315,7 +15223,14 @@ Get-FileHash $outJson -Algorithm SHA256`;
         if (scopedDefinitionTerm) { event.preventDefault(); openScopedDefinitionPopover(scopedDefinitionTerm, true); return; }
         if (event.target.closest("#legalReferencePopoverClose")) { event.preventDefault(); closeLegalReferencePopover(true); return; }
         const legalReference = event.target.closest("[data-legal-reference]");
-        if (legalReference) { event.preventDefault(); openLegalReferencePopover(legalReference, true); return; }
+        if (legalReference) {
+          event.preventDefault();
+          closeLegalReferencePopover(false);
+          if (navigateToLocalLegalReference(legalReference)) return;
+          const url = legalReference.dataset.referenceUrl || legalReference.getAttribute("href");
+          if (url && !url.startsWith("#")) safeOpen(url);
+          return;
+        }
         const footnoteJump = event.target.closest("[data-house-footnote-jump]");
         if (footnoteJump) {
           event.preventDefault();
@@ -15660,7 +15575,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
       else openClearedSearchHierarchy();
       els.searchWorkspace.classList.remove("boot-workspace");
       els.resultList.removeAttribute("aria-busy");
-      els.resultList.setAttribute("aria-label", "Search results");
+      els.resultList.setAttribute("aria-label", "Legal hierarchy");
       requestAnimationFrame(() => window.INA_SEARCH_MARK_PERFORMANCE?.("title-list-rendered", { source: window.INA_SEARCH_CORPUS_LOAD_SOURCE || "unknown" }));
       syncMainShareWarning();
       requestAnimationFrame(() => hydrateAnnotationIndexAfterPaint());

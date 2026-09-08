@@ -1,0 +1,412 @@
+[
+  {
+    "id": 3,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 214(l) resolves to Title 8, section 1184(l)), but the converted INA wording leaves the inherited container “of this title, referred to in subsec. (a)(15)(F)(i), p” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 6,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 214 resolves to Title 8, section 1184), but the converted INA wording leaves the inherited container “(l) of this title, referred to in subsec. (a)(15)(F)(i)” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 9,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(j) converts to INA 214(j); the corpus reference at title8.sections[1101].notes[4] matches the shard metadata and crosswalk target Title 8, section 1184(j), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 12,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 240A(d) resolves to Title 8, section 1229b(d)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [8 U.S.C. 1229b” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 15,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 237(a) resolves to Title 8, section 1227(a)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [8 U.S.C. 1182(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 18,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(a) resolves to Title 8, section 1182(a)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [8 U.S.C. 1182(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 21,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a) resolves to Title 8, section 1101(a)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act (8 U.S.C. 1101(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 24,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15) resolves to Title 8, section 1101(a)(15)), but the converted INA wording leaves the inherited container “of such Act [8 U.S.C. 1101(a)(15)], but may be admitte” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 27,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(E) resolves to Title 8, section 1101(a)(15)(E)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act (8 U.S.C. 1101(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 30,
+    "verdict": "pass",
+    "rationale": "Pass: section 1105a converts to INA 106; the corpus reference at title8.sections[1105a].notes[1] matches the shard metadata and crosswalk target Title 8, section 1105a, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 33,
+    "verdict": "pass",
+    "rationale": "Pass: section 1151(a) converts to INA 201(a); the corpus reference at title8.sections[1152].notes[2] matches the shard metadata and crosswalk target Title 8, section 1151(a), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 36,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 201(b)(2) resolves to Title 8, section 1151(b)(2)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [8 U.S.C. 1151(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 39,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(b)(1) converts to INA 101(b)(1); the corpus reference at title8.sections[1154].notes[2] matches the shard metadata and crosswalk target Title 8, section 1101(b)(1), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 42,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(b)(1)(E) converts to INA 101(b)(1)(E); the corpus reference at title8.sections[1155].notes[1] matches the shard metadata and crosswalk target Title 8, section 1101(b)(1)(E), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 45,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 240(c)(7) resolves to Title 8, section 1229a(c)(7)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act (8 U.S.C. 1229a” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 48,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182 converts to INA 212; the corpus reference at title8.sections[1159].body[2] matches the shard metadata and crosswalk target Title 8, section 1182, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 51,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101 resolves to Title 8, section 1101), but the converted INA wording leaves the inherited container ““(a)(27)(A)” of this title for “(a)(27)(B)”. 1965—Subs” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 54,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(a)(2)(D) converts to INA 242(a)(2)(D); the corpus reference at title8.sections[1182].body[3/2/1/0] matches the shard metadata and crosswalk target Title 8, section 1252(a)(2)(D), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 57,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H)(i)(b1) resolves to Title 8, section 1101(a)(15)(H)(i)(b1)), but the converted INA wording leaves the inherited container “of this title or INA 101(a)(15)(E)(iii) wages that are” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 60,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H)(i)(b1) resolves to Title 8, section 1101(a)(15)(H)(i)(b1)), but the converted INA wording leaves the inherited container “of this title or INA 101(a)(15)(E)(iii) who files a co” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 63,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H)(i)(b1) resolves to Title 8, section 1101(a)(15)(H)(i)(b1)), but the converted INA wording leaves the inherited container “of this title or INA 101(a)(15)(E)(iii) designated as” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 66,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H)(i)(b1) resolves to Title 8, section 1101(a)(15)(H)(i)(b1)), but the converted INA wording leaves the inherited container “of this title or INA 101(a)(15)(E)(iii) an established” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 69,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H)(i)(b1) resolves to Title 8, section 1101(a)(15)(H)(i)(b1)), but the converted INA wording leaves the inherited container “of this title or INA 101(a)(15)(E)(iii) is or will be” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 72,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 214 resolves to Title 8, section 1184), but the converted INA wording leaves the inherited container “(l) of this title, referred to in subsec. (a)(6)(G), pr” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 75,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(l) converts to INA 214(l); the corpus reference at title8.sections[1182].notes[4] matches the shard metadata and crosswalk target Title 8, section 1184(l), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 78,
+    "verdict": "pass",
+    "rationale": "Pass: section 1228(c) converts to INA 238(c); the corpus reference at title8.sections[1182].notes[4] matches the shard metadata and crosswalk target Title 8, section 1228(c), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 81,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(27)(A) converts to INA 101(a)(27)(A); the corpus reference at title8.sections[1182].notes[4] matches the shard metadata and crosswalk target Title 8, section 1101(a)(27)(A), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 84,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(a)(3)(B)(iv) resolves to Title 8, section 1182(a)(3)(B)(iv)), but the converted INA wording leaves the inherited container “of such Act (as so amended) with respect to a group at” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 87,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(d) resolves to Title 8, section 1182(d)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [subsec. (d)(9)” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 90,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(d)(5) of this title converts to INA 212(d)(5); the corpus reference at title8.sections[1182].notes[61] matches the shard metadata and crosswalk target Title 8, section 1182(d)(5), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 93,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(l) resolves to Title 8, section 1182(l)), but the converted INA wording leaves the inherited container “of this title may be authorized to enter or stay in th” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 96,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H)(i)(b1) resolves to Title 8, section 1101(a)(15)(H)(i)(b1)), but the converted INA wording leaves the inherited container “of this title are—” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 99,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H)(ii)(b) resolves to Title 8, section 1101(a)(15)(H)(ii)(b)), but the converted INA wording leaves the inherited container “of this title, the Department of Homeland Security.” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 102,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 245(l) resolves to Title 8, section 1255(l)), but the converted INA wording leaves the inherited container “of this title and is unable to obtain such relief beca” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 105,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(U) converts to INA 101(a)(15)(U); the corpus reference at title8.sections[1184].body[15/0] matches the shard metadata and crosswalk target Title 8, section 1101(a)(15)(U), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 108,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H)(i)(b1) resolves to Title 8, section 1101(a)(15)(H)(i)(b1)), but the converted INA wording leaves the inherited container “of this title)” for “INA 101(a)(15)(H), (L), (O), or (” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 111,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(U) converts to INA 101(a)(15)(U); the corpus reference at title8.sections[1184].notes[4] matches the shard metadata and crosswalk target Title 8, section 1101(a)(15)(U), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 114,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(U) converts to INA 101(a)(15)(U); the corpus reference at title8.sections[1184].notes[4] matches the shard metadata and crosswalk target Title 8, section 1101(a)(15)(U), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 117,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(l) resolves to Title 8, section 1182(l)), but the converted INA wording leaves the inherited container “of this title may be authorized to enter or stay in th” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 120,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(H) resolves to Title 8, section 1101(a)(15)(H)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act (8 U.S.C. 1101(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 123,
+    "verdict": "pass",
+    "rationale": "Pass: section 1153(d) converts to INA 203(d); the corpus reference at title8.sections[1186a].notes[3] matches the shard metadata and crosswalk target Title 8, section 1153(d), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 126,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 216A(d)(1) resolves to Title 8, section 1186b(d)(1)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act (8 U.S.C. 1186b” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 129,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(a)(14) converts to INA 212(a)(14); the corpus reference at title8.sections[1188].notes[3] matches the shard metadata and crosswalk target Title 8, section 1182(a)(14), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 132,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(C)(iii) resolves to Title 8, section 1101(a)(15)(C)(iii)), but the converted INA wording leaves the inherited container “of this title (referred to as the “C–3 visa” category)” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 135,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 101(a)(15)(K) resolves to Title 8, section 1101(a)(15)(K)), but the converted INA wording leaves the inherited container “of such Act (8 U.S.C. 1101(a)(15)(K)) for the limited” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 138,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229 converts to INA 239; the corpus reference at title8.sections[1221].notes[1] matches the shard metadata and crosswalk target Title 8, section 1229, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 141,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 237(a) resolves to Title 8, section 1227(a)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [8 U.S.C. 1227(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 144,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(a)(5)(C)(i) converts to INA 212(a)(5)(C)(i); the corpus reference at title8.sections[1227].notes[3] matches the shard metadata and crosswalk target Title 8, section 1182(a)(5)(C)(i), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 147,
+    "verdict": "pass",
+    "rationale": "Pass: section 1253 converts to INA 243; the corpus reference at title8.sections[1228].notes[1] matches the shard metadata and crosswalk target Title 8, section 1253, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 150,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252 converts to INA 242; the corpus reference at title8.sections[1228].notes[4] matches the shard metadata and crosswalk target Title 8, section 1252, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 153,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229a converts to INA 240; the corpus reference at title8.sections[1228].notes[4] matches the shard metadata and crosswalk target Title 8, section 1229a, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 156,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252 converts to INA 242; the corpus reference at title8.sections[1228].notes[4] matches the shard metadata and crosswalk target Title 8, section 1252, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 159,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229a converts to INA 240; the corpus reference at title8.sections[1228].notes[4] matches the shard metadata and crosswalk target Title 8, section 1229a, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 162,
+    "verdict": "pass",
+    "rationale": "Pass: section 1105a converts to INA 106; the corpus reference at title8.sections[1228].notes[4] matches the shard metadata and crosswalk target Title 8, section 1105a, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 165,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229a converts to INA 240; the corpus reference at title8.sections[1228].notes[4] matches the shard metadata and crosswalk target Title 8, section 1229a, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 168,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229 converts to INA 239; the corpus reference at title8.sections[1229].notes[1] matches the shard metadata and crosswalk target Title 8, section 1229, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 171,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 240A(b)(2) resolves to Title 8, section 1229b(b)(2)), but the converted INA wording leaves the inherited container “or 1254(a)(3) of this title (as in effect before the t” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 174,
+    "verdict": "pass",
+    "rationale": "Pass: section 1225(b)(1) converts to INA 235(b)(1); the corpus reference at title8.sections[1252].body[0/1/0] matches the shard metadata and crosswalk target Title 8, section 1225(b)(1), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 177,
+    "verdict": "pass",
+    "rationale": "Pass: section 1225(b)(1) converts to INA 235(b)(1); the corpus reference at title8.sections[1252].body[4] matches the shard metadata and crosswalk target Title 8, section 1225(b)(1), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 180,
+    "verdict": "flag",
+    "rationale": "Wrong target: the surrounding text says ‘habeas corpus under section 2241 of title 28 … by section 1361 or 1651 of such title,’ so section 1361 is 28 U.S.C. 1361 and must not convert to INA 291 or a Title 8 local target."
+  },
+  {
+    "id": 183,
+    "verdict": "pass",
+    "rationale": "Pass: section 1253(h)(2) converts to INA 243(h)(2); the corpus reference at title8.sections[1254a].notes[2] matches the shard metadata and crosswalk target Title 8, section 1253(h)(2), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 186,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184 converts to INA 214; the corpus reference at title8.sections[1255].notes[1] matches the shard metadata and crosswalk target Title 8, section 1184, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 189,
+    "verdict": "pass",
+    "rationale": "Pass: section 1154(h) converts to INA 204(h); the corpus reference at title8.sections[1255].notes[2] matches the shard metadata and crosswalk target Title 8, section 1154(h), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 192,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(a)(9) resolves to Title 8, section 1182(a)(9)), but the converted INA wording leaves the inherited container “of such Act [8 U.S.C. 1182(a)(9)]. In granting waivers” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 195,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(a) resolves to Title 8, section 1182(a)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [8 U.S.C. 1182(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 198,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(a) resolves to Title 8, section 1182(a)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [8 U.S.C. 1182(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 201,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(a) resolves to Title 8, section 1182(a)), but the converted INA wording leaves the inherited container “of the Immigration and Nationality Act [8 U.S.C. 1182(” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 204,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 212(l) resolves to Title 8, section 1182(l)), but the converted INA wording leaves the inherited container “of this title or INA 217.” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 207,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252 converts to INA 242; the corpus reference at title8.sections[1282].notes[1] matches the shard metadata and crosswalk target Title 8, section 1252, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 210,
+    "verdict": "pass",
+    "rationale": "Pass: section 1228 converts to INA 238; the corpus reference at title8.sections[1321].notes[1] matches the shard metadata and crosswalk target Title 8, section 1228, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 213,
+    "verdict": "pass",
+    "rationale": "Pass: section 1160(a) converts to INA 210(a); the corpus reference at title8.sections[1324b].notes[2] matches the shard metadata and crosswalk target Title 8, section 1160(a), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 216,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 245(i)(3)(B) resolves to Title 8, section 1255(i)(3)(B)), but the converted INA wording leaves the inherited container “of this title.” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 219,
+    "verdict": "pass",
+    "rationale": "Pass: section 1228(b) converts to INA 238(b); the corpus reference at title8.sections[1356].notes[3] matches the shard metadata and crosswalk target Title 8, section 1228(b), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 222,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229a converts to INA 240; the corpus reference at title8.sections[1357].notes[2] matches the shard metadata and crosswalk target Title 8, section 1229a, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 225,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 301 resolves to Title 8, section 1401), but the converted INA wording leaves the inherited container “, and of paragraph (2) of INA 308, of this title shall” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 228,
+    "verdict": "pass",
+    "rationale": "Pass: section 1401(a)(7) converts to INA 301(a)(7); the corpus reference at title8.sections[1409].notes[3] matches the shard metadata and crosswalk target Title 8, section 1401(a)(7), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 231,
+    "verdict": "flag",
+    "rationale": "Target is correct (INA 241(b)(3)(B) resolves to Title 8, section 1231(b)(3)(B)), but the converted INA wording leaves the inherited container “of such Act [8 U.S.C. 1231(b)(3)(B)]. “(c) Administrat” immediately after the label, producing awkward/redundant grammar in the full field; review the container handling."
+  },
+  {
+    "id": 234,
+    "verdict": "pass",
+    "rationale": "Pass: section 1440(b) of this title converts to INA 329(b); the corpus reference at title8.sections[1440].notes[13] matches the shard metadata and crosswalk target Title 8, section 1440(b), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 237,
+    "verdict": "pass",
+    "rationale": "Pass: section 1401 converts to INA 301; the corpus reference at title8.sections[1452].notes[2] matches the shard metadata and crosswalk target Title 8, section 1401, and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 240,
+    "verdict": "pass",
+    "rationale": "Pass: section 1481(a) converts to INA 349(a); the corpus reference at title8.sections[1483].notes[2] matches the shard metadata and crosswalk target Title 8, section 1481(a), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 243,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a)(4)(B) converts to INA 237(a)(4)(B); the corpus reference at title8.sections[1531].notes[2] matches the shard metadata and crosswalk target Title 8, section 1227(a)(4)(B), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  },
+  {
+    "id": 246,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a)(9) converts to INA 212(a)(9); the corpus reference at cfr.records[8:215.8].blocks[9] matches the shard metadata and crosswalk target Title 8, section 1182(a)(9), and the surrounding field flows without a flagged trailing title/Act container or list defect."
+  }
+]

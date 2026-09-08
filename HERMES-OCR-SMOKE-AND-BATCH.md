@@ -1,0 +1,17 @@
+# Approved Ovis smoke, final acceptance, and 16-page batch
+
+Independent read-only review has returned **APPROVE FOR DIRECT SYNTHETIC OVIS SMOKE** on the final capture-v2 source (including the 23:37 `--until-file` trigger correction). The 17 focused capture fixtures also pass after that last edit. You may now use the full RTX 5090. Qwen is intentionally stopped and does not need to share VRAM; keep it stopped throughout.
+
+Resume ownership of the dirty worker tree and perform these gates in order. If any gate fails, stop OCR work, leave Qwen stopped, preserve the evidence, and report the failure rather than continuing.
+
+1. Run one fresh, uniquely named direct/synthetic OvisOCR2 smoke with the corrected runtime capture. The capture controller must itself exit successfully. Verify and report that `success` is true; the TCP LISTEN proof is mapped to the exact EngineCore PID derived from the concurrent valid audit/store observation; no service-descendant unsafe socket, owned parse error, or `ss` failure occurred; the live private FileStore was actually observed; after result completion EngineCore exited, the exact `.store` is absent, the exact `.audit.json` persists valid and matching, and the rendezvous directory remains private. Inspect the OCR result too.
+
+2. Only after that smoke passes, make all final code/config/test/mode corrections. Regenerate `env/environment-manifest.json` **last**, after all other tracked files have their final bytes and modes; ensure its `generatedAt` is fresh and every locked hash is exact. Run the entire worker suite, runtime verification, Python compilation, `git diff --check`, schema/provenance checks, and confirm the installed user unit is byte-identical to the final tracked unit. Commit every intended file (including the new executor, capture, probe, and tests) and require a clean tree. Report the full commit and SHA-256 of `bin/ovis_vllm_executor.py`.
+
+3. At that clean final commit, run a new uniquely named **service-owned** Ovis acceptance job using the same capture-v2 gates. Include the service ownership/singleton negative probe. Require the result to pin the exact final worker commit and executor SHA-256. The controller must fully exit with complete evidence; do not count the earlier tcp-rendezvous acceptance or any pre-final-commit run.
+
+4. Only after the final service-owned acceptance passes, process the untouched 16 `ocr-smoke-*` jobs already staged in the worker inbox/drop, with all three requested engines in the intended order: PP-OCRv6, PaddleOCR-VL 1.6, then OvisOCR2. Preserve the original inputs. Expected output is exactly 16 result envelopes / 48 successful engine layers, with no errors and no known truncation; every layer must pin the final clean worker commit, and every Ovis layer must pin the final executor SHA-256 plus its audit evidence. Do not auto-adjudicate or auto-select a winning engine.
+
+5. Do not run the 50-page severe queue. When the 16-page batch is complete, stop the OCR service/model, leave Qwen stopped, and report: final commit, executor hash, full test counts, direct-smoke and service-acceptance artifact paths and evidence summaries, 16/48 batch counts, result directory/file list plus checksums, any per-layer failures/truncation, final GPU processes/VRAM, service state, and the Qwen restore command (but do not run it).
+
+Do not delete or overwrite prior evidence. Clearly mark the older `accept-ovis-service-owned-e9b4ce0-20260831t025100z` tcp-rendezvous artifact as invalid/non-counting.

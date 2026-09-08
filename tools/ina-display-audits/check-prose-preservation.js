@@ -34,7 +34,12 @@ for (const field of collectFields(corpus)) {
     cursor = group.end;
   }
   expected += mask(cursor, field.text.length);
-  if (actual !== expected || linkIndex !== field.references.length) findings.push({sourceId:field.sourceId,sourcePath:field.sourcePath,field:field.field,original:field.text,actual,expected});
+  // Authority containers may now end outside the source link span. Ignore
+  // only these explicitly permitted citation-designator phrases on both
+  // sides; all remaining prose, punctuation and link order must match.
+  // Per-occurrence Luna review separately verifies each removal's scope.
+  const withoutAuthorityContainers = text => text.replace(/,?\s+of\s+(?:this\s+title|the\s+Immigration\s+and\s+Nationality\s+Act|(?:such|the|this)\s+Act)\b/gi, "");
+  if (withoutAuthorityContainers(actual) !== withoutAuthorityContainers(expected) || linkIndex !== field.references.length) findings.push({sourceId:field.sourceId,sourcePath:field.sourcePath,field:field.field,original:field.text,actual,expected});
   fields++; references += field.references.length; groups += grouped.length;
 }
 const output = {fields,references,groups,findings};

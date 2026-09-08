@@ -1,0 +1,2696 @@
+[
+  {
+    "id": 1,
+    "sourceId": "8-117, 118-note-2",
+    "sourcePath": "title8.sections[117, 118].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 220",
+    "renderedText": "section 220",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 220",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "220",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "42 U.S.C. 220",
+      "resolution": "official-source-only",
+      "targetTitle": "42",
+      "targetSection": "220",
+      "targetPath": []
+    },
+    "rationale": "Pass. The source explicitly says “section 220 of Title 42, The Public Health and Welfare” in 8-117, 118-note-2; the before target incorrectly used Title 8, while the after target is 42 U.S.C. 220 and official-source-only. The afterField preserves the cross-title wording and therefore resolves the reference correctly."
+  },
+  {
+    "id": 4,
+    "sourceId": "8-1101-a-43-P",
+    "sourcePath": "title8.sections[1101].body[0/42/15]",
+    "field": "text",
+    "verdict": "flag",
+    "issue": "removed explicit non-INA citation",
+    "referenceText": "1546(a)",
+    "renderedText": null,
+    "beforeTarget": {
+      "citation": "18 U.S.C. 1546(a)",
+      "resolution": "official-source-only",
+      "targetTitle": "18",
+      "targetSection": "1546",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": null,
+    "rationale": "Flag. The full source field 8-1101-a-43-P explicitly uses “1546(a)” in the phrase “instrument in violation of section 1543 of title 18 or is described in section 1546(a) of such title (relating to document fraud) and (ii) for which the term of imprisonment is at least 12 months, except in”. The before record correctly identifies 18 U.S.C. 1546(a), but the after record is null, so this source-authored Title 18 citation disappears. It is a real reference to another title and must remain an official-source-only link or equivalent preserved citation."
+  },
+  {
+    "id": 7,
+    "sourceId": "8-1101-note-3",
+    "sourcePath": "title8.sections[1101].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1184",
+    "renderedText": "INA 214",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1184",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 214",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1101-note-3, the changed occurrence is “out as a note under section 287 of Title 22, Foreign Relations and Intercourse. INA 214(l), referred to in subsec. (a)(15)(F)(i), probably means the subsec. (l) of INA 214 which relates to nonimmigrant eleme”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 214 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 10,
+    "sourceId": "8-1101-note-5",
+    "sourcePath": "title8.sections[1101].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1184(l)",
+    "renderedText": "INA 214(l)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1184(l)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": [
+        "l"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 214(l)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": [
+        "l"
+      ]
+    },
+    "rationale": "Pass. In 8-1101-note-5, the changed occurrence is “Subsec. (a)(15)(F)(i). Pub. L. 104–208, § 625(a)(2), inserted “consistent with INA 214(l)” after “such a course of study”. Subsec. (a)(15)(K). Pub. L. 104–208, § 308(f)(1)(A), substituted “admission” for “entr”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 214(l) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 13,
+    "sourceId": "8-1101-note-5",
+    "sourcePath": "title8.sections[1101].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1434",
+    "renderedText": "INA 323",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1434",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1434",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 323",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1434",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1101-note-5, the changed occurrence is “ar. (46). Subsec. (c)(1). Pub. L. 102–232, § 309(b)(4), struck out reference to INA 323. 1990—Subsec. (a)(15)(D)(i). Pub. L. 101–649, § 203(c), substituted “a capacity” for “any capacity” and inserted “, as”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 323 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 16,
+    "sourceId": "8-1101-note-17",
+    "sourcePath": "title8.sections[1101].notes[16]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 240A(d)",
+    "renderedText": "INA 240A(d)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1229b(d)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1229b",
+      "targetPath": [
+        "d"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 240A(d)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1229b",
+      "targetPath": [
+        "d"
+      ]
+    },
+    "rationale": "Pass. In 8-1101-note-17, the changed occurrence is “(A) In general.—Subject to subparagraphs (B) and (C), paragraphs (1) and (2) of INA 240A(d) [8 U.S.C. 1229b(d)(1), (2)] (relating to continuous residence or physical presence) shall apply to orders to show cause”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 240A(d) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 19,
+    "sourceId": "8-1101-note-17",
+    "sourcePath": "title8.sections[1101].notes[16]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 237(a)",
+    "renderedText": "INA 237(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1227(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1227",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 237(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1227",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1101-note-17, the changed occurrence is “table under paragraph (2) or (3) of INA 212(a) or paragraph (2), (3), or (4) of INA 237(a) [8 U.S.C. 1182(a)(2), (3), 1227(a)(3), (4)] and is not an alien described in section 241(b)(3)(B)(i) of such Act [8 U.S”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 237(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 22,
+    "sourceId": "8-1101-note-20",
+    "sourcePath": "title8.sections[1101].notes[19]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 212(a)",
+    "renderedText": "INA 212(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1101-note-20, the changed occurrence is “lication for admission, the immigrant’s admissibility under paragraph (7)(A) of INA 212(a) [8 U.S.C. 1182(a)(7)(A)] shall be determined under the provisions of law in effect on the date of the issuance of such”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 25,
+    "sourceId": "8-1101-note-76",
+    "sourcePath": "title8.sections[1101].notes[75]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 101(a)",
+    "renderedText": "INA 101(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1101-note-76, the changed occurrence is “tion for nonimmigrant status under paragraph (15)(T)(i), (15)(U)(i), or (51) of INA 101(a) (8 U.S.C. 1101(a)) during the preceding fiscal year; “(B) were granted such nonimmigrant status during such fiscal year”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 28,
+    "sourceId": "8-1101-note-95",
+    "sourcePath": "title8.sections[1101].notes[94]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 101(a)(15)",
+    "renderedText": "INA 101(a)(15)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)",
+      "resolution": "official-source-only",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)",
+      "resolution": "official-source-only",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15"
+      ]
+    },
+    "rationale": "Pass. In 8-1101-note-95, the changed occurrence is “hall not be admitted under subparagraph (O)(i), (O)(ii), (P)(i), or (P)(iii) of INA 101(a)(15) [8 U.S.C. 1101(a)(15)], but may be admitted under the terms of subparagraph (H)(i)(b) of such section (as in effect on”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 31,
+    "sourceId": "8-1101-note-99",
+    "sourcePath": "title8.sections[1101].notes[98]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 101(a)(15)(E)",
+    "renderedText": "INA 101(a)(15)(E)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(E)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "E"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(E)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "E"
+      ]
+    },
+    "rationale": "Pass. In 8-1101-note-99, the changed occurrence is “, 2022, 136 Stat. 3440, provided that: “For purposes of clauses (i) and (ii) of INA 101(a)(15)(E) (8 U.S.C. 1101(a)(15)(E)), Portugal shall be considered to be a foreign state described in such section if the Governme”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(E) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 34,
+    "sourceId": "8-1105a-note-2",
+    "sourcePath": "title8.sections[1105a].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1105a",
+    "renderedText": "INA 106",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1105a",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1105a",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 106",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1105a",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1105a-note-2, the changed occurrence is “Prior ProvisionsA prior INA 106, act June 27, 1952, ch. 477, title I, § 106, as added Sept. 26, 1961, Pub. L. 87–301, § 5(a), 75 Stat. 651; amended Dec”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 106 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 37,
+    "sourceId": "8-1152-note-3",
+    "sourcePath": "title8.sections[1152].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1151(a)",
+    "renderedText": "INA 201(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1151(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1151",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 201(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1151",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1152-note-3, the changed occurrence is “t forth in subsection (a), to the foreign state,” for “limitations set forth in INA 201(a) and subsection (a), to the hemisphere in which such colony or other component or dependent area is located, and to the”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 201(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 40,
+    "sourceId": "8-1153-note-26",
+    "sourcePath": "title8.sections[1153].notes[25]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 201(b)(2)",
+    "renderedText": "INA 201(b)(2)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1151(b)(2)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1151",
+      "targetPath": [
+        "b",
+        "2"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 201(b)(2)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1151",
+      "targetPath": [
+        "b",
+        "2"
+      ]
+    },
+    "rationale": "Pass. In 8-1153-note-26, the changed occurrence is “—“(A) the sum of the number of aliens described in subparagraphs (A) and (B) of INA 201(b)(2) [8 U.S.C. 1151(b)(2)] (or, for fiscal year 1992, section 201(b) of such Act) who were issued immigrant visas or otherwi”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 201(b)(2) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 43,
+    "sourceId": "8-1154-note-3",
+    "sourcePath": "title8.sections[1154].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(b)(1)",
+    "renderedText": "INA 101(b)(1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(b)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "b",
+        "1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(b)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "b",
+        "1"
+      ]
+    },
+    "rationale": "Pass. In 8-1154-note-3, the changed occurrence is “gnated existing provisions as par. (1), substituted “subparagraph (F) or (G) of INA 101(b)(1)” for “INA 101(b)(1)(F)”, and added par. (2). Subsec. (h). Pub. L. 106–386, § 1507(b), inserted at end “Remarriage of an”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(b)(1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 46,
+    "sourceId": "8-1155-note-2",
+    "sourcePath": "title8.sections[1155].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(b)(1)(E)",
+    "renderedText": "INA 101(b)(1)(E)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(b)(1)(E)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "b",
+        "1",
+        "E"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(b)(1)(E)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "b",
+        "1",
+        "E"
+      ]
+    },
+    "rationale": "Pass. In 8-1155-note-2, the changed occurrence is “tside the United States. Subsec. (c). Pub. L. 87–301, §§ 3(b), 10, substituted “INA 101(b)(1)(E) or (F)” for “INA 101(b)(1)(E)”, and provided that no petition shall be approved if the alien had previously been accord”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(b)(1)(E) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 49,
+    "sourceId": "8-1157-note-12",
+    "sourcePath": "title8.sections[1157].notes[11]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 240(c)(7)",
+    "renderedText": "INA 240(c)(7)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1229a(c)(7)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1229a",
+      "targetPath": [
+        "c",
+        "7"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 240(c)(7)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1229a",
+      "targetPath": [
+        "c",
+        "7"
+      ]
+    },
+    "rationale": "Pass. In 8-1157-note-12, the changed occurrence is “e a motion to reopen such claim in accordance with subparagraphs (A) and (B) of INA 240(c)(7) (8 U.S.C. 1229a(c)(7)) not later than six months after the date of the enactment of the Refugee Crisis in Iraq Act [of”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 240(c)(7) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 52,
+    "sourceId": "8-1157-note-13",
+    "sourcePath": "title8.sections[1157].notes[12]",
+    "field": "text",
+    "verdict": "flag",
+    "issue": "removed explicit non-INA citation",
+    "referenceText": "551(2)",
+    "renderedText": null,
+    "beforeTarget": {
+      "citation": "37 U.S.C. 551(2)",
+      "resolution": "official-source-only",
+      "targetTitle": "37",
+      "targetSection": "551",
+      "targetPath": [
+        "2"
+      ]
+    },
+    "afterTarget": null,
+    "rationale": "Flag. The full source field 8-1157-note-13 explicitly uses “551(2)” in the phrase “(3) of title 37, United States Code) in a missing status (as defined in section 551(2) of such title and this subsection) as a result of the Vietnam War; or “(ii) who is an employee (as defined in section 5”. The before record correctly identifies 37 U.S.C. 551(2), but the after record is null, so this source-authored Title 37 citation disappears. It is a real reference to another title and must remain an official-source-only link or equivalent preserved citation."
+  },
+  {
+    "id": 55,
+    "sourceId": "8-1157-note-13",
+    "sourcePath": "title8.sections[1157].notes[12]",
+    "field": "text",
+    "verdict": "flag",
+    "issue": "removed explicit non-INA citation",
+    "referenceText": "551(2)",
+    "renderedText": null,
+    "beforeTarget": {
+      "citation": "37 U.S.C. 551(2)",
+      "resolution": "official-source-only",
+      "targetTitle": "37",
+      "targetSection": "551",
+      "targetPath": [
+        "2"
+      ]
+    },
+    "afterTarget": null,
+    "rationale": "Flag. The full source field 8-1157-note-13 explicitly uses “551(2)” in the phrase “(3) of title 37, United States Code) in a missing status (as defined in section 551(2) of such title and this subsection) as a result of the Vietnam War; or “(ii) who is an employee (as defined in section 5”. The before record correctly identifies 37 U.S.C. 551(2), but the after record is null, so this source-authored Title 37 citation disappears. It is a real reference to another title and must remain an official-source-only link or equivalent preserved citation."
+  },
+  {
+    "id": 58,
+    "sourceId": "8-1157-note-13",
+    "sourcePath": "title8.sections[1157].notes[12]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": null,
+    "renderedText": "section 5561(5)",
+    "beforeTarget": null,
+    "afterTarget": {
+      "citation": "5 U.S.C. 5561(5)",
+      "resolution": "official-source-only",
+      "targetTitle": "5",
+      "targetSection": "5561",
+      "targetPath": [
+        "5"
+      ]
+    },
+    "rationale": "Pass. This is a newly detected explicit citation in 8-1157-note-13: “tion 5561(2) of title 5, United States Code) in a missing status (as defined in section 5561(5) of such title) as a result of the Vietnam War. “(B) Exclusion.—Such term does not include an individual with respect to”. The after record adds 5 U.S.C. 5561(5) with official-source-only resolution, matching the stated title in the source context; the addition preserves the original prose and does not invent an INA mapping."
+  },
+  {
+    "id": 61,
+    "sourceId": "8-1157-note-13",
+    "sourcePath": "title8.sections[1157].notes[12]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": null,
+    "renderedText": "section 551(2)",
+    "beforeTarget": null,
+    "afterTarget": {
+      "citation": "37 U.S.C. 551(2)",
+      "resolution": "official-source-only",
+      "targetTitle": "37",
+      "targetSection": "551",
+      "targetPath": [
+        "2"
+      ]
+    },
+    "rationale": "Pass. This is a newly detected explicit citation in 8-1157-note-13: “tion 101(3) of title 37, United States Code) in a missing status (as defined in section 551(2) of such title and this subsection) as a result of the Vietnam War; or “(ii) who is an employee (as defined in section 5”. The after record adds 37 U.S.C. 551(2) with official-source-only resolution, matching the stated title in the source context; the addition preserves the original prose and does not invent an INA mapping."
+  },
+  {
+    "id": 64,
+    "sourceId": "8-1159-c",
+    "sourcePath": "title8.sections[1159].body[2]",
+    "field": "heading",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1182",
+    "renderedText": "INA 212",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 212",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1159-c, the changed occurrence is “Coordination with INA 212”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 67,
+    "sourceId": "8-1181-note-2",
+    "sourcePath": "title8.sections[1181].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101",
+    "renderedText": "INA 101",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 101",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1181-note-2, the changed occurrence is “), added subsec. (c). 1976—Subsec. (b). Pub. L. 94–571 substituted reference to INA 101 “(a)(27)(A)” of this title for “(a)(27)(B)”. 1965—Subsec. (a). Pub. L. 89–236 restated requirement of an unexpired visa”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 70,
+    "sourceId": "8-1182-d-3-B-i",
+    "sourcePath": "title8.sections[1182].body[3/2/1/0]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1252(a)(2)(D)",
+    "renderedText": "INA 242(a)(2)(D)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1252(a)(2)(D)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1252",
+      "targetPath": [
+        "a",
+        "2",
+        "D"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 242(a)(2)(D)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1252",
+      "targetPath": [
+        "a",
+        "2",
+        "D"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-d-3-B-i, the changed occurrence is “oval pursuant to INA 242, and review shall be limited to the extent provided in INA 242(a)(2)(D). The Secretary of State may not exercise the discretion provided in this clause with respect to an alien at any time du”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 242(a)(2)(D) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 73,
+    "sourceId": "8-1182-t-1-A-i",
+    "sourcePath": "title8.sections[1182].body[19/0/0/0]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-t-1-A-i, the changed occurrence is “the period of authorized employment to aliens admitted or provided status under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) wages that are at least— whichever is greater, based on the best information available as of”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(H)(i)(b1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 76,
+    "sourceId": "8-1182-t-3-C-v",
+    "sourcePath": "title8.sections[1182].body[19/2/2/4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-t-3-C-v, the changed occurrence is “ry of Homeland Security shall devise a process under which a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) who files a complaint regarding a violation of clause (iv) and is otherwise eligible to remai”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(H)(i)(b1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 79,
+    "sourceId": "8-1182-t-3-C-vii-II",
+    "sourcePath": "title8.sections[1182].body[19/2/2/6/1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-t-3-C-vii-II, the changed occurrence is “filed an attestation under this subsection and who places a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) designated as a part-time employee in the attestation, after the nonimmigrant has entered int”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(H)(i)(b1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 82,
+    "sourceId": "8-1182-t-3-C-vii-V",
+    "sourcePath": "title8.sections[1182].body[19/2/2/6/4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-t-3-C-vii-V, the changed occurrence is “a school or other educational institution from applying to a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) an established salary practice of the employer, under which the employer pays to nonimmigrant”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(H)(i)(b1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 85,
+    "sourceId": "8-1182-t-4-A",
+    "sourcePath": "title8.sections[1182].body[19/3/0]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-t-4-A, the changed occurrence is “e of the worksite or physical location where the work of the nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) is or will be performed. If such worksite or location is within a Metropolitan Statistical Ar”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(H)(i)(b1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 88,
+    "sourceId": "8-1182-note-3",
+    "sourcePath": "title8.sections[1182].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1184",
+    "renderedText": "INA 214",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1184",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 214",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1182-note-3, the changed occurrence is “), is section 112 of Pub. L. 101–649, which is set out as a note under INA 203. INA 214(l), referred to in subsec. (a)(6)(G), probably means the subsec. (l) of INA 214, which relates to nonimmigrant elementa”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 214 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 91,
+    "sourceId": "8-1182-note-5",
+    "sourcePath": "title8.sections[1182].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1184(l)",
+    "renderedText": "INA 214(l)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1184(l)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": [
+        "l"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 214(l)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": [
+        "l"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-note-5, the changed occurrence is “sponsor required under INA 213A(f))”. Subsec. (e). Pub. L. 107–273 substituted “INA 214(l)” for “INA 214(k)”. 2001—Subsec. (a)(2)(I). Pub. L. 107–56, § 1006(a), added subpar. (I). Subsec. (a)(3)(B)(i)(II). Pub.”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 214(l) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 94,
+    "sourceId": "8-1182-note-5",
+    "sourcePath": "title8.sections[1182].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1228(c)",
+    "renderedText": "INA 238(c)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1228(c)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1228",
+      "targetPath": [
+        "c"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 238(c)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1228",
+      "targetPath": [
+        "c"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-note-5, the changed occurrence is “s”. Subsec. (d)(4). Pub. L. 104–208, § 308(g)(1), substituted “INA 233(c)” for “INA 238(c)”. Subsec. (d)(5)(A). Pub. L. 104–208, § 602(a), substituted “only on a case-by-case basis for urgent humanitarian reaso”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 238(c) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 97,
+    "sourceId": "8-1182-note-5",
+    "sourcePath": "title8.sections[1182].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(27)(A)",
+    "renderedText": "INA 101(a)(27)(A)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(27)(A)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "27",
+        "A"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(27)(A)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "27",
+        "A"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-note-5, the changed occurrence is “e at least two years subsequent to such arrival, except for aliens described in INA 101(a)(27)(A) and aliens born in Western Hemisphere, and further provided that no paragraph following par. (24) shall be redesignated”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(27)(A) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 100,
+    "sourceId": "8-1182-note-14",
+    "sourcePath": "title8.sections[1182].notes[13]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 212(a)(3)(B)(iv)",
+    "renderedText": "INA 212(a)(3)(B)(iv)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(a)(3)(B)(iv)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a",
+        "3",
+        "B",
+        "iv"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(a)(3)(B)(iv)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a",
+        "3",
+        "B",
+        "iv"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-note-14, the changed occurrence is “n a terrorist activity described in subclause (IV)(bb), (V)(bb), or (VI)(cc) of INA 212(a)(3)(B)(iv) (as so amended) with respect to a group at any time when the group was not a terrorist organization designated by the S”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(a)(3)(B)(iv) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 103,
+    "sourceId": "8-1182-note-29",
+    "sourcePath": "title8.sections[1182].notes[28]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 212(d)",
+    "renderedText": "INA 212(d)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(d)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "d"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(d)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "d"
+      ]
+    },
+    "rationale": "Pass. In 8-1182-note-29, the changed occurrence is “I, § 3201(d)(2), Sept. 27, 1979, 93 Stat. 497, provided that: “Paragraph (9) of INA 212(d) [subsec. (d)(9) of this section], as added by subsection (b) of this section, shall cease to be effective at the end of”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(d) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 106,
+    "sourceId": "8-1182-note-40",
+    "sourcePath": "title8.sections[1182].notes[39]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": null,
+    "renderedText": "section 2241",
+    "beforeTarget": null,
+    "afterTarget": {
+      "citation": "28 U.S.C. 2241",
+      "resolution": "official-source-only",
+      "targetTitle": "28",
+      "targetSection": "2241",
+      "targetPath": []
+    },
+    "rationale": "Pass. This is a newly detected explicit citation in 8-1182-note-40: “ty Act (8 U.S.C. 1252), sections 1361 and 1651 of title 28, United States Code, section 2241 of such title, and any other habeas corpus provision of law, no court shall have jurisdiction to review any determinati”. The after record adds 28 U.S.C. 2241 with official-source-only resolution, matching the stated title in the source context; the addition preserves the original prose and does not invent an INA mapping."
+  },
+  {
+    "id": 109,
+    "sourceId": "8-1183a-f-5-B-ii",
+    "sourcePath": "title8.sections[1183a].body[5/4/1/1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1154(l)",
+    "renderedText": "INA 204(l)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1154(l)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1154",
+      "targetPath": [
+        "l"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 204(l)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1154",
+      "targetPath": [
+        "l"
+      ]
+    },
+    "rationale": "Pass. In 8-1183a-f-5-B-ii, the changed occurrence is “the alien’s petition is being adjudicated pursuant to INA 204(l) (surviving relative consideration).”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 204(l) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 112,
+    "sourceId": "8-1184-c-11-A-i",
+    "sourcePath": "title8.sections[1184].body[2/10/0/0]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-c-11-A-i, the changed occurrence is “n order that an alien may be initially granted nonimmigrant status described in INA 101(a)(15)(H)(i)(b1); or”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(H)(i)(b1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 115,
+    "sourceId": "8-1184-g-8-C",
+    "sourcePath": "title8.sections[1184].body[6/7/2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(H)(i)(b1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-g-8-C, the changed occurrence is “The period of authorized admission as a nonimmigrant under INA 101(a)(15)(H)(i)(b1) shall be 1 year, and may be extended, but only in 1-year increments. After every second extension, the next following e”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(H)(i)(b1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 118,
+    "sourceId": "8-1184-o-6",
+    "sourcePath": "title8.sections[1184].body[14/5]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(T)(i)(III)(aa)",
+    "renderedText": "INA 101(a)(15)(T)(i)(III)(aa)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(T)(i)(III)(aa)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "T",
+        "i",
+        "III",
+        "aa"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(T)(i)(III)(aa)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "T",
+        "i",
+        "III",
+        "aa"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-o-6, the changed occurrence is “In making a determination under INA 101(a)(15)(T)(i)(III)(aa) with respect to an alien, statements from State and local law enforcement officials that the alien has complied with an”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(T)(i)(III)(aa) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 121,
+    "sourceId": "8-1184-p",
+    "sourcePath": "title8.sections[1184].body[15]",
+    "field": "heading",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(U)",
+    "renderedText": "INA 101(a)(15)(U)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(U)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "U"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(U)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "U"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-p, the changed occurrence is “Requirements applicable to INA 101(a)(15)(U) visas”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(U) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 124,
+    "sourceId": "8-1184-r",
+    "sourcePath": "title8.sections[1184].body[17]",
+    "field": "heading",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(K)(ii)",
+    "renderedText": "INA 101(a)(15)(K)(ii)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(K)(ii)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "K",
+        "ii"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(K)(ii)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "K",
+        "ii"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-r, the changed occurrence is “Visas of nonimmigrants described in INA 101(a)(15)(K)(ii)”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(K)(ii) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 127,
+    "sourceId": "8-1184-note-5",
+    "sourcePath": "title8.sections[1184].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(U)",
+    "renderedText": "INA 101(a)(15)(U)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(U)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "U"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(U)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "U"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-note-5, the changed occurrence is “is section, the authorized period of status of an alien as a nonimmigrant under INA 101(a)(15)(U) if the Secretary determines that an extension of such period is warranted due to exceptional circumstances. Such alien’”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(U) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 130,
+    "sourceId": "8-1184-note-5",
+    "sourcePath": "title8.sections[1184].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(F)(i)",
+    "renderedText": "INA 101(a)(15)(F)(i)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(F)(i)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "F",
+        "i"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(F)(i)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "F",
+        "i"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-note-5, the changed occurrence is “m). Pub. L. 107–274 substituted “clause (i) or (iii) of INA 101(a)(15)(F)” for “INA 101(a)(15)(F)(i)” in two places in subsec. (m) relating to nonimmigrant elementary and secondary school students. 2001—Subsec. (k)(2). P”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(F)(i) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 133,
+    "sourceId": "8-1184-note-5",
+    "sourcePath": "title8.sections[1184].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1101(a)(15)(O)",
+    "renderedText": "INA 101(a)(15)(O)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)(O)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "O"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)(O)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15",
+        "O"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-note-5, the changed occurrence is “991—Subsec. (a)(2)(A). Pub. L. 102–232, § 303(a)(11), substituted “described in INA 101(a)(15)(O)” for “under INA 101(a)(15)(O)”. Pub. L. 102–232, § 205(d), inserted “(or events)” after “event”. Subsec. (a)(2)(B). Pub”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15)(O) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 136,
+    "sourceId": "8-1184-note-32",
+    "sourcePath": "title8.sections[1184].notes[31]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 203(b)",
+    "renderedText": "INA 203(b)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1153(b)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1153",
+      "targetPath": [
+        "b"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 203(b)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1153",
+      "targetPath": [
+        "b"
+      ]
+    },
+    "rationale": "Pass. In 8-1184-note-32, the changed occurrence is “[8 U.S.C. 1154(a)] for a preference status under paragraph (1), (2), or (3) of INA 203(b) of that Act [8 U.S.C. 1153(b)]; and “(2) is eligible to be granted that status but for application of the per country l”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 203(b) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 139,
+    "sourceId": "8-1186a-note-2",
+    "sourcePath": "title8.sections[1186a].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1184",
+    "renderedText": "INA 214",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1184",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 214",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1186a-note-2, the changed occurrence is “Code, see Short Title note set out under INA 101 and Tables. Subsection (p) of INA 214, referred to in subsec. (d)(1)(A)(ii), was redesignated subsec. (r) of INA 214 by Pub. L. 108–193, § 8(a)(3), Dec. 19,”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 214 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 142,
+    "sourceId": "8-1186b-note-10",
+    "sourcePath": "title8.sections[1186b].notes[9]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 216A(d)(1)",
+    "renderedText": "INA 216A(d)(1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1186b(d)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1186b",
+      "targetPath": [
+        "d",
+        "1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 216A(d)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1186b",
+      "targetPath": [
+        "d",
+        "1"
+      ]
+    },
+    "rationale": "Pass. In 8-1186b-note-10, the changed occurrence is “of perjury, the facts and information described in subparagraphs (A) and (B) of INA 216A(d)(1) (8 U.S.C. 1186b(d)(1)) with respect to any commercial enterprise (regardless of whether such enterprise is a limited pa”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 216A(d)(1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 145,
+    "sourceId": "8-1188-note-4",
+    "sourcePath": "title8.sections[1188].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1182(a)(5)(A)(i)",
+    "renderedText": "INA 212(a)(5)(A)(i)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(a)(5)(A)(i)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a",
+        "5",
+        "A",
+        "i"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(a)(5)(A)(i)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a",
+        "5",
+        "A",
+        "i"
+      ]
+    },
+    "rationale": "Pass. In 8-1188-note-4, the changed occurrence is “ent note below. 1991—Subsec. (g)(3). Pub. L. 102–232, § 307(l)(4), substituted “INA 212(a)(5)(A)(i)” for “INA 212(a)(14)”. Subsec. (i)(1). Pub. L. 102–232, § 309(b)(8), as amended by Pub. L. 103–416, substituted “1324a(”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(a)(5)(A)(i) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 148,
+    "sourceId": "8-1201-note-15",
+    "sourcePath": "title8.sections[1201].notes[14]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 203(a)",
+    "renderedText": "INA 203(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1153(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1153",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 203(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1153",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1201-note-15, the changed occurrence is “1990] and is issued an immigrant visa under paragraph (1), (2), (4), or (5) of INA 203(a) [8 U.S.C. 1153(a)] (as in effect on the date of the enactment of this Act) or under section 203(a) or 203(b)(1) of such”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 203(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 151,
+    "sourceId": "8-1202-note-3",
+    "sourcePath": "title8.sections[1202].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1151 (b)",
+    "renderedText": "INA 201(b)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1151(b)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1151",
+      "targetPath": [
+        "b"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 201(b)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1151",
+      "targetPath": [
+        "b"
+      ]
+    },
+    "rationale": "Pass. In 8-1202-note-3, the changed occurrence is “mental disease; if he claims to be an immediate relative within the meaning of INA 201(b) or a preference or special immigrant, the facts on which he bases such claim; whether or not he is a member of any clas”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 201(b) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 154,
+    "sourceId": "8-1221-note-2",
+    "sourcePath": "title8.sections[1221].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1224",
+    "renderedText": "INA 234",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1224",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1224",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 234",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1224",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1221-note-2, the changed occurrence is “t to such arrivals by air) as may be required by regulations issued pursuant to INA 234.” Subsec. (b). Pub. L. 107–77, § 115(b), amended subsec. (b) generally. Prior to amendment, subsec. (b) read as follows”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 234 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 157,
+    "sourceId": "8-1224-note-4",
+    "sourcePath": "title8.sections[1224].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1224",
+    "renderedText": "INA 234",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1224",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1224",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 234",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1224",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1224-note-4, the changed occurrence is “Prior ProvisionsA prior INA 234, act June 27, 1952, ch. 477, title II, ch. 4, § 234, 66 Stat. 198, as amended, which related to physical and mental exa”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 234 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 160,
+    "sourceId": "8-1227-note-4",
+    "sourcePath": "title8.sections[1227].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1182(a)(6)(C)(i)",
+    "renderedText": "INA 212(a)(6)(C)(i)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(a)(6)(C)(i)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a",
+        "6",
+        "C",
+        "i"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(a)(6)(C)(i)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a",
+        "6",
+        "C",
+        "i"
+      ]
+    },
+    "rationale": "Pass. In 8-1227-note-4, the changed occurrence is “l. (ii) as (iii). Subsec. (a)(1)(G). Pub. L. 102–232, § 307(h)(5), substituted “INA 212(a)(6)(C)(i)” for “INA 212(a)(5)(C)(i)”. Subsec. (a)(1)(H). Pub. L. 102–232, § 307(h)(6), substituted “paragraph (4)(D)” for “paragr”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(a)(6)(C)(i) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 163,
+    "sourceId": "8-1228-c-3-B",
+    "sourcePath": "title8.sections[1228].body[3/2/1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1253(a)",
+    "renderedText": "INA 243(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1253(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1253",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 243(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1253",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1228-c-3-B, the changed occurrence is “defendant’s country of choice for removal and any alternate country pursuant to INA 243(a).”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 243(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 166,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1229a",
+    "renderedText": "INA 240",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1229a",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1229a",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 240",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1229a",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1228-note-5, the changed occurrence is “or officers or any other person.” Pub. L. 104–208, § 308(c)(1)(A), substituted “INA 240” for “INA 242”. Pub. L. 104–132, § 440(g)(1)(B), struck out “, where warranted,” after “assures expeditious deportation”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 240 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 169,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1252(a)(2)",
+    "renderedText": "INA 242(a)(2)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1252(a)(2)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1252",
+      "targetPath": [
+        "a",
+        "2"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 242(a)(2)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1252",
+      "targetPath": [
+        "a",
+        "2"
+      ]
+    },
+    "rationale": "Pass. In 8-1228-note-5, the changed occurrence is “Subsec. (a)(2). Pub. L. 104–208, § 308(c)(1)(B), substituted “INA 236(c)” for “INA 242(a)(2)”. Pub. L. 104–132, § 440(g)(2), which directed substitution of “any criminal offense covered in section 1251(a)(2)(A)(i”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 242(a)(2) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 172,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1227(a)(2)(A)(iii)",
+    "renderedText": "INA 237(a)(2)(A)(iii)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1227(a)(2)(A)(iii)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1227",
+      "targetPath": [
+        "a",
+        "2",
+        "A",
+        "iii"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 237(a)(2)(A)(iii)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1227",
+      "targetPath": [
+        "a",
+        "2",
+        "A",
+        "iii"
+      ]
+    },
+    "rationale": "Pass. In 8-1228-note-5, the changed occurrence is “uted “removal” for “deportation”. Pub. L. 104–208, § 308(c)(1)(C), substituted “INA 237(a)(2)(A)(iii)” for “section 1251(a)(2)(A)(iii)→ 8 U.S.C. 1227”. Subsec. (b)(2)(A). Pub. L. 104–132, § 442(a)(1)(A), substituted “or””. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 237(a)(2)(A)(iii) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 175,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1227(a)(2)(A)",
+    "renderedText": "INA 237(a)(2)(A)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1227(a)(2)(A)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1227",
+      "targetPath": [
+        "a",
+        "2",
+        "A"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 237(a)(2)(A)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1227",
+      "targetPath": [
+        "a",
+        "2",
+        "A"
+      ]
+    },
+    "rationale": "Pass. In 8-1228-note-5, the changed occurrence is “→ 8 U.S.C. 1227, or (D)→ 8 U.S.C. 1227 of this title, or any offense covered by INA 237(a)(2)(A)(ii) for which both predicate offenses are, without regard to the date of their commission, otherwise covered by INA 237”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 237(a)(2)(A) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 178,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1252",
+    "renderedText": "INA 242",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1252",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1252",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 242",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1252",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1228-note-5, the changed occurrence is “any other person.” Pub. L. 104–208, § 308(c)(1)(A), substituted “INA 240” for “INA 242”. Pub. L. 104–132, § 440(g)(1)(B), struck out “, where warranted,” after “assures expeditious deportation”. Pub. L. 104”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 242 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 181,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1105a(a)(1)",
+    "renderedText": "INA 106(a)(1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1105a(a)(1)",
+      "resolution": "official-source-only",
+      "targetTitle": "8",
+      "targetSection": "1105a",
+      "targetPath": [
+        "a",
+        "1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 106(a)(1)",
+      "resolution": "official-source-only",
+      "targetTitle": "8",
+      "targetSection": "1105a",
+      "targetPath": [
+        "a",
+        "1"
+      ]
+    },
+    "rationale": "Pass. In 8-1228-note-5, the changed occurrence is “)(3)(A)(iii). Pub. L. 104–208, § 308(g)(2)(C), substituted “INA 242(b)(1)” for “INA 106(a)(1)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” in two places. Subsec. (c)(3)(B). Pub. L. 10”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 106(a)(1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 184,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1227(a)",
+    "renderedText": "INA 237(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1227(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1227",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 237(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1227",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1228-note-5, the changed occurrence is “→ 8 U.S.C. 1227, or (D)→ 8 U.S.C. 1227 of this title, or any offense covered by INA 237(a)(2)(A)(ii) for which both predicate offenses are, without regard to the date of their commission, otherwise covered by I”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 237(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 187,
+    "sourceId": "8-1229a-note-11",
+    "sourcePath": "title8.sections[1229a].notes[10]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 204(a)(1)(B)",
+    "renderedText": "INA 204(a)(1)(B)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1154(a)(1)(B)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1154",
+      "targetPath": [
+        "a",
+        "1",
+        "B"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 204(a)(1)(B)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1154",
+      "targetPath": [
+        "a",
+        "1",
+        "B"
+      ]
+    },
+    "rationale": "Pass. In 8-1229a-note-11, the changed occurrence is “) or (iv) of INA 204(a)(1)(A) (8 U.S.C. 1154(a)(1)(A)), clause (ii) or (iii) of INA 204(a)(1)(B) (8 U.S.C. 1154(a)(1)(B)), or section 244(a)(3) of such Act (as so in effect) (8 U.S.C. 1254(a)(3)); and “(bb) if the mo”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 204(a)(1)(B) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 190,
+    "sourceId": "8-1229b-note-9",
+    "sourcePath": "title8.sections[1229b].notes[8]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 101(a)(15)",
+    "renderedText": "INA 101(a)(15)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(a)(15)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(a)(15)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "a",
+        "15"
+      ]
+    },
+    "rationale": "Pass. In 8-1229b-note-9, the changed occurrence is “ication], cases involving nonimmigrants described in subparagraph (T) or (U) of INA 101(a)(15) (8 U.S.C. 1101(a)(15)), and relief under section 240A(b)(2) [8 U.S.C. 1229b(b)(2)] or 244(a)(3) [8 U.S.C. 1254(a)(3)] o”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(a)(15) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 193,
+    "sourceId": "8-1252-a-2-A",
+    "sourcePath": "title8.sections[1252].body[0/1/0]",
+    "field": "heading",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1225(b)(1)",
+    "renderedText": "INA 235(b)(1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1225(b)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1225",
+      "targetPath": [
+        "b",
+        "1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 235(b)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1225",
+      "targetPath": [
+        "b",
+        "1"
+      ]
+    },
+    "rationale": "Pass. In 8-1252-a-2-A, the changed occurrence is “Review relating to INA 235(b)(1)”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 235(b)(1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 196,
+    "sourceId": "8-1252-e",
+    "sourcePath": "title8.sections[1252].body[4]",
+    "field": "heading",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1225(b)(1)",
+    "renderedText": "INA 235(b)(1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1225(b)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1225",
+      "targetPath": [
+        "b",
+        "1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 235(b)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1225",
+      "targetPath": [
+        "b",
+        "1"
+      ]
+    },
+    "rationale": "Pass. In 8-1252-e, the changed occurrence is “Judicial review of orders under INA 235(b)(1)”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 235(b)(1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 199,
+    "sourceId": "8-1252-note-3",
+    "sourcePath": "title8.sections[1252].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1361",
+    "renderedText": "section 1361",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1361",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1361",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "28 U.S.C. 1361",
+      "resolution": "official-source-only",
+      "targetTitle": "28",
+      "targetSection": "1361",
+      "targetPath": []
+    },
+    "rationale": "Pass. The source amendment text explicitly lists “section 1361 ... of title 28” in 8-1252-note-3. The after record changes the prior erroneous 8 U.S.C. interpretation to official-source-only 28 U.S.C. 1361, matching the source wording and preserving the citation."
+  },
+  {
+    "id": 202,
+    "sourceId": "8-1254a-note-3",
+    "sourcePath": "title8.sections[1254a].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1253(h)(2)",
+    "renderedText": "INA 243(h)(2)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1253(h)(2)",
+      "resolution": "official-source-only",
+      "targetTitle": "8",
+      "targetSection": "1253",
+      "targetPath": [
+        "h",
+        "2"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 243(h)(2)",
+      "resolution": "official-source-only",
+      "targetTitle": "8",
+      "targetSection": "1253",
+      "targetPath": [
+        "h",
+        "2"
+      ]
+    },
+    "rationale": "Pass. In 8-1254a-note-3, the changed occurrence is “B)(ii). Pub. L. 104–208, § 308(g)(7)(E)(i), substituted “INA 208(b)(2)(A)” for “INA 243(h)(2)”. Subsec. (e). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “section 1254(a)”. Pub. L. 104–208, §”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 243(h)(2) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 205,
+    "sourceId": "8-1255-note-2",
+    "sourcePath": "title8.sections[1255].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1184",
+    "renderedText": "INA 214",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1184",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 214",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1184",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1255-note-2, the changed occurrence is “References in TextSubsection (p) of INA 214, referred to in subsec. (e)(3), was redesignated subsec. (r) of INA 214 by Pub. L. 108–193, § 8(a)(3), Dec. 19, 2003, 1”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 214 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 208,
+    "sourceId": "8-1255-note-3",
+    "sourcePath": "title8.sections[1255].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1154(h)",
+    "renderedText": "INA 204(h)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1154(h)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1154",
+      "targetPath": [
+        "h"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 204(h)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1154",
+      "targetPath": [
+        "h"
+      ]
+    },
+    "rationale": "Pass. In 8-1255-note-3, the changed occurrence is “(I)”. Subsec. (e)(3). Pub. L. 102–232, § 308(a), substituted “INA 204(g)” for “INA 204(h)”. Subsec. (g). Pub. L. 102–110, § 2(c)(2), added subsec. (g). Subsec. (h). Pub. L. 102–232, § 302(d)(2)(B), added subse”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 204(h) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 211,
+    "sourceId": "8-1255-note-21",
+    "sourcePath": "title8.sections[1255].notes[20]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 212(a)(9)",
+    "renderedText": "INA 212(a)(9)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(a)(9)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a",
+        "9"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(a)(9)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a",
+        "9"
+      ]
+    },
+    "rationale": "Pass. In 8-1255-note-21, the changed occurrence is “n a waiver on the grounds of inadmissibility under subparagraphs (A) and (C) of INA 212(a)(9) [8 U.S.C. 1182(a)(9)]. In granting waivers under subparagraph (B), the Attorney General shall use standards used in gra”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(a)(9) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 214,
+    "sourceId": "8-1255-note-22",
+    "sourcePath": "title8.sections[1255].notes[21]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 212(a)",
+    "renderedText": "INA 212(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1255-note-22, the changed occurrence is “inadmissibility specified in paragraphs (4), (5), (6)(A), (7)(A), and (9)(B) of INA 212(a) [8 U.S.C. 1182(a)(4), (5), (6)(A), (7)(A), (9)(B)] shall not apply. “(2) Rules in applying certain provisions.—In the c”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 217,
+    "sourceId": "8-1255-note-23",
+    "sourcePath": "title8.sections[1255].notes[22]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 212(a)",
+    "renderedText": "INA 212(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1255-note-23, the changed occurrence is “ounds for Inadmissibility.—The provisions of paragraphs (4), (5), and (7)(A) of INA 212(a) [8 U.S.C. 1182(a)(4), (5), (7)(A)] shall not apply to adjustment of status under this section and the Attorney General”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 220,
+    "sourceId": "8-1255-note-27",
+    "sourcePath": "title8.sections[1255].notes[26]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 212(a)",
+    "renderedText": "INA 212(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1255-note-27, the changed occurrence is “r Inadmissibility.—The provisions of paragraphs (4), (5), and (7)(A) and (9) of INA 212(a) [8 U.S.C. 1182(a)(4), (5), (7)(A), (9)] shall not be applicable to any alien seeking admission to the United States und”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 223,
+    "sourceId": "8-1258-a-4",
+    "sourcePath": "title8.sections[1258].body[0/3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1182(l)",
+    "renderedText": "INA 212(l)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1182(l)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "l"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 212(l)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1182",
+      "targetPath": [
+        "l"
+      ]
+    },
+    "rationale": "Pass. In 8-1258-a-4, the changed occurrence is “an alien admitted as a nonimmigrant visitor without a visa under INA 212(l) or INA 217.”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 212(l) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 226,
+    "sourceId": "8-1282-note-2",
+    "sourcePath": "title8.sections[1282].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1252",
+    "renderedText": "INA 242",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1252",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1252",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 242",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1252",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1282-note-2, the changed occurrence is “996—Subsec. (b). Pub. L. 104–208, § 308(g)(5)(A)(i), substituted “INA 240” for “INA 242”. Pub. L. 104–208, § 308(e)(2)(E), substituted “removed” for “deported” in two places. 1991—Subsec. (c). Pub. L. 102–23”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 242 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 229,
+    "sourceId": "8-1321-note-2",
+    "sourcePath": "title8.sections[1321].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1228",
+    "renderedText": "INA 238",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1228",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1228",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 238",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1228",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1321-note-2, the changed occurrence is “Amendments1996—Subsec. (a). Pub. L. 104–208 substituted “INA 233” for “INA 238”. 1990—Subsec. (a). Pub. L. 101–649 substituted “$3,000” for “$1,000”. 1986—Subsec. (c). Pub. L. 99–603 added subsec. (”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 238 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 232,
+    "sourceId": "8-1324a-a-1-B-i",
+    "sourcePath": "title8.sections[1324a].body[0/0/1/0]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "(b)",
+    "renderedText": "(b)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1802(b)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1802",
+      "targetPath": [
+        "b"
+      ]
+    },
+    "afterTarget": {
+      "citation": "8 U.S.C. 1324a(b)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1324a",
+      "targetPath": [
+        "b"
+      ]
+    },
+    "rationale": "Pass. In 8-1324a-a-1-B-i, the source phrase “ited States an individual without complying with the requirements of subsection (b) or (ii) if the person or entity is an agricultural association, agricultural employer, or farm labor contractor (as def” uses subsection (b) for the surrounding Title 8 provision, not Title 29’s section 1802(b). The after record corrects the prior mistaken target to local 8 U.S.C. 1324a(b) / INA 274A(b), consistent with the field’s source section and grammar."
+  },
+  {
+    "id": 235,
+    "sourceId": "8-1324b-note-3",
+    "sourcePath": "title8.sections[1324b].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1160(a)",
+    "renderedText": "INA 210(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1160(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1160",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 210(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1160",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1324b-note-3, the changed occurrence is “sec. (a)(3)(B). Pub. L. 104–208, § 671(d)(1)(B), struck out “, 1161(a),” after “INA 210(a)”. Subsec. (a)(6). Pub. L. 104–208, § 421(a), substituted “A person’s” for “For purposes of paragraph (1), a person’s” a”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 210(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 238,
+    "sourceId": "8-1356-r-2",
+    "sourcePath": "title8.sections[1356].body[17/1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1255(i)(3)(b)",
+    "renderedText": "INA 245(i)(3)(B)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1255(i)(3)(B)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1255",
+      "targetPath": [
+        "i",
+        "3",
+        "B"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 245(i)(3)(B)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1255",
+      "targetPath": [
+        "i",
+        "3",
+        "B"
+      ]
+    },
+    "rationale": "Pass. In 8-1356-r-2, the changed occurrence is “apter which are recovered by the Department of Justice, and amount described in INA 245(i)(3)(B).”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 245(i)(3)(B) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 241,
+    "sourceId": "8-1356-note-4",
+    "sourcePath": "title8.sections[1356].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1228(b)",
+    "renderedText": "INA 238(b)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1228(b)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1228",
+      "targetPath": [
+        "b"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 238(b)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1228",
+      "targetPath": [
+        "b"
+      ]
+    },
+    "rationale": "Pass. In 8-1356-note-4, the changed occurrence is “. 1996—Subsec. (a). Pub. L. 104–208, § 308(g)(1), substituted “INA 233(b)” for “INA 238(b)”. Subsec. (h)(1)(A). Pub. L. 104–208, § 671(e)(5), inserted period after “expended”. Subsec. (h)(1)(B). Pub. L. 104–208”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 238(b) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 244,
+    "sourceId": "8-1357-note-3",
+    "sourcePath": "title8.sections[1357].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1229a",
+    "renderedText": "INA 240",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1229a",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1229a",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 240",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1229a",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1357-note-3, the changed occurrence is “clusion from”. Subsec. (f)(1). Pub. L. 104–208, § 308(g)(5)(A)(i), substituted “INA 240” for “INA 242”. Subsec. (g). Pub. L. 104–208, § 308(e)(1)(M), which directed amendment of subsec. (g) by substituting “”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 240 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 247,
+    "sourceId": "8-1365a-note-9",
+    "sourcePath": "title8.sections[1365a].notes[8]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": null,
+    "renderedText": "section 5316",
+    "beforeTarget": null,
+    "afterTarget": {
+      "citation": "5 U.S.C. 5316",
+      "resolution": "official-source-only",
+      "targetTitle": "5",
+      "targetSection": "5316",
+      "targetPath": []
+    },
+    "rationale": "Pass. This is a newly detected explicit citation in 8-1365a-note-9: “rate not to exceed the rate payable for level V of the Executive Schedule under section 5316 of title 5, United States Code. The Attorney General may fix the compensation of other personnel without regard to the”. The after record adds 5 U.S.C. 5316 with official-source-only resolution, matching the stated title in the source context; the addition preserves the original prose and does not invent an INA mapping."
+  },
+  {
+    "id": 250,
+    "sourceId": "8-1409-note-4",
+    "sourcePath": "title8.sections[1409].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1401(a)",
+    "renderedText": "INA 301(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1401(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1401",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 301(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1401",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1409-note-4, the changed occurrence is “(1), substituted “(c), (d), (e), and (g) of INA 301” for “(3) to (5) and (7) of INA 301(a)”. Subsec. (b). Pub. L. 97–116, § 18(l)(2), substituted “INA 301(g)” for “INA 301(a)(7)”.”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 301(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 253,
+    "sourceId": "8-1423-note-8",
+    "sourcePath": "title8.sections[1423].notes[7]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 312(a)",
+    "renderedText": "INA 312(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1423(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1423",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 312(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1423",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1423-note-8, the changed occurrence is “UERRILLA UNITS OR IRREGULAR FORCES IN LAOS.“The requirement of paragraph (1) of INA 312(a) (8 U.S.C. 1423(a)(1)) shall not apply to the naturalization of any person—“(1) who—“(A) was admitted into the United St”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 312(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 256,
+    "sourceId": "8-1427-note-9",
+    "sourcePath": "title8.sections[1427].notes[8]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 101(b)(1)",
+    "renderedText": "INA 101(b)(1)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1101(b)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "b",
+        "1"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 101(b)(1)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1101",
+      "targetPath": [
+        "b",
+        "1"
+      ]
+    },
+    "rationale": "Pass. In 8-1427-note-9, the changed occurrence is “) the term ‘child’ means a child as defined in subparagraphs (A) through (E) of INA 101(b)(1) [8 U.S.C. 1101(b)(1)], without regard to age or marital status; and “(2) the term ‘spouse’ means the wife or husband of”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 101(b)(1) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 259,
+    "sourceId": "8-1448-note-2",
+    "sourcePath": "title8.sections[1448].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1433",
+    "renderedText": "INA 322",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1433",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1433",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 322",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1433",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1448-note-2, the changed occurrence is “407(d)(15)(D), added subsec. (d). 1981—Subsec. (a). Pub. L. 97–116 substituted “INA 322” for “INA 322 or 1434”.”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 322 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 262,
+    "sourceId": "8-1452-note-3",
+    "sourcePath": "title8.sections[1452].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1401(a)",
+    "renderedText": "INA 301(a)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1401(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1401",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 301(a)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1401",
+      "targetPath": [
+        "a"
+      ]
+    },
+    "rationale": "Pass. In 8-1452-note-3, the changed occurrence is “16 substituted “(c), (d), (e), or (g) of INA 301” for “(3), (4), (5), or (7) of INA 301(a)”.”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 301(a) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 265,
+    "sourceId": "8-1483-note-3",
+    "sourcePath": "title8.sections[1483].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1481",
+    "renderedText": "INA 349",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1481",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1481",
+      "targetPath": []
+    },
+    "afterTarget": {
+      "citation": "INA 349",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1481",
+      "targetPath": []
+    },
+    "rationale": "Pass. In 8-1483-note-3, the changed occurrence is “Subsec. (a). Pub. L. 97–116, § 18(r)(1), substituted “paragraphs (6) and (7) of INA 349(a)” for “paragraphs (7), (8), and (9) of INA 349”. Subsec. (b). Pub. L. 97–116, § 18(r)(2), substituted “and (5)” for “”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 349 with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 268,
+    "sourceId": "8-1534-k-4",
+    "sourcePath": "title8.sections[1534].body[10/3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "section 1254a(e)",
+    "renderedText": "INA 244(e)",
+    "beforeTarget": {
+      "citation": "8 U.S.C. 1254a(e)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1254a",
+      "targetPath": [
+        "e"
+      ]
+    },
+    "afterTarget": {
+      "citation": "INA 244(e)",
+      "resolution": "local",
+      "targetTitle": "8",
+      "targetSection": "1254a",
+      "targetPath": [
+        "e"
+      ]
+    },
+    "rationale": "Pass. In 8-1534-k-4, the changed occurrence is “voluntary departure under INA 244(e);”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as INA 244(e) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 271,
+    "sourceId": "8-1721-c-4",
+    "sourcePath": "title8.sections[1721].body[2/3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": "(7)",
+    "renderedText": "(7)",
+    "beforeTarget": {
+      "citation": "18 U.S.C. 1030(a)(7)",
+      "resolution": "official-source-only",
+      "targetTitle": "18",
+      "targetSection": "1030",
+      "targetPath": [
+        "a",
+        "7"
+      ]
+    },
+    "afterTarget": {
+      "citation": "18 U.S.C. 1030(a)(7)",
+      "resolution": "official-source-only",
+      "targetTitle": "18",
+      "targetSection": "1030",
+      "targetPath": [
+        "a",
+        "7"
+      ]
+    },
+    "rationale": "Pass. In 8-1721-c-4, the changed occurrence is “s such information in the manner described in any of the paragraphs (1) through (7) of section 1030(a) of such title, or attempts to use such information in such manner, shall be subject to the same pena”. The source wording identifies the cited provision in this Title 8 section or note; the after record resolves it as 18 U.S.C. 1030(a)(7) with the same subsection path and local/official policy appropriate to that context. The rendered afterField remains grammatical and preserves surrounding prose and punctuation."
+  },
+  {
+    "id": 274,
+    "sourceId": "8-1721-c-4",
+    "sourcePath": "title8.sections[1721].body[2/3]",
+    "field": "text",
+    "verdict": "pass",
+    "issue": null,
+    "referenceText": null,
+    "renderedText": "section 1030(c)",
+    "beforeTarget": null,
+    "afterTarget": {
+      "citation": "18 U.S.C. 1030(c)",
+      "resolution": "official-source-only",
+      "targetTitle": "18",
+      "targetSection": "1030",
+      "targetPath": [
+        "c"
+      ]
+    },
+    "rationale": "Pass. This is a newly detected explicit citation in 8-1721-c-4: “in such manner, shall be subject to the same penalties as are applicable under section 1030(c) of such title for violation of that paragraph.”. The after record adds 18 U.S.C. 1030(c) with official-source-only resolution, matching the stated title in the source context; the addition preserves the original prose and does not invent an INA mapping."
+  }
+]

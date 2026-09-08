@@ -1,0 +1,933 @@
+{
+  "artifactSha256": "c71b9acde48e5e53f35646406a9097b185de56cc184df0a6928f1a0d7beba8b7",
+  "statutorySections": 376,
+  "structuralUnits": 6973,
+  "inlineMarkers": 273,
+  "cfrSections": 3039,
+  "statutoryDuplicates": [
+    {
+      "citation": "8 U.S.C. 1154(a)(1)(B)(i)(I)",
+      "occurrences": [
+        {
+          "ina": "INA 204(a)(1)(B)(i)(I)",
+          "locator": "body[0].children[0].children[1].children[0].children[0]",
+          "heading": "",
+          "text": "Except as provided in subclause (II), any alien lawfully admitted for permanent residence claiming that an alien is entitled to a classification by reason of the relationship described in section 1153(a)(2) of this title may file a petition with the Attorney General for such classification.",
+          "childLabels": [],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1154"
+        },
+        {
+          "ina": "INA 204(a)(1)(B)(i)(I)",
+          "locator": "body[0].children[0].children[1].children[0].children[1]",
+          "heading": "",
+          "text": "Subclause (I) shall not apply in the case of an alien lawfully admitted for permanent residence who has been convicted of a specified offense against a minor (as defined in subparagraph (A)(viii)(II)), unless the Secretary of Homeland Security, in the Secretary’s sole and unreviewable discretion, determines that such person poses no risk to the alien with respect to whom a petition described in subclause (I) is filed.",
+          "childLabels": [],
+          "footnoteReferences": [
+            {
+              "id": "usc-1154-fn002007",
+              "xmlId": "fn002007",
+              "number": "1",
+              "flattenedInsertion": "11 So in original. Probably should be “(II)”.",
+              "sourceLocation": {
+                "sourceKey": "1154:a/1/B/i/I#2",
+                "field": "text"
+              },
+              "offset": 0,
+              "reconstructionPrefix": "",
+              "reconstructionSuffix": " "
+            }
+          ],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1154"
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1182(t)",
+      "occurrences": [
+        {
+          "ina": "INA 212(t)",
+          "locator": "body[19]",
+          "heading": "Nonimmigrant professionals; labor attestations",
+          "text": "",
+          "childLabels": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "footnoteReferences": [
+            {
+              "id": "usc-1182-fn002022",
+              "xmlId": "fn002022",
+              "number": "11",
+              "flattenedInsertion": "1111 So in original. Two subsecs. (t) have been enacted.",
+              "sourceLocation": {
+                "sourceKey": "1182:t",
+                "field": "heading"
+              },
+              "offset": 0,
+              "reconstructionPrefix": "",
+              "reconstructionSuffix": " "
+            }
+          ],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        },
+        {
+          "ina": "INA 212(t)",
+          "locator": "body[20]",
+          "heading": "Foreign residence requirement",
+          "text": "",
+          "childLabels": [
+            "1",
+            "2"
+          ],
+          "footnoteReferences": [
+            {
+              "id": "usc-1182-fn002023",
+              "xmlId": "fn002023",
+              "number": "12",
+              "flattenedInsertion": "1212 So in original. Two subsecs. (t) have been enacted.",
+              "sourceLocation": {
+                "sourceKey": "1182:t#2",
+                "field": "heading"
+              },
+              "offset": 0,
+              "reconstructionPrefix": "",
+              "reconstructionSuffix": " "
+            }
+          ],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1182(t)(1)",
+      "occurrences": [
+        {
+          "ina": "INA 212(t)(1)",
+          "locator": "body[19].children[0]",
+          "heading": "",
+          "text": "No alien may be admitted or provided status as a nonimmigrant under section 1101(a)(15)(H)(i)(b1) of this title or section 1101(a)(15)(E)(iii) of this title in an occupational classification unless the employer has filed with the Secretary of Labor an attestation stating the following:",
+          "childLabels": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        },
+        {
+          "ina": "INA 212(t)(1)",
+          "locator": "body[20].children[0]",
+          "heading": "",
+          "text": "Except as provided in paragraph (2), no person admitted under section 1101(a)(15)(Q)(ii)(I) of this title, or acquiring such status after admission, shall be eligible to apply for nonimmigrant status, an immigrant visa, or permanent residence under this chapter until it is established that such person has resided and been physically present in the person’s country of nationality or last residence for an aggregate of at least 2 years following departure from the United States.",
+          "childLabels": [],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1182(t)(2)",
+      "occurrences": [
+        {
+          "ina": "INA 212(t)(2)",
+          "locator": "body[19].children[1]",
+          "heading": "",
+          "text": "",
+          "childLabels": [
+            "A",
+            "B",
+            "C"
+          ],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        },
+        {
+          "ina": "INA 212(t)(2)",
+          "locator": "body[20].children[1]",
+          "heading": "",
+          "text": "The Secretary of Homeland Security may waive the requirement of such 2-year foreign residence abroad if the Secretary determines that—",
+          "childLabels": [
+            "A",
+            "B"
+          ],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1182(t)(2)(A)",
+      "occurrences": [
+        {
+          "ina": "INA 212(t)(2)(A)",
+          "locator": "body[19].children[1].children[0]",
+          "heading": "",
+          "text": "The employer shall make available for public examination, within one working day after the date on which an attestation under this subsection is filed, at the employer’s principal place of business or worksite, a copy of each such attestation (and such accompanying documents as are necessary).",
+          "childLabels": [],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        },
+        {
+          "ina": "INA 212(t)(2)(A)",
+          "locator": "body[20].children[1].children[0]",
+          "heading": "",
+          "text": "departure from the United States would impose exceptional hardship upon the alien’s spouse or child (if such spouse or child is a citizen of the United States or an alien lawfully admitted for permanent residence); or",
+          "childLabels": [],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1182(t)(2)(B)",
+      "occurrences": [
+        {
+          "ina": "INA 212(t)(2)(B)",
+          "locator": "body[19].children[1].children[1]",
+          "heading": "",
+          "text": "",
+          "childLabels": [
+            "i",
+            "ii"
+          ],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        },
+        {
+          "ina": "INA 212(t)(2)(B)",
+          "locator": "body[20].children[1].children[1]",
+          "heading": "",
+          "text": "the admission of the alien is in the public interest or the national interest of the United States.",
+          "childLabels": [],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1182"
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1228(c)",
+      "occurrences": [
+        {
+          "ina": "INA 238(c)",
+          "locator": "body[2]",
+          "heading": "Presumption of deportability",
+          "text": "An alien convicted of an aggravated felony shall be conclusively presumed to be deportable from the United States.",
+          "childLabels": [],
+          "footnoteReferences": [
+            {
+              "id": "usc-1228-fn002044",
+              "xmlId": "fn002044",
+              "number": "1",
+              "flattenedInsertion": "11 So in original. Two subsecs. (c) have been enacted.",
+              "sourceLocation": {
+                "sourceKey": "1228:c",
+                "field": "heading"
+              },
+              "offset": 0,
+              "reconstructionPrefix": "",
+              "reconstructionSuffix": " "
+            }
+          ],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1228"
+        },
+        {
+          "ina": "INA 238(c)",
+          "locator": "body[3]",
+          "heading": "Judicial removal",
+          "text": "",
+          "childLabels": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "footnoteReferences": [
+            {
+              "number": "1",
+              "flattenedInsertion": "1",
+              "sourceLocation": {
+                "sourceKey": "1228:c#2",
+                "field": "heading"
+              },
+              "reusedReference": true,
+              "offset": 0,
+              "reconstructionPrefix": "",
+              "reconstructionSuffix": " ",
+              "id": "usc-1228-fn002044",
+              "xmlId": "fn002044"
+            }
+          ],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1228"
+        }
+      ]
+    }
+  ],
+  "additionalInlineCandidates": [
+    {
+      "citation": "8 U.S.C. 1160(a)(2)(I)",
+      "occurrences": [
+        {
+          "kind": "inline",
+          "locator": "body[0].children[1].children[0]",
+          "start": 475,
+          "parent": [
+            "a",
+            "2",
+            "A"
+          ],
+          "text": "(I) the date the alien was granted such temporary resident status, or (II) the day after the last day of the application period described in paragraph (1)(A)."
+        },
+        {
+          "kind": "inline",
+          "locator": "body[0].children[1].children[1]",
+          "start": 172,
+          "parent": [
+            "a",
+            "2",
+            "B"
+          ],
+          "text": "(I) the date the alien was granted such temporary resident status, or (II) the day after the last day of the application period described in paragraph (1)(A)."
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1160(a)(2)(II)",
+      "occurrences": [
+        {
+          "kind": "inline",
+          "locator": "body[0].children[1].children[0]",
+          "start": 545,
+          "parent": [
+            "a",
+            "2",
+            "A"
+          ],
+          "text": "(II) the day after the last day of the application period described in paragraph (1)(A)."
+        },
+        {
+          "kind": "inline",
+          "locator": "body[0].children[1].children[1]",
+          "start": 242,
+          "parent": [
+            "a",
+            "2",
+            "B"
+          ],
+          "text": "(II) the day after the last day of the application period described in paragraph (1)(A)."
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1435(a)(1)",
+      "occurrences": [
+        {
+          "kind": "inline",
+          "locator": "body[0]",
+          "start": 55,
+          "parent": [
+            "a"
+          ],
+          "text": "(1) prior to September 22, 1922, lost United States citizenship by marriage to an alien, or by the loss of United States citizenship of such person’s spouse, or (2) on or after September 22, 1922, lost United States citizenship by marriage to an alie"
+        },
+        {
+          "ina": "INA 324(a)(1)",
+          "locator": "body[0].children[0]",
+          "heading": "",
+          "text": "no period of residence or specified period of physical presence within the United States or within the State or district of the Service in the United States where the application is filed shall be required; and",
+          "childLabels": [],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1435",
+          "kind": "structural"
+        }
+      ]
+    },
+    {
+      "citation": "8 U.S.C. 1435(a)(2)",
+      "occurrences": [
+        {
+          "kind": "inline",
+          "locator": "body[0]",
+          "start": 216,
+          "parent": [
+            "a"
+          ],
+          "text": "(2) on or after September 22, 1922, lost United States citizenship by marriage to an alien ineligible to citizenship, may if no other nationality was acquired by an affirmative act of such person other than by marriage be naturalized upon compliance "
+        },
+        {
+          "ina": "INA 324(a)(2)",
+          "locator": "body[0].children[1]",
+          "heading": "",
+          "text": "the application need not set forth that it is the intention of the applicant to reside permanently within the United States.",
+          "childLabels": [],
+          "footnoteReferences": [],
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1435",
+          "kind": "structural"
+        }
+      ]
+    }
+  ],
+  "cfrAddressDuplicates": [
+    {
+      "citation": "8 CFR 214.1(a)(2)",
+      "occurrences": [
+        {
+          "locator": "blocks[12]",
+          "text": "(2) Classification designations. For the purpose of this chapter the following nonimmigrant designations are established. The designation in the second column may be used to refer to the appropriate nonimmigrant classification.",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[26]",
+          "text": "(2) Section 101(a)(15)(J). The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(J) of the Act, if the alien:",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 214.1(a)(2)(ii)",
+      "occurrences": [
+        {
+          "locator": "blocks[17]",
+          "text": "(ii) At the time of admission or extension of stay, every nonimmigrant alien must also agree to depart the United States at the expiration of his or her authorized period of admission or extension of stay, or upon abandonment of his or her authorized nonimmigrant status, and to comply with the departure procedures at section 215.8 of this chapter if such procedures apply to the particular alien. The nonimmigrant alien's failure to comply with those departure requirements, including any requirement that the alien provide biometric identifiers, may constitute a failure of the alien to maintain the terms of his or her nonimmigrant status.",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(ii)",
+              "s": 0,
+              "e": 4
+            }
+          ]
+        },
+        {
+          "locator": "blocks[21]",
+          "text": "(ii) Is applying for readmission after an absence from the United States not exceeding thirty days solely in contiguous territory or adjacent islands;",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(ii)",
+              "s": 0,
+              "e": 4
+            }
+          ]
+        },
+        {
+          "locator": "blocks[28]",
+          "text": "(ii) Is applying for readmission after an absence from the United States not exceeding thirty days solely in contiguous territory or adjacent islands;",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(ii)",
+              "s": 0,
+              "e": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 214.1(a)(2)(iii)",
+      "occurrences": [
+        {
+          "locator": "blocks[18]",
+          "text": "(iii) At the time a nonimmigrant alien applies for admission or extension of stay, he or she must post a bond on Form I-352 in the sum of not less than $500, to ensure the maintenance of his or her nonimmigrant status and departure from the United States, if required to do so by the Commissioner of CBP, the Director of U.S. Citizenship and Immigration Services, an immigration judge, or the Board of Immigration Appeals.",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(iii)",
+              "s": 0,
+              "e": 5
+            }
+          ]
+        },
+        {
+          "locator": "blocks[22]",
+          "text": "(iii) Is in possession of a valid passport unless exempt from the requirement for presentation of a passport; and",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(iii)",
+              "s": 0,
+              "e": 5
+            }
+          ]
+        },
+        {
+          "locator": "blocks[29]",
+          "text": "(iii) Is in possession of a valid passport unless exempt from the requirement for the presentation of a passport; and",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(iii)",
+              "s": 0,
+              "e": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 214.1(a)(2)(i)",
+      "occurrences": [
+        {
+          "locator": "blocks[20]",
+          "text": "(i) Is admissible;",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(i)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[27]",
+          "text": "(i) Is admissible;",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(i)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 214.1(a)(2)(iv)",
+      "occurrences": [
+        {
+          "locator": "blocks[23]",
+          "text": "(iv) Presents, or is the accompanying spouse or child of an alien who presents, an Arrival-Departure Record, Form I-94 (see § 1.4 of this chapter), issued to the alien in connection with the previous admission or stay, and either:",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(iv)",
+              "s": 0,
+              "e": 4
+            }
+          ]
+        },
+        {
+          "locator": "blocks[30]",
+          "text": "(iv) Presents, or is the accompanying spouse or child of an alien who presents, Form I-94 issued to the alien in connection with the previous admission or stay or the last Form DS-2019 issued to the alien. Form I-94 or Form DS-2019 must show the unexpired period of the alien's stay properly endorsed.",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-214/subpart-A/section-214.1",
+          "unitMarkers": [
+            {
+              "a": "(a)(2)(iv)",
+              "s": 0,
+              "e": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 274a.2(b)(4)",
+      "occurrences": [
+        {
+          "locator": "blocks[42]",
+          "text": "(4) Individuals with handicaps, who are unable to produce one of the identity documents listed in paragraph (b)(1)(v)(B) (1) or (2) of this section, who are being placed into employment by a nonprofit organization, association or as part of a rehabilitation program, may follow the procedures for establishing identity provided in this section for minors under the age of 18, substituting where appropriate, the term “special placement” for “minor under age 18”, and permitting, in addition to a parent or legal guardian, a representative from the nonprofit organization, association or rehabilitation program placing the individual into a position of employment, to fill out and sign in the appropriate section, the Form I-9. For purposes of this section the term individual with handicaps means any person who",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[106]",
+          "text": "(4) Limitation on use of Form I-9. Any information contained in or appended to the Form I-9, including copies or electronic images of documents listed in paragraph (c) of this section used to verify an individual's identity or employment eligibility, may be used only for enforcement of the Act and sections 1001, 1028, 1546, or 1621 of title 18, United States Code.",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 274a.2(b)(4)(iii)(C)",
+      "occurrences": [
+        {
+          "locator": "blocks[46]",
+          "text": "(C) The following are acceptable documents to establish employment authorization only:",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(iii)(C)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[68]",
+          "text": "(C) Form I-94 or I-94A indicating refugee status. The individual indicates in section 1 of the Form I-9 that he or she is an alien authorized to work and the individual:",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(iii)(C)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 274a.2(b)(4)(iii)(C)(1)",
+      "occurrences": [
+        {
+          "locator": "blocks[47]",
+          "text": "(1) A Social Security account number card other than one that specifies on the face that the issuance of the card does not authorize employment in the United States;",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(iii)(C)(1)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[69]",
+          "text": "(1) Presents the departure portion of Form I-94 or I-94A containing an unexpired refugee admission stamp, which is designated for purposes of this section as a receipt for the Form I-766, or a social security account number card that contains no employment restrictions; and",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(iii)(C)(1)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 274a.2(b)(4)(iii)(C)(2)",
+      "occurrences": [
+        {
+          "locator": "blocks[48]",
+          "text": "(2) Certification or report of birth issued by the Department of State, including Forms FS-545, DS-1350, FS-240;",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(iii)(C)(2)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[70]",
+          "text": "(2) Presents, within 90 days of the hire or, in the case of reverification, the date employment authorization expires, either an unexpired Form I-766, or a social security account number card that contains no employment restrictions and a document described under paragraph (b)(1)(v)(B) of this section.",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(iii)(C)(2)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 274a.2(b)(4)(ix)(A)",
+      "occurrences": [
+        {
+          "locator": "blocks[94]",
+          "text": "(A) As part of a pilot program;",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(ix)(A)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[98]",
+          "text": "(A) In the case of an employer, three years after the date of the hire or one year after the date the individual's employment is terminated, whichever is later; or",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(ix)(A)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[102]",
+          "text": "(A) To provide for the processing, storage and maintenance of all microfilm, and",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(ix)(A)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "8 CFR 274a.2(b)(4)(ix)(B)",
+      "occurrences": [
+        {
+          "locator": "blocks[95]",
+          "text": "(B) Upon the Secretary's determination that such procedures offer an equivalent level of security to that of physical examination as indicated by, for instance, observed measures of system integrity (such as error or fraud rates) or the procedure's capacity for confirming certain documents or information; or",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(ix)(B)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[99]",
+          "text": "(B) In the case of a recruiter or referrer for a fee, three years after the date of the hire.",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(ix)(B)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[103]",
+          "text": "(B) To be able to make the contents thereof available as required by law. The person or entity presenting the microfilm will make available a reader-printer at the examination site for the ready reading, location and reproduction of any record or records being maintained on microfilm. Reader-printers made available to an officer of the Service, the Special Counsel for Immigration-Related Unfair Employment Practices, or the Department of Labor shall provide safety features and be in clean condition, properly maintained and in good working order. The reader-printers must have the capacity to display and print a complete page of information. A person or entity who is determined to have failed to comply with the criteria established by this regulation for the presentation of microfilm or microfiche to the Service, the Special Counsel for Immigration-Related Unfair Employment Practices, or the Department of Labor, and at the time of the inspection does not present a properly completed Form I-9 for the employee, is in violation of section 274A(a)(1)(B) of the Act and § 274a.2(b)(2).",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/part-274a/subpart-A/section-274a.2",
+          "unitMarkers": [
+            {
+              "a": "(b)(4)(ix)(B)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "20 CFR 655.15(f)(2)(i)(C)(1)",
+      "occurrences": [
+        {
+          "locator": "blocks[13]",
+          "text": "(1) Applies for the job; and",
+          "url": "https://www.ecfr.gov/current/title-20/part-655/subpart-A/section-655.15",
+          "unitMarkers": [
+            {
+              "a": "(f)(2)(i)(C)(1)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[16]",
+          "text": "(1) Sign and date an attestation form stating the employer's compliance with this subparagraph. The attestation form is available at http://www.foreignlaborcert.doleta.gov/form.cfm;",
+          "url": "https://www.ecfr.gov/current/title-20/part-655/subpart-A/section-655.15",
+          "unitMarkers": [
+            {
+              "a": "(f)(2)(i)(C)(1)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "20 CFR 655.15(f)(2)(i)(C)(2)",
+      "occurrences": [
+        {
+          "locator": "blocks[14]",
+          "text": "(2) Will be available at the time and place of need.",
+          "url": "https://www.ecfr.gov/current/title-20/part-655/subpart-A/section-655.15",
+          "unitMarkers": [
+            {
+              "a": "(f)(2)(i)(C)(2)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[17]",
+          "text": "(2) Provide each H-2B nonimmigrant worker seeking admission to the United States a copy of the signed and dated attestation, with instructions that the worker must present the documentation upon request to the Department of State's consular officers when they apply for a visa and/or the Department of Homeland Security's U.S Customs and Border Protection officers when seeking admission to the United States. Without this attestation, an H-2B nonimmigrant may be denied a visa or admission to the United States if seeking to enter at any time other than the start date stated in the petition. (The attestation is not necessary when filing an amended petition based on a worker who is being substituted in accordance with DHS regulations.) The attestation presented by an H-2B nonimmigrant worker must be the official attestation downloaded from OFLC's Web site and may not be altered or revised in any manner; and",
+          "url": "https://www.ecfr.gov/current/title-20/part-655/subpart-A/section-655.15",
+          "unitMarkers": [
+            {
+              "a": "(f)(2)(i)(C)(2)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "20 CFR 655.15(f)(2)(i)(C)(3)",
+      "occurrences": [
+        {
+          "locator": "blocks[15]",
+          "text": "(3) In order to comply with this provision, employers in the seafood industry must—",
+          "url": "https://www.ecfr.gov/current/title-20/part-655/subpart-A/section-655.15",
+          "unitMarkers": [
+            {
+              "a": "(f)(2)(i)(C)(3)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[18]",
+          "text": "(3) Retain the additional recruitment documentation, together with their prefiling recruitment documentation, for a period of 3 years from the date of certification, consistent with the document retention requirements under § 655.56. Seafood industry employers who conduct the required additional recruitment should not submit proof of the additional recruitment to the Office of Foreign Labor Certification.",
+          "url": "https://www.ecfr.gov/current/title-20/part-655/subpart-A/section-655.15",
+          "unitMarkers": [
+            {
+              "a": "(f)(2)(i)(C)(3)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "citation": "20 CFR 655.19(e)(1)",
+      "occurrences": [
+        {
+          "locator": "blocks[7]",
+          "text": "(1) Either the job contractor or its employer-client may place the required job order and conduct recruitment as described in §§ 655.16 and 655.43 through 655.46. Also, either one of the joint employers may assume responsibility for interviewing applicants. However, both of the joint employers must sign the recruitment report that is submitted to the NPC with the Application for Temporary Employment Certification, ETA Form 9142B.",
+          "url": "https://www.ecfr.gov/current/title-20/part-655/subpart-A/section-655.19",
+          "unitMarkers": [
+            {
+              "a": "(e)(1)",
+              "s": 0,
+              "e": 3
+            }
+          ]
+        },
+        {
+          "locator": "blocks[8]",
+          "text": "(e)(1) Either the job contractor or its employer-client may place the required job order and conduct recruitment as described in § 655.16 and §§ 655.42 through 655.46. Also, either one of the joint employers may assume responsibility for interviewing applicants. However, both of the joint employers must sign the recruitment report that is submitted to the NPC with the Application for Temporary Employment Certification, ETA Form 9142B.",
+          "url": "https://www.ecfr.gov/current/title-20/part-655/subpart-A/section-655.19",
+          "unitMarkers": [
+            {
+              "a": "(e)",
+              "s": 0,
+              "e": 3
+            },
+            {
+              "a": "(e)(1)",
+              "s": 3,
+              "e": 6
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "houseNotes": [
+    {
+      "section": "1154",
+      "notes": [
+        {
+          "id": "usc-1154-fn002007",
+          "xmlId": "fn002007",
+          "number": "1",
+          "text": "So in original. Probably should be “(II)”.",
+          "sourceLocation": {
+            "sourceKey": "1154:a/1/B/i/I#2",
+            "field": "text",
+            "offset": 0
+          },
+          "uslmReferences": [],
+          "references": []
+        }
+      ]
+    },
+    {
+      "section": "1182",
+      "notes": [
+        {
+          "id": "usc-1182-fn002022",
+          "xmlId": "fn002022",
+          "number": "11",
+          "text": "So in original. Two subsecs. (t) have been enacted.",
+          "sourceLocation": {
+            "sourceKey": "1182:t",
+            "field": "heading",
+            "offset": 0
+          },
+          "uslmReferences": [],
+          "references": []
+        },
+        {
+          "id": "usc-1182-fn002023",
+          "xmlId": "fn002023",
+          "number": "12",
+          "text": "So in original. Two subsecs. (t) have been enacted.",
+          "sourceLocation": {
+            "sourceKey": "1182:t#2",
+            "field": "heading",
+            "offset": 0
+          },
+          "uslmReferences": [],
+          "references": []
+        }
+      ]
+    },
+    {
+      "section": "1228",
+      "notes": [
+        {
+          "id": "usc-1228-fn002044",
+          "xmlId": "fn002044",
+          "number": "1",
+          "text": "So in original. Two subsecs. (c) have been enacted.",
+          "sourceLocation": {
+            "sourceKey": "1228:c",
+            "field": "heading",
+            "offset": 0
+          },
+          "uslmReferences": [],
+          "references": []
+        }
+      ]
+    }
+  ]
+}

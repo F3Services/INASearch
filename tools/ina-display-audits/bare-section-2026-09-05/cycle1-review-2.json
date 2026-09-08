@@ -1,0 +1,412 @@
+[
+  {
+    "id": 2,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 214(o) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 5,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1184 resolves to INA 214 (target 8 U.S.C. §1184[]; undefined; undefined). The rendered replacement “INA 214” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 8,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1184(k) resolves to INA 214(k) (target 8 U.S.C. §1184[\"k\"]; undefined; undefined). The rendered replacement “INA 214(k)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 11,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 240A(d) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 14,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 212(a) resolves to INA 212(a) (target 8 U.S.C. §1182[\"a\"]; undefined; undefined). The rendered replacement “INA 212(a)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 17,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 203(b) is crosswalk-correct, but the rendered citation is immediately followed by “of such Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 20,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1501 resolves to INA 358 (target 8 U.S.C. §1501[]; undefined; undefined). The rendered replacement “INA 358” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 23,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 245(c) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 26,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(E) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 29,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination metadata resolves 8 U.S.C. 1101(4) to INA 101(4), but the full source phrase is “section 1101(4) of Ex. Ord. No. 12656.” This is an Executive Order citation, so converting it to an INA citation is misleading even though the USC-shaped target metadata matches the corpus."
+  },
+  {
+    "id": 32,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1229b(a) resolves to INA 240A(a) (target 8 U.S.C. §1229b[\"a\"]; undefined; undefined). The rendered replacement “INA 240A(a)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 35,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 203(b) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 38,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1153(a)(7) of this title resolves to INA 203(a)(7) (target 8 U.S.C. §1153[\"a\",\"7\"]; undefined; undefined). The rendered replacement “INA 203(a)(7)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 41,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1101(b)(1)(F) resolves to INA 101(b)(1)(F) (target 8 U.S.C. §1101[\"b\",\"1\",\"F\"]; undefined; undefined). The rendered replacement “INA 101(b)(1)(F)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 44,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1157 resolves to INA 207 (target 8 U.S.C. §1157[]; undefined; undefined). The rendered replacement “INA 207” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 47,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1227(a)(4)(B) resolves to INA 237(a)(4)(B) (target 8 U.S.C. §1227[\"a\",\"4\",\"B\"]; undefined; undefined). The rendered replacement “INA 237(a)(4)(B)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 50,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1182(a)(19) resolves to INA 212(a)(19) (target 8 U.S.C. §1182[\"a\",\"19\"]; undefined; undefined). The rendered replacement “INA 212(a)(19)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 53,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 240B is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 56,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(H)(i)(b1) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 59,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(H)(i)(b1) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 62,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(H)(i)(b1) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 65,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(H)(i)(b1) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 68,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(H)(i)(b1) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 71,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 214(l) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 74,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(H)(i)(b1) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 77,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1223(c) resolves to INA 233(c) (target 8 U.S.C. §1223[\"c\"]; undefined; undefined). The rendered replacement “INA 233(c)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 80,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1227(a) resolves to INA 237(a) (target 8 U.S.C. §1227[\"a\"]; undefined; undefined). The rendered replacement “INA 237(a)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 83,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(a)(3)(B)(iv) is crosswalk-correct, but the rendered citation is immediately followed by “of such Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 86,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(a)(4) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 89,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(a) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 92,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 204(l) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 95,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(H)(i)(b1) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 98,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15)(H)(i)(b1) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 101,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1101(a)(15)(T)(i)(III)(aa) resolves to INA 101(a)(15)(T)(i)(III)(aa) (target 8 U.S.C. §1101[\"a\",\"15\",\"T\",\"i\",\"III\",\"aa\"]; undefined; undefined). The rendered replacement “INA 101(a)(15)(T)(i)(III)(aa)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 104,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1101(a)(15)(U) resolves to INA 101(a)(15)(U) (target 8 U.S.C. §1101[\"a\",\"15\",\"U\"]; undefined; undefined). The rendered replacement “INA 101(a)(15)(U)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 107,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1101(a)(15)(K)(ii) resolves to INA 101(a)(15)(K)(ii) (target 8 U.S.C. §1101[\"a\",\"15\",\"K\",\"ii\"]; undefined; undefined). The rendered replacement “INA 101(a)(15)(K)(ii)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 110,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1101(a)(15)(U) resolves to INA 101(a)(15)(U) (target 8 U.S.C. §1101[\"a\",\"15\",\"U\"]; undefined; undefined). The rendered replacement “INA 101(a)(15)(U)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 113,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1101(a)(15)(F)(i) resolves to INA 101(a)(15)(F)(i) (target 8 U.S.C. §1101[\"a\",\"15\",\"F\",\"i\"]; undefined; undefined). The rendered replacement “INA 101(a)(15)(F)(i)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 116,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1101(a)(15)(O) resolves to INA 101(a)(15)(O) (target 8 U.S.C. §1101[\"a\",\"15\",\"O\"]; undefined; undefined). The rendered replacement “INA 101(a)(15)(O)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 119,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 203(b) resolves to INA 203(b) (target 8 U.S.C. §1153[\"b\"]; undefined; undefined). The rendered replacement “INA 203(b)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 122,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1184 resolves to INA 214 (target 8 U.S.C. §1184[]; undefined; undefined). The rendered replacement “INA 214” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 125,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 216A(d)(1) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 128,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1182(a)(5)(A)(i) resolves to INA 212(a)(5)(A)(i) (target 8 U.S.C. §1182[\"a\",\"5\",\"A\",\"i\"]; undefined; undefined). The rendered replacement “INA 212(a)(5)(A)(i)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 131,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 203(a) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 134,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1151 (b) resolves to INA 201(b) (target 8 U.S.C. §1151[\"b\"]; undefined; undefined). The rendered replacement “INA 201(b)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 137,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1224 resolves to INA 234 (target 8 U.S.C. §1224[]; undefined; undefined). The rendered replacement “INA 234” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 140,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1224 resolves to INA 234 (target 8 U.S.C. §1224[]; undefined; undefined). The rendered replacement “INA 234” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 143,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1182(a)(6)(C)(i) resolves to INA 212(a)(6)(C)(i) (target 8 U.S.C. §1182[\"a\",\"6\",\"C\",\"i\"]; undefined; undefined). The rendered replacement “INA 212(a)(6)(C)(i)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 146,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 243(a) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 149,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1229a resolves to INA 240 (target 8 U.S.C. §1229a[]; undefined; undefined). The rendered replacement “INA 240” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 152,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1252(a)(2) resolves to INA 242(a)(2) (target 8 U.S.C. §1252[\"a\",\"2\"]; undefined; undefined). The rendered replacement “INA 242(a)(2)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 155,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1227(a)(2)(A)(iii) resolves to INA 237(a)(2)(A)(iii) (target 8 U.S.C. §1227[\"a\",\"2\",\"A\",\"iii\"]; undefined; undefined). The rendered replacement “INA 237(a)(2)(A)(iii)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 158,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1227(a)(2)(A) resolves to INA 237(a)(2)(A) (target 8 U.S.C. §1227[\"a\",\"2\",\"A\"]; undefined; undefined). The rendered replacement “INA 237(a)(2)(A)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 161,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1252 resolves to INA 242 (target 8 U.S.C. §1252[]; undefined; undefined). The rendered replacement “INA 242” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 164,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1105a(a)(1) resolves to INA 106(a)(1) (target 8 U.S.C. §1105a[\"a\",\"1\"]; undefined; undefined). The rendered replacement “INA 106(a)(1)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 167,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1227(a) resolves to INA 237(a) (target 8 U.S.C. §1227[\"a\"]; undefined; undefined). The rendered replacement “INA 237(a)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 170,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 204(a)(1)(B) is crosswalk-correct, but the rendered citation is immediately followed by “of such Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 173,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 176,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1361 resolves to INA 291 (target 8 U.S.C. §1361[]; undefined; undefined). The rendered replacement “INA 291” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 179,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1253 resolves to INA 243 (target 8 U.S.C. §1253[]; undefined; undefined). The rendered replacement “INA 243” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 182,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1158(b)(2)(A) resolves to INA 208(b)(2)(A) (target 8 U.S.C. §1158[\"b\",\"2\",\"A\"]; undefined; undefined). The rendered replacement “INA 208(b)(2)(A)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 185,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(l) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 188,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1154(g) resolves to INA 204(g) (target 8 U.S.C. §1154[\"g\"]; undefined; undefined). The rendered replacement “INA 204(g)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 191,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(a) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 194,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(a) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 197,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(a) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 200,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(a) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 203,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 212(a) is crosswalk-correct, but the rendered citation is immediately followed by “of such Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 206,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1229a resolves to INA 240 (target 8 U.S.C. §1229a[]; undefined; undefined). The rendered replacement “INA 240” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 209,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1223 resolves to INA 233 (target 8 U.S.C. §1223[]; undefined; undefined). The rendered replacement “INA 233” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 212,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 274A(j) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 215,
+    "verdict": "flag",
+    "rationale": "FLAG: INA 212(a)(2) is the correct destination for the changed span, but the same source list continues with the bare USC address “1182(a)(3) ... of this title.” The resulting mixed “INA 212(a)(2) ... or 1182(a)(3)” list has inconsistent nomenclature and leaves the trailing title qualifier attached to the unconverted member."
+  },
+  {
+    "id": 218,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1223(b) resolves to INA 233(b) (target 8 U.S.C. §1223[\"b\"]; undefined; undefined). The rendered replacement “INA 233(b)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 221,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 101(a)(15) is crosswalk-correct, but the rendered citation is immediately followed by “of such Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 224,
+    "verdict": "flag",
+    "rationale": "FLAG: INA 308 is the correct destination for section 1408, but the rendered sentence now reads “paragraph (2) of INA 308, of this title shall apply.” The conversion leaves a dangling comma plus “of this title” after the INA citation, producing ungrammatical list flow."
+  },
+  {
+    "id": 227,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1401(g) resolves to INA 301(g) (target 8 U.S.C. §1401[\"g\"]; undefined; undefined). The rendered replacement “INA 301(g)” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 230,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 312(a) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 233,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1440 resolves to INA 329 (target 8 U.S.C. §1440[]; undefined; undefined). The rendered replacement “INA 329” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 236,
+    "verdict": "pass",
+    "rationale": "PASS: Built-corpus metadata confirms section 1433 resolves to INA 322 (target 8 U.S.C. §1433[]; undefined; undefined). The rendered replacement “INA 322” preserves the surrounding source sentence/list flow, with no misleading historical or unresolved container issue in this occurrence."
+  },
+  {
+    "id": 239,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 322 is crosswalk-correct, but the rendered citation is immediately followed by “of this act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 242,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 414(a) is crosswalk-correct, but the rendered citation is immediately followed by “of the Immigration and Nationality Act”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  },
+  {
+    "id": 245,
+    "verdict": "flag",
+    "rationale": "FLAG: The destination INA 504(e)(3) is crosswalk-correct, but the rendered citation is immediately followed by “of this title”. Because the INA designation already identifies the Act, this leftover statutory container is redundant or grammatically malformed in the converted sentence; review the surrounding clause/list before accepting the display."
+  }
+]

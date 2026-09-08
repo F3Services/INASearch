@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "sourceTier": "official-reporter-editorial-treatment-index",
+  "coverageCutoff": "Reporter volume 25; revised May 23, 2014",
+  "sources": [
+    {
+      "id": "eoir-affected-decisions-vol16-25",
+      "sha256": "1f371866799547901f17c1bb3600ae432ea0f44c60ad05c0b279ee4cf7c3ac74",
+      "pages": 37,
+      "rows": 2145
+    }
+  ],
+  "rows": 2145,
+  "expandedEdges": 2653,
+  "codeCounts": {
+    "c": 91,
+    "d": 417,
+    "e": 69,
+    "f": 596,
+    "g": 532,
+    "j": 18,
+    "m": 123,
+    "n": 38,
+    "o": 91,
+    "r": 102,
+    "s": 67,
+    "v": 1
+  },
+  "affectedInCasesResolved": 1356,
+  "affectedExternalOrUnresolved": 789,
+  "treatingPinpointsResolved": 2652,
+  "treatingPinpointsUnresolved": 1,
+  "outputSha256": "8f6949805ed102acfeb0f5cf61a40bfc04cd2f606dd747f5fac5460097156c51",
+  "limitations": [
+    "The table stops at reporter volume 25 and directs readers to the volume 15 cumulative table for volumes 1-15.",
+    "A code characterizes treatment at a cited reporter page; the affected proposition and scope must be verified in the treating opinion.",
+    "The table does not identify displacement caused solely by later statutes, regulations, or policy changes."
+  ]
+}

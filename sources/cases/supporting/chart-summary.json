@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "sourceTier": "secondary-recall-evidence",
+  "publisherDisclaimerApplies": true,
+  "sources": [
+    {
+      "id": "eoir-bia-precedent-chart-a-ag",
+      "sha256": "799fdec4177e23f027eb508e7bb171eb5f4a6d6437f2a8468b2e5159a1e400d2",
+      "entries": 148
+    },
+    {
+      "id": "eoir-bia-precedent-chart-ai-ca",
+      "sha256": "0da0968122f795c21446736b745a8522d36b0997c9ba823bbb3b701fbca4cec7",
+      "entries": 192
+    },
+    {
+      "id": "eoir-bia-precedent-chart-ca-cr",
+      "sha256": "e2733517ca844a7ac5c38bac78af4a8bd17b1daa2336d68495841c07f31301f1",
+      "entries": 127
+    },
+    {
+      "id": "eoir-bia-precedent-chart-d-i",
+      "sha256": "b9b7e0d8bfbcacbb47523ed40d56861df211e439d041c6daeb4f3ca12ba45df8",
+      "entries": 87
+    },
+    {
+      "id": "eoir-bia-precedent-chart-m-rec",
+      "sha256": "823442bb2c2d6be02d228a9a563c5ccc36a53441eb97f2ebc0d5d34181c9ac93",
+      "entries": 62
+    },
+    {
+      "id": "eoir-bia-precedent-chart-ref-end",
+      "sha256": "c137691582fdd964f35f16f03ceffb44063a5b93e95c2b2b60312759f8a3f42e",
+      "entries": 167
+    }
+  ],
+  "occurrences": 783,
+  "resolvedOccurrences": 783,
+  "unresolvedOccurrences": 0,
+  "uniqueResolvedCases": 608,
+  "topicLinks": 780,
+  "explicitHeadnoteTreatments": 190,
+  "incomingHeadingTreatments": 16,
+  "outputSha256": "be3f8f5ed291f428651bbce286d38f6249c816368549f67eb078e0d12da6be2e",
+  "unresolvedExamples": []
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-30",
+  "status": "candidate-not-in-authoritative-case-manifest",
+  "purpose": "Close the first-party EOIR electronic gap for bound reporter volumes 1-7 without obscuring that the bytes come from a preservation surrogate.",
+  "publication": {
+    "title": "Administrative Decisions Under Immigration & Nationality Laws",
+    "publisher": "U.S. Government Printing Office",
+    "corporateAuthor": "United States Department of Justice",
+    "lccn": "47046558",
+    "issn": "0895-2558",
+    "hathiCatalogRecord": "001719567",
+    "hathiCatalogUrl": "https://catalog.hathitrust.org/Record/001719567",
+    "libraryOfCongressCatalogingEvidence": "https://www.loc.gov/aba/pcc/conser/CCM/Module34.pdf",
+    "serialArchiveEvidence": "https://onlinebooks.library.upenn.edu/webbin/serial?id=admdecimmnat",
+    "rights": "Public Domain, U.S. federal document; HathiTrust records the selected copies as Google-digitized"
+  },
+  "volumes": [
+    {"volume": 1, "years": "1940-1943", "hathiItemId": "mdp.39015025344816"},
+    {"volume": 2, "years": "1944-1947", "hathiItemId": "mdp.39015047779494"},
+    {"volume": 3, "years": "1947-1950", "hathiItemId": "mdp.39015047779643"},
+    {"volume": 4, "years": "1950-1953", "hathiItemId": "mdp.39015047779650", "googleBooksFullViewId": "InWkApLXUbIC"},
+    {"volume": 5, "years": "1952-1954", "hathiItemId": "mdp.39015047779809", "googleBooksFullViewId": "WtYdAAAAMAAJ"},
+    {"volume": 6, "years": "1953-1956", "hathiItemId": "mdp.39015047779957"},
+    {"volume": 7, "years": "1955-1958", "hathiItemId": "mdp.39015047779668", "googleBooksFullViewId": "H2gB8JBazu8C"}
+  ],
+  "volume15AffectedDecisionsCandidate": {
+    "purpose": "Supply the historical affected-decisions table that the official volume 25 notice directs readers to consult for volumes 1-15.",
+    "volume": 15,
+    "years": "1974-1976",
+    "hathiItemIds": [
+      "mdp.39015047779981",
+      "osu.32437000510400",
+      "osu.32435031106644",
+      "cub.u183034340539"
+    ],
+    "verifiedCopy": "mdp.39015047779981",
+    "scanPages": 912,
+    "noticeSequenceRange": "23-30",
+    "printedPageRange": "XIX-XXVI",
+    "title": "Notice Regarding Decisions in Volumes 1 to 15, Inclusive, Affected by Subsequent Reported Administrative or Judicial Decisions",
+    "status": "verified-page-range-not-ingested",
+    "accessConstraint": "The public-domain HathiTrust copy provides page-at-a-time viewing, but whole-book download requires an eligible member login and the text-only viewer warns against saving or redistribution. Treat it as a source locator until a lawful reproducible full-volume or page-set capture is available."
+  },
+  "brokenElectronicPdfSurrogates": {
+    "status": "candidate-not-ingested",
+    "verifiedAt": "2026-08-30",
+    "cases": [
+      {"corpusKey": "eoir-1817", "citation": "12 I&N Dec. 537", "hathiVolume": 12, "hathiItemId": "mdp.39015047779973"},
+      {"corpusKey": "eoir-2009", "citation": "13 I&N Dec. 406", "hathiVolume": 13, "hathiItemId": "mdp.39015047779684"},
+      {"corpusKey": "eoir-2606", "citation": "16 I&N Dec. 305", "hathiVolume": 16, "hathiItemId": "mdp.39015047779692"}
+    ],
+    "sourceEvidence": "HathiTrust bibliographic API record 001719567 identifies public-domain GPO bound-volume copies; the EOIR live volume and alphabetical links for these three PDFs return 404.",
+    "acceptanceGate": "Ingest only from a lawful reproducible whole-volume/page-set route, retain HathiTrust holding and item provenance, segment by printed reporter page, and label the bytes library-scan-surrogate."
+  },
+  "accessFindings": [
+    "EOIR publishes two official image-only cumulative topical indexes for volumes 1-15. Their 74 pages are checksummed in supporting/manifest.json and can support citation/topic reconciliation after OCR, but do not contain the opinion text.",
+    "HathiTrust anonymous full view exposes stable page sequences and text-only view, but whole-book download requires an affiliated member-library login.",
+    "The volume 15 affected-decisions notice is verified at HathiTrust sequences 23-30 (printed pages XIX-XXVI), but those viewer pages have not been copied into this repository because the available access route is page-at-a-time and disclaims saving or redistribution.",
+    "HathiTrust page image requests returned rate limiting during the browser audit and are not suitable for an uncoordinated bulk crawl.",
+    "Google Books exposes a public PDF route for verified full-view IDs, but repeated anonymous capture triggered a human-verification interstitial; the route is not reproducible enough for authoritative ingestion and IDs have not yet been verified for every volume.",
+    "A bound-volume source must be segmented into cases by printed reporter page, with volume table-of-contents/index reconciliation and page-image checks before case records enter the main manifest."
+  ],
+  "acceptanceGate": [
+    "Capture all seven complete volumes from a lawful, reproducible full-view route.",
+    "Record scan provider, holding institution, source item ID, byte count, and SHA-256 independently from the underlying government publication identity.",
+    "Extract the cumulative/numerical index and reconcile every case start page and interim-decision number.",
+    "Visually verify a stratified sample and every segmentation or citation conflict.",
+    "Label every resulting case as library-scan-surrogate rather than first-party-electronic."
+  ]
+}

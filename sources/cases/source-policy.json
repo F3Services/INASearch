@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-30",
+  "scope": {
+    "include": [
+      "EOIR decisions published in the electronic Administrative Decisions Under Immigration and Nationality Laws volumes",
+      "USCIS current adopted AAO decisions",
+      "USCIS prior adopted AAO decisions retained with the publisher's superseded or overruled status"
+    ],
+    "exclude": [
+      "AAO non-precedent decisions",
+      "unpublished BIA decisions",
+      "commercial editorial copies as source text",
+      "unofficial mirrors as source text"
+    ]
+  },
+  "collections": [
+    {
+      "id": "eoir-precedent-volumes",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "indexUrl": "https://www.justice.gov/eoir/ag-bia-decisions",
+      "supplementalIndexUrls": [
+        "https://www.justice.gov/eoir/precedent-decision-alpha-a-e",
+        "https://www.justice.gov/eoir/precedent-decision-alpha-f-j",
+        "https://www.justice.gov/eoir/precedent-decision-alpha-k-o",
+        "https://www.justice.gov/eoir/precedent-decision-alpha-p-t",
+        "https://www.justice.gov/eoir/precedent-decision-alpha-u-z"
+      ],
+      "authority": "Official electronic reporter index, official alphabetical cross-check, and official decision PDFs",
+      "defaultRequestDelaySeconds": 10,
+      "coverage": "Electronic volumes 8 through current",
+      "knownGap": "The current official electronic volume index does not expose case-level PDFs for volumes 1-7. Three listed volume 8-29 decisions (EOIR IDs 1817, 2009, and 2606) have verified broken PDF links across the applicable live/archive catalogs and remain metadata-only."
+    },
+    {
+      "id": "uscis-adopted-aao",
+      "publisher": "U.S. Citizenship and Immigration Services",
+      "indexUrl": "https://www.uscis.gov/about-us/organization/directorates-and-program-offices/administrative-appeals-office-aao/adopted-aao-decisions",
+      "authority": "Official list, status statement, cover memoranda, and adopted-decision PDFs",
+      "defaultRequestDelaySeconds": 10,
+      "coverage": "Current and prior adopted AAO decisions"
+    }
+  ],
+  "evidenceRules": [
+    "Retain every authoritative PDF byte-for-byte with SHA-256.",
+    "Retain publisher-page checksums and the exact erroneous listing text when a PDF-backed correction is required.",
+    "Never replace written text with OCR repair; store original text, normalized target, and repair provenance separately.",
+    "Represent later treatment as a directed, evidence-bearing edge rather than a global validity boolean."
+  ],
+  "archivalExtension": {
+    "status": "candidate-not-in-authoritative-case-manifest",
+    "details": "archival-source-candidates.json",
+    "supportingSources": {
+      "manifest": "supporting/manifest.json",
+      "cumulativeIndexes": "First-party topical index evidence through reporter volume 27; not opinion text.",
+      "affectedDecisionsNotice": "Formal first-party reporter treatment table through volume 25, revised May 23, 2014. Its coded entries are strong historical treatment evidence but require review of the treating opinion and do not capture statutory or regulatory displacement.",
+      "biaPrecedentChart": "First-party-hosted informational chart for BIA headnotes in volumes 21-27 through July 2017; publisher-disclaimed as noncomprehensive and not an official EOIR publication; secondary recall evidence only.",
+      "courtListener": "Free Law Project browse and citation-link coverage exposes I&N reporter volumes 8-29 and can provide secondary recall or QA. It is not a treatment citator and is not accepted as authoritative source text.",
+      "biaEdgeImmCite": "Immigration-specific later-treatment/status service covering precedential administrative and federal authorities. Candidate licensed vendor evidence tier only: public terms prohibit bulk extraction or redistribution, coverage is not guaranteed complete, and status must remain linked to primary authority. A 2026-08-29 public-surface smoke test found the new Delcarmen-Lara material but no Arrabally case result/status, so the licensed feed must pass a known-answer coverage evaluation.",
+      "biaCases": "Full-text BIA search comparator covering precedent and unpublished decisions; no public reusable treatment methodology identified."
+    },
+    "volume15TreatmentTable": {
+      "status": "verified-in-public-domain-library-scan-not-yet-ingested",
+      "hathiItemId": "mdp.39015047779981",
+      "hathiCatalogUrl": "https://catalog.hathitrust.org/Record/001719567",
+      "scanPages": 912,
+      "noticeSequenceRange": "23-30",
+      "printedPageRange": "XIX-XXVI",
+      "title": "Notice Regarding Decisions in Volumes 1 to 15, Inclusive, Affected by Subsequent Reported Administrative or Judicial Decisions",
+      "accessConstraint": "HathiTrust exposes one page at a time and restricts whole-volume download to eligible users; do not ingest from the text-only viewer without a lawful reproducible capture route."
+    },
+    "rule": "A preservation scan of an official GPO volume must retain scan-provider provenance and be labeled library-scan-surrogate; it must not be presented as a first-party EOIR electronic PDF. Official cumulative indexes may validate citations and topics but may not stand in for decision text."
+  }
+}

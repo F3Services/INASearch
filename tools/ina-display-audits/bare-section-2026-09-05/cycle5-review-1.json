@@ -1,0 +1,1006 @@
+[
+  {
+    "id": 1,
+    "sourceId": "8-117, 118-note-2",
+    "referenceText": "section 220",
+    "verdict": "pass",
+    "afterContext": ". 558, related to use of the hospital at Ellis Island Immigration Station for the care of Public Health Service patients. See section 1356(a) of this title and section 220 of Title 42, The Public Health and Welfare. Similar provisions were contained in the following prior appropriation acts, which were repealed by section 1313, formerly section 611, of act July 1, 1944, ch. 373, 58 Stat. ",
+    "issues": [],
+    "rationale": "Pass. In 8-117, 118-note-2, the literal afterContext is “. 558, related to use of the hospital at Ellis Island Immigration Station for the care of Public Health Service patients. See section 1356(a) of this title and section 220 of Title 42, The Public Health and Welfare. Similar provisions were contained in the following prior appropriation acts, which were repealed by section 1313, formerly section 611, of act July 1, 1944, ch. 373, 58 Stat. ”. It preserves grammatical surrounding prose, and the after target 42 U.S.C. 220 matches the source authority and subsection path."
+  },
+  {
+    "id": 4,
+    "sourceId": "8-1101-a-43-P",
+    "referenceText": "1546(a)",
+    "verdict": "pass",
+    "afterContext": "",
+    "issues": [],
+    "rationale": "Pass. The apparent removal in 8-1101-a-43-P is paired with a wider replacement link elsewhere in the full field; the afterContext remains grammatical and citation coverage is preserved."
+  },
+  {
+    "id": 7,
+    "sourceId": "8-1101-note-3",
+    "referenceText": "Section 1184(l)",
+    "verdict": "pass",
+    "afterContext": "he United Nations (61 Stat. 758), referred to in subsec. (a)(15)(C)(ii), is set out as a note under section 287 of Title 22, Foreign Relations and Intercourse. INA 214(l), referred to in subsec. (a)(15)(F)(i), probably means the subsec. (l) of INA 214 which relates to nonimmigrant elementary and secondary school students and was added by Pub. L. 104–208, div. C, title VI, § 625(a)(1), Se",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-3, the literal afterContext is “he United Nations (61 Stat. 758), referred to in subsec. (a)(15)(C)(ii), is set out as a note under section 287 of Title 22, Foreign Relations and Intercourse. INA 214(l), referred to in subsec. (a)(15)(F)(i), probably means the subsec. (l) of INA 214 which relates to nonimmigrant elementary and secondary school students and was added by Pub. L. 104–208, div. C, title VI, § 625(a)(1), Se”. It preserves grammatical surrounding prose, and the after target INA 214(l) matches the source authority and subsection path."
+  },
+  {
+    "id": 10,
+    "sourceId": "8-1101-note-3",
+    "referenceText": "section 1184",
+    "verdict": "pass",
+    "afterContext": "t Title note set out under section 288 of Title 22 and Tables. Subsection (p) of INA 214, referred to in subsec. (a)(15)(K), was redesignated as subsec. (r) of INA 214 by Pub. L. 108–193, § 8(a)(3), Dec. 19, 2003, 117 Stat. 2886. Section 3(a) of the Selective Training and Service Act of 1940, as amended (54 Stat. 885; 55 Stat. 844), referred to in subsec. (a)(19), was classified to se",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-3, the literal afterContext is “t Title note set out under section 288 of Title 22 and Tables. Subsection (p) of INA 214, referred to in subsec. (a)(15)(K), was redesignated as subsec. (r) of INA 214 by Pub. L. 108–193, § 8(a)(3), Dec. 19, 2003, 117 Stat. 2886. Section 3(a) of the Selective Training and Service Act of 1940, as amended (54 Stat. 885; 55 Stat. 844), referred to in subsec. (a)(19), was classified to se”. It preserves grammatical surrounding prose, and the after target INA 214 matches the source authority and subsection path."
+  },
+  {
+    "id": 13,
+    "sourceId": "8-1101-note-5",
+    "referenceText": "section 1184(j)",
+    "verdict": "pass",
+    "afterContext": "5)(K). Pub. L. 104–208, § 308(f)(1)(A), substituted “admission” for “entry”. Subsec. (a)(15)(S). Pub. L. 104–208, § 671(a)(3)(B), substituted “INA 214(k)” for “INA 214(j)” in introductory provisions. Subsec. (a)(17). Pub. L. 104–208, § 308(d)(4)(A), substituted “expulsion, or removal” for “or expulsion”. Subsec. (a)(30). Pub. L. 104–208, § 308(f)(1)(B), substituted “admission” for “entry",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-5, the literal afterContext is “5)(K). Pub. L. 104–208, § 308(f)(1)(A), substituted “admission” for “entry”. Subsec. (a)(15)(S). Pub. L. 104–208, § 671(a)(3)(B), substituted “INA 214(k)” for “INA 214(j)” in introductory provisions. Subsec. (a)(17). Pub. L. 104–208, § 308(d)(4)(A), substituted “expulsion, or removal” for “or expulsion”. Subsec. (a)(30). Pub. L. 104–208, § 308(f)(1)(B), substituted “admission” for “entry”. It preserves grammatical surrounding prose, and the after target INA 214(j) matches the source authority and subsection path."
+  },
+  {
+    "id": 16,
+    "sourceId": "8-1101-note-17",
+    "referenceText": "1252(a)",
+    "verdict": "flag",
+    "afterContext": " is commenced. If the Attorney General makes such election, the notice of hearing provided to the alien under section 235 or 242(a) of such Act [8 U.S.C. 1225, INA 242(a)] shall be valid as if provided under section 239 of such Act [8 U.S.C. 1229] (as amended by this subtitle) to confer jurisdiction on the immigration judge. “(3) Attorney general option to terminate and reinitiate procee",
+    "issues": [
+      "INA-followed-by-authority-tail",
+      "mixed-U-S-C-bracket-list"
+    ],
+    "rationale": "Flag. In 8-1101-note-17, the literal afterContext is “ is commenced. If the Attorney General makes such election, the notice of hearing provided to the alien under section 235 or 242(a) of such Act [8 U.S.C. 1225, INA 242(a)] shall be valid as if provided under section 239 of such Act [8 U.S.C. 1229] (as amended by this subtitle) to confer jurisdiction on the immigration judge. “(3) Attorney general option to terminate and reinitiate procee” The afterContext shows an incomplete bracket list mixing an INA designator into an 8 U.S.C. list. The rendered occurrence needs a grammar or link-group correction."
+  },
+  {
+    "id": 19,
+    "sourceId": "8-1101-note-17",
+    "referenceText": "section 240A(d)",
+    "verdict": "pass",
+    "afterContext": "ase in which the Attorney General elects to terminate and reinitiate proceedings in accordance with paragraph (3) of this subsection, paragraphs (1) and (2) of INA 240A(d) [8 U.S.C. 1229b(d)(1), (2)] shall not apply to an order to show cause issued before April 1, 1997. “(C) Special rule for certain aliens granted temporary protection from deportation and for battered spouses and children",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-17, the literal afterContext is “ase in which the Attorney General elects to terminate and reinitiate proceedings in accordance with paragraph (3) of this subsection, paragraphs (1) and (2) of INA 240A(d) [8 U.S.C. 1229b(d)(1), (2)] shall not apply to an order to show cause issued before April 1, 1997. “(C) Special rule for certain aliens granted temporary protection from deportation and for battered spouses and children”. It preserves grammatical surrounding prose, and the after target INA 240A(d) matches the source authority and subsection path."
+  },
+  {
+    "id": 22,
+    "sourceId": "8-1101-note-17",
+    "referenceText": "section 237(a)",
+    "verdict": "flag",
+    "afterContext": ")(5)(C)(i) of this section, and—“(A) the alien—“(i) is not inadmissible or deportable under paragraph (2) or (3) of INA 212(a) or paragraph (2), (3), or (4) of INA 237(a) [8 U.S.C. 1182(a)(2), (3), INA 237(a)(3), (4)] and is not an alien described in section 241(b)(3)(B)(i) of such Act [8 U.S.C. 1231(b)(3)(B)(i)]; “(ii) has been physically present in the United States for a continuous pe",
+    "issues": [
+      "INA-followed-by-authority-tail",
+      "mixed-U-S-C-bracket-list"
+    ],
+    "rationale": "Flag. In 8-1101-note-17, the literal afterContext is “)(5)(C)(i) of this section, and—“(A) the alien—“(i) is not inadmissible or deportable under paragraph (2) or (3) of INA 212(a) or paragraph (2), (3), or (4) of INA 237(a) [8 U.S.C. 1182(a)(2), (3), INA 237(a)(3), (4)] and is not an alien described in section 241(b)(3)(B)(i) of such Act [8 U.S.C. 1231(b)(3)(B)(i)]; “(ii) has been physically present in the United States for a continuous pe” The afterContext shows an incomplete bracket list mixing an INA designator into an 8 U.S.C. list. The rendered occurrence needs a grammar or link-group correction."
+  },
+  {
+    "id": 25,
+    "sourceId": "8-1101-note-17",
+    "referenceText": "1101(a)(43)",
+    "verdict": "flag",
+    "afterContext": "Act [8 U.S.C. 1182(a)(2), INA 237(a)(2), (3)]; “(ii) is not an alien described in section 241(b)(3)(B)(i) or 101(a)(43) of such Act [8 U.S.C. 1231(b)(3)(B)(i), INA 101(a)(43)]; “(iii) has been physically present in the United States for a continuous period of not less than 10 years immediately following the commission of an act, or the assumption of a status, constituting a ground for remova",
+    "issues": [
+      "mixed-U-S-C-bracket-list"
+    ],
+    "rationale": "Flag. In 8-1101-note-17, the literal afterContext is “Act [8 U.S.C. 1182(a)(2), INA 237(a)(2), (3)]; “(ii) is not an alien described in section 241(b)(3)(B)(i) or 101(a)(43) of such Act [8 U.S.C. 1231(b)(3)(B)(i), INA 101(a)(43)]; “(iii) has been physically present in the United States for a continuous period of not less than 10 years immediately following the commission of an act, or the assumption of a status, constituting a ground for remova” The afterContext shows an incomplete bracket list mixing an INA designator into an 8 U.S.C. list. The rendered occurrence needs a grammar or link-group correction."
+  },
+  {
+    "id": 28,
+    "sourceId": "8-1101-note-20",
+    "referenceText": "section 212(a)",
+    "verdict": "pass",
+    "afterContext": "ssession of an unexpired immigrant visa issued before October 1, 1991, makes application for admission, the immigrant’s admissibility under paragraph (7)(A) of INA 212(a) [8 U.S.C. 1182(a)(7)(A)] shall be determined under the provisions of law in effect on the date of the issuance of such visa. “(e) Construction.—Nothing in this title [see subsec. (a) above] shall be construed as affecti",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-20, the literal afterContext is “ssession of an unexpired immigrant visa issued before October 1, 1991, makes application for admission, the immigrant’s admissibility under paragraph (7)(A) of INA 212(a) [8 U.S.C. 1182(a)(7)(A)] shall be determined under the provisions of law in effect on the date of the issuance of such visa. “(e) Construction.—Nothing in this title [see subsec. (a) above] shall be construed as affecti”. It preserves grammatical surrounding prose, and the after target INA 212(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 31,
+    "sourceId": "8-1101-note-65",
+    "referenceText": "section 1501",
+    "verdict": "pass",
+    "afterContext": "first Congress, first session; 63 Stat. 208 [section 3508 of title 50]), the Act of June 5, 1950 (Public Law 535, Eighty-first Congress, second session [former section 1501 et seq. of title 22]), nor title V of the Agricultural Act of 1949, as amended (Public Law 78, Eighty-second Congress, first session [former sections 1461 to 1468 of title 7]).”",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-65, the literal afterContext is “first Congress, first session; 63 Stat. 208 [section 3508 of title 50]), the Act of June 5, 1950 (Public Law 535, Eighty-first Congress, second session [former section 1501 et seq. of title 22]), nor title V of the Agricultural Act of 1949, as amended (Public Law 78, Eighty-second Congress, first session [former sections 1461 to 1468 of title 7]).””. It preserves grammatical surrounding prose, and the after target 22 U.S.C. 1501 matches the source authority and subsection path."
+  },
+  {
+    "id": 34,
+    "sourceId": "8-1101-note-80",
+    "referenceText": "1152(a)",
+    "verdict": "pass",
+    "afterContext": "ion shall not be counted against any numerical limitation under sections 201(d), 202(a), or 203(b)(4) of the Immigration and Nationality Act (8 U.S.C. 1151(d), INA 202(a), and INA 203(b)(4)). “(C) Carry forward.—“(i) Fiscal years 2009 through 2013.—If the numerical limitation specified in subparagraph (A) is not reached during a given fiscal year, with respect to fiscal year 2009, 2010, ",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-80, the literal afterContext is “ion shall not be counted against any numerical limitation under sections 201(d), 202(a), or 203(b)(4) of the Immigration and Nationality Act (8 U.S.C. 1151(d), INA 202(a), and INA 203(b)(4)). “(C) Carry forward.—“(i) Fiscal years 2009 through 2013.—If the numerical limitation specified in subparagraph (A) is not reached during a given fiscal year, with respect to fiscal year 2009, 2010, ”. It preserves grammatical surrounding prose, and the after target INA 202(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 37,
+    "sourceId": "8-1101-note-81",
+    "referenceText": "1153(b)(4)",
+    "verdict": "pass",
+    "afterContext": "ounted against the numerical limitations under sections 201(d), 202(a), and 203(b)(4) of the Immigration and Nationality Act (8 U.S.C. 1151(d), INA 202(a), and INA 203(b)(4)). “(3) Carry forward.—If the numerical limitation described in paragraph (1) is not reached during a given fiscal year, the numerical limitation for the following fiscal year shall be increased by a number equal to the ",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-81, the literal afterContext is “ounted against the numerical limitations under sections 201(d), 202(a), and 203(b)(4) of the Immigration and Nationality Act (8 U.S.C. 1151(d), INA 202(a), and INA 203(b)(4)). “(3) Carry forward.—If the numerical limitation described in paragraph (1) is not reached during a given fiscal year, the numerical limitation for the following fiscal year shall be increased by a number equal to the ”. It preserves grammatical surrounding prose, and the after target INA 203(b)(4) matches the source authority and subsection path."
+  },
+  {
+    "id": 40,
+    "sourceId": "8-1101-note-96",
+    "referenceText": "section 203(c)",
+    "verdict": "pass",
+    "afterContext": "sored immigrants and employment-based immigrants. The Commission shall include in the report an assessment of the effect of the requirement of paragraph (2) of INA 203(c) on the diversity, educational, and skill level of aliens admitted. “(d) Compensation of Members.—(1) Each member of the Commission who is not an officer or employee of the Federal Government is entitled to receive, subj",
+    "issues": [],
+    "rationale": "Pass. In 8-1101-note-96, the literal afterContext is “sored immigrants and employment-based immigrants. The Commission shall include in the report an assessment of the effect of the requirement of paragraph (2) of INA 203(c) on the diversity, educational, and skill level of aliens admitted. “(d) Compensation of Members.—(1) Each member of the Commission who is not an officer or employee of the Federal Government is entitled to receive, subj”. It preserves grammatical surrounding prose, and the after target INA 203(c) matches the source authority and subsection path."
+  },
+  {
+    "id": 43,
+    "sourceId": "8-1101-note-100",
+    "referenceText": "1153(b)(1)(C)",
+    "verdict": "flag",
+    "afterContext": " 12, 1999, 113 Stat. 1319, provided that: “In applying sections 101(a)(15)(L) and 203(b)(1)(C) of the Immigration and Nationality Act [8 U.S.C. 1101(a)(15)(L), INA 203(b)(1)(C)], and for no other purpose, in the case of a partnership that is organized in the United States to provide accounting or management consulting services and that markets its accounting or management consulting services u",
+    "issues": [
+      "mixed-U-S-C-bracket-list"
+    ],
+    "rationale": "Flag. In 8-1101-note-100, the literal afterContext is “ 12, 1999, 113 Stat. 1319, provided that: “In applying sections 101(a)(15)(L) and 203(b)(1)(C) of the Immigration and Nationality Act [8 U.S.C. 1101(a)(15)(L), INA 203(b)(1)(C)], and for no other purpose, in the case of a partnership that is organized in the United States to provide accounting or management consulting services and that markets its accounting or management consulting services u” The afterContext shows an incomplete bracket list mixing an INA designator into an 8 U.S.C. list. The rendered occurrence needs a grammar or link-group correction."
+  },
+  {
+    "id": 46,
+    "sourceId": "8-1103-note-20",
+    "referenceText": "section 1101(4)",
+    "verdict": "pass",
+    "afterContext": null,
+    "issues": [],
+    "rationale": "Pass. The source explicitly identifies section 1101(4) as part of Executive Order 12656 and places the note under Title 42 section 5195; it is not 8 U.S.C. 1101(4). Removing the mistaken local USC link preserves the authoritative source wording."
+  },
+  {
+    "id": 49,
+    "sourceId": "8-1104-note-3",
+    "referenceText": null,
+    "verdict": "pass",
+    "afterContext": "of Deputy Under Secretary of State for Administration. 1964—Subsec. (b). Pub. L. 88–426 repealed provisions which related to compensation of Administrator. See section 5311 et seq. of Title 5, Government Organization and Employees. 1962—Subsec. (b). Pub. L. 87–510 provided for appointment of Administrator of Bureau of Security and Consular Affairs by President by and with advice and consen",
+    "issues": [],
+    "rationale": "Pass. In 8-1104-note-3, the literal afterContext is “of Deputy Under Secretary of State for Administration. 1964—Subsec. (b). Pub. L. 88–426 repealed provisions which related to compensation of Administrator. See section 5311 et seq. of Title 5, Government Organization and Employees. 1962—Subsec. (b). Pub. L. 87–510 provided for appointment of Administrator of Bureau of Security and Consular Affairs by President by and with advice and consen”. It preserves grammatical surrounding prose, and the after target 5 U.S.C. 5311 matches the source authority and subsection path."
+  },
+  {
+    "id": 52,
+    "sourceId": "8-1151-note-2",
+    "referenceText": "section 1229b(a)",
+    "verdict": "pass",
+    "afterContext": "6—Subsec. (b)(1)(C). Pub. L. 104–208, § 671(d)(1)(A), struck out “, 1161,” after “INA 210”. Subsec. (b)(1)(D). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “section 1254(a)”. Pub. L. 104–208, § 308(e)(5), substituted “removal is canceled” for “deportation is suspended”. Subsec. (c)(1)(A)(ii). Pub. L. 104–208, § 603(1), amended cl. (ii) generally. Prior to amendment, c",
+    "issues": [],
+    "rationale": "Pass. In 8-1151-note-2, the literal afterContext is “6—Subsec. (b)(1)(C). Pub. L. 104–208, § 671(d)(1)(A), struck out “, 1161,” after “INA 210”. Subsec. (b)(1)(D). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “section 1254(a)”. Pub. L. 104–208, § 308(e)(5), substituted “removal is canceled” for “deportation is suspended”. Subsec. (c)(1)(A)(ii). Pub. L. 104–208, § 603(1), amended cl. (ii) generally. Prior to amendment, c”. It preserves grammatical surrounding prose, and the after target INA 240A(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 55,
+    "sourceId": "8-1153-note-20",
+    "referenceText": "section 203(b)",
+    "verdict": "pass",
+    "afterContext": "aph (2). Visas made available under this subsection shall only be available in a fiscal year to employment-based immigrants under paragraph (1), (2), or (3) of INA 203(b) [8 U.S.C. 1153(b)] and any such visa that is made available due to the difference between the number of employment-based visas that were made available in fiscal year 2001, 2002, 2003, or 2004 and the number of such vis",
+    "issues": [],
+    "rationale": "Pass. In 8-1153-note-20, the literal afterContext is “aph (2). Visas made available under this subsection shall only be available in a fiscal year to employment-based immigrants under paragraph (1), (2), or (3) of INA 203(b) [8 U.S.C. 1153(b)] and any such visa that is made available due to the difference between the number of employment-based visas that were made available in fiscal year 2001, 2002, 2003, or 2004 and the number of such vis”. It preserves grammatical surrounding prose, and the after target INA 203(b) matches the source authority and subsection path."
+  },
+  {
+    "id": 58,
+    "sourceId": "8-1153-note-28",
+    "referenceText": "section 212(a)",
+    "verdict": "pass",
+    "afterContext": " admissibility of an alien provided a visa number under this section, the Attorney General shall waive the ground of exclusion specified in paragraph (6)(C) of INA 212(a) [8 U.S.C. 1182(a)], unless the Attorney General finds that such a waiver is not in the national interest. In addition, the provisions of section 212(e) of such Act shall not apply so as to prevent an individual’s applic",
+    "issues": [],
+    "rationale": "Pass. In 8-1153-note-28, the literal afterContext is “ admissibility of an alien provided a visa number under this section, the Attorney General shall waive the ground of exclusion specified in paragraph (6)(C) of INA 212(a) [8 U.S.C. 1182(a)], unless the Attorney General finds that such a waiver is not in the national interest. In addition, the provisions of section 212(e) of such Act shall not apply so as to prevent an individual’s applic”. It preserves grammatical surrounding prose, and the after target INA 212(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 61,
+    "sourceId": "8-1154-note-3",
+    "referenceText": "section 1101(b)(1)(F)",
+    "verdict": "pass",
+    "afterContext": "after “subparagraph (B),”. Subsec. (d). Pub. L. 106–279 designated existing provisions as par. (1), substituted “subparagraph (F) or (G) of INA 101(b)(1)” for “INA 101(b)(1)(F)”, and added par. (2). Subsec. (h). Pub. L. 106–386, § 1507(b), inserted at end “Remarriage of an alien whose petition was approved under subsection (a)(1)(B)(ii) or (a)(1)(A)(iii) or marriage of an alien described in cl",
+    "issues": [],
+    "rationale": "Pass. In 8-1154-note-3, the literal afterContext is “after “subparagraph (B),”. Subsec. (d). Pub. L. 106–279 designated existing provisions as par. (1), substituted “subparagraph (F) or (G) of INA 101(b)(1)” for “INA 101(b)(1)(F)”, and added par. (2). Subsec. (h). Pub. L. 106–386, § 1507(b), inserted at end “Remarriage of an alien whose petition was approved under subsection (a)(1)(B)(ii) or (a)(1)(A)(iii) or marriage of an alien described in cl”. It preserves grammatical surrounding prose, and the after target INA 101(b)(1)(F) matches the source authority and subsection path."
+  },
+  {
+    "id": 64,
+    "sourceId": "8-1155-note-2",
+    "referenceText": "section 1101(b)(1)(E)",
+    "verdict": "pass",
+    "afterContext": "igration officers when the petition is executed outside the United States. Subsec. (c). Pub. L. 87–301, §§ 3(b), 10, substituted “INA 101(b)(1)(E) or (F)” for “INA 101(b)(1)(E)”, and provided that no petition shall be approved if the alien had previously been accorded a nonquota status under INA 101(a)(27)(A) or a preference quota status under INA 203(a)(3), by reason of marriage entered into ",
+    "issues": [],
+    "rationale": "Pass. In 8-1155-note-2, the literal afterContext is “igration officers when the petition is executed outside the United States. Subsec. (c). Pub. L. 87–301, §§ 3(b), 10, substituted “INA 101(b)(1)(E) or (F)” for “INA 101(b)(1)(E)”, and provided that no petition shall be approved if the alien had previously been accorded a nonquota status under INA 101(a)(27)(A) or a preference quota status under INA 203(a)(3), by reason of marriage entered into ”. It preserves grammatical surrounding prose, and the after target INA 101(b)(1)(E) matches the source authority and subsection path."
+  },
+  {
+    "id": 67,
+    "sourceId": "8-1157-note-12",
+    "referenceText": "1153(a)",
+    "verdict": "pass",
+    "afterContext": "d group, and have close family members (as described in section 201(b)(2)(A)(i) or 203(a) of the Immigration and Nationality Act (8 U.S.C. 1151(b)(2)(A)(i) and INA 203(a))) in the United States. “(b) Identification of Other Persecuted Groups.—The Secretary of State, or the designee of the Secretary, is authorized to identify other Priority 2 groups of Iraqis, including vulnerable populat",
+    "issues": [],
+    "rationale": "Pass. In 8-1157-note-12, the literal afterContext is “d group, and have close family members (as described in section 201(b)(2)(A)(i) or 203(a) of the Immigration and Nationality Act (8 U.S.C. 1151(b)(2)(A)(i) and INA 203(a))) in the United States. “(b) Identification of Other Persecuted Groups.—The Secretary of State, or the designee of the Secretary, is authorized to identify other Priority 2 groups of Iraqis, including vulnerable populat”. It preserves grammatical surrounding prose, and the after target INA 203(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 70,
+    "sourceId": "8-1157-note-12",
+    "referenceText": "section 240(c)(7)",
+    "verdict": "pass",
+    "afterContext": " changed country conditions may, notwithstanding any other provision of law, file a motion to reopen such claim in accordance with subparagraphs (A) and (B) of INA 240(c)(7) (8 U.S.C. 1229a(c)(7)) not later than six months after the date of the enactment of the Refugee Crisis in Iraq Act [of 2007] [Jan. 28, 2008] if the alien—“(1) is a citizen or national of Iraq; and “(2) has remained in t",
+    "issues": [],
+    "rationale": "Pass. In 8-1157-note-12, the literal afterContext is “ changed country conditions may, notwithstanding any other provision of law, file a motion to reopen such claim in accordance with subparagraphs (A) and (B) of INA 240(c)(7) (8 U.S.C. 1229a(c)(7)) not later than six months after the date of the enactment of the Refugee Crisis in Iraq Act [of 2007] [Jan. 28, 2008] if the alien—“(1) is a citizen or national of Iraq; and “(2) has remained in t”. It preserves grammatical surrounding prose, and the after target INA 240(c)(7) matches the source authority and subsection path."
+  },
+  {
+    "id": 73,
+    "sourceId": "8-1157-note-13",
+    "referenceText": "551(2)",
+    "verdict": "pass",
+    "afterContext": null,
+    "issues": [],
+    "rationale": "Pass. The apparent removal of 37 U.S.C. 551(2) is paired with a wider section 551(2) replacement in the same source field; the citation remains represented and the source wording is preserved."
+  },
+  {
+    "id": 76,
+    "sourceId": "8-1157-note-13",
+    "referenceText": "551(2)",
+    "verdict": "pass",
+    "afterContext": null,
+    "issues": [],
+    "rationale": "Pass. The apparent removal of 37 U.S.C. 551(2) is paired with a wider section 551(2) replacement in the same source field; the citation remains represented and the source wording is preserved."
+  },
+  {
+    "id": 79,
+    "sourceId": "8-1157-note-13",
+    "referenceText": null,
+    "verdict": "pass",
+    "afterContext": ") as a result of the Vietnam War; or “(ii) who is an employee (as defined in section 5561(2) of title 5, United States Code) in a missing status (as defined in section 5561(5) of such title) as a result of the Vietnam War. “(B) Exclusion.—Such term does not include an individual with respect to whom it is officially determined under section 552(c) of title 37, United States Code, that such in",
+    "issues": [],
+    "rationale": "Pass. In 8-1157-note-13, the literal afterContext is “) as a result of the Vietnam War; or “(ii) who is an employee (as defined in section 5561(2) of title 5, United States Code) in a missing status (as defined in section 5561(5) of such title) as a result of the Vietnam War. “(B) Exclusion.—Such term does not include an individual with respect to whom it is officially determined under section 552(c) of title 37, United States Code, that such in”. It preserves grammatical surrounding prose, and the after target 5 U.S.C. 5561(5) matches the source authority and subsection path."
+  },
+  {
+    "id": 82,
+    "sourceId": "8-1157-note-13",
+    "referenceText": null,
+    "verdict": "pass",
+    "afterContext": "ndividual—“(i) who is a member of a uniformed service (within the meaning of section 101(3) of title 37, United States Code) in a missing status (as defined in section 551(2) of such title and this subsection) as a result of the Persian Gulf War, or any successor conflict, operation, or action; or “(ii) who is an employee (as defined in section 5561(2) of title 5, United States Code) in a mi",
+    "issues": [],
+    "rationale": "Pass. In 8-1157-note-13, the literal afterContext is “ndividual—“(i) who is a member of a uniformed service (within the meaning of section 101(3) of title 37, United States Code) in a missing status (as defined in section 551(2) of such title and this subsection) as a result of the Persian Gulf War, or any successor conflict, operation, or action; or “(ii) who is an employee (as defined in section 5561(2) of title 5, United States Code) in a mi”. It preserves grammatical surrounding prose, and the after target 37 U.S.C. 551(2) matches the source authority and subsection path."
+  },
+  {
+    "id": 85,
+    "sourceId": "8-1157-note-22",
+    "referenceText": "1185(a)",
+    "verdict": "pass",
+    "afterContext": "ees. Sec. 3. Realignment of the U.S. Refugee Admissions Program. (a) I hereby proclaim, pursuant to sections 212(f) and 215(a) of the INA, 8 U.S.C. 1182(f) and INA 215(a), that entry into the United States of refugees under the USRAP would be detrimental to the interests of the United States. I therefore direct that entry into the United States of refugees under the USRAP be suspended—su",
+    "issues": [],
+    "rationale": "Pass. In 8-1157-note-22, the literal afterContext is “ees. Sec. 3. Realignment of the U.S. Refugee Admissions Program. (a) I hereby proclaim, pursuant to sections 212(f) and 215(a) of the INA, 8 U.S.C. 1182(f) and INA 215(a), that entry into the United States of refugees under the USRAP would be detrimental to the interests of the United States. I therefore direct that entry into the United States of refugees under the USRAP be suspended—su”. It preserves grammatical surrounding prose, and the after target INA 215(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 88,
+    "sourceId": "8-1160-note-3",
+    "referenceText": "section 1182(a)(6)(C)(i)",
+    "verdict": "pass",
+    "afterContext": "), made technical correction to Pub. L. 102–232, § 309(b)(6)(F). See 1991 Amendment note below. 1991—Subsec. (b)(7)(B). Pub. L. 102–232, § 307(j), substituted “INA 212(a)(6)(C)(i)” for “INA 212(a)(19)”. Subsec. (d)(3). Pub. L. 102–232, § 309(b)(6)(A)–(C), realigned margins of par. (3) and its subparagraphs, and in introductory provisions substituted “Service” for “the Immigration and Naturalizati",
+    "issues": [],
+    "rationale": "Pass. In 8-1160-note-3, the literal afterContext is “), made technical correction to Pub. L. 102–232, § 309(b)(6)(F). See 1991 Amendment note below. 1991—Subsec. (b)(7)(B). Pub. L. 102–232, § 307(j), substituted “INA 212(a)(6)(C)(i)” for “INA 212(a)(19)”. Subsec. (d)(3). Pub. L. 102–232, § 309(b)(6)(A)–(C), realigned margins of par. (3) and its subparagraphs, and in introductory provisions substituted “Service” for “the Immigration and Naturalizati”. It preserves grammatical surrounding prose, and the after target INA 212(a)(6)(C)(i) matches the source authority and subsection path."
+  },
+  {
+    "id": 91,
+    "sourceId": "8-1182-a-6-G",
+    "referenceText": "section 1184(l)",
+    "verdict": "pass",
+    "afterContext": "An alien who obtains the status of a nonimmigrant under INA 101(a)(15)(F)(i) and who violates a term or condition of such status under INA 214(l) is inadmissible until the alien has been outside the United States for a continuous period of 5 years after the date of the violation.",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-a-6-G, the literal afterContext is “An alien who obtains the status of a nonimmigrant under INA 101(a)(15)(F)(i) and who violates a term or condition of such status under INA 214(l) is inadmissible until the alien has been outside the United States for a continuous period of 5 years after the date of the violation.”. It preserves grammatical surrounding prose, and the after target INA 214(l) matches the source authority and subsection path."
+  },
+  {
+    "id": 94,
+    "sourceId": "8-1182-e",
+    "referenceText": "section 1184(l)",
+    "verdict": "pass",
+    "afterContext": " requested by an interested United States Government agency on behalf of an alien described in clause (iii), the waiver shall be subject to the requirements of INA 214(l): And provided further, That, except in the case of an alien described in clause (iii), the Attorney General may, upon the favorable recommendation of the Director, waive such two-year foreign residence requirement in an",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-e, the literal afterContext is “ requested by an interested United States Government agency on behalf of an alien described in clause (iii), the waiver shall be subject to the requirements of INA 214(l): And provided further, That, except in the case of an alien described in clause (iii), the Attorney General may, upon the favorable recommendation of the Director, waive such two-year foreign residence requirement in an”. It preserves grammatical surrounding prose, and the after target INA 214(l) matches the source authority and subsection path."
+  },
+  {
+    "id": 97,
+    "sourceId": "8-1182-t-1-C-ii",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "afterContext": "ng in conspicuous locations at the place of employment or electronic notification to employees in the occupational classification for which nonimmigrants under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) are sought.",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-t-1-C-ii, the literal afterContext is “ng in conspicuous locations at the place of employment or electronic notification to employees in the occupational classification for which nonimmigrants under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) are sought.”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(H)(i)(b1) matches the source authority and subsection path."
+  },
+  {
+    "id": 100,
+    "sourceId": "8-1182-t-3-C-vi-I",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "afterContext": "It is a violation of this clause for an employer who has filed an attestation under this subsection to require a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) to pay a penalty for ceasing employment with the employer prior to a date agreed to by the nonimmigrant and the employer. The Secretary of Labor shall determine whether a required payment is a ",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-t-3-C-vi-I, the literal afterContext is “It is a violation of this clause for an employer who has filed an attestation under this subsection to require a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) to pay a penalty for ceasing employment with the employer prior to a date agreed to by the nonimmigrant and the employer. The Secretary of Labor shall determine whether a required payment is a ”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(H)(i)(b1) matches the source authority and subsection path."
+  },
+  {
+    "id": 103,
+    "sourceId": "8-1182-t-3-C-vii-III",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "afterContext": "In the case of a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) who has not yet entered into employment with an employer who has had approved an attestation under this subsection with respect to the nonimmigrant, the provisions of subclauses (I) and (II) sh",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-t-3-C-vii-III, the literal afterContext is “In the case of a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) who has not yet entered into employment with an employer who has had approved an attestation under this subsection with respect to the nonimmigrant, the provisions of subclauses (I) and (II) sh”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(H)(i)(b1) matches the source authority and subsection path."
+  },
+  {
+    "id": 106,
+    "sourceId": "8-1182-t-3-C-vii-V",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "afterContext": "t under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) an established salary practice of the employer, under which the employer pays to nonimmigrants under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) and United States workers in the same occupational classification an annual salary in disbursements over fewer than 12 months, if—",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-t-3-C-vii-V, the literal afterContext is “t under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) an established salary practice of the employer, under which the employer pays to nonimmigrants under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) and United States workers in the same occupational classification an annual salary in disbursements over fewer than 12 months, if—”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(H)(i)(b1) matches the source authority and subsection path."
+  },
+  {
+    "id": 109,
+    "sourceId": "8-1182-t-4-B",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "afterContext": "In the case of an attestation with respect to one or more nonimmigrants under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) by an employer, the employer is considered to “displace” a United States worker from a job if the employer lays off the worker from a job that is essentially the equivalent of the job for which",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-t-4-B, the literal afterContext is “In the case of an attestation with respect to one or more nonimmigrants under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) by an employer, the employer is considered to “displace” a United States worker from a job if the employer lays off the worker from a job that is essentially the equivalent of the job for which”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(H)(i)(b1) matches the source authority and subsection path."
+  },
+  {
+    "id": 112,
+    "sourceId": "8-1182-note-3",
+    "referenceText": "section 1184",
+    "verdict": "pass",
+    "afterContext": " secondary school students and was added by Pub. L. 104–208, div. C, title VI, § 625(a)(1), Sept. 30, 1996, 110 Stat. 3009–699, and redesignated subsec. (m) of INA 214 by Pub. L. 106–386, div. A, § 107(e)(2)(A), Oct. 28, 2000, 114 Stat. 1478. The Social Security Act, referred to in subsec. (m)(6)(B), is act Aug. 14, 1935, ch. 531, 49 Stat. 620. Titles XVIII and XIX of the Act are clas",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-3, the literal afterContext is “ secondary school students and was added by Pub. L. 104–208, div. C, title VI, § 625(a)(1), Sept. 30, 1996, 110 Stat. 3009–699, and redesignated subsec. (m) of INA 214 by Pub. L. 106–386, div. A, § 107(e)(2)(A), Oct. 28, 2000, 114 Stat. 1478. The Social Security Act, referred to in subsec. (m)(6)(B), is act Aug. 14, 1935, ch. 531, 49 Stat. 620. Titles XVIII and XIX of the Act are clas”. It preserves grammatical surrounding prose, and the after target INA 214 matches the source authority and subsection path."
+  },
+  {
+    "id": 115,
+    "sourceId": "8-1182-note-5",
+    "referenceText": "1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "afterContext": "r appearing. Subsec. (t)(3)(C)(i)(II), (ii)(II), (iii)(II). Pub. L. 109–13, § 501(d)(2), substituted “1101(a)(15)(H)(i)(b1), or INA 101(a)(15)(E)(iii)” for “or INA 101(a)(15)(H)(i)(b1)”. 2004—Subsec. (a)(2)(G). Pub. L. 108–458, § 5502(a), amended heading and text of subpar. (G) generally. Prior to amendment, text read as follows: “Any alien who, while serving as a foreign government official, was resp",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-5, the literal afterContext is “r appearing. Subsec. (t)(3)(C)(i)(II), (ii)(II), (iii)(II). Pub. L. 109–13, § 501(d)(2), substituted “1101(a)(15)(H)(i)(b1), or INA 101(a)(15)(E)(iii)” for “or INA 101(a)(15)(H)(i)(b1)”. 2004—Subsec. (a)(2)(G). Pub. L. 108–458, § 5502(a), amended heading and text of subpar. (G) generally. Prior to amendment, text read as follows: “Any alien who, while serving as a foreign government official, was resp”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(H)(i)(b1) matches the source authority and subsection path."
+  },
+  {
+    "id": 118,
+    "sourceId": "8-1182-note-5",
+    "referenceText": "section 1223(c)",
+    "verdict": "pass",
+    "afterContext": " (d)(3). Pub. L. 104–208, § 308(d)(1)(E), substituted “inadmissible aliens” for “excludable aliens”. Subsec. (d)(4). Pub. L. 104–208, § 308(g)(1), substituted “INA 233(c)” for “INA 238(c)”. Subsec. (d)(5)(A). Pub. L. 104–208, § 602(a), substituted “only on a case-by-case basis for urgent humanitarian reasons or significant public benefit” for “for emergent reasons or for reasons deemed s",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-5, the literal afterContext is “ (d)(3). Pub. L. 104–208, § 308(d)(1)(E), substituted “inadmissible aliens” for “excludable aliens”. Subsec. (d)(4). Pub. L. 104–208, § 308(g)(1), substituted “INA 233(c)” for “INA 238(c)”. Subsec. (d)(5)(A). Pub. L. 104–208, § 602(a), substituted “only on a case-by-case basis for urgent humanitarian reasons or significant public benefit” for “for emergent reasons or for reasons deemed s”. It preserves grammatical surrounding prose, and the after target INA 233(c) matches the source authority and subsection path."
+  },
+  {
+    "id": 121,
+    "sourceId": "8-1182-note-5",
+    "referenceText": "section 1227(a)",
+    "verdict": "pass",
+    "afterContext": "or “for emergent reasons or for reasons deemed strictly in the public interest”. Subsec. (d)(7). Pub. L. 104–208, § 308(g)(4)(B), substituted “INA 241(c)” for “INA 237(a)”. Pub. L. 104–208, § 308(e)(2)(A), substituted “removed” for “deported”. Pub. L. 104–208, § 308(d)(1)(G), substituted “denied admission” for “excluded from admission”. Subsec. (d)(11). Pub. L. 104–208, § 671(e)(3), inse",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-5, the literal afterContext is “or “for emergent reasons or for reasons deemed strictly in the public interest”. Subsec. (d)(7). Pub. L. 104–208, § 308(g)(4)(B), substituted “INA 241(c)” for “INA 237(a)”. Pub. L. 104–208, § 308(e)(2)(A), substituted “removed” for “deported”. Pub. L. 104–208, § 308(d)(1)(G), substituted “denied admission” for “excluded from admission”. Subsec. (d)(11). Pub. L. 104–208, § 671(e)(3), inse”. It preserves grammatical surrounding prose, and the after target INA 237(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 124,
+    "sourceId": "8-1182-note-14",
+    "referenceText": "1227(a)(4)(B)",
+    "verdict": "flag",
+    "afterContext": "ding any other provision of law, sections 212(a)(3)(B) and 237(a)(4)(B) of the Immigration and Nationality Act, as amended by this Act [8 U.S.C. 1182(a)(3)(B), INA 237(a)(4)(B)], shall apply to all aliens in exclusion or deportation proceedings on or after the date of the enactment of this Act [Oct. 26, 2001] (except for proceedings in which there has been a final administrative decision befor",
+    "issues": [
+      "mixed-U-S-C-bracket-list"
+    ],
+    "rationale": "Flag. In 8-1182-note-14, the literal afterContext is “ding any other provision of law, sections 212(a)(3)(B) and 237(a)(4)(B) of the Immigration and Nationality Act, as amended by this Act [8 U.S.C. 1182(a)(3)(B), INA 237(a)(4)(B)], shall apply to all aliens in exclusion or deportation proceedings on or after the date of the enactment of this Act [Oct. 26, 2001] (except for proceedings in which there has been a final administrative decision befor” The afterContext shows an incomplete bracket list mixing an INA designator into an 8 U.S.C. list. The rendered occurrence needs a grammar or link-group correction."
+  },
+  {
+    "id": 127,
+    "sourceId": "8-1182-note-14",
+    "referenceText": "section 212(a)(3)(B)(iv)",
+    "verdict": "pass",
+    "afterContext": "h Act or otherwise designated under section 212(a)(3)(B)(vi)(II) of such Act (as so amended); or “(ii) described in subclause (IV)(cc), (V)(cc), or (VI)(dd) of INA 212(a)(3)(B)(iv) (as so amended) with respect to a terrorist organization described in section 212(a)(3)(B)(vi)(III) of such Act (as so amended). “(4) Exception.—The Secretary of State, in consultation with the Attorney General, may det",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-14, the literal afterContext is “h Act or otherwise designated under section 212(a)(3)(B)(vi)(II) of such Act (as so amended); or “(ii) described in subclause (IV)(cc), (V)(cc), or (VI)(dd) of INA 212(a)(3)(B)(iv) (as so amended) with respect to a terrorist organization described in section 212(a)(3)(B)(vi)(III) of such Act (as so amended). “(4) Exception.—The Secretary of State, in consultation with the Attorney General, may det”. It preserves grammatical surrounding prose, and the after target INA 212(a)(3)(B)(iv) matches the source authority and subsection path."
+  },
+  {
+    "id": 130,
+    "sourceId": "8-1182-note-29",
+    "referenceText": "section 212(d)",
+    "verdict": "pass",
+    "afterContext": "d)(1) of Pub. L. 96–70, set out as a note under INA 101. Pub. L. 96–70, title III, § 3201(d)(2), Sept. 27, 1979, 93 Stat. 497, provided that: “Paragraph (9) of INA 212(d) [subsec. (d)(9) of this section], as added by subsection (b) of this section, shall cease to be effective at the end of the transition period [midnight Mar. 31, 1982, see section 2101 of Pub. L. 96–70, title II, Sept. 2",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-29, the literal afterContext is “d)(1) of Pub. L. 96–70, set out as a note under INA 101. Pub. L. 96–70, title III, § 3201(d)(2), Sept. 27, 1979, 93 Stat. 497, provided that: “Paragraph (9) of INA 212(d) [subsec. (d)(9) of this section], as added by subsection (b) of this section, shall cease to be effective at the end of the transition period [midnight Mar. 31, 1982, see section 2101 of Pub. L. 96–70, title II, Sept. 2”. It preserves grammatical surrounding prose, and the after target INA 212(d) matches the source authority and subsection path."
+  },
+  {
+    "id": 133,
+    "sourceId": "8-1182-note-40",
+    "referenceText": null,
+    "verdict": "pass",
+    "afterContext": "whether statutory or nonstatutory), section 242 of the Immigration and Nationality Act (8 U.S.C. 1252), sections 1361 and 1651 of title 28, United States Code, section 2241 of such title, and any other habeas corpus provision of law, no court shall have jurisdiction to review any determination made pursuant to this section.”",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-40, the literal afterContext is “whether statutory or nonstatutory), section 242 of the Immigration and Nationality Act (8 U.S.C. 1252), sections 1361 and 1651 of title 28, United States Code, section 2241 of such title, and any other habeas corpus provision of law, no court shall have jurisdiction to review any determination made pursuant to this section.””. It preserves grammatical surrounding prose, and the after target 28 U.S.C. 2241 matches the source authority and subsection path."
+  },
+  {
+    "id": 136,
+    "sourceId": "8-1182-note-63",
+    "referenceText": "section 1182(d)(5) of this title",
+    "verdict": "pass",
+    "afterContext": "108, provided that any refugee, not otherwise eligible for retroactive adjustment of status, who was paroled into United States by Attorney General pursuant to INA 212(d)(5) before Apr. 1, 1980, was to have his status adjusted pursuant to INA 203(g) and (h).",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-63, the literal afterContext is “108, provided that any refugee, not otherwise eligible for retroactive adjustment of status, who was paroled into United States by Attorney General pursuant to INA 212(d)(5) before Apr. 1, 1980, was to have his status adjusted pursuant to INA 203(g) and (h).”. It preserves grammatical surrounding prose, and the after target INA 212(d)(5) matches the source authority and subsection path."
+  },
+  {
+    "id": 139,
+    "sourceId": "8-1182-note-77",
+    "referenceText": "1185(a)",
+    "verdict": "pass",
+    "afterContext": "he Constitution and the laws of the United States of America, including sections 212(f) and 215(a) of the Immigration and Nationality Act (8 U.S.C. 1182(f) and INA 215(a)) and section 301 of title 3, United States Code, hereby find that, absent the measures set forth in Proclamation 10773, as amended by this proclamation, the entry into the United States of persons described in section 1",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-77, the literal afterContext is “he Constitution and the laws of the United States of America, including sections 212(f) and 215(a) of the Immigration and Nationality Act (8 U.S.C. 1182(f) and INA 215(a)) and section 301 of title 3, United States Code, hereby find that, absent the measures set forth in Proclamation 10773, as amended by this proclamation, the entry into the United States of persons described in section 1”. It preserves grammatical surrounding prose, and the after target INA 215(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 142,
+    "sourceId": "8-1182-note-78",
+    "referenceText": "1185(a)",
+    "verdict": "pass",
+    "afterContext": "tion of Restrictions on Entry for Aliens Invading the United States. I hereby proclaim, pursuant to sections 212(f) and 215(a) of the INA, 8 U.S.C. 1182(f) and INA 215(a), that aliens engaged in the invasion across the southern border of the United States on or after the date of this proclamation are restricted from invoking provisions of the INA that would permit their continued presenc",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-78, the literal afterContext is “tion of Restrictions on Entry for Aliens Invading the United States. I hereby proclaim, pursuant to sections 212(f) and 215(a) of the INA, 8 U.S.C. 1182(f) and INA 215(a), that aliens engaged in the invasion across the southern border of the United States on or after the date of this proclamation are restricted from invoking provisions of the INA that would permit their continued presenc”. It preserves grammatical surrounding prose, and the after target INA 215(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 145,
+    "sourceId": "8-1182-note-80",
+    "referenceText": "1185(a)(1)",
+    "verdict": "pass",
+    "afterContext": " and the laws of the United States of America, including sections 212(f) and 215(a)(1) of the Immigration and Nationality Act, as amended (8 U.S.C. 1182(f) and INA 215(a)(1)), and whereas: (1) The President has authority to suspend the entry of aliens coming by sea to the United States without necessary documentation, to establish reasonable rules and regulations regarding, and other limita",
+    "issues": [],
+    "rationale": "Pass. In 8-1182-note-80, the literal afterContext is “ and the laws of the United States of America, including sections 212(f) and 215(a)(1) of the Immigration and Nationality Act, as amended (8 U.S.C. 1182(f) and INA 215(a)(1)), and whereas: (1) The President has authority to suspend the entry of aliens coming by sea to the United States without necessary documentation, to establish reasonable rules and regulations regarding, and other limita”. It preserves grammatical surrounding prose, and the after target INA 215(a)(1) matches the source authority and subsection path."
+  },
+  {
+    "id": 148,
+    "sourceId": "8-1183a-f-5-B-ii",
+    "referenceText": "section 1154(l)",
+    "verdict": "pass",
+    "afterContext": "the alien’s petition is being adjudicated pursuant to INA 204(l) (surviving relative consideration).",
+    "issues": [],
+    "rationale": "Pass. In 8-1183a-f-5-B-ii, the literal afterContext is “the alien’s petition is being adjudicated pursuant to INA 204(l) (surviving relative consideration).”. It preserves grammatical surrounding prose, and the after target INA 204(l) matches the source authority and subsection path."
+  }
+
+,
+
+  {
+    "id": 151,
+    "sourceId": "8-1184-c-11-A-i",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "afterContext": "in order that an alien may be initially granted nonimmigrant status described in INA 101(a)(15)(H)(i)(b1); or",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-c-11-A-i, the literal afterContext is “in order that an alien may be initially granted nonimmigrant status described in INA 101(a)(15)(H)(i)(b1); or”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(H)(i)(b1) matches the source authority and subsection path."
+  },
+  {
+    "id": 154,
+    "sourceId": "8-1184-g-8-C",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "afterContext": "The period of authorized admission as a nonimmigrant under INA 101(a)(15)(H)(i)(b1) shall be 1 year, and may be extended, but only in 1-year increments. After every second extension, the next following extension shall not be granted unless the Secretary of Labor had determined and certified to the Secr",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-g-8-C, the literal afterContext is “The period of authorized admission as a nonimmigrant under INA 101(a)(15)(H)(i)(b1) shall be 1 year, and may be extended, but only in 1-year increments. After every second extension, the next following extension shall not be granted unless the Secretary of Labor had determined and certified to the Secr”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(H)(i)(b1) matches the source authority and subsection path."
+  },
+  {
+    "id": 157,
+    "sourceId": "8-1184-o-6",
+    "referenceText": "section 1101(a)(15)(T)(i)(III)(aa)",
+    "verdict": "pass",
+    "afterContext": "In making a determination under INA 101(a)(15)(T)(i)(III)(aa) with respect to an alien, statements from State and local law enforcement officials that the alien has complied with any reasonable request for assistance in the investigation or prosecution of crimes such as kidnapping",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-o-6, the literal afterContext is “In making a determination under INA 101(a)(15)(T)(i)(III)(aa) with respect to an alien, statements from State and local law enforcement officials that the alien has complied with any reasonable request for assistance in the investigation or prosecution of crimes such as kidnapping”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(T)(i)(III)(aa) matches the source authority and subsection path."
+  },
+  {
+    "id": 160,
+    "sourceId": "8-1184-p",
+    "referenceText": "section 1101(a)(15)(U)",
+    "verdict": "pass",
+    "afterContext": "Requirements applicable to INA 101(a)(15)(U) visas",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-p, the literal afterContext is “Requirements applicable to INA 101(a)(15)(U) visas”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(U) matches the source authority and subsection path."
+  },
+  {
+    "id": 163,
+    "sourceId": "8-1184-r",
+    "referenceText": "section 1101(a)(15)(K)(ii)",
+    "verdict": "pass",
+    "afterContext": "Visas of nonimmigrants described in INA 101(a)(15)(K)(ii)",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-r, the literal afterContext is “Visas of nonimmigrants described in INA 101(a)(15)(K)(ii)”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(K)(ii) matches the source authority and subsection path."
+  },
+  {
+    "id": 166,
+    "sourceId": "8-1184-note-5",
+    "referenceText": "section 1101(a)(15)(U)",
+    "verdict": "pass",
+    "afterContext": "), added pars. (4) to (6). Subsec. (o). Pub. L. 108–193, § 8(a)(3), redesignated subsec. (n) as (o). Former subsec. (o), relating to requirements applicable to INA 101(a)(15)(U) visas, redesignated (p). Another former subsec. (o), relating to employment of nonimmigrants described in INA 101(a)(15)(V), redesignated (q). Subsec. (p). Pub. L. 108–193, § 8(a)(3), redesignated subsec. (o), relating ",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-note-5, the literal afterContext is “), added pars. (4) to (6). Subsec. (o). Pub. L. 108–193, § 8(a)(3), redesignated subsec. (n) as (o). Former subsec. (o), relating to requirements applicable to INA 101(a)(15)(U) visas, redesignated (p). Another former subsec. (o), relating to employment of nonimmigrants described in INA 101(a)(15)(V), redesignated (q). Subsec. (p). Pub. L. 108–193, § 8(a)(3), redesignated subsec. (o), relating ”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(U) matches the source authority and subsection path."
+  },
+  {
+    "id": 169,
+    "sourceId": "8-1184-note-5",
+    "referenceText": "section 1101(a)(15)(F)(i)",
+    "verdict": "pass",
+    "afterContext": ". (6). Subsec. (l)(1)(B). Pub. L. 107–273 substituted “30;” for “20;”. Subsec. (m). Pub. L. 107–274 substituted “clause (i) or (iii) of INA 101(a)(15)(F)” for “INA 101(a)(15)(F)(i)” in two places in subsec. (m) relating to nonimmigrant elementary and secondary school students. 2001—Subsec. (k)(2). Pub. L. 107–45, § 1(2), redesignated par. (3) as (2). Pub. L. 107–45, § 1(1), which directed that sub",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-note-5, the literal afterContext is “. (6). Subsec. (l)(1)(B). Pub. L. 107–273 substituted “30;” for “20;”. Subsec. (m). Pub. L. 107–274 substituted “clause (i) or (iii) of INA 101(a)(15)(F)” for “INA 101(a)(15)(F)(i)” in two places in subsec. (m) relating to nonimmigrant elementary and secondary school students. 2001—Subsec. (k)(2). Pub. L. 107–45, § 1(2), redesignated par. (3) as (2). Pub. L. 107–45, § 1(1), which directed that sub”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(F)(i) matches the source authority and subsection path."
+  },
+  {
+    "id": 172,
+    "sourceId": "8-1184-note-5",
+    "referenceText": "section 1101(a)(15)(O)",
+    "verdict": "pass",
+    "afterContext": " L. 116–113, § 503(b)(1)–(3), added subsec. (j). 1991—Subsec. (a)(2)(A). Pub. L. 102–232, § 303(a)(11), substituted “described in INA 101(a)(15)(O)” for “under INA 101(a)(15)(O)”. Pub. L. 102–232, § 205(d), inserted “(or events)” after “event”. Subsec. (a)(2)(B). Pub. L. 102–232, § 206(a), designated cl. (i) as subpar. (B) and struck out cl. (ii) which read as follows: “An alien who is admitted",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-note-5, the literal afterContext is “ L. 116–113, § 503(b)(1)–(3), added subsec. (j). 1991—Subsec. (a)(2)(A). Pub. L. 102–232, § 303(a)(11), substituted “described in INA 101(a)(15)(O)” for “under INA 101(a)(15)(O)”. Pub. L. 102–232, § 205(d), inserted “(or events)” after “event”. Subsec. (a)(2)(B). Pub. L. 102–232, § 206(a), designated cl. (i) as subpar. (B) and struck out cl. (ii) which read as follows: “An alien who is admitted”. It preserves grammatical surrounding prose, and the after target INA 101(a)(15)(O) matches the source authority and subsection path."
+  },
+  {
+    "id": 175,
+    "sourceId": "8-1184-note-32",
+    "referenceText": "section 203(b)",
+    "verdict": "pass",
+    "afterContext": "who—“(1) is the beneficiary of a petition filed under section 204(a) of that Act [8 U.S.C. 1154(a)] for a preference status under paragraph (1), (2), or (3) of INA 203(b) of that Act [8 U.S.C. 1153(b)]; and “(2) is eligible to be granted that status but for application of the per country limitations applicable to immigrants under those paragraphs, may apply for, and the Attorney General ",
+    "issues": [],
+    "rationale": "Pass. In 8-1184-note-32, the literal afterContext is “who—“(1) is the beneficiary of a petition filed under section 204(a) of that Act [8 U.S.C. 1154(a)] for a preference status under paragraph (1), (2), or (3) of INA 203(b) of that Act [8 U.S.C. 1153(b)]; and “(2) is eligible to be granted that status but for application of the per country limitations applicable to immigrants under those paragraphs, may apply for, and the Attorney General ”. It preserves grammatical surrounding prose, and the after target INA 203(b) matches the source authority and subsection path."
+  },
+  {
+    "id": 178,
+    "sourceId": "8-1186a-note-2",
+    "referenceText": "section 1184",
+    "verdict": "pass",
+    "afterContext": "e Code, see Short Title note set out under INA 101 and Tables. Subsection (p) of INA 214, referred to in subsec. (d)(1)(A)(ii), was redesignated subsec. (r) of INA 214 by Pub. L. 108–193, § 8(a)(3), Dec. 19, 2003, 117 Stat. 2886.",
+    "issues": [],
+    "rationale": "Pass. In 8-1186a-note-2, the literal afterContext is “e Code, see Short Title note set out under INA 101 and Tables. Subsection (p) of INA 214, referred to in subsec. (d)(1)(A)(ii), was redesignated subsec. (r) of INA 214 by Pub. L. 108–193, § 8(a)(3), Dec. 19, 2003, 117 Stat. 2886.”. It preserves grammatical surrounding prose, and the after target INA 214 matches the source authority and subsection path."
+  },
+  {
+    "id": 181,
+    "sourceId": "8-1186b-note-10",
+    "referenceText": "section 216A(d)(1)",
+    "verdict": "pass",
+    "afterContext": " requests the removal of such conditional basis and which states, under penalty of perjury, the facts and information described in subparagraphs (A) and (B) of INA 216A(d)(1) (8 U.S.C. 1186b(d)(1)) with respect to any commercial enterprise (regardless of whether such enterprise is a limited partnership and regardless of whether the alien entered the enterprise after its formation) which the ",
+    "issues": [],
+    "rationale": "Pass. In 8-1186b-note-10, the literal afterContext is “ requests the removal of such conditional basis and which states, under penalty of perjury, the facts and information described in subparagraphs (A) and (B) of INA 216A(d)(1) (8 U.S.C. 1186b(d)(1)) with respect to any commercial enterprise (regardless of whether such enterprise is a limited partnership and regardless of whether the alien entered the enterprise after its formation) which the ”. It preserves grammatical surrounding prose, and the after target INA 216A(d)(1) matches the source authority and subsection path."
+  },
+  {
+    "id": 184,
+    "sourceId": "8-1187-note-12",
+    "referenceText": "section 217(c)(5)(A)(i)",
+    "verdict": "pass",
+    "afterContext": "tle II, § 205(b), Dec. 18, 2015, 129 Stat. 2993, provided that: “The Secretary of Homeland Security shall submit the first report described in subclause (V) of INA 217(c)(5)(A)(i) (8 U.S.C. (c)(5)(A)(i)), as added by subsection (a), not later than 90 days after the date of the enactment of this Act [Dec. 18, 2015].”",
+    "issues": [],
+    "rationale": "Pass. In 8-1187-note-12, the literal afterContext is “tle II, § 205(b), Dec. 18, 2015, 129 Stat. 2993, provided that: “The Secretary of Homeland Security shall submit the first report described in subclause (V) of INA 217(c)(5)(A)(i) (8 U.S.C. (c)(5)(A)(i)), as added by subsection (a), not later than 90 days after the date of the enactment of this Act [Dec. 18, 2015].””. It preserves grammatical surrounding prose, and the after target INA 217(c)(5)(A)(i) matches the source authority and subsection path."
+  },
+  {
+    "id": 187,
+    "sourceId": "8-1189-note-9",
+    "referenceText": "section 219(a)",
+    "verdict": "pass",
+    "afterContext": "(4)(B)) prior to the date of enactment of this Act, and such redesignations shall continue to be effective until revoked as provided in paragraph (5) or (6) of INA 219(a) (8 U.S.C. 1189(a)).”",
+    "issues": [],
+    "rationale": "Pass. In 8-1189-note-9, the literal afterContext is “(4)(B)) prior to the date of enactment of this Act, and such redesignations shall continue to be effective until revoked as provided in paragraph (5) or (6) of INA 219(a) (8 U.S.C. 1189(a)).””. It preserves grammatical surrounding prose, and the after target INA 219(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 190,
+    "sourceId": "8-1201-note-16",
+    "referenceText": "1253(d)",
+    "verdict": "flag",
+    "afterContext": "Applications of Cuban Nationals in Third Countries.—Notwithstanding section 212(f) and section 243(d) of the Immigration and Nationality Act [8 U.S.C. 1182(f), INA 243(d)], on and after the date of the enactment of this Act [Dec. 22, 1987], consular officers of the Department of State shall process immigrant visa applications by nationals of Cuba located in third countries on the same ba",
+    "issues": [
+      "mixed-U-S-C-bracket-list"
+    ],
+    "rationale": "Flag. In 8-1201-note-16, the literal afterContext is “Applications of Cuban Nationals in Third Countries.—Notwithstanding section 212(f) and section 243(d) of the Immigration and Nationality Act [8 U.S.C. 1182(f), INA 243(d)], on and after the date of the enactment of this Act [Dec. 22, 1987], consular officers of the Department of State shall process immigrant visa applications by nationals of Cuba located in third countries on the same ba” The afterContext shows an incomplete bracket list mixing an INA designator into an 8 U.S.C. list. The rendered occurrence needs a grammar or link-group correction."
+  },
+  {
+    "id": 193,
+    "sourceId": "8-1202-note-3",
+    "referenceText": "section 1151 (b)",
+    "verdict": "pass",
+    "afterContext": "other copy shall be disposed of as may be by regulations prescribed”. 1965—Subsec. (a). Pub. L. 89–236 substituted “an immediate relative within the meaning of INA 201(b) or a preference or special immigrant”, for “preference quota or a nonquota immigrant”. 1961—Subsecs. (a), (c). Pub. L. 87–301 struck out requirement to state applicant’s race and ethnic classification.",
+    "issues": [],
+    "rationale": "Pass. In 8-1202-note-3, the literal afterContext is “other copy shall be disposed of as may be by regulations prescribed”. 1965—Subsec. (a). Pub. L. 89–236 substituted “an immediate relative within the meaning of INA 201(b) or a preference or special immigrant”, for “preference quota or a nonquota immigrant”. 1961—Subsecs. (a), (c). Pub. L. 87–301 struck out requirement to state applicant’s race and ethnic classification.”. It preserves grammatical surrounding prose, and the after target INA 201(b) matches the source authority and subsection path."
+  },
+  {
+    "id": 196,
+    "sourceId": "8-1221-note-2",
+    "referenceText": "section 1224",
+    "verdict": "pass",
+    "afterContext": "rst sentence and substituted “vessel, aircraft, train or bus” for “vessel or aircraft” in second sentence. 1996—Subsecs. (a), (b). Pub. L. 104–208 substituted “INA 234” for “INA 239”. 1991—Subsec. (d). Pub. L. 102–232 substituted “Commissioner” for “collector of customs” after “deposit with the”. 1990—Subsec. (d). Pub. L. 101–649 substituted “Commissioner the sum of $300” for “collect",
+    "issues": [],
+    "rationale": "Pass. In 8-1221-note-2, the literal afterContext is “rst sentence and substituted “vessel, aircraft, train or bus” for “vessel or aircraft” in second sentence. 1996—Subsecs. (a), (b). Pub. L. 104–208 substituted “INA 234” for “INA 239”. 1991—Subsec. (d). Pub. L. 102–232 substituted “Commissioner” for “collector of customs” after “deposit with the”. 1990—Subsec. (d). Pub. L. 101–649 substituted “Commissioner the sum of $300” for “collect”. It preserves grammatical surrounding prose, and the after target INA 234 matches the source authority and subsection path."
+  },
+  {
+    "id": 199,
+    "sourceId": "8-1224-note-4",
+    "referenceText": "section 1224",
+    "verdict": "pass",
+    "afterContext": "Prior ProvisionsA prior INA 234, act June 27, 1952, ch. 477, title II, ch. 4, § 234, 66 Stat. 198, as amended, which related to physical and mental examinations, was renumbered section 232(b) of act June 27, 1952, by Pub. L. 104–208, div. C, title III",
+    "issues": [],
+    "rationale": "Pass. In 8-1224-note-4, the literal afterContext is “Prior ProvisionsA prior INA 234, act June 27, 1952, ch. 477, title II, ch. 4, § 234, 66 Stat. 198, as amended, which related to physical and mental examinations, was renumbered section 232(b) of act June 27, 1952, by Pub. L. 104–208, div. C, title III”. It preserves grammatical surrounding prose, and the after target INA 234 matches the source authority and subsection path."
+  },
+  {
+    "id": 202,
+    "sourceId": "8-1227-note-4",
+    "referenceText": "section 1182(a)(6)(C)(i)",
+    "verdict": "pass",
+    "afterContext": "), (iii). Pub. L. 102–232, § 307(h)(4), added cl. (ii) and redesignated former cl. (ii) as (iii). Subsec. (a)(1)(G). Pub. L. 102–232, § 307(h)(5), substituted “INA 212(a)(6)(C)(i)” for “INA 212(a)(5)(C)(i)”. Subsec. (a)(1)(H). Pub. L. 102–232, § 307(h)(6), substituted “paragraph (4)(D)” for “paragraph (6) or (7)”. Subsec. (a)(2)(D). Pub. L. 102–232, § 307(h)(7), inserted “or attempt” after “consp",
+    "issues": [],
+    "rationale": "Pass. In 8-1227-note-4, the literal afterContext is “), (iii). Pub. L. 102–232, § 307(h)(4), added cl. (ii) and redesignated former cl. (ii) as (iii). Subsec. (a)(1)(G). Pub. L. 102–232, § 307(h)(5), substituted “INA 212(a)(6)(C)(i)” for “INA 212(a)(5)(C)(i)”. Subsec. (a)(1)(H). Pub. L. 102–232, § 307(h)(6), substituted “paragraph (4)(D)” for “paragraph (6) or (7)”. Subsec. (a)(2)(D). Pub. L. 102–232, § 307(h)(7), inserted “or attempt” after “consp”. It preserves grammatical surrounding prose, and the after target INA 212(a)(6)(C)(i) matches the source authority and subsection path."
+  },
+  {
+    "id": 205,
+    "sourceId": "8-1228-c-3-B",
+    "referenceText": "section 1253(a)",
+    "verdict": "pass",
+    "afterContext": "efendant with written notice of the order of removal, which shall designate the defendant’s country of choice for removal and any alternate country pursuant to INA 243(a).",
+    "issues": [],
+    "rationale": "Pass. In 8-1228-c-3-B, the literal afterContext is “efendant with written notice of the order of removal, which shall designate the defendant’s country of choice for removal and any alternate country pursuant to INA 243(a).”. It preserves grammatical surrounding prose, and the after target INA 243(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 208,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1229a",
+    "verdict": "pass",
+    "afterContext": "t is legally enforceable by any party against the United States or its agencies or officers or any other person.” Pub. L. 104–208, § 308(c)(1)(A), substituted “INA 240” for “INA 242”. Pub. L. 104–132, § 440(g)(1)(B), struck out “, where warranted,” after “assures expeditious deportation”. Pub. L. 104–132, § 440(g)(1)(A), as amended by Pub. L. 104–208, §§ 306(d), 308(g)(10)(H), 671(c)(",
+    "issues": [],
+    "rationale": "Pass. In 8-1228-note-5, the literal afterContext is “t is legally enforceable by any party against the United States or its agencies or officers or any other person.” Pub. L. 104–208, § 308(c)(1)(A), substituted “INA 240” for “INA 242”. Pub. L. 104–132, § 440(g)(1)(B), struck out “, where warranted,” after “assures expeditious deportation”. Pub. L. 104–132, § 440(g)(1)(A), as amended by Pub. L. 104–208, §§ 306(d), 308(g)(10)(H), 671(c)(”. It preserves grammatical surrounding prose, and the after target INA 240 matches the source authority and subsection path."
+  },
+  {
+    "id": 211,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1252(a)(2)",
+    "verdict": "pass",
+    "afterContext": "y INA 237(a)(2)(A)(i)” for “aggravated felonies (as defined in INA 101(a)(43))”. Subsec. (a)(2). Pub. L. 104–208, § 308(c)(1)(B), substituted “INA 236(c)” for “INA 242(a)(2)”. Pub. L. 104–132, § 440(g)(2), which directed substitution of “any criminal offense covered in section 1251(a)(2)(A)(iii)→ 8 U.S.C. 1227, (B)→ 8 U.S.C. 1227, (C)→ 8 U.S.C. 1227, or (D)→ 8 U.S.C. 1227 of this title, or ",
+    "issues": [],
+    "rationale": "Pass. In 8-1228-note-5, the literal afterContext is “y INA 237(a)(2)(A)(i)” for “aggravated felonies (as defined in INA 101(a)(43))”. Subsec. (a)(2). Pub. L. 104–208, § 308(c)(1)(B), substituted “INA 236(c)” for “INA 242(a)(2)”. Pub. L. 104–132, § 440(g)(2), which directed substitution of “any criminal offense covered in section 1251(a)(2)(A)(iii)→ 8 U.S.C. 1227, (B)→ 8 U.S.C. 1227, (C)→ 8 U.S.C. 1227, or (D)→ 8 U.S.C. 1227 of this title, or ”. It preserves grammatical surrounding prose, and the after target INA 242(a)(2) matches the source authority and subsection path."
+  },
+  {
+    "id": 214,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1227(a)(2)(A)(iii)",
+    "verdict": "pass",
+    "afterContext": "substituted “INA 240” for “INA 242(b)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Pub. L. 104–208, § 308(c)(1)(C), substituted “INA 237(a)(2)(A)(iii)” for “section 1251(a)(2)(A)(iii)→ 8 U.S.C. 1227”. Subsec. (b)(2)(A). Pub. L. 104–132, § 442(a)(1)(A), substituted “or” for “and” at end. Subsec. (b)(2)(B). Pub. L. 104–132, § 442(a)(1)(B), amended subpar. (B) generally.",
+    "issues": [],
+    "rationale": "Pass. In 8-1228-note-5, the literal afterContext is “substituted “INA 240” for “INA 242(b)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Pub. L. 104–208, § 308(c)(1)(C), substituted “INA 237(a)(2)(A)(iii)” for “section 1251(a)(2)(A)(iii)→ 8 U.S.C. 1227”. Subsec. (b)(2)(A). Pub. L. 104–132, § 442(a)(1)(A), substituted “or” for “and” at end. Subsec. (b)(2)(B). Pub. L. 104–132, § 442(a)(1)(B), amended subpar. (B) generally.”. It preserves grammatical surrounding prose, and the after target INA 237(a)(2)(A)(iii) matches the source authority and subsection path."
+  },
+  {
+    "id": 217,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1227(a)(2)(A)",
+    "verdict": "pass",
+    "afterContext": "on”. Subsec. (c)(2)(A). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Subsec. (c)(2)(B). Pub. L. 104–208, § 308(g)(1), substituted “INA 237(a)(2)(A)” for “section 1251(a)(2)(A)→ 8 U.S.C. 1227”. Subsec. (c)(2)(C). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Subsec. (c)(2)(D)(ii). Pub. L. 104–208, § 308(g)(5)(D), substituted “INA 240” for",
+    "issues": [],
+    "rationale": "Pass. In 8-1228-note-5, the literal afterContext is “on”. Subsec. (c)(2)(A). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Subsec. (c)(2)(B). Pub. L. 104–208, § 308(g)(1), substituted “INA 237(a)(2)(A)” for “section 1251(a)(2)(A)→ 8 U.S.C. 1227”. Subsec. (c)(2)(C). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Subsec. (c)(2)(D)(ii). Pub. L. 104–208, § 308(g)(5)(D), substituted “INA 240” for”. It preserves grammatical surrounding prose, and the after target INA 237(a)(2)(A) matches the source authority and subsection path."
+  },
+  {
+    "id": 220,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1252",
+    "verdict": "pass",
+    "afterContext": "c. (c)(3)(A)(i). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Subsec. (c)(3)(A)(ii). Pub. L. 104–208, § 308(g)(2)(A), substituted “INA 242” for “INA 106”. Subsec. (c)(3)(A)(iii). Pub. L. 104–208, § 308(g)(2)(C), substituted “INA 242(b)(1)” for “INA 106(a)(1)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” in two places. Subsec. (",
+    "issues": [],
+    "rationale": "Pass. In 8-1228-note-5, the literal afterContext is “c. (c)(3)(A)(i). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Subsec. (c)(3)(A)(ii). Pub. L. 104–208, § 308(g)(2)(A), substituted “INA 242” for “INA 106”. Subsec. (c)(3)(A)(iii). Pub. L. 104–208, § 308(g)(2)(C), substituted “INA 242(b)(1)” for “INA 106(a)(1)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” in two places. Subsec. (”. It preserves grammatical surrounding prose, and the after target INA 242 matches the source authority and subsection path."
+  },
+  {
+    "id": 223,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1105a(a)(1)",
+    "verdict": "pass",
+    "afterContext": "Pub. L. 104–208, § 308(g)(2)(A), substituted “INA 242” for “INA 106”. Subsec. (c)(3)(A)(iii). Pub. L. 104–208, § 308(g)(2)(C), substituted “INA 242(b)(1)” for “INA 106(a)(1)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” in two places. Subsec. (c)(3)(B). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” wherever appearing. Subsec. (c)(4). P",
+    "issues": [],
+    "rationale": "Pass. In 8-1228-note-5, the literal afterContext is “Pub. L. 104–208, § 308(g)(2)(A), substituted “INA 242” for “INA 106”. Subsec. (c)(3)(A)(iii). Pub. L. 104–208, § 308(g)(2)(C), substituted “INA 242(b)(1)” for “INA 106(a)(1)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” in two places. Subsec. (c)(3)(B). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” wherever appearing. Subsec. (c)(4). P”. It preserves grammatical surrounding prose, and the after target INA 106(a)(1) matches the source authority and subsection path."
+  },
+  {
+    "id": 226,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1227(a)",
+    "verdict": "pass",
+    "afterContext": "ation” wherever appearing. Subsec. (c)(4). Pub. L. 104–208, § 308(g)(5)(A)(ii), substituted “INA 240” for “INA 242”. Pub. L. 104–208, § 308(g)(1), substituted “INA 237(a)” for “section 1251(a)→ 8 U.S.C. 1227”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” in two places. Subsec. (c)(5). Pub. L. 104–208, § 308(e)(10), substituted “removal” for “deportation” in he",
+    "issues": [],
+    "rationale": "Pass. In 8-1228-note-5, the literal afterContext is “ation” wherever appearing. Subsec. (c)(4). Pub. L. 104–208, § 308(g)(5)(A)(ii), substituted “INA 240” for “INA 242”. Pub. L. 104–208, § 308(g)(1), substituted “INA 237(a)” for “section 1251(a)→ 8 U.S.C. 1227”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” in two places. Subsec. (c)(5). Pub. L. 104–208, § 308(e)(10), substituted “removal” for “deportation” in he”. It preserves grammatical surrounding prose, and the after target INA 237(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 229,
+    "sourceId": "8-1229a-note-11",
+    "referenceText": "section 204(a)(1)(A)",
+    "verdict": "pass",
+    "afterContext": "d Nationality Act (as so in effect) (8 U.S.C. 1252b(c)(3)) does not apply—“(aa) if the basis of the motion is to apply for relief under clause (iii) or (iv) of INA 204(a)(1)(A) (8 U.S.C. 1154(a)(1)(A)), clause (ii) or (iii) of INA 204(a)(1)(B) (8 U.S.C. 1154(a)(1)(B)), or section 244(a)(3) of such Act (as so in effect) (8 U.S.C. 1254(a)(3)); and “(bb) if the motion is accompanied by a suspensi",
+    "issues": [],
+    "rationale": "Pass. In 8-1229a-note-11, the literal afterContext is “d Nationality Act (as so in effect) (8 U.S.C. 1252b(c)(3)) does not apply—“(aa) if the basis of the motion is to apply for relief under clause (iii) or (iv) of INA 204(a)(1)(A) (8 U.S.C. 1154(a)(1)(A)), clause (ii) or (iii) of INA 204(a)(1)(B) (8 U.S.C. 1154(a)(1)(B)), or section 244(a)(3) of such Act (as so in effect) (8 U.S.C. 1254(a)(3)); and “(bb) if the motion is accompanied by a suspensi”. It preserves grammatical surrounding prose, and the after target INA 204(a)(1)(A) matches the source authority and subsection path."
+  },
+  {
+    "id": 232,
+    "sourceId": "8-1229b-b-4-A-ii",
+    "referenceText": "section 1229b(b)(2)",
+    "verdict": "flag",
+    "afterContext": "parent of a child alien granted relief under INA 240A(b)(2) or 1254(a)(3) of this title (as in effect before the title III–A effective date in section 309 of the Illegal Immigration Reform and Immigrant Responsibility Act of 1996).",
+    "issues": [
+      "INA-followed-by-of-this-title"
+    ],
+    "rationale": "Flag. In 8-1229b-b-4-A-ii, the literal afterContext is “parent of a child alien granted relief under INA 240A(b)(2) or 1254(a)(3) of this title (as in effect before the title III–A effective date in section 309 of the Illegal Immigration Reform and Immigrant Responsibility Act of 1996).” The INA designator is followed by a dangling “of this title” tail. The rendered occurrence needs a grammar or link-group correction."
+  },
+  {
+    "id": 235,
+    "sourceId": "8-1252-a-1",
+    "referenceText": null,
+    "verdict": "pass",
+    "afterContext": " governed only by chapter 158 of title 28, except as provided in subsection (b) and except that the court may not order the taking of additional evidence under section 2347(c) of such title.",
+    "issues": [],
+    "rationale": "Pass. In 8-1252-a-1, the literal afterContext is “ governed only by chapter 158 of title 28, except as provided in subsection (b) and except that the court may not order the taking of additional evidence under section 2347(c) of such title.”. It preserves grammatical surrounding prose, and the after target 28 U.S.C. 2347(c) matches the source authority and subsection path."
+  },
+  {
+    "id": 238,
+    "sourceId": "8-1252-b-9",
+    "referenceText": "section 1361",
+    "verdict": "pass",
+    "afterContext": " otherwise provided in this section, no court shall have jurisdiction, by habeas corpus under section 2241 of title 28 or any other habeas corpus provision, by section 1361 or 1651 of such title, or by any other provision of law (statutory or nonstatutory), to review such an order or such questions of law or fact.",
+    "issues": [],
+    "rationale": "Pass. In 8-1252-b-9, the literal afterContext is “ otherwise provided in this section, no court shall have jurisdiction, by habeas corpus under section 2241 of title 28 or any other habeas corpus provision, by section 1361 or 1651 of such title, or by any other provision of law (statutory or nonstatutory), to review such an order or such questions of law or fact.”. It preserves grammatical surrounding prose, and the after target 28 U.S.C. 1361 matches the source authority and subsection path."
+  },
+  {
+    "id": 241,
+    "sourceId": "8-1252-note-2",
+    "referenceText": "section 1253",
+    "verdict": "pass",
+    "afterContext": "nd, as so amended, no longer contains a subsec. (g). Provisions similar to those contained in former subsec. (g) of INA 243 are now contained in subsec. (d) of INA 243. Rule 23 of the Federal Rules of Civil Procedure, referred to in subsec. (e)(1)(B), is set out in the Appendix to Title 28, Judiciary and Judicial Procedure. The Illegal Immigration Reform and Immigrant Responsibility A",
+    "issues": [],
+    "rationale": "Pass. In 8-1252-note-2, the literal afterContext is “nd, as so amended, no longer contains a subsec. (g). Provisions similar to those contained in former subsec. (g) of INA 243 are now contained in subsec. (d) of INA 243. Rule 23 of the Federal Rules of Civil Procedure, referred to in subsec. (e)(1)(B), is set out in the Appendix to Title 28, Judiciary and Judicial Procedure. The Illegal Immigration Reform and Immigrant Responsibility A”. It preserves grammatical surrounding prose, and the after target INA 243 matches the source authority and subsection path."
+  },
+  {
+    "id": 244,
+    "sourceId": "8-1254a-note-3",
+    "referenceText": "section 1158(b)(2)(A)",
+    "verdict": "pass",
+    "afterContext": "c. (b)(5)(B). Pub. L. 104–208, § 308(e)(1)(G), substituted “removal” for “deportation”. Subsec. (c)(2)(B)(ii). Pub. L. 104–208, § 308(g)(7)(E)(i), substituted “INA 208(b)(2)(A)” for “INA 243(h)(2)”. Subsec. (e). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “section 1254(a)”. Pub. L. 104–208, § 308(e)(11), amended heading. 1994—Subsec. (c)(1)(B). Pub. L. 103–416, § 219(z)(2",
+    "issues": [],
+    "rationale": "Pass. In 8-1254a-note-3, the literal afterContext is “c. (b)(5)(B). Pub. L. 104–208, § 308(e)(1)(G), substituted “removal” for “deportation”. Subsec. (c)(2)(B)(ii). Pub. L. 104–208, § 308(g)(7)(E)(i), substituted “INA 208(b)(2)(A)” for “INA 243(h)(2)”. Subsec. (e). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “section 1254(a)”. Pub. L. 104–208, § 308(e)(11), amended heading. 1994—Subsec. (c)(1)(B). Pub. L. 103–416, § 219(z)(2”. It preserves grammatical surrounding prose, and the after target INA 208(b)(2)(A) matches the source authority and subsection path."
+  },
+  {
+    "id": 247,
+    "sourceId": "8-1255-c",
+    "referenceText": "section 1182(l)",
+    "verdict": "pass",
+    "afterContext": "nder INA 212(d)(4)(C); (4) an alien (other than an immediate relative as defined in INA 201(b)) who was admitted as a nonimmigrant visitor without a visa under INA 212(l) or INA 217; (5) an alien who was admitted as a nonimmigrant described in INA 101(a)(15)(S), (6) an alien who is deportable under INA 237(a)(4)(B); (7) any alien who seeks adjustment of status to that of an immigrant und",
+    "issues": [],
+    "rationale": "Pass. In 8-1255-c, the literal afterContext is “nder INA 212(d)(4)(C); (4) an alien (other than an immediate relative as defined in INA 201(b)) who was admitted as a nonimmigrant visitor without a visa under INA 212(l) or INA 217; (5) an alien who was admitted as a nonimmigrant described in INA 101(a)(15)(S), (6) an alien who is deportable under INA 237(a)(4)(B); (7) any alien who seeks adjustment of status to that of an immigrant und”. It preserves grammatical surrounding prose, and the after target INA 212(l) matches the source authority and subsection path."
+  },
+  {
+    "id": 250,
+    "sourceId": "8-1255-note-3",
+    "referenceText": "section 1154(g)",
+    "verdict": "pass",
+    "afterContext": "A), inserted “(J),” after “(I),”. Pub. L. 102–110, § 2(c)(1), substituted “, (I), or (K)” for “or (I)”. Subsec. (e)(3). Pub. L. 102–232, § 308(a), substituted “INA 204(g)” for “INA 204(h)”. Subsec. (g). Pub. L. 102–110, § 2(c)(2), added subsec. (g). Subsec. (h). Pub. L. 102–232, § 302(d)(2)(B), added subsec. (h). 1990—Subsec. (b). Pub. L. 101–649, § 162(e)(3), struck out “or nonpreferenc",
+    "issues": [],
+    "rationale": "Pass. In 8-1255-note-3, the literal afterContext is “A), inserted “(J),” after “(I),”. Pub. L. 102–110, § 2(c)(1), substituted “, (I), or (K)” for “or (I)”. Subsec. (e)(3). Pub. L. 102–232, § 308(a), substituted “INA 204(g)” for “INA 204(h)”. Subsec. (g). Pub. L. 102–110, § 2(c)(2), added subsec. (g). Subsec. (h). Pub. L. 102–232, § 302(d)(2)(B), added subsec. (h). 1990—Subsec. (b). Pub. L. 101–649, § 162(e)(3), struck out “or nonpreferenc”. It preserves grammatical surrounding prose, and the after target INA 204(g) matches the source authority and subsection path."
+  },
+  {
+    "id": 253,
+    "sourceId": "8-1255-note-17",
+    "referenceText": "section 212(a)",
+    "verdict": "pass",
+    "afterContext": "ty.—In determining the admissibility of an alien under paragraph (1)(C), the grounds of inadmissibility specified in paragraphs (4), (5), (6)(A), and (7)(A) of INA 212(a) (8 U.S.C. 1182(a)) shall not apply. “(3) Exceptions.—An alien shall not be eligible for adjustment of status under this subsection if the Secretary determines that the alien—“(A) has been convicted of any aggravated fel",
+    "issues": [],
+    "rationale": "Pass. In 8-1255-note-17, the literal afterContext is “ty.—In determining the admissibility of an alien under paragraph (1)(C), the grounds of inadmissibility specified in paragraphs (4), (5), (6)(A), and (7)(A) of INA 212(a) (8 U.S.C. 1182(a)) shall not apply. “(3) Exceptions.—An alien shall not be eligible for adjustment of status under this subsection if the Secretary determines that the alien—“(A) has been convicted of any aggravated fel”. It preserves grammatical surrounding prose, and the after target INA 212(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 256,
+    "sourceId": "8-1255-note-21",
+    "referenceText": "section 101(b)(1)",
+    "verdict": "pass",
+    "afterContext": "ution, or paroled for emergent reasons or reasons deemed strictly in the public interest, or “(C) was a child (as defined in the text above subparagraph (A) of INA 101(b)(1) (8 U.S.C. 1101(b)(1)) at the time of arrival in the United States and on December 31, 1995, and who—“(i) arrived in the United States without parents in the United States and has remained without parents in the United S",
+    "issues": [],
+    "rationale": "Pass. In 8-1255-note-21, the literal afterContext is “ution, or paroled for emergent reasons or reasons deemed strictly in the public interest, or “(C) was a child (as defined in the text above subparagraph (A) of INA 101(b)(1) (8 U.S.C. 1101(b)(1)) at the time of arrival in the United States and on December 31, 1995, and who—“(i) arrived in the United States without parents in the United States and has remained without parents in the United S”. It preserves grammatical surrounding prose, and the after target INA 101(b)(1) matches the source authority and subsection path."
+  },
+  {
+    "id": 259,
+    "sourceId": "8-1255-note-22",
+    "referenceText": "section 212(a)(9)",
+    "verdict": "pass",
+    "afterContext": "C. 1231(a)(5)] shall not apply; and “(B) the Attorney General may grant the alien a waiver on the grounds of inadmissibility under subparagraphs (A) and (C) of INA 212(a)(9) [8 U.S.C. 1182(a)(9)]. In granting waivers under subparagraph (B), the Attorney General shall use standards used in granting consent under subparagraphs (A)(iii) and (C)(ii) of such section 212(a)(9). “(3) Relationship ",
+    "issues": [],
+    "rationale": "Pass. In 8-1255-note-22, the literal afterContext is “C. 1231(a)(5)] shall not apply; and “(B) the Attorney General may grant the alien a waiver on the grounds of inadmissibility under subparagraphs (A) and (C) of INA 212(a)(9) [8 U.S.C. 1182(a)(9)]. In granting waivers under subparagraph (B), the Attorney General shall use standards used in granting consent under subparagraphs (A)(iii) and (C)(ii) of such section 212(a)(9). “(3) Relationship ”. It preserves grammatical surrounding prose, and the after target INA 212(a)(9) matches the source authority and subsection path."
+  },
+  {
+    "id": 262,
+    "sourceId": "8-1255-note-26",
+    "referenceText": "section 101(a)",
+    "verdict": "pass",
+    "afterContext": "migrant, and the immigrant’s accompanying spouse and children—“(1) who, as of September 1, 1989, has the status of a nonimmigrant under paragraph (15)(H)(i) of INA 101(a) [8 U.S.C. 1101(a)(15)(H)(i)] to perform services as a registered nurse, “(2) who, for at least 3 years before the date of application for adjustment of status (whether or not before, on, or after, the date of the enactm",
+    "issues": [],
+    "rationale": "Pass. In 8-1255-note-26, the literal afterContext is “migrant, and the immigrant’s accompanying spouse and children—“(1) who, as of September 1, 1989, has the status of a nonimmigrant under paragraph (15)(H)(i) of INA 101(a) [8 U.S.C. 1101(a)(15)(H)(i)] to perform services as a registered nurse, “(2) who, for at least 3 years before the date of application for adjustment of status (whether or not before, on, or after, the date of the enactm”. It preserves grammatical surrounding prose, and the after target INA 101(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 265,
+    "sourceId": "8-1255a-note-4",
+    "referenceText": "section 1255a",
+    "verdict": "pass",
+    "afterContext": "Prior ProvisionsA prior INA 245A, Pub. L. 85–316, § 9, Sept. 11, 1957, 71 Stat. 641, provided for adjustment of status of certain resident aliens to that of a person admitted for permanent residence, the recording by Attorney General of alien’s lawful ",
+    "issues": [],
+    "rationale": "Pass. In 8-1255a-note-4, the literal afterContext is “Prior ProvisionsA prior INA 245A, Pub. L. 85–316, § 9, Sept. 11, 1957, 71 Stat. 641, provided for adjustment of status of certain resident aliens to that of a person admitted for permanent residence, the recording by Attorney General of alien’s lawful ”. It preserves grammatical surrounding prose, and the after target INA 245A matches the source authority and subsection path."
+  },
+  {
+    "id": 268,
+    "sourceId": "8-1258-a-4",
+    "referenceText": "section 1182(l)",
+    "verdict": "pass",
+    "afterContext": "an alien admitted as a nonimmigrant visitor without a visa under INA 212(l) or INA 217.",
+    "issues": [],
+    "rationale": "Pass. In 8-1258-a-4, the literal afterContext is “an alien admitted as a nonimmigrant visitor without a visa under INA 212(l) or INA 217.”. It preserves grammatical surrounding prose, and the after target INA 212(l) matches the source authority and subsection path."
+  },
+  {
+    "id": 271,
+    "sourceId": "8-1282-note-2",
+    "referenceText": "section 1252",
+    "verdict": "pass",
+    "afterContext": "Amendments2023—Subsec. (a)(3). Pub. L. 117–360 added par. (3). 1996—Subsec. (b). Pub. L. 104–208, § 308(g)(5)(A)(i), substituted “INA 240” for “INA 242”. Pub. L. 104–208, § 308(e)(2)(E), substituted “removed” for “deported” in two places. 1991—Subsec. (c). Pub. L. 102–232 substituted “fined under title 18” for “fined not more than $2,000 (or, if greater, the amount pro",
+    "issues": [],
+    "rationale": "Pass. In 8-1282-note-2, the literal afterContext is “Amendments2023—Subsec. (a)(3). Pub. L. 117–360 added par. (3). 1996—Subsec. (b). Pub. L. 104–208, § 308(g)(5)(A)(i), substituted “INA 240” for “INA 242”. Pub. L. 104–208, § 308(e)(2)(E), substituted “removed” for “deported” in two places. 1991—Subsec. (c). Pub. L. 102–232 substituted “fined under title 18” for “fined not more than $2,000 (or, if greater, the amount pro”. It preserves grammatical surrounding prose, and the after target INA 242 matches the source authority and subsection path."
+  },
+  {
+    "id": 274,
+    "sourceId": "8-1321-note-2",
+    "referenceText": "section 1228",
+    "verdict": "pass",
+    "afterContext": "Amendments1996—Subsec. (a). Pub. L. 104–208 substituted “INA 233” for “INA 238”. 1990—Subsec. (a). Pub. L. 101–649 substituted “$3,000” for “$1,000”. 1986—Subsec. (c). Pub. L. 99–603 added subsec. (c).",
+    "issues": [],
+    "rationale": "Pass. In 8-1321-note-2, the literal afterContext is “Amendments1996—Subsec. (a). Pub. L. 104–208 substituted “INA 233” for “INA 238”. 1990—Subsec. (a). Pub. L. 101–649 substituted “$3,000” for “$1,000”. 1986—Subsec. (c). Pub. L. 99–603 added subsec. (c).”. It preserves grammatical surrounding prose, and the after target INA 238 matches the source authority and subsection path."
+  },
+  {
+    "id": 277,
+    "sourceId": "8-1324a-a-1-B-i",
+    "referenceText": "(b)",
+    "verdict": "pass",
+    "afterContext": "f title 29), to hire, or to recruit or refer for a fee, for employment in the United States an individual without complying with the requirements of subsection (b).",
+    "issues": [],
+    "rationale": "Pass. In 8-1324a-a-1-B-i, the literal afterContext is “f title 29), to hire, or to recruit or refer for a fee, for employment in the United States an individual without complying with the requirements of subsection (b).”. It preserves grammatical surrounding prose, and the after target 8 U.S.C. 1324a(b) matches the source authority and subsection path."
+  },
+  {
+    "id": 280,
+    "sourceId": "8-1324a-note-23",
+    "referenceText": "1324a(a)(2)",
+    "verdict": "pass",
+    "afterContext": "d not contract with employers that have not complied with section 274A(a)(1)(A) and 274A(a)(2) of the Immigration and Nationality Act (8 U.S.C. 1324a(a)(1)(A), INA 274A(a)(2)) (the “INA employment provisions”) prohibiting the unlawful employment of aliens. (b) It is the policy of the executive branch in procuring goods and services that, to ensure the economical and efficient administration ",
+    "issues": [],
+    "rationale": "Pass. In 8-1324a-note-23, the literal afterContext is “d not contract with employers that have not complied with section 274A(a)(1)(A) and 274A(a)(2) of the Immigration and Nationality Act (8 U.S.C. 1324a(a)(1)(A), INA 274A(a)(2)) (the “INA employment provisions”) prohibiting the unlawful employment of aliens. (b) It is the policy of the executive branch in procuring goods and services that, to ensure the economical and efficient administration ”. It preserves grammatical surrounding prose, and the after target INA 274A(a)(2) matches the source authority and subsection path."
+  },
+  {
+    "id": 283,
+    "sourceId": "8-1326-c",
+    "referenceText": "section 1252(h)(2)",
+    "verdict": "pass",
+    "afterContext": "Any alien deported pursuant to INA 242(h)(2) who enters, attempts to enter, or is at any time found in, the United States (unless the Attorney General has expressly consented to such alien’s reentry) shall be incarcerated for the remainder of the sentence of impri",
+    "issues": [],
+    "rationale": "Pass. In 8-1326-c, the literal afterContext is “Any alien deported pursuant to INA 242(h)(2) who enters, attempts to enter, or is at any time found in, the United States (unless the Attorney General has expressly consented to such alien’s reentry) shall be incarcerated for the remainder of the sentence of impri”. It preserves grammatical surrounding prose, and the after target INA 242(h)(2) matches the source authority and subsection path."
+  },
+  {
+    "id": 286,
+    "sourceId": "8-1327-note-2",
+    "referenceText": "1182(a)(3)",
+    "verdict": "pass",
+    "afterContext": ". 1990—Pub. L. 101–649, § 603(a)(16), substituted “1182(a)(2) (insofar as an alien excludable under such section has been convicted of an aggravated felony) or INA 212(a)(3) (other than subparagraph (E) thereof)” for “1182(a)(9), (10), (23) (insofar as an alien excludable under any such paragraph has in addition been convicted of an aggravated felony), (27), (28), or (29)”. Pub. L. 101–649,",
+    "issues": [],
+    "rationale": "Pass. In 8-1327-note-2, the literal afterContext is “. 1990—Pub. L. 101–649, § 603(a)(16), substituted “1182(a)(2) (insofar as an alien excludable under such section has been convicted of an aggravated felony) or INA 212(a)(3) (other than subparagraph (E) thereof)” for “1182(a)(9), (10), (23) (insofar as an alien excludable under any such paragraph has in addition been convicted of an aggravated felony), (27), (28), or (29)”. Pub. L. 101–649,”. It preserves grammatical surrounding prose, and the after target INA 212(a)(3) matches the source authority and subsection path."
+  },
+  {
+    "id": 289,
+    "sourceId": "8-1356-s-5",
+    "referenceText": "section 1154",
+    "verdict": "pass",
+    "afterContext": "s under paragraphs (1) and (9) of INA 214(c) related to petitions made for nonimmigrants described in INA 101(a)(15)(H)(i)(b), under paragraph (1)(C) or (D) of INA 204(a) related to petitions for immigrants described in INA 203(b).",
+    "issues": [],
+    "rationale": "Pass. In 8-1356-s-5, the literal afterContext is “s under paragraphs (1) and (9) of INA 214(c) related to petitions made for nonimmigrants described in INA 101(a)(15)(H)(i)(b), under paragraph (1)(C) or (D) of INA 204(a) related to petitions for immigrants described in INA 203(b).”. It preserves grammatical surrounding prose, and the after target INA 204(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 292,
+    "sourceId": "8-1356-note-4",
+    "referenceText": "section 1228(b)",
+    "verdict": "pass",
+    "afterContext": "ounts paid out for expenses incurred by Attorney General for detention of aliens. 1996—Subsec. (a). Pub. L. 104–208, § 308(g)(1), substituted “INA 233(b)” for “INA 238(b)”. Subsec. (h)(1)(A). Pub. L. 104–208, § 671(e)(5), inserted period after “expended”. Subsec. (h)(1)(B). Pub. L. 104–208, § 382(b), substituted “1253(c), 1321,” for “1321”. Subsec. (h)(2)(A). Pub. L. 104–208, § 124(a)(1)",
+    "issues": [],
+    "rationale": "Pass. In 8-1356-note-4, the literal afterContext is “ounts paid out for expenses incurred by Attorney General for detention of aliens. 1996—Subsec. (a). Pub. L. 104–208, § 308(g)(1), substituted “INA 233(b)” for “INA 238(b)”. Subsec. (h)(1)(A). Pub. L. 104–208, § 671(e)(5), inserted period after “expended”. Subsec. (h)(1)(B). Pub. L. 104–208, § 382(b), substituted “1253(c), 1321,” for “1321”. Subsec. (h)(2)(A). Pub. L. 104–208, § 124(a)(1)”. It preserves grammatical surrounding prose, and the after target INA 238(b) matches the source authority and subsection path."
+  },
+  {
+    "id": 295,
+    "sourceId": "8-1357-note-3",
+    "referenceText": "section 1229a",
+    "verdict": "pass",
+    "afterContext": "ub. L. 104–208, § 308(d)(4)(L)(ii), substituted “denial of admission to” for “exclusion from”. Subsec. (f)(1). Pub. L. 104–208, § 308(g)(5)(A)(i), substituted “INA 240” for “INA 242”. Subsec. (g). Pub. L. 104–208, § 308(e)(1)(M), which directed amendment of subsec. (g) by substituting “removal” for “deportation” wherever appearing, could not be executed because the word “deportation” ",
+    "issues": [],
+    "rationale": "Pass. In 8-1357-note-3, the literal afterContext is “ub. L. 104–208, § 308(d)(4)(L)(ii), substituted “denial of admission to” for “exclusion from”. Subsec. (f)(1). Pub. L. 104–208, § 308(g)(5)(A)(i), substituted “INA 240” for “INA 242”. Subsec. (g). Pub. L. 104–208, § 308(e)(1)(M), which directed amendment of subsec. (g) by substituting “removal” for “deportation” wherever appearing, could not be executed because the word “deportation” ”. It preserves grammatical surrounding prose, and the after target INA 240 matches the source authority and subsection path."
+  },
+  {
+    "id": 298,
+    "sourceId": "8-1365a-note-9",
+    "referenceText": null,
+    "verdict": "pass",
+    "afterContext": "States Code, at rates for individuals not to exceed the daily equivalent of the annual rate of basic pay prescribed for level V of the Executive Schedule under section 5316 of such title. “(5) Administrative support services.—Upon the request of the Attorney General, the Administrator of General Services shall provide to the Task Force, on a reimbursable basis, the administrative support s",
+    "issues": [],
+    "rationale": "Pass. In 8-1365a-note-9, the literal afterContext is “States Code, at rates for individuals not to exceed the daily equivalent of the annual rate of basic pay prescribed for level V of the Executive Schedule under section 5316 of such title. “(5) Administrative support services.—Upon the request of the Attorney General, the Administrator of General Services shall provide to the Task Force, on a reimbursable basis, the administrative support s”. It preserves grammatical surrounding prose, and the after target 5 U.S.C. 5316 matches the source authority and subsection path."
+  }
+
+,
+
+  {
+    "id": 301,
+    "sourceId": "8-1409-note-4",
+    "referenceText": "section 1401(a)",
+    "verdict": "pass",
+    "afterContext": " of twenty-one years by legitimation.” 1981—Subsec. (a). Pub. L. 97–116, § 18(l)(1), substituted “(c), (d), (e), and (g) of INA 301” for “(3) to (5) and (7) of INA 301(a)”. Subsec. (b). Pub. L. 97–116, § 18(l)(2), substituted “INA 301(g)” for “INA 301(a)(7)”.",
+    "issues": [],
+    "rationale": "Pass. In 8-1409-note-4, the literal afterContext is “ of twenty-one years by legitimation.” 1981—Subsec. (a). Pub. L. 97–116, § 18(l)(1), substituted “(c), (d), (e), and (g) of INA 301” for “(3) to (5) and (7) of INA 301(a)”. Subsec. (b). Pub. L. 97–116, § 18(l)(2), substituted “INA 301(g)” for “INA 301(a)(7)”.”. It preserves grammatical surrounding prose, and the after target INA 301(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 304,
+    "sourceId": "8-1423-note-8",
+    "referenceText": "section 312(a)",
+    "verdict": "pass",
+    "afterContext": "N FROM ENGLISH LANGUAGE REQUIREMENT FOR CERTAIN ALIENS WHO SERVED WITH SPECIAL GUERRILLA UNITS OR IRREGULAR FORCES IN LAOS.“The requirement of paragraph (1) of INA 312(a) (8 U.S.C. 1423(a)(1)) shall not apply to the naturalization of any person—“(1) who—“(A) was admitted into the United States as a refugee from Laos pursuant to section 207 of the Immigration and Nationality Act (8 U.S.C.",
+    "issues": [],
+    "rationale": "Pass. In 8-1423-note-8, the literal afterContext is “N FROM ENGLISH LANGUAGE REQUIREMENT FOR CERTAIN ALIENS WHO SERVED WITH SPECIAL GUERRILLA UNITS OR IRREGULAR FORCES IN LAOS.“The requirement of paragraph (1) of INA 312(a) (8 U.S.C. 1423(a)(1)) shall not apply to the naturalization of any person—“(1) who—“(A) was admitted into the United States as a refugee from Laos pursuant to section 207 of the Immigration and Nationality Act (8 U.S.C.”. It preserves grammatical surrounding prose, and the after target INA 312(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 307,
+    "sourceId": "8-1427-note-9",
+    "referenceText": "section 101(b)(1)",
+    "verdict": "pass",
+    "afterContext": "ces, methods, and activities. “(d) Definitions.—For purposes of this section—“(1) the term ‘child’ means a child as defined in subparagraphs (A) through (E) of INA 101(b)(1) [8 U.S.C. 1101(b)(1)], without regard to age or marital status; and “(2) the term ‘spouse’ means the wife or husband of a deceased alien referred to in subsection (b) who was married to such alien during the time the al",
+    "issues": [],
+    "rationale": "Pass. In 8-1427-note-9, the literal afterContext is “ces, methods, and activities. “(d) Definitions.—For purposes of this section—“(1) the term ‘child’ means a child as defined in subparagraphs (A) through (E) of INA 101(b)(1) [8 U.S.C. 1101(b)(1)], without regard to age or marital status; and “(2) the term ‘spouse’ means the wife or husband of a deceased alien referred to in subsection (b) who was married to such alien during the time the al”. It preserves grammatical surrounding prose, and the after target INA 101(b)(1) matches the source authority and subsection path."
+  },
+  {
+    "id": 310,
+    "sourceId": "8-1448-note-2",
+    "referenceText": "section 1433",
+    "verdict": "pass",
+    "afterContext": " such place as may be designated by the court”. Subsec. (d). Pub. L. 101–649, § 407(d)(15)(D), added subsec. (d). 1981—Subsec. (a). Pub. L. 97–116 substituted “INA 322” for “INA 322 or 1434”.",
+    "issues": [],
+    "rationale": "Pass. In 8-1448-note-2, the literal afterContext is “ such place as may be designated by the court”. Subsec. (d). Pub. L. 101–649, § 407(d)(15)(D), added subsec. (d). 1981—Subsec. (a). Pub. L. 97–116 substituted “INA 322” for “INA 322 or 1434”.”. It preserves grammatical surrounding prose, and the after target INA 322 matches the source authority and subsection path."
+  },
+  {
+    "id": 313,
+    "sourceId": "8-1452-note-3",
+    "referenceText": "section 1401(a)",
+    "verdict": "pass",
+    "afterContext": ". L. 99–653, as amended by Pub. L. 100–525, added subsec. (c). 1981—Pub. L. 97–116 substituted “(c), (d), (e), or (g) of INA 301” for “(3), (4), (5), or (7) of INA 301(a)”.",
+    "issues": [],
+    "rationale": "Pass. In 8-1452-note-3, the literal afterContext is “. L. 99–653, as amended by Pub. L. 100–525, added subsec. (c). 1981—Pub. L. 97–116 substituted “(c), (d), (e), or (g) of INA 301” for “(3), (4), (5), or (7) of INA 301(a)”.”. It preserves grammatical surrounding prose, and the after target INA 301(a) matches the source authority and subsection path."
+  },
+  {
+    "id": 316,
+    "sourceId": "8-1483-note-3",
+    "referenceText": "section 1481",
+    "verdict": "pass",
+    "afterContext": "r “paragraphs (2), (4),”. 1981—Subsec. (a). Pub. L. 97–116, § 18(r)(1), substituted “paragraphs (6) and (7) of INA 349(a)” for “paragraphs (7), (8), and (9) of INA 349”. Subsec. (b). Pub. L. 97–116, § 18(r)(2), substituted “and (5)” for “(5), and (6)”.",
+    "issues": [],
+    "rationale": "Pass. In 8-1483-note-3, the literal afterContext is “r “paragraphs (2), (4),”. 1981—Subsec. (a). Pub. L. 97–116, § 18(r)(1), substituted “paragraphs (6) and (7) of INA 349(a)” for “paragraphs (7), (8), and (9) of INA 349”. Subsec. (b). Pub. L. 97–116, § 18(r)(2), substituted “and (5)” for “(5), and (6)”.”. It preserves grammatical surrounding prose, and the after target INA 349 matches the source authority and subsection path."
+  },
+  {
+    "id": 319,
+    "sourceId": "8-1534-k-4",
+    "referenceText": "section 1254a(e)",
+    "verdict": "pass",
+    "afterContext": "voluntary departure under INA 244(e);",
+    "issues": [],
+    "rationale": "Pass. In 8-1534-k-4, the literal afterContext is “voluntary departure under INA 244(e);”. It preserves grammatical surrounding prose, and the after target INA 244(e) matches the source authority and subsection path."
+  },
+  {
+    "id": 322,
+    "sourceId": "8-1721-c-4",
+    "referenceText": "(7)",
+    "verdict": "pass",
+    "afterContext": "eding authorized access (as defined in section 1030(e) of title 18), and who uses such information in the manner described in any of the paragraphs (1) through (7) of section 1030(a) of such title, or attempts to use such information in such manner, shall be subject to the same penalties as are applicable under section 1030(c) of such title for violation of that paragraph.",
+    "issues": [],
+    "rationale": "Pass. In 8-1721-c-4, the literal afterContext is “eding authorized access (as defined in section 1030(e) of title 18), and who uses such information in the manner described in any of the paragraphs (1) through (7) of section 1030(a) of such title, or attempts to use such information in such manner, shall be subject to the same penalties as are applicable under section 1030(c) of such title for violation of that paragraph.”. It preserves grammatical surrounding prose, and the after target 18 U.S.C. 1030(a)(7) matches the source authority and subsection path."
+  },
+  {
+    "id": 325,
+    "sourceId": "8-1721-c-4",
+    "referenceText": null,
+    "verdict": "pass",
+    "afterContext": "hrough (7) of section 1030(a) of such title, or attempts to use such information in such manner, shall be subject to the same penalties as are applicable under section 1030(c) of such title for violation of that paragraph.",
+    "issues": [],
+    "rationale": "Pass. In 8-1721-c-4, the literal afterContext is “hrough (7) of section 1030(a) of such title, or attempts to use such information in such manner, shall be subject to the same penalties as are applicable under section 1030(c) of such title for violation of that paragraph.”. It preserves grammatical surrounding prose, and the after target 18 U.S.C. 1030(c) matches the source authority and subsection path."
+  }
+
+]

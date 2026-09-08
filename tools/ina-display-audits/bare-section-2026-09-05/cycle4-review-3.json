@@ -1,0 +1,2307 @@
+[
+  {
+    "id": 3,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(o) renders as INA 214(o); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(o)."
+  },
+  {
+    "id": 6,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(a)(2)(G) renders as INA 212(a)(2)(G); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)(2)(G)."
+  },
+  {
+    "id": 9,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184 renders as INA 214; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184."
+  },
+  {
+    "id": 12,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(n)(1) renders as INA 212(n)(1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(n)(1)."
+  },
+  {
+    "id": 15,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(p) renders as INA 214(p); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(p)."
+  },
+  {
+    "id": 18,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(o) renders as INA 214(o); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(o)."
+  },
+  {
+    "id": 21,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(j) renders as INA 214(j); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(j)."
+  },
+  {
+    "id": 24,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(a)(34) renders as INA 212(a)(34); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)(34)."
+  },
+  {
+    "id": 27,
+    "verdict": "pass",
+    "rationale": "Pass: 1227 renders as INA 237; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227."
+  },
+  {
+    "id": 30,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(h) renders as INA 212(h); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(h)."
+  },
+  {
+    "id": 33,
+    "verdict": "pass",
+    "rationale": "Pass: section 240A(d) renders as INA 240A(d); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229b(d)."
+  },
+  {
+    "id": 36,
+    "verdict": "pass",
+    "rationale": "Pass: 1227(a)(3) renders as INA 237(a)(3); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227(a)(3)."
+  },
+  {
+    "id": 39,
+    "verdict": "pass",
+    "rationale": "Pass: section 240(c)(3) renders as INA 240(c)(3); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229a(c)(3)."
+  },
+  {
+    "id": 42,
+    "verdict": "pass",
+    "rationale": "Pass: 1183a renders as INA 213A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1183a."
+  },
+  {
+    "id": 45,
+    "verdict": "pass",
+    "rationale": "Pass: 1184 renders as INA 214; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184."
+  },
+  {
+    "id": 48,
+    "verdict": "pass",
+    "rationale": "Pass: 1324 renders as INA 274; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324."
+  },
+  {
+    "id": 51,
+    "verdict": "pass",
+    "rationale": "Pass: 1356 renders as INA 286; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1356."
+  },
+  {
+    "id": 54,
+    "verdict": "pass",
+    "rationale": "Pass: 1153 renders as INA 203; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153."
+  },
+  {
+    "id": 57,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 60,
+    "verdict": "pass",
+    "rationale": "Pass: 1252b renders as INA 242B; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1252b."
+  },
+  {
+    "id": 63,
+    "verdict": "pass",
+    "rationale": "Pass: 1255a renders as INA 245A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255a."
+  },
+  {
+    "id": 66,
+    "verdict": "pass",
+    "rationale": "Pass: 1302 renders as INA 262; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1302."
+  },
+  {
+    "id": 69,
+    "verdict": "pass",
+    "rationale": "Pass: 1324a renders as INA 274A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324a."
+  },
+  {
+    "id": 72,
+    "verdict": "pass",
+    "rationale": "Pass: 1330 renders as INA 280; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1330."
+  },
+  {
+    "id": 75,
+    "verdict": "pass",
+    "rationale": "Pass: 1424 renders as INA 313; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1424."
+  },
+  {
+    "id": 78,
+    "verdict": "pass",
+    "rationale": "Pass: 1522 renders as INA 412; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1522."
+  },
+  {
+    "id": 81,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 84,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 87,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 90,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 93,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 96,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 99,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 102,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 105,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 108,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 111,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 114,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 117,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 120,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 123,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 126,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 129,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 132,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 135,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 138,
+    "verdict": "pass",
+    "rationale": "Pass: 1157 renders as INA 207; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1157."
+  },
+  {
+    "id": 141,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 144,
+    "verdict": "pass",
+    "rationale": "Pass: 1153 renders as INA 203; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153."
+  },
+  {
+    "id": 147,
+    "verdict": "pass",
+    "rationale": "Pass: 1201 renders as INA 221; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1201."
+  },
+  {
+    "id": 150,
+    "verdict": "pass",
+    "rationale": "Pass: 1160 renders as INA 210; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1160."
+  },
+  {
+    "id": 153,
+    "verdict": "pass",
+    "rationale": "Pass: 1187 renders as INA 217; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1187."
+  },
+  {
+    "id": 156,
+    "verdict": "pass",
+    "rationale": "Pass: 1255a renders as INA 245A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255a."
+  },
+  {
+    "id": 159,
+    "verdict": "pass",
+    "rationale": "Pass: 1324a renders as INA 274A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324a."
+  },
+  {
+    "id": 162,
+    "verdict": "pass",
+    "rationale": "Pass: 1152 renders as INA 202; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1152."
+  },
+  {
+    "id": 165,
+    "verdict": "pass",
+    "rationale": "Pass: 1356 renders as INA 286; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1356."
+  },
+  {
+    "id": 168,
+    "verdict": "pass",
+    "rationale": "Pass: 1181 renders as INA 211; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1181."
+  },
+  {
+    "id": 171,
+    "verdict": "pass",
+    "rationale": "Pass: 1152 renders as INA 202; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1152."
+  },
+  {
+    "id": 174,
+    "verdict": "pass",
+    "rationale": "Pass: 1187 renders as INA 217; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1187."
+  },
+  {
+    "id": 177,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 207 to 209) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 180,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 207 to 209) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 183,
+    "verdict": "pass",
+    "rationale": "Pass: 1187 renders as INA 217; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1187."
+  },
+  {
+    "id": 186,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 189,
+    "verdict": "pass",
+    "rationale": "Pass: 1229a renders as INA 240; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229a."
+  },
+  {
+    "id": 192,
+    "verdict": "pass",
+    "rationale": "Pass: 1430 renders as INA 319; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1430."
+  },
+  {
+    "id": 195,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 198,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 201,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 204,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 207,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 210,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 213,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 216,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 219,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 222,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 225,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 228,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 231,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 234,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 237,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 240,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 243,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 246,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 249,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 252,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 255,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 258,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 261,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 264,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 267,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 270,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 273,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 276,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 279,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 282,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 285,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 288,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 291,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 294,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 297,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 300,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 303,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 306,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 309,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 312,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (range) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 315,
+    "verdict": "pass",
+    "rationale": "Pass: 1104 renders as INA 104; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1104."
+  },
+  {
+    "id": 318,
+    "verdict": "pass",
+    "rationale": "Pass: 1154 renders as INA 204; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1154."
+  },
+  {
+    "id": 321,
+    "verdict": "pass",
+    "rationale": "Pass: 1161 renders as INA 210A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1161."
+  },
+  {
+    "id": 324,
+    "verdict": "pass",
+    "rationale": "Pass: 1186a renders as INA 216; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186a."
+  },
+  {
+    "id": 327,
+    "verdict": "pass",
+    "rationale": "Pass: 1201 renders as INA 221; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1201."
+  },
+  {
+    "id": 330,
+    "verdict": "pass",
+    "rationale": "Pass: 1223 renders as INA 233; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1223."
+  },
+  {
+    "id": 333,
+    "verdict": "pass",
+    "rationale": "Pass: 1252 renders as INA 242; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1252."
+  },
+  {
+    "id": 336,
+    "verdict": "pass",
+    "rationale": "Pass: 1259 renders as INA 249; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1259."
+  },
+  {
+    "id": 339,
+    "verdict": "pass",
+    "rationale": "Pass: 1304 renders as INA 264; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1304."
+  },
+  {
+    "id": 342,
+    "verdict": "pass",
+    "rationale": "Pass: 1324a renders as INA 274A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324a."
+  },
+  {
+    "id": 345,
+    "verdict": "pass",
+    "rationale": "Pass: 1356 renders as INA 286; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1356."
+  },
+  {
+    "id": 348,
+    "verdict": "pass",
+    "rationale": "Pass: 1408 renders as INA 308; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1408."
+  },
+  {
+    "id": 351,
+    "verdict": "pass",
+    "rationale": "Pass: 1422 renders as INA 311; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1422."
+  },
+  {
+    "id": 354,
+    "verdict": "pass",
+    "rationale": "Pass: 1431 renders as INA 320; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1431."
+  },
+  {
+    "id": 357,
+    "verdict": "pass",
+    "rationale": "Pass: 1435 renders as INA 324; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1435."
+  },
+  {
+    "id": 360,
+    "verdict": "pass",
+    "rationale": "Pass: 1446 renders as INA 335; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1446."
+  },
+  {
+    "id": 363,
+    "verdict": "pass",
+    "rationale": "Pass: 1452 renders as INA 341; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1452."
+  },
+  {
+    "id": 366,
+    "verdict": "pass",
+    "rationale": "Pass: 1459 renders as INA 348; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1459."
+  },
+  {
+    "id": 369,
+    "verdict": "pass",
+    "rationale": "Pass: 1489 renders as INA 357; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1489."
+  },
+  {
+    "id": 372,
+    "verdict": "pass",
+    "rationale": "Pass: 1524 renders as INA 414; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1524."
+  },
+  {
+    "id": 375,
+    "verdict": "pass",
+    "rationale": "Pass: 1201 renders as INA 221; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1201."
+  },
+  {
+    "id": 378,
+    "verdict": "pass",
+    "rationale": "Pass: 1356 renders as INA 286; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1356."
+  },
+  {
+    "id": 381,
+    "verdict": "pass",
+    "rationale": "Pass: 1451 renders as INA 340; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1451."
+  },
+  {
+    "id": 384,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 387,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 390,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 393,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 396,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 399,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 402,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 405,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 408,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 411,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 414,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 417,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 420,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 423,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 426,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 412 to 414) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 429,
+    "verdict": "pass",
+    "rationale": "Pass: 1105a renders as INA 106; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1105a."
+  },
+  {
+    "id": 432,
+    "verdict": "pass",
+    "rationale": "Pass: 1154 renders as INA 204; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1154."
+  },
+  {
+    "id": 435,
+    "verdict": "pass",
+    "rationale": "Pass: 1203 renders as INA 223; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1203."
+  },
+  {
+    "id": 438,
+    "verdict": "pass",
+    "rationale": "Pass: 1252 renders as INA 242; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1252."
+  },
+  {
+    "id": 441,
+    "verdict": "pass",
+    "rationale": "Pass: 1258 renders as INA 248; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1258."
+  },
+  {
+    "id": 444,
+    "verdict": "pass",
+    "rationale": "Pass: 1356 renders as INA 286; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1356."
+  },
+  {
+    "id": 447,
+    "verdict": "pass",
+    "rationale": "Pass: 1427 renders as INA 316; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1427."
+  },
+  {
+    "id": 450,
+    "verdict": "pass",
+    "rationale": "Pass: 1433 renders as INA 322; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1433."
+  },
+  {
+    "id": 453,
+    "verdict": "pass",
+    "rationale": "Pass: 1445 renders as INA 334; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1445."
+  },
+  {
+    "id": 456,
+    "verdict": "pass",
+    "rationale": "Pass: 1448 renders as INA 337; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1448."
+  },
+  {
+    "id": 459,
+    "verdict": "pass",
+    "rationale": "Pass: 1481 renders as INA 349; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1481."
+  },
+  {
+    "id": 462,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 411 to 1525) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 465,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 411 to 1525) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 468,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 411 to 1525) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 471,
+    "verdict": "pass",
+    "rationale": "Pass: 1154 renders as INA 204; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1154."
+  },
+  {
+    "id": 474,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 477,
+    "verdict": "pass",
+    "rationale": "Pass: section 1501 renders as section 1501; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 22, section 1501."
+  },
+  {
+    "id": 480,
+    "verdict": "pass",
+    "rationale": "Pass: 1152(a) renders as INA 202(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1152(a)."
+  },
+  {
+    "id": 483,
+    "verdict": "pass",
+    "rationale": "Pass: 1153(b)(4) renders as INA 203(b)(4); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153(b)(4)."
+  },
+  {
+    "id": 486,
+    "verdict": "pass",
+    "rationale": "Pass: 1184 renders as INA 214; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184."
+  },
+  {
+    "id": 489,
+    "verdict": "pass",
+    "rationale": "Pass: section 203(c) renders as INA 203(c); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153(c)."
+  },
+  {
+    "id": 492,
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15)(E) renders as INA 101(a)(15)(E); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(E)."
+  },
+  {
+    "id": 495,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)."
+  },
+  {
+    "id": 498,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 501,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 504,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 507,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 510,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 513,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 516,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 519,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 522,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 525,
+    "verdict": "flag",
+    "rationale": "The rendered field leaves a mixed INA/USC numeric range (INA 245 to 1255) after converting only one endpoint. That range is an authority list, so the display is misleading and should retain consistent INA labels or preserve the USC range."
+  },
+  {
+    "id": 528,
+    "verdict": "pass",
+    "rationale": "Pass: 1185(a) renders as INA 215(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1185(a)."
+  },
+  {
+    "id": 531,
+    "verdict": "pass",
+    "rationale": "Pass: section 1160 renders as INA 210; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1160."
+  },
+  {
+    "id": 534,
+    "verdict": "pass",
+    "rationale": "Pass: 1152 renders as INA 202; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1152."
+  },
+  {
+    "id": 537,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 540,
+    "verdict": "pass",
+    "rationale": "Pass: 1204 renders as INA 224; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1204."
+  },
+  {
+    "id": 543,
+    "verdict": "pass",
+    "rationale": "Pass: 1259 renders as INA 249; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1259."
+  },
+  {
+    "id": 546,
+    "verdict": "pass",
+    "rationale": "Pass: section 1151(a) renders as INA 201(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1151(a)."
+  },
+  {
+    "id": 549,
+    "verdict": "pass",
+    "rationale": "Pass: section 1151(a) renders as INA 201(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1151(a)."
+  },
+  {
+    "id": 552,
+    "verdict": "pass",
+    "rationale": "Pass: 1186b renders as INA 216A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186b."
+  },
+  {
+    "id": 555,
+    "verdict": "pass",
+    "rationale": "Pass: 1186b renders as INA 216A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186b."
+  },
+  {
+    "id": 558,
+    "verdict": "pass",
+    "rationale": "Pass: section 201(b)(2) renders as INA 201(b)(2); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1151(b)(2)."
+  },
+  {
+    "id": 561,
+    "verdict": "pass",
+    "rationale": "Pass: section 1153(a)(7) of this title renders as INA 203(a)(7); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153(a)(7)."
+  },
+  {
+    "id": 564,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(b)(1)(F) renders as INA 101(b)(1)(F); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(b)(1)(F)."
+  },
+  {
+    "id": 567,
+    "verdict": "pass",
+    "rationale": "Pass: 1201(i) renders as INA 221(i); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1201(i)."
+  },
+  {
+    "id": 570,
+    "verdict": "pass",
+    "rationale": "Pass: 1152(a) renders as INA 202(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1152(a)."
+  },
+  {
+    "id": 573,
+    "verdict": "pass",
+    "rationale": "Pass: the changed reference 551(2) is removed from the rendered field; its full source context does not identify an INA provision requiring conversion."
+  },
+  {
+    "id": 576,
+    "verdict": "pass",
+    "rationale": "Pass: the changed reference 5561(5) is removed from the rendered field; its full source context does not identify an INA provision requiring conversion."
+  },
+  {
+    "id": 579,
+    "verdict": "pass",
+    "rationale": "Pass: the changed reference 5561(5) is removed from the rendered field; its full source context does not identify an INA provision requiring conversion."
+  },
+  {
+    "id": 582,
+    "verdict": "pass",
+    "rationale": "Pass: the added section 551(2) is a separate non-INA authority in the full field; it remains a section citation with target Title 37, section 551(2) and is not falsely converted to INA."
+  },
+  {
+    "id": 585,
+    "verdict": "pass",
+    "rationale": "Pass: the added section 5561(5) is a separate non-INA authority in the full field; it remains a section citation with target Title 5, section 5561(5) and is not falsely converted to INA."
+  },
+  {
+    "id": 588,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a)(4)(B) renders as INA 237(a)(4)(B); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227(a)(4)(B)."
+  },
+  {
+    "id": 591,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(a)(19) renders as INA 212(a)(19); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)(19)."
+  },
+  {
+    "id": 594,
+    "verdict": "pass",
+    "rationale": "Pass: section 1254a(e) renders as INA 240B; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229c."
+  },
+  {
+    "id": 597,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 600,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 603,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 606,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 609,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 612,
+    "verdict": "pass",
+    "rationale": "Pass: Section 1184(l) renders as INA 214(l); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(l)."
+  },
+  {
+    "id": 615,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 618,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(l) renders as INA 214(l); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(l)."
+  },
+  {
+    "id": 621,
+    "verdict": "pass",
+    "rationale": "Pass: section 1228(c) renders as INA 238(c); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1228(c)."
+  },
+  {
+    "id": 624,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(27)(A) renders as INA 101(a)(27)(A); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(27)(A)."
+  },
+  {
+    "id": 627,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a)(3)(B)(iv) renders as INA 212(a)(3)(B)(iv); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)(3)(B)(iv)."
+  },
+  {
+    "id": 630,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a)(6)(A)(ii) renders as INA 212(a)(6)(A)(ii); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)(6)(A)(ii)."
+  },
+  {
+    "id": 633,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)."
+  },
+  {
+    "id": 636,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(m) renders as INA 212(m); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(m)."
+  },
+  {
+    "id": 639,
+    "verdict": "pass",
+    "rationale": "Pass: 1185(a)(1) renders as INA 215(a)(1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1185(a)(1)."
+  },
+  {
+    "id": 642,
+    "verdict": "pass",
+    "rationale": "Pass: 1185(a) renders as INA 215(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1185(a)."
+  },
+  {
+    "id": 645,
+    "verdict": "pass",
+    "rationale": "Pass: 1185(a) renders as INA 215(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1185(a)."
+  },
+  {
+    "id": 648,
+    "verdict": "pass",
+    "rationale": "Pass: 1185(a)(1) renders as INA 215(a)(1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1185(a)(1)."
+  },
+  {
+    "id": 651,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(l) renders as INA 212(l); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(l)."
+  },
+  {
+    "id": 654,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 657,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101 (a)(15)(H)(ii)(b) renders as INA 101(a)(15)(H)(ii)(b); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(ii)(b)."
+  },
+  {
+    "id": 660,
+    "verdict": "pass",
+    "rationale": "Pass: section 1255(l) renders as INA 245(l); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255(l)."
+  },
+  {
+    "id": 663,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(U) renders as INA 101(a)(15)(U); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(U)."
+  },
+  {
+    "id": 666,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 669,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(U) renders as INA 101(a)(15)(U); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(U)."
+  },
+  {
+    "id": 672,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(U) renders as INA 101(a)(15)(U); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(U)."
+  },
+  {
+    "id": 675,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(l) renders as INA 212(l); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(l)."
+  },
+  {
+    "id": 678,
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15)(H) renders as INA 101(a)(15)(H); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)."
+  },
+  {
+    "id": 681,
+    "verdict": "pass",
+    "rationale": "Pass: section 1153(d) renders as INA 203(d); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153(d)."
+  },
+  {
+    "id": 684,
+    "verdict": "pass",
+    "rationale": "Pass: 1153(b)(5) renders as INA 203(b)(5); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153(b)(5)."
+  },
+  {
+    "id": 687,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(a)(5)(A)(i) renders as INA 212(a)(5)(A)(i); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)(5)(A)(i)."
+  },
+  {
+    "id": 690,
+    "verdict": "pass",
+    "rationale": "Pass: 1188 renders as INA 218; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1188."
+  },
+  {
+    "id": 693,
+    "verdict": "pass",
+    "rationale": "Pass: 1152 renders as INA 202; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1152."
+  },
+  {
+    "id": 696,
+    "verdict": "pass",
+    "rationale": "Pass: 1253(d) renders as INA 243(d); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1253(d)."
+  },
+  {
+    "id": 699,
+    "verdict": "pass",
+    "rationale": "Pass: section 1151 (b) renders as INA 201(b); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1151(b)."
+  },
+  {
+    "id": 702,
+    "verdict": "pass",
+    "rationale": "Pass: section 1224 renders as INA 234; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1224."
+  },
+  {
+    "id": 705,
+    "verdict": "pass",
+    "rationale": "Pass: section 1224 renders as INA 234; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1224."
+  },
+  {
+    "id": 708,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(a)(6)(C)(i) renders as INA 212(a)(6)(C)(i); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)(6)(C)(i)."
+  },
+  {
+    "id": 711,
+    "verdict": "pass",
+    "rationale": "Pass: 1252 renders as INA 242; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1252."
+  },
+  {
+    "id": 714,
+    "verdict": "pass",
+    "rationale": "Pass: section 1253(a) renders as INA 243(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1253(a)."
+  },
+  {
+    "id": 717,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229a renders as INA 240; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229a."
+  },
+  {
+    "id": 720,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(a)(2) renders as INA 242(a)(2); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1252(a)(2)."
+  },
+  {
+    "id": 723,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a)(2)(A)(iii) renders as INA 237(a)(2)(A)(iii); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227(a)(2)(A)(iii)."
+  },
+  {
+    "id": 726,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a)(2)(A) renders as INA 237(a)(2)(A); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227(a)(2)(A)."
+  },
+  {
+    "id": 729,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252 renders as INA 242; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1252."
+  },
+  {
+    "id": 732,
+    "verdict": "pass",
+    "rationale": "Pass: section 1105a(a)(1) renders as INA 106(a)(1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1105a(a)(1)."
+  },
+  {
+    "id": 735,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a) renders as INA 237(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227(a)."
+  },
+  {
+    "id": 738,
+    "verdict": "pass",
+    "rationale": "Pass: section 204(a)(1)(A) renders as INA 204(a)(1)(A); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1154(a)(1)(A)."
+  },
+  {
+    "id": 741,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229b(b)(2) renders as INA 240A(b)(2); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229b(b)(2)."
+  },
+  {
+    "id": 744,
+    "verdict": "pass",
+    "rationale": "Pass: the added section 2347(c) is a separate non-INA authority in the full field; it remains a section citation with target Title 28, section 2347(c) and is not falsely converted to INA."
+  },
+  {
+    "id": 747,
+    "verdict": "pass",
+    "rationale": "Pass: section 1361 renders as section 1361; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 28, section 1361."
+  },
+  {
+    "id": 750,
+    "verdict": "pass",
+    "rationale": "Pass: section 1253 renders as INA 243; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1253."
+  },
+  {
+    "id": 753,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 756,
+    "verdict": "pass",
+    "rationale": "Pass: section 1253(h)(2) renders as INA 243(h)(2); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1253(h)(2)."
+  },
+  {
+    "id": 759,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184 renders as INA 214; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184."
+  },
+  {
+    "id": 762,
+    "verdict": "pass",
+    "rationale": "Pass: section 1154(h) renders as INA 204(h); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1154(h)."
+  },
+  {
+    "id": 765,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)."
+  },
+  {
+    "id": 768,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)."
+  },
+  {
+    "id": 771,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)."
+  },
+  {
+    "id": 774,
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a) renders as INA 101(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)."
+  },
+  {
+    "id": 777,
+    "verdict": "pass",
+    "rationale": "Pass: section 1255a renders as INA 245A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255a."
+  },
+  {
+    "id": 780,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(l) renders as INA 212(l); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(l)."
+  },
+  {
+    "id": 783,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229a renders as INA 240; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229a."
+  },
+  {
+    "id": 786,
+    "verdict": "pass",
+    "rationale": "Pass: section 1223 renders as INA 233; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1223."
+  },
+  {
+    "id": 789,
+    "verdict": "pass",
+    "rationale": "Pass: the added section 981(d) is a separate non-INA authority in the full field; it remains a section citation with target Title 18, section 981(d) and is not falsely converted to INA."
+  },
+  {
+    "id": 792,
+    "verdict": "pass",
+    "rationale": "Pass: section 1324a of this title renders as INA 274A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324a."
+  },
+  {
+    "id": 795,
+    "verdict": "pass",
+    "rationale": "Pass: section 1160(a) renders as INA 210(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1160(a)."
+  },
+  {
+    "id": 798,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(a)(3) renders as INA 212(a)(3); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(a)(3)."
+  },
+  {
+    "id": 801,
+    "verdict": "pass",
+    "rationale": "Pass: section 1255(i)(3)(b) renders as INA 245(i)(3)(B); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255(i)(3)(B)."
+  },
+  {
+    "id": 804,
+    "verdict": "pass",
+    "rationale": "Pass: section 1223(b) renders as INA 233(b); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1223(b)."
+  },
+  {
+    "id": 807,
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15) renders as INA 101(a)(15); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)."
+  },
+  {
+    "id": 810,
+    "verdict": "pass",
+    "rationale": "Pass: the added section 5316 is a separate non-INA authority in the full field; it remains a section citation with target Title 5, section 5316 and is not falsely converted to INA."
+  },
+  {
+    "id": 813,
+    "verdict": "pass",
+    "rationale": "Pass: section 1401 renders as INA 301; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1401."
+  },
+  {
+    "id": 816,
+    "verdict": "pass",
+    "rationale": "Pass: section 1401(a)(7) renders as INA 301(a)(7); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1401(a)(7)."
+  },
+  {
+    "id": 819,
+    "verdict": "pass",
+    "rationale": "Pass: section 241(b)(3)(B) renders as INA 241(b)(3)(B); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1231(b)(3)(B)."
+  },
+  {
+    "id": 822,
+    "verdict": "pass",
+    "rationale": "Pass: 1433 renders as INA 322; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1433."
+  },
+  {
+    "id": 825,
+    "verdict": "pass",
+    "rationale": "Pass: section 1440 renders as INA 329; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1440."
+  },
+  {
+    "id": 828,
+    "verdict": "pass",
+    "rationale": "Pass: section 1433 renders as INA 322; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1433."
+  },
+  {
+    "id": 831,
+    "verdict": "pass",
+    "rationale": "Pass: section 1433 renders as INA 322; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1433."
+  },
+  {
+    "id": 834,
+    "verdict": "pass",
+    "rationale": "Pass: section 414(a) renders as INA 414(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1524(a)."
+  },
+  {
+    "id": 837,
+    "verdict": "pass",
+    "rationale": "Pass: section 1534(c)(3) renders as INA 504(e)(3); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1534(e)(3)."
+  },
+  {
+    "id": 840,
+    "verdict": "pass",
+    "rationale": "Pass: section 1030(a) renders as section 1030(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 18, section 1030(a)."
+  },
+  {
+    "id": 843,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 846,
+    "verdict": "pass",
+    "rationale": "Pass: 1225 renders as INA 235; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1225."
+  },
+  {
+    "id": 849,
+    "verdict": "pass",
+    "rationale": "Pass: 1228 renders as INA 238; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1228."
+  },
+  {
+    "id": 852,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 855,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 858,
+    "verdict": "pass",
+    "rationale": "Pass: 1324b renders as INA 274B; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324b."
+  },
+  {
+    "id": 861,
+    "verdict": "pass",
+    "rationale": "Pass: 1304 renders as INA 264; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1304."
+  },
+  {
+    "id": 864,
+    "verdict": "pass",
+    "rationale": "Pass: 1254a renders as INA 244; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1254a."
+  },
+  {
+    "id": 867,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 870,
+    "verdict": "pass",
+    "rationale": "Pass: 1154 renders as INA 204; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1154."
+  },
+  {
+    "id": 873,
+    "verdict": "pass",
+    "rationale": "Pass: 1186a renders as INA 216; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186a."
+  },
+  {
+    "id": 876,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 879,
+    "verdict": "pass",
+    "rationale": "Pass: 1154 renders as INA 204; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1154."
+  },
+  {
+    "id": 882,
+    "verdict": "pass",
+    "rationale": "Pass: 1186a renders as INA 216; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186a."
+  },
+  {
+    "id": 885,
+    "verdict": "pass",
+    "rationale": "Pass: 1151 renders as INA 201; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1151."
+  },
+  {
+    "id": 888,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 891,
+    "verdict": "pass",
+    "rationale": "Pass: 1226 renders as INA 236; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1226."
+  },
+  {
+    "id": 894,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 897,
+    "verdict": "pass",
+    "rationale": "Pass: 1159 renders as INA 209; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1159."
+  },
+  {
+    "id": 900,
+    "verdict": "pass",
+    "rationale": "Pass: 1282 renders as INA 252; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1282."
+  },
+  {
+    "id": 903,
+    "verdict": "pass",
+    "rationale": "Pass: 1181 renders as INA 211; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1181."
+  },
+  {
+    "id": 906,
+    "verdict": "pass",
+    "rationale": "Pass: 1225 renders as INA 235; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1225."
+  },
+  {
+    "id": 909,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 912,
+    "verdict": "pass",
+    "rationale": "Pass: 1186a renders as INA 216; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186a."
+  },
+  {
+    "id": 915,
+    "verdict": "pass",
+    "rationale": "Pass: 1221 renders as INA 231; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1221."
+  },
+  {
+    "id": 918,
+    "verdict": "pass",
+    "rationale": "Pass: 1301 renders as INA 261; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1301."
+  },
+  {
+    "id": 921,
+    "verdict": "pass",
+    "rationale": "Pass: 1104 renders as INA 104; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1104."
+  },
+  {
+    "id": 924,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 927,
+    "verdict": "pass",
+    "rationale": "Pass: 1186a renders as INA 216; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186a."
+  },
+  {
+    "id": 930,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 933,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 936,
+    "verdict": "pass",
+    "rationale": "Pass: 1225 renders as INA 235; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1225."
+  },
+  {
+    "id": 939,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 942,
+    "verdict": "pass",
+    "rationale": "Pass: 1228 renders as INA 238; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1228."
+  },
+  {
+    "id": 945,
+    "verdict": "pass",
+    "rationale": "Pass: 1224 renders as INA 234; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1224."
+  },
+  {
+    "id": 948,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 951,
+    "verdict": "pass",
+    "rationale": "Pass: 1229 renders as INA 239; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229."
+  },
+  {
+    "id": 954,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 957,
+    "verdict": "pass",
+    "rationale": "Pass: 1226 renders as INA 236; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1226."
+  },
+  {
+    "id": 960,
+    "verdict": "pass",
+    "rationale": "Pass: 1324a renders as INA 274A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324a."
+  },
+  {
+    "id": 963,
+    "verdict": "pass",
+    "rationale": "Pass: 1221 renders as INA 231; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1221."
+  },
+  {
+    "id": 966,
+    "verdict": "pass",
+    "rationale": "Pass: 1223 renders as INA 233; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1223."
+  },
+  {
+    "id": 969,
+    "verdict": "pass",
+    "rationale": "Pass: 1226 renders as INA 236; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1226."
+  },
+  {
+    "id": 972,
+    "verdict": "pass",
+    "rationale": "Pass: 1231 renders as INA 241; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1231."
+  },
+  {
+    "id": 975,
+    "verdict": "pass",
+    "rationale": "Pass: 1330 renders as INA 280; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1330."
+  },
+  {
+    "id": 978,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 981,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 984,
+    "verdict": "pass",
+    "rationale": "Pass: 1255a renders as INA 245A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255a."
+  },
+  {
+    "id": 987,
+    "verdict": "pass",
+    "rationale": "Pass: 1259 renders as INA 249; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1259."
+  },
+  {
+    "id": 990,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 993,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 996,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 999,
+    "verdict": "pass",
+    "rationale": "Pass: 1282 renders as INA 252; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1282."
+  },
+  {
+    "id": 1002,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 1005,
+    "verdict": "pass",
+    "rationale": "Pass: 1285 renders as INA 255; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1285."
+  },
+  {
+    "id": 1008,
+    "verdict": "pass",
+    "rationale": "Pass: 1201 renders as INA 221; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1201."
+  },
+  {
+    "id": 1011,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1014,
+    "verdict": "pass",
+    "rationale": "Pass: 1323 renders as INA 273; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1323."
+  },
+  {
+    "id": 1017,
+    "verdict": "pass",
+    "rationale": "Pass: 1105a renders as INA 106; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1105a."
+  },
+  {
+    "id": 1020,
+    "verdict": "pass",
+    "rationale": "Pass: 1223 renders as INA 233; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1223."
+  },
+  {
+    "id": 1023,
+    "verdict": "pass",
+    "rationale": "Pass: 1253 renders as INA 243; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1253."
+  },
+  {
+    "id": 1026,
+    "verdict": "pass",
+    "rationale": "Pass: 1284 renders as INA 254; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1284."
+  },
+  {
+    "id": 1029,
+    "verdict": "pass",
+    "rationale": "Pass: 1322 renders as INA 272; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1322."
+  },
+  {
+    "id": 1032,
+    "verdict": "pass",
+    "rationale": "Pass: 1221 renders as INA 231; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1221."
+  },
+  {
+    "id": 1035,
+    "verdict": "pass",
+    "rationale": "Pass: 1229 renders as INA 239; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229."
+  },
+  {
+    "id": 1038,
+    "verdict": "pass",
+    "rationale": "Pass: 1322 renders as INA 272; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1322."
+  },
+  {
+    "id": 1041,
+    "verdict": "pass",
+    "rationale": "Pass: 1324d renders as INA 274D; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324d."
+  },
+  {
+    "id": 1044,
+    "verdict": "pass",
+    "rationale": "Pass: 1356 renders as INA 286; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1356."
+  },
+  {
+    "id": 1047,
+    "verdict": "pass",
+    "rationale": "Pass: 1226 renders as INA 236; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1226."
+  },
+  {
+    "id": 1050,
+    "verdict": "pass",
+    "rationale": "Pass: 1302 renders as INA 262; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1302."
+  },
+  {
+    "id": 1053,
+    "verdict": "pass",
+    "rationale": "Pass: 1362 renders as INA 292; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1362."
+  },
+  {
+    "id": 1056,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1059,
+    "verdict": "pass",
+    "rationale": "Pass: 1447 renders as INA 336; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1447."
+  },
+  {
+    "id": 1062,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1065,
+    "verdict": "pass",
+    "rationale": "Pass: 1424 renders as INA 313; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1424."
+  },
+  {
+    "id": 1068,
+    "verdict": "pass",
+    "rationale": "Pass: 1181 renders as INA 211; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1181."
+  },
+  {
+    "id": 1071,
+    "verdict": "pass",
+    "rationale": "Pass: 1447 renders as INA 336; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1447."
+  },
+  {
+    "id": 1074,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1077,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1080,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1083,
+    "verdict": "pass",
+    "rationale": "Pass: 1436 renders as INA 325; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1436."
+  },
+  {
+    "id": 1086,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1089,
+    "verdict": "pass",
+    "rationale": "Pass: 1440 renders as INA 329; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1440."
+  },
+  {
+    "id": 1092,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1095,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1098,
+    "verdict": "pass",
+    "rationale": "Pass: 1447 renders as INA 336; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1447."
+  },
+  {
+    "id": 1101,
+    "verdict": "pass",
+    "rationale": "Pass: 1448 renders as INA 337; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1448."
+  },
+  {
+    "id": 1104,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1107,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1110,
+    "verdict": "pass",
+    "rationale": "Pass: 1444 renders as INA 333; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1444."
+  },
+  {
+    "id": 1113,
+    "verdict": "pass",
+    "rationale": "Pass: 1455 renders as INA 344; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1455."
+  },
+  {
+    "id": 1116,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1119,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1122,
+    "verdict": "pass",
+    "rationale": "Pass: 1454 renders as INA 343; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1454."
+  },
+  {
+    "id": 1125,
+    "verdict": "pass",
+    "rationale": "Pass: 1454 renders as INA 343; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1454."
+  },
+  {
+    "id": 1128,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1131,
+    "verdict": "pass",
+    "rationale": "Pass: 1155 renders as INA 205; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1155."
+  },
+  {
+    "id": 1134,
+    "verdict": "pass",
+    "rationale": "Pass: 1226 renders as INA 236; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1226."
+  },
+  {
+    "id": 1137,
+    "verdict": "pass",
+    "rationale": "Pass: 1229b renders as INA 240A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229b."
+  },
+  {
+    "id": 1140,
+    "verdict": "pass",
+    "rationale": "Pass: 1254a renders as INA 244; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1254a."
+  },
+  {
+    "id": 1143,
+    "verdict": "pass",
+    "rationale": "Pass: 1330 renders as INA 280; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1330."
+  },
+  {
+    "id": 1146,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1149,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1152,
+    "verdict": "pass",
+    "rationale": "Pass: 1154 renders as INA 204; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1154."
+  },
+  {
+    "id": 1155,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 1158,
+    "verdict": "pass",
+    "rationale": "Pass: 1153 renders as INA 203; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153."
+  },
+  {
+    "id": 1161,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 1164,
+    "verdict": "pass",
+    "rationale": "Pass: 1151 renders as INA 201; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1151."
+  },
+  {
+    "id": 1167,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 1170,
+    "verdict": "pass",
+    "rationale": "Pass: 1225 renders as INA 235; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1225."
+  },
+  {
+    "id": 1173,
+    "verdict": "pass",
+    "rationale": "Pass: 1282 renders as INA 252; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1282."
+  },
+  {
+    "id": 1176,
+    "verdict": "pass",
+    "rationale": "Pass: 1158 renders as INA 208; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1158."
+  },
+  {
+    "id": 1179,
+    "verdict": "pass",
+    "rationale": "Pass: 1252 renders as INA 242; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1252."
+  },
+  {
+    "id": 1182,
+    "verdict": "pass",
+    "rationale": "Pass: 1181 renders as INA 211; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1181."
+  },
+  {
+    "id": 1185,
+    "verdict": "pass",
+    "rationale": "Pass: 1225 renders as INA 235; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1225."
+  },
+  {
+    "id": 1188,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1191,
+    "verdict": "pass",
+    "rationale": "Pass: 1186a renders as INA 216; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186a."
+  },
+  {
+    "id": 1194,
+    "verdict": "pass",
+    "rationale": "Pass: 1281 renders as INA 251; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1281."
+  },
+  {
+    "id": 1197,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1200,
+    "verdict": "pass",
+    "rationale": "Pass: 1186a renders as INA 216; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186a."
+  },
+  {
+    "id": 1203,
+    "verdict": "pass",
+    "rationale": "Pass: 1224 renders as INA 234; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1224."
+  },
+  {
+    "id": 1206,
+    "verdict": "pass",
+    "rationale": "Pass: 1227 renders as INA 237; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227."
+  },
+  {
+    "id": 1209,
+    "verdict": "pass",
+    "rationale": "Pass: 1221 renders as INA 231; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1221."
+  },
+  {
+    "id": 1212,
+    "verdict": "pass",
+    "rationale": "Pass: 1158 renders as INA 208; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1158."
+  },
+  {
+    "id": 1215,
+    "verdict": "pass",
+    "rationale": "Pass: 1186b renders as INA 216A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1186b."
+  },
+  {
+    "id": 1218,
+    "verdict": "pass",
+    "rationale": "Pass: 1227 renders as INA 237; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227."
+  },
+  {
+    "id": 1221,
+    "verdict": "pass",
+    "rationale": "Pass: 1229b renders as INA 240A; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229b."
+  },
+  {
+    "id": 1224,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 1227,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 1230,
+    "verdict": "pass",
+    "rationale": "Pass: 1225 renders as INA 235; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1225."
+  },
+  {
+    "id": 1233,
+    "verdict": "pass",
+    "rationale": "Pass: 1231 renders as INA 241; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1231."
+  },
+  {
+    "id": 1236,
+    "verdict": "pass",
+    "rationale": "Pass: 1330 renders as INA 280; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1330."
+  },
+  {
+    "id": 1239,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1242,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 1245,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 1248,
+    "verdict": "pass",
+    "rationale": "Pass: 1324c renders as INA 274C; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324c."
+  },
+  {
+    "id": 1251,
+    "verdict": "pass",
+    "rationale": "Pass: 1221 renders as INA 231; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1221."
+  },
+  {
+    "id": 1254,
+    "verdict": "pass",
+    "rationale": "Pass: 1229 renders as INA 239; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1229."
+  },
+  {
+    "id": 1257,
+    "verdict": "pass",
+    "rationale": "Pass: 1283 renders as INA 253; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1283."
+  },
+  {
+    "id": 1260,
+    "verdict": "pass",
+    "rationale": "Pass: 1286 renders as INA 256; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1286."
+  },
+  {
+    "id": 1263,
+    "verdict": "pass",
+    "rationale": "Pass: 1330 renders as INA 280; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1330."
+  },
+  {
+    "id": 1266,
+    "verdict": "pass",
+    "rationale": "Pass: 1226 renders as INA 236; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1226."
+  },
+  {
+    "id": 1269,
+    "verdict": "pass",
+    "rationale": "Pass: 1362 renders as INA 292; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1362."
+  },
+  {
+    "id": 1272,
+    "verdict": "pass",
+    "rationale": "Pass: 1443 renders as INA 332; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1443."
+  },
+  {
+    "id": 1275,
+    "verdict": "pass",
+    "rationale": "Pass: 1221 renders as INA 231; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1221."
+  },
+  {
+    "id": 1278,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(c) renders as INA 214(c); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(c)."
+  },
+  {
+    "id": 1281,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(c) renders as INA 214(c); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(c)."
+  },
+  {
+    "id": 1284,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(g) renders as INA 214(g); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(g)."
+  },
+  {
+    "id": 1287,
+    "verdict": "pass",
+    "rationale": "Pass: 1153 renders as INA 203; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153."
+  },
+  {
+    "id": 1290,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(c)(12) renders as INA 214(c)(12); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(c)(12)."
+  },
+  {
+    "id": 1293,
+    "verdict": "pass",
+    "rationale": "Pass: 1351 renders as INA 281; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1351."
+  },
+  {
+    "id": 1296,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 1299,
+    "verdict": "pass",
+    "rationale": "Pass: 1504 renders as INA 361; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1504."
+  },
+  {
+    "id": 1302,
+    "verdict": "pass",
+    "rationale": "Pass: 1258 renders as INA 248; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1258."
+  },
+  {
+    "id": 1305,
+    "verdict": "pass",
+    "rationale": "Pass: 1324b renders as INA 274B; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324b."
+  },
+  {
+    "id": 1308,
+    "verdict": "pass",
+    "rationale": "Pass: 1324c renders as INA 274C; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1324c."
+  },
+  {
+    "id": 1311,
+    "verdict": "pass",
+    "rationale": "Pass: 1252 renders as INA 242; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1252."
+  },
+  {
+    "id": 1314,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(c) renders as INA 214(c); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(c)."
+  },
+  {
+    "id": 1317,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(n) renders as INA 212(n); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(n)."
+  },
+  {
+    "id": 1320,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1323,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1326,
+    "verdict": "pass",
+    "rationale": "Pass: 1104 renders as INA 104; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1104."
+  },
+  {
+    "id": 1329,
+    "verdict": "pass",
+    "rationale": "Pass: 1184 renders as INA 214; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184."
+  },
+  {
+    "id": 1332,
+    "verdict": "pass",
+    "rationale": "Pass: 1258 renders as INA 248; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1258."
+  },
+  {
+    "id": 1335,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(d) renders as INA 212(d); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(d)."
+  },
+  {
+    "id": 1338,
+    "verdict": "pass",
+    "rationale": "Pass: 1227(a)(4)(A)(i) renders as INA 237(a)(4)(A)(i); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1227(a)(4)(A)(i)."
+  },
+  {
+    "id": 1341,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1344,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1347,
+    "verdict": "pass",
+    "rationale": "Pass: 1103 renders as INA 103; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1103."
+  },
+  {
+    "id": 1350,
+    "verdict": "pass",
+    "rationale": "Pass: 1104 renders as INA 104; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1104."
+  },
+  {
+    "id": 1353,
+    "verdict": "pass",
+    "rationale": "Pass: 1153(a)(8) renders as INA 203(a)(8); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1153(a)(8)."
+  },
+  {
+    "id": 1356,
+    "verdict": "pass",
+    "rationale": "Pass: 1182 renders as INA 212; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182."
+  },
+  {
+    "id": 1359,
+    "verdict": "pass",
+    "rationale": "Pass: 1255 renders as INA 245; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1255."
+  },
+  {
+    "id": 1362,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(a) renders as INA 214(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(a)."
+  },
+  {
+    "id": 1365,
+    "verdict": "pass",
+    "rationale": "Pass: 1182(n)(5) renders as INA 212(n)(5); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1182(n)(5)."
+  },
+  {
+    "id": 1368,
+    "verdict": "pass",
+    "rationale": "Pass: 1188 renders as INA 218; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1188."
+  },
+  {
+    "id": 1371,
+    "verdict": "pass",
+    "rationale": "Pass: 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1101(a)(15)(H)(i)(b1)."
+  },
+  {
+    "id": 1374,
+    "verdict": "pass",
+    "rationale": "Pass: 1288 renders as INA 258; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1288."
+  },
+  {
+    "id": 1377,
+    "verdict": "pass",
+    "rationale": "Pass: 1488 renders as INA 356; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1488."
+  },
+  {
+    "id": 1380,
+    "verdict": "pass",
+    "rationale": "Pass: 1184(a) renders as INA 214(a); the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1184(a)."
+  },
+  {
+    "id": 1383,
+    "verdict": "pass",
+    "rationale": "Pass: 1188 renders as INA 218; the full after-field has no residual “section(s) INA” construction, redundant authority tail, mixed-list defect, or wrong-title target, and the corpus target is Title 8, section 1188."
+  }
+]

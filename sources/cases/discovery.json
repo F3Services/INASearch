@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-30T07:59:20+00:00",
+  "recordCount": 3320,
+  "collections": {
+    "eoir-precedent-volumes": 3296,
+    "uscis-adopted-aao": 24
+  },
+  "sourcePages": [
+    {
+      "url": "https://www.justice.gov/eoir/ag-bia-decisions",
+      "requestedUrl": "https://www.justice.gov/eoir/ag-bia-decisions",
+      "sha256": "598dcdbeffb20f4ac7fc1aff614a06beafe8633f898c5e96aa31763ada3719dc",
+      "bytes": 102586,
+      "etag": "\"1788015877-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 15:04:37 GMT"
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-08",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol08.html",
+      "sha256": "27122704d5d1dfe324a90f1634d3972aede406327b5cd01a2cf5fa328a036078",
+      "bytes": 124510,
+      "etag": "\"1787993038-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 08:43:58 GMT",
+      "volume": 8,
+      "decisionCount": 148
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-09",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol09.html",
+      "sha256": "d7c4ebccc6e256749abae0bd991cf1a8fce028bd0de26c56853791b9c943b1ed",
+      "bytes": 122242,
+      "etag": "\"1787933247-gzip\"",
+      "lastModified": "Fri, 28 Aug 2026 16:07:27 GMT",
+      "volume": 9,
+      "decisionCount": 141
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-10",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol10.html",
+      "sha256": "797c6755b702b95e3cc9530bddee7b0634685f42c8456546320201b0e90c3c9c",
+      "bytes": 134496,
+      "etag": "\"1787965846-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 01:10:46 GMT",
+      "volume": 10,
+      "decisionCount": 189
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-11",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol11.html",
+      "sha256": "1b33c9eeb8cd31e90868d633aa8d28c50105e30971b72eb5988b268dd2971361",
+      "bytes": 149996,
+      "etag": "\"1787916263-gzip\"",
+      "lastModified": "Fri, 28 Aug 2026 11:24:23 GMT",
+      "volume": 11,
+      "decisionCount": 258
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-12",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol12.html",
+      "sha256": "52da9d3834f3092cd5aa49717158d2b16975e5a536cc8cbb582215788ac7ffea",
+      "bytes": 142466,
+      "etag": "\"1788026107-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 17:55:07 GMT",
+      "volume": 12,
+      "decisionCount": 225
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-13",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol13.html",
+      "sha256": "38342f1b4da83a97b0c54a421d48c704e7940beca924ce469bfbf50a605bbc55",
+      "bytes": 140327,
+      "etag": "\"1788076541-gzip\"",
+      "lastModified": "Sun, 30 Aug 2026 07:55:41 GMT",
+      "volume": 13,
+      "decisionCount": 216
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-14",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol14.html",
+      "sha256": "8c1307b9f1738b95094196cb6e35b4393d66e8ff24b1ff9313350313af0185e9",
+      "bytes": 132623,
+      "etag": "\"1787850017-gzip\"",
+      "lastModified": "Thu, 27 Aug 2026 17:00:17 GMT",
+      "volume": 14,
+      "decisionCount": 183
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-15",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol15.html",
+      "sha256": "23e22ade2f60522a8ae187b00aca785859ca4942f0396f3b532551d782694d2d",
+      "bytes": 142159,
+      "etag": "\"1787844034-gzip\"",
+      "lastModified": "Thu, 27 Aug 2026 15:20:34 GMT",
+      "volume": 15,
+      "decisionCount": 223
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-16",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol16.html",
+      "sha256": "18d02c14ef9bec2b6d95719b1880952ab248c6e945ac27d2f47cc87b315ce5db",
+      "bytes": 133761,
+      "etag": "\"1788032594-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 19:43:14 GMT",
+      "volume": 16,
+      "decisionCount": 185
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-17",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol17.html",
+      "sha256": "c44ccd6df6fab68bc723b651bf5d2f25d07e2e7c74e3a1a0fe3f7fa49de148bc",
+      "bytes": 123701,
+      "etag": "\"1788020137-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 16:15:37 GMT",
+      "volume": 17,
+      "decisionCount": 141
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-18",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol18.html",
+      "sha256": "358596efd3430a7073d5176d1e58a15cd09f441eca0af68ba8918f0bfa71b490",
+      "bytes": 113821,
+      "etag": "\"1787942294-gzip\"",
+      "lastModified": "Fri, 28 Aug 2026 18:38:14 GMT",
+      "volume": 18,
+      "decisionCount": 99
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-19",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol19.html",
+      "sha256": "1ce625bb7bb295ea3d69895d94cf5d35f1906cacb567c2ab48ee10ed3f04e5b9",
+      "bytes": 286546,
+      "etag": "\"1787817939-gzip\"",
+      "lastModified": "Thu, 27 Aug 2026 08:05:39 GMT",
+      "volume": 19,
+      "decisionCount": 150
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-20",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol20.html",
+      "sha256": "8c385b776455fe0e3518d2d36a1a839e392951d6c25cbb9bcc19767d2dbac57b",
+      "bytes": 268299,
+      "etag": "\"1788020863-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 16:27:43 GMT",
+      "volume": 20,
+      "decisionCount": 142
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-21",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol21.html",
+      "sha256": "5931a6746c1349447ee2f5d68368ec1a806b2227fd9bfd5b4fb253d9da48a78e",
+      "bytes": 204174,
+      "etag": "\"1788017922-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 15:38:42 GMT",
+      "volume": 21,
+      "decisionCount": 98
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-22",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol22.html",
+      "sha256": "7d2f6d86830aba2b2f86ca05db2b69c0841c58a2e1282f44cab09902c8da1833",
+      "bytes": 193888,
+      "etag": "\"1788036764-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 20:52:44 GMT",
+      "volume": 22,
+      "decisionCount": 100
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-23",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol23.html",
+      "sha256": "4a0a3b344a4c69f0fd0b82e36430b5026b0f06413b9ae26a3a5004fe90af589d",
+      "bytes": 186834,
+      "etag": "\"1788017811-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 15:36:51 GMT",
+      "volume": 23,
+      "decisionCount": 100
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-24",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol24.html",
+      "sha256": "79d44ca3a95bf476381d308a86cca534cfd3a355f8224b476ef102745c6ba393",
+      "bytes": 185461,
+      "etag": "\"1787840387-gzip\"",
+      "lastModified": "Thu, 27 Aug 2026 14:19:47 GMT",
+      "volume": 24,
+      "decisionCount": 102
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-25",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol25.html",
+      "sha256": "7942d280ee70d240b28d41ff95b958500c70e3270497258c368ea4125275f4aa",
+      "bytes": 201939,
+      "etag": "\"1787843355-gzip\"",
+      "lastModified": "Thu, 27 Aug 2026 15:09:15 GMT",
+      "volume": 25,
+      "decisionCount": 123
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decisions-volume-26",
+      "requestedUrl": "https://www.justice.gov/eoir/vll/intdec/nfvol26.html",
+      "sha256": "36945be1763e4084dad5480fd57e0796f8c95c53f9f92ce86b555cfed4df4ccf",
+      "bytes": 195423,
+      "etag": "\"1787849390-gzip\"",
+      "lastModified": "Thu, 27 Aug 2026 16:49:50 GMT",
+      "volume": 26,
+      "decisionCount": 121
+    },
+    {
+      "url": "https://www.justice.gov/eoir/volume-27",
+      "requestedUrl": "https://www.justice.gov/eoir/volume-27",
+      "sha256": "ec3cfd9f660eac0ea108681864b04d725ae055e22daac6539a9f43f48e58d0fd",
+      "bytes": 176076,
+      "etag": "\"1787863587-gzip\"",
+      "lastModified": "Thu, 27 Aug 2026 20:46:27 GMT",
+      "volume": 27,
+      "decisionCount": 98
+    },
+    {
+      "url": "https://www.justice.gov/eoir/volume-28",
+      "requestedUrl": "https://www.justice.gov/eoir/volume-28",
+      "sha256": "2b9c42f98bc8885a7515035b67ac4498a9f1e7c235cf0042187238d49459e8db",
+      "bytes": 174298,
+      "etag": "\"1788018613-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 15:50:13 GMT",
+      "volume": 28,
+      "decisionCount": 100
+    },
+    {
+      "url": "https://www.justice.gov/eoir/volume-29",
+      "requestedUrl": "https://www.justice.gov/eoir/volume-29",
+      "sha256": "3d6f7495dd75b8e95356e4a7e6342b06be3cd2590698ad53065ca0e1316abcd4",
+      "bytes": 225950,
+      "etag": "\"1787940865-gzip\"",
+      "lastModified": "Fri, 28 Aug 2026 18:14:25 GMT",
+      "volume": 29,
+      "decisionCount": 154
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decision-alpha-a-e",
+      "requestedUrl": "https://www.justice.gov/eoir/precedent-decision-alpha-a-e",
+      "sha256": "22ebef745fe6ed92da1b3bc93407192b27578ee6ae0b7038fc44bc315810aa67",
+      "bytes": 241487,
+      "etag": "\"1787955686-gzip\"",
+      "lastModified": "Fri, 28 Aug 2026 22:21:26 GMT",
+      "catalog": "alphabetical",
+      "decisionCount": 872
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decision-alpha-f-j",
+      "requestedUrl": "https://www.justice.gov/eoir/precedent-decision-alpha-f-j",
+      "sha256": "5f2ba59718d70387b0f722b5506b3ffcfdd1e30c6d4398f1b9bb3f6375882a6b",
+      "bytes": 175405,
+      "etag": "\"1788076727-gzip\"",
+      "lastModified": "Sun, 30 Aug 2026 07:58:47 GMT",
+      "catalog": "alphabetical",
+      "decisionCount": 482
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decision-alpha-k-o",
+      "requestedUrl": "https://www.justice.gov/eoir/precedent-decision-alpha-k-o",
+      "sha256": "317a3b11065a9767f566aaf9bed14965afd7024a867cfdec879e3130e3753918",
+      "bytes": 218831,
+      "etag": "\"1787883933-gzip\"",
+      "lastModified": "Fri, 28 Aug 2026 02:25:33 GMT",
+      "catalog": "alphabetical",
+      "decisionCount": 742
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decision-alpha-p-t",
+      "requestedUrl": "https://www.justice.gov/eoir/precedent-decision-alpha-p-t",
+      "sha256": "b804b9a9c854e6e2e7dc40fe5662fe571be7c0a3abedfa96f2fa08f75d146f35",
+      "bytes": 222076,
+      "etag": "\"1788047717-gzip\"",
+      "lastModified": "Sat, 29 Aug 2026 23:55:17 GMT",
+      "catalog": "alphabetical",
+      "decisionCount": 759
+    },
+    {
+      "url": "https://www.justice.gov/eoir/precedent-decision-alpha-u-z",
+      "requestedUrl": "https://www.justice.gov/eoir/precedent-decision-alpha-u-z",
+      "sha256": "803d6881a3db90268c0db36eacdfe3f1b8b9f14efe7ebe225c58a13c5f67b2d4",
+      "bytes": 147896,
+      "etag": "\"1787927391-gzip\"",
+      "lastModified": "Fri, 28 Aug 2026 14:29:51 GMT",
+      "catalog": "alphabetical",
+      "decisionCount": 295
+    },
+    {
+      "url": "https://www.uscis.gov/about-us/organization/directorates-and-program-offices/administrative-appeals-office-aao/adopted-aao-decisions",
+      "requestedUrl": "https://www.uscis.gov/about-us/organization/directorates-and-program-offices/administrative-appeals-office-aao/adopted-aao-decisions",
+      "sha256": "84376d56e2037aa8e312a1494357291dbfe497a90bd9c373ef833ca80a67dd1a",
+      "bytes": 93520,
+      "etag": "\"1788076759\"",
+      "lastModified": "Sun, 30 Aug 2026 07:59:19 GMT",
+      "decisionCount": 24
+    }
+  ],
+  "catalogDiagnostics": {
+    "eoirIdRange": [
+      938,
+      4238
+    ],
+    "unlistedInterimDecisionIds": [
+      993,
+      1186,
+      2244,
+      2442,
+      2503
+    ],
+    "note": "Interim-decision identifiers are not assumed contiguous. These IDs were not published as case entries on either the authoritative volume or alphabetical pages at capture time."
+  },
+  "scope": {
+    "included": [
+      "EOIR electronic published precedent volumes 8-present",
+      "USCIS current and prior adopted AAO decisions"
+    ],
+    "excluded": [
+      "AAO non-precedent decisions",
+      "unpublished BIA decisions"
+    ],
+    "knownGap": "EOIR does not expose volumes 1-7 as case-level PDFs from its current electronic volume index."
+  }
+}

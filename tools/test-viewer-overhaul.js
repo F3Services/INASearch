@@ -340,6 +340,7 @@ async function testSectionMaterializationHooks() {
   const occurrenceHierarchyHtml = vm.runInNewContext(`(${hierarchySource.trim()})`, {
     profile: hierarchyProfile,
     escapeHtml: value => String(value),
+    navigationTitleCase: extractedFunction("navigationTitleCase", "statuteStatus"),
     titleCaseTopic: value => String(value).replace(/(^|-)([a-z])/g, (_, separator, letter) => `${separator}${letter.toUpperCase()}`).replaceAll("-", " "),
     occurrenceSectionDomToken: value => String(value),
     Map, Number, String
@@ -363,7 +364,7 @@ async function testSectionMaterializationHooks() {
   hierarchyProfile.preferences.showCfrChapterSubchapterInSearchHierarchy = true;
   const detailedCfrHierarchy = occurrenceHierarchyHtml(cfrHierarchyFixture, true, "cfr");
   assert(detailedCfrHierarchy.includes("Chapter I") && detailedCfrHierarchy.includes("Subchapter B") && !detailedCfrHierarchy.includes("Subpart A"), "The detailed CFR result hierarchy does not add only Chapter and Subchapter.");
-  assert(template.includes('.occurrence-section-label small { display: inline;') && hierarchySource.includes('<small>— ${escapeHtml(section.heading)}</small>'), "Section citations and titles are not kept on one header row.");
+  assert(template.includes('.occurrence-section-label small { display: inline;') && hierarchySource.includes('<small>— ${escapeHtml(navigationTitleCase(section.heading))}</small>'), "Section citations and titles are not kept on one header row.");
   assert(hierarchySource.includes('class="occurrence-section-disclosure"')
     && hierarchySource.includes('button class="occurrence-section-label"')
     && hierarchySource.includes('data-occurrence-section-open='), "Section result headers do not separate disclosure from section navigation.");

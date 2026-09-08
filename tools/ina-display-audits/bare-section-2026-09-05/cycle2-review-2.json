@@ -1,0 +1,462 @@
+[
+  {
+    "id": 2,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1184(l) maps to INA 214(l) (8 U.S.C. §1184[\"l\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 5,
+    "verdict": "pass",
+    "rationale": "PASS: This is a newly detected source span, section 1546(a), and the full context identifies it as an explicit non-INA USC citation (including its stated title), so the addition preserves authority and prose."
+  },
+  {
+    "id": 8,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1184 maps to INA 214 (8 U.S.C. §1184[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 11,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1184(k) maps to INA 214(k) (8 U.S.C. §1184[\"k\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 14,
+    "verdict": "pass",
+    "rationale": "PASS: This is a newly detected source span, section 921, and the full context identifies it as an explicit non-INA USC citation (including its stated title), so the addition preserves authority and prose."
+  },
+  {
+    "id": 17,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 240A(d) maps to INA 240A(d) (8 U.S.C. §1229b[\"d\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 20,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 240(c)(3) maps to INA 240(c)(3) (8 U.S.C. §1229a[\"c\",\"3\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 23,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 101(a)(27)(C)(ii) maps to INA 101(a)(27)(C)(ii) (8 U.S.C. §1101[\"a\",\"27\",\"C\",\"ii\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 26,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 101(a)(15) maps to INA 101(a)(15) (8 U.S.C. §1101[\"a\",\"15\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 29,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 203(c) maps to INA 203(c) (8 U.S.C. §1153[\"c\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 32,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 212(a) maps to INA 212(a) (8 U.S.C. §1182[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 35,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1160 maps to INA 210 (8 U.S.C. §1160[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 38,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1151(a) maps to INA 201(a) (8 U.S.C. §1151[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 41,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 212(a) maps to INA 212(a) (8 U.S.C. §1182[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 44,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(b)(1)(F) maps to INA 101(b)(1)(F) (8 U.S.C. §1101[\"b\",\"1\",\"F\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 47,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(b)(1)(E) maps to INA 101(b)(1)(E) (8 U.S.C. §1101[\"b\",\"1\",\"E\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 50,
+    "verdict": "pass",
+    "rationale": "PASS: The prior linked span 551(2) is correctly removed from the display inventory because the full source context identifies it as a Title 37 USC citation rather than an INA provision; the source prose remains intact."
+  },
+  {
+    "id": 53,
+    "verdict": "pass",
+    "rationale": "PASS: The prior linked span 5561(5) is correctly removed from the display inventory because the full source context identifies it as a Title 5 USC citation rather than an INA provision; the source prose remains intact."
+  },
+  {
+    "id": 56,
+    "verdict": "pass",
+    "rationale": "PASS: The prior linked span 5561(5) is correctly removed from the display inventory because the full source context identifies it as a Title 5 USC citation rather than an INA provision; the source prose remains intact."
+  },
+  {
+    "id": 59,
+    "verdict": "pass",
+    "rationale": "PASS: This is a newly detected source span, section 551(2), and the full context identifies it as an explicit non-INA USC citation (including its stated title), so the addition preserves authority and prose."
+  },
+  {
+    "id": 62,
+    "verdict": "pass",
+    "rationale": "PASS: This is a newly detected source span, section 5561(5), and the full context identifies it as an explicit non-INA USC citation (including its stated title), so the addition preserves authority and prose."
+  },
+  {
+    "id": 65,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1182(a)(6)(C)(i) maps to INA 212(a)(6)(C)(i) (8 U.S.C. §1182[\"a\",\"6\",\"C\",\"i\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 68,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1184(l) maps to INA 214(l) (8 U.S.C. §1184[\"l\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 71,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1184(l) maps to INA 214(l) (8 U.S.C. §1184[\"l\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 74,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1) (8 U.S.C. §1101[\"a\",\"15\",\"H\",\"i\",\"b1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 77,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1) (8 U.S.C. §1101[\"a\",\"15\",\"H\",\"i\",\"b1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 80,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1) (8 U.S.C. §1101[\"a\",\"15\",\"H\",\"i\",\"b1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 83,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1) (8 U.S.C. §1101[\"a\",\"15\",\"H\",\"i\",\"b1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 86,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1) (8 U.S.C. §1101[\"a\",\"15\",\"H\",\"i\",\"b1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 89,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1184 maps to INA 214 (8 U.S.C. §1184[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 92,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1184(k) maps to INA 214(k) (8 U.S.C. §1184[\"k\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 95,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1231(c) maps to INA 241(c) (8 U.S.C. §1231[\"c\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 98,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 212(a)(3)(B)(iv) maps to INA 212(a)(3)(B)(iv) (8 U.S.C. §1182[\"a\",\"3\",\"B\",\"iv\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 101,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 212(a)(6)(A)(ii) maps to INA 212(a)(6)(A)(ii) (8 U.S.C. §1182[\"a\",\"6\",\"A\",\"ii\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 104,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 212(a) maps to INA 212(a) (8 U.S.C. §1182[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 107,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1182(d)(5) of this title maps to INA 212(d)(5) (8 U.S.C. §1182[\"d\",\"5\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 110,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1182(l) maps to INA 212(l) (8 U.S.C. §1182[\"l\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 113,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1) (8 U.S.C. §1101[\"a\",\"15\",\"H\",\"i\",\"b1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 116,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101 (a)(15)(H)(ii)(b) maps to INA 101(a)(15)(H)(ii)(b) (8 U.S.C. §1101[\"a\",\"15\",\"H\",\"ii\",\"b\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 119,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1255(l) maps to INA 245(l) (8 U.S.C. §1255[\"l\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 122,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(U) maps to INA 101(a)(15)(U) (8 U.S.C. §1101[\"a\",\"15\",\"U\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 125,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1) (8 U.S.C. §1101[\"a\",\"15\",\"H\",\"i\",\"b1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 128,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(U) maps to INA 101(a)(15)(U) (8 U.S.C. §1101[\"a\",\"15\",\"U\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 131,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(U) maps to INA 101(a)(15)(U) (8 U.S.C. §1101[\"a\",\"15\",\"U\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 134,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1182(l) maps to INA 212(l) (8 U.S.C. §1182[\"l\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 137,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 101(a)(15)(H) maps to INA 101(a)(15)(H) (8 U.S.C. §1101[\"a\",\"15\",\"H\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 140,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1153(d) maps to INA 203(d) (8 U.S.C. §1153[\"d\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 143,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 216A(d)(1) maps to INA 216A(d)(1) (8 U.S.C. §1186b[\"d\",\"1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 146,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1182(a)(14) maps to INA 212(a)(14) (8 U.S.C. §1182[\"a\",\"14\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 149,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1101(a)(15)(C)(iii) maps to INA 101(a)(15)(C)(iii) (8 U.S.C. §1101[\"a\",\"15\",\"C\",\"iii\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 152,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 101(a)(15)(K) maps to INA 101(a)(15)(K) (8 U.S.C. §1101[\"a\",\"15\",\"K\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 155,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1229 maps to INA 239 (8 U.S.C. §1229[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 158,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 237(a) maps to INA 237(a) (8 U.S.C. §1227[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 161,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1182(a)(5)(C)(i) maps to INA 212(a)(5)(C)(i) (8 U.S.C. §1182[\"a\",\"5\",\"C\",\"i\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 164,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1253 maps to INA 243 (8 U.S.C. §1253[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 167,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1252 maps to INA 242 (8 U.S.C. §1252[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 170,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1229a maps to INA 240 (8 U.S.C. §1229a[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 173,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1252 maps to INA 242 (8 U.S.C. §1252[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 176,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1229a maps to INA 240 (8 U.S.C. §1229a[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 179,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1105a maps to INA 106 (8 U.S.C. §1105a[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 182,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1229a maps to INA 240 (8 U.S.C. §1229a[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 185,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1229 maps to INA 239 (8 U.S.C. §1229[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 188,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1229b(b)(2) maps to INA 240A(b)(2) (8 U.S.C. §1229b[\"b\",\"2\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 191,
+    "verdict": "pass",
+    "rationale": "PASS: The prior linked span 2347(c) is correctly removed from the display inventory because the full source context identifies it as a Title 28 USC citation rather than an INA provision; the source prose remains intact."
+  },
+  {
+    "id": 194,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1253(g) maps to INA 243(g) (8 U.S.C. §1253[\"g\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 197,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1253 maps to INA 243 (8 U.S.C. §1253[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 200,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that Section 1252a maps to INA 242A (8 U.S.C. §1252a[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 203,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1229b(a) maps to INA 240A(a) (8 U.S.C. §1229b[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 206,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1227(a)(4)(B) maps to INA 237(a)(4)(B) (8 U.S.C. §1227[\"a\",\"4\",\"B\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 209,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 212(a) maps to INA 212(a) (8 U.S.C. §1182[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 212,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 101(b)(1) maps to INA 101(b)(1) (8 U.S.C. §1101[\"b\",\"1\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 215,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 212(a)(9) maps to INA 212(a)(9) (8 U.S.C. §1182[\"a\",\"9\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 218,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 101(a) maps to INA 101(a) (8 U.S.C. §1101[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 221,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1255a maps to INA 245A (8 U.S.C. §1255a[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 224,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1227(a)(4)(B) maps to INA 237(a)(4)(B) (8 U.S.C. §1227[\"a\",\"4\",\"B\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 227,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1301 maps to INA 261 (8 U.S.C. §1301[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 230,
+    "verdict": "pass",
+    "rationale": "PASS: The prior linked span 981(d) is correctly removed from the display inventory because the full source context identifies it as a Title 18 USC citation rather than an INA provision; the source prose remains intact."
+  },
+  {
+    "id": 233,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1324a of this title maps to INA 274A (8 U.S.C. §1324a[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 236,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1252(h)(2) maps to INA 242(h)(2) (8 U.S.C. §1252[\"h\",\"2\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 239,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1154 maps to INA 204(a) (8 U.S.C. §1154[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 242,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 101(a)(15) maps to INA 101(a)(15) (8 U.S.C. §1101[\"a\",\"15\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 245,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1252 maps to INA 242 (8 U.S.C. §1252[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 248,
+    "verdict": "flag",
+    "rationale": "FLAG: The target INA 308 is correct for section 1408, but the rendered field still says “paragraph (2) of INA 308, of this title shall apply.” The trailing title container and comma remain outside the converted span, leaving redundant/awkward grammar."
+  },
+  {
+    "id": 251,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1401(g) maps to INA 301(g) (8 U.S.C. §1401[\"g\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 254,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 312(a) maps to INA 312(a) (8 U.S.C. §1423[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 257,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1440 maps to INA 329 (8 U.S.C. §1440[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 260,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1433 maps to INA 322 (8 U.S.C. §1433[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 263,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1433 maps to INA 322 (8 U.S.C. §1433[]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 266,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 414(a) maps to INA 414(a) (8 U.S.C. §1524[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 269,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1534(c)(3) maps to INA 504(e)(3) (8 U.S.C. §1534[\"e\",\"3\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 272,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 1030(a) maps to undefined (8 U.S.C. §1030[\"a\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  },
+  {
+    "id": 275,
+    "verdict": "pass",
+    "rationale": "PASS: Source context and built-corpus metadata agree that section 212(a)(9) maps to INA 212(a)(9) (8 U.S.C. §1182[\"a\",\"9\"]; undefined; undefined). The afterField replacement has coherent surrounding grammar and no residual “of this title/Act” container or mixed-list defect."
+  }
+]

@@ -1,0 +1,758 @@
+[
+  {
+    "id": 3,
+    "sourceId": "8-1101-a-15-T-i",
+    "referenceText": "section 1184(o)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(o) renders as INA 214(o); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “subject to INA 214(o), an alien who the Secretary of Homeland Security, or in the case of subclause (III)(aa) the Secretary of Homeland Security, in consultation with the Attorney General, determines—”"
+  },
+  {
+    "id": 6,
+    "sourceId": "8-1101-f-9",
+    "referenceText": "1182(a)(2)(G)",
+    "verdict": "pass",
+    "rationale": "Pass: 1182(a)(2)(G) renders as INA 212(a)(2)(G); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “ibed in INA 212(a)(3)(E) (relating to assistance in Nazi persecution, participation in genocide, or commission of acts of torture or extrajudicial killings) or INA 212(a)(2)(G) (relating to severe violations of religious freedom).”"
+  },
+  {
+    "id": 9,
+    "sourceId": "8-1101-note-3",
+    "referenceText": "section 1184",
+    "verdict": "pass",
+    "rationale": "Pass: section 1184 renders as INA 214; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “secondary school students and was added by Pub. L. 104–208, div. C, title VI, § 625(a)(1), Sept. 30, 1996, 110 Stat. 3009–699, and redesignated subsec. (m) of INA 214 by Pub. L. 106–386, div. A, § 107(e)(2)(A), Oct. 28, 2000, 114 Stat. 1478. The International ”"
+  },
+  {
+    "id": 12,
+    "sourceId": "8-1101-note-5",
+    "referenceText": "section 1184(k)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(k) renders as INA 214(k); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “y”. Subsec. (a)(15)(K). Pub. L. 104–208, § 308(f)(1)(A), substituted “admission” for “entry”. Subsec. (a)(15)(S). Pub. L. 104–208, § 671(a)(3)(B), substituted “INA 214(k)” for “INA 214(j)” in introductory provisions. Subsec. (a)(17). Pub. L. 104–208, § 308(d)(”"
+  },
+  {
+    "id": 15,
+    "sourceId": "8-1101-note-5",
+    "referenceText": "section 921",
+    "verdict": "pass",
+    "rationale": "Pass: the added occurrence is a separately identified non-INA authority, and its rendered section target is retained. After-context: “cluding a purely political offense) for which the term of imprisonment imposed (regardless of any suspension of such imprisonment) is at least 5 years,” after “section 921 of such title,”. Pub. L. 101–649, § 501(a)(2), inserted “any illicit trafficking in any ”"
+  },
+  {
+    "id": 18,
+    "sourceId": "8-1101-note-17",
+    "referenceText": "section 240A(d)",
+    "verdict": "pass",
+    "rationale": "Pass: section 240A(d) renders as INA 240A(d); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “in effect). “(5) Transitional rules with regard to suspension of deportation.—“(A) In general.—Subject to subparagraphs (B) and (C), paragraphs (1) and (2) of INA 240A(d) [8 U.S.C. 1229b(d)(1), (2)] (relating to continuous residence or physical presence) shall”"
+  },
+  {
+    "id": 21,
+    "sourceId": "8-1101-note-17",
+    "referenceText": "section 212(a)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “ief, the alien is described in subsection (c)(5)(C)(i) of this section, and—“(A) the alien—“(i) is not inadmissible or deportable under paragraph (2) or (3) of INA 212(a) or paragraph (2), (3), or (4) of INA 237(a) [8 U.S.C. 1182(a)(2), (3), INA 237(a)(3), (4)”"
+  },
+  {
+    "id": 24,
+    "sourceId": "8-1101-note-17",
+    "referenceText": "1227(a)(2)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “ible or deportable under section 212(a)(2), 237(a)(2) (other than 237(a)(2)(A)(iii)), or 237(a)(3) of the Immigration and Nationality Act [8 U.S.C. 1182(a)(2), INA 237(a)(2), (3)]; “(ii) is not an alien described in section 241(b)(3)(B)(i) or 101(a)(43) of suc”"
+  },
+  {
+    "id": 27,
+    "sourceId": "8-1101-note-20",
+    "referenceText": "section 203(b)",
+    "verdict": "pass",
+    "rationale": "Pass: section 203(b) renders as INA 203(b); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “petition, the petitioner must file (by not later than October 1, 1993) a new petition for classification of the employment under paragraph (1), (2), or (3) of INA 203(b) (as amended by this title), and “(B) any labor certification under section 212(a)(5)(A) of”"
+  },
+  {
+    "id": 30,
+    "sourceId": "8-1101-note-64",
+    "referenceText": "1182(n)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “ement the changes made by this section to section 101(a)(15)(H)(i)(b) and section 212(n) of the Immigration and Nationality Act [8 U.S.C. 1101(a)(15)(H)(i)(b), INA 212(n)] no later than January 2, 1992.” Pub. L. 102–140, title VI, § 610, Oct. 28, 1991, 105 Sta”"
+  },
+  {
+    "id": 33,
+    "sourceId": "8-1101-note-77",
+    "referenceText": "section 101(a)(15)",
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15) renders as INA 101(a)(15); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “239, div. A, title XVII, § 1706(b), Jan. 2, 2013, 126 Stat. 2097, provided that: “No alien may be admitted to the United States pursuant to subparagraph (U) of INA 101(a)(15) (8 U.S.C. 1101(a)(15)) as a result of the alien being a victim of a crime described i”"
+  },
+  {
+    "id": 36,
+    "sourceId": "8-1101-note-81",
+    "referenceText": "1152(a)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “d shall not be counted against the numerical limitations under sections 201(d), 202(a), and 203(b)(4) of the Immigration and Nationality Act (8 U.S.C. 1151(d), INA 202(a), and INA 203(b)(4)). “(3) Carry forward.—If the numerical limitation described in paragra”"
+  },
+  {
+    "id": 39,
+    "sourceId": "8-1101-note-95",
+    "referenceText": "section 101(a)(15)",
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15) renders as INA 101(a)(15); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “ing or assisting in an artistic or athletic performance) before April 1, 1992, shall not be admitted under subparagraph (O)(i), (O)(ii), (P)(i), or (P)(iii) of INA 101(a)(15) [8 U.S.C. 1101(a)(15)], but may be admitted under the terms of subparagraph (H)(i)(b)”"
+  },
+  {
+    "id": 42,
+    "sourceId": "8-1101-note-99",
+    "referenceText": "section 101(a)(15)(E)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “mmigrant status to nationals of the United States.” Pub. L. 115–226, § 2, Aug. 1, 2018, 132 Stat. 1625, provided that: “For purposes of clauses (i) and (ii) of INA 101(a)(15)(E) (8 U.S.C. 1101(a)(15)(E)), New Zealand shall be considered to be a foreign state d”"
+  },
+  {
+    "id": 45,
+    "sourceId": "8-1101-note-107",
+    "referenceText": "section 212(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “rants, and “(B) they are issued an immigrant visa and depart from Vietnam on or after March 22, 1988. “(2) The provisions of paragraphs (4), (5), and (7)(A) of INA 212(a) [8 U.S.C. 1182(a)(4), (5), and (7)(A)] shall not be applicable to any alien seeking admis”"
+  },
+  {
+    "id": 48,
+    "sourceId": "8-1103-note-33",
+    "referenceText": "1185(a)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “and to the extent consistent with applicable law, a proclamation, relying on authorities such as sections 212(f) and 215[(a)] of the INA (8 U.S.C. 1182(f) and INA 215(a)), suspending or limiting entry of nationals of those countries who hold B–1 or B–2 visas; ”"
+  },
+  {
+    "id": 51,
+    "sourceId": "8-1151-note-2",
+    "referenceText": "section 1160",
+    "verdict": "pass",
+    "rationale": "Pass: section 1160 renders as INA 210; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “spouse or parent loses United States citizenship on account of the abuse.” 1996—Subsec. (b)(1)(C). Pub. L. 104–208, § 671(d)(1)(A), struck out “, 1161,” after “INA 210”. Subsec. (b)(1)(D). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “sect”"
+  },
+  {
+    "id": 54,
+    "sourceId": "8-1153-note-3",
+    "referenceText": "section 1151(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1151(a) renders as INA 201(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “b)”. 1990—Subsec. (a). Pub. L. 101–649, § 111(2), added subsec. (a) and struck out former subsec. (a) which related to allocation of visas of aliens subject to INA 201(a) limitations. Subsec. (a)(7). Pub. L. 101–649, § 603(a)(3), substituted “INA 212(a)(5)” fo”"
+  },
+  {
+    "id": 57,
+    "sourceId": "8-1153-note-26",
+    "referenceText": "section 201(b)(2)",
+    "verdict": "pass",
+    "rationale": "Pass: section 201(b)(2) renders as INA 201(b)(2); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “computed under this paragraph for a fiscal year is the number (if any) by which—“(A) the sum of the number of aliens described in subparagraphs (A) and (B) of INA 201(b)(2) [8 U.S.C. 1151(b)(2)] (or, for fiscal year 1992, section 201(b) of such Act) who were i”"
+  },
+  {
+    "id": 60,
+    "sourceId": "8-1154-note-3",
+    "referenceText": "section 1101(b)(1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(b)(1) renders as INA 101(b)(1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “raphs (C) and (D),” after “subparagraph (B),”. Subsec. (d). Pub. L. 106–279 designated existing provisions as par. (1), substituted “subparagraph (F) or (G) of INA 101(b)(1)” for “INA 101(b)(1)(F)”, and added par. (2). Subsec. (h). Pub. L. 106–386, § 1507(b), ”"
+  },
+  {
+    "id": 63,
+    "sourceId": "8-1155-note-2",
+    "referenceText": "section 1101(b)(1)(E)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(b)(1)(E) renders as INA 101(b)(1)(E); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “administration of oaths by immigration officers when the petition is executed outside the United States. Subsec. (c). Pub. L. 87–301, §§ 3(b), 10, substituted “INA 101(b)(1)(E) or (F)” for “INA 101(b)(1)(E)”, and provided that no petition shall be approved if ”"
+  },
+  {
+    "id": 66,
+    "sourceId": "8-1157-note-3",
+    "referenceText": "section 1157",
+    "verdict": "pass",
+    "rationale": "Pass: section 1157 renders as INA 207; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Prior ProvisionsA prior INA 207, act June 27, 1952, ch. 477, title II, ch. 1, § 207, 66 Stat. 181, prohibited issuance of immigrant visas to other immigrants in lieu of immigrants excluded from admission, immigrants deported, immigrants failing to app”"
+  },
+  {
+    "id": 69,
+    "sourceId": "8-1157-note-12",
+    "referenceText": "1153(b)(4)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “counted against any numerical limitation under sections 201(d), 202(a), or 203(b)(4) of the Immigration and Nationality Act (8 U.S.C. 1151(d), INA 202(a), and INA 203(b)(4)). “(3) Carry forward.—“(A) Fiscal years 2008 through 2011.—If the numerical limitation ”"
+  },
+  {
+    "id": 72,
+    "sourceId": "8-1157-note-13",
+    "referenceText": "5561(5)",
+    "verdict": "pass",
+    "rationale": "Pass: the occurrence is removed because its source context is a non-Title-8 authority or a widened replacement span; no INA target is asserted. After-context: “Bring Them Home Alive ProgramPub. L. 106–484, Nov. 9, 2000, 114 Stat. 2195, as amended by Pub. L. 107–258, § 2, Oct. 29, 2002, 116 Stat. 1738, provided that: “SECTION 1. SHORT TITLE.“This Act may be cited as the ‘Bring Them Home Alive Act of 2000’. “SEC. 2. AM”"
+  },
+  {
+    "id": 75,
+    "sourceId": "8-1157-note-13",
+    "referenceText": "section 208(b)(2)(A)",
+    "verdict": "pass",
+    "rationale": "Pass: section 208(b)(2)(A) renders as INA 208(b)(2)(A); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “een convicted of a serious criminal offense, or a person who presents a danger to the security of the United States, as set forth in clauses (i) through (v) of INA 208(b)(2)(A) (8 U.S.C. 1158(b)(2)(A)). “(c) Definitions.—In this section:“(1) American persian g”"
+  },
+  {
+    "id": 78,
+    "sourceId": "8-1157-note-13",
+    "referenceText": "section 551(2)",
+    "verdict": "pass",
+    "rationale": "Pass: the added occurrence is a separately identified non-INA authority, and its rendered section target is retained. After-context: “ndividual—“(i) who is a member of a uniformed service (within the meaning of section 101(3) of title 37, United States Code) in a missing status (as defined in section 551(2) of such title and this subsection) as a result of the Vietnam War; or “(ii) who is an”"
+  },
+  {
+    "id": 81,
+    "sourceId": "8-1157-note-13",
+    "referenceText": "section 5561(5)",
+    "verdict": "pass",
+    "rationale": "Pass: the added occurrence is a separately identified non-INA authority, and its rendered section target is retained. After-context: “n) as a result of the Korean War; or “(ii) who is an employee (as defined in section 5561(2) of title 5, United States Code) in a missing status (as defined in section 5561(5) of such title) as a result of the Korean War. “(B) Exclusion.—Such term does not inc”"
+  },
+  {
+    "id": 84,
+    "sourceId": "8-1157-note-20",
+    "referenceText": "1157(a)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “sentatives for purposes of Sections 101(a)(42)(B) and 207(a), (b), (d), and (e) of the Immigration and Nationality Act, as amended (8 U.S.C. 1101(a)(42)(B) and INA 207(a), (b), (d), and (e)). 1–102. There are reserved to the President the following functions u”"
+  },
+  {
+    "id": 87,
+    "sourceId": "8-1159-c",
+    "referenceText": "section 1182",
+    "verdict": "pass",
+    "rationale": "Pass: section 1182 renders as INA 212; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Coordination with INA 212”"
+  },
+  {
+    "id": 90,
+    "sourceId": "8-1181-note-2",
+    "referenceText": "section 1101",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101 renders as INA 101; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “eference to subsection (c) of this section. Subsec. (c). Pub. L. 96–212, § 202(2), added subsec. (c). 1976—Subsec. (b). Pub. L. 94–571 substituted reference to INA 101 “(a)(27)(A)” of this title for “(a)(27)(B)”. 1965—Subsec. (a). Pub. L. 89–236 restated requi”"
+  },
+  {
+    "id": 93,
+    "sourceId": "8-1182-d-3-B-i",
+    "referenceText": "section 1252(a)(2)(D)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(a)(2)(D) renders as INA 242(a)(2)(D); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “mination or revocation except in a proceeding for review of a final order of removal pursuant to INA 242, and review shall be limited to the extent provided in INA 242(a)(2)(D). The Secretary of State may not exercise the discretion provided in this clause wit”"
+  },
+  {
+    "id": 96,
+    "sourceId": "8-1182-t-1-A-i",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “is offering and will offer during the period of authorized employment to aliens admitted or provided status under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) wages that are at least— whichever is greater, based on the best information available as of th”"
+  },
+  {
+    "id": 99,
+    "sourceId": "8-1182-t-3-C-v",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “The Secretary of Labor and the Secretary of Homeland Security shall devise a process under which a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) who files a complaint regarding a violation of clause (iv) and is otherwise eligible to rem”"
+  },
+  {
+    "id": 102,
+    "sourceId": "8-1182-t-3-C-vii-II",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “It is a failure to meet a condition of paragraph (1)(A) for an employer who has filed an attestation under this subsection and who places a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) designated as a part-time employee in the attestat”"
+  },
+  {
+    "id": 105,
+    "sourceId": "8-1182-t-3-C-vii-V",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “This clause shall not be construed as prohibiting an employer that is a school or other educational institution from applying to a nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) an established salary practice of the employer, under which”"
+  },
+  {
+    "id": 108,
+    "sourceId": "8-1182-t-4-A",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “The term “area of employment” means the area within normal commuting distance of the worksite or physical location where the work of the nonimmigrant under INA 101(a)(15)(H)(i)(b1) or INA 101(a)(15)(E)(iii) is or will be performed. If such worksite or location”"
+  },
+  {
+    "id": 111,
+    "sourceId": "8-1182-note-3",
+    "referenceText": "section 1184",
+    "verdict": "pass",
+    "rationale": "Pass: section 1184 renders as INA 214; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “), is section 112 of Pub. L. 101–649, which is set out as a note under INA 203. INA 214(l), referred to in subsec. (a)(6)(G), probably means the subsec. (l) of INA 214, which relates to nonimmigrant elementary and secondary school students and was added by Pub”"
+  },
+  {
+    "id": 114,
+    "sourceId": "8-1182-note-5",
+    "referenceText": "1101(a)(15)(E)(iii)",
+    "verdict": "pass",
+    "rationale": "Pass: 1101(a)(15)(E)(iii) renders as INA 101(a)(15)(E)(iii); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “NA 101(a)(15)(H)(i)(b1)” wherever appearing. Subsec. (t)(3)(C)(i)(II), (ii)(II), (iii)(II). Pub. L. 109–13, § 501(d)(2), substituted “1101(a)(15)(H)(i)(b1), or INA 101(a)(15)(E)(iii)” for “or INA 101(a)(15)(H)(i)(b1)”. 2004—Subsec. (a)(2)(G). Pub. L. 108–458, ”"
+  },
+  {
+    "id": 117,
+    "sourceId": "8-1182-note-5",
+    "referenceText": "section 1184(k)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(k) renders as INA 214(k); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “agraph (5)(B) of such section)” for “(including any additional sponsor required under INA 213A(f))”. Subsec. (e). Pub. L. 107–273 substituted “INA 214(l)” for “INA 214(k)”. 2001—Subsec. (a)(2)(I). Pub. L. 107–56, § 1006(a), added subpar. (I). Subsec. (a)(3)(B)”"
+  },
+  {
+    "id": 120,
+    "sourceId": "8-1182-note-5",
+    "referenceText": "section 1231(c)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1231(c) renders as INA 241(c); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “public benefit” for “for emergent reasons or for reasons deemed strictly in the public interest”. Subsec. (d)(7). Pub. L. 104–208, § 308(g)(4)(B), substituted “INA 241(c)” for “INA 237(a)”. Pub. L. 104–208, § 308(e)(2)(A), substituted “removed” for “deported”.”"
+  },
+  {
+    "id": 123,
+    "sourceId": "8-1182-note-9",
+    "referenceText": "1182(d)(3)(B)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “his section [Dec. 26, 2007], and these amendments and sections 212(a)(3)(B) and 212(d)(3)(B) of the Immigration and Nationality Act (8 U.S.C. 1182(a)(3)(B) and INA 212(d)(3)(B)), as amended by these sections, shall apply to— “(1) removal proceedings instituted”"
+  },
+  {
+    "id": 126,
+    "sourceId": "8-1182-note-14",
+    "referenceText": "section 212(a)(3)(B)(iv)",
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a)(3)(B)(iv) renders as INA 212(a)(3)(B)(iv); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “alien from being considered inadmissible or deportable for having engaged in a terrorist activity—“(i) described in subclause (IV)(bb), (V)(bb), or (VI)(cc) of INA 212(a)(3)(B)(iv) (as so amended) with respect to a terrorist organization at any time when such ”"
+  },
+  {
+    "id": 129,
+    "sourceId": "8-1182-note-18",
+    "referenceText": "section 212(a)(4)",
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a)(4) renders as INA 212(a)(4); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “ivision [set out as a note under INA 213A] a standard form for an affidavit of support, as the Attorney General shall specify, but subparagraphs (C) and (D) of INA 212(a)(4) [8 U.S.C. 1182(a)(4)(C), (D)], as so amended, shall not apply to applications with res”"
+  },
+  {
+    "id": 132,
+    "sourceId": "8-1182-note-40",
+    "referenceText": "section 212(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “autocratic dictatorship of Saddam Hussein in Iraq. “(2) For membership in the kurdistan democratic party and patriotic union of kurdistan.—Paragraph (3)(B) of INA 212(a) (8 U.S.C. 1182(a)(3)(B)) shall not apply to an alien applying for a nonimmigrant visa, who”"
+  },
+  {
+    "id": 135,
+    "sourceId": "8-1182-note-62",
+    "referenceText": "section 1182(d)(5) of this title",
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(d)(5) of this title renders as INA 212(d)(5); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “States give special consideration to plight of refugees from Democratic Kampuchea (Cambodia) and that Attorney General should parole into United States, under INA 212(d)(5) for fiscal year 1979, 7,500 aliens who are nationals or citizens of Democratic Kampuche”"
+  },
+  {
+    "id": 138,
+    "sourceId": "8-1182-note-76",
+    "referenceText": "1185(a)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “he Constitution and the laws of the United States of America, including sections 212(f) and 215(a) of the Immigration and Nationality Act (8 U.S.C. 1182(f) and INA 215(a)) and section 301 of title 3, United States Code, hereby find that, absent the measures se”"
+  },
+  {
+    "id": 141,
+    "sourceId": "8-1182-note-78",
+    "referenceText": "1185(a)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “ates Code, hereby direct as follows: Section 1. Suspension of Entry. I hereby proclaim, pursuant to sections 212(f) and 215(a) of the INA, 8 U.S.C. 1182(f) and INA 215(a), that the entry into the United States on or after the date of this order [Jan. 20, 2025]”"
+  },
+  {
+    "id": 144,
+    "sourceId": "8-1182-note-78",
+    "referenceText": "1185(a)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “United States on or after the date of this order, whether as an exercise of the suspension power in section 212(f) and 215(a) of the INA, 8 U.S.C. 1182(f) and INA 215(a), or as an exercise of my delegated authority under the Constitution of the United States, ”"
+  },
+  {
+    "id": 147,
+    "sourceId": "8-1182-note-87",
+    "referenceText": "1185(a)(1)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “and the laws of the United States of America, including sections 212(f) and 215(a)(1) of the Immigration and Nationality Act, as amended (8 U.S.C. 1182(f) and INA 215(a)(1)), and in light of Proclamation 4865 of September 29, 1981 [set out above], I hereby del”"
+  },
+  {
+    "id": 150,
+    "sourceId": "8-1184-c-1",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “The question of importing any alien as a nonimmigrant under subparagraph (H), (L), (O), or (P)(i) of INA 101(a)(15) (excluding nonimmigrants under INA 101(a)(15)(H)(i)(b1)) in any specific case or specific cases shall be determined by the Attorney General, aft”"
+  },
+  {
+    "id": 153,
+    "sourceId": "8-1184-g-8-B-i",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “The Secretary of Homeland Security shall establish annual numerical limitations on approvals of initial applications by aliens for admission under INA 101(a)(15)(H)(i)(b1).”"
+  },
+  {
+    "id": 156,
+    "sourceId": "8-1184-i-3",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “For purposes of INA 101(a)(15)(H)(i)(b1), the term “specialty occupation” means an occupation that requires—”"
+  },
+  {
+    "id": 159,
+    "sourceId": "8-1184-o-7-C",
+    "referenceText": "section 1255(l)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1255(l) renders as INA 245(l); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Nonimmigrant status under INA 101(a)(15)(T) shall be extended during the pendency of an application for adjustment of status under INA 245(l).”"
+  },
+  {
+    "id": 162,
+    "sourceId": "8-1184-q",
+    "referenceText": "section 1101(a)(15)(V)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(V) renders as INA 101(a)(15)(V); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Employment of nonimmigrants described in INA 101(a)(15)(V)”"
+  },
+  {
+    "id": 165,
+    "sourceId": "8-1184-note-5",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) renders as INA 101(a)(15)(H)(i)(b1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “). Pub. L. 108–78, §§ 107(c), 402(1), temporarily amended subpar. (A) generally. Prior to amendment, subpar. (A) read as follows: “The agreement referred to in INA 101(a)(15)(H)(i)(b1) is the United States-Chile Free Trade Agreement.” See Effective and Termina”"
+  },
+  {
+    "id": 168,
+    "sourceId": "8-1184-note-5",
+    "referenceText": "section 1101(a)(15)(F)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(F) renders as INA 101(a)(15)(F); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “ub. L. 107–124 added par. (6). Subsec. (l)(1)(B). Pub. L. 107–273 substituted “30;” for “20;”. Subsec. (m). Pub. L. 107–274 substituted “clause (i) or (iii) of INA 101(a)(15)(F)” for “INA 101(a)(15)(F)(i)” in two places in subsec. (m) relating to nonimmigrant ”"
+  },
+  {
+    "id": 171,
+    "sourceId": "8-1184-note-5",
+    "referenceText": "section 1101(a)(15)(O)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(O) renders as INA 101(a)(15)(O); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “341(c), as renumbered by Pub. L. 116–113, § 503(b)(1)–(3), added subsec. (j). 1991—Subsec. (a)(2)(A). Pub. L. 102–232, § 303(a)(11), substituted “described in INA 101(a)(15)(O)” for “under INA 101(a)(15)(O)”. Pub. L. 102–232, § 205(d), inserted “(or events)” a”"
+  },
+  {
+    "id": 174,
+    "sourceId": "8-1184-note-27",
+    "referenceText": "section 101(a)(15)(K)",
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15)(K) renders as INA 101(a)(15)(K); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “rtain InformationPub. L. 109–162, title VIII, § 832(b), Jan. 5, 2006, 119 Stat. 3068, provided that: “The fact that an alien described in clause (i) or (ii) of INA 101(a)(15)(K) (8 U.S.C. 1101(a)(15)(K)) is aware of any information disclosed under the amendmen”"
+  },
+  {
+    "id": 177,
+    "sourceId": "8-1184-note-40",
+    "referenceText": "section 101(a)(15)",
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15) renders as INA 101(a)(15); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “t. 4315, provided that: “(a) 5-Year Provision.—With respect to work authorization for aliens admitted as nonimmigrant students described in subparagraph (F) of INA 101(a)(15) [8 U.S.C. 1101(a)(15)] during the 5-year period beginning October 1, 1991, the Attorn”"
+  },
+  {
+    "id": 180,
+    "sourceId": "8-1186a-note-4",
+    "referenceText": "section 1153(a)(8)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1153(a)(8) renders as INA 203(a)(8); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “ight to be given that evidence shall be within the sole discretion of the Attorney General.” 1991—Subsec. (g)(1). Pub. L. 102–232 substituted “INA 203(d)” for “INA 203(a)(8)” in closing provisions. 1990—Subsec. (c)(4). Pub. L. 101–649 struck out “or” at end of”"
+  },
+  {
+    "id": 183,
+    "sourceId": "8-1186b-note-10",
+    "referenceText": "section 216A(d)(1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 216A(d)(1) renders as INA 216A(d)(1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “f a petition in accordance with subparagraph (A) of such section. Such petition may include the facts and information described in subparagraphs (A) and (B) of INA 216A(d)(1) (8 U.S.C. 1186b(d)(1)) with respect to any commercial enterprise (regardless of wheth”"
+  },
+  {
+    "id": 186,
+    "sourceId": "8-1188-note-4",
+    "referenceText": "section 1182(a)(14)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(a)(14) renders as INA 212(a)(14); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “guage of Pub. L. 102–232, § 309(b)(8). See 1991 Amendment note below. 1991—Subsec. (g)(3). Pub. L. 102–232, § 307(l)(4), substituted “INA 212(a)(5)(A)(i)” for “INA 212(a)(14)”. Subsec. (i)(1). Pub. L. 102–232, § 309(b)(8), as amended by Pub. L. 103–416, substi”"
+  },
+  {
+    "id": 189,
+    "sourceId": "8-1201-note-16",
+    "referenceText": "1253(d)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “Applications of Cuban Nationals in Third Countries.—Notwithstanding section 212(f) and section 243(d) of the Immigration and Nationality Act [8 U.S.C. 1182(f), INA 243(d)], on and after the date of the enactment of this Act [Dec. 22, 1987], consular officers o”"
+  },
+  {
+    "id": 192,
+    "sourceId": "8-1202-h-2-E-iii",
+    "referenceText": "section 1101(a)(15)(C)(iii)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(C)(iii) renders as INA 101(a)(15)(C)(iii); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “within that class of nonimmigrants enumerated in INA 101(a)(15)(C)(iii) (referred to as the “C–3 visa” category); or”"
+  },
+  {
+    "id": 195,
+    "sourceId": "usc-1202-fn002040",
+    "referenceText": "section 1101(a)(15)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15) renders as INA 101(a)(15); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “So in original. Subpar. (C) of INA 101(a)(15) does not contain clauses.”"
+  },
+  {
+    "id": 198,
+    "sourceId": "8-1223-note-4",
+    "referenceText": "section 1223",
+    "verdict": "pass",
+    "rationale": "Pass: section 1223 renders as INA 233; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Prior ProvisionsA prior INA 233, act June 27, 1952, ch. 477, title II, ch. 4, § 233, 66 Stat. 197, related to examinations of aliens upon arrival in the United States, prior to repeal by Pub. L. 99–500, § 101(b) [title II, § 206(a), formerly § 206], O”"
+  },
+  {
+    "id": 201,
+    "sourceId": "8-1227-note-3",
+    "referenceText": "section 1227",
+    "verdict": "pass",
+    "rationale": "Pass: section 1227 renders as INA 237; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Prior ProvisionsA prior INA 237, acts June 27, 1952, ch. 477, title II, ch. 4, § 237, 66 Stat. 201; Dec. 29, 1981, Pub. L. 97–116, § 7, 95 Stat. 1615; Oct. 18, 1986, Pub. L. 99–500, § 101(b) [title II, § 206(b)(2)], as added Oct. 24, 1988, Pub. L. 100”"
+  },
+  {
+    "id": 204,
+    "sourceId": "8-1228-c-2-B",
+    "referenceText": "section 1252b",
+    "verdict": "pass",
+    "rationale": "Pass: section 1252b renders as INA 242B; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Notwithstanding INA 242B, the United States Attorney, with the concurrence of the Commissioner, shall file at least 30 days prior to the date set for sentencing a charge containing factual allegations regarding the alienage of the defendant and”"
+  },
+  {
+    "id": 207,
+    "sourceId": "8-1228-note-4",
+    "referenceText": "section 1228",
+    "verdict": "pass",
+    "rationale": "Pass: section 1228 renders as INA 238; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Prior ProvisionsA prior INA 238, act June 27, 1952, ch. 477, title II, ch. 4, § 238, 66 Stat. 202, as amended, which related to entry through or from foreign contiguous territory and adjacent islands, was renumbered section 233 of act June 27, 1952, b”"
+  },
+  {
+    "id": 210,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1226(c)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1226(c) renders as INA 236(c); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “herwise covered by INA 237(a)(2)(A)(i)” for “aggravated felonies (as defined in INA 101(a)(43))”. Subsec. (a)(2). Pub. L. 104–208, § 308(c)(1)(B), substituted “INA 236(c)” for “INA 242(a)(2)”. Pub. L. 104–132, § 440(g)(2), which directed substitution of “any c”"
+  },
+  {
+    "id": 213,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1252(b)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(b) renders as INA 242(b); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Pub. L. 104–208, § 308(e)(10), substituted “Removal” for “Deportation” in heading. Subsec. (b)(1). Pub. L. 104–208, § 308(g)(5)(C), substituted “INA 240” for “INA 242(b)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Pub. L. 104–20”"
+  },
+  {
+    "id": 216,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1105a",
+    "verdict": "pass",
+    "rationale": "Pass: section 1105a renders as INA 106; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “d as follows: “is not eligible for any relief from deportation under this chapter.” Subsec. (b)(3). Pub. L. 104–208, § 308(g)(2)(A), substituted “INA 242” for “INA 106”. Pub. L. 104–132, § 442(a)(2), substituted “14 calendar days” for “30 calendar days”. Subse”"
+  },
+  {
+    "id": 219,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1252(b)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(b) renders as INA 242(b); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “). Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Subsec. (c)(2)(D)(ii). Pub. L. 104–208, § 308(g)(5)(D), substituted “INA 240” for “INA 242(b)”. Subsec. (c)(2)(D)(iv). Pub. L. 104–208, § 308(e)(2)(D), substituted “removed” for “depo”"
+  },
+  {
+    "id": 222,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1252(b)(1)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(b)(1) renders as INA 242(b)(1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “sec. (c)(3)(A)(ii). Pub. L. 104–208, § 308(g)(2)(A), substituted “INA 242” for “INA 106”. Subsec. (c)(3)(A)(iii). Pub. L. 104–208, § 308(g)(2)(C), substituted “INA 242(b)(1)” for “INA 106(a)(1)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “depo”"
+  },
+  {
+    "id": 225,
+    "sourceId": "8-1228-note-5",
+    "referenceText": "section 1252",
+    "verdict": "pass",
+    "rationale": "Pass: section 1252 renders as INA 242; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “08, § 308(e)(1)(F), substituted “removal” for “deportation” wherever appearing. Subsec. (c)(4). Pub. L. 104–208, § 308(g)(5)(A)(ii), substituted “INA 240” for “INA 242”. Pub. L. 104–208, § 308(g)(1), substituted “INA 237(a)” for “section 1251(a)→ 8 U.S.C. 1227”"
+  },
+  {
+    "id": 228,
+    "sourceId": "8-1229-note-2",
+    "referenceText": "section 1229",
+    "verdict": "pass",
+    "rationale": "Pass: section 1229 renders as INA 239; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Prior ProvisionsA prior INA 239, act June 27, 1952, ch. 477, title II, ch. 4, § 239, 66 Stat. 203, as amended, which related to designation of ports of entry for aliens arriving by aircraft, was renumbered section 234 of act June 27, 1952, by Pub. L.”"
+  },
+  {
+    "id": 231,
+    "sourceId": "8-1229b-b-4-A-i",
+    "referenceText": "section 1229b(b)(2)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1229b(b)(2) renders as INA 240A(b)(2); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “child of an alien granted relief under INA 240A(b)(2) or 1254(a)(3) of this title (as in effect before the title III–A effective date in section 309 of the Illegal Immigration Reform and Immigrant Responsibility Act of 1996); or”"
+  },
+  {
+    "id": 234,
+    "sourceId": "8-1252-a-1",
+    "referenceText": "2347(c)",
+    "verdict": "pass",
+    "rationale": "Pass: the occurrence is removed because its source context is a non-Title-8 authority or a widened replacement span; no INA target is asserted. After-context: “Judicial review of a final order of removal (other than an order of removal without a hearing pursuant to INA 235(b)(1)) is governed only by chapter 158 of title 28, except as provided in subsection (b) and except that the court may not order the taking of add”"
+  },
+  {
+    "id": 237,
+    "sourceId": "8-1252-b-8-B",
+    "referenceText": "section 1253(g)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1253(g) renders as INA 243(g); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “does not relieve the alien from complying with INA 241(a)(4) and INA 243(g); and”"
+  },
+  {
+    "id": 240,
+    "sourceId": "8-1252-note-2",
+    "referenceText": "section 1253",
+    "verdict": "pass",
+    "rationale": "Pass: section 1253 renders as INA 243; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “07(a), Sept. 30, 1996, 110 Stat. 3009–612, and, as so amended, no longer contains a subsec. (g). Provisions similar to those contained in former subsec. (g) of INA 243 are now contained in subsec. (d) of INA 243. Rule 23 of the Federal Rules of Civil Procedure”"
+  },
+  {
+    "id": 243,
+    "sourceId": "8-1252a-note-2",
+    "referenceText": "Section 1252a",
+    "verdict": "pass",
+    "rationale": "Pass: Section 1252a→ 8 U.S.C. 1228 renders as INA 242A→ 8 U.S.C. 1228; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Codification INA 242A→ 8 U.S.C. 1228, act June 27, 1952, ch. 477, title II, ch. 5, § 242A, as added Nov. 18, 1988, Pub. L. 100–690, title VII, § 7347(a), 102 Stat. 4471, as amended, which related to expedited removal of aliens convicted of committing aggra”"
+  },
+  {
+    "id": 246,
+    "sourceId": "8-1254a-note-3",
+    "referenceText": "section 1229b(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1229b(a) renders as INA 240A(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “)(B)(ii). Pub. L. 104–208, § 308(g)(7)(E)(i), substituted “INA 208(b)(2)(A)” for “INA 243(h)(2)”. Subsec. (e). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “section 1254(a)”. Pub. L. 104–208, § 308(e)(11), amended heading. 1994—Subsec. (c)”"
+  },
+  {
+    "id": 249,
+    "sourceId": "8-1255-note-3",
+    "referenceText": "section 1227(a)(4)(B)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a)(4)(B) renders as INA 237(a)(4)(B); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “stablished under INA 286(s)”. Subsec. (k). Pub. L. 105–119, § 111(c)(2), added subsec. (k). 1996—Subsec. (c)(6). Pub. L. 104–208, § 308(g)(10)(B), substituted “INA 237(a)(4)(B)” for “section 1251(a)(4)(B)→ 8 U.S.C. 1227”. Pub. L. 104–132 added cl. (6). Subsec.”"
+  },
+  {
+    "id": 252,
+    "sourceId": "8-1255-note-3",
+    "referenceText": "1153(a)",
+    "verdict": "pass",
+    "rationale": "Pass: 1153(a) renders as INA 203(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “. (h). 1990—Subsec. (b). Pub. L. 101–649, § 162(e)(3), struck out “or nonpreference” after “number of the preference” and substituted “1151(a)” for “1152(e) or INA 203(a)” and “succeeding fiscal year” for “fiscal year then current”. Subsec. (e)(1). Pub. L. 101”"
+  },
+  {
+    "id": 255,
+    "sourceId": "8-1255-note-21",
+    "referenceText": "section 212(a)(9)",
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a)(9) renders as INA 212(a)(9); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “C. 1231(a)(5)] shall not apply; and “(B) the Attorney General may grant the alien a waiver on the grounds of inadmissibility under subparagraphs (A) and (C) of INA 212(a)(9) [8 U.S.C. 1182(a)(9)]. In granting waivers under subparagraph (B), the Attorney Genera”"
+  },
+  {
+    "id": 258,
+    "sourceId": "8-1255-note-22",
+    "referenceText": "section 212(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “r permanent residence, except in determining such admissibility the grounds for inadmissibility specified in paragraphs (4), (5), (6)(A), (7)(A), and (9)(B) of INA 212(a) [8 U.S.C. 1182(a)(4), (5), (6)(A), (7)(A), (9)(B)] shall not apply. “(2) Rules in applyin”"
+  },
+  {
+    "id": 261,
+    "sourceId": "8-1255-note-23",
+    "referenceText": "section 212(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “December 31, 1991, after being denied refugee status. “(c) Waiver of Certain Grounds for Inadmissibility.—The provisions of paragraphs (4), (5), and (7)(A) of INA 212(a) [8 U.S.C. 1182(a)(4), (5), (7)(A)] shall not apply to adjustment of status under this sect”"
+  },
+  {
+    "id": 264,
+    "sourceId": "8-1255-note-27",
+    "referenceText": "section 212(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) renders as INA 212(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “September 30, 2026, after being denied refugee status. “(c) Waiver of Certain Grounds for Inadmissibility.—The provisions of paragraphs (4), (5), and (7)(A) of INA 212(a) [8 U.S.C. 1182(a)(4), (5), (7)(A)] shall not apply to adjustment of status under this sec”"
+  },
+  {
+    "id": 267,
+    "sourceId": "8-1255a-note-17",
+    "referenceText": "1160(f)",
+    "verdict": "flag",
+    "rationale": "The rendered authority list is partially converted: its after-context mixes an INA label with a U.S.C.-prefixed list/parenthetical, which is misleading or grammatically malformed. After-context: “the legalized alien is ineligible for such assistance under section 245A(h) or 210(f), respectively, of the Immigration and Nationality Act [8 U.S.C. 1255a(h), INA 210(f)]. “(e) Exception for Certain Aliens.—An alien is not eligible for the benefits of this se”"
+  },
+  {
+    "id": 270,
+    "sourceId": "8-1282-note-2",
+    "referenceText": "section 1229a",
+    "verdict": "pass",
+    "rationale": "Pass: section 1229a renders as INA 240; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Amendments2023—Subsec. (a)(3). Pub. L. 117–360 added par. (3). 1996—Subsec. (b). Pub. L. 104–208, § 308(g)(5)(A)(i), substituted “INA 240” for “INA 242”. Pub. L. 104–208, § 308(e)(2)(E), substituted “removed” for “deported” in two places. 1991—Subsec. (c). Pub”"
+  },
+  {
+    "id": 273,
+    "sourceId": "8-1321-note-2",
+    "referenceText": "section 1223",
+    "verdict": "pass",
+    "rationale": "Pass: section 1223 renders as INA 233; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Amendments1996—Subsec. (a). Pub. L. 104–208 substituted “INA 233” for “INA 238”. 1990—Subsec. (a). Pub. L. 101–649 substituted “$3,000” for “$1,000”. 1986—Subsec. (c). Pub. L. 99–603 added subsec. (c).”"
+  },
+  {
+    "id": 276,
+    "sourceId": "8-1324-b-2",
+    "referenceText": "section 981(d)",
+    "verdict": "pass",
+    "rationale": "Pass: the added occurrence is a separately identified non-INA authority, and its rendered section target is retained. After-context: “Seizures and forfeitures under this subsection shall be governed by the provisions of chapter 46 of title 18 relating to civil forfeitures, including section 981(d) of such title, except that such duties as are imposed upon the Secretary of the Treasury under ”"
+  },
+  {
+    "id": 279,
+    "sourceId": "8-1324a-note-15",
+    "referenceText": "section 1324a of this title",
+    "verdict": "pass",
+    "rationale": "Pass: section 1324a of this title renders as INA 274A; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “of Representatives and of the Senate a report on any additional authority or resources needed by the Immigration and Naturalization Service in order to enforce INA 274A, or by Federal agencies in order to carry out Ex. Ord. No. 12989, set out below, and to exp”"
+  },
+  {
+    "id": 282,
+    "sourceId": "8-1324b-note-3",
+    "referenceText": "section 1160(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1160(a) renders as INA 210(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Amendments1996—Subsec. (a)(3)(B). Pub. L. 104–208, § 671(d)(1)(B), struck out “, 1161(a),” after “INA 210(a)”. Subsec. (a)(6). Pub. L. 104–208, § 421(a), substituted “A person’s” for “For purposes of paragraph (1), a person’s” and “if made for the purpose or w”"
+  },
+  {
+    "id": 285,
+    "sourceId": "8-1327",
+    "referenceText": "1182(a)(3)",
+    "verdict": "pass",
+    "rationale": "Pass: 1182(a)(3) renders as INA 212(a)(3); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “aids or assists any alien inadmissible under INA 212(a)(2) (insofar as an alien inadmissible under such section has been convicted of an aggravated felony) or INA 212(a)(3) (other than subparagraph (E) thereof) to enter the United States, or who connives or co”"
+  },
+  {
+    "id": 288,
+    "sourceId": "8-1356-r-2",
+    "referenceText": "section 1255(i)(3)(b)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1255(i)(3)(b) renders as INA 245(i)(3)(B); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “ll breached cash and surety bonds, in excess of $8,000,000, posted under this chapter which are recovered by the Department of Justice, and amount described in INA 245(i)(3)(B).”"
+  },
+  {
+    "id": 291,
+    "sourceId": "8-1356-note-4",
+    "referenceText": "section 1223(b)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1223(b) renders as INA 233(b); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “appropriation amounts paid out for expenses incurred by Attorney General for detention of aliens. 1996—Subsec. (a). Pub. L. 104–208, § 308(g)(1), substituted “INA 233(b)” for “INA 238(b)”. Subsec. (h)(1)(A). Pub. L. 104–208, § 671(e)(5), inserted period after ”"
+  },
+  {
+    "id": 294,
+    "sourceId": "8-1356-note-20",
+    "referenceText": "section 101(a)(15)",
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15) renders as INA 101(a)(15); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Nationality Act (8 U.S.C. 1258) to change status to be classified as a dependent of a nonimmigrant described in subparagraph (E), (H), (L), (O), (P), or (R) of INA 101(a)(15) (8 U.S.C. 1101(a)(15)), or to extend such classification, the fee is set at an amount”"
+  },
+  {
+    "id": 297,
+    "sourceId": "8-1365a-note-9",
+    "referenceText": "section 5316",
+    "verdict": "pass",
+    "rationale": "Pass: the added occurrence is a separately identified non-INA authority, and its rendered section target is retained. After-context: “ions and General Schedule pay rates, except that the rate of pay for such personnel may not exceed the rate payable for level V of the Executive Schedule under section 5316 of such title. “(3) Detail of government employees.—Any Federal Government employee, wi”"
+  },
+  {
+    "id": 300,
+    "sourceId": "8-1409-note-4",
+    "referenceText": "section 1401",
+    "verdict": "pass",
+    "rationale": "Pass: section 1401 renders as INA 301; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “ed while such child is under the age of twenty-one years by legitimation.” 1981—Subsec. (a). Pub. L. 97–116, § 18(l)(1), substituted “(c), (d), (e), and (g) of INA 301” for “(3) to (5) and (7) of INA 301(a)”. Subsec. (b). Pub. L. 97–116, § 18(l)(2), substitute”"
+  },
+  {
+    "id": 303,
+    "sourceId": "8-1409-note-4",
+    "referenceText": "section 1401(a)(7)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1401(a)(7) renders as INA 301(a)(7); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “substituted “(c), (d), (e), and (g) of INA 301” for “(3) to (5) and (7) of INA 301(a)”. Subsec. (b). Pub. L. 97–116, § 18(l)(2), substituted “INA 301(g)” for “INA 301(a)(7)”.”"
+  },
+  {
+    "id": 306,
+    "sourceId": "8-1427-note-9",
+    "referenceText": "section 241(b)(3)(B)",
+    "verdict": "pass",
+    "rationale": "Pass: section 241(b)(3)(B) renders as INA 241(b)(3)(B); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “itted for permanent residence, within the United States for at least one year prior to naturalization; and “(2) is not described in clauses (i) through (iv) of INA 241(b)(3)(B) [8 U.S.C. 1231(b)(3)(B)]. “(c) Administration of Oath.—An applicant for naturalizat”"
+  },
+  {
+    "id": 309,
+    "sourceId": "8-1440-note-14",
+    "referenceText": "section 1440(b) of this title",
+    "verdict": "pass",
+    "rationale": "Pass: section 1440(b) of this title renders as INA 329(b); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “ralization for aliens and noncitizens who served in the Armed Forces in the Grenada campaign by making them eligible in accordance with statutory exceptions in INA 329(b), was revoked, effective Feb. 2, 1987, by Ex. Ord. No. 12913, May 2, 1994, 59 F.R. 23115, ”"
+  },
+  {
+    "id": 312,
+    "sourceId": "8-1452-note-3",
+    "referenceText": "section 1401",
+    "verdict": "pass",
+    "rationale": "Pass: section 1401 renders as INA 301; the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “and added subsec. (b). Subsec. (c). Pub. L. 99–653, as amended by Pub. L. 100–525, added subsec. (c). 1981—Pub. L. 97–116 substituted “(c), (d), (e), or (g) of INA 301” for “(3), (4), (5), or (7) of INA 301(a)”.”"
+  },
+  {
+    "id": 315,
+    "sourceId": "8-1483-note-3",
+    "referenceText": "section 1481(a)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1481(a) renders as INA 349(a); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Pub. L. 100–525, substituted “paragraphs (3)” for “paragraphs (2), (4),”. 1981—Subsec. (a). Pub. L. 97–116, § 18(r)(1), substituted “paragraphs (6) and (7) of INA 349(a)” for “paragraphs (7), (8), and (9) of INA 349”. Subsec. (b). Pub. L. 97–116, § 18(r)(2), s”"
+  },
+  {
+    "id": 318,
+    "sourceId": "8-1531-note-3",
+    "referenceText": "section 1227(a)(4)(B)",
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a)(4)(B) renders as INA 237(a)(4)(B); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “Amendments1996—Par. (1). Pub. L. 104–208, § 308(g)(1), substituted “INA 237(a)(4)(B)” for “section 1251(a)(4)(B)→ 8 U.S.C. 1227”. Par. (7). Pub. L. 104–208, § 354(a)(5), added par. (7).”"
+  },
+  {
+    "id": 321,
+    "sourceId": "8-1721-c-4",
+    "referenceText": "(1)",
+    "verdict": "pass",
+    "rationale": "Pass: (1) renders as (1); the source authority/path agrees with the Title-8 crosswalk, and the literal after-context has coherent grammar with no mixed list or redundant authority tail. After-context: “tion or exceeding authorized access (as defined in section 1030(e) of title 18), and who uses such information in the manner described in any of the paragraphs (1) through (7) of section 1030(a) of such title, or attempts to use such information in such manner”"
+  },
+  {
+    "id": 324,
+    "sourceId": "8-1721-c-4",
+    "referenceText": "1030(c)",
+    "verdict": "pass",
+    "rationale": "Pass: the occurrence is removed because its source context is a non-Title-8 authority or a widened replacement span; no INA target is asserted. After-context: “Any person who obtains information under this subsection without authorization or exceeding authorized access (as defined in section 1030(e) of title 18), and who uses such information in the manner described in any of the paragraphs (1) through (7) of section”"
+  }
+]

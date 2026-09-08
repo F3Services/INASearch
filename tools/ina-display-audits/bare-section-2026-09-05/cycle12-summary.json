@@ -1,0 +1,45 @@
+{
+  "referencesChanged": 1387,
+  "fieldsChanged": 529,
+  "detectionAndTargetsUnchanged": false,
+  "baseline": {
+    "fields": 57663,
+    "references": 53690,
+    "renderedLinks": 53690,
+    "groups": {
+      "numbered-section-list": 243,
+      "repeated-section-list": 10,
+      "cfr-act-list": 564
+    },
+    "changedFields": 4047,
+    "artifactSha256": "ceec2047a5a06c0ee2b71a46a47fa390a0d41c51d0d8153f6a63c4697811a4dc",
+    "templateSha256": "fd76a1e2e85ea5e157cf02545f14f6c56e188b6e9545c4b9fb5981096a5bcfc5"
+  },
+  "current": {
+    "fields": 57663,
+    "references": 53695,
+    "renderedLinks": 53695,
+    "groups": {
+      "numbered-section-list": 352,
+      "repeated-section-list": 11,
+      "cfr-act-list": 564
+    },
+    "changedFields": 4464,
+    "artifactSha256": "e021410aac40128a547f1d094a42908ccabca92f319ea4fd9ff6295f0a05158d",
+    "templateSha256": "145b7bb24ee5d40349cfaca1dc9cf6d7d9b9a9b85503c20b3783e7cdd556a807"
+  },
+  "reviewedBuild": {
+    "fields": 57663,
+    "references": 53695,
+    "renderedLinks": 53695,
+    "groups": {
+      "numbered-section-list": 352,
+      "repeated-section-list": 11,
+      "cfr-act-list": 564
+    },
+    "changedFields": 4464,
+    "artifactSha256": "635e395dddf2ad11fed3e24f13e92524ab1199cef33eece4700492f87e4b9ebc",
+    "templateSha256": "145b7bb24ee5d40349cfaca1dc9cf6d7d9b9a9b85503c20b3783e7cdd556a807"
+  },
+  "rebuildVerification": "Full display.jsonl byte-for-byte identical to reviewed cycle12; build metadata generatedAt changes artifact hash."
+}

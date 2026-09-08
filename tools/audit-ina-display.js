@@ -22,12 +22,20 @@ function runtime(template, corpus) {
     transferTargetUrl: () => '', transferTargetLabel: () => '', legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => ''
   };
   vm.createContext(scope);
-  for (const name of ['renderSearchHighlightedText', 'legalReferenceCitation', 'statutoryReferenceCrosswalk', 'coordinatedStatutoryInaLists', 'statutoryLinkUsesConvertibleUscWording', 'statutoryLinkInaCitation', 'legalReferenceHtml', 'houseFootnoteReferenceHtml', 'coordinatedInaListHtml', 'linkifyStatutoryText']) {
+  for (const name of ['normCitationPart', 'statuteStatus', 'transferSourceKey', 'transferTargetForSource', 'transferTargetLabel', 'houseSectionUrl', 'transferTargetUrl', 'legalReferenceDisposition', 'renderSearchHighlightedText', 'legalReferenceCitation', 'statutoryReferenceCrosswalk', 'inUnfinishedStatutoryList', 'coordinatedStatutoryInaLists', 'statutoryLinkUsesConvertibleUscWording', 'statutoryLinkInaCitation', 'legalReferenceSourceDiscrepancy', 'legalReferenceHtml', 'houseFootnoteReferenceHtml', 'coordinatedInaListHtml', 'linkifyStatutoryText']) {
     const start = template.indexOf(`    function ${name}(`);
+    if (start < 0 && name === "inUnfinishedStatutoryList") continue; // Pre-change snapshots have no such helper.
     if (start < 0) throw new Error(`Missing ${name}`);
     const end = template.indexOf('\n    function ', start + 10);
     vm.runInContext(template.slice(start, end), scope);
   }
+  scope.uscToIna = new Map();
+  for (const row of corpus.inaCrosswalk) if (row.uscSection && !scope.uscToIna.has(scope.normCitationPart(row.uscSection))) scope.uscToIna.set(scope.normCitationPart(row.uscSection), row);
+  scope.sectionMap = new Map(corpus.title8.sections.map(section => [scope.normCitationPart(section.section), section]));
+  for (const section of corpus.title8.sections) for (const target of section.transferTargets || []) {
+    for (const key of [scope.normCitationPart(target.source), scope.transferSourceKey(target.source)]) if (!scope.sectionMap.has(key)) scope.sectionMap.set(key, section);
+  }
+  for (const row of corpus.inaCrosswalk) if (row.localSection && scope.sectionMap.has(scope.normCitationPart(row.localSection))) scope.sectionMap.set(scope.normCitationPart(row.uscSection), scope.sectionMap.get(scope.normCitationPart(row.localSection)));
   return scope;
 }
 function contextFor(field, corpus) {
@@ -45,9 +53,13 @@ function audit(artifact, templateFile, output) {
     const html = api.linkifyStatutoryText(field.text, field.references, 0, undefined, null, [], context);
     const groups = api.coordinatedStatutoryInaLists(field.text, field.references, 0, undefined, context);
     const displayed = plain(html);
+    let htmlCursor = 0, displayCursor = 0;
     const links = [...html.matchAll(/<a\b([^>]*data-legal-reference[^>]*)>([\s\S]*?)<\/a>/g)].map(match => {
       const attrs = Object.fromEntries([...match[1].matchAll(/([\w-]+)="([^"]*)"/g)].map(attr => [attr[1], plain(attr[2])]));
-      return { text: plain(match[2]), family: attrs['data-reference-family'], section: attrs['data-reference-section'], path: attrs['data-reference-path'], sourceText: attrs['data-reference-source-text'], ina: attrs['data-reference-ina-citation'], citation: attrs['data-reference-citation'], navigation: attrs['data-show-citation'] || attrs['data-show-cfr-citation'] };
+      const displayStart = displayCursor + plain(html.slice(htmlCursor, match.index)).length;
+      const displayEnd = displayStart + plain(match[2]).length;
+      htmlCursor = match.index + match[0].length; displayCursor = displayEnd;
+      return { displayStart, displayEnd, text: plain(match[2]), family: attrs['data-reference-family'], section: attrs['data-reference-section'], path: attrs['data-reference-path'], sourceText: attrs['data-reference-source-text'], ina: attrs['data-reference-ina-citation'], citation: attrs['data-reference-citation'], navigation: attrs['data-show-citation'] || attrs['data-show-cfr-citation'] };
     });
     summary.fields++; summary.references += field.references.length; summary.renderedLinks += links.length;
     if (displayed !== field.text) summary.changedFields++;

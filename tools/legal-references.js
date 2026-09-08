@@ -488,12 +488,22 @@ function inaActReferenceCandidates(text, context) {
   }
   const assumesIna = cfrContextUsesInaAct(context) || /\b(?:INA|Immigration\s+and\s+Nationality\s+Act)\b/i.test(input);
   if (assumesIna) {
+    const writtenOwners = EmbeddedReferences.parseNumberedSectionReferences(input);
     for (const match of input.matchAll(/\bsections?\s+(?=\d+[A-Za-z-]*\s*\()/gi)) {
+      // The owner at the end of a coordinated list also governs earlier
+      // members and ranges, even when the INA shorthand grammar stops early.
+      if (writtenOwners.some(candidate => candidate.start <= match.index && match.index < candidate.scope.start &&
+        ["public-law", "named-act", "named-instrument", "numbered-title", "this-title", "that-title", "such-title"].includes(candidate.scope.type))) continue;
       const parsed = parseInaActCitationPrefix(input, match.index);
       if (!parsed?.citations?.length) continue;
       const suffixText = input.slice(parsed.end, parsed.end + 240);
       const writtenActSuffix = suffixText.match(/^\s+of\s+([^.;]{1,220}?\bAct(?:\s+of\s+\d{4})?)\b/i)?.[1] || "";
-      const acceptedSuffixMatch = suffixText.match(/^\s+of\s+(?:(?:the|this|such|that)\s+Act\b|INA\b|(?:the\s+)?Immigration\s+and\s+Nationality\s+Act\b)/i);
+      const acceptedSuffixMatch = suffixText.match(/^\s+of\s+(?:(?:the|this|such|that)\s+Act\b(?!\s+of\s+\d{4}\b)|INA\b|(?:the\s+)?Immigration\s+and\s+Nationality\s+Act\b)/i);
+      // An explicitly written owner outranks the CFR part's default INA
+      // context. In particular, "section 101(e) of Public Law 100-202" is
+      // not INA 101(e). Leave other named or unknown owners to their own
+      // resolvers rather than guessing an INA destination.
+      if (/^\s*,?\s*of\b/i.test(suffixText) && !acceptedSuffixMatch) continue;
       const acceptedActSuffix = /^(?:(?:the|this|such|that)\s+Act|INA|Immigration\s+and\s+Nationality\s+Act)\b/i.test(writtenActSuffix);
       const normalizedSuffix = suffixText.trimStart().toLowerCase();
       const catalogNamedActSuffix = [...(context.namedActs?.keys?.() || [])].some(name => {
@@ -506,6 +516,26 @@ function inaActReferenceCandidates(text, context) {
       // formal title (for example, a trailing "of 1996"). Let the named-Act
       // resolver own that citation instead of occupying its first member as INA.
       if (!acceptedActSuffix && (writtenActSuffix || catalogNamedActSuffix || structuredNamedActSuffix)) continue;
+      // A repeated, identical section address in the same sentence retains
+      // its explicitly named owner. A part-wide INA default must not turn a
+      // later "section 501(c)(3)" into INA 501 after the sentence named IRC.
+      if (!acceptedSuffixMatch && parsed.citations.length === 1) {
+        const citation = parsed.citations[0];
+        const owner = writtenOwners.filter(candidate => candidate.end <= match.index &&
+          candidate.scope.type === "named-act" &&
+          !/[.!?]\s+[A-Z]|\bINA\b|Immigration\s+and\s+Nationality\s+Act/i.test(input.slice(candidate.end, match.index).replace(/U\.S\.C\./gi, "USC")) &&
+          candidate.members.some(member => member.section === citation.inaSection && canonicalPath(member.tokens) === canonicalPath(citation.path))).at(-1);
+        if (owner) {
+          const target = namedActTarget(owner.scope.actName, { section: citation.inaSection, tokens: citation.path }, context);
+          if (target && target.family !== "unknown") {
+            const reference = { id: makeId(context, citation.start, "embedded-named-act-section", 0), start: citation.start, end: citation.end, text: input.slice(citation.start, citation.end), ...target, resolution: target.resolution || "official-source-only", provenance: "deterministic-context", ruleId: "embedded-named-act-section" };
+            const evidenceTarget = packedTargetBase(target);
+            reference.evidenceRecord = numberedSectionEvidence(context, { ...reference, tokens: citation.path }, owner, reference, evidenceTarget.title, evidenceTarget.section, evidenceTarget.path);
+            results.push(reference);
+            continue;
+          }
+        }
+      }
       let currentSection = "";
       let currentPath = [];
       let finalCitationAdded = false;
@@ -735,16 +765,27 @@ function bareSectionReferenceCandidates(text, context) {
   for (const [index, match] of [...input.matchAll(pattern)].entries()) {
     const section = String(match[1]);
     const writtenPath = pathTokens(match[2]);
+    const trailingText = input.slice(match.index + match[0].length);
+    // An explicitly named instrument outranks a coincidentally matching USC number.
+    if (/^\s+of\s+(?:Ex\.\s*Ord\.\s*No\.|Executive\s+Order)\s*\d/i.test(trailingText)) continue;
+    const titleContainer = trailingText.match(/^(?:\s*(?:,|and|or)\s*\d+[A-Za-z]*(?:\([^()]+\))*)*(?:\s+et\s+seq\.)?\s+of\s+(?:title\s+(\d+)|(such)\s+title)\b/i);
+    const precedingTitle = titleContainer?.[2] ? [...input.slice(Math.max(0, match.index - 350), match.index).matchAll(/\btitle\s+(\d+)\b/gi)].at(-1)?.[1] : null;
+    const explicitTitle = titleContainer?.[1] || precedingTitle;
     let target = null;
     let ruleId = "context-bare-usc-section";
-    if (context.uscSections?.has(`8:${section}`)) {
+    if (explicitTitle) {
+      target = { family: "usc", targetKind: "usc", targetTitle: explicitTitle, targetSection: section, targetPath: writtenPath,
+        resolution: localUscTarget(context, explicitTitle, section, writtenPath) ? "local" : "official-source-only", officialUrl: houseSectionUrl(explicitTitle, section) };
+      ruleId = "context-bare-trailing-title-section";
+    }
+    if (!target && context.uscSections?.has(`8:${section}`)) {
       const targetPath = canonicalLocalUscPath(context, "8", section, writtenPath);
       target = {
         family: "usc", targetKind: "usc", targetTitle: "8", targetSection: section, targetPath,
         resolution: localUscTarget(context, "8", section, targetPath) ? "local" : "official-source-only",
         officialUrl: houseSectionUrl("8", section)
       };
-    } else {
+    } else if (!target) {
       const exactKey = `${section.toLowerCase()}:${writtenPath.map(token => token.toLowerCase()).join("/")}`;
       const historical = context.actSectionTargets?.get(exactKey);
       if (historical) {
@@ -863,10 +904,12 @@ function sourceAuthoritySectionCandidates(text, context, anchorReferences = []) 
       .sort((left, right) => left.start - right.start)[0];
     const authority = packedTargetBase(preceding || following);
     if (!authority) continue;
+    const writtenContainers = !preceding && following
+      ? namedActContainerPath(input.slice(end, following.start).replace(/^[\s,]+/, "")) : [];
     const fields = path => authority.family === "public-law"
       ? {
         family: "public-law", targetKind: "public-law", targetCongress: authority.title, targetLaw: authority.section,
-        targetPath: [...(authority.path || []), `s${section}`, ...path], resolution: "official-source-only",
+        targetPath: [...(authority.path || []), ...writtenContainers, `s${section}`, ...path], resolution: "official-source-only",
         officialUrl: `https://www.govinfo.gov/app/details/PLAW-${authority.title}publ${authority.section}`
       }
       : {
@@ -916,7 +959,7 @@ function explicitCitationContinuationCandidates(text, context, baseReferences = 
     while (cursor < input.length && cursor - base.end < 1600) {
       const ignorable = input.slice(cursor).match(/^\s+(?:note\b|et\s+seq\.?\b)/i);
       if (ignorable) cursor += ignorable[0].length;
-      const connector = input.slice(cursor).match(/^\s*(?:,\s*(?:(?:and|or)\s+)?|(?:and|or|through|to)\s+)/i);
+      const connector = input.slice(cursor).match(/^\s*(?:,\s*(?:(?:and|or)\s+)?|&\s*|(?:and|or|through|to)\s+)/i);
       if (!connector) break;
       let memberStart = cursor + connector[0].length;
       const repeatedUnit = input.slice(memberStart).match(/^(?:(?:sections?|§{1,2})\s*)/i);
@@ -952,6 +995,9 @@ function explicitCitationContinuationCandidates(text, context, baseReferences = 
         sourceText = relative[0];
       }
       if (!targetPath) break;
+      // A new, written owner ends the previous citation's authority scope:
+      // "INA 201(b) & Section 2 of the ... Act" is not INA section 2.
+      if (absolute && base.family !== "cfr" && /^\s+of\s+(?!(?:this|that|such)\b|the\s+Act\b|(?:the\s+)?INA\b|title\b)/i.test(input.slice(memberEnd))) break;
       previousPath = targetPath;
       const ruleId = `${base.ruleId === "explicit-ina" || base.family === "ina" ? "explicit-ina" : base.family === "cfr" ? "explicit-cfr" : "explicit-usc"}-continuation`;
       let target;
@@ -1786,7 +1832,7 @@ function namedActContainerPath(value) {
   const text = String(value || "");
   const path = [];
   const division = text.match(/^division\s+([A-Z0-9-]+)\b/i);
-  const title = text.match(/^(?:division\s+[A-Z0-9-]+,?\s+)?title\s+([IVXLCDM0-9-]+)\s+of\b/i);
+  const title = text.match(/^(?:division\s+[A-Z0-9-]+,?\s+)?title\s+([IVXLCDM0-9-]+)(?:\s+of\b|,)/i);
   if (division) path.push(`division-${division[1].toUpperCase()}`);
   if (title) path.push(`title-${title[1].toUpperCase()}`);
   return path;
@@ -1835,6 +1881,19 @@ function namedActTarget(actName, member, context = {}) {
   const cleanActName = canonicalActName(actName);
   const normalized = cleanActName.toLowerCase();
   const writtenContainers = namedActContainerPath(actName);
+  if (/^(?:internal revenue code(?: of (?:1954|1986))?|irc)$/.test(normalized)) {
+    return { family: "usc", targetKind: "usc", targetTitle: "26", targetSection: String(member.section), targetPath: [...(member.tokens || [])], resolution: "official-source-only", officialUrl: houseSectionUrl("26", member.section) };
+  }
+  // Pub. L. 96-422, 94 Stat. 1799. Some embedded notes misprint 96-122;
+  // that conflicting secondary citation must not erase the Act's identity.
+  if (normalized === "refugee education assistance act of 1980") {
+    return { family: "public-law", targetKind: "public-law", targetCongress: "96", targetLaw: "422", targetPath: [`s${member.section}`, ...(member.tokens || [])], resolution: "official-source-only", officialUrl: "https://www.govinfo.gov/app/details/PLAW-96publ422" };
+  }
+  // 42 U.S.C. 4031 source credit: Pub. L. 90-448, title XIII, §1324,
+  // as added by Pub. L. 109-64, §1. The amending law does not own §1324.
+  if (normalized === "national flood insurance act of 1968" && String(member.section) === "1324") {
+    return { family: "usc", targetKind: "usc", targetTitle: "42", targetSection: "4031", targetPath: [...(member.tokens || [])], resolution: "official-source-only", officialUrl: houseSectionUrl("42", "4031") };
+  }
   if (/^immigration and (?:nationality|naturalization) act(?: of \d{4})?\b/.test(normalized)) {
     const mapping = context.inaMap?.get(String(member.section || "").toLowerCase());
     const section = String(mapping?.localSection || mapping?.uscSection || "");
@@ -1848,10 +1907,10 @@ function namedActTarget(actName, member, context = {}) {
       officialUrl: houseSectionUrl("8", section)
     };
   }
-  if (normalized.includes("haitian refugee immigration fairness act")) {
+  if (normalized === "hrifa" || /haitian refugee (?:immigration|immigrant) fairness act/.test(normalized)) {
     return { family: "public-law", targetKind: "public-law", targetCongress: "105", targetLaw: "277", targetPath: ["division-A", "title-IX", `section-${member.section}`, ...member.tokens], officialUrl: "https://www.govinfo.gov/app/details/PLAW-105publ277" };
   }
-  if (normalized.includes("nicaraguan adjustment and central american relief act")) {
+  if (normalized === "nacara" || normalized.includes("nicaraguan adjustment and central american relief act")) {
     return { family: "public-law", targetKind: "public-law", targetCongress: "105", targetLaw: "100", targetPath: ["title-II", `section-${member.section}`, ...member.tokens], officialUrl: "https://www.govinfo.gov/app/details/PLAW-105publ100" };
   }
   if (normalized.includes("selective training and service act of 1940")) {
@@ -2241,6 +2300,12 @@ function followingParallelTarget(candidate, member, anchorReferences = [], allow
     const targetPath = (target.path || []).map(String);
     const projectionBridge = String(sourceText || "").slice(after, reference.start);
     const isImmediateBracketedParallel = /^\s*[\[(]\s*(?:\[\s*)?(?:former|now)?\]?\s*$/i.test(projectionBridge);
+    // A directly adjacent Code citation also supplies a whole-section
+    // codification: "section 564 of the ... Act, 21 U.S.C. 360bbb-3".
+    // Requiring only a comma bridge prevents inference across other prose.
+    if (!suffix.length && !targetPath.length && target.family === "usc" && /^\s*,\s*$/.test(projectionBridge)) {
+      return { ...target, parallelEvidence: "immediate-comma", parallelMatch: "exact-path" };
+    }
     const qualifier = String(sourceText || "").slice(Math.max(after, reference.start - 24), reference.start).match(/\b(now|former)\s*$/i)?.[1]?.toLowerCase() || "";
     const isCodeNoteLocator = reference.family === "usc" && /^\s+note\b/i.test(String(sourceText || "").slice(reference.end));
     if (isCodeNoteLocator) return { ...target, path: [], parallelEvidence: "note-locator", parallelMatch: "note-locator", forceOfficial: true };
@@ -2502,7 +2567,7 @@ function numberedSectionReferenceCandidates(text, context, anchorReferences = []
         // target when it identifies a genuinely different codification, but
         // not merely to copy a publisher's case typo into the statutory path.
         const parallelCanSupplyUnknown = (!namedTarget || namedTarget.family === "unknown") && ["exact-path", "current-recodification", "note-locator", "same-citation-public-law"].includes(parallel?.parallelMatch);
-        const target = parallel && ((parallel.parallelEvidence === "immediate-bracket" && !sameTargetIgnoringCase && !parallelDropsKnownContainers) || parallelCanSupplyUnknown)
+        const target = parallel && ((["immediate-bracket", "immediate-comma"].includes(parallel.parallelEvidence) && !sameTargetIgnoringCase && !parallelDropsKnownContainers) || parallelCanSupplyUnknown)
           ? referenceFieldsForTarget(context, parallel)
           : namedTarget;
         if (!target) return null;

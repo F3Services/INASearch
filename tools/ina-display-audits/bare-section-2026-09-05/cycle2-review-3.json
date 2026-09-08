@@ -1,0 +1,457 @@
+[
+  {
+    "id": 3,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(o) converts to INA 214(o); the full afterField preserves the source sentence and the target remains Title 8, section 1184(o), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 6,
+    "verdict": "pass",
+    "rationale": "Pass: Section 1184(l) converts to INA 214(l); the full afterField preserves the source sentence and the target remains Title 8, section 1184(l), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 9,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184 converts to INA 214; the full afterField preserves the source sentence and the target remains Title 8, section 1184, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 12,
+    "verdict": "pass",
+    "rationale": "Pass: section 1184(j) converts to INA 214(j); the full afterField preserves the source sentence and the target remains Title 8, section 1184(j), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 15,
+    "verdict": "pass",
+    "rationale": "Pass: section 240A(d) converts to INA 240A(d); the full afterField preserves the source sentence and the target remains Title 8, section 1229b(d), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 18,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) converts to INA 212(a); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 21,
+    "verdict": "pass",
+    "rationale": "Pass: section 203(b) converts to INA 203(b); the full afterField preserves the source sentence and the target remains Title 8, section 1153(b), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 24,
+    "verdict": "flag",
+    "rationale": "Wrong historical target: the source says “former section 1501 et seq. of title 22,” so this is a Title 22 reference and must remain official-source-only; converting it to INA 358/Title 8 is misleading."
+  },
+  {
+    "id": 27,
+    "verdict": "pass",
+    "rationale": "Pass: section 245(c) converts to INA 245(c); the full afterField preserves the source sentence and the target remains Title 8, section 1255(c), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 30,
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15)(E) converts to INA 101(a)(15)(E); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(E), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 33,
+    "verdict": "pass",
+    "rationale": "Pass: removed non-INA reference section 1101(4); the source context identifies its separate authority, so no INA display should be emitted."
+  },
+  {
+    "id": 36,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229b(a) converts to INA 240A(a); the full afterField preserves the source sentence and the target remains Title 8, section 1229b(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 39,
+    "verdict": "pass",
+    "rationale": "Pass: section 203(b) converts to INA 203(b); the full afterField preserves the source sentence and the target remains Title 8, section 1153(b), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 42,
+    "verdict": "pass",
+    "rationale": "Pass: section 1153(a)(7) of this title converts to INA 203(a)(7); the full afterField preserves the source sentence and the target remains Title 8, section 1153(a)(7), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 45,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(b)(1)(F) converts to INA 101(b)(1)(F); the full afterField preserves the source sentence and the target remains Title 8, section 1101(b)(1)(F), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 48,
+    "verdict": "pass",
+    "rationale": "Pass: section 1157 converts to INA 207; the full afterField preserves the source sentence and the target remains Title 8, section 1157, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 51,
+    "verdict": "pass",
+    "rationale": "Pass: removed non-INA reference 5561(5); the source context identifies its separate authority, so no INA display should be emitted."
+  },
+  {
+    "id": 54,
+    "verdict": "pass",
+    "rationale": "Pass: section 208(b)(2)(A) converts to INA 208(b)(2)(A); the full afterField preserves the source sentence and the target remains Title 8, section 1158(b)(2)(A), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 57,
+    "verdict": "pass",
+    "rationale": "Pass: added section 551(2); the source explicitly cites section 551(2) in the shown Title 37 context, and the new target Title 37, section 551(2) matches the wording."
+  },
+  {
+    "id": 60,
+    "verdict": "pass",
+    "rationale": "Pass: added section 5561(5); the source explicitly cites section 5561(5) in the shown Title 5 context, and the new target Title 5, section 5561(5) matches the wording."
+  },
+  {
+    "id": 63,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a)(4)(B) converts to INA 237(a)(4)(B); the full afterField preserves the source sentence and the target remains Title 8, section 1227(a)(4)(B), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 66,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(a)(19) converts to INA 212(a)(19); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a)(19), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 69,
+    "verdict": "pass",
+    "rationale": "Pass: section 1254a(e) converts to INA 240B; the full afterField preserves the source sentence and the target remains Title 8, section 1229c, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 72,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 75,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 78,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 81,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 84,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 87,
+    "verdict": "pass",
+    "rationale": "Pass: Section 1184(l) converts to INA 214(l); the full afterField preserves the source sentence and the target remains Title 8, section 1184(l), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 90,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 93,
+    "verdict": "pass",
+    "rationale": "Pass: section 1223(c) converts to INA 233(c); the full afterField preserves the source sentence and the target remains Title 8, section 1223(c), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 96,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a) converts to INA 237(a); the full afterField preserves the source sentence and the target remains Title 8, section 1227(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 99,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a)(3)(B)(iv) converts to INA 212(a)(3)(B)(iv); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a)(3)(B)(iv), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 102,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a)(4) converts to INA 212(a)(4); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a)(4), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 105,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) converts to INA 212(a); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 108,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(d)(5) of this title converts to INA 212(d)(5); the full afterField preserves the source sentence and the target remains Title 8, section 1182(d)(5), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 111,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 114,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 117,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 120,
+    "verdict": "pass",
+    "rationale": "Pass: section 1255(l) converts to INA 245(l); the full afterField preserves the source sentence and the target remains Title 8, section 1255(l), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 123,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(V) converts to INA 101(a)(15)(V); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(V), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 126,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(H)(i)(b1) converts to INA 101(a)(15)(H)(i)(b1); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(H)(i)(b1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 129,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(F) converts to INA 101(a)(15)(F); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(F), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 132,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(O) converts to INA 101(a)(15)(O); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(O), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 135,
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15)(K) converts to INA 101(a)(15)(K); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(K), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 138,
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15) converts to INA 101(a)(15); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 141,
+    "verdict": "pass",
+    "rationale": "Pass: section 1153(a)(8) converts to INA 203(a)(8); the full afterField preserves the source sentence and the target remains Title 8, section 1153(a)(8), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 144,
+    "verdict": "pass",
+    "rationale": "Pass: section 217(c)(5)(A)(i) converts to INA 217(c)(5)(A)(i); the full afterField preserves the source sentence and the target remains Title 8, section 1187(c)(5)(A)(i), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 147,
+    "verdict": "pass",
+    "rationale": "Pass: section 219(a) converts to INA 219(a); the full afterField preserves the source sentence and the target remains Title 8, section 1189(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 150,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15)(C)(iii) converts to INA 101(a)(15)(C)(iii); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15)(C)(iii), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 153,
+    "verdict": "pass",
+    "rationale": "Pass: section 1101(a)(15) converts to INA 101(a)(15); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 156,
+    "verdict": "pass",
+    "rationale": "Pass: section 1223 converts to INA 233; the full afterField preserves the source sentence and the target remains Title 8, section 1223, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 159,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227 converts to INA 237; the full afterField preserves the source sentence and the target remains Title 8, section 1227, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 162,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252b converts to INA 242B; the full afterField preserves the source sentence and the target remains Title 8, section 1252b, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 165,
+    "verdict": "pass",
+    "rationale": "Pass: section 1228 converts to INA 238; the full afterField preserves the source sentence and the target remains Title 8, section 1228, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 168,
+    "verdict": "pass",
+    "rationale": "Pass: section 1226(c) converts to INA 236(c); the full afterField preserves the source sentence and the target remains Title 8, section 1226(c), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 171,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(b) converts to INA 242(b); the full afterField preserves the source sentence and the target remains Title 8, section 1252(b), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 174,
+    "verdict": "pass",
+    "rationale": "Pass: section 1105a converts to INA 106; the full afterField preserves the source sentence and the target remains Title 8, section 1105a, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 177,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(b) converts to INA 242(b); the full afterField preserves the source sentence and the target remains Title 8, section 1252(b), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 180,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252(b)(1) converts to INA 242(b)(1); the full afterField preserves the source sentence and the target remains Title 8, section 1252(b)(1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 183,
+    "verdict": "pass",
+    "rationale": "Pass: section 1252 converts to INA 242; the full afterField preserves the source sentence and the target remains Title 8, section 1252, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 186,
+    "verdict": "pass",
+    "rationale": "Pass: section 204(a)(1)(A) converts to INA 204(a)(1)(A); the full afterField preserves the source sentence and the target remains Title 8, section 1154(a)(1)(A), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 189,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229b(b)(2) converts to INA 240A(b)(2); the full afterField preserves the source sentence and the target remains Title 8, section 1229b(b)(2), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 192,
+    "verdict": "pass",
+    "rationale": "Pass: added section 2347(c); the source explicitly cites section 2347(c) in the shown Title 28 context, and the new target Title 28, section 2347(c) matches the wording."
+  },
+  {
+    "id": 195,
+    "verdict": "pass",
+    "rationale": "Pass: corrected target to 28 U.S.C. § 1361; the source expressly says “section 2241 of title 28 … section 1361 or 1651 of such title,” so retaining the bare section label is correct and avoids a false INA conversion."
+  },
+  {
+    "id": 198,
+    "verdict": "pass",
+    "rationale": "Pass: section 1253 converts to INA 243; the full afterField preserves the source sentence and the target remains Title 8, section 1253, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 201,
+    "verdict": "pass",
+    "rationale": "Pass: section 1158(b)(2)(A) converts to INA 208(b)(2)(A); the full afterField preserves the source sentence and the target remains Title 8, section 1158(b)(2)(A), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 204,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(l) converts to INA 212(l); the full afterField preserves the source sentence and the target remains Title 8, section 1182(l), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 207,
+    "verdict": "pass",
+    "rationale": "Pass: section 1154(g) converts to INA 204(g); the full afterField preserves the source sentence and the target remains Title 8, section 1154(g), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 210,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) converts to INA 212(a); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 213,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) converts to INA 212(a); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 216,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) converts to INA 212(a); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 219,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) converts to INA 212(a); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 222,
+    "verdict": "pass",
+    "rationale": "Pass: section 212(a) converts to INA 212(a); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 225,
+    "verdict": "pass",
+    "rationale": "Pass: section 1229a converts to INA 240; the full afterField preserves the source sentence and the target remains Title 8, section 1229a, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 228,
+    "verdict": "pass",
+    "rationale": "Pass: section 1223 converts to INA 233; the full afterField preserves the source sentence and the target remains Title 8, section 1223, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 231,
+    "verdict": "pass",
+    "rationale": "Pass: added section 981(d); the source explicitly cites section 981(d) in the shown Title 18 context, and the new target Title 18, section 981(d) matches the wording."
+  },
+  {
+    "id": 234,
+    "verdict": "pass",
+    "rationale": "Pass: section 1324a(j) converts to INA 274A(j); the full afterField preserves the source sentence and the target remains Title 8, section 1324a(j), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 237,
+    "verdict": "pass",
+    "rationale": "Pass: section 1182(a)(2) converts to INA 212(a)(2); the full afterField preserves the source sentence and the target remains Title 8, section 1182(a)(2), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 240,
+    "verdict": "pass",
+    "rationale": "Pass: section 1223(b) converts to INA 233(b); the full afterField preserves the source sentence and the target remains Title 8, section 1223(b), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 243,
+    "verdict": "pass",
+    "rationale": "Pass: section 101(a)(15) converts to INA 101(a)(15); the full afterField preserves the source sentence and the target remains Title 8, section 1101(a)(15), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 246,
+    "verdict": "pass",
+    "rationale": "Pass: added section 5316; the source explicitly cites section 5316 in the shown Title 5 context, and the new target Title 5, section 5316 matches the wording."
+  },
+  {
+    "id": 249,
+    "verdict": "flag",
+    "rationale": "Grammar/authority-tail issue: after converting the first reference, the field reads “INA 301, and of paragraph (2) of INA 308, of this title,” leaving a redundant trailing “of this title” container attached to the INA label/list."
+  },
+  {
+    "id": 252,
+    "verdict": "pass",
+    "rationale": "Pass: section 1401(a)(7) converts to INA 301(a)(7); the full afterField preserves the source sentence and the target remains Title 8, section 1401(a)(7), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 255,
+    "verdict": "pass",
+    "rationale": "Pass: section 241(b)(3)(B) converts to INA 241(b)(3)(B); the full afterField preserves the source sentence and the target remains Title 8, section 1231(b)(3)(B), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 258,
+    "verdict": "pass",
+    "rationale": "Pass: section 1440(b) of this title converts to INA 329(b); the full afterField preserves the source sentence and the target remains Title 8, section 1440(b), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 261,
+    "verdict": "pass",
+    "rationale": "Pass: section 1401 converts to INA 301; the full afterField preserves the source sentence and the target remains Title 8, section 1401, matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 264,
+    "verdict": "pass",
+    "rationale": "Pass: section 1481(a) converts to INA 349(a); the full afterField preserves the source sentence and the target remains Title 8, section 1481(a), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 267,
+    "verdict": "pass",
+    "rationale": "Pass: section 1227(a)(4)(B) converts to INA 237(a)(4)(B); the full afterField preserves the source sentence and the target remains Title 8, section 1227(a)(4)(B), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 270,
+    "verdict": "pass",
+    "rationale": "Pass: (1) converts to (1); the full afterField preserves the source sentence and the target remains Title 18, section 1030(a)(1), matching the cited Title 8 provision without a misleading historical or authority-tail conversion."
+  },
+  {
+    "id": 273,
+    "verdict": "pass",
+    "rationale": "Pass: removed non-INA reference 1030(c); the source context identifies its separate authority, so no INA display should be emitted."
+  }
+]

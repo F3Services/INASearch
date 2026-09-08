@@ -181,7 +181,7 @@ a/43/N	44	(2)	reference	44:47 "(2)" -> USC 8:1324/a/2 [local;embedded-a-shared-t
 a/43/N	63	(a)	reference	51:80 "section 1324(a) of this title" -> USC 8:1324/a [local;house-uslm-ref]
 a/43/O	36	(a)	reference	24:39 "section 1325(a)" -> USC 8:1325/a [local;context-bare-usc-section]
 a/43/P	11	(i)	run-in	11:14 (i) -> RUN-IN a/43/P/i
-a/43/P	193	(a)	reference	189:196 "1546(a)" -> USC 18:1546/a [official-source-only;embedded-numbered-section-list]
+a/43/P	193	(a)	reference	181:196 "section 1546(a)" -> USC 18:1546/a [official-source-only;context-bare-trailing-title-section]
 a/43/P	244	(ii)	run-in	244:248 (ii) -> RUN-IN a/43/P/ii
 a/45	56	(15)(E)	reference	56:63 "(15)(E)" -> USC 8:1101/a/15/E [local;embedded-inferred-unit]
 a/46	67	(a)(15)(O)(i)	reference	67:80 "(a)(15)(O)(i)" -> USC 8:1101/a/15/O/i [local;embedded-inferred-unit]

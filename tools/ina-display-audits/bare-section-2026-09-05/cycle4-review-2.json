@@ -1,0 +1,2307 @@
+[
+  {
+    "id": 2,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1184(l) maps to INA 214(l); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 5,
+    "verdict": "pass",
+    "rationale": "PASS: Newly detected section 1546(a) is supported by the full source context and explicit statutory title, preserving the source authority and prose."
+  },
+  {
+    "id": 8,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 11,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(n)(1) maps to INA 212(n)(1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 14,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184(n) maps to INA 214(n); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 17,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184(q) maps to INA 214(q); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 20,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1184(k) maps to INA 214(k); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 23,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(a)(2)(E) maps to INA 212(a)(2)(E); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 26,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1225 -> INA 235) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 29,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1252(a) -> INA 242(a)) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 32,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (section 240A(d) -> INA 240A(d)) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 35,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (section 237(a) -> INA 237(a)) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 38,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1101(a)(43) -> INA 101(a)(43)) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 41,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1183 -> INA 213) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 44,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1183a -> INA 213A) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 47,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1258 -> INA 248) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 50,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1323 -> INA 273) is in 8-1101-note-17's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 53,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1151 -> INA 201) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 56,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1160 -> INA 210) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 59,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1252 -> INA 242) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 62,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 65,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1288 -> INA 258) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 68,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1323 -> INA 273) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 71,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1324c -> INA 274C) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 74,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1421 -> INA 310) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 77,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1449 -> INA 338) is in 8-1101-note-18's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 80,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1105a -> INA 106) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 83,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1157 -> INA 207) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 86,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 89,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1188 -> INA 218) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 92,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1226 -> INA 236) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 95,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1252 -> INA 242) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 98,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1281 -> INA 251) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 101,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1288 -> INA 258) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 104,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1324a -> INA 274A) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 107,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1357 -> INA 287) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 110,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1433 -> INA 322) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 113,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1443 -> INA 332) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 116,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1451 -> INA 340) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 119,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1151 -> INA 201) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 122,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 125,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 128,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1158 -> INA 208) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 131,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1201 -> INA 221) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 134,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1421 -> INA 310) is in 8-1101-note-19's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 137,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1154 -> INA 204) is in 8-1101-note-20's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 140,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-20's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 143,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1152 -> INA 202) is in 8-1101-note-20's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 146,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-20's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 149,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (section 212(a) -> INA 212(a)) is in 8-1101-note-20's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 152,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1184 -> INA 214) is in 8-1101-note-22's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 155,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-22's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 158,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1324 -> INA 274) is in 8-1101-note-22's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 161,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1357 -> INA 287) is in 8-1101-note-22's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 164,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1228 -> INA 238) is in 8-1101-note-23's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 167,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1153 -> INA 203) is in 8-1101-note-25's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 170,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1253 -> INA 243) is in 8-1101-note-25's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 173,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-25's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 176,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1158 -> INA 208) is in 8-1101-note-42's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 179,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1227 -> INA 237) is in 8-1101-note-42's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 182,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1184 -> INA 214) is in 8-1101-note-46's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 185,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1154 -> INA 204) is in 8-1101-note-46's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 188,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1227 -> INA 237) is in 8-1101-note-46's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 191,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-46's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 194,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1105a -> INA 106) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 197,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1157 -> INA 207) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 200,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 203,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1188 -> INA 218) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 206,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1226 -> INA 236) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 209,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1252 -> INA 242) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 212,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255a -> INA 245A) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 215,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1284 -> INA 254) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 218,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1323 -> INA 273) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 221,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1325 -> INA 275) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 224,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1421 -> INA 310) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 227,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1433 -> INA 322) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 230,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1443 -> INA 332) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 233,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1455 -> INA 344) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 236,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1160 -> INA 210) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 239,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1252 -> INA 242) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 242,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1356 -> INA 286) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 245,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1153 -> INA 203) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 248,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1184 -> INA 214) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 251,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 254,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1105a -> INA 106) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 257,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1157 -> INA 207) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 260,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 263,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1188 -> INA 218) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 266,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1226 -> INA 236) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 269,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1252 -> INA 242) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 272,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255a -> INA 245A) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 275,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1284 -> INA 254) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 278,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1323 -> INA 273) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 281,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1325 -> INA 275) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 284,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1421 -> INA 310) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 287,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1433 -> INA 322) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 290,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1443 -> INA 332) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 293,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1451 -> INA 340) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 296,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1151 -> INA 201) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 299,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 302,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 305,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1153 -> INA 203) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 308,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1184 -> INA 214) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 311,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-52's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 314,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1103 -> INA 103) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 317,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1152 -> INA 202) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 320,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1160 -> INA 210) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 323,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1184 -> INA 214) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 326,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1188 -> INA 218) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 329,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1222 -> INA 232) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 332,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1227 -> INA 237) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 335,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255a -> INA 245A) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 338,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1302 -> INA 262) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 341,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1324 -> INA 274) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 344,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1353 -> INA 283) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 347,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1360 -> INA 290) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 350,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1421 -> INA 310) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 353,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1426 -> INA 315) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 356,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1433 -> INA 322) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 359,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1441 -> INA 330) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 362,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1451 -> INA 340) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 365,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1455 -> INA 344) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 368,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1483 -> INA 351) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 371,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1523 -> INA 413) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 374,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 377,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 380,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1409 -> INA 309) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 383,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1522 -> INA 412) is in 8-1101-note-55's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 386,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1201 -> INA 221) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 389,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1301 -> INA 261) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 392,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1401 -> INA 301) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 395,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1433 -> INA 322) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 398,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1481 -> INA 349) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 401,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 404,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1325 -> INA 275) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 407,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1187 -> INA 217) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 410,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1324b -> INA 274B) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 413,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1252 -> INA 242) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 416,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1259 -> INA 249) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 419,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1357 -> INA 287) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 422,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1160 -> INA 210) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 425,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255a -> INA 245A) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 428,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1324b -> INA 274B) is in 8-1101-note-56's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 431,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1152 -> INA 202) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 434,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1201 -> INA 221) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 437,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1227 -> INA 237) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 440,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 443,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1324 -> INA 274) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 446,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1409 -> INA 309) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 449,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1432 -> INA 321) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 452,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1440 -> INA 329) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 455,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1447 -> INA 336) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 458,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1455 -> INA 344) is in 8-1101-note-58's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 461,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1157 -> INA 207) is in 8-1101-note-59's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 464,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1151 -> INA 201) is in 8-1101-note-59's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 467,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-59's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 470,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1152 -> INA 202) is in 8-1101-note-60's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 473,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-60's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 476,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(n) maps to INA 212(n); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 479,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 101(a)(15) maps to INA 101(a)(15); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 482,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1152(a) maps to INA 202(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 485,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-83's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 488,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 101(a)(15) maps to INA 101(a)(15); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 491,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 101(a)(15)(E) maps to INA 101(a)(15)(E); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 494,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1153(a) maps to INA 203(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 497,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 500,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1357 -> INA 287) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 503,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1151 -> INA 201) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 506,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1157 -> INA 207) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 509,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1182 -> INA 212) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 512,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1189 -> INA 219) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 515,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1252a -> INA 242A→ 8 U.S.C. 1228) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 518,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1288 -> INA 258) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 521,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1324 -> INA 274) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 524,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1522 -> INA 412) is in 8-1101-note-119's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 527,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1229a(d) maps to INA 240(d); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 530,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1105a maps to INA 106; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 533,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1101 -> INA 101) is in 8-1151-note-13's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 536,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1181 -> INA 211) is in 8-1151-note-13's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 539,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1202 -> INA 222) is in 8-1151-note-13's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 542,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1255 -> INA 245) is in 8-1151-note-13's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 545,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1351 -> INA 281) is in 8-1151-note-13's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 548,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1151(b)(1) maps to INA 201(b)(1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 551,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1186b maps to INA 216A; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 554,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1186b maps to INA 216A; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 557,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1153(c) maps to INA 203(c); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 560,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 212(a) maps to INA 212(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 563,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(b)(1)(F) maps to INA 101(b)(1)(F); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 566,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(b)(1)(E) maps to INA 101(b)(1)(E); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 569,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1153(a) maps to INA 203(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 572,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 240(c)(7) maps to INA 240(c)(7); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 575,
+    "verdict": "pass",
+    "rationale": "PASS: The removed 551(2) is a non-INA or span-enlargement correction supported by the full source field; no citation is lost."
+  },
+  {
+    "id": 578,
+    "verdict": "pass",
+    "rationale": "PASS: The removed 551(2) is a non-INA or span-enlargement correction supported by the full source field; no citation is lost."
+  },
+  {
+    "id": 581,
+    "verdict": "pass",
+    "rationale": "PASS: Newly detected section 5561(5) is supported by the full source context and explicit statutory title, preserving the source authority and prose."
+  },
+  {
+    "id": 584,
+    "verdict": "pass",
+    "rationale": "PASS: Newly detected section 551(2) is supported by the full source context and explicit statutory title, preserving the source authority and prose."
+  },
+  {
+    "id": 587,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1185(a) maps to INA 215(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 590,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1182(a)(6)(C)(i) maps to INA 212(a)(6)(C)(i); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 593,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1184(l) maps to INA 214(l); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 596,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1184(l) maps to INA 214(l); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 599,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 602,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 605,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 608,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 611,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 614,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 617,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 620,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1223(c) maps to INA 233(c); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 623,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1227(a) maps to INA 237(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 626,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1227(a)(4)(B) maps to INA 237(a)(4)(B); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 629,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 212(a)(3)(B)(iv) maps to INA 212(a)(3)(B)(iv); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 632,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 212(d) maps to INA 212(d); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 635,
+    "verdict": "pass",
+    "rationale": "PASS: Newly detected section 2241 is supported by the full source context and explicit statutory title, preserving the source authority and prose."
+  },
+  {
+    "id": 638,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1182(d)(5) of this title maps to INA 212(d)(5); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 641,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1185(a) maps to INA 215(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 644,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1185(a) maps to INA 215(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 647,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1185(a)(1) maps to INA 215(a)(1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 650,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1154(l) maps to INA 204(l); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 653,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 656,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(H)(i)(b1) maps to INA 101(a)(15)(H)(i)(b1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 659,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(T)(i)(III)(aa) maps to INA 101(a)(15)(T)(i)(III)(aa); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 662,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(U) maps to INA 101(a)(15)(U); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 665,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(K)(ii) maps to INA 101(a)(15)(K)(ii); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 668,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(U) maps to INA 101(a)(15)(U); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 671,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(F)(i) maps to INA 101(a)(15)(F)(i); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 674,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(O) maps to INA 101(a)(15)(O); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 677,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 203(b) maps to INA 203(b); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 680,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 683,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 216A(d)(1) maps to INA 216A(d)(1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 686,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 217(c)(5)(A)(i) maps to INA 217(c)(5)(A)(i); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 689,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1188 maps to INA 218; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 692,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(a)(4) maps to INA 212(a)(4); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 695,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1253(d) maps to INA 243(d); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 698,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15)(C)(iii) maps to INA 101(a)(15)(C)(iii); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 701,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1101(a)(15) maps to INA 101(a)(15); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 704,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1223 maps to INA 233; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 707,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1227 maps to INA 237; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 710,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1161 -> INA 210A) is in 8-1227-note-14's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 713,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1252b maps to INA 242B; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 716,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1228 maps to INA 238; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 719,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1226(c) maps to INA 236(c); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 722,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1252(b) maps to INA 242(b); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 725,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1105a maps to INA 106; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 728,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1252(b) maps to INA 242(b); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 731,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1252(b)(1) maps to INA 242(b)(1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 734,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1252 maps to INA 242; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 737,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1229 maps to INA 239; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 740,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1229b(b)(2) maps to INA 240A(b)(2); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 743,
+    "verdict": "pass",
+    "rationale": "PASS: The removed 2347(c) is a non-INA or span-enlargement correction supported by the full source field; no citation is lost."
+  },
+  {
+    "id": 746,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1253(g) maps to INA 243(g); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 749,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1253 maps to INA 243; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 752,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: Section 1252a maps to INA 242A; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 755,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1158(b)(2)(A) maps to INA 208(b)(2)(A); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 758,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1182(l) maps to INA 212(l); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 761,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1154(g) maps to INA 204(g); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 764,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 212(a) maps to INA 212(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 767,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 101(b)(1) maps to INA 101(b)(1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 770,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 212(a)(9) maps to INA 212(a)(9); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 773,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1152 maps to INA 202; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 776,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 212(a) maps to INA 212(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 779,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1160(f) maps to INA 210(f); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 782,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1152 maps to INA 202; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 785,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1301 maps to INA 261; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 788,
+    "verdict": "pass",
+    "rationale": "PASS: The removed 981(d) is a non-INA or span-enlargement correction supported by the full source field; no citation is lost."
+  },
+  {
+    "id": 791,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1324b(g) maps to INA 274B(g); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 794,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1324a(j) maps to INA 274A(j); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 797,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1182(a)(2) maps to INA 212(a)(2); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 800,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1253(c)(2) maps to INA 243(c)(2); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 803,
+    "verdict": "pass",
+    "rationale": "PASS: Newly detected section 4261 is supported by the full source context and explicit statutory title, preserving the source authority and prose."
+  },
+  {
+    "id": 806,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 101(a)(15) maps to INA 101(a)(15); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 809,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1252 maps to INA 242; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 812,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1408 maps to INA 308; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 815,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1401(g) maps to INA 301(g); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 818,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 312(a) maps to INA 312(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 821,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1433 -> INA 322) is in 8-1430-note-4's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 824,
+    "verdict": "flag",
+    "rationale": "FLAG: This occurrence (1430 -> INA 319) is in 8-1439-note-5's rendered amendment list, which reads “sections INA …”. The INA label is inserted after the plural “sections” and mixed with remaining bare/arrow USC members, so this field still has defective list grammar and nomenclature; the row's target itself was checked against its source context."
+  },
+  {
+    "id": 827,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1433 maps to INA 322; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 830,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1401(a) maps to INA 301(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 833,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1481 maps to INA 349; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 836,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 1254a(e) maps to INA 244(e); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 839,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: (7) maps to (7); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 842,
+    "verdict": "pass",
+    "rationale": "PASS: Newly detected section 1030(c) is supported by the full source context and explicit statutory title, preserving the source authority and prose."
+  },
+  {
+    "id": 845,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1224 maps to INA 234; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 848,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1227 maps to INA 237; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 851,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1253 maps to INA 243; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 854,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1362 maps to INA 292; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 857,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1252b maps to INA 242B; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 860,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 863,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 866,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1356 maps to INA 286; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 869,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1153 maps to INA 203; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 872,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 875,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1324a maps to INA 274A; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 878,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1153 maps to INA 203; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 881,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182 maps to INA 212; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 884,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 887,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1159 maps to INA 209; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 890,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1158 maps to INA 208; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 893,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1282 maps to INA 252; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 896,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1158 maps to INA 208; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 899,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1252 maps to INA 242; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 902,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 905,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1203 maps to INA 223; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 908,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1102 maps to INA 102; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 911,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 914,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1188 maps to INA 218; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 917,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1282 maps to INA 252; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 920,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 923,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1185 maps to INA 215; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 926,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 929,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1187 maps to INA 217; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 932,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1181 maps to INA 211; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 935,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1203 maps to INA 223; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 938,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1227 maps to INA 237; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 941,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1221 maps to INA 231; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 944,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1222 maps to INA 232; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 947,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 950,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1228 maps to INA 238; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 953,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1229 maps to INA 239; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 956,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1225 maps to INA 235; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 959,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1231 maps to INA 241; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 962,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1362 maps to INA 292; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 965,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182 maps to INA 212; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 968,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1225 maps to INA 235; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 971,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1228 maps to INA 238; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 974,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1255 maps to INA 245; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 977,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1254a maps to INA 244; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 980,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1252 maps to INA 242; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 983,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1255a maps to INA 245A; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 986,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1256 maps to INA 246; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 989,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1257 maps to INA 247; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 992,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1258 maps to INA 248; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 995,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1260 maps to INA 250; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 998,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1281 maps to INA 251; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1001,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1185 maps to INA 215; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1004,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1283 maps to INA 253; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1007,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1281 maps to INA 251; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1010,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1305 maps to INA 265; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1013,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1321 maps to INA 271; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1016,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1019,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1221 maps to INA 231; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1022,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1229 maps to INA 239; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1025,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1283 maps to INA 253; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1028,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1286 maps to INA 256; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1031,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1330 maps to INA 280; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1034,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1227 maps to INA 237; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1037,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1253 maps to INA 243; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1040,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1325 maps to INA 275; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1043,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1046,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1225 maps to INA 235; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1049,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1357 maps to INA 287; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1052,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1252b maps to INA 242B; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1055,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1406 maps to INA 306; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1058,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1061,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1423 maps to INA 312; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1064,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1448 maps to INA 337; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1067,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1070,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1073,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1429 maps to INA 318; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1076,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1079,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1435 maps to INA 324; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1082,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1101 maps to INA 101; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1085,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1438 maps to INA 327; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1088,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1091,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1094,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1447 maps to INA 336; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1097,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1100,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1447 maps to INA 336; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1103,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1448 maps to INA 337; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1106,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1448 maps to INA 337; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1109,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1112,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1452 maps to INA 341; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1115,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1118,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1455 maps to INA 344; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1121,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1124,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1127,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1440 maps to INA 329; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1130,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1154 maps to INA 204; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1133,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182 maps to INA 212; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1136,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1229a maps to INA 240; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1139,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1231 maps to INA 241; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1142,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1324d maps to INA 274D; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1145,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1362 maps to INA 292; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1148,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1356 maps to INA 286; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1151,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1153 maps to INA 203; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1154,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1186a maps to INA 216; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1157,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1151 maps to INA 201; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1160,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1155 maps to INA 205; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1163,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1166,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1159 maps to INA 209; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1169,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1158 maps to INA 208; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1172,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1252 maps to INA 242; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1175,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1157 maps to INA 207; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1178,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1228 maps to INA 238; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1181,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1184,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1203 maps to INA 223; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1187,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1102 maps to INA 102; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1190,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1193,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1221 maps to INA 231; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1196,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1301 maps to INA 261; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1199,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1202,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182 maps to INA 212; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1205,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1226 maps to INA 236; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1208,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1362 maps to INA 292; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1211,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1214,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1186a maps to INA 216; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1217,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1226 maps to INA 236; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1220,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1229a maps to INA 240; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1223,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1252 maps to INA 242; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1226,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1362 maps to INA 292; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1229,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1224 maps to INA 234; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1232,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1227 maps to INA 237; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1235,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1255 maps to INA 245; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1238,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1254a maps to INA 244; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1241,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1255 maps to INA 245; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1244,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1259 maps to INA 249; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1247,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1103 maps to INA 103; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1250,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1324a maps to INA 274A; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1253,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1227 maps to INA 237; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1256,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1281 maps to INA 251; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1259,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1285 maps to INA 255; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1262,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1323 maps to INA 273; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1265,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1225 maps to INA 235; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1268,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1357 maps to INA 287; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1271,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1429 maps to INA 318; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1274,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1448 maps to INA 337; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1277,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(m) maps to INA 212(m); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1280,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1288(c) maps to INA 258(c); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1283,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(n) maps to INA 212(n); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1286,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(p)(1) maps to INA 212(p)(1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1289,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1183 maps to INA 213; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1292,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1351 maps to INA 281; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1295,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1183a maps to INA 213A; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1298,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1401 maps to INA 301; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1301,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1304,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1324(b) maps to INA 274(b); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1307,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1324b maps to INA 274B; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1310,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1104 maps to INA 104; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1313,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1188 maps to INA 218; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1316,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(m) maps to INA 212(m); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1319,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1222 maps to INA 232; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1322,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1304 maps to INA 264; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1325,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1304 maps to INA 264; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1328,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182 maps to INA 212; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1331,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1334,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1252 maps to INA 242; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1337,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: section 212(a)(9) maps to INA 212(a)(9); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1340,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1343,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1304 maps to INA 264; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1346,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1304 maps to INA 264; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1349,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1304 maps to INA 264; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1352,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182 maps to INA 212; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1355,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1153 maps to INA 203; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1358,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1252 maps to INA 242; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1361,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184 maps to INA 214; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1364,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1182(n)(5) maps to INA 212(n)(5); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1367,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184(a) maps to INA 214(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1370,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1188 maps to INA 218; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1373,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1101(a)(15)(D) maps to INA 101(a)(15)(D); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1376,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1255a(a)(1) maps to INA 245A(a)(1); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1379,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1443 maps to INA 332; source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  },
+  {
+    "id": 1382,
+    "verdict": "pass",
+    "rationale": "PASS: Verified this row independently: 1184(a) maps to INA 214(a); source authority and target metadata agree, and the rendered afterField has no mixed-list, scope-tail, historical-authority, or dangling-qualifier defect."
+  }
+]

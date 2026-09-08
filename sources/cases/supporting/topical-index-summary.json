@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "sourceTier": "official-reporter-topical-index",
+  "sources": [
+    {
+      "id": "eoir-index-vol16-25",
+      "sha256": "00f57b44576fa57fb5d9725b51820c82e8b1c680107ded4bd56a58b6bde4a01b",
+      "pages": 47,
+      "subjectEntries": 2320
+    },
+    {
+      "id": "eoir-index-vol26-27",
+      "sha256": "eb400f84bcf96a9ef3e3c830ed32b1332bbb10c739c8a651f529027ea1090dea",
+      "pages": 10,
+      "subjectEntries": 606
+    }
+  ],
+  "subjectEntries": 2926,
+  "caseTopicOccurrences": 8784,
+  "resolvedOccurrences": 8784,
+  "unresolvedOccurrences": 0,
+  "uniqueResolvedCases": 1425,
+  "uniqueTopicLinks": 8720,
+  "outputSha256": "5cad0e7d879b11ef03bdf6c36d9798ac53e9f3e392a48f18962a3354feb02162",
+  "unresolvedExamples": [],
+  "limitations": [
+    "These are reporter subject associations, not holdings or later-treatment conclusions.",
+    "Image-only volumes 1-15 remain routed to the OCR workflow and are not included in this native-text snapshot."
+  ]
+}

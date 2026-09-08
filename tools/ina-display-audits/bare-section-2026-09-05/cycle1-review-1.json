@@ -1,0 +1,1693 @@
+[
+  {
+    "id": 1,
+    "sourceId": "8-1101-a-15-F-i",
+    "sourcePath": "title8.sections[1101].body[0/14/5/0]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1184(l)",
+    "renderedText": "INA 214(l)",
+    "target": {
+      "title": "8",
+      "section": "1184",
+      "path": [
+        "l"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1101-a-15-F-i, the rendered occurrence is “rarily and solely for the purpose of pursuing such a course of study consistent with INA 214(l) of this title at an established college, university, seminary, conservatory, academic high school, elementary school, or oth”. The INA designator INA 214(l) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 4,
+    "sourceId": "8-1101-note-3",
+    "sourcePath": "title8.sections[1101].notes[2]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1184",
+    "renderedText": "INA 214",
+    "target": {
+      "title": "8",
+      "section": "1184",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1101-note-3, the rendered occurrence is “set out as a note under section 287 of Title 22, Foreign Relations and Intercourse. INA 214(l) of this title, referred to in subsec. (a)(15)(F)(i), probably means the subsec. (l) of INA 214 which relates to nonimmigr”. The INA designator INA 214 is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 7,
+    "sourceId": "8-1101-note-5",
+    "sourcePath": "title8.sections[1101].notes[4]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1184(l)",
+    "renderedText": "INA 214(l)",
+    "target": {
+      "title": "8",
+      "section": "1184",
+      "path": [
+        "l"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1101-note-5, the rendered occurrence is “ion.” Subsec. (a)(15)(F)(i). Pub. L. 104–208, § 625(a)(2), inserted “consistent with INA 214(l) of this title” after “such a course of study”. Subsec. (a)(15)(K). Pub. L. 104–208, § 308(f)(1)(A), substituted “admission””. The INA designator INA 214(l) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 10,
+    "sourceId": "8-1101-note-5",
+    "sourcePath": "title8.sections[1101].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1434",
+    "renderedText": "INA 323",
+    "target": {
+      "title": "8",
+      "section": "1434",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1101-note-5, the rendered occurrence appears as “ded par. (46). Subsec. (c)(1). Pub. L. 102–232, § 309(b)(4), struck out reference to INA 323. 1990—Subsec. (a)(15)(D)(i). Pub. L. 101–649, § 203(c), substituted “a capacity” for “any capacity” and inserted “, as defin”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 13,
+    "sourceId": "8-1101-note-17",
+    "sourcePath": "title8.sections[1101].notes[16]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 240A(d)",
+    "renderedText": "INA 240A(d)",
+    "target": {
+      "title": "8",
+      "section": "1229b",
+      "path": [
+        "d"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1101-note-17, the rendered occurrence is “on.—“(A) In general.—Subject to subparagraphs (B) and (C), paragraphs (1) and (2) of INA 240A(d) of the Immigration and Nationality Act [8 U.S.C. 1229b(d)(1), (2)] (relating to continuous residence or physical presence) s”. The INA designator INA 240A(d) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 16,
+    "sourceId": "8-1101-note-17",
+    "sourcePath": "title8.sections[1101].notes[16]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 240(c)(3)",
+    "renderedText": "INA 240(c)(3)",
+    "target": {
+      "title": "8",
+      "section": "1229a",
+      "path": [
+        "c",
+        "3"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1101-note-17, the rendered occurrence is “the date of the enactment of this Act [Sept. 30, 1996]. Subparagraphs (B) and (C) of INA 240(c)(3) of the Immigration and Nationality Act [8 U.S.C. 1229a(c)(3)(B), (C)], as inserted by section 304(a)(3) of this division, sh”. The INA designator INA 240(c)(3) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 19,
+    "sourceId": "8-1101-note-64",
+    "sourcePath": "title8.sections[1101].notes[63]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 101(a)(27)(C)(ii)",
+    "renderedText": "INA 101(a)(27)(C)(ii)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "27",
+        "C",
+        "ii"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1101-note-64, the rendered occurrence is “cial immigrant status for special immigrants described in subclause (II) or (III) of INA 101(a)(27)(C)(ii) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(27)(C)(ii)); and “(2) submit a certification to Congress and publis”. The INA designator INA 101(a)(27)(C)(ii) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 22,
+    "sourceId": "8-1101-note-77",
+    "sourcePath": "title8.sections[1101].notes[76]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 101(a)(15)",
+    "renderedText": "INA 101(a)(15)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1101-note-77, the rendered occurrence is “that: “No alien may be admitted to the United States pursuant to subparagraph (U) of INA 101(a)(15) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(15)) as a result of the alien being a victim of a crime described i”. The INA designator INA 101(a)(15) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 25,
+    "sourceId": "8-1101-note-96",
+    "sourcePath": "title8.sections[1101].notes[95]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 203(c)",
+    "renderedText": "INA 203(c)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "c"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1101-note-96, the rendered occurrence is “ude in the report an assessment of the effect of the requirement of paragraph (2) of INA 203(c) of the Immigration and Nationality Act on the diversity, educational, and skill level of aliens admitted. “(d) Compensation”. The INA designator INA 203(c) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 28,
+    "sourceId": "8-1101-note-107",
+    "sourcePath": "title8.sections[1101].notes[106]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 212(a)",
+    "renderedText": "INA 212(a)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1101-note-107, the rendered occurrence is “n or after March 22, 1988. “(2) The provisions of paragraphs (4), (5), and (7)(A) of INA 212(a) of the Immigration and Nationality Act [8 U.S.C. 1182(a)(4), (5), and (7)(A)] shall not be applicable to any alien seeking a”. The INA designator INA 212(a) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 31,
+    "sourceId": "8-1151-note-2",
+    "sourcePath": "title8.sections[1151].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1160",
+    "renderedText": "INA 210",
+    "target": {
+      "title": "8",
+      "section": "1160",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1151-note-2, the rendered occurrence appears as “1996—Subsec. (b)(1)(C). Pub. L. 104–208, § 671(d)(1)(A), struck out “, 1161,” after “INA 210”. Subsec. (b)(1)(D). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “section 1254(a)”. Pub. L. 104–208, §”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 34,
+    "sourceId": "8-1153-note-3",
+    "sourcePath": "title8.sections[1153].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1151(a)",
+    "renderedText": "INA 201(a)",
+    "target": {
+      "title": "8",
+      "section": "1151",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1153-note-3, the rendered occurrence appears as “uck out former subsec. (a) which related to allocation of visas of aliens subject to INA 201(a) limitations. Subsec. (a)(7). Pub. L. 101–649, § 603(a)(3), substituted “INA 212(a)(5)” for “INA 212(a)(14)”. Subsec. (b). Pu”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 37,
+    "sourceId": "8-1153-note-28",
+    "sourcePath": "title8.sections[1153].notes[27]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 212(a)",
+    "renderedText": "INA 212(a)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1153-note-28, the rendered occurrence is “ttorney General shall waive the ground of exclusion specified in paragraph (6)(C) of INA 212(a) of the Immigration and Nationality Act [8 U.S.C. 1182(a)], unless the Attorney General finds that such a waiver is not in th”. The INA designator INA 212(a) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 40,
+    "sourceId": "8-1154-note-3",
+    "sourcePath": "title8.sections[1154].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1101(b)(1)(F)",
+    "renderedText": "INA 101(b)(1)(F)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "b",
+        "1",
+        "F"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1154-note-3, the rendered occurrence appears as “provisions as par. (1), substituted “subparagraph (F) or (G) of INA 101(b)(1)” for “INA 101(b)(1)(F)”, and added par. (2). Subsec. (h). Pub. L. 106–386, § 1507(b), inserted at end “Remarriage of an alien whose petition was ap”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 43,
+    "sourceId": "8-1155-note-2",
+    "sourcePath": "title8.sections[1155].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1101(b)(1)(E)",
+    "renderedText": "INA 101(b)(1)(E)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "b",
+        "1",
+        "E"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1155-note-2, the rendered occurrence appears as “ed outside the United States. Subsec. (c). Pub. L. 87–301, §§ 3(b), 10, substituted “INA 101(b)(1)(E) or (F)” for “INA 101(b)(1)(E)”, and provided that no petition shall be approved if the alien had previously been accorded a”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 46,
+    "sourceId": "8-1157-note-13",
+    "sourcePath": "title8.sections[1157].notes[12]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 208(b)(2)(A)",
+    "renderedText": "INA 208(b)(2)(A)",
+    "target": {
+      "title": "8",
+      "section": "1158",
+      "path": [
+        "b",
+        "2",
+        "A"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1157-note-13, the rendered occurrence is “ger to the security of the United States, as set forth in clauses (i) through (v) of INA 208(b)(2)(A) of the Immigration and Nationality Act (8 U.S.C. 1158(b)(2)(A)). “(c) Definitions.—In this section:“(1) American persian gul”. The INA designator INA 208(b)(2)(A) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 49,
+    "sourceId": "8-1160-note-3",
+    "sourcePath": "title8.sections[1160].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1182(a)(6)(C)(i)",
+    "renderedText": "INA 212(a)(6)(C)(i)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "6",
+        "C",
+        "i"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1160-note-3, the rendered occurrence appears as “mendment note below. 1991—Subsec. (b)(7)(B). Pub. L. 102–232, § 307(j), substituted “INA 212(a)(6)(C)(i)” for “INA 212(a)(19)”. Subsec. (d)(3). Pub. L. 102–232, § 309(b)(6)(A)–(C), realigned margins of par. (3) and its subparagra”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 52,
+    "sourceId": "8-1182-a-6-G",
+    "sourcePath": "title8.sections[1182].body[0/5/6]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1184(l)",
+    "renderedText": "INA 214(l)",
+    "target": {
+      "title": "8",
+      "section": "1184",
+      "path": [
+        "l"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1182-a-6-G, the rendered occurrence is “under INA 101(a)(15)(F)(i) and who violates a term or condition of such status under INA 214(l) of this title is inadmissible until the alien has been outside the United States for a continuous period of 5 years after th”. The INA designator INA 214(l) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 55,
+    "sourceId": "8-1182-e",
+    "sourcePath": "title8.sections[1182].body[4]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1184(l)",
+    "renderedText": "INA 214(l)",
+    "target": {
+      "title": "8",
+      "section": "1184",
+      "path": [
+        "l"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1182-e, the rendered occurrence is “alien described in clause (iii), the waiver shall be subject to the requirements of INA 214(l) of this title: And provided further, That, except in the case of an alien described in clause (iii), the Attorney General ma”. The INA designator INA 214(l) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 58,
+    "sourceId": "8-1182-t-1-C-ii",
+    "sourcePath": "title8.sections[1182].body[19/0/2/1]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1182-t-1-C-ii, the rendered occurrence is “cation to employees in the occupational classification for which nonimmigrants under INA 101(a)(15)(H)(i)(b1) of this title or INA 101(a)(15)(E)(iii) are sought.”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 61,
+    "sourceId": "8-1182-t-3-C-vi-I",
+    "sourcePath": "title8.sections[1182].body[19/2/2/5/0]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1182-t-3-C-vi-I, the rendered occurrence is “r who has filed an attestation under this subsection to require a nonimmigrant under INA 101(a)(15)(H)(i)(b1) of this title or INA 101(a)(15)(E)(iii) to pay a penalty for ceasing employment with the employer prior to a date agreed to”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 64,
+    "sourceId": "8-1182-t-3-C-vii-III",
+    "sourcePath": "title8.sections[1182].body[19/2/2/6/2]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1182-t-3-C-vii-III, the rendered occurrence is “In the case of a nonimmigrant under INA 101(a)(15)(H)(i)(b1) of this title or INA 101(a)(15)(E)(iii) who has not yet entered into employment with an employer who has had approved an att”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 67,
+    "sourceId": "8-1182-t-3-C-vii-V",
+    "sourcePath": "title8.sections[1182].body[19/2/2/6/4]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1182-t-3-C-vii-V, the rendered occurrence is “t is a school or other educational institution from applying to a nonimmigrant under INA 101(a)(15)(H)(i)(b1) of this title or INA 101(a)(15)(E)(iii) an established salary practice of the employer, under which the employer pays to non”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 70,
+    "sourceId": "8-1182-t-4-B",
+    "sourcePath": "title8.sections[1182].body[19/3/1]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1182-t-4-B, the rendered occurrence is “In the case of an attestation with respect to one or more nonimmigrants under INA 101(a)(15)(H)(i)(b1) of this title or INA 101(a)(15)(E)(iii) by an employer, the employer is considered to “displace” a United States worker from”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 73,
+    "sourceId": "8-1182-note-3",
+    "sourcePath": "title8.sections[1182].notes[2]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1184",
+    "renderedText": "INA 214",
+    "target": {
+      "title": "8",
+      "section": "1184",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1182-note-3, the rendered occurrence is “E)(ii), is section 112 of Pub. L. 101–649, which is set out as a note under INA 203. INA 214(l) of this title, referred to in subsec. (a)(6)(G), probably means the subsec. (l) of INA 214, which relates to nonimmigrant”. The INA designator INA 214 is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 76,
+    "sourceId": "8-1182-note-5",
+    "sourcePath": "title8.sections[1182].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1184(k)",
+    "renderedText": "INA 214(k)",
+    "target": {
+      "title": "8",
+      "section": "1184",
+      "path": [
+        "k"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1182-note-5, the rendered occurrence appears as “ired under INA 213A(f))”. Subsec. (e). Pub. L. 107–273 substituted “INA 214(l)” for “INA 214(k)”. 2001—Subsec. (a)(2)(I). Pub. L. 107–56, § 1006(a), added subpar. (I). Subsec. (a)(3)(B)(i)(II). Pub. L. 107–56, § 411(a)(1”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 79,
+    "sourceId": "8-1182-note-5",
+    "sourcePath": "title8.sections[1182].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1231(c)",
+    "renderedText": "INA 241(c)",
+    "target": {
+      "title": "8",
+      "section": "1231",
+      "path": [
+        "c"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1182-note-5, the rendered occurrence appears as “the public interest”. Subsec. (d)(7). Pub. L. 104–208, § 308(g)(4)(B), substituted “INA 241(c)” for “INA 237(a)”. Pub. L. 104–208, § 308(e)(2)(A), substituted “removed” for “deported”. Pub. L. 104–208, § 308(d)(1)(G), s”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 82,
+    "sourceId": "8-1182-note-14",
+    "sourcePath": "title8.sections[1182].notes[13]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 212(a)(3)(B)(iv)",
+    "renderedText": "INA 212(a)(3)(B)(iv)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "3",
+        "B",
+        "iv"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of such Act",
+    "rationale": "Flag. In source field 8-1182-note-14, the rendered occurrence is “ged in a terrorist activity described in subclause (IV)(bb), (V)(bb), or (VI)(cc) of INA 212(a)(3)(B)(iv) of such Act (as so amended) with respect to a group at any time when the group was not a terrorist organization designated b”. The INA designator INA 212(a)(3)(B)(iv) is followed by the source locator “of such Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 85,
+    "sourceId": "8-1182-note-18",
+    "sourcePath": "title8.sections[1182].notes[17]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 212(a)(6)(A)(ii)",
+    "renderedText": "INA 212(a)(6)(A)(ii)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "6",
+        "A",
+        "ii"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1182-note-18, the rendered occurrence is “110 Stat. 3009–579, provided that: “The requirements of subclauses (II) and (III) of INA 212(a)(6)(A)(ii) of the Immigration and Nationality Act [8 U.S.C. 1182(a)(6)(A)(ii)(II), (III)], as inserted by paragraph (1), shall not appl”. The INA designator INA 212(a)(6)(A)(ii) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 88,
+    "sourceId": "8-1182-note-40",
+    "sourcePath": "title8.sections[1182].notes[39]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 212(a)",
+    "renderedText": "INA 212(a)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1182-note-40, the rendered occurrence is “on of Kurdistan.—“(1) For activities opposing the ba’ath regime.—Paragraph (3)(B) of INA 212(a) of the Immigration and Nationality Act (8 U.S.C. 1182(a)(3)(B)) shall not apply to an alien with respect to activities under”. The INA designator INA 212(a) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 91,
+    "sourceId": "8-1182-note-63",
+    "sourcePath": "title8.sections[1182].notes[62]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1182(d)(5) of this title",
+    "renderedText": "INA 212(d)(5)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "d",
+        "5"
+      ],
+      "resolution": "local",
+      "ruleId": "house-uslm-ref"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1182-note-63, the rendered occurrence appears as “stment of status, who was paroled into United States by Attorney General pursuant to INA 212(d)(5) before Apr. 1, 1980, was to have his status adjusted pursuant to INA 203(g) and (h).”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 94,
+    "sourceId": "8-1184-c-1",
+    "sourcePath": "title8.sections[1184].body[2/0]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1184-c-1, the rendered occurrence is “bparagraph (H), (L), (O), or (P)(i) of INA 101(a)(15) (excluding nonimmigrants under INA 101(a)(15)(H)(i)(b1) of this title) in any specific case or specific cases shall be determined by the Attorney General, after consultation with a”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 97,
+    "sourceId": "8-1184-g-8-B-i",
+    "sourcePath": "title8.sections[1184].body[6/7/1/0]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1184-g-8-B-i, the rendered occurrence is “rical limitations on approvals of initial applications by aliens for admission under INA 101(a)(15)(H)(i)(b1) of this title.”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 100,
+    "sourceId": "8-1184-i-3",
+    "sourcePath": "title8.sections[1184].body[8/2]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1184-i-3, the rendered occurrence is “For purposes of INA 101(a)(15)(H)(i)(b1) of this title, the term “specialty occupation” means an occupation that requires—”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 103,
+    "sourceId": "8-1184-o-7-C",
+    "sourcePath": "title8.sections[1184].body[14/6/2]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1255(l)",
+    "renderedText": "INA 245(l)",
+    "target": {
+      "title": "8",
+      "section": "1255",
+      "path": [
+        "l"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1184-o-7-C, the rendered occurrence is “all be extended during the pendency of an application for adjustment of status under INA 245(l) of this title.”. The INA designator INA 245(l) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 106,
+    "sourceId": "8-1184-q",
+    "sourcePath": "title8.sections[1184].body[16]",
+    "field": "heading",
+    "verdict": "pass",
+    "referenceText": "section 1101(a)(15)(V)",
+    "renderedText": "INA 101(a)(15)(V)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "V"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1184-q, the rendered occurrence appears as “Employment of nonimmigrants described in INA 101(a)(15)(V)”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 109,
+    "sourceId": "8-1184-note-5",
+    "sourcePath": "title8.sections[1184].notes[4]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(H)(i)(b1)",
+    "renderedText": "INA 101(a)(15)(H)(i)(b1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "H",
+        "i",
+        "b1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1184-note-5, the rendered occurrence is “bparagraph (H), (L), (O), or (P)(i) of INA 101(a)(15) (excluding nonimmigrants under INA 101(a)(15)(H)(i)(b1) of this title)” for “INA 101(a)(15)(H), (L), (O), or (P)(i)”. See Effective and Termination Dates of 2003 Amendments note be”. The INA designator INA 101(a)(15)(H)(i)(b1) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 112,
+    "sourceId": "8-1184-note-5",
+    "sourcePath": "title8.sections[1184].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1101(a)(15)(F)",
+    "renderedText": "INA 101(a)(15)(F)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "F"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1184-note-5, the rendered occurrence appears as “ed “30;” for “20;”. Subsec. (m). Pub. L. 107–274 substituted “clause (i) or (iii) of INA 101(a)(15)(F)” for “INA 101(a)(15)(F)(i)” in two places in subsec. (m) relating to nonimmigrant elementary and secondary school students.”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 115,
+    "sourceId": "8-1184-note-5",
+    "sourcePath": "title8.sections[1184].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1101(a)(15)(O)",
+    "renderedText": "INA 101(a)(15)(O)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "O"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1184-note-5, the rendered occurrence appears as “j). 1991—Subsec. (a)(2)(A). Pub. L. 102–232, § 303(a)(11), substituted “described in INA 101(a)(15)(O)” for “under INA 101(a)(15)(O)”. Pub. L. 102–232, § 205(d), inserted “(or events)” after “event”. Subsec. (a)(2)(B). Pub. L.”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 118,
+    "sourceId": "8-1184-note-27",
+    "sourcePath": "title8.sections[1184].notes[26]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 101(a)(15)(K)",
+    "renderedText": "INA 101(a)(15)(K)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "K"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1184-note-27, the rendered occurrence is “tat. 3068, provided that: “The fact that an alien described in clause (i) or (ii) of INA 101(a)(15)(K) of the Immigration and Nationality Act (8 U.S.C. 1101(a)(15)(K)) is aware of any information disclosed under the amendments”. The INA designator INA 101(a)(15)(K) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 121,
+    "sourceId": "8-1184-note-40",
+    "sourcePath": "title8.sections[1184].notes[39]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 101(a)(15)",
+    "renderedText": "INA 101(a)(15)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1184-note-40, the rendered occurrence is “zation for aliens admitted as nonimmigrant students described in subparagraph (F) of INA 101(a)(15) of the Immigration and Nationality Act [8 U.S.C. 1101(a)(15)] during the 5-year period beginning October 1, 1991, the Attorn”. The INA designator INA 101(a)(15) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 124,
+    "sourceId": "8-1186a-note-4",
+    "sourcePath": "title8.sections[1186a].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1153(a)(8)",
+    "renderedText": "INA 203(a)(8)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "8"
+      ],
+      "resolution": "official-source-only",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1186a-note-4, the rendered occurrence appears as “ttorney General.” 1991—Subsec. (g)(1). Pub. L. 102–232 substituted “INA 203(d)” for “INA 203(a)(8)” in closing provisions. 1990—Subsec. (c)(4). Pub. L. 101–649 struck out “or” at end of subpar. (A), struck out “by the alien”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 127,
+    "sourceId": "8-1187-note-12",
+    "sourcePath": "title8.sections[1187].notes[11]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 217(c)(5)(A)(i)",
+    "renderedText": "INA 217(c)(5)(A)(i)",
+    "target": {
+      "title": "8",
+      "section": "1187",
+      "path": [
+        "c",
+        "5",
+        "A",
+        "i"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1187-note-12, the rendered occurrence is “ary of Homeland Security shall submit the first report described in subclause (V) of INA 217(c)(5)(A)(i) of the Immigration and Nationality Act (8 U.S.C. (c)(5)(A)(i)), as added by subsection (a), not later than 90 days after the”. The INA designator INA 217(c)(5)(A)(i) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 130,
+    "sourceId": "8-1189-note-9",
+    "sourcePath": "title8.sections[1189].notes[8]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 219(a)",
+    "renderedText": "INA 219(a)",
+    "target": {
+      "title": "8",
+      "section": "1189",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1189-note-9, the rendered occurrence is “shall continue to be effective until revoked as provided in paragraph (5) or (6) of INA 219(a) of the Immigration and Nationality Act (8 U.S.C. 1189(a)).””. The INA designator INA 219(a) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 133,
+    "sourceId": "8-1202-h-2-E-iii",
+    "sourcePath": "title8.sections[1202].body[7/1/4/2]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1101(a)(15)(C)(iii)",
+    "renderedText": "INA 101(a)(15)(C)(iii)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15",
+        "C",
+        "iii"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1202-h-2-E-iii, the rendered occurrence is “within that class of nonimmigrants enumerated in INA 101(a)(15)(C)(iii) of this title (referred to as the “C–3 visa” category); or”. The INA designator INA 101(a)(15)(C)(iii) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 136,
+    "sourceId": "usc-1202-fn002040",
+    "sourcePath": "title8.sections[1202].houseEditorialFootnotes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1101(a)(15)",
+    "renderedText": "INA 101(a)(15)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field usc-1202-fn002040, the rendered occurrence appears as “So in original. Subpar. (C) of INA 101(a)(15) does not contain clauses.”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 139,
+    "sourceId": "8-1223-note-4",
+    "sourcePath": "title8.sections[1223].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1223",
+    "renderedText": "INA 233",
+    "target": {
+      "title": "8",
+      "section": "1223",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1223-note-4, the rendered occurrence appears as “Prior ProvisionsA prior INA 233, act June 27, 1952, ch. 477, title II, ch. 4, § 233, 66 Stat. 197, related to examinations of aliens upon arrival in the Uni”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 142,
+    "sourceId": "8-1227-note-3",
+    "sourcePath": "title8.sections[1227].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1227",
+    "renderedText": "INA 237",
+    "target": {
+      "title": "8",
+      "section": "1227",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1227-note-3, the rendered occurrence appears as “Prior ProvisionsA prior INA 237, acts June 27, 1952, ch. 477, title II, ch. 4, § 237, 66 Stat. 201; Dec. 29, 1981, Pub. L. 97–116, § 7, 95 Stat. 1615; Oct.”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 145,
+    "sourceId": "8-1228-c-2-B",
+    "sourcePath": "title8.sections[1228].body[3/1/1]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1252b",
+    "renderedText": "INA 242B",
+    "target": {
+      "title": "8",
+      "section": "1252b",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1228-c-2-B, the rendered occurrence is “Notwithstanding INA 242B of this title, the United States Attorney, with the concurrence of the Commissioner, shall file at least 30 days prior to th”. The INA designator INA 242B is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 148,
+    "sourceId": "8-1228-note-4",
+    "sourcePath": "title8.sections[1228].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1228",
+    "renderedText": "INA 238",
+    "target": {
+      "title": "8",
+      "section": "1228",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1228-note-4, the rendered occurrence appears as “Prior ProvisionsA prior INA 238, act June 27, 1952, ch. 477, title II, ch. 4, § 238, 66 Stat. 202, as amended, which related to entry through or from foreig”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 151,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1226(c)",
+    "renderedText": "INA 236(c)",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [
+        "c"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1228-note-5, the rendered occurrence appears as “d in INA 101(a)(43))”. Subsec. (a)(2). Pub. L. 104–208, § 308(c)(1)(B), substituted “INA 236(c)” for “INA 242(a)(2)”. Pub. L. 104–132, § 440(g)(2), which directed substitution of “any criminal offense covered in section”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 154,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1252(b)",
+    "renderedText": "INA 242(b)",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [
+        "b"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1228-note-5, the rendered occurrence appears as “heading. Subsec. (b)(1). Pub. L. 104–208, § 308(g)(5)(C), substituted “INA 240” for “INA 242(b)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Pub. L. 104–208, § 308(c)(1)(C), substituted “IN”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 157,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1105a",
+    "renderedText": "INA 106",
+    "target": {
+      "title": "8",
+      "section": "1105a",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1228-note-5, the rendered occurrence appears as “hapter.” Subsec. (b)(3). Pub. L. 104–208, § 308(g)(2)(A), substituted “INA 242” for “INA 106”. Pub. L. 104–132, § 442(a)(2), substituted “14 calendar days” for “30 calendar days”. Subsec. (b)(4)(B). Pub. L. 104–132, §”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 160,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1252(b)",
+    "renderedText": "INA 242(b)",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [
+        "b"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1228-note-5, the rendered occurrence appears as “heading. Subsec. (b)(1). Pub. L. 104–208, § 308(g)(5)(C), substituted “INA 240” for “INA 242(b)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation”. Pub. L. 104–208, § 308(c)(1)(C), substituted “IN”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 163,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1252(b)(1)",
+    "renderedText": "INA 242(b)(1)",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [
+        "b",
+        "1"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1228-note-5, the rendered occurrence appears as “for “INA 106”. Subsec. (c)(3)(A)(iii). Pub. L. 104–208, § 308(g)(2)(C), substituted “INA 242(b)(1)” for “INA 106(a)(1)”. Pub. L. 104–208, § 308(e)(1)(F), substituted “removal” for “deportation” in two places. Subsec. (c)(3)”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 166,
+    "sourceId": "8-1228-note-5",
+    "sourcePath": "title8.sections[1228].notes[4]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1252",
+    "renderedText": "INA 242",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1228-note-5, the rendered occurrence appears as “rs or any other person.” Pub. L. 104–208, § 308(c)(1)(A), substituted “INA 240” for “INA 242”. Pub. L. 104–132, § 440(g)(1)(B), struck out “, where warranted,” after “assures expeditious deportation”. Pub. L. 104–132,”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 169,
+    "sourceId": "8-1229a-note-11",
+    "sourcePath": "title8.sections[1229a].notes[10]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 204(a)(1)(A)",
+    "renderedText": "INA 204(a)(1)(A)",
+    "target": {
+      "title": "8",
+      "section": "1154",
+      "path": [
+        "a",
+        "1",
+        "A"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1229a-note-11, the rendered occurrence is “(aa) if the basis of the motion is to apply for relief under clause (iii) or (iv) of INA 204(a)(1)(A) of the Immigration and Nationality Act (8 U.S.C. 1154(a)(1)(A)), clause (ii) or (iii) of INA 204(a)(1)(B) of such Act (8 U.S”. The INA designator INA 204(a)(1)(A) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 172,
+    "sourceId": "8-1229b-b-4-A-ii",
+    "sourcePath": "title8.sections[1229b].body[1/3/0/1]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1229b(b)(2)",
+    "renderedText": "INA 240A(b)(2)",
+    "target": {
+      "title": "8",
+      "section": "1229b",
+      "path": [
+        "b",
+        "2"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1229b-b-4-A-ii, the rendered occurrence is “parent of a child alien granted relief under INA 240A(b)(2) or 1254(a)(3) of this title (as in effect before the title III–A effective date in section 309 of the Illegal Immigration Re”. The INA designator INA 240A(b)(2) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 175,
+    "sourceId": "8-1252-b-8-B",
+    "sourcePath": "title8.sections[1252].body[1/7/1]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1253(g)",
+    "renderedText": "INA 243(g)",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "g"
+      ],
+      "resolution": "official-source-only",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1252-b-8-B, the rendered occurrence is “does not relieve the alien from complying with INA 241(a)(4) and INA 243(g) of this title; and”. The INA designator INA 243(g) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 178,
+    "sourceId": "8-1252-note-2",
+    "sourcePath": "title8.sections[1252].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1253",
+    "renderedText": "INA 243",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1252-note-2, the rendered occurrence appears as “tion of this Act to the Code, see Short Title note set out under INA 101 and Tables. INA 243, referred to in subsec. (b)(8)(B), was amended generally by Pub. L. 104–208, div. C, title III, § 307(a), Sept. 30, 1996, 11”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 181,
+    "sourceId": "8-1252a-note-2",
+    "sourcePath": "title8.sections[1252a].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "Section 1252a→ 8 U.S.C. 1228",
+    "renderedText": "INA 242A→ 8 U.S.C. 1228",
+    "target": {
+      "title": "8",
+      "section": "1252a",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1252a-note-2, the rendered occurrence appears as “Codification INA 242A→ 8 U.S.C. 1228, act June 27, 1952, ch. 477, title II, ch. 5, § 242A, as added Nov. 18, 1988, Pub. L. 100–690, title VII, § 7347(a), 102 Sta”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 184,
+    "sourceId": "8-1254a-note-3",
+    "sourcePath": "title8.sections[1254a].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1229b(a)",
+    "renderedText": "INA 240A(a)",
+    "target": {
+      "title": "8",
+      "section": "1229b",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1254a-note-3, the rendered occurrence appears as “” for “INA 243(h)(2)”. Subsec. (e). Pub. L. 104–208, § 308(g)(8)(A)(i), substituted “INA 240A(a)” for “section 1254(a)”. Pub. L. 104–208, § 308(e)(11), amended heading. 1994—Subsec. (c)(1)(B). Pub. L. 103–416, § 219(z)(2)”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 187,
+    "sourceId": "8-1255-note-3",
+    "sourcePath": "title8.sections[1255].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1227(a)(4)(B)",
+    "renderedText": "INA 237(a)(4)(B)",
+    "target": {
+      "title": "8",
+      "section": "1227",
+      "path": [
+        "a",
+        "4",
+        "B"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1255-note-3, the rendered occurrence appears as “ded subsec. (k). 1996—Subsec. (c)(6). Pub. L. 104–208, § 308(g)(10)(B), substituted “INA 237(a)(4)(B)” for “section 1251(a)(4)(B)→ 8 U.S.C. 1227”. Pub. L. 104–132 added cl. (6). Subsec. (c)(7), (8). Pub. L. 104–208, § 375, add”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 190,
+    "sourceId": "8-1255-note-17",
+    "sourcePath": "title8.sections[1255].notes[16]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 212(a)",
+    "renderedText": "INA 212(a)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1255-note-17, the rendered occurrence is “e grounds of inadmissibility specified in paragraphs (4), (5), (6)(A), and (7)(A) of INA 212(a) of the Immigration and Nationality Act (8 U.S.C. 1182(a)) shall not apply. “(3) Exceptions.—An alien shall not be eligible f”. The INA designator INA 212(a) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 193,
+    "sourceId": "8-1255-note-21",
+    "sourcePath": "title8.sections[1255].notes[20]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 101(b)(1)",
+    "renderedText": "INA 101(b)(1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "b",
+        "1"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1255-note-21, the rendered occurrence is “blic interest, or “(C) was a child (as defined in the text above subparagraph (A) of INA 101(b)(1) of the Immigration and Nationality Act (8 U.S.C. 1101(b)(1)) at the time of arrival in the United States and on December 31,”. The INA designator INA 101(b)(1) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 196,
+    "sourceId": "8-1255-note-22",
+    "sourcePath": "title8.sections[1255].notes[21]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 212(a)(9)",
+    "renderedText": "INA 212(a)(9)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "9"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of such Act",
+    "rationale": "Flag. In source field 8-1255-note-22, the rendered occurrence is “alien a waiver on the grounds of inadmissibility under subparagraphs (A) and (C) of INA 212(a)(9) of such Act [8 U.S.C. 1182(a)(9)]. In granting waivers under subparagraph (B), the Attorney General shall use standards used”. The INA designator INA 212(a)(9) is followed by the source locator “of such Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 199,
+    "sourceId": "8-1255-note-26",
+    "sourcePath": "title8.sections[1255].notes[25]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 101(a)",
+    "renderedText": "INA 101(a)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of such Act",
+    "rationale": "Flag. In source field 8-1255-note-26, the rendered occurrence is “of September 1, 1989, has the status of a nonimmigrant under paragraph (15)(H)(i) of INA 101(a) of such Act [8 U.S.C. 1101(a)(15)(H)(i)] to perform services as a registered nurse, “(2) who, for at least 3 years before th”. The INA designator INA 101(a) is followed by the source locator “of such Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 202,
+    "sourceId": "8-1255a-note-4",
+    "sourcePath": "title8.sections[1255a].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1255a",
+    "renderedText": "INA 245A",
+    "target": {
+      "title": "8",
+      "section": "1255a",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1255a-note-4, the rendered occurrence appears as “Prior ProvisionsA prior INA 245A, Pub. L. 85–316, § 9, Sept. 11, 1957, 71 Stat. 641, provided for adjustment of status of certain resident aliens to that of”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 205,
+    "sourceId": "8-1259-note-2",
+    "sourcePath": "title8.sections[1259].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1227(a)(4)(B)",
+    "renderedText": "INA 237(a)(4)(B)",
+    "target": {
+      "title": "8",
+      "section": "1227",
+      "path": [
+        "a",
+        "4",
+        "B"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1259-note-2, the rendered occurrence appears as “Amendments1996—Par. (d). Pub. L. 104–208 substituted “INA 237(a)(4)(B)” for “section 1251(a)(4)(B)→ 8 U.S.C. 1227”. Pub. L. 104–132 inserted “and is not deportable under section 1251(a)(4)(B) of”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 208,
+    "sourceId": "8-1304-note-3",
+    "sourcePath": "title8.sections[1304].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1301",
+    "renderedText": "INA 261",
+    "target": {
+      "title": "8",
+      "section": "1301",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1304-note-3, the rendered occurrence appears as “first sentence generally, striking out “and fingerprinting” before “of aliens under INA 261”.”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 211,
+    "sourceId": "8-1324a-note-15",
+    "sourcePath": "title8.sections[1324a].notes[14]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1324a of this title",
+    "renderedText": "INA 274A",
+    "target": {
+      "title": "8",
+      "section": "1324a",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "house-uslm-ref"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1324a-note-15, the rendered occurrence appears as “r resources needed by the Immigration and Naturalization Service in order to enforce INA 274A, or by Federal agencies in order to carry out Ex. Ord. No. 12989, set out below, and to expand the restrictions in such orde”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 214,
+    "sourceId": "8-1326-c",
+    "sourcePath": "title8.sections[1326].body[2]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1252(h)(2)",
+    "renderedText": "INA 242(h)(2)",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [
+        "h",
+        "2"
+      ],
+      "resolution": "official-source-only",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1326-c, the rendered occurrence is “Any alien deported pursuant to INA 242(h)(2) of this title who enters, attempts to enter, or is at any time found in, the United States (unless the Attorney General has”. The INA designator INA 242(h)(2) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 217,
+    "sourceId": "8-1356-s-5",
+    "sourcePath": "title8.sections[1356].body[18/4]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1154",
+    "renderedText": "INA 204(a)",
+    "target": {
+      "title": "8",
+      "section": "1154",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "house-editorial-correction"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1356-s-5, the rendered occurrence is “nonimmigrants described in INA 101(a)(15)(H)(i)(b), under paragraph (1)(C) or (D) of INA 204(a) of this title related to petitions for immigrants described in INA 203(b).”. The INA designator INA 204(a) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 220,
+    "sourceId": "8-1356-note-20",
+    "sourcePath": "title8.sections[1356].notes[19]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 101(a)(15)",
+    "renderedText": "INA 101(a)(15)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "a",
+        "15"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of such Act",
+    "rationale": "Flag. In source field 8-1356-note-20, the rendered occurrence is “) to change status to a classification described in subparagraph (F), (J), or (M) of INA 101(a)(15) of such Act (8 U.S.C. 1101(a)(15)), the fee is set at an amount not greater than $1,750 and the required processing timefram”. The INA designator INA 101(a)(15) is followed by the source locator “of such Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 223,
+    "sourceId": "8-1357-note-3",
+    "sourcePath": "title8.sections[1357].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1252",
+    "renderedText": "INA 242",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1357-note-3, the rendered occurrence appears as “rom”. Subsec. (f)(1). Pub. L. 104–208, § 308(g)(5)(A)(i), substituted “INA 240” for “INA 242”. Subsec. (g). Pub. L. 104–208, § 308(e)(1)(M), which directed amendment of subsec. (g) by substituting “removal” for “depor”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 226,
+    "sourceId": "8-1409-note-4",
+    "sourcePath": "title8.sections[1409].notes[3]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1401(a)",
+    "renderedText": "INA 301(a)",
+    "target": {
+      "title": "8",
+      "section": "1401",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1409-note-4, the rendered occurrence appears as “18(l)(1), substituted “(c), (d), (e), and (g) of INA 301” for “(3) to (5) and (7) of INA 301(a)”. Subsec. (b). Pub. L. 97–116, § 18(l)(2), substituted “INA 301(g)” for “INA 301(a)(7)”.”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 229,
+    "sourceId": "8-1423-note-8",
+    "sourcePath": "title8.sections[1423].notes[7]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 312(a)",
+    "renderedText": "INA 312(a)",
+    "target": {
+      "title": "8",
+      "section": "1423",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1423-note-8, the rendered occurrence is “IAL GUERRILLA UNITS OR IRREGULAR FORCES IN LAOS.“The requirement of paragraph (1) of INA 312(a) of the Immigration and Nationality Act (8 U.S.C. 1423(a)(1)) shall not apply to the naturalization of any person—“(1) who—“(”. The INA designator INA 312(a) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 232,
+    "sourceId": "8-1427-note-9",
+    "sourcePath": "title8.sections[1427].notes[8]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 101(b)(1)",
+    "renderedText": "INA 101(b)(1)",
+    "target": {
+      "title": "8",
+      "section": "1101",
+      "path": [
+        "b",
+        "1"
+      ],
+      "resolution": "local",
+      "ruleId": "embedded-a-explicit-container-base"
+    },
+    "issue": "of the Immigration and Nationality Act",
+    "rationale": "Flag. In source field 8-1427-note-9, the rendered occurrence is “n—“(1) the term ‘child’ means a child as defined in subparagraphs (A) through (E) of INA 101(b)(1) of the Immigration and Nationality Act [8 U.S.C. 1101(b)(1)], without regard to age or marital status; and “(2) the term ‘sp”. The INA designator INA 101(b)(1) is followed by the source locator “of the Immigration and Nationality Act”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  },
+  {
+    "id": 235,
+    "sourceId": "8-1448-note-2",
+    "sourcePath": "title8.sections[1448].notes[1]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1433",
+    "renderedText": "INA 322",
+    "target": {
+      "title": "8",
+      "section": "1433",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1448-note-2, the rendered occurrence appears as “9, § 407(d)(15)(D), added subsec. (d). 1981—Subsec. (a). Pub. L. 97–116 substituted “INA 322” for “INA 322 or 1434”.”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 238,
+    "sourceId": "8-1452-note-3",
+    "sourcePath": "title8.sections[1452].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1401(a)",
+    "renderedText": "INA 301(a)",
+    "target": {
+      "title": "8",
+      "section": "1401",
+      "path": [
+        "a"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1452-note-3, the rendered occurrence appears as “97–116 substituted “(c), (d), (e), or (g) of INA 301” for “(3), (4), (5), or (7) of INA 301(a)”.”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 241,
+    "sourceId": "8-1483-note-3",
+    "sourcePath": "title8.sections[1483].notes[2]",
+    "field": "text",
+    "verdict": "pass",
+    "referenceText": "section 1481",
+    "renderedText": "INA 349",
+    "target": {
+      "title": "8",
+      "section": "1481",
+      "path": [],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": null,
+    "rationale": "Pass. In source field 8-1483-note-3, the rendered occurrence appears as “1981—Subsec. (a). Pub. L. 97–116, § 18(r)(1), substituted “paragraphs (6) and (7) of INA 349(a)” for “paragraphs (7), (8), and (9) of INA 349”. Subsec. (b). Pub. L. 97–116, § 18(r)(2), substituted “and (5)” for “(5),”. The INA designator is used in a complete surrounding phrase without a trailing U.S.-Code locator; its crosswalk target and subsection path match the source reference, and the conversion preserves the sentence’s intended meaning and punctuation."
+  },
+  {
+    "id": 244,
+    "sourceId": "8-1534-k-4",
+    "sourcePath": "title8.sections[1534].body[10/3]",
+    "field": "text",
+    "verdict": "flag",
+    "referenceText": "section 1254a(e)",
+    "renderedText": "INA 244(e)",
+    "target": {
+      "title": "8",
+      "section": "1254a",
+      "path": [
+        "e"
+      ],
+      "resolution": "local",
+      "ruleId": "context-bare-usc-section"
+    },
+    "issue": "of this title",
+    "rationale": "Flag. In source field 8-1534-k-4, the rendered occurrence is “voluntary departure under INA 244(e) of this title;”. The INA designator INA 244(e) is followed by the source locator “of this title”, which was grammatical for the original USC citation but is redundant or misleading after conversion (especially “of this title,” which points back to the U.S. Code title). This occurrence needs a display/grammar decision before it can pass."
+  }
+]

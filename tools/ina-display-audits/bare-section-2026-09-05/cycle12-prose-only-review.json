@@ -1,0 +1,554 @@
+[
+  {
+    "id": 1,
+    "sourceId": "cfr-8:212.3",
+    "sourcePath": "cfr.records[8:212.3].blocks[13]",
+    "field": "x",
+    "verdict": "pass",
+    "afterText": "(5) The alien applies for relief under section 212(c) within five years of the barring act as enumerated in one or more sections of INA 242B(e)(1) through (4).",
+    "fieldRationale": "Pass. Full after field preserves grammatical flow after authority-tail cleanup; each of the 1 references retains its intended authority and subsection path.",
+    "references": [
+      {
+        "start": 132,
+        "text": "section 242B(e) (1)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1252b",
+          "targetPath": [
+            "e",
+            "1"
+          ],
+          "inaSection": "242B"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 242B(e)(1)\" resolves to \"INA 242B(e)(1)\" and matches ina target section 1252b with path [\"e\",\"1\"]."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "sourceId": "cfr-8:235.8",
+    "sourcePath": "cfr.records[8:235.8].blocks[9]",
+    "field": "x",
+    "verdict": "pass",
+    "afterText": "(d) Hearing by immigration judge. If the regional director directs that an alien subject to removal under this section be given a hearing or further hearing before an immigration judge, the hearing and all further proceedings in the matter shall be conducted in accordance with the provisions of INA 240 and other applicable sections of the Act to the same extent as though the alien had been referred to an immigration judge by the examining immigration officer. In a case where the immigration judge ordered the alien removed pursuant to paragraph (a) of this section, the Service shall refer the case back to the immigration judge and proceedings shall be automatically reopened upon receipt of the notice of referral. If confidential information, not previously considered in the matter, is presented supporting the inadmissibility of the alien under INA 212(a)(3)(A) (other than clause (ii)), (B) or (C), the disclosure of which, in the discretion of the immigration judge, may be prejudicial to the public interest, safety, or security, the immigration judge may again order the alien removed under the authority of INA 235(c) and further action shall be taken as provided in this section.",
+    "fieldRationale": "Pass. Full after field preserves grammatical flow after authority-tail cleanup; each of the 4 references retains its intended authority and subsection path.",
+    "references": [
+      {
+        "start": 296,
+        "text": "section 240 of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1229a",
+          "targetPath": [],
+          "inaSection": "240"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 240\" resolves to \"INA 240\" and matches ina target section 1229a with path []."
+      },
+      {
+        "start": 565,
+        "text": "(a)",
+        "target": {
+          "family": "cfr",
+          "targetTitle": "8",
+          "targetSection": "235.8",
+          "targetPath": [
+            "a"
+          ],
+          "inaSection": ""
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"(a)\" resolves to \"8 CFR 235.8(a)\" and matches cfr target section 235.8 with path [\"a\"]."
+      },
+      {
+        "start": 870,
+        "text": "section 212(a)(3)(A)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1182",
+          "targetPath": [
+            "a",
+            "3",
+            "A"
+          ],
+          "inaSection": "212"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 212(a)(3)(A)\" resolves to \"INA 212(a)(3)(A)\" and matches ina target section 1182 with path [\"a\",\"3\",\"A\"]."
+      },
+      {
+        "start": 1152,
+        "text": "section 235(c) of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1225",
+          "targetPath": [
+            "c"
+          ],
+          "inaSection": "235"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 235(c)\" resolves to \"INA 235(c)\" and matches ina target section 1225 with path [\"c\"]."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "sourceId": "cfr-8:245a.34",
+    "sourcePath": "cfr.records[8:245a.34].blocks[1]",
+    "field": "x",
+    "verdict": "pass",
+    "afterText": "(1) INA 237(a)(1)(A) (aliens who were inadmissible at the time of entry or adjustment of status), except that the alien may be removed if he or she is inadmissible because of a ground listed in INA 212(a)(2) (criminal and related grounds) or in INA 212(a)(3) (security and related grounds); or",
+    "fieldRationale": "Pass. Full after field preserves grammatical flow after authority-tail cleanup; each of the 3 references retains its intended authority and subsection path.",
+    "references": [
+      {
+        "start": 4,
+        "text": "Section 237(a)(1)(A) of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1227",
+          "targetPath": [
+            "a",
+            "1",
+            "A"
+          ],
+          "inaSection": "237"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 237(a)(1)(A)\" resolves to \"INA 237(a)(1)(A)\" and matches ina target section 1227 with path [\"a\",\"1\",\"A\"]."
+      },
+      {
+        "start": 209,
+        "text": "section 212(a)(2)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1182",
+          "targetPath": [
+            "a",
+            "2"
+          ],
+          "inaSection": "212"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 212(a)(2)\" resolves to \"INA 212(a)(2)\" and matches ina target section 1182 with path [\"a\",\"2\"]."
+      },
+      {
+        "start": 264,
+        "text": "section 212(a)(3)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1182",
+          "targetPath": [
+            "a",
+            "3"
+          ],
+          "inaSection": "212"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 212(a)(3)\" resolves to \"INA 212(a)(3)\" and matches ina target section 1182 with path [\"a\",\"3\"]."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "sourceId": "cfr-8:1212.2",
+    "sourcePath": "cfr.records[8:1212.2].blocks[24]",
+    "field": "x",
+    "verdict": "pass",
+    "afterText": "(j) Advance approval. An alien whose departure will execute an order of deportation shall receive a conditional approval depending upon his or her satisfactory departure. However, the grant of permission to reapply does not waive inadmissibility under INA 212(a)(16) or (17) resulting from exclusion, deportation, or removal proceedings which are instituted subsequent to the date permission to reapply is granted.",
+    "fieldRationale": "Pass. Full after field preserves grammatical flow after authority-tail cleanup; each of the 1 references retains its intended authority and subsection path.",
+    "references": [
+      {
+        "start": 252,
+        "text": "section 212(a) (16)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1182",
+          "targetPath": [
+            "a",
+            "16"
+          ],
+          "inaSection": "212"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 212(a)(16)\" resolves to \"INA 212(a)(16)\" and matches ina target section 1182 with path [\"a\",\"16\"]."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "sourceId": "cfr-8:1212.8",
+    "sourcePath": "cfr.records[8:1212.8].blocks[0]",
+    "field": "x",
+    "verdict": "pass",
+    "afterText": "(a) General. The certification requirement of INA 212(a)(14) applies to aliens seeking admission to the United States or adjustment of status under INA 245 for the purpose of performing skilled or unskilled labor, who are preference immigrants as described in INA 203(a)(3) or (6), or who are nonpreference immigrants as described in INA 203(a)(8). The certification requirement shall not be applicable to a nonpreference applicant for admission to the United States or to a nonpreference applicant for adjustment of status under section 245 who establishes that he will not perform skilled or unskilled labor. A native of the Western Hemisphere who established a priority date with a consular officer prior to January 1, 1977 and who was found to be entitled to an exemption from the labor certification requirement of INA 212(a)(14) under the law in effect prior to January 1, 1977 as the parent, spouse or child of a United States citizen or lawful permanent resident alien shall continue to be exempt from that requirement for so long as the relationship upon which the exemption is based continues to exist.",
+    "fieldRationale": "Pass. Full after field preserves grammatical flow after authority-tail cleanup; each of the 5 references retains its intended authority and subsection path.",
+    "references": [
+      {
+        "start": 46,
+        "text": "section 212(a)(14) of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1182",
+          "targetPath": [
+            "a",
+            "14"
+          ],
+          "inaSection": "212"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 212(a)(14)\" resolves to \"INA 212(a)(14)\" and matches ina target section 1182 with path [\"a\",\"14\"]."
+      },
+      {
+        "start": 163,
+        "text": "section 245 of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1255",
+          "targetPath": [],
+          "inaSection": "245"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 245\" resolves to \"INA 245\" and matches ina target section 1255 with path []."
+      },
+      {
+        "start": 290,
+        "text": "section 203(a) (3)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1153",
+          "targetPath": [
+            "a",
+            "3"
+          ],
+          "inaSection": "203"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 203(a)(3)\" resolves to \"INA 203(a)(3)\" and matches ina target section 1153 with path [\"a\",\"3\"]."
+      },
+      {
+        "start": 380,
+        "text": "section 203(a)(8)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1153",
+          "targetPath": [
+            "a",
+            "8"
+          ],
+          "inaSection": "203"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 203(a)(8)\" resolves to \"INA 203(a)(8)\" and matches ina target section 1153 with path [\"a\",\"8\"]."
+      },
+      {
+        "start": 870,
+        "text": "section 212(a)(14) of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1182",
+          "targetPath": [
+            "a",
+            "14"
+          ],
+          "inaSection": "212"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 212(a)(14)\" resolves to \"INA 212(a)(14)\" and matches ina target section 1182 with path [\"a\",\"14\"]."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "sourceId": "cfr-8:1235.8",
+    "sourcePath": "cfr.records[8:1235.8].blocks[9]",
+    "field": "x",
+    "verdict": "pass",
+    "afterText": "(d) Hearing by immigration judge. If the regional director directs that an alien subject to removal under this section be given a hearing or further hearing before an immigration judge, the hearing and all further proceedings in the matter shall be conducted in accordance with the provisions of INA 240 and other applicable sections of the Act to the same extent as though the alien had been referred to an immigration judge by the examining immigration officer. In a case where the immigration judge ordered the alien removed pursuant to paragraph (a) of this section, the Service shall refer the case back to the immigration judge and proceedings shall be automatically reopened upon receipt of the notice of referral. If confidential information, not previously considered in the matter, is presented supporting the inadmissibility of the alien under INA 212(a)(3)(A) (other than clause (ii)), (B) or (C), the disclosure of which, in the discretion of the immigration judge, may be prejudicial to the public interest, safety, or security, the immigration judge may again order the alien removed under the authority of INA 235(c) and further action shall be taken as provided in this section.",
+    "fieldRationale": "Pass. Full after field preserves grammatical flow after authority-tail cleanup; each of the 4 references retains its intended authority and subsection path.",
+    "references": [
+      {
+        "start": 296,
+        "text": "section 240 of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1229a",
+          "targetPath": [],
+          "inaSection": "240"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 240\" resolves to \"INA 240\" and matches ina target section 1229a with path []."
+      },
+      {
+        "start": 565,
+        "text": "(a)",
+        "target": {
+          "family": "cfr",
+          "targetTitle": "8",
+          "targetSection": "1235.8",
+          "targetPath": [
+            "a"
+          ],
+          "inaSection": ""
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"(a)\" resolves to \"8 CFR 1235.8(a)\" and matches cfr target section 1235.8 with path [\"a\"]."
+      },
+      {
+        "start": 870,
+        "text": "section 212(a)(3)(A)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1182",
+          "targetPath": [
+            "a",
+            "3",
+            "A"
+          ],
+          "inaSection": "212"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 212(a)(3)(A)\" resolves to \"INA 212(a)(3)(A)\" and matches ina target section 1182 with path [\"a\",\"3\",\"A\"]."
+      },
+      {
+        "start": 1152,
+        "text": "section 235(c) of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1225",
+          "targetPath": [
+            "c"
+          ],
+          "inaSection": "235"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 235(c)\" resolves to \"INA 235(c)\" and matches ina target section 1225 with path [\"c\"]."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "sourceId": "cfr-8:1245.1",
+    "sourcePath": "cfr.records[8:1245.1].blocks[79]",
+    "field": "x",
+    "verdict": "pass",
+    "afterText": "(1) A valid, unexpired visa petition filed prior to October 1, 1991, which has been approved to grant the applicant preference status under INA 202(a)(3) or (6) (as in effect prior to October 1, 1991), and is deemed by operation of the automatic conversion provisions of section 4 of Public Law 102-110 (the Armed Forces Immigration Adjustment Act of 1991), to be effective to grant the applicant preference status under INA 203(b)(2) or (3) (as in effect on and after October 1, 1991) because of his or here occupation as a registered nurse, provided the application for adjustment of status is approved no later than October 1, 1993, or",
+    "fieldRationale": "Pass. Full after field preserves grammatical flow after authority-tail cleanup; each of the 6 references retains its intended authority and subsection path.",
+    "references": [
+      {
+        "start": 140,
+        "text": "section 202(a) (3)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1152",
+          "targetPath": [
+            "a",
+            "3"
+          ],
+          "inaSection": "202"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 202(a)(3)\" resolves to \"INA 202(a)(3)\" and matches ina target section 1152 with path [\"a\",\"3\"]."
+      },
+      {
+        "start": 162,
+        "text": "(6)",
+        "target": {
+          "family": "public-law",
+          "targetTitle": "",
+          "targetSection": "",
+          "targetPath": [
+            "s202",
+            "a",
+            "6"
+          ],
+          "inaSection": ""
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"(6)\" resolves to \"Public Law 102-110\" and matches public-law target section (non-USC) with path [\"s202\",\"a\",\"6\"]."
+      },
+      {
+        "start": 295,
+        "text": "4",
+        "target": {
+          "family": "public-law",
+          "targetTitle": "",
+          "targetSection": "",
+          "targetPath": [
+            "s4"
+          ],
+          "inaSection": ""
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"4\" resolves to \"Public Law 102-110\" and matches public-law target section (non-USC) with path [\"s4\"]."
+      },
+      {
+        "start": 300,
+        "text": "Public Law 102-110",
+        "target": {
+          "family": "public-law",
+          "targetTitle": "",
+          "targetSection": "",
+          "targetPath": [],
+          "inaSection": ""
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"Public Law 102-110\" resolves to \"Public Law 102-110\" and matches public-law target section (non-USC) with path []."
+      },
+      {
+        "start": 437,
+        "text": "section 203(b) (2)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1153",
+          "targetPath": [
+            "b",
+            "2"
+          ],
+          "inaSection": "203"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 203(b)(2)\" resolves to \"INA 203(b)(2)\" and matches ina target section 1153 with path [\"b\",\"2\"]."
+      },
+      {
+        "start": 459,
+        "text": "(3) of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1153",
+          "targetPath": [
+            "b",
+            "3"
+          ],
+          "inaSection": "203"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"(3)\" resolves to \"INA 203(b)(3)\" and matches ina target section 1153 with path [\"b\",\"3\"]."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "sourceId": "cfr-8:1245.1",
+    "sourcePath": "cfr.records[8:1245.1].blocks[85]",
+    "field": "x",
+    "verdict": "pass",
+    "afterText": "(1) A valid, unexpired visa petition filed prior to October 1, 1991, which has been approved to grant the applicant preference status under INA 203(a)(3) or (6) (as in effect prior to October 1, 1991) and is deemed by operation of the automatic conversion provisions of section 4 of Public Law 101-110 to be effective to grant the applicant preference status under INA 203(b)(2) or (3) (as in effect on and after October 1, 1991) because of his or her occupation as a registered nurse, provided the application for adjustment of status is approved no later than October 1, 1993, or",
+    "fieldRationale": "Pass. Full after field preserves grammatical flow after authority-tail cleanup; each of the 6 references retains its intended authority and subsection path.",
+    "references": [
+      {
+        "start": 140,
+        "text": "section 203(a) (3)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1153",
+          "targetPath": [
+            "a",
+            "3"
+          ],
+          "inaSection": "203"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 203(a)(3)\" resolves to \"INA 203(a)(3)\" and matches ina target section 1153 with path [\"a\",\"3\"]."
+      },
+      {
+        "start": 162,
+        "text": "(6)",
+        "target": {
+          "family": "public-law",
+          "targetTitle": "",
+          "targetSection": "",
+          "targetPath": [
+            "s203",
+            "a",
+            "6"
+          ],
+          "inaSection": ""
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"(6)\" resolves to \"Public Law 101-110\" and matches public-law target section (non-USC) with path [\"s203\",\"a\",\"6\"]."
+      },
+      {
+        "start": 294,
+        "text": "4",
+        "target": {
+          "family": "public-law",
+          "targetTitle": "",
+          "targetSection": "",
+          "targetPath": [
+            "s4"
+          ],
+          "inaSection": ""
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"4\" resolves to \"Public Law 101-110\" and matches public-law target section (non-USC) with path [\"s4\"]."
+      },
+      {
+        "start": 299,
+        "text": "Public Law 101-110",
+        "target": {
+          "family": "public-law",
+          "targetTitle": "",
+          "targetSection": "",
+          "targetPath": [],
+          "inaSection": ""
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"Public Law 101-110\" resolves to \"Public Law 101-110\" and matches public-law target section (non-USC) with path []."
+      },
+      {
+        "start": 381,
+        "text": "section 203(b) (2)",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1153",
+          "targetPath": [
+            "b",
+            "2"
+          ],
+          "inaSection": "203"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"INA 203(b)(2)\" resolves to \"INA 203(b)(2)\" and matches ina target section 1153 with path [\"b\",\"2\"]."
+      },
+      {
+        "start": 403,
+        "text": "(3) of the Act",
+        "target": {
+          "family": "ina",
+          "targetTitle": "8",
+          "targetSection": "1153",
+          "targetPath": [
+            "b",
+            "3"
+          ],
+          "inaSection": "203"
+        },
+        "verdict": "pass",
+        "rationale": "Pass. The rendered target \"(3)\" resolves to \"INA 203(b)(3)\" and matches ina target section 1153 with path [\"b\",\"3\"]."
+      }
+    ]
+  }
+]

@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-29T19:16:00-04:00",
+  "artifacts": [
+    {
+      "id": "eoir-index-vol1-15-a-e",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "Index to Precedent Decisions; Vol 1-15, Inclusive (A-E)",
+      "sourceUrl": "https://www.justice.gov/eoir/vll/intdec/chart/Index_vol1_15_ae.pdf",
+      "localPath": "supporting/raw/eoir-index-vol1-15-a-e.pdf",
+      "role": "official-topical-index-supporting-evidence",
+      "coverage": "Reporter volumes 1-15, topics A-E",
+      "bytes": 5069291,
+      "pages": 41,
+      "sha256": "ec421e1f45086fc1422308d4691d84c4469e9df7aafc027a7fb1d60a3f18bb76",
+      "pdfCreationDate": "2002-11-06T07:22:21-05:00",
+      "hasTextLayer": false,
+      "scan": {
+        "colorSpace": "gray",
+        "encoding": "CCITT",
+        "approximateDpi": 315,
+        "ocrRequired": true,
+        "ocrStatus": "planned"
+      }
+    },
+    {
+      "id": "eoir-index-vol1-15-f-z",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "Index to Precedent Decisions; Vol 1-15, Inclusive (F-Z)",
+      "sourceUrl": "https://www.justice.gov/eoir/vll/intdec/chart/Index_vol1_15_fz_1.pdf",
+      "localPath": "supporting/raw/eoir-index-vol1-15-f-z.pdf",
+      "role": "official-topical-index-supporting-evidence",
+      "coverage": "Reporter volumes 1-15, topics F-Z",
+      "bytes": 3992958,
+      "pages": 33,
+      "sha256": "4e4e8bf7fc1ce6fbae317a51f7fa642bc48778935bdb40b6002e939880f0cefb",
+      "pdfCreationDate": "2002-11-06T07:22:21-05:00",
+      "pdfModificationDate": "2013-11-19T11:04:19-05:00",
+      "hasTextLayer": false,
+      "scan": {
+        "colorSpace": "gray",
+        "encoding": "CCITT",
+        "approximateDpi": 315,
+        "ocrRequired": true,
+        "ocrStatus": "planned"
+      }
+    },
+    {
+      "id": "eoir-index-vol16-25",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "Index to Precedent Decisions; Interim Decisions 2526 to 3765",
+      "sourceUrl": "https://www.justice.gov/sites/default/files/eoir/legacy/2014/05/29/Topical%20Index.pdf",
+      "localPath": "supporting/raw/eoir-index-vol16-25.pdf",
+      "role": "official-topical-index-supporting-evidence",
+      "coverage": "Reporter volumes 16-25",
+      "bytes": 369007,
+      "pages": 47,
+      "sha256": "00f57b44576fa57fb5d9725b51820c82e8b1c680107ded4bd56a58b6bde4a01b",
+      "pdfCreationDate": "2014-05-29T11:18:14-04:00",
+      "hasTextLayer": true,
+      "extraction": {
+        "method": "pdf-native",
+        "status": "ready"
+      }
+    },
+    {
+      "id": "eoir-index-vol26-27",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "Index to Precedent Decisions; Interim Decisions 3766 to 3984",
+      "sourceUrl": "https://www.justice.gov/media/1068286/dl?inline=",
+      "localPath": "supporting/raw/eoir-index-vol26-27.pdf",
+      "role": "official-topical-index-supporting-evidence",
+      "coverage": "Reporter volumes 26-27",
+      "landingPageLabel": "Cumulative Index AG/BIA Volumes 26-28",
+      "coverageCorrectionBasis": "The PDF title page expressly limits coverage to Interim Decisions 3766-3984 in volumes 26 and 27; volume 28 begins with Interim Decision 3985.",
+      "bytes": 127591,
+      "pages": 10,
+      "sha256": "eb400f84bcf96a9ef3e3c830ed32b1332bbb10c739c8a651f529027ea1090dea",
+      "pdfCreationDate": "2020-05-27T12:16:40-04:00",
+      "pdfModificationDate": "2020-05-27T12:18:26-04:00",
+      "hasTextLayer": true,
+      "extraction": {
+        "method": "pdf-native",
+        "status": "ready"
+      }
+    },
+    {
+      "id": "eoir-affected-decisions-vol16-25",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "Notice Regarding Administrative and Judicial Decisions Cited in Volumes 16 Through 25, Inclusive, Affected by Subsequent Reported Administrative or Judicial Decisions",
+      "sourceUrl": "https://www.justice.gov/sites/default/files/eoir/legacy/2014/05/29/Notice%20Regarding%20Admin%20and%20Judicial%20Decisions%20%5Brevised%20per%20DLN%205.23.14%5D.pdf",
+      "localPath": "supporting/raw/eoir-affected-decisions-vol16-25.pdf",
+      "role": "official-reporter-affected-decisions-table",
+      "sourceTier": "official-reporter-editorial-treatment-index",
+      "coverage": "Administrative and judicial decisions cited in reporter volumes 16-25 and affected by subsequent reported administrative or judicial decisions through volume 25",
+      "revisionDate": "2014-05-23",
+      "publisherInstruction": "See volume 15 for the cumulative listing regarding volumes 1-15.",
+      "knownLimitation": "The table is a historical reporter finding aid. It does not establish current validity after volume 25 or identify displacement caused solely by later statutes, regulations, or policy changes; the treating opinion must be read for issue and scope.",
+      "bytes": 168968,
+      "pages": 37,
+      "sha256": "1f371866799547901f17c1bb3600ae432ea0f44c60ad05c0b279ee4cf7c3ac74",
+      "pdfCreationDate": "2014-05-29T11:17:56-04:00",
+      "hasTextLayer": true,
+      "extraction": {
+        "method": "pypdf-native-layout",
+        "status": "ready"
+      }
+    },
+    {
+      "id": "eoir-bia-precedent-chart",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "BIA Precedent Chart",
+      "sourceUrl": "https://www.justice.gov/eoir/bia-precedent-chart",
+      "localPath": "supporting/raw/eoir-bia-precedent-chart.html",
+      "mediaType": "text/html",
+      "role": "first-party-informational-chart-landing-page",
+      "sourceTier": "secondary-recall-evidence",
+      "coverage": "BIA headnotes in reporter volumes 21-27, Matter of Esposito through Matter of Izaguirre, March 30, 1995-July 21, 2017",
+      "publisherUpdatedDate": "2021-12-27",
+      "publisherDisclaimer": "Informational convenience; not comprehensive, not intended for preparing an appeal or citation in briefs, and not an official EOIR publication.",
+      "bytes": 132648,
+      "sha256": "42f251aecbf73b608d0f1db957a123cce1c6ce695bcf7427e030475c5f145d9d"
+    },
+    {
+      "id": "eoir-bia-precedent-chart-a-ag",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "BIA Precedent Chart A-AG",
+      "sourceUrl": "https://www.justice.gov/eoir/bia-precedent-chart-a-ag",
+      "localPath": "supporting/raw/eoir-bia-precedent-chart-a-ag.html",
+      "mediaType": "text/html",
+      "role": "first-party-informational-chart-section",
+      "sourceTier": "secondary-recall-evidence",
+      "bytes": 210602,
+      "sha256": "799fdec4177e23f027eb508e7bb171eb5f4a6d6437f2a8468b2e5159a1e400d2"
+    },
+    {
+      "id": "eoir-bia-precedent-chart-ai-ca",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "BIA Precedent Chart AI-CA",
+      "sourceUrl": "https://www.justice.gov/eoir/bia-precedent-chart-ai-ca",
+      "localPath": "supporting/raw/eoir-bia-precedent-chart-ai-ca.html",
+      "mediaType": "text/html",
+      "role": "first-party-informational-chart-section",
+      "sourceTier": "secondary-recall-evidence",
+      "bytes": 258870,
+      "sha256": "0da0968122f795c21446736b745a8522d36b0997c9ba823bbb3b701fbca4cec7"
+    },
+    {
+      "id": "eoir-bia-precedent-chart-ca-cr",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "BIA Precedent Chart CA-CR",
+      "sourceUrl": "https://www.justice.gov/eoir/bia-precedent-chart-ca-cr",
+      "localPath": "supporting/raw/eoir-bia-precedent-chart-ca-cr.html",
+      "mediaType": "text/html",
+      "role": "first-party-informational-chart-section",
+      "sourceTier": "secondary-recall-evidence",
+      "bytes": 193696,
+      "sha256": "e2733517ca844a7ac5c38bac78af4a8bd17b1daa2336d68495841c07f31301f1"
+    },
+    {
+      "id": "eoir-bia-precedent-chart-d-i",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "BIA Precedent Chart D-I",
+      "sourceUrl": "https://www.justice.gov/eoir/bia-precedent-chart-d-i",
+      "localPath": "supporting/raw/eoir-bia-precedent-chart-d-i.html",
+      "mediaType": "text/html",
+      "role": "first-party-informational-chart-section",
+      "sourceTier": "secondary-recall-evidence",
+      "bytes": 166473,
+      "sha256": "b9b7e0d8bfbcacbb47523ed40d56861df211e439d041c6daeb4f3ca12ba45df8"
+    },
+    {
+      "id": "eoir-bia-precedent-chart-m-rec",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "BIA Precedent Chart M-REC",
+      "sourceUrl": "https://www.justice.gov/eoir/bia-precedent-chart-m-rec",
+      "localPath": "supporting/raw/eoir-bia-precedent-chart-m-rec.html",
+      "mediaType": "text/html",
+      "role": "first-party-informational-chart-section",
+      "sourceTier": "secondary-recall-evidence",
+      "bytes": 143017,
+      "sha256": "823442bb2c2d6be02d228a9a563c5ccc36a53441eb97f2ebc0d5d34181c9ac93"
+    },
+    {
+      "id": "eoir-bia-precedent-chart-ref-end",
+      "publisher": "U.S. Department of Justice, Executive Office for Immigration Review",
+      "title": "BIA Precedent Chart REF-END",
+      "sourceUrl": "https://www.justice.gov/eoir/bia-precedent-chart-ref-end",
+      "localPath": "supporting/raw/eoir-bia-precedent-chart-ref-end.html",
+      "mediaType": "text/html",
+      "role": "first-party-informational-chart-section",
+      "sourceTier": "secondary-recall-evidence",
+      "bytes": 237174,
+      "sha256": "c137691582fdd964f35f16f03ceffb44063a5b93e95c2b2b60312759f8a3f42e"
+    }
+  ],
+  "interpretation": [
+    "The cumulative index PDFs are official EOIR topical indexes, not case opinions and not replacements for the missing bound volumes.",
+    "Together they provide first-party topical coverage through volume 27; the volumes 1-15 scans require OCR, while volumes 16-27 have native text.",
+    "They can validate historical reporter citations and rule-to-case relationships.",
+    "The formal affected-decisions notice is first-party reporter editorial evidence with explicit treatment codes through volume 25. It is the strongest available treatment seed, but it is historical rather than a current comprehensive citator and expressly points to volume 15 for earlier cumulative coverage.",
+    "The separate BIA Precedent Chart adds headnotes and some later-treatment annotations for a limited 1995-2017 window, but its publisher disclaimer makes it secondary recall evidence rather than a citator.",
+    "Entries repeat the same case under multiple topics, so all supporting output must be deduplicated by case identity before use."
+  ]
+}

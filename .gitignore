@@ -1,1 +1,17 @@
 tmp/
+__pycache__/
+*.py[cod]
+
+# Published-case source artifacts and reproducible derived indexes.  The small
+# discovery manifest and documentation remain versioned; downloaded PDFs,
+# page images, extracted documents, and SQLite databases do not.
+sources/cases/raw/
+sources/cases/derived/
+sources/cases/index/
+sources/cases/renders/
+sources/cases/ocr-output/
+sources/cases/supporting/raw/
+sources/cases/supporting/renders/
+sources/cases/supporting/derived/
+sources/cases/capture-errors.jsonl
+sources/cases/capture.jsonl.lock
