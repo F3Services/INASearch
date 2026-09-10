@@ -1,0 +1,56 @@
+{
+  "baseCommit": "10b67e93a143f36878a60e50bdfe016e11f292f8",
+  "artifacts": {
+    "INASearch.html": {
+      "before": {
+        "artifactBytes": 8346800,
+        "sha256": "ba4c8179728a1da890e6015b71b8b2c9074caf9bb1818b7fcdbb567f43dda0b8",
+        "runtimeCodeBytes": 1227676,
+        "cssBytes": 99027,
+        "corpusBytes": 5232793,
+        "corpusEncoding": "gzip"
+      },
+      "after": {
+        "artifactBytes": 8369846,
+        "sha256": "a285ed79d364a80b82c220b8fe9c4fee1b05dd19318d767fe5e093a934d9a994",
+        "runtimeCodeBytes": 1249433,
+        "cssBytes": 99206,
+        "corpusBytes": 5233518,
+        "corpusEncoding": "gzip"
+      },
+      "delta": {
+        "artifactBytes": 23046,
+        "runtimeCodeBytes": 21757,
+        "cssBytes": 179,
+        "corpusBytes": 725
+      },
+      "artifactGrowthPercent": 0.27610581300618203
+    },
+    "INASearch-Uncompressed.html": {
+      "before": {
+        "artifactBytes": 35505889,
+        "sha256": "319e8231db692bcae891609e99cce8bceca1851bf0013272da971bd3daa6bfc3",
+        "runtimeCodeBytes": 1227676,
+        "cssBytes": 99027,
+        "corpusBytes": 34136390,
+        "corpusEncoding": "plain JSON"
+      },
+      "after": {
+        "artifactBytes": 35530784,
+        "sha256": "0dbe7960ef975e9c7c201129598006b03a109187dfb246a1029aafdf1114ac9e",
+        "runtimeCodeBytes": 1249433,
+        "cssBytes": 99206,
+        "corpusBytes": 34139203,
+        "corpusEncoding": "plain JSON"
+      },
+      "delta": {
+        "artifactBytes": 24895,
+        "runtimeCodeBytes": 21757,
+        "cssBytes": 179,
+        "corpusBytes": 2813
+      },
+      "artifactGrowthPercent": 0.07011512935220408
+    }
+  },
+  "correctionLogsExcluded": true
+}

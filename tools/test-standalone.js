@@ -137,7 +137,7 @@ function readBuild(fileName) {
 const EXPECTED_EXECUTABLE_SCRIPT_IDS = Object.freeze([
   "inaSearchStorageRuntime", "inaSearchCorpusPackingRuntime", "inaSearchInsertionsRuntime", "inaSearchAnnotationsRuntime", "inaSearchCommandRuntime",
   "inaSearchWorkspaceRuntime", "inaSearchOccurrenceRuntime", "inaSearchEmbeddedReferencesRuntime",
-  "inaSearchLegalReferencesRuntime", "inaSearchUpdaterRuntime", "", ""
+  "inaSearchLegalReferencesRuntime", "inaSearchCfrHierarchyRuntime", "inaSearchUpdaterRuntime", "", ""
 ]);
 
 function executableScriptEntries(html) {
@@ -198,7 +198,8 @@ async function runBootstrap(build, overrides = {}) {
     TextEncoder: globalThis.TextEncoder,
     Uint8Array,
     atob: globalThis.atob,
-    crypto: globalThis.crypto
+    crypto: globalThis.crypto,
+    INASearchCfrHierarchy: require("../src/INASearch-CFR-Hierarchy")
   };
   context.window = context;
   vm.createContext(context);
@@ -231,7 +232,7 @@ function extractedFunction(source, name, nextName, context = {}) {
   const match = source.match(expression);
   assert(match, `Could not extract ${name} from the application source.`);
   const functionSource = match[0].replace(new RegExp(`\\n(?:\\n)?    (?:async )?function ${nextName}\\($`), "");
-  return vm.runInNewContext(`(${functionSource})`, { JSON, String, ...context });
+  return vm.runInNewContext(`(${functionSource})`, { JSON, String, INASearchCfrHierarchy: require("../src/INASearch-CFR-Hierarchy"), ...context });
 }
 
 function authorityHierarchyFunctions(source, context = {}) {
@@ -397,7 +398,7 @@ function compactCitationPathFunctions(source, context = {}) {
   const end = source.indexOf("\n\n    function structuredCloneSafe(", start);
   assert(start >= 0 && end > start, "Could not extract the compact citation-path resolver.");
   const declarations = source.slice(start, end);
-  return vm.runInNewContext(`${declarations}\n({ romanNumeralValue, statutePathDescriptor, compactStatutePathIndex, romanCaseMatches, compareCompactCitationPaths, citationAmbiguityRange, citationWithStatuteInterpretation, resolveIndexedCompactStatutePath })`, {
+  return vm.runInNewContext(`${declarations}\n({ commonCompactCandidatePrefixLength, romanNumeralValue, statutePathDescriptor, compactStatutePathIndex, romanCaseMatches, compareCompactCitationPaths, citationAmbiguityRange, citationWithStatuteInterpretation, resolveIndexedCompactStatutePath })`, {
     Array,
     Map,
     Math,
@@ -799,14 +800,17 @@ async function main() {
   const cfrUnitDepths = allCfrBlocks.flatMap(block => (block.u || []).map(unit => (unit.a.match(/\(/g) || []).length));
   assert.strictEqual(Math.max(...cfrUnitDepths), 7, "The CFR corpus does not retain the complete seven-level paragraph hierarchy reported by eCFR.");
   const addressedCfrBlocks = allCfrBlocks.filter(block => block.u?.length);
-  assert.strictEqual(addressedCfrBlocks.length, cfrStructureAudit.summary.rendererAddressGroupCount, "Addressable CFR blocks do not have one-to-one parity with official eCFR legal lines.");
-  assert.strictEqual(addressedCfrBlocks.reduce((count, block) => count + block.u.length, 0), cfrStructureAudit.summary.rendererAddressCount, "CFR block unit paths do not cover every official eCFR address.");
+  assert.strictEqual(addressedCfrBlocks.length, cfrStructureAudit.summary.correctedAddressGroupCount, "Addressable CFR blocks do not have one-to-one parity with official eCFR legal lines.");
+  assert.strictEqual(addressedCfrBlocks.reduce((count, block) => count + block.u.length, 0), cfrStructureAudit.summary.correctedAddressCount, "CFR block unit paths do not cover every official eCFR address.");
+  const reviewedCfrMarkers = JSON.parse(fs.readFileSync(path.join(root, "sources/legal/cfr-hierarchy/reviewed-expectations.json"), "utf8")).reviews.flatMap(review => review.expectations);
+  const hasReviewedMarkers = block => reviewedCfrMarkers.some(item => item.original[1] === block.x && Array.isArray(item.correctedMarkers) && JSON.stringify(item.correctedMarkers.map(([a, s, e]) => ({ a, s, e }))) === JSON.stringify(block.u));
   assert(addressedCfrBlocks.filter(block => block.u.length > 1).every(block => {
+    if (hasReviewedMarkers(block)) return true;
     const leading = /^\s*((?:\([A-Za-z0-9ivxlcdmIVXLCDM]+\))+)/.exec(block.x || "");
     const range = /^\s*\([A-Za-z0-9ivxlcdmIVXLCDM]+\)\s*[-–—]\s*\([A-Za-z0-9ivxlcdmIVXLCDM]+\)/.exec(block.x || "");
     return Boolean(range || (leading && block.u.every(unit => unit.e <= leading[0].length)));
   }), "A combined CFR block still hides a later official legal unit after prose instead of starting a new line.");
-  assert(allCfrBlocks.every(block => (block.u || []).every(unit => /^(?:\([^)]+\)|[A-Za-z0-9ivxlcdmIVXLCDM]+\.)$/.test(String(block.x || "").slice(unit.s, unit.e)))), "A CFR unit offset does not point to its displayed parenthetical or appendix-outline marker.");
+  assert(allCfrBlocks.every(block => hasReviewedMarkers(block) || (block.u || []).every(unit => /^(?:\([^)]+\)|[A-Za-z0-9ivxlcdmIVXLCDM]+\.)$/.test(String(block.x || "").slice(unit.s, unit.e)))), "A CFR unit offset does not point to its displayed parenthetical or appendix-outline marker.");
   assert.strictEqual(allCfrBlocks.filter(block => block.t === "graphic").length, 15, "Referenced CFR graphics were not retained in document order.");
   assert.strictEqual(full.corpus.forms.length, 105);
   assert.strictEqual(full.corpus.namedActs.length, 5);
@@ -931,7 +935,7 @@ async function main() {
     16080,
     "Not every House USLM reference was attached to its exact displayed source span or its publisher-supplied correction."
   );
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 37615, "Unexpected deterministic legal-reference total after the citation-display and contextual-reference audit.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 37614, "Unexpected deterministic legal-reference total after the citation-display and contextual-reference audit.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 13403, "Unexpected embedded-reference candidate total after the corpus-wide parser audit.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 9406, "Unexpected resolved embedded-reference total after the corpus-wide parser audit.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1311, "Unexpected unresolved/ambiguous embedded-reference total after the corpus-wide parser audit.");
@@ -1961,6 +1965,7 @@ async function main() {
         reject(error);
       }, { once: true }));
     },
+    INASearchCfrHierarchy: require("../src/INASearch-CFR-Hierarchy"),
     INASearchStorage: updaterStorage
   };
   updaterContext.globalThis = updaterContext;
@@ -3426,6 +3431,9 @@ async function main() {
   });
   const parseCfr = extractedFunction(fallbackSource, "parseCfr", "parseAct", {
     Number, String, Set,
+    indexedCfrSection: extractedFunction(fallbackSource, "indexedCfrSection", "resolveIndexedCfrPath", { cfrSectionsByNumber, cfrSectionNumberKey }),
+    resolveIndexedCfrPath: extractedFunction(fallbackSource, "resolveIndexedCfrPath", "parseCfr", { componentTokens: cfrComponentTokens, canonicalPath: cfrCanonicalPath, normCitationPart: statutoryNormPart,
+      ...compactCitationPathFunctions(fallbackSource, { normCitationPart: statutoryNormPart, canonicalPath: cfrCanonicalPath }) }),
     cfrSectionMap, cfrSectionIdMap, cfrPartMap, cfrPartsByTitle, cfrRemovedPartMap,
     corpus: hydratedSource,
     parseCfrHierarchy: hierarchyParsing.parseCfrHierarchy,
@@ -3962,7 +3970,7 @@ async function main() {
   assert(parseLocalStatute("usc", "724a-1").valid, "The keyboard-hyphen spelling of transferred 8 U.S.C. 724a-1 is not recognized.");
   const parseStatuteSectionOrFamily = extractedFunction(fallbackSource, "parseStatuteSectionOrFamily", "componentTokens", { parseLocalStatute, statuteSectionFamilyResult });
   const inaTitleNumberFromBrowseInput = extractedFunction(fallbackSource, "inaTitleNumberFromBrowseInput", "hierarchyNodeAncestors", { String, Number, INA_TITLE_ROMAN });
-  const parseIna = extractedFunction(fallbackSource, "parseIna", "parseCfr", {
+  const parseIna = extractedFunction(fallbackSource, "parseIna", "indexedCfrSection", {
     String,
     INA_SOURCE_URL,
     inaTitleGroups,
@@ -4105,6 +4113,7 @@ async function main() {
   const parseCitationForScope = extractedFunction(fallbackSource, "parseCitation", "focusedCitationFeatureBoundary", {
     parseCfr,
     cfrPartsByNumber,
+    indexedCfrSection: extractedFunction(fallbackSource, "indexedCfrSection", "resolveIndexedCfrPath", { cfrSectionsByNumber, cfrSectionNumberKey }),
     cfrSectionsByNumber,
     cfrSectionNumberKey,
     parseUscHierarchy: hierarchyParsing.parseUscHierarchy,
@@ -4146,6 +4155,7 @@ async function main() {
   assert(inferredReservedCfrRange?.valid && inferredReservedCfrRange.type === "cfr" && inferredReservedCfrRange.record?.item?.id === "8:103.20-103.36", "A bare ranged CFR section locator did not resolve its indexed Title 8 record.");
   const cfrSectionTitleAlternativesHtml = extractedFunction(fallbackSource, "cfrSectionTitleAlternativesHtml", "renderCfr", {
     navigationTitleCase: extractedFunction(fallbackSource, "navigationTitleCase", "statuteStatus"),
+    indexedCfrSection: extractedFunction(fallbackSource, "indexedCfrSection", "resolveIndexedCfrPath", { cfrSectionsByNumber, cfrSectionNumberKey }),
     cfrSectionsByNumber,
     cfrSectionNumberKey,
     escapeHtml: escapeStatutoryHtml

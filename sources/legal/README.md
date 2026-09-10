@@ -48,7 +48,19 @@ independently compares the generated corpus with hash-verified eCFR XML and the
 same-date enhanced renderer captured for every included part. The audit checks
 part, section, and appendix inventories; exact preservation of all XML body
 text; rendered paragraph order and boundaries; every canonical address; and
-the one-to-one mapping from each official legal line to a generated block.
+the mapping from each official legal line to a generated block. The independently
+reviewed expectations in `cfr-hierarchy/reviewed-expectations.json` override
+incorrect publisher addresses only after checking the original text and marker
+offsets. Compound headings can expose several units in one unchanged block.
 Its baseline mismatch list records every regulatory record whose
 pre-fix generated addresses disagreed with eCFR, including the false
 8 CFR 204.2(h)(2)(i) path.
+
+The September 2026 hierarchy repair is documented in
+[`cfr-hierarchy/README.md`](cfr-hierarchy/README.md). `corrections.json`, the source
+findings, reviewed expectations, download fixtures and verification reports are
+repository artifacts. Neither standalone edition embeds or requests these files.
+`src/INASearch-CFR-Hierarchy.js` contains the shared reconciliation engine and
+only the compiled guards and repair instructions needed for future downloads.
+The generator invokes it through `tools/reconcile-cfr.js`; the browser updater
+invokes it after XML/renderer normalization and before atomic activation.

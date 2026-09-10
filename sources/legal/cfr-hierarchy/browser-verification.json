@@ -1,0 +1,158 @@
+{
+  "result": "pass",
+  "checks": [
+    {
+      "query": "214.2h",
+      "target": "(h)",
+      "value": "214.2h",
+      "heading": "8 CFR 214.2",
+      "outlines": 1,
+      "blocks": 697,
+      "tables": 1,
+      "next": "(i)",
+      "ambiguity": false
+    },
+    {
+      "query": "214.2h2",
+      "target": "(h)(2)",
+      "value": "214.2h2",
+      "heading": "8 CFR 214.2",
+      "outlines": 1,
+      "blocks": 42,
+      "tables": 0,
+      "next": "(h)(3)",
+      "ambiguity": false
+    },
+    {
+      "query": "214.2h2i",
+      "target": "(h)(2)(i)",
+      "value": "214.2h2i",
+      "heading": "8 CFR 214.2",
+      "outlines": 1,
+      "blocks": 37,
+      "tables": 0,
+      "next": "(h)(2)(ii)",
+      "ambiguity": false
+    },
+    {
+      "query": "214.2h2ia",
+      "target": "(h)(2)(i)(A)",
+      "value": "214.2h2ia",
+      "heading": "8 CFR 214.2",
+      "outlines": 1,
+      "blocks": 1,
+      "tables": 0,
+      "next": "(h)(2)(i)(B)",
+      "ambiguity": false
+    },
+    {
+      "query": "214.2h2i",
+      "target": "(h)(2)(i)",
+      "value": "214.2h2i",
+      "heading": "8 CFR 214.2",
+      "outlines": 1,
+      "blocks": 37,
+      "tables": 0,
+      "next": "(h)(2)(ii)",
+      "ambiguity": false
+    },
+    {
+      "query": "214.2h2ii",
+      "target": "(h)(2)(ii)",
+      "value": "214.2h2ii",
+      "heading": "8 CFR 214.2",
+      "outlines": 1,
+      "blocks": 1,
+      "tables": 0,
+      "next": "(h)(2)(iii)",
+      "ambiguity": true
+    },
+    {
+      "query": "214.2h2iI",
+      "target": "(h)(2)(i)(I)",
+      "value": "214.2h2iI",
+      "heading": "8 CFR 214.2",
+      "outlines": 1,
+      "blocks": 11,
+      "tables": 0,
+      "next": "(h)(2)(i)(J)",
+      "ambiguity": false
+    },
+    {
+      "query": "19 CFR 4.7",
+      "target": "",
+      "value": "19 CFR 4.7",
+      "heading": "19 CFR 4.7",
+      "outlines": 0,
+      "blocks": 0,
+      "tables": 0,
+      "ambiguity": false
+    },
+    {
+      "query": "19 CFR 4.7a",
+      "target": "",
+      "value": "19 CFR 4.7a",
+      "heading": "19 CFR 4.7a",
+      "outlines": 0,
+      "blocks": 0,
+      "tables": 0,
+      "ambiguity": false
+    },
+    {
+      "query": "19 CFR 4.7(a)",
+      "target": "(a)",
+      "value": "19 CFR 4.7(a)",
+      "heading": "19 CFR 4.7",
+      "outlines": 1,
+      "blocks": 4,
+      "tables": 0,
+      "next": "(b)",
+      "ambiguity": false
+    },
+    {
+      "query": "20 CFR 655.510d1iiC2iiiA",
+      "target": "(d)(1)(ii)(C)(2)(iii)(A)",
+      "value": "20 CFR 655.510d1iiC2iiiA",
+      "heading": "20 CFR 655.510",
+      "outlines": 1,
+      "blocks": 1,
+      "tables": 0,
+      "next": "(d)(1)(ii)(C)(2)(iii)(B)",
+      "ambiguity": false
+    },
+    {
+      "query": "214.1a2",
+      "target": "(a)(2)",
+      "value": "214.1a2",
+      "heading": "8 CFR 214.1",
+      "outlines": 1,
+      "blocks": 4,
+      "tables": 1,
+      "next": "(a)(3)(i)",
+      "ambiguity": false
+    },
+    {
+      "query": "214.1b1",
+      "target": "(b)(1)",
+      "value": "214.1b1",
+      "heading": "8 CFR 214.1",
+      "outlines": 1,
+      "blocks": 7,
+      "tables": 0,
+      "next": "(b)(2)",
+      "ambiguity": false
+    },
+    {
+      "query": "274a.2b1vB1",
+      "target": "(b)(1)(v)(B)(1)",
+      "value": "274a.2b1vB1",
+      "heading": "8 CFR 274a.2",
+      "outlines": 1,
+      "blocks": 10,
+      "tables": 0,
+      "next": "(b)(1)(v)(B)(2)",
+      "ambiguity": false
+    }
+  ],
+  "errors": []
+}

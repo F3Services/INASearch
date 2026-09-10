@@ -80,6 +80,7 @@
   function normalizeAnchor(value = {}) {
     return {
       sourceHostKey: text(value.sourceHostKey),
+      structureRevision: Number(value.structureRevision) || 0,
       sourceField: text(value.sourceField || "text"),
       path: Array.isArray(value.path) ? value.path.map(text) : [],
       start: Math.max(0, Number(value.start) || 0),

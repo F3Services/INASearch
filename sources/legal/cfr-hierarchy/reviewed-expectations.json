@@ -1,0 +1,5228 @@
+{
+  "schemaVersion": 1,
+  "reviewedSnapshot": "2026-09-10",
+  "reviews": [
+    {
+      "id": "8:214.1",
+      "rule": "admission-compound-headings",
+      "reason": "Visible (a)(3), General requirements / (i), and (b), Readmission / (1) headings; successive (i)-(iv), (2)-(4) admission categories corroborate the parent reset. Inline statutory references are not markers.",
+      "firstBlock": 16,
+      "lastBlock": 40,
+      "sourceGuard": "78e0cc75a268a1f1",
+      "firstGuard": "892c30070fe94def",
+      "expectations": [
+        {
+          "blockPath": [
+            16
+          ],
+          "original": [
+            "p",
+            "(3) General requirements. (i) Every nonimmigrant alien who applies for admission to, or an extension of stay in, the United States, must establish that he or she is admissible to the United States, or that any ground of inadmissibility has been waived under section 212(d)(3) of the Act. Upon application for admission, the alien must present a valid passport and valid visa unless either or both documents have been waived. A nonimmigrant alien's admission to the United States is conditioned on compliance with any inspection requirement in § 235.1(d) or of this chapter, as well as compliance with part 215, subpart B, of this chapter, if applicable. The passport of an alien applying for admission must be valid for a minimum of six months from the expiration date of the contemplated period of stay, unless otherwise provided in this chapter, and the alien must agree to abide by the terms and conditions of his or her admission. An alien applying for extension of stay must present a passport only if requested to do so by the Department of Homeland Security. The passport of an alien applying for extension of stay must be valid at the time of application for extension, unless otherwise provided in this chapter, and the alien must agree to maintain the validity of his or her passport and to abide by all the terms and conditions of his extension.",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(3) "
+              },
+              {
+                "x": "General requirements.",
+                "s": "i"
+              },
+              {
+                "x": " (i) Every nonimmigrant alien who applies for admission to, or an extension of stay in, the United States, must establish that he or she is admissible to the United States, or that any ground of inadmissibility has been waived under section 212(d)(3) of the Act. Upon application for admission, the alien must present a valid passport and valid visa unless either or both documents have been waived. A nonimmigrant alien's admission to the United States is conditioned on compliance with any inspection requirement in § 235.1(d) or of this chapter, as well as compliance with part 215, subpart B, of this chapter, if applicable. The passport of an alien applying for admission must be valid for a minimum of six months from the expiration date of the contemplated period of stay, unless otherwise provided in this chapter, and the alien must agree to abide by the terms and conditions of his or her admission. An alien applying for extension of stay must present a passport only if requested to do so by the Department of Homeland Security. The passport of an alien applying for extension of stay must be valid at the time of application for extension, unless otherwise provided in this chapter, and the alien must agree to maintain the validity of his or her passport and to abide by all the terms and conditions of his extension."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)",
+              0,
+              3
+            ],
+            [
+              "(a)(3)(i)",
+              26,
+              29
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            17
+          ],
+          "original": [
+            "p",
+            "(ii) At the time of admission or extension of stay, every nonimmigrant alien must also agree to depart the United States at the expiration of his or her authorized period of admission or extension of stay, or upon abandonment of his or her authorized nonimmigrant status, and to comply with the departure procedures at section 215.8 of this chapter if such procedures apply to the particular alien. The nonimmigrant alien's failure to comply with those departure requirements, including any requirement that the alien provide biometric identifiers, may constitute a failure of the alien to maintain the terms of his or her nonimmigrant status.",
+            "(a)(2)(ii)",
+            "",
+            [
+              {
+                "a": "(a)(2)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            18
+          ],
+          "original": [
+            "p",
+            "(iii) At the time a nonimmigrant alien applies for admission or extension of stay, he or she must post a bond on Form I-352 in the sum of not less than $500, to ensure the maintenance of his or her nonimmigrant status and departure from the United States, if required to do so by the Commissioner of CBP, the Director of U.S. Citizenship and Immigration Services, an immigration judge, or the Board of Immigration Appeals.",
+            "(a)(2)(iii)",
+            "",
+            [
+              {
+                "a": "(a)(2)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            19
+          ],
+          "original": [
+            "p",
+            "(b) Readmission of nonimmigrants under section 101(a)(15) (F), (J), (M), or (Q)(ii) to complete unexpired periods of previous admission or extension of stay—(1) Section 101(a)(15)(F). The inspecting immigration officer shall readmit for duration of status as defined in § 214.2(f)(5)(i), any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(F) of the Act, if the alien:",
+            "",
+            "(a)(2)(iii)((b)(a)(15)(F)(J)(M)(Q)(ii)",
+            [],
+            [
+              {
+                "x": "(b) "
+              },
+              {
+                "x": "Readmission of nonimmigrants under section 101(a)(15) (F), (J), (M), or (Q)(ii) to complete unexpired periods of previous admission or extension of stay",
+                "s": "i"
+              },
+              {
+                "x": "—(1) "
+              },
+              {
+                "x": "Section 101(a)(15)(F).",
+                "s": "i"
+              },
+              {
+                "x": " The inspecting immigration officer shall readmit for duration of status as defined in § 214.2(f)(5)(i), any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(F) of the Act, if the alien:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)",
+              0,
+              3
+            ],
+            [
+              "(b)(1)",
+              157,
+              160
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            20
+          ],
+          "original": [
+            "p",
+            "(i) Is admissible;",
+            "(a)(2)(i)",
+            "",
+            [
+              {
+                "a": "(a)(2)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            21
+          ],
+          "original": [
+            "p",
+            "(ii) Is applying for readmission after an absence from the United States not exceeding thirty days solely in contiguous territory or adjacent islands;",
+            "(a)(2)(ii)",
+            "",
+            [
+              {
+                "a": "(a)(2)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            22
+          ],
+          "original": [
+            "p",
+            "(iii) Is in possession of a valid passport unless exempt from the requirement for presentation of a passport; and",
+            "(a)(2)(iii)",
+            "",
+            [
+              {
+                "a": "(a)(2)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            23
+          ],
+          "original": [
+            "p",
+            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, an Arrival-Departure Record, Form I-94 (see § 1.4 of this chapter), issued to the alien in connection with the previous admission or stay, and either:",
+            "(a)(2)(iv)",
+            "",
+            [
+              {
+                "a": "(a)(2)(iv)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(iv)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            24
+          ],
+          "original": [
+            "p",
+            "(A) A properly endorsed Form I-20 or successor form if there has been no substantive change in the information on the student's most recent Form I-20 or successor form since the form was initially issued; or",
+            "(a)(2)(iv)(A)",
+            "",
+            [
+              {
+                "a": "(a)(2)(iv)(A)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(iv)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            25
+          ],
+          "original": [
+            "p",
+            "(B) A new Form I-20 or successor form if there has been any substantive change in the information on the student's most recent Form I-20 or successor form since the form was initially issued.",
+            "(a)(2)(iv)(B)",
+            "",
+            [
+              {
+                "a": "(a)(2)(iv)(B)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(iv)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            26
+          ],
+          "original": [
+            "p",
+            "(2) Section 101(a)(15)(J). The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(J) of the Act, if the alien:",
+            "(a)(2)",
+            "",
+            [
+              {
+                "a": "(a)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "(2) "
+              },
+              {
+                "x": "Section 101(a)(15)(J).",
+                "s": "i"
+              },
+              {
+                "x": " The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(J) of the Act, if the alien:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            27
+          ],
+          "original": [
+            "p",
+            "(i) Is admissible;",
+            "(a)(2)(i)",
+            "",
+            [
+              {
+                "a": "(a)(2)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            28
+          ],
+          "original": [
+            "p",
+            "(ii) Is applying for readmission after an absence from the United States not exceeding thirty days solely in contiguous territory or adjacent islands;",
+            "(a)(2)(ii)",
+            "",
+            [
+              {
+                "a": "(a)(2)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            29
+          ],
+          "original": [
+            "p",
+            "(iii) Is in possession of a valid passport unless exempt from the requirement for the presentation of a passport; and",
+            "(a)(2)(iii)",
+            "",
+            [
+              {
+                "a": "(a)(2)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            30
+          ],
+          "original": [
+            "p",
+            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, Form I-94 issued to the alien in connection with the previous admission or stay or the last Form DS-2019 issued to the alien. Form I-94 or Form DS-2019 must show the unexpired period of the alien's stay properly endorsed.",
+            "(a)(2)(iv)",
+            "",
+            [
+              {
+                "a": "(a)(2)(iv)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iv)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            31
+          ],
+          "original": [
+            "p",
+            "(3) Section 101(a)(15)(M). The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(M) of the Act, if the alien:",
+            "(a)(3)",
+            "",
+            [
+              {
+                "a": "(a)(3)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "(3) "
+              },
+              {
+                "x": "Section 101(a)(15)(M).",
+                "s": "i"
+              },
+              {
+                "x": " The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(M) of the Act, if the alien:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            32
+          ],
+          "original": [
+            "p",
+            "(i) Is admissible;",
+            "(a)(3)(i)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            33
+          ],
+          "original": [
+            "p",
+            "(ii) Is applying for readmission after an absence not exceeding thirty days solely in contiguous territory;",
+            "(a)(3)(ii)",
+            "",
+            [
+              {
+                "a": "(a)(3)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            34
+          ],
+          "original": [
+            "p",
+            "(iii) Is in possession of a valid passport unless exempt from the requirement for presentation of a passport; and",
+            "(a)(3)(iii)",
+            "",
+            [
+              {
+                "a": "(a)(3)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            35
+          ],
+          "original": [
+            "p",
+            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, Form I-94 issued to the alien in connection with the previous admission or stay, and the alien's properly endorsed Form I-20 or successor form.",
+            "(a)(3)(iv)",
+            "",
+            [
+              {
+                "a": "(a)(3)(iv)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iv)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            36
+          ],
+          "original": [
+            "p",
+            "(4) Section 101(a)(15)(Q)(ii). The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, if the alien:",
+            "(a)(4)",
+            "",
+            [
+              {
+                "a": "(a)(4)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "(4) "
+              },
+              {
+                "x": "Section 101(a)(15)(Q)(ii).",
+                "s": "i"
+              },
+              {
+                "x": " The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, if the alien:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(4)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            37
+          ],
+          "original": [
+            "p",
+            "(i) Is admissible;",
+            "(a)(4)(i)",
+            "",
+            [
+              {
+                "a": "(a)(4)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(4)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            38
+          ],
+          "original": [
+            "p",
+            "(ii) Is applying for readmission after an absence from the United States not exceeding 30 days solely in contiguous territory or adjacent islands;",
+            "(a)(4)(ii)",
+            "",
+            [
+              {
+                "a": "(a)(4)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(4)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            39
+          ],
+          "original": [
+            "p",
+            "(iii) Is in possession of a valid passport;",
+            "(a)(4)(iii)",
+            "",
+            [
+              {
+                "a": "(a)(4)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(4)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            40
+          ],
+          "original": [
+            "p",
+            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, an Arrival-Departure Record, Form I-94, issued to the alien in connection with the previous admission or stay. The principal alien must also present a Certification Letter issued by the Department of State's Program Administrator.",
+            "(a)(4)(iv)",
+            "",
+            [
+              {
+                "a": "(a)(4)(iv)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(4)(iv)",
+              0,
+              4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8:274a.2",
+      "rule": "verification-document-levels",
+      "reason": "XML italic numerals and Roman markers retain fifth/sixth levels; document-category headings B/C/D and internal references identify the parent. Plain (vi) Special rules resumes (b)(1); Retention heading resumes (b)(2). The source prints (vi) twice in the identity list: retain both occurrences and every word.",
+      "firstBlock": 24,
+      "lastBlock": 106,
+      "sourceGuard": "d8f111dc1f158ce4",
+      "firstGuard": "75cb6bc942536be5",
+      "expectations": [
+        {
+          "blockPath": [
+            28
+          ],
+          "original": [
+            "p",
+            "(vi) U.S. military card or draft record;",
+            "(b)(1)(vi)",
+            "",
+            [
+              {
+                "a": "(b)(1)(vi)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "vi",
+                "s": "i"
+              },
+              {
+                "x": ") U.S. military card or draft record;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(1)(vi)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            29
+          ],
+          "original": [
+            "p",
+            "(v) Identification card issued by federal, state, or local government agencies or entities. If the identification card does not contain a photograph, identifying information shall be included such as: name, date of birth, sex, height, color of eyes, and address;",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "v",
+                "s": "i"
+              },
+              {
+                "x": ") Identification card issued by federal, state, or local government agencies or entities. If the identification card does not contain a photograph, identifying information shall be included such as: name, date of birth, sex, height, color of eyes, and address;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(1)(v)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            30
+          ],
+          "original": [
+            "p",
+            "(vi) Military dependent's identification card;",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "vi",
+                "s": "i"
+              },
+              {
+                "x": ") Military dependent's identification card;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(1)(vi)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            31
+          ],
+          "original": [
+            "p",
+            "(vii) Native American tribal documents;",
+            "(b)(1)(vii)",
+            "",
+            [
+              {
+                "a": "(b)(1)(vii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "vii",
+                "s": "i"
+              },
+              {
+                "x": ") Native American tribal documents;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(1)(vii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            32
+          ],
+          "original": [
+            "p",
+            "(viii) United States Coast Guard Merchant Mariner Card;",
+            "(b)(1)(viii)",
+            "",
+            [
+              {
+                "a": "(b)(1)(viii)",
+                "s": 0,
+                "e": 6
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "viii",
+                "s": "i"
+              },
+              {
+                "x": ") United States Coast Guard Merchant Mariner Card;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(1)(viii)",
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            33
+          ],
+          "original": [
+            "p",
+            "(ix) Driver's license issued by a Canadian government authority;",
+            "(b)(1)(ix)",
+            "",
+            [
+              {
+                "a": "(b)(1)(ix)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "ix",
+                "s": "i"
+              },
+              {
+                "x": ") Driver's license issued by a Canadian government authority;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(1)(ix)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            34
+          ],
+          "original": [
+            "p",
+            "(2) For individuals under age 18 who are unable to produce a document listed in paragraph (b)(1)(v)(B)(1) of this section, the following documents are acceptable to establish identity only:",
+            "(b)(2)",
+            "",
+            [
+              {
+                "a": "(b)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") For individuals under age 18 who are unable to produce a document listed in paragraph (b)(1)(v)(B)("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") of this section, the following documents are acceptable to establish identity only:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            35
+          ],
+          "original": [
+            "p",
+            "(i) School record or report card;",
+            "(b)(2)(i)",
+            "",
+            [
+              {
+                "a": "(b)(2)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "i",
+                "s": "i"
+              },
+              {
+                "x": ") School record or report card;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(2)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            36
+          ],
+          "original": [
+            "p",
+            "(ii) Clinic doctor or hospital record;",
+            "(b)(2)(ii)",
+            "",
+            [
+              {
+                "a": "(b)(2)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "ii",
+                "s": "i"
+              },
+              {
+                "x": ") Clinic doctor or hospital record;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(2)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            37
+          ],
+          "original": [
+            "p",
+            "(iii) Daycare or nursery school record.",
+            "(b)(2)(iii)",
+            "",
+            [
+              {
+                "a": "(b)(2)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "iii",
+                "s": "i"
+              },
+              {
+                "x": ") Daycare or nursery school record."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(2)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            38
+          ],
+          "original": [
+            "p",
+            "(3) Minors under the age of 18 who are unable to produce one of the identity documents listed in paragraph (b)(1)(v)(B) (1) or (2) of this section are exempt from producing one of the enumerated identity documents if:",
+            "(b)(3)",
+            "",
+            [
+              {
+                "a": "(b)(3)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "3",
+                "s": "i"
+              },
+              {
+                "x": ") Minors under the age of 18 who are unable to produce one of the identity documents listed in paragraph (b)(1)(v)(B) ("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") or ("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") of this section are exempt from producing one of the enumerated identity documents if:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(3)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            39
+          ],
+          "original": [
+            "p",
+            "(i) The minor's parent or legal guardian completes on the Form I-9 Section 1—“Employee Information and Verification” and in the space for the minor's signature, the parent or legal guardian writes the words, “minor under age 18.”",
+            "(b)(3)(i)",
+            "",
+            [
+              {
+                "a": "(b)(3)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "i",
+                "s": "i"
+              },
+              {
+                "x": ") The minor's parent or legal guardian completes on the Form I-9 Section 1—“Employee Information and Verification” and in the space for the minor's signature, the parent or legal guardian writes the words, “minor under age 18.”"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(3)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            40
+          ],
+          "original": [
+            "p",
+            "(ii) The minor's parent or legal guardian completes on the Form I-9 the “Preparer/Translator certification.”",
+            "(b)(3)(ii)",
+            "",
+            [
+              {
+                "a": "(b)(3)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "ii",
+                "s": "i"
+              },
+              {
+                "x": ") The minor's parent or legal guardian completes on the Form I-9 the “Preparer/Translator certification.”"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(3)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            41
+          ],
+          "original": [
+            "p",
+            "(iii) The employer or the recruiter or referrer for a fee writes in Section 2—“Employer Review and Verification” under List B in the space after the words “Document Identification #” the words, “minor under age 18.”",
+            "(b)(3)(iii)",
+            "",
+            [
+              {
+                "a": "(b)(3)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "iii",
+                "s": "i"
+              },
+              {
+                "x": ") The employer or the recruiter or referrer for a fee writes in Section 2—“Employer Review and Verification” under List B in the space after the words “Document Identification #” the words, “minor under age 18.”"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(3)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            42
+          ],
+          "original": [
+            "p",
+            "(4) Individuals with handicaps, who are unable to produce one of the identity documents listed in paragraph (b)(1)(v)(B) (1) or (2) of this section, who are being placed into employment by a nonprofit organization, association or as part of a rehabilitation program, may follow the procedures for establishing identity provided in this section for minors under the age of 18, substituting where appropriate, the term “special placement” for “minor under age 18”, and permitting, in addition to a parent or legal guardian, a representative from the nonprofit organization, association or rehabilitation program placing the individual into a position of employment, to fill out and sign in the appropriate section, the Form I-9. For purposes of this section the term individual with handicaps means any person who",
+            "(b)(4)",
+            "",
+            [
+              {
+                "a": "(b)(4)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "4",
+                "s": "i"
+              },
+              {
+                "x": ") Individuals with handicaps, who are unable to produce one of the identity documents listed in paragraph (b)(1)(v)(B) ("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") or ("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") of this section, who are being placed into employment by a nonprofit organization, association or as part of a rehabilitation program, may follow the procedures for establishing identity provided in this section for minors under the age of 18, substituting where appropriate, the term “special placement” for “minor under age 18”, and permitting, in addition to a parent or legal guardian, a representative from the nonprofit organization, association or rehabilitation program placing the individual into a position of employment, to fill out and sign in the appropriate section, the Form I-9. For purposes of this section the term "
+              },
+              {
+                "x": "individual with handicaps",
+                "s": "i"
+              },
+              {
+                "x": " means any person who"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(4)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            43
+          ],
+          "original": [
+            "p",
+            "(i) Has a physical or mental impairment which substantially limits one or more of such person's major life activities,",
+            "(b)(4)(i)",
+            "",
+            [
+              {
+                "a": "(b)(4)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "i",
+                "s": "i"
+              },
+              {
+                "x": ") Has a physical or mental impairment which substantially limits one or more of such person's major life activities,"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(4)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            44
+          ],
+          "original": [
+            "p",
+            "(ii) Has a record of such impairment, or",
+            "(b)(4)(ii)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "ii",
+                "s": "i"
+              },
+              {
+                "x": ") Has a record of such impairment, or"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(4)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            45
+          ],
+          "original": [
+            "p",
+            "(iii) Is regarded as having such impairment.",
+            "(b)(4)(iii)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "iii",
+                "s": "i"
+              },
+              {
+                "x": ") Is regarded as having such impairment."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(B)(4)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            46
+          ],
+          "original": [
+            "p",
+            "(C) The following are acceptable documents to establish employment authorization only:",
+            "(b)(4)(iii)(C)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            47
+          ],
+          "original": [
+            "p",
+            "(1) A Social Security account number card other than one that specifies on the face that the issuance of the card does not authorize employment in the United States;",
+            "(b)(4)(iii)(C)(1)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(1)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") A Social Security account number card other than one that specifies on the face that the issuance of the card does not authorize employment in the United States;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(C)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            48
+          ],
+          "original": [
+            "p",
+            "(2) Certification or report of birth issued by the Department of State, including Forms FS-545, DS-1350, FS-240;",
+            "(b)(4)(iii)(C)(2)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") Certification or report of birth issued by the Department of State, including Forms FS-545, DS-1350, FS-240;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(C)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            49
+          ],
+          "original": [
+            "p",
+            "(3) An original or certified copy of a birth certificate issued by a State, county, municipal authority or outlying possession of the United States bearing an official seal;",
+            "(b)(4)(iii)(C)(3)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(3)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "3",
+                "s": "i"
+              },
+              {
+                "x": ") An original or certified copy of a birth certificate issued by a State, county, municipal authority or outlying possession of the United States bearing an official seal;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(C)(3)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            50
+          ],
+          "original": [
+            "p",
+            "(4) Native American tribal document;",
+            "(b)(4)(iii)(C)(4)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(4)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "4",
+                "s": "i"
+              },
+              {
+                "x": ") Native American tribal document;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(C)(4)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            51
+          ],
+          "original": [
+            "p",
+            "(5) United States Citizen Identification Card, Form I-197;",
+            "(b)(4)(iii)(C)(5)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(5)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "5",
+                "s": "i"
+              },
+              {
+                "x": ") United States Citizen Identification Card, Form I-197;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(C)(5)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            52
+          ],
+          "original": [
+            "p",
+            "(6) Identification card for use of resident citizen in the United States, Form I-179;",
+            "(b)(4)(iii)(C)(6)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(6)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "6",
+                "s": "i"
+              },
+              {
+                "x": ") Identification card for use of resident citizen in the United States, Form I-179;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(C)(6)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            53
+          ],
+          "original": [
+            "p",
+            "(7) An employment authorization document issued by the Department of Homeland Security.",
+            "(b)(4)(iii)(C)(7)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(7)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "7",
+                "s": "i"
+              },
+              {
+                "x": ") An employment authorization document issued by the Department of Homeland Security."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(C)(7)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            54
+          ],
+          "original": [
+            "p",
+            "(D) The following are acceptable documents to establish both identity and employment authorization in the Commonwealth of the Northern Mariana Islands only, for a two-year period starting from the transition program effective date (as defined in 8 CFR 1.1), in addition to those documents listed in paragraph (b)(1)(v)(A) of this section:",
+            "(b)(4)(iii)(D)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(D)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(D)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            55
+          ],
+          "original": [
+            "p",
+            "(1) In the case of an alien with employment authorization in the Commonwealth of the Northern Mariana Islands incident to status for a period of up to two years following the transition program effective date that is unrestricted or otherwise authorizes a change of employer:",
+            "(b)(4)(iii)(D)(1)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(D)(1)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(D)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            56
+          ],
+          "original": [
+            "p",
+            "(i) The unexpired foreign passport and an Alien Entry Permit with red band issued to the alien by the Office of the Attorney General, Division of Immigration of the Commonwealth of the Northern Mariana Islands before the transition program effective date, as long as the period of employment authorization has not yet expired, or",
+            "(b)(4)(iii)(D)(1)(i)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(D)(1)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(D)(1)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            57
+          ],
+          "original": [
+            "p",
+            "(ii) An unexpired foreign passport and temporary work authorization letter issued by the Department of Labor of the Commonwealth of the Northern Mariana Islands before the transition program effective date, and containing the name and photograph of the individual, as long as the period of employment authorization has not yet expired and the proposed employment is not in conflict with any restrictions or limitations identified on the Temporary Work Authorization letter;",
+            "(b)(4)(iii)(D)(1)(ii)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(D)(1)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(D)(1)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            58
+          ],
+          "original": [
+            "p",
+            "(iii) An unexpired foreign passport and a permanent resident card issued by the Commonwealth of the Northern Mariana Islands.",
+            "(b)(4)(iii)(D)(1)(iii)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(D)(1)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(D)(1)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            59
+          ],
+          "original": [
+            "p",
+            "(2) [Reserved]",
+            "(b)(4)(iii)(D)(2)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(D)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") [Reserved]"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(v)(D)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            60
+          ],
+          "original": [
+            "p",
+            "(vi) Special rules for receipts. Except as provided in paragraph (b)(1)(iii) of this section, unless the individual indicates or the employer or recruiter or referrer for a fee has actual or constructive knowledge that the individual is not authorized to work, an employer or recruiter or referrer for a fee must accept a receipt for the application for a replacement document or a document described in paragraphs (b)(1)(vi)(B)(1) and (b)(1)(vi)(C)(1) of this section in lieu of the required document in order to comply with any requirement to examine documentation imposed by this section, in the following circumstances:",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(vi) "
+              },
+              {
+                "x": "Special rules for receipts.",
+                "s": "i"
+              },
+              {
+                "x": " Except as provided in paragraph (b)(1)(iii) of this section, unless the individual indicates or the employer or recruiter or referrer for a fee has actual or constructive knowledge that the individual is not authorized to work, an employer or recruiter or referrer for a fee must accept a receipt for the application for a replacement document or a document described in paragraphs (b)(1)(vi)(B)("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") and (b)(1)(vi)(C)("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") of this section in lieu of the required document in order to comply with any requirement to examine documentation imposed by this section, in the following circumstances:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            61
+          ],
+          "original": [
+            "p",
+            "(A) Application for a replacement document. The individual:",
+            "(b)(4)(iii)(A)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(A)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "(A) "
+              },
+              {
+                "x": "Application for a replacement document.",
+                "s": "i"
+              },
+              {
+                "x": " The individual:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            62
+          ],
+          "original": [
+            "p",
+            "(1) Is unable to provide the required document within the time specified in this section because the document was lost, stolen, or damaged;",
+            "(b)(4)(iii)(A)(1)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(A)(1)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") Is unable to provide the required document within the time specified in this section because the document was lost, stolen, or damaged;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(A)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            63
+          ],
+          "original": [
+            "p",
+            "(2) Presents a receipt for the application for the replacement document within the time specified in this section; and",
+            "(b)(4)(iii)(A)(2)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(A)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") Presents a receipt for the application for the replacement document within the time specified in this section; and"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(A)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            64
+          ],
+          "original": [
+            "p",
+            "(3) Presents the replacement document within 90 days of the hire or, in the case of reverification, the date employment authorization expires; or",
+            "(b)(4)(iii)(A)(3)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(A)(3)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "3",
+                "s": "i"
+              },
+              {
+                "x": ") Presents the replacement document within 90 days of the hire or, in the case of reverification, the date employment authorization expires; or"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(A)(3)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            65
+          ],
+          "original": [
+            "p",
+            "(B) Form I-94 or I-94A indicating temporary evidence of permanent resident status. The individual indicates in section 1 of the Form I-9 that he or she is a lawful permanent resident and the individual:",
+            "(b)(4)(iii)(B)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(B)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "(B) "
+              },
+              {
+                "x": "Form I-94 or I-94A indicating temporary evidence of permanent resident status.",
+                "s": "i"
+              },
+              {
+                "x": " The individual indicates in section 1 of the Form I-9 that he or she is a lawful permanent resident and the individual:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            66
+          ],
+          "original": [
+            "p",
+            "(1) Presents the arrival portion of Form I-94 or Form I-94A containing an unexpired “Temporary I-551” stamp and a photograph of the individual, which is designated for purposes of this section as a receipt for Form I-551; and",
+            "(b)(4)(iii)(B)(1)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(B)(1)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") Presents the arrival portion of Form I-94 or Form I-94A containing an unexpired “Temporary I-551” stamp and a photograph of the individual, which is designated for purposes of this section as a receipt for Form I-551; and"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(B)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            67
+          ],
+          "original": [
+            "p",
+            "(2) Presents the Form I-551 by the expiration date of the “Temporary I-551” stamp or, if the stamp has no expiration date, within one year from the issuance date of the arrival portion of the Form I-94 or Form I-94A; or",
+            "(b)(4)(iii)(B)(2)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(B)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") Presents the Form I-551 by the expiration date of the “Temporary I-551” stamp or, if the stamp has no expiration date, within one year from the issuance date of the arrival portion of the Form I-94 or Form I-94A; or"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(B)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            68
+          ],
+          "original": [
+            "p",
+            "(C) Form I-94 or I-94A indicating refugee status. The individual indicates in section 1 of the Form I-9 that he or she is an alien authorized to work and the individual:",
+            "(b)(4)(iii)(C)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "(C) "
+              },
+              {
+                "x": "Form I-94 or I-94A indicating refugee status.",
+                "s": "i"
+              },
+              {
+                "x": " The individual indicates in section 1 of the Form I-9 that he or she is an alien authorized to work and the individual:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            69
+          ],
+          "original": [
+            "p",
+            "(1) Presents the departure portion of Form I-94 or I-94A containing an unexpired refugee admission stamp, which is designated for purposes of this section as a receipt for the Form I-766, or a social security account number card that contains no employment restrictions; and",
+            "(b)(4)(iii)(C)(1)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(1)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") Presents the departure portion of Form I-94 or I-94A containing an unexpired refugee admission stamp, which is designated for purposes of this section as a receipt for the Form I-766, or a social security account number card that contains no employment restrictions; and"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(C)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            70
+          ],
+          "original": [
+            "p",
+            "(2) Presents, within 90 days of the hire or, in the case of reverification, the date employment authorization expires, either an unexpired Form I-766, or a social security account number card that contains no employment restrictions and a document described under paragraph (b)(1)(v)(B) of this section.",
+            "(b)(4)(iii)(C)(2)",
+            "",
+            [
+              {
+                "a": "(b)(4)(iii)(C)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") Presents, within 90 days of the hire or, in the case of reverification, the date employment authorization expires, either an unexpired Form I-766, or a social security account number card that contains no employment restrictions and a document described under paragraph (b)(1)(v)(B) of this section."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vi)(C)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            71
+          ],
+          "original": [
+            "p",
+            "(vii) If an individual's employment authorization expires, the employer, recruiter or referrer for a fee must reverify on the Form I-9 to reflect that the individual is still authorized to work in the United States; otherwise, the individual may no longer be employed, recruited, or referred. Reverification on the Form I-9 must occur not later than the date work authorization expires and must comply with the applicable document presentation and examination procedures in paragraphs (b)(1)(ii)(A) and (b)(1)(ix) of this section, and form instructions. If an Employment Authorization Document (Form I-766) as described in 8 CFR 274a.13(d) was presented for completion of the Form I-9 in combination with a Notice of Action (Form I-797C), stating that the original Employment Authorization Document has been automatically extended, reverification applies upon the expiration of the automatically extended validity period under 8 CFR 274a.13(d) and not upon the expiration date indicated on the face of the individual's Employment Authorization Document. In order to reverify on the Form I-9, the employee or referred individual must present a document that either shows continuing employment eligibility or is a new grant of work authorization. The employer or the recruiter or referrer for a fee must review this document, and if it appears to be genuine and relate to the individual, reverify by noting the document's identification number and expiration date, if any, on the Form I-9 and signing the attestation by a handwritten signature or electronic signature in accordance with paragraph (i) of this section.",
+            "(b)(4)(vii)",
+            "",
+            [
+              {
+                "a": "(b)(4)(vii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(vii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            72
+          ],
+          "original": [
+            "p",
+            "(viii) An employer will not be deemed to have hired an individual for employment if the individual is continuing in his or her employment and has a reasonable expectation of employment at all times.",
+            "(b)(4)(viii)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)",
+                "s": 0,
+                "e": 6
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)",
+              0,
+              6
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            73
+          ],
+          "original": [
+            "p",
+            "(A) An individual is continuing in his or her employment in one of the following situations:",
+            "(b)(4)(viii)(A)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            74
+          ],
+          "original": [
+            "p",
+            "(1) An individual takes approved paid or unpaid leave on account of study, illness or disability of a family member, illness or pregnancy, maternity or paternity leave, vacation, union business, or other temporary leave approved by the employer;",
+            "(b)(4)(viii)(A)(1)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(1)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") An individual takes approved paid or unpaid leave on account of study, illness or disability of a family member, illness or pregnancy, maternity or paternity leave, vacation, union business, or other temporary leave approved by the employer;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            75
+          ],
+          "original": [
+            "p",
+            "(2) An individual is promoted, demoted, or gets a pay raise;",
+            "(b)(4)(viii)(A)(2)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") An individual is promoted, demoted, or gets a pay raise;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            76
+          ],
+          "original": [
+            "p",
+            "(3) An individual is temporarily laid off for lack of work;",
+            "(b)(4)(viii)(A)(3)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(3)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "3",
+                "s": "i"
+              },
+              {
+                "x": ") An individual is temporarily laid off for lack of work;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(3)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            77
+          ],
+          "original": [
+            "p",
+            "(4) An individual is on strike or in a labor dispute;",
+            "(b)(4)(viii)(A)(4)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(4)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "4",
+                "s": "i"
+              },
+              {
+                "x": ") An individual is on strike or in a labor dispute;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(4)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            78
+          ],
+          "original": [
+            "p",
+            "(5) An individual is reinstated after disciplinary suspension for wrongful termination, found unjustified by any court, arbitrator, or administrative body, or otherwise resolved through reinstatement or settlement;",
+            "(b)(4)(viii)(A)(5)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(5)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "5",
+                "s": "i"
+              },
+              {
+                "x": ") An individual is reinstated after disciplinary suspension for wrongful termination, found unjustified by any court, arbitrator, or administrative body, or otherwise resolved through reinstatement or settlement;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(5)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            79
+          ],
+          "original": [
+            "p",
+            "(6) An individual transfers from one distinct unit of an employer to another distinct unit of the same employer; the employer may transfer the individual's Form I-9 to the receiving unit;",
+            "(b)(4)(viii)(A)(6)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(6)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "6",
+                "s": "i"
+              },
+              {
+                "x": ") An individual transfers from one distinct unit of an employer to another distinct unit of the same employer; the employer may transfer the individual's Form I-9 to the receiving unit;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(6)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            80
+          ],
+          "original": [
+            "p",
+            "(7) An individual continues his or her employment with a related, successor, or reorganized employer, provided that the employer obtains and maintains from the previous employer records and Forms I-9 where applicable. For this purpose, a related, successor, or reorganized employer includes:",
+            "(b)(4)(viii)(A)(7)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(7)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "7",
+                "s": "i"
+              },
+              {
+                "x": ") An individual continues his or her employment with a related, successor, or reorganized employer, provided that the employer obtains and maintains from the previous employer records and Forms I-9 where applicable. For this purpose, a related, successor, or reorganized employer includes:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(7)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            81
+          ],
+          "original": [
+            "p",
+            "(i) The same employer at another location;",
+            "(b)(4)(viii)(A)(7)(i)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(7)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "i",
+                "s": "i"
+              },
+              {
+                "x": ") The same employer at another location;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(7)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            82
+          ],
+          "original": [
+            "p",
+            "(ii) An employer who continues to employ some or all of a previous employer's workforce in cases involving a corporate reorganization, merger, or sale of stock or assets;",
+            "(b)(4)(viii)(A)(7)(ii)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(7)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "ii",
+                "s": "i"
+              },
+              {
+                "x": ") An employer who continues to employ some or all of a previous employer's workforce in cases involving a corporate reorganization, merger, or sale of stock or assets;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(7)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            83
+          ],
+          "original": [
+            "p",
+            "(iii) An employer who continues to employ any employee of another employer's workforce where both employers belong to the same multi-employer association and the employee continues to work in the same bargaining unit under the same collective bargaining agreement. For purposes of this subsection, any agent designated to complete and maintain the Form I-9 must record the employee's date of hire and/or termination each time the employee is hired and/or terminated by an employer of the multi-employer association; or",
+            "(b)(4)(viii)(A)(7)(iii)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(7)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "iii",
+                "s": "i"
+              },
+              {
+                "x": ") An employer who continues to employ any employee of another employer's workforce where both employers belong to the same multi-employer association and the employee continues to work in the same bargaining unit under the same collective bargaining agreement. For purposes of this subsection, any agent designated to complete and maintain the Form I-9 must record the employee's date of hire and/or termination each time the employee is hired and/or terminated by an employer of the multi-employer association; or"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(7)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            84
+          ],
+          "original": [
+            "p",
+            "(8) An individual is engaged in seasonal employment.",
+            "(b)(4)(viii)(A)(8)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(A)(8)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "8",
+                "s": "i"
+              },
+              {
+                "x": ") An individual is engaged in seasonal employment."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(A)(8)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            85
+          ],
+          "original": [
+            "p",
+            "(B) The employer who is claiming that an individual is continuing in his or her employment must also establish that the individual expected to resume employment at all times and that the individual's expectation is reasonable. Whether an individual's expectation is reasonable will be determined on a case-by-case basis taking into consideration several factors. Factors which would indicate that an individual has a reasonable expectation of employment include, but are not limited to, the following:",
+            "(b)(4)(viii)(B)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(B)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            86
+          ],
+          "original": [
+            "p",
+            "(1) The individual in question was employed by the employer on a regular and substantial basis. A determination of a regular and substantial basis is established by a comparison of other workers who are similarly employed by the employer;",
+            "(b)(4)(viii)(B)(1)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(B)(1)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") The individual in question was employed by the employer on a regular and substantial basis. A determination of a regular and substantial basis is established by a comparison of other workers who are similarly employed by the employer;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(B)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            87
+          ],
+          "original": [
+            "p",
+            "(2) The individual in question complied with the employer's established and published policy regarding his or her absence;",
+            "(b)(4)(viii)(B)(2)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(B)(2)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") The individual in question complied with the employer's established and published policy regarding his or her absence;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(B)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            88
+          ],
+          "original": [
+            "p",
+            "(3) The employer's past history of recalling absent employees for employment indicates a likelihood that the individual in question will resume employment with the employer within a reasonable time in the future;",
+            "(b)(4)(viii)(B)(3)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(B)(3)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "3",
+                "s": "i"
+              },
+              {
+                "x": ") The employer's past history of recalling absent employees for employment indicates a likelihood that the individual in question will resume employment with the employer within a reasonable time in the future;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(B)(3)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            89
+          ],
+          "original": [
+            "p",
+            "(4) The former position held by the individual in question has not been taken permanently by another worker;",
+            "(b)(4)(viii)(B)(4)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(B)(4)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "4",
+                "s": "i"
+              },
+              {
+                "x": ") The former position held by the individual in question has not been taken permanently by another worker;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(B)(4)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            90
+          ],
+          "original": [
+            "p",
+            "(5) The individual in question has not sought or obtained benefits during his or her absence from employment with the employer that are inconsistent with an expectation of resuming employment with the employer within a reasonable time in the future. Such benefits include, but are not limited to, severance and retirement benefits;",
+            "(b)(4)(viii)(B)(5)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(B)(5)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "5",
+                "s": "i"
+              },
+              {
+                "x": ") The individual in question has not sought or obtained benefits during his or her absence from employment with the employer that are inconsistent with an expectation of resuming employment with the employer within a reasonable time in the future. Such benefits include, but are not limited to, severance and retirement benefits;"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(B)(5)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            91
+          ],
+          "original": [
+            "p",
+            "(6) The financial condition of the employer indicates the ability of the employer to permit the individual in question to resume employment within a reasonable time in the future; or",
+            "(b)(4)(viii)(B)(6)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(B)(6)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "6",
+                "s": "i"
+              },
+              {
+                "x": ") The financial condition of the employer indicates the ability of the employer to permit the individual in question to resume employment within a reasonable time in the future; or"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(B)(6)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            92
+          ],
+          "original": [
+            "p",
+            "(7) The oral and/or written communication between employer, the employer's supervisory employees and the individual in question indicates that it is reasonably likely that the individual in question will resume employment with the employer within a reasonable time in the future.",
+            "(b)(4)(viii)(B)(7)",
+            "",
+            [
+              {
+                "a": "(b)(4)(viii)(B)(7)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "7",
+                "s": "i"
+              },
+              {
+                "x": ") The oral and/or written communication between employer, the employer's supervisory employees and the individual in question indicates that it is reasonably likely that the individual in question will resume employment with the employer within a reasonable time in the future."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(viii)(B)(7)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            93
+          ],
+          "original": [
+            "p",
+            "(ix) As an optional alternative to the physical examination procedure described in paragraph (b)(1)(ii)(A) of this section, the Secretary may, consistent with applicable law and via notice published in the Federal Register, authorize alternative documentation examination procedures with respect to some or all employers. The Secretary may adopt such procedures:",
+            "(b)(4)(ix)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ix)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [
+              {
+                "x": "(ix) As an optional alternative to the physical examination procedure described in paragraph (b)(1)(ii)(A) of this section, the Secretary may, consistent with applicable law and via notice published in the "
+              },
+              {
+                "x": "Federal Register,",
+                "s": "b"
+              },
+              {
+                "x": " authorize alternative documentation examination procedures with respect to some or all employers. The Secretary may adopt such procedures:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(ix)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            94
+          ],
+          "original": [
+            "p",
+            "(A) As part of a pilot program;",
+            "(b)(4)(ix)(A)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ix)(A)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(ix)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            95
+          ],
+          "original": [
+            "p",
+            "(B) Upon the Secretary's determination that such procedures offer an equivalent level of security to that of physical examination as indicated by, for instance, observed measures of system integrity (such as error or fraud rates) or the procedure's capacity for confirming certain documents or information; or",
+            "(b)(4)(ix)(B)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ix)(B)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(ix)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            96
+          ],
+          "original": [
+            "p",
+            "(C) As a temporary measure to address a public health emergency declared by the Secretary of Health and Human Services pursuant to Section 319 of the Public Health Service Act, or a national emergency declared by the President pursuant to Sections 201 and 301 of the National Emergencies Act.",
+            "(b)(4)(ix)(C)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ix)(C)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(ix)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            97
+          ],
+          "original": [
+            "p",
+            "(2) Retention and Inspection of Form I-9. (i) A paper (with original handwritten signatures), electronic (with acceptable electronic signatures that meet the requirements of paragraphs (h) and (i) of this section or original paper scanned into an electronic format, or a combination of paper and electronic formats that meet the requirements of paragraphs (e), (f), and (g) of this section), or microfilm or microfiche copy of the original signed version of Form I-9 must be retained by an employer or a recruiter or referrer for a fee for the following time periods:",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(2) "
+              },
+              {
+                "x": "Retention and Inspection of Form I-9.",
+                "s": "i"
+              },
+              {
+                "x": " (i) A paper (with original handwritten signatures), electronic (with acceptable electronic signatures that meet the requirements of paragraphs (h) and (i) of this section or original paper scanned into an electronic format, or a combination of paper and electronic formats that meet the requirements of paragraphs (e), (f), and (g) of this section), or microfilm or microfiche copy of the original signed version of Form I-9 must be retained by an employer or a recruiter or referrer for a fee for the following time periods:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)",
+              0,
+              3
+            ],
+            [
+              "(b)(2)(i)",
+              42,
+              45
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            98
+          ],
+          "original": [
+            "p",
+            "(A) In the case of an employer, three years after the date of the hire or one year after the date the individual's employment is terminated, whichever is later; or",
+            "(b)(4)(ix)(A)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ix)(A)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(i)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            99
+          ],
+          "original": [
+            "p",
+            "(B) In the case of a recruiter or referrer for a fee, three years after the date of the hire.",
+            "(b)(4)(ix)(B)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ix)(B)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(i)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            100
+          ],
+          "original": [
+            "p",
+            "(ii) Any person or entity required to retain Forms I-9 in accordance with this section shall be provided with at least three business days notice prior to an inspection of Forms I-9 by officers of an authorized agency of the United States. At the time of inspection, Forms I-9 must be made available in their original paper, electronic form, a paper copy of the electronic form, or on microfilm or microfiche at the location where the request for production was made. If Forms I-9 are kept at another location, the person or entity must inform the officer of the authorized agency of the United States of the location where the forms are kept and make arrangements for the inspection. Inspections may be performed at an office of an authorized agency of the United States. A recruiter or referrer for a fee who has designated an employer to complete the employment verification procedures may present a photocopy or printed electronic image of the Form I-9 in lieu of presenting the Form I-9 in its original paper or electronic form or on microfilm or microfiche, as set forth in paragraph (b)(1)(iv) of this section. Any refusal or delay in presentation of the Forms I-9 for inspection is a violation of the retention requirements as set forth in section 274A(b)(3) of the Act. No Subpoena or warrant shall be required for such inspection, but the use of such enforcement tools is not precluded. In addition, if the person or entity has not complied with a request to present the Forms I-9, any officer listed in 8 CFR 287.4 may compel production of the Forms I-9 and any other relevant documents by issuing a subpoena. Nothing in this section is intended to limit the subpoena power under section 235(d)(4) of the Act.",
+            "",
+            "",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            101
+          ],
+          "original": [
+            "p",
+            "(iii) The following standards shall apply to Forms I-9 presented on microfilm or microfiche submitted to an officer of the Service, the Special Counsel for Immigration-Related Unfair Employment Practices, or the Department of Labor: Microfilm, when displayed on a microfilm reader (viewer) or reproduced on paper must exhibit a high degree of legibility and readability. For this purpose, legibility is defined as the quality of a letter or numeral which enables the observer to positively and quickly identify it to the exclusion of all other letters or numerals. Readability is defined as the quality of a group of letters or numerals being recognizable as words or whole numbers. A detailed index of all microfilmed data shall be maintained and arranged in such a manner as to permit the immediate location of any particular record. It is the responsibility of the employer, recruiter or referrer for a fee:",
+            "",
+            "",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            102
+          ],
+          "original": [
+            "p",
+            "(A) To provide for the processing, storage and maintenance of all microfilm, and",
+            "(b)(4)(ix)(A)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ix)(A)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iii)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            103
+          ],
+          "original": [
+            "p",
+            "(B) To be able to make the contents thereof available as required by law. The person or entity presenting the microfilm will make available a reader-printer at the examination site for the ready reading, location and reproduction of any record or records being maintained on microfilm. Reader-printers made available to an officer of the Service, the Special Counsel for Immigration-Related Unfair Employment Practices, or the Department of Labor shall provide safety features and be in clean condition, properly maintained and in good working order. The reader-printers must have the capacity to display and print a complete page of information. A person or entity who is determined to have failed to comply with the criteria established by this regulation for the presentation of microfilm or microfiche to the Service, the Special Counsel for Immigration-Related Unfair Employment Practices, or the Department of Labor, and at the time of the inspection does not present a properly completed Form I-9 for the employee, is in violation of section 274A(a)(1)(B) of the Act and § 274a.2(b)(2).",
+            "(b)(4)(ix)(B)",
+            "",
+            [
+              {
+                "a": "(b)(4)(ix)(B)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iii)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            104
+          ],
+          "original": [
+            "p",
+            "(iv) Paragraphs (e), (f), (g), (h), and (i) of this section specify the standards for electronic Forms I-9.",
+            "",
+            "",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iv)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            105
+          ],
+          "original": [
+            "p",
+            "(3) Copying of documentation. An employer, or a recruiter or referrer for a fee may, but is not required to, copy or make an electronic image of a document presented by an individual solely for the purpose of complying with the verification requirements of this section. If such a copy or electronic image is made, it must either be retained with the Form I-9 or stored with the employee's records and be retrievable consistent with paragraphs (e), (f), (g), (h), and (i) of this section. The copying or electronic imaging of any such document and retention of the copy or electronic image does not relieve the employer from the requirement to fully complete section 2 of the Form I-9. An employer, recruiter or referrer for a fee should not, however, copy or electronically image only the documents of individuals of certain national origins or citizenship statuses. To do so may violate section 274B of the Act.",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(3) "
+              },
+              {
+                "x": "Copying of documentation.",
+                "s": "i"
+              },
+              {
+                "x": " An employer, or a recruiter or referrer for a fee may, but is not required to, copy or make an electronic image of a document presented by an individual solely for the purpose of complying with the verification requirements of this section. If such a copy or electronic image is made, it must either be retained with the Form I-9 or stored with the employee's records and be retrievable consistent with paragraphs (e), (f), (g), (h), and (i) of this section. The copying or electronic imaging of any such document and retention of the copy or electronic image does not relieve the employer from the requirement to fully complete section 2 of the Form I-9. An employer, recruiter or referrer for a fee should not, however, copy or electronically image only the documents of individuals of certain national origins or citizenship statuses. To do so may violate section 274B of the Act."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)",
+              0,
+              3
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8:212.4",
+      "rule": "waiver-compound-heading",
+      "reason": "Visible Applications / (1) General compound heading, six Roman children, then (2) Authority: renderer omitted (1). Continuation describes the same recommendation.",
+      "firstBlock": 0,
+      "lastBlock": 7,
+      "sourceGuard": "78a5616d613ee541",
+      "firstGuard": "e28e364fd4042c2f",
+      "expectations": [
+        {
+          "blockPath": [
+            0
+          ],
+          "original": [
+            "p",
+            "(a) Applications under section 212(d)(3)(A)—(1) General. District directors and officers in charge outside the United States in the districts of Bangkok, Thailand; Mexico City, Mexico; and Rome, Italy are authorized to act upon recommendations made by consular officers for the exercise of discretion under section 212(d)(3)(A) of the Act. The District Director, Washington, DC, has jurisdiction in such cases recommended to the Service at the seat-of-government level by the Department of State. When a consular officer or other State Department official recommends that the benefits of section 212(d)(3)(A) of the Act be accorded an alien, neither an application nor fee shall be required. The recommendation shall specify:",
+            "(a)",
+            "",
+            [
+              {
+                "a": "(a)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "(a) "
+              },
+              {
+                "x": "Applications under section 212(d)(3)(A)",
+                "s": "i"
+              },
+              {
+                "x": "—(1) "
+              },
+              {
+                "x": "General.",
+                "s": "i"
+              },
+              {
+                "x": " District directors and officers in charge outside the United States in the districts of Bangkok, Thailand; Mexico City, Mexico; and Rome, Italy are authorized to act upon recommendations made by consular officers for the exercise of discretion under section 212(d)(3)(A) of the Act. The District Director, Washington, DC, has jurisdiction in such cases recommended to the Service at the seat-of-government level by the Department of State. When a consular officer or other State Department official recommends that the benefits of section 212(d)(3)(A) of the Act be accorded an alien, neither an application nor fee shall be required. The recommendation shall specify:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)",
+              0,
+              3
+            ],
+            [
+              "(a)(1)",
+              44,
+              47
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            1
+          ],
+          "original": [
+            "p",
+            "(i) The reasons for inadmissibility and each section of law under which the alien is inadmissible;",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            2
+          ],
+          "original": [
+            "p",
+            "(ii) Each intended date of arrival;",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            3
+          ],
+          "original": [
+            "p",
+            "(iii) The length of each proposed stay in the United States;",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            4
+          ],
+          "original": [
+            "p",
+            "(iv) The purpose of each stay;",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(iv)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            5
+          ],
+          "original": [
+            "p",
+            "(v) The number of entries which the alien intends to make; and",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(v)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            6
+          ],
+          "original": [
+            "p",
+            "(vi) The justification for exercising the authority contained in section 212(d)(3) of the Act.",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(vi)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            7
+          ],
+          "original": [
+            "p",
+            "If the alien desires to make multiple entries and the consular officer or other State Department official believes that the circumstances justify the issuance of a visa valid for multiple entries rather than for a specified number of entries, and recommends that the alien be accorded an authorization valid for multiple entries, the information required by items (ii) and (iii) shall be furnished only with respect to the initial entry. Item (ii) does not apply to a bona fide crewman. The consular officer or other State Department official shall be notified of the decision on his recommendation. No appeal by the alien shall lie from an adverse decision made by a Service officer on the recommendation of a consular officer or other State Department official.",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": "(a)(1)"
+        }
+      ]
+    },
+    {
+      "id": "8:1212.4",
+      "rule": "waiver-compound-heading",
+      "reason": "Visible Applications / (1) General compound heading, six Roman children, then (2) Authority: renderer omitted (1). Continuation describes the same recommendation.",
+      "firstBlock": 0,
+      "lastBlock": 7,
+      "sourceGuard": "78a5616d613ee541",
+      "firstGuard": "e28e364fd4042c2f",
+      "expectations": [
+        {
+          "blockPath": [
+            0
+          ],
+          "original": [
+            "p",
+            "(a) Applications under section 212(d)(3)(A)—(1) General. District directors and officers in charge outside the United States in the districts of Bangkok, Thailand; Mexico City, Mexico; and Rome, Italy are authorized to act upon recommendations made by consular officers for the exercise of discretion under section 212(d)(3)(A) of the Act. The District Director, Washington, DC, has jurisdiction in such cases recommended to the Service at the seat-of-government level by the Department of State. When a consular officer or other State Department official recommends that the benefits of section 212(d)(3)(A) of the Act be accorded an alien, neither an application nor fee shall be required. The recommendation shall specify:",
+            "(a)",
+            "",
+            [
+              {
+                "a": "(a)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [
+              {
+                "x": "(a) "
+              },
+              {
+                "x": "Applications under section 212(d)(3)(A)",
+                "s": "i"
+              },
+              {
+                "x": "—(1) "
+              },
+              {
+                "x": "General.",
+                "s": "i"
+              },
+              {
+                "x": " District directors and officers in charge outside the United States in the districts of Bangkok, Thailand; Mexico City, Mexico; and Rome, Italy are authorized to act upon recommendations made by consular officers for the exercise of discretion under section 212(d)(3)(A) of the Act. The District Director, Washington, DC, has jurisdiction in such cases recommended to the Service at the seat-of-government level by the Department of State. When a consular officer or other State Department official recommends that the benefits of section 212(d)(3)(A) of the Act be accorded an alien, neither an application nor fee shall be required. The recommendation shall specify:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)",
+              0,
+              3
+            ],
+            [
+              "(a)(1)",
+              44,
+              47
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            1
+          ],
+          "original": [
+            "p",
+            "(i) The reasons for inadmissibility and each section of law under which the alien is inadmissible;",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            2
+          ],
+          "original": [
+            "p",
+            "(ii) Each intended date of arrival;",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            3
+          ],
+          "original": [
+            "p",
+            "(iii) The length of each proposed stay in the United States;",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            4
+          ],
+          "original": [
+            "p",
+            "(iv) The purpose of each stay;",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(iv)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            5
+          ],
+          "original": [
+            "p",
+            "(v) The number of entries which the alien intends to make; and",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(v)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            6
+          ],
+          "original": [
+            "p",
+            "(vi) The justification for exercising the authority contained in section 212(d)(3) of the Act.",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)(vi)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            7
+          ],
+          "original": [
+            "p",
+            "If the alien desires to make multiple entries and the consular officer or other State Department official believes that the circumstances justify the issuance of a visa valid for multiple entries rather than for a specified number of entries, and recommends that the alien be accorded an authorization valid for multiple entries, the information required by items (ii) and (iii) shall be furnished only with respect to the initial entry. Item (ii) does not apply to a bona fide crewman. The consular officer or other State Department official shall be notified of the decision on his recommendation. No appeal by the alien shall lie from an adverse decision made by a Service officer on the recommendation of a consular officer or other State Department official.",
+            "",
+            "(a)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": "(a)(1)"
+        }
+      ]
+    },
+    {
+      "id": "8:287.5",
+      "rule": "arrest-compound-heading",
+      "reason": "Arrests heading includes (i), followed by A-D conditions and explicit (ii) officers.",
+      "firstBlock": 37,
+      "lastBlock": 41,
+      "sourceGuard": "8ffed904693db8e4",
+      "firstGuard": "910e180c9f24f0bc",
+      "expectations": [
+        {
+          "blockPath": [
+            37
+          ],
+          "original": [
+            "p",
+            "(4) Arrests of persons under section 287(a)(5)(B) of the Act for any felony. (i) Section 287(a)(5)(B) of the Act authorizes designated immigration officers, as listed in paragraph (c)(4)(iii) of this section, to arrest persons, without warrant, for any felony cognizable under the laws of the United States if:",
+            "(c)(4)",
+            "",
+            [
+              {
+                "a": "(c)(4)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(c)(4)",
+              0,
+              3
+            ],
+            [
+              "(c)(4)(i)",
+              77,
+              80
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            38
+          ],
+          "original": [
+            "p",
+            "(A) The immigration officer has reasonable grounds to believe that the person to be arrested has committed or is committing such a felony;",
+            "",
+            "(c)(4)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(c)(4)(i)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            39
+          ],
+          "original": [
+            "p",
+            "(B) The immigration officer is performing duties relating to the enforcement of the immigration laws at the time of the arrest;",
+            "",
+            "(c)(4)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(c)(4)(i)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            40
+          ],
+          "original": [
+            "p",
+            "(C) There is a likelihood of the person escaping before a warrant can be obtained for his or her arrest; and",
+            "",
+            "(c)(4)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(c)(4)(i)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            41
+          ],
+          "original": [
+            "p",
+            "(D) The immigration officer has been certified as successfully completing a training program that covers such arrests and the standards with respect to the immigration enforcement activities of the Department as defined in 8 CFR 287.8.",
+            "",
+            "(c)(4)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(c)(4)(i)(D)",
+              0,
+              3
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8:292.3",
+      "rule": "discipline-lettered-children",
+      "reason": "The two Roman disclosure provisions explicitly introduce independent A-D and A-E lists; source letters and surrounding (i)/(ii) headings establish their scope.",
+      "firstBlock": 30,
+      "lastBlock": 40,
+      "sourceGuard": "54ffbe38f62c72b4",
+      "firstGuard": "cd115e81e01613b5",
+      "expectations": [
+        {
+          "blockPath": [
+            31
+          ],
+          "original": [
+            "p",
+            "(A) A practitioner has caused, or is likely to cause, harm to client(s), the public, or the administration of justice, such that the public or specific individuals should be advised of the nature of the allegations. If disclosure of information is made pursuant to this paragraph, the DHS disciplinary counsel may define the scope of information disseminated and may limit the disclosure of information to specified individuals or entities;",
+            "",
+            "(h)(1)(i)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(i)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            32
+          ],
+          "original": [
+            "p",
+            "(B) A practitioner has committed criminal acts or is under investigation by law enforcement authorities;",
+            "",
+            "(h)(1)(i)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(i)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            33
+          ],
+          "original": [
+            "p",
+            "(C) A practitioner is under investigation by a disciplinary or regulatory authority, or has committed acts or made omissions that may reasonably result in investigation by such an authority;",
+            "",
+            "(h)(1)(i)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(i)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            34
+          ],
+          "original": [
+            "p",
+            "(D) A practitioner is the subject of multiple disciplinary complaints and the DHS disciplinary counsel has determined not to pursue all of the complaints. The DHS disciplinary counsel may inform complainants whose allegations have not been pursued of the status of any other preliminary inquiries or the manner in which any other complaint(s) against the practitioner have been resolved.",
+            "",
+            "(h)(1)(i)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(i)(D)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            36
+          ],
+          "original": [
+            "p",
+            "(A) To witnesses or potential witnesses in conjunction with a complaint or preliminary inquiry;",
+            "",
+            "(h)(1)(ii)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(ii)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            37
+          ],
+          "original": [
+            "p",
+            "(B) To other governmental agencies responsible for the enforcement of civil or criminal laws;",
+            "",
+            "(h)(1)(ii)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(ii)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            38
+          ],
+          "original": [
+            "p",
+            "(C) To agencies and other jurisdictions responsible for conducting disciplinary investigations or proceedings;",
+            "",
+            "(h)(1)(ii)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(ii)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            39
+          ],
+          "original": [
+            "p",
+            "(D) To the complainant or a lawful designee; and",
+            "",
+            "(h)(1)(ii)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(ii)(D)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            40
+          ],
+          "original": [
+            "p",
+            "(E) To the practitioner who is the subject of the complaint or preliminary inquiry or the practitioner's counsel of record.",
+            "",
+            "(h)(1)(ii)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(h)(1)(ii)(E)",
+              0,
+              3
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20:655.73",
+      "rule": "debarment-missing-opening-parenthesis",
+      "reason": "Source begins a) Debarment, followed by (1)-(3), then (b). Preserve a) exactly; supply the address, not missing legal text.",
+      "firstBlock": 0,
+      "lastBlock": 3,
+      "sourceGuard": "2bc9770d41e9dfad",
+      "firstGuard": "7eb9bad95a5b0625",
+      "expectations": [
+        {
+          "blockPath": [
+            0
+          ],
+          "original": [
+            "p",
+            "a) Debarment of an employer. The Administrator, OFLC may not issue future labor certifications under this subpart to an employer or any successor in interest to that employer, subject to the time limits set forth in paragraph (c) of this section, if the Administrator, OFLC finds that the employer committed the following violations:",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "a) "
+              },
+              {
+                "x": "Debarment of an employer.",
+                "s": "i"
+              },
+              {
+                "x": " The Administrator, OFLC may not issue future labor certifications under this subpart to an employer or any successor in interest to that employer, subject to the time limits set forth in paragraph (c) of this section, if the Administrator, OFLC finds that the employer committed the following violations:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)",
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            1
+          ],
+          "original": [
+            "p",
+            "(1) Willful misrepresentation of a material fact in its H-2B Registration, Application for Prevailing Wage Determination, Application for Temporary Employment Certification, or H-2B Petition;",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(1) Willful misrepresentation of a material fact in its "
+              },
+              {
+                "x": "H-2B Registration, Application for Prevailing Wage Determination,",
+                "s": "i"
+              },
+              {
+                "x": " "
+              },
+              {
+                "x": "Application for Temporary Employment Certification,",
+                "s": "i"
+              },
+              {
+                "x": " or "
+              },
+              {
+                "x": "H-2B Petition;",
+                "s": "i"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            2
+          ],
+          "original": [
+            "p",
+            "(2) Substantial failure to meet any of the terms and conditions of its H-2B Registration, Application for Prevailing Wage Determination, Application for Temporary Employment Certification, or H-2B Petition. A substantial failure is a willful failure to comply that constitutes a significant deviation from the terms and conditions of such documents; or",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(2) Substantial failure to meet any of the terms and conditions of its "
+              },
+              {
+                "x": "H-2B Registration, Application for Prevailing Wage Determination,",
+                "s": "i"
+              },
+              {
+                "x": " "
+              },
+              {
+                "x": "Application for Temporary Employment Certification,",
+                "s": "i"
+              },
+              {
+                "x": " or "
+              },
+              {
+                "x": "H-2B Petition.",
+                "s": "i"
+              },
+              {
+                "x": " A substantial failure is a willful failure to comply that constitutes a significant deviation from the terms and conditions of such documents; or"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            3
+          ],
+          "original": [
+            "p",
+            "(3) Willful misrepresentation of a material fact to the DOS during the visa application process.",
+            "",
+            "",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)",
+              0,
+              3
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20:416.1337",
+      "rule": "payment-category-list",
+      "reason": "Paragraph (b)(4) introduces the three Roman payment categories; each amount has an associated explanation following it.",
+      "firstBlock": 23,
+      "lastBlock": 30,
+      "sourceGuard": "6e8ec7990b51ff89",
+      "firstGuard": "2603c8ab6036895b",
+      "expectations": [
+        {
+          "blockPath": [
+            25
+          ],
+          "original": [
+            "p",
+            "(i) Federal supplemental security income benefit only—$200.",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(i) "
+              },
+              {
+                "x": "Federal supplemental security income benefit only",
+                "s": "i"
+              },
+              {
+                "x": "—$200."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(4)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            26
+          ],
+          "original": [
+            "p",
+            "Recipients whose records indicate eligibility for Federal supplemental security income benefits for the month before the month the dollar limitation was first exceeded.",
+            "",
+            "",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": "(b)(4)(i)"
+        },
+        {
+          "blockPath": [
+            27
+          ],
+          "original": [
+            "p",
+            "(ii) Federal supplemental security income benefit and optional supplementation, or optional supplementation only—$700",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(ii) "
+              },
+              {
+                "x": "Federal supplemental security income benefit and optional supplementation, or optional supplementation only",
+                "s": "i"
+              },
+              {
+                "x": "—$700"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(4)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            28
+          ],
+          "original": [
+            "p",
+            "Recipients whose records indicate they were eligible for Federal supplemental security income benefits plus federally-administered optional supplementation, or eligible for federally-administered optional supplementation only, for the month before the month the dollar limitation was first exceeded.",
+            "",
+            "",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": "(b)(4)(ii)"
+        },
+        {
+          "blockPath": [
+            29
+          ],
+          "original": [
+            "p",
+            "(iii) Federal supplemental security income benefit and mandatory or other supplementation, or mandatory supplementation only—$2,000",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(iii) "
+              },
+              {
+                "x": "Federal supplemental security income benefit and mandatory or other supplementation, or mandatory supplementation only",
+                "s": "i"
+              },
+              {
+                "x": "—$2,000"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(4)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            30
+          ],
+          "original": [
+            "p",
+            "Recipients whose records show eligibility for Federal supplemental security income benefits and federally-administered mandatory supplementation or essential person increment for the month before the month the dollar limitation was first exceeded. This category also includes those eligible for federally-administered mandatory supplementation only and those eligible for Federal supplemental security income benefits plus an essential person increment and federally-administered optional supplementation.",
+            "",
+            "",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": "(b)(4)(iii)"
+        }
+      ]
+    },
+    {
+      "id": "20:416.994",
+      "rule": "disability-lettered-children",
+      "reason": "Roman headings introduce A-C/A-E considerations, B(1)-(2) diagnostic lists and A-D error exceptions. EXAMPLE wrappers interrupt renderer state but not these enumerated siblings.",
+      "firstBlock": 17,
+      "lastBlock": 62,
+      "sourceGuard": "036cc331922c66e5",
+      "firstGuard": "10c914facf0f3a66",
+      "expectations": [
+        {
+          "blockPath": [
+            18
+          ],
+          "original": [
+            "p",
+            "(A) A decrease in the severity of an impairment as measured by changes (improvement) in symptoms, signs or laboratory findings can, if great enough, result in an increase in the functional capacity to do work activities. Vascular surgery (e.g., femoropopliteal bypass) may sometimes reduce the severity of the circulatory complications of diabetes so that better circulation results and the person can stand or walk for longer periods. When new evidence showing a change in symptoms, signs and laboratory findings establishes that both medical improvement has occurred and your functional capacity to perform basic work activities, or residual functional capacity, has increased, we say that medical improvement which is related to your ability to do work has occurred. A residual functional capacity assessment is also used to determine whether you can engage in substantial gainful activity and, thus, whether you continue to be disabled (see paragraph (b)(1)(vi) of this section).",
+            "",
+            "(b)(1)(iv)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(iv)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            19
+          ],
+          "original": [
+            "p",
+            "(B) Many impairment-related factors must be considered in assessing your functional capacity for basic work activities. Age is one key factor. Medical literature shows that there is a gradual decrease in organ function with age; that major losses and deficits become irreversible over time and that maximum exercise performance diminishes with age. Other changes related to sustained periods of inactivity and the aging process include muscle atrophy, degenerative joint changes, decrease in range of motion, and changes in the cardiac and respiratory systems which limit the exertional range.",
+            "",
+            "(b)(1)(iv)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(iv)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            20
+          ],
+          "original": [
+            "p",
+            "(C) Studies have also shown that the longer an individual is away from the workplace and is inactive, the more difficult it becomes to return to ongoing gainful employment. In addition, a gradual change occurs in most jobs so that after about 15 years, it is no longer realistic to expect that skills and abilities acquired in these jobs will continue to apply to the current workplace. Thus, if you are age 50 or over and have been receiving disability benefits for a considerable period of time, we will consider this factor along with your age in assessing your residual functional capacity. This will ensure that the disadvantages resulting from inactivity and the aging process during a long period of disability will be considered. In some instances where available evidence does not resolve what you can or cannot do on a sustained basis, we will provide special work evaluations or other appropriate testing.",
+            "",
+            "(b)(1)(iv)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(1)(iv)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            29
+          ],
+          "original": [
+            "p",
+            "(A) Previous impairment met or equaled listings. If our most recent favorable decision was based on the fact that your impairment(s) at the time met or equaled the severity contemplated by the Listing of Impairments in appendix 1 of subpart P of part 404 of this chapter, an assessment of your residual functional capacity would not have been made. If medical improvement has occurred and the severity of the prior impairment(s) no longer meets or equals the same listing section used to make our most recent favorable decision, we will find that the medical improvement was related to your ability to work. Appendix 1 of subpart P of part 404 of this chapter describes impairments which, if severe enough, affect a person's ability to work. If the appendix level severity is met or equaled the individual is deemed, in the absence of evidence to the contrary, to be unable to engage in gainful activity. If there has been medical improvement to the degree that the requirement of the listing section is no longer met or equaled, then the medical improvement is related to your ability to work. We must, of course, also establish that you can currently engage in substantial gainful activity before finding that your disability has ended.",
+            "",
+            "(b)(2)(iv)",
+            [],
+            [
+              {
+                "x": "(A) "
+              },
+              {
+                "x": "Previous impairment met or equaled listings.",
+                "s": "i"
+              },
+              {
+                "x": " If our most recent favorable decision was based on the fact that your impairment(s) at the time met or equaled the severity contemplated by the Listing of Impairments in appendix 1 of subpart P of part 404 of this chapter, an assessment of your residual functional capacity would not have been made. If medical improvement has occurred and the severity of the prior impairment(s) no longer meets or equals the same listing section used to make our most recent favorable decision, we will find that the medical improvement was related to your ability to work. Appendix 1 of subpart P of part 404 of this chapter describes impairments which, if severe enough, affect a person's ability to work. If the appendix level severity is met or equaled the individual is deemed, in the absence of evidence to the contrary, to be unable to engage in gainful activity. If there has been medical improvement to the degree that the requirement of the listing section is no longer met or equaled, then the medical improvement is related to your ability to work. We must, of course, also establish that you can currently engage in substantial gainful activity before finding that your disability has ended."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iv)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            30
+          ],
+          "original": [
+            "p",
+            "(B) Prior residual functional capacity assessment made. The residual functional capacity assessment used in making the most recent favorable medical decision will be compared to the residual functional capacity assessment based on current evidence in order to determine if your functional capacity for basic work activities has increased. There will be no attempt made to reassess the prior residual functional capacity.",
+            "",
+            "(b)(2)(iv)",
+            [],
+            [
+              {
+                "x": "(B) "
+              },
+              {
+                "x": "Prior residual functional capacity assessment made.",
+                "s": "i"
+              },
+              {
+                "x": " The residual functional capacity assessment used in making the most recent favorable medical decision will be compared to the residual functional capacity assessment based on current evidence in order to determine if your functional capacity for basic work activities has increased. There will be no attempt made to reassess the prior residual functional capacity."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iv)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            31
+          ],
+          "original": [
+            "p",
+            "(C) Prior residual functional capacity assessment should have been made, but was not. If the most recent favorable medical decision should have contained an assessment of your residual functional capacity (i.e., your impairments did not meet or equal the level of severity contemplated by the Listing of Impairments in appendix 1 of subpart P of part 404 of this chapter) but does not, either because this assessment is missing from your file or because it was not done, we will reconstruct the residual functional capacity. This reconstructed residual functional capacity will accurately and objectively assess your functional capacity to do basic work activities. We will assign the maximum functional capacity consistent with a decision of allowance.",
+            "",
+            "(b)(2)(iv)",
+            [],
+            [
+              {
+                "x": "(C) "
+              },
+              {
+                "x": "Prior residual functional capacity assessment should have been made, but was not.",
+                "s": "i"
+              },
+              {
+                "x": " If the most recent favorable medical decision should have contained an assessment of your residual functional capacity ("
+              },
+              {
+                "x": "i.e.",
+                "s": "i"
+              },
+              {
+                "x": ", your impairments did not meet or equal the level of severity contemplated by the Listing of Impairments in appendix 1 of subpart P of part 404 of this chapter) but does not, either because this assessment is missing from your file or because it was not done, we will reconstruct the residual functional capacity. This reconstructed residual functional capacity will accurately and objectively assess your functional capacity to do basic work activities. We will assign the maximum functional capacity consistent with a decision of allowance."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iv)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            34
+          ],
+          "original": [
+            "p",
+            "(D) Impairment subject to temporary remission. In some cases the evidence shows that an individual's impairments are subject to temporary remission. In assessing whether medical improvement has occurred in persons with this type of impairment, we will be careful to consider the longitudinal history of the impairment, including the occurrence of prior remission, and prospects for future worsenings. Improvement in such impairments that is only temporary will not warrant a finding of medical improvement.",
+            "",
+            "(Example)",
+            [],
+            [
+              {
+                "x": "(D) "
+              },
+              {
+                "x": "Impairment subject to temporary remission.",
+                "s": "i"
+              },
+              {
+                "x": " In some cases the evidence shows that an individual's impairments are subject to temporary remission. In assessing whether medical improvement has occurred in persons with this type of impairment, we will be careful to consider the longitudinal history of the impairment, including the occurrence of prior remission, and prospects for future worsenings. Improvement in such impairments that is only temporary will not warrant a finding of medical improvement."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iv)(D)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            35
+          ],
+          "original": [
+            "p",
+            "(E) Prior file cannot be located. If the prior file cannot be located, we will first determine whether you are able to now engage in substantial gainful activity based on all your current impairments. (In this way, we will be able to determine that your disability continues at the earliest point without addressing the often lengthy process of reconstructing prior evidence.) If you cannot engage in substantial gainful activity currently, your benefits will continue unless one of the second group of exceptions applies (see paragraph (b)(4) of this section). If you are able to engage in substantial gainful activity, we will determine whether an attempt should be made to reconstruct those portions of the missing file that were relevant to our most recent favorable medical decision (e.g., work history, medical evidence, and the results of consultative examinations). This determination will consider the potential availability of old records in light of their age, whether the source of the evidence is still in operation , and whether reconstruction efforts will yield a complete record of the basis for the most recent favorable medical decision. If relevant parts of the prior record are not reconstructed either because it is determined not to attempt reconstruction or because such efforts fail, medical improvement cannot be found. The documentation of your current impairments will provide a basis for any future reviews. If the missing file is later found, it may serve as a basis for reopening any decision under this section in accordance with § 416.988.",
+            "",
+            "(Example)",
+            [],
+            [
+              {
+                "x": "(E) "
+              },
+              {
+                "x": "Prior file cannot be located.",
+                "s": "i"
+              },
+              {
+                "x": " If the prior file cannot be located, we will first determine whether you are able to now engage in substantial gainful activity based on all your current impairments. (In this way, we will be able to determine that your disability continues at the earliest point without addressing the often lengthy process of reconstructing prior evidence.) If you cannot engage in substantial gainful activity currently, your benefits will continue unless one of the second group of exceptions applies (see paragraph (b)(4) of this section). If you are able to engage in substantial gainful activity, we will determine whether an attempt should be made to reconstruct those portions of the missing file that were relevant to our most recent favorable medical decision (e.g., work history, medical evidence, and the results of consultative examinations). This determination will consider the potential availability of old records in light of their age, whether the source of the evidence is still in operation , and whether reconstruction efforts will yield a complete record of the basis for the most recent favorable medical decision. If relevant parts of the prior record are not reconstructed either because it is determined not to attempt reconstruction or because such efforts fail, medical improvement cannot be found. The documentation of your current impairments will provide a basis for any future reviews. If the missing file is later found, it may serve as a basis for reopening any decision under this section in accordance with § 416.988."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(2)(iv)(E)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            44
+          ],
+          "original": [
+            "p",
+            "(A) How we will determine which methods are new or improved techniques and when they become generally available. New or improved diagnostic techniques or evaluations will come to our attention by several methods. In reviewing cases, we often become aware of new techniques when their results are presented as evidence. Such techniques and evaluations are also discussed and acknowledged in medical literature by medical professional groups and other governmental entities. Through these sources, we develop listings of new techniques and when they become generally available. For example, we will consult the Health Care Financing Administration for its experience regarding when a technique is recognized for payment under Medicare and when they began paying for the technique.",
+            "",
+            "(b)(3)(iii)",
+            [],
+            [
+              {
+                "x": "(A) "
+              },
+              {
+                "x": "How we will determine which methods are new or improved techniques and when they become generally available.",
+                "s": "i"
+              },
+              {
+                "x": " New or improved diagnostic techniques or evaluations will come to our attention by several methods. In reviewing cases, we often become aware of new techniques when their results are presented as evidence. Such techniques and evaluations are also discussed and acknowledged in medical literature by medical professional groups and other governmental entities. Through these sources, we develop listings of new techniques and when they become generally available. For example, we will consult the Health Care Financing Administration for its experience regarding when a technique is recognized for payment under Medicare and when they began paying for the technique."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iii)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            45
+          ],
+          "original": [
+            "p",
+            "(B) How you will know which methods are new or improved techniques and when they become generally available. We will let you know which methods we consider to be new or improved techniques and when they become available through two vehicles.",
+            "",
+            "(b)(3)(iii)",
+            [],
+            [
+              {
+                "x": "(B) "
+              },
+              {
+                "x": "How you will know which methods are new or improved techniques and when they become generally available.",
+                "s": "i"
+              },
+              {
+                "x": " We will let you know which methods we consider to be new or improved techniques and when they become available through two vehicles."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iii)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            46
+          ],
+          "original": [
+            "p",
+            "(1) Some of the future changes in the Listing of Impairments in appendix 1 of subpart P of part 404 of this chapter will be based on new or improved diagnostic or evaluation techniques. Such listings changes will clearly state this fact as they are published as Notices of Proposed Rulemaking and the new or improved techniques will be considered generally available as of the date of the final publication of that particular listing in the Federal Register.",
+            "",
+            "(b)(3)(iii)",
+            [],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "1",
+                "s": "i"
+              },
+              {
+                "x": ") Some of the future changes in the Listing of Impairments in appendix 1 of subpart P of part 404 of this chapter will be based on new or improved diagnostic or evaluation techniques. Such listings changes will clearly state this fact as they are published as Notices of Proposed Rulemaking and the new or improved techniques will be considered generally available as of the date of the final publication of that particular listing in the "
+              },
+              {
+                "x": "Federal Register.",
+                "s": "b"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iii)(B)(1)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            47
+          ],
+          "original": [
+            "p",
+            "(2) A cumulative list since 1970 of new or approved diagnostic techniques or evaluations, how they changed the evaluation of the applicable impairment and the month and year they became generally available, will be published in the Notices section of the Federal Register. Included will be any changes in the Listing of Impairments published in the Code of Federal Regulations since 1970 which are reflective of new or improved techniques. No cases will be processed under this exception until this cumulative listing is so published. Subsequent changes to the list will be published periodically. The period will be determined by the volume of changes needed.",
+            "",
+            "(b)(3)(iii)",
+            [],
+            [
+              {
+                "x": "("
+              },
+              {
+                "x": "2",
+                "s": "i"
+              },
+              {
+                "x": ") A cumulative list since 1970 of new or approved diagnostic techniques or evaluations, how they changed the evaluation of the applicable impairment and the month and year they became generally available, will be published in the "
+              },
+              {
+                "x": "Notices",
+                "s": "i"
+              },
+              {
+                "x": " section of the "
+              },
+              {
+                "x": "Federal Register.",
+                "s": "b"
+              },
+              {
+                "x": " Included will be any changes in the Listing of Impairments published in the Code of Federal Regulations since 1970 which are reflective of new or improved techniques. No cases will be processed under this exception until this cumulative listing is so published. Subsequent changes to the list will be published periodically. The period will be determined by the volume of changes needed."
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iii)(B)(2)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            51
+          ],
+          "original": [
+            "p",
+            "(A) Substantial evidence shows on its face that the decision in question should not have been made (e.g., the evidence in your file such as pulmonary function study values was misread or an adjudicative standard such as a listing in appendix 1 of subpart P of part 404 of this chapter or a medical/vocational rule in appendix 2 of subpart P of part 404 of this chapter was misapplied).",
+            "",
+            "(b)(3)(iv)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iv)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            56
+          ],
+          "original": [
+            "p",
+            "(B) At the time of the prior evaluation, required and material evidence of the severity of your impairment(s) was missing. That evidence becomes available upon review, and substantial evidence demonstrates that had such evidence been present at the time of the prior determination, disability would not have been found.",
+            "",
+            "(Example%202)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iv)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            59
+          ],
+          "original": [
+            "p",
+            "(C) Substantial evidence which is new evidence which relates to the prior determination (of allowance or continuance) refutes the conclusions that were based upon the prior evidence (e.g., a tumor thought to be malignant was later shown to have actually been benign). Substantial evidence must show that had the new evidence, (which relates to the prior determination) been considered at the time of the prior decision, the claim would not have been allowed or continued. A substitution of current judgment for that used in the prior favorable decision will not be the basis for applying this exception.",
+            "",
+            "(Example)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iv)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            62
+          ],
+          "original": [
+            "p",
+            "(D) The exception for error will not be applied retroactively under the conditions set out above unless the conditions for reopening the prior decision (see §§ 416.1488 through 416.1489) are met.",
+            "",
+            "(Example)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iv)(D)",
+              0,
+              3
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "19:4.98",
+      "rule": "navigation-fee-extra-designation",
+      "reason": "Source prints (e-1) between (e) and (f); preserve this designation without forcing an alphabet-only marker.",
+      "firstBlock": 24,
+      "lastBlock": 24,
+      "sourceGuard": "9f1917e1dc096485",
+      "firstGuard": "dc3a62978db4f843",
+      "expectations": [
+        {
+          "blockPath": [
+            24
+          ],
+          "original": [
+            "p",
+            "(e-1) Fee 5 shall be collected from a foreign or American vessel at each port where the vessel is required to file a post entry in accordance with the provisions of § 4.12(a)(3). An original post entry may be supplemented by additional post entries in instances where items were omitted from the original post entry. A separate fee shall be collected for each supplemental post entry made to the original post entry.",
+            "",
+            "(e)",
+            [],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(e-1)",
+              0,
+              5
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "19:4.98",
+      "rule": "fee-schedule-local-list",
+      "reason": "Fee numbers 1-8 and their repeated (a)/(b) tonnage classes form the published schedule inside (a)(1), not new section paragraphs.",
+      "firstBlock": 2,
+      "lastBlock": 15,
+      "sourceGuard": "14f5b9f113a23291",
+      "firstGuard": "92ecc9c4d3b98a6c",
+      "expectations": []
+    },
+    {
+      "id": "19:4.94",
+      "rule": "cruising-license-form-list",
+      "reason": "The quoted cruising-license form has a Warning with (1)/(2) conditions inside (d), not independent regulatory paragraphs.",
+      "firstBlock": 38,
+      "lastBlock": 43,
+      "sourceGuard": "a82d7291044e02a9",
+      "firstGuard": "8667e5b19fad127d",
+      "expectations": []
+    },
+    {
+      "id": "8:245a.1",
+      "rule": "quoted-developmental-definition",
+      "reason": "A quoted statutory definition follows the regulatory (v) definition; retain its (1)-(5) and inline Roman list as definition content.",
+      "firstBlock": 48,
+      "lastBlock": 53,
+      "sourceGuard": "d70bab63d2ad2c33",
+      "firstGuard": "a8c6589700bf231f",
+      "expectations": []
+    },
+    {
+      "id": "22:89.1",
+      "rule": "country-local-lists",
+      "reason": "Country headings each restart a local lettered service schedule. No global (a)/(b) addresses are assigned.",
+      "firstBlock": 0,
+      "lastBlock": 606,
+      "sourceGuard": "af6960307f8fa1bc",
+      "firstGuard": "b86f64e1774d5e91",
+      "expectations": []
+    },
+    {
+      "id": "20:656.3",
+      "rule": "svp-term-context",
+      "reason": "Table belongs to the Specific vocational preparation (SVP) definition. Renderer percent-encoded term is not a canonical paragraph path.",
+      "firstBlock": 33,
+      "lastBlock": 33,
+      "sourceGuard": "e17f1794dc152ec4",
+      "firstGuard": "74a34d1ca0acc6e0",
+      "expectations": [
+        {
+          "blockPath": [
+            33
+          ],
+          "original": [
+            "table",
+            "",
+            "",
+            "(Specific%20vocational%20preparation%20(SVP)",
+            [],
+            [],
+            [
+              [
+                {
+                  "x": "Level",
+                  "h": 1
+                },
+                {
+                  "x": "Time",
+                  "h": 1
+                }
+              ],
+              [
+                {
+                  "x": "1"
+                },
+                {
+                  "x": "Short demonstration."
+                }
+              ],
+              [
+                {
+                  "x": "2"
+                },
+                {
+                  "x": "Anything beyond short demonstration up to and including 30 days."
+                }
+              ],
+              [
+                {
+                  "x": "3"
+                },
+                {
+                  "x": "Over 30 days up to and including 3 months."
+                }
+              ],
+              [
+                {
+                  "x": "4"
+                },
+                {
+                  "x": "Over 3 months up to and including 6 months."
+                }
+              ],
+              [
+                {
+                  "x": "5"
+                },
+                {
+                  "x": "Over 6 months up to and including 1 year."
+                }
+              ],
+              [
+                {
+                  "x": "6"
+                },
+                {
+                  "x": "Over 1 year up to and including 2 years."
+                }
+              ],
+              [
+                {
+                  "x": "7"
+                },
+                {
+                  "x": "Over 2 years up to and including 4 years."
+                }
+              ],
+              [
+                {
+                  "x": "8"
+                },
+                {
+                  "x": "Over 4 years up to and including 10 years."
+                }
+              ],
+              [
+                {
+                  "x": "9"
+                },
+                {
+                  "x": "Over 10 years."
+                }
+              ]
+            ]
+          ],
+          "correctedMarkers": ""
+        }
+      ]
+    },
+    {
+      "id": "20:655.15",
+      "rule": "seafood-repeated-source-numbering",
+      "reason": "Source prints (3), then (1)-(3), all italic fifth-level numbers. Neither text nor XML supplies a unique corrected ancestry; preserve separate occurrences of the printed addresses.",
+      "firstBlock": 13,
+      "lastBlock": 18,
+      "sourceGuard": "ec7099fa39238a6e",
+      "firstGuard": "49ed3c0953ef9675",
+      "expectations": []
+    },
+    {
+      "id": "20:655.19",
+      "rule": "joint-employment-repeated-designations",
+      "reason": "Source repeats (e)(1) with different cross-references. Preserve both designated occurrences.",
+      "firstBlock": 0,
+      "lastBlock": 15,
+      "sourceGuard": "02d61d7587f5ca5d",
+      "firstGuard": "4036e79b45bf568b",
+      "expectations": []
+    }
+  ]
+}

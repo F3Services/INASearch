@@ -144,12 +144,19 @@ They are off by default. If a user turns them on, INASearch checks the covered m
 
 1. asks eCFR whether any of the already covered titles or parts may have changed;
 2. downloads both the dated XML and the same-date enhanced renderer only for covered parts reported as changed;
-3. uses renderer paragraph IDs to normalize hierarchy and line boundaries, verifies complete XML/renderer inventory parity, and stores both source artifacts with their hashes;
+3. normalizes XML/renderer evidence, verifies complete inventory parity, and runs the same guarded hierarchy reconciliation used to generate the shipped corpus; both source artifacts retain their hashes;
 4. regenerates definitions and inline citations affected by the change;
 5. stages and verifies the new corpus; and
 6. activates it for use after a reload while retaining the previous corpus for rollback.
 
 Searches and viewed provisions do not affect which network requests are made. Multiple tabs coordinate so they do not run the same update at once.
+
+If the downloaded structure fails validation or a known defect no longer matches
+its reviewed source guard, the update is rejected and the previous corpus and
+currency dates remain active. An unfamiliar defect may require a reviewed repair
+in a later application release. A structure revision prevents an obsolete cached
+hierarchy from replacing the repaired release. Detailed correction logs are kept
+in the GitHub repository; the application does not embed or download them.
 
 ### Do CFR updates expand the corpus automatically?
 
@@ -267,7 +274,7 @@ python3 tools/capture-legal-sources.py capture --capture-date YYYY-MM-DD --refre
 
 Refreshing is deliberately explicit. After capture, the crosswalk, hierarchy, statute references, footnotes, CFR corpus, and distributable files must be regenerated and reviewed as one release change.
 
-For CFR structure, the capture includes both the eCFR XML text and the same-date enhanced renderer for every included part. The XML supplies the regulatory text; the renderer's canonical paragraph IDs supply hierarchy and legal-line boundaries that the flat XML does not encode. `tools/audit-cfr-structure.py` independently verifies record inventories, complete XML text preservation, rendered paragraph order and boundaries, and every addressable paragraph path.
+For CFR structure, the capture includes both the eCFR XML text and the same-date enhanced renderer for every included part. XML supplies the regulatory text and formatting; renderer IDs provide additional structural evidence. Some publisher IDs are incorrect. Reviewed repairs use visible markers, compound headings, formatting and neighboring structure while preserving the text and genuine repeated designations. `tools/audit-cfr-structure.py` checks inventories, complete XML text preservation and reviewed marker expectations. `tools/audit-cfr-hierarchy.py` separately classifies visible numbering findings; the shared runtime index preserves individual occurrences for navigation, highlighting, copying and excerpts. See `sources/legal/cfr-hierarchy/README.md` for the audit and measured sizes.
 
 ## Builds and project structure
 

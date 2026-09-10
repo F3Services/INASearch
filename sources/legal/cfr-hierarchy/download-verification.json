@@ -1,0 +1,9 @@
+{
+  "parts": 12,
+  "records": 16,
+  "guardFailure": "8:274a.2: unreviewed repeated designation (b)(4)",
+  "atomicFailure": "8:274a.2: unreviewed repeated designation (b)(4)",
+  "retained": true,
+  "successfulReplay": true,
+  "obsoleteCacheRejected": true
+}

@@ -198,6 +198,7 @@ template = replaceRuntimeBlock(template, "OCCURRENCE", "inaSearchOccurrenceRunti
 template = replaceInertRuntimeBlock(template, "SEARCH_WORKER", "inaSearchSearchWorkerRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Search-Worker.js"), "utf8"));
 template = replaceRuntimeBlock(template, "EMBEDDED_REFERENCES", "inaSearchEmbeddedReferencesRuntime", fs.readFileSync(path.join(root, "tools", "embedded-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "LEGAL_REFERENCES", "inaSearchLegalReferencesRuntime", fs.readFileSync(path.join(root, "tools", "legal-references.js"), "utf8"));
+template = replaceRuntimeBlock(template, "CFR_HIERARCHY", "inaSearchCfrHierarchyRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-CFR-Hierarchy.js"), "utf8"));
 template = replaceRuntimeBlock(template, "UPDATER", "inaSearchUpdaterRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Updater.js"), "utf8"));
 const fullCorpus = readAssignedObject("INASearch-Corpus.js", "INA_SEARCH_CORPUS");
 fullCorpus.inaHierarchy = readAssignedObject("INASearch-INA-Hierarchy.js", "INA_SEARCH_INA_HIERARCHY");
