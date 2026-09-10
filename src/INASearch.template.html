@@ -1155,7 +1155,8 @@
     .cfr-block[data-cfr-path] { scroll-margin-top: calc(var(--topbar-height) + 95px); }
     .cfr-block.target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
     .cfr-subtree { display: grid; gap: 8px; white-space: normal; }
-    .cfr-subtree.cfr-block.target { padding: 0; border: 0; outline: 2px solid var(--blue); }
+    .cfr-subtree.cfr-block.target { padding: 0; border: 0; background: transparent; box-shadow: none; isolation: isolate; }
+    .cfr-subtree.target::before { content: ""; position: absolute; inset: 0; inset-inline-start: var(--cfr-selection-inset, 0px); z-index: -1; pointer-events: none; border: 2px solid var(--blue); border-radius: 6px; background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
     .cfr-subtree > .cfr-block { background: transparent; }
     .cfr-block.search-target { background: var(--amber-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 35%, transparent); }
     .cfr-table .search-target { background: var(--amber-soft); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--warning) 42%, transparent); }
@@ -11388,7 +11389,13 @@
 
     function legalCitationHoverHostForSelection(selection) {
       if (!selection) return null;
-      return selection.dataset.legalCitationSelect === "cfr" ? selection.closest(".cfr-block") || selection : selection;
+      if (selection.dataset.legalCitationSelect !== "cfr") return selection;
+      const host = selection.closest(".cfr-block") || selection;
+      const target = host.closest(".cfr-subtree.target");
+      if (target) {
+        try { if (canonicalPath(JSON.parse(selection.dataset.legalCitationPath || "[]")) === target.dataset.cfrPath) return null; } catch {}
+      }
+      return host;
     }
 
     function setLegalCitationHover(selection) {
@@ -12503,6 +12510,17 @@
       return segments;
     }
 
+    function cfrSelectionInset(section, segments) {
+      // Match the widest selected source block's existing indentation without reflowing text.
+      const depth = segments.filter(segment => segment.selected).reduce((minimum, segment) => {
+        const block = section.blocks[segment.i];
+        if (["h", "table", "note", "graphic"].includes(block.t)) return 0;
+        return Math.min(minimum, Number(block.d || 0) || (componentTokens(block.u?.[0]?.a || block.a || block.c || "") || []).length);
+      }, 7);
+      const level = Math.max(0, depth - 1);
+      return `clamp(${level * 12}px, ${level * 2}vw, ${level * 24}px)`;
+    }
+
     function renderCfrSegment(section, segment, searchTarget, citationBase, context) {
       // Escape the opening bracket so HTML comment stripping preserves these runtime boundaries.
       const block = section.blocks[segment.i];
@@ -12511,10 +12529,11 @@
 
     function renderCfrBody(section, targetPath, searchTarget, citationBase, context) {
       const output = []; let open = false;
-      for (const segment of cfrBodySegments(section, targetPath, searchTarget?.blockPath)) {
+      const segments = cfrBodySegments(section, targetPath, searchTarget?.blockPath), inset = cfrSelectionInset(section, segments);
+      for (const segment of segments) {
         if (open && !segment.selected) { output.push("</div>"); open = false; }
         if (segment.selected && !open) {
-          output.push(`<div class="cfr-subtree cfr-block target" data-cfr-path="${escapeHtml(targetPath)}" aria-label="Citation target">`);
+          output.push(`<div class="cfr-subtree cfr-block target" data-cfr-path="${escapeHtml(targetPath)}" style="--cfr-selection-inset:${inset}" aria-label="Citation target">`);
           open = true;
         }
         output.push(renderCfrSegment(section, segment, searchTarget, citationBase, context));
@@ -12537,7 +12556,8 @@
         } else if (node.nodeType === 8 && node.data === "/cfr-render" && chunk) { chunk.end = node; chunk = null; }
       }
       let cursor = body.firstChild, wrapper = null, replaced = false;
-      for (const segment of cfrBodySegments(section, targetPath, locator)) {
+      const segments = cfrBodySegments(section, targetPath, locator), inset = cfrSelectionInset(section, segments);
+      for (const segment of segments) {
         let existing = chunks.get(segment.key);
         if (existing) {
           while (cursor && cursor !== existing.start) { const next = cursor.nextSibling; cursor.remove(); cursor = next; }
@@ -12553,6 +12573,7 @@
             wrapper = document.createElement("div");
             wrapper.className = "cfr-subtree cfr-block target";
             wrapper.dataset.cfrPath = targetPath;
+            wrapper.style.setProperty("--cfr-selection-inset", inset);
             wrapper.setAttribute("aria-label", "Citation target");
             body.insertBefore(wrapper, existing.start);
           }
