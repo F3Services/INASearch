@@ -177,7 +177,8 @@ Browser tests use the existing Playwright installation; set
 capture files. Updating guards requires a new source review; compiling or rebuilding
 alone cannot approve a changed source exception.
 
-Both rebuilt editions are available locally. The preview at
-`http://Daves-MacBook-Air.local:8765/` serves the rebuilt normal edition and reloads
-when it changes. Publication awaits Dave's independent Linux inspection and explicit
-push authorization.
+Dave authorized publication on September 10, 2026. Both rebuilt editions are
+included in the repository, and `cloudflare-pages/index.html` is an exact copy of
+the reviewed normal edition. The preview at `http://Daves-MacBook-Air.local:8765/`
+serves that edition and reloads when it changes. Detailed correction logs and
+evidence remain in the repository only.
