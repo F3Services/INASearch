@@ -7,23 +7,23 @@
       "measurements": [
         {
           "query": "214.2",
-          "ms": 231
+          "ms": 229
         },
         {
           "query": "214.2h",
-          "ms": 231
+          "ms": 225
         },
         {
           "query": "214.2h2",
-          "ms": 222
+          "ms": 227
         },
         {
           "query": "214.2h2i",
-          "ms": 230
+          "ms": 233
         },
         {
           "query": "214.2h2ia",
-          "ms": 227
+          "ms": 224
         }
       ]
     },
@@ -32,23 +32,23 @@
       "measurements": [
         {
           "query": "214.2",
-          "ms": 748
+          "ms": 737
         },
         {
           "query": "214.2h",
-          "ms": 674
+          "ms": 676
         },
         {
           "query": "214.2h2",
-          "ms": 763
+          "ms": 777
         },
         {
           "query": "214.2h2i",
-          "ms": 740
+          "ms": 755
         },
         {
           "query": "214.2h2ia",
-          "ms": 743
+          "ms": 719
         }
       ]
     }
@@ -67,15 +67,15 @@
         },
         {
           "query": "214.2h2",
-          "ms": 50
+          "ms": 49
         },
         {
           "query": "214.2h2i",
-          "ms": 30
+          "ms": 32
         },
         {
           "query": "214.2h2ia",
-          "ms": 28
+          "ms": 33
         }
       ]
     },
@@ -84,30 +84,30 @@
       "measurements": [
         {
           "query": "214.2",
-          "ms": 699
+          "ms": 683
         },
         {
           "query": "214.2h",
-          "ms": 219
+          "ms": 221
         },
         {
           "query": "214.2h2",
-          "ms": 216
+          "ms": 225
         },
         {
           "query": "214.2h2i",
-          "ms": 114
+          "ms": 117
         },
         {
           "query": "214.2h2ia",
-          "ms": 113
+          "ms": 121
         }
       ]
     }
   ],
   "artifacts": {
     "before": "b03028703f696bbe9f1817d6f6df36fa4f468c1b857dd44c1a9ce39bfa9ee6f4",
-    "after": "f3c05a832d3097639a8f2fb8d0a8374182a4bb75d66321ae363ca2738e732a29"
+    "after": "82c41ebec93b239f4394778ffbe66c68e4d068d2e88f45f594b7c5ebdcf3440e"
   },
   "checks": [
     "source DOM identity and complete text preserved during every suffix change",
@@ -116,6 +116,8 @@
     "same-provision click retains enclosing target",
     "rapid typing immediately shows the latest provision on screen",
     "backspace updates the parent scope",
+    "selection outline matches source indentation at 1440, 800 and 390 pixels",
+    "hover excludes the selected occurrence and preserves other children, siblings and repeated occurrences",
     "1x and 4x CPU input-to-paint budgets"
   ]
 }

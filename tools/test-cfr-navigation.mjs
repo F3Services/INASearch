@@ -69,6 +69,39 @@ try {
   await ready(page,query,target,'8 CFR 214.1');assert.equal(await page.locator('.cfr-body').textContent(),original,'Compound-boundary updates must not duplicate or lose text');
   assert.equal(await page.locator('.cfr-subtree.target').count(),target?1:0);
  }
+ // Painted scope must follow indentation without moving or narrowing source text.
+ for(const width of [1440,800,390]) {
+  await page.setViewportSize({width,height:1000});
+  for(const [query,target,section] of [['214.2h2ia','(h)(2)(i)(A)','8 CFR 214.2'],['214.2h2i','(h)(2)(i)','8 CFR 214.2'],['214.1a2','(a)(2)','8 CFR 214.1']]) {
+   await ready(page,query,target,section);
+   const geometry=await page.locator('.cfr-subtree.target').evaluate(node=>{
+    const rect=node.getBoundingClientRect(),paint=getComputedStyle(node,'::before');
+    const blocks=[...node.querySelectorAll('.cfr-block')].map(block=>block.getBoundingClientRect());
+    return {left:rect.left+parseFloat(paint.left),right:rect.right-parseFloat(paint.right),sourceLeft:Math.min(...blocks.map(block=>block.left)),sourceRight:Math.max(...blocks.map(block=>block.right)),border:paint.borderLeftWidth};
+   });
+   assert(Math.abs(geometry.left-geometry.sourceLeft)<1,`${query} at ${width}px: selection extends past source indentation`);
+   assert(Math.abs(geometry.right-geometry.sourceRight)<1,`${query}: selection ends outside the source width`);
+   assert.equal(geometry.border,'2px');
+   await page.locator('.cfr-subtree.target .cfr-unit-wrapper').first().hover();
+   assert.equal(await page.locator('.cfr-body .citation-hover-target').count(),0,'The selected unit receives a redundant hover box');
+   if(target==='(h)(2)(i)') {
+    await page.locator('.cfr-subtree.target .cfr-unit-wrapper[data-cfr-path="(h)(2)(i)(A)"]').hover();
+    assert.equal(await page.locator('.cfr-body .citation-hover-target').count(),1,'A different child unit must remain hoverable');
+   }
+  }
+ }
+ await page.setViewportSize({width:1440,height:1000});
+ await ready(page,'8 CFR 274a.2(b)(1)(v)(B)(1)(vi)','(b)(1)(v)(B)(1)(vi)','8 CFR 274a.2');
+ await page.locator('.cfr-unit-wrapper[data-cfr-block-path="30"]').hover();
+ assert.equal(await page.locator('.cfr-body .citation-hover-target').count(),1,'A repeated designation in another occurrence must remain hoverable');
+ await page.locator('.cfr-subtree.target .cfr-unit-wrapper').first().hover();
+ assert.equal(await page.locator('.cfr-body .citation-hover-target').count(),0);
+ await ready(page,'214.2h2ia','(h)(2)(i)(A)');
+ await page.locator('.cfr-unit-wrapper[data-cfr-path="(h)(2)(i)(B)"]').hover();
+ assert.equal(await page.locator('.cfr-body .citation-hover-target').count(),1,'A sibling unit must remain hoverable');
+ await page.locator('.cfr-subtree.target .cfr-unit-wrapper').first().hover();
+ assert.equal(await page.locator('.cfr-body .citation-hover-target').count(),0);
+ await page.screenshot({path:'tmp/cfr-selection-hover.png'});
  await ready(page,'214.2h2i','(h)(2)(i)');
  // Real insertion UI: the card must survive changing the selected source scope.
  const reference=page.locator('.cfr-subtree.target [data-legal-reference][data-reference-insertion-key]').first();
@@ -107,7 +140,7 @@ try {
  assert.deepEqual(errors,[]);
  await page.screenshot({path:'tmp/cfr-navigation-performance.png'});
  await context.close();
- report.checks=['source DOM identity and complete text preserved during every suffix change','compound heading split/merge preserves all text','inserted excerpt and saved note survive selection changes','same-provision click retains enclosing target','rapid typing immediately shows the latest provision on screen','backspace updates the parent scope','1x and 4x CPU input-to-paint budgets'];
+ report.checks=['source DOM identity and complete text preserved during every suffix change','compound heading split/merge preserves all text','inserted excerpt and saved note survive selection changes','same-provision click retains enclosing target','rapid typing immediately shows the latest provision on screen','backspace updates the parent scope','selection outline matches source indentation at 1440, 800 and 390 pixels','hover excludes the selected occurrence and preserves other children, siblings and repeated occurrences','1x and 4x CPU input-to-paint budgets'];
  fs.writeFileSync('sources/legal/cfr-hierarchy/navigation-performance.json',JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));
 }finally{await browser.close();}

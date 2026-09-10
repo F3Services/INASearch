@@ -99,11 +99,11 @@ Baseline commit: `10b67e93a143f36878a60e50bdfe016e11f292f8`. Sizes are bytes, no
 
 | Edition | Before | After | Net increase |
 | --- | ---: | ---: | ---: |
-| `INASearch.html` | 8,346,800 | 8,374,203 | +27,403 (0.328%) |
-| `INASearch-Uncompressed.html` | 35,505,889 | 35,535,141 | +29,252 (0.082%) |
+| `INASearch.html` | 8,346,800 | 8,375,479 | +28,679 (0.344%) |
+| `INASearch-Uncompressed.html` | 35,505,889 | 35,536,417 | +30,528 (0.086%) |
 
-Net additional runtime code: **26,034 bytes**, including deferred worker source,
-below the 50,000-byte planning target. CSS adds 259 bytes. The compressed corpus
+Net additional runtime code: **26,993 bytes**, including deferred worker source,
+below the 50,000-byte planning target. CSS adds 576 bytes. The compressed corpus
 adds **725 bytes** (5,232,793 → 5,233,518); plain corpus JSON adds **2,813 bytes**.
 HTML growth also includes base64 expansion and shell metadata. The audit JSON,
 source evidence and fixtures contribute zero bytes to the shipped editions.
@@ -120,7 +120,11 @@ The reader now keeps source fragments in the DOM when changing the selected scop
 within the same section. Only compound heading boundaries that actually change are
 rendered again. Notes, inserted excerpts and repeated source occurrences retain their
 hosts. A changed corpus or profile revision requires a fresh render. The blue outline
-no longer changes the text width. Valid CFR input reuses the existing classification,
+no longer changes the text width. Its painted boundary follows the widest selected
+source block's indentation, including tables. Hover outlines are suppressed for the
+selected occurrence while other child, sibling and repeated occurrences remain
+hoverable. Browser geometry and pointer checks cover 1,440-, 800- and 390-pixel
+viewports. Valid CFR input reuses the existing classification,
 bypasses the text-search debounce, and scrolls immediately to the latest provision.
 
 [Performance results](navigation-performance.json) compare the repaired release at
@@ -133,14 +137,14 @@ once and is reported separately.
 
 | CPU slowdown | Suffix typing before | Suffix typing after | Initial section load before → after |
 | --- | ---: | ---: | ---: |
-| 1× | 222–231 ms | 28–54 ms | 231 → 167 ms |
-| 4× | 674–763 ms | 113–219 ms | 748 → 699 ms |
+| 1× | 224–233 ms | 32–54 ms | 229 → 167 ms |
+| 4× | 676–777 ms | 117–225 ms | 737 → 683 ms |
 
 The browser regression also checks preservation of every source paragraph DOM node
 and the entire section text, compound heading split/merge, inserted excerpts, saved
 notes, repeated selection, backspacing, and the final visible target after a burst
 of actual keystrokes. Both rebuilt editions retain the repository-only audit policy.
-This follow-up adds 4,277 runtime bytes (4,357 HTML bytes) relative to `18a91f9`;
+This follow-up adds 5,236 runtime bytes (5,633 HTML bytes) relative to `18a91f9`;
 the combined hierarchy repair remains below the 50 KB runtime target.
 
 Reproduce the comparison after building:
