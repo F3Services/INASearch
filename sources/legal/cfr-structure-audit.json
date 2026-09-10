@@ -8,7 +8,11 @@
     },
     "corpus": {
       "path": "src/INASearch-CFR.js",
-      "sha256": "902dbee102b49e987a99a210948817fc8bf42e5293bcb288aa21d5218755c990"
+      "sha256": "9b3cb51f1b305c981e2b3a306ad91aab9108eaacffcd4dd9baea5f27680e59c1"
+    },
+    "reviewedExpectations": {
+      "path": "sources/legal/cfr-hierarchy/reviewed-expectations.json",
+      "sha256": "a3348aceae0b1155fba93f36e3fff3df3cb166a93cfc9d57edd9963200f9ee5e"
     },
     "baseline": {
       "path": "tmp/INASearch-CFR-pre-structure-fix.js",
@@ -26,6 +30,9 @@
     "rendererParagraphCount": 37577,
     "rendererElementCount": 37743,
     "rendererAddressCount": 30323,
+    "correctedAddressCount": 30388,
+    "correctedAddressGroupCount": 30356,
+    "reviewedCorrectionCount": 161,
     "rendererAddressGroupCount": 30297,
     "rendererContextElementCount": 1382,
     "currentStructureMismatchCount": 0,

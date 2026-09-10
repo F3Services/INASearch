@@ -584,7 +584,7 @@
   function projectionCacheDescriptor(corpus, options = {}) {
     return {
       cacheKey: `${options.cacheKey || "default"}\u0000${projectionAuthorityKey(options)}\u0000${options.deferNormalization ? "raw" : "normalized"}`,
-      version: `${corpus.corpusVersion || ""}\u0000${corpus.cfr?.captureTime || ""}`
+      version: `${corpus.corpusVersion || ""}\u0000${corpus.cfr?.captureTime || ""}\u0000${corpus.cfr?.structureRevision || 0}`
     };
   }
 
@@ -592,14 +592,16 @@
     const authorityKey = typeof options.authorityKey === "string" && options.authorityKey ? options.authorityKey : projectionAuthorityKey(options);
     const corpusVersion = String(options.corpusVersion || corpus?.corpusVersion || corpus?.cfr?.captureTime || "");
     const corpusSha256 = String(options.corpusSha256 || "");
+    const cfrStructureRevision = Number(options.cfrStructureRevision ?? corpus?.cfr?.structureRevision ?? 0);
     return {
       projectionSchemaVersion: PERSISTED_PROJECTION_SCHEMA_VERSION,
       searchAlgorithmVersion: SEARCH_ALGORITHM_VERSION,
       corpusSchemaVersion: Number(options.corpusSchemaVersion ?? corpus?.schemaVersion ?? 0),
       corpusVersion,
       corpusSha256,
+      cfrStructureRevision,
       authorityKey,
-      key: [PERSISTED_PROJECTION_SCHEMA_VERSION, SEARCH_ALGORITHM_VERSION, Number(options.corpusSchemaVersion ?? corpus?.schemaVersion ?? 0), corpusVersion, corpusSha256 || "unhashed", authorityKey].join(":"),
+      key: [PERSISTED_PROJECTION_SCHEMA_VERSION, SEARCH_ALGORITHM_VERSION, Number(options.corpusSchemaVersion ?? corpus?.schemaVersion ?? 0), corpusVersion, corpusSha256 || "unhashed", authorityKey, cfrStructureRevision].join(":"),
     };
   }
 

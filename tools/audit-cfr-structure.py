@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import pathlib
@@ -346,6 +347,11 @@ def main() -> int:
     capture = json.loads((args.cache / "capture.json").read_text(encoding="utf-8"))
     corpus = load_corpus(args.corpus)
     baseline = load_corpus(args.baseline) if args.baseline else None
+    review_path = ROOT / "sources/legal/cfr-hierarchy/reviewed-expectations.json"
+    reviews = json.loads(review_path.read_text())["reviews"] if corpus.get("structureRevision") else []
+    reviewed_changes = defaultdict(list)
+    for review in reviews:
+        reviewed_changes[review["id"]].extend(review["expectations"])
     corpus_sections = {record["id"]: record for record in corpus["sections"]}
     corpus_parts = {record["id"]: record for record in corpus["parts"]}
     corpus_appendices = defaultdict(list)
@@ -386,6 +392,26 @@ def main() -> int:
 
     def compare_structure(record_id: str, rendered: dict, current: dict, old: dict | None) -> None:
         nonlocal renderer_record_count, renderer_address_count, renderer_address_group_count
+        # Validate against the separately reviewed expectations, then restore only
+        # those fields for comparison with the uncorrected publisher renderer.
+        current = copy.deepcopy(current)
+        for expectation in reviewed_changes.get(record_id, []):
+            block = current["blocks"][expectation["blockPath"][0]]
+            before = expectation["original"]
+            markers = expectation["correctedMarkers"]
+            expected_units = [{"a": path, "s": start, "e": end} for path, start, end in markers] if isinstance(markers, list) else []
+            expected_address = expected_units[-1]["a"] if expected_units else ""
+            expected_context = markers if isinstance(markers, str) else ""
+            if (block.get("u", []) != expected_units or block.get("a", "") != expected_address
+                    or block.get("c", "") != expected_context or block.get("t") != before[0]
+                    or block.get("x", "") != before[1] or block.get("r", []) != before[5]
+                    or block.get("rows", []) != before[6]):
+                failures.append({"kind": "reviewed-source-correction", "id": record_id, "blockPath": expectation["blockPath"]})
+            for key in ("a", "c", "u"):
+                block.pop(key, None)
+            for key, value in zip(("a", "c", "u"), before[2:5]):
+                if value:
+                    block[key] = value
         expected = rendered_addresses(rendered)
         renderer_record_count += 1
         renderer_address_count += len(expected)
@@ -530,6 +556,7 @@ def main() -> int:
         "inputs": {
             "captureManifest": {"path": report_path(args.cache / "capture.json"), "sha256": sha256((args.cache / "capture.json").read_bytes())},
             "corpus": {"path": report_path(args.corpus), "sha256": sha256(args.corpus.read_bytes())},
+            "reviewedExpectations": {"path": report_path(review_path), "sha256": sha256(review_path.read_bytes())},
             "baseline": ({"path": report_path(args.baseline), "sha256": sha256(args.baseline.read_bytes())} if args.baseline else None),
         },
         "summary": {
@@ -543,6 +570,9 @@ def main() -> int:
             "rendererParagraphCount": renderer_paragraph_count,
             "rendererElementCount": renderer_element_count,
             "rendererAddressCount": renderer_address_count,
+            "correctedAddressCount": sum(len(block_addresses(r["blocks"])) for r in [*corpus["sections"], *corpus["appendices"]]),
+            "correctedAddressGroupCount": sum(len(block_address_groups(r["blocks"])) for r in [*corpus["sections"], *corpus["appendices"]]),
+            "reviewedCorrectionCount": sum(len(items) for items in reviewed_changes.values()),
             "rendererAddressGroupCount": renderer_address_group_count,
             "rendererContextElementCount": renderer_context_count,
             "currentStructureMismatchCount": len(current_mismatches),

@@ -164,7 +164,12 @@ async function main() {
   assert.strictEqual(racingReady.identity.corpusVersion, nextCorpus.corpusVersion, "An obsolete projection build won a corpus-change race.");
   await racing.waitFor(message => message.type === "metric" && message.name === "projection-cache-saved");
   assert(!racing.messages.some(message => message.type === "ready" && message.identity?.corpusVersion === corpus.corpusVersion), "A stale projection announced readiness after a corpus change.");
-  console.log("Search worker cache tests passed.");
+  const obsolete = createHarness(shared, nextCorpus);
+  obsolete.send({ type: "init", identity: { ...nextIdentity, cfrStructureRevision: 1 }, source: "indexeddb" });
+  const rejected = await obsolete.waitFor(message => message.type === "fatal");
+  assert.match(rejected.message, /No corpus is available/, "A worker built a repaired-release projection from obsolete cached CFR structure.");
+  assert(!obsolete.messages.some(message => message.type === "ready"), "An obsolete hierarchy projection became active.");
+  console.log("Search worker cache tests passed, including CFR structure-revision rejection.");
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });

@@ -262,7 +262,7 @@
         const address = item.entry.addressable && !item.entry.term && !item.entry.disabled ? entryUnits.at(-1)?.a || paragraphPath(item.entry.path) : "";
         const context = address || (item.entry.path.length && !item.entry.term && !item.entry.disabled ? paragraphPath(item.entry.path) : "");
         const depth = item.entry.indent || (!item.entry.addressable ? item.entry.path.length : 0);
-        return { start, end, a: address, c: context, d: depth, u: entryUnits };
+        return { start, end, a: address, c: context, d: depth, u: entryUnits, q: item.entry.term || item.entry.disabled };
       });
       return { units, path: consumed ? paragraphPath(this.currentPath) : "", depth: consumed ? this.currentDepth : 0, context: consumed ? paragraphPath(this.currentContext) : "", segments };
     }
@@ -393,6 +393,7 @@
           const segmentText = text.slice(segment.start, segment.end);
           if (!segmentText) continue;
           const block = { t: "p", x: segmentText };
+          if (segment.q) block.q = "publisher-named-list";
           if (segment.a) block.a = segment.a;
           if (segment.c && segment.c !== segment.a) block.c = segment.c;
           else if (defaultContext && !segment.a && !segment.c) block.c = defaultContext;
@@ -501,6 +502,7 @@
           url: sourceUrl(title, current.slice(0, -1), number)
         };
         oracle.finish();
+        globalThis.INASearchCfrHierarchy.reconcile(record);
         sections.push(record);
         partRecord.sectionIds.push(record.id);
         rendererUsage.sections.add(number);
@@ -514,6 +516,7 @@
           label: number, heading: childText(node, "HEAD"), hierarchy: current, blocks: normalizedBlocks(node, graphics, oracle), url: partRecord.url
         };
         oracle.finish();
+        globalThis.INASearchCfrHierarchy.reconcile(record);
         appendices.push(record);
         partRecord.appendixIds.push(record.id);
         rendererUsage.appendixCount += 1;
@@ -827,7 +830,7 @@
 
   async function currentCorpus(fallback) {
     const cached = await globalThis.INASearchStorage?.loadActiveCorpus({ corpusSchemaVersion: fallback.schemaVersion });
-    return cached?.corpus && globalThis.INASearchStorage.compareVersions(cached.corpus.corpusVersion, fallback.corpusVersion) >= 0 ? cached.corpus : fallback;
+    return cached?.corpus && cached.corpus.cfr?.structureRevision === globalThis.INASearchCfrHierarchy.revision && globalThis.INASearchStorage.compareVersions(cached.corpus.corpusVersion, fallback.corpusVersion) >= 0 ? cached.corpus : fallback;
   }
 
   async function performCheck(fallbackCorpus, options = {}) {

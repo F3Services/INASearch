@@ -29,7 +29,9 @@
       corpusSchemaVersion: message.identity?.corpusSchemaVersion,
       minimumVersion: message.identity?.corpusVersion
     });
-    return cached?.corpus || null;
+    const corpus = cached?.corpus || null;
+    if (message.identity?.cfrStructureRevision && corpus?.cfr?.structureRevision !== message.identity.cfrStructureRevision) return null;
+    return corpus;
   }
 
   function normalizedIdentifier(value) {
