@@ -1155,6 +1155,7 @@
     .cfr-block[data-cfr-path] { scroll-margin-top: calc(var(--topbar-height) + 95px); }
     .cfr-block.target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
     .cfr-subtree { display: grid; gap: 8px; white-space: normal; }
+    .cfr-subtree.cfr-block.target { padding: 0; border: 0; outline: 2px solid var(--blue); }
     .cfr-subtree > .cfr-block { background: transparent; }
     .cfr-block.search-target { background: var(--amber-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 35%, transparent); }
     .cfr-table .search-target { background: var(--amber-soft); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--warning) 42%, transparent); }
@@ -4902,7 +4903,7 @@
       return true;
     }
 
-    function runSearch() {
+    function runSearch(options = {}) {
       state.query = els.search.value.trim();
       if (state.searchScopeActive) refreshSearchScope();
       else renderSearchScopeEditor();
@@ -4971,7 +4972,7 @@
         return;
       }
       const direct = state.citation?.valid && state.citation.record
-        ? { ...state.citation.record, score: 10000, citationResult: state.citation }
+        ? { ...state.citation.record, score: 10000, citationResult: state.citation, instantCitationJump: options.typed === true }
         : null;
       setSearchResults(direct ? [direct] : []);
       showCurrentSearchResults(direct);
@@ -10824,7 +10825,7 @@
       else if (["statutory-note", "editorial-note", "usc-note"].includes(record.kind)) renderStatutoryNote(record.item);
       else if (record.kind === "source-credit") renderSourceCredit(record.item);
       else if (record.kind === "ina") renderIna(record.item);
-      else if (record.kind === "cfr" || record.kind === "cfr-appendix") renderCfr(record.item, citationResult);
+      else if (record.kind === "cfr" || record.kind === "cfr-appendix") renderCfr(record.item, citationResult, record.instantCitationJump === true);
       else if (record.kind === "act") renderAct(record.item);
       else if (record.kind === "policy") renderPolicy(record.item);
       else if (record.kind === "form") renderForm(record.item);
@@ -11509,11 +11510,11 @@
       return statuteReadingLine(profile?.preferences?.citationJumpOffsetPercent);
     }
 
-    function scrollStatuteAnchorToReadingLine(anchor) {
+    function scrollStatuteAnchorToReadingLine(anchor, instant = false) {
       if (!anchor?.getBoundingClientRect) return;
       const delta = anchor.getBoundingClientRect().top - statuteJumpLine();
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
-      (focusedPane?.scrollRoot || window).scrollBy({ top: delta, behavior: focusedPane || !animatedCitationJumpsEnabled() ? "auto" : "smooth" });
+      (focusedPane?.scrollRoot || window).scrollBy({ top: delta, behavior: instant ? "instant" : focusedPane || !animatedCitationJumpsEnabled() ? "auto" : "smooth" });
     }
 
     function currentStatutePathAtReadingLine() {
@@ -11555,20 +11556,23 @@
     }
 
     function highlightScrolledLegalTarget(kind, path, occurrenceBlockPath = null) {
-      clearScrolledLegalTarget();
-      if (!path.length) return;
       if (kind === "cfr") {
         const section = cfrSectionIdMap.get(state.statuteNavigationSectionId);
         const body = $(".cfr-body", els.detail);
         if (section && body) {
           const citationBase = `${section.title} CFR ${section.section}`;
           const context = { ...(cfrDefinitionContext(section, []) || {}), sourceHost: { kind: "cfr", title: Number(section.title), section: section.section, path: [] } };
-          body.innerHTML = renderCfrBody(section, canonicalPath(path), occurrenceBlockPath ? { blockPath: occurrenceBlockPath } : null, citationBase, context);
-          renderInsertedReferenceGroups(els.detail);
-          renderInlineLegalNotes();
+          if (!updateRenderedCfrBody(body, section, canonicalPath(path), occurrenceBlockPath, citationBase, context)) {
+            body.innerHTML = renderCfrBody(section, canonicalPath(path), occurrenceBlockPath ? { blockPath: occurrenceBlockPath } : null, citationBase, context);
+            renderedCfrBodies.set(body, { blocks: section.blocks, profileRevision: state.profileRevision, key: `${canonicalPath(path)}:${(occurrenceBlockPath || []).join(".")}` });
+            renderInsertedReferenceGroups(els.detail);
+            renderInlineLegalNotes();
+          }
         }
         return;
       }
+      clearScrolledLegalTarget();
+      if (!path.length) return;
       const inline = $$(".statutory-runin-line[data-statute-inline-path]", els.detail).find(item => {
         try { return sameLegalPath(JSON.parse(item.dataset.statuteInlinePath || "[]"), path); } catch { return false; }
       });
@@ -12054,10 +12058,10 @@
       scrollStatuteAnchorToReadingLine(anchor);
     }
 
-    function scrollToRenderedCfrTarget() {
+    function scrollToRenderedCfrTarget(instant = false) {
       const searchMatch = $("[data-cfr-search-match], [data-statute-search-match]", els.detail);
       const citationTarget = $(".cfr-unit-wrapper.target, .cfr-block.target", els.detail);
-      scrollStatuteAnchorToReadingLine(searchMatch || citationTarget || $("[data-cfr-start]", els.detail));
+      scrollStatuteAnchorToReadingLine(searchMatch || citationTarget || $("[data-cfr-start]", els.detail), instant);
     }
 
     function renderStatutoryNode(node, targetPath, path, depth, searchTarget = null, citationBase = "", sectionId = "", baseDefinitionContext = null) {
@@ -12475,31 +12479,93 @@
       return `<div role="paragraph" class="cfr-block${classes}"${block.a ? ` data-cfr-path="${escapeHtml(block.a)}"` : ""}${selectionAttributes}${depthAttribute}${citationTarget ? ' aria-label="Citation target"' : searchHit ? ' aria-label="Search match"' : ""}${searchHit ? " data-cfr-search-match" : ""}>${contents}</div>`;
     }
 
-    function renderCfrBody(section, targetPath, searchTarget, citationBase, context) {
-      const ranges = targetPath ? globalThis.INASearchCfrHierarchy.scope(section, targetPath, searchTarget?.blockPath) : [];
+    // Keep source fragments in the DOM while the user moves within a section.
+    // Comment boundaries include continuation text, slots and compound markers.
+    const renderedCfrBodies = new WeakMap();
+
+    function cfrBodySegments(section, targetPath, locator = null) {
+      const ranges = targetPath ? globalThis.INASearchCfrHierarchy.scope(section, targetPath, locator) : [];
       const selected = new Map();
       for (const range of ranges) {
-        const key = range.blockPath[0];
-        const previous = selected.get(key);
+        const key = range.blockPath[0], previous = selected.get(key);
         if (previous) previous.end = range.end;
         else selected.set(key, { ...range });
       }
-      const output = []; let open = false;
-      const finish = () => { if (open) { output.push("</div>"); open = false; } };
+      const segments = [];
+      const add = (i, start, end, selected) => segments.push({ i, start, end, selected, key: `${i}:${start}:${end}` });
       for (let i = 0; i < (section.blocks || []).length; i++) {
-        const block = section.blocks[i], range = selected.get(i);
-        const render = clip => renderCfrBlock(block, [i], "", searchTarget, section, citationBase, context, "", clip);
-        if (!range) { finish(); output.push(render(null)); continue; }
-        if (block.x && range.start > 0) { finish(); output.push(render({ start: 0, end: range.start })); }
-        if (!open) {
+        const block = section.blocks[i], range = selected.get(i), end = String(block.x || "").length;
+        if (!range) { add(i, 0, end, false); continue; }
+        if (block.x && range.start > 0) add(i, 0, range.start, false);
+        add(i, range.start, range.end, true);
+        if (block.x && range.end < end) add(i, range.end, end, false);
+      }
+      return segments;
+    }
+
+    function renderCfrSegment(section, segment, searchTarget, citationBase, context) {
+      // Escape the opening bracket so HTML comment stripping preserves these runtime boundaries.
+      const block = section.blocks[segment.i];
+      return `\x3c!--cfr-render:${segment.key}-->${renderCfrBlock(block, [segment.i], "", searchTarget, section, citationBase, context, "", block.x ? segment : null)}\x3c!--/cfr-render-->`;
+    }
+
+    function renderCfrBody(section, targetPath, searchTarget, citationBase, context) {
+      const output = []; let open = false;
+      for (const segment of cfrBodySegments(section, targetPath, searchTarget?.blockPath)) {
+        if (open && !segment.selected) { output.push("</div>"); open = false; }
+        if (segment.selected && !open) {
           output.push(`<div class="cfr-subtree cfr-block target" data-cfr-path="${escapeHtml(targetPath)}" aria-label="Citation target">`);
           open = true;
         }
-        output.push(render(block.x ? range : null));
-        if (block.x && range.end < block.x.length) { finish(); output.push(render({ start: range.end, end: block.x.length })); }
+        output.push(renderCfrSegment(section, segment, searchTarget, citationBase, context));
       }
-      finish();
+      if (open) output.push("</div>");
       return output.join("");
+    }
+
+    function updateRenderedCfrBody(body, section, targetPath, locator, citationBase, context) {
+      const previous = renderedCfrBodies.get(body);
+      if (!previous || previous.blocks !== section.blocks || previous.profileRevision !== state.profileRevision) return false;
+      const key = `${targetPath}:${(locator || []).join(".")}`;
+      setLegalCitationHover(null);
+      if (previous.key === key) return true;
+      for (const wrapper of body.querySelectorAll(":scope > .cfr-subtree")) wrapper.replaceWith(...wrapper.childNodes);
+      const chunks = new Map(); let chunk = null;
+      for (const node of body.childNodes) {
+        if (node.nodeType === 8 && node.data.startsWith("cfr-render:")) {
+          chunk = { start: node }; chunks.set(node.data.slice(11), chunk);
+        } else if (node.nodeType === 8 && node.data === "/cfr-render" && chunk) { chunk.end = node; chunk = null; }
+      }
+      let cursor = body.firstChild, wrapper = null, replaced = false;
+      for (const segment of cfrBodySegments(section, targetPath, locator)) {
+        let existing = chunks.get(segment.key);
+        if (existing) {
+          while (cursor && cursor !== existing.start) { const next = cursor.nextSibling; cursor.remove(); cursor = next; }
+        } else {
+          const template = document.createElement("template");
+          template.innerHTML = renderCfrSegment(section, segment, null, citationBase, context);
+          existing = { start: template.content.firstChild, end: template.content.lastChild };
+          body.insertBefore(template.content, cursor); replaced = true;
+        }
+        const next = existing.end.nextSibling;
+        if (segment.selected) {
+          if (!wrapper) {
+            wrapper = document.createElement("div");
+            wrapper.className = "cfr-subtree cfr-block target";
+            wrapper.dataset.cfrPath = targetPath;
+            wrapper.setAttribute("aria-label", "Citation target");
+            body.insertBefore(wrapper, existing.start);
+          }
+          let node = existing.start;
+          while (node !== next) { const following = node.nextSibling; wrapper.append(node); node = following; }
+        } else wrapper = null;
+        cursor = next;
+      }
+      while (cursor) { const next = cursor.nextSibling; cursor.remove(); cursor = next; }
+      previous.key = key;
+      // Only changed compound boundaries need new annotation/insertion hosts.
+      if (replaced) { renderInsertedReferenceGroups(els.detail); renderInlineLegalNotes(); }
+      return true;
     }
 
     function cfrSectionFamilyHtml(section) {
@@ -12520,7 +12586,7 @@
       return `<nav class="section-family-alternatives" aria-label="Same-numbered sections in other CFR titles"><span class="section-family-alternatives-label">Other titles:</span><span class="section-family-alternatives-list">${links}</span></nav>`;
     }
 
-    function renderCfr(item, citationResult = null) {
+    function renderCfr(item, citationResult = null, instantJump = false) {
       hydrateLegalReferences(item);
       if (item?.external) {
         setStatuteNavigationVisible(false);
@@ -12548,14 +12614,23 @@
       state.hierarchyPageNodeId = null;
       if (section.id) activateNavigationLocation(normalizedStatuteHistoryLocation(section.id, citationResult?.path || [], "cfr"));
       const headingInsertionLocator = { recordPath: ["heading"], kind: "cfr-heading", field: "heading", start: 0, end: String(section.heading || cite).length };
+      const existingBody = $(".cfr-body", els.detail);
+      if (citationResult && !searchTarget?.kind && updateRenderedCfrBody(existingBody, section, targetPath, searchTarget?.blockPath, citationBase, baseDefinitionContext)) {
+        $(".detail-heading-actions", els.detail).innerHTML = openButton(cfrOfficialTextFragment(section, citationResult.path || []), "Current eCFR");
+        renderCfrNavigation(section, citationResult.path || []);
+        const paneId = state.focusedActivePaneId;
+        requestAnimationFrame(() => runInFocusedPane(paneId, () => { syncStatuteNavigationOffset(); scrollToRenderedCfrTarget(instantJump); }));
+        return;
+      }
       els.detail.innerHTML = `<div class="detail-content" data-cfr-start>${cfrSectionFamilyHtml(section)}${cfrSectionTitleAlternativesHtml(section)}<div class="detail-heading-row legal-reader-heading"><div class="detail-heading-citation">${legalUnitTriggerHtml("cfr", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}</div><div class="detail-heading-title"><h2 class="detail-title">${linkifyCfrText(section.heading || cite, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(cfrOfficialTextFragment(section, citationResult?.path || []), "Current eCFR")}</div></div>${legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, [], citationBase, "div", headingInsertionLocator)}<div class="cfr-body">${renderCfrBody(section, targetPath, searchTarget, citationBase, baseDefinitionContext)}</div><details class="regulation-source-details"><summary>Source details</summary><div class="source-banner">This regulation text is from the eCFR edition current through ${escapeHtml(currentThrough)}. Use “Current eCFR” to check for changes.${part?.authority ? `<br><strong>Authority:</strong> ${linkifyCfrText(part.authority, part.authorityReferences || [])}` : ""}${part?.source ? `<br><strong>Source:</strong> ${linkifyCfrText(part.source, part.sourceReferences || [])}` : ""}</div></details></div>`;
+      if (!searchTarget?.kind) renderedCfrBodies.set($(".cfr-body", els.detail), { blocks: section.blocks, profileRevision: state.profileRevision, key: `${targetPath}:${(searchTarget?.blockPath || []).join(".")}` });
       renderInsertedReferenceGroups(els.detail);
       renderInlineLegalNotes();
       renderCfrNavigation(section, citationResult?.path || (searchTarget?.path ? componentTokens(searchTarget.path) || [] : []));
       const paneId = state.focusedActivePaneId;
       requestAnimationFrame(() => runInFocusedPane(paneId, () => {
         syncStatuteNavigationOffset();
-        scrollToRenderedCfrTarget();
+        scrollToRenderedCfrTarget(instantJump);
         setTimeout(() => runInFocusedPane(paneId, renderInlineLegalNotes), 450);
       }));
     }
@@ -14821,9 +14896,14 @@ Get-FileHash $outJson -Algorithm SHA256`;
           activateSearchScope(tagged.scope, true, tagged.mode);
         }
         state.query = els.search.value.trim();
+        let inputCitation = null;
         state.pendingCommandClassification = globalThis.INA_SEARCH_COMMAND?.classifyInput?.(state.query, {
           authorities: state.searchScopeActive ? [state.searchScope?.family === "cfr" ? "cfr" : "statute"] : undefined,
-          citationClassifier: commandCitationClassifier
+          citationClassifier: value => {
+            const classified = commandCitationClassifier(value);
+            inputCitation = classified.result;
+            return classified;
+          }
         }) || null;
         state.citation = null;
         renderCitationFeedback(null);
@@ -14832,7 +14912,8 @@ Get-FileHash $outJson -Algorithm SHA256`;
         showSearchResults();
         if (!state.query) { runSearch(); return; }
         const deleting = String(event.inputType || "").startsWith("delete");
-        searchTimer = setTimeout(runSearch, deleting ? 160 : 65);
+        const cfrNavigation = !state.searchScopeActive && state.pendingCommandClassification?.mode === "navigation" && inputCitation?.type === "cfr";
+        searchTimer = setTimeout(() => runSearch({ typed: cfrNavigation }), cfrNavigation ? 0 : deleting ? 160 : 65);
       });
       els.searchScopeInput.addEventListener("input", event => {
         clearTimeout(searchTimer);

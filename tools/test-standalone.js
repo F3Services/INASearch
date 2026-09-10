@@ -656,7 +656,7 @@ async function main() {
   assert(tutorialPracticeSource.includes("setTimeout(() =>") && tutorialPracticeSource.includes("advanceTutorial()"), "Successful Quick Start practice does not automatically advance.");
   assert(tutorialCatalogSource.includes('practice: { kind: "citation-result", authority: "ina", section: "203", path: [] }') && !tutorialCatalogSource.includes('kind: "search-exact"'), "Quick Start still grades the characters typed instead of the citation result INASearch resolved.");
   assert(tutorialPracticeSource.includes("result.type !== practice.authority") && tutorialPracticeSource.includes("result.mapping?.inaSection") && !tutorialPracticeSource.includes("normalize(els.search.value) ==="), "Citation tutorial completion is not based on the resolved legal citation.");
-  const runSearchSource = full.html.slice(full.html.indexOf("function runSearch()"), full.html.indexOf("function shouldDeferBroadSearch"));
+  const runSearchSource = full.html.slice(full.html.indexOf("function runSearch("), full.html.indexOf("function shouldDeferBroadSearch"));
   assert(runSearchSource.includes("showCurrentSearchResults(direct);") && runSearchSource.includes("checkTutorialPractice();"), "A live citation result does not notify the active tutorial after it opens.");
   assert(!/\.tutorial-highlight\s*\{[^}]*z-index:/s.test(full.html), "A highlighted reader panel can still rise above and cover the sticky search bar.");
   const tipCatalogSource = full.html.slice(full.html.indexOf("const TIP_CATEGORIES"), full.html.indexOf("const TIP_BY_ID"));
@@ -2003,7 +2003,7 @@ async function main() {
   assert.strictEqual(corpusPayloadText(fs.readFileSync(uncompressed.filePath, "utf8")), uncompressedPayload, "Uncompressed JSON output is not deterministic.");
 
   const fallbackSource = fs.readFileSync(path.join(root, "src", "INASearch.template.html"), "utf8");
-  assert(fallbackSource.includes('scrollStatuteAnchorToReadingLine(searchMatch || citationTarget || $("[data-cfr-start]", els.detail))'), "CFR citation scrolling does not prioritize the requested unit over the earlier section wrapper.");
+  assert(fallbackSource.includes('scrollStatuteAnchorToReadingLine(searchMatch || citationTarget || $("[data-cfr-start]", els.detail), instant)'), "CFR citation scrolling does not prioritize the requested unit over the earlier section wrapper.");
   assert(fallbackSource.includes('data-note-associations-input') && fallbackSource.includes('data-legal-unit-kind='), "The citation-note editor or legal-unit citation actions are missing.");
   assert(!fallbackSource.includes('id="courseStructureEditor"') && !fallbackSource.includes('data-note-week='), "Retired course-note controls remain in the application shell.");
   const tutorialPracticeState = { citation: null, query: "", occurrenceMainResult: null, focusedCitationPanes: [], view: "search", searchScopeActive: false, searchScopeMode: "in", searchScope: null, definitionQuery: "" };
@@ -4994,6 +4994,8 @@ async function main() {
   });
   scrollStatuteAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 500 }) });
   assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "smooth" }, "Statute navigation did not align an anchor to the top reading line.");
+  scrollStatuteAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 500 }) }, true);
+  assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "instant" }, "Live CFR typing does not override CSS smooth scrolling for the latest selection.");
   const instantStatuteAnchorToReadingLine = extractedFunction(fallbackSource, "scrollStatuteAnchorToReadingLine", "currentStatutePathAtReadingLine", {
     statuteJumpLine: () => 200,
     animatedCitationJumpsEnabled: () => false,
@@ -5208,7 +5210,7 @@ async function main() {
   assert(fallbackSource.includes("syncSearchToScrolledLegalLocation(\"statute\"") && fallbackSource.includes("syncSearchToScrolledLegalLocation(\"cfr\""), "Scroll-follow mode is not connected to both statutory and regulatory readers.");
   const scrollSearchSyncSource = fallbackSource.slice(fallbackSource.indexOf("function syncSearchToScrolledLegalLocation"), fallbackSource.indexOf("function updateStatuteNavigationFromScroll"));
   assert(scrollSearchSyncSource.includes("const resolvedCitation = parseCitation(query);") && !scrollSearchSyncSource.includes("parseCitation(displayedQuery)"), "A compact display citation can replace the exact legal target during scroll synchronization.");
-  const emptyRunSearchSource = fallbackSource.slice(fallbackSource.indexOf("function runSearch()"), fallbackSource.indexOf("function shouldDeferBroadSearch"));
+  const emptyRunSearchSource = fallbackSource.slice(fallbackSource.indexOf("function runSearch("), fallbackSource.indexOf("function shouldDeferBroadSearch"));
   assert(emptyRunSearchSource.includes("if (!state.query && !state.searchScopeActive)") && emptyRunSearchSource.includes("openClearedSearchHierarchy();"), "Erasing the complete search citation does not open the INA root hierarchy.");
   assert(fallbackSource.includes('id="focusedCitationWorkspace"') && fallbackSource.includes('id="focusedCitationPanes"') && fallbackSource.includes("focused-citation-pane-scroll"), "The focused comparison workspace or its independent reader scrollers are missing.");
   assert(fallbackSource.includes("parseFocusedCitationInput(state.query, state.focusedCitationMode)") && fallbackSource.includes("enterFocusedCitationMode(focusedCitations, { resetHistories: true })"), "Comma-separated citations are not routed ahead of full search scoring or retained while a new pane is being typed.");
@@ -5224,7 +5226,7 @@ async function main() {
   const navigatorVisibilitySource = fallbackSource.slice(fallbackSource.indexOf("function legalNavigatorVisibleForCurrentContext"), fallbackSource.indexOf("function syncMainToolbarMode"));
   assert(navigatorVisibilitySource.includes('mode === "never"') && navigatorVisibilitySource.includes('mode === "all"') && navigatorVisibilitySource.includes("focusedCitationRecord(state.citation)"), "Legal navigator visibility does not implement Never, Single reader, and All legal views.");
   assert(fallbackSource.includes('label: childLabel,\n        value: ""') && (fallbackSource.match(/value: "", options/g) || []).length >= 2, "Immediate-child navigation menus still display child counts that can be confused with citation units.");
-  assert(fallbackSource.includes('behavior: focusedPane || !animatedCitationJumpsEnabled() ? "auto" : "smooth"'), "Focused panes or disabled citation animation do not position requested units synchronously.");
+  assert(fallbackSource.includes('behavior: instant ? "instant" : focusedPane || !animatedCitationJumpsEnabled() ? "auto" : "smooth"'), "Focused panes or disabled citation animation do not position requested units synchronously.");
   assert(fallbackSource.includes("withFocusedCitationPane(pane, () => handleStatuteNavigatorClick(event))") && fallbackSource.includes("focusedPaneForElement(event.target)"), "Focused panes do not route navigation and reader interactions through their own state contexts.");
   assert(fallbackSource.includes("replaceFocusedCitationSegment(focusedPane, displayedQuery)") && fallbackSource.includes("formatNavigationCitationLike(focusedPane?.entry.text"), "Scroll synchronization does not update only the active pane's formatted search segment.");
   const emptyHierarchyQueries = [];

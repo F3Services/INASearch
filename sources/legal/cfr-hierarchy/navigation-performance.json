@@ -1,0 +1,121 @@
+{
+  "result": "pass",
+  "measurement": "Input event to two animation frames after matching reader selection; includes debounce and layout, excludes completion of optional smooth scrolling.",
+  "before": [
+    {
+      "cpuSlowdown": 1,
+      "measurements": [
+        {
+          "query": "214.2",
+          "ms": 231
+        },
+        {
+          "query": "214.2h",
+          "ms": 231
+        },
+        {
+          "query": "214.2h2",
+          "ms": 222
+        },
+        {
+          "query": "214.2h2i",
+          "ms": 230
+        },
+        {
+          "query": "214.2h2ia",
+          "ms": 227
+        }
+      ]
+    },
+    {
+      "cpuSlowdown": 4,
+      "measurements": [
+        {
+          "query": "214.2",
+          "ms": 748
+        },
+        {
+          "query": "214.2h",
+          "ms": 674
+        },
+        {
+          "query": "214.2h2",
+          "ms": 763
+        },
+        {
+          "query": "214.2h2i",
+          "ms": 740
+        },
+        {
+          "query": "214.2h2ia",
+          "ms": 743
+        }
+      ]
+    }
+  ],
+  "after": [
+    {
+      "cpuSlowdown": 1,
+      "measurements": [
+        {
+          "query": "214.2",
+          "ms": 167
+        },
+        {
+          "query": "214.2h",
+          "ms": 54
+        },
+        {
+          "query": "214.2h2",
+          "ms": 50
+        },
+        {
+          "query": "214.2h2i",
+          "ms": 30
+        },
+        {
+          "query": "214.2h2ia",
+          "ms": 28
+        }
+      ]
+    },
+    {
+      "cpuSlowdown": 4,
+      "measurements": [
+        {
+          "query": "214.2",
+          "ms": 699
+        },
+        {
+          "query": "214.2h",
+          "ms": 219
+        },
+        {
+          "query": "214.2h2",
+          "ms": 216
+        },
+        {
+          "query": "214.2h2i",
+          "ms": 114
+        },
+        {
+          "query": "214.2h2ia",
+          "ms": 113
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "before": "b03028703f696bbe9f1817d6f6df36fa4f468c1b857dd44c1a9ce39bfa9ee6f4",
+    "after": "f3c05a832d3097639a8f2fb8d0a8374182a4bb75d66321ae363ca2738e732a29"
+  },
+  "checks": [
+    "source DOM identity and complete text preserved during every suffix change",
+    "compound heading split/merge preserves all text",
+    "inserted excerpt and saved note survive selection changes",
+    "same-provision click retains enclosing target",
+    "rapid typing immediately shows the latest provision on screen",
+    "backspace updates the parent scope",
+    "1x and 4x CPU input-to-paint budgets"
+  ]
+}

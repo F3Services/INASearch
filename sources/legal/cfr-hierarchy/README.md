@@ -99,15 +99,56 @@ Baseline commit: `10b67e93a143f36878a60e50bdfe016e11f292f8`. Sizes are bytes, no
 
 | Edition | Before | After | Net increase |
 | --- | ---: | ---: | ---: |
-| `INASearch.html` | 8,346,800 | 8,369,846 | +23,046 (0.276%) |
-| `INASearch-Uncompressed.html` | 35,505,889 | 35,530,784 | +24,895 (0.070%) |
+| `INASearch.html` | 8,346,800 | 8,374,203 | +27,403 (0.328%) |
+| `INASearch-Uncompressed.html` | 35,505,889 | 35,535,141 | +29,252 (0.082%) |
 
-Net additional runtime code: **21,757 bytes**, including deferred worker source,
-below the 50,000-byte planning target. CSS adds 179 bytes. The compressed corpus
+Net additional runtime code: **26,034 bytes**, including deferred worker source,
+below the 50,000-byte planning target. CSS adds 259 bytes. The compressed corpus
 adds **725 bytes** (5,232,793 → 5,233,518); plain corpus JSON adds **2,813 bytes**.
 HTML growth also includes base64 expansion and shell metadata. The audit JSON,
 source evidence and fixtures contribute zero bytes to the shipped editions.
 [Detailed sizes and artifact hashes](sizes.json).
+
+## Navigation performance follow-up
+
+Progressively typing `214.2h2ia` exposed a reader performance gap: every character
+rebuilt all of §214.2, including reference links and annotation hosts. The enclosing
+selection also narrowed the text and forced it to wrap again. Smooth scrolling could
+still be travelling toward an earlier input when the next character arrived.
+
+The reader now keeps source fragments in the DOM when changing the selected scope
+within the same section. Only compound heading boundaries that actually change are
+rendered again. Notes, inserted excerpts and repeated source occurrences retain their
+hosts. A changed corpus or profile revision requires a fresh render. The blue outline
+no longer changes the text width. Valid CFR input reuses the existing classification,
+bypasses the text-search debounce, and scrolls immediately to the latest provision.
+
+[Performance results](navigation-performance.json) compare the repaired release at
+`18a91f9` with this follow-up in isolated Chromium at 1× and 4× CPU slowdown. The
+measurement runs from the input event through two animation frames after the matching
+selection, including debounce and layout. It excludes completion of the baseline's
+optional scroll animation; a separate rapid-typing assertion verifies that the new
+selection is on screen immediately. Initial section loading still renders the section
+once and is reported separately.
+
+| CPU slowdown | Suffix typing before | Suffix typing after | Initial section load before → after |
+| --- | ---: | ---: | ---: |
+| 1× | 222–231 ms | 28–54 ms | 231 → 167 ms |
+| 4× | 674–763 ms | 113–219 ms | 748 → 699 ms |
+
+The browser regression also checks preservation of every source paragraph DOM node
+and the entire section text, compound heading split/merge, inserted excerpts, saved
+notes, repeated selection, backspacing, and the final visible target after a burst
+of actual keystrokes. Both rebuilt editions retain the repository-only audit policy.
+This follow-up adds 4,277 runtime bytes (4,357 HTML bytes) relative to `18a91f9`;
+the combined hierarchy repair remains below the 50 KB runtime target.
+
+Reproduce the comparison after building:
+
+```sh
+git show 18a91f9:INASearch.html > tmp/cfr-navigation-before.html
+node tools/test-cfr-navigation.mjs --baseline tmp/cfr-navigation-before.html
+```
 
 ## Reproduction and delivery
 

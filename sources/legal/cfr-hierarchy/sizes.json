@@ -11,20 +11,20 @@
         "corpusEncoding": "gzip"
       },
       "after": {
-        "artifactBytes": 8369846,
-        "sha256": "a285ed79d364a80b82c220b8fe9c4fee1b05dd19318d767fe5e093a934d9a994",
-        "runtimeCodeBytes": 1249433,
-        "cssBytes": 99206,
+        "artifactBytes": 8374203,
+        "sha256": "f3c05a832d3097639a8f2fb8d0a8374182a4bb75d66321ae363ca2738e732a29",
+        "runtimeCodeBytes": 1253710,
+        "cssBytes": 99286,
         "corpusBytes": 5233518,
         "corpusEncoding": "gzip"
       },
       "delta": {
-        "artifactBytes": 23046,
-        "runtimeCodeBytes": 21757,
-        "cssBytes": 179,
+        "artifactBytes": 27403,
+        "runtimeCodeBytes": 26034,
+        "cssBytes": 259,
         "corpusBytes": 725
       },
-      "artifactGrowthPercent": 0.27610581300618203
+      "artifactGrowthPercent": 0.3283054583792591
     },
     "INASearch-Uncompressed.html": {
       "before": {
@@ -36,20 +36,20 @@
         "corpusEncoding": "plain JSON"
       },
       "after": {
-        "artifactBytes": 35530784,
-        "sha256": "0dbe7960ef975e9c7c201129598006b03a109187dfb246a1029aafdf1114ac9e",
-        "runtimeCodeBytes": 1249433,
-        "cssBytes": 99206,
+        "artifactBytes": 35535141,
+        "sha256": "2970f601cf7cc0a60cb82b8ec7074ef1614de97b27fabca53497bf1d23ed6a77",
+        "runtimeCodeBytes": 1253710,
+        "cssBytes": 99286,
         "corpusBytes": 34139203,
         "corpusEncoding": "plain JSON"
       },
       "delta": {
-        "artifactBytes": 24895,
-        "runtimeCodeBytes": 21757,
-        "cssBytes": 179,
+        "artifactBytes": 29252,
+        "runtimeCodeBytes": 26034,
+        "cssBytes": 259,
         "corpusBytes": 2813
       },
-      "artifactGrowthPercent": 0.07011512935220408
+      "artifactGrowthPercent": 0.08238633315166394
     }
   },
   "correctionLogsExcluded": true
