@@ -1,15 +1,7 @@
-/*
- * INASearch local profile
- *
- * Keep this file beside INASearch.html. INASearch can update it
- * after you connect the file once, or download a replacement when direct
- * file writing is unavailable. Do not place sensitive or controlled
- * information here unless your environment permits it.
- *
- * Citation notes and highlights are created and organized inside the legal reader.
- */
+/* Blank profile embedded at build time. User data is saved in INASearch_Data.json. */
 window.INA_SEARCH_PROFILE = {
   "schemaVersion": 5,
+  "queryVersion": 2,
   "profileId": "b28a83da-7f4a-4b1d-91cf-7bd72b7b3372",
   "createdAt": "2026-07-30T00:00:00.000Z",
   "updatedAt": null,
@@ -17,10 +9,6 @@ window.INA_SEARCH_PROFILE = {
   "notes": [],
   "highlights": [],
   "annotationOrdinals": {},
-  "tutorialProgress": {
-    "schemaVersion": 1,
-    "modules": {}
-  },
   "tipProgress": {
     "schemaVersion": 1,
     "currentTipId": null,
@@ -32,7 +20,7 @@ window.INA_SEARCH_PROFILE = {
     "showDetailedStatus": false,
     "hideTopThemeControls": false,
     "hideLocalShareWarning": false,
-    "statutoryLinkCitationSystem": "ina",
+    "statutoryLinkCitationSystem": "view",
     "highlightInaCitationLinks": false,
     "highlightDefinedTerms": false,
     "noteDisplayPosition": "top",
@@ -44,8 +32,9 @@ window.INA_SEARCH_PROFILE = {
     "closeBlankCompanionOnSectionOpen": true,
     "legalNavigatorVisibility": "single",
     "scrollUpdatesSearch": false,
-    "citationJumpOffsetPercent": 5,
-    "navigationTrackingOffsetPercent": 5,
+    "pageViewOffsetPercent": 3,
+    "mainNavigatorCollapsed": false,
+    "citationCopyPreface": "[Citation] states the following",
     "expandSearchResultsByDefault": true,
     "showCfrChapterSubchapterInSearchHierarchy": false,
     "syncCfrCommonDepthFromStatute": true,

@@ -29,8 +29,8 @@ function between(startMarker, endMarker, source = template) {
   return source.slice(start, end);
 }
 
-function extractedFunction(name, nextName, context = {}) {
-  const source = between(`    function ${name}(`, `\n\n    function ${nextName}(`).trim();
+function extractedFunction(name, _nextName, context = {}) {
+  const source = require("./test-function-source")(template, name);
   return vm.runInNewContext(`(${source})`, { Array, Boolean, Date, JSON, Map, Math, Number, Object, Set, String, ...context });
 }
 
@@ -44,7 +44,8 @@ function testRuntimeBlocks() {
     ["ANNOTATIONS", "inaSearchAnnotationsRuntime", "INASearch-Annotations.js", "INA_SEARCH_ANNOTATIONS"],
     ["COMMAND", "inaSearchCommandRuntime", "INASearch-Command.js", "INA_SEARCH_COMMAND"],
     ["WORKSPACE", "inaSearchWorkspaceRuntime", "INASearch-Workspace.js", "INA_SEARCH_WORKSPACE"],
-    ["OCCURRENCE", "inaSearchOccurrenceRuntime", "INASearch-Occurrence.js", "INA_SEARCH_OCCURRENCE"]
+    ["OCCURRENCE", "inaSearchOccurrenceRuntime", "INASearch-Occurrence.js", "INA_SEARCH_OCCURRENCE"],
+    ["QUERY", "inaSearchQueryRuntime", "INASearch-Query.js", "INA_SEARCH_QUERY"]
   ];
   let previousOffset = -1;
   for (const [name, id, fileName, globalName] of runtimes) {
@@ -79,8 +80,8 @@ function testProfileContracts() {
     closeBlankCompanionOnSectionOpen: profile.preferences.closeBlankCompanionOnSectionOpen,
     legalNavigatorVisibility: profile.preferences.legalNavigatorVisibility,
     scrollUpdatesSearch: profile.preferences.scrollUpdatesSearch,
-    citationJumpOffsetPercent: profile.preferences.citationJumpOffsetPercent,
-    navigationTrackingOffsetPercent: profile.preferences.navigationTrackingOffsetPercent,
+    pageViewOffsetPercent: profile.preferences.pageViewOffsetPercent,
+    mainNavigatorCollapsed: profile.preferences.mainNavigatorCollapsed,
     expandSearchResultsByDefault: profile.preferences.expandSearchResultsByDefault,
     showCfrChapterSubchapterInSearchHierarchy: profile.preferences.showCfrChapterSubchapterInSearchHierarchy,
     syncCfrCommonDepthFromStatute: profile.preferences.syncCfrCommonDepthFromStatute,
@@ -92,8 +93,8 @@ function testProfileContracts() {
     closeBlankCompanionOnSectionOpen: true,
     legalNavigatorVisibility: "single",
     scrollUpdatesSearch: false,
-    citationJumpOffsetPercent: 5,
-    navigationTrackingOffsetPercent: 5,
+    pageViewOffsetPercent: 3,
+    mainNavigatorCollapsed: false,
     expandSearchResultsByDefault: true,
     showCfrChapterSubchapterInSearchHierarchy: false,
     syncCfrCommonDepthFromStatute: true,
@@ -106,30 +107,15 @@ function testProfileContracts() {
   for (const id of [
     "emptySearchViewSelect", "splitAuthoritySearchPanesToggle", "closeBlankCompanionOnSectionOpenToggle", "legalNavigatorVisibilitySelect",
     "scrollUpdatesSearchToggle", "syncCfrCommonDepthFromStatuteToggle", "expandSearchResultsByDefaultToggle", "showCfrChapterSubchapterInSearchHierarchyToggle", "persistInlineReferenceInsertionsToggle",
-    "referenceInsertionsUnavailableCount", "removeUnavailableReferenceInsertionsButton", "statuteNavigationDepthSelect", "cfrNavigationDepthSelect", "citationJumpOffsetInput", "navigationTrackingOffsetInput",
+    "referenceInsertionsUnavailableCount", "removeUnavailableReferenceInsertionsButton", "statuteNavigationDepthSelect", "cfrNavigationDepthSelect", "pageViewOffsetInput",
     "noteDisplayPositionSelect", "notesUseHandwrittenFontToggle"
   ]) assert(template.includes(`id="${id}"`), `Missing overhaul setting control ${id}.`);
   assert(template.includes('const companionSettingEnabled = profile.preferences.emptySearchView === "both"')
     && template.includes("els.closeBlankCompanionOnSectionOpenToggle.disabled = !companionSettingEnabled"), "The companion-close setting is not conditionally disabled.");
   assert(template.includes("normalized.preferences.splitAuthoritySearchPanes = normalized.preferences.splitAuthoritySearchPanes === true;"), "Profile normalization does not preserve an explicit split-search opt-in while defaulting omitted values off.");
-  assert(template.includes('legacyFieldName("navigation", "Updates", "Search")'), "Legacy navigationUpdatesSearch is not explicitly retired during profile normalization.");
+  assert(template.includes('Object.hasOwn(defaults.preferences, key)'), "Unknown/retired preferences are not removed during profile normalization.");
   assert(template.includes("--search-hit: #ffd866") && template.includes("--search-hit-ink: #241a00")
     && template.includes(".occurrence-row-text mark { border-radius: 2px; padding: 0 1px; color: var(--search-hit-ink); background: var(--search-hit); }"), "Search-hit highlighting does not use an explicit contrasting foreground/background pair.");
-}
-
-function testQuoteSafeLegacyScopeExtraction() {
-  const extractCitationFilterTag = extractedFunction("extractCitationFilterTag", "extractSearchScopeTag", { INA_SEARCH_COMMAND: command });
-  assert.strictEqual(extractCitationFilterTag('in:CFR "the term"'), null, "A content-scope in: modifier was mistaken for the legacy citation-scope editor.");
-  assert.strictEqual(extractCitationFilterTag('in:notes president'), null, "An artifact content scope was mistaken for a citation scope.");
-  assert.deepStrictEqual(plain(extractCitationFilterTag("alpha in: INA 101  waiver")), {
-    query: "alpha waiver", scope: "INA 101", mode: "in", authorityWide: false
-  });
-  assert.deepStrictEqual(plain(extractCitationFilterTag("cites:INA 101  immigrant")), {
-    query: "immigrant", scope: "INA 101", mode: "cites", authorityWide: false
-  });
-  for (const input of ['"in:CFR the term"', '(alpha in:CFR)', 'alpha \\in:CFR', '"scope, in:INA" OR alpha']) {
-    assert.strictEqual(extractCitationFilterTag(input), null, `A quoted, grouped, or escaped scope was extracted: ${input}`);
-  }
 }
 
 function occurrenceRoutingHarness(state, classification, { citation = null, splitAuthoritySearchPanes = false } = {}) {
@@ -138,7 +124,9 @@ function occurrenceRoutingHarness(state, classification, { citation = null, spli
     state,
     profile: { preferences: { splitAuthoritySearchPanes } },
     parseCitation: () => citation,
-    INA_SEARCH_COMMAND: { classifyInput: () => classification },
+    INA_SEARCH_COMMAND: { classifyInput: () => ({ ...classification, ok: classification.status === "valid" }) },
+    resolveStructuredQuery: ast => ({ branches: ast.branches.map(b => ({ ...b, scopes: b.locations.map(l => ({ family: /cfr/i.test(l) ? "cfr" : "usc" })) })) }),
+    structuredSearchGroups: extractedFunction("structuredSearchGroups", "renderStructuredSearchPane"),
     commandCitationClassifier: () => ({ valid: false }),
     showSearchResults: () => events.push(["show"]),
     dualOccurrenceWorkspace: (query, ast) => ({ kind: "dual", query, ast }),
@@ -159,38 +147,28 @@ function occurrenceRoutingHarness(state, classification, { citation = null, spli
 }
 
 function testOccurrenceRouting() {
-  const dualAst = { status: "valid", ok: true, scope: null, clauses: [{ alternatives: [{ value: "term" }] }], common: { levels: { statute: "deepest", cfr: "deepest" } } };
-  const combined = occurrenceRoutingHarness({ query: "the term", searchScopeActive: false, searchScopeMode: "in", searchScope: null, focusedCitationMode: false }, { mode: "search", status: "valid", ast: dualAst });
+  const dualAst = command.parseCommand("the term");
+  const classify = ast => ({ mode: "search", status: "valid", ast });
+  const combined = occurrenceRoutingHarness({ query: "the term" }, classify(dualAst));
   const combinedEvent = combined.events.find(event => event[0] === "single")?.[1];
-  assert.strictEqual(combined.accepted, true, "An unscoped ordinary search did not enter occurrence search.");
-  assert.strictEqual(combinedEvent?.descriptor?.authority, "combined", "The default unscoped search did not route to the single combined authority stream.");
-  assert.deepStrictEqual(plain(combinedEvent?.descriptor?.authorities), ["statute", "cfr"], "The combined search stream does not preserve INA-before-CFR source order.");
-  assert(!combined.events.some(event => event[0] === "dual"), "The default unscoped search opened the optional split workspace.");
-  assert.strictEqual(combined.events.find(event => event[0] === "common")?.[1]?.mode, "stream", "The combined search did not configure its Common control for stream mode.");
-
-  const split = occurrenceRoutingHarness({ query: "the term", searchScopeActive: false, searchScopeMode: "in", searchScope: null, focusedCitationMode: false }, { mode: "search", status: "valid", ast: dualAst }, { splitAuthoritySearchPanes: true });
-  assert.strictEqual(split.accepted, true, "An opted-in split search did not enter occurrence search.");
-  assert.strictEqual(split.events.filter(event => event[0] === "dual").length, 1, "An opted-in split search did not create exactly one dual workspace.");
-  assert.strictEqual(split.events.filter(event => event[0] === "single").length, 0, "An opted-in split search also created the combined occurrence stream.");
-
-  const scopedAst = { ...dualAst, scope: { authority: "cfr", citationSystem: "cfr" }, common: { levels: { cfr: "section" } } };
-  const scoped = occurrenceRoutingHarness({ query: 'in:CFR "the term"', searchScopeActive: false, searchScopeMode: "in", searchScope: null, focusedCitationMode: true }, { mode: "search", status: "valid", ast: scopedAst });
-  const singleEvent = scoped.events.find(event => event[0] === "single");
-  assert.strictEqual(scoped.accepted, true, "An authority-scoped ordinary search did not enter occurrence search.");
-  assert.strictEqual(singleEvent?.[1]?.descriptor?.authority, "cfr", "A CFR-scoped search was routed to the wrong authority.");
-  assert(scoped.events.some(event => event[0] === "exit"), "A singleton scoped search retained an obsolete comparison workspace.");
-  assert(!scoped.events.some(event => event[0] === "dual"), "A scoped search incorrectly opened both authorities.");
-
-  const legacyScope = { valid: true, family: "cfr", label: "8 CFR 204.1" };
-  const legacy = occurrenceRoutingHarness({ query: "petition", searchScopeActive: true, searchScopeMode: "in", searchScope: legacyScope, focusedCitationMode: false }, { mode: "search", status: "valid", ast: dualAst });
-  const legacySingle = legacy.events.find(event => event[0] === "single")?.[1];
-  assert.strictEqual(legacySingle?.descriptor?.authority, "cfr", "A legacy citation fence lost its CFR authority.");
-  assert.strictEqual(legacySingle?.scope, legacyScope, "A legacy citation fence was not passed to the occurrence engine.");
-
-  const cites = occurrenceRoutingHarness({ query: "term", searchScopeActive: true, searchScopeMode: "cites", searchScope: { valid: true }, focusedCitationMode: false }, { mode: "search", status: "valid", ast: dualAst });
-  assert.strictEqual(cites.accepted, false, "cites: was incorrectly routed into primary legal-text occurrence search.");
-  const citationPrefix = occurrenceRoutingHarness({ query: "INA 212", searchScopeActive: false, searchScopeMode: "in", searchScope: null, focusedCitationMode: false }, { mode: "search", status: "valid", ast: dualAst }, { citation: { recognized: true } });
-  assert.strictEqual(citationPrefix.accepted, false, "A recognized citation prefix was scanned as ordinary text.");
+  assert.strictEqual(combined.accepted, true);
+  assert.strictEqual(combinedEvent?.descriptor?.authority, "combined");
+  assert.deepStrictEqual(plain(combinedEvent?.descriptor?.authorities), ["statute", "cfr"]);
+  assert(!combined.events.some(event => event[0] === "dual"));
+  assert.strictEqual(combined.events.find(event => event[0] === "common")?.[1]?.mode, "stream");
+  const split = occurrenceRoutingHarness({ query: "the term" }, classify(dualAst), { splitAuthoritySearchPanes: true });
+  assert.strictEqual(split.events.filter(event => event[0] === "dual").length, 1);
+  assert.deepStrictEqual(plain(split.events.find(event => event[0] === "dual")[1].entries.map(e => e.queryGroup)), ["ina", "cfr", "notes"]);
+  for (const input of ['in:CFR "the term"', 'in:237 cites:212', 'cites:212 in:237']) {
+    const scoped = occurrenceRoutingHarness({ query: input, focusedCitationMode: true }, classify(command.parseCommand(input)));
+    const pane = scoped.events.find(event => event[0] === "single")?.[1];
+    assert.strictEqual(scoped.accepted, true);
+    assert.deepStrictEqual(plain(pane.descriptor.ast.scopeGroups), command.parseCommand(input).scopeGroups);
+    assert.deepStrictEqual(plain(pane.descriptor.ast.citationGroups), command.parseCommand(input).citationGroups);
+    assert(scoped.events.some(event => event[0] === "exit"));
+  }
+  const citationPrefix = occurrenceRoutingHarness({ query: "INA 212" }, { mode: "navigation-prefix" });
+  assert.strictEqual(citationPrefix.accepted, false);
 
   const runSearchSource = between("    function runSearch(", "\n\n    function shouldDeferBroadSearch(");
   assert(runSearchSource.indexOf("parseLegalWorkspaceInput") < runSearchSource.indexOf("tryRunOccurrenceSearch"), "Legal pane expressions are not routed before ordinary search.");
@@ -235,39 +213,23 @@ function testCommonControls() {
 }
 
 function testChildHardScopes() {
-  const extractCitationFilterTag = extractedFunction("extractCitationFilterTag", "extractSearchScopeTag", { INA_SEARCH_COMMAND: command });
-  const inaScope = { valid: true, family: "usc", authority: "ina", sectionIds: new Set(["8-1101"]), pathsBySection: new Map() };
-  const parseSearchScope = value => value === "INA 101" ? inaScope : { valid: false, message: "Bad scope" };
-  const focusedPaneHardScope = extractedFunction("focusedPaneHardScope", "focusedPaneDescriptor", { extractCitationFilterTag, parseSearchScope });
-  const hardScope = focusedPaneHardScope('in:INA 101  "term"', { child: true });
-  assert.strictEqual(hardScope?.tagged?.query, '"term"', "A child hard scope retained its citation as query text.");
-  assert.strictEqual(hardScope?.scope, inaScope, "A child hard scope did not retain the parsed citation fence.");
-  assert.strictEqual(hardScope?.authority, "statute", "An INA child hard scope selected the wrong occurrence authority.");
-  assert.strictEqual(focusedPaneHardScope('in:CFR "term"', { child: true }), null, "An authority-wide child in: modifier was mistaken for a citation fence.");
-  assert.strictEqual(focusedPaneHardScope('"in:INA 101  term"', { child: true }), null, "A quoted child phrase was mistaken for a citation fence.");
-
+  const resolveStructuredQuery = extractedFunction("resolveStructuredQuery", "structuredSearchGroups", { INA_SEARCH_QUERY: require("../src/INASearch-Query"), parseSearchScope: value => ({ valid: true, family: /cfr/i.test(value) ? "cfr" : "usc", label: value, sectionIds: new Set(["one"]), pathsBySection: new Map() }) });
   const focusedPaneDescriptor = extractedFunction("focusedPaneDescriptor", "parseLegalWorkspaceInput", {
-    INA_SEARCH_COMMAND: command,
-    parseCitation: () => null,
-    authorityForCitationResult: () => null,
-    focusedCitationRecord: () => null,
-    isAuthorityBrowse: () => false,
-    citationInputCanContinue: () => false,
-    focusedPaneHardScope,
-    commandCitationClassifier: () => ({ valid: false })
+    INA_SEARCH_COMMAND: command, parseCitation: () => null, authorityForCitationResult: () => null,
+    focusedCitationRecord: () => null, isAuthorityBrowse: () => false, citationInputCanContinue: () => false,
+    resolveStructuredQuery, commandCitationClassifier: () => ({ valid: false })
   });
-  const descriptor = focusedPaneDescriptor('in:INA 101  "term"', { child: true, childAuthority: "cfr", requireAuthority: true });
-  assert.strictEqual(descriptor.ok, true, "A valid child citation fence was rejected.");
-  assert.strictEqual(descriptor.authority, "statute", "A child citation fence did not override the pane's prior authority.");
-  assert.strictEqual(descriptor.scope, inaScope, "The parsed child citation fence was dropped from its descriptor.");
-  assert.deepStrictEqual(plain(descriptor.ast.clauses.map(clause => clause.alternatives.map(atom => atom.value))), [["term"]], "Citation-scope text leaked into the occurrence query clauses.");
-
-  const occurrencePaneSource = between("    async function renderFocusedOccurrencePane(", "\n\n    function occurrenceReaderTarget(");
-  assert(occurrencePaneSource.includes("scope: pane.entry.scope || undefined"), "A child citation fence is not passed to the occurrence session.");
+  for (const input of ['in:237 cites:212', 'cites:212 in:237', 'in:INA 101 "term"']) {
+    const descriptor = focusedPaneDescriptor(input, { child: true, childAuthority: "cfr", requireAuthority: true });
+    assert.strictEqual(descriptor.ok, true);
+    assert.deepStrictEqual(plain(descriptor.ast.scopeGroups), command.parseCommand(input).scopeGroups);
+    assert.deepStrictEqual(plain(descriptor.ast.citationGroups), command.parseCommand(input).citationGroups);
+  }
+  const paneSource = between("    async function renderFocusedOccurrencePane(", "\n\n    function occurrenceReaderTarget(");
+  assert(paneSource.includes("renderStructuredSearchPane(pane)"), "Pane and main queries must share execution.");
   const expressionSource = between("    function focusedWorkspaceExpression(", "\n\n    function syncFocusedWorkspaceExpression(");
-  assert(expressionSource.includes("!pane.entry.scope"), "The compositor prepends a second authority scope to child hard-fence commands.");
-  const normalizeSource = between("    function normalizeFocusedPaneEntry(", "\n\n    function focusedCitationRecord(");
-  assert(normalizeSource.includes("scope: entry?.scope || descriptor.scope || null"), "Child hard-fence state is lost during pane normalization.");
+  assert(expressionSource.includes("!pane.entry.ast?.queryVersion"));
+
 }
 
 async function testSectionMaterializationHooks() {
@@ -405,8 +367,8 @@ function testAuthorityStreamAndLegacySearchRetirement() {
     && template.includes('top: calc(var(--topbar-height, 0px) + var(--statute-nav-height, 0px));'), "Combined-search authority headers are not sticky below the application navigation.");
   assert(template.includes('.occurrence-authority-group { position: relative;'), "Authority groups do not bound their sticky headers so the next source can displace the prior header.");
 
-  const legalAuthoritiesForAst = extractedFunction("legalAuthoritiesForAst", "annotationTextMatchesAst");
-  assert.deepStrictEqual(plain(legalAuthoritiesForAst({ scope: { authorities: ["cfr", "statute"] } })), ["statute", "cfr"], "A reversed in:CFR,INA modifier can reorder the required INA→CFR stream.");
+  const legalAuthoritiesForAst = extractedFunction("legalAuthoritiesForAst", "resolveStructuredQuery");
+  assert.deepStrictEqual(plain(legalAuthoritiesForAst({ scope: { authorities: ["cfr", "statute"] } })), ["cfr", "statute"], "Legacy scopes retain their authorities; the stream controls display order.");
 
   const namespaceOccurrenceResult = extractedFunction("namespaceOccurrenceResult", "combineAuthorityOccurrenceResults", {
     emptyOccurrenceResult: () => ({ sections: [], hierarchy: [], totalOccurrences: 0, materializeOccurrences: () => ({ rows: [], total: 0, returned: 0 }) })
@@ -469,7 +431,7 @@ function testPaneModesAndHistory() {
 
   const descriptorSource = between("    function focusedPaneDescriptor(", "\n\n    function parseLegalWorkspaceInput(");
   for (const mode of ["reader", "hierarchy", "search-tree"]) assert(descriptorSource.includes(`mode: "${mode}"`), `Pane descriptor mode ${mode} is missing.`);
-  assert(descriptorSource.includes("options.requireAuthority === true"), "A standalone pane search can lose its authority fence.");
+  assert(descriptorSource.includes("resolveStructuredQuery(ast)"), "Pane scopes must use the shared resolver.");
   const commitSource = between("    function commitFocusedPaneInput(", "\n\n    function handleFocusedPaneInput(");
   assert(commitSource.includes("Use the main search bar to add or compose another pane"), "Child panes do not reject pane-spawning commas with guidance.");
   const inputSource = between("    function handleFocusedPaneInput(", "\n\n    function navigateFocusedPaneCommandHistory(");
@@ -539,9 +501,7 @@ function testPaneModesAndHistory() {
     assert(source.includes("resetHistories: true"), `A main-bar ${label} rebuild retains stale child histories.`);
   }
 
-  const indexBuildSource = between("    async function buildIndexRecords(", "\n\n    function inaMappedSection(");
-  assert(indexBuildSource.includes("!state.focusedCitationMode && !state.mainOccurrencePane"),
-    "Completing the citation-source index can replay an active pane workspace and erase pane-local history.");
+  assert(!template.includes("function buildIndexRecords("), "The retired general search index is still present.");
 }
 
 function testInsertionExclusions() {
@@ -586,7 +546,6 @@ function testInsertionExclusions() {
 async function main() {
   testRuntimeBlocks();
   testProfileContracts();
-  testQuoteSafeLegacyScopeExtraction();
   testOccurrenceRouting();
   testCommonControls();
   testChildHardScopes();

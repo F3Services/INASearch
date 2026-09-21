@@ -6,10 +6,13 @@ const vm = require('vm');
 const crypto = require('crypto');
 const { readArtifact, collectFields } = require('./audit-inline-references');
 const embedded = require('./embedded-references');
+const functionSource = require('./test-function-source');
 const escapeHtml = value => String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 const plain = value => String(value).replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/g, '').replace(/<[^>]*>/g, '').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 function runtime(template, corpus) {
   const scope = {
+    corpus,
+    state: { statuteHierarchyAuthority: 'ina' },
     profile: { preferences: { statutoryLinkCitationSystem: 'ina' } },
     INASearchEmbeddedReferences: embedded,
     inaMap: new Map(corpus.inaCrosswalk.map(row => [String(row.inaSection).toLowerCase(), row])),
@@ -22,12 +25,10 @@ function runtime(template, corpus) {
     transferTargetUrl: () => '', transferTargetLabel: () => '', legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => ''
   };
   vm.createContext(scope);
+  if (template.includes('function statutoryLinksUseIna(')) vm.runInContext(functionSource(template, 'statutoryLinksUseIna'), scope);
   for (const name of ['normCitationPart', 'statuteStatus', 'transferSourceKey', 'transferTargetForSource', 'transferTargetLabel', 'houseSectionUrl', 'transferTargetUrl', 'legalReferenceDisposition', 'renderSearchHighlightedText', 'legalReferenceCitation', 'statutoryReferenceCrosswalk', 'inUnfinishedStatutoryList', 'coordinatedStatutoryInaLists', 'statutoryLinkUsesConvertibleUscWording', 'statutoryLinkInaCitation', 'legalReferenceSourceDiscrepancy', 'legalReferenceHtml', 'houseFootnoteReferenceHtml', 'coordinatedInaListHtml', 'linkifyStatutoryText']) {
-    const start = template.indexOf(`    function ${name}(`);
-    if (start < 0 && name === "inUnfinishedStatutoryList") continue; // Pre-change snapshots have no such helper.
-    if (start < 0) throw new Error(`Missing ${name}`);
-    const end = template.indexOf('\n    function ', start + 10);
-    vm.runInContext(template.slice(start, end), scope);
+    if (name === "inUnfinishedStatutoryList" && !template.includes(`function ${name}(`)) continue; // Pre-change snapshots have no such helper.
+    vm.runInContext(functionSource(template, name), scope);
   }
   scope.uscToIna = new Map();
   for (const row of corpus.inaCrosswalk) if (row.uscSection && !scope.uscToIna.has(scope.normCitationPart(row.uscSection))) scope.uscToIna.set(scope.normCitationPart(row.uscSection), row);

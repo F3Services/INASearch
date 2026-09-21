@@ -1,0 +1,12 @@
+{
+  "name": "inasearch",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-standalone.js",
+    "test": "node tools/test-standalone.js"
+  },
+  "devDependencies": {
+    "terser": "5.44.0",
+    "acorn": "8.15.0"
+  }
+}

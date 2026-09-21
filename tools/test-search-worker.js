@@ -78,6 +78,7 @@ function createHarness(shared, corpus) {
   context.self = context;
   vm.createContext(context);
   new vm.Script(occurrenceSource, { filename: "INASearch-Occurrence.js" }).runInContext(context);
+  for (const name of ["Annotations", "Query"]) new vm.Script(fs.readFileSync(path.join(root, "src", `INASearch-${name}.js`), "utf8")).runInContext(context);
   new vm.Script(workerSource, { filename: "INASearch-Search-Worker.js" }).runInContext(context);
   return {
     messages,
@@ -106,16 +107,35 @@ async function main() {
   assert.strictEqual(shared.searchIndexes.size, 1, "A built projection was not persisted.");
   assert.strictEqual(shared.corpusWrites, 1, "The embedded baseline was not persisted independently of updater settings.");
 
-  cold.send({ type: "search", sessionId: "ordinary", generation: 1, requestId: "ordinary-1", query: "alpha", options: { authorities: ["ina"] } });
+  cold.send({ type: "search", sessionId: "ordinary", generation: 1, requestId: "ordinary-1", query: require("../src/INASearch-Command").parseCommand("alpha"), options: { authorities: ["ina"], plan: { branches: [{ kind: "law", scopes: [] }], citationScopes: [] } } });
   const search = await cold.waitFor(message => message.type === "search-result" && message.sessionId === "ordinary");
   assert(search.result.totalOccurrences > 0, "The worker returned no ordinary legal-text hits.");
   cold.send({ type: "materialize", pageId: "ordinary-page", requestId: search.result.requestId, options: { sectionId: search.result.sections[0].id, start: 0, limit: 1 } });
   const page = await cold.waitFor(message => message.type === "page-result" && message.pageId === "ordinary-page");
   assert.strictEqual(page.page.rows.length, 1, "The worker did not materialize a bounded result page.");
 
-  cold.send({ type: "citation-search", sessionId: "citations", generation: 1, requestId: "citations-1", scope: { family: "usc", sectionIds: new Set(["8-1182"]), pathsBySection: new Map([["8-1182", []]]) }, query: { clauses: [] }, authorities: ["statute"] });
-  const citations = await cold.waitFor(message => message.type === "search-result" && message.sessionId === "citations");
-  assert.strictEqual(citations.result.totalOccurrences, 1, "The persisted reverse citation index did not find its source provision.");
+  const ast = require("../src/INASearch-Command").parseCommand("in:101 cites:102 alpha");
+  const scopes = id => ({ valid: true, family: "usc", sectionIds: new Set([id]), pathsBySection: new Map() });
+  const structuredOptions = { authorities: ["ina"], plan: { branches: [{ kind: "law", scopes: [scopes("8-1101")] }], citationScopes: [[scopes("8-1182")]] } };
+  cold.send({ type: "search", sessionId: "structured", generation: 1, requestId: "structured-1", query: ast, options: structuredOptions });
+  const structured = await cold.waitFor(message => message.type === "search-result" && message.sessionId === "structured");
+  const projection = require("../src/INASearch-Occurrence").buildProjection(corpus);
+  const fallback = require("../src/INASearch-Query").search(projection, ast, structuredOptions);
+  assert.strictEqual(structured.result.totalOccurrences, 1, "Independent source and cited-target constraints lost packed references during asynchronous indexing.");
+  cold.send({ type: "materialize", pageId: "structured-page", requestId: structured.result.requestId, options: { start: 0, limit: 10 } });
+  const structuredPage = await cold.waitFor(message => message.type === "page-result" && message.pageId === "structured-page");
+  assert.deepStrictEqual(structuredPage.page.rows, fallback.materializeOccurrences({limit:10}).rows, "Worker/fallback structured results differ.");
+
+  const highlightedText = corpus.title8.sections[0].body[0].text;
+  const selectedStart = highlightedText.indexOf("alpha");
+  const personal = {highlights:[{id:"highlight",color:"pink",segments:[{id:"segment",association:{family:"usc",title:8,start:{unit:"1101",path:["a"]}},anchor:require("../src/INASearch-Annotations").quoteAnchor(highlightedText,selectedStart,selectedStart+5)}]}]};
+  for (const [id, input, count] of [["presence","in:highlights rule",1],["exact","in:highlights-exact rule",0],["selected","in:highlights-exact alpha",1]]) {
+    const queryAst = require("../src/INASearch-Command").parseCommand(input);
+    const options = {...structuredOptions, personal, plan:{branches:queryAst.branches.map(branch=>({...branch,scopes:[]})),citationScopes:[]}};
+    cold.send({type:"search",sessionId:id,generation:1,requestId:id,query:queryAst,options});
+    const result = await cold.waitFor(message=>message.type==="search-result" && message.sessionId===id);
+    assert.strictEqual(result.result.totalOccurrences,count,`Worker ${id} highlight matching failed.`);
+  }
 
   const corruptedKey = [...shared.searchIndexes.keys()][0];
   const corruptedRecord = structuredClone(shared.searchIndexes.get(corruptedKey));
@@ -131,6 +151,9 @@ async function main() {
   await recovering.waitFor(message => message.type === "metric" && message.name === "projection-cache-saved");
 
   const readsBeforeWarm = shared.corpusReads;
+  // Existing installations may still have the redundant citation-source field.
+  // Its removal must not invalidate otherwise identical cached projections.
+  for (const record of shared.searchIndexes.values()) record.payload.citationSources = [{ retired: true }];
   const warm = createHarness(shared, corpus);
   warm.send({ type: "init", identity, source: "indexeddb" });
   const warmReady = await warm.waitFor(message => message.type === "ready");
@@ -138,8 +161,10 @@ async function main() {
   assert.strictEqual(shared.corpusReads, readsBeforeWarm, "A warm projection cache hit unnecessarily decoded the corpus in the worker.");
 
   const cancellationStart = warm.messages.length;
-  warm.send({ type: "search", sessionId: "rapid", generation: 1, requestId: "rapid-1", query: "alpha", options: { authorities: ["ina"] } });
-  warm.send({ type: "search", sessionId: "rapid", generation: 2, requestId: "rapid-2", query: "target", options: { authorities: ["ina"] } });
+  const rapidOptions = { authorities: ["ina"], plan: { branches: [{ kind: "law", scopes: [] }], citationScopes: [] } };
+  const parse = require("../src/INASearch-Command").parseCommand;
+  warm.send({ type: "search", sessionId: "rapid", generation: 1, requestId: "rapid-1", query: parse("alpha"), options: rapidOptions });
+  warm.send({ type: "search", sessionId: "rapid", generation: 2, requestId: "rapid-2", query: parse("target"), options: rapidOptions });
   await warm.waitFor(message => message.type === "search-result" && message.sessionId === "rapid" && message.generation === 2);
   await new Promise(resolve => setTimeout(resolve, 25));
   assert(!warm.messages.slice(cancellationStart).some(message => message.type === "search-result" && message.sessionId === "rapid" && message.generation === 1), "A stale search generation replaced a newer result.");

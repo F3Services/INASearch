@@ -102,7 +102,7 @@
 
   function validCorpusRecord(record) {
     return Boolean(
-      record && ((record.recordSchemaVersion === 1 && record.storageFormat === "json") || (record.recordSchemaVersion === 2 && record.storageFormat === "runtime-json")) &&
+      record && record.recordSchemaVersion === 2 && record.storageFormat === "runtime-json" &&
       Number.isSafeInteger(record.bytes) && record.bytes > 0 &&
       typeof record.sha256 === "string" && /^[0-9a-f]{64}$/.test(record.sha256) &&
       record.payload instanceof Blob
@@ -173,7 +173,7 @@
     if (bytes.byteLength !== record.bytes) throw new Error("The saved browser profile byte count does not match its manifest.");
     if (await sha256Bytes(bytes) !== record.sha256) throw new Error("The saved browser profile failed its SHA-256 integrity check.");
     const vault = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
-    if (!vault || vault.format !== "INASearchData" || Number(vault.schemaVersion) !== 1 || typeof vault.vaultId !== "string" || !Number.isSafeInteger(vault.revision) || vault.revision < 0 || ![1, 2, 3, 4, 5].includes(Number(vault.profile?.schemaVersion)) || !Array.isArray(vault.profile?.notes) || !vault.profile?.preferences || typeof vault.profile.preferences !== "object") {
+    if (!vault || vault.format !== "INASearchData" || Number(vault.schemaVersion) !== 1 || typeof vault.vaultId !== "string" || !Number.isSafeInteger(vault.revision) || vault.revision < 0 || Number(vault.profile?.schemaVersion) !== 5 || !Array.isArray(vault.profile?.notes) || !vault.profile?.preferences || typeof vault.profile.preferences !== "object") {
       throw new Error("The saved browser profile payload is invalid.");
     }
     return vault;
@@ -327,7 +327,7 @@
   }
 
   async function saveSearchIndex(record) {
-    if (!record?.key || record.recordSchemaVersion !== 1 || !record.payload || !Array.isArray(record.payload.fragments) || !Array.isArray(record.payload.hierarchyNodes) || !Array.isArray(record.payload.citationSources)) {
+    if (!record?.key || record.recordSchemaVersion !== 1 || !record.payload || !Array.isArray(record.payload.fragments) || !Array.isArray(record.payload.hierarchyNodes)) {
       throw new Error("The search-index cache record is malformed.");
     }
     const database = await openDatabase();

@@ -7,11 +7,11 @@ const annotations = require("../src/INASearch-Annotations");
 const associationKey = association => `${association.family}:${association.title}:${association.start.unit}:${(association.start.path || []).join("/")}:${association.end?.unit || ""}:${(association.end?.path || []).join("/")}`;
 const association = (unit = "1182", path = ["a", "2", "D"]) => ({ family: "usc", title: 8, citationSystem: "ina", start: { unit, path }, label: "INA 212(a)(2)(D)" });
 
-function testLegacyMigration() {
+function testCurrentProfileNormalization() {
   const noteAssociation = { ...association(), placement: { dock: "right", boundary: "after", preferredWidthPx: 412, order: 9, primaryHighlightId: "segment-1" } };
   const migrated = annotations.normalizeProfile({
-    schemaVersion: 4,
-    notes: [{ id: "legacy", title: "Issue", body: "Keep this wording.", tags: ["urgent"], color: "pink", links: [{ label: "INA 212" }], associations: [noteAssociation], createdAt: "2025-01-01T00:00:00.000Z", updatedAt: "2025-01-02T00:00:00.000Z" }],
+    schemaVersion: 5,
+    notes: [{ id: "current", text: "Issue. Keep this wording. Tags: urgent", color: "pink", associations: [noteAssociation], createdAt: "2025-01-01T00:00:00.000Z", updatedAt: "2025-01-02T00:00:00.000Z" }],
     highlights: [{ id: "highlight-1", noteId: "legacy", color: "violet", segments: [{ id: "segment-1", association: noteAssociation, anchor: { exact: "Keep", start: 0, end: 4 } }], createdAt: "2025-01-01T00:00:00.000Z", updatedAt: "2025-01-02T00:00:00.000Z" }],
     preferences: { lastNoteColor: "pink", notesUseRuleFont: true }
   });
@@ -99,10 +99,10 @@ function testSyntheticScale() {
   console.log(`INFO annotation synthetic index: ${Date.now() - started} ms for 20,000 artifacts / 20,000 associations`);
 }
 
-testLegacyMigration();
+testCurrentProfileNormalization();
 testReferencesStayVerbatim();
 testDisplayPreferences();
 testAnchorsAndNeedsReview();
 testIncrementalIndexesAndAliases();
 testSyntheticScale();
-console.log("PASS annotations: schema-5 migration, references, anchors, incremental indexes, aliases, and synthetic scale");
+console.log("PASS annotations: schema-5 normalization, references, anchors, incremental indexes, aliases, and synthetic scale");

@@ -36,7 +36,7 @@ Firefox and Safari may still run the reader, save a profile in their own browser
 
 ### How are my notes saved?
 
-INASearch automatically saves notes, preferences, and tutorial progress in browser-owned IndexedDB storage. “Saved in browser” means the current browser profile contains the latest verified copy; it does not mean the data is a durable filesystem document.
+INASearch automatically saves notes, highlights, preferences, and daily-tip progress in browser-owned IndexedDB storage. “Saved in browser” means the current browser profile contains the latest verified copy; it does not mean the data is a durable filesystem document.
 
 Create a note from an exact INA, U.S.C., or CFR citation's actions menu. Notes use a neutral full-width layout, may be associated with several exact citations, and appear immediately above or below each citation according to the global setting. The optional handwritten-font setting uses an installed system font when available and otherwise keeps the normal rule-text font.
 
@@ -46,6 +46,18 @@ For stronger protection, open **Saving & data** and select or create `INASearch_
 
 The browser grants access only to the file you selected. INASearch does not receive permission to browse the surrounding folder. It checks the file before writing and reads it back afterward to confirm that the save succeeded.
 
+### How does the live navigation bar work?
+
+The main reader’s navigation dropdowns follow the citation at **Page view offset**, which defaults to 3% below the top of the readable area. The same setting controls where citation jumps land. Use the arrow to the left of the INASearch logo to expand or collapse the dropdown row. Your choice is saved. The search field keeps the entered or explicitly selected citation in either mode.
+
+Scrolling changes neither navigation history nor the blue selection highlight. Selecting a citation, opening its menu, copying its citation or text, sharing it, adding a note, printing it, or opening its official source logs that citation. The action column stays fixed in the left gutter. Its actions use the blue-highlighted citation while any part of that unit is visible. Otherwise, hovering or focusing a button previews the first citation below the offset line. Click a citation in the text to select a broader unit when needed.
+
+The tall copy bubble has one copy icon and three choices separated by lines: § for the citation, T for legal text, and § + T for both with a preface. Hover anywhere in the bubble to preview the target citation. Its inner button borders appear on hover or keyboard focus. The INA/U.S.C. switch in the same column controls the copied statute format and the navigation hierarchy; it is disabled for regulations and statutes without an INA equivalent. **Citation and text preface** in Settings defaults to `[Citation] states the following`. The combined copy replaces `[Citation]` (case-insensitively), adds ` -` and a newline, then includes the legal text. If the token is missing, Settings shows `[citation] not detected`.
+
+The search field’s copy controls target its displayed citation. Share stays beside the search field and uses the live navigation citation in the main reader. Hover or keyboard-focus Share to light the window edges and temporarily show the shared destination, including both panes in a split view. Moving away or pressing Escape restores your reading position; previewing does not add history. Clicking copies the previewed link. A recipient’s saved display preferences can affect the layout.
+
+If you jump to `INA 237(a)(3)` and scroll to `(a)(2)(D)`, Back first returns to `(a)(3)`. Pressing Back again visits the previous logged destination. History jumps align the citation at Page view offset. Side-by-side panes retain their own navigation history and copy targets.
+
 ### What happens if I open INASearch in two windows?
 
 You usually do not need a second window to view multiple provisions. Enter two or more citations in the search box, separated by commas:
@@ -54,7 +66,7 @@ You usually do not need a second window to view multiple provisions. Enter two o
 INA 212(a)(6)(C)(i), INA 212(i), 8 CFR 212.7
 ```
 
-INASearch opens each citation in its own reader pane. The panes remain visible together and scroll independently. Remove the commas to return to the ordinary single-provision reader.
+INASearch opens each citation in its own reader pane. The panes remain visible together and scroll independently. Each has aligned history controls, citation copies inside its search field, and a stationary action column for its own text. The INA/U.S.C. setting is shared: switching one eligible pane updates all panes. Every switch shows that setting, but regulations and statutes without an INA equivalent disable their switch. With **Follow View Setting**, citation links update without moving the reading anchor in any pane. Remove the commas to return to the ordinary single-provision reader.
 
 ### What if I want to anyways?
 
@@ -62,7 +74,7 @@ You can open multiple windows, but each window has its own working copy. Browser
 
 The windows do not live-sync. Suppose window A and window B opened the same browser-profile revision. If A saves first, B's next browser write is rejected. B keeps its work in memory and offers to reload the newer copy, explicitly merge its notes and settings, or download B's copy before resolving the conflict. The same refusal occurs when a connected data file has a newer revision.
 
-An explicit merge retains notes from both copies, keeps B's version of same-ID notes and settings, and combines tutorial progress at the highest achieved state. Reconnect the data file afterward if its copy also needs reconciliation.
+An explicit merge retains notes from both copies, keeps B's version of same-ID notes and settings, and preserves the latest daily-tip selection and dismissal dates. Reconnect the data file afterward if its copy also needs reconciliation.
 
 You can deliberately connect different files in different windows, but those files are independent and do not sync. The most recently connected file is the one that browser profile will try to remember for the next session.
 
@@ -198,13 +210,17 @@ Other House references use the same grammar. The generator translates publisher 
 
 House range identifiers use `...` where the normalized corpus uses ` to `. That single identifier difference is normalized before matching. This recovered 1,281 source-authored links that were previously skipped; the audited release accepts all 16,080 displayed House references with zero skips.
 
-### How does “Show INA citations in statutory links” affect citation lists?
+### How does “Convert citations to INA format” work?
 
-The setting uses the INA crosswalk for supported statutory citations and keeps abbreviated references short. For example, `section 1227(a)(2)(A)(ii), (A)(iii), (B), (C), or (D) of this title` reads `INA 237(a)(2)(A)(ii), (A)(iii), (B), (C), or (D)`.
+**Follow View Setting** is the default for new and reset settings. **Always** converts supported links to INA format. **Follow View Setting** converts them when the INA/U.S.C. swap button is set to INA. **Never** preserves the source wording. Existing saved on/off choices become Always/Never. Swapping in Follow View Setting keeps the citation at Page view offset in place and updates the links without rebuilding the reader.
+
+The setting uses the INA crosswalk and keeps abbreviated references short. For example, `section 1227(a)(2)(A)(ii), (A)(iii), (B), (C), or (D) of this title` reads `INA 237(a)(2)(A)(ii), (A)(iii), (B), (C), or (D)`.
 
 The original order, connecting words, and punctuation remain intact. A trailing section stays at the end: `paragraph (6)(A), (6)(C), or (7) of section 1182(a) of this title` reads `paragraph (6)(A), (6)(C), or (7) of INA 212(a)`. Repeated complete citations in a list can share their common section and subsection. The same approach applies to supported INA citations within CFR text.
 
-Each abbreviated link retains its complete target and original source wording in the reference preview. Turning the setting off restores the source wording.
+Each abbreviated link retains its complete target and original source wording in the reference preview. **Highlight converted INA citations in yellow** applies only to converted links; citations already written in INA format remain blue.
+
+The defined-term **Warning** explains a text-matching limitation: “national” in “national or international acclaim” is an adjective, while the legal definition describes a person. A highlight alone does not establish that the definition fits the sentence.
 
 ### How are citations without a House link recognized?
 
@@ -285,12 +301,17 @@ Both contain the same expanded corpus at runtime. `INASearch.html` compresses an
 ### How do I build and test the project?
 
 ```bash
+npm ci
 node tools/build-standalone.js
 node tools/test-standalone.js
 node tools/test-ina-display.js
 ```
 
-The test suite checks source hashes, the INA crosswalk, CFR coverage, legal-reference spans and targets, policy excerpts, browser loading, profile migration, deterministic output, search performance, and size limits.
+The build uses pinned development dependencies to minify JavaScript, including the embedded worker. These tools are not shipped with the app. Readable builds in `tmp/debug/` support source-level tests; loading and browser tests exercise the minified releases. Both editions still work as single offline files.
+
+The test suite checks source hashes, the INA crosswalk, CFR coverage, legal-reference spans and targets, policy excerpts, browser loading, current JSON profile round trips, deterministic output, search performance, and size limits.
+
+Saved-data import accepts current JSON profiles and `INASearch_Data.json` vaults with profile schema 5. The old HTML and profile JavaScript import formats and course-note migrations have been removed. The progress-tracked Quick Start tutorial has also been removed; all daily tips remain available in About without completing a tutorial.
 
 ### Where are the main project files?
 

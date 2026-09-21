@@ -96,7 +96,7 @@ function testScopesAndCommonParsing() {
   assert.deepStrictEqual(plain(separateDepths.common.levels), { statute: "subsection", cfr: "paragraph-4" }, "A comma-separated Common pair did not preserve independent authority depths.");
   assert.strictEqual(command.scanCommandSegments("common:subsection,P4 waiver").hasTopLevelComma, false, "A Common depth pair was mistaken for a second workspace pane.");
 
-  assert(codes(command.parseCommand("in:INA in:CFR waiver")).includes("duplicate-in-modifier"), "Duplicate in: modifiers were silently accepted.");
+  assert.strictEqual(command.parseCommand("in:INA in:CFR waiver").branches[0].locations.length, 2, "Independent location constraints must be preserved.");
   assert(codes(command.parseCommand("in:INA common:CFR=section waiver")).includes("common-authority-out-of-scope"), "An out-of-scope CFR Common modifier was accepted in an INA-only search.");
   assert(codes(command.parseCommand("common:INA=section common:USC=subsection waiver")).includes("duplicate-common-authority"), "INA and USC aliases bypassed duplicate detection.");
   assert(codes(command.parseCommand("in:TITLE waiver")).includes("invalid-in-modifier"));
@@ -112,10 +112,9 @@ function testScopesAndCommonParsing() {
   assert.strictEqual(command.scanCommandSegments("in:INA,notes,highlights president").hasTopLevelComma, false, "A content-scope list became a workspace.");
   assert.strictEqual(command.splitTopLevelCommands("is:notes, INA 212").hasTopLevelComma, true, "A comma followed by a new command was swallowed by is:.");
 
-  const listing = command.parseCommand("is:notes,highlights");
-  assert.deepStrictEqual(plain(listing.listing.kinds), ["notes", "highlights"]);
-  assert(codes(command.parseCommand("president is:notes")).includes("is-exclusive"), "is: accepted an ordinary term.");
-  assert(codes(command.parseCommand("is:notes has:highlights")).includes("is-exclusive"), "is: accepted another modifier.");
+  assert(codes(command.parseCommand("is:notes")).includes("retired-is-modifier"));
+  assert.strictEqual(command.parseCommand("in:notes waiver").ok, true);
+  assert.strictEqual(command.parseCommand("in:notes").branches[0].kind, "notes");
 
   const hasOr = command.parseCommand("president has:notes,highlights");
   assert.deepStrictEqual(plain(hasOr.has.map(item => item.kinds)), [["notes", "highlights"]]);
