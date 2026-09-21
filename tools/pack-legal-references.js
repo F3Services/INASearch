@@ -2,6 +2,7 @@
 
 const PROPERTY_CODES = {
   references: "t",
+  continuationReferences: "c",
   headingReferences: "h",
   preambleReferences: "p",
   sourceCreditReferences: "s",
@@ -10,7 +11,7 @@ const PROPERTY_CODES = {
   sourceReferences: "o"
 };
 const CODE_PROPERTIES = Object.fromEntries(Object.entries(PROPERTY_CODES).map(([property, code]) => [code, property]));
-const PROPERTY_FIELDS = { references: "text", headingReferences: "heading", preambleReferences: "preamble", sourceCreditReferences: "sourceCredit", xReferences: "x", authorityReferences: "authority", sourceReferences: "source" };
+const PROPERTY_FIELDS = { continuationReferences: "continuation", references: "text", headingReferences: "heading", preambleReferences: "preamble", sourceCreditReferences: "sourceCredit", xReferences: "x", authorityReferences: "authority", sourceReferences: "source" };
 const REFERENCE_KEYS = {
   id: "i", start: "s", end: "e", text: "x", family: "f", resolution: "r", targetKind: "k",
   targetTitle: "t", targetSection: "n", targetPath: "a", targetCongress: "c", targetLaw: "l",
@@ -30,7 +31,7 @@ const RULES = [
   "embedded-a-explicit-container-base", "embedded-a-preceding-container", "embedded-a-shared-trailing-container",
   "embedded-explicit-container", "embedded-this-container", "embedded-such-container", "embedded-relative-container",
   "embedded-numbered-section-list", "embedded-named-act-section", "embedded-named-instrument-section", "embedded-inferred-unit", "embedded-exception",
-  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction"
+  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "historical-reviewed-reference"
 ];
 const EVIDENCE_UNITS = ["", "section", "subsection", "paragraph", "subparagraph", "clause", "subclause", "item", "subitem"];
 
@@ -64,7 +65,7 @@ function compactReference(reference, houseHrefIndex = () => 0, legalTargetIndex 
     reference.targetTitle || 0, reference.targetSection || 0, !derivedPath && reference.targetPath?.length ? reference.targetPath : 0,
     reference.targetCongress || 0, reference.targetLaw || 0, reference.targetVolume || 0, reference.targetPage || 0,
     Math.max(0, RULES.indexOf(reference.ruleId || "")), reference.inaSection || 0,
-    reference.policyScopeId || 0];
+    reference.policyScopeId || 0, reference.historicalTargetId || 0];
   while (target.at(-1) === 0) target.pop();
   const packed = [1, reference.start - previousEnd, reference.end - reference.start, legalTargetIndex(target)];
   if (typeof reference.evidenceId === "number" && Number.isFinite(reference.evidenceId)) packed.push(reference.evidenceId);
@@ -80,7 +81,7 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     const packedTarget = legalTargets[reference[3]] || [];
     const target = typeof packedTarget === "string" ? packedTarget.split("|") : packedTarget;
     if (typeof target[4] === "string") target[4] = target[4] ? target[4].split("/") : [];
-    Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "", policyScopeId: target[11] || "" });
+    Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "", policyScopeId: target[11] || "", ...(Number(target[12]) ? { historicalTargetId: Number(target[12]) } : {}) });
     if (typeof reference[4] === "number" && Number.isFinite(reference[4])) output.evidenceId = reference[4];
   }
   else for (const [key, value] of Object.entries(reference || {})) output[KEY_REFERENCES[key] || key] = value;
@@ -97,7 +98,7 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     else if ((match = output.houseHref.match(/^\/us\/stat\/([^/]+)\/([^/]+)(?:\/(.*))?$/))) Object.assign(output, { family: "statutes-at-large", targetKind: "statutes-at-large", targetVolume: match[1], targetPage: match[2], targetPath: match[3] ? match[3].split("/").filter(Boolean) : [], officialUrl: `https://www.govinfo.gov/app/details/STATUTE-${match[1]}/STATUTE-${match[1]}-Pg${match[2]}` });
     else if (/^\/us\/act\//.test(output.houseHref)) Object.assign(output, { family: "public-law", targetKind: "act", targetPath: output.houseHref.split("/").filter(Boolean).slice(2), officialUrl: `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(output.text || "")}%22%7D` });
   } else {
-    output.provenance = output.ruleId === "context-cfr-scoped-act-section" ? "reviewed-semantic-policy"
+    output.provenance = output.ruleId === "historical-reviewed-reference" ? "reviewed-historical-source" : output.ruleId === "context-cfr-scoped-act-section" ? "reviewed-semantic-policy"
       : output.ruleId === "house-editorial-correction" ? "house-editorial-correction"
       : output.ruleId === "embedded-exception" ? "reviewed-exception"
       : String(output.ruleId || "").startsWith("context-") || String(output.ruleId || "").startsWith("embedded-") ? "deterministic-context"

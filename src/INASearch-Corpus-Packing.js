@@ -505,7 +505,10 @@
     return corpus;
   }
 
-  const api = Object.freeze({ FORMAT, packCorpusForDelivery, hydratePackedCorpus });
+  // The encoder is a build-time dependency; the shipped reader only decodes.
+  const api = Object.freeze(typeof INASEARCH_BROWSER !== "undefined" && INASEARCH_BROWSER
+    ? { FORMAT, hydratePackedCorpus }
+    : { FORMAT, packCorpusForDelivery, hydratePackedCorpus });
   globalThis.INASearchCorpusPacking = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })();

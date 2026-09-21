@@ -1,0 +1,2902 @@
+{
+  "schemaVersion": 1,
+  "scope": [
+    "210A",
+    "242B",
+    "295",
+    "321",
+    "323",
+    "345",
+    "348",
+    "350",
+    "352",
+    "353",
+    "354",
+    "355",
+    "401",
+    "242A"
+  ],
+  "titles": {
+    "210A": "Determination of agricultural labor shortages and admission of additional special agricultural workers",
+    "242B": "Deportation procedures",
+    "295": "Transportation of remains of immigration officers and border patrol agents killed in the line of duty",
+    "321": "Children born outside of United States of alien parent",
+    "323": "Children adopted by United States citizens",
+    "345": "Mail relating to naturalization transmitted free of postage and registered",
+    "348": "Admissibility in evidence of testimony as to statements voluntarily made to officers or employees in the course of their official duties",
+    "350": "Dual nationals; divestiture of foreign nationality",
+    "352": "Loss of nationality by naturalized national",
+    "353": "Section 352 not effective as to certain persons",
+    "354": "Section 352(a)(2) not effective as to certain persons",
+    "355": "Loss of American nationality through parent’s expatriation; not effective until person attains age of twenty-five years",
+    "401": "Joint Congressional Committee",
+    "242A": "Expedited deportation of aliens convicted of committing aggravated felonies"
+  },
+  "captures": [
+    {
+      "file": "sources/legal/raw/historical-ina/house-disposition-records.json",
+      "sha256": "43d641054766953e79153d55a9f4498aa45e251e068dc21bb157c93130bf7df6",
+      "bytes": 35953,
+      "url": "https://uscode.house.gov/",
+      "capturedAt": "2026-07-30",
+      "description": "Retained House records extracted without modification from the existing corpus; per-record sources identify the official pages."
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-100-3422.png",
+      "sha256": "04007cbb062d14d1738de4bde16269a4050b93073366a4dfb32b0c4f9e8c3577",
+      "bytes": 551375,
+      "url": "https://uscode.house.gov/images/stat/100/3422.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-102-4471.png",
+      "sha256": "0b3cc58857790d1b850868a9a27eb2830743ccd5117b5625663199acf76c1d4b",
+      "bytes": 505399,
+      "url": "https://uscode.house.gov/images/stat/102/4471.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-104-5047.png",
+      "sha256": "3107342bf8462f1cd8bc57a8738926130aeade47e41b14f9e996d2e7d990d4bb",
+      "bytes": 541954,
+      "url": "https://uscode.house.gov/images/stat/104/5047.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-104-5048.png",
+      "sha256": "dd4283bdbb736c0e8b79220cc49b71c98db0444a12725fb89bf68cab28174bd3",
+      "bytes": 423821,
+      "url": "https://uscode.house.gov/images/stat/104/5048.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-104-5061.png",
+      "sha256": "f8650f73887939ed3057eb382c1365404443d6dcc757bac45592383e3c4da75f",
+      "bytes": 461650,
+      "url": "https://uscode.house.gov/images/stat/104/5061.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-104-5083.png",
+      "sha256": "1e688fa3ffafc2c5dd24a666dcbd13773b2cad63b6d3ff84efad95844e5db97a",
+      "bytes": 463015,
+      "url": "https://uscode.house.gov/images/stat/104/5083.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-104-5085.png",
+      "sha256": "2bbdd180ad727d640fe58257c6eacb7573fe9a6f2f039062eec6bd1715658501",
+      "bytes": 444318,
+      "url": "https://uscode.house.gov/images/stat/104/5085.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-105-1756.png",
+      "sha256": "e2e1cb30d12f19f59f032f43fe6cf97f10187170a2a9aa9eebf428895ba3de77",
+      "bytes": 454788,
+      "url": "https://uscode.house.gov/images/stat/105/1756.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-110-3009-625.png",
+      "sha256": "fa5fb4c7bea736640761ea7fd635f9ae872671f486bc71f8641999c66869b2c8",
+      "bytes": 452884,
+      "url": "https://uscode.house.gov/images/stat/110/3009-625.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-110-3009-645.png",
+      "sha256": "0fcaaf060031cb4dab16fc80e0de525c83bf0a41a0d9d21afb654abac214d64c",
+      "bytes": 443978,
+      "url": "https://uscode.house.gov/images/stat/110/3009-645.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-110-3009-700.png",
+      "sha256": "5e62f214e1474a1fad8ddcf7418efe95f609635cdada1887e7b486b1acc2283e",
+      "bytes": 445226,
+      "url": "https://uscode.house.gov/images/stat/110/3009-700.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-112-2681-26.png",
+      "sha256": "beb9ff6a4463f65cf789c6ffdc47ed0916202518174ab1f6a45d3867fba6dc0d",
+      "bytes": 527133,
+      "url": "https://uscode.house.gov/images/stat/112/2681-26.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-66-165.png",
+      "sha256": "7b6233ab3ee8b9e1523556a985bce9b41a066db5461c255985892e90b64a4ca2",
+      "bytes": 496643,
+      "url": "https://uscode.house.gov/images/stat/66/165.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-66-166.png",
+      "sha256": "f0823944beac397ecdca2b3dbdde2c0e528d6aa751aecb15ccddb471bc117066",
+      "bytes": 485498,
+      "url": "https://uscode.house.gov/images/stat/66/166.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-74-708.png",
+      "sha256": "99e1ec5ca0eb2d07d94f12ae195504d632b42c5b6173577ce63f1101ecc63b76",
+      "bytes": 474809,
+      "url": "https://uscode.house.gov/images/stat/74/708.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/stat-84-1190.png",
+      "sha256": "83ef73b091e910bff4e80d121ea0d7fc4150c14e31cda267ff7af144b6744772",
+      "bytes": 715207,
+      "url": "https://uscode.house.gov/images/stat/84/1190.png",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sha256": "56b3ba8e978c6f198342f20eda8e0e59210f9d335327803ee71b39411ba87607",
+      "bytes": 3037842,
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1964-ch12.pdf",
+      "sha256": "72738dc87f073b67e7abb6807fecb133785db27d67ced96ba8ca583b78880e9e",
+      "bytes": 3545442,
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1964-00100/uscode1964-001008012/uscode1964-001008012.pdf",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1988-ch12.pdf",
+      "sha256": "64beee115eb22967a6774a9dd9c4d4b57d28cb259bce4b1403c8a97d9eb3bce3",
+      "bytes": 6641862,
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1995-1252b.html",
+      "sha256": "4189790c22c7fb8b4fb296521ef8caf83439d756340237664ce433e7fe6c902e",
+      "bytes": 168697,
+      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1995-title8-section1252b&num=0&edition=1995",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1997-1363b.html",
+      "sha256": "b1bf76801fe18e0d09e79cc1756f739e31443082d14ef3e746b2d9e4e48a4eab",
+      "bytes": 144274,
+      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1997-title8-section1363b&num=0&edition=1997",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1999-1432.html",
+      "sha256": "5c54c71e0093e7bb0732013f87765cdc504309c93962eca4d04d5be90121a990",
+      "bytes": 152302,
+      "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1999-title8-section1432&num=0&edition=1999",
+      "capturedAt": "2026-09-19",
+      "description": "Official source capture"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1995-title8.pdf",
+      "sha256": "40c7472369c84102a61bf886db30dd08418363b4a44aa63dc3283f601196d61f",
+      "bytes": 1707734,
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-1995-title8/pdf/USCODE-1995-title8.pdf",
+      "capturedAt": "2026-09-19",
+      "description": "Official historical text and amendment verification for INA 242A"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-2023-1228.pdf",
+      "sha256": "a5119b4747b50af34b7ec6840401b72a96d44904ba3267d1712156fd24403095",
+      "bytes": 137895,
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title8/pdf/USCODE-2023-title8-chap12-subchapII-partIV-sec1228.pdf",
+      "capturedAt": "2026-09-19",
+      "description": "Official historical text and amendment verification for INA 242A"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/pl-104-132.pdf",
+      "sha256": "eec9704dec972bcb2e9c1a8b11a1a288d3eafd8480d9bd64157c4a1d66d3b0d9",
+      "bytes": 520367,
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-104publ132/pdf/PLAW-104publ132.pdf",
+      "capturedAt": "2026-09-19",
+      "description": "Official historical text and amendment verification for INA 242A"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/pl-104-208.pdf",
+      "sha256": "dec27f0049c9632010de245fd5cdd5c7d8dd030526826e586ec272ed56864447",
+      "bytes": 2520014,
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-104publ208/pdf/PLAW-104publ208.pdf",
+      "capturedAt": "2026-09-19",
+      "description": "Official historical text and amendment verification for INA 242A"
+    }
+  ],
+  "sections": [
+    {
+      "inaSection": "401",
+      "uscSection": "1106",
+      "codeHeading": "Joint Congressional Committee.",
+      "sourceFile": "usc-1958-ch12.pdf",
+      "pdfPages": [
+        12,
+        13
+      ],
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "There is established a joint congressional committee to be known as the Joint Committee on Immigration and Nationality Policy (hereinafter referred to as the \"Committee\") to be composed of ten members as follows: (1) five members who are members of the Committee on the Judiciary of the Senate, three from the majority and two from the minority party to be appointed by the President of the Senate; and (2) five members who are members of the Committee on the Judiciary of the House of Representatives, three from the majority and two from the minority party to be appointed by the Speaker of the House of Representatives.",
+          "heading": "Composition"
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "No person shall continue to serve as a member of the Committee after he has ceased to be a member of the Committee on the Judiciary of either the Senate or the House of Representatives.",
+          "heading": "Necessity of membership on House or Senate Committees on the Judiciary"
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "A vacancy in the membership of the Committee shall be filled in the same manner as the original selection and the Committee shall elect a Chairman from among its members.",
+          "heading": "Vacancies; election of chairman"
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "It shall be the function of the Committee to make a continuous study of (1) the administration of this chapter, and its effect on the national security, the economy, and the social welfare of the United States, and (2) such conditions within or without the United States which in the opinion of the Committee might have any bearing on the immigration and nationality policy of the United States.",
+          "heading": "Functions"
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "text": "The Committee shall make from time to time a report to the Senate and the House of Representatives concerning the results of its studies together with such recommendations as it may deem desirable.",
+          "heading": "Reports"
+        },
+        {
+          "path": [
+            "f"
+          ],
+          "text": "The Secretary of State and the Attorney General shall without delay submit to the Committee all regulations, instructions, and all other information as requested by the Committee relative to the administration of this chapter; and the Secretary of State and the Attorney General shall consult with the Committee from time to time with respect to their activities under this chapter.",
+          "heading": "Submission of regulations to Committee"
+        },
+        {
+          "path": [
+            "g"
+          ],
+          "text": "The Committee or any duly authorized Subcommittee thereof is authorized to hold such hearings; to sit and act at such times and places; to require by subpena or otherwise the attendance of such witnesses and the production of such books, papers, and documents; to administer such oaths; to take such testimony; to procure such printing and binding as it deems advisable. The provisions of sections 192 and 194 of Title 2 shall apply in case of any failure of any witnesses to comply with any subpena or to testify when summoned under the authority of this chapter.",
+          "heading": "Hearings; subpena"
+        },
+        {
+          "path": [
+            "h"
+          ],
+          "text": "The members of the Committee shall serve without compensation in addition to that received for their services as Members of Congress but they shall be reimbursed for travel, subsistence, and other expenses incurred by them in the performance of the duties vested in the Committee other than expenses in connection with meetings of the Committee held in the District of Columbia during such times as the Congress is in session.",
+          "heading": "Travel expenses"
+        },
+        {
+          "path": [
+            "i"
+          ],
+          "text": "The Committee is authorized, without regard to the civil service laws or the Classification Act of 1949, to appoint and fix the compensation of such clerks, experts, consultants, and clerical and stenographic assistants as it deems necessary and advisable. The Committee is authorized to reimburse the members of its staff for travel, subsistence and the other necessary expenses incurred by them in the performance of the duties vested in the Committee other than expenses in connection with meetings of the Committee held in the District of Columbia during such times as the Congress is in session. The chairman of the Committee on the Judiciary of the Senate and the chairman of the Committee on the Judiciary of the House of Representatives may assign members of the staff of the said committees to serve on the staff of the Committee, without additional compensation, except for the reimbursement of expenses incurred by such staff members as prescribed in this subsection.",
+          "heading": "Employment of personnel"
+        },
+        {
+          "path": [
+            "j"
+          ],
+          "text": "The expenses of the Committee shall be paid one-half from the contingent fund of the Senate and one-half from the contingent fund of the House of Representatives, upon vouchers signed by the Chairman of the Committee or by any member of the Committee duly authorized by the Chairman.",
+          "heading": "Payment of Committee expenses"
+        },
+        {
+          "path": [
+            "k"
+          ],
+          "text": "This section shall take effect on June 27, 1952.",
+          "heading": "Effective date"
+        }
+      ],
+      "originalTitle": "Joint Congressional Committee",
+      "originalTitleSource": "stat-66-166.png",
+      "repealEffectiveDate": "1971-01-03",
+      "lastAmendmentDate": "1952-06-27",
+      "versionLabel": "Final text immediately before repeal effective 1971-01-03 (immediately before noon)",
+      "amendmentReview": [
+        "No intervening amendments; the captured Code body matches the enactment listed in the House removal description."
+      ],
+      "repealRecord": "Repealed. Pub. L. 91–510, title IV, § 422(a), Oct. 26, 1970, 84 Stat. 1189",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=12",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "9803bb6a6e4174ccb915c21668ec16d325a47cb0997cbe3eed4be2e1659de1f3"
+    },
+    {
+      "inaSection": "323",
+      "uscSection": "1434",
+      "codeHeading": "Children adopted by citizens.",
+      "sourceFile": "usc-1958-ch12.pdf",
+      "pdfPages": [
+        74,
+        74
+      ],
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "An adopted child may, if not otherwise disqualified from becoming a citizen by reason of sections 1424-1426 or 1429 of this title, be naturalized before reaching the age of eighteen years upon the petition of the adoptive parent or parents, upon compliance with all the provisions of this subchapter, if the adoptive parent or parents are citizens of the United States, and the child—"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "was lawfully admitted to the United States for permanent residence;"
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "was adopted before attaining the age of sixteen years; and"
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "text": "subsequent to such adoption has resided continuously in the United States in legal custody of the adoptive parent or parents for two years prior to the date of filing such petition."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "In lieu of the residence and physical presence requirements of section 1427 (a) of this title such child shall be required to establish only two years' residence and one year's physical presence in the United States during the two-year period immediately preceding the filing of the petition. If the child is of tender years he may be presumed to be of good moral character, attached to the principles of the Constitution, and well disposed to the good order and happiness of the United States."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "Any such adopted child (1) one of whose adoptive parents is (A) a citizen of the United States, (B) in the Armed Forces of the United States or in the employment of the Government of the United States, or of an American institution of research recognized as such by the Attorney General, or of an American firm or corporation engaged in whole or in part in the development of foreign trade and commerce of the United States, or a subsidiary thereof, or of a public international organization in which the United States participates by treaty or statute or is authorized to perform the ministerial or priestly functions of a religious denomination having a bona fide organization within the United States, or is engaged solely as a missionary by a religious denomination or by an inter-denominational mission organization having a bona fide organization within the United States, and (C) regularly stationed abroad in such service or employment, and (2) who is in the United States at the time of naturalization, and (3) whose citizen adoptive parent declares before the naturalization court in good faith an intention to have such child take up residence within the United States immediately upon the termination of such service or employment abroad of such citizen adoptive parent, may be naturalized upon compliance with all the requirements of the naturalization laws except that no prior residence or specified period of physical presence within the United States or within the jurisdiction of the naturalization court or proof thereof shall be required, and paragraph (3) of subsection (a) of this section shall not be applicable."
+        }
+      ],
+      "originalTitle": "Children adopted by United States citizens",
+      "originalTitleSource": "stat-66-165.png",
+      "repealEffectiveDate": "1978-10-05",
+      "lastAmendmentDate": "1958-08-20",
+      "versionLabel": "Final text immediately before repeal effective 1978-10-05",
+      "amendmentReview": [
+        "1957: PL 85-316 §11; 1958: PL 85-697 §1, both incorporated in the 1958 Code."
+      ],
+      "repealRecord": "Repealed. Pub. L. 95–417, § 7, Oct. 5, 1978, 92 Stat. 918",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=74",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "e69a7d10a3b863382056bb7b48e33ef4c453f782a80dbb253c0bb5c89c5ff8c7",
+      "referenceCorrections": [
+        {
+          "path": [
+            "a"
+          ],
+          "field": "text",
+          "phrase": "sections 1424-1426 or 1429",
+          "citations": [
+            {
+              "text": "1424",
+              "title": "8",
+              "section": "1424",
+              "path": []
+            },
+            {
+              "text": "1426",
+              "title": "8",
+              "section": "1426",
+              "path": []
+            },
+            {
+              "text": "1429",
+              "title": "8",
+              "section": "1429",
+              "path": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "inaSection": "345",
+      "uscSection": "1456",
+      "codeHeading": "Official mail transmitted free of postage and registry fee.",
+      "sourceFile": "usc-1958-ch12.pdf",
+      "pdfPages": [
+        89,
+        89
+      ],
+      "units": [
+        {
+          "path": [],
+          "text": "All mail matter of whatever class, relating to naturalization, including duplicate papers required by law or regulation to be sent to the Service by clerks of courts addressed to the Department of Justice or the Service, or any official thereof, and endorsed \"Official Business\", shall be transmitted free of postage and, if necessary, by registered mail without fee, and so marked."
+        }
+      ],
+      "originalTitle": "Mail relating to naturalization transmitted free of postage and registered",
+      "originalTitleSource": "stat-66-165.png",
+      "repealEffectiveDate": "1960-09-01",
+      "lastAmendmentDate": "1952-06-27",
+      "versionLabel": "Final text immediately before repeal effective 1960-09-01",
+      "amendmentReview": [
+        "No intervening amendments; the captured Code body matches the enactment listed in the House removal description."
+      ],
+      "repealRecord": "Repealed. Pub. L. 86–682, § 12(c), Sept. 2, 1960, 74 Stat. 708, eff. Sept. 1, 1960",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=89",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "effectiveDateNote": "Enacted September 2, 1960, effective September 1, 1960 (PL 86-682 §12(e)); the body-version boundary follows the effective date.",
+      "unitsSha256": "89c7ea3b9096602277edd487d4ade18a62e513eb925b9604850e69c6b5432ab5"
+    },
+    {
+      "inaSection": "350",
+      "uscSection": "1482",
+      "codeHeading": "Dual nationals; divestiture of nationality.",
+      "sourceFile": "usc-1958-ch12.pdf",
+      "pdfPages": [
+        91,
+        92
+      ],
+      "units": [
+        {
+          "path": [],
+          "text": "A person who acquired at birth the nationality of the United States and of a foreign state and who has voluntarily sought or claimed benefits of the nationality of any foreign state shall lose his United States nationality by hereafter having a continuous residence for three years in the foreign state of which he is a national by birth at any time after attaining the age of twenty-two years unless he shall—"
+        },
+        {
+          "path": [
+            "1"
+          ],
+          "text": "prior to the expiration of such three-year period, take an oath of allegiance to the United States before a United States displomatic or consular officer in a manner prescribed by the Secretary of State; and"
+        },
+        {
+          "path": [
+            "2"
+          ],
+          "text": "have his residence outside of the United States solely for one of the reasons set forth in paragraphs (1), (2)–(7), or (8) of section 1485 of this title, or paragraph (1) or (2) of section 1486 of this title: Provided, however, That nothing contained in this section shall deprive any person of his United States nationality if his foreign residence shall begin after he shall have attained the age of sixty years and shall have had his residence in the United States for twenty-five years after having attained the age of eighteen years."
+        }
+      ],
+      "originalTitle": "Dual nationals; divestiture of foreign nationality",
+      "originalTitleSource": "stat-66-165.png",
+      "repealEffectiveDate": "1978-10-10",
+      "lastAmendmentDate": "1952-06-27",
+      "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+      "amendmentReview": [
+        "No intervening amendments; the captured Code body matches the enactment listed in the House removal description."
+      ],
+      "repealRecord": "Repealed. Pub. L. 95–432, § 1, Oct. 10, 1978, 92 Stat. 1046",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=91",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "transcriptionNote": "The 1958 Code prints “displomatic”; its footnote says: So in original. Probably should read “diplomatic”. The printed body spelling is retained.",
+      "unitsSha256": "bf835dc33dae3e54d072c12f14ede3759e4521f277c13ca8715449bf8275141a",
+      "referenceCorrections": [
+        {
+          "path": [
+            "2"
+          ],
+          "field": "text",
+          "phrase": "paragraphs (1), (2)–(7), or (8) of section 1485",
+          "citations": [
+            {
+              "text": "(1)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "1"
+              ]
+            },
+            {
+              "text": "(2)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "2"
+              ]
+            },
+            {
+              "text": "(7)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "7"
+              ]
+            },
+            {
+              "text": "(8)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "8"
+              ]
+            },
+            {
+              "text": "section 1485",
+              "title": "8",
+              "section": "1485",
+              "path": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "inaSection": "352",
+      "uscSection": "1484",
+      "codeHeading": "Loss of nationality by naturalized national.",
+      "sourceFile": "usc-1958-ch12.pdf",
+      "pdfPages": [
+        92,
+        92
+      ],
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "A person who has become a national by naturalization shall lose his nationality by—"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "having a continuous residence for three years in the territory of a foreign state of which he was formerly a national or in which the place of his birth is situated, except as provided in section 1485 of this title, whether such residence commenced before or after the effective date of this chapter;"
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "having a continuous residence for five years in any other foreign state or states, except as provided in sections 1485 and 1486 of this title, whether such residence commenced before or after the effective date of this chapter."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": ""
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "text": "For the purpose of paragraph (1) of subsection (a) of this section, the time during which the person had his residence abroad solely or principally for a reason or purpose within the scope of any provision of section 1485 of this title shall not be counted in computing quantum of residence."
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ],
+          "text": "For the purpose of paragraph (2) of subsection (a) of this section, the time during which the person had his residence abroad solely or principally for a reason or purpose within the scope of any provision of sections 1485 and 1486 of this title shall not be counted in computing quantum of residence."
+        }
+      ],
+      "originalTitle": "Loss of nationality by naturalized national",
+      "originalTitleSource": "stat-66-166.png",
+      "repealEffectiveDate": "1978-10-10",
+      "lastAmendmentDate": "1952-06-27",
+      "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+      "amendmentReview": [
+        "No intervening amendments; the captured Code body matches the enactment listed in the House removal description."
+      ],
+      "repealRecord": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=92",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "76fa69ecc6a184a9d91137d61f46cbaa091927b27a43e4f0365e6bf4690f9312"
+    },
+    {
+      "inaSection": "355",
+      "uscSection": "1487",
+      "codeHeading": "Loss of American nationality through parents' expatriation; not effective until persons attain age of twenty-five years.",
+      "sourceFile": "usc-1958-ch12.pdf",
+      "pdfPages": [
+        94,
+        94
+      ],
+      "units": [
+        {
+          "path": [],
+          "text": "A person having United States nationality, who is under the age of twenty-one and whose residence is in a foreign state with or under the legal custody of a parent who hereafter loses United States nationality under section 1482 or 1484 of this title, shall also lose his United States nationality if such person has or acquires the nationality of such foreign state: Provided, That, in such case, United States nationality shall not be lost as the result of loss of United States nationality by the parent unless and until the person attains the age of twenty-five years without having established his residence in the United States."
+        }
+      ],
+      "originalTitle": "Loss of American nationality through parent’s expatriation; not effective until person attains age of twenty-five years",
+      "originalTitleSource": "stat-66-166.png",
+      "repealEffectiveDate": "1978-10-10",
+      "lastAmendmentDate": "1952-06-27",
+      "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+      "amendmentReview": [
+        "No intervening amendments; the captured Code body matches the enactment listed in the House removal description."
+      ],
+      "repealRecord": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=94",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "c9974a6b5d4c7469b654756e11710c09fcf17847f705fd58708303c71aa741f1"
+    },
+    {
+      "inaSection": "353",
+      "uscSection": "1485",
+      "codeHeading": "Inapplicability of section 1484 to certain persons.",
+      "sourceFile": "usc-1964-ch12.pdf",
+      "pdfPages": [
+        95,
+        95
+      ],
+      "units": [
+        {
+          "path": [],
+          "text": "Section 1484 (a) of this title shall have no application to a national who—"
+        },
+        {
+          "path": [
+            "1"
+          ],
+          "text": "has his residence abroad in the employment of the Government of the United States; or"
+        },
+        {
+          "path": [
+            "2"
+          ],
+          "text": "is receiving compensation from the Government of the United States and has his residence abroad on account of disability incurred in its service; or"
+        },
+        {
+          "path": [
+            "3"
+          ],
+          "text": "shall have had his residence in the United States for not less than twenty-five years subsequent to his naturalization and shall have attained the age of sixty years when the foreign residence is established; or"
+        },
+        {
+          "path": [
+            "4"
+          ],
+          "text": "had his residence abroad on October 14, 1940, and temporarily has his residence abroad, or who, thereafter has gone or goes abroad and temporarily has his residence abroad, solely or principally to represent a bona fide American educational, scientific, philanthropic, commercial, financial, or business organization, having its principal office or place of business in the United States, or a bona fide religious organization having an office and representative in the United States, or an international agency of an official character in which the United States participates, for which he receives a substantial compensation; or"
+        },
+        {
+          "path": [
+            "5"
+          ],
+          "text": "has his residence abroad and is prevented from returning to the United States exclusively"
+        },
+        {
+          "path": [
+            "5",
+            "A"
+          ],
+          "text": "by his own ill health; or"
+        },
+        {
+          "path": [
+            "5",
+            "B"
+          ],
+          "text": "by the ill health of his parent, spouse, or child who cannot be brought to the United States, whose condition requires his personal care and attendance: Provided, That in such case the person having his residence abroad shall, at least every six months, register at the appropriate Foreign Service office and submit evidence satisfactory to the Secretary of State that his case continues to meet the requirements of this subparagraph; or"
+        },
+        {
+          "path": [
+            "5",
+            "C"
+          ],
+          "text": "by reason of the death of his parent, spouse, or child: Provided, That in the case of the death of such parent, spouse, or child the person having his residence abroad shall return to the United States within six months after the death of such relative; or"
+        },
+        {
+          "path": [
+            "6"
+          ],
+          "text": "has his residence abroad for the purpose of pursuing a full course of study of a specialized character or attending full-time an institution of learning of a grade above that of a preparatory school: Provided, That such residence does not exceed five years; or"
+        },
+        {
+          "path": [
+            "7"
+          ],
+          "text": "is the spouse or child of, or has a son or daughter who is, an American citizen, and who has his residence abroad for the purpose of being with his American citizen spouse, parent, or son or daughter who has his residence abroad for one of the objects or considerations specified in paragraphs (1)-(5) or (6) of this section, or paragraph (2) of section 1486 of this title; or"
+        },
+        {
+          "path": [
+            "8"
+          ],
+          "text": "is the spouse or child of an American national by birth who while under the age of twenty-one years had his residence in the United States for a period or periods totaling ten years, and has his residence abroad for the purpose of being with said spouse or parent; or"
+        },
+        {
+          "path": [
+            "9"
+          ],
+          "text": "was born in the United States or one of its outlying possessions, who originally had American nationality and who, after having lost such nationality through marriage to an alien, reacquired it; or"
+        },
+        {
+          "path": [
+            "10"
+          ],
+          "text": "has, by Act of Congress or by treaty, United States nationality solely by reason of former nationality and birth or residence in an area outside the continental United States: Provided, That subsections (b) and (c) of section 404 of the Nationality Act of 1940, as amended, shall not be held to be or to have been applicable to persons defined in this paragraph."
+        }
+      ],
+      "originalTitle": "Section 352 not effective as to certain persons",
+      "originalTitleSource": "stat-66-166.png",
+      "repealEffectiveDate": "1978-10-10",
+      "lastAmendmentDate": "1959-08-04",
+      "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+      "amendmentReview": [
+        "1959: PL 86-129 §1, added son or daughter to paragraph (7); incorporated in the 1964 Code."
+      ],
+      "repealRecord": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1964-00100/uscode1964-001008012/uscode1964-001008012.pdf#page=95",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "c4d3cd59621bd898c1377c4288dafdb5ce97a326813406979aecc49885937c9d",
+      "referenceCorrections": [
+        {
+          "path": [
+            "7"
+          ],
+          "field": "text",
+          "phrase": "paragraphs (1)-(5) or (6) of this section",
+          "citations": [
+            {
+              "text": "(1)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "1"
+              ]
+            },
+            {
+              "text": "(5)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "5"
+              ]
+            },
+            {
+              "text": "(6)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "6"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "inaSection": "354",
+      "uscSection": "1486",
+      "codeHeading": "Inapplicability of section 1484(a)(2) to certain persons.",
+      "sourceFile": "usc-1964-ch12.pdf",
+      "pdfPages": [
+        95,
+        96
+      ],
+      "units": [
+        {
+          "path": [],
+          "text": "Section 1484(a)(2) of this title shall have no application to a national—"
+        },
+        {
+          "path": [
+            "1"
+          ],
+          "text": "who is a veteran of the Spanish-American War, World War I, or World War II, or of the Korean hostilities (having served honorably in an active-duty status in the military, air, or naval forces of the United States during a period beginning June 25, 1950, and ending July 1, 1955), and the spouse, children, and dependent parents of such veteran whether such residence in the territory of a foreign state or states commenced before or after the effective date of this chapter: Provided, That any such veteran who upon June 27, 1952, has had his residence continuously in the territory of a foreign state of which he was formerly a national or in which the place of his birth is situated for three years or more, and who has retained his United States nationality solely by reason of the provisions of section 406(h) of the Nationality Act of 1940, shall not be subject to the provisions or requirements of section 1484(a)(1) of this title: Provided further, That the provisions of section 404(c) of the Nationality Act of 1940, as amended, shall not be held to be or to have been applicable to veterans of World War II;"
+        },
+        {
+          "path": [
+            "2"
+          ],
+          "text": "who has established to the satisfaction of the Secretary of State, as evidenced by possession of a valid unexpired United States passport or other valid document issued by the Secretary of State, that his residence is temporarily outside of the United States for the purpose of"
+        },
+        {
+          "path": [
+            "2",
+            "A"
+          ],
+          "text": "carrying on a commercial enterprise which in the opinion of the Secretary of State will directly and substantially benefit American trade or commerce; or"
+        },
+        {
+          "path": [
+            "2",
+            "B"
+          ],
+          "text": "carrying on scientific research on behalf of an institution accredited by the Secretary of State and engaged in research which in the opinion of the Secretary of State is directly and substantially beneficial to the interests of the United States; or"
+        },
+        {
+          "path": [
+            "2",
+            "C"
+          ],
+          "text": "engaging in such work or activities, under such unique or unusual circumstances, as may be determined by the Secretary of State to be directly and substantially beneficial to the interests of the United States;"
+        },
+        {
+          "path": [
+            "3"
+          ],
+          "text": "who is the widow or widower of a citizen of the United States and who has attained the age of sixty years, and who has had a residence outside of the United States and its outlying possessions for a period of not less than ten years during all of which period a marriage relationship has existed with a spouse who has had a residence outside of the United States and its outlying possessions in an occupation or capacity of the type designated in paragraphs (1)-(4) or (5)(A) of section 1485 of this title, or paragraphs (1), (2), or (4) of this section;"
+        },
+        {
+          "path": [
+            "4"
+          ],
+          "text": "who has attained the age of sixty years, and has had a residence outside the United States and its outlying possessions for not less than ten years, during all of which period he has been engaged in an occupation of the type designated in paragraphs (1), (2), or (4) of section 1485 of this title, or paragraph (2) of this section, and who is in bona fide retirement from such occupation; or who is the spouse or child of the national described in this paragraph and who has his residence abroad for the purpose of being with such American citizen spouse or parent; or"
+        },
+        {
+          "path": [
+            "5"
+          ],
+          "text": "who shall have had his residence in the United States for not less than fifteen years subsequent to his naturalization and prior to the establishment of his foreign residence; or who prior to attaining the age of twenty-one years, shall have had his residence in the United States for not less than fifteen years subsequent to his lawful admission for permanent residence."
+        }
+      ],
+      "originalTitle": "Section 352(a)(2) not effective as to certain persons",
+      "originalTitleSource": "stat-66-166.png",
+      "repealEffectiveDate": "1978-10-10",
+      "lastAmendmentDate": "1961-09-26",
+      "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+      "amendmentReview": [
+        "1959: PL 86-129 §§2–3, Korean hostilities in (1) and residence requirements in (5); 1961: PL 87-301 §20, spouse or child in (4); incorporated in the 1964 Code."
+      ],
+      "repealRecord": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1964-00100/uscode1964-001008012/uscode1964-001008012.pdf#page=95",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "bc6edd20500e35a3aac3d57fd9305d416ae556894acd9df19e7eaa68a3d36f58",
+      "referenceCorrections": [
+        {
+          "path": [
+            "3"
+          ],
+          "field": "text",
+          "phrase": "paragraphs (1)-(4) or (5)(A) of section 1485",
+          "citations": [
+            {
+              "text": "(1)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "1"
+              ]
+            },
+            {
+              "text": "(4)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "4"
+              ]
+            },
+            {
+              "text": "(5)(A)",
+              "title": "8",
+              "section": "1485",
+              "path": [
+                "5",
+                "A"
+              ]
+            },
+            {
+              "text": "section 1485",
+              "title": "8",
+              "section": "1485",
+              "path": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "inaSection": "348",
+      "uscSection": "1459",
+      "codeHeading": "Admissibility in evidence of statements voluntarily made to officers or employees in the course of their official duties; failure of clerk of court to do duty; penalties",
+      "sourceFile": "usc-1988-ch12.pdf",
+      "pdfPages": [
+        190,
+        191
+      ],
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "In case any clerk of court shall refuse or neglect to comply with any of the provisions of section 1450(a), (b), or (c) of this title, such clerk of court shall forfeit and pay to the United States the sum of $25 in each and every case in which such violation or omission occurs and the amount of such forfeiture may be recovered by the United States in a civil action against such clerk."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "If any clerk of court shall fail to return to the Service or properly account for any certificate of naturalization furnished by the Service as provided in subsection (d) of section 1450 of this title, such clerk of court shall be liable to the United States in the sum of $50, to be recovered in a civil action, for each and every such certificate not properly accounted for or returned."
+        }
+      ],
+      "originalTitle": "Admissibility in evidence of testimony as to statements voluntarily made to officers or employees in the course of their official duties",
+      "originalTitleSource": "stat-66-165.png",
+      "repealEffectiveDate": "1990-11-29",
+      "lastAmendmentDate": "1988-10-24",
+      "versionLabel": "Final text immediately before repeal effective 1990-11-29",
+      "amendmentReview": [
+        "1988: PL 100-525 §9(gg), struck former (a) and redesignated (b) and (c) as (a) and (b); incorporated in the 1988 Code. The original INA title is deliberately retained."
+      ],
+      "repealRecord": "Repealed. Pub. L. 101–649, title IV, § 407(d)(20), Nov. 29, 1990, 104 Stat. 5046",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=190",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "effectiveDateNote": "PL 101-649 §408(a)(3) sets the general effective date at enactment; §408(d) preserves specified existing proceedings and rights.",
+      "unitsSha256": "5cd4a26bb90ba5c09d212a45879f661f5495a870f40034b9ee0573aaea7684c4"
+    },
+    {
+      "inaSection": "210A",
+      "uscSection": "1161",
+      "codeHeading": "Determination of agricultural labor shortages and admission of additional special agricultural workers",
+      "sourceFile": "usc-1988-ch12.pdf",
+      "pdfPages": [
+        48,
+        53
+      ],
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "",
+          "heading": "Determination of need to admit additional special agricultural workers"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "Before the beginning of each fiscal year (beginning with fiscal year 1990 and ending with fiscal year 1993), the Secretaries of Labor and Agriculture (in this section referred to as the \"Secretaries\") shall jointly determine the number (if any) of additional aliens who should be admitted to the United States or who should otherwise acquire the status of aliens lawfully admitted for temporary residence under this section during the fiscal year to meet a shortage of workers to perform seasonal agricultural services in the United States during the year. Such number is, in this section, referred to as the \"shortage number\".",
+          "heading": "In general"
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "The shortage number is-",
+          "heading": "Overall determination",
+          "continuation": "divided by the factor (determined under paragraph (6)) for man-days per worker."
+        },
+        {
+          "path": [
+            "a",
+            "2",
+            "A"
+          ],
+          "text": "the anticipated need for special agricultural workers (as determined under paragraph (4)) for the fiscal year, minus"
+        },
+        {
+          "path": [
+            "a",
+            "2",
+            "B"
+          ],
+          "text": "the supply of such workers (as determined under paragraph (5)) for that year,"
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "text": "In determining the shortage number, the Secretaries may not determine that there is a shortage unless, after considering all of the criteria set forth in paragraphs (4) and (5), the Secretaries determine that there will not be sufficient able, willing, and qualified workers available to perform seasonal agricultural services required in the fiscal year involved.",
+          "heading": "No replenishment if no shortage"
+        },
+        {
+          "path": [
+            "a",
+            "4"
+          ],
+          "text": "For purposes of paragraph (2)(A), the anticipated need for special agricultural workers for a fiscal year is determined as follows:",
+          "heading": "Determination of need"
+        },
+        {
+          "path": [
+            "a",
+            "4",
+            "A"
+          ],
+          "text": "The Secretaries shall jointly estimate, using statistically valid methods, the number of man-days of labor performed in seasonal agricultural services in the United States in the previous fiscal year.",
+          "heading": "Base"
+        },
+        {
+          "path": [
+            "a",
+            "4",
+            "B"
+          ],
+          "text": "The Secretaries shall jointly-",
+          "heading": "Adjustment for crop losses and changes in industry"
+        },
+        {
+          "path": [
+            "a",
+            "4",
+            "B",
+            "i"
+          ],
+          "text": "increase such number by the number of man-days of labor in seasonal agricultural services in the United States that would have been needed in the previous fiscal year to avoid any crop damage or other loss that resulted from the unavailability of labor, and"
+        },
+        {
+          "path": [
+            "a",
+            "4",
+            "B",
+            "ii"
+          ],
+          "text": "adjust such number to take into account the projected growth or contraction in the requirements for seasonal agricultural services as a result of-"
+        },
+        {
+          "path": [
+            "a",
+            "4",
+            "B",
+            "ii",
+            "I"
+          ],
+          "text": "growth or contraction in the seasonal agriculture industry, and"
+        },
+        {
+          "path": [
+            "a",
+            "4",
+            "B",
+            "ii",
+            "II"
+          ],
+          "text": "the use of technologies and personnel practices that affect the need for, and retention of, workers to perform such services."
+        },
+        {
+          "path": [
+            "a",
+            "5"
+          ],
+          "text": "For purposes of paragraph (2)(B), the anticipated supply of special agricultural workers for a fiscal year is determined as follows:",
+          "heading": "Determination of supply"
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "A"
+          ],
+          "text": "The Secretaries shall use the number estimated under paragraph (4)(A).",
+          "heading": "Base"
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "B"
+          ],
+          "text": "The Secretaries shall jointly-",
+          "heading": "Adjustment for retirements and increased recruitment"
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "B",
+            "i"
+          ],
+          "text": "decrease such number by the number of man-days of labor in seasonal agricultural services in the United States that will be lost due to retirement and movement of workers out of performance of seasonal agricultural services, and"
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "B",
+            "ii"
+          ],
+          "text": "increase such number by the number of additional man-days of labor in seasonal agricultural services in the United States that can reasonably be expected to result from the availability of able, willing, qualified, and unemployed special agricultural workers, rural low skill, or manual, laborers, and domestic agricultural workers."
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "C"
+          ],
+          "text": "In making the adjustment under subparagraph (B)(ii), the Secretaries shall consider-",
+          "heading": "Bases for increased number"
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "C",
+            "i"
+          ],
+          "text": "the effect, if any, that improvements in wages and working conditions offered by employers will have on the availability of workers to perform seasonal agricultural services, taking into account the adverse effect, if any, of such improvements in wages and working conditions on the economic competitiveness of the perishable agricultural industry,"
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "C",
+            "ii"
+          ],
+          "text": "the effect, if any, of enhanced recruitment efforts by the employers of such workers and government employment services in the traditional and expected areas of supply of such workers, and"
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "C",
+            "iii"
+          ],
+          "text": "the number of able, willing and qualified individuals who apply for employment opportunities in seasonal agricultural services listed with offices of government employment services."
+        },
+        {
+          "path": [
+            "a",
+            "5",
+            "D"
+          ],
+          "text": "Nothing in this subsection shall be deemed to require any individual employer to pay any specified level of wages, to provide any specified working conditions, or to provide for any specified recruitment of workers.",
+          "heading": "Construction"
+        },
+        {
+          "path": [
+            "a",
+            "6"
+          ],
+          "text": "",
+          "heading": "Determination of man-day per worker factor"
+        },
+        {
+          "path": [
+            "a",
+            "6",
+            "A"
+          ],
+          "text": "For fiscal year 1990-",
+          "heading": "Fiscal year 1990"
+        },
+        {
+          "path": [
+            "a",
+            "6",
+            "A",
+            "i"
+          ],
+          "text": "Subject to clause (ii), for purposes of paragraph (2) the factor under this paragraph is the average number, as estimated by the Director of the Bureau of the Census under subsection (b)(3)(A)(ii) of this section, of man-days of seasonal agricultural services performed in the United States in fiscal year 1989 by special agricultural workers whose status is adjusted under section 1160 of this title and who performed seasonal agricultural services in the United States at any time during the fiscal year.",
+          "heading": "In general"
+        },
+        {
+          "path": [
+            "a",
+            "6",
+            "A",
+            "ii"
+          ],
+          "text": "If the Director determines that-",
+          "heading": "Lack of adequate information",
+          "continuation": "the factor under this paragraph is 90."
+        },
+        {
+          "path": [
+            "a",
+            "6",
+            "A",
+            "ii",
+            "I"
+          ],
+          "text": "the information reported under subsection (b)(2)(A) of this section is not adequate to make a reasonable estimate of the average number described in clause (i), but"
+        },
+        {
+          "path": [
+            "a",
+            "6",
+            "A",
+            "ii",
+            "II"
+          ],
+          "text": "the inadequacy of the information is not due to the refusal or failure of employers to report the information required under subsection (b)(2)(A) of this section,"
+        },
+        {
+          "path": [
+            "a",
+            "6",
+            "B"
+          ],
+          "text": "For purposes of paragraph (2) for fiscal year 1991, the factor under this paragraph is the average number, as estimated by the Director of the Bureau of the Census under subsection (b)(3)(A)(ii) of this section, of man-days of seasonal agricultural services performed in the United States in fiscal year 1990 by special agricultural workers who obtained lawful temporary resident status under this section.",
+          "heading": "Fiscal year 1991"
+        },
+        {
+          "path": [
+            "a",
+            "6",
+            "C"
+          ],
+          "text": "For purposes of paragraph (2) for fiscal years 1992 and 1993, the factor under this paragraph is the average number, as estimated by the Director of the Bureau of the Census under subsection (b)(3)(A)(ii) of this section, of man-days of seasonal agricultural services performed in the United States in each of the two previous fiscal years by special agricultural workers who obtained lawful temporary resident status under this section during either of such fiscal years.",
+          "heading": "Fiscal years 1992 and 1993"
+        },
+        {
+          "path": [
+            "a",
+            "7"
+          ],
+          "text": "",
+          "heading": "Emergency procedure for increase in shortage number"
+        },
+        {
+          "path": [
+            "a",
+            "7",
+            "A"
+          ],
+          "text": "After the beginning of a fiscal year, a group or association representing employers (and potential employers) of individuals who perform seasonal agricultural services may request the Secretaries to increase the shortage number for the fiscal year based upon a showing that extraordinary, unusual, and unforeseen circumstances have resulted in a significant increase in the shortage number due to (i) a significant increase in the need for special agricultural workers in the year, (ii) a significant decrease in the availability of able, willing, and qualified workers to perform seasonal agricultural services, or (iii) a significant decrease (below the factor used for purposes of paragraph (6)) in the number of man-days of seasonal agricultural services performed by aliens who were recently admitted (or whose status was recently adjusted) under this section.",
+          "heading": "Requests"
+        },
+        {
+          "path": [
+            "a",
+            "7",
+            "B"
+          ],
+          "text": "Not later than 3 days after the date the Secretaries receive a request under subparagraph (A), the Secretaries shall provide for notice in the Federal Register of the substance of the request and shall provide an opportunity for interested parties to submit information to the Secretaries on a timely basis respecting the request.",
+          "heading": "Notice of emergency procedure"
+        },
+        {
+          "path": [
+            "a",
+            "7",
+            "C"
+          ],
+          "text": "The Secretaries, not later than 21 days after the date of the receipt of such a request and after consideration of any information submitted on a timely basis with respect to the request, shall make and publish in the Federal Register their determination on the request. The request shall be granted, and the shortage number for the fiscal year shall be increased, to the extent that the Secretaries determine that such an increase is justified based upon the showing and circumstances described in subparagraph (A) and that such an increase takes into account reasonable recruitment efforts having been undertaken.",
+          "heading": "Prompt determination on request"
+        },
+        {
+          "path": [
+            "a",
+            "8"
+          ],
+          "text": "",
+          "heading": "Procedure for decreasing man-days of seasonal agricultural services required in the case of oversupply of workers"
+        },
+        {
+          "path": [
+            "a",
+            "8",
+            "A"
+          ],
+          "text": "After the beginning of a fiscal year, a group of special agricultural workers may request the Secretaries to decrease the number of man-days required under subparagraphs (A) and (B) of subsection (d)(2) of this section with respect to the fiscal year based upon a showing that extraordinary, unusual, and unforeseen circumstances have resulted in a significant decrease in the shortage number due to (i) a significant decrease in the need for special agricultural workers in the year, (ii) a significant increase in the availability of able, willing, and qualified workers to perform seasonal agricultural services, or (iii) a significant increase (above the factor used for purposes of paragraph (6)) in the number of man-days of seasonal agricultural services performed by aliens who were recently admitted (or whose status was recently adjusted) under this section.",
+          "heading": "Requests"
+        },
+        {
+          "path": [
+            "a",
+            "8",
+            "B"
+          ],
+          "text": "Not later than 3 days after the date the Secretaries receive a request under subparagraph (A), the Secretaries shall provide for notice in the Federal Register of the substance of the request and shall provide an opportunity for interested parties to submit information to the Secretaries on a timely basis respecting the request.",
+          "heading": "Notice of request"
+        },
+        {
+          "path": [
+            "a",
+            "8",
+            "C"
+          ],
+          "text": "The Secretaries, before the end of the fiscal year involved and after consideration of any information submitted on a timely basis with respect to the request, shall make and publish in the Federal Register their determination on the request. The request shall be granted, and the number of man-days specified in subparagraphs (A) and (B) of subsection (d)(2) of this section for the fiscal year shall be reduced by the same proportion as the Secretaries determine that a decrease in the shortage number is justified based upon the showing and circumstances described in subparagraph (A).",
+          "heading": "Determination on request"
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "",
+          "heading": "Annual numerical limitation on admission of additional special agricultural workers"
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "text": "",
+          "heading": "Annual numerical limitation"
+        },
+        {
+          "path": [
+            "b",
+            "1",
+            "A"
+          ],
+          "text": "The numerical limitation on the number of aliens who may be admitted under subsection (c)(1) of this section or who otherwise may acquire lawful temporary residence under such subsection for fiscal year 1990 is—",
+          "heading": "Fiscal year 1990"
+        },
+        {
+          "path": [
+            "b",
+            "1",
+            "A",
+            "i"
+          ],
+          "text": "95 percent of the number of individuals whose status was adjusted under section 1160(a) of this title, minus"
+        },
+        {
+          "path": [
+            "b",
+            "1",
+            "A",
+            "ii"
+          ],
+          "text": "the number estimated under paragraph (3)(A)(i) for fiscal year 1989 (as adjusted in accordance with subparagraph (C))."
+        },
+        {
+          "path": [
+            "b",
+            "1",
+            "B"
+          ],
+          "text": "The numerical limitation on the number of aliens who may be admitted under subsection (c)(1) of this section or who otherwise may acquire lawful temporary residence under such subsection for fiscal year 1991, 1992, or 1993 is-",
+          "heading": "Fiscal years 1991, 1992, and 1993"
+        },
+        {
+          "path": [
+            "b",
+            "1",
+            "B",
+            "i"
+          ],
+          "text": "90 percent of the number described in this clause for the previous fiscal year (or, for fiscal year 1991, the number described in subparagraph (A)(i)), minus"
+        },
+        {
+          "path": [
+            "b",
+            "1",
+            "B",
+            "ii"
+          ],
+          "text": "the number estimated under paragraph (3)(A)(i) for the previous fiscal year (as adjusted in accordance with subparagraph (C))."
+        },
+        {
+          "path": [
+            "b",
+            "1",
+            "C"
+          ],
+          "text": "The number used under subparagraph (A)(ii) or (B)(ii) (as the case may be) shall be increased or decreased to reflect any numerical increase or decrease, respectively, in the number of aliens admitted to perform temporary seasonal agricultural services (as defined in subsection (g)(2) of this section) under section 1101(a)(15)(H)(ii)(a) of this title in the fiscal year compared to such number in the previous fiscal year.",
+          "heading": "Adjustment to take into account change in number of H-2 agricultural workers"
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ],
+          "text": "In the case of a person or entity who employs, during a fiscal year (beginning with fiscal year 1989 and ending with fiscal year 1992) in seasonal agricultural services, a special agricultural worker-",
+          "heading": "Reporting of information on employment"
+        },
+        {
+          "path": [
+            "b",
+            "2",
+            "A"
+          ],
+          "text": "whose status was adjusted under section 1160 of this title, the person or entity shall furnish an official designated by the Secretaries with a certificate (at such time, in such form, and containing such information as the Secretaries establish, after consultation with the Attorney General and the Director of the Bureau of the Census) of the number of man-days of employment performed by the alien in seasonal agricultural services during the fiscal year, or"
+        },
+        {
+          "path": [
+            "b",
+            "2",
+            "B"
+          ],
+          "text": "who was admitted or whose status was adjusted under this section, the person or entity shall furnish the alien and an official designated by the Secretaries with a certificate (at such time, in such form, and containing such information as the Secretaries establish, after consultation with the Attorney General and the Director of the Bureau of the Census) of the number of man-days of employment performed by the alien in seasonal agricultural services during the fiscal year."
+        },
+        {
+          "path": [
+            "b",
+            "3"
+          ],
+          "text": "",
+          "heading": "Annual estimate of employment of special agricultural workers"
+        },
+        {
+          "path": [
+            "b",
+            "3",
+            "A"
+          ],
+          "text": "The Director of the Bureau of the Census shall, before the end of each fiscal year (beginning with fiscal year 1989 and ending with fiscal year 1992), estimate—",
+          "heading": "In general"
+        },
+        {
+          "path": [
+            "b",
+            "3",
+            "A",
+            "i"
+          ],
+          "text": "the number of special agricultural workers who have performed seasonal agricultural services in the United States at any time during the fiscal year, and"
+        },
+        {
+          "path": [
+            "b",
+            "3",
+            "A",
+            "ii"
+          ],
+          "text": "for purposes of subsection (a)(5) of this section, the average number of man-days of such services certain of such workers have performed in the United States during the fiscal year."
+        },
+        {
+          "path": [
+            "b",
+            "3",
+            "B"
+          ],
+          "text": "The official designated by the Secretaries under paragraph (2) shall furnish to the Director, in such form and manner as the Director specifies, information contained in the certifications furnished to the official under paragraph (2).",
+          "heading": "Furnishing of information to Director"
+        },
+        {
+          "path": [
+            "b",
+            "3",
+            "C"
+          ],
+          "text": "The Director shall base the estimates under subparagraph (A) on the information furnished under subparagraph (B), but shall take into account (to the extent feasible) the underreporting or duplicate reporting of special agricultural workers who have performed seasonal agricultural services at any time during the fiscal year. The Director shall periodically conduct appropriate surveys, of agricultural employers and others, to ascertain the extent of such underreporting or duplicate reporting.",
+          "heading": "Basis for estimates"
+        },
+        {
+          "path": [
+            "b",
+            "3",
+            "D"
+          ],
+          "text": "The Director shall annually prepare and report to the Congress information on the estimates made under this paragraph.",
+          "heading": "Report"
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "",
+          "heading": "Admission of additional special agricultural workers"
+        },
+        {
+          "path": [
+            "c",
+            "1"
+          ],
+          "text": "For each fiscal year (beginning with fiscal year 1990 and ending with fiscal year 1993), the Attorney General shall provide for the admission for lawful temporary resident status, or for the adjustment of status to lawful temporary resident status, of a number of aliens equal to the shortage number (if any, determined under subsection (a) of this section) for the fiscal year, or, if less, the numerical limitation established under subsection (b)(1) of this section for the fiscal year. No such alien shall be admitted who is not admissible to the United States as an immigrant, except as otherwise provided under subsection (e) of this section.",
+          "heading": "In general"
+        },
+        {
+          "path": [
+            "c",
+            "2"
+          ],
+          "text": "The Attorney General shall, in consultation with the Secretary of State, provide such process as may be appropriate for aliens to petition for immigrant visas or to adjust status to become aliens lawfully admitted for temporary residence under this subsection. No alien may be issued a visa as an alien to be admitted under this subsection or may have the alien's status adjusted under this subsection unless the alien has had a petition approved under this paragraph.",
+          "heading": "Allocation of visas"
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "",
+          "heading": "Rights of aliens admitted or adjusted under this section"
+        },
+        {
+          "path": [
+            "d",
+            "1"
+          ],
+          "text": "The Attorney General shall adjust the status of any alien provided lawful temporary resident status under subsection (c) of this section to that of an alien lawfully admitted for permanent residence at the end of the 3-year period that begins on the date the alien was granted such temporary resident status.",
+          "heading": "Adjustment to permanent residence"
+        },
+        {
+          "path": [
+            "d",
+            "2"
+          ],
+          "text": "During the period of temporary resident status granted an alien under subsection (c) of this section, the Attorney General may terminate such status only upon a determination under this chapter that the alien is deportable.",
+          "heading": "Termination of temporary residence"
+        },
+        {
+          "path": [
+            "d",
+            "3"
+          ],
+          "text": "During the period an alien is in lawful temporary resident status granted under this section, the alien has the right to travel abroad (including commutation from a residence abroad) and shall be granted authorization to engage in employment in the United States and shall be provided an \"employment authorized\" endorsement or other appropriate work permit, in the same manner as for aliens lawfully admitted for permanent residence.",
+          "heading": "Authorized travel and employment during temporary residence"
+        },
+        {
+          "path": [
+            "d",
+            "4"
+          ],
+          "text": "Except as otherwise provided in this subsection, an alien who acquires the status of an alien lawfully admitted for temporary residence under subsection (c) of this section, such status not having changed, is considered to be an alien lawfully admitted for permanent residence (as described in section 1101(a)(20) of this title), other than under any provision of the immigration laws.",
+          "heading": "In general"
+        },
+        {
+          "path": [
+            "d",
+            "5"
+          ],
+          "text": "",
+          "heading": "Employment in seasonal agricultural services required"
+        },
+        {
+          "path": [
+            "d",
+            "5",
+            "A"
+          ],
+          "text": "In order to meet the requirement of this paragraph (for purposes of this subsection and section 1251(a)(1)(F) of this title), an alien, who has obtained the status of an alien lawfully admitted for temporary residence under this section, must establish to the Attorney General that the alien has performed 90 man-days of seasonal agricultural services-",
+          "heading": "For 3 years to avoid deportation"
+        },
+        {
+          "path": [
+            "d",
+            "5",
+            "A",
+            "i"
+          ],
+          "text": "during the one-year period beginning on the date the alien obtained such status,"
+        },
+        {
+          "path": [
+            "d",
+            "5",
+            "A",
+            "ii"
+          ],
+          "text": "during the one-year period beginning one year after the date the alien obtained such status, and"
+        },
+        {
+          "path": [
+            "d",
+            "5",
+            "A",
+            "iii"
+          ],
+          "text": "during the one-year period beginning two years after the date the alien obtained such status."
+        },
+        {
+          "path": [
+            "d",
+            "5",
+            "B"
+          ],
+          "text": "Notwithstanding any provision in subchapter III of this chapter, an alien admitted under this section may not be naturalized as a citizen of the United States under that subchapter unless the alien has performed 90 man-days of seasonal agricultural services in each of 5 fiscal years (not including any fiscal year before the fiscal year in which the alien was admitted under this section).",
+          "heading": "For 5 years for naturalization"
+        },
+        {
+          "path": [
+            "d",
+            "5",
+            "C"
+          ],
+          "text": "In meeting the requirements of subparagraphs (A) and (B), an alien may submit such documentation as may be submitted under section 1160(b)(3) of this title.",
+          "heading": "Proof"
+        },
+        {
+          "path": [
+            "d",
+            "5",
+            "D"
+          ],
+          "text": "The number of man-days specified in subparagraphs (A) and (B) are subject to adjustment under subsection (a)(8) of this section.",
+          "heading": "Adjustment of number of man-days required"
+        },
+        {
+          "path": [
+            "d",
+            "6"
+          ],
+          "text": "The provisions of section 1255a(h) of this title (other than paragraph (1)(A)(iii)) shall apply to an alien who has obtained the status of an alien lawfully admitted for temporary residence under this section, during the five-year period beginning on the date the alien obtained such status, in the same manner as they apply to an alien granted lawful temporary residence under section 1255a of this title; except that, for purposes of this paragraph, assistance furnished under the Legal Services Corporation Act (42 U.S.C. 2996 et seq.) or under title V of the Housing Act of 1949 (42 U.S.C. 1471 et seq.) shall not be construed to be financial assistance described in section 1255a(h)(1)(A)(i) of this title.",
+          "heading": "Disqualification from certain public assistance"
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "text": "In the determination of an alien's admissibility under subsection (c)(1) of this section-",
+          "heading": "Determination of admissibility of additional workers"
+        },
+        {
+          "path": [
+            "e",
+            "1"
+          ],
+          "text": "The provisions of paragraphs (5) and (7)(A) of section 1182(a) of this title shall not apply.",
+          "heading": "Grounds of exclusion not applicable"
+        },
+        {
+          "path": [
+            "e",
+            "2"
+          ],
+          "text": "",
+          "heading": "Waiver of certain grounds for exclusion"
+        },
+        {
+          "path": [
+            "e",
+            "2",
+            "A"
+          ],
+          "text": "Except as provided in subparagraph (B), the Attorney General may waive any other provision of section 1182(a) of this title in the case of individual aliens for humanitarian purposes, to assure family unity, or when it is otherwise in the public interest.",
+          "heading": "In general"
+        },
+        {
+          "path": [
+            "e",
+            "2",
+            "B"
+          ],
+          "text": "The following provisions of section 1182(a) of this title may not be waived by the Attorney General under subparagraph (A):",
+          "heading": "Grounds that may not be waived"
+        },
+        {
+          "path": [
+            "e",
+            "2",
+            "B",
+            "i"
+          ],
+          "text": "Paragraphs (2)(A) and (2)(B) (relating to criminals)."
+        },
+        {
+          "path": [
+            "e",
+            "2",
+            "B",
+            "ii"
+          ],
+          "text": "Paragraph (2)(C) (relating to drug offenses), except for so much of such paragraph as relates to a single offense of simple possession of 30 grams or less of marihuana."
+        },
+        {
+          "path": [
+            "e",
+            "2",
+            "B",
+            "iii"
+          ],
+          "text": "Paragraph (3) (relating to security and related grounds)."
+        },
+        {
+          "path": [
+            "e",
+            "2",
+            "C"
+          ],
+          "text": "An alien is not ineligible for adjustment of status under this section due to being inadmissible under section 1182(a)(4) of this title if the alien demonstrates a history of employment in the United States evidencing self-support without reliance on public cash assistance.",
+          "heading": "Special rule for determination of public charge"
+        },
+        {
+          "path": [
+            "e",
+            "3"
+          ],
+          "text": "The alien shall be required, at the alien's expense, to undergo such a medical examination (including a determination of immunization status) as is appropriate and conforms to generally accepted professional standards of medical practice.",
+          "heading": "Medical examination"
+        },
+        {
+          "path": [
+            "f"
+          ],
+          "text": "",
+          "heading": "Terms of employment respecting aliens admitted under this section"
+        },
+        {
+          "path": [
+            "f",
+            "1"
+          ],
+          "text": "If a person employs an alien, who was admitted or whose status is adjusted under subsection (c) of this section, in the performance of seasonal agricultural services and provides transportation arrangements or assistance for such workers, the employer must provide the same transportation arrangements or assistance (generally comparable in expense and scope) for other individuals employed in the performance of seasonal agricultural services.",
+          "heading": "Equal transportation for domestic workers"
+        },
+        {
+          "path": [
+            "f",
+            "2"
+          ],
+          "text": "A farm labor contractor, agricultural employer, or agricultural association who is an exempt person (as defined in paragraph (5)) shall not knowingly provide false or misleading information to an alien who was admitted or whose status was adjusted under subsection (c) of this section concerning the terms, conditions, or existence of agricultural employment (described in subsection (a), (b), or (c) of section 301 of MASAWPA [29 U.S.C. 1831(a), (b), (c)]).",
+          "heading": "Prohibition of false information by certain employers"
+        },
+        {
+          "path": [
+            "f",
+            "3"
+          ],
+          "text": "In the case of an exempt person and with respect to aliens who have been admitted or whose status has been adjusted under subsection (c) of this section, the provisions of section 505 of MASAWPA [29 U.S.C. 1855] shall apply to any proceeding under or related to (and rights and protections afforded by) this section in the same manner as they apply to proceedings under or related to (and rights and protections afforded by) MASAWPA.",
+          "heading": "Prohibition of discrimination by certain employers"
+        },
+        {
+          "path": [
+            "f",
+            "4"
+          ],
+          "text": "If a person or entity-",
+          "heading": "Enforcement",
+          "continuation": "the person or entity is subject to a civil money penalty under section 503 of MASAWPA [29 U.S.C. 1853] in the same manner as if the person or entity had committed a violation of MASAWPA."
+        },
+        {
+          "path": [
+            "f",
+            "4",
+            "A"
+          ],
+          "text": "fails to furnish a certificate required under subsection (b)(2) of this section or furnishes false statement of a material fact in such a certificate,"
+        },
+        {
+          "path": [
+            "f",
+            "4",
+            "B"
+          ],
+          "text": "violates paragraph (1) or (2), or"
+        },
+        {
+          "path": [
+            "f",
+            "4",
+            "C"
+          ],
+          "text": "violates the provisions of section 505(a) of MASAWPA [29 U.S.C. 1855(a)] (as they apply under paragraph (3)),"
+        },
+        {
+          "path": [
+            "f",
+            "5"
+          ],
+          "text": "In this subsection:",
+          "heading": "Special definitions"
+        },
+        {
+          "path": [
+            "f",
+            "5",
+            "A"
+          ],
+          "text": "The term \"MASAWPA\" means the Migrant and Seasonal Agricultural Worker Protection Act (Public Law 97-470) [29 U.S.C. 1801 et seq.].",
+          "heading": "MASAWPA"
+        },
+        {
+          "path": [
+            "f",
+            "5",
+            "B"
+          ],
+          "text": "The term \"exempt person\" means a person or entity who would be subject to the provisions of MASAWPA but for paragraph (1) or (2), or both, of section 4(a) of MASAWPA [29 U.S.C. 1803(a)(1), (2)]."
+        },
+        {
+          "path": [
+            "g"
+          ],
+          "text": "In this section:",
+          "heading": "General definitions"
+        },
+        {
+          "path": [
+            "g",
+            "1"
+          ],
+          "text": "The term \"special agricultural worker\" means an individual, regardless of present status, whose status was at any time adjusted under section 1160 of this title or who at any time was admitted or had the individual's status adjusted under subsection (c) of this section."
+        },
+        {
+          "path": [
+            "g",
+            "2"
+          ],
+          "text": "The term \"seasonal agricultural services\" has the meaning given such term in section 1160(h) of this title."
+        },
+        {
+          "path": [
+            "g",
+            "3"
+          ],
+          "text": "The term \"Director\" refers to the Director of the Bureau of the Census."
+        },
+        {
+          "path": [
+            "g",
+            "4"
+          ],
+          "text": "The term \"man-day\" means, with respect to seasonal agricultural services, the performance during a calendar day of at least 4 hours of seasonal agricultural services."
+        }
+      ],
+      "originalTitle": "Determination of agricultural labor shortages and admission of additional special agricultural workers",
+      "originalTitleSource": "stat-100-3422.png",
+      "repealEffectiveDate": "1994-10-25",
+      "lastAmendmentDate": "1991-12-12",
+      "versionLabel": "Final text immediately before repeal effective 1994-10-25",
+      "amendmentReview": [
+        "1988: PL 100-525 §2(n)(1), incorporated in the 1988 Code.",
+        "1990: PL 101-649 §603(a)(6), update exclusion grounds; §603(b)(1), update deportation cross-reference. Effective June 1, 1991 (§601(e)(1)), and March 1, 1991 (§602(d)), respectively.",
+        "1991: PL 102-232 §307(l)(2), replace (e)(2)(B)(iii) and (iv) with the single security-grounds clause; effective as if included in §603(a)."
+      ],
+      "repealRecord": "Repealed. Pub. L. 103–416, title II, § 219(ee)(1), Oct. 25, 1994, 108 Stat. 4319",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=48",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "ff858153258928d66b479016b74d55c259375ef0677a0b2da099d8b46f8422e4",
+      "referenceCorrections": [
+        {
+          "path": [
+            "f",
+            "5",
+            "B"
+          ],
+          "field": "text",
+          "phrase": "paragraph (1) or (2), or both, of section 4(a) of MASAWPA",
+          "citations": [
+            {
+              "text": "(1)",
+              "title": "29",
+              "section": "1803",
+              "path": [
+                "a",
+                "1"
+              ]
+            },
+            {
+              "text": "(2)",
+              "title": "29",
+              "section": "1803",
+              "path": [
+                "a",
+                "2"
+              ]
+            },
+            {
+              "text": "section 4(a) of MASAWPA",
+              "title": "29",
+              "section": "1803",
+              "path": [
+                "a"
+              ]
+            }
+          ]
+        }
+      ],
+      "amendmentSources": [
+        {
+          "label": "104 Stat. 5083",
+          "url": "https://uscode.house.gov/images/stat/104/5083.png"
+        },
+        {
+          "label": "104 Stat. 5085",
+          "url": "https://uscode.house.gov/images/stat/104/5085.png"
+        },
+        {
+          "label": "105 Stat. 1756",
+          "url": "https://uscode.house.gov/images/stat/105/1756.png"
+        }
+      ]
+    },
+    {
+      "inaSection": "242B",
+      "uscSection": "1252b",
+      "codeHeading": "Deportation procedures",
+      "sourceFile": "usc-1995-1252b.html",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "heading": "Notices"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "heading": "Order to show cause",
+          "text": "In deportation proceedings under section 1252 of this title, written notice (in this section referred to as an \"order to show cause\") shall be given in person to the alien (or, if personal service is not practicable, such notice shall be given by certified mail to the alien or to the alien's counsel of record, if any) specifying the following:"
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "A"
+          ],
+          "text": "The nature of the proceedings against the alien."
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "B"
+          ],
+          "text": "The legal authority under which the proceedings are conducted."
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "C"
+          ],
+          "text": "The acts or conduct alleged to be in violation of law."
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "D"
+          ],
+          "text": "The charges against the alien and the statutory provisions alleged to have been violated."
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "E"
+          ],
+          "text": "The alien may be represented by counsel and the alien will be provided a list of counsel prepared under subsection (b)(2) of this section."
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "F"
+          ],
+          "text": ""
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "F",
+            "i"
+          ],
+          "text": "The requirement that the alien must immediately provide (or have provided) the Attorney General with a written record of an address and telephone number (if any) at which the alien may be contacted respecting proceedings under section 1252 of this title."
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "F",
+            "ii"
+          ],
+          "text": "The requirement that the alien must provide the Attorney General immediately with a written record of any change of the alien's address or telephone number."
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "F",
+            "iii"
+          ],
+          "text": "The consequences under subsection (c)(2) of this section of failure to provide address and telephone information pursuant to this subparagraph."
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "heading": "Notice of time and place of proceedings",
+          "text": "In deportation proceedings under section 1252 of this title-",
+          "continuation": "In the case of an alien not in detention, a written notice shall not be required under this paragraph if the alien has failed to provide the address required under subsection (a)(1)(F) of this section."
+        },
+        {
+          "path": [
+            "a",
+            "2",
+            "A"
+          ],
+          "text": "written notice shall be given in person to the alien (or, if personal service is not practicable, written notice shall be given by certified mail to the alien or to the alien's counsel of record, if any), in the order to show cause or otherwise, of-"
+        },
+        {
+          "path": [
+            "a",
+            "2",
+            "A",
+            "i"
+          ],
+          "text": "the time and place at which the proceedings will be held, and"
+        },
+        {
+          "path": [
+            "a",
+            "2",
+            "A",
+            "ii"
+          ],
+          "text": "the consequences under subsection (c) of this section of the failure, except under exceptional circumstances, to appear at such proceedings; and"
+        },
+        {
+          "path": [
+            "a",
+            "2",
+            "B"
+          ],
+          "text": "in the case of any change or postponement in the time and place of such proceedings, written notice shall be given in person to the alien (or, if personal service is not practicable, written notice shall be given by certified mail to the alien or to the alien's counsel of record, if any) of-"
+        },
+        {
+          "path": [
+            "a",
+            "2",
+            "B",
+            "i"
+          ],
+          "text": "the new time or place of the proceedings, and"
+        },
+        {
+          "path": [
+            "a",
+            "2",
+            "B",
+            "ii"
+          ],
+          "text": "the consequences under subsection (c) of this section of failing, except under exceptional circumstances, to attend such proceedings."
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "heading": "Form of information",
+          "text": "Each order to show cause or other notice under this subsection-"
+        },
+        {
+          "path": [
+            "a",
+            "3",
+            "A"
+          ],
+          "text": "shall be in English and Spanish, and"
+        },
+        {
+          "path": [
+            "a",
+            "3",
+            "B"
+          ],
+          "text": "shall specify that the alien may be represented by an attorney in deportation proceedings under section 1252 of this title and will be provided, in accordance with subsection (b)(1) of this section, a period of time in order to obtain counsel and a current list described in subsection (b)(2) of this section."
+        },
+        {
+          "path": [
+            "a",
+            "4"
+          ],
+          "heading": "Central address files",
+          "text": "The Attorney General shall create a system to record and preserve on a timely basis notices of addresses and telephone numbers (and changes) provided under paragraph (1)(F)."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "heading": "Securing of counsel"
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "heading": "In general",
+          "text": "In order that an alien be permitted the opportunity to secure counsel before the first hearing date in proceedings under section 1252 of this title, the hearing date shall not be scheduled earlier than 14 days after the service of the order to show cause, unless the alien requests in writing an earlier hearing date."
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ],
+          "heading": "Current lists of counsel",
+          "text": "The Attorney General shall provide for lists (updated not less often than quarterly) of persons who have indicated their availability to represent pro bono aliens in proceedings under section 1252 of this title. Such lists shall be provided under subsection (a)(1)(E) of this section and otherwise made generally available."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "heading": "Consequences of failure to appear"
+        },
+        {
+          "path": [
+            "c",
+            "1"
+          ],
+          "heading": "In general",
+          "text": "Any alien who, after written notice required under subsection (a)(2) of this section has been provided to the alien or the alien's counsel of record, does not attend a proceeding under section 1252 of this title, shall be ordered deported under section 1252(b)(1) of this title in absentia if the Service establishes by clear, unequivocal, and convincing evidence that the written notice was so provided and that the alien is deportable. The written notice by the Attorney General shall be considered sufficient for purposes of this paragraph if provided at the most recent address provided under subsection (a)(1)(F) of this section."
+        },
+        {
+          "path": [
+            "c",
+            "2"
+          ],
+          "heading": "No notice if failure to provide address information",
+          "text": "No written notice shall be required under paragraph (1) if the alien has failed to provide the address required under subsection (a)(1)(F) of this section."
+        },
+        {
+          "path": [
+            "c",
+            "3"
+          ],
+          "heading": "Rescission of order",
+          "text": "Such an order may be rescinded only-",
+          "continuation": "The filing of the motion to reopen described in subparagraph (A) or (B) shall stay the deportation of the alien pending disposition of the motion."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "A"
+          ],
+          "text": "upon a motion to reopen filed within 180 days after the date of the order of deportation if the alien demonstrates that the failure to appear was because of exceptional circumstances (as defined in subsection (f)(2) of this section), or"
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B"
+          ],
+          "text": "upon a motion to reopen filed at any time if the alien demonstrates that the alien did not receive notice in accordance with subsection (a)(2) of this section or the alien demonstrates that the alien was in Federal or State custody and did not appear through no fault of the alien."
+        },
+        {
+          "path": [
+            "c",
+            "4"
+          ],
+          "heading": "Effect on judicial review",
+          "text": "Any petition for review under section 1105a of this title of an order entered in absentia under this subsection shall, notwithstanding such section, be filed not later than 60 days (or 30 days in the case of an alien convicted of an aggravated felony) after the date of the final order of deportation and shall (except in cases described in section 1105a(a)(5) of this title) be confined to the issues of the validity of the notice provided to the alien, to the reasons for the alien's not attending the proceeding, and to whether or not clear, convincing, and unequivocal evidence of deportability has been established."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "heading": "Treatment of frivolous behavior",
+          "text": "The Attorney General shall, by regulation-",
+          "continuation": "Nothing in this subsection shall be construed as limiting the authority of the Attorney General to take actions with respect to inappropriate behavior."
+        },
+        {
+          "path": [
+            "d",
+            "1"
+          ],
+          "text": "define in a proceeding before an immigration judge or before an appellate administrative body under this subchapter, frivolous behavior for which attorneys may be sanctioned,"
+        },
+        {
+          "path": [
+            "d",
+            "2"
+          ],
+          "text": "specify the circumstances under which an administrative appeal of a decision or ruling will be considered frivolous and will be summarily dismissed, and"
+        },
+        {
+          "path": [
+            "d",
+            "3"
+          ],
+          "text": "impose appropriate sanctions (which may include suspension and disbarment) in the case of frivolous behavior."
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "heading": "Limitation on discretionary relief for failure to appear"
+        },
+        {
+          "path": [
+            "e",
+            "1"
+          ],
+          "heading": "At deportation proceedings",
+          "text": "Any alien against whom a final order of deportation is entered in absentia under this section and who, at the time of the notice described in subsection (a)(2) of this section, was provided oral notice, either in the alien's native language or in another language the alien understands, of the time and place of the proceedings and of the consequences under this paragraph of failing, other than because of exceptional circumstances (as defined in subsection (f)(2) of this section) to attend a proceeding under section 1252 of this title, shall not be eligible for relief described in paragraph (5) for a period of 5 years after the date of the entry of the final order of deportation."
+        },
+        {
+          "path": [
+            "e",
+            "2"
+          ],
+          "heading": "Voluntary departure"
+        },
+        {
+          "path": [
+            "e",
+            "2",
+            "A"
+          ],
+          "heading": "In general",
+          "text": "Subject to subparagraph (B), any alien allowed to depart voluntarily under section 1254(e)(1) of this title or who has agreed to depart voluntarily at his own expense under section 1252(b)(1) of this title who remains in the United States after the scheduled date of departure, other than because of exceptional circumstances, shall not be eligible for relief described in paragraph (5) for a period of 5 years after the scheduled date of departure or the date of unlawful reentry, respectively."
+        },
+        {
+          "path": [
+            "e",
+            "2",
+            "B"
+          ],
+          "heading": "Written and oral notice required",
+          "text": "Subparagraph (A) shall not apply to an alien allowed to depart voluntarily unless, before such departure, the Attorney General has provided written notice to the alien in English and Spanish and oral notice either in the alien's native language or in another language the alien understands of the consequences under subparagraph (A) of the alien's remaining in the United States after the scheduled date of departure, other than because of exceptional circumstances."
+        },
+        {
+          "path": [
+            "e",
+            "3"
+          ],
+          "heading": "Failure to appear under deportation order"
+        },
+        {
+          "path": [
+            "e",
+            "3",
+            "A"
+          ],
+          "heading": "In general",
+          "text": "Subject to subparagraph (B), any alien against whom a final order of deportation is entered under this section and who fails, other than because of exceptional circumstances, to appear for deportation at the time and place ordered shall not be eligible for relief described in paragraph (5) for a period of 5 years after the date the alien was required to appear for deportation."
+        },
+        {
+          "path": [
+            "e",
+            "3",
+            "B"
+          ],
+          "heading": "Written and oral notice required",
+          "text": "Subparagraph (A) shall not apply to an alien against whom a deportation order is entered unless the Attorney General has provided, orally in the alien's native language or in another language the alien understands and in the final order of deportation under this section of the consequences under subparagraph (A) of the alien's failure, other than because of exceptional circumstances, to appear for deportation at the time and place ordered."
+        },
+        {
+          "path": [
+            "e",
+            "4"
+          ],
+          "heading": "Failure to appear for asylum hearing"
+        },
+        {
+          "path": [
+            "e",
+            "4",
+            "A"
+          ],
+          "heading": "In general",
+          "text": "Subject to subparagraph (B), any alien-",
+          "continuation": "shall not be eligible for relief described in paragraph (5) for a period of 5 years after the date of the asylum hearing."
+        },
+        {
+          "path": [
+            "e",
+            "4",
+            "A",
+            "i"
+          ],
+          "text": "whose period of authorized stay (if any) has expired through the passage of time,"
+        },
+        {
+          "path": [
+            "e",
+            "4",
+            "A",
+            "ii"
+          ],
+          "text": "who has filed an application for asylum, and"
+        },
+        {
+          "path": [
+            "e",
+            "4",
+            "A",
+            "iii"
+          ],
+          "text": "who fails, other than because of exceptional circumstances, to appear at the time and place specified for the asylum hearing,"
+        },
+        {
+          "path": [
+            "e",
+            "4",
+            "B"
+          ],
+          "heading": "Written and oral notice required",
+          "text": "Subparagraph (A) shall not apply in the case of an alien with respect to a failure to be present at a hearing unless-"
+        },
+        {
+          "path": [
+            "e",
+            "4",
+            "B",
+            "i"
+          ],
+          "text": "written notice in English and Spanish, and oral notice either in the alien's native language or in another language the alien understands, was provided to the alien of the time and place at which the asylum hearing will be held, and in the case of any change or postponement in such time or place, written notice in English and Spanish, and oral notice either in the alien's native language or in another language the alien understands, was provided to the alien of the new time or place of the hearing; and"
+        },
+        {
+          "path": [
+            "e",
+            "4",
+            "B",
+            "ii"
+          ],
+          "text": "notices under clause (i) specified the consequences under subparagraph (A) of failing, other than because of exceptional circumstances, to attend such hearing."
+        },
+        {
+          "path": [
+            "e",
+            "5"
+          ],
+          "heading": "Relief covered",
+          "text": "The relief described in this paragraph is-"
+        },
+        {
+          "path": [
+            "e",
+            "5",
+            "A"
+          ],
+          "text": "voluntary departure under section 1252(b)(1) of this title,"
+        },
+        {
+          "path": [
+            "e",
+            "5",
+            "B"
+          ],
+          "text": "suspension of deportation or voluntary departure under section 1254 of this title, and"
+        },
+        {
+          "path": [
+            "e",
+            "5",
+            "C"
+          ],
+          "text": "adjustment or change of status under section 1255, 1258, or 1259 of this title."
+        },
+        {
+          "path": [
+            "f"
+          ],
+          "heading": "Definitions",
+          "text": "In this section:"
+        },
+        {
+          "path": [
+            "f",
+            "1"
+          ],
+          "text": "The term \"certified mail\" means certified mail, return receipt requested."
+        },
+        {
+          "path": [
+            "f",
+            "2"
+          ],
+          "text": "The term \"exceptional circumstances\" refers to exceptional circumstances (such as serious illness of the alien or death of an immediate relative of the alien, but not including less compelling circumstances) beyond the control of the alien."
+        }
+      ],
+      "originalTitle": "Deportation procedures",
+      "originalTitleSource": "stat-104-5061.png",
+      "repealEffectiveDate": "1997-04-01",
+      "lastAmendmentDate": "1996-09-30",
+      "versionLabel": "Final text immediately before repeal effective 1997-04-01",
+      "amendmentReview": [
+        "1991: PL 102-232 §306(c)(6) and 1994: PL 103-416 §219(i), incorporated in the 1995 Code.",
+        "1996: PL 104-208 §371(b)(7), replace “a special inquiry officer” with “an immigration judge” in (d)(1), effective September 30, 1996 (§371(d)(1))."
+      ],
+      "repealRecord": "Repealed. Pub. L. 104–208, div. C, title III, § 308(b)(6), Sept. 30, 1996, 110 Stat. 3009–615",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1995-title8-section1252b&num=0&edition=1995",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "effectiveDateNote": "General repeal date April 1, 1997; subject to the transitional and savings provisions of PL 104-208 §309.",
+      "unitsSha256": "446acb4bfa92317f08f33be8e2cf3ecb5db8248ef674727e61f991fa7d6d1117",
+      "amendmentSources": [
+        {
+          "label": "110 Stat. 3009-645",
+          "url": "https://uscode.house.gov/images/stat/110/3009-645.png"
+        }
+      ]
+    },
+    {
+      "inaSection": "321",
+      "uscSection": "1432",
+      "codeHeading": "Children born outside United States of alien parents; conditions for automatic citizenship",
+      "sourceFile": "usc-1999-1432.html",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "A child born outside of the United States of alien parents, or of an alien parent and a citizen parent who has subsequently lost citizenship of the United States, becomes a citizen of the United States upon fulfillment of the following conditions:"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "The naturalization of both parents; or"
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "The naturalization of the surviving parent if one of the parents is deceased; or"
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "text": "The naturalization of the parent having legal custody of the child when there has been a legal separation of the parents or the naturalization of the mother if the child was born out of wedlock and the paternity of the child has not been established by legitimation; and if"
+        },
+        {
+          "path": [
+            "a",
+            "4"
+          ],
+          "text": "Such naturalization takes place while such child is unmarried and under the age of eighteen years; and"
+        },
+        {
+          "path": [
+            "a",
+            "5"
+          ],
+          "text": "Such child is residing in the United States pursuant to a lawful admission for permanent residence at the time of the naturalization of the parent last naturalized under clause (1) of this subsection, or the parent naturalized under clause (2) or (3) of this subsection, or thereafter begins to reside permanently in the United States while under the age of eighteen years."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "Subsection (a) of this section shall apply to an adopted child only if the child is residing in the United States at the time of naturalization of such adoptive parent or parents, in the custody of his adoptive parent or parents, pursuant to a lawful admission for permanent residence."
+        }
+      ],
+      "originalTitle": "Children born outside of United States of alien parent",
+      "originalTitleSource": "stat-66-165.png",
+      "repealEffectiveDate": "2001-02-27",
+      "lastAmendmentDate": "1988-10-24",
+      "versionLabel": "Final text immediately before repeal effective 2001-02-27",
+      "amendmentReview": [
+        "1978: PL 95-417 §5; 1981: PL 97-116 §18(m); 1986: PL 99-653 §15; 1988: PL 100-525 §8(l), all incorporated in the 1999 Code."
+      ],
+      "repealRecord": "Repealed. Pub. L. 106–395, title I, § 103(a), Oct. 30, 2000, 114 Stat. 1632",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1999-title8-section1432&num=0&edition=1999",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "d020c9ec7f83fc993834c5205138556ced2653118150a83ea0c32f48ba54b688"
+    },
+    {
+      "inaSection": "295",
+      "uscSection": "1363b",
+      "codeHeading": "Transportation of remains of immigration officers and border patrol agents killed in the line of duty",
+      "sourceFile": "usc-1997-1363b.html",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "heading": "In general",
+          "text": "To the extent provided in appropriation Acts, when an immigration officer or border patrol agent is killed in the line of duty, the Attorney General may pay from appropriations available for the activity in which the officer or agent was engaged-"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "the actual and necessary expenses of transportation of the remains of the officer or agent to a place of burial located in any State, American Samoa, the Commonwealth of the Northern Mariana Islands, the Republic of the Marshall Islands, the Federated States of Micronesia, or the Republic of Palau;"
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "travel expenses, including per diem in lieu of subsistence, of the decedent's spouse and minor children to and from such site at rates not greater than those established for official government travel under subchapter I of chapter 57 of title 5; and"
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "text": "any other memorial service authorized by the Attorney General."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "heading": "Prepayment",
+          "text": "The Attorney General may prepay any expense authorized to be paid under this section."
+        }
+      ],
+      "originalTitle": "Transportation of remains of immigration officers and border patrol agents killed in the line of duty",
+      "originalTitleSource": "stat-110-3009-700.png",
+      "repealEffectiveDate": "1998-10-21",
+      "lastAmendmentDate": "1996-09-30",
+      "versionLabel": "Final text immediately before repeal effective 1998-10-21",
+      "amendmentReview": [
+        "No intervening amendments; the captured Code body matches the enactment listed in the House removal description."
+      ],
+      "repealRecord": "Repealed. Pub. L. 105–277, div. A, § 101(b) [title I, § 109(b)], Oct. 21, 1998, 112 Stat. 2681–50, 2681–67",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1997-title8-section1363b&num=0&edition=1997",
+      "transcriptionPolicy": "Historical U.S. Code body, including its codified cross-references; original INA table-of-contents title. Line wrapping and OCR artifacts corrected against the page images. Structural headings and concluding passages are recorded separately; original run-in clauses are parsed by the shared parser.",
+      "unitsSha256": "a14dc7bc611916c1ec2bc574460383f8b0c848e74953186c5315ce5433b07924"
+    },
+    {
+      "inaSection": "242A",
+      "uscSection": "1252a",
+      "status": "transferred",
+      "codeHeading": "Expedited deportation of aliens convicted of committing aggravated felonies",
+      "sourceFile": "usc-1995-title8.pdf",
+      "pdfPages": [
+        154,
+        156
+      ],
+      "originalTitle": "Expedited deportation of aliens convicted of committing aggravated felonies",
+      "originalTitleSource": "pl-104-208.pdf, div. C, section 671(e)(1)",
+      "transferEffectiveDate": "1997-04-01",
+      "lastAmendmentDate": "1996-09-30",
+      "versionLabel": "Reconstructed historical text immediately before transfer effective 1997-04-01",
+      "transferRecord": "Renumbered INA section 238 and transferred to 8 U.S.C. 1228 by Pub. L. 104–208, div. C, section 308(b)(5), September 30, 1996, 110 Stat. 3009–615",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-1995-title8/pdf/USCODE-1995-title8.pdf#page=154",
+      "amendmentSources": [
+        {
+          "label": "AEDPA §§ 440(g), 442",
+          "url": "https://www.govinfo.gov/content/pkg/PLAW-104publ132/pdf/PLAW-104publ132.pdf#page=66"
+        },
+        {
+          "label": "IIRIRA §§ 304(c), 306(d), 374(a)(2), 671",
+          "url": "https://www.govinfo.gov/content/pkg/PLAW-104publ208/pdf/PLAW-104publ208.pdf"
+        },
+        {
+          "label": "House amendment and effective-date history",
+          "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title8/pdf/USCODE-2023-title8-chap12-subchapII-partIV-sec1228.pdf#page=3"
+        }
+      ],
+      "amendmentReview": [
+        "Base: 1995 Code, pages 154–156, incorporating amendments through October 25, 1994. Compare the 2023 House section 1228 amendment history, pages 306–307.",
+        "AEDPA 440(g)(1), corrected by IIRIRA 306(d) and 671(c)(5): broaden (a)(1) criminal offenses and remove “, where warranted,”. IIRIRA 671(c)(6) retroactively deletes AEDPA 440(g)(2), so retain (a)(2).",
+        "AEDPA 442(a),(c), with retroactive IIRIRA 304(c): (b)(2) alternatives, conditional residents, 14-day period in (b)(3), spelling correction, six safeguards (A)–(F) including corrected identity verification (D), (b)(5), and presumption subsection (c).",
+        "IIRIRA 671(b)(13),(14) retroactively redesignates judicial-deportation (d) as (c). Preserve both (c) designations, as the House also does; do not invent a (d) citation.",
+        "IIRIRA 374(a)(2),(c) retroactively removes “without a decision on the merits” in judicial-deportation (c)(4). Do not apply 374(a)(1),(3), which take effect at the general April 1, 1997 date.",
+        "Exclude IIRIRA 308 changes effective April 1, 1997: renumbering, removal terminology, new references (1227/1229a/1226/1252), and the final no-enforceable-right sentence in (a)(1). Retain historical Code references 1251, 1252, and 1105a.",
+        "Original INA table-of-contents title corrected by IIRIRA 671(e)(1)."
+      ],
+      "effectiveDateNote": "General transfer effective April 1, 1997, subject to IIRIRA section 309 transitional and savings provisions. This reconstructed version includes the 1996 amendments and retroactive corrections, not the changes taking effect with the transfer.",
+      "transcriptionNote": "Two subsections designated (c) were enacted: Presumption of deportability and Judicial deportation. Both are preserved below; paragraph citations (c)(1)–(4) refer to Judicial deportation.",
+      "transcriptionPolicy": "Historical Code wording cross-checked against the 1995 Code and the later House amendment history; codified references retained. Subsequent changes are applied only as specified in amendmentReview. Editorial footnote artifacts are excluded from statutory wording.",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "heading": "Deportation of criminal aliens"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "heading": "In general",
+          "text": "The Attorney General shall provide for the availability of special deportation proceedings at certain Federal, State, and local correctional facilities for aliens convicted of any criminal offense covered in section 1251(a)(2)(A)(iii), (B), (C), or (D) of this title, or any offense covered by section 1251(a)(2)(A)(ii) of this title for which both predicate offenses are, without regard to the date of their commission, otherwise covered by section 1251(a)(2)(A)(i) of this title. Such proceedings shall be conducted in conformity with section 1252 of this title (except as otherwise provided in this section), and in a manner which eliminates the need for additional detention at any processing center of the Service and in a manner which assures expeditious deportation following the end of the alien’s incarceration for the underlying sentence."
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "heading": "Implementation",
+          "text": "With respect to an alien convicted of an aggravated felony who is taken into custody by the Attorney General pursuant to section 1252(a)(2) of this title, the Attorney General shall, to the maximum extent practicable, detain any such felon at a facility at which other such aliens are detained. In the selection of such facility, the Attorney General shall make reasonable efforts to ensure that the alien’s access to counsel and right to counsel under section 1362 of this title are not impaired."
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "heading": "Expedited proceedings"
+        },
+        {
+          "path": [
+            "a",
+            "3",
+            "A"
+          ],
+          "text": "Notwithstanding any other provision of law, the Attorney General shall provide for the initiation and, to the extent possible, the completion of deportation proceedings, and any administrative appeals thereof, in the case of any alien convicted of an aggravated felony before the alien’s release from incarceration for the underlying aggravated felony."
+        },
+        {
+          "path": [
+            "a",
+            "3",
+            "B"
+          ],
+          "text": "Nothing in this section shall be construed as requiring the Attorney General to effect the deportation of any alien sentenced to actual incarceration, before release from the penitentiary or correctional institution where such alien is confined."
+        },
+        {
+          "path": [
+            "a",
+            "4"
+          ],
+          "heading": "Review"
+        },
+        {
+          "path": [
+            "a",
+            "4",
+            "A"
+          ],
+          "text": "The Attorney General shall review and evaluate deportation proceedings conducted under this section."
+        },
+        {
+          "path": [
+            "a",
+            "4",
+            "B"
+          ],
+          "text": "The Comptroller General shall monitor, review, and evaluate deportation proceedings conducted under this section. Within 18 months after the effective date of this section, the Comptroller General shall submit a report to such Committees concerning the extent to which deportation proceedings conducted under this section may adversely affect the ability of such aliens to contest deportation effectively."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "heading": "Deportation of aliens who are not permanent residents"
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "text": "The Attorney General may, in the case of an alien described in paragraph (2), determine the deportability of such alien under section 1251(a)(2)(A)(iii) of this title (relating to conviction of an aggravated felony) and issue an order of deportation pursuant to the procedures set forth in this subsection or section 1252(b) of this title."
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ],
+          "text": "An alien is described in this paragraph if the alien—"
+        },
+        {
+          "path": [
+            "b",
+            "2",
+            "A"
+          ],
+          "text": "was not lawfully admitted for permanent residence at the time at which proceedings under this section commenced; or"
+        },
+        {
+          "path": [
+            "b",
+            "2",
+            "B"
+          ],
+          "text": "had permanent resident status on a conditional basis (as described in section 1186a of this title) at the time that proceedings under this section commenced."
+        },
+        {
+          "path": [
+            "b",
+            "3"
+          ],
+          "text": "The Attorney General may not execute any order described in paragraph (1) until 14 calendar days have passed from the date that such order was issued, unless waived by the alien, in order that the alien has an opportunity to apply for judicial review under section 1105a of this title."
+        },
+        {
+          "path": [
+            "b",
+            "4"
+          ],
+          "text": "Proceedings before the Attorney General under this subsection shall be in accordance with such regulations as the Attorney General shall prescribe. The Attorney General shall provide that—"
+        },
+        {
+          "path": [
+            "b",
+            "4",
+            "A"
+          ],
+          "text": "the alien is given reasonable notice of the charges and of the opportunity described in subparagraph (C);"
+        },
+        {
+          "path": [
+            "b",
+            "4",
+            "B"
+          ],
+          "text": "the alien shall have the privilege of being represented (at no expense to the government) by such counsel, authorized to practice in such proceedings, as the alien shall choose;"
+        },
+        {
+          "path": [
+            "b",
+            "4",
+            "C"
+          ],
+          "text": "the alien has a reasonable opportunity to inspect the evidence and rebut the charges;"
+        },
+        {
+          "path": [
+            "b",
+            "4",
+            "D"
+          ],
+          "text": "a determination is made for the record that the individual upon whom the notice for the proceeding under this section is served (either in person or by mail) is, in fact, the alien named in such notice;"
+        },
+        {
+          "path": [
+            "b",
+            "4",
+            "E"
+          ],
+          "text": "a record is maintained for judicial review; and"
+        },
+        {
+          "path": [
+            "b",
+            "4",
+            "F"
+          ],
+          "text": "the final order of deportation is not adjudicated by the same person who issues the charges."
+        },
+        {
+          "path": [
+            "b",
+            "5"
+          ],
+          "text": "No alien described in this section shall be eligible for any relief from deportation that the Attorney General may grant in the Attorney General’s discretion."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "heading": "Presumption of deportability",
+          "text": "An alien convicted of an aggravated felony shall be conclusively presumed to be deportable from the United States."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "heading": "Judicial deportation",
+          "duplicateDesignation": true
+        },
+        {
+          "path": [
+            "c",
+            "1"
+          ],
+          "heading": "Authority",
+          "text": "Notwithstanding any other provision of this chapter, a United States district court shall have jurisdiction to enter a judicial order of deportation at the time of sentencing against an alien whose criminal conviction causes such alien to be deportable under section 1251(a)(2)(A) of this title, if such an order has been requested by the United States Attorney with the concurrence of the Commissioner and if the court chooses to exercise such jurisdiction."
+        },
+        {
+          "path": [
+            "c",
+            "2"
+          ],
+          "heading": "Procedure"
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "A"
+          ],
+          "text": "The United States Attorney shall file with the United States district court, and serve upon the defendant and the Service, prior to commencement of the trial or entry of a guilty plea a notice of intent to request judicial deportation."
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "B"
+          ],
+          "text": "Notwithstanding section 1252b of this title, the United States Attorney, with the concurrence of the Commissioner, shall file at least 30 days prior to the date set for sentencing a charge containing factual allegations regarding the alienage of the defendant and identifying the crime or crimes which make the defendant deportable under section 1251(a)(2)(A) of this title."
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "C"
+          ],
+          "text": "If the court determines that the defendant has presented substantial evidence to establish prima facie eligibility for relief from deportation under this chapter, the Commissioner shall provide the court with a recommendation and report regarding the alien’s eligibility for relief. The court shall either grant or deny the relief sought."
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "D"
+          ]
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "D",
+            "i"
+          ],
+          "text": "The alien shall have a reasonable opportunity to examine the evidence against him or her, to present evidence on his or her own behalf, and to cross-examine witnesses presented by the Government."
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "D",
+            "ii"
+          ],
+          "text": "The court, for the purposes of determining whether to enter an order described in paragraph (1), shall only consider evidence that would be admissible in proceedings conducted pursuant to section 1252(b) of this title."
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "D",
+            "iii"
+          ],
+          "text": "Nothing in this subsection shall limit the information a court of the United States may receive or consider for the purposes of imposing an appropriate sentence."
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "D",
+            "iv"
+          ],
+          "text": "The court may order the alien deported if the Attorney General demonstrates that the alien is deportable under this chapter."
+        },
+        {
+          "path": [
+            "c",
+            "3"
+          ],
+          "heading": "Notice, appeal, and execution of judicial order of deportation"
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "A"
+          ]
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "A",
+            "i"
+          ],
+          "text": "A judicial order of deportation or denial of such order may be appealed by either party to the court of appeals for the circuit in which the district court is located."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "A",
+            "ii"
+          ],
+          "text": "Except as provided in clause (iii), such appeal shall be considered consistent with the requirements described in section 1105a of this title."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "A",
+            "iii"
+          ],
+          "text": "Upon execution by the defendant of a valid waiver of the right to appeal the conviction on which the order of deportation is based, the expiration of the period described in section 1105a(a)(1) of this title, or the final dismissal of an appeal from such conviction, the order of deportation shall become final and shall be executed at the end of the prison term in accordance with the terms of the order. If the conviction is reversed on direct appeal, the order entered pursuant to this section shall be void."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B"
+          ],
+          "text": "As soon as is practicable after entry of a judicial order of deportation, the Commissioner shall provide the defendant with written notice of the order of deportation, which shall designate the defendant’s country of choice for deportation and any alternate country pursuant to section 1253(a) of this title."
+        },
+        {
+          "path": [
+            "c",
+            "4"
+          ],
+          "heading": "Denial of judicial order",
+          "text": "Denial of a request for a judicial order of deportation shall not preclude the Attorney General from initiating deportation proceedings pursuant to section 1252 of this title upon the same ground of deportability or upon any other ground of deportability provided under section 1251(a) of this title."
+        }
+      ],
+      "unitsSha256": "e50318b5dd59e69a33433e19ab5ef1d419172afb493a866f981840927fddc570",
+      "destinationIna": "238",
+      "destinationUsc": "1228"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 const zlib = require("zlib");
+const { compactShell } = require("./compact-shell");
 const { buildDefinitionCatalog } = require("./definition-catalog");
 const { applyStatuteReferences } = require("./statute-references");
 const { applyStatuteFootnotes } = require("./statute-footnotes");
@@ -179,13 +180,14 @@ function makeBuild(template, corpus, profile, options) {
       const expression = new RegExp(`(<!-- INA_SEARCH_${name}_DATA_START -->\\s*<script id="${id}"[^>]*>)([\\s\\S]*?)(<\\/script>\\s*<!-- INA_SEARCH_${name}_DATA_END -->)`);
       html = html.replace(expression, (_, open, json, close) => `${open}${safeCompactJson(JSON.parse(json))}${close}`);
     }
-    html = html.replace(/<style>([\s\S]*?)<\/style>/, (_, css) => `<style>${css.replace(/\s+/g, " ").replace(/\s*([{}:;,])\s*/g, "$1")}</style>`);
-    html = html.replace(/<!--(?! INA_SEARCH_)[\s\S]*?-->/g, "").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^[\t ]+/gm, "").replace(/^\/\/[^\n]*\n/gm, "").replace(/\n{2,}/g, "\n");
   }
-  fs.writeFileSync(path.join(root, options.fileName), html);
+  const destination = path.join(root, options.outputDirectory || "", options.fileName);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(destination, html);
   return { fileName: options.fileName, bytes: Buffer.byteLength(html), instanceId: buildSignature, manifest: corpusPayload.manifest };
 }
 
+async function main() {
 let template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
 const annotationRuntimeSource = fs.readFileSync(path.join(sourceDir, "INASearch-Annotations.js"), "utf8");
 template = replaceRuntimeBlock(template, "STORAGE", "inaSearchStorageRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Storage.js"), "utf8"));
@@ -195,6 +197,7 @@ template = replaceRuntimeBlock(template, "ANNOTATIONS", "inaSearchAnnotationsRun
 template = replaceRuntimeBlock(template, "COMMAND", "inaSearchCommandRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Command.js"), "utf8"));
 template = replaceRuntimeBlock(template, "WORKSPACE", "inaSearchWorkspaceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Workspace.js"), "utf8"));
 template = replaceRuntimeBlock(template, "OCCURRENCE", "inaSearchOccurrenceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Occurrence.js"), "utf8"));
+template = replaceRuntimeBlock(template, "QUERY", "inaSearchQueryRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Query.js"), "utf8"));
 template = replaceInertRuntimeBlock(template, "SEARCH_WORKER", "inaSearchSearchWorkerRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Search-Worker.js"), "utf8"));
 template = replaceRuntimeBlock(template, "EMBEDDED_REFERENCES", "inaSearchEmbeddedReferencesRuntime", fs.readFileSync(path.join(root, "tools", "embedded-references.js"), "utf8"));
 template = replaceRuntimeBlock(template, "LEGAL_REFERENCES", "inaSearchLegalReferencesRuntime", fs.readFileSync(path.join(root, "tools", "legal-references.js"), "utf8"));
@@ -208,10 +211,12 @@ applyStatuteFootnotes(fullCorpus, statuteFootnoteSource);
 fullCorpus.cfr = readAssignedObject("INASearch-CFR.js", "INA_SEARCH_CFR");
 const statuteReferenceSource = readAssignedObject("INASearch-Statute-References.js", "INA_SEARCH_STATUTE_REFERENCES");
 applyStatuteReferences(fullCorpus, statuteReferenceSource);
+require("./historical-ina.js").applyHistoricalIna(fullCorpus);
 indexStatuteRunIns(fullCorpus);
 fullCorpus.legalReferenceExceptions = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "embedded-reference-exceptions.json"), "utf8"));
 applyGeneratedLegalReferences(fullCorpus);
 applyStatuteStatusMetadata(fullCorpus);
+require("./historical-ina.js").applyHistoricalReferences(fullCorpus);
 const definitionSource = readAssignedObject("INASearch-Definitions.js", "INA_SEARCH_DEFINITIONS");
 const uscisGlossarySource = readAssignedObject("INASearch-USCIS-Glossary.js", "INA_SEARCH_USCIS_GLOSSARY");
 fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
@@ -228,24 +233,28 @@ const annotationBundleReport = {
   pretextIncluded: false
 };
 
-const results = [
-  makeBuild(template, fullCorpus, defaultProfile, {
+const debugTemplate = await compactShell(template, { debug: true });
+template = await compactShell(template);
+const variants = [
+  {
     variant: "standard",
     displayName: "INASearch",
     fileName: "INASearch.html",
     hasLocalUscCache: true,
     compactCorpus: true,
     compactShell: true
-  }),
-  makeBuild(template, fullCorpus, defaultProfile, {
+  },
+  {
     variant: "uncompressed",
     displayName: "INASearch (Uncompressed Corpus)",
     fileName: "INASearch-Uncompressed.html",
     hasLocalUscCache: true,
     uncompressedCorpus: true,
     compactShell: true
-  })
+  }
 ];
+const results = variants.map(options => makeBuild(template, fullCorpus, defaultProfile, options));
+for (const options of variants) makeBuild(debugTemplate, fullCorpus, defaultProfile, { ...options, outputDirectory: "tmp/debug" });
 
 for (const result of results) {
   const corpusSize = result.manifest.compression === "gzip"
@@ -254,3 +263,6 @@ for (const result of results) {
   console.log(`${result.fileName}\t${result.bytes} bytes\t${result.instanceId}\t${corpusSize}`);
 }
 console.log(`annotations\t${annotationBundleReport.javascriptBytes} JS bytes\t${annotationBundleReport.cssBytes} CSS bytes\t${annotationBundleReport.fontBytes} font bytes\tPretext ${annotationBundleReport.pretextIncluded ? "included" : "absent"}`);
+}
+
+main().catch(error => { console.error(error); process.exitCode = 1; });

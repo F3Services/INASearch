@@ -3358,6 +3358,7 @@ function applyGeneratedLegalReferences(corpus) {
         inlineUnitMarkers: StatuteRunIns?.statuteRunInPathMarkers?.(section, node, nodePath) || []
       }, nodeState);
       walkUsc(section, node.children, nodePath, nodeState, actSectionTargets);
+      attach(node, "continuation", context, nodeState);
       siblingState = newState(nodeState.frames);
     }
   };
@@ -3530,6 +3531,8 @@ function applyCfrReferences(corpus, changedPartIds) {
   };
 }
 
+// Runtime CFR updates need this entry point; corpus authoring stays in Node.
+if (typeof INASEARCH_BROWSER !== "undefined" && INASEARCH_BROWSER) return { applyCfrReferences };
 return {
   applyCfrReferences,
   applyGeneratedLegalReferences,

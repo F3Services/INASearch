@@ -22,7 +22,7 @@
     "paragraph-4", "paragraph-5", "paragraph-6"
   ]);
   const COMMON_AUTHORITIES = Object.freeze(["statute", "cfr"]);
-  const CONTENT_SCOPES = Object.freeze(["ina", "cfr", "notes", "highlights"]);
+  const CONTENT_SCOPES = Object.freeze(["ina", "cfr", "notes", "annotations", "highlights", "highlights-exact"]);
   const ARTIFACT_KINDS = Object.freeze(["notes", "highlights"]);
 
   const issue = (code, message, index = null) => ({ code, message, ...(index === null ? {} : { index }) });
@@ -116,6 +116,7 @@
   function scanCommandSegments(value) {
     const input = String(value || "");
     const boundaries = [];
+    const scopeSpans = extractQueryScopes(input).spans;
     const errors = [];
     let start = 0;
     let depth = 0;
@@ -139,7 +140,7 @@
         continue;
       }
       const tokenStart = Math.max(input.lastIndexOf(" ", index - 1), input.lastIndexOf("\t", index - 1), input.lastIndexOf("\n", index - 1), input.lastIndexOf("(", index - 1), input.lastIndexOf(")", index - 1)) + 1;
-      const modifierComma = depth === 0 && modifierListComma(input, index, tokenStart);
+      const modifierComma = depth === 0 && (modifierListComma(input, index, tokenStart) || scopeSpans.some(span => index >= span.start && index < span.end));
       if (character === "," && depth === 0 && !modifierComma) {
         hasTopLevelComma = true;
         boundaries.push([start, index]);
@@ -497,7 +498,7 @@
     return `${token.value}${next.value}`;
   }
 
-  function parseCommand(value, options = {}) {
+  function parseTextCommand(value, options = {}) {
     const input = String(value || "");
     const split = scanCommandSegments(input);
     if (split.hasTopLevelComma) return { type: "search", input, status: "invalid", ok: false, errors: [issue("multiple-commands", "Use the workspace parser for comma-separated commands.")] };
@@ -675,6 +676,123 @@
     };
   }
 
+
+  const QUERY_VERSION = 2;
+  const PERSONAL_SCOPES = new Set(["notes", "annotations", "highlights", "highlights-exact"]);
+
+  // Read citation syntax before the text lexer interprets its parentheses as OR groups.
+  // Corpus validation is deliberately separate: incomplete/unknown citations never become words.
+  function readScopeValue(input, start) {
+    const tail = input.slice(start);
+    const quoted = tail.match(/^"((?:\\.|[^"\\])*)"/);
+    if (quoted) return { value: quoted[1].replace(/\\(.)/g, "$1"), end: start + quoted[0].length };
+    const content = tail.match(/^(notes|annotations|highlights-exact|highlights)(?=$|[\s,])/i);
+    if (content) return { value: content[1].toLowerCase(), end: start + content[0].length };
+    const authority = tail.match(/^(?:(?:\d+\s*)?c\.?\s*f\.?\s*r\.?|(?:8\s*)?u\.?\s*s\.?\s*c\.?|i\.?\s*n\.?\s*a\.?|statutes?)(?=\s|\d|§|$|,)/i);
+    let end = authority ? authority[0].length : 0;
+    const rest = tail.slice(end);
+    const locator = rest.match(/^\s*(?:§+\s*)?(?:(?:part|title|chapter|subchapter|subpart)\s+)?(?:\d+[a-z0-9]*(?:\.\d+[a-z0-9-]*)?|[IVX]+)(?![a-z0-9:])(?:\s*\([a-z0-9]+\))*(?:\s*[-–—]\s*(?:(?:\d+\s*)?(?:INA|CFR|U\.?S\.?C\.?)\s*)?(?:\d+[a-z0-9]*(?:\.\d+[a-z0-9-]*)?)?(?:\s*\([a-z0-9]+\))*)?/i);
+    if (locator) end += locator[0].length;
+    if (!end) {
+      const word = tail.match(/^[^\s,]+/);
+      return { value: word?.[0] || "", end: start + (word?.[0].length || 0) };
+    }
+    // Include unfinished path tokens so typing cannot launch an accidentally broader search.
+    const unfinished = tail.slice(end).match(/^\s*\([^)]*$/);
+    if (unfinished) end += unfinished[0].length;
+    return { value: tail.slice(0, end).trim(), end: start + end };
+  }
+
+  function extractQueryScopes(value) {
+    const input = String(value || ""), groups = [], cites = [], errors = [], spans = [];
+    let text = "", cursor = 0, depth = 0;
+    while (cursor < input.length) {
+      const ch = input[cursor];
+      if (ch === "\\") { text += input.slice(cursor, cursor + 2); cursor += 2; continue; }
+      if (ch === '"') {
+        let end = cursor + 1;
+        while (end < input.length) { if (input[end] === "\\") end += 2; else if (input[end++] === '"') break; }
+        text += input.slice(cursor, end); cursor = end; continue;
+      }
+      if (ch === "(") depth++;
+      if (ch === ")") depth--;
+      const tag = (cursor === 0 || /\s|\(/.test(input[cursor - 1])) && input.slice(cursor).match(/^(in|cites|is):\s*/i);
+      if (!tag) { text += ch; cursor++; continue; }
+      const start = cursor, name = tag[1].toLowerCase();
+      if (depth) errors.push(issue("modifier-inside-group", "Put scope tags outside text alternative groups.", start));
+      if (name === "is") errors.push(issue("retired-is-modifier", "Use in:notes or in:highlights-exact instead of is:.", start));
+      cursor += tag[0].length;
+      const values = [];
+      while (true) {
+        const read = readScopeValue(input, cursor);
+        if (!read.value) { errors.push(issue("missing-scope-value", `Enter a value after ${name}:`, cursor)); break; }
+        values.push(read.value); cursor = read.end;
+        if (input[cursor] !== "," || /\s/.test(input[cursor + 1] || "")) break;
+        cursor++;
+      }
+      if (name === "cites") cites.push(values);
+      else if (name === "in") groups.push(values);
+      spans.push({ start, end: cursor, name, values });
+      text += " ";
+    }
+    return { text: text.trim(), groups, cites, errors, spans };
+  }
+
+  function scopeBranches(groups) {
+    let combinations = [[]];
+    for (const group of groups) {
+      combinations = combinations.flatMap(previous => group.map(value => [...previous, value]));
+      if (combinations.length > 128) throw new SyntaxError("Use at most 128 scope alternatives.");
+    }
+    return combinations.map(values => {
+      const contents = [...new Set(values.filter(value => PERSONAL_SCOPES.has(value.toLowerCase())).map(value => value.toLowerCase()))];
+      const locations = values.filter(value => !PERSONAL_SCOPES.has(value.toLowerCase()));
+      const modes = contents.filter(value => value.startsWith("highlights"));
+      const kinds = contents.filter(value => !value.startsWith("highlights"));
+      if (kinds.length > 1 || (kinds.length && modes.length)) throw new SyntaxError("These content scopes do not intersect. Use a comma list for alternatives.");
+      return { kind: kinds[0] || "law", locations, highlightMode: modes.includes("highlights-exact") ? "exact" : modes.length ? "presence" : null };
+    });
+  }
+
+  function parseCommand(value, options = {}) {
+    const input = String(value || ""), extracted = extractQueryScopes(input);
+    let branches = [];
+    try { branches = scopeBranches(extracted.groups); }
+    catch (error) { extracted.errors.push(issue("incompatible-scopes", error.message)); }
+    const hasExplicitScope = extracted.groups.length > 0;
+    if (!hasExplicitScope) branches = [{ kind: "law", locations: [], highlightMode: null }, { kind: "notes", locations: [], highlightMode: null }];
+    const inferAuthority = location => /c\.?\s*f\.?\s*r/i.test(location) || /^\d+\./.test(location) ? "cfr" : "statute";
+    const legalBranches = branches.filter(branch => branch.kind !== "notes");
+    const authorities = [...new Set(legalBranches.flatMap(branch => branch.locations.length ? branch.locations.map(inferAuthority) : normalizeAuthorities(options.authorities)))];
+    const ast = parseTextCommand(extracted.text, { ...options, authorities: authorities.length ? authorities : COMMON_AUTHORITIES });
+    const errors = [...extracted.errors, ...(ast.errors || [])];
+    if (ast.has?.length) {
+      if (hasExplicitScope && branches.some(branch => branch.kind !== "law")) errors.push(issue("has-artifact-scope", "has: filters legal text. Use a legal scope with has:."));
+      branches = branches.filter(branch => branch.kind === "law");
+    }
+    if (!legalBranches.length && ast.common?.present) errors.push(issue("common-without-legal-scope", "common: applies to legal text only."));
+    for (const group of [...extracted.groups, ...extracted.cites]) for (const item of group) {
+      if (PERSONAL_SCOPES.has(item.toLowerCase())) continue;
+      if (!/^(?:\d|§|INA|USC|U\.|CFR|C\.|statute)/i.test(item)) errors.push(issue("invalid-in-modifier", `“${item}” is not a legal citation or supported scope.`));
+    }
+    const simpleScope = extracted.groups.length === 1 ? parseInModifier(`in:${extracted.groups[0].join(",")}`) : null;
+    const contentScopes = [...new Set(branches.flatMap(branch => branch.kind === "law" ? (branch.locations.length ? branch.locations.map(inferAuthority).map(a => a === "statute" ? "ina" : "cfr") : ["ina", "cfr"]) : [branch.kind]))];
+    const scope = hasExplicitScope ? simpleScope && !simpleScope.error ? simpleScope : { contentScopes, authorities, authority: authorities.length === 1 ? authorities[0] : null } : null;
+    const incomplete = ast.status === "incomplete" || errors.some(error => error.code === "missing-scope-value") || [...extracted.groups, ...extracted.cites].flat().some(v => (v.match(/\(/g) || []).length !== (v.match(/\)/g) || []).length);
+    return { ...ast, input, queryVersion: QUERY_VERSION, scope, scopeGroups: extracted.groups, citationGroups: extracted.cites, branches, scopeSpans: extracted.spans,
+      status: incomplete ? "incomplete" : errors.length ? "invalid" : "valid", ok: !incomplete && !errors.length, errors };
+  }
+
+  function migrateQuery(value, version = 1) {
+    if (Number(version) >= QUERY_VERSION) return String(value || "");
+    const replacements = extractQueryScopes(value).spans.filter(span => span.name === "is" || (span.name === "in" && span.values.some(v => /^highlights$/i.test(v)))).map(span => ({
+      start: span.start, end: span.end,
+      value: `in:${span.values.map(v => /^highlights$/i.test(v) ? "highlights-exact" : v).join(",")}`
+    }));
+    let result = String(value || "");
+    for (const item of replacements.reverse()) result = result.slice(0, item.start) + item.value + result.slice(item.end);
+    return result;
+  }
   function escapePhrase(value) {
     return `"${String(value || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
   }
@@ -682,17 +800,20 @@
   function serializeAtom(atom) {
     if (atom?.kind === "phrase") return escapePhrase(atom.value);
     const value = String(atom?.value || "");
-    if (/^(?:or|not)$/i.test(value) || /^(?:in|is|has|common):/i.test(value)) return `\\${value}`;
+    if (/^(?:or|not)$/i.test(value) || /^(?:in|is|cites|has|common):/i.test(value)) return `\\${value}`;
     return value.replace(/([\\\s(),"])/g, "\\$1");
   }
 
   function serializeCommand(ast, options = {}) {
     if (!ast || ast.type !== "search" || ast.status !== "valid") return "";
     const parts = [];
-    if (ast.listing?.kinds?.length) parts.push(`is:${ast.listing.kinds.join(",")}`);
-    if (ast.scope?.contentScopes?.length) parts.push(`in:${ast.scope.contentScopes.map(value => value === "ina" ? "INA" : value === "cfr" ? "CFR" : value).join(",")}`);
-    else if (ast.scope?.authority === "statute") parts.push("in:INA");
-    else if (ast.scope?.authority === "cfr") parts.push("in:CFR");
+    if (ast.queryVersion === QUERY_VERSION) {
+      for (const group of ast.scopeGroups || []) parts.push(`in:${group.join(",")}`);
+      for (const group of ast.citationGroups || []) parts.push(`cites:${group.join(",")}`);
+    }
+    if (!ast.queryVersion && ast.scope?.contentScopes?.length) parts.push(`in:${ast.scope.contentScopes.map(value => value === "ina" ? "INA" : value === "cfr" ? "CFR" : value).join(",")}`);
+    else if (!ast.queryVersion && ast.scope?.authority === "statute") parts.push("in:INA");
+    else if (!ast.queryVersion && ast.scope?.authority === "cfr") parts.push("in:CFR");
     const commonText = canonicalizeCommon(ast.common?.levels, {
       authorities: ast.common?.authorities || (ast.scope ? [ast.scope.authority] : options.authorities),
       includeDeepest: options.includeDeepestCommon === true
@@ -736,7 +857,7 @@
       if (token.type === "close") { depth = Math.max(0, depth - 1); continue; }
       if (token.type !== "atom" || token.kind !== "word" || token.escaped || depth > 0) continue;
       const value = normalizedWord(token.value);
-      if (/^(?:in|is|has|common):/.test(value) || value === "or" || value === "not") return true;
+      if (/^(?:in|is|cites|has|common):/.test(value) || value === "or" || value === "not") return true;
     }
     return false;
   }
@@ -798,6 +919,10 @@
   }
 
   return Object.freeze({
+    QUERY_VERSION,
+    extractQueryScopes,
+    migrateQuery,
+    scopeBranches,
     STATUTE_COMMON_LEVELS,
     CFR_COMMON_LEVELS,
     COMMON_AUTHORITIES,

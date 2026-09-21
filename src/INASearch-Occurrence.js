@@ -18,9 +18,11 @@
 })(typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this, function () {
   "use strict";
 
-  const SCHEMA_VERSION = 1;
-  const PERSISTED_PROJECTION_SCHEMA_VERSION = 1;
-  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}`;
+  const SCHEMA_VERSION = 2;
+  // The fragment/hierarchy format is unchanged. Extra cached fields are ignored,
+  // so removing the redundant citation index need not force a cold rebuild.
+  const PERSISTED_PROJECTION_SCHEMA_VERSION = 2;
+  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-5`;
   const DEFAULT_SLICE_MS = 8;
   const STATUTE_DEPTHS = Object.freeze({
     section: 0, subsection: 1, paragraph: 2, subparagraph: 3, clause: 4,
@@ -65,8 +67,12 @@
           }
           pendingSpace = null;
           characters.push(character);
-          starts.push(rawStart);
-          ends.push(rawOffset);
+          // String matching reports UTF-16 offsets, including both code units
+          // of a supplementary character.
+          for (let unit = 0; unit < character.length; unit += 1) {
+            starts.push(rawStart);
+            ends.push(rawOffset);
+          }
         } else if (characters.length) {
           if (pendingSpace) pendingSpace.end = rawOffset;
           else pendingSpace = { start: rawStart, end: rawOffset };
@@ -297,6 +303,56 @@
     return segments.map((segment, index) => ({ ...segment, sourceEnd: segments[index + 1]?.start ?? String(node?.text || "").length }));
   }
 
+  function expandedHouseHref(value) {
+    const input = String(value || "");
+    if (input.startsWith("u")) return `/us/usc/t${input.slice(1)}`;
+    if (input.startsWith("p")) return `/us/pl/${input.slice(1)}`;
+    if (input.startsWith("s")) return `/us/stat/${input.slice(1)}`;
+    if (input.startsWith("a")) return `/us/act/${input.slice(1)}`;
+    return input;
+  }
+
+  function packedReferences(corpus, source, property, code, field) {
+    if (Array.isArray(source?.[property])) return source[property];
+    const packed = source?._lr?.[code];
+    if (!packed) return [];
+    const references = typeof packed === "string" ? packed.split(";").filter(Boolean).map(item => item.split(",").map(Number)) : packed;
+    const families = { u: "usc", i: "ina", c: "cfr", p: "public-law", s: "statutes-at-large", f: "federal-register", "?": "unknown" };
+    let previousEnd = 0;
+    return references.map(reference => {
+      const start = previousEnd + Number(reference?.[1] || 0);
+      const end = start + Number(reference?.[2] || 0);
+      previousEnd = end;
+      const text = String(source?.[field] || "").slice(start, end);
+      if (Array.isArray(reference) && reference[0] === 0) {
+        const houseHref = expandedHouseHref(corpus?.legalReferencePacking?.houseHrefs?.[reference[3]] || "");
+        const match = houseHref.match(/^\/us\/usc\/t([^/]+)\/s([^/]+)(?:\/(.*))?$/);
+        return match ? { family: "usc", targetTitle: match[1], targetSection: match[2], targetPath: match[3] ? match[3].split("/").filter(Boolean) : [], resolution: Number(reference[4]) === 2 ? "unresolved" : "local", start, end, text } : { resolution: "unresolved", start, end, text };
+      }
+      if (!Array.isArray(reference)) return { ...reference, start, end, text: reference.text || text };
+      const rawTarget = corpus?.legalReferencePacking?.legalTargets?.[reference[3]] || [];
+      const target = typeof rawTarget === "string" ? rawTarget.split("|") : rawTarget;
+      return {
+        family: families[target[0]] || "unknown",
+        targetTitle: target[2] || "",
+        targetSection: target[3] || "",
+        targetPath: Array.isArray(target[4]) ? target[4].map(String) : target[4] ? String(target[4]).split("/") : [],
+        resolution: Number(target[1]) === 2 ? "unresolved" : Number(target[1]) === 1 ? "local" : "official-source-only",
+        ...(Number(target[12]) ? { historicalTargetId: Number(target[12]) } : {}),
+        start, end, text
+      };
+    });
+  }
+
+
+  function referenceLookup(corpus) {
+    return {
+      uscIds: new Map((corpus?.title8?.sections || []).map(item => [String(item.section).toLowerCase(), item.id])),
+      inaLabels: new Map((corpus?.inaCrosswalk || []).filter(row => !row.isNote && row.inaSection).map(row => [String(row.uscSection).toLowerCase(), row.inaSection])),
+      cfrIds: new Map((corpus?.cfr?.sections || []).map(item => [`${item.title}:${String(item.section).toLowerCase()}`, item.id]))
+    };
+  }
+
   function buildProjection(corpus, options = {}) {
     const started = now(), fragments = [], hierarchy = makeHierarchyStore();
     const requestedAuthorities = options.authorities === undefined
@@ -312,6 +368,28 @@
       byAuthority: { ina: 0, cfr: 0 }, byKind: Object.create(null)
     };
 
+
+    const { uscIds, inaLabels, cfrIds } = options.referenceLookup || referenceLookup(options.referenceCorpus || corpus);
+    function fragmentReferences(record, source, text) {
+      let host = record, field = source.field;
+      if (field === "body") { let nodes = record.body; for (const index of source.recordPath || []) { host = nodes?.[index]; nodes = host?.children; } field = source.subfield || "text"; }
+      else if (field === "blocks") { host = record.blocks; for (const index of source.blockPath || []) host = host?.[index]; if (source.rowIndex !== undefined) host = host?.rows?.[source.rowIndex]?.[source.cellIndex]; field = source.subfield || "x"; }
+      else if (field === "sourceCredit") host = record;
+      else if (field === "notes") { host = record.notes?.[source.noteIndex]; field = source.subfield || "text"; }
+      else if (field === "houseEditorialFootnotes") { host = record.houseEditorialFootnotes?.[source.noteIndex]; field = "text"; }
+      const property = field === "text" ? "references" : `${field}References`;
+      const codes = { continuation: "c", text: "t", heading: "h", preamble: "p", sourceCredit: "s", x: "x", authority: "a", source: "o" };
+      const refs = packedReferences(corpus, host, property, codes[field], field);
+      return refs.filter(ref => ref.resolution !== "unresolved").map(ref => {
+        const family = ["ina", "usc"].includes(ref.family) ? "usc" : ref.family;
+        const sectionId = family === "usc" ? uscIds.get(String(ref.targetSection).toLowerCase()) : cfrIds.get(`${ref.targetTitle}:${String(ref.targetSection).toLowerCase()}`);
+        const start = Number(ref.start || 0) - Number(source.start || 0), end = Number(ref.end || 0) - Number(source.start || 0);
+        const inaSection = family === "usc" ? inaLabels.get(String(ref.targetSection).toLowerCase()) : null;
+        const raw = String(text || "").slice(start, end);
+        const displayText = inaSection && /^(?:sections?\b|8\s*U\.?\s*S\.?\s*C\.?)/i.test(raw) ? `INA ${inaSection}${canonicalPath(ref.targetPath || [])}` : null;
+        return { family, sectionId, path: ref.targetPath || [], start, end, ...(displayText ? { displayText } : {}) };
+      }).filter(ref => ref.sectionId && ref.start >= 0 && ref.end <= String(text || "").length && ref.end > ref.start);
+    }
     const addFragment = source => {
       const text = String(source.text || ""), normalized = options.deferNormalization ? null : normalizeText(text);
       if (options.deferNormalization ? !text.trim() : !normalized) return null;
@@ -319,6 +397,7 @@
       const fragment = {
         id: `${source.authority}:${sourceOrder}`,
         sourceOrder,
+        contentKind: "law",
         ...source,
         text,
         normalized,
@@ -402,7 +481,7 @@
         }
         return keys;
       };
-      const addStatuteFragment = (kind, text, path, occurrenceKeys, source) => addFragment({ ...common, kind, text, path, occurrenceKeys, citation: `${citationBase}${canonicalPath(path)}`, source });
+      const addStatuteFragment = (kind, text, path, occurrenceKeys, source) => addFragment({ ...common, kind, text, path, occurrenceKeys, citation: `${citationBase}${canonicalPath(path)}`, source, references: fragmentReferences(section, source, text) });
       addStatuteFragment("statute-heading", section.heading, [], [], { field: "heading" });
       addStatuteFragment("statute-preamble", section.preamble, [], [], { field: "preamble" });
       let nodeOrdinal = 0;
@@ -422,9 +501,17 @@
             }
           } else addStatuteFragment("statute-node", text, path, occurrenceKeys, { ...sourceBase, subfield: "text", start: 0, end: text.length });
           walkNodes(node.children, path, occurrenceKeys, recordPath);
+          if (node.continuation) addStatuteFragment("statute-node", node.continuation, path, occurrenceKeys, { ...sourceBase, subfield: "continuation", start: 0, end: String(node.continuation || "").length });
         }
       };
       walkNodes(section.body);
+      const supplement = (kind, text, source, heading) => addFragment({ ...common, contentKind: "annotations", kind, text, path: source.path || [], occurrenceKeys: (source.path || []).map((_, depth) => `${rootOccurrenceKey}:annotation:${source.path.slice(0, depth + 1).join("/")}`), deepestOccurrenceKey: `${rootOccurrenceKey}:${source.field}:${source.noteIndex ?? 0}`, citation: citationBase, annotationHeading: heading, source, references: fragmentReferences(section, source, text) });
+      supplement("source-credit", section.sourceCredit, { field: "sourceCredit" }, "Source credit");
+      (section.notes || []).forEach((note, noteIndex) => {
+        supplement("statutory-note-heading", note.heading, { field: "notes", subfield: "heading", noteIndex }, note.heading || note.topic);
+        supplement("statutory-note", note.text, { field: "notes", subfield: "text", noteIndex }, note.heading || note.topic || "Statutory and editorial note");
+      });
+      (section.houseEditorialFootnotes || []).forEach((note, noteIndex) => supplement("editorial-footnote", note.text, { field: "houseEditorialFootnotes", noteIndex, footnoteId: note.id, path: String(note.sourceLocation?.sourceKey || "").split(":").slice(1).join(":").replace(/#\d+/g, "").split("/").filter(token => token && token !== "preamble" && token !== "heading") }, "House editorial footnote"));
       stats.inaRecords += 1;
     }
 
@@ -480,7 +567,7 @@
       const citationBase = `${record.title} CFR ${sectionLabel}`;
       const common = { authority: "cfr", recordKind, recordId: record.id, title: Number(record.title), partId: record.partId || "", section: sectionLabel, citationBase, rootOccurrenceKey, hierarchyIds, heading: record.heading || "" };
       const state = { path: [], occurrenceKeys: [], localHeading: "" };
-      const addCfrFragment = (kind, text, path, occurrenceKeys, source, noteType = null, citationOverride = "", localHeading = state.localHeading, deepestOccurrenceKey = "") => addFragment({ ...common, heading: localHeading || common.heading, localHeading: localHeading || "", kind, text, path, occurrenceKeys, citation: citationOverride || `${citationBase}${canonicalPath(path)}`, ...(citationOverride ? { rangeCitation: citationOverride } : {}), source, ...(noteType ? { noteType } : {}), ...(deepestOccurrenceKey ? { deepestOccurrenceKey } : {}) });
+      const addCfrFragment = (kind, text, path, occurrenceKeys, source, noteType = null, citationOverride = "", localHeading = state.localHeading, deepestOccurrenceKey = "") => addFragment({ ...common, heading: localHeading || common.heading, localHeading: localHeading || "", kind, text, path, occurrenceKeys, citation: citationOverride || `${citationBase}${canonicalPath(path)}`, ...(citationOverride ? { rangeCitation: citationOverride } : {}), source, references: fragmentReferences(record, source, text), contentKind: ["editorial", "effective-date", "source-credit"].includes(noteType) ? "annotations" : "law", ...(noteType ? { noteType } : {}), ...(deepestOccurrenceKey ? { deepestOccurrenceKey } : {}) });
       addCfrFragment(recordKind === "appendix" ? "cfr-appendix-heading" : "cfr-heading", record.heading, [], [], { field: "heading" }, null, "", "");
 
       const ensurePath = (path, createExact = false) => {
@@ -494,7 +581,7 @@
           const block = blocks[blockIndex] || {}, currentBlockPath = [...blockPath, blockIndex], type = block.t || "p";
           if (type === "note") {
             const noteType = cfrNoteType(block);
-            if (noteType === "ordinary") {
+            {
               const saved = { path: [...state.path], occurrenceKeys: [...state.occurrenceKeys], localHeading: state.localHeading, active: tracker.activeSnapshot() };
               walkBlocks(block.blocks, [...currentBlockPath, "blocks"], noteType, `${record.id}:note:${currentBlockPath.join(".")}`);
               state.path = saved.path;
@@ -505,7 +592,7 @@
             continue;
           }
           if (type === "p") {
-            if (block.k === "citation") continue;
+            if (block.k === "citation") { addCfrFragment("cfr-source-credit", block.x, [], [], { field: "blocks", blockPath: currentBlockPath }, "source-credit"); continue; }
             const text = String(block.x || ""), units = [...(block.u || [])].sort((left, right) => Number(left.s) - Number(right.s));
             if (units.length) {
               const leadingRange = /^\s*\([^)]+\)\s*[-–—]\s*\([^)]+\)/.test(text);
@@ -605,7 +692,7 @@
     };
   }
 
-  function toPersistedProjection(projection, identity = {}, extras = {}) {
+  function toPersistedProjection(projection, identity = {}) {
     if (!projection || !Array.isArray(projection.fragments) || !Array.isArray(projection.hierarchyNodes)) {
       throw new TypeError("A completed occurrence projection is required.");
     }
@@ -623,7 +710,6 @@
       payload: {
         fragments: projection.fragments,
         hierarchyNodes: projection.hierarchyNodes,
-        citationSources: Array.isArray(extras.citationSources) ? extras.citationSources : Array.isArray(projection.citationSources) ? projection.citationSources : [],
       },
     };
   }
@@ -640,8 +726,7 @@
     }
     const fragments = record.payload?.fragments;
     const hierarchyNodes = record.payload?.hierarchyNodes;
-    const citationSources = record.payload?.citationSources;
-    if (!Array.isArray(fragments) || !Array.isArray(hierarchyNodes) || !Array.isArray(citationSources) || fragments.length !== record.fragmentCount || hierarchyNodes.length !== record.hierarchyNodeCount) {
+    if (!Array.isArray(fragments) || !Array.isArray(hierarchyNodes) || fragments.length !== record.fragmentCount || hierarchyNodes.length !== record.hierarchyNodeCount) {
       throw new Error("The saved search projection is incomplete.");
     }
     const hierarchyById = new Map();
@@ -658,7 +743,6 @@
       fragments,
       hierarchyNodes,
       hierarchyById,
-      citationSources,
       stats: {
         restored: true,
         fragmentCount: fragments.length,
@@ -701,6 +785,9 @@
 
   async function buildProjectionAsync(corpus, options = {}) {
     if (!corpus || typeof corpus !== "object") throw new TypeError("A corpus object is required.");
+    // Every chunk resolves against the full edition. Build those lookup maps
+    // once rather than rebuilding them for every individual statute section.
+    options = { ...options, referenceLookup: options.referenceLookup || referenceLookup(options.referenceCorpus || corpus) };
     const started = now(), requested = new Set(projectionAuthorityKey(options).split(",").filter(Boolean));
     const units = [];
     if (requested.has("ina")) {
@@ -715,17 +802,17 @@
       }
       for (const group of groups.values()) units.push({
         count: 1,
-        build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [group.section] }, inaCrosswalk: group.rows, cfr: { ...(corpus.cfr || {}), sections: [], appendices: [] } }, { ...options, authorities: ["ina"], deferNormalization: true })
+        build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [group.section] }, inaCrosswalk: group.rows, cfr: { ...(corpus.cfr || {}), sections: [], appendices: [] } }, { ...options, referenceCorpus: corpus, authorities: ["ina"], deferNormalization: true })
       });
     }
     if (requested.has("cfr")) {
       for (const sections of chunkCfrRecords(corpus?.cfr?.sections || [])) units.push({
         count: sections.length,
-        build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [] }, inaCrosswalk: [], cfr: { ...(corpus.cfr || {}), sections, appendices: [] } }, { ...options, authorities: ["cfr"], deferNormalization: true })
+        build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [] }, inaCrosswalk: [], cfr: { ...(corpus.cfr || {}), sections, appendices: [] } }, { ...options, referenceCorpus: corpus, authorities: ["cfr"], deferNormalization: true })
       });
       for (const appendices of chunkCfrRecords(corpus?.cfr?.appendices || [])) units.push({
         count: appendices.length,
-        build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [] }, inaCrosswalk: [], cfr: { ...(corpus.cfr || {}), sections: [], appendices } }, { ...options, authorities: ["cfr"], deferNormalization: true })
+        build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [] }, inaCrosswalk: [], cfr: { ...(corpus.cfr || {}), sections: [], appendices } }, { ...options, referenceCorpus: corpus, authorities: ["cfr"], deferNormalization: true })
       });
     }
 
@@ -1045,6 +1132,7 @@
     const hasCfrScope = directSystem === "cfr" || Object.keys(cfr).length > 0;
     const pathMatches = (fragment, prefixes) => !prefixes.length || prefixes.some(prefix => prefix.every((token, index) => normalizedIdentifier(fragment.path[index]) === token));
     return fragment => {
+      if ((fragment.contentKind || "law") !== (options.contentKind || "law")) return false;
       if (!options.authorities.has(fragment.authority)) return false;
       if (hasInaScope && !hasCfrScope && fragment.authority !== "ina") return false;
       if (hasCfrScope && !hasInaScope && fragment.authority !== "cfr") return false;
@@ -1478,6 +1566,11 @@
   }
 
   return Object.freeze({
+    packedReferences,
+    bucketFor,
+    searchOptions,
+    citationForFragment,
+    readerCommandForFragment,
     SCHEMA_VERSION,
     PERSISTED_PROJECTION_SCHEMA_VERSION,
     SEARCH_ALGORITHM_VERSION,
@@ -1495,8 +1588,7 @@
     getProjection,
     getProjectionAsync,
     clearProjection,
-    search,
-    searchAsync,
-    createSearchSession
+    // Retain the old matcher only for Node diagnostic comparisons.
+    ...(typeof INASEARCH_BROWSER !== "undefined" && INASEARCH_BROWSER ? {} : { search, searchAsync, createSearchSession })
   });
 });

@@ -3,7 +3,7 @@
   "use strict";
   const api = factory();
   if (typeof module === "object" && module.exports) module.exports = api;
-  if (typeof window !== "undefined") window.INA_SEARCH_ANNOTATIONS = api;
+  if (typeof globalThis !== "undefined") globalThis.INA_SEARCH_ANNOTATIONS = api;
 })(function createINASearchAnnotations() {
   "use strict";
 
@@ -30,19 +30,6 @@
     return HIGHLIGHT_COLORS.includes(value) ? value : fallback;
   }
 
-  function legacyText(note) {
-    if (Object.hasOwn(note || {}, "text")) return text(note.text);
-    const parts = [];
-    if (text(note?.title).trim()) parts.push(text(note.title).trim());
-    if (text(note?.body)) parts.push(text(note.body));
-    if (Array.isArray(note?.tags) && note.tags.length) parts.push(`Tags: ${note.tags.map(text).join(", ")}`);
-    if (Array.isArray(note?.links) && note.links.length) {
-      const values = note.links.map(link => typeof link === "string" ? link : text(link?.label || link?.citation || link?.url || JSON.stringify(link)));
-      parts.push(`Links:\n${values.join("\n")}`);
-    }
-    return parts.join("\n\n");
-  }
-
   function normalizeAssociation(value) {
     if (!value || typeof value !== "object") return null;
     const association = clone(value);
@@ -64,7 +51,7 @@
 
   function normalizeNote(value, options = {}) {
     const now = options.now || new Date().toISOString();
-    const noteText = legacyText(value || {});
+    const noteText = text(value?.text);
     const associations = (Array.isArray(value?.associations) ? value.associations : []).map(normalizeAssociation).filter(Boolean);
     const normalized = {
       id: text(value?.id || options.makeId?.("note") || `note-${Date.now()}`),
@@ -349,7 +336,7 @@
 
   return Object.freeze({
     PROFILE_SCHEMA_VERSION, REFERENCE_PARSER_VERSION, HIGHLIGHT_COLORS, DEFAULT_HIGHLIGHT_COLOR,
-    normalizedText, tokens, hashText, highlightColor, legacyText, normalizeAssociation, normalizeNote,
+    normalizedText, tokens, hashText, highlightColor, normalizeAssociation, normalizeNote,
     normalizeHighlight, normalizeProfile, compactReferenceCandidate, detectReferences, quoteAnchor,
     resolveQuoteAnchor, AnnotationIndex
   });

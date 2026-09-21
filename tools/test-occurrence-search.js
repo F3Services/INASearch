@@ -83,11 +83,11 @@ function syntheticCorpus() {
 async function syntheticTests() {
   const corpus = syntheticCorpus(), projection = occurrence.buildProjection(corpus);
   const persistedIdentity = occurrence.projectionIdentity(corpus, { corpusSchemaVersion: 5, corpusSha256: "a".repeat(64) });
-  const persisted = occurrence.toPersistedProjection(projection, persistedIdentity, { citationSources: [{ recordId: "fixture", targets: [] }] });
+  const persisted = occurrence.toPersistedProjection(projection, persistedIdentity);
   assert(!Object.hasOwn(persisted.payload, "hierarchyById"), "The persisted projection contains its transient hierarchy Map.");
   const restored = occurrence.restorePersistedProjection(structuredClone(persisted), persistedIdentity);
   assert(restored.hierarchyById instanceof Map && restored.hierarchyById.size === projection.hierarchyById.size, "A persisted projection did not reconstruct its hierarchy Map.");
-  assert.strictEqual(restored.citationSources[0].recordId, "fixture", "The persisted projection lost its reverse citation index.");
+  assert(!Object.hasOwn(persisted.payload, "citationSources"), "The retired reverse-citation index is still serialized.");
   const persistedSearchCases = [
     ["beta", { authorities: "cfr" }],
     ['"Beta repeated"', { authorities: "cfr" }],
@@ -137,7 +137,7 @@ async function syntheticTests() {
   assert(repeatedStatutePaths.every(fragment => Number.isInteger(fragment.source.ordinal) && Array.isArray(fragment.source.recordPath)), "A repeated statute source locator is ambiguous.");
 
   for (const included of ["ordinaryneedle", "footneed", "tableword", "appendixneedle"]) assert(projection.fragments.some(fragment => fragment.normalized.includes(included)), `${included} was omitted from primary CFR text.`);
-  for (const excluded of ["editorialneedle", "effectiveneedle", "legacyeditorialneedle", "sourcecreditneedle"]) assert(!projection.fragments.some(fragment => fragment.normalized.includes(excluded)), `${excluded} should be excluded from primary CFR text.`);
+  for (const excluded of ["editorialneedle", "effectiveneedle", "legacyeditorialneedle", "sourcecreditneedle"]) assert(!projection.fragments.some(fragment => fragment.contentKind !== "annotations" && fragment.normalized.includes(excluded)), `${excluded} should be excluded from primary CFR text.`);
   const reservedRange = projection.fragments.filter(fragment => fragment.source?.rangePaths && fragment.text.includes("Reserved"));
   assert.strictEqual(reservedRange.length, 1, "A CFR reserved range was split into endpoint occurrences.");
   assert.strictEqual(reservedRange[0].citation, "8 CFR 1.1(c)–(d)", "A CFR range lost its citation label.");
@@ -279,8 +279,8 @@ async function realCorpusTests() {
   assert(knownCollisionFragments.every(fragment => ["a/2/A", "a/2/B"].includes(fragment.path.join("/"))), "Colliding statute run-ins were merged at an ambiguous virtual path.");
   assert(projection.fragments.some(fragment => fragment.kind === "cfr-table-cell"), "No CFR table cells were projected.");
   assert(projection.fragments.some(fragment => fragment.kind === "cfr-footnote"), "No CFR footnotes were projected.");
-  assert(!projection.fragments.some(fragment => ["editorial", "effective-date"].includes(fragment.noteType)), "Excluded CFR notes entered the projection.");
-  assert(!projection.fragments.some(fragment => fragment.authority === "ina" && /\b\d{1,2}\d{1,2}\s+(?:so in original|see )/i.test(fragment.text)), "Flattened House editorial footnote prose entered primary legal search.");
+  assert(!projection.fragments.some(fragment => fragment.contentKind !== "annotations" && ["editorial", "effective-date"].includes(fragment.noteType)), "Excluded CFR notes entered the projection.");
+  assert(!projection.fragments.some(fragment => fragment.contentKind !== "annotations" && fragment.authority === "ina" && /\b\d{1,2}\d{1,2}\s+(?:so in original|see )/i.test(fragment.text)), "Flattened House editorial footnote prose entered primary legal search.");
   assert.strictEqual(occurrence.search(projection, "occupational physically", { authorities: "ina", scope: { ina: { inaSections: ["212"] } } }).totalOccurrences, 0, "Real duplicate INA 212(t)(1) occurrences were merged.");
   assert.strictEqual(occurrence.search(projection, "Newburyport Plymouth", { authorities: "cfr", scope: { cfr: { titles: ["8"], sections: ["100.4"] } } }).totalOccurrences, 0, "Real repeated 8 CFR 100.4(a) rows were merged.");
   const fieldOfficeRows = projection.fragments.filter(fragment => fragment.recordId === "8:100.4" && fragment.path.join("/") === "a" && ["Newburyport, MA", "Plymouth, MA"].includes(fragment.text));

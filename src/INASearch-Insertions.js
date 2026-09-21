@@ -10,10 +10,10 @@
   const MAX_RECORDS = 5000;
   const HOST_KINDS = new Set(["usc", "cfr"]);
   const RECORD_KINDS = new Set([
-    "section-heading", "section-preamble", "node-heading", "node-text", "run-in",
+    "section-heading", "section-preamble", "node-heading", "node-text", "node-continuation", "run-in",
     "cfr-heading", "cfr-unit", "cfr-table-cell", "cfr-note", "cfr-footnote"
   ]);
-  const RECORD_FIELDS = new Set(["heading", "preamble", "text", "x", "cell"]);
+  const RECORD_FIELDS = new Set(["heading", "preamble", "text", "continuation", "x", "cell"]);
 
   function cleanToken(value) {
     return String(value == null ? "" : value).trim().slice(0, 160);
@@ -185,7 +185,7 @@
 
   const SOURCE_KIND_ORDER = new Map([
     ["section-heading", 0], ["section-preamble", 1],
-    ["node-heading", 0], ["node-text", 1], ["run-in", 1],
+    ["node-heading", 0], ["node-text", 1], ["node-continuation", 2], ["run-in", 1],
     ["cfr-heading", 0], ["cfr-unit", 1], ["cfr-table-cell", 1], ["cfr-note", 1], ["cfr-footnote", 2]
   ]);
 
