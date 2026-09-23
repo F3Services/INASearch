@@ -39,7 +39,7 @@ async function checkRail(rail){
   assert((await citation.boundingBox()).width>before.width+20);
   assert.equal(await citation.getAttribute('title'),null);
   await assertUnclipped(citation);await citation.click();assert.equal(await citation.locator('.copy-action-label').innerText(),await copied());
-  await text.hover();assert.equal(await text.locator('.copy-action-label').innerText(),'Copy highlighted text');assert.equal(await text.getAttribute('title'),null);await assertUnclipped(text);
+  await text.hover();assert.equal(await text.locator('.copy-action-label').innerText(),'Highlighted text');assert.equal(await text.getAttribute('title'),null);await assertUnclipped(text);
   await combined.hover();const label=await combined.locator('.copy-action-label').innerText();await assertUnclipped(combined);
   assert(!label.toLowerCase().includes('[citation]'));
   assert.equal(await combined.getAttribute('title'),null);

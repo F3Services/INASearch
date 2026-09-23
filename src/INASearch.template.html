@@ -10698,7 +10698,7 @@
         if (copyLabel) {
           button.removeAttribute("title");
           if (!target) copyLabel.textContent = "";
-          else if (button.dataset.liveCitationAction === "copy-text") copyLabel.textContent = "Copy highlighted text";
+          else if (button.dataset.liveCitationAction === "copy-text") copyLabel.textContent = "Highlighted text";
           else {
             const citation = target.query;
             const preface = citationCopyPreface(citation);
