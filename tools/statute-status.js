@@ -26,6 +26,23 @@ const TRANSFER_TARGETS = Object.freeze({
   "1556": [["1556", 8, "1353d"]]
 });
 
+// Exact disposition labels in the captured House Title 8 table of contents.
+// These describe whole chapters; section statuses cannot reconstruct mixed
+// labels such as Chapter 9's "Repealed or Transferred".
+const CHAPTER_DISPOSITIONS = Object.freeze({
+  "1": "Repealed or Omitted",
+  "2": "Transferred",
+  "3": "Transferred or Repealed",
+  "4": "Omitted",
+  "5": "Transferred or Omitted",
+  "6": "Transferred, Omitted, or Repealed",
+  "7": "Omitted or Repealed",
+  "8": "Repealed",
+  "9": "Repealed or Transferred",
+  "10": "Repealed",
+  "11": "Repealed or Transferred"
+});
+
 function expandedTarget(tuple) {
   const [source, title, section, qualifier = ""] = tuple;
   return {
@@ -39,6 +56,7 @@ function expandedTarget(tuple) {
 }
 
 function applyStatuteStatusMetadata(corpus) {
+  if (corpus?.title8) corpus.title8.chapterDispositions = { ...CHAPTER_DISPOSITIONS };
   const sections = corpus?.title8?.sections || [];
   const transferred = sections.filter(section => section.status === "transferred");
   const transferredLabels = new Set(transferred.map(section => String(section.section)));
@@ -52,4 +70,4 @@ function applyStatuteStatusMetadata(corpus) {
   return corpus;
 }
 
-module.exports = { TRANSFER_TARGETS, applyStatuteStatusMetadata };
+module.exports = { TRANSFER_TARGETS, CHAPTER_DISPOSITIONS, applyStatuteStatusMetadata };

@@ -17,7 +17,7 @@ for (const [id, expected] of [
 ]) {
   const field = fields.find(f => f.sourceId === id && f.field === 'text');
   const html = render(field.text, field.references, sectionContext);
-  assert.equal(plain(html), expected);
+  assert.equal(plain(html.replace(/<template>[\s\S]*?<\/template>/g, '')), expected);
   assert.equal((html.match(/data-legal-reference/g) || []).length, field.references.length);
   for (const reference of field.references) assert(html.includes(`data-reference-source-text="${reference.text}"`));
 }
@@ -110,7 +110,7 @@ assert.equal(plain(render(selfQualifiedText, selfQualifiedRefs, sectionContext))
 const sharedPrefixText = '8 U.S.C. 1182(a)(2), (3), 1227(a)(3), (4)';
 const sharedPrefixRefs = refsFor(sharedPrefixText, ['8 U.S.C. 1182(a)(2)', '(3)', '1227(a)(3)', '(4)'], [['a','2'],['a','3'],['a','3'],['a','4']]);
 sharedPrefixRefs.forEach((reference,index)=>{ reference.targetSection = index<2?'1182':'1227'; reference.ruleId='explicit-usc-continuation'; });
-assert.equal(plain(render(sharedPrefixText, sharedPrefixRefs, sectionContext)), sharedPrefixText, 'A member of a shared USC prefix must not be converted in isolation');
+assert.equal(plain(render(sharedPrefixText, sharedPrefixRefs, sectionContext)), 'INA 212(a)(2), (3), 237(a)(3), (4)', 'Shared USC prefixes and abbreviated members must convert together');
 const title28Fields = fields.filter(field => field.text.includes('section 1361 or 1651 of such title'));
 assert.equal(title28Fields.length, 2);
 for(const field of title28Fields) assert.equal(field.references.find(reference=>reference.text==='section 1361').targetTitle, '28', 'Such title must inherit Title 28 rather than collide with INA 291');
@@ -128,3 +128,78 @@ const longListStart = performance.now();
 assert.equal(api.inUnfinishedStatutoryList('sections '+'1'.repeat(12000)+' unrelated prose'),false);
 assert(performance.now()-longListStart<250,'Section-list scope scanning backtracks on a long numeric token');
 console.log('PASS mixed historical list, relative range and linear list-scope scanning');
+
+// Fully written USC citations participate in the same saved display mode as
+// contextual citations, while the original source and exact locator survive.
+const explicitText = 'Requirements under 8 U.S.C. 1188 apply.';
+const explicitRefs = refsFor(explicitText, ['8 U.S.C. 1188'], [[]], 'usc', '1188');
+api.profile.preferences.statutoryLinkCitationSystem = 'view';
+for (const [authority, expected] of [['ina', 'Requirements under INA 218 apply.'], ['usc', explicitText]]) {
+  api.state.statuteHierarchyAuthority = authority;
+  const html = render(explicitText, explicitRefs, { kind: 'cfr', title: '29' });
+  assert.equal(plain(html.replace(/<template>[\s\S]*?<\/template>/g, '')), expected);
+  assert(html.includes('data-reference-source-text="8 U.S.C. 1188"'));
+  assert(html.includes('data-reference-section="1188"'));
+}
+api.state.statuteHierarchyAuthority = 'ina';
+api.profile.preferences.statutoryLinkCitationSystem = 'ina';
+for (const [text, phrase] of [
+  ['8 U.S.C. 1101 note', '8 U.S.C. 1101'],
+  ['8 U.S.C. 1101 [note]', '8 U.S.C. 1101'],
+  ['8 U.S.C. 1101 et seq.', '8 U.S.C. 1101'],
+  ['note under 8 U.S.C. 1101', '8 U.S.C. 1101'],
+  ['former 8 U.S.C. 1101', '8 U.S.C. 1101']
+]) assert.equal(plain(render(text, refsFor(text, [phrase], [[]], 'usc', '1101'), sectionContext)), text);
+const parallelText = 'section 101(a) of the Immigration and Nationality Act (8 U.S.C. 1101(a))';
+const parallelRefs = refsFor(parallelText, ['section 101(a)', '8 U.S.C. 1101(a)'], [['a'], ['a']], 'usc', '1101');
+parallelRefs[0].ruleId = 'embedded-a-explicit-container-base';
+assert.equal(plain(render(parallelText, parallelRefs, sectionContext)), 'INA 101(a) (8 U.S.C. 1101(a))');
+const allFields = require('./audit-explicit-usc-display').fields(corpus);
+for (const [title, section, sourcePhrase, retainedParallel] of [
+  [8, '212.17', 'waivers of inadmissibility', '8 U.S.C. 1182(d)(3)(B) or (d)(14)'],
+  [20, '655.1', 'Section 214(c)(1)', '8 U.S.C. 1184(c)(1)'],
+  [45, '410.1208', 'Special Immigrant Juvenile', '8 U.S.C. 1101(a)(27)(J)'],
+  [20, '655.700', 'formerly INA section 214(m)', '(8 U.S.C. 1184(n))']
+]) {
+  const field = allFields.find(field => field.context.title === title && field.context.sourceHost.section === section && field.text.includes(sourcePhrase));
+  assert(field, `${title} CFR ${section}`);
+  assert(plain(render(field.text, field.references, field.context)).includes(retainedParallel), `${title} CFR ${section}: preserve the USC parallel after an INA annotation`);
+}
+const historicalList = allFields.find(field => field.sourceId === '8-1101-note-17' && field.text.includes('236 or 242 and 242B'));
+for (const [text, section] of [['236', '1226'], ['242', '1252'], ['242B', '1252b']]) {
+  const reference = historicalList.references.find(reference => reference.text === text && reference.start >= 2696 && reference.start <= 2711);
+  assert.equal(reference.targetSection, section, 'Distinct INA sections in a historical list must retain distinct destinations');
+  assert.equal(reference.targetEdition, '1994');
+}
+const motivation = allFields.find(field => field.context.title === 29 && field.context.sourceHost.section === '501.6' && field.text.includes('8 U.S.C. 1188'));
+assert(motivation);
+assert(plain(render(motivation.text, motivation.references, motivation.context)).includes('INA 218'));
+const dated = allFields.flatMap(field => field.references.filter(reference => reference.targetEdition &&
+  (/\((?:1994|1999|2000)\)\s*$/.test(reference.text) || reference.text === '8 U.S.C. 1226(e)(1)')).map(reference => ({ field, reference })));
+assert.equal(dated.length, 4, 'Three edition-qualified citations include both endpoints of the 1994 range');
+for (const { field, reference } of dated) {
+  assert.equal(reference.resolution, 'official-source-only');
+  assert(!reference.targetPath.includes(reference.targetEdition));
+  assert(reference.officialUrl.includes(`edition=${reference.targetEdition}`));
+  const html = render(field.text, field.references, field.context);
+  assert(html.includes(`data-reference-edition="${reference.targetEdition}"`));
+  assert(html.includes('data-reference-status="historical"'));
+}
+console.log('PASS explicit USC display: 29 CFR 501.6, Follow view, source metadata, note/sequence/parallel guards, and historical edition URLs');
+const sha = value => require('crypto').createHash('sha256').update(value).digest('hex');
+const hashedFields = new Map(allFields.filter(field => field.context.sourceHost).map(field => [`${field.context.sourceHost.kind}:${field.context.sourceHost.title}:${field.context.sourceHost.section}:${field.field}:${sha(field.text)}`, field]));
+for (const correction of corpus.historicalLocatorCorrections || []) {
+  const field = hashedFields.get(`${correction.kind}:${correction.title}:${correction.section}:${correction.field}:${correction.sourceSha256}`);
+  assert(field, correction.id);
+  const reference = field.references.find(reference => reference.start === correction.start && reference.end === correction.end);
+  assert.equal(reference.text, correction.text);
+  assert.equal(reference.targetSection, correction.target.section);
+  assert.deepEqual(reference.targetPath, correction.target.path);
+  assert.equal(reference.targetEdition, correction.target.edition === 'prelim' ? undefined : correction.target.edition);
+  assert.equal(reference.resolution, correction.target.edition === 'prelim' ? 'local' : 'official-source-only');
+  const html = render(field.text, field.references, field.context);
+  if (correction.target.edition !== 'prelim') assert(html.includes(`data-reference-edition="${correction.target.edition}"`));
+  if (correction.target.url) assert.equal(reference.officialUrl, correction.target.url);
+  if (correction.citationNote) assert.equal(reference.citationNote, correction.citationNote);
+}
+console.log(`PASS reviewed historical locators: ${(corpus.historicalLocatorCorrections || []).length} exact source spans and edition targets survive corpus packing`);

@@ -31,7 +31,7 @@ const RULES = [
   "embedded-a-explicit-container-base", "embedded-a-preceding-container", "embedded-a-shared-trailing-container",
   "embedded-explicit-container", "embedded-this-container", "embedded-such-container", "embedded-relative-container",
   "embedded-numbered-section-list", "embedded-named-act-section", "embedded-named-instrument-section", "embedded-inferred-unit", "embedded-exception",
-  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "historical-reviewed-reference"
+  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "historical-reviewed-reference", "explicit-cfr-hierarchy"
 ];
 const EVIDENCE_UNITS = ["", "section", "subsection", "paragraph", "subparagraph", "clause", "subclause", "item", "subitem"];
 
@@ -65,7 +65,7 @@ function compactReference(reference, houseHrefIndex = () => 0, legalTargetIndex 
     reference.targetTitle || 0, reference.targetSection || 0, !derivedPath && reference.targetPath?.length ? reference.targetPath : 0,
     reference.targetCongress || 0, reference.targetLaw || 0, reference.targetVolume || 0, reference.targetPage || 0,
     Math.max(0, RULES.indexOf(reference.ruleId || "")), reference.inaSection || 0,
-    reference.policyScopeId || 0, reference.historicalTargetId || 0];
+    reference.policyScopeId || 0, reference.historicalTargetId || 0, reference.targetEdition || 0, reference.historicalOfficialUrl || 0, reference.citationNote || 0];
   while (target.at(-1) === 0) target.pop();
   const packed = [1, reference.start - previousEnd, reference.end - reference.start, legalTargetIndex(target)];
   if (typeof reference.evidenceId === "number" && Number.isFinite(reference.evidenceId)) packed.push(reference.evidenceId);
@@ -81,7 +81,7 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     const packedTarget = legalTargets[reference[3]] || [];
     const target = typeof packedTarget === "string" ? packedTarget.split("|") : packedTarget;
     if (typeof target[4] === "string") target[4] = target[4] ? target[4].split("/") : [];
-    Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "", policyScopeId: target[11] || "", ...(Number(target[12]) ? { historicalTargetId: Number(target[12]) } : {}) });
+    Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "", policyScopeId: target[11] || "", ...(Number(target[12]) ? { historicalTargetId: Number(target[12]) } : {}), ...(target[13] ? { targetEdition: String(target[13]) } : {}), ...(target[14] ? { historicalOfficialUrl: String(target[14]) } : {}), ...(target[15] ? { citationNote: String(target[15]) } : {}) });
     if (typeof reference[4] === "number" && Number.isFinite(reference[4])) output.evidenceId = reference[4];
   }
   else for (const [key, value] of Object.entries(reference || {})) output[KEY_REFERENCES[key] || key] = value;
@@ -105,13 +105,21 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
       : "deterministic-parser";
     output.targetKind = output.family === "ina" && output.resolution !== "local" ? "ina" : output.family;
     if (output.family === "usc" && output.targetSection) output.officialUrl = `https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=${encodeURIComponent(`granuleid:USC-prelim-title${output.targetTitle}-section${output.targetSection}`)}`;
-    else if (output.family === "cfr" && output.targetSection) output.officialUrl = `https://www.ecfr.gov/current/title-${encodeURIComponent(output.targetTitle)}/part-${encodeURIComponent(String(output.targetSection).split(".")[0])}/section-${encodeURIComponent(output.targetSection)}`;
+    else if (output.family === "cfr" && output.targetSection) {
+                  const address = String(output.targetSection), subpart = address.match(/^\d+[A-Za-z]*\.([A-Za-z]+)$/)?.[1];
+                  output.officialUrl = `https://www.ecfr.gov/current/title-${encodeURIComponent(output.targetTitle)}/part-${encodeURIComponent(address.split(".")[0])}` + (subpart ? `/subpart-${encodeURIComponent(subpart.toUpperCase())}` : address.includes(".") ? `/section-${encodeURIComponent(address)}` : "");
+                }
     else if (output.family === "public-law") output.officialUrl = `https://www.govinfo.gov/app/details/PLAW-${output.targetCongress}publ${output.targetLaw}`;
     else if (output.family === "statutes-at-large") output.officialUrl = `https://www.govinfo.gov/app/details/STATUTE-${output.targetVolume}/STATUTE-${output.targetVolume}-Pg${output.targetPage}`;
     else if (output.family === "federal-register") output.officialUrl = `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(output.text || "")}%22%7D`;
     else if (output.family === "ina") output.officialUrl = output.targetSection ? `https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=${encodeURIComponent(`granuleid:USC-prelim-title8-section${output.targetSection}`)}` : "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act";
     else if (output.family === "unknown") output.officialUrl = `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(`${output.targetTitle || output.text || ""} section ${output.targetSection || ""}${(output.targetPath || []).map(token => `(${token})`).join("")}`)}%22%7D`;
   }
+  if (output.targetEdition && output.family === "usc") {
+    output.resolution = "official-source-only";
+    output.officialUrl = `https://uscode.house.gov/view.xhtml?edition=${output.targetEdition}&num=0&req=${encodeURIComponent(`granuleid:USC-${output.targetEdition}-title${output.targetTitle}-section${output.targetSection}`)}`;
+  }
+  if (output.historicalOfficialUrl) output.officialUrl = output.historicalOfficialUrl;
   return output;
 }
 

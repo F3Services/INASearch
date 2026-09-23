@@ -157,7 +157,7 @@ function applyHistoricalReferences(corpus) {
   // imported. Upgrade only citations whose exact target is now locally present.
   const upgrade = object => {
     if (!object || typeof object !== "object") return;
-    if (["usc", "ina"].includes(object.family) && String(object.targetTitle || 8) === "8" && !object.historicalTargetId && availablePath(sections.get(String(object.targetSection)), object.targetPath || [])) object.resolution = "local";
+    if (["usc", "ina"].includes(object.family) && String(object.targetTitle || 8) === "8" && !object.targetEdition && !object.historicalTargetId && availablePath(sections.get(String(object.targetSection)), object.targetPath || [])) object.resolution = "local";
     for (const child of Object.values(object)) if (child && typeof child === "object") upgrade(child);
   };
   upgrade(corpus);

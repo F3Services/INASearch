@@ -5,7 +5,11 @@ const H = require('../src/INASearch-CFR-Hierarchy');
 const box={window:{}}; vm.runInNewContext(fs.readFileSync('src/INASearch-CFR.js','utf8'),box);
 const cfr=box.window.INA_SEARCH_CFR, records=[...cfr.sections,...cfr.appendices];
 const template=fs.readFileSync('src/INASearch.template.html','utf8');
-function declaration(name) { const start=template.indexOf('    function '+name+'('); assert(start>=0,name); const end=template.indexOf('\n    }',start)+6; return template.slice(start,end); }
+function declaration(name) {
+ const start=template.indexOf('function '+name+'('); assert(start>=0,name);
+ const parsed=require('acorn').parseExpressionAt(template,start,{ecmaVersion:'latest'});
+ return template.slice(start,parsed.end);
+}
 const names=['parseCfr','indexedCfrSection','resolveIndexedCfrPath','componentTokens','compactHierarchyTokens','canonicalPath','normCitationPart','cfrSectionNumberKey','compareCompactCitationPaths','romanNumeralValue','romanNumeralForValue','commonCompactCandidatePrefixLength','cfrSectionFamilyHtml','cfrParagraphNavigationSegments','cfrChildNavigationSegment','citationAmbiguityRange','citationWithStatuteInterpretation'];
 const cfrSectionMap=new Map(cfr.sections.map(r=>[`${r.title}:${r.section.replace(/[^a-z0-9-]/gi,'').toLowerCase()}`,r]));
 const cfrSectionsByNumber=new Map();for(const r of cfr.sections){const key=r.section.toLowerCase();if(!cfrSectionsByNumber.has(key))cfrSectionsByNumber.set(key,[]);cfrSectionsByNumber.get(key).push(r);}

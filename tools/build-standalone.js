@@ -167,6 +167,11 @@ function makeBuild(template, corpus, profile, options) {
     fileName: options.fileName,
     instanceId: buildSignature,
     hasLocalUscCache: options.hasLocalUscCache,
+    title8ChapterDispositions: {
+      sourceSha256: corpus.sources.title8.sourceSha256,
+      labels: corpus.title8.chapterDispositions
+    },
+    cfrHierarchyVersion: corpus.legalReferenceMetadata.cfrHierarchyVersion,
     corpusCompression: corpusPayload.manifest.compression,
     generatedAt: new Date().toISOString()
   };
@@ -214,6 +219,7 @@ applyStatuteReferences(fullCorpus, statuteReferenceSource);
 require("./historical-ina.js").applyHistoricalIna(fullCorpus);
 indexStatuteRunIns(fullCorpus);
 fullCorpus.legalReferenceExceptions = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "embedded-reference-exceptions.json"), "utf8"));
+fullCorpus.historicalLocatorCorrections = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "historical-reference-locators.json"), "utf8"));
 applyGeneratedLegalReferences(fullCorpus);
 applyStatuteStatusMetadata(fullCorpus);
 require("./historical-ina.js").applyHistoricalReferences(fullCorpus);
