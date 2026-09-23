@@ -3,10 +3,21 @@ import assert from 'node:assert/strict';
 import { homedir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { mkdir } from 'node:fs/promises';
 const {startInspection}=await import(pathToFileURL(resolve(homedir(),'.codex/tools/browser-inspection/session.mjs')));
-const url=pathToFileURL(resolve(process.argv[2]||'INASearch.html')).href;
-const outputDir=resolve('audits/copy-button-expansion/browser');
-const session=await startInspection({url,outputDir});const page=session.page;
+const target=process.argv[2]||'INASearch.html';
+const url=/^https?:\/\//.test(target)?target:pathToFileURL(resolve(target)).href;
+const firefoxRun=process.env.INAS_TEST_BROWSER==='firefox';
+const outputDir=resolve(`audits/copy-button-expansion/${firefoxRun?'firefox':'browser'}`);
+async function startFirefoxInspection(){
+  const {firefox}=await import(pathToFileURL(resolve(homedir(),'.codex/tools/browser-inspection/node_modules/playwright/index.mjs')));
+  await mkdir(outputDir,{recursive:true});
+  const browser=await firefox.launch();const context=await browser.newContext();const page=await context.newPage();
+  const events=[];page.on('pageerror',error=>events.push({type:'pageerror',text:error.message}));
+  await context.tracing.start({screenshots:true,snapshots:true});
+  return {page,events,close:async()=>{try{await context.tracing.stop({path:resolve(outputDir,'trace.zip')});}finally{await browser.close();}}};
+}
+const session=await (firefoxRun?startFirefoxInspection():startInspection({url,outputDir}));const page=session.page;
 await page.addInitScript(()=>{window.qaCopies=[];Object.defineProperty(navigator,'clipboard',{value:{writeText:async text=>qaCopies.push(text)}});});
 const settle=()=>page.evaluate(async()=>{for(let i=0;i<3;i++)await new Promise(requestAnimationFrame);});
 const main=page.locator('#mainReaderActions');
@@ -17,6 +28,8 @@ async function assertUnclipped(button) {
   assert.notEqual(size.overflow,'ellipsis','Copy labels must never substitute dots');
   assert(size.contentWidth<=size.width+1 && size.contentHeight<=size.height+1,`Copy label is clipped: ${JSON.stringify(size)}`);
   assert(size.height<=size.lineHeight+1,`Copy label must stay on one line: ${JSON.stringify(size)}`);
+  const bounds = await button.evaluate(el => ({ button: el.getBoundingClientRect().toJSON(), label: el.querySelector('.copy-action-label').getBoundingClientRect().toJSON() }));
+  assert(bounds.label.right <= bounds.button.right - 0.5,`Copy button background must enclose its label: ${JSON.stringify(bounds)}`);
 }
 async function checkRail(rail){
   await page.mouse.move(900,40); await page.evaluate(()=>document.activeElement?.blur());
@@ -31,7 +44,7 @@ async function checkRail(rail){
   assert(!label.toLowerCase().includes('[citation]'));
   assert.equal(await combined.getAttribute('title'),null);
   await combined.click();assert.equal(label,(await copied()).split('\n')[0]);
-  assert.equal((await combined.boundingBox()).height,53,'Expanding the label must not increase button height');
+  assert(Math.abs((await combined.boundingBox()).height-53)<0.1,'Expanding the label must not increase button height');
   await page.mouse.move(900,40);await citation.focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab');
   assert(await citation.locator('.copy-action-label').isVisible(),'Keyboard focus must expand the citation');
 }
@@ -50,13 +63,15 @@ try{
  await copy(main,'copy-citation').click();const citation=await copied();
  await copy(main,'copy-citation-text').hover();assert.equal(await copy(main,'copy-citation-text').locator('.copy-action-label').innerText(),`Under ${citation}:`);
  await copy(main,'copy-citation-text').click();assert.equal(await copied(),custom.replace(/\[citation\]/gi,citation)+text);
- await page.waitForFunction(()=>!INASearchTest.getState().profileChanged);await page.reload();await page.waitForFunction(()=>window.INASearchTest?.getState().selected);
+ // Firefox also exercises the rendered hover/copy surfaces. Profile persistence
+ // is covered by the Chromium run; Firefox's isolated context aborts IndexedDB saves.
+ if(!firefoxRun){await page.waitForFunction(()=>!INASearchTest.getState().profileChanged);await page.reload();await page.waitForFunction(()=>window.INASearchTest?.getState().selected);}
  await page.locator('#settingsMenuButton').click();assert.equal(await input.inputValue(),custom);
  await input.fill('[citation][/n]\n');await page.locator('#closeSavingMenuButton').click();await copy(main,'copy-citation-text').click();assert.match(await copied(),/\[\/n\]\n/);
  await page.locator('#settingsMenuButton').click();await page.locator('#resetCitationCopyPrefaceButton').click();assert.equal(await input.inputValue(),defaults);
  assert.equal(await page.locator('#citationCopyPrefaceWarning').isVisible(),false);await page.screenshot({path:resolve(outputDir,'multiline-settings.png')});
  await page.locator('#closeSavingMenuButton').click();await checkRail(main);
- console.log('PASS literal multiline whitespace, citation substitution, persistence, old tokens treated literally, and Reset');
+ console.log(`PASS literal multiline whitespace, citation substitution, ${firefoxRun?'':'persistence, '}old tokens treated literally, and Reset`);
  await page.locator('#settingsMenuButton').click();
  await input.fill('[citation] — '+ 'Additional context for the complete copied provision. '.repeat(4)+'\n\n');
  await page.locator('#closeSavingMenuButton').click();await copy(main,'copy-citation-text').hover();await assertUnclipped(copy(main,'copy-citation-text'));
@@ -64,7 +79,7 @@ try{
  await page.screenshot({path:resolve(outputDir,'long-label-expanded.png')});
  await page.setViewportSize({width:390,height:918});await settle();await checkRail(main);
  await copy(main,'copy-citation-text').hover();await assertUnclipped(copy(main,'copy-citation-text'));
- assert.equal((await copy(main,'copy-citation-text').boundingBox()).height,53,'Long labels must stay on one line at narrow widths');
+ assert(Math.abs((await copy(main,'copy-citation-text').boundingBox()).height-53)<0.1,'Long labels must stay on one line at narrow widths');
  await page.screenshot({path:resolve(outputDir,'long-label-narrow.png')});
  await page.setViewportSize({width:1280,height:918});await page.locator('#settingsMenuButton').click();await page.locator('#resetCitationCopyPrefaceButton').click();await page.locator('#closeSavingMenuButton').click();
  console.log('PASS content-sized single-line labels beyond 560px, including narrow layouts');
