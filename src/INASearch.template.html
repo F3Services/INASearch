@@ -411,10 +411,10 @@
     .main-reader-actions .live-citation-copies .combined-copy-button { height: 53px; min-height: 53px; }
     .main-reader-actions .live-citation-copies .statute-history-button:hover:not(:disabled), .main-reader-actions .live-citation-copies .statute-history-button:focus-visible { border-color: var(--blue); }
     .main-reader-actions .statute-history-button:hover:not(:disabled) { background: var(--blue-soft); }
-    .main-reader-actions .live-citation-copies .copy-action-button { display: flex; align-self: flex-start; align-items: center; justify-content: flex-start; width: max-content; min-width: 27px; max-width: var(--copy-preview-width, calc(100vw - 8px)); flex-shrink: 0; }
+    .main-reader-actions .live-citation-copies .copy-action-button { display: flex; align-self: flex-start; align-items: center; justify-content: flex-start; width: max-content; min-width: 27px; flex-shrink: 0; }
     .copy-action-button > :first-child { flex: 0 0 25px; text-align: center; }
-    .copy-action-label { display: none; min-width: 0; padding: 0 7px; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; font: 750 12px/1.2 var(--sans); }
-    .main-reader-actions .live-citation-copies .copy-action-button:is(:hover, :focus-visible):not(:disabled) { position: relative; z-index: 1; height: auto; padding-block: 1px; background: var(--blue-soft); }
+    .copy-action-label { display: none; flex-shrink: 0; padding: 0 7px; white-space: pre; text-align: left; font: 750 12px/1.2 var(--sans); }
+    .main-reader-actions .live-citation-copies .copy-action-button:is(:hover, :focus-visible):not(:disabled) { position: relative; z-index: 1; background: var(--blue-soft); }
     .copy-action-button:hover:not(:disabled) .copy-action-label, .copy-action-button:focus-visible .copy-action-label { display: block; }
     .main-reader-actions .official-source-action { display: flex; flex: 0 0 auto; align-self: flex-start; align-items: center; gap: 7px; width: auto; min-width: 31px; padding: 0 5px; white-space: nowrap; }
     .official-source-action .reader-action-icon { flex: 0 0 18px; }
@@ -10712,8 +10712,6 @@
           button.setAttribute("aria-label", label);
         }
       }
-      const previewRightEdge = pane ? pane.element.getBoundingClientRect().right : window.innerWidth;
-      actions.style.setProperty("--copy-preview-width", `${Math.max(27, previewRightEdge - actions.getBoundingClientRect().left - 8)}px`);
       authorityToggle.disabled = false;
       const entry = pane?.entry || state.mainOccurrencePane?.entry;
       const searchAuthority = entry?.authorities?.length === 1 ? entry.authorities[0] : entry?.authority;

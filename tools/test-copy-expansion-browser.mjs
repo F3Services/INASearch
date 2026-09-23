@@ -13,9 +13,10 @@ const main=page.locator('#mainReaderActions');
 const copy=(rail,type)=>rail.locator(`[data-live-citation-action="${type}"]`);
 const copied=()=>page.evaluate(()=>qaCopies.at(-1));
 async function assertUnclipped(button) {
-  const size = await button.locator('.copy-action-label').evaluate(el => ({ width:el.clientWidth, contentWidth:el.scrollWidth, height:el.clientHeight, contentHeight:el.scrollHeight, overflow:getComputedStyle(el).textOverflow }));
+  const size = await button.locator('.copy-action-label').evaluate(el => ({ width:el.clientWidth, contentWidth:el.scrollWidth, height:el.clientHeight, contentHeight:el.scrollHeight, overflow:getComputedStyle(el).textOverflow, lineHeight:parseFloat(getComputedStyle(el).lineHeight) }));
   assert.notEqual(size.overflow,'ellipsis','Copy labels must never substitute dots');
   assert(size.contentWidth<=size.width+1 && size.contentHeight<=size.height+1,`Copy label is clipped: ${JSON.stringify(size)}`);
+  assert(size.height<=size.lineHeight+1,`Copy label must stay on one line: ${JSON.stringify(size)}`);
 }
 async function checkRail(rail){
   await page.mouse.move(900,40); await page.evaluate(()=>document.activeElement?.blur());
@@ -30,7 +31,7 @@ async function checkRail(rail){
   assert(!label.toLowerCase().includes('[citation]'));
   assert.equal(await combined.getAttribute('title'),null);
   await combined.click();assert.equal(label,(await copied()).split('\n')[0]);
-  const box=await combined.boundingBox();assert(box.x+box.width<=await page.evaluate(()=>innerWidth));
+  assert.equal((await combined.boundingBox()).height,53,'Expanding the label must not increase button height');
   await page.mouse.move(900,40);await citation.focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab');
   assert(await citation.locator('.copy-action-label').isVisible(),'Keyboard focus must expand the citation');
 }
@@ -63,18 +64,17 @@ try{
  await page.screenshot({path:resolve(outputDir,'long-label-expanded.png')});
  await page.setViewportSize({width:390,height:918});await settle();await checkRail(main);
  await copy(main,'copy-citation-text').hover();await assertUnclipped(copy(main,'copy-citation-text'));
- assert((await copy(main,'copy-citation-text').boundingBox()).height>53,'Long labels must wrap at the screen edge');
+ assert.equal((await copy(main,'copy-citation-text').boundingBox()).height,53,'Long labels must stay on one line at narrow widths');
  await page.screenshot({path:resolve(outputDir,'long-label-narrow.png')});
  await page.setViewportSize({width:1280,height:918});await page.locator('#settingsMenuButton').click();await page.locator('#resetCitationCopyPrefaceButton').click();await page.locator('#closeSavingMenuButton').click();
- console.log('PASS content-sized labels beyond 560px and full wrapping without ellipsis or clipping');
+ console.log('PASS content-sized single-line labels beyond 560px, including narrow layouts');
 
  await page.evaluate(()=>INASearchTest.applySearchQuery('8 CFR 1245.1(a), INA 237(a)(3)',false,true));await settle();
  const panes=page.locator('.focused-citation-pane');await panes.nth(1).waitFor();
  for(let index=0;index<2;index++){
    const rail=panes.nth(index).locator('.pane-reader-actions');await checkRail(rail);
    await copy(rail,'copy-citation-text').hover();
-   const button=await copy(rail,'copy-citation-text').boundingBox(),pane=await panes.nth(index).boundingBox();
-   assert(button.x+button.width<=pane.x+pane.width,'Expanded copy label must fit within its pane');
+   await assertUnclipped(copy(rail,'copy-citation-text'));
  }
  await page.screenshot({path:resolve(outputDir,'split-expanded.png')});
  // The transparent rail must not swallow clicks in the reader beside the icons.
