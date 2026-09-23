@@ -19,7 +19,7 @@ const { RULES: PACKED_REFERENCE_RULES, compactHouseHref, expandHouseHref, packLe
 const { indexStatuteRunIns, statuteRunInMarkers, statuteRunInPathMarkers } = require("./statute-run-ins");
 const { ina101ParentheticalReferenceReview } = require("./ina101-reference-review");
 const { enumerateInlineReferences, summarize: summarizeInlineReferenceInventory } = require("./audit-inline-references");
-const { applyStatuteStatusMetadata } = require("./statute-status");
+const { CHAPTER_DISPOSITIONS, applyStatuteStatusMetadata } = require("./statute-status");
 const { FORMAT: CORPUS_PACKING_FORMAT, packCorpusForDelivery, hydratePackedCorpus } = require("../src/INASearch-Corpus-Packing");
 const searchCommandRuntime = require("../src/INASearch-Command");
 
@@ -63,6 +63,7 @@ function sourceCorpus() {
   require("./historical-ina").applyHistoricalIna(corpus);
   indexStatuteRunIns(corpus);
   corpus.legalReferenceExceptions = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "embedded-reference-exceptions.json"), "utf8"));
+  corpus.historicalLocatorCorrections = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "historical-reference-locators.json"), "utf8"));
   applyGeneratedLegalReferences(corpus);
   applyStatuteStatusMetadata(corpus);
   require("./historical-ina").applyHistoricalReferences(corpus);
@@ -432,7 +433,9 @@ async function main() {
     ["test-query-scopes.js", "PASS structured scopes"],
     ["test-query-performance.js", "PASS structured search performance"],
     ["test-workspace.js", "Workspace compositor tests passed."],
+    ["test-cfr-subject-groups.js", "PASS CFR subject headings"],
     ["test-insertions.js", "Inserted-reference state tests passed."],
+    ["test-copy-format.js", "PASS explicit copy formatting"],
     ["test-occurrence-search.js", "Occurrence search tests passed."],
     ["test-viewer-overhaul.js", "Viewer overhaul tests passed."],
     ["test-navigation-title-case.js", "Navigation title-case tests passed."]
@@ -897,13 +900,14 @@ async function main() {
   assert.strictEqual(hydratedSource.legalReferenceMetadata.houseTruncatedCitationCorrections, 3, "The reviewed truncated House citation-correction count changed.");
   assert.strictEqual(
     verifiedHouseReferences + hydratedSource.legalReferenceMetadata.houseSourceEditorialCitationCorrections +
-      hydratedSource.legalReferenceMetadata.sourceBracketCitationCorrections + hydratedSource.legalReferenceMetadata.houseTruncatedCitationCorrections,
+      hydratedSource.legalReferenceMetadata.sourceBracketCitationCorrections + hydratedSource.legalReferenceMetadata.houseTruncatedCitationCorrections +
+      hydratedSource.legalReferenceMetadata.historicalHouseCitationCorrections,
     16076,
     "Not every House USLM reference was attached to its exact displayed source span or its publisher-supplied correction."
   );
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 37859, "Unexpected deterministic legal-reference total after the citation-display and contextual-reference audit.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 38658, "Unexpected deterministic legal-reference total after the citation-display and contextual-reference audit.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 13574, "Unexpected embedded-reference candidate total after the corpus-wide parser audit.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 9511, "Unexpected resolved embedded-reference total after the corpus-wide parser audit.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 9488, "Unexpected inferred-reference evidence total after reviewed historical locators replaced 23 inferred targets.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1318, "Unexpected unresolved/ambiguous embedded-reference total after the corpus-wide parser audit.");
   assert(hydratedSource.legalReferenceMetadata.suppressedSelfReferences > 8_000, "The build did not audit and suppress the corpus-wide self-reference set.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-this-unit"), "The bare self-referential unit rule remains advertised as navigable.");
@@ -2009,7 +2013,7 @@ async function main() {
     ["a1952-06-27/ch477", "/us/act/1952-06-27/ch477"]
   ]) assert.strictEqual(expandPackedHouseHref(packed), expanded, `The browser did not expand packed House target ${packed}.`);
   const hydrateStart = fallbackSource.indexOf("    function hydrateLegalReferences(");
-  const hydrateEnd = fallbackSource.indexOf("\n    if (loadedCorpus && !corpus)", hydrateStart);
+  const hydrateEnd = fallbackSource.indexOf("\n    if (corpus && corpus.legalReferenceMetadata", hydrateStart);
   assert(hydrateStart >= 0 && hydrateEnd > hydrateStart, "Could not extract the browser legal-reference hydrator.");
   const hydrateLegalReferences = vm.runInNewContext(`(${fallbackSource.slice(hydrateStart, hydrateEnd).trim()})`, {
     expandPackedHouseHref,
@@ -4584,6 +4588,7 @@ async function main() {
     fields: 0, groups: 0, members: 0,
     grammars: {
       "numbered-section-list": { groups: 0, members: 0 },
+      "explicit-usc-list": { groups: 0, members: 0 },
       "repeated-section-list": { groups: 0, members: 0 }
     }
   };
@@ -4630,7 +4635,9 @@ async function main() {
   }
   assert(coordinatedInaDisplayAudit.grammars["numbered-section-list"].groups >= 206, "The expanded numbered-list coverage lost existing groups.");
   assert(coordinatedInaDisplayAudit.grammars["numbered-section-list"].members >= 627, "The numbered citation groups lost targets.");
-  assert(coordinatedInaDisplayAudit.grammars["repeated-section-list"].groups >= 8, "The repeated complete citation coverage decreased.");
+  // The 1990 diversity-transition note preserves its former 1182(a)(19)
+  // locator instead of coordinating it through the current INA crosswalk.
+  assert(coordinatedInaDisplayAudit.grammars["repeated-section-list"].groups >= 7, "The repeated complete citation coverage decreased.");
   console.log(`PASS coordinated INA display audit: ${coordinatedInaDisplayAudit.groups} citation lists across ${coordinatedInaDisplayAudit.fields} fields; ${coordinatedInaDisplayAudit.members} independently linked members`);
   citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "usc";
   const specialImmigrantReferenceHtml = linkifyStatutoryText(specialImmigrantBlock.x, specialImmigrantActReferences);
@@ -4707,8 +4714,8 @@ async function main() {
   assert(fallbackSource.includes('.legal-reference-preview-action-label { font-size: 10px;') && previewMarkup.includes('class="legal-reference-preview-action-label">Split</span>'), "The preview action labels were not enlarged or the pane action was not renamed Split.");
   assert(fallbackSource.includes('.profile-setup-alert-dismiss { border: 0;') && fallbackSource.includes('text-decoration: underline;') && /profile-setup-alert-actions[\s\S]{0,300}backupReminderDisableButton[^>]*>Don't ask again<[\s\S]{0,300}profile-setup-alert-buttons/.test(fallbackSource), "The profile-data don't-ask-again control is not an underlined text action to the left of the reminder buttons.");
   assert(previewMarkup.includes('data-tool-tooltip="Copy complete statute text"') && previewMarkup.includes('data-tool-tooltip="Open as another viewer pane"') && previewMarkup.includes('class="legal-reference-multi-icon"') && previewMarkup.includes('M11.5 9h6'), "The provision actions do not expose the requested hover labels or one-to-two-window symbol.");
-  assert(fallbackSource.includes('const copyLabel = `Copy complete ${copyNoun} text`;') && fallbackSource.includes('els.copyLegalReferenceTextButton.dataset.toolTooltip = copyLabel;') && fallbackSource.includes('context.family === "cfr" ? "regulation" : "statute"'), "The copy-text symbol does not switch its hover label between complete statute and regulation text.");
-  assert(fallbackSource.includes('const hasLocalText = context.resolution === "local" && Boolean(context.text);') && fallbackSource.includes('els.legalReferencePopoverActions.hidden = !hasLocalText;'), "Reference actions must be available for locally included historical text and hidden when target text is unavailable.");
+  assert(fallbackSource.includes('const copyLabel = legalCopyDescription(`Copy complete ${copyNoun} text`);') && fallbackSource.includes('els.copyLegalReferenceTextButton.dataset.toolTooltip = copyLabel;') && fallbackSource.includes('context.family === "cfr" ? "regulation" : "statute"'), "The copy-text symbol does not switch its hover label between complete statute and regulation text.");
+  assert(fallbackSource.includes('const hasLocalText = context.resolution === "local" && Boolean(context.text);') && fallbackSource.includes('els.legalReferencePopoverActions.hidden = !hasLocalText && !hasLocalIndex;'), "Reference actions must be available for locally included historical text and hidden when target text is unavailable.");
   assert(fallbackSource.includes("Repealed—not current law.") && fallbackSource.includes("This provision was transferred"), "The legal-reference preview does not explain repealed and transferred dispositions.");
   assert(!fallbackSource.includes("Included source text · offline preview") && !previewMarkup.includes("legalReferencePopoverStatus"), "The redundant offline-preview status remains in the statutory popup.");
   assert(fallbackSource.includes('const showCrosswalk = Boolean(context.inaCitation && context.uscCitation);'), "The statutory preview still changes its citation header when Show INA Citations is toggled.");
@@ -5087,6 +5094,24 @@ async function main() {
   const hierarchyNodes = [...hierarchyModel.authorityHierarchyNodes.values()];
   const hierarchyChild = (parent, kind, number) => (parent.children || []).map(id => hierarchyModel.authorityHierarchyNodes.get(id)).find(node => node?.kind === kind && statuteNormPart(node.number) === statuteNormPart(number));
   const uscTitle8Node = hierarchyModel.authorityHierarchyNodes.get("usc:title:8");
+  const houseXml = fs.readFileSync(path.join(root, full.corpus.sources.title8.sourceArtifact), "utf8");
+  const houseChapterDispositions = {};
+  for (const row of houseXml.matchAll(/<tocItem>([\s\S]*?)<\/tocItem>/g)) {
+    const chapter = row[1].match(/href="\/us\/usc\/t8\/ch(\d+)"/);
+    const label = row[1].match(/\[([^\]]+)\]/);
+    if (chapter && label) houseChapterDispositions[chapter[1]] = label[1];
+  }
+  assert.deepStrictEqual(CHAPTER_DISPOSITIONS, houseChapterDispositions, "Chapter disposition labels differ from the captured House table of contents.");
+  assert.deepStrictEqual(full.corpus.title8.chapterDispositions, houseChapterDispositions, "Chapter labels were lost during corpus delivery packing.");
+  assert.strictEqual(uscTitle8Node.children.length, 16, "The Title 8 homepage must include all sixteen chapters.");
+  for (const id of uscTitle8Node.children) {
+    const node = hierarchyModel.authorityHierarchyNodes.get(id);
+    assert.strictEqual(node.dispositionLabel, houseChapterDispositions[node.number] || "", `Chapter ${node.number} has an incorrect disposition.`);
+    assert.strictEqual(Boolean(node.containsIna), node.number === "12", `Chapter ${node.number} has incorrect INA membership.`);
+  }
+  assert.deepStrictEqual(plain(hierarchyModel.authorityHierarchyNodes.get("usc:section:8-1101").inaSections), ["101"]);
+  assert.deepStrictEqual(plain(hierarchyModel.authorityHierarchyNodes.get("usc:section:8-1101").inaNoteSections), ["404", "405", "406", "407"]);
+  assert.deepStrictEqual(plain(hierarchyModel.authorityHierarchyNodes.get("usc:section:8-1252c").inaSections), [], "An unmapped Title 8 provision must not acquire INA membership from its chapter.");
   const uscChapter12Node = hierarchyChild(uscTitle8Node, "chapter", "12");
   const uscSubchapterIIINode = hierarchyChild(uscChapter12Node, "subchapter", "III");
   const uscPartINode = hierarchyChild(uscSubchapterIIINode, "part", "I");
@@ -5118,6 +5143,12 @@ async function main() {
     escapeHtml: escapeStatutoryHtml,
     statuteStatusLabel
   });
+  const chapter12Badges = hierarchyStatusBadge(uscChapter12Node);
+  assert(chapter12Badges.includes(">Contains INA</span>") && !chapter12Badges.includes(">Contains INA provisions</span>"));
+  assert(!chapter12Badges.includes(">Repealed</span>"), "A current chapter must not inherit a descendant's repeal status.");
+  const section1101Badges = hierarchyStatusBadge(hierarchyModel.authorityHierarchyNodes.get("usc:section:8-1101"));
+  assert(section1101Badges.includes(">INA 101</span>") && section1101Badges.includes(">INA notes</span>"));
+  assert(section1101Badges.includes("INA 404, 405, 406, 407 appears in statutory notes"), "Note-only INA mappings need a separate explanation.");
   const statusOnlyHierarchyNodes = hierarchyNodes.filter(node => node.kind === "section" && hierarchyStatusReplacesHeading(node));
   assert(!hierarchyStatusReplacesHeading(hierarchyModel.authorityHierarchyNodes.get("ina:section:321")), "An original INA title was hidden behind its status.");
   const renderStatusOnlyHierarchyRows = extractedFunction(fallbackSource, "renderHierarchyRows", "hierarchyPageNodeIds", {
@@ -5172,7 +5203,7 @@ async function main() {
   assert(fallbackSource.includes('statuteNavigationDepthSelect.addEventListener("change"') && fallbackSource.includes('cfrNavigationDepthSelect.addEventListener("change"'), "The Settings unit-depth selectors are not wired to their persisted preferences.");
   assert(fallbackSource.includes('id="mainShareButton"') && fallbackSource.includes('.main-share-button {') && fallbackSource.includes('.main-share-icon {'), "The former unit-depth space does not contain the icon-only global share control.");
   assert(fallbackSource.includes("STATUTE_NAVIGATION_DEPTHS") && fallbackSource.includes("CFR_NAVIGATION_DEPTHS"), "The navigation bar lacks separate persisted statute and regulation depth options.");
-  assert(fallbackSource.includes('statutoryNavigationSystem: "usc"') && fallbackSource.includes('statuteSectionDisplay: "hierarchy"') && fallbackSource.includes("automaticStatutoryNavigationSystem: true") && fallbackSource.includes('emptySearchView: "ina"') && fallbackSource.includes("splitAuthoritySearchPanes: false") && fallbackSource.includes("closeBlankCompanionOnSectionOpen: true") && fallbackSource.includes('legalNavigatorVisibility: "single"') && fallbackSource.includes("scrollUpdatesSearch: false") && fallbackSource.includes("pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT") && fallbackSource.includes("mainNavigatorCollapsed: false") && fallbackSource.includes("expandSearchResultsByDefault: true") && fallbackSource.includes("showCfrChapterSubchapterInSearchHierarchy: false") && fallbackSource.includes("syncCfrCommonDepthFromStatute: true") && fallbackSource.includes("persistInlineReferenceInsertions: false") && fallbackSource.includes("animatedCitationJumps: true"), "Viewer and navigation preference defaults do not match the overhaul contract.");
+  assert(fallbackSource.includes('statutoryNavigationSystem: "ina"') && fallbackSource.includes('statuteSectionDisplay: "hierarchy"') && fallbackSource.includes("automaticStatutoryNavigationSystem: true") && fallbackSource.includes("splitAuthoritySearchPanes: false") && fallbackSource.includes('legalNavigatorVisibility: "single"') && fallbackSource.includes("scrollUpdatesSearch: false") && fallbackSource.includes("pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT") && fallbackSource.includes("mainNavigatorCollapsed: false") && fallbackSource.includes("expandSearchResultsByDefault: true") && fallbackSource.includes("showCfrChapterSubchapterInSearchHierarchy: false") && fallbackSource.includes("syncCfrCommonDepthFromStatute: true") && fallbackSource.includes("persistInlineReferenceInsertions: false") && fallbackSource.includes("animatedCitationJumps: true"), "Viewer and navigation preference defaults do not match the overhaul contract.");
   assert(!fallbackSource.includes("navigationUpdatesSearch: true"), "The retired explicit-navigation synchronization preference remains in defaults.");
   assert(fallbackSource.includes("syncSearchToScrolledLegalLocation(\"statute\"") && fallbackSource.includes("syncSearchToScrolledLegalLocation(\"cfr\""), "Scroll-follow mode is not connected to both statutory and regulatory readers.");
   const scrollSearchSyncSource = fallbackSource.slice(fallbackSource.indexOf("function syncSearchToScrolledLegalLocation"), fallbackSource.indexOf("function updateStatuteNavigationFromScroll"));
@@ -5227,18 +5258,16 @@ async function main() {
     enterFocusedCitationMode: parsed => { emptyFocusedWorkspace = parsed; },
     updateSearchSuggestionVisibility: () => {}
   });
+  for (const retiredPreference of ["ina", "cfr", "both"]) {
+    emptyHierarchyProfile.preferences.emptySearchView = retiredPreference;
+    openClearedSearchHierarchy();
+    assert.strictEqual(emptyHierarchyState.statuteHierarchyAuthority, "usc", "Home must preserve the shared authority.");
+    assert.deepStrictEqual(plain(emptyHierarchyQueries.at(-1)), { query: "8 U.S.C.", display: "" }, "Home must ignore obsolete menu preferences.");
+    assert.strictEqual(emptyFocusedWorkspace, null, "Home must not create split panes.");
+  }
+  emptyHierarchyState.statuteHierarchyAuthority = "ina";
   openClearedSearchHierarchy();
-  assert.strictEqual(emptyHierarchyState.statuteHierarchyAuthority, "ina", "Clearing Search does not consistently reset the hierarchy authority to INA.");
-  assert.deepStrictEqual(plain(emptyHierarchyQueries.at(-1)), { query: "INA", display: "" }, "Clearing Search does not open the top-level INA page with a blank field.");
-  emptyHierarchyProfile.preferences.emptySearchView = "cfr";
-  openClearedSearchHierarchy();
-  assert.deepStrictEqual(plain(emptyHierarchyQueries.at(-1)), { query: "CFR", display: "" }, "The CFR empty-search preference does not open the CFR hierarchy with a blank field.");
-  emptyHierarchyProfile.preferences.emptySearchView = "both";
-  emptyHierarchyProfile.preferences.splitAuthoritySearchPanes = true;
-  openClearedSearchHierarchy();
-  assert.deepStrictEqual(plain(emptyFocusedWorkspace.entries.map(entry => [entry.text, entry.mode, entry.origin])), [["INA", "hierarchy", "blank-both"], ["CFR", "hierarchy", "blank-both"]], "The Both empty-search preference does not create ordered INA/CFR hierarchy panes.");
-  assert.strictEqual(emptyFocusedWorkspace.origin, "blank-both", "The split-search preference changed the independent empty-search navigation workspace.");
-  assert.strictEqual(emptyHierarchyElements.search.value, "", "Blank Both leaked its child roots into the main search bar.");
+  assert.deepStrictEqual(plain(emptyHierarchyQueries.at(-1)), { query: "INA", display: "" });
   const automaticHierarchyCalls = [];
   const automaticHierarchyState = { navigationQueryInProgress: false };
   const automaticHierarchyProfile = { preferences: { automaticStatutoryNavigationSystem: true } };
@@ -5260,7 +5289,7 @@ async function main() {
   automaticCfrProfile.preferences.automaticCfrUpdates = true;
   assert.strictEqual(automaticCfrUpdatesEnabled(), true, "An explicit CFR-update opt-in was ignored.");
   assert(fallbackSource.includes("data-hierarchy-expand") && fallbackSource.includes("data-hierarchy-expand-all") && fallbackSource.includes("data-hierarchy-collapse-all"), "Hierarchy pages lack distinct row expansion and page-level expansion controls.");
-  assert(fallbackSource.includes("hierarchyExpandableNodeIds(hierarchyPageNodeIds(state.citation))"), "The Expand All control does not recursively include descendant menus.");
+  assert(fallbackSource.includes("hierarchyExpandableNodeIds(rowIds)"), "The Expand All control does not recursively include descendant menus.");
   assert(/\.workspace\.authority-browse \.result-list\s*\{[^}]*max-height:\s*none;[^}]*overflow:\s*visible/.test(fallbackSource), "Authority indexes still use a nested scroll pane.");
   assert.deepStrictEqual(plain(statuteNavigation.statuteSiblingNodes(section1101, ["a", "15"]).map(node => node.label)), plain(statuteNavigation.statuteNodeAtPath(section1101, ["a"]).children.map(node => node.label)), "Nested dropdown choices are not derived from the shared parent node.");
 
@@ -5348,7 +5377,8 @@ async function main() {
   };
   const hierarchyHistory = statuteHistoryFunctions(fallbackSource, {
     state: hierarchyHistoryState,
-    els: { statuteNavigator: { hidden: false } },
+    window: { scrollY: 0, scrollTo() {} }, requestAnimationFrame: fn => fn(),
+    els: { statuteNavigator: { hidden: false }, search: { value: "" } },
     $: () => null,
     corpus: full.corpus,
     uscToIna: statuteUscToIna,
@@ -5492,6 +5522,25 @@ async function main() {
   assert.strictEqual(statutoryFormattingAudit.citationLinks + ancillaryCitationLinks, 25834, "Unexpected total generated-link count in displayed cached statutory material.");
 
   const migration = profileMigrationFunctions(fallbackSource);
+  for (const authority of ["ina", "usc"]) {
+    const legacy = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, statutoryNavigationSystem: authority, emptySearchView: "both", closeBlankCompanionOnSectionOpen: false } }));
+    assert.strictEqual(legacy.preferences.statutoryNavigationSystem, authority, "A saved shared authority choice must survive the homepage change.");
+    assert(!Object.hasOwn(legacy.preferences, "emptySearchView") && !Object.hasOwn(legacy.preferences, "closeBlankCompanionOnSectionOpen"), "Profile imports must discard retired homepage settings.");
+  }
+  const oldCopyPreferences = { ...blankProfile.preferences };
+  delete oldCopyPreferences.citationCopyPrefaceVersion;
+  for (const legacyDefault of ["[Citation] states the following", "[Citation] states the following[/n]"]) {
+    assert.strictEqual(migration.normalizeProfile({ ...blankProfile, preferences: { ...oldCopyPreferences, citationCopyPreface: legacyDefault } }).preferences.citationCopyPreface, "[Citation] states the following -\n\n", "Legacy defaults must become a literal multiline preface.");
+  }
+  const migratedCopy = migration.normalizeProfile({ ...blankProfile, preferences: { ...oldCopyPreferences, citationCopyPreface: "Custom [citation][/n]text[/n][/n]" } });
+  assert.strictEqual(migratedCopy.preferences.citationCopyPreface, "Custom [citation]\ntext -\n\n\n", "Legacy custom templates must retain their copied output.");
+  assert.strictEqual(migration.normalizeProfile(migratedCopy).preferences.citationCopyPreface, migratedCopy.preferences.citationCopyPreface, "Preface migration must only run once.");
+  assert.strictEqual(migration.normalizeProfile({ ...blankProfile, preferences: { ...oldCopyPreferences, citationCopyPreface: "x".repeat(1000) } }).preferences.citationCopyPreface, "x".repeat(1000) + " -\n", "Migration must retain the automatically added separator even at the old length limit.");
+  const literalCopy = "  Literal [citation][/n]\nsecond line  \n\n";
+  assert.strictEqual(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, citationCopyPrefaceVersion: 2, citationCopyPreface: literalCopy } }).preferences.citationCopyPreface, literalCopy, "Multiline templates must retain whitespace and treat old tokens literally.");
+  const withoutAuthority = { ...blankProfile.preferences };
+  delete withoutAuthority.statutoryNavigationSystem;
+  assert.strictEqual(migration.normalizeProfile({ ...blankProfile, preferences: withoutAuthority }).preferences.statutoryNavigationSystem, "ina", "A profile without a saved authority must default to INA.");
   const oldReadingPreferences = { ...blankProfile.preferences, citationJumpOffsetPercent: 41, navigationTrackingOffsetPercent: 73 };
   delete oldReadingPreferences.pageViewOffsetPercent;
   delete oldReadingPreferences.mainNavigatorCollapsed;

@@ -75,9 +75,8 @@ function testProfileContracts() {
   assert.strictEqual(profile.preferences.noteDisplayPosition, "top");
   assert.strictEqual(profile.preferences.notesUseHandwrittenFont, false);
   assert.deepStrictEqual(plain({
-    emptySearchView: profile.preferences.emptySearchView,
+    statutoryNavigationSystem: profile.preferences.statutoryNavigationSystem,
     splitAuthoritySearchPanes: profile.preferences.splitAuthoritySearchPanes,
-    closeBlankCompanionOnSectionOpen: profile.preferences.closeBlankCompanionOnSectionOpen,
     legalNavigatorVisibility: profile.preferences.legalNavigatorVisibility,
     scrollUpdatesSearch: profile.preferences.scrollUpdatesSearch,
     pageViewOffsetPercent: profile.preferences.pageViewOffsetPercent,
@@ -88,9 +87,8 @@ function testProfileContracts() {
     persistInlineReferenceInsertions: profile.preferences.persistInlineReferenceInsertions,
     hideLocalShareWarning: profile.preferences.hideLocalShareWarning
   }), {
-    emptySearchView: "ina",
+    statutoryNavigationSystem: "ina",
     splitAuthoritySearchPanes: false,
-    closeBlankCompanionOnSectionOpen: true,
     legalNavigatorVisibility: "single",
     scrollUpdatesSearch: false,
     pageViewOffsetPercent: 3,
@@ -105,13 +103,16 @@ function testProfileContracts() {
   assert.deepStrictEqual(profile.referenceInsertions, { schemaVersion: 1, records: [] });
 
   for (const id of [
-    "emptySearchViewSelect", "splitAuthoritySearchPanesToggle", "closeBlankCompanionOnSectionOpenToggle", "legalNavigatorVisibilitySelect",
+    "splitAuthoritySearchPanesToggle", "legalNavigatorVisibilitySelect",
     "scrollUpdatesSearchToggle", "syncCfrCommonDepthFromStatuteToggle", "expandSearchResultsByDefaultToggle", "showCfrChapterSubchapterInSearchHierarchyToggle", "persistInlineReferenceInsertionsToggle",
     "referenceInsertionsUnavailableCount", "removeUnavailableReferenceInsertionsButton", "statuteNavigationDepthSelect", "cfrNavigationDepthSelect", "pageViewOffsetInput",
     "noteDisplayPositionSelect", "notesUseHandwrittenFontToggle"
   ]) assert(template.includes(`id="${id}"`), `Missing overhaul setting control ${id}.`);
-  assert(template.includes('const companionSettingEnabled = profile.preferences.emptySearchView === "both"')
-    && template.includes("els.closeBlankCompanionOnSectionOpenToggle.disabled = !companionSettingEnabled"), "The companion-close setting is not conditionally disabled.");
+  for (const key of ["emptySearchView", "closeBlankCompanionOnSectionOpen"]) {
+    assert(!Object.hasOwn(profile.preferences, key), `Retired home preference ${key} remains in blank profiles.`);
+    assert(!template.includes(`normalized.preferences.${key} =`), `Retired preference ${key} is revived on import.`);
+  }
+  assert(!template.includes('id="emptySearchViewSelect"') && !template.includes('id="closeBlankCompanionOnSectionOpenToggle"'), "Retired home settings remain visible.");
   assert(template.includes("normalized.preferences.splitAuthoritySearchPanes = normalized.preferences.splitAuthoritySearchPanes === true;"), "Profile normalization does not preserve an explicit split-search opt-in while defaulting omitted values off.");
   assert(template.includes('Object.hasOwn(defaults.preferences, key)'), "Unknown/retired preferences are not removed during profile normalization.");
   assert(template.includes("--search-hit: #ffd866") && template.includes("--search-hit-ink: #241a00")
@@ -241,6 +242,7 @@ async function testSectionMaterializationHooks() {
   const declarations = between("    const OCCURRENCE_EAGER_ROW_LIMIT", "\n\n    function scheduleVisibleOccurrenceSections(");
   const unitCorpus = { title8: { sections: [{ id: "8-1101" }] }, cfr: { sections: [], appendices: [] } };
   const helpers = vm.runInNewContext(`${declarations}\n({ occurrenceRowCitationLabel, occurrenceRowUnitText, renderOccurrenceRows, renderAllOccurrenceSections })`, {
+    legalCopyDescription: label => label,
     $$, $: () => null,
     corpus: unitCorpus,
     escapeHtml: value => String(value),
@@ -299,11 +301,17 @@ async function testSectionMaterializationHooks() {
   assert(hierarchySource.includes('class="occurrence-section"') && !hierarchySource.includes("result?.buckets"), "The bottom hierarchy level is not the section-level hit list.");
   assert(hierarchySource.includes('expandResults ? " open" : ""'), "Search result branches do not honor the default-expansion preference.");
   const hierarchyProfile = { preferences: { showCfrChapterSubchapterInSearchHierarchy: false } };
+  const hierarchyLabels = {
+    navigationTitleCase: extractedFunction("navigationTitleCase", "statuteStatus"),
+    titleCaseTopic: extractedFunction("titleCaseTopic", "navigationTitleCase")
+  };
   const occurrenceHierarchyHtml = vm.runInNewContext(`(${hierarchySource.trim()})`, {
     profile: hierarchyProfile,
     escapeHtml: value => String(value),
     navigationTitleCase: extractedFunction("navigationTitleCase", "statuteStatus"),
     titleCaseTopic: value => String(value).replace(/(^|-)([a-z])/g, (_, separator, letter) => `${separator}${letter.toUpperCase()}`).replaceAll("-", " "),
+    hierarchyRowCitation: extractedFunction("hierarchyRowCitation", "hierarchyRowHeading", hierarchyLabels),
+    hierarchyRowHeading: extractedFunction("hierarchyRowHeading", "hierarchyStatusReplacesHeading", hierarchyLabels),
     occurrenceSectionDomToken: value => String(value),
     Map, Number, String
   });
@@ -326,6 +334,10 @@ async function testSectionMaterializationHooks() {
   hierarchyProfile.preferences.showCfrChapterSubchapterInSearchHierarchy = true;
   const detailedCfrHierarchy = occurrenceHierarchyHtml(cfrHierarchyFixture, true, "cfr");
   assert(detailedCfrHierarchy.includes("Chapter I") && detailedCfrHierarchy.includes("Subchapter B") && !detailedCfrHierarchy.includes("Subpart A"), "The detailed CFR result hierarchy does not add only Chapter and Subchapter.");
+  cfrHierarchyFixture.hierarchy.splice(-1, 0, { id: "topic", parentId: "subpart", kind: "subject-group", number: "ECFR123456789abcdef", heading: "Application Procedures", totalOccurrences: 2 });
+  cfrHierarchyFixture.hierarchy.at(-1).parentId = "topic";
+  const topicSearchHierarchy = occurrenceHierarchyHtml(cfrHierarchyFixture, true);
+  assert(topicSearchHierarchy.includes("Application Procedures") && !topicSearchHierarchy.includes("ECFR123456789abcdef"), "A displayed topic heading must not expose its eCFR identifier.");
   assert(template.includes('.occurrence-section-label small { display: inline;') && hierarchySource.includes('<small>— ${escapeHtml(navigationTitleCase(section.heading))}</small>'), "Section citations and titles are not kept on one header row.");
   assert(hierarchySource.includes('class="occurrence-section-disclosure"')
     && hierarchySource.includes('button class="occurrence-section-label"')
@@ -344,14 +356,14 @@ async function testSectionMaterializationHooks() {
     && template.includes('data-copy-tooltip="Copy Citation"')
     && template.includes('data-copy-tooltip="Copy Text"')
     && template.includes('title="Copy Citation"')
-    && template.includes('title="Copy Text"'), "Result copy controls are not compact, theme-aware, and concisely explained on hover.");
+    && template.includes('legalCopyDescription("Copy the complete legal-unit text to the right")'), "Result copy controls are not compact, theme-aware, and concisely explained on hover.");
   assert(template.includes('.occurrence-row:has([data-occurrence-copy="citation"]:hover) .occurrence-row-citation')
     && template.includes('.occurrence-row:has([data-occurrence-copy="text"]:hover) .occurrence-row-text'), "Copy-button hover does not highlight the cell it targets.");
   assert(template.includes('id="searchScopeClear" type="button" tabindex="-1"')
     && template.includes('event.key === "Tab" && !event.shiftKey')
     && template.includes('els.search.focus();'), "Forward Tab from the scope editor is not guaranteed to enter the main search field.");
   const copySource = between("    async function copyOccurrenceRowData(", "\n\n    async function renderOccurrenceRows(");
-  assert(copySource.includes("occurrenceRowUnitText(row)") && copySource.includes("row.citation"), "Result copy actions do not distinguish full citation from complete unit text.");
+  assert(copySource.includes("occurrenceRowUnitText(row, state.statuteHierarchyAuthority)") && copySource.includes("row.citation"), "Result copy actions do not distinguish full citation from complete unit text.");
   const resultSource = between("    function renderOccurrenceSearchResult(", "\n\n    async function renderFocusedOccurrencePane(");
   assert(resultSource.includes('class="occurrence-search-summary"') && resultSource.includes('hitCount === 1 ? "hit" : "hits"') && resultSource.includes('sectionCount === 1 ? "section" : "sections"'), "Search result totals are not integrated as ‘N hits in M sections’ with singular handling.");
   assert(!resultSource.includes("INA matches") && !resultSource.includes("CFR matches") && !resultSource.includes("Each expanded section"), "Search result panes retain redundant authority headings or explanatory copy.");
@@ -496,8 +508,7 @@ function testPaneModesAndHistory() {
     && enterSource.includes("resetHistories || previousCommand !== entry.text"), "A main workspace rebuild cannot reset history for unchanged/reused child panes.");
   const occurrenceRoutingSource = between("    function tryRunOccurrenceSearch(", "\n\n    function runSearch(");
   const runSearchSource = between("    function runSearch(", "\n\n    function shouldDeferBroadSearch(");
-  const blankWorkspaceSource = between("    function openClearedSearchHierarchy(", "\n\n    function openTopLevelStatuteHierarchy(");
-  for (const [label, source] of [["dual search", occurrenceRoutingSource], ["composed workspace", runSearchSource], ["blank Both workspace", blankWorkspaceSource]]) {
+  for (const [label, source] of [["dual search", occurrenceRoutingSource], ["composed workspace", runSearchSource]]) {
     assert(source.includes("resetHistories: true"), `A main-bar ${label} rebuild retains stale child histories.`);
   }
 

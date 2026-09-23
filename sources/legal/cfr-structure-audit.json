@@ -8,7 +8,7 @@
     },
     "corpus": {
       "path": "src/INASearch-CFR.js",
-      "sha256": "9b3cb51f1b305c981e2b3a306ad91aab9108eaacffcd4dd9baea5f27680e59c1"
+      "sha256": "036476090b7ba63a0be695bc9cae8760fff4bbd743d2e33054c82b2a9e386534"
     },
     "reviewedExpectations": {
       "path": "sources/legal/cfr-hierarchy/reviewed-expectations.json",

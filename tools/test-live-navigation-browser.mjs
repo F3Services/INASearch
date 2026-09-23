@@ -196,7 +196,7 @@ try {
     assert.equal(await page.locator('.citation-hover-target').count(), 0, 'Disabled actions must not preview a citation');
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
-  console.log('PASS enabled/disabled format switch and disabled action hover suppression');
+  console.log('PASS format switch and disabled action hover suppression');
 
   await reset();
   await scrollToPath(['d', '1']);
@@ -223,15 +223,15 @@ try {
 
   await reset();
   await page.locator('#settingsMenuButton').click();
-  assert.equal(await page.locator('#citationCopyPrefaceInput').inputValue(), '[Citation] states the following');
+  assert.equal(await page.locator('#citationCopyPrefaceInput').inputValue(), '[Citation] states the following -\n\n');
   assert(!(await page.locator('#citationCopyPrefaceWarning').isVisible()));
-  await page.locator('#citationCopyPrefaceInput').fill('Under [cItAtIoN], the text is');
+  await page.locator('#citationCopyPrefaceInput').fill('Under [cItAtIoN], the text is:\n\n');
   assert(!(await page.locator('#citationCopyPrefaceWarning').isVisible()));
   await page.locator('#closeSavingMenuButton').click();
   await page.locator('[data-live-citation-action="copy-citation-text"]').click();
-  assert.match(await page.evaluate(() => qaCopies.at(-1)), /^Under INA 237\(a\)\(3\), the text is -\n/);
+  assert.match(await page.evaluate(() => qaCopies.at(-1)), /^Under INA 237\(a\)\(3\), the text is:\n\n/);
   await page.locator('#settingsMenuButton').click();
-  await page.locator('#citationCopyPrefaceInput').fill('The law says');
+  await page.locator('#citationCopyPrefaceInput').fill('The law says:\n');
   assert.equal(await page.locator('#citationCopyPrefaceWarning').innerText(), '[citation] not detected');
   assert(await page.locator('#citationCopyPrefaceWarning').isVisible());
   await page.locator('#closeSavingMenuButton').click();
@@ -240,10 +240,10 @@ try {
   await page.waitForFunction(() => window.INASearchTest?.getState().statuteNavigationLocation?.view === 'reader');
   await aligned();
   await page.locator('[data-live-citation-action="copy-citation-text"]').click();
-  assert.match(await page.evaluate(() => qaCopies.at(-1)), /^The law says -\n/);
+  assert.match(await page.evaluate(() => qaCopies.at(-1)), /^The law says:\n/);
   await page.locator('#settingsMenuButton').click();
-  assert.equal(await page.locator('#citationCopyPrefaceInput').inputValue(), 'The law says');
-  await page.locator('#citationCopyPrefaceInput').fill('[Citation] states the following');
+  assert.equal(await page.locator('#citationCopyPrefaceInput').inputValue(), 'The law says:\n');
+  await page.locator('#resetCitationCopyPrefaceButton').click();
   await page.locator('#closeSavingMenuButton').click();
   await page.waitForFunction(() => !INASearchTest.getState().profileChanged);
   console.log('PASS case-insensitive preface substitution, exact missing-token warning, and saved preference');
@@ -385,7 +385,7 @@ try {
   await aligned();
   assert.equal((await snapshot()).live, '8 CFR 214.2(h)(13)(iii)(A)');
   assert(await page.locator('#mainReaderAuthorityToggle').isVisible());
-  assert(await page.locator('#mainReaderAuthorityToggle').isDisabled());
+  assert(await page.locator('#mainReaderAuthorityToggle').isEnabled());
   await page.locator('[data-live-citation-action="copy-citation"]').click();
   assert.equal(await page.evaluate(() => qaCopies.at(-1)), '8 CFR 214.2(h)(13)(iii)(A)');
   await page.locator('[data-live-citation-action="copy-citation-text"]').click();
@@ -398,15 +398,15 @@ try {
   await page.locator('[data-live-citation-action="copy-citation"]').hover();
   assert(await page.locator('.cfr-block.citation-hover-target').isVisible());
   await page.locator('#mainReaderAuthorityToggle').hover();
-  assert.equal(await page.locator('.citation-hover-target').count(), 0, 'A disabled format switch must clear the previous action preview');
+  assert.equal(await page.locator('.citation-hover-target').count(), 0, 'The format switch must clear the previous action preview');
   await page.locator('[data-live-citation-action="copy-citation"]').hover();
   assert(await page.locator('.cfr-block.citation-hover-target').isVisible());
   await page.locator('[data-live-citation-action="copy-citation"]').click();
   assert.equal(await page.evaluate(() => qaCopies.at(-1)), cfrFallback);
   await reset('8 U.S.C. 1252c');
   assert(await page.locator('#mainReaderAuthorityToggle').isVisible());
-  assert(await page.locator('#mainReaderAuthorityToggle').isDisabled());
-  console.log('PASS CFR and non-INA statutes, disabled format switch, and citation copying');
+  assert(await page.locator('#mainReaderAuthorityToggle').isEnabled());
+  console.log('PASS CFR and non-INA statutes, always-enabled format switch, and citation copying');
 
   await page.evaluate(() => INASearchTest.applySearchQuery('in:237 deportable', false, true));
   await page.locator('.occurrence-row [data-occurrence-open]').first().click();
@@ -445,7 +445,7 @@ try {
   await page.setViewportSize({ width: 390, height: 918 });
   await page.goto(`${url}?q=INA`);
   await page.waitForFunction(() => document.querySelector('.topbar').classList.contains('search-on-second-row'));
-  assert(!(await page.locator('#mainReaderActions').isVisible()));
+  assert(await page.locator('#mainReaderActions').isVisible(), 'Contents pages retain the side controls at narrow widths');
   assert(await page.locator('#mainShareButton').isVisible());
   console.log('PASS narrow header initialization outside the citation reader');
   assert.equal(session.events.filter(event => ['pageerror', 'error'].includes(event.type)).length, 0, JSON.stringify(session.events));

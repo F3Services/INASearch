@@ -89,7 +89,7 @@ try {
   const text = await page.evaluate(() => qaCopies.at(-1));
   assert.match(text, /Failure to register/);
   await action(0, 'copy-citation-text').click();
-  assert.equal(await page.evaluate(() => qaCopies.at(-1)), `8 U.S.C. 1227(a)(3) states the following -\n${text}`);
+  assert.equal(await page.evaluate(() => qaCopies.at(-1)), `8 U.S.C. 1227(a)(3) states the following -\n\n${text}`);
   await action(1, 'open').click();
   assert.match(await page.evaluate(() => qaOpens.at(-1)), /1101/);
   await action(0, 'print').click();
@@ -135,8 +135,8 @@ try {
       const button = pane.readerActions.querySelector('.main-reader-authority');
       return { disabled: button.disabled, label: button.querySelector('.statute-authority-cycle-current').textContent };
     }));
-    assert.deepEqual(states.map(s => s.disabled), [false, true, true]);
-    assert(states.every(s => s.label === states[0].label));
+    assert.deepEqual(states.map(s => s.disabled), [false, false, false]);
+    assert.deepEqual(states.map(s => s.label), states[0].label === 'INA' ? ['INA', 'INA', 'INA'] : ['USC', 'USC', 'CFR']);
     await rail(2).locator('.main-reader-authority').hover();
     assert.equal(await page.locator('.citation-hover-target').count(), 0);
   }
@@ -147,7 +147,7 @@ try {
   await action(2, 'open').hover();
   assert.equal(await rail(2).locator('.official-source-action-label').innerText(), 'Open in eCFR.gov');
   await page.screenshot({ path: resolve(outputDir, 'mixed-panes.png') });
-  console.log('PASS independently disabled switches with a synchronized label across INA, non-INA USC, and CFR');
+  console.log('PASS always-enabled switches with shared state and contextual labels across INA, non-INA USC, and CFR');
 
   await query('INA 237, INA 212');
   const beforeOther = await panes.nth(1).locator('.focused-citation-pane-search').inputValue();

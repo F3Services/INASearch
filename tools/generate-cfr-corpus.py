@@ -996,7 +996,7 @@ def normalize_document(raw: bytes, title: int, mappings: dict, graphics: dict, r
 def generate(cache: pathlib.Path, output: pathlib.Path) -> dict:
     capture = json.loads((cache / "capture.json").read_text(encoding="utf-8"))
     ptar = read_verified(cache / "ptar.html", capture["ptar"], "Parallel Table")
-    read_verified(cache / "titles.json", capture["titleMetadata"], "eCFR title metadata")
+    title_metadata = json.loads(read_verified(cache / "titles.json", capture["titleMetadata"], "eCFR title metadata"))
     mappings = intersect_ptar_mappings(parse_ptar(ptar))
     validate_reviewed_scope(mappings, int(capture["ptarYear"]))
     captured_removed = {
@@ -1080,6 +1080,7 @@ def generate(cache: pathlib.Path, output: pathlib.Path) -> dict:
         "captureTime": capture["captureTime"],
         "ptar": {**capture["ptar"], "mappingCount": len(mappings)},
         "titleMetadata": capture["titleMetadata"],
+        "titleNames": {str(item["number"]): item["name"] for item in title_metadata["titles"]},
         "currentThrough": capture["currentThrough"],
         "coverage": {"core": "Complete current Title 8 CFR", "titles": sorted({part["title"] for part in parts}), "partCount": len(parts), "sectionCount": len(sections), "appendixCount": len(appendices), "sectionCountsByTitle": title_counts},
         "sources": sources,

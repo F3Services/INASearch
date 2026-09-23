@@ -1,0 +1,1909 @@
+[
+  {
+    "id": "usc-8-1252-fnv1a-867a6c09-207",
+    "kind": "usc",
+    "title": "8",
+    "section": "1252",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-867a6c09",
+    "sourceSha256": "7a43569fb9e05401e2a4aba244d6d3142cc6799e0ce5753e6476499b282d2271",
+    "start": 207,
+    "end": 224,
+    "text": "8 U.S.C. 1105a(a)",
+    "target": {
+      "title": "8",
+      "section": "1105a",
+      "path": [
+        "a"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former section 106 judicial review; quoted as former law before repeal, whereas current 1105a is unrelated.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00987",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1105a&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-234f0bd6-2756",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-234f0bd6",
+    "sourceSha256": "b5cae7b512e483a882a7823f7ed3c040955d061e019076c3d47115a3940b457d",
+    "start": 2756,
+    "end": 2769,
+    "text": "8 U.S.C. 1226",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Pre-IIRIRA section 236 concerns exclusion proceedings; current section 1226 concerns detention.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00019",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-214.14-fnv1a-703594fd-235",
+    "kind": "cfr",
+    "title": "8",
+    "section": "214.14",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-703594fd",
+    "sourceSha256": "384f6ce4ff2305184dd47ada36472357be4fa1a724817ec7a88f7ba42ef5f27f",
+    "start": 235,
+    "end": 248,
+    "text": "8 U.S.C. 1226",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Pre-IIRIRA section 236 concerns exclusion proceedings; current section 1226 concerns detention.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02379",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-214.14-fnv1a-4733b9d2-290",
+    "kind": "cfr",
+    "title": "8",
+    "section": "214.14",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-4733b9d2",
+    "sourceSha256": "dd14f795a26de8674bfd4ff836285fe50c820de5a7cf0438a1e7adfe2bf3cf58",
+    "start": 290,
+    "end": 303,
+    "text": "8 U.S.C. 1226",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Pre-IIRIRA section 236 concerns exclusion proceedings; current section 1226 concerns detention.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02387",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-214.14-fnv1a-703594fd-203",
+    "kind": "cfr",
+    "title": "8",
+    "section": "214.14",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-703594fd",
+    "sourceSha256": "384f6ce4ff2305184dd47ada36472357be4fa1a724817ec7a88f7ba42ef5f27f",
+    "start": 203,
+    "end": 215,
+    "text": "sections 236",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Historical section 236 proceedings before/under former-law context; current section 1226 is a different provision.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02377",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-214.14-fnv1a-4733b9d2-258",
+    "kind": "cfr",
+    "title": "8",
+    "section": "214.14",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-4733b9d2",
+    "sourceSha256": "dd14f795a26de8674bfd4ff836285fe50c820de5a7cf0438a1e7adfe2bf3cf58",
+    "start": 258,
+    "end": 270,
+    "text": "sections 236",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Historical section 236 proceedings before/under former-law context; current section 1226 is a different provision.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02385",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-214.205-fnv1a-546eac01-349",
+    "kind": "cfr",
+    "title": "8",
+    "section": "214.205",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-546eac01",
+    "sourceSha256": "b8d9603cedb8d45291e56520ad3cbb12323a8652d0daaed8303591cd97da8c49",
+    "start": 349,
+    "end": 361,
+    "text": "sections 236",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Historical section 236 proceedings before/under former-law context; current section 1226 is a different provision.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02399",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-1212.3-fnv1a-40902ef4-230",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1212.3",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-40902ef4",
+    "sourceSha256": "9e5235be94d0fa27b2ccf7a75704c04f8165fbcd0a4acd1660a16ad50a078f50",
+    "start": 230,
+    "end": 233,
+    "text": "236",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Historical section 236 proceedings before/under former-law context; current section 1226 is a different provision.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02489",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-1236.1-fnv1a-ecd70da7-458",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1236.1",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-ecd70da7",
+    "sourceSha256": "ba11de3d6a638d2679941a11f3d7de5dfd65276b7e9692051b1c0519a556ddd7",
+    "start": 458,
+    "end": 480,
+    "text": "section 236 of the Act",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Historical section 236 proceedings before/under former-law context; current section 1226 is a different provision.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02507",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-1240.30-fnv1a-f71e6b95-118",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1240.30",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-f71e6b95",
+    "sourceSha256": "840c085fb0dfb3c1d262798fdffb007777cb20787a738b1b394585ae38635086",
+    "start": 118,
+    "end": 140,
+    "text": "section 236 of the Act",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Historical section 236 proceedings before/under former-law context; current section 1226 is a different provision.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02517",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-1245.10-fnv1a-43bb69c0-227",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1245.10",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-43bb69c0",
+    "sourceSha256": "598c026bfd3d47ecd134d3f41be0bde6edd3e3cf91e8ec0a4570a12762f250c2",
+    "start": 227,
+    "end": 249,
+    "text": "section 236 of the Act",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Historical section 236 proceedings before/under former-law context; current section 1226 is a different provision.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02551",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1255-fnv1a-d74a2a18-3560",
+    "kind": "usc",
+    "title": "8",
+    "section": "1255",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d74a2a18",
+    "sourceSha256": "e020ebe784a23cccb76c39212d7c8dbc7760cb385977a226ae70158b94931bef",
+    "start": 3560,
+    "end": 3573,
+    "text": "8 U.S.C. 1252",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Former section 242 described apprehension/deportation jurisdiction; current section 1252 is judicial review of removal orders.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01083",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-214.204-fnv1a-a417a398-142",
+    "kind": "cfr",
+    "title": "8",
+    "section": "214.204",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-a417a398",
+    "sourceSha256": "bf65424a6ffe4553f8622d9f4c9b269439408ef7fb12715b4aea616ffbec0c05",
+    "start": 142,
+    "end": 156,
+    "text": "242 of the Act",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Former section 242 described apprehension/deportation jurisdiction; current section 1252 is judicial review of removal orders.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02397",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-214.211-fnv1a-a80199dd-161",
+    "kind": "cfr",
+    "title": "8",
+    "section": "214.211",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-a80199dd",
+    "sourceSha256": "790a3235ab19c36bfe13051e24c6aa7cff842780a2cee8ef91ae8d4c0bfc63b1",
+    "start": 161,
+    "end": 175,
+    "text": "242 of the Act",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Former section 242 described apprehension/deportation jurisdiction; current section 1252 is judicial review of removal orders.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02403",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-1003.19-fnv1a-7e24df8d-49",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1003.19",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-7e24df8d",
+    "sourceSha256": "749676456bbd398e39a1da3a3dd88c4dc0b0146709cacf98a94237164096644c",
+    "start": 49,
+    "end": 77,
+    "text": "section 242(a)(2) of the Act",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [
+        "a",
+        "2"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former section 242 described apprehension/deportation jurisdiction; current section 1252 is judicial review of removal orders.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02455",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-1212.3-fnv1a-d14e11ab-268",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1212.3",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-d14e11ab",
+    "sourceSha256": "9aabbe41f020e86ac44537e537f9009cae103c10310ec5242b997e950e365172",
+    "start": 268,
+    "end": 282,
+    "text": "242 of the Act",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Former section 242 described apprehension/deportation jurisdiction; current section 1252 is judicial review of removal orders.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02485",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1612-fnv1a-20780e0d-3397",
+    "kind": "usc",
+    "title": "8",
+    "section": "1612",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-20780e0d",
+    "sourceSha256": "5cd6e730b6d6c73166a607826a37a3c0c5c543933099863593d006bd732e3ca7",
+    "start": 3397,
+    "end": 3403,
+    "text": "243(h)",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "h"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly historical withholding-of-deportation provision; current section 1253 is materially different. 1994 edition contains subsection (h), withholding of deportation or return.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01543",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1612-fnv1a-20780e0d-6059",
+    "kind": "usc",
+    "title": "8",
+    "section": "1612",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-20780e0d",
+    "sourceSha256": "5cd6e730b6d6c73166a607826a37a3c0c5c543933099863593d006bd732e3ca7",
+    "start": 6059,
+    "end": 6065,
+    "text": "243(h)",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "h"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly historical withholding-of-deportation provision; current section 1253 is materially different. 1994 edition contains subsection (h), withholding of deportation or return.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01545",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1613-fnv1a-c20fbe0b-79",
+    "kind": "usc",
+    "title": "8",
+    "section": "1613",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-c20fbe0b",
+    "sourceSha256": "cdb3d6aa55b3df4e21db39b89a207524aa1dcd16fd20a0e96cdf37f31cc7228f",
+    "start": 79,
+    "end": 92,
+    "text": "8 U.S.C. 1253",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "h"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly historical withholding-of-deportation provision; current section 1253 is materially different. 1994 edition contains subsection (h), withholding of deportation or return.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01549",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1613-fnv1a-4d598d52-1329",
+    "kind": "usc",
+    "title": "8",
+    "section": "1613",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-4d598d52",
+    "sourceSha256": "bb4aec3d7a783ec68346fa0486265c138a145d62ec3f324a2e34ed699fcff5b3",
+    "start": 1329,
+    "end": 1335,
+    "text": "243(h)",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "h"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly historical withholding-of-deportation provision; current section 1253 is materially different. 1994 edition contains subsection (h), withholding of deportation or return.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01553",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1622-fnv1a-c4438016-79",
+    "kind": "usc",
+    "title": "8",
+    "section": "1622",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-c4438016",
+    "sourceSha256": "72194efdb6b1c3b8307f1137bd9a1ac8786c43542366596771ef623e5972d9df",
+    "start": 79,
+    "end": 92,
+    "text": "8 U.S.C. 1253",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "h"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly historical withholding-of-deportation provision; current section 1253 is materially different. 1994 edition contains subsection (h), withholding of deportation or return.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01563",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1622-fnv1a-2b3e2ae3-155",
+    "kind": "usc",
+    "title": "8",
+    "section": "1622",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-2b3e2ae3",
+    "sourceSha256": "eff54a854a075b70feb5fd797d3717fd2ac1bb8a2ed8e701a4a8ef6ce5551fde",
+    "start": 155,
+    "end": 161,
+    "text": "243(h)",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "h"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly historical withholding-of-deportation provision; current section 1253 is materially different. 1994 edition contains subsection (h), withholding of deportation or return.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01569",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1641-fnv1a-41fb7791-79",
+    "kind": "usc",
+    "title": "8",
+    "section": "1641",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-41fb7791",
+    "sourceSha256": "45cd8801b42678277c6a0b5aa75393af532ad311c426c52ee538059655a1a858",
+    "start": 79,
+    "end": 92,
+    "text": "8 U.S.C. 1253",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "h"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly historical withholding-of-deportation provision; current section 1253 is materially different. 1994 edition contains subsection (h), withholding of deportation or return.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01581",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1641-fnv1a-ebc2546a-611",
+    "kind": "usc",
+    "title": "8",
+    "section": "1641",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-ebc2546a",
+    "sourceSha256": "68c7ac3d0479f310eb64d00811d0d79947e5d31ba1c738880a17df6acbf0374c",
+    "start": 611,
+    "end": 617,
+    "text": "243(h)",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [
+        "h"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly historical withholding-of-deportation provision; current section 1253 is materially different. 1994 edition contains subsection (h), withholding of deportation or return.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01599",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-241.4-fnv1a-00b25a4a-323",
+    "kind": "cfr",
+    "title": "8",
+    "section": "241.4",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-00b25a4a",
+    "sourceSha256": "1404afb4f1d48efd593663d827b70dd4ea9ab0e3916dd41a41515fddd42a09cf",
+    "start": 323,
+    "end": 335,
+    "text": "(e)(3)(1994)",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [
+        "e",
+        "3"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Source explicitly dates USC 1226(e)(3) to the 1994 edition; preliminary route loses the cited version.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02433",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-234f0bd6-19634",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-234f0bd6",
+    "sourceSha256": "b5cae7b512e483a882a7823f7ed3c040955d061e019076c3d47115a3940b457d",
+    "start": 19634,
+    "end": 19657,
+    "text": "8 U.S.C. 1252b(c)(3)(B)",
+    "target": {
+      "title": "8",
+      "section": "1252b",
+      "path": [
+        "c",
+        "3",
+        "B"
+      ],
+      "edition": "1994"
+    },
+    "reason": "the source expressly limits former INA 242B(c)(3)(B) to law in effect before the title III-A effective date; the current/preliminary route loses that historical text.",
+    "review": {
+      "cycle": 4,
+      "referenceId": "reference-00017",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252b&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1252-fnv1a-e7fc86f3-605",
+    "kind": "usc",
+    "title": "8",
+    "section": "1252",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-e7fc86f3",
+    "sourceSha256": "610565c0f703f116291727dd83b117e6359d8cdc1c3a8c3cca08d95a8d3e3ee9",
+    "start": 605,
+    "end": 622,
+    "text": "8 U.S.C. 1252b(a)",
+    "target": {
+      "title": "8",
+      "section": "1252b",
+      "path": [
+        "a"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly former/repealed section 242B; retain its historical statutory text.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00977",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252b&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-240.65-fnv1a-69f89d48-235",
+    "kind": "cfr",
+    "title": "8",
+    "section": "240.65",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-69f89d48",
+    "sourceSha256": "3efd80fd61cfa44a64ddad772cc29f8c3eac5b87d8e1b8c3a6375ddf2709b325",
+    "start": 235,
+    "end": 253,
+    "text": "section 241(a) (2)",
+    "target": {
+      "title": "8",
+      "section": "1251",
+      "path": [
+        "a",
+        "2"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former INA 241(a) deportability grounds in pre-April 1997 law map to historical USC 1251, not current USC 1231.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02421",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1251&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-240.65-fnv1a-69f89d48-263",
+    "kind": "cfr",
+    "title": "8",
+    "section": "240.65",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-69f89d48",
+    "sourceSha256": "3efd80fd61cfa44a64ddad772cc29f8c3eac5b87d8e1b8c3a6375ddf2709b325",
+    "start": 263,
+    "end": 277,
+    "text": "(4) of the Act",
+    "target": {
+      "title": "8",
+      "section": "1251",
+      "path": [
+        "a",
+        "4"
+      ],
+      "edition": "1994"
+    },
+    "reason": "The linked (4) is the former INA 241(a)(4) ground; current USC 1231 is not its historical location.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02423",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1251&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-240.65-fnv1a-69f89d48-128",
+    "kind": "cfr",
+    "title": "8",
+    "section": "240.65",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-69f89d48",
+    "sourceSha256": "3efd80fd61cfa44a64ddad772cc29f8c3eac5b87d8e1b8c3a6375ddf2709b325",
+    "start": 128,
+    "end": 156,
+    "text": "section 244(a)(2) of the Act",
+    "target": {
+      "title": "8",
+      "section": "1254",
+      "path": [
+        "a",
+        "2"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former INA 244(a)(2) concerned suspension of deportation; current INA 244/USC 1254a concerns TPS.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02420",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1254&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "cfr-8-240.65-fnv1a-69f89d48-255",
+    "kind": "cfr",
+    "title": "8",
+    "section": "240.65",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-69f89d48",
+    "sourceSha256": "3efd80fd61cfa44a64ddad772cc29f8c3eac5b87d8e1b8c3a6375ddf2709b325",
+    "start": 255,
+    "end": 258,
+    "text": "(3)",
+    "target": {
+      "title": "8",
+      "section": "1251",
+      "path": [
+        "a",
+        "3"
+      ],
+      "edition": "1994"
+    },
+    "reason": "The linked (3) is the former INA 241(a)(3) ground; current USC 1231 is not its historical location.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02422",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1251&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1252-fnv1a-867a6c09-160",
+    "kind": "usc",
+    "title": "8",
+    "section": "1252",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-867a6c09",
+    "sourceSha256": "7a43569fb9e05401e2a4aba244d6d3142cc6799e0ce5753e6476499b282d2271",
+    "start": 160,
+    "end": 166,
+    "text": "106(a)",
+    "target": {
+      "title": "8",
+      "section": "1105a",
+      "path": [
+        "a"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former section 106 judicial review; quoted as former law before repeal, whereas current 1105a is unrelated. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00987",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1105a&num=0&edition=1994",
+      "companionOf": "usc-8-1252-fnv1a-867a6c09-207"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-234f0bd6-2711",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-234f0bd6",
+    "sourceSha256": "b5cae7b512e483a882a7823f7ed3c040955d061e019076c3d47115a3940b457d",
+    "start": 2711,
+    "end": 2715,
+    "text": "242B",
+    "target": {
+      "title": "8",
+      "section": "1252b",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "The original INA section number and the adjacent USC parallel list identify this distinct pre-IIRIRA provision; preserve its individual section instead of inheriting the first list member.",
+    "review": {
+      "cycle": 6,
+      "referenceId": "reference-00019",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252b&num=0&edition=1994",
+      "companionOf": "usc-8-1101-fnv1a-234f0bd6-2756"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-234f0bd6-2703",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-234f0bd6",
+    "sourceSha256": "b5cae7b512e483a882a7823f7ed3c040955d061e019076c3d47115a3940b457d",
+    "start": 2703,
+    "end": 2706,
+    "text": "242",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "The original INA section number and the adjacent USC parallel list identify this distinct pre-IIRIRA provision; preserve its individual section instead of inheriting the first list member.",
+    "review": {
+      "cycle": 6,
+      "referenceId": "reference-00019",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994",
+      "companionOf": "usc-8-1101-fnv1a-234f0bd6-2756"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-234f0bd6-2696",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-234f0bd6",
+    "sourceSha256": "b5cae7b512e483a882a7823f7ed3c040955d061e019076c3d47115a3940b457d",
+    "start": 2696,
+    "end": 2699,
+    "text": "236",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Pre-IIRIRA section 236 concerns exclusion proceedings; current section 1226 concerns detention. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00019",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994",
+      "companionOf": "usc-8-1101-fnv1a-234f0bd6-2756"
+    }
+  },
+  {
+    "id": "cfr-8-236.1-fnv1a-ecd70da7-458",
+    "kind": "cfr",
+    "title": "8",
+    "section": "236.1",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-ecd70da7",
+    "sourceSha256": "ba11de3d6a638d2679941a11f3d7de5dfd65276b7e9692051b1c0519a556ddd7",
+    "start": 458,
+    "end": 480,
+    "text": "section 236 of the Act",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Historical section 236 proceedings before/under former-law context; current section 1226 is a different provision. Identical source text in another location.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02507",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994",
+      "companionOf": "cfr-8-1236.1-fnv1a-ecd70da7-458"
+    }
+  },
+  {
+    "id": "usc-8-1255-fnv1a-d74a2a18-3515",
+    "kind": "usc",
+    "title": "8",
+    "section": "1255",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d74a2a18",
+    "sourceSha256": "e020ebe784a23cccb76c39212d7c8dbc7760cb385977a226ae70158b94931bef",
+    "start": 3515,
+    "end": 3519,
+    "text": "242B",
+    "target": {
+      "title": "8",
+      "section": "1252b",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "The original INA section number and the adjacent USC parallel list identify this distinct pre-IIRIRA provision; preserve its individual section instead of inheriting the first list member.",
+    "review": {
+      "cycle": 6,
+      "referenceId": "reference-01083",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252b&num=0&edition=1994",
+      "companionOf": "usc-8-1255-fnv1a-d74a2a18-3560"
+    }
+  },
+  {
+    "id": "usc-8-1255-fnv1a-d74a2a18-3508",
+    "kind": "usc",
+    "title": "8",
+    "section": "1255",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d74a2a18",
+    "sourceSha256": "e020ebe784a23cccb76c39212d7c8dbc7760cb385977a226ae70158b94931bef",
+    "start": 3508,
+    "end": 3511,
+    "text": "242",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "Former section 242 described apprehension/deportation jurisdiction; current section 1252 is judicial review of removal orders. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01083",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994",
+      "companionOf": "usc-8-1255-fnv1a-d74a2a18-3560"
+    }
+  },
+  {
+    "id": "cfr-8-241.4-fnv1a-00b25a4a-295",
+    "kind": "cfr",
+    "title": "8",
+    "section": "241.4",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-00b25a4a",
+    "sourceSha256": "1404afb4f1d48efd593663d827b70dd4ea9ab0e3916dd41a41515fddd42a09cf",
+    "start": 295,
+    "end": 314,
+    "text": "8 U.S.C. 1226(e)(1)",
+    "target": {
+      "title": "8",
+      "section": "1226",
+      "path": [
+        "e",
+        "1"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Source explicitly dates USC 1226(e)(3) to the 1994 edition; preliminary route loses the cited version. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02433",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1226&num=0&edition=1994",
+      "companionOf": "cfr-8-241.4-fnv1a-00b25a4a-323"
+    }
+  },
+  {
+    "id": "usc-8-1252-fnv1a-e7fc86f3-624",
+    "kind": "usc",
+    "title": "8",
+    "section": "1252",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-e7fc86f3",
+    "sourceSha256": "610565c0f703f116291727dd83b117e6359d8cdc1c3a8c3cca08d95a8d3e3ee9",
+    "start": 624,
+    "end": 627,
+    "text": "(b)",
+    "target": {
+      "title": "8",
+      "section": "1252b",
+      "path": [
+        "b"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly former/repealed section 242B; retain its historical statutory text. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00977",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252b&num=0&edition=1994",
+      "companionOf": "usc-8-1252-fnv1a-e7fc86f3-605"
+    }
+  },
+  {
+    "id": "usc-8-1252-fnv1a-e7fc86f3-629",
+    "kind": "usc",
+    "title": "8",
+    "section": "1252",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-e7fc86f3",
+    "sourceSha256": "610565c0f703f116291727dd83b117e6359d8cdc1c3a8c3cca08d95a8d3e3ee9",
+    "start": 629,
+    "end": 632,
+    "text": "(c)",
+    "target": {
+      "title": "8",
+      "section": "1252b",
+      "path": [
+        "c"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly former/repealed section 242B; retain its historical statutory text. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00977",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252b&num=0&edition=1994",
+      "companionOf": "usc-8-1252-fnv1a-e7fc86f3-605"
+    }
+  },
+  {
+    "id": "usc-8-1252-fnv1a-e7fc86f3-637",
+    "kind": "usc",
+    "title": "8",
+    "section": "1252",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-e7fc86f3",
+    "sourceSha256": "610565c0f703f116291727dd83b117e6359d8cdc1c3a8c3cca08d95a8d3e3ee9",
+    "start": 637,
+    "end": 643,
+    "text": "(e)(1)",
+    "target": {
+      "title": "8",
+      "section": "1252b",
+      "path": [
+        "e",
+        "1"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Expressly former/repealed section 242B; retain its historical statutory text. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00977",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252b&num=0&edition=1994",
+      "companionOf": "usc-8-1252-fnv1a-e7fc86f3-605"
+    }
+  },
+  {
+    "id": "cfr-8-1240.65-fnv1a-69f89d48-235",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1240.65",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-69f89d48",
+    "sourceSha256": "3efd80fd61cfa44a64ddad772cc29f8c3eac5b87d8e1b8c3a6375ddf2709b325",
+    "start": 235,
+    "end": 253,
+    "text": "section 241(a) (2)",
+    "target": {
+      "title": "8",
+      "section": "1251",
+      "path": [
+        "a",
+        "2"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former INA 241(a) deportability grounds in pre-April 1997 law map to historical USC 1251, not current USC 1231. Identical source text in another location.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02421",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1251&num=0&edition=1994",
+      "companionOf": "cfr-8-240.65-fnv1a-69f89d48-235"
+    }
+  },
+  {
+    "id": "cfr-8-1240.65-fnv1a-69f89d48-255",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1240.65",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-69f89d48",
+    "sourceSha256": "3efd80fd61cfa44a64ddad772cc29f8c3eac5b87d8e1b8c3a6375ddf2709b325",
+    "start": 255,
+    "end": 258,
+    "text": "(3)",
+    "target": {
+      "title": "8",
+      "section": "1251",
+      "path": [
+        "a",
+        "3"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former INA 241(a) deportability grounds in pre-April 1997 law map to historical USC 1251, not current USC 1231. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02421",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1251&num=0&edition=1994",
+      "companionOf": "cfr-8-240.65-fnv1a-69f89d48-235"
+    }
+  },
+  {
+    "id": "cfr-8-1240.65-fnv1a-69f89d48-263",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1240.65",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-69f89d48",
+    "sourceSha256": "3efd80fd61cfa44a64ddad772cc29f8c3eac5b87d8e1b8c3a6375ddf2709b325",
+    "start": 263,
+    "end": 277,
+    "text": "(4) of the Act",
+    "target": {
+      "title": "8",
+      "section": "1251",
+      "path": [
+        "a",
+        "4"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former INA 241(a) deportability grounds in pre-April 1997 law map to historical USC 1251, not current USC 1231. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02421",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1251&num=0&edition=1994",
+      "companionOf": "cfr-8-240.65-fnv1a-69f89d48-235"
+    }
+  },
+  {
+    "id": "cfr-8-1240.65-fnv1a-69f89d48-128",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1240.65",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-69f89d48",
+    "sourceSha256": "3efd80fd61cfa44a64ddad772cc29f8c3eac5b87d8e1b8c3a6375ddf2709b325",
+    "start": 128,
+    "end": 156,
+    "text": "section 244(a)(2) of the Act",
+    "target": {
+      "title": "8",
+      "section": "1254",
+      "path": [
+        "a",
+        "2"
+      ],
+      "edition": "1994"
+    },
+    "reason": "Former INA 244(a)(2) concerned suspension of deportation; current INA 244/USC 1254a concerns TPS. Identical source text in another location.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02420",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1254&num=0&edition=1994",
+      "companionOf": "cfr-8-240.65-fnv1a-69f89d48-128"
+    }
+  },
+  {
+    "id": "cfr-20-655.700-fnv1a-e7aa00f6-1214",
+    "kind": "cfr",
+    "title": "20",
+    "section": "655.700",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-e7aa00f6",
+    "sourceSha256": "37b29e94091debe472f3321b4eba9e3db79333676663a4375087b01ffc49634a",
+    "start": 1214,
+    "end": 1232,
+    "text": "INA section 214(m)",
+    "target": {
+      "title": "8",
+      "section": "1184",
+      "path": [
+        "n"
+      ],
+      "edition": "prelim"
+    },
+    "citationNote": "The regulation uses former INA 214(m) as an alias for the H-1B portability provision now at INA 214(n), 8 U.S.C. 1184(n). This link opens that current provision; the printed wording is preserved.",
+    "reason": "This source says \u201cformerly INA 214(m)\u201d in a clause about increased H-1B portability; former section 214(m) is superseded by current 214(n), not today\u2019s student provision at USC 1184(m). Keep source display and route to current n with historical/modern explanatory metadata.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02627",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1184"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-234f0bd6-2771",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-234f0bd6",
+    "sourceSha256": "b5cae7b512e483a882a7823f7ed3c040955d061e019076c3d47115a3940b457d",
+    "start": 2771,
+    "end": 2775,
+    "text": "1252",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "former INA 242 within proceedings governed before the title III-A effective date; section 1252 then covered deportation proceedings, so the preliminary/current version loses the cited law.",
+    "review": {
+      "cycle": 4,
+      "referenceId": "reference-00003",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-234f0bd6-3272",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-234f0bd6",
+    "sourceSha256": "b5cae7b512e483a882a7823f7ed3c040955d061e019076c3d47115a3940b457d",
+    "start": 3272,
+    "end": 3285,
+    "text": "8 U.S.C. 1225",
+    "target": {
+      "title": "8",
+      "section": "1225",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "the quoted transition provision compares a notice under INA 235 before the title III-A changes with a notice under amended INA 239; route to the 1994 version of USC 1225.",
+    "review": {
+      "cycle": 4,
+      "referenceId": "reference-00004",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1225&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-234f0bd6-3287",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-234f0bd6",
+    "sourceSha256": "b5cae7b512e483a882a7823f7ed3c040955d061e019076c3d47115a3940b457d",
+    "start": 3287,
+    "end": 3294,
+    "text": "1252(a)",
+    "target": {
+      "title": "8",
+      "section": "1252",
+      "path": [
+        "a"
+      ],
+      "edition": "1994"
+    },
+    "reason": "the quoted transition provision concerns former INA 242(a) proceedings before the title III-A changes; use the 1994 version of USC 1252(a).",
+    "review": {
+      "cycle": 4,
+      "referenceId": "reference-00005",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1252&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1612-fnv1a-4f70c785-69",
+    "kind": "usc",
+    "title": "8",
+    "section": "1612",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-4f70c785",
+    "sourceSha256": "5b8be4210aa0388fee2f4e757c6d41a739abced2b77c3439970b75903530f576",
+    "start": 69,
+    "end": 82,
+    "text": "8 U.S.C. 1253",
+    "target": {
+      "title": "8",
+      "section": "1253",
+      "path": [],
+      "edition": "1994"
+    },
+    "reason": "the linked USC 1253 citation is for former INA 243(h), expressly identified as in effect immediately before IIRIRA section 307; use the 1994 USC edition.",
+    "review": {
+      "cycle": 4,
+      "referenceId": "reference-00148",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1994-title8-section1253&num=0&edition=1994"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-18e8f355-2961",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-18e8f355",
+    "sourceSha256": "0f4cf4697d0b65e12b92796cfa7b91f109a332f67ab4dd33001c55e1c121a550",
+    "start": 2961,
+    "end": 2993,
+    "text": "section 1152(e)(7) of this title",
+    "target": {
+      "title": "8",
+      "section": "1152",
+      "path": [
+        "e",
+        "7"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=19"
+    },
+    "reason": "Expressly refers to the pre-April 1, 1980 conditional-entry regime; use historical USC edition and preserve obsolete subsection path.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00107",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=18"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-18e8f355-3461",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-18e8f355",
+    "sourceSha256": "0f4cf4697d0b65e12b92796cfa7b91f109a332f67ab4dd33001c55e1c121a550",
+    "start": 3461,
+    "end": 3470,
+    "text": "203(a)(7)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "7"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=20"
+    },
+    "reason": "Expressly refers to the pre-April 1, 1980 conditional-entry regime; use historical USC edition and preserve obsolete subsection path.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00109",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=20"
+    }
+  },
+  {
+    "id": "usc-8-1641-fnv1a-7cc5d196-85",
+    "kind": "usc",
+    "title": "8",
+    "section": "1641",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-7cc5d196",
+    "sourceSha256": "01946e9e6459ad677e8a31f0aa4005e7e155c49a255b38eb646f69605ecd3312",
+    "start": 85,
+    "end": 104,
+    "text": "8 U.S.C. 1153(a)(7)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "7"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=20"
+    },
+    "reason": "Expressly refers to the pre-April 1, 1980 conditional-entry regime; use historical USC edition and preserve obsolete subsection path.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-01583",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=20"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-d88bdc0f-3143",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d88bdc0f",
+    "sourceSha256": "5c13358dd94bc21a6f5f39a1cd39f45e78246d6114cf7234fe0aa2b67ecd8fcf",
+    "start": 3143,
+    "end": 3162,
+    "text": "8 U.S.C. 1153(a)(3)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "3"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00085",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-d88bdc0f-4194",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d88bdc0f",
+    "sourceSha256": "5c13358dd94bc21a6f5f39a1cd39f45e78246d6114cf7234fe0aa2b67ecd8fcf",
+    "start": 4194,
+    "end": 4203,
+    "text": "203(a)(4)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "4"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00087",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-d88bdc0f-4524",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d88bdc0f",
+    "sourceSha256": "5c13358dd94bc21a6f5f39a1cd39f45e78246d6114cf7234fe0aa2b67ecd8fcf",
+    "start": 4524,
+    "end": 4533,
+    "text": "203(a)(8)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "8"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00089",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-d88bdc0f-4732",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d88bdc0f",
+    "sourceSha256": "5c13358dd94bc21a6f5f39a1cd39f45e78246d6114cf7234fe0aa2b67ecd8fcf",
+    "start": 4732,
+    "end": 4741,
+    "text": "203(a)(6)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "6"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00091",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-d88bdc0f-5333",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d88bdc0f",
+    "sourceSha256": "5c13358dd94bc21a6f5f39a1cd39f45e78246d6114cf7234fe0aa2b67ecd8fcf",
+    "start": 5333,
+    "end": 5342,
+    "text": "203(a)(6)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "6"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00093",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    }
+  },
+  {
+    "id": "cfr-8-204.5-fnv1a-cf773203-219",
+    "kind": "cfr",
+    "title": "8",
+    "section": "204.5",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-cf773203",
+    "sourceSha256": "3cf3e8c5ce53a2a88610f84adb58204a519ce406192a1433a24287a2d746f297",
+    "start": 219,
+    "end": 239,
+    "text": "203(a)(6) of the Act",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "6"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02335",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    }
+  },
+  {
+    "id": "cfr-8-1245.1-fnv1a-e42b77d1-140",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1245.1",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-e42b77d1",
+    "sourceSha256": "b5e30286903b8bf94abb6d6b5dbfa7f6f9d961665c88c7f440529a39d022f290",
+    "start": 140,
+    "end": 158,
+    "text": "section 202(a) (3)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "3"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly refers to preference status under former section 202(a)(3)/(6) before October 1, 1991; current section 1152 has different text.",
+    "citationNote": "The printed INA 202(a)(3)/(6) appears to be a source error: the former preference categories are in INA 203(a)(3)/(6), 8 U.S.C. 1153. This link opens those archived provisions. The regulation\u2019s printed wording is preserved.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02537",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    }
+  },
+  {
+    "id": "cfr-8-1245.1-fnv1a-e42b77d1-162",
+    "kind": "cfr",
+    "title": "8",
+    "section": "1245.1",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-e42b77d1",
+    "sourceSha256": "b5e30286903b8bf94abb6d6b5dbfa7f6f9d961665c88c7f440529a39d022f290",
+    "start": 162,
+    "end": 165,
+    "text": "(6)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "6"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Companion preference category; source 202 is an apparent typo for former INA203.",
+    "citationNote": "The printed INA 202(a)(3)/(6) appears to be a source error: the former preference categories are in INA 203(a)(3)/(6), 8 U.S.C. 1153. This link opens those archived provisions. The regulation\u2019s printed wording is preserved.",
+    "review": {
+      "cycle": 2,
+      "companionOf": "reference-02537",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-18e8f355-4120",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-18e8f355",
+    "sourceSha256": "0f4cf4697d0b65e12b92796cfa7b91f109a332f67ab4dd33001c55e1c121a550",
+    "start": 4120,
+    "end": 4124,
+    "text": "(15)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "15"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27"
+    },
+    "reason": "The linked list expressly cites former paragraphs of INA 212 for aliens entering before Apr. 1, 1980; retain that statutory edition.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00111",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-18e8f355-4132",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-18e8f355",
+    "sourceSha256": "0f4cf4697d0b65e12b92796cfa7b91f109a332f67ab4dd33001c55e1c121a550",
+    "start": 4132,
+    "end": 4136,
+    "text": "(21)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "21"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27"
+    },
+    "reason": "The linked list expressly cites former paragraphs of INA 212 for aliens entering before Apr. 1, 1980; retain that statutory edition.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00113",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-18e8f355-4148",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-18e8f355",
+    "sourceSha256": "0f4cf4697d0b65e12b92796cfa7b91f109a332f67ab4dd33001c55e1c121a550",
+    "start": 4148,
+    "end": 4152,
+    "text": "(32)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "32"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=29"
+    },
+    "reason": "The linked list expressly cites former paragraphs of INA 212 for aliens entering before Apr. 1, 1980; retain that statutory edition.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00115",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=29"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-d88bdc0f-3164",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d88bdc0f",
+    "sourceSha256": "5c13358dd94bc21a6f5f39a1cd39f45e78246d6114cf7234fe0aa2b67ecd8fcf",
+    "start": 3164,
+    "end": 3167,
+    "text": "(6)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "6"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00085",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32",
+      "companionOf": "usc-8-1101-fnv1a-d88bdc0f-3143"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-d88bdc0f-4719",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d88bdc0f",
+    "sourceSha256": "5c13358dd94bc21a6f5f39a1cd39f45e78246d6114cf7234fe0aa2b67ecd8fcf",
+    "start": 4719,
+    "end": 4728,
+    "text": "203(a)(3)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "3"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00091",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32",
+      "companionOf": "usc-8-1101-fnv1a-d88bdc0f-4732"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-d88bdc0f-5320",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-d88bdc0f",
+    "sourceSha256": "5c13358dd94bc21a6f5f39a1cd39f45e78246d6114cf7234fe0aa2b67ecd8fcf",
+    "start": 5320,
+    "end": 5329,
+    "text": "203(a)(3)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "3"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00093",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32",
+      "companionOf": "usc-8-1101-fnv1a-d88bdc0f-5333"
+    }
+  },
+  {
+    "id": "cfr-8-204.5-fnv1a-cf773203-198",
+    "kind": "cfr",
+    "title": "8",
+    "section": "204.5",
+    "field": "x",
+    "sourceFingerprint": "fnv1a-cf773203",
+    "sourceSha256": "3cf3e8c5ce53a2a88610f84adb58204a519ce406192a1433a24287a2d746f297",
+    "start": 198,
+    "end": 215,
+    "text": "section 203(a)(3)",
+    "target": {
+      "title": "8",
+      "section": "1153",
+      "path": [
+        "a",
+        "3"
+      ],
+      "edition": "1988",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32"
+    },
+    "reason": "Expressly pre-October 1, 1991 preference categories. Current USC sections are not an edition-accurate representation of these categories. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-02335",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=32",
+      "companionOf": "cfr-8-204.5-fnv1a-cf773203-219"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-18e8f355-4099",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-18e8f355",
+    "sourceSha256": "0f4cf4697d0b65e12b92796cfa7b91f109a332f67ab4dd33001c55e1c121a550",
+    "start": 4099,
+    "end": 4118,
+    "text": "section 1182(a)(14)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "14"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27"
+    },
+    "reason": "The linked list expressly cites former paragraphs of INA 212 for aliens entering before Apr. 1, 1980; retain that statutory edition. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00111",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27",
+      "companionOf": "usc-8-1101-fnv1a-18e8f355-4120"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-18e8f355-4126",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-18e8f355",
+    "sourceSha256": "0f4cf4697d0b65e12b92796cfa7b91f109a332f67ab4dd33001c55e1c121a550",
+    "start": 4126,
+    "end": 4130,
+    "text": "(20)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "20"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27"
+    },
+    "reason": "The linked list expressly cites former paragraphs of INA 212 for aliens entering before Apr. 1, 1980; retain that statutory edition. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00111",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27",
+      "companionOf": "usc-8-1101-fnv1a-18e8f355-4120"
+    }
+  },
+  {
+    "id": "usc-8-1101-fnv1a-18e8f355-4138",
+    "kind": "usc",
+    "title": "8",
+    "section": "1101",
+    "field": "text",
+    "sourceFingerprint": "fnv1a-18e8f355",
+    "sourceSha256": "0f4cf4697d0b65e12b92796cfa7b91f109a332f67ab4dd33001c55e1c121a550",
+    "start": 4138,
+    "end": 4142,
+    "text": "(25)",
+    "target": {
+      "title": "8",
+      "section": "1182",
+      "path": [
+        "a",
+        "25"
+      ],
+      "edition": "1976",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27"
+    },
+    "reason": "The linked list expressly cites former paragraphs of INA 212 for aliens entering before Apr. 1, 1980; retain that statutory edition. Companion in the same explicitly historical citation list.",
+    "review": {
+      "cycle": 2,
+      "referenceId": "reference-00111",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1976-00200/uscode1976-002008012/uscode1976-002008012.pdf#page=27",
+      "companionOf": "usc-8-1101-fnv1a-18e8f355-4120"
+    }
+  }
+]
