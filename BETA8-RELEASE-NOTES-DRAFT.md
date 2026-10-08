@@ -37,6 +37,24 @@ Saved-data import now accepts current JSON backups and `INASearch_Data.json`. Ol
 
 Existing citation-display preferences switch to Follow View Setting once after updating. You can choose Always or Never in Settings, and that choice is retained.
 
+## Changes in action
+
+**Historical INA text:** INA 321 now includes the former statutory text, its official source, and a prominent repeal warning.
+
+![Historical INA 321 with its repeal warning and source](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-historical-ina.png)
+
+**Home index — before and after:** The CFR index appears below the INA, with its own Expand All and Collapse All controls.
+
+![Beta7 and Beta8 Home index comparison](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-home-before-after.png)
+
+**Copy controls — before and after, close-up:** The fixed column offers citation, text, or both. Hovering over combined copy previews the selected provision and its preface.
+
+![Close-up of Beta7 and Beta8 copy controls](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-copy-before-after.png)
+
+**Search citations — before and after, close-up:** These are the same two matches in INA 212(j) for “this title.” Beta8 displays the converted INA references while preserving the search marks.
+
+![Close-up of citation wording and search marks in Beta7 and Beta8](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-search-citations-before-after.png)
+
 ## Downloads
 
 - **INASearch.html** — download this file for everyday use.
@@ -46,5 +64,5 @@ Download either file and open it in Chrome or Edge. Both include the legal text 
 
 ### SHA-256 checksums
 
-- `INASearch.html`: `5428acc15c305caded8eea718b73b0d1bfdc3ca607cef4f242d2b801a186e8dd`
-- `INASearch-Uncompressed.html`: `76617d6754dadb6ff8ef69012575c0de4be10b0b8a8f31250a1be3160ea8b84c`
+- `INASearch.html`: `1390d444d9e7c8de66027411d8de97458fa3ccb3c1a010c0d311b03e707dcaf1`
+- `INASearch-Uncompressed.html`: `d462f7ac8edcb6d04b09a3b3c8d3d8f510e1cc7387ca4fde52dc3912a6f8bd61`
