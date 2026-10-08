@@ -1,5 +1,9 @@
 # Browser inspection for coding work
 
+## Usable browser copies only
+
+Never open or provide `src/INASearch.template.html` as a browser copy or preview. It is source input and is not a usable application. Browser links and browser inspection must use the built root `INASearch.html` or the working preview at `http://127.0.0.1:8765/` (or the LAN preview below). Rebuild after source changes before presenting the app.
+
 ## Dave's independent Linux preview
 
 Dave inspects the MacBook working copy from his Linux desktop on the same home network before changes are pushed. The preview is served by `tools/preview-server.js` on port 8765, running as a detached Node process (logs: `~/Library/Logs/INASearch/preview.log`; restart after a Mac reboot with `node tools/preview-server.js`). Open `http://Daves-MacBook-Air.local:8765/` (LAN IP on setup: `192.168.0.245`). The preview injects a browser-local SHA-256 compatibility shim because LAN HTTP lacks SubtleCrypto; secure-context features such as connecting a save file may be unavailable. The published HTML is unchanged. It serves only the built `INASearch.html` and a version endpoint, and reloads browser tabs automatically when the HTML content changes. After source changes, run `node tools/build-standalone.js` so the preview reflects them. Do not push changes until Dave has had his independent inspection and authorized the push. Discover local network/tooling details autonomously rather than asking Dave for information available on this machine.

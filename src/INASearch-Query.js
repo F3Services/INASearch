@@ -175,7 +175,8 @@
       const saved = highlights.find(range => range.start <= left && range.end >= right);
       parts.push({ text: fragment.text.slice(left, right), match: hit.match !== false && left >= hit.start && right <= hit.end, ...(saved ? { highlightColor: saved.color } : {}) });
     }
-    return { start, end, matchStart: hit.start, matchEnd: hit.end, leadingEllipsis: start > 0, trailingEllipsis: end < fragment.text.length, parts };
+    return { start, end, matchStart: hit.start, matchEnd: hit.end, leadingEllipsis: start > 0, trailingEllipsis: end < fragment.text.length, parts,
+      ...(fragment.source ? { source: { authority: fragment.authority, recordId: fragment.recordId, target: fragment.source } } : {}) };
   }
   function previewText(text, ast, ranges = []) {
     const hits = rawMatches(text, occurrence.compileQuery(ast), [{ start: 0, end: text.length }]);

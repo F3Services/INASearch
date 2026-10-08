@@ -21,6 +21,7 @@ window.INA_SEARCH_PROFILE = {
     "hideTopThemeControls": false,
     "hideLocalShareWarning": false,
     "statutoryLinkCitationSystem": "view",
+    "statutoryLinkCitationSystemVersion": 2,
     "highlightInaCitationLinks": false,
     "highlightDefinedTerms": false,
     "noteDisplayPosition": "top",
