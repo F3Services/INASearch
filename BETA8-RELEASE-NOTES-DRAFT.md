@@ -14,6 +14,8 @@ Beta8 makes finding, comparing, and copying the law easier, and adds historical 
 
 ## What’s fixed
 
+- Fixed citation jumps that could stop at the wrong position when a new citation was entered during scrolling, especially when the direction changed.
+- Corrected statutory section highlighting so selecting a parent unit includes its child units. Also corrected clause addresses in INA 210.
 - Corrected CFR paragraph structure and selection outlines so navigation, copying, highlights, and inserted excerpts target the right unit.
 - Corrected more citation links, including CFR subpart references and references in historical INA text that could open the wrong modern provision.
 - Improved citation display in search results and when switching views, preserving search marks, saved highlights, and reading positions. Yellow highlighting now applies only to converted INA citations.
@@ -64,5 +66,5 @@ Download either file and open it in Chrome or Edge. Both include the legal text 
 
 ### SHA-256 checksums
 
-- `INASearch.html`: `1390d444d9e7c8de66027411d8de97458fa3ccb3c1a010c0d311b03e707dcaf1`
-- `INASearch-Uncompressed.html`: `d462f7ac8edcb6d04b09a3b3c8d3d8f510e1cc7387ca4fde52dc3912a6f8bd61`
+- `INASearch.html`: `8197dc251a861d1063545abdff5b5a23752777ef4b598c964d1ca03d08541044`
+- `INASearch-Uncompressed.html`: `239dc02480e35b5d1a1f5009b1295ea924f01acaac400fafac16bd95663d2624`

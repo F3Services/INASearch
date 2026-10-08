@@ -172,6 +172,7 @@ function makeBuild(template, corpus, profile, options) {
       labels: corpus.title8.chapterDispositions
     },
     cfrHierarchyVersion: corpus.legalReferenceMetadata.cfrHierarchyVersion,
+    statuteRunInRevision: corpus.title8.runInRevision,
     corpusCompression: corpusPayload.manifest.compression,
     generatedAt: new Date().toISOString()
   };

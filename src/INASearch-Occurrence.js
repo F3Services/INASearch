@@ -22,7 +22,7 @@
   // The fragment/hierarchy format is unchanged. Extra cached fields are ignored,
   // so removing the redundant citation index need not force a cold rebuild.
   const PERSISTED_PROJECTION_SCHEMA_VERSION = 2;
-  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-5`;
+  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-6`;
   const DEFAULT_SLICE_MS = 8;
   const STATUTE_DEPTHS = Object.freeze({
     section: 0, subsection: 1, paragraph: 2, subparagraph: 3, clause: 4,
@@ -224,7 +224,7 @@
     const depth = Math.max(0, (currentPath?.length || 1) - 1), token = String(inlineTokens[0] || "");
     const sameLevel = depth === 0 ? /^[a-z]+$/.test(token)
       : depth === 1 ? /^\d+$/.test(token)
-      : depth === 2 ? /^[A-Z]+$/.test(token)
+      : depth === 2 ? /^[A-Z]+$/.test(token) && !/^[IVXLCDM]+$/.test(token)
       : depth === 3 ? /^[ivxlcdm]+$/.test(token)
       : depth === 4 ? /^[IVXLCDM]+$/.test(token)
       : depth % 2 === 1 ? /^[a-z]+$/.test(token) : /^[A-Z]+$/.test(token);

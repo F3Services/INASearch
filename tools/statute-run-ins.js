@@ -4,6 +4,7 @@ const markerPattern = /\((\d{1,3}|[A-Za-z]{1,4}|[a-z]\d{1,3})\)/g;
 const romanPattern = /^(?:i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)$/i;
 const referenceWords = new Set(["section", "sections", "subsection", "subsections", "paragraph", "paragraphs", "subparagraph", "subparagraphs", "clause", "clauses", "subclause", "subclauses", "item", "items", "subdivision", "subdivisions", "part", "parts", "chapter", "chapters", "title", "titles", "under"]);
 const referenceConnector = /^[\s,()[\]]*(?:(?:and|or|through|to)[\s,()[\]]*)*$/i;
+const RUN_IN_REVISION = 2;
 
 function isAddressToken(token) {
   return /^\d{1,3}$/.test(token) || /^[A-Za-z]$/.test(token) || /^[a-z]\d{1,3}$/.test(token) || romanPattern.test(token) || /^([a-z])\1{1,2}$/.test(token) || /^([A-Z])\1$/.test(token);
@@ -146,7 +147,9 @@ function fallbackRunInPath(currentPath, parentPath, inlineTokens) {
   const firstInlineToken = String(inlineTokens[0] || "");
   const sameLevel = currentDepth === 0 ? /^[a-z]+$/.test(firstInlineToken)
     : currentDepth === 1 ? /^\d+$/.test(firstInlineToken)
-    : currentDepth === 2 ? /^[A-Z]+$/.test(firstInlineToken)
+    // Capital Roman clauses can sit directly inside a capital-letter paragraph
+    // (INA 210(a)(2)(A)/(B)); they are children, not paragraph siblings.
+    : currentDepth === 2 ? /^[A-Z]+$/.test(firstInlineToken) && !/^[IVXLCDM]+$/.test(firstInlineToken)
     : currentDepth === 3 ? /^[ivxlcdm]+$/.test(firstInlineToken)
     : currentDepth === 4 ? /^[IVXLCDM]+$/.test(firstInlineToken)
     : currentDepth % 2 === 1 ? /^[a-z]+$/.test(firstInlineToken) : /^[A-Z]+$/.test(firstInlineToken);
@@ -162,6 +165,7 @@ function collectStructuralPaths(nodes, path, identities) {
 }
 
 function indexStatuteRunIns(corpus) {
+  if (corpus?.title8) corpus.title8.runInRevision = RUN_IN_REVISION;
   const stats = { sections: 0, sourceNodes: 0, markers: 0, paths: 0 };
   for (const section of corpus?.title8?.sections || []) {
     const structuralIdentities = new Set();

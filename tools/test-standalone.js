@@ -687,6 +687,9 @@ async function main() {
   assert.strictEqual(JSON.stringify(packedTransferredSection._t), '[["31",52,"10101"],["32",52,"10102"]]', "Unexpected compact transfer tuple encoding.");
   assert(full.corpus.title8.sections.flatMap(section => section.body || []).every(node => Array.isArray(node.path)), "Compact corpus hydration did not restore top-level statutory paths.");
   const hydratedSource = unpackLegalReferences(JSON.parse(JSON.stringify(fullSource)));
+  assert.deepStrictEqual(plain(hydratedSource.title8.sections.find(section => section.section === "1160").runInPaths.filter(path => path[1] === "2")), [
+    ["a", "2", "A", "I"], ["a", "2", "A", "II"], ["a", "2", "B", "I"], ["a", "2", "B", "II"]
+  ], "INA 210's capital Roman clauses must remain inside their distinct A/B paragraphs.");
   for (const href of ["/us/usc/t8/s1101/a/15/H/i/b", "/us/pl/104/208", "/us/stat/110/3009", "/us/act/1952-06-27/ch477"]) {
     assert.strictEqual(expandHouseHref(compactHouseHref(href)), href, `Packed House href did not round-trip: ${href}`);
   }
@@ -2017,7 +2020,7 @@ async function main() {
     ["a1952-06-27/ch477", "/us/act/1952-06-27/ch477"]
   ]) assert.strictEqual(expandPackedHouseHref(packed), expanded, `The browser did not expand packed House target ${packed}.`);
   const hydrateStart = fallbackSource.indexOf("    function hydrateLegalReferences(");
-  const hydrateEnd = fallbackSource.indexOf("\n    if (corpus && corpus.legalReferenceMetadata", hydrateStart);
+  const hydrateEnd = fallbackSource.indexOf("\n    if (corpus &&", hydrateStart);
   assert(hydrateStart >= 0 && hydrateEnd > hydrateStart, "Could not extract the browser legal-reference hydrator.");
   const hydrateLegalReferences = vm.runInNewContext(`(${fallbackSource.slice(hydrateStart, hydrateEnd).trim()})`, {
     expandPackedHouseHref,
@@ -2524,6 +2527,7 @@ async function main() {
   let incrementalInScopeTopLevelOpens = 0;
   let incrementalInScopeResultViews = 0;
   const runIncrementalInScopeSearch = extractedFunction(fallbackSource, "runSearch", "shouldDeferBroadSearch", {
+    cancelLegalReaderScroll: () => {},
     state: incrementalInScopeState,
     els: incrementalInScopeElements,
     refreshSearchScope: () => incrementalInScopeState.searchScope,
@@ -2955,6 +2959,11 @@ async function main() {
     { id: "multi", associations: [noteAssociation("1182", ["a"]), noteAssociation("1184", ["b"])] },
     { id: "range", associations: [noteAssociation("1182", ["a"], { unit: "1184", path: ["b"] })] }
   ] };
+  const legacyStatuteRunInAssociation = extractedFunction(fallbackSource, "legacyStatuteRunInAssociation", "statuteRunInReviewLocation", { Number, String });
+  const statuteRunInReviewLocation = extractedFunction(fallbackSource, "statuteRunInReviewLocation", "reconcileStatuteRunInAnnotations", { legacyStatuteRunInAssociation, Number, String, JSON });
+  const reconcileStatuteRunInAnnotations = extractedFunction(fallbackSource, "reconcileStatuteRunInAnnotations", "reconcileCfrAnnotations", {
+    profile: noteRenderProfile, state: {}, legacyStatuteRunInAssociation, requestAnimationFrame: callback => callback(), markProfileChanged: () => {}
+  });
   const renderCitationNotes = extractedFunction(fallbackSource, "renderInlineLegalNotes", "startInlineNoteEditor", {
     state: { view: "search", pendingAnnotationFocus: null },
     els: { detail: {} },
@@ -2963,6 +2972,7 @@ async function main() {
     legalUnitNoteHost: trigger => trigger.host,
     associationStartsAtLocation: (association, location) => association.family === location.family && association.title === location.title && association.start.unit === location.unit && JSON.stringify(association.start.path) === JSON.stringify(location.path),
     profile: noteRenderProfile,
+    reconcileStatuteRunInAnnotations, statuteRunInReviewLocation,
     document: { createElement: () => ({ className: "", attributes: {}, innerHTML: "", removed: false, setAttribute(name, value) { this.attributes[name] = value; }, remove() { this.removed = true; } }) },
     citationNoteHtml: (note, association) => `[${note.id}:${association.start.unit}]`,
     renderUserHighlights: () => {},
@@ -2976,6 +2986,18 @@ async function main() {
   noteHostA.insertions = []; noteHostB.insertions = [];
   renderCitationNotes();
   assert(noteHostA.insertions.every(insertion => insertion.position === "afterend") && noteHostB.insertions.every(insertion => insertion.position === "afterend"), "Bottom-position notes were not immediately rerendered below their citations.");
+  const legacyAssociation = { ...noteAssociation("1160", ["a", "2", "I"]), label: "INA 210(a)(2)(I)" };
+  const legacyNote = { id: "legacy", text: "Preserved ambiguous note", associations: [legacyAssociation] };
+  const legacyHighlight = { segments: [{ association: structuredClone(legacyAssociation), anchor: { exact: "Preserved quote", status: "active" } }] };
+  noteRenderProfile.notes.push(legacyNote);noteRenderProfile.highlights = [legacyHighlight];
+  const legacyHost = makeNoteHost("legacy");
+  noteTriggers.push({ location: { family: "usc", title: 8, unit: "1160", path: ["a", "2"] }, host: legacyHost });
+  renderCitationNotes();
+  assert.strictEqual(legacyAssociation.structureStatus, "needs-review");
+  assert.deepStrictEqual(legacyAssociation.start.path, ["a", "2", "I"], "A legacy ambiguous note must retain its original citation.");
+  assert.strictEqual(legacyNote.text, "Preserved ambiguous note");
+  assert.strictEqual(legacyHighlight.segments[0].anchor.status, "needs-review");
+  assert.strictEqual(legacyHost.insertions.at(-1).section.innerHTML, "[legacy:1160]", "Legacy ambiguous notes must remain visible at their enclosing paragraph for review.");
   const occurrenceRoutingSource = fallbackSource.slice(fallbackSource.indexOf("function tryRunOccurrenceSearch"), fallbackSource.indexOf("function runSearch", fallbackSource.indexOf("function tryRunOccurrenceSearch")));
   assert(occurrenceRoutingSource.includes('classList.remove("authority-browse", "single-legal-result")') && occurrenceRoutingSource.includes("renderAuthorityBrowseHeader(null)"), "Occurrence searches can remain hidden by a prior citation/authority-browse layout.");
   const focusedOccurrenceSource = fallbackSource.slice(fallbackSource.indexOf("async function renderStructuredSearchPane"), fallbackSource.indexOf("function annotationTextMatchesAst", fallbackSource.indexOf("async function renderStructuredSearchPane")));
@@ -2984,7 +3006,7 @@ async function main() {
   assert(fallbackSource.includes("const topOffsetRatio = normalizeReadingOffsetPercent(offsetPercent) / 100;") && fallbackSource.includes("return rootRect.top + rootHeight * topOffsetRatio;") && fallbackSource.includes("return navigatorBottom + (viewportBottom - navigatorBottom) * topOffsetRatio;"), "The statute and focused-pane reading lines do not share the selected percentage offset.");
   assert(fallbackSource.includes('.statutory-node { position: relative; margin: 5px 0 5px 15px; padding: 0; border-radius: 6px; }'), "Nested statutory nodes do not use one fixed indentation increment without stacking horizontal padding.");
   assert(fallbackSource.includes('.statute-body > .statutory-node { margin-inline-start: 0; }'), "Top-level statutory nodes retain an unnecessary indentation increment.");
-  assert(/\.statutory-runin-line \{ position: relative; margin: 5px 0 5px min\(calc\(var\(--depth, 0\) \* 15px\), 90px\); padding: 5px 7px 7px; border-radius: 6px; \}/.test(fallbackSource), "Run-in statutory units lost their independent source-address indentation.");
+  assert(fallbackSource.includes("--runin-parent-depth: 0;") && fallbackSource.includes("min(calc(var(--runin-parent-depth) * 15px), 90px)"), "Nested run-in statutory units must subtract their enclosing parent's indentation.");
   assert(/\.statutory-node\.target,\s*\.statutory-runin-line\.citation-target \{/.test(fallbackSource), "Run-in statutory targets do not share the standard target styling.");
   assert(fallbackSource.includes('.cfr-block.target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }'), "CFR citation targets do not match the statute reader's blue block treatment.");
   assert(!fallbackSource.includes('.cfr-unit-wrapper.target { background:'), "CFR citation targets still paint each wrapped inline fragment separately.");
@@ -3770,7 +3792,7 @@ async function main() {
       }
     }
   }
-  assert.strictEqual(auditedGeneratedRunInPaths, 285, "The exhaustive compact-citation audit did not visit every generated statutory run-in path.");
+  assert.strictEqual(auditedGeneratedRunInPaths, 287, "The exhaustive compact-citation audit did not visit every generated statutory run-in path.");
   const lowercaseRomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15oiii"));
   assert.deepStrictEqual(lowercaseRomanAmbiguity.path, ["a", "15", "O", "iii"], "The longest valid clause was not selected for an ambiguous lowercase Roman sequence.");
   assert.strictEqual(lowercaseRomanAmbiguity.ambiguity.commonLabel, "INA 101(a)(15)(O)", "A lowercase Roman ambiguity does not expose its shared citation prefix once.");
@@ -4962,22 +4984,61 @@ async function main() {
   readingOffsetProfile.preferences.pageViewOffsetPercent = 40;
   assert.strictEqual(statuteJumpLine(), 470, "Changing the page-view offset did not move the jump line.");
   assert.strictEqual(statuteReadingLine(), 470, "Tracking and jumping must use the same line.");
+  const statuteScrollWindow = { scrollY: 700, scrollX: 20, scrollTo: options => statuteScrollCalls.push(options) };
+  const legalReaderScrollAnimations = new WeakMap(), legalReaderScrollRevisions = new WeakMap(), statuteAnimationFrames = new Map();
+  let statuteAnimationFrameId = 0;
+  const requestStatuteAnimationFrame = callback => { statuteAnimationFrames.set(++statuteAnimationFrameId, callback); return statuteAnimationFrameId; };
+  const cancelLegalReaderScroll = extractedFunction(fallbackSource, "cancelLegalReaderScroll", "animateLegalReaderScroll", {
+    window: statuteScrollWindow, legalReaderScrollAnimations, legalReaderScrollRevisions, cancelAnimationFrame: id => statuteAnimationFrames.delete(id)
+  });
+  const animateLegalReaderScroll = extractedFunction(fallbackSource, "animateLegalReaderScroll", "scrollStatuteAnchorToReadingLine", {
+    window: statuteScrollWindow, legalReaderScrollAnimations, performance: { now: () => 0 }, Math, requestAnimationFrame: requestStatuteAnimationFrame
+  });
+  animateLegalReaderScroll(statuteScrollWindow, 1000, 20);
+  statuteAnimationFrames.get(statuteAnimationFrameId)(100);
+  assert(statuteScrollCalls.at(-1).top > 700 && statuteScrollCalls.at(-1).top < 1000, "The controlled animation must move toward its absolute destination.");
+  const staleAnimationStep = statuteAnimationFrames.get(statuteAnimationFrameId);
+  cancelLegalReaderScroll();
+  const callsAtCancellation = statuteScrollCalls.length;
+  staleAnimationStep(650);
+  assert.strictEqual(statuteScrollCalls.length, callsAtCancellation, "A canceled animation frame must never resume the previous jump.");
+  animateLegalReaderScroll(statuteScrollWindow, 1000, 20);
+  statuteAnimationFrames.get(statuteAnimationFrameId)(650);
+  assert.deepStrictEqual(plain(statuteScrollCalls.at(-1)), { top: 1000, left: 20, behavior: "instant" }, "The controlled animation must finish at the exact destination.");
+  statuteScrollCalls.length = 0;
+  const controlledScroll = (root, top, left) => statuteScrollCalls.push({ top, left, behavior: "controlled" });
   const scrollStatuteAnchorToReadingLine = extractedFunction(fallbackSource, "scrollStatuteAnchorToReadingLine", "currentStatutePathAtReadingLine", {
     statuteJumpLine: () => 200,
     animatedCitationJumpsEnabled: () => true,
-    window: { scrollBy: options => statuteScrollCalls.push(options) }
+    cancelLegalReaderScroll,
+    animateLegalReaderScroll: controlledScroll,
+    window: statuteScrollWindow,
+    Math
   });
   scrollStatuteAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 500 }) });
-  assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "smooth" }, "Statute navigation did not align an anchor to the top reading line.");
+  assert.deepStrictEqual(plain(statuteScrollCalls.splice(0)), [{ top: 700, left: 20, behavior: "instant" }, { top: 1000, left: 20, behavior: "controlled" }], "Statute navigation must cancel the old animation and align the new anchor using its actual scroll position.");
   scrollStatuteAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 500 }) }, true);
-  assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "instant" }, "Live CFR typing does not override CSS smooth scrolling for the latest selection.");
+  assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 1000, left: 20, behavior: "instant" }, "Live CFR typing does not override CSS smooth scrolling for the latest selection.");
+  statuteScrollCalls.length = 0;
   const instantStatuteAnchorToReadingLine = extractedFunction(fallbackSource, "scrollStatuteAnchorToReadingLine", "currentStatutePathAtReadingLine", {
     statuteJumpLine: () => 200,
     animatedCitationJumpsEnabled: () => false,
-    window: { scrollBy: options => statuteScrollCalls.push(options) }
+    cancelLegalReaderScroll,
+    window: statuteScrollWindow,
+    Math
   });
   instantStatuteAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 500 }) });
-  assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 300, behavior: "auto" }, "Disabling animated citation jumps did not switch reader navigation to an immediate jump.");
+  assert.deepStrictEqual(plain(statuteScrollCalls.pop()), { top: 1000, left: 20, behavior: "instant" }, "Disabling animated citation jumps did not switch reader navigation to an immediate jump.");
+  statuteScrollCalls.length = 0;
+  const paneScrollCalls = [];
+  const paneScrollRoot = { scrollTop: 100, scrollLeft: 12, scrollTo: options => paneScrollCalls.push(options) };
+  const paneAnchorToReadingLine = extractedFunction(fallbackSource, "scrollStatuteAnchorToReadingLine", "currentStatutePathAtReadingLine", {
+    state: { focusedActivePaneId: "reader" }, focusedPaneById: () => ({ scrollRoot: paneScrollRoot }),
+    statuteJumpLine: () => 200, animatedCitationJumpsEnabled: () => true,
+    cancelLegalReaderScroll, window: statuteScrollWindow, Math
+  });
+  paneAnchorToReadingLine({ getBoundingClientRect: () => ({ top: 350 }) });
+  assert.deepStrictEqual(plain(paneScrollCalls), [{ top: 100, left: 12, behavior: "instant" }, { top: 250, left: 12, behavior: "instant" }], "Focused-pane jumps must measure from the pane's actual scroll position and preserve horizontal scrolling.");
   assert(fallbackSource.includes("html.instant-citation-jumps { scroll-behavior: auto; }") && /syncCitationJumpAnimationPreference\(\);\s+syncAppearanceControls\(\);\s+updateCorpusStatus\(\);/.test(fallbackSource), "The immediate citation-jump preference is not applied before startup navigation.");
   let renderedStatuteTarget = null;
   let renderedSearchMatch = null;
@@ -5247,7 +5308,7 @@ async function main() {
   const navigatorVisibilitySource = fallbackSource.slice(fallbackSource.indexOf("function legalNavigatorVisibleForCurrentContext"), fallbackSource.indexOf("function syncMainToolbarMode"));
   assert(navigatorVisibilitySource.includes('mode === "never"') && navigatorVisibilitySource.includes('mode === "all"') && navigatorVisibilitySource.includes("focusedCitationRecord(state.citation)"), "Legal navigator visibility does not implement Never, Single reader, and All legal views.");
   assert(fallbackSource.includes('label: childLabel,\n        value: ""') && (fallbackSource.match(/value: "", options/g) || []).length >= 2, "Immediate-child navigation menus still display child counts that can be confused with citation units.");
-  assert(fallbackSource.includes('behavior: instant ? "instant" : focusedPane || !animatedCitationJumpsEnabled() ? "auto" : "smooth"'), "Focused panes or disabled citation animation do not position requested units synchronously.");
+  assert(fallbackSource.includes('if (!instant && !focusedPane && animatedCitationJumpsEnabled()) animateLegalReaderScroll('), "Focused panes or disabled citation animation do not position requested units synchronously.");
   assert(fallbackSource.includes("withFocusedCitationPane(pane, () => handleStatuteNavigatorClick(event))") && fallbackSource.includes("focusedPaneForElement(event.target)"), "Focused panes do not route navigation and reader interactions through their own state contexts.");
   assert(fallbackSource.includes("replaceFocusedCitationSegment(focusedPane, displayedQuery)") && fallbackSource.includes("formatNavigationCitationLike(focusedPane?.entry.text"), "Scroll synchronization does not update only the active pane's formatted search segment.");
   const emptyHierarchyQueries = [];
@@ -5453,7 +5514,7 @@ async function main() {
   assert(actionableHDefinition.includes('data-legal-unit-citation="8 U.S.C. 1101(a)(15)(H)(i)(b)"'), "H-1B's run-in statutory unit does not receive its complete indexed citation path.");
   assert(actionableHDefinition.includes('data-legal-unit-citation="8 U.S.C. 1101(a)(15)(H)(i)(b1)"'), `H-1B1's alphanumeric run-in statutory unit does not receive its complete indexed citation path: ${[...actionableHDefinition.matchAll(/data-legal-unit-citation="([^"]+)/g)].map(match => match[1]).join(", ")}`);
   assert(actionableHDefinition.includes('data-statute-inline-target aria-label="Citation target"'), "A virtual run-in citation does not become the visible scroll target.");
-  assert(/class="statutory-runin-line" style="--depth:2"[^>]*>[\s\S]*?data-legal-unit-citation="8 U\.S\.C\. 1101\(a\)\(15\)\(H\)\(i\)\(a\)"/.test(actionableHDefinition), "A validated nested run-in path does not use its relative statutory depth.");
+  assert(/class="statutory-runin-line" style="--depth:2;--runin-parent-depth:1"[^>]*>[\s\S]*?data-legal-unit-citation="8 U\.S\.C\. 1101\(a\)\(15\)\(H\)\(i\)\(a\)"/.test(actionableHDefinition), "A validated nested run-in path does not retain its depth relative to its enclosing parent.");
   assert(/class="statutory-runin-line" style="--depth:1"[^>]*>[\s\S]*?data-legal-unit-citation="8 U\.S\.C\. 1101\(a\)\(15\)\(H\)\(iii\)"/.test(actionableHDefinition), "A validated sibling run-in path does not align at the standard statutory depth.");
   assert.strictEqual((formatStatutoryRunInText(statutoryNode(hydratedSource, "1104", ["a"]).text, "a").match(/statutory-runin-line/g) || []).length, 3, "Numeric run-in paragraphs were not formatted.");
   assert.strictEqual((formatStatutoryRunInText(statutoryNode(hydratedSource, "1430", ["b"]).text, "b").match(/statutory-runin-line/g) || []).length, 6, "Nested numeric and letter run-ins were not formatted.");
