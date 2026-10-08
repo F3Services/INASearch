@@ -8,17 +8,16 @@ Beta8 makes finding, comparing, and copying the law easier, and adds historical 
 - **More precise searches:** Combine `in:` and `cites:` in the same search field. Search within a citation or range, find provisions that cite another provision, and narrow the results with words. Use `in:notes` for personal notes or `in:annotations` for source annotations.
 - **Search your highlights:** Use `in:highlights` to search provisions containing a saved highlight, or `in:highlights-exact` to search only the highlighted words. Your saved colors appear in search results.
 - **Easier browsing:** Home shows the INA or Title 8 index above the CFR index, with separate Expand All and Collapse All controls. Clearer headings, CFR topic groups, and status labels make the lists easier to follow.
-- **Live navigation:** The navigation bar follows what you are reading while the search field keeps your chosen citation. Collapse the bar beside the logo, and use one Page view offset setting for scrolling and citation jumps. Side-by-side readers have clearer controls for each pane’s history and copy actions.
 - **Better copying:** A fixed action column offers citation, text, or both with a customizable preface. The INA/U.S.C. switch chooses the copied wording. Hover over a text-copy button to preview its target; moving away restores your reading position.
 - **Preview shared links:** Hover over Share to see the destination before copying its link, including both panes in a split view. Moving away or pressing Escape returns you to where you were reading.
-- **Citation display choices:** Citation links can follow the INA/U.S.C. view, always use INA format, or keep the source wording. Follow View Setting is the default, and optional yellow highlighting marks converted INA citations.
 - **Simpler help:** All tips are available by category in About. The progress-tracked Quick Start tutorial has been removed.
 
 ## What’s fixed
 
 - Corrected CFR paragraph structure and selection outlines so navigation, copying, highlights, and inserted excerpts target the right unit.
 - Corrected more citation links, including CFR subpart references and references in historical INA text that could open the wrong modern provision.
-- Kept citation wording consistent in readers and search results without losing search marks, saved highlights, or reading positions.
+- Improved citation display in search results and when switching views, preserving search marks, saved highlights, and reading positions. Yellow highlighting now applies only to converted INA citations.
+- Made the navigation bar easier to collapse, combined scrolling and citation-jump offsets in one setting, and clarified history and copy controls in side-by-side readers.
 - Improved Back and Forward after scrolling, and kept temporary copy and share previews out of navigation history.
 - Fixed copy labels that wrapped or extended past their backgrounds, including in Firefox, and stopped the share-preview frame from shifting the page.
 - Made backup reminders appear at startup when existing work needs protection, including customized settings, instead of interrupting a fresh session after its first edits.
