@@ -274,9 +274,9 @@ async function realCorpusTests() {
   assert.strictEqual(projection.stats.inaRecords, 172, "The mapped operative INA record set changed unexpectedly.");
   assert.strictEqual(projection.stats.cfrSections, 3039, "The CFR section set changed unexpectedly.");
   assert(projection.fragments.some(fragment => fragment.kind === "statute-run-in"), "No statute run-in fragments were projected.");
-  const knownCollisionFragments = projection.fragments.filter(fragment => fragment.recordId === "8-1160" && fragment.source?.runInCollision);
-  assert.strictEqual(knownCollisionFragments.length, 4, "Known colliding statute run-ins were not detected.");
-  assert(knownCollisionFragments.every(fragment => ["a/2/A", "a/2/B"].includes(fragment.path.join("/"))), "Colliding statute run-ins were merged at an ambiguous virtual path.");
+  const agriculturalClauses = projection.fragments.filter(fragment => fragment.recordId === "8-1160" && fragment.kind === "statute-run-in" && fragment.path[1] === "2");
+  assert.deepStrictEqual(agriculturalClauses.map(fragment => fragment.path.join("/")), ["a/2/A/I", "a/2/A/II", "a/2/B/I", "a/2/B/II"], "INA 210's run-in clauses must remain separately searchable under their correct A/B paragraphs.");
+  assert(!projection.fragments.some(fragment => fragment.recordId === "8-1160" && fragment.source?.runInCollision), "INA 210 still contains colliding run-in citation paths.");
   assert(projection.fragments.some(fragment => fragment.kind === "cfr-table-cell"), "No CFR table cells were projected.");
   assert(projection.fragments.some(fragment => fragment.kind === "cfr-footnote"), "No CFR footnotes were projected.");
   assert(!projection.fragments.some(fragment => fragment.contentKind !== "annotations" && ["editorial", "effective-date"].includes(fragment.noteType)), "Excluded CFR notes entered the projection.");

@@ -1151,7 +1151,7 @@
     .statute-preamble { margin: 17px 0; }
     .statutory-node { position: relative; margin: 5px 0 5px 15px; padding: 0; border-radius: 6px; }
     .statute-body > .statutory-node { margin-inline-start: 0; }
-    .statutory-runin-line { position: relative; margin: 5px 0 5px min(calc(var(--depth, 0) * 15px), 90px); padding: 5px 7px 7px; border-radius: 6px; }
+    .statutory-runin-line { --runin-parent-depth: 0; position: relative; margin: 5px 0 5px max(0px, calc(min(calc(var(--depth, 0) * 15px), 90px) - min(calc(var(--runin-parent-depth) * 15px), 90px))); padding: 5px 7px 7px; border-radius: 6px; }
     .statutory-node.target,
     .statutory-runin-line.citation-target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
     .detail-content.citation-hover-target,
@@ -2321,7 +2321,7 @@
       hydratedLegalReferenceRoots.add(value);
       return value;
     }
-    if (corpus && corpus.legalReferenceMetadata?.cfrHierarchyVersion !== build.cfrHierarchyVersion) {
+    if (corpus && (corpus.legalReferenceMetadata?.cfrHierarchyVersion !== build.cfrHierarchyVersion || corpus.title8?.runInRevision !== build.statuteRunInRevision)) {
       const embedded = await loadEmbeddedINASearchCorpus();
       if (isValidCorpus(embedded)) {
         const previous = corpus;
@@ -4448,6 +4448,7 @@
     }
 
     function runSearch(options = {}) {
+      cancelLegalReaderScroll();
       state.mainSearchShowsLive = false;
       state.query = els.search.value.trim();
       if (state.searchScopeActive) refreshSearchScope();
@@ -6902,7 +6903,7 @@
           void handleLegalUnitAction(button.dataset.liveCitationAction, context);
         });
       });
-      pane.input.addEventListener("input", () => handleFocusedPaneInput(pane));
+      pane.input.addEventListener("input", () => { cancelLegalReaderScroll(pane.scrollRoot); handleFocusedPaneInput(pane); });
       pane.input.addEventListener("blur", () => commitFocusedPaneInput(pane));
       pane.input.addEventListener("keydown", event => {
         if (event.key === "Enter") { event.preventDefault(); commitFocusedPaneInput(pane); }
@@ -7659,6 +7660,35 @@
       return { associationKey };
     }
 
+    function legacyStatuteRunInAssociation(association, endpoint = association?.start) {
+      const path = endpoint?.path || [];
+      return association?.family === "usc" && Number(association.title || 8) === 8 && String(endpoint?.unit) === "1160"
+        && path.length === 3 && path[0] === "a" && path[1] === "2" && ["I", "II"].includes(String(path[2]).toUpperCase());
+    }
+
+    function statuteRunInReviewLocation(association, location) {
+      return association?.structureStatus === "needs-review" && legacyStatuteRunInAssociation(association)
+        && location?.family === "usc" && Number(location.title) === 8 && String(location.unit) === "1160"
+        && JSON.stringify(location.path) === '["a","2"]';
+    }
+
+    function reconcileStatuteRunInAnnotations() {
+      let changed = false;
+      const review = association => {
+        if (!legacyStatuteRunInAssociation(association) && !legacyStatuteRunInAssociation(association, association?.end)) return false;
+        if (association.structureStatus !== "needs-review") { association.structureStatus = "needs-review"; changed = true; }
+        return true;
+      };
+      for (const note of profile.notes || []) for (const association of note.associations || []) review(association);
+      for (const highlight of profile.highlights || []) for (const segment of highlight.segments || []) {
+        if (review(segment.association) && segment.anchor && segment.anchor.status !== "needs-review") { segment.anchor.status = "needs-review"; changed = true; }
+      }
+      if (changed) {
+        state.annotationIndex = null;
+        requestAnimationFrame(() => markProfileChanged());
+      }
+    }
+
     function reconcileCfrAnnotations() {
       const engine = globalThis.INASearchCfrHierarchy;
       if (profile.cfrStructureRevision === engine.revision) return;
@@ -7690,6 +7720,7 @@
     }
 
     function ensureAnnotationIndex(force = false) {
+      reconcileStatuteRunInAnnotations();
       if (!force && state.annotationIndex) return state.annotationIndex;
       reconcileCfrAnnotations();
       const Index = globalThis.INA_SEARCH_ANNOTATIONS?.AnnotationIndex;
@@ -7722,6 +7753,7 @@
 
     async function hydrateAnnotationIndexAfterPaint() {
       await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 0)));
+      reconcileStatuteRunInAnnotations();
       const Index = globalThis.INA_SEARCH_ANNOTATIONS?.AnnotationIndex;
       if (typeof Index !== "function" || state.annotationIndex) return;
       const cached = await globalThis.INASearchStorage?.getMetadata?.(annotationCacheKey()).catch(() => null);
@@ -7836,6 +7868,7 @@
 
     function renderInlineLegalNotes() {
       if (state.view !== "search") return;
+      reconcileStatuteRunInAnnotations();
       $$(".citation-notes", els.detail).forEach(group => group.remove());
       const candidates = $$('[data-legal-unit-kind]', els.detail).map((trigger, index) => ({
         trigger, index, location: locationFromLegalUnitTrigger(trigger), host: legalUnitNoteHost(trigger)
@@ -7843,7 +7876,7 @@
       const groups = new Map();
       for (const note of profile.notes || []) {
         for (const association of note.associations || []) {
-          const chosen = candidates.find(candidate => associationStartsAtLocation(association, candidate.location));
+          const chosen = candidates.find(candidate => associationStartsAtLocation(association, candidate.location) || statuteRunInReviewLocation(association, candidate.location));
           if (!chosen) continue;
           const group = groups.get(chosen.trigger) || { ...chosen, notes: [] };
           group.notes.push({ note, association });
@@ -7995,16 +8028,17 @@
       const candidates = $$('[data-legal-unit-kind]', els.detail).map(trigger => ({ trigger, location: locationFromLegalUnitTrigger(trigger) })).filter(item => item.location);
       const changedHighlights = new Set();
       for (const highlight of profile.highlights || []) for (const segment of highlight.segments || []) {
-        const matching = candidates.filter(item => associationStartsAtLocation(segment.association, item.location));
+        const matching = candidates.filter(item => associationStartsAtLocation(segment.association, item.location) || statuteRunInReviewLocation(segment.association, item.location));
         const matchingHosts = [...new Map(matching.map(item => [legalUnitNoteHost(item.trigger), item])).values()];
         const verified = matchingHosts.filter(item => {
+          if (segment.association?.structureStatus === "needs-review") return false;
           const host = legalUnitNoteHost(item.trigger);
           const source = userHighlightTextNodes(host).map(node => node.nodeValue).join("");
           return globalThis.INA_SEARCH_ANNOTATIONS?.resolveQuoteAnchor?.(source, segment.anchor)?.status === "active";
         });
         const candidate = verified.length === 1 ? verified[0] : matchingHosts.length === 1 ? matchingHosts[0] : null;
         const host = candidate ? legalUnitNoteHost(candidate.trigger) : null;
-        const outcome = host ? wrapUserHighlight(host, highlight, segment) : null;
+        const outcome = host ? segment.association?.structureStatus === "needs-review" ? { wrapped: false, changed: false } : wrapUserHighlight(host, highlight, segment) : null;
         if (host && outcome && !outcome.wrapped) {
           const notice = document.createElement("button");
           notice.type = "button";
@@ -10920,6 +10954,7 @@
     }
 
     function releaseMainLiveLocation() {
+      if (legalReaderScrollAnimations.has(window)) cancelLegalReaderScroll();
       if (!isMainLegalReader()) return;
       state.mainLivePinned = false;
     }
@@ -11511,6 +11546,7 @@
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
       if (!section) return false;
       const scrollRoot = focusedPane?.scrollRoot || window;
+      cancelLegalReaderScroll(scrollRoot);
       const scrollTop = focusedPane ? focusedPane.scrollRoot.scrollTop : window.scrollY;
       const scrollLeft = focusedPane ? focusedPane.scrollRoot.scrollLeft : window.scrollX;
       const mapping = cfr ? null : uscToIna.get(normCitationPart(section.section));
@@ -11575,8 +11611,8 @@
       highlightScrolledLegalTarget(cfr ? "cfr" : "statute", path, occurrenceBlockPath);
       syncMainReaderToolbar();
       const restoreScroll = () => focusedPane
-        ? scrollRoot.scrollTo({ top: scrollTop, left: scrollLeft, behavior: "auto" })
-        : window.scrollTo({ top: scrollTop, left: scrollLeft, behavior: "auto" });
+        ? scrollRoot.scrollTo({ top: scrollTop, left: scrollLeft, behavior: "instant" })
+        : window.scrollTo({ top: scrollTop, left: scrollLeft, behavior: "instant" });
       restoreScroll();
       requestAnimationFrame(restoreScroll);
       return true;
@@ -11622,11 +11658,71 @@
       return statuteReadingLine(profile?.preferences?.pageViewOffsetPercent);
     }
 
+    const legalReaderScrollAnimations = new WeakMap();
+    const legalReaderScrollRevisions = new WeakMap();
+
+    function legalReaderScrollRequest() {
+      const pane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
+      const root = pane?.scrollRoot || window;
+      return { root, revision: legalReaderScrollRevisions.get(root) || 0 };
+    }
+
+    function legalReaderScrollRequestIsCurrent(request) {
+      return (request.root === window || request.root.isConnected) && (legalReaderScrollRevisions.get(request.root) || 0) === request.revision;
+    }
+
+    function cancelLegalReaderScroll(root = window) {
+      legalReaderScrollRevisions.set(root, (legalReaderScrollRevisions.get(root) || 0) + 1);
+      const animation = legalReaderScrollAnimations.get(root);
+      if (animation) {
+        cancelAnimationFrame(animation.frame);
+        legalReaderScrollAnimations.delete(root);
+      }
+      root.scrollTo({
+        top: root === window ? window.scrollY : root.scrollTop,
+        left: root === window ? window.scrollX : root.scrollLeft,
+        behavior: "instant"
+      });
+    }
+
+    function animateLegalReaderScroll(root, top, left, complete) {
+      const startTop = root === window ? window.scrollY : root.scrollTop;
+      const distance = top - startTop;
+      const duration = Math.min(650, Math.max(180, Math.sqrt(Math.abs(distance)) * 12));
+      const started = performance.now();
+      const animation = { frame: null };
+      legalReaderScrollAnimations.set(root, animation);
+      const step = now => {
+        if (legalReaderScrollAnimations.get(root) !== animation) return;
+        const progress = Math.min(1, (now - started) / duration);
+        const eased = progress < .5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
+        root.scrollTo({ top: startTop + distance * eased, left, behavior: "instant" });
+        if (progress < 1) animation.frame = requestAnimationFrame(step);
+        else {
+          legalReaderScrollAnimations.delete(root);
+          complete?.();
+        }
+      };
+      animation.frame = requestAnimationFrame(step);
+    }
+
     function scrollStatuteAnchorToReadingLine(anchor, instant = false) {
       if (!anchor?.getBoundingClientRect) return;
-      const delta = anchor.getBoundingClientRect().top - statuteJumpLine();
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
-      (focusedPane?.scrollRoot || window).scrollBy({ top: delta, behavior: instant ? "instant" : focusedPane || !animatedCitationJumpsEnabled() ? "auto" : "smooth" });
+      const root = focusedPane?.scrollRoot || window;
+      // Stop the previous animation before measuring the new destination.
+      // An absolute position cannot accumulate a delta on its old endpoint.
+      cancelLegalReaderScroll(root);
+      const delta = anchor.getBoundingClientRect().top - statuteJumpLine();
+      const top = root === window ? window.scrollY : root.scrollTop;
+      const left = root === window ? window.scrollX : root.scrollLeft;
+      const destination = Math.max(0, top + delta);
+      if (!instant && !focusedPane && animatedCitationJumpsEnabled()) animateLegalReaderScroll(root, destination, left, () => {
+        if (!anchor.isConnected) return;
+        // Inline notes or a wrapping header can change layout during the jump.
+        root.scrollTo({ top: Math.max(0, window.scrollY + anchor.getBoundingClientRect().top - statuteJumpLine()), left, behavior: "instant" });
+      });
+      else root.scrollTo({ top: destination, left, behavior: "instant" });
     }
 
     function currentStatutePathAtReadingLine() {
@@ -11890,8 +11986,10 @@
       } finally {
         state.suppressNavigationHistory = previousSuppression;
       }
+      const scrollRequest = legalReaderScrollRequest();
       requestAnimationFrame(() => {
         state.restoringLegalHistory = false;
+        if (!legalReaderScrollRequestIsCurrent(scrollRequest)) return;
         if (!sameStatuteHistoryLocation(state.statuteNavigationLocation, location, false)) return;
         syncStatuteNavigationOffset();
         if (location.kind === "cfr") scrollToRenderedCfrTarget();
@@ -12178,7 +12276,9 @@
       renderInlineLegalNotes();
       renderStatuteNavigation(section, navigationPath);
       const paneId = state.focusedActivePaneId;
+      const scrollRequest = legalReaderScrollRequest();
       requestAnimationFrame(() => runInFocusedPane(paneId, () => {
+        if (!legalReaderScrollRequestIsCurrent(scrollRequest)) return;
         syncStatuteNavigationOffset();
         scrollToRenderedStatuteTarget();
         scheduleStatuteNavigationUpdate();
@@ -12486,7 +12586,7 @@
       const firstInlineToken = String(inlineTokens[0] || "");
       const sameLevel = currentDepth === 0 ? /^[a-z]+$/.test(firstInlineToken)
         : currentDepth === 1 ? /^\d+$/.test(firstInlineToken)
-        : currentDepth === 2 ? /^[A-Z]+$/.test(firstInlineToken)
+        : currentDepth === 2 ? /^[A-Z]+$/.test(firstInlineToken) && !/^[IVXLCDM]+$/.test(firstInlineToken)
         : currentDepth === 3 ? /^[ivxlcdm]+$/.test(firstInlineToken)
         : currentDepth === 4 ? /^[IVXLCDM]+$/.test(firstInlineToken)
         : currentDepth % 2 === 1 ? /^[a-z]+$/.test(firstInlineToken) : /^[A-Z]+$/.test(firstInlineToken);
@@ -12501,6 +12601,7 @@
       const initial = initialRaw.trimEnd();
       const parts = initial ? [`<span class="statutory-runin-chapeau">${linkifyStatutoryText(input, references, 0, initial.length, searchMatch, footnoteReferences, definitionContext)}</span>`] : [];
       let previousInlinePath = null;
+      const openUnits = [];
       markers.forEach((marker, index) => {
         const nextStart = markers[index + 1]?.start ?? input.length;
         const nextMarkerIsNested = Boolean(markers[index + 1]?.nestedAfterPrevious);
@@ -12513,6 +12614,14 @@
         if (!addressTokens.length) addressTokens.push(marker.token);
         const inlinePath = legalUnit ? resolvedRunInStatutePath(legalUnit, addressTokens, previousInlinePath, marker.nestedAfterPrevious) : [];
         previousInlinePath = inlinePath;
+        // Run-in parents own their following descendants, just like structural
+        // nodes. Keep siblings outside the enclosing selection and hover box.
+        while (openUnits.length) {
+          const parent = openUnits.at(-1);
+          if (inlinePath.length > parent.path.length && parent.path.every((token, pathIndex) => String(token) === String(inlinePath[pathIndex]))) break;
+          parts.push("</span>");
+          openUnits.pop();
+        }
         const structuralDuplicate = structuralStatutePathExists(legalUnit, inlinePath);
         const navigableInline = Boolean(legalUnit?.sectionId && inlinePath.length && !structuralDuplicate);
         const inlineDefinitionContext = definitionContext ? {
@@ -12531,8 +12640,11 @@
           ? legalUnitTriggerHtml("usc", legalUnit.sectionId, inlinePath, inlineCitation, escapeHtml(marker.address), "inline-address")
           : `<strong class="inline-address">${escapeHtml(marker.address)}</strong>`;
         const insertionLocator = inlineDefinitionContext?.sourceRecord ? { recordPath: inlineDefinitionContext.sourceRecord.recordPath, kind: "run-in", field: "text", start: contentStart, end: contentEnd } : null;
-        parts.push(`<span class="statutory-runin-line${structuralDuplicate ? " structural-duplicate" : ""}${isInlineTarget ? " citation-target" : ""}" style="--depth:${displayDepth}"${navigableInline ? ` data-statute-inline-path="${escapeHtml(JSON.stringify(inlinePath))}"${legalCitationSelectionAttributes("usc", legalUnit.sectionId, inlinePath)}` : ""}${isInlineTarget ? " data-statute-inline-target aria-label=\"Citation target\"" : ""}>${address}<span>${content}</span></span>${navigableInline && definitionContext?.sourceHost ? legalAugmentationSlotHtml("usc", 8, definitionContext.sourceHost.section, inlinePath, inlineCitation, "span", insertionLocator) : ""}`);
+        const parentDepth = openUnits.at(-1)?.depth;
+        parts.push(`<span class="statutory-runin-line${structuralDuplicate ? " structural-duplicate" : ""}${isInlineTarget ? " citation-target" : ""}" style="--depth:${displayDepth}${parentDepth !== undefined ? `;--runin-parent-depth:${parentDepth}` : ""}"${navigableInline ? ` data-statute-inline-path="${escapeHtml(JSON.stringify(inlinePath))}"${legalCitationSelectionAttributes("usc", legalUnit.sectionId, inlinePath)}` : ""}${isInlineTarget ? " data-statute-inline-target aria-label=\"Citation target\"" : ""}>${address}<span>${content}</span>${navigableInline && definitionContext?.sourceHost ? legalAugmentationSlotHtml("usc", 8, definitionContext.sourceHost.section, inlinePath, inlineCitation, "span", insertionLocator) : ""}`);
+        openUnits.push({ path: inlinePath, depth: displayDepth });
       });
+      for (const unit of openUnits) parts.push("</span>");
       return parts.join("");
     }
 
@@ -12888,7 +13000,8 @@
         $(".detail-heading-actions", els.detail).innerHTML = openButton(cfrOfficialTextFragment(section, citationResult.path || []), "Current eCFR", `${citationBase}${canonicalPath(citationResult.path || [])}`);
         renderCfrNavigation(section, citationResult.path || []);
         const paneId = state.focusedActivePaneId;
-        requestAnimationFrame(() => runInFocusedPane(paneId, () => { syncStatuteNavigationOffset(); scrollToRenderedCfrTarget(instantJump); }));
+        const scrollRequest = legalReaderScrollRequest();
+        requestAnimationFrame(() => runInFocusedPane(paneId, () => { if (!legalReaderScrollRequestIsCurrent(scrollRequest)) return; syncStatuteNavigationOffset(); scrollToRenderedCfrTarget(instantJump); }));
         return;
       }
       els.detail.innerHTML = `<div class="detail-content" data-cfr-start>${cfrSectionFamilyHtml(section)}${cfrSectionTitleAlternativesHtml(section)}<div class="detail-heading-row legal-reader-heading"><div class="detail-heading-citation">${legalUnitTriggerHtml("cfr", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}</div><div class="detail-heading-title"><h2 class="detail-title">${linkifyCfrText(section.heading || cite, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(cfrOfficialTextFragment(section, citationResult?.path || []), "Current eCFR", `${citationBase}${canonicalPath(citationResult?.path || [])}`)}</div></div>${legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, [], citationBase, "div", headingInsertionLocator)}<div class="cfr-body">${renderCfrBody(section, targetPath, searchTarget, citationBase, baseDefinitionContext)}</div><details class="regulation-source-details"><summary>Source details</summary><div class="source-banner">This regulation text is from the eCFR edition current through ${escapeHtml(currentThrough)}. Use “Current eCFR” to check for changes.${part?.authority ? `<br><strong>Authority:</strong> ${linkifyCfrText(part.authority, part.authorityReferences || [])}` : ""}${part?.source ? `<br><strong>Source:</strong> ${linkifyCfrText(part.source, part.sourceReferences || [])}` : ""}</div></details></div>`;
@@ -12897,7 +13010,9 @@
       renderInlineLegalNotes();
       renderCfrNavigation(section, citationResult?.path || (searchTarget?.path ? componentTokens(searchTarget.path) || [] : []));
       const paneId = state.focusedActivePaneId;
+      const scrollRequest = legalReaderScrollRequest();
       requestAnimationFrame(() => runInFocusedPane(paneId, () => {
+        if (!legalReaderScrollRequestIsCurrent(scrollRequest)) return;
         syncStatuteNavigationOffset();
         scrollToRenderedCfrTarget(instantJump);
         setTimeout(() => runInFocusedPane(paneId, renderInlineLegalNotes), 450);
@@ -14548,6 +14663,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
     }
 
     function switchView(view, focusSearch = false, refresh = true) {
+      if (view !== state.view) cancelLegalReaderScroll();
       endCopyActionPreview(true);
       endShareViewPreview(true);
       if (view === "notes") {
@@ -14688,6 +14804,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
         if (!els.localShareWarningPopover.hidden && !event.target.closest("#localShareWarningPopover") && !event.target.closest("#mainShareButton")) hideLocalShareWarning(true);
       });
       els.search.addEventListener("input", event => {
+        cancelLegalReaderScroll();
         clearTimeout(searchTimer);
         if (!state.promotingPane) adoptPromotedNavigationHistory();
         state.mainSearchDraft = true;
@@ -14722,6 +14839,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
         searchTimer = setTimeout(() => runSearch({ typed: cfrNavigation }), cfrNavigation ? 0 : deleting ? 160 : 65);
       });
       els.searchScopeInput.addEventListener("input", event => {
+        cancelLegalReaderScroll();
         clearTimeout(searchTimer);
         beginMainSearchHistoryEdit();
         refreshSearchScope();
@@ -15518,6 +15636,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
 
     async function initialize() {
       await loadBackupReminderMetadata();
+      reconcileStatuteRunInAnnotations();
       if (refreshStaleNoteReferences()) markProfileChanged();
       resolveSavedReferenceInsertions();
       syncCitationJumpAnimationPreference();

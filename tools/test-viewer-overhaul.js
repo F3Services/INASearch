@@ -437,7 +437,7 @@ function testAuthorityStreamAndLegacySearchRetirement() {
 
 function testPaneModesAndHistory() {
   assert(template.includes("const FOCUSED_PANE_TYPING_COMMIT_DELAY = 750"), "Heavy pane searches lost their coalescing delay.");
-  assert(template.includes('pane.input.addEventListener("input", () => handleFocusedPaneInput(pane))')
+  assert(template.includes('cancelLegalReaderScroll(pane.scrollRoot); handleFocusedPaneInput(pane);')
     && template.includes('pane.input.addEventListener("blur", () => commitFocusedPaneInput(pane))')
     && template.includes('event.key === "Enter"'), "Pane typing is not committed on idle, blur, and Enter.");
 
