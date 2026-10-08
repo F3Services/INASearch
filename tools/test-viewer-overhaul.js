@@ -469,7 +469,11 @@ function testPaneModesAndHistory() {
   handleFocusedPaneInput(immediatePane);
   assert(immediateEvents.some(event => event[0] === "commit" && event[1] === "reader"), "Changing 8cfr205.2 to 8cfr205.2b does not commit synchronously.");
 
+  const copyPreviewReadingScrollTop = extractedFunction("copyPreviewReadingScrollTop", "bindCopyActionPreview", {
+    state: { copyActionPreview: null }, window: { scrollY: 0 }
+  });
   const focusedPaneHistorySnapshot = extractedFunction("focusedPaneHistorySnapshot", "updateFocusedPaneHistoryButtons", {
+    copyPreviewReadingScrollTop,
     $$: () => [{ dataset: { paneHierarchyNode: "ina:title:I" } }],
     document: {}
   });

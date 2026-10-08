@@ -577,7 +577,8 @@
     .main-share-button { position: relative; display: grid; width: 38px; height: 29px; place-items: center; border: 1px solid rgba(255,255,255,.24); border-radius: 6px; padding: 0; color: #d8e9f8; background: rgba(255,255,255,.07); cursor: pointer; }
     .main-share-button:hover, .main-share-button:focus-visible { border-color: #67b7ff; color: #fff; background: rgba(103,183,255,.18); }
     .main-share-button:focus-visible { outline: 3px solid rgba(120,196,255,.58); outline-offset: 2px; }
-    html.share-view-preview::after { content: ""; position: fixed; inset: 0; z-index: 1000; pointer-events: none; border: 3px solid #67b7ff; box-shadow: inset 0 0 18px 4px rgba(103,183,255,.7); }
+    /* Paint the preview frame without adding border space to the viewport overlay. */
+    html.share-view-preview::after { content: ""; position: fixed; inset: 0; z-index: 1000; pointer-events: none; box-shadow: inset 0 0 0 3px #67b7ff, inset 0 0 18px 4px rgba(103,183,255,.7); }
     @media print { html.share-view-preview::after { display: none; } }
     .main-share-icon { width: 17px; height: 17px; overflow: visible; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
     .main-share-local-warning { position: absolute; top: -7px; right: -7px; display: grid; width: 17px; height: 17px; place-items: center; border: 1px solid #fff1ad; border-radius: 50%; color: #4e3504; background: #ffd76b; box-shadow: 0 1px 4px rgba(0,0,0,.35); font-size: 11px; font-weight: 950; line-height: 1; }
@@ -1266,6 +1267,7 @@
     .statute-citation-link:hover { color: var(--navy); background: var(--blue-soft); }
     .statute-citation-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     .statute-citation-link.citation-display-ina { color: var(--warning); background: color-mix(in srgb, var(--warning-soft) 72%, transparent); text-decoration-color: currentColor; }
+    .occurrence-row-text .citation-display-ina { color: var(--warning); background: color-mix(in srgb, var(--warning-soft) 72%, transparent); }
     .statute-citation-link.citation-display-ina:hover { color: var(--warning); background: var(--warning-soft); }
     .statute-citation-link.citation-display-ina:focus-visible { outline-color: var(--warning); }
     .legal-reference-link.reference-unavailable { text-decoration-style: dotted; }
@@ -1864,7 +1866,7 @@
 
   <section class="profile-setup-alert" id="profileSetupNotice" aria-live="polite" hidden>
     <span class="profile-setup-alert-icon" aria-hidden="true">!</span>
-    <span><strong id="profileSetupTitle">Save a data file to protect your notes</strong><small id="profileSetupMessage">Without a saved data file, your notes, highlights, and other research exist only in this browser and can be lost if its site data is cleared.</small></span>
+    <span><strong id="profileSetupTitle">Save a data file to protect your work</strong><small id="profileSetupMessage">Without a saved data file, your notes, highlights, settings, and other research exist only in this browser and can be lost if its site data is cleared.</small></span>
     <span class="profile-setup-alert-actions">
       <button class="profile-setup-alert-dismiss" id="backupReminderDisableButton" type="button">Don't ask again</button>
       <span class="profile-setup-alert-buttons">
@@ -2549,6 +2551,7 @@
       localShareWarningCloseTimer: null,
       localShareWarningAnchor: null,
       shareViewPreview: null,
+      copyActionPreview: null,
       legalReferenceContext: null,
       legalReferencePreviewTimer: null,
       legalReferenceCloseTimer: null,
@@ -2599,6 +2602,7 @@
       fileSyncPending: cachedProfileLoad?.record?.fileSyncState?.status === "pending",
       lastBackupReminderAt: null,
       lastFilesystemProtectionAt: null,
+      backupReminderEligibleAtStartup: false,
       backupReminderDue: false,
       fileHandle: null,
       fileConnected: false,
@@ -2688,7 +2692,7 @@
       highlights: [],
       annotationOrdinals: {},
       tipProgress: { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null },
-      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "view", highlightInaCitationLinks: false, noteDisplayPosition: "top", notesUseHandwrittenFont: false, statutoryNavigationSystem: "ina", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, splitAuthoritySearchPanes: false, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, mainNavigatorCollapsed: false, citationCopyPreface: "[Citation] states the following -\n\n", citationCopyPrefaceVersion: 2, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
+      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "view", statutoryLinkCitationSystemVersion: 2, highlightInaCitationLinks: false, noteDisplayPosition: "top", notesUseHandwrittenFont: false, statutoryNavigationSystem: "ina", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, splitAuthoritySearchPanes: false, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, mainNavigatorCollapsed: false, citationCopyPreface: "[Citation] states the following -\n\n", citationCopyPrefaceVersion: 2, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
       referenceInsertions: emptyReferenceInsertions()
     });
 
@@ -2718,7 +2722,10 @@
       normalized.preferences.showDetailedStatus = normalized.preferences.showDetailedStatus === true;
       normalized.preferences.hideTopThemeControls = normalized.preferences.hideTopThemeControls === true;
       normalized.preferences.hideLocalShareWarning = normalized.preferences.hideLocalShareWarning === true;
-      normalized.preferences.statutoryLinkCitationSystem = ["ina", "view", "usc"].includes(normalized.preferences.statutoryLinkCitationSystem) ? normalized.preferences.statutoryLinkCitationSystem : "view";
+      // Unversioned profiles kept the old on/off choice when Follow View Setting
+      // was introduced. Adopt the new default once, then preserve explicit choices.
+      normalized.preferences.statutoryLinkCitationSystem = normalized.preferences.statutoryLinkCitationSystemVersion === 2 && ["ina", "view", "usc"].includes(normalized.preferences.statutoryLinkCitationSystem) ? normalized.preferences.statutoryLinkCitationSystem : "view";
+      normalized.preferences.statutoryLinkCitationSystemVersion = 2;
       normalized.preferences.highlightInaCitationLinks = normalized.preferences.highlightInaCitationLinks === true;
       normalized.preferences.statutoryNavigationSystem = normalized.preferences.statutoryNavigationSystem === "usc" ? "usc" : "ina";
       normalized.preferences.statuteSectionDisplay = ["usc", "ina", "both", "hierarchy"].includes(normalized.preferences.statuteSectionDisplay) ? normalized.preferences.statuteSectionDisplay : "hierarchy";
@@ -2793,6 +2800,8 @@
       : isValidProfile(window.INA_SEARCH_PROFILE)
         ? normalizeProfile(window.INA_SEARCH_PROFILE)
         : defaultProfile();
+    // Capture existing work before startup bookkeeping or this visit's edits.
+    state.backupReminderEligibleAtStartup = profileHasProtectableContent();
     applyThemePreference(profile.preferences.theme);
     document.body?.classList.toggle("notes-use-handwritten-font", profile.preferences.notesUseHandwrittenFont === true);
     replaceReferenceInsertionSession(profile.referenceInsertions?.records || []);
@@ -5204,7 +5213,7 @@
         targetOccurrence: pane?.readerState?.explicitOccurrenceTarget || null,
         hierarchyExpanded: $$('[data-pane-hierarchy-node][open]', pane?.detail || document).map(element => element.dataset.paneHierarchyNode),
         searchState: pane?.searchState ? { offset: Number(pane.searchState.offset) || 0, sectionId: pane.searchState.activeSectionId || "", bucketId: pane.searchState.activeSectionId || "", totalOccurrences: Number(pane.searchState.result?.totalOccurrences) || 0 } : null,
-        scrollTop: Math.max(0, Number(pane?.scrollRoot?.scrollTop) || 0),
+        scrollTop: copyPreviewReadingScrollTop(pane),
         timestamp: Date.now()
       };
     }
@@ -6370,18 +6379,99 @@
       return `${snippet.leadingEllipsis ? "…" : ""}${escapeHtml(snippet.leading || "")}<mark>${escapeHtml(snippet.match || "")}</mark>${escapeHtml(snippet.trailing || "")}${snippet.trailingEllipsis ? "…" : ""}`;
     }
 
-    function occurrenceSnippetPartsHtml(snippet) {
+    function occurrenceSnippetSource(source) {
+      const target = source?.target;
+      if (!target) return null;
+      const record = source.authority === "ina"
+        ? (corpus?.title8?.sections || []).find(section => section.id === source.recordId)
+        : cfrSectionIdMap.get(source.recordId) || cfrAppendixIdMap.get(source.recordId);
+      if (!record) return null;
+      hydrateLegalReferences(record);
+      let host = record, field = target.field;
+      if (field === "body") {
+        let nodes = record.body;
+        for (const index of target.recordPath || []) { host = nodes?.[index]; nodes = host?.children; }
+        field = target.subfield || "text";
+      } else if (field === "blocks") {
+        host = cfrOccurrenceBlockAtPath(record, target.blockPath);
+        if (target.rowIndex !== undefined) host = host?.rows?.[target.rowIndex]?.[target.cellIndex];
+        field = target.subfield || "x";
+      } else if (field === "notes") { host = record.notes?.[target.noteIndex]; field = target.subfield || "text"; }
+      else if (field === "houseEditorialFootnotes") { host = record.houseEditorialFootnotes?.[target.noteIndex]; field = "text"; }
+      const text = host?.[field];
+      if (typeof text !== "string") return null;
+      const context = source.authority === "ina"
+        ? { kind: "usc", uscSection: record.section, sourceHost: { kind: "usc", title: 8, section: record.section } }
+        : { kind: "cfr", title: record.title, sourceHost: { kind: "cfr", title: record.title, section: record.section } };
+      return { text, references: host[field === "text" ? "references" : `${field}References`] || [], context, offset: Number(target.start) || 0,
+        end: Number.isFinite(target.end) ? target.end : text.length };
+    }
+
+    function occurrenceSnippetPartHtml(text, part = {}) {
+      const escaped = escapeHtml(text);
+      if (part.highlightColor) return `<span class="search-saved-highlight${part.match ? " search-saved-match" : ""}" style="--saved-highlight:${escapeHtml(HIGHLIGHT_COLOR_HEX[part.highlightColor] || HIGHLIGHT_COLOR_HEX.yellow)}">${escaped}</span>`;
+      return part.match ? `<mark>${escaped}</mark>` : escaped;
+    }
+
+    function occurrenceConvertedSnippetHtml(snippet, source) {
+      const resolved = occurrenceSnippetSource(snippet?.source || source);
+      if (!resolved?.references.length || !snippet.parts?.length) return null;
+      const { text, references, context, offset } = resolved;
+      let cursor = offset + (Number(snippet.start) || 0);
+      const parts = snippet.parts.map(part => { const start = cursor; cursor += String(part.text || "").length; return { ...part, start, end: cursor }; });
+      // Selected display text can differ from the raw source. Keep its exact
+      // saved wording rather than inventing offsets into a different string.
+      if (parts.map(part => part.text).join("") !== text.slice(parts[0].start, cursor)) return null;
+      let start = parts[0].start, end = cursor;
+      const inaContext = { ...context, citationDisplaySystem: "ina" };
+      const ranges = references.map(reference => {
+        const suffix = statutoryLinkInaCitation(reference, { ...inaContext, referenceSourceText: text, referenceSourceReferences: references })
+          ? text.slice(reference.end).match(/^,?\s+of\s+(?:this\s+title|the\s+Immigration\s+and\s+Nationality\s+Act|(?:such|the|this)\s+Act)\b/i) : null;
+        return { start: reference.start, end: reference.end + (suffix?.[0].length || 0) };
+      });
+      ranges.push(...coordinatedStatutoryInaLists(text, references, offset, resolved.end, inaContext));
+      for (const range of ranges) if (range.start < end && range.end > start) { start = Math.max(offset, Math.min(start, range.start)); end = Math.min(resolved.end, Math.max(end, range.end)); }
+      const renderText = (left, right) => {
+        const boundaries = [...new Set([left, right, ...parts.flatMap(part => [part.start, part.end]).filter(position => position > left && position < right)])].sort((a, b) => a - b);
+        return boundaries.slice(0, -1).map((position, index) => occurrenceSnippetPartHtml(text.slice(position, boundaries[index + 1]), parts.find(part => part.start <= position && part.end > position))).join("");
+      };
+      const renderConvertedText = (label, left, right) => {
+        const selected = parts.filter(part => part.start < right && part.end > left && (part.match || part.highlightColor));
+        if (!selected.length) return escapeHtml(label);
+        const original = text.slice(left, right);
+        const core = original.replace(/,?\s+of\s+(?:this\s+title|the\s+Immigration\s+and\s+Nationality\s+Act|(?:such|the|this)\s+Act)\s*$/i, "");
+        // Only the unchanged address suffix has an exact position after a
+        // conversion. A coincidental letter elsewhere is not the same match.
+        let shared = 0;
+        const pathStart = label.indexOf("(");
+        if (original === label) shared = label.length;
+        else if (pathStart >= 0) while (shared < label.length - pathStart && shared < core.length && label[label.length - 1 - shared] === core[core.length - 1 - shared]) shared++;
+        const unchangedStart = left + core.length - shared;
+        const ranges = selected.map(part => {
+          const begin = Math.max(left, part.start), finish = Math.min(right, part.end);
+          const position = begin >= unchangedStart && finish <= left + core.length ? label.length - shared + begin - unchangedStart : -1;
+          return position < 0 ? { ...part, start: 0, end: label.length } : { ...part, start: position, end: position + finish - begin };
+        });
+        const boundaries = [...new Set([0, label.length, ...ranges.flatMap(range => [range.start, range.end])])].sort((a, b) => a - b);
+        return boundaries.slice(0, -1).map((position, index) => {
+          const covering = ranges.filter(range => range.start <= position && range.end > position);
+          return occurrenceSnippetPartHtml(label.slice(position, boundaries[index + 1]), { match: covering.some(part => part.match), highlightColor: covering.find(part => part.highlightColor)?.highlightColor });
+        }).join("");
+      };
+      const body = linkifyStatutoryText(text, references, start, end, null, [], { ...context, referenceTextOnly: true, renderText, renderConvertedText });
+      return `${start > offset ? "…" : ""}${body}${end < resolved.end ? "…" : ""}`;
+    }
+
+    function occurrenceSnippetPartsHtml(snippet, source = null) {
+      const converted = occurrenceConvertedSnippetHtml(snippet, source);
+      if (converted !== null) return converted;
       if (!snippet?.parts?.length) return occurrenceSnippetHtml(snippet);
-      const body = snippet.parts.map(part => {
-        const text = escapeHtml(part.text || "");
-        if (part.highlightColor) return `<span class="search-saved-highlight${part.match ? " search-saved-match" : ""}" style="--saved-highlight:${escapeHtml(HIGHLIGHT_COLOR_HEX[part.highlightColor] || HIGHLIGHT_COLOR_HEX.yellow)}">${text}</span>`;
-        return part.match ? `<mark>${text}</mark>` : text;
-      }).join("");
+      const body = snippet.parts.map(part => occurrenceSnippetPartHtml(part.text || "", part)).join("");
       return `${snippet.leadingEllipsis ? "…" : ""}${body}${snippet.trailingEllipsis ? "…" : ""}`;
     }
 
     function occurrenceRowTextHtml(row) {
-      if (row?.artifactKind === "note") return `<span class="artifact-note-text" title="${escapeHtml(row.artifactText || "")}">${row.snippets?.length ? row.snippets.map(occurrenceSnippetPartsHtml).join(" … ") : escapeHtml(row.artifactText || "")}</span>`;
+      if (row?.artifactKind === "note") return `<span class="artifact-note-text" title="${escapeHtml(row.artifactText || "")}">${row.snippets?.length ? row.snippets.map(snippet => occurrenceSnippetPartsHtml(snippet)).join(" … ") : escapeHtml(row.artifactText || "")}</span>`;
       if (row?.artifactKind === "highlight") {
         const prefix = String(row.artifactPrefix || ""), suffix = String(row.artifactSuffix || ""), exact = String(row.artifactText || "");
         const leading = row.artifactSourceStart > prefix.length ? "…" : "";
@@ -6390,7 +6480,7 @@
         return `<span class="occurrence-snippet-segment">${leading}${escapeHtml(prefix)}<mark data-highlight-color="${escapeHtml(row.artifactColor || "yellow")}" style="--artifact-color:${escapeHtml(HIGHLIGHT_COLOR_HEX[row.artifactColor] || HIGHLIGHT_COLOR_HEX.yellow)}">${escapeHtml(exact)}</mark>${escapeHtml(suffix)}${trailing}${review}</span>`;
       }
       const snippets = row?.snippets?.length ? row.snippets : row?.snippet ? [row.snippet] : [];
-      return snippets.map(snippet => `<span class="occurrence-snippet-segment">${occurrenceSnippetPartsHtml(snippet)}</span>`).join("");
+      return snippets.map(snippet => `<span class="occurrence-snippet-segment">${occurrenceSnippetPartsHtml(snippet, row)}</span>`).join("");
     }
 
     const OCCURRENCE_EAGER_ROW_LIMIT = 250;
@@ -6789,6 +6879,7 @@
       pane.readerActions.classList.add("pane-reader-actions");
       for (const control of $$("[id]", pane.readerActions)) control.removeAttribute("id");
       $(".focused-citation-pane-body", element).prepend(pane.readerActions);
+      bindCopyActionPreview(pane.readerActions, pane);
       pane.readerActions.addEventListener("mouseenter", () => withFocusedCitationPane(pane, syncMainReaderActionTarget));
       pane.readerActions.addEventListener("mouseleave", () => setLegalCitationHover(null));
       pane.readerActions.addEventListener("focusin", () => withFocusedCitationPane(pane, syncMainReaderActionTarget));
@@ -6828,7 +6919,7 @@
         }
       });
       pane.scrollRoot.addEventListener("scroll", () => withFocusedCitationPane(pane, () => {
-        if (state.shareViewPreview) return;
+        if (state.shareViewPreview || state.copyActionPreview) return;
         rememberFocusedPaneReadingAnchor(pane);
         scheduleStatuteNavigationUpdate();
         scheduleVisibleOccurrenceSections(pane);
@@ -8693,9 +8784,12 @@
       const inaCitation = historicalSource ? "" : displayOptions?.inaCitation || statutoryLinkInaCitation(reference, sourceContext);
       if (sourceContext?.plainText) return inaCitation && !displayOptions?.preserveContents ? inaCitation : String(contents ?? reference.text ?? "");
       const citation = disposition.historical && reference.family === "statutes-at-large" ? disposition.heading : inaCitation || legalReferenceCitation(reference);
-      const displayedContents = inaCitation ? displayOptions?.preserveContents ? contents : escapeHtml(inaCitation) : contents;
+      const displayedContents = inaCitation ? displayOptions?.preserveContents ? contents
+        : sourceContext?.renderConvertedText ? sourceContext.renderConvertedText(inaCitation, reference.start, sourceContext.referenceDisplayEnd ?? reference.end)
+        : escapeHtml(inaCitation) : contents;
       const convertedToIna = Boolean(inaCitation && displayOptions?.isInaConversion !== false && !/^INA\b/i.test(String(reference.text || "").trim()) && ["usc", "ina"].includes(reference.family));
       const highlightInaCitation = convertedToIna && profile?.preferences?.highlightInaCitationLinks === true;
+      if (sourceContext?.referenceTextOnly) return highlightInaCitation ? `<span class="citation-display-ina">${displayedContents}</span>` : displayedContents;
       const classes = `statute-citation-link legal-reference-link${highlightInaCitation ? " citation-display-ina" : ""}${resolution === "unresolved" ? " reference-unavailable" : resolution === "official-source-only" ? " reference-official-only" : ""}${(disposition.status === "repealed" || disposition.historical) ? " reference-repealed" : disposition.status === "transferred" ? " reference-transferred" : ""}`;
       const localUsc = resolution === "local" && (reference.targetKind === "usc" || reference.family === "usc" || reference.family === "ina");
       const localCfr = resolution === "local" && (reference.targetKind === "cfr" || reference.family === "cfr");
@@ -9679,7 +9773,7 @@
       }
     }
 
-    function shareCitationAnchor(detail, result) {
+    function shareCitationAnchor(detail, result, preferredTrigger = null) {
       const record = focusedCitationRecord(result);
       if (!record) return null;
       const path = result.path || [];
@@ -9689,7 +9783,7 @@
       // occurrence locators are not encoded in these shared URLs.
       const triggers = $$("[data-legal-unit-kind]", detail).filter(element =>
         element.dataset.legalUnitSection === record.item.id && !element.closest(".inserted-reference-card"));
-      const trigger = triggers.find(element => {
+      const trigger = preferredTrigger || triggers.find(element => {
         try { return sameLegalPath(JSON.parse(element.dataset.legalUnitPath || "[]"), path); } catch { return false; }
       });
       if (record.kind !== "usc" && trigger) {
@@ -9707,6 +9801,7 @@
     }
 
     function beginShareViewPreview() {
+      endCopyActionPreview(true);
       if (state.shareViewPreview && !state.shareViewPreview.ending) return;
       const link = currentViewShareLink();
       if (!link) return;
@@ -10621,6 +10716,8 @@
 
     function mainReaderActionTarget() {
       const pane = state.focusedPaneContext;
+      const activePreview = state.copyActionPreview;
+      if (activePreview && !activePreview.ending && activePreview.pane === (pane || null)) return activePreview.target;
       const paneReader = pane?.entry?.mode === "reader" && ["usc", "cfr"].includes(state.statuteNavigationKind)
         && state.selected?.item?.id === state.statuteNavigationSectionId;
       const live = pane ? (paneReader ? { kind: state.statuteNavigationKind, sectionId: state.statuteNavigationSectionId } : null) : mainLiveCitationLocation();
@@ -10660,6 +10757,59 @@
 
     function mainReaderActionContext(target = mainReaderActionTarget()) {
       return target ? legalUnitContextForLocation(target.kind, target.sectionId, target.path, target.query, target.trigger, target.occurrenceBlockPath) : null;
+    }
+
+    function beginCopyActionPreview(pane = null) {
+      if (state.copyActionPreview && !state.copyActionPreview.ending && state.copyActionPreview.pane === pane) return;
+      endCopyActionPreview(true);
+      endShareViewPreview(true);
+      const target = mainReaderActionTarget();
+      const anchor = target && shareCitationAnchor(els.detail, parseCitation(target.query), target.trigger);
+      if (!anchor) return;
+      const root = pane?.scrollRoot || window;
+      // Freeze the copy target before scrolling so the preview cannot change
+      // the citation, reading anchor, or history through scroll listeners.
+      state.copyActionPreview = { pane, target, root, ending: false,
+        top: pane ? root.scrollTop : window.scrollY, left: pane ? root.scrollLeft : window.scrollX };
+      scrollStatuteAnchorToReadingLine(anchor, true);
+    }
+
+    function endCopyActionPreview(immediate = false) {
+      const preview = state.copyActionPreview;
+      if (!preview) return;
+      preview.ending = true;
+      const restore = () => {
+        if (preview.root === window || preview.root.isConnected) preview.root.scrollTo({ top: preview.top, left: preview.left, behavior: "instant" });
+      };
+      restore();
+      if (immediate) { state.copyActionPreview = null; return; }
+      // Keep queued scroll events and a copy click's selection callback from
+      // recording the temporary position or moving the reader on return.
+      requestAnimationFrame(() => {
+        if (state.copyActionPreview !== preview) return;
+        restore();
+        requestAnimationFrame(() => { if (state.copyActionPreview === preview) state.copyActionPreview = null; });
+      });
+    }
+
+    function copyPreviewReadingScrollTop(pane = null) {
+      const preview = state.copyActionPreview;
+      return Math.max(0, preview && preview.pane === (pane || null) ? preview.top : pane?.scrollRoot?.scrollTop ?? window.scrollY ?? 0);
+    }
+
+    function bindCopyActionPreview(actions, pane = null) {
+      const selector = '[data-live-citation-action="copy-text"], [data-live-citation-action="copy-citation-text"]';
+      for (const button of $$(selector, actions)) {
+        button.addEventListener("mouseenter", () => {
+          if (button.disabled) return;
+          if (pane) withFocusedCitationPane(pane, () => beginCopyActionPreview(pane));
+          else beginCopyActionPreview();
+        });
+        button.addEventListener("mouseleave", event => {
+          const next = event.relatedTarget?.closest?.(selector);
+          if (!next || !actions.contains(next) || next.disabled) endCopyActionPreview();
+        });
+      }
     }
 
     function hierarchyActionNode() {
@@ -10933,7 +11083,7 @@
       const location = state.statuteNavigationLocation;
       const current = state.statuteNavigationHistory[state.statuteNavigationHistoryIndex];
       if (location?.view === "hierarchy" && sameStatuteHistoryLocation(current, location)) {
-        const presentation = { expanded: [...state.hierarchyExpanded], scrollTop: Math.max(0, state.focusedPaneContext?.scrollRoot?.scrollTop ?? window.scrollY ?? 0) };
+        const presentation = { expanded: [...state.hierarchyExpanded], scrollTop: copyPreviewReadingScrollTop(state.focusedPaneContext) };
         Object.assign(location, presentation);
         Object.assign(current, presentation);
         return;
@@ -10954,7 +11104,7 @@
       const presentation = {
         query: state.query, displayQuery: els.search.value,
         authority: state.statuteHierarchyAuthority,
-        scrollTop: Math.max(0, state.focusedPaneContext?.scrollRoot?.scrollTop ?? window.scrollY ?? 0),
+        scrollTop: copyPreviewReadingScrollTop(state.focusedPaneContext),
         targetOccurrence: state.explicitOccurrenceTarget || null
       };
       Object.assign(location, presentation);
@@ -11581,7 +11731,7 @@
 
     function updateStatuteNavigationFromScroll() {
       state.statuteNavigationFrame = null;
-      if (state.shareViewPreview) return;
+      if (state.shareViewPreview || state.copyActionPreview) return;
       syncMainReaderActionTarget();
       if (state.restoringLegalHistory) return;
       if (isMainLegalReader() && state.mainLivePinned) return;
@@ -12134,7 +12284,7 @@
     }
 
     function scrollToRenderedStatuteTarget() {
-      if (state.restoringLegalHistory || state.shareViewPreview) return;
+      if (state.restoringLegalHistory || state.shareViewPreview || state.copyActionPreview) return;
       const searchMatch = $("[data-statute-search-match]", els.detail);
       const inlineTarget = $("[data-statute-inline-target]", els.detail);
       const target = $(".statutory-node.target, .statutory-node.search-target", els.detail);
@@ -12143,7 +12293,7 @@
     }
 
     function scrollToRenderedCfrTarget(instant = false) {
-      if (state.restoringLegalHistory || state.shareViewPreview) return;
+      if (state.restoringLegalHistory || state.shareViewPreview || state.copyActionPreview) return;
       const searchMatch = $("[data-cfr-search-match], [data-statute-search-match]", els.detail);
       const citationTarget = $(".cfr-unit-wrapper.target, .cfr-block.target", els.detail);
       scrollStatuteAnchorToReadingLine(searchMatch || citationTarget || $("[data-cfr-start]", els.detail), instant);
@@ -12186,7 +12336,7 @@
 
     function coordinatedInaListHtml(group, input, references, searchMatch, footnoteReferences, definitionContext) {
       const plainText = definitionContext?.plainText === true;
-      const renderText = (start, end) => plainText ? input.slice(start, end) : renderScopedDefinitionAnnotatedText(input, searchMatch, start, end, definitionContext);
+      const renderText = (start, end) => plainText ? input.slice(start, end) : definitionContext?.renderText ? definitionContext.renderText(start, end) : renderScopedDefinitionAnnotatedText(input, searchMatch, start, end, definitionContext);
       const renderFootnote = reference => plainText ? superscriptNumber(reference.number) : houseFootnoteReferenceHtml(reference);
       const footnotes = (footnoteReferences || []).filter(reference => Number.isInteger(reference.offset) && reference.offset >= group.start && reference.offset <= group.end).sort((left, right) => left.offset - right.offset);
       const parts = [];
@@ -12195,6 +12345,7 @@
         while (footnoteIndex < footnotes.length && footnotes[footnoteIndex].offset <= offset) parts.push(renderFootnote(footnotes[footnoteIndex++]));
       };
       group.members.forEach((reference, index) => {
+        let displayStart = index ? group.parsedMembers[index].start : group.start;
         if (index) {
           const previous = group.parsedMembers[index - 1];
           let cursor = previous.end;
@@ -12208,12 +12359,15 @@
           // A repeated 'section' is citation wording, not connecting prose.
           const gap = input.slice(cursor, nextStart);
           const repeatedWord = gap.match(/sections?\s*$/i);
+          if (repeatedWord) displayStart = nextStart - repeatedWord[0].length;
           parts.push(renderText(cursor, repeatedWord ? nextStart - repeatedWord[0].length : nextStart));
         }
         const crosswalk = group.crosswalks[index];
         const written = group.parsedMembers[index];
         const label = group.labels[index];
-        const contents = plainText ? label : label === input.slice(written.start, written.end)
+        const contents = plainText ? label : definitionContext?.renderConvertedText
+          ? definitionContext.renderConvertedText(label, displayStart, index === group.members.length - 1 ? group.end : written.end)
+          : label === input.slice(written.start, written.end)
           ? renderScopedDefinitionAnnotatedText(input, searchMatch, written.start, written.end, definitionContext)
           : searchMatch && searchMatch.start < written.end && searchMatch.end > (index ? written.start : group.start)
             ? `<mark class="statute-search-match" data-statute-search-match>${escapeHtml(label)}</mark>` : escapeHtml(label);
@@ -12238,7 +12392,7 @@
       const input = String(value || "");
       definitionContext = { ...(definitionContext || {}), referenceSourceText: input, referenceSourceReferences: references };
       const plainText = definitionContext.plainText === true;
-      const renderText = (start, end) => plainText ? input.slice(start, end) : renderScopedDefinitionAnnotatedText(input, searchMatch, start, end, definitionContext);
+      const renderText = (start, end) => plainText ? input.slice(start, end) : definitionContext.renderText ? definitionContext.renderText(start, end) : renderScopedDefinitionAnnotatedText(input, searchMatch, start, end, definitionContext);
       const start = Math.max(0, Number(segmentStart) || 0);
       const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
       const protectedDefinitionRanges = !plainText && definedTermHighlightingEnabled() ? scopedDefinitionMatches(input, definitionContext, start, end) : [];
@@ -12259,7 +12413,7 @@
         const suffixEnd = annotation.end + suffix[0].length;
         if ((references || []).some(reference => reference.start >= suffixStart && reference.start < suffixEnd) ||
             (footnoteReferences || []).some(reference => reference.offset >= suffixStart && reference.offset < suffixEnd)) return [];
-        return [{ kind: "citation-authority-suffix", start: suffixStart, end: suffixEnd }];
+        return [{ kind: "citation-authority-suffix", start: suffixStart, end: suffixEnd, reference: annotation.reference }];
       });
       const eligibleFootnotes = (footnoteReferences || [])
         .filter(reference => Number.isInteger(reference.offset) && reference.offset >= start && (reference.offset < end || (end === input.length && reference.offset === end)))
@@ -12283,8 +12437,8 @@
           parts.push(coordinatedInaListHtml(annotation.group, input, references, searchMatch, footnoteReferences, definitionContext));
           cursor = annotation.end;
         } else {
-          const referenceContext = definitionContext ? { ...definitionContext, referenceOrdinal: Math.max(0, (references || []).indexOf(reference)) } : null;
-          parts.push(legalReferenceHtml(reference, plainText ? input.slice(reference.start, reference.end) : renderSearchHighlightedText(input, searchMatch, reference.start, reference.end), referenceContext));
+          const referenceContext = { ...definitionContext, referenceOrdinal: Math.max(0, (references || []).indexOf(reference)), referenceDisplayEnd: authoritySuffixes.find(suffix => suffix.reference === reference)?.end ?? reference.end };
+          parts.push(legalReferenceHtml(reference, plainText ? input.slice(reference.start, reference.end) : definitionContext.renderText ? renderText(reference.start, reference.end) : renderSearchHighlightedText(input, searchMatch, reference.start, reference.end), referenceContext));
           cursor = reference.end;
         }
       }
@@ -12839,7 +12993,10 @@
       return Boolean(
         (candidate?.notes || []).length ||
         (candidate?.highlights || []).length ||
-        (candidate?.referenceInsertions?.records || []).length
+        (candidate?.referenceInsertions?.records || []).length ||
+        Object.entries(defaultProfile().preferences).some(([key, value]) =>
+          candidate?.preferences?.[key] !== undefined && candidate.preferences[key] !== value
+        )
       );
     }
 
@@ -12860,12 +13017,12 @@
         ? "Saving stopped because another window changed this profile"
         : mode === "error"
           ? "Saving in this browser needs attention"
-          : "Save a data file to protect your notes";
+          : "Save a data file to protect your work";
       els.profileSetupMessage.textContent = mode === "conflict"
         ? "Open Settings to reload, merge, or export this window before resolving the conflict."
         : mode === "error"
           ? `${state.browserSaveError || "Browser storage is unavailable."} Download or connect a data file before closing this tab.`
-          : "Without a saved data file, your notes, highlights, and other research exist only in this browser and can be lost if its site data is cleared.";
+          : "Without a saved data file, your notes, highlights, settings, and other research exist only in this browser and can be lost if its site data is cleared.";
       els.backupReminderLaterButton.hidden = problem;
       els.backupReminderDisableButton.hidden = problem;
     }
@@ -12918,6 +13075,16 @@
       $("#clearDefaultStartupQueryButton").disabled = !profile.preferences.defaultStartupQuery;
     }
 
+    function refreshOccurrenceCitationDisplay(pane) {
+      if (!pane?.searchState) return;
+      for (const element of $$('[data-occurrence-row]', pane.detail)) {
+        const sectionId = occurrenceSectionIdFromToken(element.dataset.occurrenceRowSection);
+        const row = pane.searchState.rowsBySection?.get(sectionId)?.rows?.[Number(element.dataset.occurrenceRow)];
+        const text = element.querySelector('.occurrence-row-text');
+        if (row && text) text.innerHTML = occurrenceRowTextHtml(row);
+      }
+    }
+
     function refreshStatutoryCitationDisplay() {
       refreshLegalCopyDescriptions();
       closeLegalReferencePopover(true);
@@ -12926,6 +13093,7 @@
         const panes = [...state.focusedCitationPanes];
         const scrollPositions = new Map(panes.map(pane => [pane.id, pane.scrollRoot.scrollTop]));
         panes.forEach(pane => {
+          if (pane.entry?.mode === "search-tree" && pane.searchState) { refreshOccurrenceCitationDisplay(pane); return; }
           if (!pane.record) return;
           withFocusedCitationPane(pane, () => renderDetail(pane.record));
           scopeFocusedPaneIds(pane);
@@ -12939,6 +13107,7 @@
       }
       const scrollTop = window.scrollY;
       if (state.view === "definitions") renderDefinitions();
+      else if (state.mainOccurrencePane?.searchState) refreshOccurrenceCitationDisplay(state.mainOccurrencePane);
       else if (state.selected) renderDetail(state.selected);
       requestAnimationFrame(() => window.scrollTo(0, scrollTop));
     }
@@ -13545,7 +13714,7 @@
     }
 
     async function maybeShowBackupReminder() {
-      if (!profileHasProtectableContent() || state.fileConnected || !profile.updatedAt || profile.preferences.backupReminder === "disabled" || state.browserSaveConflict || state.browserSaveError) return false;
+      if (!state.backupReminderEligibleAtStartup || !profileHasProtectableContent() || state.fileConnected || profile.preferences.backupReminder === "disabled" || state.browserSaveConflict || state.browserSaveError) return false;
       const baseline = Math.max(Date.parse(state.lastBackupReminderAt || 0) || 0, Date.parse(state.lastFilesystemProtectionAt || 0) || 0);
       if (baseline && Date.now() - baseline < BACKUP_REMINDER_INTERVAL_MS) return false;
       const at = new Date().toISOString();
@@ -13760,7 +13929,6 @@
           }
           updateProfileSummary();
           if (fileError) toast(`Filesystem autosave failed, but this work was saved in the browser: ${fileError.message || fileError}`);
-          else void maybeShowBackupReminder();
         } catch (error) {
           state.browserSaveConflict = error?.name === "ProfileConflictError";
           state.browserSaveError = error?.message || String(error);
@@ -14342,6 +14510,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
     }
 
     function applySearchQuery(query, focusSearch = true, preserveFormatting = false) {
+      endCopyActionPreview(true);
       endShareViewPreview(true);
       captureStatuteHistoryPresentation();
       const suppliedQuery = String(query || "");
@@ -14379,6 +14548,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
     }
 
     function switchView(view, focusSearch = false, refresh = true) {
+      endCopyActionPreview(true);
       endShareViewPreview(true);
       if (view === "notes") {
         applySearchQuery("in:notes", focusSearch, true);
@@ -14459,18 +14629,28 @@ Get-FileHash $outJson -Algorithm SHA256`;
         if (els.mainShareButton.matches(":focus-visible")) beginShareViewPreview();
       });
       els.mainShareButton.addEventListener("blur", () => endShareViewPreview());
-      window.addEventListener("blur", () => endShareViewPreview());
+      window.addEventListener("blur", () => { endShareViewPreview(); endCopyActionPreview(); });
       document.addEventListener("pointerdown", event => {
         if (!event.target.closest("#mainShareButton")) endShareViewPreview(true);
+        const preview = state.copyActionPreview;
+        const button = event.target.closest('[data-live-citation-action="copy-text"], [data-live-citation-action="copy-citation-text"]');
+        if (preview && !(preview.pane?.readerActions || els.mainReaderActions).contains(button)) endCopyActionPreview(true);
       }, { capture: true, passive: true });
       document.addEventListener("keydown", event => {
+        if (state.copyActionPreview) {
+          const copyButton = event.target.closest('[data-live-citation-action="copy-text"], [data-live-citation-action="copy-citation-text"]');
+          if (!(copyButton && ["Enter", " "].includes(event.key))) {
+            endCopyActionPreview(true);
+            if (event.key === "Escape") { event.preventDefault(); event.stopImmediatePropagation(); return; }
+          }
+        }
         if (!state.shareViewPreview) return;
         if (event.target.closest("#mainShareButton") && ["Enter", " "].includes(event.key)) return;
         endShareViewPreview(true);
         if (event.key === "Escape") { event.preventDefault(); event.stopImmediatePropagation(); }
       }, true);
-      window.addEventListener("wheel", () => endShareViewPreview(true), { capture: true, passive: true });
-      window.addEventListener("touchmove", () => endShareViewPreview(true), { capture: true, passive: true });
+      window.addEventListener("wheel", () => { endShareViewPreview(true); endCopyActionPreview(true); }, { capture: true, passive: true });
+      window.addEventListener("touchmove", () => { endShareViewPreview(true); endCopyActionPreview(true); }, { capture: true, passive: true });
       els.mainNavigatorToggle.addEventListener("click", event => {
         event.stopPropagation();
         setMainNavigatorCollapsed(profile.preferences.mainNavigatorCollapsed !== true);
@@ -14478,6 +14658,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
       els.mainReaderAuthorityToggle.addEventListener("click", () => {
         if (!els.mainReaderAuthorityToggle.disabled) setStatuteHierarchyAuthority(state.statuteHierarchyAuthority === "ina" ? "usc" : "ina", true);
       });
+      bindCopyActionPreview(els.mainReaderActions);
       els.mainReaderActions.addEventListener("mouseenter", syncMainReaderActionTarget);
       els.mainReaderActions.addEventListener("mouseleave", () => setLegalCitationHover(null));
       els.mainReaderActions.addEventListener("focusin", syncMainReaderActionTarget);
@@ -14845,7 +15026,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
         }
       });
       window.addEventListener("scroll", () => {
-        if (state.shareViewPreview) return;
+        if (state.shareViewPreview || state.copyActionPreview) return;
         if (!state.mainLayoutRestorePending) state.mainReadingAnchor = captureMainReadingAnchor();
         scheduleStatuteNavigationUpdate();
         if (state.mainOccurrencePane && !state.focusedCitationMode) scheduleVisibleOccurrenceSections(state.mainOccurrencePane);
@@ -14863,6 +15044,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
           && !event.target.closest("input, textarea, select, button, summary, [contenteditable]")) releaseMainLiveLocation();
       });
       window.addEventListener("resize", () => {
+        endCopyActionPreview(true);
         endShareViewPreview(true);
         const mainAnchor = state.mainReadingAnchor;
         if (isMainLegalReader() && mainAnchor) {
@@ -14955,7 +15137,7 @@ Get-FileHash $outJson -Algorithm SHA256`;
         else if (event.key === "Escape" && state.view === "search") { event.preventDefault(); closeSearchResults(); }
       });
       document.addEventListener("visibilitychange", () => {
-        if (document.hidden) endShareViewPreview();
+        if (document.hidden) { endShareViewPreview(); endCopyActionPreview(); }
         if (document.hidden && state.profileChanged) queueProfileWrite();
       });
       document.addEventListener("click", event => {

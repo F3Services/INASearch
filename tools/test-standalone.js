@@ -369,7 +369,10 @@ function statuteHistoryFunctions(source, context = {}) {
   const start = source.indexOf("    function normalizedStatuteHistoryLocation(");
   const end = source.indexOf("\n\n    function normalizedSearchText(", start);
   assert(start >= 0 && end > start, "Could not extract the statute history functions.");
-  const declarations = source.slice(start, end);
+  const previewScrollStart = source.indexOf("    function copyPreviewReadingScrollTop(");
+  const previewScrollEnd = source.indexOf("\n\n    function bindCopyActionPreview(", previewScrollStart);
+  assert(previewScrollStart >= 0 && previewScrollEnd > previewScrollStart, "Could not extract copy-preview reading position.");
+  const declarations = source.slice(start, end) + "\n" + source.slice(previewScrollStart, previewScrollEnd);
   const navigationQuery = context.applyNavigationQuery || ((query, displayQuery) => context.applySearchQuery?.(query, false, displayQuery));
   return vm.runInNewContext(`${declarations}\n({ normalizedStatuteHistoryLocation, sameStatuteHistoryLocation, pushStatuteHistoryLocation, activateNavigationLocation, recordExplicitStatuteMove, navigateToStatuteLocation, navigateToStatuteCitation, navigateToLocalLegalReference, navigateStatuteHistory, openCfrLocation, navigateToCfrLocation, navigateToCfrCitation })`, {
     Array,
@@ -436,6 +439,7 @@ async function main() {
     ["test-cfr-subject-groups.js", "PASS CFR subject headings"],
     ["test-insertions.js", "Inserted-reference state tests passed."],
     ["test-copy-format.js", "PASS explicit copy formatting"],
+    ["test-search-reference-display.js", "PASS search reference refresh"],
     ["test-occurrence-search.js", "Occurrence search tests passed."],
     ["test-viewer-overhaul.js", "Viewer overhaul tests passed."],
     ["test-navigation-title-case.js", "Navigation title-case tests passed."]
@@ -2134,10 +2138,16 @@ async function main() {
   for (const id of ["legalNavigatorVisibilitySelect", "syncCfrCommonDepthFromStatuteToggle", "pageViewOffsetInput"]) assert(fallbackSource.indexOf(`id="${id}"`) > navigationSettingsStart, `${id} is not grouped with navigation and scrolling.`);
   assert(fallbackSource.includes('setReadingOffsetPreference("pageViewOffsetPercent"'), "The shared percentage control is not wired to the persisted reading offset.");
   assert(fallbackSource.includes('.settings-toggle input[type="checkbox"] { width: 19px; height: 19px;') && !fallbackSource.includes('.settings-toggle input { width: 19px; height: 19px;'), "The settings checkbox rule still collapses percentage inputs to checkbox dimensions.");
-  assert(fallbackSource.includes('id="profileSetupTitle">Save a data file to protect your notes</strong>') && fallbackSource.includes("your notes, highlights, and other research exist only in this browser and can be lost"), "The data-file warning does not explain which annotations are at risk.");
   const protectableProfile = { notes: [], highlights: [], referenceInsertions: { records: [] }, preferences: { backupReminder: "weekly" } };
-  const profileHasProtectableContent = extractedFunction(fallbackSource, "profileHasProtectableContent", "profileSetupMode", { profile: protectableProfile, Boolean });
-  assert.strictEqual(profileHasProtectableContent(), false, "A settings-only profile is treated as annotation data needing a file warning.");
+  const profileHasProtectableContent = extractedFunction(fallbackSource, "profileHasProtectableContent", "profileSetupMode", { profile: protectableProfile, defaultProfile: () => ({ preferences: blankProfile.preferences }), Boolean });
+  protectableProfile.updatedAt = new Date().toISOString();
+  protectableProfile.tipProgress = { currentTipId: 1, lastAdvancedLocalDate: "2026-10-06", dismissedLocalDate: null };
+  assert.strictEqual(profileHasProtectableContent(), false, "Default settings and automatic tip progress triggered a data-file warning.");
+  protectableProfile.preferences.theme = "dark";
+  assert.strictEqual(profileHasProtectableContent(), true, "Customized settings were excluded from data-file protection.");
+  protectableProfile.preferences.theme = "light";
+  assert.strictEqual(profileHasProtectableContent(), false, "Restoring the default setting still required data-file protection.");
+  assert(fallbackSource.includes('id="profileSetupTitle">Save a data file to protect your work</strong>') && fallbackSource.includes("your notes, highlights, settings, and other research exist only in this browser and can be lost"), "The data-file warning does not explain which saved work is at risk.");
   protectableProfile.notes = [{ id: "note" }];
   assert.strictEqual(profileHasProtectableContent(), true, "A note does not activate durable-data protection.");
   protectableProfile.notes = [];
@@ -2149,7 +2159,10 @@ async function main() {
   protectableProfile.referenceInsertions.records = [];
   const protectableState = { browserSaveConflict: false, browserSaveError: "", browserStorageAvailable: true, profileChanged: true, backupReminderDue: true, fileConnected: false };
   const profileSetupMode = extractedFunction(fallbackSource, "profileSetupMode", "renderProfileSetupNotice", { profile: protectableProfile, state: protectableState, profileHasProtectableContent });
-  assert.strictEqual(profileSetupMode(), "idle", "Changing settings alone displays the bold data-file warning.");
+  assert.strictEqual(profileSetupMode(), "idle", "Default settings display the bold data-file warning.");
+  protectableProfile.preferences.theme = "dark";
+  assert.strictEqual(profileSetupMode(), "backup", "A due startup reminder did not protect customized settings.");
+  protectableProfile.preferences.theme = "light";
   protectableProfile.notes = [{ id: "note" }];
   assert.strictEqual(profileSetupMode(), "backup", "A due reminder is not shown after the user creates a note.");
   protectableState.browserSaveConflict = true;
@@ -2396,7 +2409,7 @@ async function main() {
   assert.strictEqual(vaultFunctions.vaultFromText(fakeVaultText).revision, 1, "The verified vault write did not advance its file revision.");
   fakeVaultText = JSON.stringify({ ...vaultFunctions.vaultFromText(fakeVaultText), revision: 9 });
   await assert.rejects(() => writeVaultSnapshot(blankProfile, 8), /changed in another window or device/, "A newer external vault revision was silently overwritten.");
-  const queueProfileWriteFixture = ({ state, writeVaultSnapshot = async () => {}, saveVaultInBrowser }) => extractedFunction(fallbackSource, "queueProfileWrite", "requestWritePermission", {
+  const queueProfileWriteFixture = ({ state, writeVaultSnapshot = async () => {}, saveVaultInBrowser, maybeShowBackupReminder = async () => {} }) => extractedFunction(fallbackSource, "queueProfileWrite", "requestWritePermission", {
     state,
     profileSnapshot: () => blankProfile,
     updateSaveStatus: () => {},
@@ -2405,15 +2418,17 @@ async function main() {
     vaultDocument: profile => ({ format: "INASearchData", schemaVersion: 1, vaultId: "vault-fixture-1234", revision: state.vaultRevision, profile }),
     saveVaultInBrowser,
     updateProfileSummary: () => {},
-    maybeShowBackupReminder: async () => {},
+    maybeShowBackupReminder,
     renderSources: () => {},
     toast: () => {},
     Date,
     String
   });
   const browserOnlyWrites = [];
+  let autosaveReminderChecks = 0;
   const browserOnlyState = { profileRevision: 2, profileChanged: true, saveQueue: Promise.resolve(), browserSaveConflict: false, browserSaveError: "", browserStorageAvailable: true, fileHandle: null, fileConnected: false, fileSyncPending: false, vaultRevision: 0, vaultId: "vault-fixture-1234", view: "search", profileValid: false };
-  await queueProfileWriteFixture({ state: browserOnlyState, saveVaultInBrowser: async (vault, details) => browserOnlyWrites.push({ vault, details }) })();
+  await queueProfileWriteFixture({ state: browserOnlyState, saveVaultInBrowser: async (vault, details) => browserOnlyWrites.push({ vault, details }), maybeShowBackupReminder: async () => { autosaveReminderChecks += 1; } })();
+  assert.strictEqual(autosaveReminderChecks, 0, "Autosaving current-session changes triggered a startup-only backup reminder.");
   assert.strictEqual(browserOnlyState.profileChanged, false, "A successful browser-only autosave left the profile dirty.");
   assert.strictEqual(browserOnlyState.profileValid, true, "A successful browser-only autosave did not validate the working profile.");
   assert.strictEqual(browserOnlyWrites[0].details.fileSyncState.status, "none", "A browser-only profile was incorrectly marked as filesystem-synchronized.");
@@ -2548,6 +2563,7 @@ async function main() {
   const startupApplyState = { query: "", searchScopeActive: false };
   let startupActivatedScope = null;
   const applyStartupSearchQuery = extractedFunction(fallbackSource, "applySearchQuery", "openSearchRecord", {
+    endCopyActionPreview: () => {},
     endShareViewPreview: () => {},
     captureStatuteHistoryPresentation: () => {},
     String,
@@ -2761,22 +2777,26 @@ async function main() {
   updateSaveStatus("Data file needs reconciliation", "warn");
   assert.strictEqual(saveStatusElement.hidden, true, "Disabling detailed status did not hide a saving-attention state.");
   const reminderWrites = [];
-  const reminderState = { fileConnected: false, browserSaveConflict: false, browserSaveError: "", lastBackupReminderAt: null, lastFilesystemProtectionAt: null, backupReminderDue: false };
+  const reminderState = { backupReminderEligibleAtStartup: false, fileConnected: false, browserSaveConflict: false, browserSaveError: "", lastBackupReminderAt: null, lastFilesystemProtectionAt: null, backupReminderDue: false };
   const reminderProfile = { updatedAt: "2026-08-25T00:00:00.000Z", notes: [], highlights: [], referenceInsertions: { records: [] }, preferences: { backupReminder: "weekly" } };
   const maybeShowBackupReminder = extractedFunction(fallbackSource, "maybeShowBackupReminder", "dismissBackupReminder", {
     state: reminderState,
     profile: reminderProfile,
-    profileHasProtectableContent: () => Boolean(reminderProfile.notes.length || reminderProfile.highlights.length || reminderProfile.referenceInsertions.records.length),
+    profileHasProtectableContent: () => profileHasProtectableContent(reminderProfile),
     BACKUP_REMINDER_INTERVAL_MS: 7 * 24 * 60 * 60 * 1000,
     Date,
     globalThis: { INASearchStorage: { async setMetadata(key, value) { reminderWrites.push([key, value]); } } },
     renderProfileSetupNotice: () => {}
   });
-  assert.strictEqual(await maybeShowBackupReminder(), false, "Changing only settings scheduled a filesystem reminder.");
-  assert.strictEqual(reminderState.backupReminderDue, false, "Changing only settings exposed the bold data-file warning.");
-  assert.strictEqual(reminderWrites.length, 0, "Changing only settings stored a backup-reminder timestamp.");
+  assert.strictEqual(await maybeShowBackupReminder(), false, "A pristine startup scheduled a filesystem reminder.");
+  assert.strictEqual(reminderState.backupReminderDue, false, "A pristine startup exposed the bold data-file warning.");
+  assert.strictEqual(reminderWrites.length, 0, "A pristine startup stored a backup-reminder timestamp.");
   reminderProfile.notes.push({ id: "note" });
-  assert.strictEqual(await maybeShowBackupReminder(), true, "The first substantive browser-saved change did not schedule a filesystem reminder.");
+  assert.strictEqual(await maybeShowBackupReminder(), false, "The first note in a fresh session triggered the backup reminder before the next startup.");
+  assert.strictEqual(reminderWrites.length, 0, "A current-session note started the weekly reminder interval prematurely.");
+  reminderState.backupReminderEligibleAtStartup = true;
+  reminderProfile.updatedAt = null;
+  assert.strictEqual(await maybeShowBackupReminder(), true, "Existing notes without an update timestamp did not schedule a startup reminder.");
   assert.strictEqual(reminderState.backupReminderDue, true, "The due filesystem reminder was not exposed to the UI.");
   assert.strictEqual(reminderWrites.length, 1, "The first filesystem reminder timestamp was not stored exactly once.");
   reminderState.backupReminderDue = false;
@@ -2789,6 +2809,9 @@ async function main() {
   reminderState.fileConnected = false;
   reminderProfile.preferences.backupReminder = "disabled";
   assert.strictEqual(await maybeShowBackupReminder(), false, "The don't-remind-again preference did not suppress filesystem reminders.");
+  reminderProfile.notes = [];
+  reminderProfile.preferences = { backupReminder: "weekly", theme: "dark" };
+  assert.strictEqual(await maybeShowBackupReminder(), true, "Existing customized settings did not schedule a startup reminder.");
   assert(/<button class="brand" id="inaSearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>INASearch<\/strong><small>Statutes &amp; Regulations<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area and Home control do not continuously wrap the full INASearch brand.");
   assert(fallbackSource.includes("Inspired by the excellent work of 2604"), "The INASearch tribute text is missing.");
   assert(fallbackSource.includes('els.brand.addEventListener("mouseenter", beginBrandTributeHover);'), "The tribute timer is not attached to the continuous brand area.");
@@ -5556,7 +5579,14 @@ async function main() {
   }
   for (const statutoryLinkCitationSystem of ["ina", "view", "usc"]) {
     const saved = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, statutoryLinkCitationSystem } }));
-    assert.strictEqual(saved.preferences.statutoryLinkCitationSystem, statutoryLinkCitationSystem, "Citation conversion choice must survive profile normalization, including legacy on/off values.");
+    assert.strictEqual(saved.preferences.statutoryLinkCitationSystem, statutoryLinkCitationSystem, "Explicit citation conversion choices must survive normalization after migration.");
+    const oldCitationPreferences = { ...blankProfile.preferences, statutoryLinkCitationSystem };
+    delete oldCitationPreferences.statutoryLinkCitationSystemVersion;
+    const migratedCitationProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: oldCitationPreferences }));
+    assert.strictEqual(migratedCitationProfile.preferences.statutoryLinkCitationSystem, "view", "Unversioned citation display preferences must migrate to Follow View Setting.");
+    assert.strictEqual(migratedCitationProfile.preferences.statutoryLinkCitationSystemVersion, 2, "Citation preference migration must record its version.");
+    migratedCitationProfile.preferences.statutoryLinkCitationSystem = statutoryLinkCitationSystem;
+    assert.strictEqual(migration.normalizeProfile(migratedCitationProfile).preferences.statutoryLinkCitationSystem, statutoryLinkCitationSystem, "Citation preference migration must not run again after an explicit choice.");
   }
   for (const theme of ["system", "light", "dark"]) {
     const themedProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, theme } }));
