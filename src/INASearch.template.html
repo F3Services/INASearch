@@ -3261,8 +3261,13 @@
     function romanCaseMatches(rawCompact, candidate) {
       const pattern = compactCandidateCasePattern(candidate);
       if (pattern.length !== rawCompact.length) return false;
+      let unit = 0, unitEnd = String(candidate.inputParts?.[0] ?? candidate.path[0]).length;
       for (let index = 0; index < rawCompact.length; index++) {
+        while (index >= unitEnd && unit + 1 < candidate.path.length) unitEnd += String(candidate.inputParts?.[++unit] ?? candidate.path[unit]).length;
         if (!/[ivxlcdm]/i.test(rawCompact[index])) continue;
+        // Lowercase lettered ancestors remain case-insensitive when a later
+        // Roman unit is recased to choose an interpretation.
+        if (![3, 4].includes(candidate.unitTypes[unit]) && rawCompact[index] === rawCompact[index].toLowerCase()) continue;
         if (rawCompact[index] !== pattern[index]) return false;
       }
       return true;
@@ -3313,6 +3318,20 @@
     }
 
     function citationWithStatuteInterpretation(value, ambiguity, option) {
+      if (option?.compactEdits) {
+        const source = String(value || ""), positions = [];
+        const characters = ambiguity.compactHyphens ? /[A-Za-z0-9-]/ : /[A-Za-z0-9]/;
+        for (let index = 0; index < source.length; index++) if (characters.test(source[index])) positions.push(index);
+        const pathPositions = positions.slice(-ambiguity.inputCompact.length);
+        if (pathPositions.length !== ambiguity.inputCompact.length) return source;
+        let updated = source;
+        for (const edit of [...option.compactEdits].reverse()) {
+          const start = pathPositions[edit.start], end = pathPositions[edit.end - 1] + 1;
+          if (!Number.isInteger(start) || !Number.isInteger(end)) return source;
+          updated = updated.slice(0, start) + edit.text + updated.slice(end);
+        }
+        return updated;
+      }
       const range = citationAmbiguityRange(value, ambiguity);
       if (!range || typeof option?.compactSuffix !== "string") return String(value || "");
       const source = String(value || "");
@@ -3320,12 +3339,15 @@
     }
 
     function resolveIndexedCompactStatutePath(kind, authoritySection, localSection, raw) {
-      const explicit = componentTokens(raw);
+      const syntax = globalThis.INA_SEARCH_COMMAND.scanCitationPath(raw);
+      if (syntax.status !== "complete") return null;
       const rawCompact = String(raw || "").replace(/[^A-Za-z0-9]/g, "");
       const compact = normCitationPart(rawCompact);
       if (!compact) return null;
       let candidates = [...(compactStatutePathIndex(kind, authoritySection, localSection).get(compact) || [])];
-      if (explicit !== null) candidates = candidates.filter(candidate => candidate.path.length === explicit.length && explicit.every((token, index) => explicitStatuteTokenMatches(token, candidate, index)));
+      if (syntax.segments.length !== 1 || syntax.segments[0].kind !== "compact") candidates = candidates.filter(candidate => globalThis.INA_SEARCH_COMMAND.matchCitationPath(syntax, candidate, {
+        unitMatches: (token, index) => explicitStatuteTokenMatches(token, candidate, index)
+      }));
       const hasUppercaseRoman = /[IVXLCDM]/.test(rawCompact);
       if (hasUppercaseRoman) candidates = candidates.filter(candidate => romanCaseMatches(rawCompact, candidate));
       if (!candidates.length) return null;
@@ -3342,7 +3364,8 @@
           path: candidate.path,
           label: canonicalPath(candidate.path.slice(divergentUnit)),
           fullLabel: `${authority}${canonicalPath(candidate.path)}`,
-          compactSuffix: candidate.path.slice(divergentUnit).join("")
+          compactSuffix: candidate.path.slice(divergentUnit).join(""),
+          compactEdits: globalThis.INA_SEARCH_COMMAND.citationPathEdits(raw, syntax, candidate, divergentUnit, { unitMatches: (token, index) => explicitStatuteTokenMatches(token, candidate, index) })
         }))
       } : null;
       return {
@@ -4592,61 +4615,45 @@
     }
 
     function resolveComponents(section, raw) {
-      const explicit = componentTokens(raw);
-      if (explicit) {
-        const visit = (nodes, index, path) => {
-          if (index === explicit.length) return { valid: true, path, suggestions: nodes.map(node => node.label).slice(0, 24) };
-          const matches = nodes.filter(node => normCitationPart(node.label) === normCitationPart(explicit[index]));
-          if (!matches.length) return { valid: false, path, invalid: explicit[index], suggestions: nodes.map(node => node.label).slice(0, 24) };
-          let deepest = null;
-          for (const node of matches) {
-            const outcome = visit(node.children || [], index + 1, [...path, node.label]);
-            if (!rest || outcome.section?.status === "transferred" || outcome.valid) return outcome;
-            if (!deepest || outcome.path.length > deepest.path.length) deepest = outcome;
-          }
-          return deepest;
-        };
-        return visit(section.body || [], 0, []);
-      }
-      const visitCompact = (nodes, remaining, path) => {
-        if (!remaining) return { valid: true, path, suggestions: nodes.map(node => node.label).slice(0, 24) };
+      const syntax = globalThis.INA_SEARCH_COMMAND.scanCitationPath(raw);
+      const visit = (nodes, index, remaining, path) => {
+        if (index === syntax.segments.length) return { valid: syntax.status === "complete", path, invalid: syntax.status === "complete" ? "" : String(raw), suggestions: nodes.map(node => node.label).slice(0, 24) };
+        const segment = syntax.segments[index];
+        const target = remaining ?? normCitationPart(segment.text);
+        if (segment.kind === "unit" && syntax.status !== "complete" && index === syntax.segments.length - 1) return { valid: false, path, invalid: segment.text, suggestions: nodes.map(node => node.label).slice(0, 24) };
         const choices = nodes
           .map(n => ({ node: n, key: normCitationPart(n.label) }))
-          .filter(x => x.key && remaining.startsWith(x.key))
+          .filter(x => x.key && (segment.kind === "unit" ? target === x.key : target.startsWith(x.key)))
           .sort((a, b) => b.key.length - a.key.length);
-        if (!choices.length) return { valid: false, path, invalid: remaining, suggestions: nodes.map(node => node.label).slice(0, 24) };
+        if (!choices.length) return { valid: false, path, invalid: target, suggestions: nodes.map(node => node.label).slice(0, 24) };
         let deepest = null;
         for (const choice of choices) {
-          const outcome = visitCompact(choice.node.children || [], remaining.slice(choice.key.length), [...path, choice.node.label]);
-          if (!rest || outcome.section?.status === "transferred" || outcome.valid) return outcome;
+          const rest = target.slice(choice.key.length);
+          const outcome = visit(choice.node.children || [], rest ? index : index + 1, rest || null, [...path, choice.node.label]);
+          if (outcome.valid) return outcome;
           if (!deepest || outcome.path.length > deepest.path.length) deepest = outcome;
         }
         return deepest;
       };
-      return visitCompact(section.body || [], normCitationPart(raw), []);
+      return visit(section.body || [], 0, null, []);
     }
 
     function resolveKnownCitationPath(kind, section, raw) {
       const map = kind === "ina" ? knownInaCitationPaths : knownUscCitationPaths;
-      const explicit = componentTokens(raw);
-      if (explicit) {
-        const known = map.get(citationPathKey(section, explicit));
-        return known ? { valid: true, path: known.path, suggestions: [], virtual: true, provenance: known.provenance } : null;
-      }
-      const compact = normCitationPart(raw);
+      const syntax = globalThis.INA_SEARCH_COMMAND.scanCitationPath(raw);
+      const compact = normCitationPart(String(raw).replace(/[()\s.,]/g, ""));
       if (!compact) return null;
-      const candidates = [...map.values()].filter(item => normCitationPart(item.section) === normCitationPart(section) && item.path.map(normCitationPart).join("") === compact);
+      const candidates = [...map.values()].filter(item => normCitationPart(item.section) === normCitationPart(section) && item.path.map(normCitationPart).join("") === compact && globalThis.INA_SEARCH_COMMAND.matchCitationPath(syntax, item));
       if (candidates.length !== 1) return null;
       return { valid: true, path: candidates[0].path, suggestions: [], virtual: true, provenance: candidates[0].provenance };
     }
 
     function canonicalPath(path) { return (path || []).map(x => `(${x})`).join(""); }
 
-    function compactHierarchyTokens(value) {
+    function compactHierarchyTokens(value, depth = 0) {
       let remaining = String(value || "").replace(/[^A-Za-z0-9]/g, "");
       const tokens = [];
       const cycle = ["lower", "number", "roman", "upper", "number", "roman"];
-      let depth = 0;
       while (remaining) {
         const type = cycle[depth % cycle.length];
         let match = "";
@@ -4661,14 +4668,22 @@
       return tokens;
     }
 
+    function unverifiedCitationPath(raw) {
+      const syntax = globalThis.INA_SEARCH_COMMAND.scanCitationPath(raw), path = [];
+      for (const segment of syntax.segments) {
+        if (segment.kind === "unit") { if (segment.text) path.push(segment.text); }
+        else path.push(...compactHierarchyTokens(segment.text, path.length));
+      }
+      return { status: syntax.status, path };
+    }
+
     function parseExternalStatute(kind, raw) {
       const map = kind === "ina" ? inaMap : sectionMap;
       const values = [...map.keys()];
       const outcome = findKnownPrefix(raw, values, (key, rest) => {
         const mapping = kind === "ina" ? inaMap.get(key) : uscToIna.get(key);
         const section = kind === "ina" ? inaMappedSection(mapping) : sectionMap.get(key);
-        let path = componentTokens(rest);
-        if (path === null) path = compactHierarchyTokens(rest);
+        const fallback = unverifiedCitationPath(rest), path = fallback.path;
         const baseLabel = kind === "ina" ? `INA ${mapping?.inaSection || key}` : `8 U.S.C. ${uscToIna.get(key)?.uscSection || section?.section || key}`;
         const label = `${baseLabel}${canonicalPath(section ? path : [])}`;
         const officialUrl = section ? officialTextFragment(section.url || houseSectionUrl(section.section), path) : INA_SOURCE_URL;
@@ -4677,10 +4692,11 @@
           title: section.heading || `Section ${section.section}`, item: section
         } : mapping && !rest ? inaSourceRecord(mapping) : null;
         return {
-          type: kind, recognized: true, valid: Boolean(section || (mapping && !rest)), external: Boolean(section), unverified: Boolean(section),
+          type: kind, recognized: true, valid: fallback.status === "complete" && Boolean(section || (mapping && !rest)), external: Boolean(section), unverified: Boolean(section),
           label, section, mapping: kind === "ina" ? mapping : uscToIna.get(normCitationPart(section?.section)),
           path: section ? path : [], renderPath: [], url: officialUrl, record,
-          message: section
+          message: fallback.status !== "complete" ? "Finish the citation's paragraph path."
+            : section
             ? "Citation recognized. This build opens the official House U.S. Code page; paragraph existence is not validated locally."
             : mapping && !rest
               ? "Citation found in the USCIS INA crosswalk; no corresponding local operative section is available."
@@ -4778,12 +4794,11 @@
     function parseFallbackStatute(kind, raw) {
       const match = String(raw).match(/^\s*([0-9]+[a-z]?(?:-\d+)?)/i);
       if (!match) return { type: kind, recognized: true, valid: false, unverified: true, message: "Enter a section number. The corpus is unavailable, so existence cannot be checked." };
-      if (kind === "ina") return { type: kind, recognized: true, valid: true, unverified: true, label: `INA ${match[1]}`, url: "https://www.uscis.gov/legal-resources/immigration-and-nationality-act", message: "Unverified—corpus unavailable. Open the official USCIS INA table." };
       const section = match[1];
       const suffix = String(raw).slice(match[0].length);
-      let path = componentTokens(suffix);
-      if (path === null) path = compactHierarchyTokens(suffix);
-      return { type: kind, recognized: true, valid: true, unverified: true, label: `8 U.S.C. ${section}${canonicalPath(path)}`, url: officialTextFragment(houseSectionUrl(section), path), message: "Unverified—corpus unavailable. Official navigation is available; any paragraph highlight is best effort." };
+      const fallback = unverifiedCitationPath(suffix), path = fallback.path;
+      if (kind === "ina") return { type: kind, recognized: true, valid: fallback.status === "complete", unverified: true, label: `INA ${section}`, url: INA_SOURCE_URL, message: "Unverified—corpus unavailable. Open the official USCIS INA table." };
+      return { type: kind, recognized: true, valid: fallback.status === "complete", unverified: true, label: `8 U.S.C. ${section}${canonicalPath(path)}`, url: officialTextFragment(houseSectionUrl(section), path), message: "Unverified—corpus unavailable. Official navigation is available; any paragraph highlight is best effort." };
     }
 
     function inaTitleNumberFromBrowseInput(value) {
@@ -4968,11 +4983,13 @@
     function resolveIndexedCfrPath(record, raw) {
       if (!raw) return { path: [], ambiguity: null };
       const structure = globalThis.INASearchCfrHierarchy.index(record);
-      const explicit = componentTokens(raw), inputCompact = String(raw).replace(/[^A-Za-z0-9-]/g, "");
+      const syntax = globalThis.INA_SEARCH_COMMAND.scanCitationPath(raw), inputCompact = String(raw).replace(/[^A-Za-z0-9-]/g, "");
+      if (syntax.status !== "complete") return null;
       let candidates = [...(structure.byCompact.get(inputCompact.toLowerCase()) || [])];
-      if (explicit !== null) {
-        const exact = candidates.filter(candidate => canonicalPath(candidate.path) === canonicalPath(explicit));
-        candidates = exact.length ? exact : candidates.filter(candidate => candidate.path.length === explicit.length && explicit.every((token, i) => normCitationPart(token) === normCitationPart(candidate.path[i])));
+      if (syntax.segments.length !== 1 || syntax.segments[0].kind !== "compact") {
+        candidates = candidates.filter(candidate => globalThis.INA_SEARCH_COMMAND.matchCitationPath(syntax, candidate));
+        const exact = candidates.filter(candidate => globalThis.INA_SEARCH_COMMAND.matchCitationPath(syntax, candidate, { unitMatches: (token, i) => token === candidate.path[i] }));
+        if (exact.length) candidates = exact;
       }
       if (/[A-Z]/.test(inputCompact)) candidates = candidates.filter(candidate => {
         const spelling = candidate.path.join("");
@@ -4983,10 +5000,10 @@
       const selected = candidates[0], divergence = commonCompactCandidatePrefixLength(candidates);
       const authority = `${record.title} CFR ${record.section}`;
       const ambiguity = candidates.length > 1 ? {
-        selectedPath: selected.path, inputCompact,
+        selectedPath: selected.path, inputCompact, compactHyphens: true,
         stablePrefixLength: selected.path.slice(0, divergence).join("").length,
         commonLabel: authority + canonicalPath(selected.path.slice(0, divergence)),
-        options: candidates.map(candidate => ({ path: candidate.path, label: canonicalPath(candidate.path.slice(divergence)), fullLabel: authority + canonicalPath(candidate.path), compactSuffix: candidate.path.slice(divergence).join("") }))
+        options: candidates.map(candidate => ({ path: candidate.path, label: canonicalPath(candidate.path.slice(divergence)), fullLabel: authority + canonicalPath(candidate.path), compactSuffix: candidate.path.slice(divergence).join(""), compactEdits: globalThis.INA_SEARCH_COMMAND.citationPathEdits(raw, syntax, candidate, divergence, { compactHyphens: true }) }))
       } : null;
       return { path: selected.path, ambiguity };
     }
@@ -5048,13 +5065,14 @@
       }
       const cached = indexed?.record || cfrSectionMap.get(`${titleNumber}:${normCitationPart(section)}`);
       const resolved = cached ? resolveIndexedCfrPath(cached, suffix) : null;
-      const path = cached ? (resolved?.path || componentTokens(suffix) || []) : (componentTokens(suffix) || compactHierarchyTokens(suffix));
+      const fallback = cached ? null : unverifiedCitationPath(suffix);
+      const path = cached ? (resolved?.path || componentTokens(suffix) || []) : fallback.path;
       const anchor = path.length ? `#p-${section}${canonicalPath(path)}` : "";
       const externalUrl = `https://www.ecfr.gov/current/title-${titleNumber}/section-${section}${anchor}`;
       const label = `${titleNumber} CFR ${section}${canonicalPath(path)}`;
       if (!cached) {
         const item = { type: "cfr", level: "section", external: true, title: titleNumber, section, path, label, url: externalUrl };
-        return { ...item, recognized: true, valid: true, message: "This section is not included in this edition; open current eCFR.", record: { key: `cfr-external:${titleNumber}:${section}:${path.map(normCitationPart).join(".")}`, kind: "cfr", group: "regulations", cite: label, title: label, item, text: normalize(label) } };
+        return { ...item, recognized: true, valid: fallback.status === "complete", message: fallback.status === "complete" ? "This section is not included in this edition; open current eCFR." : "Finish the citation's paragraph path.", record: { key: `cfr-external:${titleNumber}:${section}:${path.map(normCitationPart).join(".")}`, kind: "cfr", group: "regulations", cite: label, title: label, item, text: normalize(label) } };
       }
       const canonical = canonicalPath(path);
       const availablePaths = cachedCfrBlockPaths(cached);
@@ -5153,15 +5171,16 @@
         };
       }
 
-      const impliedStatute = input.match(/^\s*§?\s*(\d+[a-z0-9]*(?:[-–—]\d+[a-z0-9]*)?(?:\s*\([^)]+\))*)\s*$/i);
-      if (impliedStatute) {
-        const rawSection = impliedStatute[1].replace(/^0+(?=\d)/, "");
+      const impliedStatute = globalThis.INA_SEARCH_COMMAND.readCitationLocator(String(input).trim(), 0, { whole: true });
+      if (impliedStatute && impliedStatute.end === String(input).trim().length && /^§?\s*\d/.test(impliedStatute.value)) {
+        const rawSection = impliedStatute.value.replace(/^§?\s*/, "").replace(/^0+(?=\d)/, "");
         const inaResult = parseStatuteSectionOrFamily("ina", rawSection);
         if (inaResult?.valid) return { ...inaResult, impliedStatuteAuthority: "ina" };
         const uscResult = parseStatuteSectionOrFamily("usc", rawSection);
         if (uscResult?.valid) return { ...uscResult, impliedStatuteAuthority: "usc" };
         if (inaResult?.mapping || inaResult?.section || inaResult?.partial) return { ...inaResult, impliedStatuteAuthority: "ina" };
         if (uscResult?.mapping || uscResult?.section || uscResult?.partial) return { ...uscResult, impliedStatuteAuthority: "usc" };
+        return { ...inaResult, impliedStatuteAuthority: "ina" };
       }
       return parseAct(input);
     }
@@ -5279,7 +5298,8 @@
       if (compactAuthority && ["ina", "usc", "8usc", "cfr"].some(authority => authority.startsWith(compactAuthority))) return true;
       if (/^\d+(?:c(?:f(?:r)?)?)?$/i.test(compactAuthority)) return true;
       if (/^p(?:a(?:r(?:t)?)?)?\s*\d*[a-z]?(?:-\d*[a-z]?)?$/i.test(input)) return true;
-      if (/^§?\s*\d+[a-z]?(?:\.\d*)?(?:\s*\([^)]*\))*$/i.test(input)) return true;
+      const locator = globalThis.INA_SEARCH_COMMAND.readCitationLocator(input, 0, { whole: true });
+      if (locator?.end === input.length) return true;
       const ina = input.match(/^i\.?\s*n\.?\s*a\.?(.*)$/i);
       if (ina) return /^\s*(?:§+\s*)?(?:\d[\w.-]*(?:\s*\([^)]*\))*\s*(?:\([^)]*)?|(?:title|chapter|subchapter|part|section)\b.*)?$/i.test(ina[1]);
       const usc = input.match(/^(?:8\s*)?u\.?\s*s\.?\s*c\.?(.*)$/i);
@@ -7336,10 +7356,23 @@
     function inferredSearchScopeEndpoint(value, left) {
       if (/^\s*\(/.test(value)) {
         const path = [...left.pathsBySection.values()][0] || [];
-        const ending = componentTokens(value) || [];
-        const inherited = [...path.slice(0, Math.max(0, path.length - ending.length)), ...ending];
+        const syntax = globalThis.INA_SEARCH_COMMAND.scanCitationPath(value);
+        if (syntax.status !== "complete") return null;
         const authority = left.authority === "ina" ? "INA" : left.authority === "usc" ? "8 U.S.C." : `${left.title} CFR`;
-        return parseCitation(`${authority} ${left.authoritySection}${canonicalPath(inherited)}`);
+        const matches = new Map();
+        // Resolve first: a compact stretch may replace several inherited units.
+        // Only keep candidates whose consumed unit count gives that same prefix.
+        for (let length = 0; length <= path.length; length++) {
+          const prefix = path.slice(0, length);
+          const result = parseCitation(`${authority} ${left.authoritySection}${canonicalPath(prefix)}${value}`);
+          if (!result?.valid) continue;
+          for (const candidate of result.ambiguity?.options || [{ path: result.path }]) {
+            const ending = candidate.path.slice(length), consumed = ending.length;
+            if (!consumed || length !== Math.max(0, path.length - consumed) || !prefix.every((token, index) => candidate.path[index] === token)) continue;
+            matches.set(canonicalPath(candidate.path), { ...result, path: candidate.path, ambiguity: null, label: `${authority} ${left.authoritySection}${canonicalPath(candidate.path)}` });
+          }
+        }
+        return matches.size === 1 ? matches.values().next().value : null;
       }
       const direct = parseCitation(value);
       const explicitlyQualified = /^\s*(?:i\.?\s*n\.?\s*a\.?(?=\s|§|\d|$)|(?:8\s*)?u\.?\s*s\.?\s*c\.?(?=\s|§|\d|$)|(?:\d+\s*)?c\.?\s*f\.?\s*r\.?(?=\s|§|\d|$))/i.test(String(value || ""));
@@ -7403,9 +7436,13 @@
         const leftText = input.slice(0, separator.index).trim();
         const rightText = input.slice(separator.index + separator[0].length).trim();
         if (!leftText || !rightText) continue;
-        const left = searchScopeDescriptor(parseCitation(leftText));
+        const leftResult = parseCitation(leftText);
+        if (leftResult?.ambiguity) return { valid: false, message: "Use explicit unit boundaries or letter case to disambiguate this range." };
+        const left = searchScopeDescriptor(leftResult);
         if (!left) continue;
-        const right = searchScopeDescriptor(inferredSearchScopeEndpoint(rightText, left));
+        const rightResult = inferredSearchScopeEndpoint(rightText, left);
+        if (rightResult?.ambiguity) return { valid: false, message: "Use explicit unit boundaries or letter case to disambiguate this range." };
+        const right = searchScopeDescriptor(rightResult);
         if (!right) return { valid: false, message: "Enter a valid ending citation for this range." };
         return searchScopeRange(left, right);
       }

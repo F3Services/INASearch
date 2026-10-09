@@ -680,6 +680,116 @@
   const QUERY_VERSION = 2;
   const PERSONAL_SCOPES = new Set(["notes", "annotations", "highlights", "highlights-exact"]);
 
+  // Parenthesized units are indivisible; compact stretches may contain several
+  // units. Keep source positions for editing an ambiguity without erasing units.
+  function scanCitationPath(value) {
+    const input = String(value || ""), segments = [];
+    let cursor = 0;
+    while (cursor < input.length) {
+      if (/[\s.,]/.test(input[cursor]) || (input[cursor] === "-" && !segments.length)) { cursor++; continue; }
+      const start = cursor;
+      if (input[cursor] === "(") {
+        const close = input.indexOf(")", cursor + 1);
+        const end = close < 0 ? input.length : close + 1;
+        const text = input.slice(cursor + 1, close < 0 ? end : close).trim();
+        segments.push({ kind: "unit", text, start, end });
+        if (/[()]/.test(text) || (text && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(text))) return { status: "invalid", segments };
+        if (close < 0) return { status: "incomplete", segments };
+        if (!text) return { status: "invalid", segments };
+        cursor = end;
+      } else {
+        const match = input.slice(cursor).match(/^[a-z0-9]+(?:-[a-z0-9]+)*/i);
+        if (!match) return { status: "invalid", segments };
+        cursor += match[0].length;
+        segments.push({ kind: "compact", text: match[0], start, end: cursor });
+      }
+    }
+    return { status: "complete", segments };
+  }
+
+  function matchCitationPath(syntax, candidate, options = {}) {
+    if (syntax.status !== "complete") return null;
+    const normalize = options.normalize || (value => String(value).replace(/[^a-z0-9-]/gi, "").toLowerCase());
+    const parts = candidate.inputParts || candidate.path;
+    const unitMatches = options.unitMatches || ((token, index) => normalize(token) === normalize(parts[index]));
+    let cursor = 0;
+    const segments = [];
+    for (const segment of syntax.segments) {
+      const from = cursor;
+      if (segment.kind === "unit") {
+        if (cursor >= parts.length || !unitMatches(segment.text, cursor)) return null;
+        cursor++;
+      } else {
+        const target = normalize(segment.text);
+        let matched = "";
+        while (cursor < parts.length && matched.length < target.length) {
+          matched += normalize(parts[cursor++]);
+          if (!target.startsWith(matched)) return null;
+        }
+        if (!target || matched !== target) return null;
+      }
+      segments.push({ ...segment, from, to: cursor });
+    }
+    return cursor === parts.length ? { segments } : null;
+  }
+
+  function citationPathEdits(raw, syntax, candidate, divergentUnit, options = {}) {
+    if (!syntax.segments.some(segment => segment.kind === "unit")) return null;
+    const match = matchCitationPath(syntax, candidate, options);
+    if (!match) return null;
+    const edits = [];
+    for (const segment of match.segments) {
+      if (segment.kind !== "compact" || segment.to <= divergentUnit) continue;
+      const unchanged = candidate.inputParts.slice(segment.from, Math.max(segment.from, divergentUnit)).join("").length;
+      const before = String(raw).slice(0, segment.start).replace(options.compactHyphens ? /[^A-Za-z0-9-]/g : /[^A-Za-z0-9]/g, "").length;
+      edits.push({ start: before + unchanged, end: before + segment.text.length, text: candidate.path.slice(Math.max(segment.from, divergentUnit), segment.to).join("") });
+    }
+    return edits;
+  }
+
+  function readCitationLocator(input, start = 0, options = {}) {
+    const source = String(input || ""), tail = source.slice(start);
+    const authority = tail.match(/^(?:(?:\d+\s*)?c\.?\s*f\.?\s*r\.?|(?:8\s*)?u\.?\s*s\.?\s*c\.?|i\.?\s*n\.?\s*a\.?|statutes?)(?=\s|\d|§|$|,)/i);
+    let cursor = start + (authority?.[0].length || 0), status = "complete";
+    const head = source.slice(cursor).match(/^\s*(?:§+\s*)?(?:(?:part|title|chapter|subchapter|subpart)\s+)?(?:\d+[a-z0-9]*(?:\.\d+[a-z0-9]*)?|[IVX]+)(?![a-z0-9:])/i);
+    if (head) cursor += head[0].length;
+    else if (!(options.relative && source[cursor] === "(")) return authority ? { value: source.slice(start, cursor).trim(), end: cursor, status } : null;
+    while (cursor < source.length) {
+      const spaces = source.slice(cursor).match(/^\s+(?=\()/);
+      if (spaces) {
+        const opening = cursor + spaces[0].length, close = source.indexOf(")", opening + 1);
+        // A separated Boolean group belongs to the search text. Adjacent
+        // parentheses, or an unfinished unit, still belong to the locator.
+        if (close >= 0 && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(source.slice(opening + 1, close).trim())) break;
+        cursor = opening;
+      }
+      if (source[cursor] === "(") {
+        const close = source.indexOf(")", cursor + 1);
+        if (close < 0) { cursor = source.length; status = "incomplete"; break; }
+        const token = source.slice(cursor + 1, close);
+        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(token.trim())) status = "invalid";
+        cursor = close + 1;
+      } else {
+        const compact = source.slice(cursor).match(/^[a-z0-9]+/i);
+        if (!compact) {
+          if (options.whole && source[cursor] === ")") { status = "invalid"; cursor++; continue; }
+          break;
+        }
+        cursor += compact[0].length;
+      }
+    }
+    if (options.allowRange !== false) {
+      const separator = source.slice(cursor).match(/^\s*[-–—]\s*/);
+      if (separator) {
+        const endpointStart = cursor + separator[0].length;
+        const endpoint = readCitationLocator(source, endpointStart, { relative: true, allowRange: false });
+        cursor = endpoint?.end || endpointStart;
+        status = status === "invalid" ? status : endpoint?.status || "incomplete";
+      }
+    }
+    return { value: source.slice(start, cursor).trim(), end: cursor, status };
+  }
+
   // Read citation syntax before the text lexer interprets its parentheses as OR groups.
   // Corpus validation is deliberately separate: incomplete/unknown citations never become words.
   function readScopeValue(input, start) {
@@ -688,19 +798,10 @@
     if (quoted) return { value: quoted[1].replace(/\\(.)/g, "$1"), end: start + quoted[0].length };
     const content = tail.match(/^(notes|annotations|highlights-exact|highlights)(?=$|[\s,])/i);
     if (content) return { value: content[1].toLowerCase(), end: start + content[0].length };
-    const authority = tail.match(/^(?:(?:\d+\s*)?c\.?\s*f\.?\s*r\.?|(?:8\s*)?u\.?\s*s\.?\s*c\.?|i\.?\s*n\.?\s*a\.?|statutes?)(?=\s|\d|§|$|,)/i);
-    let end = authority ? authority[0].length : 0;
-    const rest = tail.slice(end);
-    const locator = rest.match(/^\s*(?:§+\s*)?(?:(?:part|title|chapter|subchapter|subpart)\s+)?(?:\d+[a-z0-9]*(?:\.\d+[a-z0-9-]*)?|[IVX]+)(?![a-z0-9:])(?:\s*\([a-z0-9]+\))*(?:\s*[-–—]\s*(?:(?:\d+\s*)?(?:INA|CFR|U\.?S\.?C\.?)\s*)?(?:\d+[a-z0-9]*(?:\.\d+[a-z0-9-]*)?)?(?:\s*\([a-z0-9]+\))*)?/i);
-    if (locator) end += locator[0].length;
-    if (!end) {
-      const word = tail.match(/^[^\s,]+/);
-      return { value: word?.[0] || "", end: start + (word?.[0].length || 0) };
-    }
-    // Include unfinished path tokens so typing cannot launch an accidentally broader search.
-    const unfinished = tail.slice(end).match(/^\s*\([^)]*$/);
-    if (unfinished) end += unfinished[0].length;
-    return { value: tail.slice(0, end).trim(), end: start + end };
+    const locator = readCitationLocator(input, start);
+    if (locator) return locator;
+    const word = tail.match(/^[^\s,]+/);
+    return { value: word?.[0] || "", end: start + (word?.[0].length || 0) };
   }
 
   function extractQueryScopes(value) {
@@ -935,6 +1036,10 @@
     commonDepth,
     commonLevelAtDepth,
     mapCommonLevel,
+    scanCitationPath,
+    matchCitationPath,
+    citationPathEdits,
+    readCitationLocator,
     scanCommandSegments,
     splitTopLevelCommands,
     lexCommand,

@@ -234,7 +234,9 @@ function replaceProfileOnly(html, profile) {
 
 function extractedFunction(source, name, _nextName, context = {}) {
   const functionSource = require("./test-function-source")(source, name);
-  return vm.runInNewContext(`(${functionSource})`, { JSON, String, INASearchCfrHierarchy: require("../src/INASearch-CFR-Hierarchy"), ...context });
+  const sandbox = { JSON, String, INA_SEARCH_COMMAND: searchCommandRuntime, INASearchCfrHierarchy: require("../src/INASearch-CFR-Hierarchy"), ...context };
+  if (context.globalThis) sandbox.globalThis = { INA_SEARCH_COMMAND: searchCommandRuntime, ...context.globalThis };
+  return vm.runInNewContext(`(${functionSource})`, sandbox);
 }
 
 function authorityHierarchyFunctions(source, context = {}) {
@@ -402,6 +404,7 @@ function compactCitationPathFunctions(source, context = {}) {
   assert(start >= 0 && end > start, "Could not extract the compact citation-path resolver.");
   const declarations = source.slice(start, end);
   return vm.runInNewContext(`${declarations}\n({ commonCompactCandidatePrefixLength, romanNumeralValue, statutePathDescriptor, compactStatutePathIndex, romanCaseMatches, compareCompactCitationPaths, citationAmbiguityRange, citationWithStatuteInterpretation, resolveIndexedCompactStatutePath })`, {
+    INA_SEARCH_COMMAND: searchCommandRuntime,
     Array,
     Map,
     Math,
@@ -417,6 +420,7 @@ function searchScopeParsingFunctions(source, context = {}) {
   assert(start >= 0 && end > start, "Could not extract the citation-scope parser.");
   const declarations = source.slice(start, end);
   return vm.runInNewContext(`${declarations}\n({ searchScopeDescriptor, inferredSearchScopeEndpoint, searchScopeRange, parseSearchScope })`, {
+    INA_SEARCH_COMMAND: searchCommandRuntime,
     Map,
     Number,
     Set,
@@ -433,6 +437,7 @@ async function main() {
     ["test-annotations.js", "PASS annotations"],
     ["test-search-worker.js", "Search worker cache tests passed"],
     ["test-command-language.js", "PASS command language"],
+    ["test-mixed-citations.js", "PASS mixed citations"],
     ["test-query-scopes.js", "PASS structured scopes"],
     ["test-query-performance.js", "PASS structured search performance"],
     ["test-workspace.js", "Workspace compositor tests passed."],
@@ -3401,6 +3406,7 @@ async function main() {
     cfrPartHierarchyNode: hierarchyModel.cfrPartHierarchyNode,
     componentTokens: cfrComponentTokens,
     compactHierarchyTokens: cfrCompactHierarchyTokens,
+    unverifiedCitationPath: extractedFunction(fallbackSource, "unverifiedCitationPath", null, { compactHierarchyTokens: cfrCompactHierarchyTokens }),
     canonicalPath: cfrCanonicalPath,
     normCitationPart: statutoryNormPart,
     normalize: searchNormalize,
