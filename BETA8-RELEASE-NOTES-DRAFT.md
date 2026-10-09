@@ -8,7 +8,7 @@ Beta8 makes finding, comparing, and copying the law easier, and adds historical 
 - **More precise searches:** Combine `in:` and `cites:` in the same search field. Search within a citation or range, find provisions that cite another provision, and narrow the results with words. Use `in:notes` for personal notes or `in:annotations` for source annotations.
 - **Search your highlights:** Use `in:highlights` to search provisions containing a saved highlight, or `in:highlights-exact` to search only the highlighted words. Your saved colors appear in search results.
 - **Easier browsing:** Home shows the INA or Title 8 index above the CFR index, with separate Expand All and Collapse All controls. Clearer headings, CFR topic groups, and status labels make the lists easier to follow.
-- **Better copying:** A fixed action column offers citation, text, or both with a customizable preface. The INA/U.S.C. switch chooses the copied wording. Hover over a text-copy button to preview its target; moving away restores your reading position.
+- **Better copying:** Copy controls are always visible in a fixed column beside the reader, offering citation, text, or both with a customizable preface. Previously, the citation-unit menu was hidden until you clicked a citation unit. The INA/U.S.C. switch chooses the copied wording. Hover over a text-copy button to preview its target; moving away restores your reading position.
 - **Preview shared links:** Hover over Share to see the destination before copying its link, including both panes in a split view. Moving away or pressing Escape returns you to where you were reading.
 - **Simpler help:** All tips are available by category in About. The progress-tracked Quick Start tutorial has been removed.
 
@@ -19,7 +19,7 @@ Beta8 makes finding, comparing, and copying the law easier, and adds historical 
 - Fixed an edge case when looking up citations in lettered sections. Mixed notation such as `274(a)2b` now correctly resolves to INA 274(a)(2)(B).
 - Corrected CFR paragraph structure and selection outlines so navigation, copying, highlights, and inserted excerpts target the right unit.
 - Corrected more citation links, including CFR subpart references and references in historical INA text that could open the wrong modern provision.
-- Improved citation display in search results and when switching views, preserving search marks, saved highlights, and reading positions. Yellow highlighting now applies only to converted INA citations.
+- Improved citation display in search results and when switching views, preserving search marks, saved highlights, and reading positions. With Follow View Setting, converted INA references appear in INA view; U.S.C. view retains the original source wording in searches. Yellow highlighting now applies only to converted INA citations.
 - Made the navigation bar easier to collapse, combined scrolling and citation-jump offsets in one setting, and clarified history and copy controls in side-by-side readers.
 - Improved Back and Forward after scrolling, and kept temporary copy and share previews out of navigation history.
 - Fixed copy labels that wrapped or extended past their backgrounds, including in Firefox, and stopped the share-preview frame from shifting the page.
@@ -50,13 +50,13 @@ Existing citation-display preferences switch to Follow View Setting once after u
 
 ![Beta7 and Beta8 Home index comparison](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-home-before-after.png)
 
-**Copy controls — before and after, close-up:** The fixed column offers citation, text, or both. Hovering over combined copy previews the selected provision and its preface.
+**Copy controls — before and after, close-up:** The two side-by-side Beta7 views show the menu hidden by default, then revealed by clicking the citation unit. In Beta8, the copy controls are always available on the side of the reader.
 
-![Close-up of Beta7 and Beta8 copy controls](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-copy-before-after.png)
+![Two Beta7 close-ups show the hidden menu and the menu opened by clicking a citation unit; Beta8 shows always-visible copy controls beside the reader](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-copy-before-after.png?v=03116e5d9848)
 
-**Search citations — before and after, close-up:** These are the same two matches in INA 212(j) for “this title.” Beta8 displays the converted INA references while preserving the search marks.
+**Search citations — before and after, close-up:** These are the same two matches in INA 212(j) for “this title.” With Follow View Setting, Beta8 displays the converted INA references when the view mode is INA, preserving the search marks. Switch to U.S.C. view to see the original wording in search results, as the final close-up shows.
 
-![Close-up of citation wording and search marks in Beta7 and Beta8](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-search-citations-before-after.png)
+![Beta7 search results compared with Beta8 in INA view, followed by Beta8 in U.S.C. view showing the original wording](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-search-citations-before-after.png?v=cab79832ae18)
 
 ## Downloads
 
