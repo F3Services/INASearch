@@ -67,5 +67,5 @@ Download either file and open it in Chrome or Edge. Both include the legal text 
 
 ### SHA-256 checksums
 
-- `INASearch.html`: `7a3389b2d1c2b4004e0622833a2c7b0f999e84b704d7f1b3869141b379c6f83a`
-- `INASearch-Uncompressed.html`: `be5500735b51ea78321f0085027341eb6d3bd423d1bb231f2d7c8fdf6cb44dc0`
+- `INASearch.html`: `6ca7ddcccfaa1175115524924adc68b45ef14d32609f510afb347bba38961c2e`
+- `INASearch-Uncompressed.html`: `5149eb3e82d79c39cfe44956da0bb9c9963f696c0a11bc4e9447135d9aa24f79`
