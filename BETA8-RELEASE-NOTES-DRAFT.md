@@ -4,7 +4,7 @@ Beta8 makes finding, comparing, and copying the law easier, and adds historical 
 
 ## What’s new
 
-- **Historical INA text:** Read and search 14 former INA sections, including INA 242B and 321. Each shows its historical version, official sources, and repeal or transfer warning.
+- **Historical INA text:** Previously, no repealed INA section showed its former text. Now you can read and search 14 repealed or transferred INA sections, including INA 242B and 321. Each shows its historical version, official sources, and repeal or transfer warning.
 - **More precise searches:** Combine `in:` and `cites:` in the same search field. Search within a citation or range, find provisions that cite another provision, and narrow the results with words. Use `in:notes` for personal notes or `in:annotations` for source annotations.
 - **Search your highlights:** Use `in:highlights` to search provisions containing a saved highlight, or `in:highlights-exact` to search only the highlighted words. Your saved colors appear in search results.
 - **Easier browsing:** Home shows the INA or Title 8 index above the CFR index, with separate Expand All and Collapse All controls. Clearer headings, CFR topic groups, and status labels make the lists easier to follow.
@@ -42,9 +42,9 @@ Existing citation-display preferences switch to Follow View Setting once after u
 
 ## Changes in action
 
-**Historical INA text:** INA 321 now includes the former statutory text, its official source, and a prominent repeal warning.
+**Historical INA text — INA 321 is one example:** Previously, repealed INA sections displayed no statutory text. Beta8 adds historical text for 14 repealed or transferred INA sections, with official sources and clear status warnings. INA 321 is shown below as one example.
 
-![Historical INA 321 with its repeal warning and source](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-historical-ina.png)
+![INA 321, one example of the 14 historical INA sections now available, with its repeal warning and official source](https://github.com/F3Services/INASearch/releases/download/Beta8/beta8-historical-ina.png)
 
 **Home index — before and after:** The CFR index appears below the INA, with its own Expand All and Collapse All controls.
 
