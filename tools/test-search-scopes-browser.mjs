@@ -5,7 +5,7 @@ import { homedir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 const { startInspection } = await import(pathToFileURL(resolve(homedir(), '.codex/tools/browser-inspection/session.mjs')));
-const url = pathToFileURL(resolve('INASearch.html')).href;
+const url = pathToFileURL(resolve(process.argv[2] || 'INASearch.html')).href;
 const session = await startInspection({ url, outputDir: resolve('audits/search-scopes-browser') });
 const page = session.page;
 async function search(q, target = page) {
@@ -52,8 +52,8 @@ try {
     await INASearchStorage.saveProfile(vault,{expectedRevision:snap.profile?.record?.cacheRevision || 0});
   });
   await page.goto(url);
-  assert.equal(await search('president'), '137 hits in 67 sections');
-  assert.equal(baseline, '134 hits in 64 sections');
+  assert.equal(await search('president'), '138 hits in 68 sections');
+  assert.equal(baseline, '135 hits in 65 sections');
   assert.deepEqual(await page.locator('.occurrence-authority-header strong').allTextContents(), ['INA','CFR','Notes']);
   for (const label of ['CFR','Notes']) {
     const header = page.locator('.occurrence-authority-header').filter({has:page.locator('strong',{hasText:new RegExp(`^${label}$`)})});
@@ -64,7 +64,7 @@ try {
   assert.equal(await search('in:notes in:237 president'),'1 hit in 1 section');
   assert.equal(await search('in:notes cites:212'),'1 hit in 1 section');
   assert.equal(await search('in:notes'),'3 hits in 3 sections');
-  assert.equal(await search('in:ina president'),'53 hits in 14 sections');
+  assert.equal(await search('in:ina president'),'54 hits in 15 sections');
   assert.equal(await search('in:8 CFR president'),'37 hits in 21 sections');
   assert.equal(await search('in:8cfr president'),'37 hits in 21 sections');
   assert.equal(await search('in:237 in:highlights deportable'),'1 hit in 1 section');
@@ -127,7 +127,7 @@ try {
   assert.equal(await search('in:237 cites:212', fallback),'23 hits in 1 section');
   assert.equal(await search('in:highlights-exact certifies', fallback),'1 hit in 1 section');
   const fallbackStarted = performance.now();
-  assert.equal(await search('president', fallback),'137 hits in 67 sections');
+  assert.equal(await search('president', fallback),'138 hits in 68 sections');
   await fallback.locator('.occurrence-row').first().waitFor();
   assert(performance.now()-fallbackStarted<350,'Production fallback search exceeded 350 ms');
   await fallback.close();

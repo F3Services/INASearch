@@ -200,6 +200,33 @@ function testClassificationAndChildRules() {
   assert.strictEqual(command.classifyInput("", { citationClassifier }).mode, "empty");
 }
 
+function testMixedCitationScopes() {
+  const alternatives = command.extractQueryScopes('in:274(a)2b (years imprisonment)');
+  assert.deepStrictEqual(alternatives.groups, [['274(a)2b']]);
+  assert.strictEqual(alternatives.text, '(years imprisonment)');
+  for (const [input, value, text] of [
+    ['in:274(a)2b waiver', '274(a)2b', 'waiver'],
+    ['in:8 CFR 214.2(h)2iA visa', '8 CFR 214.2(h)2iA', 'visa'],
+    ['in:274(a)2(B) waiver', '274(a)2(B)', 'waiver'],
+    ['in:274(a)2b–(a)3b waiver', '274(a)2b–(a)3b', 'waiver']
+  ]) {
+    const read = command.extractQueryScopes(input);
+    assert.deepStrictEqual(plain(read.groups), [[value]], `${input} truncated the mixed citation scope`);
+    assert.strictEqual(read.text.trim(), text, `${input} leaked a citation suffix into search terms`);
+  }
+  const cites = command.extractQueryScopes('cites:INA 274(a)2b waiver');
+  assert.deepStrictEqual(plain(cites.cites), [['INA 274(a)2b']]);
+  assert.strictEqual(cites.text.trim(), 'waiver');
+  const syntax = command.scanCitationPath('(a)2(B)');
+  assert.strictEqual(syntax.status, 'complete');
+  assert.deepStrictEqual(syntax.segments.map(s => [s.kind, s.text, s.start, s.end]), [['unit', 'a', 0, 3], ['compact', '2', 3, 4], ['unit', 'B', 4, 7]]);
+  assert.strictEqual(command.scanCitationPath('(a)2(').status, 'incomplete');
+  assert.strictEqual(command.scanCitationPath('(a2)b').segments[0].text, 'a2');
+  assert.strictEqual(command.scanCitationPath('(a)(2))').status, 'invalid');
+  assert.strictEqual(command.matchCitationPath(command.scanCitationPath('(a2)b'), {path:['a','2','B'], inputParts:['a','2','B']}), null, 'An explicit unit was split into multiple units');
+  assert(command.matchCitationPath(command.scanCitationPath('(a)2b'), {path:['a','2','B'], inputParts:['a','2','B']}));
+}
+
 function main() {
   testBrowserAndNodeExports();
   testTopLevelSplitting();
@@ -207,6 +234,7 @@ function main() {
   testScopesAndCommonParsing();
   testCommonDepthState();
   testClassificationAndChildRules();
+  testMixedCitationScopes();
   console.log("PASS command language: splitting, Boolean AST, scopes, Common mapping/sync, classification, and child-pane rules");
 }
 
