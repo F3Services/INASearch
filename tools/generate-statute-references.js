@@ -11,6 +11,7 @@ const { applyStatuteFootnotes } = require("./statute-footnotes");
 const root = path.resolve(__dirname, "..");
 const manifestPath = path.join(root, "sources", "legal", "source-manifest.json");
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+const houseSource = manifest.sources.find(source => source.id === "house-title-8-uslm");
 const houseArtifact = manifest.sources.flatMap(source => source.artifacts || []).find(artifact => artifact.id === "house-title-8-xml");
 if (!houseArtifact) throw new Error("The legal-source manifest does not contain the House Title 8 XML artifact.");
 const xmlPath = process.argv[2] || path.join(root, houseArtifact.path);
@@ -275,9 +276,9 @@ if (missingSourceRecord || sourceTextMismatch || accepted.length !== extracted.r
 }
 const result = {
   schemaVersion: 3,
-  sourceUrl: "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
-  sourceReleasePoint: "119-102",
-  capturedAt: manifest.capturedAt,
+  sourceUrl: houseSource.requestedUrl,
+  sourceReleasePoint: houseSource.releasePoint,
+  capturedAt: houseSource.capturedAt || manifest.capturedAt,
   sourceArtifact: houseArtifact.path,
   sourceBytes: xmlBytes.length,
   sourceSha256: xmlSha256,

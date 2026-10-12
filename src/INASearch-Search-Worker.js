@@ -10,8 +10,10 @@
 
   let projection = null;
   let projectionPromise = null;
+  let projectionCacheSavePromise = Promise.resolve();
   let identity = null;
   let initializationGeneration = 0;
+  let embeddedPayloadWaiter = null;
   const sessionGenerations = new Map();
   const searchResults = new Map();
 
@@ -20,7 +22,25 @@
   const send = value => scope.postMessage(value);
   const metric = (name, started, detail = {}) => send({ type: "metric", name, duration: elapsed(started), detail });
 
+  function settleEmbeddedPayload(value = null, generation = initializationGeneration) {
+    if (!embeddedPayloadWaiter || embeddedPayloadWaiter.generation !== generation) return;
+    const waiter = embeddedPayloadWaiter;
+    embeddedPayloadWaiter = null;
+    waiter.resolve(value);
+  }
+
   async function corpusFromInitialization(message) {
+    // The main thread may have merged a new embedded statute release with
+    // newer locally downloaded CFRs. That verified snapshot supersedes storage.
+    if (message.source === "upgraded-cache" && message.runtimeCorpus) return message.runtimeCorpus;
+    if (message.awaitEmbeddedPayload && !(message.embeddedPayload instanceof Blob)) {
+      const supplied = await message.embeddedPayloadReady;
+      if (!supplied) return null;
+      message = { ...message, embeddedPayload: supplied.embeddedPayload };
+      if (!(message.embeddedPayload instanceof Blob)) {
+        throw new Error("The deferred embedded corpus payload is missing or invalid.");
+      }
+    }
     if (message.embeddedPayload instanceof Blob) {
       const parsed = JSON.parse(await message.embeddedPayload.text());
       return packing?.hydratePackedCorpus(parsed) || parsed;
@@ -37,11 +57,16 @@
   async function persistRuntimeCorpus(corpus, message) {
     if (!storage?.ensureActiveCorpus) return;
     try {
+      if (message.source === "upgraded-cache" && storage.activateCorpus) {
+        await storage.activateCorpus(corpus, { reason: "embedded-statute-upgrade" });
+        send({ type: "baseline-cached", corpusVersion: corpus?.corpusVersion || "" });
+        return;
+      }
       await storage.ensureActiveCorpus(corpus, {
         reason: message.source === "embedded" ? "automatic-embedded-baseline" : "runtime-cache-migration",
         legalReferencesPacked: message.source === "embedded" || message.legalReferencesPacked === true,
         sourceCorpusSha256: message.identity?.corpusSha256 || "",
-        sourceState: { authority: "embedded-release" }
+        sourceState: message.sourceState || { authority: "embedded-release" }
       });
       send({ type: "baseline-cached", corpusVersion: corpus?.corpusVersion || "" });
     } catch (error) {
@@ -69,7 +94,10 @@
           metric("projection-cache-hit", restoreStarted, { fragments: restored.fragments.length });
           send({ type: "ready", source: "indexeddb", identity: nextIdentity, fragments: restored.fragments.length });
           metric("projection-ready", initStarted, { source: "indexeddb" });
-          if (message.source === "embedded" && message.embeddedPayload instanceof Blob) void corpusFromInitialization(message).then(corpus => generation === initializationGeneration ? persistRuntimeCorpus(corpus, message) : null).catch(error => send({ type: "cache-warning", cache: "corpus", message: error?.message || String(error) }));
+          settleEmbeddedPayload(null, generation);
+          // A valid search index does not imply that the upgraded reader data
+          // has been saved. Otherwise every refresh repeats the corpus upgrade.
+          if (message.source === "upgraded-cache" || message.corpusCacheNeedsUpgrade || !message.awaitEmbeddedPayload && message.source === "embedded" && message.embeddedPayload instanceof Blob) void corpusFromInitialization(message).then(corpus => generation === initializationGeneration ? persistRuntimeCorpus(corpus, message) : null).catch(error => send({ type: "cache-warning", cache: "corpus", message: error?.message || String(error) }));
           return restored;
         }
         metric("projection-cache-miss", restoreStarted);
@@ -96,14 +124,20 @@
     metric("projection-ready", initStarted, { source: "built" });
     void persistRuntimeCorpus(corpus, message);
     if (storage?.saveSearchIndex) {
-      const saveStarted = startedAt();
-      try {
-        await storage.saveSearchIndex(runtime.toPersistedProjection(built, nextIdentity));
-        if (generation !== initializationGeneration) return null;
-        metric("projection-cache-saved", saveStarted, { fragments: built.fragments.length });
-      } catch (error) {
-        send({ type: "cache-warning", cache: "search-index", message: error?.message || String(error) });
-      }
+      // Pending searches can use the completed projection while its cache saves.
+      // Serialize writes so a slow older save cannot replace a newer corpus.
+      projectionCacheSavePromise = projectionCacheSavePromise.then(async () => {
+        if (generation !== initializationGeneration) return;
+        const saveStarted = startedAt();
+        try {
+          await storage.saveSearchIndex(runtime.toPersistedProjection(built, nextIdentity));
+          if (generation !== initializationGeneration) return;
+          metric("projection-cache-saved", saveStarted, { fragments: built.fragments.length });
+        } catch (error) {
+          if (generation !== initializationGeneration) return;
+          send({ type: "cache-warning", cache: "search-index", message: error?.message || String(error) });
+        }
+      });
     }
     return built;
   }
@@ -148,14 +182,23 @@
   scope.addEventListener("message", event => {
     const message = event.data || {};
     if (message.type === "init" || message.type === "corpus-change") {
+      // A replacement initialization must release a superseded payload wait.
+      settleEmbeddedPayload();
       const generation = ++initializationGeneration;
+      let initializationMessage = message;
+      if (message.awaitEmbeddedPayload && !(message.embeddedPayload instanceof Blob)) {
+        const embeddedPayloadReady = new Promise(resolve => {
+          embeddedPayloadWaiter = { generation, identityKey: runtime.projectionIdentity(null, message.identity || {}).key, resolve };
+        });
+        initializationMessage = { ...message, embeddedPayloadReady };
+      }
       const previous = projectionPromise;
       projection = null;
       searchResults.clear();
       sessionGenerations.clear();
       const pending = Promise.resolve(previous).catch(() => null).then(() => {
         if (generation !== initializationGeneration) return null;
-        return initialize(message, generation);
+        return initialize(initializationMessage, generation);
       }).catch(error => {
         if (generation !== initializationGeneration || error?.name === "AbortError") return null;
         if (projectionPromise === pending) projectionPromise = null;
@@ -163,6 +206,12 @@
         return null;
       });
       projectionPromise = pending;
+      return;
+    }
+    if (message.type === "embedded-corpus-payload") {
+      if (!embeddedPayloadWaiter || embeddedPayloadWaiter.generation !== initializationGeneration) return;
+      if (message.identity && runtime.projectionIdentity(null, message.identity).key !== embeddedPayloadWaiter.identityKey) return;
+      settleEmbeddedPayload(message);
       return;
     }
     if (message.type === "search") {

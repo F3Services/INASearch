@@ -142,6 +142,22 @@ function inferredSiblingPath(currentPath, inlineTokens, previousInlinePath) {
   return null;
 }
 
+function historicalFlatChildPath(previousInlinePath, inlineTokens) {
+  if (!previousInlinePath?.length || inlineTokens.length !== 1) return null;
+  const previous = String(previousInlinePath.at(-1));
+  const next = String(inlineTokens[0]);
+  // Historical Code OCR often leaves every printed subdivision in one
+  // unlabeled body node. In that case the conventional (a)(1)(A)(i)(I)
+  // sequence supplies the parent that the structural tree cannot provide.
+  if ((/^[a-z]$/.test(previous) && /^\d+$/.test(next)) ||
+      (/^\d+$/.test(previous) && /^[A-Z]$/.test(next)) ||
+      (/^[A-Z]$/.test(previous) && romanPattern.test(next) && next === next.toLowerCase()) ||
+      (romanPattern.test(previous) && previous === previous.toLowerCase() && romanPattern.test(next) && next === next.toUpperCase())) {
+    return [...previousInlinePath, next];
+  }
+  return null;
+}
+
 function fallbackRunInPath(currentPath, parentPath, inlineTokens) {
   const currentDepth = Math.max(0, (currentPath?.length || 1) - 1);
   const firstInlineToken = String(inlineTokens[0] || "");
@@ -158,7 +174,7 @@ function fallbackRunInPath(currentPath, parentPath, inlineTokens) {
 
 function collectStructuralPaths(nodes, path, identities) {
   for (const node of nodes || []) {
-    const current = [...path, String(node.label)];
+    const current = [...path, ...node.label ? [String(node.label)] : []];
     identities.add(pathIdentity(current));
     collectStructuralPaths(node.children, current, identities);
   }
@@ -175,17 +191,20 @@ function indexStatuteRunIns(corpus) {
 
     const walk = (nodes, parentPath = []) => {
       for (const node of nodes || []) {
-        const currentPath = [...parentPath, String(node.label)];
+        const currentPath = [...parentPath, ...node.label ? [String(node.label)] : []];
         const markers = statuteRunInMarkers(node.text, node.label);
         if (markers.length) stats.sourceNodes += 1;
         let previousInlinePath = null;
         for (const marker of markers) {
           const candidates = runInPathCandidates(currentPath, marker.tokens, previousInlinePath);
           const directPath = candidates[0];
+          const flatHistorical = Boolean(section.historical && !currentPath.length);
+          const contextualPath = inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
+            || (flatHistorical ? historicalFlatChildPath(previousInlinePath, marker.tokens) : null);
+          const reusedPath = candidates.find(path => indexedIdentities.has(pathIdentity(path)) && !structuralIdentities.has(pathIdentity(path)));
           let inlinePath = marker.nestedAfterPrevious && previousInlinePath?.length
             ? [...previousInlinePath, ...marker.tokens]
-            : candidates.find(path => indexedIdentities.has(pathIdentity(path)) && !structuralIdentities.has(pathIdentity(path)))
-              || inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
+            : (flatHistorical ? contextualPath || reusedPath : reusedPath || contextualPath)
               || (isImmediateSibling(currentPath.at(-1), marker.tokens[0]) ? [...parentPath, ...marker.tokens] : null)
               || fallbackRunInPath(currentPath, parentPath, marker.tokens);
           if (structuralIdentities.has(pathIdentity(inlinePath)) && !structuralIdentities.has(pathIdentity(directPath))) inlinePath = directPath;
@@ -219,10 +238,13 @@ function statuteRunInPathMarkers(section, node, currentPath = []) {
   let previousInlinePath = null;
   return markers.map(marker => {
     const candidates = runInPathCandidates(currentPath, marker.tokens, previousInlinePath);
+    const flatHistorical = Boolean(section.historical && !currentPath.length);
+    const contextualPath = inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
+      || (flatHistorical ? historicalFlatChildPath(previousInlinePath, marker.tokens) : null);
+    const reusedPath = candidates.find(candidate => virtualIdentities.has(pathIdentity(candidate)));
     const path = marker.nestedAfterPrevious && previousInlinePath?.length
       ? [...previousInlinePath, ...marker.tokens]
-      : candidates.find(candidate => virtualIdentities.has(pathIdentity(candidate)))
-        || inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
+      : (flatHistorical ? contextualPath || reusedPath : reusedPath || contextualPath)
         || (isImmediateSibling(currentPath.at(-1), marker.tokens[0]) ? [...parentPath, ...marker.tokens] : null)
         || fallbackRunInPath(currentPath, parentPath, marker.tokens);
     previousInlinePath = path;

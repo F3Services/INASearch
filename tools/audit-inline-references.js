@@ -3,8 +3,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const zlib = require("zlib");
-const { hydratePackedCorpus } = require("../src/INASearch-Corpus-Packing");
+const { readBuildCorpus } = require("./read-build-corpus");
 const { unpackLegalReferences } = require("./pack-legal-references");
 const { statuteRunInMarkers } = require("./statute-run-ins");
 
@@ -21,18 +20,8 @@ const FIELD_REFERENCES = Object.freeze({
 const PARENTHETICAL = /\(([A-Za-z0-9]+(?:[-\u2010\u2011\u2012\u2013\u2014][A-Za-z0-9]+)*)\)/g;
 const ROMAN = /^(?:i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)$/i;
 
-function scriptText(html, id) {
-  const match = String(html || "").match(new RegExp(`<script id="${id}"[^>]*>([\\s\\S]*?)<\\/script>`));
-  if (!match) throw new Error(`Missing ${id} in standalone artifact.`);
-  return match[1];
-}
-
 function readArtifact(fileName) {
-  const html = fs.readFileSync(fileName, "utf8");
-  const manifest = JSON.parse(scriptText(html, "inaSearchCorpusManifest"));
-  const payload = scriptText(html, "inaSearchCorpusData");
-  const bytes = manifest.compression === "gzip" ? zlib.gunzipSync(Buffer.from(payload.replace(/\s+/g, ""), "base64")) : Buffer.from(payload, "utf8");
-  return unpackLegalReferences(hydratePackedCorpus(JSON.parse(bytes.toString("utf8"))));
+  return unpackLegalReferences(readBuildCorpus(fileName));
 }
 
 function addressTokens(value) {

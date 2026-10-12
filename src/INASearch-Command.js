@@ -296,7 +296,7 @@
     const authority = authorities.length === 1 && parsed.values.every(item => ["ina", "cfr"].includes(item)) ? authorities[0] : null;
     const rawLegalValues = parsed.rawValues.map(item => normalizedWord(item).replace(/[.\s]/g, "")).filter(item => ["ina", "usc", "statute", "statutes", "statutory", "cfr", "regulation", "regulations", "regulatory"].includes(item));
     const citationSystem = authorities.length === 1
-      ? authorities[0] === "cfr" ? "cfr" : rawLegalValues.some(item => item === "usc") ? "usc" : "ina"
+      ? authorities[0] === "cfr" ? "cfr" : rawLegalValues.some(item => ["usc", "statute", "statutes", "statutory"].includes(item)) ? "usc" : "ina"
       : null;
     return {
       ...parsed,
@@ -739,6 +739,14 @@
     if (!match) return null;
     const edits = [];
     for (const segment of match.segments) {
+      if (segment.kind === "unit" && segment.from >= divergentUnit) {
+        const chosen = String(candidate.path[segment.from]);
+        if (segment.text !== chosen) {
+          const before = String(raw).slice(0, segment.start).replace(options.compactHyphens ? /[^A-Za-z0-9-]/g : /[^A-Za-z0-9]/g, "").length;
+          edits.push({ start: before, end: before + segment.text.length, text: chosen });
+        }
+        continue;
+      }
       if (segment.kind !== "compact" || segment.to <= divergentUnit) continue;
       const unchanged = candidate.inputParts.slice(segment.from, Math.max(segment.from, divergentUnit)).join("").length;
       const before = String(raw).slice(0, segment.start).replace(options.compactHyphens ? /[^A-Za-z0-9-]/g : /[^A-Za-z0-9]/g, "").length;
@@ -749,7 +757,7 @@
 
   function readCitationLocator(input, start = 0, options = {}) {
     const source = String(input || ""), tail = source.slice(start);
-    const authority = tail.match(/^(?:(?:\d+\s*)?c\.?\s*f\.?\s*r\.?|(?:8\s*)?u\.?\s*s\.?\s*c\.?|i\.?\s*n\.?\s*a\.?|statutes?)(?=\s|\d|§|$|,)/i);
+    const authority = tail.match(/^(?:(?:\d+\s*)?c\.?\s*f\.?\s*r\.?|(?:\d+\s*)?u\.?\s*s\.?\s*c\.?|i\.?\s*n\.?\s*a\.?|statutes?)(?=\s|\d|§|$|,)/i);
     let cursor = start + (authority?.[0].length || 0), status = "complete";
     const head = source.slice(cursor).match(/^\s*(?:§+\s*)?(?:(?:part|title|chapter|subchapter|subpart)\s+)?(?:\d+[a-z0-9]*(?:\.\d+[a-z0-9]*)?|[IVX]+)(?![a-z0-9:])/i);
     if (head) cursor += head[0].length;
@@ -874,7 +882,7 @@
     if (!legalBranches.length && ast.common?.present) errors.push(issue("common-without-legal-scope", "common: applies to legal text only."));
     for (const group of [...extracted.groups, ...extracted.cites]) for (const item of group) {
       if (PERSONAL_SCOPES.has(item.toLowerCase())) continue;
-      if (!/^(?:\d|§|INA|USC|U\.|CFR|C\.|statute)/i.test(item)) errors.push(issue("invalid-in-modifier", `“${item}” is not a legal citation or supported scope.`));
+      if (!/^(?:\d|§|INA|USC|U\.|CFR|C\.|statut(?:e|ory))/i.test(item)) errors.push(issue("invalid-in-modifier", `“${item}” is not a legal citation or supported scope.`));
     }
     const simpleScope = extracted.groups.length === 1 ? parseInModifier(`in:${extracted.groups[0].join(",")}`) : null;
     const contentScopes = [...new Set(branches.flatMap(branch => branch.kind === "law" ? (branch.locations.length ? branch.locations.map(inferAuthority).map(a => a === "statute" ? "ina" : "cfr") : ["ina", "cfr"]) : [branch.kind]))];

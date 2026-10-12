@@ -20,8 +20,9 @@ function structuralPathExists(section, targetPath) {
 }
 
 function localUscTargetExists(corpus, reference) {
-  if (reference.family !== "usc" || reference.resolution !== "local" || String(reference.targetTitle) !== "8") return false;
-  const section = (corpus?.title8?.sections || []).find(item => String(item.section) === String(reference.targetSection));
+  if (reference.family !== "usc" || reference.resolution !== "local") return false;
+  const sections = [...(corpus?.title8?.sections || []), ...(corpus?.referencedUsc?.titles || []).flatMap(title => title.sections || [])];
+  const section = sections.find(item => Number(item.title || 8) === Number(reference.targetTitle) && String(item.section) === String(reference.targetSection));
   if (!section) return false;
   if (!(reference.targetPath || []).length || structuralPathExists(section, reference.targetPath)) return true;
   const runIns = new Set((section.runInPaths || []).map(pathIdentity));

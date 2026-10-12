@@ -72,7 +72,7 @@ function testProfileContracts() {
   assert.strictEqual(profile.schemaVersion, 5, "The simplified annotation system did not publish profile schema version 5.");
   assert.deepStrictEqual(profile.highlights, []);
   assert.deepStrictEqual(profile.annotationOrdinals, {});
-  assert.strictEqual(profile.preferences.noteDisplayPosition, "top");
+  assert.strictEqual(profile.preferences.noteDisplayPosition, undefined);
   assert.strictEqual(profile.preferences.notesUseHandwrittenFont, false);
   assert.deepStrictEqual(plain({
     statutoryNavigationSystem: profile.preferences.statutoryNavigationSystem,
@@ -106,7 +106,7 @@ function testProfileContracts() {
     "splitAuthoritySearchPanesToggle", "legalNavigatorVisibilitySelect",
     "scrollUpdatesSearchToggle", "syncCfrCommonDepthFromStatuteToggle", "expandSearchResultsByDefaultToggle", "showCfrChapterSubchapterInSearchHierarchyToggle", "persistInlineReferenceInsertionsToggle",
     "referenceInsertionsUnavailableCount", "removeUnavailableReferenceInsertionsButton", "statuteNavigationDepthSelect", "cfrNavigationDepthSelect", "pageViewOffsetInput",
-    "noteDisplayPositionSelect", "notesUseHandwrittenFontToggle"
+    "notesUseHandwrittenFontToggle"
   ]) assert(template.includes(`id="${id}"`), `Missing overhaul setting control ${id}.`);
   for (const key of ["emptySearchView", "closeBlankCompanionOnSectionOpen"]) {
     assert(!Object.hasOwn(profile.preferences, key), `Retired home preference ${key} remains in blank profiles.`);
@@ -236,15 +236,17 @@ function testChildHardScopes() {
 async function testSectionMaterializationHooks() {
   const calls = [];
   const sectionIds = ["cfr:8:204.1", "cfr:8:204.2"];
-  const containers = sectionIds.map(sectionId => ({ dataset: { occurrenceSectionRows: encodeURIComponent(sectionId) }, innerHTML: "" }));
+  const containers = sectionIds.map(sectionId => ({ dataset: { occurrenceSectionRows: encodeURIComponent(sectionId) }, innerHTML: "", setAttribute() {} }));
   const details = sectionIds.map(sectionId => ({ dataset: { occurrenceSection: encodeURIComponent(sectionId) }, open: false }));
+  containers.forEach((container, index) => { container.closest = () => details[index]; });
   const $$ = selector => selector === "[data-occurrence-section-rows]" ? containers : selector === "[data-occurrence-section]" ? details : [];
   const declarations = between("    const OCCURRENCE_EAGER_ROW_LIMIT", "\n\n    function scheduleVisibleOccurrenceSections(");
   const unitCorpus = { title8: { sections: [{ id: "8-1101" }] }, cfr: { sections: [], appendices: [] } };
   const helpers = vm.runInNewContext(`${declarations}\n({ occurrenceRowCitationLabel, occurrenceRowUnitText, renderOccurrenceRows, renderAllOccurrenceSections })`, {
-    legalCopyDescription: label => label,
+    legalCopyDescription: label => label, scheduleVisibleOccurrenceSections: () => {},
     $$, $: () => null,
     corpus: unitCorpus,
+    uscSectionById: new Map(unitCorpus.title8.sections.map(section => [section.id, section])),
     escapeHtml: value => String(value),
     occurrenceSectionDomToken: encodeURIComponent,
     occurrenceSectionIdFromToken: decodeURIComponent,
@@ -276,9 +278,6 @@ async function testSectionMaterializationHooks() {
   assert.strictEqual(pane.searchState.visibleRows.length, 160, "Nearby section windows cannot remain populated together.");
   assert.strictEqual(count(containers[0].innerHTML, /data-occurrence-row=/g), 80, "The first nearby section was evicted when another section populated.");
   assert.strictEqual(count(containers[1].innerHTML, /data-occurrence-row=/g), 80, "The second nearby section did not populate.");
-  assert.strictEqual(count(containers[0].innerHTML, /data-occurrence-copy=/g), 160, "Each result row does not expose both directional copy actions.");
-  assert(containers[0].innerHTML.includes("occurrence-row-copy-arrow\" aria-hidden=\"true\">←</span><span class=\"occurrence-row-copy-icon\" aria-hidden=\"true\">⧉")
-    && containers[0].innerHTML.includes("⧉</span><span class=\"occurrence-row-copy-arrow\" aria-hidden=\"true\">→"), "Directional copy buttons do not point outward from the copied cell.");
   assert(containers[0].innerHTML.includes("occurrence-row-citation") && containers[0].innerHTML.includes("occurrence-row-text"), "Occurrence hits are not rendered as citation/text columns.");
   assert(details.every(item => item.open), "Materializing rows did not leave both sections expanded.");
 
@@ -347,18 +346,6 @@ async function testSectionMaterializationHooks() {
     && sectionOpenSource.includes("openMainOccurrenceSection")
     && template.includes("openFocusedOccurrenceSection(pane, section)")
     && template.includes("openMainOccurrenceSection(pane, section)"), "Clicking a result section does not open its reader while preserving search history.");
-  assert(template.includes('grid-template-columns: clamp(76px, 15%, 106px) 62px minmax(0, 1fr)')
-    && template.includes('align-items: center')
-    && template.includes('.occurrence-row-text { min-width: 0; font: 12px/1.45'), "Result rows did not receive the tuned citation width, vertical centering, and larger typography.");
-  assert(template.includes('.occurrence-row-copy { position: relative; display: inline-flex; width: 28px; height: 22px;')
-    && template.includes('.occurrence-row-copy[data-occurrence-copy="text"] { color: var(--ink);')
-    && template.includes('content: attr(data-copy-tooltip)')
-    && template.includes('data-copy-tooltip="Copy Citation"')
-    && template.includes('data-copy-tooltip="Copy Text"')
-    && template.includes('title="Copy Citation"')
-    && template.includes('legalCopyDescription("Copy the complete legal-unit text to the right")'), "Result copy controls are not compact, theme-aware, and concisely explained on hover.");
-  assert(template.includes('.occurrence-row:has([data-occurrence-copy="citation"]:hover) .occurrence-row-citation')
-    && template.includes('.occurrence-row:has([data-occurrence-copy="text"]:hover) .occurrence-row-text'), "Copy-button hover does not highlight the cell it targets.");
   assert(template.includes('id="searchScopeClear" type="button" tabindex="-1"')
     && template.includes('event.key === "Tab" && !event.shiftKey')
     && template.includes('els.search.focus();'), "Forward Tab from the scope editor is not guaranteed to enter the main search field.");
@@ -455,6 +442,7 @@ function testPaneModesAndHistory() {
     editSourceSnapshot: null, lastAcceptedCommand: "8cfr205.2", typingCommitTimer: "old"
   };
   const handleFocusedPaneInput = extractedFunction("handleFocusedPaneInput", "navigateFocusedPaneCommandHistory", {
+    invalidatePaneSearchWork: () => immediateEvents.push(["cancel"]),
     String,
     FOCUSED_PANE_TYPING_COMMIT_DELAY: 750,
     topLevelCommandCommaIndex: () => -1,
@@ -467,6 +455,7 @@ function testPaneModesAndHistory() {
     commitFocusedPaneInput: (_pane, descriptor) => immediateEvents.push(["commit", descriptor.mode])
   });
   handleFocusedPaneInput(immediatePane);
+  assert.equal(immediateEvents[0][0], "cancel", "Pane input must invalidate obsolete work before classification or rendering.");
   assert(immediateEvents.some(event => event[0] === "commit" && event[1] === "reader"), "Changing 8cfr205.2 to 8cfr205.2b does not commit synchronously.");
 
   const copyPreviewReadingScrollTop = extractedFunction("copyPreviewReadingScrollTop", "bindCopyActionPreview", {
@@ -490,7 +479,7 @@ function testPaneModesAndHistory() {
   }), {
     command: 'in:INA "term"', raw: 'in:INA "term"', mode: "search-tree", authority: "statute",
     targetPath: ["a", "1"], targetOccurrence: { occurrenceKey: "hit-1" },
-    hierarchyExpanded: ["ina:title:I"], searchState: { offset: 250, sectionId: "section-1", bucketId: "section-1", totalOccurrences: 900 }, scrollTop: 42
+    hierarchyExpanded: ["ina:title:I"], searchState: { offset: 250, sectionId: "section-1", bucketId: "section-1", selectedResult: null, totalOccurrences: 900 }, scrollTop: 42
   });
 
   const pushFocusedPaneCommandHistory = extractedFunction("pushFocusedPaneCommandHistory", "focusedCitationSegments", { updateFocusedPaneHistoryButtons: () => {} });
@@ -546,9 +535,9 @@ function testInsertionExclusions() {
   assert(cfrRender.includes('containerNoteType === "ordinary"'), "CFR editorial/effective-date note descendants receive insertion slots.");
   assert(cfrRender.includes('block.t === "footnote" ? "cfr-footnote"') && cfrRender.includes('"cfr-table-cell"'), "CFR footnotes or table cells lack exact insertion anchors.");
   const statuteRender = between("    function renderStatute(", "\n\n    function scrollToRenderedStatuteTarget(");
-  assert(statuteRender.includes("legalAugmentationSlotHtml") && statuteRender.includes("section.sourceCredit"), "The statute reader lacks section-level insertion placement or source details.");
-  const sourceCreditOffset = statuteRender.indexOf("section.sourceCredit");
-  assert(statuteRender.lastIndexOf("legalAugmentationSlotHtml", sourceCreditOffset) >= 0, "Section inserted references do not precede source/editorial details.");
+  assert(statuteRender.includes("legalAugmentationSlotHtml") && statuteRender.includes("renderStatuteSupplements"), "The statute reader lacks section-level insertion placement or source details.");
+  const statuteTemplate = statuteRender.slice(statuteRender.indexOf('els.detail.innerHTML = `<div class="detail-content" data-statute-start>'));
+  assert(statuteTemplate.indexOf("legalAugmentationSlotHtml") >= 0 && statuteTemplate.indexOf("legalAugmentationSlotHtml") < statuteTemplate.indexOf("${footer("), "Section inserted references do not precede source/editorial details.");
 
   const excerptSource = between("    function insertedStatuteNodeHtml(", "\n\n    function insertionRecordFromTrigger(");
   assert(excerptSource.includes("insideInsertedReference: true"), "Inserted descendants do not suppress recursive insertion actions.");

@@ -3,7 +3,7 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
-const zlib = require("node:zlib");
+const { readBuildCorpus } = require("./read-build-corpus");
 const { readHistoricalIna, parseHistoricalUnits } = require("./historical-ina");
 const { packLegalReferences, unpackLegalReferences } = require("./pack-legal-references");
 const { hydratePackedCorpus, packCorpusForDelivery } = require("../src/INASearch-Corpus-Packing");
@@ -11,13 +11,11 @@ const occurrence = require("../src/INASearch-Occurrence");
 const annotations = require("../src/INASearch-Annotations");
 const functionSource = require("./test-function-source");
 const data = readHistoricalIna();
-const html = fs.readFileSync(require.resolve("../INASearch.html"), "utf8");
-const packed = JSON.parse(zlib.gunzipSync(Buffer.from(html.match(/<script id="inaSearchCorpusData"[^>]*>([\s\S]*?)<\/script>/)[1], "base64")));
-const corpus = unpackLegalReferences(hydratePackedCorpus(packed));
+const corpus = unpackLegalReferences(readBuildCorpus(require.resolve("../INASearch.html")));
 const sections = new Map(corpus.title8.sections.map(s => [s.section,s]));
 const nodeAt = (s, path) => path.reduce((parent, label) => parent.children?.find(n => n.label === label), { children: sections.get(s).body });
 assert.equal(corpus.historicalIna.sections.length, 14);
-assert.equal(corpus.corpusVersion, "2026.09.19-historical.4");
+assert.equal(corpus.corpusVersion, "2026.10.11-historical-usc.1");
 for (const record of data.sections) {
   const section = sections.get(record.uscSection);
   assert.equal(section.status, record.status || "repealed");
@@ -38,7 +36,9 @@ for (const record of data.sections) {
   assert(!headingRefs.some(r => r.family === "public-law"), "Old repeal-heading offsets leaked into original INA title");
 }
 assert.deepEqual(["352","353","354","355","401"].map(ina => corpus.inaCrosswalk.find(r=>r.inaSection===ina).localSection), ["1484","1485","1486","1487","1106"]);
-assert(sections.has("1484 to 1487"));
+assert(!sections.has("1484 to 1487"), "The combined 8 U.S.C. 1484 to 1487 record remained browsable after individual-section expansion.");
+for (const section of ["1484", "1485", "1486", "1487"]) assert(sections.has(section), `Individual 8 U.S.C. ${section} record is missing.`);
+assert(corpus.historicalUsc.groupSources.some(section => section.section === "1484 to 1487"), "The original combined House record was not retained as source evidence.");
 assert.equal(corpus.inaCrosswalk.find(r=>r.inaSection==="401").originalCrosswalk.hasEquivalent,false);
 assert.match(nodeAt("1252b",["d","1"]).text,/an immigration judge/);
 assert.match(nodeAt("1161",["e","1"]).text,/paragraphs \(5\) and \(7\)\(A\)/);
@@ -53,7 +53,12 @@ assert.match(nodeAt("1486",["5"]).text,/fifteen years/);
 for (const [s,path,phrase] of [["1161",["a","2"],"divided by"],["1161",["a","6","A","ii"],"factor under"],["1161",["f","4"],"person or entity"],["1252b",["a","2"],"not in detention"],["1252b",["c","3"],"stay the deportation"],["1252b",["d"],"Nothing in this subsection"],["1252b",["e","4","A"],"5 years"]]) assert(nodeAt(s,path).continuation.includes(phrase));
 const refs = [];
 function collect(node) { for(const field of ["preamble","text","continuation"]){const property=field==="text"?"references":`${field}References`; for(const r of node[property]||[]){assert.equal(node[field].slice(r.start,r.end),r.text);refs.push(r);}}for(const child of node.children||[])collect(child); }
-for(const section of sections.values())if(section.historical){collect(section);for(const node of section.body)collect(node);}
+for (const sectionId of corpus.historicalIna.sections) {
+  const section = sections.get(sectionId);
+  assert(section?.historical, `Historical INA manifest section ${sectionId} is missing its source record.`);
+  collect(section);
+  for (const node of section.body) collect(node);
+}
 for (const s of ["1252","1105a","1450","1251"]) {
   const selected=refs.filter(r=>r.targetTitle==="8"&&r.targetSection===s);
   assert(selected.length);

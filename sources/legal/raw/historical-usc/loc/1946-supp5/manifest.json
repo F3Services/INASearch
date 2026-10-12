@@ -1,0 +1,34 @@
+{
+  "collection": "Library of Congress U.S. Code digital collection",
+  "edition": "1946 U.S. Code, Supplement V (covering legislation through 1951)",
+  "retrieved": "2026-10-11",
+  "status": "Catalog records and PDF URLs confirmed; PDF acquisition was blocked by persistent HTTP 429.",
+  "locSearchQuery": "https://www.loc.gov/collections/united-states-code/?fo=json&c=100&q=%22Aliens+and+Nationality%22+%22Suppl.+5+1946%22",
+  "items": [
+    {
+      "chapter": 6,
+      "chapterTitle": "Immigration",
+      "title": "United States Code: Immigration, 8 U.S.C. §§ 100-239 (Suppl. 5 1946).",
+      "locItem": "https://www.loc.gov/item/uscode1946-012008006/",
+      "pdfUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-01200/uscode1946-012008006/uscode1946-012008006.pdf",
+      "locDescription": "U.S. Code 1946 Edition, Supplement 5, Title 8: Aliens and Nationality, Chapter 6: Immigration, Sections 100-239",
+      "downloadStatus": "Not acquired: direct LOC tile PDF returned HTTP 429 in urllib and curl requests.",
+      "localFile": null
+    },
+    {
+      "chapter": 11,
+      "chapterTitle": "Nationality",
+      "title": "United States Code: Nationality, 8 U.S.C. §§ 601-1005 (Suppl. 5 1946).",
+      "locItem": "https://www.loc.gov/item/uscode1946-012008011/",
+      "pdfUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-01200/uscode1946-012008011/uscode1946-012008011.pdf",
+      "locDescription": "U.S. Code 1946 Edition, Supplement 5, Title 8: Aliens and Nationality, Chapter 11: Nationality, Sections 601-1005",
+      "downloadStatus": "Not attempted after LOC tile returned HTTP 429 for the first requested chapter; no PDF downloaded.",
+      "localFile": null
+    }
+  ],
+  "govinfoFallback": {
+    "search": "Official GovInfo search for the 1946 U.S. Code Supplement V, Title 8 did not locate an equivalent digitized Code item.",
+    "locGuide": "https://guides.loc.gov/federal-statutes/united-states-code",
+    "note": "The Library of Congress guide describes GovInfo U.S. Code coverage as particularly for 1994 to the present; no equivalent historical 1946 Supplement V file was found."
+  }
+}

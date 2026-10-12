@@ -1,0 +1,447 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-11",
+  "captures": [
+    {
+      "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-66-Pg26.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-66/pdf/STATUTE-66-Pg26.pdf",
+      "bytes": 291901,
+      "sha256": "1994e4457d5840fd5a973b48344f59a8924353d7674261a22a5e98e25c3f4a6b",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-61-Pg630.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg630.pdf",
+      "bytes": 357760,
+      "sha256": "4e10e3307dbc8ddecb49e13b0cefa99e2d2d24f2178ebe9128c81e179e492926",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-06.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008006/uscode1946-001008006.pdf",
+      "bytes": 2175641,
+      "sha256": "94530089fb851f089c426da37de3f9ebeae8b099cb9772650c862c1e595ad44f",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-62-Pg1206.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg1206.pdf",
+      "bytes": 443687,
+      "sha256": "d972c10c703efe317a84037413ca8094d9fa3443ab33743de6332018a50c47a5",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf",
+      "bytes": 10452929,
+      "sha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-66-Pg138.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-66/pdf/STATUTE-66-Pg138.pdf",
+      "bytes": 276253,
+      "sha256": "32313f6ab637b1a29e8dfe99c478ea8b8a0212bc2fc7613f8d117f475e1889bd",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-62-Pg241.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg241.pdf",
+      "bytes": 443018,
+      "sha256": "b8cdf4d829411a52f6364d132245ebb76d7d637850a129cfc5b57ddd0b9e70fd",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-62-Pg335.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg335.pdf",
+      "bytes": 470651,
+      "sha256": "b12492189dabb18706388e5b8bc734d37f331cbdd7a531364b9a4ee791e233a8",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1934/chapter-09.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008009/uscode1934-001008009.pdf",
+      "bytes": 663655,
+      "sha256": "deedf2e9f7ace978a4e0dfaa1c6302818986e40ae66c7b65f36df4295b93acd3",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-50-Pg549.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-50/pdf/STATUTE-50-Pg549.pdf",
+      "bytes": 415159,
+      "sha256": "d775e9adbd720f6a691dda1b4b103b3f33a78a93fcdd64eb5eae1dccc14190aa",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-10.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008010/uscode1946-001008010.pdf",
+      "bytes": 146393,
+      "sha256": "9ff090e8e5571a3f6061f3963983fc6eb89fc903c03e0b3eb14cd0253bdc3adf",
+      "capturedAt": "2026-10-11"
+    }
+  ],
+  "sections": [
+    {
+      "uscSection": "144",
+      "originalTitle": "Bringing in or harboring or concealing certain aliens",
+      "units": [
+        {
+          "path": [],
+          "text": "(a) Any person, including the owner, operator, pilot, master, commanding officer, agent, or consignee of any means of transportation who— (1) brings into or lands in the United States, by any means of transportation or otherwise, or attempts, by himself or through another, to bring into or land in the United States, by any means of transportation or otherwise; (2) knowing that he is in the United States in violation of law, and knowing or having reasonable grounds to believe that his last entry into the United States occurred less than three years prior thereto, transports, or moves, or attempts to transport or move, within the United States by means of transportation or otherwise, in furtherance of such violation of law; (3) willfully or knowingly conceals, harbors, or shields from detection, or attempts to conceal, harbor, or shield from detection, in any place, including any building or any means or transportation; or (4) willfully or knowingly encourages or induces, or attempts to encourage or induce, either directly or indirectly, the entry into the United States of any alien, including an alien seaman, not duly admitted by an immigration officer or not lawfully entitled to enter or reside within the United States under the terms of this Act or any other law relating to the immigration or expulsion of aliens, shall be guilty of a felony, and upon conviction thereof shall be punished by a fine not exceeding $2,000 or by imprisonment for a term not exceeding five years, or both, for each alien in respect to whom any violation of this subsection occurs: Provided, however, That for the purposes of this section, employment (including the usual and normal practices incident to employment) shall not be deemed to constitute harboring. (b) No officer or person shall have authority to make any arrest for a violation of any provision of this section except officers and employees of the United States Immigration and Naturalization Service designated by the Attorney General, either individually or as a member of a class, and all other officers whose duty it is to enforce criminal laws."
+        }
+      ],
+      "unitsSha256": "e95f667ab3dec532733cc5acd348ff591f3a2552cc3227857097afdba360c084",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-66/pdf/STATUTE-66-Pg26.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/later-acts/STATUTE-66-Pg26.pdf",
+      "sourceSha256": "1994e4457d5840fd5a973b48344f59a8924353d7674261a22a5e98e25c3f4a6b",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text as amended through 1952-03-20",
+      "lastAmendmentDate": "1952-03-20",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete replacement of Immigration Act of 1917 section 8, visually checked on 66 Stat. 26. The printed phrase 'any means or transportation' is retained as printed.",
+      "displayHeading": "Bringing in or harboring certain aliens; penalties; arrest authority",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The 1952 replacement act has no Code catchline; originalTitle preserves the former 1946 Code catchline."
+    },
+    {
+      "uscSection": "148",
+      "originalTitle": "Lists of passengers arriving or departing; record of resident aliens and other persons leaving for foreign country",
+      "units": [
+        {
+          "path": [],
+          "text": "Upon the arrival of any alien, United States citizen, or national, by water at any port within the United States on the North American Continent from a foreign port or port of Guam, Puerto Rico, Hawaii, or other insular possession of the United States, or at any port of the said insular possessions from any foreign port, from a port in the United States on the North American Continent, or from a port of another insular possession of the United States, it shall be the duty of the master or commanding officer, owners, or consignees of the steamer, sailing, or other vessel, having said alien, United States citizen, or national on board to deliver to the immigration officers at the port of arrival typewritten or printed lists or manifests made at the time and place of embarkation of such alien, United States citizen, or national on board such steamer or vessel, and such lists or manifests shall be in such form and contain such information as the Commissioner of Immigration and Naturalization, with the approval of the Attorney General, shall by regulation prescribe as necessary for the identification of the persons transported and for the enforcement of the immigration laws. It shall further be the duty of the master or commanding officer of every vessel taking passengers from any port of the United States on the North American Continent to a foreign port or a port of Guam, Puerto Rico, Hawaii, or other insular possession of the United States, or from any port of the said insular possessions to any foreign port, to a port of the United States on the North American Continent, or to a port of another insular possession of the United States to file with the immigration officials before departure a list of all aliens, United States citizens, or nationals, taken on board, said list to be in such form and to contain such information as the Commissioner of Immigration and Naturalization, with the approval of the Attorney General, shall by regulation prescribe as necessary for the identification of the persons transported and for the enforcement of the immigration laws. No master or commanding officer of any such vessel shall be granted clearance papers for his vessel until he has deposited such list or lists with the immigration officials at the port of departure and made oath that they are full and complete as to the information required to be contained therein. Any neglect or omission to comply with the requirements of this section shall be punishable as provided in section 150 of this title: Provided, That in the case of vessels making regular trips to ports of the United States the Commissioner of Immigration and Naturalization, with the approval of the Attorney General, may, when expedient, arrange for the delivery of lists of outgoing aliens, United States citizens, or nationals at a later date: Provided further, That it shall be the duty of immigration officials to record the following information regarding every resident alien and citizen or national leaving the United States by way of the Canadian or Mexican borders for permanent residence in a foreign country: Names, age, and sex; whether married or single; calling or occupation; whether able to read or write; nationality; country of birth; country of which citizen or subject; race; last permanent residence in the United States; intended future permanent residence; and time and port of last arrival in the United States; and if a United States citizen, or national, the facts on which claim to that status is based."
+        }
+      ],
+      "unitsSha256": "eeda9efcdd6c424133f43a050030bf8766ccaa76c50eb3e36206cad45e5f2b73",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00700/uscode1946-007008006/uscode1946-007008006.pdf#page=1",
+      "sourceArtifact": null,
+      "sourceSha256": null,
+      "sourcePdfPages": [
+        1,
+        2
+      ],
+      "versionLabel": "Historical text as amended through 1947-07-30",
+      "lastAmendmentDate": "1947-07-30",
+      "reviewStatus": "official-supplement-transcribed",
+      "transcriptionNote": "Complete 1947 replacement transcribed from the official 1946 Code Supplement II, pages 135-136 (sourceUrl for the full text); print wraps normalized. The captured 61 Stat. 630 page establishes the replacement but ends before its text. The LOC PDF host returned HTTP 429 for local capture.",
+      "fullTextSourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00700/uscode1946-007008006/uscode1946-007008006.pdf#page=1",
+      "edition": "1946",
+      "sourceAccessedAt": "2026-10-11",
+      "sourceCaptureStatus": "remote-only-rate-limited",
+      "amendmentSources": [
+        {
+          "label": "Act of July 30, 1947, 61 Stat. 630 (enacting page)",
+          "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-61-Pg630.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg630.pdf",
+          "bytes": 357760,
+          "sha256": "4e10e3307dbc8ddecb49e13b0cefa99e2d2d24f2178ebe9128c81e179e492926",
+          "capturedAt": "2026-10-11"
+        }
+      ]
+    },
+    {
+      "uscSection": "155",
+      "originalTitle": "Deportation of undesirable aliens generally",
+      "units": [
+        {
+          "path": [],
+          "text": "(a) At any time within five years after entry, any alien who at the time of entry was a member of one or more of the classes excluded by law; any alien who shall have entered or who shall be found in the United States in violation of this chapter, or in violation of any other law of the United States; any alien who at any time after entry shall be found advocating or teaching the unlawful destruction of property, or advocating or teaching anarchy, or the overthrow by force or violence of the Government of the United States or of all forms of law or the assassination of public officials; any alien who within five years after entry becomes a public charge from causes not affirmatively shown to have arisen subsequent to landing; 'except as hereinafter provided, any alien who is hereafter sentenced to imprisonment for a term of one year or more because of conviction in this country of a crime involving moral turpitude, committed within five years after the entry of the alien to the United States, or who is hereafter sentenced more than once to such a term of Imprisonment because of conviction in this country of any crime involving moral turpitude, committed at any time after entry; any alien who shall be found an inmate of'or connected with the management of a house of prostitution or practicing prostitution after such alien shall have entered the United States, or who shall receive, share in, or derive benefit from any Dart of the earnings of any prostitute; any alien who manages or is employed by, in, or in connection with any house of prostitution or music or dance hall or other place of amusement or resort habitually frequented by prostitutes, or where prostitutes gather, or who in any way assists any prostitute or protects or promises to protect from arrest any prostitute; any alien who shall import or attempt to import any person for the purpose of prostitution or for any other immoral purpose; any alien who, after being excluded and deported or arrested and deported as a prostitute, or as a procurer, or as having been connected with the business of prostitution or importation for prostitution or other immoral purposes in any of the ways hereinbefore specified, shall return to and enter the United States; any alien convicted and imprisoned for a violation of any of the provisions of section 138 of this title; any alien who was convicted, or who admits the commission, prior to entry, of a felony or other crime or misdemeanor involving moral turpitude; at any time within three years after entry, any alien who shall have entered the United States by water at any time or place other than as designated by immigration officials, or by land at any place other than one designated as a port of entry for aliens by the Commissioner of Immigration and Naturalization, or at any time not designated by Immigration officials, or who enters without inspection, shall, upon the warrant of the Attorney General, be taken into custody and deported. The marriage to an American citizen of a female of the sexually immoral classes the exclusion or deportation of which is prescribed by this chapter shall not Invest such female with United States citizenship if the marriage of such alien female shall be solemnized after her arrest or after the commission of acts which make her liable to deportation under this chapter.. The provision of this section respecting the deportation of aliens convicted of a crime involving moral turpitude shall not apply to one who has been pardoned, nor shall such deportation be made or directed if the court, or judge thereof, sentencing such alien for such crime shall, at the time of imposing Judgment or passing sentence or within thirty days thereafter, due notice having first been given to representatives of the State, make a recommendation to the Attorney General that such alien shall not be deported in pursuance of this chapter; nor shall any alien convicted as aforesaid be deported until after the termination of his imprisonment. The provisions of this section, with the exceptions hereinbefore noted, shall be applicable to the classes of aliens therein mentioned irrespective of the time of their entry into the United States; and shall also apply to the cases of aliens who come to the mainland of the United States from the insular possessions thereof. Any person who shall be arrested under the provisions of this section, on the ground that he has entered or been found in the United States in violation of any other law thereof which imposes on such person the burden of proving his right to enter or remain, and who shall fail to establish the existence of the right claimed, shall be deported to the place specified in such other law. In every case where any person is ordered deported from the United States under the provisions of this chapter, or of any law or treaty, the decision of the Attorney General shall be final.\n\n(b) Any alien of any of the classes specified in this subsection, in addition to aliens who are deportable under other provisions of law, shall, upon warrant of the Attorney General, be taken into custody and deported: (1) Any alien who, at any time within five years after entry, shall have, knowingly and for gain, encouraged, induced, assisted, abetted, or aided any other alien to enter or to try to enter the United States in violation of law.\n\n(2) Any alien who, at any time after entry, shall have on more than one occasion, knowingly and for gain, encouraged, induced, assisted, abetted, or aided any other. alien or aliens to enter or to try to enter the United States in violation of law. (3) Any alien who, at any time after entry, shall have been convicted of possessing or carrying in violation of any law any.weapon which shoots or is designed to shoot automatically or semiautomatically more than one shot without manual reloading, by a single function of the trigger, or a weapon commonly called a sawed-off shotgun.\n\n(4) Any alien who, at any time within five years after entry, shall have been convicted of violating the provisions of sections 9-13 of Title 18.\n\n(5) Any alien who, at any time after entry, shall have* been convicted more than once of violating the provisions of sections 9-13 of Title 18. No alien who is deportable under the provisions of paragraph (3), (4), or (5) of this subsection shall be deported until the termination of his imprisonment or the entry of an order releasing him on probation or parole.\n\n(c) In the case of any alien (other than one to whom subsection (d) is applicable) who is deportable under any law of the United States and who has proved good moral character for the preceding five years, the Attorney General may (1) permit such alien to depart the United States to any country of his choice at his own expense, in lieu of deportation; or (2) suspend deportation of such alien if he is not ineligible for naturalization or if ineligible, such ineligibility is solely by reason of his race, if he finds (a) that such deportation would result in serious economic detriment to a citizen or legally resident alien who is the spouse, parent, or minor child of such deportable alien; or (b) that such alien has resided continuously in the United States for seven years or more and is residing in the United States upon the effective date of this Act. If the deportation of any alien is suspended under the provisions of this subsection for more than six months, a complete and detailed statement of the facts and pertinent provisions of law in the case shall be reported to the Congress with the reasons for such suspension. These reports shall be submitted on the 1st and 15th day of each calendar month in which Congress is in session. If during the session of the Congress at which a case is reported, or prior to the close of the session of the Congress next following the session at which a case is reported, the Congress passes a concurrent resolution stating in substance that it favors the suspension of such deportation, the Attorney General shall cancel deportation proceedings. If prior to the close of the session of the Congress next following the session at which a case is reported, the Congress does not pass such a concurrent resolution, the Attorney General shall thereupon deport such alien in the manner provided by law. Deportation proceedings shall not be canceled in the case of any alien who was not legally admitted for permanent residence at the time of his last entry into the United States, unless such alien pays the Commissioner of Immigration and Naturalization a fee of $18 (which fee shall be deposited in the Treasury of the United States as miscellaneous receipts). Upon the cancellation of such proceedings in any case in which fee has been paid the Commissioner shall record the alien’s admission for permanent residence as of the date of his last entry into the United States and the Secretary of State shall, if the alien was a quota immigrant at the time of entry and was not charged to the appropriate quota, reduce by one the immigration quota of the country of the alien’s nationality as defined in section 12 of the Act of May 26,1924 (U. S. C., title 8, sec. 212), for the fiscal year then current at the time of cancellation or the next following year in which a quota is available: Provided, That no quota shall be reduced by more than 50 per centum in any fiscal year.\n\n(d) The provisions of subsection (c) shall not be applicable in the case of any alien who is deportable under (1) section 137 of this title; (2) section 175 of Title 21; (3) section 156a of this title;\n\n(4) any of the provisions of so much of subsection\n\n(a) of this section as relates to criminals, prostitutes, procurers, or other immoral persons, the mentally and physically deficient, anarchists, and similar classes; or (5) subsection (b) of this section."
+        }
+      ],
+      "unitsSha256": "6a306294eb90a38f2f79edfc6e3ce79eabdefd03fd9961b717d4f863a9da06ac",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008006/uscode1946-001008006.pdf#page=23",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-06.pdf",
+      "sourceSha256": "94530089fb851f089c426da37de3f9ebeae8b099cb9772650c862c1e595ad44f",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        23,
+        24,
+        25
+      ],
+      "versionLabel": "Historical text as amended through 1948-07-01",
+      "lastAmendmentDate": "1948-07-01",
+      "reviewStatus": "amendment-verified-base-ocr",
+      "transcriptionNote": "Subsection (c) replaced verbatim from Public Law 863; subsections (a), (b), and (d) come from the 1946 Code OCR and retain its unreviewed-OCR warning.",
+      "amendmentSources": [
+        {
+          "label": "Public Law 863, 62 Stat. 1206",
+          "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-62-Pg1206.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg1206.pdf",
+          "bytes": 443687,
+          "sha256": "d972c10c703efe317a84037413ca8094d9fa3443ab33743de6332018a50c47a5",
+          "capturedAt": "2026-10-11"
+        }
+      ]
+    },
+    {
+      "uscSection": "156",
+      "originalTitle": "Ports to which aliens to be deported; cost of deportation",
+      "units": [
+        {
+          "path": [],
+          "text": "(a) That the deportation of aliens provided for in this Act and all other immigration laws of the United States shall be directed by the Attorney General to the country specified by the alien, if it is willing to accept him into its territory; otherwise such deportation shall be directed by the Attorney General within his discretion and without priority of preference because of their order as herein set forth, either to the country from which such alien last entered the United States; or to the country in which is located the foreign port at which such alien embarked for the United States or for foreign contiguous territory; or to any country in which he resided prior to entering the country from which he entered the United States; or to the country which had sovereignty over the birthplace of the alien at the time of his birth; or to any country of which such an alien is a subject, national, or citizen; or to the country in which he was born; or to the country in which the place of his birth is situated at the time he is ordered deported; or, if deportation to any of the said foregoing places or countries is impracticable, inadvisable, or impossible, then to any country which is willing to accept such alien into its territory. If the United States is at war and the deportation, in accordance with the preceding provisions of this section, of any alien who is deportable under any law of the United States, shall be found by the Attorney General to be impracticable or inconvenient because of enemy occupation of the country whence such alien came or wherein is located the foreign port at which he embarked for the United States or because of other reasons connected with the war, such alien may, at the option of the Attorney General, be deported (1) if such alien is a citizen or subject of a country whose recognized government is in exile, to the country wherein is located that government in exile, if that country will permit him to enter its territory; or (2) if such alien is a citizen or subject of a country whose recognized government is not in exile, then, to a country or any political or territorial subdivision thereof which is approximate to the country of which the alien is a citizen or subject, or with the consent of the country of which the alien is a citizen or subject, to any other country. No alien shall be deported under any provisions of this Act to any country in which the Attorney General shall find that such alien would be subjected to physical persecution. If deportation proceedings are instituted at any time within five years after the entry of the alien, such deportation, including one-half of the entire cost of removal to the port of deportation, shall be at the expense of the contractor, procurer, or other person by whom the alien was unlawfully induced to enter the United States or, if that cannot be done, then the cost of removal to the port of deportation shall be at the expense of the appropriation for the enforcement of this Act, and the deportation from such port shall be at the expense of the owner or owners of such vessels or transportation lines by which such aliens respectively came, or, if that is not practicable, at the expense of the appropriation for the enforcement of this Act. If deportation proceedings are instituted later than five years after the entry of the alien, or, if the deportation is made by reason of causes arising subsequent to entry, the cost thereof shall be payable from the appropriation for the enforcement of this Act. A failure or refusal on the part of the masters, agents, owners, or consignees of vessels to comply with the order of the Attorney General to take on board, guard safely, and transport to the destination specified any alien ordered to be deported under the provisions of this Act shall be punished by the imposition of the penalties prescribed in section 18 of this Act: Provided, That when in the opinion of the Attorney General the mental or physical condition of such alien is such as to require personal care and attendance, the said Attorney General shall when necessary employ a suitable person for that purpose, who shall accompany such alien to his or her final destination, and the expense incident to such service shall be defrayed in the same manner as the expense of deporting the accompanied alien is defrayed. Pending final determination of the deportability of any alien taken into custody under warrant of the Attorney General, such alien may, in the discretion of the Attorney General (1) be continued in custody; or (2) be released under bond in the amount of not less than $500, with security approved by the Attorney General ; or (3) be released on conditional parole. It shall be among the conditions of any such bond, or of the terms of release on parole, that the alien shall be produced, or will produce himself, when required to do so for the purpose of defending himself against the charge or charges under which he was taken into custody and any other charges which subsequently are lodged against him, and for deportation if an order for his deportation has been made. When such an order of deportation has been made against any alien, the Attorney General shall have a period of six months from the date of such order within which to effect the alien’s departure from the United States, during which period, at the Attorney General’s discretion, the alien may be detained, released on conditional parole, or upon bond in an amount and specifying such conditions for surrender of the alien to the Immigration and Naturalization Service as may be determined by the Attorney General. If deportation has not been practicable, advisable, or possible, or departure of the alien from the United States has not been effected, within six months from the date of the order of deportation the alien shall become subject to such further supervision and detention pending eventual deportation as is authorized hereinafter in this section. The Attorney General is hereby authorized and directed to arrange for appropriate places of detention for those aliens whom he shall take into custody and detain. Where no Federal buildings are available or buildings adapted or suitably located for the purpose are available for rental, the Attorney General is hereby authorized, notwithstanding section 3709 of the Revised Statutes, as amended (41 U. S. C. 5), or section 322 of the Act of June 30, 1932, as amended (40 U. S. C. 278a), to expend, from the appropriation provided for the administration and enforcement of the immigration laws, such amounts as may be necessary for the acquisition of land and the erection, acquisition, maintenance, operation, remodeling, or repair of buildings, sheds, and office quarters (including living quarters for officers where none are otherwise available), and adjunct facilities, necessary for the detention of aliens. (b) Any alien, against whom an order of deportation, heretofore or hereafter issued, has been outstanding for more than six months shall, pending eventual deportation, be subject to supervision under regulations prescribed by the Attorney General. Such regulations shall require any alien subject to supervision (1) to appear from time to time at specified times or intervals before an officer of the Immigration and Naturalization Service for identification; (2) to submit, if necessary, to medical and psychiatric examination at the expense of the United States; (3) to give information under oath as to his nationality, circumstances, habits, associations, and activities, and such other information whether or not related to the foregoing as the Attorney General may deem fit and proper; and (4) to conform to such reasonable written restrictions on his conduct or activities as are prescribed by the Attorney General in his case. Any alien who shall willfully fail to comply with such regulations, or willfully fail to appear or to give information or submit to medical or psychiatric examination if required, or knowingly give false information in relation to the requirements of such regulations, or knowingly violate a reasonable restriction imposed upon his conduct or activity, shall upon conviction be guilty of a felony, and shall be fined not more than $1,000 or shall be imprisoned not more than one year, or both. (c) Any alien against whom an order of deportation is outstanding under (1) the Act of October 16, 1918, as amended (40 Stat. 1012, 41 Stat. 1008, 54 Stat. 673; 8 U. S. C. 137); (2) the Act of February 9, 1909, as amended (35 Stat. 614, 42 Stat. 596; 21 U. S. C. 171, 174- 175); (3) the Act of February 18, 1931, as amended (46 Stat. 1171, 54 Stat. 673; 8 U. S. C. 156a) ; or (4) so much of section 19 of the Immigration Act of 1917, as amended (39 Stat. 889-890; 54 Stat. 671-673, 56 Stat. 1044; 8 U. S. C. 155) as relates to criminals, prostitutes, procurers or other immoral persons, anarchists, subversives and similar classes, who shall willfully fail or refuse to depart from the United States within a period of six months from the date of such order of deportation, or from the date of the enactment of the Subversive Activities Control Act of 1950, whichever is the later, or shall willfully fail or refuse to make timely-application in good faith for travel or other documents necessary to his departure, or who shall connive or conspire, or take any other action, designed to prevent or hamper or with the purpose of preventing or hampering his departure pursuant to such order of deportation, or who shall willfully fail or refuse to present himself for deportation at the time and place required by the Attorney General pursuant to such order of deportation, shall upon conviction be guilty of a felony, and shall be imprisoned not more than ten years: Provided, That this subsection shall not make it illegal for any alien to take any proper steps for the purpose of securing cancellation of or exemption from such order of deportation or for the purpose of securing his release from incarceration or custody: Provided further, That the court may for good cause suspend the sentence of such alien and order his release under such conditions as the court may prescribe. In determining whether good cause has been shown to justify releasing the alien, the court shall take into account such factors as (1) the age, health, and period of detention of the alien; (2) the effect upon the national security and public peace or safety; (3) the likelihood of the alien’s following a course of conduct which made or would make him deportable; (4) the character of the efforts made by such alien himself and by representatives of the country or countries to which his deportation is directed to expedite the alien’s departure from the United States; (5) the reason for the inability of the Government of the United States to secure passports, other travel documents, or deportation facilities from the country or countries to which the alien has been ordered deported; and (6) the eligibility of the alien for discretionary relief under the immigration laws. (d) Should any alien subject to the provisions of subsection (c) unlawfully return to the United States after having been released for departure or deported pursuant to this section, the previous warrant of deportation against him shall be considered as reinstated from its original date of issuance. (e) If any alien subject to this section is able to depart from the United States, except that he is financially unable to pay his passage, the expense of such passage to the country to which he is destined may be paid from the appropriation for the enforcement of this Act, unless such payment is otherwise provided for under this Act."
+        }
+      ],
+      "unitsSha256": "87dddaa3e063aae78fe841c1d4434b8b6d0f466e26bd671808ffe03d5a42075c",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=24",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        24,
+        25,
+        26
+      ],
+      "versionLabel": "Historical text as amended through 1952-06-18",
+      "lastAmendmentDate": "1952-06-18",
+      "reviewStatus": "amendment-verified-act-ocr",
+      "transcriptionNote": "Full replacement enacted at 64 Stat. 1010-1012, with the final sentence of subsection (a) added by 66 Stat. 138. OCR was checked for major artifacts against scanned pages; dense 1950 text remains flagged for full line-by-line proofing.",
+      "displayHeading": "Countries of deportation; costs, custody, supervision, and detention",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The 1950 replacement act has no Code catchline; originalTitle preserves the former 1946 Code catchline.",
+      "amendmentSources": [
+        {
+          "label": "Public Law 395, 66 Stat. 138",
+          "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-66-Pg138.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-66/pdf/STATUTE-66-Pg138.pdf",
+          "bytes": 276253,
+          "sha256": "32313f6ab637b1a29e8dfe99c478ea8b8a0212bc2fc7613f8d117f475e1889bd",
+          "capturedAt": "2026-10-11"
+        }
+      ]
+    },
+    {
+      "uscSection": "204",
+      "originalTitle": "Nonquota immigrant defined",
+      "units": [
+        {
+          "path": [],
+          "text": "When used in this chapter the term \"nonquota immigrant\" means-\n\n(a) An immigrant who is the unmarried child under twenty-one years of age, or the wife, or the husband, of a citizen of the United States: Provided, That the marriage shall have occurred prior to issuance of visa and in the case of husbands of citizens, prior to January 1, 1948.\n\n(b) An immigrant previously lawfully admitted to the United States, who is returning from a temporary visit abroad;\n\n(c) An immigrant who was born in the Dominion of Canada, Newfoundland, the Republic of Mexico, the Republic of Cuba, the Republic of Haiti, the Dominican Republic, the Canal Zone, or an independent country of Central or South America, and his wife, and his unmarried children under eighteen years of age, if accompanying or following to join him;\n\n(d) An immigrant who continuously for at least two years immediately preceding the time of his application for admission to the United States has been, and who seeks to enter the United States solely for the purpose of, carrying on the vocation of minister of any religious denomination, or professor of a college, academy, seminary, or university; and his wife, and his unmarried children under eighteen years of age, if accompanying or following to join him; or an immigrant arriving in the United States before July 1, 1927, who is the wife, or the unmarried child under eighteen years of age, of an alien resident of the United States who entered the United States prior to July 1, 1924, and who continuously for at least two years immediately preceding the time of his admission to the United States for permanent residence was, and who entered the United States solely for the purpose of carrying on the vocation of minister of any religious denomination or professor of a college, academy, seminary, or university, if such immigrant is following to join such alien;\n\n(e) An immigrant who is a bona fide student at least fifteen years of age and who seeks to enter the United States solely for the purpose of study at an accredited school, college, academy, seminary, or university, particularly designated by him and approved by the Attorney General, which shall have agreed to report to the Attorney General the termination of attendance of each immigrant student, and if any such institution of learning fails to make such reports promptly the approval shall be withdrawn; or\n\n(f) A woman who was a citizen of the United States and lost her citizenship by reason of her marriage to an alien, or the loss of United States citizenship by her husband, or by marriage to an alien and residence in a foreign country."
+        }
+      ],
+      "unitsSha256": "154be00a7c0c19272ccd2062b0f53ea83fdaa9fd1e34af281ec7110d69f634bf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008006/uscode1946-001008006.pdf#page=35",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-06.pdf",
+      "sourceSha256": "94530089fb851f089c426da37de3f9ebeae8b099cb9772650c862c1e595ad44f",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        35
+      ],
+      "versionLabel": "Historical text as amended through 1948-05-19",
+      "lastAmendmentDate": "1948-05-19",
+      "reviewStatus": "amendment-verified-base-ocr",
+      "transcriptionNote": "The cited amendment was checked against the official page. Earlier Code text retains OCR provenance pending a complete page-level proofreading.",
+      "amendmentSources": [
+        {
+          "label": "Public Law 538, section 1, 62 Stat. 241",
+          "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-62-Pg241.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg241.pdf",
+          "bytes": 443018,
+          "sha256": "b8cdf4d829411a52f6364d132245ebb76d7d637850a129cfc5b57ddd0b9e70fd",
+          "capturedAt": "2026-10-11"
+        }
+      ]
+    },
+    {
+      "uscSection": "206",
+      "originalTitle": "Enumeration of preferences within quotas",
+      "units": [
+        {
+          "path": [],
+          "text": "(a) Immigration visas to quota immigrants shall be issued in each fiscal year as follows:\n\n(1) Fifty per centum of the quota of each nationality for such year shall be made available in such year for the issuance of immigration visas to the following classes of immigrants, without priority of preference as between such classes; (A) Quota immigrants who are the fathers or the mothers of citizens of the United States who are twenty-one years of age or over, or who are the husbands of citizens of the United States by marriages occurring on or after January 1, 1948; and (B) in the case of any nationality the quota for which is three hundred or more, quota immigrants who are skilled in agriculture, and the wives, and the dependent children under the age of eighteen years, of such immigrants skilled in agriculture, if accompanying or following to join them.\n\n(2) The remainder of the quota of each nationality for such year, plus any portion of the 50 per centum referred to in paragraph (1) not required in such year for the issuance of immigration visas to the classes specified in such paragraph, shall be made available in such year for the issuance of immigration visas to quota immigrants of such nationality who are the unmarried children under twenty-one years of age, or the wives, of alien residents of the United States who are lawfully admitted to the United States for permanent residence.\n\n(3) Any portion of the quota of each nationality for such year not required for the issuance of immigration visas to the classes specified in paragraphs (1) and (2) shall be made available in such year for the issuance of immigration visas to other quota immigrants of such nationality.\n\n(b) The preference provided in paragraphs (1) and (2) of subdivision (a) shall, in the case of quota immigrants of any nationality, be given in the calendar month in which the right to preference is established, if the number of immigration visas which may be issued in such month to quota immigrants of such nationality has not already been issued; otherwise, in the next calendar month."
+        }
+      ],
+      "unitsSha256": "4dded1ee7708bb6885995756b92d44d6932ea5511449fef581d7c619cfd96285",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008006/uscode1946-001008006.pdf#page=36",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-06.pdf",
+      "sourceSha256": "94530089fb851f089c426da37de3f9ebeae8b099cb9772650c862c1e595ad44f",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        36
+      ],
+      "versionLabel": "Historical text as amended through 1948-05-19",
+      "lastAmendmentDate": "1948-05-19",
+      "reviewStatus": "amendment-verified-base-ocr",
+      "transcriptionNote": "The cited amendment was checked against the official page. Earlier Code text retains OCR provenance pending a complete page-level proofreading.",
+      "amendmentSources": [
+        {
+          "label": "Public Law 538, section 2, 62 Stat. 241",
+          "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-62-Pg241.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg241.pdf",
+          "bytes": 443018,
+          "sha256": "b8cdf4d829411a52f6364d132245ebb76d7d637850a129cfc5b57ddd0b9e70fd",
+          "capturedAt": "2026-10-11"
+        }
+      ]
+    },
+    {
+      "uscSection": "210",
+      "originalTitle": "Reentry permits-(a) Persons entitled to; application; form and contents; verification; photograph accompanying",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "heading": "Persons entitled to; application; form and contents; verification; photograph accompanying",
+          "text": "Any alien about to depart temporarily from the United States may make application to the Commissioner of Immigration and Naturalization for a permit to reenter the United States, stating the length of his intended absence, and the reasons therefor. Such application shall be made under oath, and shall be in such form and contain such information as may be by regulations prescribed, and shall be accompanied by two copies of the applicant's photograph."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "heading": "Issue by Commissioner with approval of Attorney General; life of permit; form and contents of permit; photograph attached",
+          "text": "If the Commissioner of Immigration and Naturalization finds that the alien has been legally admitted to the United States, and that the application is made in good faith, he shall, with the approval of the Attorney General, issue the permit, specifying therein the length of time, not exceeding one year, during which it shall be valid. The permit shall be in such form as shall be by regulations prescribed and shall have permanently attached thereto the photograph of the alien to whom issued, together with such other matter as may be deemed necessary for the complete identification of the alien."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "heading": "Extension of life of permit",
+          "text": "On good cause shown the validity of the permit may be extended for such period or periods, not exceeding six months each, and under such conditions, as shall be by regulations prescribed."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "heading": "Fee for permit",
+          "text": "For the issuance of the permit, and for each extension thereof, there shall be paid a fee of $3, which shall be covered into the Treasury as miscellaneous receipts."
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "heading": "Surrender of permit on return to United States",
+          "text": "Upon the return of the alien to the United States the permit shall be surrendered to the immigration officer at the port of inspection."
+        },
+        {
+          "path": [
+            "f"
+          ],
+          "heading": "Effect of permit on rights of alien",
+          "text": "A permit issued under this section shall have no effect under the immigration laws, except to show that the alien to whom it is issued is returning from a temporary visit abroad; but nothing in this section shall be construed as making such permit the exclusive means of establishing that the alien is so returning."
+        },
+        {
+          "path": [
+            "g"
+          ],
+          "heading": "Treaty-Merchants Return Permit",
+          "text": "An alien lawfully admitted to the United States, pursuant to clause 6, section 3, of this Act, between July 1, 1924, and July 5, 1932, both dates inclusive, who since entry has maintained the status required of him at the time of his admission and who desires to visit abroad and return to the United States to resume the status existing at time of his departure for such visit, may apply to the Commissioner of Immigration and Naturalization for a Treaty-Merchants Return Permit which may be issued by the Commissioner, with the approval of the Attorney General, if he finds that the applicant is entitled thereto. Such a permit shall, in the possession of persons to whom issued, be accepted in lieu of any visa otherwise required from non-immigrants under this Act or section 30 of the Alien Registration Act of 1940 (54 Stat. 673; 8 U. S. C. 451). Each permit shall be valid for a period therein designated not exceeding one year, but may be extended for good cause shown to the satisfaction of the Commissioner of Immigration and Naturalization, for a period or periods not exceeding six months each. For the issuance of any such permit or any extension thereof there shall be paid to the Commissioner of Immigration and Naturalization a fee of $3, which shall be covered into the Treasury as miscellaneous receipts. The necessary forms and other requirements to effect the purposes of this subsection shall be prescribed by regulations of the Commissioner of Immigration and Naturalization, with the approval of the Attorney General. Subsection (e) shall be applicable to this subsection."
+        }
+      ],
+      "unitsSha256": "9b1a270fcedd355025985075e9e2870b0a7a870ce2fa8d1365a6332f24878342",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008006/uscode1946-001008006.pdf#page=38",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-06.pdf",
+      "sourceSha256": "94530089fb851f089c426da37de3f9ebeae8b099cb9772650c862c1e595ad44f",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        38
+      ],
+      "versionLabel": "Historical text as amended through 1948-06-03",
+      "lastAmendmentDate": "1948-06-03",
+      "reviewStatus": "amendment-verified-base-ocr",
+      "transcriptionNote": "1948 subsection (g) is from the enacted text. Earlier subsections (a)-(f) come from the 1946 Code OCR and retain its unreviewed-OCR warning.",
+      "amendmentSources": [
+        {
+          "label": "Public Law 600, 62 Stat. 335",
+          "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-62-Pg335.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg335.pdf",
+          "bytes": 470651,
+          "sha256": "b12492189dabb18706388e5b8bc734d37f331cbdd7a531364b9a4ee791e233a8",
+          "capturedAt": "2026-10-11"
+        }
+      ]
+    },
+    {
+      "uscSection": "388",
+      "originalTitle": "Filipino declarants honorably discharged from Navy, Marine Corps, or Naval Auxiliary Service; Puerto Ricans or aliens serving in Army, Navy, Marine Corps, Coast Guard, or United States Government vessels, etc.; residence",
+      "units": [
+        {
+          "path": [],
+          "text": "Any native-born Filipino of the age of twenty-one years and upward who has declared his intention to become a citizen of the United States and who has enlisted or may enlist in the United States Navy or Marine Corps or the Naval Auxiliary Service or the Coast Guard, and who, after service of not less than three years, may be honorably discharged therefrom, or who may receive an ordinary discharge with recommendation for reenlistment; or any alien, or any Puerto Rican not a citizen of the United States, of the age of twenty-one years and upward, who has enlisted or entered or may hereafter enlist in or enter the armies of the United States, either the Regular or the Volunteer Forces, or the National Army, or in the United States Navy or Marine Corps, or in the United States Coast Guard, or who has served for three years on board of any vessel of the United States Government, or for three years on board vessels of more than twenty tons burden, whether or not documented under the laws of the United States, and whether public or private, which are not foreign vessels, and while still in the service on a reenlistment or reappointment, or within six months after an honorable discharge or separation therefrom, may, on presentation of the required declaration of intention petition for naturalization and may be naturalized without complying with the requirements of residence within the United States and within the county."
+        }
+      ],
+      "unitsSha256": "cae485476418cc89d1dd0fb8803561492aa0dead4ec66b6324c99f7ab9bf2c74",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008009/uscode1934-001008009.pdf#page=7",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-09.pdf",
+      "sourceSha256": "deedf2e9f7ace978a4e0dfaa1c6302818986e40ae66c7b65f36df4295b93acd3",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        7
+      ],
+      "versionLabel": "Historical text as amended through 1937-07-30",
+      "lastAmendmentDate": "1937-07-30",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "The complete 1934 Code body was checked against the printed page; section 3 of the 1937 act inserts 'or the Coast Guard' after 'Naval Auxiliary Service' as printed at 50 Stat. 549.",
+      "amendmentSources": [
+        {
+          "label": "Act of July 30, 1937, section 3, 50 Stat. 548-549",
+          "file": "sources/legal/raw/historical-usc/later-acts/STATUTE-50-Pg549.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-50/pdf/STATUTE-50-Pg549.pdf",
+          "bytes": 415159,
+          "sha256": "d775e9adbd720f6a691dda1b4b103b3f33a78a93fcdd64eb5eae1dccc14190aa",
+          "capturedAt": "2026-10-11"
+        }
+      ]
+    },
+    {
+      "uscSection": "456",
+      "originalTitle": "Notice of change of address",
+      "units": [
+        {
+          "path": [],
+          "text": "Any alien required to be registered under this title who is an alien resident of the United States on January 1, 1951, and on January 1 of any succeeding year, shall, within ten days following such dates, notify the Commissioner in writing of his current address. In the case of an alien for whom a parent or legal guardian is required to apply for registration, the notice required by this section shall be given by such parent or legal guardian."
+        }
+      ],
+      "unitsSha256": "7bf9b0b8e2b3ec17994d5053e50383d329c8658f9e4885d7fb4916be5ef3d635",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=27",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        27
+      ],
+      "versionLabel": "Historical text as amended through 1950-09-23",
+      "lastAmendmentDate": "1950-09-23",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete replacement of Alien Registration Act section 35 in Public Law 831, section 24(a), visually checked at 64 Stat. 1013.",
+      "displayHeading": "Annual notice of current address by registered aliens",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The 1950 replacement act has no Code catchline; originalTitle preserves the former 1946 Code catchline."
+    },
+    {
+      "uscSection": "457",
+      "originalTitle": "Penalties",
+      "units": [
+        {
+          "path": [],
+          "text": "(a) Any alien required to apply for registration and to be fingerprinted who willfully fails or refuses to make such application or to be fingerprinted, and any parent or legal guardian required to apply for the registration of any alien who willfully fails or refuses to file application for the registration of such alien shall, upon conviction thereof be fined not to exceed $1,000 or be imprisoned not more than six months, or both.\n\n(b) Any alien, or any parent or legal guardian of any alien, who fails to give written notice to the Commissioner, as required by section 35 of this Act, shall, upon conviction thereof, be fined not to exceed $100 or imprisoned not more than thirty days, or both.\n\n(c) Any alien or any parent or legal guardian of any alien, who files an application for registration containing statements known by him to be false, or who procures or attempts to procure registration of himself or another person through fraud, shall, upon conviction thereof, be fined not to exceed $1,000, or be imprisoned not more than six months, or both; and any alien so convicted within five years after entry into the United States shall, upon the warrant of the Attorney General, be taken into custody and be deported in the manner provided In sections 155 and 156 of this title.\n\n(d) Any person who with unlawful intent photographs, prints, or in any other manner makes; or executes, any engraving, photograph, print; or impression in the likeness of an alien registration receipt card or any colorable imitation thereof, except when and as authorized under such rules and regulations as may be prescribed by the Attorney General, shall upon conviction, be fined not to exceed $5,000 or be Imprisoned not more than five years, or both."
+        }
+      ],
+      "unitsSha256": "50db7f018e24033605c874d99173065d32e85fa23984d9db00ef86a90a949f47",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008010/uscode1946-001008010.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-10.pdf",
+      "sourceSha256": "9ff090e8e5571a3f6061f3963983fc6eb89fc903c03e0b3eb14cd0253bdc3adf",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text as amended through 1950-09-23",
+      "lastAmendmentDate": "1950-09-23",
+      "reviewStatus": "amendment-verified-base-ocr",
+      "transcriptionNote": "Subsection (b) replaced from 64 Stat. 1013; other subsections from the 1946 Code OCR, visually spot-checked on the source page.",
+      "amendmentSources": [
+        {
+          "label": "Public Law 831, section 24(b), 64 Stat. 1013",
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf",
+          "bytes": 10452929,
+          "sha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+          "capturedAt": "2026-10-11"
+        }
+      ]
+    }
+  ]
+}

@@ -82,7 +82,7 @@
     const requestedTitle = Number(value?.title);
     return {
       kind,
-      title: kind === "cfr" && Number.isInteger(requestedTitle) && requestedTitle > 0 && requestedTitle <= 999 ? requestedTitle : kind === "usc" ? 8 : 0,
+      title: kind === "cfr" && Number.isInteger(requestedTitle) && requestedTitle > 0 && requestedTitle <= 999 ? requestedTitle : kind === "usc" ? (Number.isInteger(requestedTitle) && requestedTitle > 0 && requestedTitle <= 54 ? requestedTitle : 8) : 0,
       section,
       path: cleanPath(value?.path)
     };

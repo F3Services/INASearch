@@ -16,7 +16,8 @@
     return output;
   }
   function index(record) {
-    if (cache.has(record)) return cache.get(record);
+    const cached = cache.get(record);
+    if (cached && cached.blocks === record.blocks) return cached.result;
     const rows = flatten(record.blocks), events = [], nodes = [], byPath = new Map(), stack = [];
     const close = at => { const node = stack.pop(); node.end = at; };
     for (const row of rows) {
@@ -52,7 +53,7 @@
       byCompact.get(key).push({ path: parts, inputParts: parts, unitTypes: parts.map((token, i) => /^[ivxlcdm]+$/.test(token) && i > 0 ? 3 : /^[IVXLCDM]+$/.test(token) ? 4 : 0) });
     }
     const result = { rows, events, nodes, byPath, byCompact, paths: [...byPath.keys()] };
-    cache.set(record, result);
+    cache.set(record, { blocks: record.blocks, result });
     return result;
   }
   function scope(record, path, locator = null) {

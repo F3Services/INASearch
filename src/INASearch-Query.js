@@ -17,7 +17,7 @@
   }
   function scopeMatches(fragment, scope) {
     if (!scope?.valid) return false;
-    if (scope.family !== (fragment.authority === "ina" ? "usc" : "cfr")) return false;
+    if (scope.family !== (fragment.authority === "cfr" ? "cfr" : "usc")) return false;
     if (!scope.sectionIds?.has(fragment.recordId)) return false;
     return scopePaths(scope, fragment.recordId).some(path => prefix(fragment.path, path));
   }
@@ -25,8 +25,8 @@
     return reference.family === scope.family && scope.sectionIds?.has(reference.sectionId) && scopePaths(scope, reference.sectionId).some(path => prefix(reference.path, path));
   }
   function associationMatches(fragment, association) {
-    if (!association?.start || association.family !== (fragment.authority === "ina" ? "usc" : "cfr")) return false;
-    if (association.family === "cfr" && Number(association.title) !== Number(fragment.title)) return false;
+    if (!association?.start || association.family !== (fragment.authority === "cfr" ? "cfr" : "usc")) return false;
+    if (Number(association.title || (association.family === "usc" ? 8 : 0)) !== Number(fragment.title)) return false;
     if (String(association.start.unit).toLowerCase() !== String(fragment.section).toLowerCase()) return false;
     return prefix(fragment.path, association.start.path);
   }

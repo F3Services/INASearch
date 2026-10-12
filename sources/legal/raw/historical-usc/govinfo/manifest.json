@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "year": 1994,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-1994-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-1994-title8/html/USCODE-1994-title8.htm",
+      "bytes": 2610729,
+      "sha256": "89a051624072fec6247aa0fac9818ea5e6d4a71115840ee8df51fdabc8f49b37"
+    },
+    {
+      "year": 1995,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-1995-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-1995-title8/html/USCODE-1995-title8.htm",
+      "bytes": 2636043,
+      "sha256": "f0d573fa584b91af9cc9c2725fb5c1a20fcb1465e34c0706aae70641eeb483df"
+    },
+    {
+      "year": 1996,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-1996-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-1996-title8/html/USCODE-1996-title8.htm",
+      "bytes": 3253823,
+      "sha256": "036e1985454d6ae468f99e595c70af40a98c44e6cd742e2ad9008282183213e0"
+    },
+    {
+      "year": 1997,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-1997-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-1997-title8/html/USCODE-1997-title8.htm",
+      "bytes": 3359046,
+      "sha256": "00b2d16fbd56bb4f8cf3df8db2a1fd8aa47ac4a8f09e431f72f76a2c4a2e1d66"
+    },
+    {
+      "year": 1998,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-1998-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-1998-title8/html/USCODE-1998-title8.htm",
+      "bytes": 3445021,
+      "sha256": "950e6b988157468672eb137643c2d28a46e1d6cc8628c3a388186fb9c617b650"
+    },
+    {
+      "year": 1999,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-1999-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-1999-title8/html/USCODE-1999-title8.htm",
+      "bytes": 3489326,
+      "sha256": "0b6a39bc2ee966c7b2049066dfe1699e6fae4779722615ee046223cc47079866"
+    },
+    {
+      "year": 2000,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2000-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2000-title8/html/USCODE-2000-title8.htm",
+      "bytes": 3654447,
+      "sha256": "0b88a7bf435141cc7d97df58cd6730cb3cc16fe2bd0e04ec5112453cb58724f7"
+    },
+    {
+      "year": 2001,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2001-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2001-title8/html/USCODE-2001-title8.htm",
+      "bytes": 3722052,
+      "sha256": "0ce997c99d70294c3fcd21f7e74cf06706820d76a6797d304cbf9f974b80a703"
+    },
+    {
+      "year": 2002,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2002-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2002-title8/html/USCODE-2002-title8.htm",
+      "bytes": 3996323,
+      "sha256": "3026dae57ee93edb1f4da41ebed74c9a72ba63bf6562c3153683e1fd267076d8"
+    },
+    {
+      "year": 2003,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2003-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2003-title8/html/USCODE-2003-title8.htm",
+      "bytes": 4074983,
+      "sha256": "3b9dbe2438d945091e8efe43800f770fe9f9a3a0902cc6263532738a589a5fe8"
+    },
+    {
+      "year": 2004,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2004-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2004-title8/html/USCODE-2004-title8.htm",
+      "bytes": 4166105,
+      "sha256": "4103a4c1a21d190477b272f3a64b6d61c8b5f7fa7c35f2a9a065547a96e57966"
+    },
+    {
+      "year": 2005,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2005-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2005-title8/html/USCODE-2005-title8.htm",
+      "bytes": 4306154,
+      "sha256": "759530061b38726a42e51277dc66f820113d93438d478bd51d669b6ab11dea57"
+    },
+    {
+      "year": 2006,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2006-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2006-title8/html/USCODE-2006-title8.htm",
+      "bytes": 4205166,
+      "sha256": "78406270dfa58895358dd35139d826a8c86a4a1e7377160389a88796aeae2c6e"
+    },
+    {
+      "year": 2007,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2007-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2007-title8/html/USCODE-2007-title8.htm",
+      "bytes": 4261125,
+      "sha256": "52a3abba5280d53cd8fd340dcb392b6c44a45e88cc2e80aa4f1655eeb8b98e59"
+    },
+    {
+      "year": 2008,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2008-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2008-title8/html/USCODE-2008-title8.htm",
+      "bytes": 4399306,
+      "sha256": "5adac3f462533f3871b1b4d14de11d812e6b84ec54d945972676b7d2038c279a"
+    },
+    {
+      "year": 2009,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2009-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2009-title8/html/USCODE-2009-title8.htm",
+      "bytes": 4436370,
+      "sha256": "3d79d46187cece10aedc87df3b79be9678b58e8681f5a7c152ca23ea05df1b63"
+    },
+    {
+      "year": 2010,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2010-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2010-title8/html/USCODE-2010-title8.htm",
+      "bytes": 4479714,
+      "sha256": "4cfb0562b44e0a1750db3d5ff0582551260cbb911063c29c993137cc8f26a93e"
+    },
+    {
+      "year": 2011,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2011-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2011-title8/html/USCODE-2011-title8.htm",
+      "bytes": 4504048,
+      "sha256": "7c21ef42f003c3f69abe5762c56a873357af678288125bc845084f6ea184d64e"
+    },
+    {
+      "year": 2012,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2012-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2012-title8/html/USCODE-2012-title8.htm",
+      "bytes": 4517859,
+      "sha256": "520a18aa3de1f4526c0d350862a831aca8b337216cb2fba9f82188d736d3942e"
+    },
+    {
+      "year": 2013,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2013-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2013-title8/html/USCODE-2013-title8.htm",
+      "bytes": 4576732,
+      "sha256": "0998c13d2bbb32c8268253ad167d5d2bde55d4e12332d613bb82d5d75881fc2c"
+    },
+    {
+      "year": 2014,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2014-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2014-title8/html/USCODE-2014-title8.htm",
+      "bytes": 4592944,
+      "sha256": "1208f9dac11a22460d43b1bacd53d58652714145fac9e5347c3e260a5e3b1f4d"
+    },
+    {
+      "year": 2015,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2015-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2015-title8/html/USCODE-2015-title8.htm",
+      "bytes": 4607368,
+      "sha256": "d48684f0a9471a0ec825d681e8860dfbb980680a6e3cfcd329364b3db10b5de1"
+    },
+    {
+      "year": 2016,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2016-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2016-title8/html/USCODE-2016-title8.htm",
+      "bytes": 4604992,
+      "sha256": "290b05c4dd052392537625e6cd90241b689990ecd7bead72b4e3604c471d2271"
+    },
+    {
+      "year": 2017,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2017-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2017-title8/html/USCODE-2017-title8.htm",
+      "bytes": 4759083,
+      "sha256": "94442257f3fbbe710f65661cd4527e6865ed0d5dfd9f153f395691d0d54023e5"
+    },
+    {
+      "year": 2018,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2018-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2018-title8/html/USCODE-2018-title8.htm",
+      "bytes": 4787795,
+      "sha256": "2982afd5c20e957d281d21611f52861b8ce93cd7efede42a30a0b9e068d37848"
+    },
+    {
+      "year": 2019,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2019-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2019-title8/html/USCODE-2019-title8.htm",
+      "bytes": 4847935,
+      "sha256": "9b015507da68fa171c018cba941ea6472c499aa6c4635c782e60a112beeec72e"
+    },
+    {
+      "year": 2020,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2020-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2020-title8/html/USCODE-2020-title8.htm",
+      "bytes": 4953619,
+      "sha256": "c09e807c7fd42874a624a042bb6a32a032eaaf25d0c8bddc5a9daf1ee0e87fce"
+    },
+    {
+      "year": 2021,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2021-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2021-title8/html/USCODE-2021-title8.htm",
+      "bytes": 4853242,
+      "sha256": "de21d87b8d2c22f39dbfdce84ea9a8aa3a8b59c04819ccb6e561f7af950f7489"
+    },
+    {
+      "year": 2022,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2022-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2022-title8/html/USCODE-2022-title8.htm",
+      "bytes": 4981867,
+      "sha256": "d3e9feeeffdc3d4025aa8e4ee469da3f6492b64f0e0e16f062bc13a8597aa011"
+    },
+    {
+      "year": 2023,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2023-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2023-title8/html/USCODE-2023-title8.htm",
+      "bytes": 4985440,
+      "sha256": "95760da559d21b6f4a5b23e76680e64e4d239cd34c593c0a93a9fb654fea7532"
+    },
+    {
+      "year": 2024,
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-2024-title8.htm",
+      "source": "https://www.govinfo.gov/content/pkg/USCODE-2024-title8/html/USCODE-2024-title8.htm",
+      "bytes": 5023773,
+      "sha256": "d1263bf8578a311ec9e119a4d63d3624bbf507fcee13013eab1b1635242dae64"
+    }
+  ]
+}

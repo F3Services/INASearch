@@ -6,13 +6,14 @@ const vm = require("node:vm");
 const functionSource = require("./test-function-source");
 const command = require("../src/INASearch-Command");
 const cfrHierarchy = require("../src/INASearch-CFR-Hierarchy");
-const { hydratePackedCorpus } = require("../src/INASearch-Corpus-Packing");
+const { readBuildCorpus } = require("./read-build-corpus");
 
-function createParser() {
+function createParser(extraCorpus = {}) {
   const source = fs.readFileSync(path.join(__dirname, "../src/INASearch.template.html"), "utf8");
-  const html = fs.readFileSync(path.join(__dirname, "../INASearch-Uncompressed.html"), "utf8");
-  const corpus = hydratePackedCorpus(JSON.parse(html.match(/<script id="inaSearchCorpusData"[^>]*>([\s\S]*?)<\/script>/)[1]));
-  const norm = value => String(value || "").replace(/[^a-z0-9-]/gi, "").toLowerCase();
+  const corpus = readBuildCorpus(process.env.INASEARCH_TEST_HTML || path.join(__dirname, "../INASearch.html"));
+  Object.assign(corpus, extraCorpus);
+  const allUscSections = [...corpus.title8.sections, ...(corpus.referencedUsc?.titles || []).flatMap(title => title.sections || [])];
+  const norm = vm.runInNewContext(`(${functionSource(source, "normCitationPart")})`);
   const sectionMap = new Map(corpus.title8.sections.map(section => [norm(section.section), section]));
   const inaMap = new Map(corpus.inaCrosswalk.map(row => [norm(row.inaSection), row]));
   const uscToIna = new Map(corpus.inaCrosswalk.filter(row => row.uscSection).map(row => [norm(row.uscSection), row]));
@@ -24,7 +25,7 @@ function createParser() {
   }
   const context = vm.createContext({
     INA_SEARCH_COMMAND: command, INASearchCfrHierarchy: cfrHierarchy,
-    corpus, sectionMap, inaMap, uscToIna, hasLocalUscCache: true,
+    corpus, sectionMap, inaMap, uscToIna, allUscSections, uscSectionById: new Map(allUscSections.map(section => [section.id, section])), authorityHierarchyNodes: new Map(), hasLocalUscCache: true,
     knownInaCitationPaths: new Map(), knownUscCitationPaths: new Map(),
     inaMappedSection: row => sectionMap.get(norm(row?.localSection || row?.uscSection)),
     statuteStatus: section => section.status || "active",
@@ -39,7 +40,7 @@ function createParser() {
     cfrPartsByNumber: new Map(), cfrPartsByTitle: new Map(),
     parseCfrHierarchy: () => null, parseUscHierarchy: () => null, parseAct: () => null,
     isHierarchyBrowse: () => false, INA_SOURCE_URL: "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-    officialTextFragment: (url, parts) => url + parts.join("/"), houseSectionUrl: section => `https://uscode.house.gov/${section}`,
+    officialTextFragment: (url, parts) => url + parts.join("/"), houseSectionUrl: (section, title = 8) => `https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title${title}-section${section}`,
     inaSourceRecord: row => ({ kind: "ina", item: row }),
     parseIna: raw => context.parseStatuteSectionOrFamily("ina", raw),
     normCitationPart: norm, normalize: norm,
@@ -50,6 +51,8 @@ function createParser() {
   const start = source.indexOf("    const compactStatutePathIndexes = new Map();");
   const end = source.indexOf("\n\n    function structuredCloneSafe(", start);
   const names = ["canonicalPath", "componentTokens", "compactHierarchyTokens", "unverifiedCitationPath", "resolveComponents", "resolveKnownCitationPath", "findKnownPrefix", "letteredIdentifierFamily", "statuteSectionFamilyResult", "parseStatuteSectionOrFamily", "parseExternalStatute", "parseFallbackStatute", "parseLocalStatute", "indexedCfrSection", "resolveIndexedCfrPath", "parseCfr", "parseCitation", "citationInputCanContinue", "searchScopeDescriptor", "inferredSearchScopeEndpoint", "searchScopeRange", "parseSearchScope"];
+  names.push("uscSection", "uscMapping", "uscBase", "parseUscCitation", "namedHierarchyUnits");
+  names.push("transferSourceKey", "transferTargetForSource", "transferTargetLabel", "transferTargetUrl", "transferRecord");
   vm.runInContext(source.slice(start, end) + "\n" + names.map(name => functionSource(source, name)).join("\n"), context);
   return { api: context, corpus };
 }
@@ -57,6 +60,18 @@ function createParser() {
 function run() {
   const { api, corpus } = createParser();
   const plain = value => JSON.parse(JSON.stringify(value));
+  const former137 = corpus.title8.sections.find(section => section.section === "137–1");
+  const current1371 = corpus.title8.sections.find(section => section.section === "1371");
+  const former5a = corpus.title8.sections.find(section => section.section === "5a–1");
+  assert(former137 && current1371 && former5a, "The built corpus lacks the historical section collision fixture");
+  assert.equal(api.uscSection(8, "137–1")?.id, former137.id, "The former §137–1 must retain its distinct section-map key");
+  assert.equal(api.uscSection(8, "137-1")?.id, former137.id, "ASCII and printed dashes must identify the same former section");
+  assert.equal(api.uscSection(8, "1371")?.id, current1371.id, "Current §1371 must not be replaced by former §137–1");
+  assert.equal(api.uscSection(8, "5a-1")?.id, former5a.id, "Former §5a–1 must retain its hyphenated key");
+  for (const [citation, section] of [["8 USC137–1", former137], ["8 USC137-1", former137], ["8 USC1371", current1371], ["8 USC5a–1", former5a]]) {
+    const result = api.parseCitation(citation);
+    assert(result?.valid && result.section?.id === section.id, `${citation} navigated to ${result?.section?.section || "no section"}`);
+  }
   const expect = (input, label) => {
     const result = api.parseCitation(input);
     assert(result?.valid, `${input} must resolve, got ${result?.message || "unrecognized"}`);
@@ -111,6 +126,11 @@ function run() {
   const separated = expect("INA101(a)15(o)iii", "INA 101(a)(15)(O)(iii)");
   const separatedOption = separated.ambiguity.options.find(item => item.path.join("/") === "a/15/O/ii/I");
   assert.equal(api.citationWithStatuteInterpretation("INA101(a)15(o)iii", separated.ambiguity, separatedOption), "INA101(a)15(o)iiI");
+  const eb5 = expect("INA203b5Biii", "INA 203(b)(5)(B)(iii)");
+  const eb5Option = eb5.ambiguity?.options.find(item => item.path.join("/") === "b/5/B/ii/I");
+  assert(eb5Option, "An uppercase ancestor must not suppress a lowercase Roman-suffix ambiguity");
+  assert.equal(api.citationWithStatuteInterpretation("INA203b5Biii", eb5.ambiguity, eb5Option), "INA203b5BiiI");
+  expect("INA203b5BiiI", "INA 203(b)(5)(B)(ii)(I)");
   for (const input of ['8 USC1101(a)27ciii', '8 USC1101a27(c)iii', '8 USC1101a27ciii']) {
     const result = api.parseCitation(input);
     const chosen = result.ambiguity.options.find(item => item.path.join('/') === 'a/27/C/ii/I');
@@ -138,7 +158,7 @@ function run() {
     forms.push(parts.map((part, i) => i % 2 ? part : `(${part})`).join(""));
     return new Set(forms);
   };
-  const audit = (resolve, candidates, count) => {
+  const audit = (resolve, candidates, count, sectionNumber) => {
     for (const candidate of candidates) for (const input of variants(candidate.inputParts)) {
       const result = resolve(input);
       const paths = [result?.path, ...(result?.ambiguity?.options || []).map(item => item.path)].filter(Boolean);
@@ -149,7 +169,7 @@ function run() {
       }
       for (const option of result?.ambiguity?.options || []) {
         const edited = api.citationWithStatuteInterpretation(input, result.ambiguity, option);
-        assert.equal(resolve(edited)?.path.join('/'), option.path.join('/'), `${input} choice ${option.path.join('/')} navigated to another unit after editing to ${edited}`);
+        assert.equal(resolve(edited)?.path.join('/'), option.path.join('/'), `${sectionNumber}: ${input} choice ${option.path.join('/')} navigated to another unit after editing to ${edited}`);
         ambiguityChoices++;
       }
       if (count === "statute") statuteForms++; else cfrForms++;
@@ -157,9 +177,9 @@ function run() {
   };
   for (const section of corpus.title8.sections) {
     const index = api.compactStatutePathIndex("usc", section.section, section);
-    for (const candidates of index.values()) audit(input => api.resolveIndexedCompactStatutePath("usc", section.section, section, input), candidates, "statute");
+    for (const candidates of index.values()) audit(input => api.resolveIndexedCompactStatutePath("usc", section.section, section, input), candidates, "statute", section.section);
   }
-  for (const section of corpus.cfr.sections) for (const candidates of cfrHierarchy.index(section).byCompact.values()) audit(input => api.resolveIndexedCfrPath(section, input), candidates, "cfr");
+  for (const section of corpus.cfr.sections) for (const candidates of cfrHierarchy.index(section).byCompact.values()) audit(input => api.resolveIndexedCfrPath(section, input), candidates, "cfr", section.section);
   assert(statuteForms > 30000 && cfrForms > 30000);
   console.log(`PASS mixed citations: examples, invalid/partial input, structural fallback, ambiguity edits, ranges; ${statuteForms} statutory and ${cfrForms} CFR mixed forms, ${ambiguityChoices} ambiguity choice round trips`);
 }

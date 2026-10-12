@@ -31,7 +31,7 @@ const RULES = [
   "embedded-a-explicit-container-base", "embedded-a-preceding-container", "embedded-a-shared-trailing-container",
   "embedded-explicit-container", "embedded-this-container", "embedded-such-container", "embedded-relative-container",
   "embedded-numbered-section-list", "embedded-named-act-section", "embedded-named-instrument-section", "embedded-inferred-unit", "embedded-exception",
-  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "historical-reviewed-reference", "explicit-cfr-hierarchy"
+  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "historical-reviewed-reference", "explicit-cfr-hierarchy", "house-uslm-ref"
 ];
 const EVIDENCE_UNITS = ["", "section", "subsection", "paragraph", "subparagraph", "clause", "subclause", "item", "subitem"];
 
@@ -98,7 +98,7 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     else if ((match = output.houseHref.match(/^\/us\/stat\/([^/]+)\/([^/]+)(?:\/(.*))?$/))) Object.assign(output, { family: "statutes-at-large", targetKind: "statutes-at-large", targetVolume: match[1], targetPage: match[2], targetPath: match[3] ? match[3].split("/").filter(Boolean) : [], officialUrl: `https://www.govinfo.gov/app/details/STATUTE-${match[1]}/STATUTE-${match[1]}-Pg${match[2]}` });
     else if (/^\/us\/act\//.test(output.houseHref)) Object.assign(output, { family: "public-law", targetKind: "act", targetPath: output.houseHref.split("/").filter(Boolean).slice(2), officialUrl: `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(output.text || "")}%22%7D` });
   } else {
-    output.provenance = output.ruleId === "historical-reviewed-reference" ? "reviewed-historical-source" : output.ruleId === "context-cfr-scoped-act-section" ? "reviewed-semantic-policy"
+    output.provenance = output.ruleId === "house-uslm-ref" ? "house-uslm-ref" : output.ruleId === "historical-reviewed-reference" ? "reviewed-historical-source" : output.ruleId === "context-cfr-scoped-act-section" ? "reviewed-semantic-policy"
       : output.ruleId === "house-editorial-correction" ? "house-editorial-correction"
       : output.ruleId === "embedded-exception" ? "reviewed-exception"
       : String(output.ruleId || "").startsWith("context-") || String(output.ruleId || "").startsWith("embedded-") ? "deterministic-context"

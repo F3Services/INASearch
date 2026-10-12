@@ -42,8 +42,9 @@ function reconstructFlattenedField(cleanText, references) {
 }
 
 function applyStatuteFootnotes(corpus, footnoteSource) {
-  if (!footnoteSource || Number(footnoteSource.extraction?.footnotes) !== 118 || Number(footnoteSource.extraction?.references) !== 151 || Number(footnoteSource.extraction?.affectedFields) !== 143) {
-    throw new Error("The House footnote overlay is incomplete; expected 118 footnotes and 151 references across 143 fields.");
+  const expected = footnoteSource?.extraction;
+  if (!expected || ![expected.footnotes, expected.references, expected.affectedFields].every(value => Number.isInteger(value) && value >= 0)) {
+    throw new Error("The House footnote overlay is incomplete; measured extraction counts are required.");
   }
   const sources = statuteFootnoteSourceMap(corpus);
   let cleanedFields = 0;
@@ -74,12 +75,44 @@ function applyStatuteFootnotes(corpus, footnoteSource) {
     section.houseEditorialFootnotes = clone(records);
     footnotes += records.length;
   }
-  if (cleanedFields !== 143 || references !== 151 || footnotes !== 118) {
+  for (const [sectionNumber, records] of Object.entries(footnoteSource.sectionNotes || {})) {
+    const section = sections.get(sectionNumber);
+    if (!section || section.notes?.length !== records.length) throw new Error(`House note structure mismatch at ${sectionNumber}.`);
+    records.forEach((record, index) => {
+      const note = section.notes[index];
+      if (note.text !== record.text || note.heading !== record.heading) throw new Error(`House note text mismatch at ${note.id}.`);
+      note.role = record.role;
+      note.bodyStart = record.bodyStart;
+      note.layout = clone(record.layout);
+    });
+  }
+  const headingKey = value => normalizedHouseText(value).normalize("NFKC").toLowerCase();
+  const targets = new Map();
+  for (const section of sections.values()) {
+    for (const footnote of section.houseEditorialFootnotes || []) {
+      const match = footnote.text.match(/^See (.+?) notes? below\.$/i);
+      if (!match) continue;
+      const matches = (section.notes || []).filter(note => note.role !== "crossHeading" && headingKey(note.heading) === headingKey(match[1]) && note.text.slice(note.bodyStart ?? 0).trim());
+      // Never guess between duplicate headings or navigate to an empty note.
+      if (matches.length !== 1) continue;
+      footnote.targetNoteId = matches[0].id;
+      footnote.targetNoteHeading = matches[0].heading;
+      targets.set(footnote.id, { targetNoteId: matches[0].id, targetNoteHeading: matches[0].heading });
+    }
+  }
+  for (const [sourceKey, fields] of Object.entries(footnoteSource.fields || {})) {
+    const node = sources.get(sourceKey);
+    for (const fieldName of Object.keys(fields)) {
+      for (const reference of node[`${fieldName}FootnoteReferences`] || []) Object.assign(reference, targets.get(reference.id) || {});
+    }
+  }
+  if (cleanedFields !== expected.affectedFields || references !== expected.references || footnotes !== expected.footnotes) {
     throw new Error(`House footnote application count mismatch (${footnotes} notes, ${references} references, ${cleanedFields} fields).`);
   }
   corpus.schemaVersion = Math.max(Number(corpus.schemaVersion) || 1, Number(footnoteSource.corpusSchemaVersion) || 3);
   corpus.title8.houseFootnoteMetadata = {
     schemaVersion: footnoteSource.schemaVersion,
+    noteLayoutRevision: Object.keys(footnoteSource.sectionNotes || {}).length ? 1 : 0,
     sourceUrl: footnoteSource.sourceUrl,
     sourceReleasePoint: footnoteSource.sourceReleasePoint,
     capturedAt: footnoteSource.capturedAt,

@@ -1,0 +1,1423 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-11",
+  "reviewMethod": "Visual comparison to official Library of Congress U.S. Code page images, with 1940 Code chapter notes checked for version chronology",
+  "captures": [
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf",
+      "bytes": 164057,
+      "sha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1934/chapter-05.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008005/uscode1934-001008005.pdf",
+      "bytes": 159362,
+      "sha256": "d2a186d92c123d4ee9098a4024d69e727764f0061a2e07bf3ac8a37c523bc16c",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-02.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008002/uscode1946-001008002.pdf",
+      "bytes": 52439,
+      "sha256": "be38b6ecc84e5515c67807aeb60b2062b726431de0605fb6c8b9e03cc06b896a",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf",
+      "bytes": 189143,
+      "sha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-04.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008004/uscode1946-001008004.pdf",
+      "bytes": 50782,
+      "sha256": "307144a62391075ac14dd29d843cf9201a1fcd3dc9d70b787e9e8de5f046181d",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf",
+      "bytes": 197496,
+      "sha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "capturedAt": "2026-10-11"
+    }
+  ],
+  "sections": [
+    {
+      "uscSection": "1",
+      "originalTitle": "Citizens; who are",
+      "units": [
+        {
+          "path": [],
+          "text": "All persons born in the United States and not subject to any foreign power are declared to be citizens of the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "30c1aea974afd6a573b5eb271b602390bcda3cc14832672feb135fe7433f793a"
+    },
+    {
+      "uscSection": "2",
+      "originalTitle": "Same; persons born in Oregon",
+      "units": [
+        {
+          "path": [],
+          "text": "All persons born in the district of country formerly known as the Territory of Oregon, and subject to the jurisdiction of the United States on the 18th May 1872 are citizens in the same manner as if born elsewhere in the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "8a5b2c3aae49c4e49f380c3e68857aa027323221e48cc71813b9e96bee06c3cd"
+    },
+    {
+      "uscSection": "3",
+      "originalTitle": "Same; Indians; Indians serving in Military or Naval Establishments during World War",
+      "units": [
+        {
+          "path": [],
+          "text": "All Indians born within the territorial limits of the United States are declared to be citizens of the United States. The granting of citizenship to Indians shall not in any manner affect the right of any Indian to tribal or other property. Every American Indian who served in the Military or Naval Establishments of the United States during the war against the Imperial German Government, and who has received or may receive an honorable discharge, if not a citizen on November 6, 1919, and if he so desires, shall, on proof of such discharge and after proper identification before a court of competent jurisdiction, and without other examination, except as prescribed by said court, be granted full citizenship with all the privileges pertaining thereto, without in any manner impairing or otherwise affecting the property rights, individual or tribal, of any such Indian, or his interest in tribal or other Indian property."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "c9c08167778087ca3a02ba659c316b72dd2c489b3348c10304d2acd54cef1d64"
+    },
+    {
+      "uscSection": "3a",
+      "originalTitle": "Same; Cherokee Indians",
+      "units": [
+        {
+          "path": [],
+          "text": "All noncitizen Cherokee Indians born within the territorial limits of the United States and resident in the State of North Carolina are hereby declared to be citizens of the United States and entitled to all the rights, privileges, and Immunities belonging to such citizens, including the right of franchise, provided they can meet and conform to the educational and other tests imposed upon voters of the State of North Carolina, as a condition precedent to the exercise of such right of franchise. All Acts or parts of Acts of Congress inconsistent herewith are hereby repealed. Nothing contained in this section shall in any manner impair or otherwise affect the right of any Indian to tribal or other property."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "ad4ce0c6207406116c5454d17d5c01b905e2c66f2b2bccd93dff27228de5a268"
+    },
+    {
+      "uscSection": "3b",
+      "originalTitle": "Same; Indians of Metlakahtla, Alaska",
+      "units": [
+        {
+          "path": [],
+          "text": "The Indians of the Tsimshian Tribe, and those people known as Metlakahtlans, who emigrated from Metlakahtla, British Columbia, Canada, to Annette Island, in the Alexander Archipelago in southeastern Alaska in the year 1887, and there established a colony known as Metlakahtla, Alaska, and any and all other British Columbia Indians who joined them there not later than January 1, 1900, and have since resided continuously therein, having been faithful and loyal to the Constitution, laws, and the Government of the United States, are hereby declared to be citizens of the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "64bb94ace5196aaae8bea78b46737747694e3e365ae44329bfb14bc57ca2f299"
+    },
+    {
+      "uscSection": "3c",
+      "originalTitle": "Same; property rights; rights of United States",
+      "units": [
+        {
+          "path": [],
+          "text": "The granting of citizenship to the Indians described in section 3b of this title shall not in any manner affect the rights, individual or collective, of the said Indians to any property, nor shall it affect the rights of the United States Government to supervise and administer the affairs of the said Metlakahtla Colony. And any reservations heretofore made by any Act of Congress or Executive order or proclamation for the benefit of the said Indians shall continue in full force and effect and shall continue to be subject to modification, alteration, or repeal by the Congress or the President, respectively."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "e8e9e0b0a82415399168b11b91d62419de278be199775f99d77c7cf97bfb24cc"
+    },
+    {
+      "uscSection": "4",
+      "originalTitle": "Same; Hawaiians",
+      "units": [
+        {
+          "path": [],
+          "text": "All persons who were citizens of the Republic of Hawaii on August 12, 1898, are declared to be citizens of the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "8d55fe480fc86f42d760f0c1cbf19942b7f0c74c275613d82276023b9a742016"
+    },
+    {
+      "uscSection": "5",
+      "originalTitle": "Same; Puerto Ricans",
+      "units": [
+        {
+          "path": [],
+          "text": "All citizens of Puerto Rico, as defined by section 733 of Title 48, and all natives of Puerto Rico who were temporarily absent from that island on April 11, 1899, and have since returned, and are permanently residing in that island, and are not citizens of any foreign country, are declared, and shall be deemed and held to be, citizens of the United States: Provided, That any person hereinbefore described may retain his political status held on March 2, 1917, by making a declaration, under oath, of his decision to do so within six months from said date before the district court in the district in which he resided, the declaration to be in form as follows: \"I, _____, being duly sworn, hereby declare my intention not to become a citizen of the United States as provided in the Act of Congress conferring United States citizenship upon citizens of Puerto Rico and certain natives permanently residing in said island.\" In the case of any such person who may have been absent from the island during said six months the terms of this proviso may be availed of by transmitting a declaration, under oath, in the form herein provided within six months from March 2, 1917, to the executive secretary of Puerto Rico. Any person who was born in Puerto Rico of an alien parent and was permanently residing in that island may, if of full age, within six months from March 2, 1917, or if a minor, upon reaching his majority or within one year thereafter, make a sworn declaration of allegiance to the United States before the United States District Court for Puerto Rico, setting forth therein all the facts connected with his or her birth and residence in Puerto Rico and accompanying due proof thereof, and from and after the making of such declaration shall be considered to be a citizen of the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1,
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body. The form’s printed blank after “I,” is represented by underscores.",
+      "unitsSha256": "8bc34043d83dd6c9a93047da26fcbbee843891a673fa1561175cb1d2b0fb5ed6"
+    },
+    {
+      "uscSection": "5a",
+      "originalTitle": "Puerto Ricans; extension of time for becoming citizens of United States",
+      "units": [
+        {
+          "path": [],
+          "text": "Persons born in Puerto Rico of alien parents, referred to in the last paragraph of section 5 of this title, who did not avail themselves of the privilege granted to them of becoming citizens of the United States, shall have a period of one year from March 4, 1927, to make the declaration provided for in the aforesaid section: Provided, That persons who elected to retain the political status of citizens of Puerto Rico may within one year after March 4, 1927, become citizens of the United States upon the same terms and in the same manner as is provided for the naturalization of native Puerto Ricans born of foreign parents."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "aca67ceaa7f28ff9ea2128f00dc322542a8b4919f15618073e249054d4f29009"
+    },
+    {
+      "uscSection": "5b",
+      "originalTitle": "Inhabitants of Virgin Islands; children",
+      "units": [
+        {
+          "path": [],
+          "text": "The following persons and their children born subsequent to January 17, 1917, are hereby declared to be citizens of the United States: (a) All former Danish citizens who, on January 17, 1917, resided in the Virgin Islands of the United States, and are now residing in those islands or in the United States or Puerto Rico, and who did not make the declaration required to preserve their Danish citizenship by article 6 of the treaty entered into on August 4, 1916, between the United States and Denmark, or who, having made such a declaration, have heretofore renounced or may hereafter renounce it by a declaration before a court of record; (b) All natives of the Virgin Islands of the United States who, on January 17, 1917, resided in those islands, and are now residing in those islands or in the United States or Puerto Rico, and who are not citizens or subjects of any foreign country; and (c) All natives of the Virgin Islands of the United States who, on January 17, 1917, resided in the United States, and are now residing in the Virgin Islands of the United States, and who are not citizens or subjects of any foreign country. (d) All natives of the Virgin Islands of the United States who are, on June 28, 1932, residing in continental United States, the Virgin Islands of the United States, Puerto Rico, the Canal Zone, or any other insular possession or Territory of the United States, who are not citizens or subjects of any foreign country, regardless of their place of residence on January 17, 1917."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "0f683efd0fd13b398d4829adb1b1e42db289f02e4f37d65c45cc8e3f6778c334"
+    },
+    {
+      "uscSection": "5c",
+      "originalTitle": "Persons born in Virgin Islands on or after January 17, 1917",
+      "units": [
+        {
+          "path": [],
+          "text": "All persons born in the Virgin Islands of the United States on or after January 17, 1917 (whether before or after February 25, 1927), and subject to the jurisdiction of the United States, are hereby declared to be citizens of the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "912979487fb768b9847cb539da9a716e71eec05e92dc3080a69209f8d8c69f06"
+    },
+    {
+      "uscSection": "6",
+      "originalTitle": "Citizens; children of citizens born outside of United States",
+      "units": [
+        {
+          "path": [],
+          "text": "Any child hereafter born out of the limits and jurisdiction of the United States whose father or mother or both at the time of the birth of such child is a citizen of the United States, is declared to be a citizen of the United States; but the rights of citizenship shall not descend to any such child unless the citizen father or citizen mother, as the case may be, has resided in the United States previous to the birth of such child. In cases where one of the parents is an alien, the right of citizenship shall not descend unless the child comes to the United States and resides therein for at least five years continuously immediately previous to his eighteenth birthday, and unless, within six months after the child's twenty-first birthday, he or she shall take an oath of allegiance to the United States of America as prescribed by the Immigration and Naturalization Service of the Department of Labor."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "6090d03a5d3fcebc0de308f31b3df2a30ed36348129e3f36e28522084db9e6c1"
+    },
+    {
+      "uscSection": "7",
+      "originalTitle": "Citizenship of children of persons naturalized under certain laws",
+      "units": [
+        {
+          "path": [],
+          "text": "The children of persons who have been duly naturalized under any law of the United States, or who, previous to the passing of any law on that subject, by the Government of the United States, may have become citizens of any one of the States, under the laws thereof, being under the age of twenty-one years at the time of the naturalization of their parents, shall, if dwelling in the United States, be considered as citizens thereof; and the children of persons who now are, or have been, citizens of the United States, shall, though born out of the limits and jurisdiction of the United States, be considered as citizens thereof."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "49a9c00afff98a0224f6cde48f0d8f0f9d0bc223543ea4fc04bca6e8f9fb63bb"
+    },
+    {
+      "uscSection": "8",
+      "originalTitle": "Same; children born abroad, of alien parents, by naturalization of parent",
+      "units": [
+        {
+          "path": [],
+          "text": "A child born without the United States of alien parents shall be deemed a citizen of the United States by virtue of the naturalization of or resumption of American citizenship by the father or the mother: Provided, That such naturalization or resumption shall take place during the minority of such child: And provided further, That the citizenship of such minor child shall begin five years after the time such minor child begins to reside permanently in the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "30ff71f5410e7989066fe9fa95eb2d4fd6c4d95f22e015fd08acd80e217856bd"
+    },
+    {
+      "uscSection": "9",
+      "originalTitle": "Same; citizenship of women citizens of United States as affected by marriage",
+      "units": [
+        {
+          "path": [],
+          "text": "A woman citizen of the United States shall not cease to be a citizen of the United States by reason of her marriage after March 3, 1931, unless she makes a formal renunciation of her citizenship before a court having jurisdiction over naturalization of aliens."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "05cf173476d042ba12666797e7c4dc4787870fe659a75bc78fbd0696675d201f"
+    },
+    {
+      "uscSection": "10",
+      "originalTitle": "Same; women marrying citizens; effect of repeal of former law",
+      "units": [
+        {
+          "path": [],
+          "text": "The repeal of section 1994 of the Revised Statutes of 1874, providing that \"any woman who is now or may hereafter be married to a citizen of the United States, and who might herself be lawfully naturalized, shall be deemed a citizen \", shall not terminate citizenship acquired or retained thereunder. Nor shall repeal of section 4 of Act March 2, 1907, chapter 2534, Thirty-fourth Statutes, page 1229, providing that \"any foreign woman who acquires American citizenship by marriage to an American shall be assumed to retain the same after the termination of the marital relation if she continue to reside in the United States, unless she makes formal renunciation thereof before a court having jurisdiction to naturalize aliens, or if she resides abroad she may retain her citizenship by registering as such before a United States consul within one year after the termination of such marital relation \", terminate citizenship acquired or retained thereunder, nor restore citizenship lost thereunder."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "543973492c9bf479a5f0a8b0468d214294677208ca21ad671dea6242bb213580"
+    },
+    {
+      "uscSection": "11",
+      "originalTitle": "Forfeiture of citizenship for desertion or avoidance of draft",
+      "units": [
+        {
+          "path": [],
+          "text": "Every person who deserts the military or naval service of the United States, or who, being duly enrolled, departs the jurisdiction of the district in which he is enrolled, or goes beyond the limits of the United States, with intent to avoid any draft into the military or naval service, lawfully ordered, shall be liable to all the penalties and forfeitures of section 12 of this title. The provisions of this section and said section 12 shall not apply to any person deserting the military or naval service of the United States in time of peace. The loss of rights of citizenship prior to August 22, 1912, imposed by law upon deserters from the military or naval service may be mitigated or remitted by the President where the offense was committed in time of peace and where the exercise of such clemency will not be prejudicial to the public interests."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2,
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "93cdb8ccdabf8caf3c5d23cad7cea2bce07cf60476fb7fa0cba5e2c25bf921cf"
+    },
+    {
+      "uscSection": "12",
+      "originalTitle": "Same; Civil War",
+      "units": [
+        {
+          "path": [],
+          "text": "All persons who deserted the military or naval service of the United States and did not return thereto or report themselves to a provost marshal within sixty days after the issuance of the proclamation by the President, dated March 11, 1865, are deemed to have voluntarily relinquished and forfeited their rights of citizenship, as well as their right to become citizens; and such deserters shall be forever incapable of holding any office of trust or profit under the United States or of exercising any rights of citizens thereof. No soldier or sailor, however, who faithfully served according to his enlistment until April 19, 1865, and who, without proper authority or leave first obtained, quit his command or refused to serve after that date, shall be held to be a deserter from the Army or Navy; and this section shall be construed solely as a removal of any disability such soldier or sailor may have incurred by the loss of citizenship and of the right to hold office in consequence of his desertion."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "c10560a30ee13a76e98876f56fda775ac81e75ccbcf47dd3e635470bb1287bf8"
+    },
+    {
+      "uscSection": "13",
+      "originalTitle": "Protection to naturalized citizens- abroad",
+      "units": [
+        {
+          "path": [],
+          "text": "All naturalized citizens of the United States while in foreign countries are entitled to and shall receive from this Government the same protection of persons and property which is accorded to native-born citizens."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "4e6b145ad348ffbeebe1dc8b3e8fb5b32378d203808a4976f877488aaa3e836e"
+    },
+    {
+      "uscSection": "14",
+      "originalTitle": "Release of citizens imprisoned by foreign governments",
+      "units": [
+        {
+          "path": [],
+          "text": "Whenever it is made known to the President that any citizen of the United States has been unjustly deprived of his liberty by or under the authority of any foreign government, it shall be the duty of the President forthwith to demand of that government the reasons of such imprisonment; and if it appears to be wrongful and in violation of the rights of American citizenship, the President shall forthwith demand the release of such citizen, and if the release so demanded is unreasonably delayed 'or refused, the President shall use such means, not amounting to acts of war, as he may think necessary and proper to obtain or effectuate the release; and all the facts and proceedings relative thereto shall as soon as practicable be communicated by the President to Congress."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "1c7d050521bff1926abda833bd20a0e23bb04f822afbc6a17812448671ef97e7"
+    },
+    {
+      "uscSection": "15",
+      "originalTitle": "Expatriation; right of",
+      "units": [
+        {
+          "path": [],
+          "text": "Whereas the right of expatriation is a natural a nd inherent right of all people, indispensable to the enjoyment of the rights of life, liberty, and the pursuit of happiness; and whereas in the recognition of this principle this Government has freely received emigrants from all nations, and invested them with the rights of citizenship; and whereas it is claimed that such American citizens, with their descendants, are subjects of foreign states. owing allegiance to the governments thereof; and whereas it is necessary to the maintenance of public peace that this claim of foreign allegiance should be promptly and finally disavowed: Therefore any declaration, instruction, opinion, order, or decision of any officer of the United States which denies, restricts, impairs, or questions the right of expatriation, is declared inconsistent with the fundamental principles of the Republic."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "b471979539e532220c64add22b6a3338fc8f1f867712e0a62e6444b311d1f200"
+    },
+    {
+      "uscSection": "16",
+      "originalTitle": "Same; during time of war",
+      "units": [
+        {
+          "path": [],
+          "text": "No American citizen shall be allowed to expatriate himself when the country is at war."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "2279fba67a2d1a68ea3cd95abcbdf410e7dabf1cd490716e30b32fb340012f16"
+    },
+    {
+      "uscSection": "17",
+      "originalTitle": "Same; presumption",
+      "units": [
+        {
+          "path": [],
+          "text": "Any American citizen shall be deemed to have expatriated himself when he has been naturalized in any foreign State in conformity with its laws, or when he has taken an oath of allegiance to any foreign State. When any naturalized citizen shall have resided for two years in the foreign State from which he came, or for five years in any other foreign State it shall be presumed that he has ceased to be an American citizen, and the place of his general abode shall be deemed his place of residence during said years. Such presumption may be overcome on the presentation of satisfactory evidence to a diplomatic or consular officer of the United States, under such rules and regulations as the Department of State may prescribe. Duplicates of any evidence, registration, or other acts required by this section shall be filed with the Department of State for record."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "829ace731fea5963bd61140d0b5cefef7e35b33a7badc6a03191c312aff09699"
+    },
+    {
+      "uscSection": "17a",
+      "originalTitle": "Same; marriage to foreigner",
+      "units": [
+        {
+          "path": [],
+          "text": "A citizen of the United States may upon marriage to a foreigner make a formal renunciation of his or her United States citizenship before a court having jurisdiction over naturalization of aliens, but no citizen may make such renunciation in time of war, and if war shall be declared within one year after such renunciation then such renunciation shall be void."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "c2fbc02bab16ca6deb5f7ab008fd8c36a562ee6dde77449834a384286ed65b7f"
+    },
+    {
+      "uscSection": "18",
+      "originalTitle": "Repatriation of expatriated citizens",
+      "units": [
+        {
+          "path": [],
+          "text": "Any person who, while a citizen of the United States and during the World War in Europe, entered the military or naval service of any country at war with a country against whom the United States declared war, who shall be deemed to have lost his citizenship by reason of any oath or obligation taken by him for the purpose of entering such service, may resume his citizenship by taking the oath of allegiance to the United States prescribed by the naturalization law and regulations, and such oath may be taken before any court of the United States or of any State authorized by law to naturalize aliens or before any consul of the United States, and certified copies thereof shall be sent by such court or consul to the Department of State and the Immigration and Naturalization Service. Any individual who claims to have resumed his citizenship under the provisions of this section may, upon the payment of a fee of $1, make application to the Commissioner of Immigration and Naturalization, accompanied by two photographs of the applicant, for a certificate of repatriation. Upon proof to the satisfaction of the commissioner that the applicant is a citizen and that the citizenship was resumed as claimed, such individual shall be furnished a certificate of repatriation by the commissioner, but only if such individual is at the time within the United States. The certificate of repatriation issued under this subdivision shall have the same effect as a certificate issued by a court having naturalization jurisdiction, and the provisions of subdivisions (b) and (c) of section 399c of this title shall apply in respect of proceedings and certificates of repatriation under this subdivision in the same manner and to the same extent, including penalties, as they apply in respect of proceedings and certificates of citizenship issued under such section."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008001/uscode1934-001008001.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-01.pdf",
+      "sourceSha256": "07d4d806724f05415f6ee86055738d7bb04b53cfaca77542fe7a2795b7f70fe6",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "31a1a444dce5b756d21325c661bfc2c50ca8886366fa38f0a934110f47c4e56e"
+    },
+    {
+      "uscSection": "31",
+      "originalTitle": "Race, color, or previous condition not to affect right to vote",
+      "units": [
+        {
+          "path": [],
+          "text": "All citizens of the United States who are otherwise qualified by law to vote at any election by the people in any State, Territory, district, county, city, parish, township, school district, municipality, or other territorial subdivision, shall be entitled and allowed to vote at all such elections, without distinction of race, color, or previous condition of servitude; any constitution, law, custom, usage, or regulation of any State or Territory, or by or under its authority, to the contrary notwithstanding."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008002/uscode1946-001008002.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-02.pdf",
+      "sourceSha256": "be38b6ecc84e5515c67807aeb60b2062b726431de0605fb6c8b9e03cc06b896a",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "70c3812d662a1d61c385f8708adbbc05df5bfd5fd1a8ea0e8f9af30ff83ee3f8"
+    },
+    {
+      "uscSection": "32",
+      "originalTitle": "Interference with freedom of elections",
+      "units": [
+        {
+          "path": [],
+          "text": "No officer of the Army or Navy of the United States shall prescribe or fix, or attempt to prescribe or fix, by proclamation, order, or otherwise, the qualifications of voters in any State, or in any manner interfere with the freedom of any election in any State, or with the exercise of the free right of suffrage in any State."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008002/uscode1946-001008002.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-02.pdf",
+      "sourceSha256": "be38b6ecc84e5515c67807aeb60b2062b726431de0605fb6c8b9e03cc06b896a",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "9b0ccfc919fe600068f50618ad2219142fa35fec9aafa7c917ad9e5626282bee"
+    },
+    {
+      "uscSection": "41",
+      "originalTitle": "Equal rights under the law",
+      "units": [
+        {
+          "path": [],
+          "text": "All persons within the jurisdiction of the United States shall have the same right in every State and Territory to make and enforce contracts, to sue, be parties, give evidence, and to the full and equal benefit of all laws and proceedings for the security of persons and property as is enjoyed by white citizens, and shall be subject to like punishment, pains, penalties, taxes, licenses, and exactions of every kind, and to no other."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "7c94b53054f545ea2a1186d8277d2fea45086d7e05e741b5ec75a6bd360a7c21"
+    },
+    {
+      "uscSection": "42",
+      "originalTitle": "Property rights of citizens",
+      "units": [
+        {
+          "path": [],
+          "text": "All citizens of the United States shall have the same right, in every State and Territory, as is enjoyed by white citizens thereof to inherit, purchase, lease, sell, hold, and convey real and personal property."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "ae26775a79571d3b5dd429d1d3cdf998464f9f3657510884e22967aaa786bc8e"
+    },
+    {
+      "uscSection": "43",
+      "originalTitle": "Civil action for deprivation of rights",
+      "units": [
+        {
+          "path": [],
+          "text": "Every person who, under color of any statute, ordinance, regulation, custom, or usage, of any State or Territory, subjects, or causes to be subjected, any citizen of the United States or other person within the jurisdiction thereof to the deprivation of any rights, privileges, or immunities secured by the Constitution and laws, shall be liable to the party injured in an action at law, suit in equity, or other proper proceeding for redress."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "625ebe160b85e4ed5eba9de6633fe3006e532822058781b7444462294680412d"
+    },
+    {
+      "uscSection": "44",
+      "originalTitle": "Exclusion of jurors on account of race or color",
+      "units": [
+        {
+          "path": [],
+          "text": "No citizen possessing all other qualifications which are or may be prescribed by law shall be disqualified for service as grand or petit juror in any court of the United States, or of any State on account of race, color, or previous condition of servitude; and any officer or other person charged with any duty in the selection or summoning of jurors who shall exclude or fail to summon any citizen for the cause aforesaid shall, on conviction thereof, be deemed guilty of a misdemeanor, and be fined not more than $5,000."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "712148efc8bcb7bebebb33c8e90cb4ee51482ff3fd7f340ca6a266124b76dbbe"
+    },
+    {
+      "uscSection": "45",
+      "originalTitle": "Same; prosecution of violations",
+      "units": [
+        {
+          "path": [],
+          "text": "The district courts of the United States shall have, exclusively of the courts of the several States, cognizance of all crimes and offenses against and violations of, the provisions of section 44 of this title. The district attorneys, marshals, and deputy marshals of the United States, and United States commissioners with powers of arresting and imprisoning or bailing offenders against the laws of the United States, are hereby specially authorized and required to institute proceedings against every person who shall violate the provisions of section 44 of this title, and cause him to be arrested and imprisoned or bailed, as the case may be, for trial before such court of the United States, or Territorial court, as by law has cognizance of the offense, and such district attorneys shall cause such proceedings to be prosecuted to their termination as in other cases. Nothing contained in this section shall be construed to deny or defeat any right of civil action accruing to any person, whether by reason of this act or otherwise; and any district attorney who shall willfully fail to institute and prosecute the proceedings herein required, shall, for every such offense, forfeit and pay the sum of $500 to the person aggrieved thereby, to be recovered by an action of debt, with full costs, and shall, on conviction thereof, be deemed guilty of a misdemeanor, and be fined not less than $1,000 nor more than $5,000. Judgment for the penalty in favor of the party aggrieved against any such district attorney, or a judgment upon an indictment against any such district attorney shall be a bar to either prosecution respectively."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1,
+        2
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "62fcd509edf07d5ab000342b492d47f9f30820cd98f93b5f4946557669f97bca"
+    },
+    {
+      "uscSection": "46",
+      "originalTitle": "Same; review of proceedings",
+      "units": [
+        {
+          "path": [],
+          "text": "All cases arising under the provisions of section 44 of this title in the courts of the United States shall be reviewable by the Supreme Court of the United States, without regard to the sum in controversy, under the same provisions and regulations as are provided by law for the review of other causes in said court."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "0badece24f1919b92d47c3cb3ef2741efb8a92111628e8e7ffd89000044ba141"
+    },
+    {
+      "uscSection": "47",
+      "originalTitle": "Conspiracy to interfere with civil rights",
+      "units": [
+        {
+          "path": [
+            "1"
+          ],
+          "heading": "Preventing officer from performing duties",
+          "text": "If two or more persons in any State or Territory conspire to prevent, by force, intimidation, or threat, any person from accepting or holding any office, trust, or place of confidence under the United States, or from discharging any duties thereof; or to induce by like means any officer of the United States to leave any State, district, or place, where his duties as an officer are required to be performed, or to injure him in his person or property on account of his lawful discharge of the duties of his office, or while engaged in the lawful discharge thereof, or to injure his property so as to molest, interrupt, hinder, or impede him in the discharge of his official duties;"
+        },
+        {
+          "path": [
+            "2"
+          ],
+          "heading": "Obstructing justice; intimidating party, witness, or juror",
+          "text": "If two or more persons in any State or Territory conspire to deter, by force, intimidation, or threat, any party or witness in any court of the United States from attending such court, or from testifying to any matter pending therein, freely, fully, and truthfully, or to injure such party or witness in his person or property on account of his having so attended or testified, or to influence the verdict, presentment, or indictment of any grand or petit juror in any such court, or to injure such juror in his person or property on account of any verdict, presentment, or indictment lawfully assented to by him, or of his being or having been such juror; or if two or more persons conspire for the purpose of impeding, hindering, obstructing, or defeating, in any manner, the due course of justice in any State or Territory, with intent to deny to any citizen the equal protection of the laws, or to injure him or his property for lawfully enforcing, or attempting to enforce, the right of any person, or class of persons, to the equal protection of the laws;"
+        },
+        {
+          "path": [
+            "3"
+          ],
+          "heading": "Depriving persons of rights or privileges",
+          "text": "If two or more persons in any State or Territory conspire or go in disguise on the highway or on the premises of another, for the purpose of depriving, either directly or indirectly, any person or class of persons of the equal protection of the laws, or of equal privileges and immunities under the laws; or for the purpose of preventing or hindering the constituted authorities of any State or Territory from giving or securing to all persons within such State or Territory the equal protection of the laws; or if two or more persons conspire to prevent by force, intimidation, or threat, any citizen who is lawfully entitled to vote, from giving his support or advocacy in a legal manner, toward or in favor of the election of any lawfully qualified person as an elector for President or Vice President, or as a Member of Congress of the United States; or to injure any citizen in person or property on account of such support or advocacy; in any case of conspiracy set forth in this section, if one or more persons engaged therein do, or cause to be done, any act in furtherance of the object of such conspiracy, whereby another is injured in his person or property, or deprived of having and exercising any right or privilege of a citizen of the United States, the party so injured or deprived may have an action for the recovery of damages, occasioned by such injury or deprivation, against any one or more of the conspirators."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "ed9a3881816a335babd8b9e13837b08b66e26f0f38b346fc065e6389331436c2"
+    },
+    {
+      "uscSection": "48",
+      "originalTitle": "Same; action for neglect to prevent",
+      "units": [
+        {
+          "path": [],
+          "text": "Every person who, having knowledge that any of the wrongs conspired to be done, and mentioned in section 47 of this title, are about to be committed, and having power to prevent or aid in preventing the commission of the same, neglects or refuses so to do, if such wrongful act be committed, shall be liable to the party injured, or his legal representatives, for all damages caused by such wrongful act, which such person by reasonable diligence could have prevented; and such damages may be recovered in an action on the case; and any number of persons guilty of such wrongful neglect or refusal may be joined as defendants in the action; and if the death of any party be caused by any such wrongful act and neglect, the legal representatives of the deceased shall have such action therefor, and may recover not exceeding $5,000 damages therein, for the benefit of the widow of the deceased, if there be one, and If there be no widow, then for the benefit of the next of kin of the deceased. But no action under the provisions of this section shall be sustained which is not commenced within one year after the cause of action has accrued."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "579275c497ceb52a7098e52071458bf4b65b28d291993af65f7c2e5426f89c40"
+    },
+    {
+      "uscSection": "49",
+      "originalTitle": "Prosecution of violation of certain laws",
+      "units": [
+        {
+          "path": [],
+          "text": "The district attorneys, marshals, and deputy marshals, the commissioners appointed by the district and territorial courts, with power to arrest, imprison, or bail offenders, and every other officer who is especially empowered by the President, are authorized and required, at the expense of the United States, to institute prosecutions against all persons violating any of the provisions of section 51 of this title or of sections 5506-5516 and 5518-5532 of the Revised Statutes, and to cause such persons to be arrested, and imprisoned or bailed, for trial before the court of the United States or the territorial court having cognizance of the offense."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2,
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "46e623ee85831121e13aa030851fea87d1f07ec36e3e3e51218a9d40701980b9"
+    },
+    {
+      "uscSection": "50",
+      "originalTitle": "Commissioners; appointment of persons to execute warrants",
+      "units": [
+        {
+          "path": [],
+          "text": "The district courts of the United States and the district courts of the Territories, from time to time, shall increase the number of commissioners, so as to afford a speedy and convenient means for the arrest and examination of persons charged with the crimes referred to in section 49 of this title; and such commissioners are authorized and required to exercise all the powers and duties conferred on them herein with regard to such offenses in like manner as they are authorized by law to exercise with regard to other offenses against the laws of the United States. Said commissioners are empowered, within their respective counties, to appoint, in writing, under their hands, one or more suitable persons, from time to time, who shall execute all such warrants or other process as the commissioners may issue in the lawful performance of their duties, and the persons so appointed shall have authority to summon and call to their aid the bystanders or posse comitatus of the proper county, or such portion of the land or naval forces of the United States, or of the militia, as may be necessary to the performance of the duty with which they are charged; and such warrants shall run and be executed anywhere in the State or Territory within which they are issued."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "d88518bbdb141403f78db5acbdbf2702746bc2f70bde1024f960af15b7e0f5a1"
+    },
+    {
+      "uscSection": "51",
+      "originalTitle": "Marshal to obey precepts; refusing to receive or execute process",
+      "units": [
+        {
+          "path": [],
+          "text": "Every marshal and deputy marshal shall obey and execute all warrants or other process, when directed to him, issued under the provisions of section 50 of this title. Every marshal and deputy marshal who refuses to receive any warrant or other process when tendered to him, issued in pursuance of the provisions of this section or refuses or neglects to use all proper means diligently to execute the same, shall be liable to a fine in the sum of $1,000, for the benefit of the party aggrieved thereby."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "3adc72ca5c7cdd7063856b387428428e47ce1992c43021353a1a350bef1bf341"
+    },
+    {
+      "uscSection": "52",
+      "originalTitle": "Fees; certain officers",
+      "units": [
+        {
+          "path": [],
+          "text": "The district attorneys, marshals, their deputies, and the clerks of the courts of the United States and territorial courts shall be authorized to charge and collect, in cases under the foregoing sections, the same fees as they are allowed to charge and collect for like services in other cases; and where the proceedings are before a commissioner he shall be entitled to a fee of $10 for his services in each case, inclusive of all services incident to the arrest and examination."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "ecef6087fda18fcf93866f4deba53a20dc7b418de533e937f1833b2f5f06d12d"
+    },
+    {
+      "uscSection": "53",
+      "originalTitle": "Same; persons appointed to execute process",
+      "units": [
+        {
+          "path": [],
+          "text": "Every person appointed to execute process under section 50 of this title shall be entitled to a fee of $5 for each party he may arrest and take before any commissioner, with such other fees as may be deemed reasonable by the commissioner for any additional services necessarily performed by him, such as attending at the examination, keeping the prisoner in custody, and providing him with food and lodging during his detention, and until the final determination of the commissioner; such fees to be made up in conformity with the fees usually charged by the officers of the courts of justice within the proper district or county, as near as may be practicable, and paid out of the Treasury of the United States on the certificate of the judge of the district within which the arrest is made, and to be recoverable from the defendant as part of the judgment in case of conviction."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "78bb25058615edb94de7d58abab1a2c66856e132cb1eccea369f3de0e8f662df"
+    },
+    {
+      "uscSection": "54",
+      "originalTitle": "Speedy trial",
+      "units": [
+        {
+          "path": [],
+          "text": "Whenever the President has reason to believe that offenses have been, or are likely to be committed against the provisions of section 51 of this title or of sections 5506-5516 and 5518-5532 of the Revised Statutes, within any judicial district, it shall be lawful for him, in his discretion, to direct the judge, marshal, and district attorney of such district to attend at such place within the district, and for such time as he may designate, for the purpose of the more speedy arrest and trial of persons so charged, and it shall be the duty of every judge or other officer, when any such requisition is received by him to attend at the place and for the time therein designated."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3,
+        4
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "4456625d4e1f1c43207db7465113e8f2bea9970980360e198f2a127a100f0f77"
+    },
+    {
+      "uscSection": "55",
+      "originalTitle": "Aid of military and naval forces",
+      "units": [
+        {
+          "path": [],
+          "text": "It shall be lawful for the President of the United States, or such person as he may empower for that purpose, to employ such part of the land or naval forces of the United States, or of the militia, as may be necessary to aid in the execution of judicial process issued under sections 41-43 or 47-54 of this title, or as shall be necessary to prevent the violation and enforce the due execution of the provisions of sections 41-43, 47-56 of this title."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=4",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        4
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "c4d0923df187901a3b11848a17f328ec7806b402da52f08660632270a1bdd05b"
+    },
+    {
+      "uscSection": "56",
+      "originalTitle": "Peonage abolished",
+      "units": [
+        {
+          "path": [],
+          "text": "The holding of any person to service or labor under the system known as peonage is abolished and forever prohibited in any Territory or State of the United States; and all acts, laws, resolutions, orders, regulations, or usages of any Territory or State, which have heretofore established, maintained, or enforced, or by virtue of which any attempt shall hereafter be made to establish, maintain, or enforce, directly or indirectly, the voluntary or involuntary service or labor of any persons as peons, in liquidation of any debt or obligation, or otherwise, are declared null and void."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008003/uscode1946-001008003.pdf#page=4",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-03.pdf",
+      "sourceSha256": "df06c74cce04a3db55c09f858654fc4af02b1961a1a1f711020683ae21649061",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        4
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "1954df5b322efb7d7497801d0abe8b9fb64252b8335c94654582981d90cad7aa"
+    },
+    {
+      "uscSection": "61",
+      "originalTitle": "Laws continued in force",
+      "units": [
+        {
+          "path": [],
+          "text": "All laws and parts of laws pertaining to the collection and payment of bounty, prize money, and other legitimate claims of colored soldiers, sailors, and marines, or their heirs, shall remain in force until otherwise ordered by Congress."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008004/uscode1946-001008004.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-04.pdf",
+      "sourceSha256": "307144a62391075ac14dd29d843cf9201a1fcd3dc9d70b787e9e8de5f046181d",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "afd9e0fa20665c8f355a053de7913997b76caa120c0452fa8bbf94b6d9e26164"
+    },
+    {
+      "uscSection": "62",
+      "originalTitle": "Laws enforced by Secretary of War",
+      "units": [
+        {
+          "path": [],
+          "text": "The Secretary of War is authorized to carry Into effect all laws and parts of laws referred to in section 61 of this title, and to this end he may employ such clerical force as he deems necessary."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008004/uscode1946-001008004.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-04.pdf",
+      "sourceSha256": "307144a62391075ac14dd29d843cf9201a1fcd3dc9d70b787e9e8de5f046181d",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "fc52254b8ace74d6315f9dbbf3a487c5cbff7377a9695c03cf298bd0d9201d51"
+    },
+    {
+      "uscSection": "63",
+      "originalTitle": "Claims for pay or bounty; payment",
+      "units": [
+        {
+          "path": [],
+          "text": "All sums due upon certificates issued, or which may be issued in settlement of claims for pay, bounty, prize money, or other moneys due to colored soldiers, sailors, or marines, or their legal representatives, shall be paid in the same manner as similar claims are paid to white soldiers, sailors, and marines, but no such certificate shall be issued until it shall have been ascertained that the application is made by the original claimant, or, if he be dead, by his true living legal representative, nor until the identity of such claimant or representative as the case may be, shall have been duly established. If an agent or attorney be employed, the allowance for his services shall not in any case exceed that contemplated in the scale of fees and allowances fixed by joint resolution July 26, 1866, No. 86, § 2, 14 Stat. 368, and no power of attorney, transfer or assignment of the amount of such claims, or any part thereof, shall in any case be recognized."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008004/uscode1946-001008004.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-04.pdf",
+      "sourceSha256": "307144a62391075ac14dd29d843cf9201a1fcd3dc9d70b787e9e8de5f046181d",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "4a9d5dc8b7aa7760db3e2b26019a8bbf4404afe9596873a66424057237eecb12"
+    },
+    {
+      "uscSection": "64",
+      "originalTitle": "Retained bounty fund; application for payments",
+      "units": [
+        {
+          "path": [],
+          "text": "The unexpended balance of the retained fund in the custody of the Freedmen's Bureau prior to July 1, 1902, is covered into the Treasury as \"Miscellaneous receipts.\" Upon application by parties entitled to any portion of the money so covered in, the Secretary of the Treasury is authorized and directed to pay the amount found due in the same manner and from the same appropriation as claims for bounty to volunteer soldiers are now paid."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008004/uscode1946-001008004.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-04.pdf",
+      "sourceSha256": "307144a62391075ac14dd29d843cf9201a1fcd3dc9d70b787e9e8de5f046181d",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "f51aa06febcafd7f62a9c052d4bf7fcc4bef78d8ad208d2083564fa16a275fe4"
+    },
+    {
+      "uscSection": "65",
+      "originalTitle": "Who deemed wife and children of colored soldiers",
+      "units": [
+        {
+          "path": [],
+          "text": "In determining who is the wife or child of any colored soldier, within the meaning of this section, sections 61 and 62 of this title, evidence that the soldier and the woman claimed to be his wife cohabited or associated as husband and wife, and so continued to cohabit or associate at the time of enlistment, or evidence that a form of marriage, whether such marriage was authorized or recognized by law or not, was entered into by them, and that the parties thereafter lived together as husband and wife, and so continued to live together at the time of enlistment, shall be deemed sufficient proof of marriage; and the children born of any such marriage shall be taken to be the children embraced within the provisions of said sections whether such marriage was or was not dissolved at the time of the enlistment."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008004/uscode1946-001008004.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-04.pdf",
+      "sourceSha256": "307144a62391075ac14dd29d843cf9201a1fcd3dc9d70b787e9e8de5f046181d",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "1c973d471207224b43784517c0d172b351a025f07fe046699ff7d560b868cd67"
+    },
+    {
+      "uscSection": "71",
+      "originalTitle": "Lands in Territories",
+      "units": [
+        {
+          "path": [],
+          "text": "No alien or person who is not a citizen of the United States, or who has not declared his intention to become a citizen of the United States in the manner provided by law shall acquire title to or own any land in any of the Territories of the United States except as hereinafter provided. The prohibition of this section shall not apply to cases in which the right to hold or dispose of lands in the United States is secured by existing treaties to citizens or subjects of foreign countries, which rights, so far as they may exist by force of any such treaty, shall continue to exist so long as such treaties are in force, and no longer."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "5041ff75947e13a57786eb9269a6de763cdc967788235b715f114ee96f0ed7f2"
+    },
+    {
+      "uscSection": "72",
+      "originalTitle": "Same; previously acquired lands; bona fide resident aliens; mining or incorporated village lands",
+      "units": [
+        {
+          "path": [],
+          "text": "Sections 71-77 of this title shall not apply to land owned in any of the Territories of the United States by aliens, which was acquired on or before March 3, 1887, so long as it is held by the then owners, their heirs or legal representatives, nor to any alien who shall become a bona fide resident of the United States, and any alien who shall become a bona fide resident of the United States, or shall have declared his intention to become a citizen of the United States in the manner provided by law, shall have the right to acquire and hold lands in either of the Territories of the United States upon the same terms as citizens of the United States. If any such resident alien shall cease to be a bona fide resident of the United States then such alien shall have ten years from the time he ceases to be such bona fide resident in which to alienate such lands. Sections 71-77 of this title shall not be construed to prevent any persons not citizens of the United States from acquiring or holding lots or parcels of lands in any incorporated or platted city, town, or village, or in any mine or mining claim, in any of the Territories of the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "1f807a926dbf5dac628f4fc2d36edc618c3695eaff52abfd7582450f3ce67f0f"
+    },
+    {
+      "uscSection": "73",
+      "originalTitle": "Same; acquisition by inheritance, in collection of debts, etc.",
+      "units": [
+        {
+          "path": [],
+          "text": "Sections 71-77 of this title shall not prevent aliens from acquiring lands or any interests therein by inheritance or in the ordinary course of justice in the collection of debts, nor from acquiring liens on real estate or any interest therein, nor from lending money and securing the same upon real estate or any interest therein; nor from enforcing any such lien, nor from acquiring and holding title to such real estate, or any interest therein, upon which a lien may have heretofore or may hereafter be fixed, or upon which a loan of money may have been heretofore or hereafter may be made and secured. All lands so acquired shall be sold within ten years after title shall be perfected in him under said sale or the same shall escheat to the United States and be forfeited as provided in sections 74-77 of this title."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "c150d73f8939a3b0d3f85f185da94b587a91a33e4a57b96fe54f11b0e9ac0296"
+    },
+    {
+      "uscSection": "74",
+      "originalTitle": "Same; conveyance by aliens before escheat proceedings",
+      "units": [
+        {
+          "path": [],
+          "text": "Any alien who shall hold lands in any of the Territories of the United States in contravention of the provisions of sections 71-77 of this title may nevertheless convey his title thereto at any time before the institution of escheat proceedings as hereinafter provided. If any such conveyance shall be made by such alien, either to an alien or to a citizen of the United States, in trust and for the purpose and with the Intention of evading the provisions of said sections, such conveyance shall be null and void, and any such lands so conveyed shall be forfeited and escheat to the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "0ec62dc40a9580b7ed0b2c4aa556aa194b544d14467017b569f9cb5a9db8d0f5"
+    },
+    {
+      "uscSection": "75",
+      "originalTitle": "Same; proceedings for escheat of improperly held lands",
+      "units": [
+        {
+          "path": [],
+          "text": "It shall be the duty of the Attorney General of the United States, when he shall be informed or have reason to believe that land in any of the Territories of the United States are being held contrary to the provisions of sections 71-77 of this title, to institute or cause to be instituted suit in behalf of the United States in the district court of the Territory in the district where such land or a part thereof may be situated, praying for the escheat of the same on behalf of the United States to the United States. Before any such suit is instituted the Attorney General shall give or cause to be given ninety days' notice by registered letter of his intention to sue, or by personal notice directed to or delivered to the owner of said land, or the person who last rendered the same for taxation, or his agent, and to all other persons having an interest in such lands of which he may have actual or constructive notice. In the event personal notice cannot be obtained in some one of the modes above provided, then said notice shall be given by publication in some newspaper published in the county where the land is situate, and if no newspaper is published in said county then the said notice shall be published in some newspaper nearest said county."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2,
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "be65993d26d22f21c33c7f8b7bd9e3cd71cdf153edddf06991aaa0402fbe65d3"
+    },
+    {
+      "uscSection": "76",
+      "originalTitle": "Same; condemnation and sale of lands in escheat proceedings",
+      "units": [
+        {
+          "path": [],
+          "text": "If it shall be determined upon the trial of any such escheat proceedings that the lands are held contrary to the provisions of sections 71-77 of this title, the court trying said cause shall render judgment condemning such lands and shall order the same to be sold as under execution; and the proceeds of such sale, after deducting costs of such suit, shall be paid to the clerk of such court so rendering judgment, and said fund shall remain in the hands of such clerk for one year from the date of such payment, subject to the order of the alien owner of such lands, or his heirs or legal representatives; and If not claimed within the period of one year, such clerk shall pay the same into the treasury of the Territory in which the lands may be situated, for the benefit of the available school fund of said Territory. The defendant in any such escheat proceedings may, at any time before final judgment, suggest and show to the court that he has conformed with the law, either becoming a bona fide resident of the United States, or by declaring his intention of becoming a citizen of the United States, or by the doing or happening of any other act which, under the provisions of sections 71-77 of this title, would entitle him to hold or own real estate, which being admitted or proved, such suit shall be dismissed on payment of costs and a reasonable attorney fee to be fixed by the court."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "2546784068ee40604a19490d0dd987dc2a91306010d6c3b449633a5498b5795a"
+    },
+    {
+      "uscSection": "77",
+      "originalTitle": "Same; public lands",
+      "units": [
+        {
+          "path": [],
+          "text": "Sections 71-77 of this title shall not in any manner be construed to authorize aliens to acquire title from the United States to any of the public lands of the United States or to in any manner affect or change the laws regulating the disposal of the public lands of the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "57f11208d719f9f8d9482ad04c8e43e3477ff7317adc2d92218f34b7bd7b2037"
+    },
+    {
+      "uscSection": "78",
+      "originalTitle": "Same; application to District of Columbia",
+      "units": [
+        {
+          "path": [],
+          "text": "Aliens shall have the same rights and privileges concerning the acquisition, holding, owning, and disposition of real estate in the District of Columbia as are conferred upon aliens in respect of real estate in the Territories of the United States by sections 71-77 of this title."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "ec446c80796f674cd45763057fe6d7d825d4d3d13dd581e37452e2cb5f2a3b3a"
+    },
+    {
+      "uscSection": "79",
+      "originalTitle": "Same; real estate in District of Columbia; treaties",
+      "units": [
+        {
+          "path": [],
+          "text": "It shall be unlawful on and after March 3, 1887, for any person or persons not citizens of the United States, or who have not lawfully declared their intention to become such citizens, or for any corporation not created by. or under the laws of the United States or of some State or Territory of the United States, to acquire, hold, or own real estate so acquired, or any interest therein, in the District of Columbia, except such as may be acquired by inheritance or in good faith in the ordinary course of justice in the collection of debts heretofore created. The prohibition of this section shall not apply to cases in which the right to hold or, dispose of lands in the United States is secured by existing treaties to the citizens or subjects of foreign countries, which rights, so far as they may exist by force of any such treaty shall continue to exist so long as such treaties are in force, and no longer."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008005/uscode1934-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-05.pdf",
+      "sourceSha256": "d2a186d92c123d4ee9098a4024d69e727764f0061a2e07bf3ac8a37c523bc16c",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "historicalEditorialNote": "The 1934 Code printed this section. The 1940 Code omitted §§79–82 and stated that the corresponding provisions had been incorporated into the District of Columbia Code and superseded by 8 U.S.C. §78; the 1934 text is not presented as operative in 1940.",
+      "unitsSha256": "cea725abe32090f313a159fb48919504057c62579ca6366f0b2a7aa1f07a15d8"
+    },
+    {
+      "uscSection": "80",
+      "originalTitle": "Same; real estate in District of Columbia; alien-owned corporations",
+      "units": [
+        {
+          "path": [],
+          "text": "No corporation or association of which over 50 per centum of the stock is or may be owned by any person or persons, corporation or corporations, association or associations, not citizens of the United States, shall on and after March 3, 1887, acquire or hold or own any real estate so acquired in the District of Columbia."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008005/uscode1934-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-05.pdf",
+      "sourceSha256": "d2a186d92c123d4ee9098a4024d69e727764f0061a2e07bf3ac8a37c523bc16c",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "historicalEditorialNote": "The 1934 Code printed this section. The 1940 Code omitted §§79–82 and stated that the corresponding provisions had been incorporated into the District of Columbia Code and superseded by 8 U.S.C. §78; the 1934 text is not presented as operative in 1940.",
+      "unitsSha256": "122274990eff5cac974b55c8a516542055b8ccda7eaa809e2c89ad7d8081a0ec"
+    },
+    {
+      "uscSection": "81",
+      "originalTitle": "Same; real estate in District of Columbia; forfeiture of property",
+      "units": [
+        {
+          "path": [],
+          "text": "All property acquired, held, or owned in violation of the provisions of sections 79 and 80 of this title shall be forfeited to the United States, and it shall be the duty of the Attorney General to enforce every such forfeiture by bill in equity or other proper process. In any suit or proceeding that may be commenced to enforce the provisions of said sections, it shall be the duty of the court to determine the very right of the matter without regard to matters of form, joinder of parties, multifariousness, or other matters not affecting the substantial rights either of the United States or of the parties concerned in any such proceeding arising out of the matters in the said sections mentioned."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008005/uscode1934-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-05.pdf",
+      "sourceSha256": "d2a186d92c123d4ee9098a4024d69e727764f0061a2e07bf3ac8a37c523bc16c",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "historicalEditorialNote": "The 1934 Code printed this section. The 1940 Code omitted §§79–82 and stated that the corresponding provisions had been incorporated into the District of Columbia Code and superseded by 8 U.S.C. §78; the 1934 text is not presented as operative in 1940.",
+      "unitsSha256": "85b50079face308607f14988f467c0c0f0d7475b26872484b41a50e8da80381a"
+    },
+    {
+      "uscSection": "82",
+      "originalTitle": "Same; real estate in District of Columbia; foreign legations",
+      "units": [
+        {
+          "path": [],
+          "text": "Sections 79 to 81 inclusive of this title shall not apply to or operate in the District of Columbia, so far as relates to the ownership of legations, or the ownership of residences by representatives of foreign governments, or attaches thereof."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008005/uscode1934-001008005.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-05.pdf",
+      "sourceSha256": "d2a186d92c123d4ee9098a4024d69e727764f0061a2e07bf3ac8a37c523bc16c",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "historicalEditorialNote": "The 1934 Code printed this section. The 1940 Code omitted §§79–82 and stated that the corresponding provisions had been incorporated into the District of Columbia Code and superseded by 8 U.S.C. §78; the 1934 text is not presented as operative in 1940.",
+      "unitsSha256": "51cabbc474b9210655fa3a3a678ad29db20df815db3aaef1902afb5ad9afb068"
+    },
+    {
+      "uscSection": "83",
+      "originalTitle": "Public lands in Hawaii; right to acquire in general",
+      "units": [
+        {
+          "path": [],
+          "text": "No person, including individual, partnership, corporation, and association, who is an alien, shall be entitled to receive any certificate of occupation, right of purchase lease, cash freehold agreement, or special homestead agreement in public lands in Hawaii, unless he has declared his intention to become a citizen of the United States as provided by law. No person who has so declared his intention, and taken and held under any such certificate, lease, or agreement, shall continue to hold, or become entitled to a homestead lease or patent to the land, unless he becomes a citizen within five years after so taking."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "61db82d6027cec6daa2b48a6e28c40b69af6e52decd86c5dbe1ee4e476d522ba"
+    },
+    {
+      "uscSection": "84",
+      "originalTitle": "Same; conveyance or other transfer to alien",
+      "units": [
+        {
+          "path": [],
+          "text": "No public land in Hawaii for which any certificate of occupation, right of purchase lease, or cash freehold or special homestead agreement is issued or any part thereof, or interest therein or control thereof, shall, without the written consent of the Commissioner of Public Lands of the Territory of Hawaii, and governor, thereafter, whether before or after a homestead lease or patent has been issued thereon. be or be contracted to be in any way, directly or indirectly, by process of law or otherwise, conveyed, mortgaged, leased, or otherwise, transferred to, or acquired or held by, or for the benefit of any alien. The prohibitions of this section shall not apply to transfers or acquisitions by inheritance or between tenants in common."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3,
+        4
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "a9a0fb3c5f6841f7adec30806a26a13a464349dd2ae4e198b33e5111a5263a02"
+    },
+    {
+      "uscSection": "85",
+      "originalTitle": "Same; preference right to purchase land to persons declaring intention to become citizens",
+      "units": [
+        {
+          "path": [],
+          "text": "The Commissioner of Public Lands of the Territory of Hawaii, with the approval of the governor, may give to any person who has legally declared his intention to become a citizen of the United States, and thereafter becomes such, and who has, or whose predecessors in interest have improved any parcel of public lands and resided thereon continuously for the ten years next preceding the application to purchase, a preference right to purchase so much of such parcels and such adjoining land as may reasonably be required for a home, at a fair price to be determined by three disinterested citizens to be appointed by the governor. In the determination of such purchase price, the commissioner may, if he deems it just and reasonable, disregard the value of the improvements on such parcel and adjoining land. If such parcel of public lands is reserved for public purposes, either for the use of the United States or the Territory of Hawaii, the commissioner may, with the approval of the governor, grant to such person a preference right to purchase public lands which are of similar character, value, and area, and which are situated in the same land district. The privilege granted by this section shall not extend to any original lessee or to an assignee of an entire lease of public lands."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=4",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        4
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "10d6eb11147c0d1dcd342926da739bffb1020ad8b521e7d1698e88509403b8de"
+    },
+    {
+      "uscSection": "86",
+      "originalTitle": "Same; sale of agricultural land to persons declaring intention to become citizens",
+      "units": [
+        {
+          "path": [],
+          "text": "The Commissioner of Public Lands of the Territory of Hawaii shall, with the approval of the board of public lands, sell to any person who has legally declared his intention to become a citizen of the United States, for residence purposes lots and tracts of agricultural lands, not exceeding three acres in area."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008005/uscode1946-001008005.pdf#page=4",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-05.pdf",
+      "sourceSha256": "0c1542c88f72d286110b7bf608fedbf3d73f76766783d25c4f3551e0fc3951de",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        4
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code, Title 8",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned Code page image. Print line wrapping and end-of-line word breaks are normalized; source credits and editorial notes are separate from the statutory body.",
+      "unitsSha256": "53144f39dc1b70b6a8750c76f754516fc95e4d538ec90f6569172f5972169f6f"
+    }
+  ]
+}

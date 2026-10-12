@@ -17,6 +17,7 @@ const context = {
   normCitationPart: value => String(value).replace(/[^a-z0-9]/gi, "").toLowerCase(),
   statuteNodeAtPath: () => node, INA_SEARCH_OCCURRENCE: occurrence
 };
+context.uscSection = vm.runInNewContext(`(${functionSource(template, "uscSection")})`, context);
 const details = vm.runInNewContext(`(${functionSource(template, "sourceRecordReferenceDetails")})`, context);
 for (const [kind, unit, recordPath, field] of [["usc", "1153", ["a"], "text"], ["cfr", "999.1", [0], "x"]]) {
   const result = details({ sourceHost: { kind, title: 8, section: unit }, sourceRecord: { kind: kind === "usc" ? "node-text" : "cfr-unit", recordPath, field } });

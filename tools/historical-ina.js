@@ -97,6 +97,7 @@ function applyHistoricalReferences(corpus) {
     return true;
   };
   const numbered = (reference, source) => {
+    if (reference.historicalEditionGuard) return null;
     if (!["usc", "ina"].includes(reference.family) || String(reference.targetTitle || 8) !== "8") return null;
     const number = String(reference.targetSection), path = reference.targetPath || [];
     if (number === "1105a") return { status: "repealed", heading: "Former INA §106 — Judicial review of orders of deportation and exclusion", message: "The former judicial-review provision was repealed by Public Law 104-208 in 1996, effective April 1, 1997 with transitional provisions. The Code number was reused in 2006 for a different provision concerning battered spouses. Historical target text is not included in this corpus.", url: currentUrl(number), historicalUrl: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1995-title8-section1105a&num=0&edition=1995", destination: { citation: "Current judicial-review provision: 8 U.S.C. 1252", url: currentUrl("1252") } };
@@ -157,7 +158,7 @@ function applyHistoricalReferences(corpus) {
   // imported. Upgrade only citations whose exact target is now locally present.
   const upgrade = object => {
     if (!object || typeof object !== "object") return;
-    if (["usc", "ina"].includes(object.family) && String(object.targetTitle || 8) === "8" && !object.targetEdition && !object.historicalTargetId && availablePath(sections.get(String(object.targetSection)), object.targetPath || [])) object.resolution = "local";
+    if (["usc", "ina"].includes(object.family) && String(object.targetTitle || 8) === "8" && !object.forceOfficial && !object.historicalEditionGuard && !object.targetEdition && !object.historicalTargetId && availablePath(sections.get(String(object.targetSection)), object.targetPath || [])) object.resolution = "local";
     for (const child of Object.values(object)) if (child && typeof child === "object") upgrade(child);
   };
   upgrade(corpus);

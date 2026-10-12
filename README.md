@@ -13,7 +13,7 @@ Enter an INA, U.S.C., or CFR citation to open the provision, browse its structur
 - Open exact subsections and paragraphs in a structured legal reader.
 - Preview many cross-referenced provisions without leaving the page.
 - Find source-specific definitions and links to USCIS forms and Policy Manual resources.
-- Attach searchable, full-width notes to exact legal citations and place all visible notes above or below their citations.
+- Attach searchable notes to exact legal citations, share them with other citations, and keep their banners visible while reading the associated text.
 - Browse repealed, transferred, omitted, and note-based statutory material with clear labels.
 
 ## Get started
@@ -57,6 +57,8 @@ The data file is not encrypted, so protect it like any other document containing
 ## CFR updates and internet access
 
 Automatic CFR updates are **off by default**. With updates off, INASearch uses its built-in legal corpus and makes no network requests.
+
+Title 8 release checks run separately through the optional [GitHub corpus updater](docs/title8-updater.md). It prepares corrected, tested update pull requests for review; adopting one produces a new standalone app with the updated statute corpus.
 
 You can turn updates on in **Settings**. When enabled, INASearch checks the CFR material already included in the tool directly against eCFR. Changed parts are accepted only when dated XML text and the same-date enhanced renderer agree on complete record, hierarchy, and paragraph-boundary inventories. This setting does not update the U.S. Code, INA crosswalk, USCIS resources, or other non-CFR material.
 

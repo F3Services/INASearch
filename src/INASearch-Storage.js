@@ -102,7 +102,8 @@
 
   function validCorpusRecord(record) {
     return Boolean(
-      record && record.recordSchemaVersion === 2 && record.storageFormat === "runtime-json" &&
+      record && (record.recordSchemaVersion === 2 && record.storageFormat === "runtime-json" ||
+        record.recordSchemaVersion === 3 && record.storageFormat === "runtime-json-chunks" && Array.isArray(record.chunks)) &&
       Number.isSafeInteger(record.bytes) && record.bytes > 0 &&
       typeof record.sha256 === "string" && /^[0-9a-f]{64}$/.test(record.sha256) &&
       record.payload instanceof Blob
@@ -110,32 +111,64 @@
   }
 
   async function corpusRecord(corpus, details = {}) {
-    const text = JSON.stringify(corpus);
-    const bytes = new TextEncoder().encode(text);
+    const runtimeSha256 = await sha256Bytes(new TextEncoder().encode(JSON.stringify(corpus)));
+    const partition = globalThis.INASearchCorpusShards.partitionPackedCorpus(corpus);
+    const encode = async value => {
+      const bytes = new TextEncoder().encode(JSON.stringify(value));
+      return { bytes: bytes.byteLength, sha256: await sha256Bytes(bytes), payload: new Blob([bytes], { type: "application/json;charset=utf-8" }) };
+    };
+    const header = await encode(partition.metadata);
     return {
-      recordSchemaVersion: 2,
-      storageFormat: "runtime-json",
+      recordSchemaVersion: 3,
+      storageFormat: "runtime-json-chunks",
       corpusSchemaVersion: Number(corpus?.schemaVersion),
       corpusVersion: String(corpus?.corpusVersion || ""),
-      bytes: bytes.byteLength,
-      sha256: await sha256Bytes(bytes),
+      ...header,
+      runtimeSha256,
+      chunks: await Promise.all(partition.chunks.map(encode)),
       sourceCorpusSha256: typeof details.sourceCorpusSha256 === "string" ? details.sourceCorpusSha256 : "",
       storedAt: new Date().toISOString(),
       legalReferencesPacked: details.legalReferencesPacked === true,
       sourceState: details.sourceState || null,
-      reason: String(details.reason || ""),
-      payload: new Blob([bytes], { type: "application/json;charset=utf-8" })
+      reason: String(details.reason || "")
     };
   }
 
-  async function decodeCorpusRecord(record) {
-    if (!validCorpusRecord(record)) throw new Error("The cached corpus record is malformed.");
+  async function decodeCorpusJson(record) {
+    if (!record || !(record.payload instanceof Blob)) throw new Error("The cached corpus content is missing.");
     const bytes = new Uint8Array(await record.payload.arrayBuffer());
     if (bytes.byteLength !== record.bytes) throw new Error("The cached corpus byte count does not match its manifest.");
     if (await sha256Bytes(bytes) !== record.sha256) throw new Error("The cached corpus failed its SHA-256 integrity check.");
-    const corpus = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+    return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+  }
+
+  async function readCorpusChunk(record, id) {
+    if (!Number.isInteger(id) || id < 0 || !record.chunks?.[id]) throw new Error("The cached corpus content is missing.");
+    const chunk = await decodeCorpusJson(record.chunks[id]);
+    if (chunk.id !== id) throw new Error("The cached corpus content has an invalid identity.");
+    return chunk;
+  }
+
+  async function decodeCorpusRecord(record, options = {}) {
+    if (!validCorpusRecord(record)) throw new Error("The cached corpus record is malformed.");
+    const corpus = await decodeCorpusJson(record);
     if (Number(corpus?.schemaVersion) !== record.corpusSchemaVersion || String(corpus?.corpusVersion || "") !== record.corpusVersion) {
       throw new Error("The cached corpus identity does not match its manifest.");
+    }
+    if (record.recordSchemaVersion === 3) {
+      const mapping = corpus._shards, used = new Set();
+      const validIds = ids => Array.isArray(ids) && ids.every(id => {
+        if (id === null) return true;
+        if (!Number.isInteger(id) || id < 0 || id >= record.chunks.length) return false;
+        used.add(id); return true;
+      });
+      const groups = { usc: [...(corpus.title8?.sections || []), ...(corpus.referencedUsc?.titles || []).flatMap(title => title.sections || [])], cfr: corpus.cfr?.sections || [], appendix: corpus.cfr?.appendices || [] };
+      if (mapping?.v !== 1 || Object.entries(groups).some(([kind, records]) => !validIds(mapping[kind]) || mapping[kind].length !== records.length) ||
+        mapping.corpus && !validIds(mapping.corpus) || used.size !== record.chunks.length) throw new Error("The cached corpus catalog has missing or invalid content records.");
+    }
+    if (record.recordSchemaVersion === 3 && !options.metadataOnly) {
+      for (let id = 0; id < record.chunks.length; id++) globalThis.INASearchCorpusShards.mergePackedChunk(corpus, await readCorpusChunk(record, id));
+      delete corpus._shards;
     }
     return corpus;
   }
@@ -255,7 +288,10 @@
 
   async function loadStartupSnapshot(options = {}) {
     const database = await openDatabase();
-    if (!database) return { available: false, corpus: null, profile: null, metadata: {}, errors: {} };
+    if (!database) {
+      options.onProfileReady?.(null);
+      return { available: false, corpus: null, profile: null, metadata: {}, errors: {} };
+    }
     let values;
     try {
       const transaction = database.transaction(["corpus", "profiles", "metadata"], "readonly");
@@ -279,7 +315,7 @@
         if (!record || Number(record.corpusSchemaVersion) !== Number(options.corpusSchemaVersion)) continue;
         if (options.minimumVersion && compareVersions(record.corpusVersion, options.minimumVersion) < 0) continue;
         if (Number(options.preferRecordSchemaVersion) > Number(record.recordSchemaVersion) && (!options.minimumVersion || compareVersions(record.corpusVersion, options.minimumVersion) <= 0)) continue;
-        try { return { corpus: await decodeCorpusRecord(record), record, slot }; }
+        try { return { corpus: await decodeCorpusRecord(record, { metadataOnly: options.deferCorpus === true }), record, slot }; }
         catch (error) { errors[`corpus:${slot}`] = error?.message || String(error); }
       }
       return null;
@@ -293,7 +329,7 @@
       }
       return null;
     };
-    const [corpus, profile] = await Promise.all([chooseCorpus(), chooseProfile()]);
+    const [corpus, profile] = await Promise.all([chooseCorpus(), chooseProfile().then(profile => { options.onProfileReady?.(profile); return profile; })]);
     const metadata = Object.fromEntries(STARTUP_METADATA_KEYS.map((key, index) => [key, values[4 + index]]));
     return { available: true, corpus, profile, metadata, errors };
   }
@@ -383,7 +419,7 @@
 
   async function ensureActiveCorpus(corpus, details = {}) {
     const current = await read("corpus", ACTIVE_CORPUS_KEY);
-    if (current && Number(current.recordSchemaVersion) >= 2 && Number(current.corpusSchemaVersion) === Number(corpus?.schemaVersion) && compareVersions(current.corpusVersion, corpus?.corpusVersion) >= 0) {
+    if (current && (Number(current.recordSchemaVersion) >= 3 || compareVersions(current.corpusVersion, corpus?.corpusVersion) > 0) && Number(current.corpusSchemaVersion) === Number(corpus?.schemaVersion) && compareVersions(current.corpusVersion, corpus?.corpusVersion) >= 0) {
       try { await decodeCorpusRecord(current); return false; }
       catch { await remove("corpus", ACTIVE_CORPUS_KEY).catch(() => {}); }
     }
@@ -426,6 +462,7 @@
     activateCorpus,
     ensureActiveCorpus,
     decodeCorpusRecord,
+    readCorpusChunk,
     loadSearchIndex,
     saveSearchIndex,
     removeStaleSearchIndexes,

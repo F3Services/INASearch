@@ -1,0 +1,3457 @@
+{
+  "generatedFrom": {
+    "corpus": "src/INASearch-Corpus.js",
+    "title8Source": "sources/legal/raw/usc08@119-102.xml",
+    "publication": "Online@119-102",
+    "version": "2026.08.21-audit.2",
+    "historicalManifest": "sources/legal/historical-ina.json",
+    "historicalImporter": "tools/historical-ina.js"
+  },
+  "summary": {
+    "countUnit": "Corpus records, not expanded individual citation numbers; grouped ranges/lists count once, and the historical importer adds separate 1484–1487 records while preserving the combined House record.",
+    "sourceRecords": 376,
+    "transformedRecords": 380,
+    "statusCounts": {
+      "repealed": 61,
+      "transferred": 18,
+      "omitted": 15,
+      "current": 286
+    },
+    "groupedRangeRecords": 44,
+    "groupedNoncurrentRecords": 44,
+    "noncurrentRecords": 94,
+    "noncurrentWithGenericStatusHeading": 80,
+    "noncurrentWithMeaningfulHeading": 14,
+    "historicalSectionCount": 14,
+    "historicalWithText": 14,
+    "historicalWithoutText": 0,
+    "chapterDispositions": {
+      "1": "Repealed or Omitted",
+      "2": "Transferred",
+      "3": "Transferred or Repealed",
+      "4": "Omitted",
+      "5": "Transferred or Omitted",
+      "6": "Transferred, Omitted, or Repealed",
+      "7": "Omitted or Repealed",
+      "8": "Repealed",
+      "9": "Repealed or Transferred",
+      "10": "Repealed",
+      "11": "Repealed or Transferred"
+    },
+    "mixedChapterUiLabel": "No label for mixed chapter dispositions; show a chapter status label only when every expanded member section has the same status.",
+    "historicalWithBody": 12,
+    "historicalPreambleOnly": 2
+  },
+  "historicalCoverage": [
+    {
+      "section": "1106",
+      "status": "repealed",
+      "title": "Joint Congressional Committee",
+      "hasText": true,
+      "bodyRoots": 11,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=12",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    },
+    {
+      "section": "1434",
+      "status": "repealed",
+      "title": "Children adopted by United States citizens",
+      "hasText": true,
+      "bodyRoots": 3,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=74",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    },
+    {
+      "section": "1456",
+      "status": "repealed",
+      "title": "Mail relating to naturalization transmitted free of postage and registered",
+      "hasText": true,
+      "bodyRoots": 0,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=89",
+      "hasBody": false,
+      "hasPreamble": true,
+      "preambleCharacters": 382,
+      "textAvailability": "preamble only"
+    },
+    {
+      "section": "1482",
+      "status": "repealed",
+      "title": "Dual nationals; divestiture of foreign nationality",
+      "hasText": true,
+      "bodyRoots": 2,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=91",
+      "hasBody": true,
+      "hasPreamble": true,
+      "preambleCharacters": 410,
+      "textAvailability": "body and preamble"
+    },
+    {
+      "section": "1484",
+      "status": "repealed",
+      "title": "Loss of nationality by naturalized national",
+      "hasText": true,
+      "bodyRoots": 2,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=92",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    },
+    {
+      "section": "1487",
+      "status": "repealed",
+      "title": "Loss of American nationality through parent’s expatriation; not effective until person attains age of twenty-five years",
+      "hasText": true,
+      "bodyRoots": 0,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=94",
+      "hasBody": false,
+      "hasPreamble": true,
+      "preambleCharacters": 634,
+      "textAvailability": "preamble only"
+    },
+    {
+      "section": "1485",
+      "status": "repealed",
+      "title": "Section 352 not effective as to certain persons",
+      "hasText": true,
+      "bodyRoots": 10,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1964-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1964-00100/uscode1964-001008012/uscode1964-001008012.pdf#page=95",
+      "hasBody": true,
+      "hasPreamble": true,
+      "preambleCharacters": 75,
+      "textAvailability": "body and preamble"
+    },
+    {
+      "section": "1486",
+      "status": "repealed",
+      "title": "Section 352(a)(2) not effective as to certain persons",
+      "hasText": true,
+      "bodyRoots": 5,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1964-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1964-00100/uscode1964-001008012/uscode1964-001008012.pdf#page=95",
+      "hasBody": true,
+      "hasPreamble": true,
+      "preambleCharacters": 73,
+      "textAvailability": "body and preamble"
+    },
+    {
+      "section": "1459",
+      "status": "repealed",
+      "title": "Admissibility in evidence of testimony as to statements voluntarily made to officers or employees in the course of their official duties",
+      "hasText": true,
+      "bodyRoots": 2,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1988-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=190",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    },
+    {
+      "section": "1161",
+      "status": "repealed",
+      "title": "Determination of agricultural labor shortages and admission of additional special agricultural workers",
+      "hasText": true,
+      "bodyRoots": 7,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1988-ch12.pdf",
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=48",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    },
+    {
+      "section": "1252b",
+      "status": "repealed",
+      "title": "Deportation procedures",
+      "hasText": true,
+      "bodyRoots": 6,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1995-1252b.html",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1995-title8-section1252b&num=0&edition=1995",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    },
+    {
+      "section": "1432",
+      "status": "repealed",
+      "title": "Children born outside of United States of alien parent",
+      "hasText": true,
+      "bodyRoots": 2,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1999-1432.html",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1999-title8-section1432&num=0&edition=1999",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    },
+    {
+      "section": "1363b",
+      "status": "repealed",
+      "title": "Transportation of remains of immigration officers and border patrol agents killed in the line of duty",
+      "hasText": true,
+      "bodyRoots": 2,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1997-1363b.html",
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1997-title8-section1363b&num=0&edition=1997",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    },
+    {
+      "section": "1252a",
+      "status": "transferred",
+      "title": "Expedited deportation of aliens convicted of committing aggravated felonies",
+      "hasText": true,
+      "bodyRoots": 4,
+      "transcriptionUnits": null,
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1995-title8.pdf",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-1995-title8/pdf/USCODE-1995-title8.pdf#page=154",
+      "hasBody": true,
+      "hasPreamble": false,
+      "preambleCharacters": 0,
+      "textAvailability": "body"
+    }
+  ],
+  "noncurrentRecords": [
+    {
+      "id": "8-1 to 18",
+      "section": "1 to 18",
+      "status": "repealed",
+      "heading": "Repealed or Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "These sections, relating to citizenship, were affected by the Nationality Act of 1940, former section 501 et seq. of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "That act was passed on Oct. 14, 1940, to consolidate and restate the laws of the United States regarding citizenship, naturalization, and expatriation, and, in addition to certain specific repeals thereby, all acts or parts of acts in conflict with its provisions were repealed by former section 904 of this title. See the notes below for history of individual sections."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1, relating to citizenship of persons born in the United States, was repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. It was from R.S. § 1992, which was revised from act Apr. 9, 1866, ch. 31, § 1, 14 Stat. 27. Similar provisions were contained in former section 601(a) of this title. See section 1401 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 2, relating to citizenship of persons born in Territory of Oregon, was from R.S. § 1995, which was revised from act May 18, 1872, ch. 172, § 3, 17 Stat. 134."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 3 to 3c, related to citizenship of Indians. Section 3 was from acts Feb. 8, 1887, ch. 119, § 6, 24 Stat. 390; Mar. 3, 1901, ch. 868, 31 Stat. 1447; May 8, 1906, ch. 2348, 34 Stat. 182; Nov. 6, 1919, ch. 95, 41 Stat. 350; Mar. 3, 1921, ch. 120, § 3, 41 Stat. 1250; June 2, 1924, ch. 233, 43 Stat. 253; Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1173. Section 3a was from act June 19, 1930, ch. 544, 46 Stat. 787. Section 3b was from acts May 7, 1934, ch. 221, § 1, 48 Stat. 667; July 23, 1947, ch. 304, § 1, 61 Stat. 414. Section 3c was from act May 7, 1934, ch. 221, § 2, 48 Stat. 667."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 4, relating to citizenship of Hawaiians, was from act Apr. 30, 1900, ch. 339, § 4, 31 Stat. 141. See section 1405 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 5 and 5a, relating to citizenship of Puerto Ricans, were from act Mar. 2, 1917, ch. 145, §§ 5, 5a, respectively, 39 Stat. 953, as amended Mar. 4, 1927, ch. 503, § 2, 44 Stat. 1418; May 17, 1932, ch. 190, 47 Stat. 158. See section 1402 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 5a–1, making a further extension of time for Puerto Ricans to become citizens in cases of misinformation regarding status, was repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1174. It was from act May 16, 1938, ch. 225, 52 Stat. 377. See section 1402 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 5b and 5c, relating to citizenship of inhabitants of the Virgin Islands, were from act Feb. 25, 1927, ch. 192, §§ 1, 3, respectively, 44 Stat. 1234, 1235, as amended May 17, 1932, ch. 190, 47 Stat. 158; June 28, 1932, ch. 283, § 5, 47 Stat. 336. See section 1406 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 5d to 9a were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1174. Sections 5d and 5e, relating to citizenship of persons born in Canal Zone or Panama, were from act Aug. 4, 1937, ch. 563, §§ 1, 2, respectively, 50 Stat. 558; see section 1403 of this title. Section 6, relating to citizenship of children born outside the United States, was from R.S. § 1993 (revised from acts Apr. 14, 1802, ch. 28, § 4, 2 Stat. 155; Feb. 10, 1855, ch. 71, § 1, 10 Stat. 604); act Mar. 2, 1907, ch. 2534, §§ 6, 7, 34 Stat. 1229, as amended May 24, 1934, ch. 344, § 1, 48 Stat. 797; see sections 1431 to 1433 of this title. Section 7, relating to citizenship of children of persons naturalized under certain laws, was from R.S. § 2172, which was revised from act Apr. 14, 1802, ch. 28, § 4, 2 Stat. 155. Section 8, relating to citizenship, upon parent’s naturalization, of children born abroad of alien parents, was from act Mar. 2, 1907, ch. 2534, § 5, 34 Stat. 1229, as amended May 24, 1934, ch. 344, § 2, 48 Stat. 797. Section 9, relating to citizenship of women citizens as affected by marriage, was from acts Sept. 22, 1922, ch. 411, § 3(a), 42 Stat. 1022; July 3, 1930, ch. 835, § 1, 46 Stat. 854; Mar. 3, 1931, ch. 442, § 4(a), 46 Stat. 1511; see section 1435 of this title. Section 9a, relating to repatriation of native-born women married to aliens prior to Sept. 22, 1922, was from act June 25, 1936, ch. 801, 49 Stat. 1917, as amended July 2, 1940, ch. 509, 54 Stat. 715; see section 1435(c) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 10, relating to effect of certain repeals on citizenship of women marrying citizens, was from act Sept. 22, 1922, ch. 411, § 6, 42 Stat. 1022."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 11 and 12, relating to forfeiture of citizenship for desertion from armed forces, were repealed by acts Aug. 10, 1956, ch. 1041, § 53, 70A Stat. 644, and Sept. 6, 1966, Pub. L. 89–554, § 8, 80 Stat. 632. Section 11 was from R.S. § 1998 (revised from act Mar. 3, 1865, ch. 79, § 21, 13 Stat. 490) as amended by acts Aug. 22, 1912, ch. 336, § 1, 37 Stat. 356; Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Section 12 was from R.S. §§ 1996, 1997, which were revised from acts Mar. 3, 1865, ch. 79, § 21, 13 Stat. 490, and July 19, 1867, ch. 28, 15 Stat. 14, respectively; see sections 1481 and 1483 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 13 and 14, relating to protection of citizens when abroad, were transferred to sections 1731 and 1732 of Title 22, Foreign Relations and Intercourse."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 15, R.S. § 1999, which relates to right of expatriation, is now set out as a note under section 1481 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 16 to 18, relating to loss of citizenship, were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Section 16 was from act Mar. 2, 1907, ch. 2534, § 2, 34 Stat. 1228. Section 17 was from act Mar. 2, 1907, ch. 2534, §§ 2, 7, 34 Stat. 1228, 1229; see sections 1481(a), 1482 and 1484 of this title. Section 17a was from act May 24, 1934, ch. 344, § 3, 48 Stat. 797; see section 1481(a) of this title. Section 18 was from acts June 29, 1906, ch. 3592, § 4(12), 34 Stat. 596; May 9, 1918, ch. 69, § 1, 40 Stat. 545; June 21, 1930, ch. 559, 46 Stat. 791; see sections 1438(a), 1454, 1455, and 1459 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-31, 32",
+      "section": "31, 32",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 31 and 32 were formerly transferred to sections 1971 and 1972, respectively, of Title 42, The Public Health and Welfare, prior to editorial reclassification and renumbering as sections 10101 and 10102, respectively, of Title 52, Voting and Elections."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-41 to 43",
+      "section": "41 to 43",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 41 to 43 transferred to sections 1981 to 1983, respectively, of Title 42, The Public Health and Welfare."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-44, 45",
+      "section": "44, 45",
+      "status": "repealed",
+      "heading": "Repealed. June 25, 1948, ch. 645, § 21, 62 Stat. 862, eff. Sept. 1, 1948",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 44, act Mar. 1, 1875, ch. 114, § 4, 18 Stat. 336, related to exclusion of jurors on account of race or color. See section 243 of Title 18, Crimes and Criminal Procedure."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 45, acts Mar. 1, 1875, ch. 114, § 3, 18 Stat. 336; May 28, 1896, ch. 252, § 19, 29 Stat. 184, related to prosecutions for banning jurors because of race or color. See section 243 of Title 18."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-46 to 51",
+      "section": "46 to 51",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 46 to 51 transferred to sections 1984 to 1987, 1989, and 1990, respectively, of Title 42, The Public Health and Welfare."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-52",
+      "section": "52",
+      "status": "repealed",
+      "heading": "Repealed. June 25, 1948, ch. 646, § 39, 62 Stat. 992, eff. Sept. 1, 1948",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, R.S. § 1986; acts May 28, 1896, ch. 252, § 6, 29 Stat. 179; Feb. 26, 1919, ch. 49, § 1, 40 Stat. 1182; Feb. 11, 1921, ch. 46, 41 Stat. 1099, related to fees of district attorneys, marshals, and clerks of court."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-53 to 56",
+      "section": "53 to 56",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 53 to 56 transferred to sections 1991, 1992, former section 1993, and section 1994, respectively, of Title 42, The Public Health and Welfare."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-61 to 65",
+      "section": "61 to 65",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section 61, R.S. 2032, related to continuation of laws then in force. Section 62, R.S. 2033, related to enforcement of laws by former Secretary of War. Section 63, acts Mar. 3, 1879, ch. 182, § 2, 20 Stat. 402; Feb. 1, 1888, ch. 4, § 1, 25 Stat. 9; July 1, 1898, ch. 546, 30 Stat. 640, related to claims for pay or bounty. Section 64, act July 1, 1902, ch. 1351, 32 Stat. 556, related to retained bounty fund. Section 65, R.S. § 2037, related to wives and children of colored soldiers."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-71 to 78",
+      "section": "71 to 78",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 71 to 78 transferred to sections 1501 to 1508, respectively, of Title 48, Territories and Insular Possessions."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-79 to 82",
+      "section": "79 to 82",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 79 to 82 related to alien ownership of real estate in the District of Columbia. Sections 79 to 81 were from act Mar. 3, 1887, ch. 340, §§ 1, 2, 4, respectively, 24 Stat. 476, 477, as specifically excepted from amendment by act Mar. 2, 1897, ch. 363, 29 Stat. 618 (for said act Mar. 3, 1887, as amended by the 1897 act, see sections 1501 to 1507 of Title 48, Territories and Insular Possessions); and section 82 was from act Mar. 9, 1888, ch. 30, 25 Stat. 45."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-83 to 86",
+      "section": "83 to 86",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 83 to 86 transferred to sections 1509 to 1512, respectively, of Title 48, Territories and Insular Possessions."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-100, 101",
+      "section": "100, 101",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section 100 transferred to section 1551 of this title. Section 101 transferred to section 1552 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-102",
+      "section": "102",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(13), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, acts Feb. 5, 1917, ch. 29, § 23, 39 Stat. 892; May 14, 1937, ch. 181, 50 Stat. 164; Oct. 29, 1945, ch. 438, 59 Stat. 551; Oct. 15, 1949, ch. 695, § 5(a), 63 Stat. 880, related to administration of immigration laws. See sections 1103, 1223(a), and 1260 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-103, 103a",
+      "section": "103, 103a",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section 103, acts Mar. 2, 1895, ch. 177, § 1, 28 Stat. 780; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737; Ex. Ord. No. 6166, § 14, June 10, 1933; 1940 Reorg. Plan No. V, eff. June 14, 1940, 5 F.R. 2423, 54 Stat. 1238, which related to administration of alien contract laws, was transferred to section 342h of former Title 5, Executive Departments and Government Officers and Employees, and subsequently eliminated from the Code on enactment of Title 5, Government Organization and Employees, by Pub. L. 89–554, Sept. 6, 1966, 80 Stat. 378. See section 1103 of this title. Section 103a, act July 9, 1947, ch. 211, title II, 61 Stat. 292, which related to reimbursement by Attorney General of certain expenses incurred by other agencies in connection with administration and enforcement of laws relating to immigration, etc., was from the Department of Justice Appropriation Act, 1948, and was not repeated in the Department of Justice Appropriation Act, 1949, act June 3, 1948, ch. 400, title II, 62 Stat. 316. Similar provisions were contained in the following prior appropriation acts: July 5, 1946, ch. 541, title II, 60 Stat. 462. May 21, 1945, ch. 129, title II, 59 Stat. 185. June 28, 1944, ch. 294, title II, 58 Stat. 412. July 1, 1943, ch. 182, title II, 57 Stat. 288. July 2, 1942, ch. 472, title II, 56 Stat. 483. June 28, 1941, ch. 258, title III, 55 Stat. 292."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-104",
+      "section": "104",
+      "status": "repealed",
+      "heading": "Repealed. Dec. 17, 1943, ch. 344, § 1, 57 Stat. 600",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, acts June 6, 1900, ch. 791, § 1, 31 Stat. 611; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737; Ex. Ord. No. 6166, § 14, June 10, 1933; 1940 Reorg. Plan No. V, eff. June 14, 1940, 5 F.R. 2423, 54 Stat. 1238, provided that Commissioner of Immigration and Naturalization should have charge, under supervision of Attorney General, of administration of Chinese exclusion laws."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-105",
+      "section": "105",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(13), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act Feb. 5, 1917, ch. 29, § 30, 39 Stat. 895, related to division of information."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-106 to 106c",
+      "section": "106 to 106c",
+      "status": "repealed",
+      "heading": "Repealed. Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections, acts June 29, 1906, ch. 3592, § 1, 34 Stat. 596; Mar. 2, 1929, ch. 536, §§ 1 to 3, 45 Stat. 1512, 1513; Apr. 19, 1934, ch. 154, § 6, 48 Stat. 598; June 8, 1934, ch. 429, 48 Stat. 926; Aug. 7, 1939, ch. 517, 53 Stat. 1243, related to registry of aliens. Similar provisions were contained in former sections 728, 729, 742(b), and 746(l) of this title. See sections 1230 and 1259 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-107",
+      "section": "107",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 89–554, § 8(a), Sept. 6, 1966, 80 Stat. 637, 642",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, acts Aug. 18, 1894, ch. 301, § 1, 28 Stat 391; Aug. 1, 1914, ch. 223, § 1, 38 Stat. 666; June 5, 1920, ch. 235, § 1, 41 Stat. 936, provided for appointment of commissioners of immigration at the several ports."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-108, 109",
+      "section": "108, 109",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(13), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 108, act Feb. 5, 1917, ch. 29, § 23, 39 Stat. 892, related to duties of immigration officers. See section 1103(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 109, acts Feb. 5, 1917, ch. 29, § 24, 39 Stat. 893; June 10, 1921, ch. 18, § 304, 42 Stat. 24; May 29, 1928, ch. 864, 45 Stat. 954; Feb. 21, 1931, ch. 270, 46 Stat. 1205; May 2, 1932, ch. 156, 47 Stat. 145; June 20, 1942, ch. 426, 56 Stat. 373, related to officers and employees. See sections 1103(a) and 1353 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-109a to 109d",
+      "section": "109a to 109d",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 109a to 109c transferred to sections 1353a, 1353b, and 1353d, respectively, of this title. Section 109d, acts July 1, 1943, ch. 182, title II, 57 Stat. 288; June 28, 1944, ch. 294, title II, 58 Stat. 413; May 21, 1945, ch. 129, title II, 59 Stat. 186; July 5, 1946, ch. 541, title II, 60 Stat. 463; July 9, 1947, ch. 211, title II, 61 Stat. 292; June 3, 1948, ch. 400, title II, 62 Stat. 316; July 20, 1949, ch. 354, title II, 63 Stat. 460; Sept. 6, 1950, ch. 896, ch. III, title II, 64 Stat. 618, which related to employment of interpreters in the Immigration and Naturalization Service, was transferred to section 342f of former Title 5, Executive Departments and Government Officers and Employees, and subsequently repealed by Pub. L. 89–554, Sept. 6, 1966, 80 Stat. 378, 632, which enacted Title 5, Government Organization and Employees. See section 1555 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-110",
+      "section": "110",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(25), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, acts Feb. 27, 1925, ch. 364, title IV, 43 Stat. 1049; Aug. 7, 1946, ch. 768, 60 Stat. 865; Mar. 20, 1952, ch. 108, § 2, 66 Stat. 26, related to arrest of aliens without warrant. See section 1357 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-111",
+      "section": "111",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section 111 transferred to section 1554 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-112",
+      "section": "112",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, act Mar. 4, 1915, ch. 147, § 1, 38 Stat. 1151; 1940 Reorg. Plan No. V, eff. June 14, 1940, 5 F.R. 2423, 54 Stat. 1238, which related to employment of officers and clerks enforcing alien contract labor laws, was transferred to section 342i of former Title 5, Executive Departments and Government Officers and Employees, and subsequently eliminated from the Code on enactment of Title 5, Government Organization and Employees, by Pub. L. 89–554, Sept. 6, 1966, 80 Stat. 378. See section 1103 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-113",
+      "section": "113",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(13), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act Feb. 5, 1917, ch. 29, § 11a, 39 Stat. 882, related to detail of inspectors on vessels."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-114",
+      "section": "114",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, act Aug. 15, 1919, ch. 50, 41 Stat. 280; 1940 Reorg. Plan No. V, eff. June 14, 1940, 5 F.R. 2423, 54 Stat. 1238, authorized lease for other than governmental purposes of Charleston immigration station and dock connected therewith. Section was also classified to section 342k of former Title 5, Executive Departments and Government Officers and Employees, and subsequently eliminated from the Code on enactment of Title 5, Government Organization and Employees, by Pub. L. 89–554, Sept. 6, 1966, 80 Stat. 378."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-115, 116",
+      "section": "115, 116",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(13), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 115, act Feb. 5, 1917, ch. 29, § 26, 39 Stat. 894, related to disposal of privileges at immigrant stations. See section 1355(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 116, act Feb. 5, 1917, ch. 29, § 27, 39 Stat. 894, related to local jurisdiction over immigrant stations. See section 1358 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-117, 118",
+      "section": "117, 118",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section 117, acts July 12, 1943, ch. 221, title II, 57 Stat. 507; June 28, 1944, ch. 302, title II, 58 Stat. 558, related to use of the hospital at Ellis Island Immigration Station for the care of Public Health Service patients. See section 1356(a) of this title and section 220 of Title 42, The Public Health and Welfare. Similar provisions were contained in the following prior appropriation acts, which were repealed by section 1313, formerly section 611, of act July 1, 1944, ch. 373, 58 Stat. 714, 718. July 2, 1942, ch. 475, title II, 56 Stat. 581. July 1, 1941, ch. 269, title II, 55 Stat. 481. June 26, 1940, ch. 428, title II, 54 Stat. 585. May 6, 1939, ch. 115, title I, 53 Stat. 668. Mar. 28, 1938, ch. 55, 52 Stat. 133. May 14, 1937, ch. 180, title I, 50 Stat. 149. June 23, 1936, ch. 725, 49 Stat. 1839. May 14, 1935, ch. 110, 49 Stat. 229. Mar. 15, 1934, ch. 70, title I, 48 Stat. 435. Mar. 3, 1933, ch. 212, title I, 47 Stat. 1500. July 5, 1932, ch. 430, title I, 47 Stat. 591. Feb. 23, 1931, ch. 277, title I, 46 Stat. 1228. May 15, 1930, ch. 289, title I, 46 Stat. 347. Dec. 20, 1928, ch. 39, title I, 45 Stat. 1039. Mar. 5, 1928, ch. 126, title I, 45 Stat. 174. Jan. 26, 1927, ch. 58, 44 Stat. 1038. Mar. 2, 1926, ch. 43, 44 Stat. 147. Jan. 22, 1925, ch. 87, title I, 43 Stat. 775. Apr. 4, 1924, ch. 84, title I, 43 Stat. 75. Jan. 3, 1923, ch. 22, 42 Stat. 1101. Section 118, act Apr. 18, 1930, ch. 184, title IV, 46 Stat. 216, which related to motor vehicles and horses for enforcement of immigration and Chinese exclusion laws, expired with the appropriation act of which it was a part. Similar provisions were contained in the following prior appropriation acts: Jan. 25, 1929, ch. 102, title IV, 45 Stat. 1137. Feb. 15, 1928, ch. 57, title IV, 45 Stat. 107. Feb. 24, 1927, ch. 189, title IV, 44 Stat. 1223. Apr. 29, 1926, ch. 195, title IV, 44 Stat. 371. Feb. 27, 1925, ch. 364, title IV, 43 Stat. 1049. May 28, 1924, ch. 204, title IV, 43 Stat. 240. Jan. 5, 1923, ch. 24, title II, 42 Stat. 1127. Mar. 28, 1922, ch. 117, title II, 42 Stat. 487. June 12, 1917, ch. 27, § 1, 40 Stat. 170."
+        },
+        {
+          "heading": "Renumbering of Repealing Act",
+          "topic": "miscellaneous",
+          "text": "Renumbering of Repealing ActTitle XIII, § 1313, formerly title VI, § 611, of act July 1, 1944, which repealed section 117, was renumbered title VII, § 711, by act Aug. 13, 1946, ch. 958, § 5, 60 Stat. 1049; § 713, by act Feb. 28, 1948, ch. 83, § 9(b), 62 Stat. 47; title VIII, § 813, by act July 30, 1956, ch. 779, § 3(b), 70 Stat. 721; title IX, § 913, by Pub. L. 88–581, § 4(b), Sept. 4, 1964, 78 Stat. 919; title X, § 1013, by Pub. L. 89–239, § 3(b), Oct. 6, 1965, 79 Stat. 931; title XI, § 1113, by Pub. L. 91–572, § 6(b), Dec. 24, 1970, 84 Stat. 1506; title XII, § 1213, by Pub. L. 92–294, § 3(b), May 16, 1972, 86 Stat. 137; title XIII, § 1313, by Pub. L. 93–154, § 2(b)(2), Nov. 16, 1973, 87 Stat. 604, and was repealed by Pub. L. 93–222, § 7(b), Dec. 29, 1973, 87 Stat. 936."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-131",
+      "section": "131",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, acts Feb. 14, 1903, ch. 552, § 7, 32 Stat. 828; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737; 1940 Reorg. Plan No. V, eff. June 14, 1940, 5 F.R. 2423, 54 Stat. 1238, which related to control of immigration, was transferred to section 342a of former Title 5, Executive Departments and Government Officers and Employees, and subsequently eliminated from the Code on enactment of Title 5, Government Organization and Employees, by Pub. L. 89–554, Sept. 6, 1966, 80 Stat. 378."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-132 to 137–10",
+      "section": "132 to 137–10",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(1), (8), (11), (13), (16), (48), 66 Stat. 279, 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 132, act Feb. 5, 1917, ch. 29, § 2, 39 Stat. 875, related to head tax. See section 1351 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 133, act Mar. 4, 1909, ch. 299, § 1, 35 Stat. 982, related to covering of moneys into Treasury. See section 1356(b) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 134, act Feb. 3, 1905, ch. 297, § 1, 33 Stat. 684, authorized refunds of head taxes erroneously collected under act Mar. 3, 1903, ch. 1012, § 1, 32 Stat. 1213. Said act Mar. 3, 1903 was repealed by acts Feb. 20, 1907, ch. 1134, § 43, 34 Stat. 911; Feb. 5, 1917, ch. 29, § 38, 39 Stat. 897."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 135, R.S. § 2164, related to State tax or charge on immigrants."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 136, acts Feb. 5, 1917, ch. 29, § 3, 39 Stat. 875; June 5, 1920, ch. 243, 41 Stat. 981; Mar. 4, 1929, ch. 690, § 1(d), 45 Stat. 1551; Sept. 27, 1944, ch. 418, § 2, 58 Stat. 746, related to exclusion of aliens. See sections 1102, 1154, and 1182 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 137, acts Oct. 16, 1918, ch. 186, § 1, 40 Stat. 1012; June 5, 1920, ch. 251, 41 Stat. 1008; June 28, 1940, ch. 439, title II, § 23(a), 54 Stat. 673; May 25, 1948, ch. 338, 62 Stat. 268; Sept. 23, 1950, ch. 1024, title I, § 22, 64 Stat. 1006, related to exclusion of subversive aliens. See sections 1101 and 1182 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 137–1, acts Oct. 16, 1918, ch. 186, § 2, 40 Stat. 1012; June 28, 1940, ch. 439, title II, § 23(b), 54 Stat. 673; Sept. 23, 1950, ch. 1024, title I, § 22, 64 Stat. 1006, related to exceptions as to certain aliens seeking temporary entrance. See section 1182(d)(2) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 137–2, acts Oct. 16, 1918, ch. 186, § 3, 40 Stat. 1012; Sept. 23, 1950, ch. 1024, title I, § 22, 64 Stat. 1006, related to prohibition against issuance of visas to subversive aliens."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 137–3, act Oct. 16, 1918, ch. 186, § 4, as added Sept. 23, 1950, ch. 1024, title I, § 22, 64 Stat. 1006, related to deportation of subversive aliens."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 137–4 to 137–8, act Oct. 16, 1918, ch. 186, §§ 5–9, as added Sept. 23, 1950, ch. 1024, title I, § 22, 64 Stat. 1006, related to temporary exclusion of suspects, subversive aliens and penalties. See sections 1102, 1182, 1225, 1253, 1326 and 1327 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 137–9, act Mar. 28, 1951, ch. 23, § 1, 65 Stat. 28, related to clarification of immigration status of certain aliens."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 137–10, act Mar. 28, 1951, ch. 23, § 2, 65 Stat. 28, related to recordation of entry for permanent residence."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-137a",
+      "section": "137a",
+      "status": "repealed",
+      "heading": "Repealed. May 24, 1934, ch. 344, § 5, 48 Stat. 798",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act Sept. 22, 1922, ch. 411, § 8, as added July 3, 1930, ch. 826, 46 Stat. 849, provided as follows:"
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "“§ 137a. Married woman whose husband is native-born citizen and veteran of World War. Any woman eligible by race to citizenship who has married a citizen of the United States before July 3, 1930, whose husband shall have been a native-born citizen and a member of the military or naval forces of the United States during the World War, and separated therefrom under honorable conditions; if otherwise admissible, shall not be excluded from admission into the United States under section 136 of this title, unless she be excluded under the provisions of that section relating to—"
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "“(a) Persons afflicted with a loathsome or dangerous contagious disease, except tuberculosis in any form;"
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "“(b) Polygamy;"
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "“(c) Prostitutes, procurers, or other like immoral persons;"
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "“(d) Persons convicted of crime: Provided, That no such wife shall be excluded because of offenses committed during legal infancy, while a minor under the age of twenty-one years, and for which the sentences imposed were less than three months, and which were committed more than five years previous to July 3, 1930;"
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "“(e) Persons previously deported;"
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "“(f) Contract laborers."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "“After admission to the United States she shall be subject to all other provisions of [former] sections 9 and 10 and 367–370 of this title.”"
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Savings Clause",
+          "topic": "savings",
+          "text": "Savings ClauseAct May 24, 1934, ch. 344, § 5, 48 Stat. 798, provided that the repeal of this section should not affect any right or privilege or terminate any citizenship acquired under the section before such repeal."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-137b to 173",
+      "section": "137b to 173",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(2), (3), (5), (13), (18), (19), (23), (31), (32), (47), 66 Stat. 279, 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 137b to 137d, act Mar. 17, 1932, ch. 85, §§ 1–3, 47 Stat. 67, related to alien musicians. See section 1182(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 138, act Feb. 5, 1917, ch. 29, § 4, 39 Stat. 878, related to importation of aliens for immoral purposes. See sections 1326, 1328 and 1329 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 139, act Feb. 5, 1917, ch. 29, § 5, 39 Stat. 879, related to contract laborers. See section 1330 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 140, acts Oct. 19, 1888, ch. 1210, § 1, 25 Stat. 566; Apr. 28, 1904, Pub. R. 33, 33 Stat. 591; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737, related to rewards to informer."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 141, act Feb. 26, 1885, ch. 164, § 2, 23 Stat. 332, related to validity of contracts for labor of aliens made before importation."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 142, act Feb. 5, 1917, ch. 29, § 6, 39 Stat. 879, related to advertisement of employment. See section 1330 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 143, act Feb. 5, 1917, ch. 29, § 7, 39 Stat. 879, related to solicitation of immigration by transportation companies. See section 1330 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 144, acts Feb. 5, 1917, ch. 29, § 8, 39 Stat. 880; Mar. 20, 1952, ch. 108, § 1, 66 Stat. 26, related to bringing in or harboring certain aliens. See section 1324(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 145, acts Feb. 5, 1917, ch. 29, § 9, 39 Stat. 880; May 26, 1924, ch. 190, § 26, 43 Stat. 166, related to bringing in aliens subject to disability or afflicted with disease. See section 1322 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 146, acts Feb. 5, 1917, ch. 29, § 10, 39 Stat. 881; May 26, 1924, ch. 190, § 27, 43 Stat. 167, related to prevention of unauthorized landing of aliens. See section 1321 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 147, act Feb. 5, 1917, ch. 27, § 11, 39 Stat. 881, related to detention of aliens for observation and examination. See section 1222 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 148, acts Feb. 5, 1917, ch. 29, § 12, 39 Stat. 882; May 17, 1932, ch. 190, 47 Stat. 158; July 30, 1947, ch. 384, 61 Stat. 630, related to lists of passengers arriving or departing."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 149, act Feb. 5, 1917, ch. 29, § 13, 39 Stat. 884, related to grouping of alien passengers in lists."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 150, act Feb. 5, 1917, ch. 29, § 14, 39 Stat. 884, related to refusal or failure to furnish alien passenger list."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 151, acts Feb. 5, 1917, ch. 29, § 15, 39 Stat. 885; Dec. 19, 1944, ch. 608, § 1, 58 Stat. 816, related to inspection of alien passengers on arrival. See section 1223(a), (b) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 152, acts Feb. 5, 1917, ch. 29, § 16, 39 Stat. 885; July 1, 1944, ch. 373, title VII, § 713, formerly title VI, § 611, 58 Stat. 714, 716, renumbered title VII, § 711, Aug. 13, 1946, ch. 958, § 5, 60 Stat. 1049, renumbered title VII, § 713, Feb. 28, 1948, ch. 83, § 9(b), 62 Stat. 47, related to physical and mental examination of alien passengers. See sections 1222 and 1362 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 153, act Feb. 5, 1917, ch. 29, § 17, 39 Stat. 887, related to boards of special inquiry."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 154, acts Feb. 5, 1917, ch. 29, § 18, 39 Stat. 887; Mar. 4, 1929, ch. 690, § 1(e), 45 Stat. 1551; Dec. 19, 1944, ch. 608, § 2, 58 Stat. 816, related to immediate deportation of aliens brought in in violation of law."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 155, acts Feb. 5, 1917, ch. 29, § 19, 39 Stat. 889; June 28, 1940, ch. 439, title II, § 20, 54 Stat. 671; Dec. 8, 1942, ch. 697, 56 Stat. 1044; July 1, 1948, ch. 783, 62 Stat. 1206, related to deportation of undesirable aliens generally; see sections 1227 and 1351 of this title. Section 22 of act June 28, 1940 provided that no alien should be deportable by reason of amendments to former section 155 of this title by said act, on account of any act committed prior to the date of enactment of that act [June 28, 1940]."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 155a, act Sept. 27, 1950, ch. 1052, ch. III, 64 Stat. 1048, related to deportation or exclusion proceedings unaffected by the Administrative Procedure Act."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 156, acts Feb. 5, 1917, ch. 29, § 20, 39 Stat. 890; July 13, 1943, ch. 230, 57 Stat. 553; Sept. 23, 1950, ch. 1024, title I, § 23, 64 Stat. 1010; June 18, 1952, ch. 442, 66 Stat. 138, related to control over, and facilitation of deportation. See section 1227 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 156a, acts Feb. 18, 1931, ch. 224, 46 Stat. 1171; June 28, 1940, ch. 439, title II, § 21, 54 Stat. 673, related to deportation of aliens engaged in narcotic traffic. Section 22 of act June 28, 1940, provided that no alien should be deportable by reason of amendments to former section 156a of this title by said act, on account of any act committed prior to the date of enactment of that act [June 28, 1940]."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 157, act May 10, 1920, ch. 174, §§ 1–3, 41 Stat. 593, 594, related to deportation of aliens convicted of war-time offenses."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 158 to 163, act Feb. 5, 1917, ch. 29, §§ 21–23, 28, 39 Stat. 891–894, related to admission of aliens, detention, etc. See sections 1103(a), 1183, and 1327 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 164, act Feb. 5, 1917, ch. 29, § 25, 39 Stat. 893, related to jurisdiction of district courts. See section 1329 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 165, act Feb. 5, 1917, ch. 29, § 31, 39 Stat. 895, related to signing alien on ship’s articles with intent to permit landing in violation of law. See section 1287 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 166, acts Feb. 5, 1917, ch. 29, § 34, 39 Stat. 896; May 26, 1924, ch. 190, § 19, 43 Stat. 164, related to landing of excluded seamen. See sections 1282(b) and 1287 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 167, acts May 26, 1924, ch. 190, § 20(a)–(c), 43 Stat. 164; Dec. 19, 1944, ch. 608, § 4, 58 Stat. 817, related to control of alien seamen. See section 1284 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 168, act Feb. 5, 1917, ch. 29, § 33, 39 Stat. 896, related to paying off or discharging alien seamen. See sections 1282(a) and 1286 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 169, act Feb. 5, 1917, ch. 29, § 35, 39 Stat. 896, related to employment on passenger vessels of aliens suffering with mental disabilities. See section 1285 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 170, act Dec. 26, 1920, ch. 4, 41 Stat. 1082, related to treatment in hospitals of alien seamen. See section 1283 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 171, act Feb. 5, 1917, ch. 29, § 36, 39 Stat. 896, related to lists of aliens employed on vessels arriving from foreign ports. See section 1281 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 172, acts Mar. 3, 1893, ch. 206, § 8, 27 Stat. 570; Feb. 14, 1903, ch. 552, § 7, 32 Stat. 328; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737, related to posting of laws by agents of steamship companies."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 173, acts Feb. 5, 1917, ch. 29, §§ 1, 37, 39 Stat. 874, 897; June 2, 1924, ch. 233, 43 Stat. 253, related to definitions of aliens, seamen, etc. See section 1101(a)(3), (10), (38), (b)(3), (d)(7) of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-174",
+      "section": "174",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, acts Aug. 18, 1894, ch. 301, § 1, 28 Stat. 390; Feb. 14, 1903, ch. 552, § 7, 32 Stat. 828; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737; 1940 Reorg. Plan No. V, eff. June 14, 1940, 5 F.R. 2423, 54 Stat. 1238, which related to finality of decisions of immigration officers, was transferred to section 342j of former Title 5, Executive Departments and Government Officers and Employees, and subsequently eliminated from the Code on enactment of Title 5, Government Organization and Employees, by Pub. L. 89–554, Sept. 6, 1966, 80 Stat. 378."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-175 to 181",
+      "section": "175 to 181",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(12), (13), (23), (30), (33), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 175, act Feb. 5, 1917, ch. 29, § 1, 39 Stat. 874, related to application of laws to Philippine Islands."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 176, act Mar. 15, 1934, ch. 70, § 1, 48 Stat. 435, related to disposition of moneys received or paid for detention of aliens. See section 1356(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 177, act Feb. 5, 1917, ch. 29, § 29, 39 Stat. 894, related to international conference for regulation of immigration of aliens."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 178, act Feb. 5, 1917, ch. 29, § 38, 39 Stat. 897, provided for the effective date of the act of Feb. 5, 1917, repealed specified provisions, and set forth laws unaffected by the enactment of this act."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 179, act May 26, 1924, ch. 190, § 21(b), 43 Stat. 165, related to blank forms of manifest and crew lists. See section 1352(b) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 180, acts Mar. 4, 1929, ch. 690, § 1(a)–(c), 45 Stat. 1551; June 24, 1929, ch. 40, 46 Stat. 41, related to reentry or attempted reentry of deported aliens. See sections 1101(g) and 1326 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 180a to 180d, act Mar. 4, 1929, ch. 690, §§ 2–5, 45 Stat. 1551, 1552, related to reentry or attempted reentry of deported aliens. See sections 1101, 1182, 1203, and 1325 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 181, act May 25, 1932, ch. 203, § 7, 47 Stat. 166, related to reentry of deported aliens. See section 1326 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-201 to 204",
+      "section": "201 to 204",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(23), (24), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 201, act May 26, 1924, ch. 190, § 1, 43 Stat. 153, related to short title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 202, acts May 26, 1924, ch. 190, § 2, 43 Stat. 153; Feb. 25, 1925, ch. 316, 43 Stat. 976, related to immigration visas. See sections 1201 and 1351 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 203, acts May 26, 1924, ch. 190, § 3, 43 Stat. 154; July 6, 1932, ch. 434, 47 Stat. 607; July 1, 1940, ch. 502, § 1, 54 Stat. 711; Dec. 29, 1945, ch. 652, title I, § 7(c), 59 Stat. 672, defined immigrant. See section 1101 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 204, acts May 26, 1924, ch. 190, § 4, 43 Stat. 155; July 3, 1926, ch. 738, § 1, 44 Stat. 812; May 29, 1928, ch. 914, §§ 1, 2, 45 Stat. 1009; July 3, 1930, ch. 835, § 3, 46 Stat. 854; July 11, 1932, ch. 471, § 1, 47 Stat. 656; May 19, 1948, ch. 311, § 1, 62 Stat. 241, defined nonquota immigrant. See section 1101 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-204a, 204b",
+      "section": "204a, 204b",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections related to natives of Virgin Islands residing in foreign countries on June 22, 1932, and were based on act June 28, 1932, ch. 283, §§ 1, 2, 47 Stat. 336. Former section 204b of this title provided that section 204a should not apply after June 28, 1934."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-204c to 219",
+      "section": "204c to 219",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(23), (36), (44), (45), 66 Stat. 279, 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 204c, act June 28, 1932, ch. 283, § 3, 47 Stat. 336, related to deportation as public charge."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 204d, act June 28, 1932, ch. 283, § 4, 47 Stat. 336, related to definitions."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 205, act May 26, 1924, ch. 190, § 5, 43 Stat. 155, defined quota immigrant."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 206, acts May 26, 1924, ch. 190, § 6, 43 Stat. 155; May 29, 1928, ch. 914, § 3, 45 Stat. 1009; July 11, 1932, ch. 471, § 2, 47 Stat. 656; May 19, 1948, ch. 311, § 2, 62 Stat. 241, related to enumeration of preferences within quotas."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 207, act May 26, 1924, ch. 190, § 7, 43 Stat. 156, related to application for visas."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 208, act May 26, 1924, ch. 190, § 8, 43 Stat. 156, related to nonquota immigration visas."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 209, acts May 26, 1924, ch. 190, § 9, 43 Stat. 157; May 14, 1937, ch. 182, § 1, 50 Stat. 164, related to visas of nonquota and preferred immigrants."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 210, acts May 26, 1924, ch. 190, § 10, 43 Stat. 158; June 3, 1948, ch. 403, 62 Stat. 335, related to reentry permits."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 211, acts May 26, 1924, ch. 190, § 11, 43 Stat. 159; Mar. 4, 1927, ch. 514, 44 Stat. 1455; Mar. 31, 1928, ch. 306, 45 Stat. 400, related to immigration quotas as determined by national origin."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 212, act May 26, 1924, ch. 190, § 12, 43 Stat. 160, related to determination of nationality. See section 1152 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 212a, acts Dec. 17, 1943, ch. 344, § 2, 57 Stat. 601; Aug. 9, 1946, ch. 945, § 2, 60 Stat. 975, related to reentry permits for Chinese persons."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 212b, act July 2, 1946, ch. 534, § 4, 60 Stat. 417, related to reentry permits for Indians and races indigenous to India."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 212c, act July 2, 1946, ch. 534, § 5, 60 Stat. 417, related to definitions and allocations of quota."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 213, acts May 26, 1924, ch. 190, § 13, 43 Stat. 161; June 13, 1930, ch. 476, 46 Stat. 581; May 14, 1937, ch. 182, § 2, 50 Stat. 165; Aug. 9, 1946, ch. 945, § 1, 60 Stat. 975, related to compliance with immigration requirements."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 213a, act May 14, 1937, ch. 182, § 3, 50 Stat. 165, related to deportation of alien securing visa through fraudulent marriage."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 214, act May 26, 1924, ch. 190, § 14, 43 Stat. 162, related to deportation and procedure thereunder."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 215, acts May 26, 1924, ch. 190, § 15, 43 Stat. 162; July 1, 1932, ch. 363, 47 Stat. 524; July 1, 1940, ch. 502, § 2, 54 Stat. 711; Dec. 29, 1945, ch. 652, title I, § 7(d), 59 Stat. 672, related to admission of persons excepted from definition of immigrant and nonquota immigrants."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 216, acts May 26, 1924, ch. 190, § 16, 43 Stat. 163; Dec. 19, 1944, ch. 608, § 3, 58 Stat. 817, related to unlawful bringing of aliens into United States by water."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 217, act May 26, 1924, ch. 190, § 17, 43 Stat. 163, related to contracts with transportation lines."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 218, act May 26, 1924, ch. 190, § 18, 43 Stat. 164, related to unused immigration visas."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 219, act May 26, 1924, ch. 190, § 21(a), 43 Stat. 165, related to reentry permits."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-220",
+      "section": "220",
+      "status": "repealed",
+      "heading": "Repealed. June 25, 1948, ch. 645, § 21, 62 Stat. 862, eff. Sept. 1, 1948",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act May 26, 1924, ch. 190, § 22, 43 Stat. 165, related to forging, counterfeiting, etc., of reentry permits. See section 1546 of Title 18, Crimes and Criminal Procedure."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-221 to 227",
+      "section": "221 to 227",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(20), (22), (23), (29), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 221, act May 26, 1924, ch. 190, § 23, 43 Stat. 165, related to burden of proof upon entry of alien or in deportation proceedings."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 222, act May 26, 1924, ch. 190, § 24, 43 Stat. 166, related to rules and regulations."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 223, act May 26, 1924, ch. 190, § 25, 43 Stat. 166, related to quota law as additional to other immigration laws."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 224, acts May 26, 1924, ch. 190, § 28(a)–(e), (g)–(n), 43 Stat. 168; June 2, 1924, ch. 233, 43 Stat. 253; Oct. 29, 1945, ch. 437, 59 Stat. 551, related to definitions."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 225, act May 26, 1924, ch. 190, § 29, 43 Stat. 169, related to appropriations."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 226, act May 26, 1924, ch. 190, § 32, 43 Stat. 169, related to partial invalidity."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 226a, act Apr. 2, 1928, ch. 308, 45 Stat. 401, related to American Indians born in Canada."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 227, act Dec. 27, 1922, ch. 15, 42 Stat. 1065, related to admission of certain aliens in excess of quotas."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-228",
+      "section": "228",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, act June 7, 1924, ch. 379, 43 Stat. 669, related to aliens who entered prior to July 1, 1924 under quota of 1921, and was omitted as executed."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-229 to 231",
+      "section": "229 to 231",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(17), (23), (27), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 229, acts May 19, 1921, ch. 8, 42 Stat. 5; May 26, 1924, ch. 190, § 30, 43 Stat. 169, related to imposition and enforcement of penalties under act May 19, 1921."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 230, Joint Res. Oct. 16, 1918, ch. 190, 40 Stat. 1014, related to alien residents conscripted or volunteering for service during World War I."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 231, act May 26, 1926, ch. 400, 44 Stat. 657, related to admission into Puerto Rico of certain resident Spanish subjects."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-232 to 237",
+      "section": "232 to 237",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 232 to 236, act Dec. 28, 1945, ch. 591, §§ 1–5, 59 Stat. 659, relating to admission of alien spouses and minor children of World War II veterans, omitted as expired three years after Dec. 28, 1945. Section 237, act Dec. 28, 1945, ch. 591, § 6, added July 22, 1947, ch. 289, 61 Stat. 401."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-238",
+      "section": "238",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section transferred to section 1557 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-239",
+      "section": "239",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, acts Aug. 19, 1950, ch. 759, 64 Stat. 464; Mar. 19, 1951, ch. 9, 65 Stat. 6, relating to admission of alien spouses and minor children of members of armed forces, expired by its own terms on Mar. 19, 1952."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-241 to 246",
+      "section": "241 to 246",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(28), 66 Stat. 279, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections, act May 26, 1926, ch. 398, §§ 1–6, 44 Stat. 654, 655, related to alien veterans of World War I."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-261",
+      "section": "261",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, acts Feb. 14, 1903, ch. 552, § 7, 32 Stat. 828; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737; Ex. Ord. No. 6166, § 14, June 10, 1933; 1940 Reorg. Plan No. V, eff. June 14, 1940, 5 F.R. 2423, 54 Stat. 1238, conferred upon the Attorney General the authority, power, and jurisdiction by virtue of any law relating to the exclusion from and residence within the United States, its Territories and the District of Columbia, of Chinese and persons of Chinese descent, and vested in the collectors of customs and collectors of internal revenue, under control of the Commissioner of Immigration and Naturalization, as the Attorney General might designate therefor, the authority, power, and jurisdiction in relation to such exclusion previously vested in such officers. It was omitted as obsolete in view of the repeal, by act Dec. 17, 1943, ch. 344, § 1, 57 Stat. 600, of sections 262 to 297 and 299 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-262 to 297",
+      "section": "262 to 297",
+      "status": "repealed",
+      "heading": "Repealed. Dec. 17, 1943, ch. 344, § 1, 57 Stat. 600",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections, acts May 6, 1882, ch. 126, §§ 1, 3, 6–13, 15, 16, 22 Stat. 59–61; July 5, 1884, ch. 220, 23 Stat. 115–118; Sept. 13, 1888, ch. 1015, §§ 5–11, 13, 14, 25 Stat. 477–479; Oct. 1, 1888, ch. 1064, §§ 1, 2, 25 Stat. 504; May 5, 1892, ch. 60, §§ 1–3, 5–8, 27 Stat. 25, 26; Nov. 3, 1893, ch. 14, §§ 1, 2, 28 Stat. 7, 8; July 7, 1898, No. 55, § 1 (part), 30 Stat. 751; Apr. 30, 1900, ch. 339, § 1, 31 Stat. 161; June 6, 1900, ch. 791, § 1 (part), 31 Stat. 611; Mar. 3, 1901, ch. 845, §§ 1–3, 31 Stat. 1093; Apr. 29, 1902, ch. 641, §§ 1, 2, 4, 32 Stat. 176, 177; Apr. 27, 1904, ch. 1630, § 5, 33 Stat. 428; Aug. 24, 1912, ch. 355, § 1 (part), 37 Stat. 476, related to exclusion of Chinese and persons of Chinese descent from the United States or its Territories, and to various matters pertaining thereto, including the requirement of certificates of permission and identity by those who might be entitled to entry, exemptions, duties of masters of vessels and Federal officers, arrest, hearing and removal of Chinese unlawfully within the United States or its Territories, habeas corpus, and forfeitures and penalties for violation of the exclusion laws."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-298",
+      "section": "298",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, acts Mar. 17, 1894, Art. III, 28 Stat. 1211; Apr. 28, 1904, ch. 1762, § 1, 33 Stat. 478, provided for the Bertillon system of identification at the various ports of entry, to prevent unlawful entry of Chinese into the United States. It is obsolete in view of the repeal of sections 262 to 297 of this title by act Dec. 17, 1943, ch. 344, § 1, 57 Stat. 600. For some years prior to such act, no moneys had been appropriated to prevent unlawful entry of Chinese, referred to in this section."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-299",
+      "section": "299",
+      "status": "repealed",
+      "heading": "Repealed. Dec. 17, 1943, ch. 344, § 1, 57 Stat. 600",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act June 23, 1913, ch. 3, § 1, 38 Stat. 65, provided for delivery by the marshal, of all Chinese persons ordered deported under judicial writs, into the custody of any officer designated for that purpose, for conveyance to the frontier or seaboard for deportation."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-331 to 339",
+      "section": "331 to 339",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 93–461, Oct. 20, 1974, 88 Stat. 1387",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 331, R.S. § 2158, prohibited cooly trade."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 332, R.S. § 2159; Mar. 3, 1911, ch. 231, § 291, 36 Stat. 1167, related to forfeiture of vessels engaged in cooly trade."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 333, R.S. § 2160, related to penalty for building vessels to engage in cooly trade."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 334, R.S. § 2161, related to punishment for engaging in cooly trade."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 335, R.S. § 2162, excepted voluntary emigration of coolies from prohibition."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 336, act Mar. 3, 1875, ch. 141, § 1, 18 Stat. 477, related to inquiry and certification by consular officers."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 337, R.S. § 2163, related to examination of vessels."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 338, act Mar. 3, 1875, ch. 141, § 2, 18 Stat. 477, related to penalties for involuntary transportation of Chinese, Japanese, and others for purpose of holding to service."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 339, act Mar. 3, 1875, ch. 141, § 4, 18 Stat. 477, related to punishment for contracting to supply cooly labor."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-351 to 416",
+      "section": "351 to 416",
+      "status": "repealed",
+      "heading": "Repealed or transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "These sections, relating to naturalization, were in large degree affected by the Nationality Act of 1940, former section 501 et seq. of this title. That act was passed on Oct. 14, 1940, to consolidate and restate the laws of the United States regarding citizenship, naturalization, and expatriation, and, in addition to certain specific repeals thereby, all acts or parts of acts in conflict with its provisions were repealed by former section 904 of this title. See notes below for history of individual sections."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 351 to 354, relating to Bureau of Naturalization, were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, 54 Stat. 1172. Sections 351 to 353 were from act June 29, 1906, ch. 3592, § 1, 34 Stat. 596, and section 354 was from act May 9, 1918, ch. 69, § 1, 40 Stat. 544. See section 1443 of this title. See also section 1551 et seq. of this title for general provisions relating to Immigration and Naturalization Service."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 355, relating to reports of expenditures of Bureau of Naturalization, was repealed by act May 29, 1928, ch. 901, § 1, 45 Stat. 994. It was from act Mar. 4, 1909, ch. 299, § 1, 35 Stat. 982."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 356 to 358a were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Section 356, relating to regulations for execution of naturalization laws and use of copies of papers in evidence, was from acts June 29, 1906, ch. 3592, § 28, 34 Stat. 606, and Mar. 2, 1929, ch. 536, § 8, 45 Stat. 1515; see section 1443 of this title. Section 356a, relating to quarters for photographic studio in New York City, was from act May 25, 1932, ch. 203, § 9, 47 Stat. 166; see section 1443(g) of this title. Sections 357 (from act June 29, 1906, ch. 3592, § 3, 34 Stat. 596, as amended Mar. 3, 1911, ch. 231, § 289, 36 Stat. 1167; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737; June 25, 1936, ch. 804, 49 Stat. 1921), 358 (from act Mar. 2, 1917, ch. 145, § 41, 39 Stat. 965), and 358a (from act Feb. 25, 1927, ch. 192, § 4, 44 Stat. 1235), related to jurisdiction of naturalization courts; see section 1421 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 359, relating to racial limitation of naturalization, was from R.S. § 2169 (revised from act July 14, 1870, ch. 254, § 7, 16 Stat. 256), and acts Feb. 18, 1875, ch. 80, § 1, 18 Stat. 318; May 9, 1918, ch. 69, § 2, 40 Stat. 547. According to a communication of Jan. 8, 1943, the Immigration and Naturalization Service stated that it was the opinion of that office that said section 359 was superseded by former section 703 of this title. See section 1422 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 360, relating to admission of persons not citizens owing permanent allegiance to the United States, was repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, 54 Stat. 1172. It was from act June 29, 1906, ch. 3592, § 30, 34 Stat. 606. See section 1436 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 361, relating to period of residence required for citizenship, was repealed by act Mar. 2, 1929, ch. 536, 45 Stat. 1514. It was from R.S. § 2170, which was revised from act Mar. 3, 1813, ch. 42, § 12, 2 Stat. 811. See section 1427 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 362, forbidding naturalization of citizens within thirty days preceding a general election, was repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. It was from act June 29, 1906, ch. 3592, § 6, 34 Stat. 598. See section 1447(c) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 363, making Chinese inadmissible to citizenship, was repealed by act Dec. 17, 1943, ch. 344, § 1, 57 Stat. 600. It was from act May 6, 1882, ch. 126, § 14, 22 Stat. 61."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 364 to 366a, relating to persons inadmissible to citizenship, were repealed by act Oct. 14, 1940, ch. 876. title I, subch. V, § 504, 54 Stat. 1172. Sections 364 and 365 were from act June 29, 1906, ch. 3592, §§ 7, 8, respectively, 34 Stat. 598, 599; see sections 1424 and 1423, respectively, of this title. Section 366 was from acts May 18, 1917, ch. 15, § 2, 40 Stat. 77; July 9, 1918, ch. 143, § 4, 40 Stat. 885. Section 366a was from act Feb. 11, 1931, ch. 118, 46 Stat. 1087."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 367 to 368a, relating to naturalization of women, were repealed by act Oct. 14, 1940, ch. 876. title I, subch. V, § 504, 54 Stat. 1172. They were from act Sept. 22, 1922, ch. 411, §§ 1, 2, 3(c), respectively, 42 Stat. 1021, 1022, as amended Mar. 3, 1931, ch. 442, § 4(a), 46 Stat 1511; May 17, 1932, ch. 190, 47 Stat. 158; May 24, 1934, ch. 344, § 4, 48 Stat. 797. On the subject of section 367 see section 1422 of this title, and on the subject of 368, see section 1430 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 368b, relating to citizenship of women born in Hawaii prior to June 14, 1900, was repealed by act June 27, 1952, ch. 477, title IV, § 403(a)(34), 66 Stat. 280. It was from acts July 2, 1932, ch. 395, 47 Stat. 571; July 1, 1940, ch. 495, 54 Stat. 707."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 369 and 369a, relating to naturalization of women, were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. They were from act Sept. 22, 1922, ch. 411, §§ 4, 3(b), respectively, 42 Stat. 1022, as amended July 3, 1930, ch. 835, § 2(a), 46 Stat. 854; Mar. 3, 1931, ch. 442, § 4(a), 46 Stat. 1511. See section 1435(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 370, relating to naturalization of women married to aliens ineligible to citizenship, was repealed by act Mar. 3, 1931, ch. 442, § 4(b), 46 Stat. 1512. It was from act Sept. 22, 1922, ch. 411, § 5, 42 Stat. 1022."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 371, relating to naturalization of wives and children of aliens becoming insane after declaration of intention to become citizens, was repealed by act May 24, 1934, ch. 344, § 5, 48 Stat. 798, which provided that such repeal should “not affect any right or privilege or terminate any citizenship acquired under” the section before its repeal. Section was from act Feb. 24, 1911, ch. 151, 36 Stat. 929."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 372 to 373 were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Section 372, relating to procedure for naturalization, was from act June 29, 1906, ch. 3592, § 4, 34 Stat. 596; see section 1421(d) of this title. Section 372a, relating to naturalization of former citizens, was from act Mar. 3, 1931, ch. 442, § 3, 46 Stat. 1511. Section 373, relating to declaration of intention to become citizen, was from acts June 29, 1906, ch. 3592, § 4, 34 Stat. 596; Mar. 4, 1929, ch. 683, § 1, 45 Stat. 1545; June 20, 1939, ch. 224, § 1, 53 Stat. 843; see section 1445(f) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 374, making it unlawful to make a declaration of intention on election day, was repealed by act May 25, 1926, ch. 388, § 1, 44 Stat. 652. It was from act June 29, 1906, ch. 3592, § 4(7), as added May 9, 1918, ch. 69, § 1, 40 Stat. 544."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 375, providing that declarations of intention should not be required of widow or minor children of aliens dying after having filed a declaration of intention, was repealed by act May 24, 1934, ch. 344, § 5, 48 Stat. 798, which provided that such repeal should “not affect any right or privilege or terminate any citizenship acquired under” the section before its repeal. Section was from act June 29, 1906, ch. 3592, § 4, 34 Stat. 597."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 375a, act July 2, 1940, ch. 512, §§ 1, 2, 54 Stat. 715, relating to exemption from declaration of intention and filing of petition by children spending childhood in United States, was repealed by act June 27, 1952, ch. 477, title IV, § 403(a)(40), 66 Stat. 280."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 376, providing that alien seamen declarants should be deemed citizens for purposes of protection, was repealed by act June 15, 1935, ch. 255, § 1, 49 Stat. 376. It was from act June 29, 1906, ch. 3592, § 4(8), as added May 9, 1918, ch. 69, § 1, 40 Stat. 544."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 377, authorizing naturalization of certain aliens erroneously exercising rights and duties of citizenship prior to July 1, 1920, was repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. It was from act June 29, 1906, ch. 3592, § 4(10), as added May 9, 1918, ch. 69, § 1, 40 Stat. 545, and amended May 25, 1932, ch. 203, § 10, 47 Stat. 166."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 377a, related to naturalization of inhabitants of Virgin Islands. It was from acts Feb. 25, 1927, ch. 192, § 2, 44 Stat. 1234; May 17, 1932, ch. 190, 47 Stat. 158."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 377b to 382c were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Section 377b, requiring lawful entry and certificate of arrival as prerequisite to declaration of intention, was from acts Mar. 2, 1929, ch. 536, § 4, 45 Stat. 1513; May 25, 1932, ch. 203, § 6, 47 Stat. 166; similar provisions were contained in former section 729(b) of this title. Section 377c, relating to photographs of aliens seeking to become citizens, was from act June 29, 1906, ch. 3592, § 36, as added Mar. 2, 1929, ch. 536, § 9, 45 Stat. 1516; see section 1444 of this title. Section 378, enumerating conditions under which alien enemies could be naturalized, was from act June 29, 1906, ch. 3592, § 4(11), as added May 9, 1918, ch. 69, § 1, 40 Stat. 545; see section 1442 of this title. Section 379, relating to petitions for naturalization, was from act June 29, 1906, ch. 3592, § 4, 34 Stat. 596, as amended Mar. 2, 1929, ch. 536, § 6(a), 45 Stat. 1513; June 20, 1939, ch. 224, § 2, 53 Stat. 843; see sections 1445 and 1446(f) of this title. Section 380, providing that certificate of arrival and declaration of intention should be made a part of petition for naturalization was from act June 29, 1906, ch. 3592, § 4, 34 Stat. 596; see section 1445(a), (b) of this title. Section 380a, relating to fees for issuance of certificates of arrival, was from acts Mar. 2, 1929, ch. 536, § 5, 45 Stat. 1513; Apr. 19, 1934, ch. 154, § 3, 48 Stat. 597; see section 1455(a)(2) of this title. Section 380b, defining county as used in former sections 379, 382, and 388 of this title, was from act June 29, 1906, ch. 3592, § 35, as added Mar. 2, 1929, ch. 536, § 9, 45 Stat. 1516, and amended May 17, 1932, ch. 190, 47 Stat. 158. Sections 381 and 382(c), relating to oaths of aliens admitted to citizenship and certain prerequisites to admission, respectively, were from acts June 29, 1906, ch. 3592, § 4, 34 Stat. 596; Mar. 2, 1929, ch. 536, § 6b, 45 Stat. 1513; June 25, 1936, ch. 811, § 1, 49 Stat. 1925; June 29, 1938, ch. 819, 52 Stat. 1247; June 20, 1939, ch. 224, § 3, 53 Stat. 844; on the subject of section 381 see section 1448 of this title; and on the subject of section 382 see sections 1427, 1430(b) and 1446(g) of this title. Sections 382a, relating to absence from country as affecting continuity of residence for purpose of naturalization, was from act June 25, 1936, ch. 811, § 2, 49 Stat. 1925; see section 1427(c) of this title. Sections 382b and 382c, relating to temporary absences of clergymen as affecting continuity of residence, were from act Aug. 9, 1939, ch. 610, §§ 1, 2, respectively, 53 Stat. 1273; see sections 1428 and 1443(a), respectively, of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 383, relating to proof of residence by deposition, was repealed by act Mar. 2, 1929, ch. 536, § 6(e), 45 Stat. 1514. It was from act June 29, 1906, ch. 3592, § 10, 34 Stat. 599."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 384, relating to residence of aliens serving on vessels of foreign registry, was repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. It was from act June 29, 1906, ch. 3592, § 4(7), as added May 9, 1918, ch. 69, § 1, 40 Stat. 544; amended May 25, 1932, ch. 203, § 3, 47 Stat. 165. See section 1441(a)(2) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 385, related to validation of Hawaiian jurisdiction exercised prior to Sept. 27, 1906. It was from acts Apr. 30, 1900, ch. 339, § 100, 31 Stat. 161; May 27, 1910, ch. 258, § 9, 36 Stat. 448; Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 386 to 389 were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Section 386, providing for the renunciation of titles of nobility by aliens seeking citizenship, was from act June 29, 1906, ch. 3592, § 4, 34 Stat. 596; see section 1448(b) of this title. Section 387, relating to reimbursement for publication of citizenship textbooks, was from act June 29, 1906, ch. 3592, § 4(9), as added May 9, 1918, ch. 69, § 1, 40 Stat. 544; see sections 1443 (b) and 1457 of this title. Section 388, relating to residence requirements for certain Filipinos and Puerto Ricans serving in military service, was from act June 29, 1906, ch. 3592, § 4(7), as added May 9, 1918, ch. 69, § 1, 40 Stat. 542; June 4, 1920, ch. 227, § 30, 41 Stat. 776; Mar. 2, 1929, ch. 536, § 6(c), (d), 45 Stat. 1514; May 17, 1932, ch. 190, 47 Stat. 158; May 25, 1932, ch. 203, § 2(a), 47 Stat. 165; July 30, 1937, ch. 545, § 3, 50 Stat. 548; see sections 1427, 1439, and 1441(a)(1) of this title. Section 389, relating to residence of aliens conditionally serving in military services after honorable discharge, was from act June 29, 1906, ch. 3592, § 4(7), as added May 9, 1918, ch. 69, § 1, 40 Stat. 542."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 389a, relating to naturalization of alien veterans of World War I, was repealed by act June 27, 1952, ch. 477, title IV, § 403(a)(37), 66 Stat. 280. It was from act Aug. 19, 1937, ch. 698, § 2, as added Aug. 16, 1940, ch. 684, 54 Stat. 789."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 390 to 392, relating to naturalization of alien veterans of World War I, were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. They were from act June 29, 1906, ch. 3592, §§ 4(7), 4(13), and 4(7), respectively, as added May 19, 1918, ch. 69, § 1, 40 Stat. 542 to 544. See section 1439 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 392a to 392d related to naturalization of alien veterans of World War I. Sections 392b to 392d were repealed by act Oct. 11, 1940, ch. 876 title I, subch. V, § 504, 54 Stat. 1172. Section 392a was from acts May 26, 1926, ch. 398, § 7, 44 Stat. 655; Mar. 4, 1929, ch. 683, § 3, 45 Stat. 1546. Sections 392b to 392d were from acts May 25, 1932, ch. 203, § 1, 47 Stat. 165; Ex. Ord. No. 6166, § 14, June 10, 1933; June 24, 1935, ch. 288, §§ 1 to 3, 49 Stat. 395; Aug. 23, 1937, ch. 735, §§ 1 to 3, 50 Stat. 743, 744; June 21, 1939, ch, 234, §§ 1 to 3, 53 Stat. 851."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 392e to 398 were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Sections 392e to 392g, relating to naturalization of alien veterans of World War I formerly ineligible because of race, were from act June 24, 1935, ch. 290, §§ 1–3, respectively, 49 Stat. 397, 398. Sections 393 to 395, relating to naturalization of alien veterans, were from act June 29, 1906, ch. 3592, § 4(7), as added May 9, 1918, ch. 69, §§ 1, 2, 40 Stat. 543; see sections 1439 and 1441(a)(1) of this title. Sections 396 to 398, relating to time of filing petition, subpoena of witnesses, and final hearings on petitions, respectively, were from act June 29, 1906, ch. 3592, §§ 6, 5, 9, respectively, 34 Stat. 598, 599, as amended Mar. 3, 1931, ch. 442, §§ 1, 2, 46 Stat. 1511; see sections 1445(c) and 1447(a), (e) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 398a, act May 3, 1940, ch. 183, § 2, 54 Stat. 178, related to patriotic address to new citizens. See section 1448a of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 399 to 402 were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Section 399, authorizing the United States to appear and oppose the right of aliens to naturalization, was from act June 29, 1906, ch. 3592, § 11, 34 Stat. 599; see section 1447 of this title. Section 399a, relating to preliminary examination of petitioners for naturalization, was from act June 8, 1926, ch. 502, 44 Stat. 709; see sections 1446 and 1447 of this title. Sections 399b to 399d, relating to certificates of citizenship, were from acts June 29, 1906, ch. 3592, §§ 32 to 34, respectively, as added Mar. 2, 1929, ch. 536, § 9, 45 Stat. 1515; amended May 25, 1932, ch. 203, §§ 4, 5, 47 Stat. 165; Apr. 19, 1934, ch. 154, §§ 2, 4, 48 Stat. 597; see sections 1452, 1454 and 1455(g) of this title. Section 399e, relating to annual reports of Commissioner of Immigration, was from act Mar. 2, 1929, ch. 536, § 10, 45 Stat. 1516; see section 1458 of this title. Section 399f, relating to counsel fees in naturalization proceedings, was from act Apr. 19, 1934, ch. 154, § 5, 48 Stat. 598; see section 1455 of this title. Sections 400 to 402, relating to clerks of naturalization courts and their fees and clerical assistants, were from acts June 29, 1906, ch. 3592, §§ 12, 13, 34 Stat. 599, as amended June 25, 1910, ch. 401, § 1, 36 Stat. 829; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737; June 12, 1917, ch. 27, § 1, 40 Stat. 171; Feb. 26, 1919, ch. 49, §§ 1, 2, 40 Stat. 1182; Feb. 11, 1921, ch. 46, 41 Stat. 1099; Mar. 4, 1921, ch. 161, § 1, 41 Stat. 1412; June 10, 1921, ch. 18, § 304, 42 Stat. 24; Mar. 2, 1929, ch. 536, § 7(a), 45 Stat. 1514; and Apr. 19, 1934, ch. 154, § 1, 48 Stat. 597; see sections 1450(a)–(d), 1455, and 1459(b), (c) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 402a, related to disposition of fees received by clerks of courts. It was from act Mar. 2, 1929, ch. 536, § 7(b), 45 Stat. 1515; Ex. Ord. No. 6166, § 14, June 10, 1933. See section 1455(e) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 403 to 405 were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Sections 403 and 404, relating to fees collectible from alien soldiers, and to recording declarations and petitions, respectively, were from act June 29, 1906, ch. 3592, §§ 4(7), 14, respectively, 34 Stat. 601, as amended May 9, 1918, ch. 69, § 1 40 Stat. 544; see sections 1450(e) and 1455(h) of this title. Section 405, relating to cancellation of certificates of citizenship, was from acts June 29, 1906, ch. 3592, § 15, 34 Stat. 601; May 9, 1918, ch. 69, § 1, 40 Stat. 544; see section 1451 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 406 and 407 validated certain certificates of naturalization. They were from acts May 9, 1918, ch. 69, § 3, 40 Stat. 548, and June 29, 1906, ch. 3624, § 1, 34 Stat. 630, respectively."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 408 to 415 were repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. Sections 408 and 409, relating to naturalization forms, were from act June 29, 1906, ch. 3592, §§ 3, 27, respectively, 34 Stat. 596, 603; Mar. 4, 1913, ch. 141, § 3, 37 Stat. 737; May 9, 1918, ch. 69, § 3, 40 Stat. 548; on the subject of section 408 see sections 1421(c) and 1443(c) of this title, and on the subject of section 409 see sections 1445(a)–(d), (f), and 1449 of this title. Sections 410 to 415, relating to the punishment of crimes in connection with the naturalization of aliens, were from act June 29, 1906, ch. 3592, §§ 18, 20–24, respectively, 34 Stat. 602, 603; present provisions are contained in sections 1451(a), (b), (d), (e), (g)–(i) and 1459 of this title and sections 911, 1015, 1421–1429, 1719 and 3282 of Title 18, Crimes and Criminal Procedure."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 416, authorizing punishment of offenses against naturalization laws committed prior to May 9, 1918, under laws then in effect but since repealed, was repealed by act Oct. 14, 1940, ch. 876, title I, subch. V, § 504, 54 Stat. 1172. It was from act May 9, 1918, ch. 69, § 2, 40 Stat. 547. See note set out under section 1101 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-451 to 460",
+      "section": "451 to 460",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(39), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 451, act June 28, 1940, ch. 439, title III, § 30, 54 Stat. 673, required an alien seeking entry into United States to be registered and fingerprinted before the issuance to him of a visa. See sections 1201(b) and 1301 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 452, act June 28, 1940, ch. 439, title III, § 31, 54 Stat. 673, related to registration of aliens in United States. See section 1302 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 453, act June 28, 1940, ch. 439, title III, § 32, 54 Stat. 674, related to special provisions governing registration. See section 1303 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 454, act June 28, 1940, ch. 439, title III, § 33, 54 Stat. 674, related to places of registration and duties of postmasters."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 455, act June 28, 1940, ch. 439, title III, § 34, 54 Stat. 674, related to forms and procedure, confidential status of records and oaths in connection with the registration and fingerprinting of aliens. See section 1304 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 456, acts June 28, 1940, ch. 439, title III, § 35, 54 Stat. 675; Sept. 23, 1950, ch. 1024, title I, § 24(a), 64 Stat. 1012, related to notice of change of address. See section 1305 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 457, acts June 28, 1940, ch. 439, title III, § 36, 54 Stat. 675; Oct. 13, 1941, ch. 432, 55 Stat. 736; Sept. 23, 1950, ch. 1024, title I, § 24(b), 64 Stat. 1013, related to penalties. See section 1306 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 458, act June 28, 1940, ch. 439, title III, § 37, 54 Stat. 675, related to administration and enforcement of registration law. See section 1306 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 459, act June 28, 1940, ch. 439, title III, § 38, 54 Stat. 675, related to definitions and effective date. See section 1101(a)(8), (38) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 460, act June 28, 1940, ch. 439, title III, § 39, 54 Stat. 676, related to registration of aliens in Canal Zone."
+        },
+        {
+          "heading": "Nationality Act of 1940",
+          "topic": "miscellaneous",
+          "text": "Nationality Act of 1940On October 14, 1940, and subsequent to the enactment of former section 451 et seq. of this title, Congress passed the Nationality Act of 1940 [former section 501 et seq. of this title] for the purpose of consolidating and restating the laws of the United States upon citizenship, naturalization and expatriation. Said act contained further provisions relating to registry of aliens [former sections 728 and 746(l) of this title], and former section 504 thereof, in addition to certain specific repeals, provided that all acts or parts of acts in conflict therewith were thereby repealed."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-501 to 504",
+      "section": "501 to 504",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(42), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections, act Oct. 14, 1940, ch. 876, title I, subch. I, §§ 101–104, 54 Stat. 1137, 1138, related to definitions and place of general abode. See various provisions of section 1101 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-601 to 605",
+      "section": "601 to 605",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(42), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 601, acts Oct. 14, 1940, ch. 876, title I, subch. II, § 201, 54 Stat. 1138; July 31, 1946, ch. 708, 60 Stat. 721, related to persons born nationals and citizens. See section 1401 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 602 to 605, act Oct. 14, 1940, ch. 876, title I, subch. II, §§ 202–205, 54 Stat. 1139, related to citizens by birth in Puerto Rico, Canal Zone or Panama, nationals but not citizens and children born out of wedlock. See sections 1402, 1403, 1408, 1409(a), (c), and 1407, respectively, of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-606",
+      "section": "606",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section transferred to section 1421l of Title 48, Territories and Insular Possessions. That section was later repealed. See section 1407 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-701 to 724a",
+      "section": "701 to 724a",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(40), (42), 66 Stat. 279, 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 701, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 301, 54 Stat. 1140, related to jurisdiction to naturalize. See section 1421 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 702, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 302, 54 Stat. 1140, related to sex or marriage, as affecting eligibility for naturalization. See section 1422 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 703, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 303, 54 Stat. 1140; Dec. 17, 1943, ch. 344, § 3, 57 Stat. 601; July 2, 1946, ch. 534, § 1, 60 Stat. 416; Aug. 1, 1950, ch. 512, § 4(b), 64 Stat. 385, related to races affecting eligibility. See section 1422 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 704, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 304, 54 Stat. 1140; Sept. 23, 1950, ch. 1024, title I, § 30, 64 Stat. 1018, related to language, history and principles of government affecting eligibility. See section 1423 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 705, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 305, 54 Stat. 1141; Sept. 23, 1950, ch. 1024, title I, § 25, 64 Stat. 1013, related to exclusion from naturalization. See sections 1424(a)–(c), 1427(f), and 1451(c) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 706, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 306, 54 Stat. 1141, related to desertion from the armed forces or evasion of draft as affecting eligibility. See section 1425 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 707, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 307, 54 Stat. 1142, related to residence as affecting eligibility. See sections 1427(a)–(c) and 1441(a)(2) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 708, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 308, 54 Stat. 1143, related to temporary absence of clergyman as affecting eligibility. See section 1428 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 709, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 309, 54 Stat. 1143, related to requirements as to proof of eligibility. See sections 1446(f)–(h) and 1447(e) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 710, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 310, 54 Stat. 1144, related to married persons being excepted from certain requirements. See section 1430(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 711, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 311, 54 Stat. 1145, related to spouse of United States citizen residing in United States, in marital union prior to petition. See section 1430(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 712, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 312, 54 Stat. 1145, related to alien whose spouse is United States citizen regularly stationed abroad by United States employer. See section 1430(b) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 713, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 313, 54 Stat. 1145, related to children born outside United States, one parent a continuous United States citizen and the other an alien subsequently naturalized. See section 1431 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 714, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 314, 54 Stat. 1145, related to children born outside United States, both parents aliens, or one an alien and the other a citizen subsequently losing citizenship."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 715, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 315, 54 Stat. 1146, related to children born of one parent a United States citizen. See section 1433 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 716, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 316, 54 Stat. 1146, related to children adopted by United States citizens. See section 1434(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 717, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 317, 54 Stat. 1146, related to former citizens being excepted from certain requirements. See sections 1435(a), (c) and 1482 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 718 to 720, act Oct. 14, 1940, ch. 876, title I, subchap. III, §§ 318–320, 54 Stat. 1147, 1148, related respectively to citizenship lost by parent’s expatriation, minor child’s citizenship lost through cancellation of parent’s naturalization and the exception from certain requirements of persons misinformed of citizenship status. Sections 718 and 719 are covered by sections 1482 and 1451(f), respectively, of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 720a, act July 2, 1940, ch. 512, §§ 1, 2, 54 Stat. 715, related to aliens spending childhood in United States as excepted from certain requirements."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 721, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 321, 54 Stat. 1148, related to nationals but not citizens of the United States. See section 1436 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 721a, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 321a, as added July 2, 1946, ch. 534, § 2, 60 Stat. 417, related to resident Filipinos excepted from certain requirements. See section 1437 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 722, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 322, 54 Stat. 1148, related to persons born in Puerto Rico of alien parents. See section 1402 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 723, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 323, 54 Stat. 1149; Apr. 2, 1942, ch. 208, 56 Stat. 198; Aug. 7, 1946, ch. 769, 60 Stat. 865; Aug. 16, 1951, ch. 321, § 2, 65 Stat. 191, related to former United States citizens losing citizenship by entering armed forces of nonenemy countries during World Wars I and II. See section 1438(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 723a, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 323a, as added Dec. 7, 1942, ch. 690, 56 Stat. 1041, related to naturalization of persons serving in the armed forces of United States during World War I and earlier wars. See section 1440(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 724, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 324, 54 Stat. 1149; July 2, 1946, ch. 534, § 3, 60 Stat. 417, related to persons serving in the armed forces of the United States. See section 1439 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 724a, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 324a, as added June 1, 1948, ch. 360, § 1, 62 Stat. 282; amended June 29, 1949, ch. 274, 63 Stat. 282, related to persons serving on active duty in armed forces of United States during World Wars I and II. See section 1440(a)–(c) of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-724a–1",
+      "section": "724a–1",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, acts June 30, 1950, ch. 443, § 4, 64 Stat. 316; June 27, 1952, ch. 477, title IV, § 402(e), 66 Stat. 276, is set out as a note under section 1440 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-725 to 727",
+      "section": "725 to 727",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(42), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 725, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 325, 54 Stat. 1150; Sept. 23, 1950, ch. 1024, title I, § 26, 64 Stat. 1015, related to aliens serving on certain United States vessels. See section 1441(a)(1) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 726, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 326, 54 Stat. 1150, related to alien enemies. See section 1442(a)–(c), (e) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 727, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 327, 54 Stat. 1150; May 16, 1947, ch. 72, 61 Stat. 97, related to administration of naturalization laws. See section 1443 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-727a",
+      "section": "727a",
+      "status": "repealed",
+      "heading": "Repealed. Feb. 29, 1952, ch. 49, § 3, 66 Stat. 10",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act May 3, 1940, ch. 183, § 2, 54 Stat. 178, related to patriotic address to new citizens. See section 1448a of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-728 to 746",
+      "section": "728 to 746",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(42), (46), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 728, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 328, 54 Stat. 1151, related to registration of aliens. See sections 1230 and 1259 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 729, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 329, 54 Stat. 1152; Sept. 23, 1950, ch. 1024, title I, § 27, 64 Stat. 1015, related to certificate of arrival. See section 1429 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 730, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 330, 54 Stat. 1152, related to photographs. See section 1444 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 731, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 331, 54 Stat. 1153; May 31, 1947, ch. 87, § 1, 61 Stat. 121, related to declaration of intention. See section 1445(f) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 732, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 332, 54 Stat. 1154; May 31, 1947, ch. 87, § 2, 61 Stat. 122; June 25, 1948, ch. 656, 62 Stat. 1026, related to petition for naturalization. See section 1445(a)–(d) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 732a, act May 31, 1947, ch. 87, § 5, 61 Stat. 122, related to waiver of appearance or petition for naturalization. See section 1445(e) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 733, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 333, 54 Stat. 1156; Sept. 23, 1950, ch. 1024, title I, § 28(a), 64 Stat. 1016, related to hearings on petitions. See section 1446(a)–(e) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 734, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 334, 54 Stat. 1156; May 31, 1947, ch. 87, § 3, 61 Stat. 122; Sept. 23, 1950, ch. 1024, title I, § 28(b), 64 Stat. 1016, related to final hearings. See section 1447(a)–(d), (f) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 735, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 335, 54 Stat. 1157; May 31, 1947, ch. 87, § 4, 61 Stat. 122; Sept. 23, 1950, ch. 1024, title I, § 29, 64 Stat. 1017, related to oath of renunciation and allegiance. See section 1448 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 736, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 336, 54 Stat. 1157, related to certificate of naturalization. See section 1449 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 737, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 337, 54 Stat. 1158, related to functions and duties of the clerks of courts. See sections 1449 and 1450 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 738, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 338, 54 Stat. 1158, related to revocation of naturalization. See section 1451(a), (b), (d), (e), (g)–(i) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 739, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 339, 54 Stat. 1160; Jan. 20, 1944, ch. 2, § 3, 58 Stat. 4; July 23, 1947, ch. 304, § 2, 61 Stat. 414, related to certificates of derivative citizenship. See section 1452 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 740, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 340, 54 Stat. 1160, related to revocation of certificates issued by the commissioner or deputy. See section 1453 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 741, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 341, 54 Stat. 1160, related to documents and copies issued by commissioner or deputy. See section 1454 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 742, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 342, 54 Stat. 1161; Jan. 20, 1944, ch. 2, § 3, 58 Stat. 5; Sept. 27, 1944, ch. 415, 58 Stat. 745; Sept. 28, 1944, ch. 446, §§ 1, 2, 58 Stat. 755; Nov. 21, 1945, ch. 490, 59 Stat. 585; July 1, 1947, ch. 194, 61 Stat. 240, related to fiscal provisions. See section 1455 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Sections 743 to 745, act Oct. 14, 1940, ch. 876, title I, subchap. III, §§ 343–345, 54 Stat. 1163, related to mail, textbooks, and compilation of naturalization statistics. See sections 1457 and 1458 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 746, acts Oct. 14, 1940, ch. 876, title I, subchap. III, § 346, 54 Stat. 1163; June 25, 1948, ch. 645, § 21, 62 Stat. 862, related to penal provisions. See section 1459 of this title and sections 911, 1015, 1421–1429, 1719, and 3282 of Title 18, Crimes and Criminal Procedure."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-747",
+      "section": "747",
+      "status": "repealed",
+      "heading": "Repealed. June 25, 1948, ch. 645, § 21, 62 Stat. 862, eff. Sept. 1, 1948",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act Oct. 14, 1940, ch. 876, title I, subchap. III, § 347, 54 Stat. 1168, related to saving clauses. Similar subject matter is contained in note under section 1101 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-800",
+      "section": "800",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, R.S. § 1999, is set out as a note under section 1481 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-801 to 810",
+      "section": "801 to 810",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(42), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 801, acts Oct. 14, 1940, ch. 876, title I, subchap. IV, § 401, 54 Stat. 1168; Jan. 20, 1944, ch. 2, § 1, 58 Stat. 4; July 1, 1944, ch. 368, § 1, 58 Stat. 677; Sept. 27, 1944, ch. 418, § 1, 58 Stat. 746, related to general means of losing United States nationality. See section 1481(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 802, act Oct. 14, 1940, ch. 876, title I, subchap. IV, § 402, 54 Stat. 1169, related to presumption of expatriation. See section 1482 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 803, acts Oct. 14, 1940, ch. 876, title I, subchap. IV, § 403, 54 Stat. 1169; July 1, 1944, ch. 368, § 2, 58 Stat. 677, related to restrictions on expatriation. See sections 1482 and 1483(b) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 804, act Oct. 14, 1940, ch. 876, title I, subchap. IV, § 404, 54 Stat. 1170, related to expatriation of naturalized nationals by residence abroad. See section 1484(a) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 805, act Oct. 14, 1940, ch. 876, title I, subchap. IV, § 405, 54 Stat. 1170, related to exceptions in the case of persons employed or compensated by United States while residing abroad. See section 1485(1), (2) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 806, acts Oct. 14, 1940, ch. 876, title I, subchap. IV, § 406, 54 Stat. 1170; Dec. 8, 1942, ch. 696, 56 Stat. 1043; Dec. 24, 1942, ch. 819, 56 Stat. 1085, related to additional exceptions. See section 1485(3)–(9) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 807, act Oct. 14, 1940, ch. 876, title I, subchap. IV, § 407, 54 Stat. 1170, related to minor children of naturalized nationals losing nationality by foreign residence. See section 1487 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 808, act Oct. 14, 1940, ch. 876, title I, subchap. IV, § 408, 54 Stat. 1171, related to exclusiveness of means of losing nationality. See section 1488 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 809, acts Oct. 14, 1940, ch. 876, title I, subchap. IV, § 409, 54 Stat. 1171; Oct. 16, 1941, ch. 446, 55 Stat. 743; Oct. 9, 1942, ch. 585, 56 Stat. 779; Sept. 27, 1944, ch. 419, 58 Stat. 747; Oct. 11, 1945, ch. 410, 59 Stat. 544, related to nationality not lost under sections 804 or 807 until October, 1942. See section 1487 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 810, act Oct. 14, 1940, ch. 876, title I, subchap. IV, § 410, 54 Stat. 1171, related to chapter being inapplicable where it contravened convention of treaties. See section 1489 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-901 to 903",
+      "section": "901 to 903",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(42), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 901, act Oct. 14, 1940, ch. 876, title I, subchap. V, § 501, 54 Stat. 1171, related to procedure when diplomatic officials believe that persons in foreign state have lost American nationality. See section 1501 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 902, act Oct. 14, 1940, ch. 876, title I, subchap. V, § 502, 54 Stat. 1171, related to certificates of nationality for non-naturalized United States nationals. See section 1502 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 903, act Oct. 14, 1940, ch. 876, title I, subchap. V, § 503, 54 Stat. 1171, related to judicial proceedings for declaration of United States nationality in event of denial of rights and privileges as national. See section 1503 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-903a, 903b",
+      "section": "903a, 903b",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections 903a and 903b transferred to sections 1731 and 1732, respectively, of Title 22, Foreign Relations and Intercourse."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-904 to 907",
+      "section": "904 to 907",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(42), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 904, act Oct. 14, 1940, ch. 876, title I, subchap. V, § 504, 54 Stat. 1172, related to repeals."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 905, act Oct. 14, 1940, ch. 876, title I, subchap. V, § 505, 54 Stat. 1174, related to separability clause."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 906, act Oct. 14, 1940, ch. 876, title I, subchap. V, § 505, 54 Stat. 1174, related to effective date of chapter."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 907, act Oct. 14, 1940, ch. 876, title I, § 1, 54 Stat. 1137, related to short title of chapter."
+        },
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Specific Repeals by Act October 14, 1940",
+          "topic": "miscellaneous",
+          "text": "Specific Repeals by Act October 14, 1940In addition to the provisions from which former section 904 was taken, section 504 of act Oct. 14, 1940, specifically repealed all or parts of the following: Title 8, §§ 1, 3, 5a–1, 5d, 5e, 6, 7, 8, 9, 9a, 11, 16, 17, 17a, 18, 106, 106a, 106b, 106c, 351, 352, 353, 354, 356, 356a, 357, 358, 358a, 360, 362, 364, 365, 366, 366a, 367, 368, 368a, 369, 369a, 372, 372a, 373, 377, 377b, 377c, 378, 379, 380, 380a, 380b, 381, 382, 382a, 382b, 382c, 384, 385, 386, 387, 388, 389, 390, 391, 392, 392b, 392c note, 392d note, 392e, 392f, 392g, 393, 394, 395, 396, 397, 398, 399, 399a, 399b, 399c, 399d, 399e, 399f, 400, 401, 402, 403, 404, 405, 408, 409, 410, 411, 412, 413, 414, 415; Title 18, §§ 135, 137, 138, 139, 140, 141, 142, 143; Title 39, § 324; Title 48, § 733b; former Title 50 App., § 202."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1001 to 1006",
+      "section": "1001 to 1006",
+      "status": "repealed",
+      "heading": "Repealed. June 27, 1952, ch. 477, title IV, § 403(a)(42), 66 Stat. 280, eff. Dec. 24, 1952",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1001, act Oct. 14, 1940, ch. 876, title III, § 701, as added Mar. 27, 1942, ch. 199, title X, § 1001, 56 Stat. 182; amended Dec. 22, 1944, ch. 662, § 1, 58 Stat. 886; Dec. 28, 1945, ch. 590, § 1(c)(1), 59 Stat. 658, related to exceptions from certain requirements of naturalization of persons serving in the armed forces during World War II. See section 1440 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1002, act Oct. 14, 1940, ch. 876, title III, § 702, as added Mar. 27, 1942, ch. 199, title X, § 1001, 56 Stat. 182; amended Dec. 22, 1944, ch. 662, § 2, 58 Stat. 887, related to alien serving outside of jurisdiction of naturalization court. See section 1440 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1003, act Oct. 14, 1940, ch. 876, title III, § 703, as added Mar. 27, 1942, ch. 199, title X, § 1001, 56 Stat. 183, related to waiver of notice to commissioner in case of alien enemy. See section 1440 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1004, act Oct. 14, 1940, ch. 876, title III, § 704, as added Mar. 27, 1942, ch. 199, title X, § 1001, 56 Stat. 183, related to persons excepted from former subchapter. See section 1440 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1005, act Oct. 14, 1940, ch. 876, title III, § 705, as added Mar. 27, 1942, ch. 199, title X, § 1001, 56 Stat. 183, related to forms, rules and regulations. See section 1440 of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1006, act Oct. 14, 1940, ch. 876, title III, § 706, as added Dec. 28, 1945, ch. 590, § 1(c)(2), 59 Stat. 658, related to time of service limitation. See section 1440 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1106",
+      "section": "1106",
+      "status": "repealed",
+      "heading": "Joint Congressional Committee",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act June 27, 1952, ch. 477, title IV, § 401, 66 Stat. 274, provided for establishment of Joint Committee on Immigration and Nationality, including its composition, necessity of membership on House or Senate Committee on the Judiciary, vacancies and election of chairman, functions, reports, submission of regulations to Committee, hearings and subpena, travel expenses, employment of personnel, payment of Committee expenses, and effective date."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealRepeal effective immediately prior to noon on Jan. 3, 1971, see section 601(1) of Pub. L. 91–510, set out as an Effective Date of 1970 Amendment note under section 4301 of Title 2, The Congress."
+        },
+        {
+          "heading": "Abolition of Joint Committee on Immigration and Nationality",
+          "topic": "miscellaneous",
+          "text": "Abolition of Joint Committee on Immigration and Nationality Pub. L. 91–510, title IV, § 421, Oct. 26, 1970, 84 Stat. 1189, abolished the Joint Committee on Immigration and Nationality established by former subsec. (a) of this section."
+        }
+      ],
+      "historical": {
+        "inaSection": "401",
+        "originalTitle": "Joint Congressional Committee",
+        "versionLabel": "Final text immediately before repeal effective 1971-01-03 (immediately before noon)",
+        "hasText": true,
+        "bodyRoots": 11,
+        "lastAmendmentDate": "1952-06-27",
+        "repealRecord": "Repealed. Pub. L. 91–510, title IV, § 422(a), Oct. 26, 1970, 84 Stat. 1189",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=12",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1151a",
+      "section": "1151a",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 94–571, § 7(g), Oct. 20, 1976, 90 Stat. 2706",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, Pub. L. 89–236, § 21(e), Oct. 3, 1965, 79 Stat. 921, limited total number of special immigrants under section 1101(a)(27)(A) of this title, less certain exclusions, to 120,000 for fiscal years beginning July 1, 1968, or later."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealRepeal effective on first day of first month which begins more than 60 days after Oct. 20, 1976, see section 10 of Pub. L. 94–571, set out as an Effective Date of 1976 Amendment note under section 1101 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1161",
+      "section": "1161",
+      "status": "repealed",
+      "heading": "Determination of agricultural labor shortages and admission of additional special agricultural workers",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act June 27, 1952, ch. 477, title II, ch. 1, § 210A, as added Nov. 6, 1986, Pub. L. 99–603, title III, § 303(a), 100 Stat. 3422; amended Oct. 24, 1988, Pub. L. 100–525, § 2(n)(1), 102 Stat. 2613; Nov. 29, 1990, Pub. L. 101–649, title VI, § 603(a)(6), (b)(1), 104 Stat. 5083, 5085; Dec. 12, 1991, Pub. L. 102–232, title III, § 307(l)(2), 105 Stat. 1756, related to determination of agricultural labor shortages and admission of additional special agricultural workers."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealPub. L. 103–416, title II, § 219(ee)(3), as added by Pub. L. 104–208, div. C, title VI, § 671(b)(10), Sept. 30, 1996, 110 Stat. 3009–722, provided that: “The amendments made by this subsection [repealing this section] shall take effect on the date of the enactment of this Act [Oct. 25, 1994].”"
+        }
+      ],
+      "historical": {
+        "inaSection": "210A",
+        "originalTitle": "Determination of agricultural labor shortages and admission of additional special agricultural workers",
+        "versionLabel": "Final text immediately before repeal effective 1994-10-25",
+        "hasText": true,
+        "bodyRoots": 7,
+        "lastAmendmentDate": "1991-12-12",
+        "repealRecord": "Repealed. Pub. L. 103–416, title II, § 219(ee)(1), Oct. 25, 1994, 108 Stat. 4319",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1988-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=48",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1182a to 1182c",
+      "section": "1182a to 1182c",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 87–301, § 24(a)(1), (3), Sept. 26, 1961, 75 Stat. 657",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1182a, act Sept. 3, 1954, ch. 1254, § 4, 68 Stat. 1145, related to admission of aliens who were either convicted, or who admitted the commission, of a misdemeanor."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1182b, Pub. L. 85–316, § 5, Sept. 11, 1957, 71 Stat. 640, permitted admission of an alien spouse, child or parent excludable for crime involving moral turpitude in cases of hardship, when not contrary to national welfare or security, and with Attorney General’s consent, and under conditions and procedures prescribed by him. See section 1182(h) of this title."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1182c, Pub. L. 85–316, § 6, Sept. 11, 1957, 71 Stat. 640; Pub. L. 86–253, § 1, Sept. 9, 1959, 73 Stat. 490, authorized admission of an alien spouse, child, or parent of a United States citizen afflicted with tuberculosis under terms, conditions and controls prescribed by Attorney General. See section 1182(g) of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1186",
+      "section": "1186",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section, act June 27, 1952, ch. 477, title II, ch. 2, § 216, as added Nov. 6, 1986, Pub. L. 99–603, title III, § 301(c), 100 Stat. 3411, which related to admission of temporary H–2A workers, was renumbered § 218 by Pub. L. 100–525, § 2(l)(2), Oct. 24, 1988, 102 Stat. 2612, and transferred to section 1188 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1201a",
+      "section": "1201a",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 99–653, § 5(b), formerly § 5(a)(d), Nov. 14, 1986, 100 Stat. 3656, renumbered § 5(b), Pub. L. 100–525, § 8(d)(2), Oct. 24, 1988, 102 Stat. 2617",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, Pub. L. 85–316, § 8, Sept. 11, 1957, 71 Stat. 641, related to waiver of fingerprinting requirements for nonimmigrant aliens."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealRepeal applicable to applications for immigrant visas made, and visas issued, on or after Nov. 14, 1986, see section 23(b) of Pub. L. 99–653, set out as an Effective Date of 1986 Amendment note under section 1201 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1205",
+      "section": "1205",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 87–301, § 24(a)(2), Sept. 26, 1961, 75 Stat. 657",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, Pub. L. 85–316, § 4, Sept. 11, 1957, 71 Stat. 639; Pub. L. 86–253, § 2, Sept. 9, 1959, 73 Stat. 490; Pub. L. 86–648, § 7, July 14, 1960, 74 Stat. 505, related to nonquota immigrant visas for eligible orphans."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1251",
+      "section": "1251",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section 1251, act June 27, 1952, ch. 477, title II, ch. 5, § 241, 66 Stat. 204, as amended, which related to deportable aliens, was renumbered section 237 of ch. 4 of title II of act June 27, 1952, by Pub. L. 104–208, div. C, title III, § 305(a)(2), Sept. 30, 1996, 110 Stat. 3009–598, and was transferred to section 1227 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1251a",
+      "section": "1251a",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 87–301, § 24(a)(3), Sept. 26, 1961, 75 Stat. 657",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, Pub. L. 85–316, § 7, Sept. 11, 1957, 71 Stat. 640, excepted spouse, child or parent of a United States citizen, and aliens admitted between Dec. 22, 1945, and Nov. 1, 1954, inclusive, who misrepresented their nationality, place of birth, identity or residence, provided this latter group did so misrepresent because of fear of persecution because of race, religion or politics if repatriated and not to evade quota restrictions, or an investigation of themselves, from the deportation provisions of section 1251 of this title which declared excludable, those aliens who sought to procure or procured entry into the United States by fraud and misrepresentation, or who were not of the nationality specified in their visas, and authorized the admission, after Sept. 11, 1957, of any alien spouse, parent or child of a United States citizen or of an alien admitted for permanent residence who sought, or had procured fraudulent entry into the United States or admitted committing perjury in connection therewith, if otherwise admissible and the Attorney General consented. See section 1182(h) of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1252a",
+      "section": "1252a",
+      "status": "transferred",
+      "heading": "Expedited deportation of aliens convicted of committing aggravated felonies",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section 1252a, act June 27, 1952, ch. 477, title II, ch. 5, § 242A, as added Nov. 18, 1988, Pub. L. 100–690, title VII, § 7347(a), 102 Stat. 4471, as amended, which related to expedited removal of aliens convicted of committing aggravated felonies, was renumbered section 238 of ch. 4 of title II of act June 27, 1952, by Pub. L. 104–208, div. C, title III, § 308(b)(5), Sept. 30, 1996, 110 Stat. 3009–615, and was transferred to section 1228 of this title."
+        }
+      ],
+      "historical": {
+        "inaSection": "242A",
+        "originalTitle": "Expedited deportation of aliens convicted of committing aggravated felonies",
+        "versionLabel": "Reconstructed historical text immediately before transfer effective 1997-04-01",
+        "hasText": true,
+        "bodyRoots": 4,
+        "lastAmendmentDate": "1996-09-30",
+        "transferRecord": "Renumbered INA section 238 and transferred to 8 U.S.C. 1228 by Pub. L. 104–208, div. C, section 308(b)(5), September 30, 1996, 110 Stat. 3009–615",
+        "effectiveDateNote": "General transfer effective April 1, 1997, subject to IIRIRA section 309 transitional and savings provisions. This reconstructed version includes the 1996 amendments and retroactive corrections, not the changes taking effect with the transfer.",
+        "transcriptionNote": "Two subsections designated (c) were enacted: Presumption of deportability and Judicial deportation. Both are preserved below; paragraph citations (c)(1)–(4) refer to Judicial deportation.",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1995-title8.pdf",
+        "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-1995-title8/pdf/USCODE-1995-title8.pdf#page=154",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1252b",
+      "section": "1252b",
+      "status": "repealed",
+      "heading": "Deportation procedures",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act June 27, 1952, ch. 477, title II, ch. 5, § 242B, as added Nov. 29, 1990, Pub. L. 101–649, title V, § 545(a), 104 Stat. 5061; amended Dec. 12, 1991, Pub. L. 102–232, title III, § 306(c)(6), 105 Stat. 1753; Oct. 25, 1994, Pub. L. 103–416, title II, § 219(i), 108 Stat. 4317; Sept. 30, 1996, Pub. L. 104–208, div. C, title III, § 371(b)(7), 110 Stat. 3009–645, related to deportation procedures. See sections 1229 and 1229a of this title."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealRepeal effective, with certain transitional provisions, on the first day of the first month beginning more than 180 days after Sept. 30, 1996, see section 309 of Pub. L. 104–208, set out as an Effective Date of 1996 Amendments note under section 1101 of this title."
+        }
+      ],
+      "historical": {
+        "inaSection": "242B",
+        "originalTitle": "Deportation procedures",
+        "versionLabel": "Final text immediately before repeal effective 1997-04-01",
+        "hasText": true,
+        "bodyRoots": 6,
+        "lastAmendmentDate": "1996-09-30",
+        "repealRecord": "Repealed. Pub. L. 104–208, div. C, title III, § 308(b)(6), Sept. 30, 1996, 110 Stat. 3009–615",
+        "effectiveDateNote": "General repeal date April 1, 1997; subject to the transitional and savings provisions of PL 104-208 §309.",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1995-1252b.html",
+        "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1995-title8-section1252b&num=0&edition=1995",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1254",
+      "section": "1254",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 104–208, div. C, title III, § 308(b)(7), Sept. 30, 1996, 110 Stat. 3009–615",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, acts June 27, 1952, ch. 477, title II, ch. 5, § 244, 66 Stat. 214; Oct. 24, 1962, Pub. L. 87–885, § 4, 76 Stat. 1247; Oct. 3, 1965, Pub. L. 89–236, § 12, 79 Stat. 918; Oct. 20, 1976, Pub. L. 94–571, § 7(f), 90 Stat. 2706; Oct. 30, 1978, Pub. L. 95–549, title I, § 105, 92 Stat. 2066; Mar. 17, 1980, Pub. L. 96–212, title II, § 203(d), 94 Stat. 107; Dec. 29, 1981, Pub. L. 97–116, §§ 9, 18(h)(2), (j), 95 Stat. 1616, 1620; Nov. 6, 1986, Pub. L. 99–603, title III, § 315(b), 100 Stat. 3439; Oct. 24, 1988, Pub. L. 100–525, § 2(q)(1), 102 Stat. 2613; Nov. 18, 1988, Pub. L. 100–690, title VII, § 7343(b), 102 Stat. 4470; Nov. 29, 1990, Pub. L. 101–649, title I, § 162(e)(2), title VI, § 603(b)(3), (4), 104 Stat. 5011, 5085; Dec. 12, 1991, Pub. L. 102–232, title III, § 307(m)(1), 105 Stat. 1757; Sept. 13, 1994, Pub. L. 103–322, title IV, § 40703, 108 Stat. 1955; Apr. 24, 1996, Pub. L. 104–132, title IV, § 413(b), (c), 110 Stat. 1269, related to suspension of deportation. See sections 1229b and 1229c of this title."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealRepeal effective, with certain transitional provisions, on the first day of the first month beginning more than 180 days after Sept. 30, 1996, see section 309 of Pub. L. 104–208, set out as an Effective Date of 1996 Amendments note under section 1101 of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1363b",
+      "section": "1363b",
+      "status": "repealed",
+      "heading": "Transportation of remains of immigration officers and border patrol agents killed in the line of duty",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act June 27, 1952, ch. 477, title II, ch. 9, § 295, as added Pub. L. 104–208, div. C, title VI, § 626(a), Sept. 30, 1996, 110 Stat. 3009–700, related to transportation of remains of immigration officers and border patrol agents killed in the line of duty. Pub. L. 105–277, which directed the repeal of section 626 of the Illegal Immigration Reform and Immigrant Responsibility Act of 1996, which is section 626 of Pub. L. 104–208, div. C, title VI, Sept. 30, 1996, 110 Stat. 3009–700, was executed by repealing this section, which was section 295 of the Immigration and Nationality Act and was enacted by section 626(a) of Pub. L. 104–208, to reflect the probable intent of Congress."
+        }
+      ],
+      "historical": {
+        "inaSection": "295",
+        "originalTitle": "Transportation of remains of immigration officers and border patrol agents killed in the line of duty",
+        "versionLabel": "Final text immediately before repeal effective 1998-10-21",
+        "hasText": true,
+        "bodyRoots": 2,
+        "lastAmendmentDate": "1996-09-30",
+        "repealRecord": "Repealed. Pub. L. 105–277, div. A, § 101(b) [title I, § 109(b)], Oct. 21, 1998, 112 Stat. 2681–50, 2681–67",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1997-1363b.html",
+        "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1997-title8-section1363b&num=0&edition=1997",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1375",
+      "section": "1375",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 109–162, title VIII, § 833(g), Jan. 5, 2006, 119 Stat. 3077",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, Pub. L. 104–208, div. C, title VI, § 652, Sept. 30, 1996, 110 Stat. 3009–712, related to mail-order bride business."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1401b",
+      "section": "1401b",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 92–584, § 2, Oct. 27, 1972, 86 Stat. 1289",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, Pub. L. 85–316, § 16, Sept. 11, 1957, 71 Stat. 644, provided that absence from the United States of less than twelve months would not break the continuity of presence in the administration of section 1401(b) of this title. See section 1401(b) of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1432",
+      "section": "1432",
+      "status": "repealed",
+      "heading": "Children born outside of United States of alien parent",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, acts June 27, 1952, ch. 477, title III, ch. 2, § 321, 66 Stat. 245; Pub. L. 95–417, § 5, Oct. 5, 1978, 92 Stat. 918; Pub. L. 97–116, § 18(m), Dec. 29, 1981, 95 Stat. 1620; Pub. L. 99–653, § 15, Nov. 14, 1986, 100 Stat. 3658; Pub. L. 100–525, § 8(l), Oct. 24, 1988, 102 Stat. 2618, related to conditions for automatic citizenship of children born outside the United States of alien parents."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealRepeal effective 120 days after Oct. 30, 2000, see section 104 of Pub. L. 106–395, set out as an Effective Date of 2000 Amendment note under section 1431 of this title."
+        }
+      ],
+      "historical": {
+        "inaSection": "321",
+        "originalTitle": "Children born outside of United States of alien parent",
+        "versionLabel": "Final text immediately before repeal effective 2001-02-27",
+        "hasText": true,
+        "bodyRoots": 2,
+        "lastAmendmentDate": "1988-10-24",
+        "repealRecord": "Repealed. Pub. L. 106–395, title I, § 103(a), Oct. 30, 2000, 114 Stat. 1632",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1999-1432.html",
+        "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1999-title8-section1432&num=0&edition=1999",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1434",
+      "section": "1434",
+      "status": "repealed",
+      "heading": "Children adopted by United States citizens",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, acts June 27, 1952, ch. 477, title III, ch. 2, § 323, 66 Stat. 246; Sept. 11, 1957, Pub. L. 85–316, § 11, 71 Stat. 642; Aug. 20, 1958, Pub. L. 85–697, § 1, 72 Stat. 687, related to citizenship of children adopted by citizens."
+        }
+      ],
+      "historical": {
+        "inaSection": "323",
+        "originalTitle": "Children adopted by United States citizens",
+        "versionLabel": "Final text immediately before repeal effective 1978-10-05",
+        "hasText": true,
+        "bodyRoots": 3,
+        "lastAmendmentDate": "1958-08-20",
+        "repealRecord": "Repealed. Pub. L. 95–417, § 7, Oct. 5, 1978, 92 Stat. 918",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=74",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1440a to 1440d",
+      "section": "1440a to 1440d",
+      "status": "omitted",
+      "heading": "Omitted",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Sections, act June 30, 1953, ch. 162, §§ 1–4, 67 Stat. 108–110, which authorized naturalization of persons who served in the Armed Forces after June 29, 1950, and not later than July 1, 1955, were omitted as obsolete, since the provisions of section 1 of act June 30, 1953, required the petition for naturalization to be filed not later than December 31, 1955. See sections 1440 and 1440e of this title."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1456",
+      "section": "1456",
+      "status": "repealed",
+      "heading": "Mail relating to naturalization transmitted free of postage and registered",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act June 27, 1952, ch. 477, title III, ch. 2, § 345, 66 Stat. 266, related to free transmittal of official mail in naturalization matters. See section 3202 of Title 39, Postal Service."
+        }
+      ],
+      "historical": {
+        "inaSection": "345",
+        "originalTitle": "Mail relating to naturalization transmitted free of postage and registered",
+        "versionLabel": "Final text immediately before repeal effective 1960-09-01",
+        "hasText": true,
+        "bodyRoots": 0,
+        "lastAmendmentDate": "1952-06-27",
+        "repealRecord": "Repealed. Pub. L. 86–682, § 12(c), Sept. 2, 1960, 74 Stat. 708, eff. Sept. 1, 1960",
+        "effectiveDateNote": "Enacted September 2, 1960, effective September 1, 1960 (PL 86-682 §12(e)); the body-version boundary follows the effective date.",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=89",
+        "hasBody": false,
+        "hasPreamble": true,
+        "textAvailability": "preamble only"
+      }
+    },
+    {
+      "id": "8-1459",
+      "section": "1459",
+      "status": "repealed",
+      "heading": "Admissibility in evidence of testimony as to statements voluntarily made to officers or employees in the course of their official duties",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, acts June 27, 1952, ch. 477, title III, ch. 2, § 348, 66 Stat. 267; Oct. 24, 1988, Pub. L. 100–525, § 9(gg), 102 Stat. 2622, related to admissibility in evidence of statements voluntarily made to officers and employees in course of their official duties and penalties for failure of clerk of court to perform duties."
+        }
+      ],
+      "historical": {
+        "inaSection": "348",
+        "originalTitle": "Admissibility in evidence of testimony as to statements voluntarily made to officers or employees in the course of their official duties",
+        "versionLabel": "Final text immediately before repeal effective 1990-11-29",
+        "hasText": true,
+        "bodyRoots": 2,
+        "lastAmendmentDate": "1988-10-24",
+        "repealRecord": "Repealed. Pub. L. 101–649, title IV, § 407(d)(20), Nov. 29, 1990, 104 Stat. 5046",
+        "effectiveDateNote": "PL 101-649 §408(a)(3) sets the general effective date at enactment; §408(d) preserves specified existing proceedings and rights.",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1988-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=190",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1482",
+      "section": "1482",
+      "status": "repealed",
+      "heading": "Dual nationals; divestiture of foreign nationality",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, act June 27, 1952, ch. 477, title III, ch. 3, § 350, 66 Stat. 269, provided that an individual with dual nationality who voluntarily claims the benefits of the foreign state nationality loses his United States nationality by having continuous residence in the foreign state for 3 years after having attained 22 years of age unless prior to the 3 year period he takes an oath of allegiance to the United States, or his residence in the foreign state was for a reason specified in section 1485(1), (2), (4), (5), (6), (7), or (8) of this title or section 1486(1) or (2) of this title."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealPub. L. 95–432, § 1, Oct. 10, 1978, 92 Stat. 1046, provided that repeal of this section is effective Oct. 10, 1978."
+        }
+      ],
+      "historical": {
+        "inaSection": "350",
+        "originalTitle": "Dual nationals; divestiture of foreign nationality",
+        "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+        "hasText": true,
+        "bodyRoots": 2,
+        "lastAmendmentDate": "1952-06-27",
+        "repealRecord": "Repealed. Pub. L. 95–432, § 1, Oct. 10, 1978, 92 Stat. 1046",
+        "transcriptionNote": "The 1958 Code prints “displomatic”; its footnote says: So in original. Probably should read “diplomatic”. The printed body spelling is retained.",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=91",
+        "hasBody": true,
+        "hasPreamble": true,
+        "textAvailability": "body and preamble"
+      }
+    },
+    {
+      "id": "8-1484",
+      "section": "1484",
+      "status": "repealed",
+      "heading": "Loss of nationality by naturalized national",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1484, act June 27, 1952, ch. 477, title III, ch. 3, § 352, 66 Stat. 269, related to loss of nationality by naturalized national by continuous residence for 3 years in the territory or foreign state of which the individual was a former national or in which his place of birth was situated or continuous residence for 5 years in any other foreign state or states."
+        }
+      ],
+      "historical": {
+        "inaSection": "352",
+        "originalTitle": "Loss of nationality by naturalized national",
+        "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+        "hasText": true,
+        "bodyRoots": 2,
+        "lastAmendmentDate": "1952-06-27",
+        "repealRecord": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=92",
+        "hasBody": true,
+        "hasPreamble": false,
+        "textAvailability": "body"
+      }
+    },
+    {
+      "id": "8-1487",
+      "section": "1487",
+      "status": "repealed",
+      "heading": "Loss of American nationality through parent’s expatriation; not effective until person attains age of twenty-five years",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1487, act June 27, 1952, ch. 477, title III, ch. 3, § 355, 66 Stat. 272, related to loss of American nationality through expatriation of parents."
+        }
+      ],
+      "historical": {
+        "inaSection": "355",
+        "originalTitle": "Loss of American nationality through parent’s expatriation; not effective until person attains age of twenty-five years",
+        "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+        "hasText": true,
+        "bodyRoots": 0,
+        "lastAmendmentDate": "1952-06-27",
+        "repealRecord": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=94",
+        "hasBody": false,
+        "hasPreamble": true,
+        "textAvailability": "preamble only"
+      }
+    },
+    {
+      "id": "8-1485",
+      "section": "1485",
+      "status": "repealed",
+      "heading": "Section 352 not effective as to certain persons",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1485, acts June 27, 1952, ch. 477, title III, ch. 3, § 353, 66 Stat. 270; Aug. 4, 1959, Pub. L. 86–129, § 1, 73 Stat. 274, provided exceptions for certain persons from loss of nationality pursuant to section 1484."
+        }
+      ],
+      "historical": {
+        "inaSection": "353",
+        "originalTitle": "Section 352 not effective as to certain persons",
+        "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+        "hasText": true,
+        "bodyRoots": 10,
+        "lastAmendmentDate": "1959-08-04",
+        "repealRecord": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1964-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1964-00100/uscode1964-001008012/uscode1964-001008012.pdf#page=95",
+        "hasBody": true,
+        "hasPreamble": true,
+        "textAvailability": "body and preamble"
+      }
+    },
+    {
+      "id": "8-1486",
+      "section": "1486",
+      "status": "repealed",
+      "heading": "Section 352(a)(2) not effective as to certain persons",
+      "headingIsStatus": false,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1486, acts June 27, 1952, ch. 477, title III, ch. 3, § 354, 66 Stat. 271; Aug. 4, 1959, Pub. L. 86–129, §§ 2, 3, 73 Stat. 274; Sept. 26, 1961, Pub. L. 87–301, § 20, 75 Stat. 656, provided exceptions for certain persons from loss of nationality by continuous residence for five years in any foreign country of which the individual was not a national or in which his place of birth was situated."
+        }
+      ],
+      "historical": {
+        "inaSection": "354",
+        "originalTitle": "Section 352(a)(2) not effective as to certain persons",
+        "versionLabel": "Final text immediately before repeal effective 1978-10-10",
+        "hasText": true,
+        "bodyRoots": 5,
+        "lastAmendmentDate": "1961-09-26",
+        "repealRecord": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+        "sourceArtifact": "sources/legal/raw/historical-ina/usc-1964-ch12.pdf",
+        "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1964-00100/uscode1964-001008012/uscode1964-001008012.pdf#page=95",
+        "hasBody": true,
+        "hasPreamble": true,
+        "textAvailability": "body and preamble"
+      }
+    },
+    {
+      "id": "8-1484 to 1487",
+      "section": "1484 to 1487",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 95–432, § 2, Oct. 10, 1978, 92 Stat. 1046",
+      "headingIsStatus": true,
+      "individualizableRange": true,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1484, act June 27, 1952, ch. 477, title III, ch. 3, § 352, 66 Stat. 269, related to loss of nationality by naturalized national by continuous residence for 3 years in the territory or foreign state of which the individual was a former national or in which his place of birth was situated or continuous residence for 5 years in any other foreign state or states."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1485, acts June 27, 1952, ch. 477, title III, ch. 3, § 353, 66 Stat. 270; Aug. 4, 1959, Pub. L. 86–129, § 1, 73 Stat. 274, provided exceptions for certain persons from loss of nationality pursuant to section 1484."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1486, acts June 27, 1952, ch. 477, title III, ch. 3, § 354, 66 Stat. 271; Aug. 4, 1959, Pub. L. 86–129, §§ 2, 3, 73 Stat. 274; Sept. 26, 1961, Pub. L. 87–301, § 20, 75 Stat. 656, provided exceptions for certain persons from loss of nationality by continuous residence for five years in any foreign country of which the individual was not a national or in which his place of birth was situated."
+        },
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section 1487, act June 27, 1952, ch. 477, title III, ch. 3, § 355, 66 Stat. 272, related to loss of American nationality through expatriation of parents."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1525",
+      "section": "1525",
+      "status": "repealed",
+      "heading": "Repealed. Pub. L. 103–236, title I, § 162(m)(3), Apr. 30, 1994, 108 Stat. 409",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "",
+          "topic": "removalDescription",
+          "text": "Section, Pub. L. 96–212, title III, § 301, Mar. 17, 1980, 94 Stat. 109, related to appointment and duties of United States Coordinator for Refugee Affairs."
+        },
+        {
+          "heading": "Statutory Notes and Related Subsidiaries",
+          "topic": "statutoryNotes",
+          "text": "Statutory Notes and Related Subsidiaries"
+        },
+        {
+          "heading": "Effective Date of Repeal",
+          "topic": "effectiveDate",
+          "text": "Effective Date of RepealRepeal applicable with respect to officials, offices, and bureaus of Department of State when executive orders, regulations, or departmental directives implementing the amendments by sections 161 and 162 of Pub. L. 103–236 become effective, or 90 days after Apr. 30, 1994, whichever comes earlier, see section 161(b) of Pub. L. 103–236, as amended, set out as an Effective Date of 1994 Amendment note under section 2651a of Title 22, Foreign Relations and Intercourse."
+        }
+      ],
+      "historical": null
+    },
+    {
+      "id": "8-1556",
+      "section": "1556",
+      "status": "transferred",
+      "heading": "Transferred",
+      "headingIsStatus": true,
+      "individualizableRange": false,
+      "notes": [
+        {
+          "heading": "Editorial Notes",
+          "topic": "editorialNotes",
+          "text": "Editorial Notes"
+        },
+        {
+          "heading": "Codification",
+          "topic": "codification",
+          "text": "Codification Section transferred to section 1353d of this title."
+        }
+      ],
+      "historical": null
+    }
+  ],
+  "implementationEntryPoints": [
+    {
+      "file": "tools/build-standalone.js",
+      "purpose": "loads base Title 8 corpus, applies historical INA import and statute status metadata before building corpus"
+    },
+    {
+      "file": "tools/statute-status.js",
+      "purpose": "CHAPTER_DISPOSITIONS, TRANSFER_TARGETS, and transferTargets; current status otherwise implicit"
+    },
+    {
+      "file": "tools/historical-ina.js",
+      "purpose": "applies 14 historical transcriptions; splits 1484–1487 out of grouped House record 1484 to 1487; links historical citations"
+    },
+    {
+      "file": "src/INASearch.template.html",
+      "lines": [
+        3506,
+        3510
+      ],
+      "purpose": "statuteStatus and statuteStatusLabel"
+    },
+    {
+      "file": "src/INASearch.template.html",
+      "lines": [
+        10533,
+        10547
+      ],
+      "purpose": "hierarchyStatusReplacesHeading and hierarchyStatusBadge; currently generic heading is replaced by status badge"
+    },
+    {
+      "file": "src/INASearch.template.html",
+      "lines": [
+        12956,
+        12966
+      ],
+      "purpose": "statuteStatusWarning; current omitted banner is generic and does not identify per-section House reason"
+    },
+    {
+      "file": "src/INASearch.template.html",
+      "lines": [
+        1080,
+        1113
+      ],
+      "purpose": "hierarchy and sticky-warning colors; omitted and repealed currently use different color rules"
+    },
+    {
+      "file": "src/INASearch.template.html",
+      "lines": [
+        2941,
+        3095,
+        3097
+      ],
+      "purpose": "individual USC hierarchy leaf creation and status source"
+    }
+  ],
+  "dispositionNoteTable": {
+    "file": "sources/legal/usc-disposition-notes.tsv",
+    "source": "src/INASearch-Corpus.js before historical import",
+    "recordCount": 90,
+    "noteCount": 379,
+    "fields": [
+      "group_section",
+      "note_id",
+      "exact_full_text",
+      "opening_section_designation_phrase"
+    ],
+    "method": "Exact note text is copied from each non-current section record. The designation field is populated only for a literal leading Section/Sections phrase (optionally preceded by Codification); ranges and lists remain as written. No legal status is inferred and no range is expanded."
+  },
+  "gaps": [
+    "Non-current House records are stored as ranges or comma-separated lists; notes often describe different dispositions and titles at finer section level than the enclosing record status.",
+    "Non-current entries without a descriptive House heading currently expose only a generic disposition heading, even where codification notes identify former subject matter.",
+    "Omitted records have detailed reasons in House notes, while the detail banner currently gives only a generic “omitted from the current Code” explanation.",
+    "Chapter disposition labels can be mixed. The source TOC label remains useful evidence, but mixed chapter containers must show no status label; a chapter status label is appropriate only when every expanded member section agrees.",
+    "The historical import covers 14 INA-era sections. All 14 have text when preambles are counted; 12 include body nodes and 2 are preamble-only. Other former provisions may retain only House codification/editorial notes."
+  ]
+}

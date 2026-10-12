@@ -8,7 +8,7 @@
   "use strict";
 
   const PROFILE_SCHEMA_VERSION = 5;
-  const REFERENCE_PARSER_VERSION = 2;
+  const REFERENCE_PARSER_VERSION = 3;
   const HIGHLIGHT_COLORS = Object.freeze(["yellow", "pink", "orange", "lime", "cyan", "violet"]);
   const DEFAULT_HIGHLIGHT_COLOR = "yellow";
 
@@ -111,7 +111,7 @@
     profile.notes = (Array.isArray(profile.notes) ? profile.notes : []).map(note => normalizeNote(note, options));
     profile.highlights = (Array.isArray(profile.highlights) ? profile.highlights : []).map(highlight => normalizeHighlight(highlight, options));
     profile.preferences ||= {};
-    profile.preferences.noteDisplayPosition = profile.preferences.noteDisplayPosition === "bottom" ? "bottom" : "top";
+    delete profile.preferences.noteDisplayPosition;
     profile.preferences.notesUseHandwrittenFont = profile.preferences.notesUseHandwrittenFont === true;
     delete profile.preferences.lastNoteColor;
     delete profile.preferences.notesUseRuleFont;
@@ -131,7 +131,7 @@
     const input = text(value);
     const candidates = [], patterns = [
       /\bINA\s+\d{3}[a-z]?(?:\s*\([a-z0-9-]+\))*/gi,
-      /\b8\s+U\.?\s*S\.?\s*C\.?\s*(?:§+\s*)?\d+[a-z]?(?:\s*\([a-z0-9-]+\))*/gi,
+      /\b\d+\s+U\.?\s*S\.?\s*C\.?\s*(?:§+\s*)?\d+[a-z]?(?:\s*\([a-z0-9-]+\))*/gi,
       /\b\d+\s+C\.?\s*F\.?\s*R\.?\s*(?:§+\s*)?(?:Part\s+)?\d+(?:\.\d+)?(?:\s*\([a-z0-9-]+\))*/gi,
       /\b\d{3}[a-z0-9]+\b/gi
     ];
@@ -188,6 +188,110 @@
     });
     const usable = contextual.length === 1 ? contextual : matches.length === 1 ? matches : [];
     return usable.length === 1 ? { status: "active", start: usable[0], end: usable[0] + normalized.exact.length, method: "quote" } : { status: "needs-review" };
+  }
+
+  // Work on quote ranges before rendering marks, so saved ink never nests.
+  function editHighlightRanges(highlights, hosts, options = {}) {
+    const result = clone(highlights || []), before = JSON.stringify(result);
+    const mode = options.mode || "normalize", now = options.now || new Date().toISOString();
+    const keyFor = options.associationKey || (association => JSON.stringify(association));
+    const order = (a, b) => text(a.highlight.createdAt).localeCompare(text(b.highlight.createdAt)) || text(a.highlight.id).localeCompare(text(b.highlight.id)) || text(a.segment.id).localeCompare(text(b.segment.id));
+    const aliases = segment => [...(segment.aliases || []), ...(segment.citation ? [`${segment.citation}.h[${segment.ordinal}]`] : [])];
+    for (const host of hosts || []) {
+      const entries = [];
+      for (const highlight of result) for (const segment of highlight.segments) {
+        if (keyFor(segment.association) !== host.key || segment.association?.structureStatus === "needs-review") continue;
+        // A host can occur more than once in a reader (for example a CFR run-in).
+        if (host.acceptSegment && !host.acceptSegment(segment)) continue;
+        const resolved = resolveQuoteAnchor(host.source, segment.anchor);
+        if (resolved.status === "active") entries.push({ highlight, segment, start: resolved.start, end: resolved.end });
+      }
+      const reanchor = (segment, start, end) => {
+        segment.anchor = quoteAnchor(host.source, start, end, { ...segment.anchor, sourceHostKey: host.key, status: "active" });
+        if (host.targetsForRange) segment.citedTargets = host.targetsForRange(start, end);
+      };
+      if (mode === "remove") {
+        for (const entry of entries) {
+          if (!(entry.start < host.end && entry.end > host.start)) continue;
+          const remaining = [[entry.start, Math.min(entry.end, host.start)], [Math.max(entry.start, host.end), entry.end]].filter(([start, end]) => end > start);
+          const replacements = remaining.map(([start, end], index) => {
+            const segment = index ? options.makeSegment(host, quoteAnchor(host.source, start, end, entry.segment.anchor)) : entry.segment;
+            reanchor(segment, start, end);
+            return segment;
+          });
+          entry.highlight.segments.splice(entry.highlight.segments.indexOf(entry.segment), 1, ...replacements);
+          entry.highlight.updatedAt = now;
+        }
+        continue;
+      }
+      const groups = [];
+      const sorted = entries.sort((a, b) => a.start - b.start || a.end - b.end);
+      if (mode === "add" && host.end > host.start) sorted.push({ start: host.start, end: host.end, selection: true });
+      sorted.sort((a, b) => a.start - b.start || a.end - b.end);
+      for (const entry of sorted) {
+        const group = groups.at(-1);
+        if (group && entry.start <= group.end) { group.entries.push(entry); group.end = Math.max(group.end, entry.end); }
+        else groups.push({ start: entry.start, end: entry.end, entries: [entry] });
+      }
+      for (const group of groups) {
+        const touched = group.entries.filter(entry => !entry.selection).map(entry => ({ ...entry, highlight: result.find(highlight => highlight.segments.includes(entry.segment)) })).filter(entry => entry.highlight).sort(order);
+        const selected = group.entries.some(entry => entry.selection);
+        if (!selected && touched.length < 2) continue;
+        if (!touched.length) {
+          const segment = options.makeSegment(host, quoteAnchor(host.source, group.start, group.end, { sourceHostKey: host.key, path: host.association.start.path }));
+          reanchor(segment, group.start, group.end);
+          result.push({ id: options.makeId("highlight"), color: DEFAULT_HIGHLIGHT_COLOR, createdAt: now, updatedAt: now, segments: [segment] });
+          continue;
+        }
+        const survivor = touched[0];
+        if (touched.length === 1 && survivor.start === group.start && survivor.end === group.end) continue;
+        survivor.segment.aliases = [...new Set(touched.flatMap(entry => aliases(entry.segment)))];
+        survivor.segment.citedTargets = [...new Set(touched.flatMap(entry => entry.segment.citedTargets || []))];
+        reanchor(survivor.segment, group.start, group.end);
+        // Other segments of a merged record still belong to that highlight.
+        for (const entry of touched.slice(1)) {
+          const owner = result.find(highlight => highlight.segments.includes(entry.segment));
+          if (!owner) continue;
+          owner.segments.splice(owner.segments.indexOf(entry.segment), 1);
+          if (owner !== survivor.highlight) {
+            survivor.highlight.segments.push(...owner.segments);
+            owner.segments = [];
+          }
+        }
+        survivor.highlight.updatedAt = now;
+      }
+    }
+    const filtered = result.filter(highlight => highlight.segments.length);
+    return { highlights: filtered, changed: JSON.stringify(filtered) !== before };
+  }
+
+  class NoteDraft {
+    constructor(note, isNew = false) {
+      this.original = isNew ? null : clone(note);
+      this.value = clone(note);
+      this.isNew = isNew;
+    }
+    save(now = new Date().toISOString()) {
+      return normalizeNote({ ...this.value, updatedAt: now }, { now });
+    }
+    discard() { return clone(this.original); }
+  }
+
+  function layoutCitationBanners(entries, viewportTop) {
+    const placed = new Map();
+    return entries.map(entry => {
+      const stop = Math.max(viewportTop, ...(entry.parentIds || []).map(id => {
+        const parent = placed.get(id);
+        return parent ? parent.top + parent.height : viewportTop;
+      }));
+      const compactHeight = Math.min(entry.height, entry.compactHeight ?? entry.height);
+      const collapsedBy = Math.min(entry.height - compactHeight, Math.max(0, stop - entry.naturalTop));
+      const height = entry.height - collapsedBy;
+      const top = Math.min(Math.max(entry.naturalTop, stop), entry.bottom - height);
+      const result = { ...entry, height, collapsedBy, top, pinned: entry.naturalTop < stop };
+      placed.set(entry.id, result);
+      return result;
+    });
   }
 
   class AnnotationIndex {
@@ -338,6 +442,6 @@
     PROFILE_SCHEMA_VERSION, REFERENCE_PARSER_VERSION, HIGHLIGHT_COLORS, DEFAULT_HIGHLIGHT_COLOR,
     normalizedText, tokens, hashText, highlightColor, normalizeAssociation, normalizeNote,
     normalizeHighlight, normalizeProfile, compactReferenceCandidate, detectReferences, quoteAnchor,
-    resolveQuoteAnchor, AnnotationIndex
+    resolveQuoteAnchor, editHighlightRanges, NoteDraft, layoutCitationBanners, AnnotationIndex
   });
 });

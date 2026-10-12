@@ -1,0 +1,1968 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-11",
+  "reviewMethod": "Comparison to official Code and Statutes at Large page images retained in audits/usc-history-2026-10-11/sources; final § 1254 reconstructed from captured native GovInfo Code and public-law HTML",
+  "captures": [
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf",
+      "bytes": 3037842,
+      "sha256": "56b3ba8e978c6f198342f20eda8e0e59210f9d335327803ee71b39411ba87607",
+      "capturedAt": "2026-09-19"
+    },
+    {
+      "file": "sources/legal/raw/historical-ina/usc-1988-ch12.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf",
+      "bytes": 6641862,
+      "sha256": "64beee115eb22967a6774a9dd9c4d4b57d28cb259bce4b1403c8a97d9eb3bce3",
+      "capturedAt": "2026-09-19"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-73-Pg490.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-73/pdf/STATUTE-73-Pg490.pdf",
+      "bytes": 286179,
+      "sha256": "cc413beb5635a3deb91d0ef425332563bfba08eb9f800a1bba2716c86f2d3504",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-79-Pg911.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-79/pdf/STATUTE-79-Pg911.pdf",
+      "bytes": 2515979,
+      "sha256": "143c7f07a5e2271b002b6d14789b77cc066a5d630589676f84638ad47d53c3c8",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-52-Pg377.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-52/pdf/STATUTE-52-Pg377.pdf",
+      "bytes": 423049,
+      "sha256": "ff28a751d7e0ca961d81aca513f2bbcc1a8a8fa8a84103e0d5e1d12bbda28675",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-50-Pg558.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-50/pdf/STATUTE-50-Pg558.pdf",
+      "bytes": 421696,
+      "sha256": "1ef1183796ad57199468cf582f201d17f8984ba8cee8f60b2ffea7d16e0a6141",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-49-Pg1917.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-49/pdf/STATUTE-49-Pg1917.pdf",
+      "bytes": 419165,
+      "sha256": "e0567bf1175344eb8b334f3b469641c7617e57a7d661bc68719e1be2bcd4d088",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-67-Pg108.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-67/pdf/STATUTE-67-Pg108.pdf",
+      "bytes": 733690,
+      "sha256": "bc661c5c35f68702796a1d1b70e511ad32e3544946afe98464975a16f787d8e5",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1952/chapter-12.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1952-00100/uscode1952-001008012/uscode1952-001008012.pdf",
+      "bytes": 2528830,
+      "sha256": "bb30719cc92d915fb0b3a661dbcb98d941fd206c1fafc58ebce1912b621ee9b1",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1934/chapter-09.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008009/uscode1934-001008009.pdf",
+      "bytes": 663655,
+      "sha256": "deedf2e9f7ace978a4e0dfaa1c6302818986e40ae66c7b65f36df4295b93acd3",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-53-Pg843.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-53/pdf/STATUTE-53-Pg843.pdf",
+      "bytes": 419603,
+      "sha256": "1289fecf574ec3a233a165aa56d7abe64fb2d47a3c6455d7f8d10e9cceccbe43",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-53-Pg844.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-53/pdf/STATUTE-53-Pg844.pdf",
+      "bytes": 418807,
+      "sha256": "ad609dfa71aa4e547d780efd31858e90707801f371a64e2beebeb7c5d56e1b74",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-33-Pg684-link.pdf",
+      "url": "https://www.govinfo.gov/link/statute/33/684?link-type=pdf",
+      "bytes": 12213122,
+      "sha256": "7c9adbdfc849a8819e7394cf22720c327d1f6cdc8d0a5853f57f6d4db1af7d52",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1925/chapter-09.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1925-00100/uscode1925-001008009/uscode1925-001008009.pdf",
+      "bytes": 645528,
+      "sha256": "281aa373807ab4bfb9bbd60c00733e84bf14bb47574d0507b362e637708ee54d",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1940/chapter-07.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1940-00100/uscode1940-001008007/uscode1940-001008007.pdf",
+      "bytes": 342716,
+      "sha256": "95cec7c4489379de1a34f58261d169b9d0132ba23294a176cd0aa7e2f5a6337d",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf",
+      "bytes": 10452929,
+      "sha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-06.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008006/uscode1946-001008006.pdf",
+      "bytes": 2175641,
+      "sha256": "94530089fb851f089c426da37de3f9ebeae8b099cb9772650c862c1e595ad44f",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf",
+      "bytes": 1369550,
+      "sha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg279.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg279.pdf",
+      "bytes": 5570374,
+      "sha256": "f31b22f51d428d250b6bddde26ad59d2f82bb34a6e088b0753308728077a8650",
+      "capturedAt": "2026-10-12T00:50:16Z"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg595.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg595.pdf",
+      "bytes": 40322561,
+      "sha256": "6a204f6f9aed32add9d3b49ee16f0c5bc40c3351df058ac202a238c59a649fe4",
+      "capturedAt": "2026-10-12T00:50:16Z"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-58-Pg547.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-58/pdf/STATUTE-58-Pg547.pdf",
+      "bytes": 4990472,
+      "sha256": "db1e0295bc23b80cc02ba77065a8a2eb2569f1c43aad7154421ec75836ba42ad",
+      "capturedAt": "2026-10-12T00:50:16Z"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-100-Pg3445.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-100/pdf/STATUTE-100-Pg3445.pdf",
+      "bytes": 14807695,
+      "sha256": "4faf7e824021b34bf53ece3ae97ef47a7fc7352722b71e5b3e57d56c532a02b8",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/govinfo/USCODE-1995-title8.htm",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-1995-title8/html/USCODE-1995-title8.htm",
+      "bytes": 2636043,
+      "sha256": "f0d573fa584b91af9cc9c2725fb5c1a20fcb1465e34c0706aae70641eeb483df",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-73-Pg491.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-73/pdf/STATUTE-73-Pg491.pdf",
+      "bytes": 1779313,
+      "sha256": "ba09218e2bc85eec6d76e00f627355e813e509dcb51db091f762e206b16b381c",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-74-Pg504.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-74/pdf/STATUTE-74-Pg504.pdf",
+      "bytes": 494056,
+      "sha256": "140f312499d78390d2039c7ef08f885d1f9d6c71df4bdc02f8e52679aa561238",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-54-Pg715.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-54/pdf/STATUTE-54-Pg715.pdf",
+      "bytes": 395623,
+      "sha256": "76d4f7cd874ed7cc9a4c2941ae9e6885b50d88bc637e4a08ecc201be875f5ef9",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-49-Pg1921.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-49/pdf/STATUTE-49-Pg1921.pdf",
+      "bytes": 437965,
+      "sha256": "a9ca3f6856c16d1b6585c8789b1f6c986a9370c9bba2aa5c2db70616a34901dd",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/PLAW-104publ132.htm",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-104publ132/html/PLAW-104publ132.htm",
+      "bytes": 357131,
+      "sha256": "66e7d0b83851feeb91106d70dc5852156eff93edd9c8c5966b9b1190573a5929",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/PLAW-104publ208.htm",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-104publ208/html/PLAW-104publ208.htm",
+      "bytes": 2559264,
+      "sha256": "f63732222ece601fb008d486c54d1f09d4521a181aaa512f671170129dc6ce31",
+      "capturedAt": "2026-10-11"
+    }
+  ],
+  "sections": [
+    {
+      "uscSection": "1182a",
+      "originalTitle": "Admission of aliens convicted of misdemeanor; conditions",
+      "units": [
+        {
+          "path": [],
+          "text": "Any alien who is excludable because of the conviction of a misdemeanor classifiable as a petty offense under the provisions of section 1 (3) of Title 18, by reason of the punishment actually imposed, or who is excludable as one who admits the commission of such misdemeanor, may on and after September 3, 1954, be granted a visa and admitted to the United States, if otherwise admissible: Provided, That the alien has committed only one such offense."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=25",
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceSha256": "56b3ba8e978c6f198342f20eda8e0e59210f9d335327803ee71b39411ba87607",
+      "sourceCapturedAt": "2026-09-19",
+      "sourcePdfPages": [
+        25
+      ],
+      "versionLabel": "Historical text from the 1958 U.S. Code edition",
+      "lastAmendmentDate": "1954-09-03",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "unitsSha256": "c43521aca0a87729b7064f981443dd75ba407c8ace82afeff359b7d4e38f1b19"
+    },
+    {
+      "uscSection": "1182b",
+      "originalTitle": "Admission of alien spouse, child, or parent excludable for crime involving moral turpitude, conviction of two offenses, or membership in certain immoral classes; conditions",
+      "units": [
+        {
+          "path": [],
+          "text": "Any alien, who is excludable from the United States under paragraphs (9), (10), or (12) of section 1182 (a) of this title, who (A) is the spouse or child, including a minor unmarried adopted child, of a United States citizen, or of an alien lawfully admitted for permanent residence, or (B) has a son or daughter who is a United States citizen or an alien lawfully admitted for permanent residence, shall, if otherwise admissible, be issued a visa and admitted to the United States for permanent residence (1) if it shall be established to the satisfaction of the Attorney General that (A) the alien's exclusion would result in extreme hardship to the United States citizen or lawfully resident spouse, parent, or son or daughter of such alien, and (B) the admission to the United States of such alien would not be contrary to the national welfare, safety, or security of the United States; and (2) if the Attorney General, in his discretion, and pursuant to such terms, conditions, and procedures as he may by regulations prescribed, has consented to the alien's applying or reapplying for a visa and for admission to the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=25",
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceSha256": "56b3ba8e978c6f198342f20eda8e0e59210f9d335327803ee71b39411ba87607",
+      "sourceCapturedAt": "2026-09-19",
+      "sourcePdfPages": [
+        25
+      ],
+      "versionLabel": "Historical text from the 1958 U.S. Code edition",
+      "lastAmendmentDate": "1957-09-11",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "unitsSha256": "17f1ae4ea19d8e50eeaef727acbb8b5e34675300a10f47875d82235a3b7fde70"
+    },
+    {
+      "uscSection": "1201a",
+      "originalTitle": "Waiver of fingerprinting requirements for nonimmigrant aliens",
+      "units": [
+        {
+          "path": [],
+          "text": "The Secretary of State and the Attorney General are authorized, in their discretion and on a basis of reciprocity, pursuant to such regulations as they may severally prescribe, to waive the requirement of fingerprinting specified in sections 1201 (b) and 1302 of this title, respectively, in the case of any nonimmigrant alien."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=30",
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceSha256": "56b3ba8e978c6f198342f20eda8e0e59210f9d335327803ee71b39411ba87607",
+      "sourceCapturedAt": "2026-09-19",
+      "sourcePdfPages": [
+        30
+      ],
+      "versionLabel": "Historical text from the 1958 U.S. Code edition",
+      "lastAmendmentDate": "1957-09-11",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "unitsSha256": "41a75c30549e98bbf67efb30ea601ab330add6e6ba2790e107719c41457edfa5"
+    },
+    {
+      "uscSection": "1251a",
+      "originalTitle": "Aliens deportable for fraud or misrepresentation; adjustment of status of certain aliens; conditions; waiver of ground of inadmissibility",
+      "units": [
+        {
+          "path": [],
+          "text": "The provisions of section 1251 of this title relating to the deportation of aliens within the United States on the ground that they were excludable at the time of entry as (1) aliens who have sought to procure, or have procured visas or other documentation, or entry into the United States by fraud or misrepresentation, or (2) aliens who were not of the nationality specified in their visas, shall not apply to an alien otherwise admissible at the time of entry who (A) is the spouse, parent, or a child of a United States citizen or of an alien lawfully admitted for permanent residence; or (B) was admitted to the United States between December 22, 1945, and November 1, 1954, both dates inclusive, and misrepresented his nationality, place of birth, identity, or residence in applying for a visa: Provided, That such alien described in clause (B) shall establish to the satisfaction of the Attorney General that the misrepresentation was predicated upon the alien's fear of persecution because of race, religion, or political opinion if repatriated to his former home or residence, and was not committed for the purpose of evading the quota restrictions of the immigration laws or an investigation of the alien at the place of his former home, or residence, or elsewhere. After September 11, 1957, any alien who is the spouse, parent, or child of a United States citizen or of an alien lawfully admitted for permanent residence and who is excludable because (1) he seeks, has sought to procure, or has procured, a visa or other documentation, or entry into the United States, by fraud or misrepresentation, or (2) he admits the commission of perjury in connection therewith, shall on and after September 11, 1957, be granted a visa and admitted to the United States for permanent residence, if otherwise admissible, if the Attorney General in his discretion has consented to the alien's applying or reapplying for a visa and for admission to the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=43",
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceSha256": "56b3ba8e978c6f198342f20eda8e0e59210f9d335327803ee71b39411ba87607",
+      "sourceCapturedAt": "2026-09-19",
+      "sourcePdfPages": [
+        43
+      ],
+      "versionLabel": "Historical text from the 1958 U.S. Code edition",
+      "lastAmendmentDate": "1957-09-11",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "unitsSha256": "9849eabf9c1d81f80843d7c0ee70e63e7257135dc992f8425c03341cdd43c977"
+    },
+    {
+      "uscSection": "1401b",
+      "originalTitle": "Physical presence in the United States; absences of less than twelve months in the aggregate",
+      "units": [
+        {
+          "path": [],
+          "text": "In the administration of section 1401 (b) of this title, absences from the United States of less than twelve months in the aggregate, during the period for which continuous physical presence in the United States is required, shall not be considered to break the continuity of such physical presence."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=66",
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceSha256": "56b3ba8e978c6f198342f20eda8e0e59210f9d335327803ee71b39411ba87607",
+      "sourceCapturedAt": "2026-09-19",
+      "sourcePdfPages": [
+        66
+      ],
+      "versionLabel": "Historical text from the 1958 U.S. Code edition",
+      "lastAmendmentDate": "1957-09-11",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "unitsSha256": "0a8bd65132b9faeb0902be3469bcd3a0cd0ebfdbedb16a89d50e88c4ae2e6ab2"
+    },
+    {
+      "uscSection": "1525",
+      "originalTitle": "United States Coordinator for Refugee Affairs",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "heading": "Appointment; rank",
+          "text": "The President shall appoint, by and with the advice and consent of the Senate, a United States Coordinator for Refugee Affairs (hereinafter in this section referred to as the \"Coordinator\"). The Coordinator shall have the rank of Ambassador-at-Large."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "heading": "Duties and functions",
+          "text": "The Coordinator shall be responsible to the President for—"
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "text": "the development of overall United States refugee admission and resettlement policy;"
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ],
+          "text": "the coordination of all United States domestic and international refugee admission and resettlement programs in a manner that assures that policy objectives are met in a timely fashion;"
+        },
+        {
+          "path": [
+            "b",
+            "3"
+          ],
+          "text": "the design of an overall budget strategy to provide individual agencies with policy guidance on refugee matters in the preparation of their budget requests, and to provide the Office of Management and Budget with an overview of all refugee-related budget requests;"
+        },
+        {
+          "path": [
+            "b",
+            "4"
+          ],
+          "text": "the presentation to the Congress of the Administration's overall refugee policy and the relationship of individual agency refugee budgets to that overall policy;"
+        },
+        {
+          "path": [
+            "b",
+            "5"
+          ],
+          "text": "advising the President, Secretary of State, Attorney General, and the Secretary of Health and Human Services on the relationship of overall United States refugee policy to the admission of refugees to, and the resettlement of refugees in, the United States;"
+        },
+        {
+          "path": [
+            "b",
+            "6"
+          ],
+          "text": "under the direction of the Secretary of State, representation and negotiation on behalf of the United States with foreign governments and international organizations in discussions on refugee matters and, when appropriate, submitting refugee issues for inclusion in other international negotiations;"
+        },
+        {
+          "path": [
+            "b",
+            "7"
+          ],
+          "text": "development of an effective and responsive liaison between the Federal Government and voluntary organizations, Governors and mayors, and others involved in refugee relief and resettlement work to reflect overall United States Government policy;"
+        },
+        {
+          "path": [
+            "b",
+            "8"
+          ],
+          "text": "making recommendations to the President and to the Congress with respect to policies for, objectives of, and establishment of priorities for, Federal functions relating to refugee admission and resettlement in the United States; and"
+        },
+        {
+          "path": [
+            "b",
+            "9"
+          ],
+          "text": "reviewing the regulations, guidelines, requirements, criteria, and procedures of Federal departments and agencies applicable to the performance of functions relating to refugee admission and resettlement in the United States."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "heading": "Consultations with States, localities, etc.; reports by Secretaries of Labor and Education and inclusion of information in report of Coordinator"
+        },
+        {
+          "path": [
+            "c",
+            "1"
+          ],
+          "text": "In the conduct of the Coordinator's duties, the Coordinator shall consult regularly with States, localities, and private nonprofit voluntary agencies concerning the sponsorship process and the intended distribution of refugees."
+        },
+        {
+          "path": [
+            "c",
+            "2"
+          ],
+          "text": "The Secretary of Labor and the Secretary of Education shall provide the Coordinator with regular reports describing the efforts of their respective departments to increase refugee access to programs within their jurisdiction, and the Coordinator shall include information on such programs in reports submitted under section 1523(a)(1) of this title."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=209",
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1988-ch12.pdf",
+      "sourceSha256": "64beee115eb22967a6774a9dd9c4d4b57d28cb259bce4b1403c8a97d9eb3bce3",
+      "sourceCapturedAt": "2026-09-19",
+      "sourcePdfPages": [
+        209,
+        210
+      ],
+      "versionLabel": "Historical text from the 1988 U.S. Code edition",
+      "lastAmendmentDate": "1980-03-17",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "historicalEditorialNote": "The 1988 Code footnote explains that section 1523(a)(1), cited in subsection (c)(2), was redesignated as section 1523(a) by Public Law 100-525, section 9(jj)(2)(D), October 24, 1988.",
+      "unitsSha256": "e8307f1cd884b28a992386e144c15685a803dbd7574f48df61ec3ea843cbb318"
+    },
+    {
+      "uscSection": "1205",
+      "originalTitle": "Nonquota immigrant visas for eligible orphans",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "heading": "Issuance; termination date; limitations",
+          "text": "On or before June 30, 1961, special nonquota immigrant visas may be issued in accordance with the provisions of subsection (b) of this section to eligible orphans as therein defined who are under fourteen years of age at the time the visa is issued. Not more than two such special nonquota immigrant visas may be issued to eligible orphans adopted or to be adopted by any one United States citizen and spouse, unless necessary to prevent the separation of brothers or sisters. No natural parent of any such eligible orphan shall thereafter, by virtue of such parentage, be accorded any right, privilege, or status under the Immigration and Nationality Act."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "heading": "Definition of \"eligible orphan\"",
+          "text": "When used in this section, the term 'eligible orphan' shall mean an alien child who (1) is an orphan because of the death or disappearance of both parents, or because of abandonment or desertion by, or separation or loss from, both parents, or who has only one parent due to the death or disappearance of, abandonment, or desertion by, or separation or loss from the other parent and the remaining parent is incapable of providing care for such orphan and has in writing irrevocably released him for emigration and adoption; (2) (A) has been lawfully adopted abroad by a United States citizen and spouse, or (B) is coming to the United States for adoption by a United States citizen and spouse; and (3) is ineligible for admission into the United States solely because that portion of the quota to which he would otherwise be chargeable is oversubscribed by applicants registered on the consular waiting list at the time his visa application is made. Any United States citizen and spouse claiming that any eligible orphan is entitled to a nonquota immigrant status under subsection (a) of this section may file a petition with the Attorney General. The petition shall be in such form and shall contain such information and be supported by such documentary evidence as the Attorney General may by regulations prescribe. The petition shall establish to the satisfaction of the Attorney General that the petitioners will care for such eligible orphan properly if he is admitted to the United States and, if such eligible orphan has not been lawfully adopted abroad, that they will adopt such orphan in the United States and that the preadoption requirements, if any, of the State of such orphan's proposed residence have been met. After an investigation of the facts in each case, the Attorney General shall, if he determines the facts stated in the petition are true and that the petitioning United States citizen and spouse are persons of good moral character, approve the petition and forward one copy thereof to the Department of State. The Secretary of State shall then authorize the consular officer concerned to grant nonquota immigrant status to the beneficiary of such petition after the consular officer has determined that such beneficiary is an eligible orphan as herein defined."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "heading": "Validity of visa",
+          "text": "Any visa which has been or shall be issued to an eligible orphan under this section or under any other immigration law to a child lawfully adopted by a United States citizen and spouse while such citizen is serving abroad in the United States Armed Forces, or is employed abroad by the United States Government, or is temporarily abroad on business, shall be valid until such time, for a period not to exceed three years, as the adoptive citizen parent returns to the United States in due course of his service, employment, or business."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "heading": "Adjustment of status",
+          "text": "The Attorney General may, pursuant to such terms and conditions as he may by regulations prescribe, adjust the status to that of an alien lawfully admitted for permanent residence, as of the date of his arrival in the United States, in the case of an alien who was paroled into the United States under section 1182 (d) (5) of this title if such alien at the time of his arrival in the United States was an eligible orphan as defined in section 1971c of Appendix to Title 50 and was, or thereafter has been, adopted by a United States citizen and spouse in a court of proper jurisdiction."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1958-00100/uscode1958-001008012/uscode1958-001008012.pdf#page=32",
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1958-ch12.pdf",
+      "sourceSha256": "56b3ba8e978c6f198342f20eda8e0e59210f9d335327803ee71b39411ba87607",
+      "sourceCapturedAt": "2026-09-19",
+      "sourcePdfPages": [
+        32
+      ],
+      "versionLabel": "Historical text as amended through July 14, 1960",
+      "lastAmendmentDate": "1960-07-14",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "1958 Code subsections (c) and (d), with subsections (a) and (b) replaced by Public Law 86-253 and the subsection (a) deadline extended by Public Law 86-648. Amendment wording is retained, including references to the Immigration and Nationality Act. Each source page was visually checked.",
+      "amendmentSources": [
+        {
+          "label": "Public Law 86-253, 73 Stat. 490",
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-73-Pg490.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-73/pdf/STATUTE-73-Pg490.pdf",
+          "bytes": 286179,
+          "sha256": "cc413beb5635a3deb91d0ef425332563bfba08eb9f800a1bba2716c86f2d3504",
+          "capturedAt": "2026-10-11"
+        },
+        {
+          "label": "Public Law 86-253, continuation at 73 Stat. 491",
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-73-Pg491.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-73/pdf/STATUTE-73-Pg491.pdf",
+          "bytes": 1779313,
+          "sha256": "ba09218e2bc85eec6d76e00f627355e813e509dcb51db091f762e206b16b381c",
+          "capturedAt": "2026-10-11"
+        },
+        {
+          "label": "Public Law 86-648, section 7, 74 Stat. 505",
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-74-Pg504.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-74/pdf/STATUTE-74-Pg504.pdf",
+          "bytes": 494056,
+          "sha256": "140f312499d78390d2039c7ef08f885d1f9d6c71df4bdc02f8e52679aa561238",
+          "capturedAt": "2026-10-11"
+        }
+      ],
+      "unitsSha256": "3fae015019c8732ec56b4e815b81c74a5c22d15cc85428b9356d7a9de54589ab"
+    },
+    {
+      "uscSection": "1182c",
+      "originalTitle": "Admission of alien spouse, child, or parent afflicted with tuberculosis; termination date",
+      "units": [
+        {
+          "path": [],
+          "text": "Notwithstanding the provisions of section 212(a)(6) of the Immigration and Nationality Act as far as they relate to aliens afflicted with tuberculosis, any alien who (A) is the spouse or child, including the minor unmarried adopted child, of a United States citizen, or of an alien lawfully admitted for permanent residence, or of an alien who has been issued an immigrant visa, or (B) has a son or daughter who is a United States citizen or an alien lawfully admitted for permanent residence or an alien who has been issued an immigrant visa, shall, if otherwise admissible, be issued a visa and admitted to the United States for permanent residence in accordance with such terms, conditions, and controls, if any, including the giving of a bond, as the Attorney General, in his discretion, after consultation with the Surgeon General of the United States Public Health Service, may by regulations prescribe. No visa shall be issued under the authority of this section after June 30, 1961."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-73/pdf/STATUTE-73-Pg490.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-73-Pg490.pdf",
+      "sourceSha256": "cc413beb5635a3deb91d0ef425332563bfba08eb9f800a1bba2716c86f2d3504",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text as amended September 9, 1959",
+      "lastAmendmentDate": "1959-09-09",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "The complete replacement enacted by Public Law 86-253, section 1, is reproduced using the enacted INA citation. The prior requirement for reports to Congress was removed by that amendment. Source page visually checked; the heading describes the amended provision.",
+      "unitsSha256": "452d74a8357d95390af33e6cb1c3100eda3a321adbafa9e340634ec818075956"
+    },
+    {
+      "uscSection": "1151a",
+      "originalTitle": "Limitation on number of special immigrants",
+      "units": [
+        {
+          "path": [],
+          "text": "Unless legislation inconsistent herewith is enacted on or before June 30, 1968, in response to recommendations of the Commission or otherwise, the number of special immigrants within the meaning of section 101(a) (27) (A) of the Immigration and Nationality Act, as amended, exclusive of special immigrants who are immediate relatives of United States citizens as described in section 201(b) of that Act, shall not, in the fiscal year beginning July 1, 1968, or in any fiscal year thereafter, exceed a total of 120,000."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-79/pdf/STATUTE-79-Pg911.pdf#page=11",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-79-Pg911.pdf",
+      "sourceSha256": "143c7f07a5e2271b002b6d14789b77cc066a5d630589676f84638ad47d53c3c8",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        11
+      ],
+      "versionLabel": "Historical enacted text of Public Law 89-236, section 21(e), October 3, 1965",
+      "lastAmendmentDate": "1965-10-03",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "The full enacted text is reproduced with its original INA citations. It appeared as a note under section 1151 in the 1964 Code Supplement II. The descriptive heading identifies its subject; it is not represented as a quoted heading from the enactment.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The current House removal description identifies the provision as limiting the total number of special immigrants to 120,000. The enactment has no individual heading for subsection 21(e).",
+      "unitsSha256": "9c7d39f39f46942a8c4a9e978446f9e740cd4d0ffcc04ef7d81b01f308022604"
+    },
+    {
+      "uscSection": "5a–1",
+      "originalTitle": "Citizenship of persons born in Puerto Rico; misinformation regarding citizenship status",
+      "units": [
+        {
+          "path": [],
+          "text": "That any person of good character, attached to the principles of the Constitution of the United States, and well disposed to the good order and happiness of the United States, and born in Puerto Rico on or after April 11, 1899, who has continued to reside within the jurisdiction of the United States, whose father elected on or before April 11, 1900, to preserve his allegiance to the Crown of Spain in accordance with the provisions of the treaty of peace between the United States and Spain entered into on April 11, 1899, and who, by reason of misinformation regarding his or her own citizenship status failed within the time limits prescribed by section 5 or section 5a hereof to exercise the privilege of establishing United States citizenship and has heretofore erroneously but in good faith exercised the rights and privileges and performed the duties of a citizen of the United States, and has not personally sworn allegiance to any foreign government or ruler upon or after attainment of majority, may make a sworn declaration of allegiance to the United States before any United States district court. Such declaration shall set forth facts concerning his or her birth in Puerto Rico, good character, attachment to the principles of the Constitution of the United States, and being well disposed to the good order and happiness of the United States, residence within the jurisdiction of the United States, and misinformation regarding United States citizenship status, and shall be accompanied by proof thereof satisfactory to the court. After making such declaration and submitting such proofs, such person shall be admitted to take the oath of allegiance before the court, and thereupon shall be considered a citizen of the United States."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-52/pdf/STATUTE-52-Pg377.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-52-Pg377.pdf",
+      "sourceSha256": "ff28a751d7e0ca961d81aca513f2bbcc1a8a8fa8a84103e0d5e1d12bbda28675",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical enacted text of the Act of May 16, 1938, 52 Stat. 377",
+      "lastAmendmentDate": "1938-05-16",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted section 5c, visually checked. References to sections 5 and 5a retain the original Act numbering. The heading describes the provision and is not represented as a quoted Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Describes the complete provision enacted as section 5c of the Puerto Rico Organic Act, formerly classified to 8 U.S.C. 5a–1.",
+      "unitsSha256": "6ec5cdcbb9c2fd17f11255181d82ec0c7910832c8eaac224d947b44f7e80db1b"
+    },
+    {
+      "uscSection": "5d",
+      "originalTitle": "Citizenship of persons born in the Canal Zone",
+      "units": [
+        {
+          "path": [],
+          "text": "That any person born in the Canal Zone on or after February 26, 1904, and whether before or after the effective date of this Act, whose father or mother or both at the time of the birth of such person was or is a citizen of the United States, is declared to be a citizen of the United States."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-50/pdf/STATUTE-50-Pg558.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-50-Pg558.pdf",
+      "sourceSha256": "1ef1183796ad57199468cf582f201d17f8984ba8cee8f60b2ffea7d16e0a6141",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical enacted text of the Act of August 4, 1937, 50 Stat. 558",
+      "lastAmendmentDate": "1937-08-04",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted provision, visually checked. The heading describes this individual provision and is not represented as a quoted Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Describes section 1 of the Act of August 4, 1937; the current House removal note identifies its former Code location.",
+      "unitsSha256": "882a9d5507292bf86b8ec9469543e5f0a023756ab127613cb36b1a5ba411c85e"
+    },
+    {
+      "uscSection": "5e",
+      "originalTitle": "Citizenship of persons born in the Republic of Panama",
+      "units": [
+        {
+          "path": [],
+          "text": "Any person born in the Republic of Panama on or after February 26, 1904, and whether before or after the effective date of this Act, whose father or mother or both at the time of the birth of such person was or is a citizen of the United States employed by the Government of the United States or by the Panama Railroad Company, is declared to be a citizen of the United States."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-50/pdf/STATUTE-50-Pg558.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-50-Pg558.pdf",
+      "sourceSha256": "1ef1183796ad57199468cf582f201d17f8984ba8cee8f60b2ffea7d16e0a6141",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical enacted text of the Act of August 4, 1937, 50 Stat. 558",
+      "lastAmendmentDate": "1937-08-04",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted provision, visually checked. The heading describes this individual provision and is not represented as a quoted Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Describes section 2 of the Act of August 4, 1937; the current House removal note identifies its former Code location.",
+      "unitsSha256": "3803504060117b7d8aec727b7205d8dd0617983da3da4ebc718d7bdd7dc3c3bf"
+    },
+    {
+      "uscSection": "9a",
+      "originalTitle": "Repatriation of native-born women married to aliens prior to September 22, 1922",
+      "units": [
+        {
+          "path": [],
+          "text": "That hereafter a woman, being a native-born citizen, who has or is believed to have lost her United States Citizenship solely by reason of her marriage prior to September 22, 1922, to an alien, and whose marital status with such alien has or shall have terminated or who has resided continuously in the United States since the date of such marriage, shall be deemed to be a citizen of the United States to the same extent as though her marriage to said alien had taken place on or after September 22, 1922: Provided, however, That no such woman shall have or claim any rights as a citizen of the United States until she shall have duly taken the oath of allegiance as prescribed in section 4 of the Act approved June 29, 1906 (34 Stat. 596; U. S. C., title 8, sec. 381), at any place within or under the jurisdiction of the United States before a court exercising naturalization jurisdiction thereunder or, outside of the jurisdiction of the United States, before a secretary of embassy or legation or a consular officer as prescribed in section 1750 of the Revised Statutes of the United States (U. S. C., title 22, sec. 131); and such officer before whom such oath of allegiance shall be taken shall make entry thereof in the records of his office or in the naturalization records of the court, as the case may be, and shall deliver to such person taking such oath, upon demand, a certified copy of the proceedings had, including a copy of the oath administered, under the seal of his office or of such court, at a cost not exceeding $1, which shall be evidence of the facts stated therein before any court of record or judicial tribunal and in any department of the United States."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-49/pdf/STATUTE-49-Pg1917.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-49-Pg1917.pdf",
+      "sourceSha256": "e0567bf1175344eb8b334f3b469641c7617e57a7d661bc68719e1be2bcd4d088",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Historical text as amended July 2, 1940",
+      "lastAmendmentDate": "1940-07-02",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "The 1936 enacted text includes the words inserted after 'terminated' by the Act of July 2, 1940. The resulting duplicate comma is normalized. Both source pages were visually checked. Original statutory citations are retained; the heading is a description, not a quoted Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The current House removal note describes this provision as repatriation of native-born women married to aliens prior to September 22, 1922.",
+      "amendmentSources": [
+        {
+          "label": "Act of July 2, 1940, 54 Stat. 715",
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-54-Pg715.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-54/pdf/STATUTE-54-Pg715.pdf",
+          "bytes": 395623,
+          "sha256": "76d4f7cd874ed7cc9a4c2941ae9e6885b50d88bc637e4a08ecc201be875f5ef9",
+          "capturedAt": "2026-10-11"
+        }
+      ],
+      "unitsSha256": "e6d90ffd14f1076bf966ed4c575cc2a54e789cc7c059a14b8e5035920c73e183"
+    },
+    {
+      "uscSection": "1440a",
+      "originalTitle": "Naturalization of persons serving in the Armed Forces after June 24, 1950",
+      "units": [
+        {
+          "path": [],
+          "text": "That, notwithstanding the provisions of sections 310 (d) and 318 of the Immigration and Nationality Act, any person, not a citizen, who, after June 24, 1950, and not later than July 1, 1955, has actively served or actively serves, honorably, in the Armed Forces of the United States for a period or periods totaling not less than ninety days and who (1) having been lawfully admitted to the United States for permanent residence, or (2) having been lawfully admitted to the United States, and having been physically present within the United States for a single period of at least one year at the time of entering the Armed Forces, may be naturalized on petition filed not later than December 31, 1955, upon compliance with all the requirements of the Immigration and Nationality Act, except that— (a) he may be naturalized regardless of age; (b) no period of residence or specified period of physical presence within the United States or any State after entering the Armed Forces shall be required: Provided, That there shall be included in the petition the affidavits of at least two credible witnesses, citizens of the United States, stating that each such witness personally knows the petitioner to be a person of good moral character, attached to the principles of the Constitution of the United States and well disposed to the good order and happiness of the United States; (c) the petition for naturalization may be filed in any court having naturalization jurisdiction regardless of the residence of the petitioner; (d) notwithstanding section 336 (c) of the Immigration and Nationality Act, the petitioner may be naturalized immediately if prior to the filing of the petition, the petitioner and the witnesses shall have appeared before and been examined by a representative of the Immigration and Naturalization Service; and (e) no fee, except that which may be required by State law, shall be charged or collected for making, filing, or docketing the petition for naturalization, or for the final hearing thereon, or for the certificate of naturalization, if issued. Service in the Armed Forces of the United States may be proved by a duly authenticated copy of the record of the executive or military department having custody of the record of the petitioner's service, showing that the petitioner is or was during the period or periods hereinbefore described a member serving actively and honorably in such forces and, if separated from such service, that he was not separated under other than honorable conditions; or may be proved by affidavits, forming part of the petition, of at least two citizens of the United States, members of the Armed Forces of the United States, of the noncommissioned or warrant officer grade or higher (who may also be the witnesses described in subsection (b) of this section): Provided, however, That no period of service in the Armed Forces of the United States shall be made the basis of a petition for naturalization under this Act if the applicant has previously been naturalized on the basis of the same period of service."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-67/pdf/STATUTE-67-Pg108.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-67-Pg108.pdf",
+      "sourceSha256": "bc661c5c35f68702796a1d1b70e511ad32e3544946afe98464975a16f787d8e5",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1,
+        2
+      ],
+      "versionLabel": "Historical enacted text of the Act of June 30, 1953, 67 Stat. 108–110",
+      "lastAmendmentDate": "1953-06-30",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted section, visually checked against the Statutes at Large. Original Act and INA section numbering is retained. The heading describes this individual provision; it is not represented as a quoted Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Describes section 1 of the Act of June 30, 1953. The enactment's individual sections have no catchlines.",
+      "historicalEditorialNote": "The enacted text specifies service after June 24, 1950. The current House omission note says June 29, 1950; each source is reproduced as written.",
+      "unitsSha256": "78f804f18ff50bef15557432e051f3456d594392a6839aafbdb8582c835dd787"
+    },
+    {
+      "uscSection": "1440b",
+      "originalTitle": "Naturalization outside the jurisdiction of a naturalization court",
+      "units": [
+        {
+          "path": [],
+          "text": "Any person entitled to naturalization under section 1 of this Act may be naturalized while serving outside the jurisdiction of any naturalization court, upon compliance with applicable provisions of that section without appearing before any such court. The petition for naturalization of any such person shall be made and sworn to before, and filed with a representative of the Immigration and Naturalization Service designated by the Attorney General, which representative is hereby authorized to receive such petition, to conduct hearings thereon, to take testimony concerning any matter touching or in any way affecting the admissibility of such person for naturalization, to call witnesses, to administer oaths, including the oath of the petitioner and his witnesses to the petition and the oath prescribed by section 337 of the Immigration and Nationality Act and to grant naturalization and to issue certificates of naturalization: Provided, That the record of any proceedings hereunder shall be forwarded to and filed by the clerk of a naturalization court in the district designated by the petitioner and made a part of the record of such court."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-67/pdf/STATUTE-67-Pg108.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-67-Pg108.pdf",
+      "sourceSha256": "bc661c5c35f68702796a1d1b70e511ad32e3544946afe98464975a16f787d8e5",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2,
+        3
+      ],
+      "versionLabel": "Historical enacted text of the Act of June 30, 1953, 67 Stat. 108–110",
+      "lastAmendmentDate": "1953-06-30",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted section, visually checked against the Statutes at Large. Original Act and INA section numbering is retained. The heading describes this individual provision; it is not represented as a quoted Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Describes section 2 of the Act of June 30, 1953. The enactment's individual sections have no catchlines.",
+      "unitsSha256": "fef3019033d311bbdb98e1b4cf98e7fd88cbcbde2139920add547537eee0cedd"
+    },
+    {
+      "uscSection": "1440c",
+      "originalTitle": "Restrictions on naturalization and revocation of citizenship",
+      "units": [
+        {
+          "path": [],
+          "text": "Any person otherwise qualified for naturalization pursuant to section 1 or 2 of this Act who is or has been discharged under other than honorable conditions from the Armed Forces of the United States, or is discharged therefrom pursuant to an application for discharge made by him on the ground that he is an alien, or who is a conscientious objector who performs or performed no military duty whatever or refused to wear the uniform, shall not be entitled to the benefits of such section 1 or 2 of this Act: Provided, That citizenship granted pursuant to section 1 or 2 of this Act may be revoked in accordance with section 340 of the Immigration and Nationality Act if at any time subsequent to naturalization the person is separated from the Armed Forces of the United States under other than honorable conditions, and such ground for revocation shall be in addition to any other provided by law: Provided further, That for the purposes of section 340 (f) of the Immigration and Nationality Act, revocation on such ground shall be classified with revocatory action based on section 329 (c) of that Act. The fact that the naturalized person was separated from the service under other than honorable conditions shall be proved by a duly authenticated certification from the executive or military department under which the person was serving at the time of separation."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-67/pdf/STATUTE-67-Pg108.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-67-Pg108.pdf",
+      "sourceSha256": "bc661c5c35f68702796a1d1b70e511ad32e3544946afe98464975a16f787d8e5",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical enacted text of the Act of June 30, 1953, 67 Stat. 108–110",
+      "lastAmendmentDate": "1953-06-30",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted section, visually checked against the Statutes at Large. Original Act and INA section numbering is retained. The heading describes this individual provision; it is not represented as a quoted Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Describes section 3 of the Act of June 30, 1953. The enactment's individual sections have no catchlines.",
+      "unitsSha256": "21fd4cef0d3296bb6acf2cab0e793d19c3c373433d43aafc4e600edb074efdd4"
+    },
+    {
+      "uscSection": "1440d",
+      "originalTitle": "Definition of \"United States\"",
+      "units": [
+        {
+          "path": [],
+          "text": "When used in this Act, the term \"United States\" means the continental United States, Alaska, Hawaii, Puerto Rico, Guam, and the Virgin Islands of the United States."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-67/pdf/STATUTE-67-Pg108.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-67-Pg108.pdf",
+      "sourceSha256": "bc661c5c35f68702796a1d1b70e511ad32e3544946afe98464975a16f787d8e5",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical enacted text of the Act of June 30, 1953, 67 Stat. 108–110",
+      "lastAmendmentDate": "1953-06-30",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted section, visually checked against the Statutes at Large. Original Act and INA section numbering is retained. The heading describes this individual provision; it is not represented as a quoted Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Describes section 4 of the Act of June 30, 1953. The enactment's individual sections have no catchlines.",
+      "unitsSha256": "691f955fab1ded603ae4bff667bdf11ccbd0e46afb786c6a91b77c2ed6262f7a"
+    },
+    {
+      "uscSection": "724a–1",
+      "originalTitle": "Naturalization of aliens enlisted in the Regular Army",
+      "units": [
+        {
+          "path": [],
+          "text": "Notwithstanding the dates or periods of service specified and designated in section 329 of the Immigration and Nationality Act, the provisions of that section are applicable to aliens enlisted or reenlisted pursuant to the provisions of this Act and who have completed five or more years of military service, if honorably discharged therefrom. Any alien enlisted or reenlisted pursuant to the provisions of this Act who subsequently enters the United States, American Samoa, Swains Island, or the Canal Zone, pursuant to military orders shall, if otherwise qualified for citizenship, and after completion of five or more years of military service, if honorably discharged therefrom, be deemed to have been lawfully admitted to the United States for permanent residence within the meaning of such section 329 (a)."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1952-00100/uscode1952-001008012/uscode1952-001008012.pdf#page=61",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1952/chapter-12.pdf",
+      "sourceSha256": "bb30719cc92d915fb0b3a661dbcb98d941fd206c1fafc58ebce1912b621ee9b1",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        61
+      ],
+      "versionLabel": "Historical text as amended June 27, 1952, printed as a statutory note under 8 U.S.C. 1440",
+      "lastAmendmentDate": "1952-06-27",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Visually checked against the 1952 Code's full quotation of the amended Act of June 30, 1950. Bracketed editorial translations referring to the note's location under section 1440 are omitted; the original INA section 329 citations are retained. The former section 724a–1 catchline is separately evidenced in the 1952 Code, chapter 11, PDF page 2.",
+      "edition": "1952",
+      "unitsSha256": "48ce512440b03f4e12a67494accb1bc396f5b90181f3b9aef87ea49915bc37cf"
+    },
+    {
+      "uscSection": "1556",
+      "originalTitle": "Disposition of money received as extra compensation",
+      "units": [
+        {
+          "path": [],
+          "text": "Moneys collected on or after July 1, 1941, as extra compensation for overtime service of immigration officers and employees of the Immigration Service pursuant to sections 1353a and 1353b of this title, shall be deposited in the Treasury of the United States to the credit of the appropriation for the payment of salaries, field personnel of the Immigration and Naturalization Service, and the appropriation so credited shall be available for the payment of such compensation."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1988-00200/uscode1988-002008012/uscode1988-002008012.pdf#page=151",
+      "sourceArtifact": "sources/legal/raw/historical-ina/usc-1988-ch12.pdf",
+      "sourceSha256": "64beee115eb22967a6774a9dd9c4d4b57d28cb259bce4b1403c8a97d9eb3bce3",
+      "sourceCapturedAt": "2026-09-19",
+      "sourcePdfPages": [
+        151
+      ],
+      "versionLabel": "Transferred provision as printed at 8 U.S.C. 1353d in the 1988 Code",
+      "lastAmendmentDate": "1952-06-27",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Full text at the expressly identified transfer destination, visually checked against the 1988 Code. That edition records the last amendment as June 27, 1952. This is not represented as a facsimile of the former section 1556 entry.",
+      "edition": "1988",
+      "headingOrigin": "transferred-provision-heading",
+      "headingEvidence": "Heading of section 1353d in the 1988 Code; the current House note for section 1556 identifies section 1353d as its destination.",
+      "historicalEditorialNote": "The House identifies section 1353d as the destination of former section 1556. The text shown here is the transferred provision at that destination, with its Code citations as printed in 1988.",
+      "unitsSha256": "cef216ad0b2e1124faeb47de03b7654115badc778f94275a34c65eb4b6d8b1c0"
+    },
+    {
+      "uscSection": "357",
+      "originalTitle": "Jurisdiction of naturalization courts",
+      "units": [
+        {
+          "path": [],
+          "text": "Exclusive jurisdiction to naturalize aliens as citizens of the United States is conferred upon the following specified courts:\n\nUnited States district courts in the States, United States district courts for the Territories of Hawaii and Alaska, the district court of the United States for the District of Columbia; also all courts of record in any State or Territory having a seal, a clerk, and jurisdiction in actions at law or equity, or law and equity, in which the amount in controversy is unlimited.\n\nThe naturalization jurisdiction of all courts herein specified, State, Territorial, and Federal, shall extend only to aliens resident within the respective judicial districts of such courts."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008009/uscode1934-001008009.pdf#page=2",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-09.pdf",
+      "sourceSha256": "deedf2e9f7ace978a4e0dfaa1c6302818986e40ae66c7b65f36df4295b93acd3",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        2
+      ],
+      "versionLabel": "1934 Code text incorporating the court-name change enacted June 25, 1936",
+      "lastAmendmentDate": "1936-06-25",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-49-Pg1921.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-49/pdf/STATUTE-49-Pg1921.pdf",
+          "bytes": 437965,
+          "sha256": "a9ca3f6856c16d1b6585c8789b1f6c986a9370c9bba2aa5c2db70616a34901dd",
+          "capturedAt": "2026-10-11",
+          "label": "Act of June 25, 1936, 49 Stat. 1921"
+        }
+      ],
+      "historicalEditorialNote": "The 1936 Act renamed the Supreme Court of the District of Columbia as the district court of the United States for the District of Columbia, expressly leaving its jurisdiction and functions unchanged. The displayed text incorporates that name change into the 1934 Code text.",
+      "unitsSha256": "eef81343f45cbbc9cd8aeb64146a7e9f89972b803c416e7dfa251fc56b917a43"
+    },
+    {
+      "uscSection": "373",
+      "originalTitle": "Declaration of intention",
+      "units": [
+        {
+          "path": [],
+          "text": "He shall declare on oath before the clerk of any court authorized by this Act to naturalize aliens, or his authorized deputy, in the district in which such alien resides, two years at least prior to his admission, and after he has reached the age of eighteen years, that it is bona fide his intention to become a citizen of the United States and to reside permanently therein, and that he will, before being admitted to citizenship renounce forever all allegiance and fidelity to any foreign prince, potentate, state, or sovereignty. Such declaration shall set forth the name, age, occupation, personal description, place of birth, last foreign residence, the date of arrival, the name of the vessel, if any, in which he came to the United States, and the present place of residence in the United States of said alien. No declaration of intention or petition for naturalization shall be made outside of the office of the clerk of court."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-53/pdf/STATUTE-53-Pg843.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-53-Pg843.pdf",
+      "sourceSha256": "1289fecf574ec3a233a165aa56d7abe64fb2d47a3c6455d7f8d10e9cceccbe43",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Act of June 20, 1939, section 1, 53 Stat. 843",
+      "lastAmendmentDate": "1939-06-20",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "headingEvidence": "Former Code heading visually verified in the 1934 Code, chapter 9, PDF page 4.",
+      "historicalEditorialNote": "Full replacement of the first subdivision of section 4 of the 1906 Act. The subdivision's introductory ordinal is omitted because the reader identifies the provision by its Code section.",
+      "unitsSha256": "536f44b2fc69554b60393fc9d34a6175cc24df1523b50fa9cf3c17ed14e501e1"
+    },
+    {
+      "uscSection": "379",
+      "originalTitle": "Petition for naturalization; when required to be filed; allegations; verification by citizen witnesses",
+      "units": [
+        {
+          "path": [],
+          "text": "Not less than two years nor more than seven years after he has made such declaration of intention he shall make and file, in duplicate, a petition in writing, signed by the applicant in his own handwriting and duly verified, in which petition such applicant shall state his full name, his place of residence (by street and number, if possible), his occupation, and, if possible, the date and place of his birth; the place from which he emigrated, and the date and place of his arrival in the United States, and, if he entered through a port, the name of the vessel on which he arrived; the time when and the place and name of the court where he declared his intention to become a citizen of the United States; if he is married he shall state the name of his wife and, if possible, the country of her nativity and her place of residence at the time of filing his petition; and if he has children, the name, date, and place of birth and place of residence of each child living at the time of the filing of his petition: Provided, That if he has filed his declaration before June 29, 1906, he shall not be required to sign the petition in his own handwriting.\n\nThe petition shall set forth that he is not a disbeliever in or opposed to organized government or a member of or affiliated with any organization or body of persons teaching disbelief in or opposed to organized government, a polygamist or believer in the practice of polygamy, and that it is his intention to become a citizen of the United States and to renounce absolutely and forever all allegiance and fidelity to any foreign prince, potentate, state, or sovereignty, and that it is his intention to reside permanently within the United States, whether or not he has been denied admission as a citizen of the United States, and if denied, the ground or grounds of such denial, the court or courts in which such decision was rendered, and that the cause for such denial has been since cured or removed and every fact material to his naturalization and required to be proved upon the final hearing of his application.\n\nAs to each period of residence at any place in the county where the petitioner resides at the time of filing his petition, there shall be included in the petition the affidavits of at least two credible witnesses, citizens of the United States, stating that each has personally known the petitioner to have been a resident at such place for such period, and that the petitioner is and during all such period has been a person of good moral character."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008009/uscode1934-001008009.pdf#page=5",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-09.pdf",
+      "sourceSha256": "deedf2e9f7ace978a4e0dfaa1c6302818986e40ae66c7b65f36df4295b93acd3",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        5
+      ],
+      "versionLabel": "1934 Code text with its second paragraph replaced by the Act of June 20, 1939",
+      "lastAmendmentDate": "1939-06-20",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-53-Pg843.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-53/pdf/STATUTE-53-Pg843.pdf",
+          "bytes": 419603,
+          "sha256": "1289fecf574ec3a233a165aa56d7abe64fb2d47a3c6455d7f8d10e9cceccbe43",
+          "capturedAt": "2026-10-11",
+          "label": "Act of June 20, 1939, section 2, 53 Stat. 843"
+        },
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-53-Pg844.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-53/pdf/STATUTE-53-Pg844.pdf",
+          "bytes": 418807,
+          "sha256": "ad609dfa71aa4e547d780efd31858e90707801f371a64e2beebeb7c5d56e1b74",
+          "capturedAt": "2026-10-11",
+          "label": "Continuation at 53 Stat. 844"
+        }
+      ],
+      "historicalEditorialNote": "The 1939 Act replaced only the second paragraph. The first and third paragraphs are retained from the 1934 Code. All three paragraphs and the two-page amendment were compared with the printed sources.",
+      "unitsSha256": "08a10afcacf613d7085b23816fa16b8f0176bc6aa5d85699456661cf38406e88"
+    },
+    {
+      "uscSection": "381",
+      "originalTitle": "Oath renouncing foreign allegiance and to support Constitution and laws",
+      "units": [
+        {
+          "path": [],
+          "text": "He shall, before he is admitted to citizenship, declare on oath, in open court, that he will support the Constitution of the United States, and that he absolutely and entirely renounces and abjures all allegiance and fidelity to any foreign prince, potentate, state, or sovereignty of which he was before a citizen or subject; and he will support and defend the Constitution and laws of the United States against all enemies, foreign and domestic, and bear true faith and allegiance to the same."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-53/pdf/STATUTE-53-Pg844.pdf#page=1",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-53-Pg844.pdf",
+      "sourceSha256": "ad609dfa71aa4e547d780efd31858e90707801f371a64e2beebeb7c5d56e1b74",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        1
+      ],
+      "versionLabel": "Act of June 20, 1939, section 3, 53 Stat. 844",
+      "lastAmendmentDate": "1939-06-20",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "headingEvidence": "Former Code heading visually verified in the 1934 Code, chapter 9, PDF page 6.",
+      "historicalEditorialNote": "Full replacement of the third subdivision of section 4 of the 1906 Act, which the enacted amendment identifies as former 8 U.S.C. 381.",
+      "unitsSha256": "ec3117cd5daf2007c107fe016b236a7505c196636a78c09e1744718d810f36a0"
+    },
+    {
+      "uscSection": "134",
+      "originalTitle": "Refunding head tax",
+      "units": [
+        {
+          "path": [],
+          "text": "Provided, That the Commissioner-General of Immigration, with the approval of the Secretary of Commerce and Labor, shall have power to refund head tax heretofore and hereafter collected under section one of the immigration Act approved March third, nineteen hundred and three, upon presentation of evidence showing conclusively that such collection was erroneously made."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/link/statute/33/684?link-type=pdf#page=54",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-33-Pg684-link.pdf",
+      "sourceSha256": "7c9adbdfc849a8819e7394cf22720c327d1f6cdc8d0a5853f57f6d4db1af7d52",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        54
+      ],
+      "versionLabel": "Act of February 3, 1905, section 1, 33 Stat. 684",
+      "lastAmendmentDate": "1905-02-03",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "headingEvidence": "Former heading printed in the 1934 Code; the later Code contains only an executed-provision note.",
+      "historicalEditorialNote": "The complete head-tax refund proviso is reproduced from its enactment. The surrounding appropriation for Bureau of Immigration salaries is not part of former section 134.",
+      "unitsSha256": "e052f3e0c42b47f8006102cea1941f900e24d25138c9632dc506adbd1741be0b"
+    },
+    {
+      "uscSection": "371",
+      "originalTitle": "Wife of alien declarant becoming insane before naturalization; minor children",
+      "units": [
+        {
+          "path": [],
+          "text": "When any alien, who has declared his intention to become a citizen of the United States, becomes insane before he is actually naturalized, and his wife shall thereafter make a homestead entry under the land laws of the United States, she and their minor children may, by complying with the other provisions of the naturalization laws be naturalized without making any declaration of intention."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1925-00100/uscode1925-001008009/uscode1925-001008009.pdf#page=3",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1925/chapter-09.pdf",
+      "sourceSha256": "281aa373807ab4bfb9bbd60c00733e84bf14bb47574d0507b362e637708ee54d",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        3
+      ],
+      "versionLabel": "Historical text from the 1925 U.S. Code edition",
+      "lastAmendmentDate": "1911-02-24",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "headingOrigin": "editorial-contextualization",
+      "headingEvidence": "The printed catchline begins ‘Same;’ and follows the naturalization-of-women provisions. The subject is stated directly for standalone display.",
+      "unitsSha256": "a28cc8e6581a427c1789d56f10563e38750698558fd9060f407e18f929477b74"
+    },
+    {
+      "uscSection": "299",
+      "originalTitle": "Deportation officer",
+      "units": [
+        {
+          "path": [],
+          "text": "All Chinese persons ordered deported under judicial writs shall be delivered by the marshal of the district or his deputy into the custody of any officer designated for that purpose by the Attorney General, for conveyance to the frontier or seaboard for deportation in the same manner as aliens deported under the immigration laws."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1940-00100/uscode1940-001008007/uscode1940-001008007.pdf#page=8",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1940/chapter-07.pdf",
+      "sourceSha256": "95cec7c4489379de1a34f58261d169b9d0132ba23294a176cd0aa7e2f5a6337d",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        8
+      ],
+      "versionLabel": "Historical text from the 1940 U.S. Code edition",
+      "lastAmendmentDate": "1940-06-14",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "unitsSha256": "043185a65c7e6e6b1fc1f89581a49badb6d8cb091fd492cdb928990426e569da"
+    },
+    {
+      "uscSection": "137–4",
+      "originalTitle": "Temporary exclusion and deportation of aliens excludable under the Act",
+      "units": [
+        {
+          "path": [],
+          "text": "Notwithstanding the provisions of sections 16 and 17 of the Immigration Act of February 5, 1917, as amended (39 Stat. 885–887; 8 U. S. C. 152, 153), which relate to boards of special inquiry and to appeal from the decisions of such boards, any alien who may appear to the examining immigration officer at the port of arrival to be excludable under section 1 shall be temporarily excluded, and no further inquiry by a board of special inquiry shall be conducted until after the case is reported to the Attorney General and such an inquiry is directed by the Attorney General. If the Attorney General is satisfied that the alien is excludable under section 1 on the basis of information of a confidential nature, the disclosure of which would be prejudicial to the public interest, safety, or security, he may deny any further inquiry by a board of special inquiry and order such alien to be excluded and deported."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=22",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        22
+      ],
+      "versionLabel": "Act of October 16, 1918, as completely amended September 23, 1950 (64 Stat. 1008–1010)",
+      "lastAmendmentDate": "1950-09-23",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted Act section, visually checked against 64 Stat. 1008–1010. Print line wraps and broken words are normalized; the Act's own section and subsection numbering is retained. The descriptive heading is not represented as a former Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The enacted section has no catchline. Its subject follows the statutory text and the printed margin label(s): ‘Temporary exclusion, etc.’. The House groups sections 137–4 through 137–8 under one disposition note.",
+      "unitsSha256": "9527eb9f173654b03a06be9e33c4b0d84628cc72722da4027b9146a93869838b"
+    },
+    {
+      "uscSection": "137–5",
+      "originalTitle": "Limits on admission exceptions for aliens covered by the Act",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "The provisions of the seventh proviso to section 3 of the Immigration Act of February 5, 1917, as amended (39 Stat. 875; 8 U. S. C. 136), relating to the admission of aliens to the United States, shall have no application to cases falling within the purview of section 1 of this Act."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "The provisions of the ninth proviso to section 3 of the Immigration Act of February 5, 1917, as amended (39 Stat. 875; 8 U. S. C. 136), relating to the temporary admission of aliens to the United States, shall have no application to cases falling within the purview of section 1(1) and 1 (3) of this Act. The Attorney General shall make a detailed report to Congress in any case where the authority granted in the ninth proviso above is exercised on behalf of any alien excludible under section 1 (2)."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "Notwithstanding the provisions of the tenth proviso to section 3 of the Immigration Act of February 5, 1917, as amended (39 Stat. 875; 8 U. S. C. 136), or any other law—"
+        },
+        {
+          "path": [
+            "c",
+            "1"
+          ],
+          "text": "the provisions of section 1 (1) and 1 (3) shall be applicable to any alien within the purview of section 3 (1) of the Immigration Act of 1924, as amended (43 Stat. 153; 8 U. S. C. 201), except ambassadors, public ministers, and career diplomatic and consular officers who have been accredited by a foreign government recognized de jure by the United States and who are accepted by the President or the Secretary of State, and the members of the immediate families of such aliens, who shall be subject to exclusion under the provisions of section 1 (1) only pursuant to such rules and regulations as the President may deem to be necessary; and"
+        },
+        {
+          "path": [
+            "c",
+            "2"
+          ],
+          "text": "the provisions of section 1 (1) shall be applicable to any alien within the purview of section 3 (7) of the Immigration Act of 1924, as amended (43 Stat. 153; 8 U. S. C. 201); the provisions of section 1 (3) shall be applicable to any such alien except a designated principal resident representative of a foreign government member of an international organization entitled to enjoy privileges, exemptions, and immunities as an international organization under the International Organizations Immunities Act (59 Stat. 669), accredited resident members of the staff of such representative, and members of his immediate family."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "The proviso to section 15 of the Immigration Act of 1924, as amended (43 Stat. 153; 8 U. S. C. 201), relating to the departure of any alien who has failed to maintain status under section 3 (1) or 3 (7) of said Act shall not be applicable in the case of any alien who would be subject to exclusion under the provisions of section 1 of this Act if he were applying for admission."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=22",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        22,
+        23
+      ],
+      "versionLabel": "Act of October 16, 1918, as completely amended September 23, 1950 (64 Stat. 1008–1010)",
+      "lastAmendmentDate": "1950-09-23",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted Act section, visually checked against 64 Stat. 1008–1010. Print line wraps and broken words are normalized; the Act's own section and subsection numbering is retained. The descriptive heading is not represented as a former Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The enacted section has no catchline. Its subject follows the statutory text and the printed margin label(s): ‘Report to Congress’. The House groups sections 137–4 through 137–8 under one disposition note.",
+      "unitsSha256": "ab0263adc9bd22a210fe8ee7fb0bcbd334132ea7e466d3d47c0575b65af024b6"
+    },
+    {
+      "uscSection": "137–6",
+      "originalTitle": "Suspension of immigration visas when a country refuses an alien's return",
+      "units": [
+        {
+          "path": [],
+          "text": "Upon the notification by the Attorney General that any country upon request denies or unduly delays acceptance of the return of any alien who is a national, citizen, subject or resident thereof, the Secretary of State shall instruct consular officers performing their duties in the territory of such country to discontinue the issuance of immigration visas to nationals, citizens, subjects, or residents of such country, until such time as the Attorney General shall inform the Secretary of State that such country has accepted such alien."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=23",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        23
+      ],
+      "versionLabel": "Act of October 16, 1918, as completely amended September 23, 1950 (64 Stat. 1008–1010)",
+      "lastAmendmentDate": "1950-09-23",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted Act section, visually checked against 64 Stat. 1008–1010. Print line wraps and broken words are normalized; the Act's own section and subsection numbering is retained. The descriptive heading is not represented as a former Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The enacted section has no catchline. Its subject follows the statutory text and the printed margin label(s): ‘Acceptance of return of alien’. The House groups sections 137–4 through 137–8 under one disposition note.",
+      "unitsSha256": "b813e04683fd0daf487d1ee6f797e6393bbe5e8a227a291a6e3604e784d42258"
+    },
+    {
+      "uscSection": "137–7",
+      "originalTitle": "Penalties for assisting unlawful entry or returning after deportation",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "Any person who knowingly aids or assists any alien excludable under section 1 to enter the United States, or who connives or conspires with any person or persons to allow, procure, or permit any such alien to enter the United States, shall be guilty of a felony, and upon conviction thereof shall be punished by a fine of not more than $5,000 or by imprisonment for not more than five years, or both."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "Any alien who shall, after he has been excluded and deported or arrested and deported in pursuance of the provisions of this Act, thereafter and without the express authorization of the Attorney General return to or enter the United States or attempt to return to or to enter the United States shall be deemed guilty of a felony, and upon conviction thereof shall be punished by imprisonment for a term of not more than five years; and shall, upon the termination of such imprisonment, be taken into custody, upon the warrant of the Attorney General, and deported in the manner provided in the Immigration Act of February 5, 1917."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=23",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        23
+      ],
+      "versionLabel": "Act of October 16, 1918, as completely amended September 23, 1950 (64 Stat. 1008–1010)",
+      "lastAmendmentDate": "1950-09-23",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted Act section, visually checked against 64 Stat. 1008–1010. Print line wraps and broken words are normalized; the Act's own section and subsection numbering is retained. The descriptive heading is not represented as a former Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The enacted section has no catchline. Its subject follows the statutory text and the printed margin label(s): ‘Person assisting alien to enter U.S.’ and ‘Illegal entry after deportation’. The House groups sections 137–4 through 137–8 under one disposition note.",
+      "unitsSha256": "2893f1d1a5a92156d9480b80d430bd1b99132ed9d30c1f96fe0fab6a0608587c"
+    },
+    {
+      "uscSection": "137–8",
+      "originalTitle": "Inapplicability of laws inconsistent with the Act",
+      "units": [
+        {
+          "path": [],
+          "text": "Any statute or other authority or provision having the force or effect of law, to the extent that it is inconsistent with any of the provisions of this Act, is hereby expressly declared to be inapplicable to any alien whose case is within the purview of this Act."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=23",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        23,
+        24
+      ],
+      "versionLabel": "Act of October 16, 1918, as completely amended September 23, 1950 (64 Stat. 1008–1010)",
+      "lastAmendmentDate": "1950-09-23",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Complete enacted Act section, visually checked against 64 Stat. 1008–1010. Print line wraps and broken words are normalized; the Act's own section and subsection numbering is retained. The descriptive heading is not represented as a former Code catchline.",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "The enacted section has no catchline. Its subject follows the statutory text and the printed margin label(s): ‘Nonapplicability’. The House groups sections 137–4 through 137–8 under one disposition note.",
+      "unitsSha256": "29730211a2c346299c2ca3828f2c36f4954193cf6da864044d8de5be22124ba8"
+    },
+    {
+      "uscSection": "102",
+      "originalTitle": "Administration of immigration laws; rules and regulations; contracts for support of distressed aliens; detail of immigration officers",
+      "units": [
+        {
+          "path": [],
+          "text": "The Commissioner of Immigration and Naturalization under the direction of the Attorney General shall have charge of the administration of all laws relating to the immigration of aliens into the United States, and shall have the control, direction, and supervision of all officers, clerks, and employees appointed thereunder. He shall receive a salary of $10,000 per annum. He shall establish such rules and regulations, prescribe such forms of bond, reports, entries, and other papers, and shall issue from time to time such instructions not inconsistent with law, as he shall deem best calculated for carrying out the provisions of this section and sections 101, 105, 108, 109, 113, 115, 116, 132, 136, 138, 139, 142-156, 158-166, 168, 169, 171, 173, 175, 177, and 178 of this title and for protecting the United States and aliens migrating thereto from fraud and loss, and shall have authority to enter into contract for the support and relief of such aliens as may fall into distress or need public aid, and to remove to their native country, or the country from whence they came, or to the country of which they are citizens or subjects, at any time after entry, at the expense of the appropriations for the enforcement of the provisions of such sections, such as fall into distress or need public aid from causes arising subsequent to their entry and are desirous of being so removed, but any person thus removed shall forever be ineligible for readmission except upon the approval of the Secretary of State and the Attorney General; he shall prescribe rules for the entry and inspection of aliens coming to the United States from or through Canada and Mexico, so as not unnecessarily to delay, impede, or annoy persons in ordinary travel between the United States and said countries, and shall have power to enter into contracts with transportation lines for the said purpose. It shall be the duty of the Commissioner of Immigration and Naturalization to detail officers of the Immigration and Naturalization Service from time to time as may be necessary, in his judgment, to secure information as to the number of aliens detained in the penal, reformatory, and charitable institutions (public and private) of the several States and Territories, the District of Columbia, and other territory of the United States, and to inform the officers of such institutions of the provisions of law in relation to the deportation of aliens who have become public charges. He may, with the approval of the Attorney General, whenever in his judgment such action may be necessary to accomplish the purpose of said sections, detail immigration officers for service in foreign countries; and, upon his request, approved by the Attorney General, the Federal Security Administrator may detail medical officers of the United States Public Health Service for the performance of duties in foreign countries in connection with their enforcement."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008006/uscode1946-001008006.pdf#page=4",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-06.pdf",
+      "sourceSha256": "94530089fb851f089c426da37de3f9ebeae8b099cb9772650c862c1e595ad44f",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        4,
+        5
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code edition",
+      "lastAmendmentDate": "1945-10-29",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "headingEvidence": "The former Code caption and full body were visually checked; inherited ‘Same;’ subjects are expanded for standalone display where applicable.",
+      "unitsSha256": "ad7633f5cda37b3dc59c036d387853e70de76eb6d32deb696c5459314da358be"
+    },
+    {
+      "uscSection": "277",
+      "originalTitle": "Identification of laborers; certificates; ports of entry",
+      "units": [
+        {
+          "path": [],
+          "text": "A Chinese person claiming the right to be permitted to leave the United States and return thereto on any of the grounds stated in the foregoing section, shall apply to such officer under the control of the Commissioner of Immigration and Naturalization as the Attorney General may designate therefor, of the district from which he wishes to depart at least a month prior to the time of his departure, and shall make on oath before the said officer a full statement descriptive of his family, or property, or debts, as the case may be, and shall furnish to said officer such proofs of the facts entitling him to return as shall be required by the rules and regulations prescribed from time to time by the Attorney General, and for any false swearing in relation thereto he shall incur the penalties of perjury. He shall also permit the officer to take a full description of his person, which description such officer shall retain and mark with a number. And if, after hearing the proofs and investigating all the circumstances of the case, such officer shall decide to issue a certificate of return, he shall at such time and place as he may designate, sign and give to the person applying, a certificate containing the number of the description last aforesaid, which shall be the sole evidence given to such person of his right to return. If this last-named certificate be transferred, it shall become void, and the person to whom it was given shall forfeit his right to return to the United States. The right to return under the said certificate shall be limited to one year; but it may be extended for an additional period, not to exceed a year, in cases where, by reason of sickness or other cause of disability beyond his control, the holder thereof shall be rendered unable sooner to return, which facts shall be fully reported to and investigated by the consular representative of the United States at the port or place from which such laborer departs for the United States, and certified by such representative of the United States to the satisfaction of such officer under the control of the Commissioner of Immigration and Naturalization as the Attorney General may designate therefor at the port where such Chinese person shall seek to land in the United States, such certificate to be delivered by said representative to the master of the vessel on which he departs for the United States. And no Chinese laborer shall be permitted to reenter the United States without producing to the proper officer at the port of such entry the return certificate herein required. A Chinese laborer possessing a certificate under this section shall be admitted to the United States only at the port from which he departed therefrom, and no Chinese person, except Chinese diplomatic or consular officers, and their attendants, shall be permitted to enter the United States except at the ports of San Francisco, Portland, Oregon, Boston, New York, New Orleans, Port Townsend, or such other ports as may be designated by the Attorney General."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1940-00100/uscode1940-001008007/uscode1940-001008007.pdf#page=4",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1940/chapter-07.pdf",
+      "sourceSha256": "95cec7c4489379de1a34f58261d169b9d0132ba23294a176cd0aa7e2f5a6337d",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        4,
+        5
+      ],
+      "versionLabel": "Historical text from the 1940 U.S. Code edition",
+      "lastAmendmentDate": "1940-06-14",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "headingEvidence": "The former Code caption and full body were visually checked; inherited ‘Same;’ subjects are expanded for standalone display where applicable.",
+      "unitsSha256": "4656847d7cb917e0c46680ccdd2d66ee624ce1502d544cc94aeda635562ebe21"
+    },
+    {
+      "uscSection": "403",
+      "originalTitle": "Naturalization fees during war",
+      "units": [
+        {
+          "path": [],
+          "text": "During the time when the United States is at war no clerk of a United States court shall charge or collect a naturalization fee from an alien in the military service of the United States for filing his petition or issuing the certificate of naturalization upon admission to citizenship, and no clerk of any State court shall charge or collect any fee for this service unless the laws of the State require such charge to be made, in which case nothing more than the portion of the fee required to be paid to the State shall be charged or collected. A full accounting for all of these transactions shall be made to the Immigration and Naturalization Service in the manner provided by section 402 of this title."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1934-00100/uscode1934-001008009/uscode1934-001008009.pdf#page=11",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1934/chapter-09.pdf",
+      "sourceSha256": "deedf2e9f7ace978a4e0dfaa1c6302818986e40ae66c7b65f36df4295b93acd3",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        11
+      ],
+      "versionLabel": "Historical text from the 1934 U.S. Code edition",
+      "lastAmendmentDate": "1933-06-10",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "headingEvidence": "The former Code caption and full body were visually checked; inherited ‘Same;’ subjects are expanded for standalone display where applicable.",
+      "unitsSha256": "7967139a2786d2e9ee2224e7ba665951725232520bf90e2439151cc1c5dd106a"
+    },
+    {
+      "uscSection": "800",
+      "originalTitle": "Right of expatriation",
+      "units": [
+        {
+          "path": [],
+          "text": "Whereas the right of expatriation is a natural and inherent right of all people, indispensable to the enjoyment of the rights of life, liberty, and the pursuit of happiness; and whereas in the recognition of this principle this Government has freely received emigrants from all nations, and invested them with the rights of citizenship; and whereas it is claimed that such American citizens, with their descendants, are subjects of foreign states, owing allegiance to the governments thereof; and whereas it is necessary to the maintenance of public peace that this claim of foreign allegiance should be promptly and finally disavowed: Therefore any declaration, instruction, opinion, order, or decision of any officer of the United States which denies, restricts, impairs, or questions the right of expatriation, is declared inconsistent with the fundamental principles of the Republic."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=28",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        28
+      ],
+      "versionLabel": "Historical text from the 1946 U.S. Code edition",
+      "lastAmendmentDate": "1868-07-27",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "headingEvidence": "The former Code caption and full body were visually checked; inherited ‘Same;’ subjects are expanded for standalone display where applicable.",
+      "unitsSha256": "ff4c07139958951f27909e3d36207e5445cdbacd48d7405d55b01292c4e247e4"
+    },
+    {
+      "uscSection": "103a",
+      "originalTitle": "Reimbursement of expenses incurred by other agencies of Federal, State, and local governments",
+      "units": [
+        {
+          "path": [],
+          "text": "Provided further, That the Attorney General may transfer to, or reimburse, any other department, agency, or office of Federal, State, or local governments, funds in such amounts as may be necessary for salaries and expenses incurred by them in rendering authorized assistance to the Department of Justice in connection with the administration and enforcement of said laws;"
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg279.pdf#page=14",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg279.pdf",
+      "sourceSha256": "f31b22f51d428d250b6bddde26ad59d2f82bb34a6e088b0753308728077a8650",
+      "sourceCapturedAt": "2026-10-12T00:50:16Z",
+      "sourcePdfPages": [
+        14
+      ],
+      "versionLabel": "Final annual appropriation provision, 61 Stat. 292, enacted 1947-07-09",
+      "lastAmendmentDate": "1947-07-09",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "historicalEditorialNote": "The complete provision is reproduced from its final annual appropriation enactment identified in the Code's source history, retaining the introductory proviso and closing punctuation. ‘Said laws’ refers to the immigration, naturalization, and alien-registration laws described in the appropriation paragraph.",
+      "headingEvidence": "Descriptive heading retained from the former Code caption; the appropriation proviso has no separate statutory heading.",
+      "headingOrigin": "editorial-description",
+      "unitsSha256": "63a5db21a90cd4487236ccbf69741da7bf5e10583ad8f7ff27dde6e5f4628851"
+    },
+    {
+      "uscSection": "109d",
+      "originalTitle": "Employment of interpreters",
+      "units": [
+        {
+          "path": [],
+          "text": "Provided further, That provisions of law prohibiting or restricting the employment of aliens in the Government service shall not apply to the employment of interpreters in the Immigration and Naturalization Service (not to exceed ten permanent and such temporary employees as are required from time to time) where competent citizen interpreters are not available."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg595.pdf#page=24",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg595.pdf",
+      "sourceSha256": "6a204f6f9aed32add9d3b49ee16f0c5bc40c3351df058ac202a238c59a649fe4",
+      "sourceCapturedAt": "2026-10-12T00:50:16Z",
+      "sourcePdfPages": [
+        24
+      ],
+      "versionLabel": "Final annual appropriation provision, 64 Stat. 618, enacted 1950-09-06",
+      "lastAmendmentDate": "1950-09-06",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "historicalEditorialNote": "The complete provision is reproduced from its final annual appropriation enactment identified in the Code's source history, retaining the introductory proviso and closing punctuation.",
+      "headingEvidence": "Descriptive heading retained from the former Code caption; the appropriation proviso has no separate statutory heading.",
+      "headingOrigin": "editorial-description",
+      "unitsSha256": "08844810f7fb26073d0e805cfa20b118a1d89dc781054827e2e2ec118c3911af"
+    },
+    {
+      "uscSection": "117",
+      "originalTitle": "Use of hospital at Ellis Island by Public Health Service",
+      "units": [
+        {
+          "path": [],
+          "text": "Provided, That the Immigration and Naturalization Service shall permit the Public Health Service to use the hospitals at Ellis Island Immigration Station for the care of Public Health Service patients free of expense for physical upkeep, but with a charge of actual cost of fuel, light, water, telephone, and similar supplies and services, to be covered into the proper Immigration Service appropriations; and money collected by the Immigration Service on account of hospital expenses of persons detained in hospitals of the Public Health Service under the immigration laws and regulations shall be covered into the Treasury as miscellaneous receipts:"
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-58/pdf/STATUTE-58-Pg547.pdf#page=12",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-58-Pg547.pdf",
+      "sourceSha256": "db1e0295bc23b80cc02ba77065a8a2eb2569f1c43aad7154421ec75836ba42ad",
+      "sourceCapturedAt": "2026-10-12T00:50:16Z",
+      "sourcePdfPages": [
+        12
+      ],
+      "versionLabel": "Final annual appropriation provision, 58 Stat. 558, enacted 1944-06-28",
+      "lastAmendmentDate": "1944-06-28",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Checked against the official scanned pages. Print line wrapping and end-of-line word breaks are normalized; editorial notes remain separate from the former statutory body.",
+      "historicalEditorialNote": "The complete provision is reproduced from its final annual appropriation enactment identified in the Code's source history, retaining the introductory proviso and closing punctuation.",
+      "headingEvidence": "Descriptive heading retained from the former Code caption; the appropriation proviso has no separate statutory heading.",
+      "headingOrigin": "editorial-description",
+      "unitsSha256": "c4cd03f8f6d4923ea26c5718ea0c3f377f42824ee0e53e52a791bf34dbf9171e"
+    },
+    {
+      "uscSection": "1186",
+      "originalTitle": "Admission of temporary H-2A workers",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "heading": "Conditions for approval of H-2A petitions"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "A petition to import an alien as an H-2A worker (as defined in subsection (i)(2)) may not be approved by the Attorney General unless the petitioner has applied to the Secretary of Labor for a certification that—"
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "A"
+          ],
+          "text": "there are not sufficient workers who are able, willing, and qualified, and who will be available at the time and place needed, to perform the labor or services involved in the petition, and"
+        },
+        {
+          "path": [
+            "a",
+            "1",
+            "B"
+          ],
+          "text": "the employment of the alien in such labor or services will not adversely affect the wages and working conditions of workers in the United States similarly employed."
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "The Secretary of Labor may require by regulation, as a condition of issuing the certification, the payment of a fee to recover the reasonable costs of processing applications for certification."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "heading": "Conditions for denial of labor certification",
+          "text": "The Secretary of Labor may not issue a certification under subsection (a) with respect to an employer if the conditions described in that subsection are not met or if any of the following conditions are met:"
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "text": "There is a strike or lockout in the course of a labor dispute which, under the regulations, precludes such certification."
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ]
+        },
+        {
+          "path": [
+            "b",
+            "2",
+            "A"
+          ],
+          "text": "The employer during the previous two-year period employed H-2A workers and the Secretary of Labor has determined, after notice and opportunity for a hearing, that the employer at any time during that period substantially violated a material term or condition of the labor certification with respect to the employment of domestic or nonimmigrant workers."
+        },
+        {
+          "path": [
+            "b",
+            "2",
+            "B"
+          ],
+          "text": "No employer may be denied certification under subparagraph (A) for more than three years for any violation described in such subparagraph."
+        },
+        {
+          "path": [
+            "b",
+            "3"
+          ],
+          "text": "The employer has not provided the Secretary with satisfactory assurances that if the employment for which the certification is sought is not covered by State workers' compensation law, the employer will provide, at no cost to the worker, insurance covering injury and disease arising out of and in the course of the worker's employment which will provide benefits at least equal to those provided under the State workers' compensation law for comparable employment."
+        },
+        {
+          "path": [
+            "b",
+            "4"
+          ],
+          "text": "The Secretary determines that the employer has not made positive recruitment efforts within a multi-state region of traditional or expected labor supply where the Secretary finds that there are a significant number of qualified United States workers who, if recruited, would be willing to make themselves available for work at the time and place needed. Positive recruitment under this paragraph is in addition to, and shall be conducted within the same time period as, the circulation through the interstate employment service system of the employer's job offer. The obligation to engage in positive recruitment under this paragraph shall terminate on the date the H-2A workers depart for the employer's place of employment."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "heading": "Special rules for consideration of applications",
+          "text": "The following rules shall apply in the case of the filing and consideration of an application for a labor certification under this section:"
+        },
+        {
+          "path": [
+            "c",
+            "1"
+          ],
+          "heading": "Deadline for filing applications",
+          "text": "The Secretary of Labor may not require that the application be filed more than 60 days before the first date the employer requires the labor or services of the H-2A worker."
+        },
+        {
+          "path": [
+            "c",
+            "2"
+          ],
+          "heading": "Notice within seven days of deficiencies"
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "A"
+          ],
+          "text": "The employer shall be notified in writing within seven days of the date of filing if the application does not meet the standards (other than that described in subsection (a)(1)(A)) for approval."
+        },
+        {
+          "path": [
+            "c",
+            "2",
+            "B"
+          ],
+          "text": "If the application does not meet such standards, the notice shall include the reasons therefor and the Secretary shall provide an opportunity for the prompt resubmission of a modified application."
+        },
+        {
+          "path": [
+            "c",
+            "3"
+          ],
+          "heading": "Issuance of certification"
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "A"
+          ],
+          "text": "The Secretary of Labor shall make, not later than 20 days before the date such labor or services are first required to be performed, the certification described in subsection (a)(1) if—",
+          "continuation": "In considering the question of whether a specific qualification is appropriate in a job offer, the Secretary shall apply the normal and accepted qualifications required by non-H-2A-employers in the same or comparable occupations and crops."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "A",
+            "i"
+          ],
+          "text": "the employer has complied with the criteria for certification (including criteria for the recruitment of eligible individuals as prescribed by the Secretary), and"
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "A",
+            "ii"
+          ],
+          "text": "the employer does not actually have, or has not been provided with referrals of, qualified eligible individuals who have indicated their availability to perform such labor or services on the terms and conditions of a job offer which meets the requirements of the Secretary."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B"
+          ]
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "i"
+          ],
+          "text": "For a period of 3 years subsequent to the effective date of this section, labor certifications shall remain effective only if, from the time the foreign worker departs for the employer's place of employment, the employer will provide employment to any qualified United States worker who applies to the employer until 50 percent of the period of the work contract, under which the foreign worker who is in the job was hired, has elapsed. In addition, the employer will offer to provide benefits, wages and working conditions required pursuant to this section and regulations."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "ii"
+          ],
+          "text": "The requirement of clause (i) shall not apply to any employer who—"
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "ii",
+            "I"
+          ],
+          "text": "did not, during any calendar quarter during the preceding calendar year, use more than 500 man-days of agricultural labor, as defined in section 3(u) of the Fair Labor Standards Act of 1938 (29 U.S.C. 203(u)),"
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "ii",
+            "II"
+          ],
+          "text": "is not a member of an association which has petitioned for certification under this section for its members, and"
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "ii",
+            "III"
+          ],
+          "text": "has not otherwise associated with other employers who are petitioning for temporary foreign workers under this section."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "iii"
+          ],
+          "text": "Six months before the end of the 3-year period described in clause (i), the Secretary of Labor shall consider the findings of the report mandated by section 403(a)(4)(D) of the Immigration Reform and Control Act of 1986 as well as other relevant materials, including evidence of benefits to United States workers and costs to employers, addressing the advisability of continuing a policy which requires an employer, as a condition for certification under this section, to continue to accept qualified, eligible United States workers for employment after the date the H-2A workers depart for work with the employer. The Secretary's review of such findings and materials shall lead to the issuance of findings in furtherance of the Congressional policy that aliens not be admitted under this section unless there are not sufficient workers in the United States who are able, willing, and qualified to perform the labor or service needed and that the employment of the aliens in such labor or services will not adversely affect the wages and working conditions of workers in the United States similarly employed. In the absence of the enactment of Federal legislation prior to three months before the end of the 3-year period described in clause (i) which addresses the subject matter of this subparagraph, the Secretary shall immediately publish the findings required by this clause, and shall promulgate, on an interim or final basis, regulations based on his findings which shall be effective no later than three years from the effective date of this section."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "iv"
+          ],
+          "text": "In complying with clause (i) of this subparagraph, an association shall be allowed to refer or transfer workers among its members: Provided, That for purposes of this section an association acting as an agent for its members shall not be considered a joint employer merely because of such referral or transfer."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "v"
+          ],
+          "text": "United States workers referred or transferred pursuant to clause (iv) of this subparagraph shall not be treated disparately."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "vi"
+          ],
+          "text": "An employer shall not be liable for payments under section 655.202(b)(6) of title 20, Code of Federal Regulations (or any successor regulation) with respect to an H-2A worker who is displaced due to compliance with the requirement of this subparagraph, if the Secretary of Labor certifies that the H-2A worker was displaced because of the employer's compliance with clause (i) of this subparagraph."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "vii"
+          ]
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "vii",
+            "I"
+          ],
+          "text": "No person or entity shall willfully and knowingly withhold domestic workers prior to the arrival of H-2A workers in order to force the hiring of domestic workers under clause (i)."
+        },
+        {
+          "path": [
+            "c",
+            "3",
+            "B",
+            "vii",
+            "II"
+          ],
+          "text": "Upon the receipt of a complaint by an employer that a violation of subclause (I) has occurred the Secretary shall immediately investigate. He shall within 36 hours of the receipt of the complaint issue findings concerning the alleged violation. Where the Secretary finds that a violation has occurred, he shall immediately suspend the application of clause (i) of this subparagraph with respect to that certification for that date of need."
+        },
+        {
+          "path": [
+            "c",
+            "4"
+          ],
+          "heading": "Housing",
+          "text": "Employers shall furnish housing in accordance with regulations. The employer shall be permitted at the employer's option to provide housing meeting applicable Federal standards for temporary labor camps or to secure housing which meets the local standards for rental and/or public accomodations or other substantially similar class of habitation: Provided, That in the absence of applicable local standards, State standards for rental and/or public accomodations or other substantially similar class of habitation shall be met: Provided further, That in the absence of applicable local or State standards, Federal temporary labor camp standards shall apply: Provided further, That the Secretary of Labor shall issue regulations which address the specific requirements of housing for employees principally engaged in the range production of livestock: Provided further, That when it is the prevailing practice in the area and occupation of intended employment to provide family housing, family housing shall be provided to workers with families who request it: And provided further, That nothing in this paragraph shall require an employer to provide or secure housing for workers who are not entitled to it under the temporary labor certification regulations in effect on June 1, 1986."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "heading": "Roles of agricultural associations"
+        },
+        {
+          "path": [
+            "d",
+            "1"
+          ],
+          "heading": "Permitting filing by agricultural associations",
+          "text": "A petition to import an alien as a temporary agricultural worker, and an application for a labor certification with respect to such a worker, may be filed by an association of agricultural producers which use agricultural services."
+        },
+        {
+          "path": [
+            "d",
+            "2"
+          ],
+          "heading": "Treatment of associations acting as employers",
+          "text": "If an association is a joint or sole employer of temporary agricultural workers, the certifications granted under this section to the association may be used for the certified job opportunities of any of its producer members and such workers may be transferred among its producer members to perform agricultural services of a temporary or seasonal nature for which the certifications were granted."
+        },
+        {
+          "path": [
+            "d",
+            "3"
+          ],
+          "heading": "Treatment of violations"
+        },
+        {
+          "path": [
+            "d",
+            "3",
+            "A"
+          ],
+          "heading": "Member's violation does not necessarily disqualify association or other members",
+          "text": "If an individual producer member of a joint employer association is determined to have committed an act that under subsection (b)(2) results in the denial of certification with respect to the member, the denial shall apply only to that member of the association unless the Secretary determines that the association or other member participated in, had knowledge of, or reason to know of, the violation."
+        },
+        {
+          "path": [
+            "d",
+            "3",
+            "B"
+          ],
+          "heading": "Association's violation does not necessarily disqualify members"
+        },
+        {
+          "path": [
+            "d",
+            "3",
+            "B",
+            "i"
+          ],
+          "text": "If an association representing agricultural producers as a joint employer is determined to have committed an act that under subsection (b)(2) results in the denial of certification with respect to the association, the denial shall apply only to the association and does not apply to any individual producer member of the association unless the Secretary determines that the member participated in, had knowledge of, or reason to know of, the violation."
+        },
+        {
+          "path": [
+            "d",
+            "3",
+            "B",
+            "ii"
+          ],
+          "text": "If an association of agricultural producers certified as a sole employer is determined to have committed an act that under subsection (b)(2) results in the denial of certification with respect to the association, no individual producer member of such association may be the beneficiary of the services of temporary alien agricultural workers admitted under this section in the commodity and occupation in which such aliens were employed by the association which was denied certification during the period such denial is in force, unless such producer member employs such aliens in the commodity and occupation in question directly or through an association which is a joint employer of such workers with the producer member."
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "heading": "Expedited administrative appeals of certain determinations"
+        },
+        {
+          "path": [
+            "e",
+            "1"
+          ],
+          "text": "Regulations shall provide for an expedited procedure for the review of a denial of certification under subsection (a)(1) or a revocation of such a certification or, at the applicant's request, for a de novo administrative hearing respecting the denial or revocation."
+        },
+        {
+          "path": [
+            "e",
+            "2"
+          ],
+          "text": "The Secretary of Labor shall expeditiously, but in no case later than 72 hours after the time a new determination is requested, make a new determination on the request for certification in the case of an H-2A worker if able, willing, and qualified eligible individuals are not actually available at the time such labor or services are required and a certification was denied in whole or in part because of the availability of qualified workers. If the employer asserts that any eligible individual who has been referred is not able, willing, or qualified, the burden of proof is on the employer to establish that the individual referred is not able, willing, or qualified because of employment-related reasons."
+        },
+        {
+          "path": [
+            "f"
+          ],
+          "heading": "Violators disqualified for 5 years",
+          "text": "An alien may not be admitted to the United States as a temporary agricultural worker if the alien was admitted to the United States as such a worker within the previous five-year period and the alien during that period violated a term or condition of such previous admission."
+        },
+        {
+          "path": [
+            "g"
+          ],
+          "heading": "Authorizations of appropriations"
+        },
+        {
+          "path": [
+            "g",
+            "1"
+          ],
+          "text": "There are authorized to be appropriated for each fiscal year, beginning with fiscal year 1987, $10,000,000 for the purposes—"
+        },
+        {
+          "path": [
+            "g",
+            "1",
+            "A"
+          ],
+          "text": "of recruiting domestic workers for temporary labor and services which might otherwise be performed by nonimmigrants described in section 101(a)(15)(H)(ii)(a), and"
+        },
+        {
+          "path": [
+            "g",
+            "1",
+            "B"
+          ],
+          "text": "of monitoring terms and conditions under which such nonimmigrants (and domestic workers employed by the same employers) are employed in the United States."
+        },
+        {
+          "path": [
+            "g",
+            "2"
+          ],
+          "text": "The Secretary of Labor is authorized to take such actions, including imposing appropriate penalties and seeking appropriate injunctive relief and specific performance of contractual obligations, as may be necessary to assure employer compliance with terms and conditions of employment under this section."
+        },
+        {
+          "path": [
+            "g",
+            "3"
+          ],
+          "text": "There are authorized to be appropriated for each fiscal year, beginning with fiscal year 1987, such sums as may be necessary for the purpose of enabling the Secretary of Labor to make determinations and certifications under this section and under section 212(a)(14)."
+        },
+        {
+          "path": [
+            "g",
+            "4"
+          ],
+          "text": "There are authorized to be appropriated for each fiscal year, beginning with fiscal year 1987, such sums as may be necessary for the purposes of enabling the Secretary of Agriculture to carry out the Secretary's duties and responsibilities under this section."
+        },
+        {
+          "path": [
+            "h"
+          ],
+          "heading": "Miscellaneous provisions"
+        },
+        {
+          "path": [
+            "h",
+            "1"
+          ],
+          "text": "The Attorney General shall provide for such endorsement of entry and exit documents of nonimmigrants described in section 101(a)(15)(H)(ii) as may be necessary to carry out this section and to provide notice for purposes of section 274A."
+        },
+        {
+          "path": [
+            "h",
+            "2"
+          ],
+          "text": "The provisions of subsections (a) and (c) of section 214 and the provisions of this section preempt any State or local law regulating admissibility of nonimmigrant workers."
+        },
+        {
+          "path": [
+            "i"
+          ],
+          "heading": "Definitions",
+          "text": "For purposes of this section:"
+        },
+        {
+          "path": [
+            "i",
+            "1"
+          ],
+          "text": "The term \"eligible individual\" means, with respect to employment, an individual who is not an unauthorized alien (as defined in section 274A(h)) with respect to that employment."
+        },
+        {
+          "path": [
+            "i",
+            "2"
+          ],
+          "text": "The term \"H-2A worker\" means a nonimmigrant described in section 101(a)(15)(H)(ii)(a)."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-100/pdf/STATUTE-100-Pg3445.pdf#page=53",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-100-Pg3445.pdf",
+      "sourceSha256": "4faf7e824021b34bf53ece3ae97ef47a7fc7352722b71e5b3e57d56c532a02b8",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ],
+      "versionLabel": "Enacted text of Public Law 99-603, section 301(c), November 6, 1986",
+      "lastAmendmentDate": "1986-11-06",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "Transcribed from the enacted INA section 216 at 100 Stat. 3411-3416, excluding the separate Public Law 99-603 section 301(d) and later provisions. Original INA and Act cross-references and the enacted spelling “accomodations” are retained; print line wraps and typographic quotation marks are normalized.",
+      "unitsSha256": "2e2bd8c22f34dfd1b5b96399446196c25bfe5df329fca4d031ee9e3814e30913"
+    },
+    {
+      "uscSection": "1254",
+      "originalTitle": "Suspension of deportation",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "Adjustment of status for permanent residence; contents\n\nAs hereinafter prescribed in this section, the Attorney General may, in his discretion, suspend deportation and adjust the status to that of an alien lawfully admitted for permanent residence, in the case of an alien (other than an alien described in subparagraph (B) or (D) of section 241(a)(4)) who applies to the Attorney General for suspension of deportation and—"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "is deportable under any law of the United States except the provisions specified in paragraph (2) of this subsection; has been physically present in the United States for a continuous period of not less than seven years immediately preceding the date of such application, and proves that during all of such period he was and is a person of good moral character; and is a person whose deportation would, in the opinion of the Attorney General, result in extreme hardship to the alien or to his spouse, parent, or child, who is a citizen of the United States or an alien lawfully admitted for permanent residence;"
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "is deportable under paragraph (2), (3), or (4) of section 1251(a) of this title; has been physically present in the United States for a continuous period of not less than ten years immediately following the commission of an act, or the assumption of a status, constituting a ground for deportation, and proves that during all of such period he has been and is a person of good moral character; and is a person whose deportation would, in the opinion of the Attorney General, result in exceptional and extremely unusual hardship to the alien or to his spouse, parent, or child, who is a citizen of the United States or an alien lawfully admitted for permanent residence; or"
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "text": "is deportable under any law of the United States except section 1251(a)(1)(G) of this title and the provisions specified in paragraph (2); has been physically present in the United States for a continuous period of not less than 3 years immediately preceding the date of such application; has been battered or subjected to extreme cruelty in the United States by a spouse or parent who is a United States citizen or lawful permanent resident (or is the parent of a child of a United States citizen or lawful permanent resident and the child has been battered or subjected to extreme cruelty in the United States by such citizen or permanent resident parent); and proves that during all of such time in the United States the alien was and is a person of good moral character; and is a person whose deportation would, in the opinion of the Attorney General, result in extreme hardship to the alien or the alien's parent or child."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "Continuous physical presence: inapplicability based on service in Armed Forces; brief, casual, and innocent absences"
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "text": "The requirement of continuous physical presence in the United States specified in paragraphs (1) and (2) of subsection (a) of this section shall not be applicable to an alien who (A) has served for a minimum period of twenty-four months in an active-duty status in the Armed Forces of the United States and, if separated from such service, was separated under honorable conditions, and (B) at the time of his enlistment or induction was in the United States."
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ],
+          "text": "An alien shall not be considered to have failed to maintain continuous physical presence in the United States under paragraphs (1) and (2) of subsection (a) of this section if the absence from the United States was brief, casual, and innocent and did not meaningfully interrupt the continuous physical presence."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "Fulfillment of requirements of subsection (a)\n\nUpon application by any alien who is found by the Attorney General to meet the requirements of subsection (a) of this section the Attorney General may in his discretion suspend deportation of such alien."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "Record of cancellation of deportation\n\nUpon the cancellation of deportation in the case of any alien under this section, the Attorney General shall record the alien's lawful admission for permanent residence as of the date the cancellation of deportation of such alien is made."
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "text": "Voluntary departure"
+        },
+        {
+          "path": [
+            "e",
+            "1"
+          ],
+          "text": "Except as provided in paragraph (2), the Attorney General may, in his discretion, permit any alien under deportation proceedings, other than an alien within the provisions of paragraph (2), (3), or (4) of section 1251(a) of this title (and also any alien within the purview of such paragraphs if he is also within the provisions of paragraph (2) of subsection (a) of this section), to depart voluntarily from the United States at his own expense in lieu of deportation if such alien shall establish to the satisfaction of the Attorney General that he is, and has been, a person of good moral character for at least five years immediately preceding his application for voluntary departure under this subsection."
+        },
+        {
+          "path": [
+            "e",
+            "2"
+          ],
+          "text": "The authority contained in paragraph (1) shall not apply to any alien who is deportable under section 241(a)(4)(B) or because of a conviction for an aggravated felony."
+        },
+        {
+          "path": [
+            "f"
+          ],
+          "text": "Alien crewmen; nonimmigrant exchange aliens admitted to receive graduate medical education or training; other\n\nThe provisions of subsection (a) of this section shall not apply to an alien who—"
+        },
+        {
+          "path": [
+            "f",
+            "1"
+          ],
+          "text": "entered the United States as a crewman subsequent to June 30, 1964;"
+        },
+        {
+          "path": [
+            "f",
+            "2"
+          ],
+          "text": "was admitted to the United States as a nonimmigrant exchange alien as defined in section 1101(a)(15)(J) of this title, or has acquired the status of such a nonimmigrant exchange alien after admission, in order to receive graduate medical education or training, regardless of whether or not the alien is subject to or has fulfilled the two-year foreign residence requirement of section 1182(e) of this title; or\n\n(3)(A) was admitted to the United States as a nonimmigrant exchange alien as defined in section 1101(a)(15)(J) of this title or has acquired the status of such a nonimmigrant exchange alien after admission other than to receive graduate medical education or training, (B) is subject to the two-year foreign residence requirement of section 1182(e) of this title, and (C) has not fulfilled that requirement or received a waiver thereof."
+        },
+        {
+          "path": [
+            "g"
+          ],
+          "text": "Consideration of evidence\n\nIn acting on applications under subsection (a)(3) of this section, the Attorney General shall consider any credible evidence relevant to the application. The determination of what evidence is credible and the weight to be given that evidence shall be within the sole discretion of the Attorney General."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-1995-title8/html/USCODE-1995-title8.htm",
+      "sourceArtifact": "sources/legal/raw/historical-usc/govinfo/USCODE-1995-title8.htm",
+      "sourceSha256": "f0d573fa584b91af9cc9c2725fb5c1a20fcb1465e34c0706aae70641eeb483df",
+      "sourceCapturedAt": "2026-10-11",
+      "versionLabel": "Former 8 U.S.C. § 1254: 1995 official Code text with Pub. L. 104-132 § 413(b)–(c) amendments effective April 24, 1996",
+      "lastAmendmentDate": "1996-04-24",
+      "reviewStatus": "visually-reviewed",
+      "transcriptionNote": "The complete born-digital 1995 GovInfo Code text was compared with Pub. L. 104-132 § 413(b)–(c), (g). Only the two enacted substitutions are incorporated. The changed clauses retain the Act's INA section 241 cross-references, while unchanged clauses retain the Code's title 8 references. Pub. L. 104-208 § 308(b)(7) and § 309(a), (c) establish the general repeal boundary and transition caveat.",
+      "sourceLocator": "GovInfo USCODE-1995-title8, documentid:8_1254",
+      "validFromDate": "1996-04-24",
+      "validThroughDate": "1997-03-31",
+      "amendmentSources": [
+        {
+          "label": "Pub. L. 104-132 § 413(b)–(c), (g): final text and effective date",
+          "file": "sources/legal/raw/historical-usc/statutes/PLAW-104publ132.htm",
+          "url": "https://www.govinfo.gov/content/pkg/PLAW-104publ132/html/PLAW-104publ132.htm",
+          "bytes": 357131,
+          "sha256": "66e7d0b83851feeb91106d70dc5852156eff93edd9c8c5966b9b1190573a5929",
+          "capturedAt": "2026-10-11"
+        },
+        {
+          "label": "Pub. L. 104-208 § 308(b)(7), § 309(a): general repeal effective April 1, 1997",
+          "file": "sources/legal/raw/historical-usc/statutes/PLAW-104publ208.htm",
+          "url": "https://www.govinfo.gov/content/pkg/PLAW-104publ208/html/PLAW-104publ208.htm",
+          "bytes": 2559264,
+          "sha256": "f63732222ece601fb008d486c54d1f09d4521a181aaa512f671170129dc6ce31",
+          "capturedAt": "2026-10-11"
+        }
+      ],
+      "historicalEditorialNote": "The general repeal became effective April 1, 1997. Pub. L. 104-208 § 309(c) preserves former procedures for certain proceedings already pending on that date; the interval here describes the generally operative pre-repeal version, not every transitional application.",
+      "unitsSha256": "d555d03ddacde5daf4a8f5112d04204e85f8957f7ed4817984d3852172f91c13"
+    }
+  ]
+}

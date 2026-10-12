@@ -37,12 +37,16 @@ function fixtureCorpus() {
   };
 }
 
-function createHarness(shared, corpus) {
+function createHarness(shared, corpus, options = {}) {
   const listeners = new Map(), messages = [];
   const storage = {
     async loadSearchIndex(identity) { return shared.searchIndexes.get(identity.key) || null; },
-    async saveSearchIndex(record) { shared.searchIndexes.clear(); shared.searchIndexes.set(record.key, structuredClone(record)); return true; },
+    async saveSearchIndex(record) {
+      if (options.beforeSearchIndexSave) await options.beforeSearchIndexSave(record);
+      shared.searchIndexes.clear(); shared.searchIndexes.set(record.key, structuredClone(record)); return true;
+    },
     async ensureActiveCorpus(value) { shared.persistedCorpus = structuredClone(value); shared.corpusWrites += 1; return true; },
+    async activateCorpus(value) { shared.persistedCorpus = structuredClone(value); shared.corpusWrites += 1; return true; },
     async loadActiveCorpus() { shared.corpusReads += 1; return { corpus: structuredClone(shared.persistedCorpus || corpus), record: {}, slot: "active" }; }
   };
   const context = {
@@ -72,13 +76,14 @@ function createHarness(shared, corpus) {
     INASearchStorage: storage,
     INASearchCorpusPacking: { hydratePackedCorpus: value => value },
     addEventListener(type, listener) { listeners.set(type, listener); },
-    postMessage(value) { messages.push(structuredClone(value)); }
+    postMessage(value) { messages.push(structuredClone(value)); options.onMessage?.(value); }
   };
   context.globalThis = context;
   context.self = context;
   vm.createContext(context);
   new vm.Script(occurrenceSource, { filename: "INASearch-Occurrence.js" }).runInContext(context);
   for (const name of ["Annotations", "Query"]) new vm.Script(fs.readFileSync(path.join(root, "src", `INASearch-${name}.js`), "utf8")).runInContext(context);
+  new vm.Script(fs.readFileSync(path.join(root, "src", "INASearch-Corpus-Shards.js"), "utf8")).runInContext(context);
   new vm.Script(workerSource, { filename: "INASearch-Search-Worker.js" }).runInContext(context);
   return {
     messages,
@@ -99,6 +104,47 @@ async function main() {
   const corpus = fixtureCorpus();
   const identity = { corpusSchemaVersion: 5, corpusVersion: corpus.corpusVersion, corpusSha256: "a".repeat(64), authorities: ["ina", "cfr"] };
   const shared = { searchIndexes: new Map(), persistedCorpus: null, corpusWrites: 0, corpusReads: 0 };
+  const upgraded = structuredClone(corpus);
+  upgraded.referencedUsc = { version: "new", titles: [{ number: 18, name: "Crimes", sections: [{ id: "18-16", title: 18, section: "16", heading: "Crime", body: [{ label: "a", text: "upgradeneedle" }] }] }] };
+  const upgradeShared = { searchIndexes: new Map(), persistedCorpus: corpus, corpusWrites: 0, corpusReads: 0 };
+  const upgradeWorker = createHarness(upgradeShared, corpus);
+  upgradeWorker.send({ type: "init", identity, source: "upgraded-cache", runtimeCorpus: upgraded });
+  await upgradeWorker.waitFor(message => message.type === "ready");
+  upgradeWorker.send({ type: "search", sessionId: "upgrade", generation: 1, requestId: "upgrade-1", query: require("../src/INASearch-Command").parseCommand("upgradeneedle"), options: { authorities: ["statute"], plan: { branches: [{ kind: "law", scopes: [] }], citationScopes: [] } } });
+  const upgradeSearch = await upgradeWorker.waitFor(message => message.type === "search-result");
+  assert.strictEqual(upgradeSearch.result.totalOccurrences, 1, "The worker must use the upgraded runtime corpus instead of the older browser cache.");
+  await upgradeWorker.waitFor(message => message.type === "baseline-cached");
+  assert.strictEqual(upgradeShared.persistedCorpus.referencedUsc?.version, "new", "Cache upgrade must retain referenced USC sections for the next boot.");
+  const payloadShared = { searchIndexes: new Map(), persistedCorpus: null, corpusWrites: 0, corpusReads: 0 };
+  const payloadPending = createHarness(payloadShared, corpus);
+  payloadPending.send({ type: "init", identity, source: "embedded", awaitEmbeddedPayload: true });
+  await payloadPending.waitFor(message => message.type === "progress" && message.phase === "projection-build");
+  assert(!payloadPending.messages.some(message => message.type === "ready"), "A cold worker built a projection before its deferred embedded payload arrived.");
+  assert.strictEqual(payloadShared.corpusReads, 0, "A deferred embedded initialization fell back to an older runtime corpus.");
+  payloadPending.send({ type: "search", sessionId: "pending-payload", generation: 1, requestId: "pending-payload-1", query: require("../src/INASearch-Command").parseCommand("alpha"), options: { authorities: ["ina"], plan: { branches: [{ kind: "law", scopes: [] }], citationScopes: [] } } });
+  payloadPending.send({ type: "embedded-corpus-payload", identity, embeddedPayload: new Blob([JSON.stringify(corpus)]) });
+  const payloadSearch = await payloadPending.waitFor(message => message.type === "search-result" && message.sessionId === "pending-payload");
+  assert.strictEqual(payloadSearch.result.totalOccurrences, 1, "A pending startup search did not use its delivered embedded corpus payload.");
+  await payloadPending.waitFor(message => message.type === "metric" && message.name === "projection-cache-saved");
+  const delayedShared = { searchIndexes: new Map(), persistedCorpus: null, corpusWrites: 0, corpusReads: 0 };
+  let finishDelayedSave;
+  const delayedSave = new Promise(resolve => { finishDelayedSave = resolve; });
+  const delayed = createHarness(delayedShared, corpus, {
+    beforeSearchIndexSave: () => delayedSave,
+    onMessage(message) {
+      if (message.type !== "progress" || message.phase !== "projection-build" || message.progress) return;
+      delayed.send({ type: "search", sessionId: "startup", generation: 1, requestId: "startup-1", query: require("../src/INASearch-Command").parseCommand("alpha"), options: { authorities: ["ina"], plan: { branches: [{ kind: "law", scopes: [] }], citationScopes: [] } } });
+    }
+  });
+  delayed.send({ type: "init", identity, source: "embedded", embeddedPayload: new Blob([JSON.stringify(corpus)]) });
+  await delayed.waitFor(message => message.type === "ready");
+  try {
+    const startupSearch = await delayed.waitFor(message => message.type === "search-result" && message.sessionId === "startup", 250).catch(() => null);
+    assert(startupSearch?.result.totalOccurrences > 0, "A startup search waited for slow search-index persistence after its projection was ready.");
+    assert(!delayed.messages.some(message => message.type === "metric" && message.name === "projection-cache-saved"), "The test did not keep search-index persistence pending.");
+  } finally { finishDelayedSave(); }
+  await delayed.waitFor(message => message.type === "metric" && message.name === "projection-cache-saved");
+
   const cold = createHarness(shared, corpus);
   cold.send({ type: "init", identity, source: "embedded", embeddedPayload: new Blob([JSON.stringify(corpus)], { type: "application/json" }) });
   const coldReady = await cold.waitFor(message => message.type === "ready");
@@ -160,6 +206,30 @@ async function main() {
   assert.strictEqual(warmReady.source, "indexeddb", "A warm worker rebuilt instead of restoring its projection.");
   assert.strictEqual(shared.corpusReads, readsBeforeWarm, "A warm projection cache hit unnecessarily decoded the corpus in the worker.");
 
+  const upgradedNotes = structuredClone(corpus);
+  upgradedNotes.title8.houseFootnoteMetadata = { noteLayoutRevision: 1 };
+  const warmUpgradeShared = { searchIndexes: new Map(shared.searchIndexes), persistedCorpus: corpus, corpusWrites: 0, corpusReads: 0 };
+  const warmUpgrade = createHarness(warmUpgradeShared, corpus);
+  warmUpgrade.send({ type: "init", identity, source: "upgraded-cache", runtimeCorpus: upgradedNotes });
+  const warmUpgradeReady = await warmUpgrade.waitFor(message => message.type === "ready");
+  assert.strictEqual(warmUpgradeReady.source, "indexeddb", "A metadata upgrade must preserve an already valid search index.");
+  await warmUpgrade.waitFor(message => message.type === "baseline-cached", 250);
+  assert.strictEqual(warmUpgradeShared.persistedCorpus.title8.houseFootnoteMetadata.noteLayoutRevision, 1,
+    "A search-index cache hit must save the upgraded editorial-note corpus so refresh does not repeat the upgrade.");
+  assert.strictEqual(warmUpgradeShared.corpusReads, 0, "An upgraded snapshot must not reload the outdated corpus.");
+
+  const writesBeforeEarlyWarm = shared.corpusWrites;
+  const earlyWarm = createHarness(shared, corpus);
+  earlyWarm.send({ type: "init", identity, source: "embedded", awaitEmbeddedPayload: true });
+  const earlyReady = await earlyWarm.waitFor(message => message.type === "ready");
+  assert.strictEqual(earlyReady.source, "indexeddb", "Early startup did not restore the saved projection independently of its embedded payload.");
+  earlyWarm.send({ type: "search", sessionId: "early-warm", generation: 1, requestId: "early-warm-1", query: require("../src/INASearch-Command").parseCommand("alpha"), options: { authorities: ["ina"], plan: { branches: [{ kind: "law", scopes: [] }], citationScopes: [] } } });
+  const earlySearch = await earlyWarm.waitFor(message => message.type === "search-result" && message.sessionId === "early-warm");
+  assert.strictEqual(earlySearch.result.totalOccurrences, 1, "A restored projection could not search before the embedded payload arrived.");
+  earlyWarm.send({ type: "embedded-corpus-payload", identity, embeddedPayload: new Blob([JSON.stringify(corpus)]) });
+  await new Promise(resolve => setTimeout(resolve, 10));
+  assert.strictEqual(shared.corpusWrites, writesBeforeEarlyWarm, "An early projection cache hit redundantly persisted its later embedded payload.");
+
   const cancellationStart = warm.messages.length;
   const rapidOptions = { authorities: ["ina"], plan: { branches: [{ kind: "law", scopes: [] }], citationScopes: [] } };
   const parse = require("../src/INASearch-Command").parseCommand;
@@ -173,6 +243,21 @@ async function main() {
   nextCorpus.corpusVersion = "worker-fixture-2";
   shared.persistedCorpus = nextCorpus;
   const nextIdentity = { corpusSchemaVersion: 5, corpusVersion: nextCorpus.corpusVersion, corpusSha256: "b".repeat(64), authorities: ["ina", "cfr"] };
+  const deferredRacing = createHarness({ searchIndexes: new Map(), persistedCorpus: null, corpusWrites: 0, corpusReads: 0 }, corpus);
+  deferredRacing.send({ type: "init", identity, source: "embedded", awaitEmbeddedPayload: true });
+  await deferredRacing.waitFor(message => message.type === "progress" && message.phase === "projection-build");
+  const pendingReplacementStart = deferredRacing.messages.length;
+  deferredRacing.send({ type: "corpus-change", identity: nextIdentity, source: "embedded", awaitEmbeddedPayload: true });
+  const replacementBuild = await deferredRacing.waitFor(message => message.type === "progress" && message.phase === "projection-build" && deferredRacing.messages.indexOf(message) >= pendingReplacementStart, 250).catch(() => null);
+  assert(replacementBuild, "A superseded embedded-payload wait blocked replacement initialization.");
+  deferredRacing.send({ type: "embedded-corpus-payload", identity, embeddedPayload: new Blob([JSON.stringify(corpus)]) });
+  await new Promise(resolve => setTimeout(resolve, 10));
+  assert(!deferredRacing.messages.some(message => message.type === "ready"), "A late obsolete payload was used for a replacement initialization.");
+  deferredRacing.send({ type: "embedded-corpus-payload", identity: nextIdentity, embeddedPayload: new Blob([JSON.stringify(nextCorpus)]) });
+  const replacementPayloadReady = await deferredRacing.waitFor(message => message.type === "ready");
+  assert.strictEqual(replacementPayloadReady.identity.corpusVersion, nextCorpus.corpusVersion, "The deferred replacement payload was indexed under an obsolete corpus identity.");
+  assert(!deferredRacing.messages.some(message => message.type === "fatal"), "Canceling an obsolete payload wait reported a worker initialization failure.");
+
   const changed = createHarness(shared, nextCorpus);
   changed.send({ type: "corpus-change", identity: nextIdentity, source: "indexeddb" });
   const changedReady = await changed.waitFor(message => message.type === "ready");
@@ -189,6 +274,35 @@ async function main() {
   assert.strictEqual(racingReady.identity.corpusVersion, nextCorpus.corpusVersion, "An obsolete projection build won a corpus-change race.");
   await racing.waitFor(message => message.type === "metric" && message.name === "projection-cache-saved");
   assert(!racing.messages.some(message => message.type === "ready" && message.identity?.corpusVersion === corpus.corpusVersion), "A stale projection announced readiness after a corpus change.");
+
+  const savingShared = { searchIndexes: new Map(), persistedCorpus: null, corpusWrites: 0, corpusReads: 0 };
+  let finishOlderSave;
+  const olderSave = new Promise(resolve => { finishOlderSave = resolve; });
+  const saving = createHarness(savingShared, corpus, {
+    beforeSearchIndexSave: record => record.corpusVersion === corpus.corpusVersion ? olderSave : undefined
+  });
+  saving.send({ type: "init", identity, source: "embedded", embeddedPayload: new Blob([JSON.stringify(corpus)]) });
+  await saving.waitFor(message => message.type === "ready" && message.identity?.corpusVersion === corpus.corpusVersion);
+  try {
+    saving.send({ type: "corpus-change", identity: nextIdentity, source: "embedded", embeddedPayload: new Blob([JSON.stringify(nextCorpus)]) });
+    const replacementReady = await saving.waitFor(message => message.type === "ready" && message.identity?.corpusVersion === nextCorpus.corpusVersion, 250).catch(() => null);
+    assert(replacementReady, "A replacement projection waited for an obsolete search-index save.");
+  } finally { finishOlderSave(); }
+  await saving.waitFor(message => message.type === "metric" && message.name === "projection-cache-saved");
+  assert.strictEqual([...savingShared.searchIndexes.values()][0].corpusVersion, nextCorpus.corpusVersion, "A slow obsolete save replaced the latest projection cache.");
+  assert.strictEqual(saving.messages.filter(message => message.type === "metric" && message.name === "projection-cache-saved").length, 1, "An obsolete search-index save reported success after a corpus change.");
+
+  const failedSave = createHarness({ searchIndexes: new Map(), persistedCorpus: null, corpusWrites: 0, corpusReads: 0 }, corpus, {
+    beforeSearchIndexSave: async () => { throw new Error("Search-index storage is full."); }
+  });
+  failedSave.send({ type: "init", identity, source: "embedded", embeddedPayload: new Blob([JSON.stringify(corpus)]) });
+  await failedSave.waitFor(message => message.type === "ready");
+  const saveWarning = await failedSave.waitFor(message => message.type === "cache-warning" && message.cache === "search-index");
+  assert.match(saveWarning.message, /storage is full/, "Background cache failures did not report their warning.");
+  failedSave.send({ type: "search", sessionId: "save-failed", generation: 1, requestId: "save-failed-1", query: parse("alpha"), options: rapidOptions });
+  const uncachedSearch = await failedSave.waitFor(message => message.type === "search-result" && message.sessionId === "save-failed");
+  assert(uncachedSearch.result.totalOccurrences > 0, "A background cache-write failure disabled legal-text search.");
+
   const obsolete = createHarness(shared, nextCorpus);
   obsolete.send({ type: "init", identity: { ...nextIdentity, cfrStructureRevision: 1 }, source: "indexeddb" });
   const rejected = await obsolete.waitFor(message => message.type === "fatal");

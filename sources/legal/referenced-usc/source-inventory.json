@@ -1,0 +1,4835 @@
+{
+  "schemaVersion": 1,
+  "edition": 2024,
+  "currentThrough": "2025-01-06",
+  "publisher": "U.S. Government Publishing Office / Office of the Law Revision Counsel",
+  "captureMethod": "Verbatim document records excerpted from SHA-256 verified official title HTML; original statute, head, sourcecredit, and operative footnote fields only.",
+  "artifacts": [
+    {
+      "title": 5,
+      "section": "5307",
+      "heading": "Limitation on certain payments",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "III",
+          "title": "EMPLOYEES"
+        },
+        {
+          "kind": "subpart",
+          "number": "D",
+          "title": "Pay and Allowances"
+        },
+        {
+          "kind": "chapter",
+          "number": "53",
+          "title": "PAY RATES AND SYSTEMS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "PAY COMPARABILITY SYSTEM"
+        }
+      ],
+      "documentId": "5_5307",
+      "currentThrough": "20250106",
+      "target": "5:5307",
+      "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
+      "path": "raw/title-5-section-5307.html",
+      "sha256": "c499cd0944043d82cdf663e3a9fe4d94a6f673b0c56129b93ddf47428b92a40d",
+      "bytes": 6675,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/html/USCODE-2024-title5.htm",
+      "sourceTitleSha256": "c31115d79f0416067fb82c1b0d5e5d30ccf928fbb36687636740f4fe7b624a27",
+      "sourceTitleBytes": 12305001
+    },
+    {
+      "title": 5,
+      "section": "5332",
+      "heading": "The General Schedule",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "III",
+          "title": "EMPLOYEES"
+        },
+        {
+          "kind": "subpart",
+          "number": "D",
+          "title": "Pay and Allowances"
+        },
+        {
+          "kind": "chapter",
+          "number": "53",
+          "title": "PAY RATES AND SYSTEMS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "GENERAL SCHEDULE PAY RATES"
+        }
+      ],
+      "documentId": "5_5332",
+      "currentThrough": "20250106",
+      "target": "5:5332",
+      "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
+      "path": "raw/title-5-section-5332.html",
+      "sha256": "fad88cbb409d8d2d6b43363b119775123e5e8c73052fd5d1ddf301b898941851",
+      "bytes": 1687,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/html/USCODE-2024-title5.htm",
+      "sourceTitleSha256": "c31115d79f0416067fb82c1b0d5e5d30ccf928fbb36687636740f4fe7b624a27",
+      "sourceTitleBytes": 12305001
+    },
+    {
+      "title": 5,
+      "section": "552",
+      "heading": "Public information; agency rules, opinions, orders, records, and proceedings",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "THE AGENCIES GENERALLY"
+        },
+        {
+          "kind": "chapter",
+          "number": "5",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        }
+      ],
+      "documentId": "5_552",
+      "currentThrough": "20250106",
+      "target": "5:552",
+      "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
+      "path": "raw/title-5-section-552.html",
+      "sha256": "79860b62a1a283fb52ca83e71a41ddf70f8b7e82b570c2cf15a7bb37f2fbc146",
+      "bytes": 61139,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/html/USCODE-2024-title5.htm",
+      "sourceTitleSha256": "c31115d79f0416067fb82c1b0d5e5d30ccf928fbb36687636740f4fe7b624a27",
+      "sourceTitleBytes": 12305001
+    },
+    {
+      "title": 5,
+      "section": "552a",
+      "heading": "Records maintained on individuals",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "THE AGENCIES GENERALLY"
+        },
+        {
+          "kind": "chapter",
+          "number": "5",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        }
+      ],
+      "documentId": "5_552a",
+      "currentThrough": "20250106",
+      "target": "5:552a",
+      "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
+      "path": "raw/title-5-section-552a.html",
+      "sha256": "e8d73fd60a68699ad99ca440202a5bee64abdc882839373ae8e2ee0bc8a5a99b",
+      "bytes": 57648,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/html/USCODE-2024-title5.htm",
+      "sourceTitleSha256": "c31115d79f0416067fb82c1b0d5e5d30ccf928fbb36687636740f4fe7b624a27",
+      "sourceTitleBytes": 12305001
+    },
+    {
+      "title": 5,
+      "section": "553",
+      "heading": "Rule making",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "THE AGENCIES GENERALLY"
+        },
+        {
+          "kind": "chapter",
+          "number": "5",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        }
+      ],
+      "documentId": "5_553",
+      "currentThrough": "20250106",
+      "target": "5:553",
+      "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
+      "path": "raw/title-5-section-553.html",
+      "sha256": "906173ddb6c71fc520d60a969ea0e7f706f1dfd6321edcf8e984a764c52c9af3",
+      "bytes": 3636,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/html/USCODE-2024-title5.htm",
+      "sourceTitleSha256": "c31115d79f0416067fb82c1b0d5e5d30ccf928fbb36687636740f4fe7b624a27",
+      "sourceTitleBytes": 12305001
+    },
+    {
+      "title": 5,
+      "section": "554",
+      "heading": "Adjudications",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "THE AGENCIES GENERALLY"
+        },
+        {
+          "kind": "chapter",
+          "number": "5",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        }
+      ],
+      "documentId": "5_554",
+      "currentThrough": "20250106",
+      "target": "5:554",
+      "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
+      "path": "raw/title-5-section-554.html",
+      "sha256": "303c0bd2f056591551214ed580915b57dd6f31f704dd99f2d2c9922fd8cd03a2",
+      "bytes": 4665,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/html/USCODE-2024-title5.htm",
+      "sourceTitleSha256": "c31115d79f0416067fb82c1b0d5e5d30ccf928fbb36687636740f4fe7b624a27",
+      "sourceTitleBytes": 12305001
+    },
+    {
+      "title": 5,
+      "section": "556",
+      "heading": "Hearings; presiding employees; powers and duties; burden of proof; evidence; record as basis of decision",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "THE AGENCIES GENERALLY"
+        },
+        {
+          "kind": "chapter",
+          "number": "5",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "ADMINISTRATIVE PROCEDURE"
+        }
+      ],
+      "documentId": "5_556",
+      "currentThrough": "20250106",
+      "target": "5:556",
+      "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
+      "path": "raw/title-5-section-556.html",
+      "sha256": "7e418903165bcd2f239deb95d1f1cecd3c0b0967f70327ecee5fd7fb03a4f32f",
+      "bytes": 5310,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/html/USCODE-2024-title5.htm",
+      "sourceTitleSha256": "c31115d79f0416067fb82c1b0d5e5d30ccf928fbb36687636740f4fe7b624a27",
+      "sourceTitleBytes": 12305001
+    },
+    {
+      "title": 5,
+      "section": "706",
+      "heading": "Scope of review",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "THE AGENCIES GENERALLY"
+        },
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "JUDICIAL REVIEW"
+        }
+      ],
+      "documentId": "5_706",
+      "currentThrough": "20250106",
+      "target": "5:706",
+      "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
+      "path": "raw/title-5-section-706.html",
+      "sha256": "c67e3e1ae46060f08ee8472a594ba83b40591e91ee4c2a66cb74066d85ffb933",
+      "bytes": 1903,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/html/USCODE-2024-title5.htm",
+      "sourceTitleSha256": "c31115d79f0416067fb82c1b0d5e5d30ccf928fbb36687636740f4fe7b624a27",
+      "sourceTitleBytes": 12305001
+    },
+    {
+      "title": 6,
+      "section": "272",
+      "heading": "Citizenship and Immigration Services Ombudsman",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "HOMELAND SECURITY ORGANIZATION"
+        },
+        {
+          "kind": "subchapter",
+          "number": "IV",
+          "title": "BORDER, MARITIME, AND TRANSPORTATION SECURITY"
+        },
+        {
+          "kind": "part",
+          "number": "E",
+          "title": "Citizenship and Immigration Services"
+        }
+      ],
+      "documentId": "6_272",
+      "currentThrough": "20250106",
+      "target": "6:272",
+      "titleName": "DOMESTIC SECURITY",
+      "path": "raw/title-6-section-272.html",
+      "sha256": "57f6fda1e1c5749454980a9965161353afcb182d46fbdf3d2dac3692db0b9830",
+      "bytes": 7676,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title6/html/USCODE-2024-title6.htm",
+      "sourceTitleSha256": "3fea13baf32611950213082a14fd0e767160274eacc822106c3288b0f25112ed",
+      "sourceTitleBytes": 4243679
+    },
+    {
+      "title": 6,
+      "section": "279",
+      "heading": "Children's affairs",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "HOMELAND SECURITY ORGANIZATION"
+        },
+        {
+          "kind": "subchapter",
+          "number": "IV",
+          "title": "BORDER, MARITIME, AND TRANSPORTATION SECURITY"
+        },
+        {
+          "kind": "part",
+          "number": "E",
+          "title": "Citizenship and Immigration Services"
+        }
+      ],
+      "documentId": "6_279",
+      "currentThrough": "20250106",
+      "target": "6:279",
+      "titleName": "DOMESTIC SECURITY",
+      "path": "raw/title-6-section-279.html",
+      "sha256": "02d0c03249451624e35cb35832bcae7ba5b885a5d215109a8f978a7c07a841c3",
+      "bytes": 10616,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title6/html/USCODE-2024-title6.htm",
+      "sourceTitleSha256": "3fea13baf32611950213082a14fd0e767160274eacc822106c3288b0f25112ed",
+      "sourceTitleBytes": 4243679
+    },
+    {
+      "title": 6,
+      "section": "485",
+      "heading": "Information sharing",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "HOMELAND SECURITY ORGANIZATION"
+        },
+        {
+          "kind": "subchapter",
+          "number": "VIII",
+          "title": "COORDINATION WITH NON-FEDERAL ENTITIES; INSPECTOR GENERAL; UNITED STATES SECRET SERVICE; COAST GUARD; GENERAL PROVISIONS"
+        },
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "Information Sharing"
+        }
+      ],
+      "documentId": "6_485",
+      "currentThrough": "20250106",
+      "target": "6:485",
+      "titleName": "DOMESTIC SECURITY",
+      "path": "raw/title-6-section-485.html",
+      "sha256": "4106f07af8fcb9233de69b3ed9fe5a7d239102367fe1404036fede7a7c94470a",
+      "bytes": 27417,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title6/html/USCODE-2024-title6.htm",
+      "sourceTitleSha256": "3fea13baf32611950213082a14fd0e767160274eacc822106c3288b0f25112ed",
+      "sourceTitleBytes": 4243679
+    },
+    {
+      "title": 7,
+      "section": "1926c",
+      "heading": "Water and waste facility loans and grants to alleviate health risks",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "50",
+          "title": "AGRICULTURAL CREDIT"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "REAL ESTATE LOANS"
+        }
+      ],
+      "documentId": "7_1926c",
+      "currentThrough": "20250106",
+      "target": "7:1926c",
+      "titleName": "AGRICULTURE",
+      "path": "raw/title-7-section-1926c.html",
+      "sha256": "da5011d3025506a26b24d8f4a9638920e90d0b91bf929bd4542ab18f6dc3b46b",
+      "bytes": 6827,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title7/html/USCODE-2024-title7.htm",
+      "sourceTitleSha256": "f6be42dd97a5e58d43b72cdd764d9d6a43abe999aa036275643da5e1a0a5ce14",
+      "sourceTitleBytes": 19602755
+    },
+    {
+      "title": 7,
+      "section": "2012",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "SUPPLEMENTAL NUTRITION ASSISTANCE PROGRAM"
+        }
+      ],
+      "documentId": "7_2012",
+      "currentThrough": "20250106",
+      "target": "7:2012",
+      "titleName": "AGRICULTURE",
+      "path": "raw/title-7-section-2012.html",
+      "sha256": "9c85a2e83f92428a9e182457414606a0b4ce4d5fe363369269835d6aadafd70b",
+      "bytes": 26311,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title7/html/USCODE-2024-title7.htm",
+      "sourceTitleSha256": "f6be42dd97a5e58d43b72cdd764d9d6a43abe999aa036275643da5e1a0a5ce14",
+      "sourceTitleBytes": 19602755
+    },
+    {
+      "title": 7,
+      "section": "2013",
+      "heading": "Establishment of supplemental nutrition assistance program",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "SUPPLEMENTAL NUTRITION ASSISTANCE PROGRAM"
+        }
+      ],
+      "documentId": "7_2013",
+      "currentThrough": "20250106",
+      "target": "7:2013",
+      "titleName": "AGRICULTURE",
+      "path": "raw/title-7-section-2013.html",
+      "sha256": "ee90f2d91ae3f608b7929acaf941731819c4f9133504769418f106d8c9d558f7",
+      "bytes": 8901,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title7/html/USCODE-2024-title7.htm",
+      "sourceTitleSha256": "f6be42dd97a5e58d43b72cdd764d9d6a43abe999aa036275643da5e1a0a5ce14",
+      "sourceTitleBytes": 19602755
+    },
+    {
+      "title": 7,
+      "section": "612c",
+      "heading": "Appropriation to encourage exportation and domestic consumption of agricultural products",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "26",
+          "title": "AGRICULTURAL ADJUSTMENT"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "COMMODITY BENEFITS"
+        }
+      ],
+      "documentId": "7_612c",
+      "currentThrough": "20250106",
+      "target": "7:612c",
+      "titleName": "AGRICULTURE",
+      "path": "raw/title-7-section-612c.html",
+      "sha256": "f9cfbc66334df639bb0175bd3ef87698f756115ff316b9e8df424cb524218ba0",
+      "bytes": 4627,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title7/html/USCODE-2024-title7.htm",
+      "sourceTitleSha256": "f6be42dd97a5e58d43b72cdd764d9d6a43abe999aa036275643da5e1a0a5ce14",
+      "sourceTitleBytes": 19602755
+    },
+    {
+      "title": 9,
+      "section": "10",
+      "heading": "Same; vacation; grounds; rehearing",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "9_10",
+      "currentThrough": "20250106",
+      "target": "9:10",
+      "titleName": "ARBITRATION",
+      "path": "raw/title-9-section-10.html",
+      "sha256": "fe3ab7971d47e70f7c8c691b1c5183e656343a106484aa3e253a203c3aad95c1",
+      "bytes": 2191,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title9/html/USCODE-2024-title9.htm",
+      "sourceTitleSha256": "67fb04b2af6d2215ff710fc7bf20882efb93efe102d50a617b852befcaa57bc7",
+      "sourceTitleBytes": 86479
+    },
+    {
+      "title": 9,
+      "section": "11",
+      "heading": "Same; modification or correction; grounds; order",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "9_11",
+      "currentThrough": "20250106",
+      "target": "9:11",
+      "titleName": "ARBITRATION",
+      "path": "raw/title-9-section-11.html",
+      "sha256": "af35206f2f45a61590a6d3df13531129b721df352940c1ffe741a560553caa05",
+      "bytes": 1263,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title9/html/USCODE-2024-title9.htm",
+      "sourceTitleSha256": "67fb04b2af6d2215ff710fc7bf20882efb93efe102d50a617b852befcaa57bc7",
+      "sourceTitleBytes": 86479
+    },
+    {
+      "title": 10,
+      "section": "101",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "A",
+          "title": "General Military Law"
+        },
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "ORGANIZATION AND GENERAL MILITARY POWERS"
+        },
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "DEFINITIONS, RULES OF CONSTRUCTION, CROSS REFERENCES, AND RELATED MATTERS"
+        }
+      ],
+      "documentId": "10_101",
+      "currentThrough": "20250106",
+      "target": "10:101",
+      "titleName": "ARMED FORCES",
+      "path": "raw/title-10-section-101.html",
+      "sha256": "632e28669ca9fc036cefbb4391a5eb085d770fa5ce9082f3c00433d7e50adc45",
+      "bytes": 30818,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title10/html/USCODE-2024-title10.htm",
+      "sourceTitleSha256": "bc50ec930dfa6450e90f29fe87951951c8ea569bd6f7b0a4dd538dfa641c7fe2",
+      "sourceTitleBytes": 35810970
+    },
+    {
+      "title": 13,
+      "section": "8",
+      "heading": "Authenticated transcripts or copies of certain returns; other data; restriction on use; disposition of fees received",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "ADMINISTRATION"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "13_8",
+      "currentThrough": "20250106",
+      "target": "13:8",
+      "titleName": "CENSUS",
+      "path": "raw/title-13-section-8.html",
+      "sha256": "b67a83da43575be6e58351d148775788d1c463fd1fe83ce640fe1157c00650ae",
+      "bytes": 2602,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title13/html/USCODE-2024-title13.htm",
+      "sourceTitleSha256": "8e9067f964cd3dbc433413d439c4ecfef64f2f320439c426477fa622a19176fb",
+      "sourceTitleBytes": 373825
+    },
+    {
+      "title": 15,
+      "section": "77e",
+      "heading": "Prohibitions relating to interstate commerce and the mails",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "2A",
+          "title": "SECURITIES AND TRUST INDENTURES"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "DOMESTIC SECURITIES"
+        }
+      ],
+      "documentId": "15_77e",
+      "currentThrough": "20250106",
+      "target": "15:77e",
+      "titleName": "COMMERCE AND TRADE",
+      "path": "raw/title-15-section-77e.html",
+      "sha256": "a5602da8ab22253d393924a74780f2b495c438aa165e43a611f1f93745bfdb39",
+      "bytes": 4400,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title15/html/USCODE-2024-title15.htm",
+      "sourceTitleSha256": "770faed14deac26d8391eb658de7c3a228e705e2d9d3b440604b00aa2e6f21c4",
+      "sourceTitleBytes": 21610045
+    },
+    {
+      "title": 15,
+      "section": "78o",
+      "heading": "Registration and regulation of brokers and dealers",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "2B",
+          "title": "SECURITIES EXCHANGES"
+        }
+      ],
+      "documentId": "15_78o",
+      "currentThrough": "20250106",
+      "target": "15:78o",
+      "titleName": "COMMERCE AND TRADE",
+      "path": "raw/title-15-section-78o.html",
+      "sha256": "c8785a224a067bd246665e2a362e102fcddc3ecea0765c0fa7528a83e75b5804",
+      "bytes": 84808,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title15/html/USCODE-2024-title15.htm",
+      "sourceTitleSha256": "770faed14deac26d8391eb658de7c3a228e705e2d9d3b440604b00aa2e6f21c4",
+      "sourceTitleBytes": 21610045
+    },
+    {
+      "title": 18,
+      "section": "1001",
+      "heading": "Statements or entries generally",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "47",
+          "title": "FRAUD AND FALSE STATEMENTS"
+        }
+      ],
+      "documentId": "18_1001",
+      "currentThrough": "20250106",
+      "target": "18:1001",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1001.html",
+      "sha256": "c7c0954de5514ac5f6626e727e7175e9af99d6a53df9a88d9013c6c5a44f0264",
+      "bytes": 2734,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1028",
+      "heading": "Fraud and related activity in connection with identification documents, authentication features, and information",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "47",
+          "title": "FRAUD AND FALSE STATEMENTS"
+        }
+      ],
+      "documentId": "18_1028",
+      "currentThrough": "20250106",
+      "target": "18:1028",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1028.html",
+      "sha256": "325f3f98e414a76f0da636cea7678453a4c87cc41891d32787abd3affe269324",
+      "bytes": 16416,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1030",
+      "heading": "Fraud and related activity in connection with computers",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "47",
+          "title": "FRAUD AND FALSE STATEMENTS"
+        }
+      ],
+      "documentId": "18_1030",
+      "currentThrough": "20250106",
+      "target": "18:1030",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1030.html",
+      "sha256": "cbb213bf154eefc51efc4a9a53e8c87d7280cb9ba58dce00b4347f4f96aa82b9",
+      "bytes": 24441,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1091",
+      "heading": "Genocide",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "50A",
+          "title": "GENOCIDE"
+        }
+      ],
+      "documentId": "18_1091",
+      "currentThrough": "20250106",
+      "target": "18:1091",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1091.html",
+      "sha256": "b829b3c1c93ab83e03a308b8ba43d243b3e3f11c726aba53dc0f880f911cb45d",
+      "bytes": 4026,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1116",
+      "heading": "Murder or manslaughter of foreign officials, official guests, or internationally protected persons",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "HOMICIDE"
+        }
+      ],
+      "documentId": "18_1116",
+      "currentThrough": "20250106",
+      "target": "18:1116",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1116.html",
+      "sha256": "98480b11a629afbd1829e15372112b7ff0cba7673f1fa7160beb783cf8ee90b9",
+      "bytes": 5429,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1202",
+      "heading": "Ransom money",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "55",
+          "title": "KIDNAPPING"
+        }
+      ],
+      "documentId": "18_1202",
+      "currentThrough": "20250106",
+      "target": "18:1202",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1202.html",
+      "sha256": "2b8d697b86207fb8d15e014ccf64ff11fa5fb0036351ed41882b846c69c2a976",
+      "bytes": 1479,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1351",
+      "heading": "Fraud in foreign labor contracting",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "63",
+          "title": "MAIL FRAUD AND OTHER FRAUD OFFENSES"
+        }
+      ],
+      "documentId": "18_1351",
+      "currentThrough": "20250106",
+      "target": "18:1351",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1351.html",
+      "sha256": "dc9bd2a33acdf8a14f7b450332d01b0bd6d3ff2655c1d51f54d8d642aaa976dc",
+      "bytes": 1863,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1365",
+      "heading": "Tampering with consumer products",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "65",
+          "title": "MALICIOUS MISCHIEF"
+        }
+      ],
+      "documentId": "18_1365",
+      "currentThrough": "20250106",
+      "target": "18:1365",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1365.html",
+      "sha256": "f2c21e2b2c916af5cf09c1409023d830a7582dace4c107d6c9bc0bf7e1702bb0",
+      "bytes": 6704,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1425",
+      "heading": "Procurement of citizenship or naturalization unlawfully",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "69",
+          "title": "NATIONALITY AND CITIZENSHIP"
+        }
+      ],
+      "documentId": "18_1425",
+      "currentThrough": "20250106",
+      "target": "18:1425",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1425.html",
+      "sha256": "6791d402b2815150b03d39110d69d75f55e4fc91915f827093894a484ca5c41f",
+      "bytes": 1867,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1466A",
+      "heading": "Obscene visual representations of the sexual abuse of children",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "71",
+          "title": "OBSCENITY"
+        }
+      ],
+      "documentId": "18_1466A",
+      "currentThrough": "20250106",
+      "target": "18:1466a",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1466a.html",
+      "sha256": "3f0cb9b82825919fe137c4a33060f9b3cbeec9cd469f364166c7106fba6c9448",
+      "bytes": 6159,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1543",
+      "heading": "Forgery or false use of passport",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "75",
+          "title": "PASSPORTS AND VISAS"
+        }
+      ],
+      "documentId": "18_1543",
+      "currentThrough": "20250106",
+      "target": "18:1543",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1543.html",
+      "sha256": "00c152799b03bdc99a7d00a55a2e168f275e5a5dc791701b393a608beb7dc6ed",
+      "bytes": 1797,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1546",
+      "heading": "Fraud and misuse of visas, permits, and other documents",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "75",
+          "title": "PASSPORTS AND VISAS"
+        }
+      ],
+      "documentId": "18_1546",
+      "currentThrough": "20250106",
+      "target": "18:1546",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1546.html",
+      "sha256": "308b6bd58b771d125c8a1f5f0bd8713640142cb9a32ac518969caa0a8e57212d",
+      "bytes": 5901,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1589",
+      "heading": "Forced labor",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "77",
+          "title": "PEONAGE, SLAVERY, AND TRAFFICKING IN PERSONS"
+        }
+      ],
+      "documentId": "18_1589",
+      "currentThrough": "20250106",
+      "target": "18:1589",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1589.html",
+      "sha256": "edc975bc8bdb062f61f9b750b312a5ba80f4e4ae9efa3cb2821da177a5ada0be",
+      "bytes": 3165,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1591",
+      "heading": "Sex trafficking of children or by force, fraud, or coercion",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "77",
+          "title": "PEONAGE, SLAVERY, AND TRAFFICKING IN PERSONS"
+        }
+      ],
+      "documentId": "18_1591",
+      "currentThrough": "20250106",
+      "target": "18:1591",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1591.html",
+      "sha256": "0e353a3b7c1ededa8ae602e1378752868e8731bbcc37c2de6c1ac5beb667b10d",
+      "bytes": 5569,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1592",
+      "heading": "Unlawful conduct with respect to documents in furtherance of trafficking, peonage, slavery, involuntary servitude, or forced labor",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "77",
+          "title": "PEONAGE, SLAVERY, AND TRAFFICKING IN PERSONS"
+        }
+      ],
+      "documentId": "18_1592",
+      "currentThrough": "20250106",
+      "target": "18:1592",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1592.html",
+      "sha256": "484cf1c9ade4a1263076cfc4c95773c8f672d93677f8bc842dc3b8c45b9a1103",
+      "bytes": 2115,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1595",
+      "heading": "Civil remedy",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "77",
+          "title": "PEONAGE, SLAVERY, AND TRAFFICKING IN PERSONS"
+        }
+      ],
+      "documentId": "18_1595",
+      "currentThrough": "20250106",
+      "target": "18:1595",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1595.html",
+      "sha256": "e762008730183a8e468dca5757da4aa2c1c0fde2881a218c95de1d4f45956c4a",
+      "bytes": 2427,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "16",
+      "heading": "Crime of violence defined",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "18_16",
+      "currentThrough": "20250106",
+      "target": "18:16",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-16.html",
+      "sha256": "5b0d4a0fbe3cc1fb8487cb477d988c4d2ab9aba146cdeb54e880dfde64ad4dd3",
+      "bytes": 877,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1621",
+      "heading": "Perjury generally",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "79",
+          "title": "PERJURY"
+        }
+      ],
+      "documentId": "18_1621",
+      "currentThrough": "20250106",
+      "target": "18:1621",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1621.html",
+      "sha256": "57a55adf99544d965b67f8cf899d885d818e108b571e06530e1b912c3ad2799e",
+      "bytes": 1623,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1956",
+      "heading": "Laundering of monetary instruments",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "95",
+          "title": "RACKETEERING"
+        }
+      ],
+      "documentId": "18_1956",
+      "currentThrough": "20250106",
+      "target": "18:1956",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1956.html",
+      "sha256": "f973f133714d31dde68d6ac72c0cf856d931c7d072a959f464d67f1192b85359",
+      "bytes": 29042,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1957",
+      "heading": "Engaging in monetary transactions in property derived from specified unlawful activity",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "95",
+          "title": "RACKETEERING"
+        }
+      ],
+      "documentId": "18_1957",
+      "currentThrough": "20250106",
+      "target": "18:1957",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1957.html",
+      "sha256": "638f82246c2f83c70b96ae84323292064f0b0fa82ed9f480eb14f310f0ee154c",
+      "bytes": 4861,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "1962",
+      "heading": "Prohibited activities",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "96",
+          "title": "RACKETEER INFLUENCED AND CORRUPT ORGANIZATIONS"
+        }
+      ],
+      "documentId": "18_1962",
+      "currentThrough": "20250106",
+      "target": "18:1962",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-1962.html",
+      "sha256": "f516a0a4638e1424b1cb7d605f0c28f665b9c2de27f585957a9cf7622ce9c7fe",
+      "bytes": 2597,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "20",
+      "heading": "Financial institution defined",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "18_20",
+      "currentThrough": "20250106",
+      "target": "18:20",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-20.html",
+      "sha256": "614598e838411f92e11dc0b25c449ca80cfb57e0cb52b87efcea814a487449a6",
+      "bytes": 2680,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "209",
+      "heading": "Salary of Government officials and employees payable only by United States",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "11",
+          "title": "BRIBERY, GRAFT, AND CONFLICTS OF INTEREST"
+        }
+      ],
+      "documentId": "18_209",
+      "currentThrough": "20250106",
+      "target": "18:209",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-209.html",
+      "sha256": "3d17486e1f2adb0dda96630b2dae2b4ef9d72e8a4ec267f0e51d236caac6c437",
+      "bytes": 5084,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2250",
+      "heading": "Failure to register",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "109B",
+          "title": "SEX OFFENDER AND CRIMES AGAINST CHILDREN REGISTRY"
+        }
+      ],
+      "documentId": "18_2250",
+      "currentThrough": "20250106",
+      "target": "18:2250",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2250.html",
+      "sha256": "219bd8e95d69b8853ed5fdffef88bb873c5123e9856e6b0b13c1b405e3bd0ed6",
+      "bytes": 3765,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2251",
+      "heading": "Sexual exploitation of children",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "110",
+          "title": "SEXUAL EXPLOITATION AND OTHER ABUSE OF CHILDREN"
+        }
+      ],
+      "documentId": "18_2251",
+      "currentThrough": "20250106",
+      "target": "18:2251",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2251.html",
+      "sha256": "87946520bb8198be9c87feaee885d4eba6b8c12c406e0b9302bec4ef8e9a1d1a",
+      "bytes": 7979,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2251A",
+      "heading": "Selling or buying of children",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "110",
+          "title": "SEXUAL EXPLOITATION AND OTHER ABUSE OF CHILDREN"
+        }
+      ],
+      "documentId": "18_2251A",
+      "currentThrough": "20250106",
+      "target": "18:2251a",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2251a.html",
+      "sha256": "75290ed272f7b2801b5c0541040ce8c4951c62deda77b4e5e1cc8fbaa8e9d26e",
+      "bytes": 3592,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2252",
+      "heading": "Certain activities relating to material involving the sexual exploitation of minors",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "110",
+          "title": "SEXUAL EXPLOITATION AND OTHER ABUSE OF CHILDREN"
+        }
+      ],
+      "documentId": "18_2252",
+      "currentThrough": "20250106",
+      "target": "18:2252",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2252.html",
+      "sha256": "6dc8f224a3ad3f135b7567e5960b6f09129437baf79789fad3c02f26fe81ed20",
+      "bytes": 8251,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2339B",
+      "heading": "Providing material support or resources to designated foreign terrorist organizations",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "113B",
+          "title": "TERRORISM"
+        }
+      ],
+      "documentId": "18_2339B",
+      "currentThrough": "20250106",
+      "target": "18:2339b",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2339b.html",
+      "sha256": "6c83eff833a5e61946fa8c97ddc44894d3177d4910b2addb5849fc218058fbb7",
+      "bytes": 16944,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2339D",
+      "heading": "Receiving military-type training from a foreign terrorist organization",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "113B",
+          "title": "TERRORISM"
+        }
+      ],
+      "documentId": "18_2339D",
+      "currentThrough": "20250106",
+      "target": "18:2339d",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2339d.html",
+      "sha256": "758862a0cb5798b4e52f0685e7ebbdbcd5e6d264cddd80caa60e4ed7406dcba6",
+      "bytes": 4825,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2340",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "113C",
+          "title": "TORTURE"
+        }
+      ],
+      "documentId": "18_2340",
+      "currentThrough": "20250106",
+      "target": "18:2340",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2340.html",
+      "sha256": "601fcac332652e5f822fa39f39604aabc98a8b1ad7958a20a0d4033055cae0aa",
+      "bytes": 2069,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2383",
+      "heading": "Rebellion or insurrection",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "115",
+          "title": "TREASON, SEDITION, AND SUBVERSIVE ACTIVITIES"
+        }
+      ],
+      "documentId": "18_2383",
+      "currentThrough": "20250106",
+      "target": "18:2383",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2383.html",
+      "sha256": "48a1662864b111c20e94dbaca6831e6e6a3d061fa0b43c9e76d093f4fd25ded3",
+      "bytes": 764,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2384",
+      "heading": "Seditious conspiracy",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "115",
+          "title": "TREASON, SEDITION, AND SUBVERSIVE ACTIVITIES"
+        }
+      ],
+      "documentId": "18_2384",
+      "currentThrough": "20250106",
+      "target": "18:2384",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2384.html",
+      "sha256": "c4e7565916787dee4dca4cd732ebe4bcd5df2d9ea6a9e8bd646f51240ee9addd",
+      "bytes": 1047,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2385",
+      "heading": "Advocating overthrow of Government",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "115",
+          "title": "TREASON, SEDITION, AND SUBVERSIVE ACTIVITIES"
+        }
+      ],
+      "documentId": "18_2385",
+      "currentThrough": "20250106",
+      "target": "18:2385",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2385.html",
+      "sha256": "a1b4f4c5131365ebce88c619ad04e2c11d6616f20866f25cd00bc80c77012f93",
+      "bytes": 2718,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2421",
+      "heading": "Transportation generally",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "117",
+          "title": "TRANSPORTATION FOR ILLEGAL SEXUAL ACTIVITY AND RELATED CRIMES"
+        }
+      ],
+      "documentId": "18_2421",
+      "currentThrough": "20250106",
+      "target": "18:2421",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2421.html",
+      "sha256": "a1d36dd873bd1af3e7d7e9fc1a715c2380a639276827e81b8df30db42fe12d20",
+      "bytes": 1646,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2422",
+      "heading": "Coercion and enticement",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "117",
+          "title": "TRANSPORTATION FOR ILLEGAL SEXUAL ACTIVITY AND RELATED CRIMES"
+        }
+      ],
+      "documentId": "18_2422",
+      "currentThrough": "20250106",
+      "target": "18:2422",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2422.html",
+      "sha256": "23bd7c5eaad9b872779f1a09a5d17681935aafa774b6b832d050248836590780",
+      "bytes": 1742,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2423",
+      "heading": "Transportation of minors",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "117",
+          "title": "TRANSPORTATION FOR ILLEGAL SEXUAL ACTIVITY AND RELATED CRIMES"
+        }
+      ],
+      "documentId": "18_2423",
+      "currentThrough": "20250106",
+      "target": "18:2423",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2423.html",
+      "sha256": "489c0cf3f8aaa89c8543afaf16bb9993f5314e8317b6f9f12d2ffbd28a908169",
+      "bytes": 5862,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "2442",
+      "heading": "Recruitment or use of child soldiers",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "118",
+          "title": "WAR CRIMES"
+        }
+      ],
+      "documentId": "18_2442",
+      "currentThrough": "20250106",
+      "target": "18:2442",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-2442.html",
+      "sha256": "3830e2149b6a3f01ccba674464e8d165d6613da77b17c35458c74a8368ff5fba",
+      "bytes": 3422,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "3006A",
+      "heading": "Adequate representation of defendants",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "II",
+          "title": "CRIMINAL PROCEDURE"
+        },
+        {
+          "kind": "chapter",
+          "number": "201",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "18_3006A",
+      "currentThrough": "20250106",
+      "target": "18:3006a",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-3006a.html",
+      "sha256": "6af477e9e2f293686a2be658c2eab5a62adba3f9aa171324306964d315bc4852",
+      "bytes": 31902,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "3142",
+      "heading": "Release or detention of a defendant pending trial",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "II",
+          "title": "CRIMINAL PROCEDURE"
+        },
+        {
+          "kind": "chapter",
+          "number": "207",
+          "title": "RELEASE AND DETENTION PENDING JUDICIAL PROCEEDINGS"
+        }
+      ],
+      "documentId": "18_3142",
+      "currentThrough": "20250106",
+      "target": "18:3142",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-3142.html",
+      "sha256": "2affea4903d76b18ad4e6ef1a415efcd69c0ae6d9205d6e89dfe4018281be213",
+      "bytes": 22693,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "3504",
+      "heading": "Litigation concerning sources of evidence",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "II",
+          "title": "CRIMINAL PROCEDURE"
+        },
+        {
+          "kind": "chapter",
+          "number": "223",
+          "title": "WITNESSES AND EVIDENCE"
+        }
+      ],
+      "documentId": "18_3504",
+      "currentThrough": "20250106",
+      "target": "18:3504",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-3504.html",
+      "sha256": "a75191d54dd41020208f46dc6ef672e927b9b5bbfab572e251357e38591a8677",
+      "bytes": 1967,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "3521",
+      "heading": "Witness relocation and protection",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "II",
+          "title": "CRIMINAL PROCEDURE"
+        },
+        {
+          "kind": "chapter",
+          "number": "224",
+          "title": "PROTECTION OF WITNESSES"
+        }
+      ],
+      "documentId": "18_3521",
+      "currentThrough": "20250106",
+      "target": "18:3521",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-3521.html",
+      "sha256": "963884dfc1b19844ece33b922593b46bc9f2a83eaa1b76bd3d6770e6c51ef9e3",
+      "bytes": 12722,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "648",
+      "heading": "Custodians, generally, misusing public funds",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "31",
+          "title": "EMBEZZLEMENT AND THEFT"
+        }
+      ],
+      "documentId": "18_648",
+      "currentThrough": "20250106",
+      "target": "18:648",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-648.html",
+      "sha256": "c5b45aedbeb660f8c6289e8e32228f11c85e57c9bd6b1f754e8eca96d564e809",
+      "bytes": 1488,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "751",
+      "heading": "Prisoners in custody of institution or officer",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "35",
+          "title": "ESCAPE AND RESCUE"
+        }
+      ],
+      "documentId": "18_751",
+      "currentThrough": "20250106",
+      "target": "18:751",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-751.html",
+      "sha256": "a7f8a4c00177f04526f2cba5dcc084713bddd3c2517b1a73b2b5d5550e0057fc",
+      "bytes": 2848,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "752",
+      "heading": "Instigating or assisting escape",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "35",
+          "title": "ESCAPE AND RESCUE"
+        }
+      ],
+      "documentId": "18_752",
+      "currentThrough": "20250106",
+      "target": "18:752",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-752.html",
+      "sha256": "c71261b3764ead5ecc50efc92d2cd89bd331ac5d55cd0476af6397bec18fa525",
+      "bytes": 2474,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "758",
+      "heading": "High speed flight from immigration checkpoint",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "35",
+          "title": "ESCAPE AND RESCUE"
+        }
+      ],
+      "documentId": "18_758",
+      "currentThrough": "20250106",
+      "target": "18:758",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-758.html",
+      "sha256": "a23e74c92274a6ee0e7b360d2f22ba6855b79a7798b28b222f22be9b78145910",
+      "bytes": 778,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "841",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "40",
+          "title": "IMPORTATION, MANUFACTURE, DISTRIBUTION AND STORAGE OF EXPLOSIVE MATERIALS"
+        }
+      ],
+      "documentId": "18_841",
+      "currentThrough": "20250106",
+      "target": "18:841",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-841.html",
+      "sha256": "33a667527ea512fa007a458d4eac81d4267e3763c4e2ec225d73c42c79c8d203",
+      "bytes": 8235,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "842",
+      "heading": "Unlawful acts",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "40",
+          "title": "IMPORTATION, MANUFACTURE, DISTRIBUTION AND STORAGE OF EXPLOSIVE MATERIALS"
+        }
+      ],
+      "documentId": "18_842",
+      "currentThrough": "20250106",
+      "target": "18:842",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-842.html",
+      "sha256": "5bab22f106edb0c84a9921fad15580d3c8a15388d633efaf4804e68082845702",
+      "bytes": 17955,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "844",
+      "heading": "Penalties",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "40",
+          "title": "IMPORTATION, MANUFACTURE, DISTRIBUTION AND STORAGE OF EXPLOSIVE MATERIALS"
+        }
+      ],
+      "documentId": "18_844",
+      "currentThrough": "20250106",
+      "target": "18:844",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-844.html",
+      "sha256": "6f51c205a4c059018c894bac7283b00d941c45839da848207a4bda97902f34dd",
+      "bytes": 13643,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "871",
+      "heading": "Threats against President and successors to the Presidency",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "41",
+          "title": "EXTORTION AND THREATS"
+        }
+      ],
+      "documentId": "18_871",
+      "currentThrough": "20250106",
+      "target": "18:871",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-871.html",
+      "sha256": "81666b5c2fac48341ac533801959cf9cf20917957670f4c198161df8624c26cd",
+      "bytes": 2138,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "875",
+      "heading": "Interstate communications",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "41",
+          "title": "EXTORTION AND THREATS"
+        }
+      ],
+      "documentId": "18_875",
+      "currentThrough": "20250106",
+      "target": "18:875",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-875.html",
+      "sha256": "609cd11ea170e06c101067c36d23c8515212823b2452f540868181a05aae461f",
+      "bytes": 1914,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "876",
+      "heading": "Mailing threatening communications",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "41",
+          "title": "EXTORTION AND THREATS"
+        }
+      ],
+      "documentId": "18_876",
+      "currentThrough": "20250106",
+      "target": "18:876",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-876.html",
+      "sha256": "65701b1b2140e2542ea3c7008bb16cd2165d5f582a3cb7172337fbdd3ecb2334",
+      "bytes": 3014,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "877",
+      "heading": "Mailing threatening communications from foreign country",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "41",
+          "title": "EXTORTION AND THREATS"
+        }
+      ],
+      "documentId": "18_877",
+      "currentThrough": "20250106",
+      "target": "18:877",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-877.html",
+      "sha256": "e509e5c92e79c08cf2bd593622b108436edb1f1aed39f4e4e4d935b4ed4b06c9",
+      "bytes": 2493,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "921",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "44",
+          "title": "FIREARMS"
+        }
+      ],
+      "documentId": "18_921",
+      "currentThrough": "20250106",
+      "target": "18:921",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-921.html",
+      "sha256": "ff252032f4f9e62b5fa7cca12e2592f4fcb0ee831b54a9c8f880a69296afbc76",
+      "bytes": 28061,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "922",
+      "heading": "Unlawful acts",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "44",
+          "title": "FIREARMS"
+        }
+      ],
+      "documentId": "18_922",
+      "currentThrough": "20250106",
+      "target": "18:922",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-922.html",
+      "sha256": "be6ae5b49b340f37210e39a16dd8505595c6361c968834cdd3e0debd990554ad",
+      "bytes": 69422,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "924",
+      "heading": "Penalties",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "44",
+          "title": "FIREARMS"
+        }
+      ],
+      "documentId": "18_924",
+      "currentThrough": "20250106",
+      "target": "18:924",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-924.html",
+      "sha256": "487b22dd28d46056b6ffbb715f941fcdb7bd9010c7cc095d15173def02a2e0ea",
+      "bytes": 26664,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "960",
+      "heading": "Expedition against friendly nation",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "45",
+          "title": "FOREIGN RELATIONS"
+        }
+      ],
+      "documentId": "18_960",
+      "currentThrough": "20250106",
+      "target": "18:960",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-960.html",
+      "sha256": "330209e615b8891d484d0c3291d7b4552a29ccce4aa29ac86ac8304315a05ba8",
+      "bytes": 914,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 18,
+      "section": "981",
+      "heading": "Civil forfeiture",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "CRIMES"
+        },
+        {
+          "kind": "chapter",
+          "number": "46",
+          "title": "FORFEITURE"
+        }
+      ],
+      "documentId": "18_981",
+      "currentThrough": "20250106",
+      "target": "18:981",
+      "titleName": "CRIMES AND CRIMINAL PROCEDURE",
+      "path": "raw/title-18-section-981.html",
+      "sha256": "f124d3713c577e80c48d597a5e406c11b9e358f63f478b4b2d1dea74fd4d79ad",
+      "bytes": 33983,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/html/USCODE-2024-title18.htm",
+      "sourceTitleSha256": "96637a8d5f1c3ae6f13d3f88f8b268d253afb01fe8c59ea05ceb136b5bf8eb10",
+      "sourceTitleBytes": 8874355
+    },
+    {
+      "title": 19,
+      "section": "4502",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "29",
+          "title": "UNITED STATES–MEXICO–CANADA AGREEMENT IMPLEMENTATION"
+        }
+      ],
+      "documentId": "19_4502",
+      "currentThrough": "20250106",
+      "target": "19:4502",
+      "titleName": "CUSTOMS DUTIES",
+      "path": "raw/title-19-section-4502.html",
+      "sha256": "901bbc1dfcefd0ac92166e68c017dfb8bbcdd305920103666c184b53f4fe7ac6",
+      "bytes": 3647,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title19/html/USCODE-2024-title19.htm",
+      "sourceTitleSha256": "130f9f4cd44770c3399a5fed793f764c68c69d4afae0ce9457c0117847e896e4",
+      "sourceTitleBytes": 10194375
+    },
+    {
+      "title": 20,
+      "section": "1001",
+      "heading": "General definition of institution of higher education",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "28",
+          "title": "HIGHER EDUCATION RESOURCES AND STUDENT ASSISTANCE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "GENERAL PROVISIONS"
+        },
+        {
+          "kind": "part",
+          "number": "A",
+          "title": "Definitions"
+        }
+      ],
+      "documentId": "20_1001",
+      "currentThrough": "20250106",
+      "target": "20:1001",
+      "titleName": "EDUCATION",
+      "path": "raw/title-20-section-1001.html",
+      "sha256": "afd783c61db85c813c4e1f70406747927d1dcc7c38249beaafeb032aa93afe49",
+      "bytes": 3666,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title20/html/USCODE-2024-title20.htm",
+      "sourceTitleSha256": "ed5dab02f841ffc889cd6595a167d1f0c48acf16291ad1e92ad0023faa640710",
+      "sourceTitleBytes": 15319210
+    },
+    {
+      "title": 20,
+      "section": "1232g",
+      "heading": "Family educational and privacy rights",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "31",
+          "title": "GENERAL PROVISIONS CONCERNING EDUCATION"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "GENERAL REQUIREMENTS AND CONDITIONS CONCERNING OPERATION AND ADMINISTRATION OF EDUCATION PROGRAMS: GENERAL AUTHORITY OF SECRETARY"
+        },
+        {
+          "kind": "part",
+          "number": "4",
+          "title": "Records; Privacy; Limitation on Withholding Federal Funds"
+        }
+      ],
+      "documentId": "20_1232g",
+      "currentThrough": "20250106",
+      "target": "20:1232g",
+      "titleName": "EDUCATION",
+      "path": "raw/title-20-section-1232g.html",
+      "sha256": "5dd97ab13f81c38fc81d67f3ef90255361e252303f939b4068551781cc32b235",
+      "bytes": 30879,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title20/html/USCODE-2024-title20.htm",
+      "sourceTitleSha256": "ed5dab02f841ffc889cd6595a167d1f0c48acf16291ad1e92ad0023faa640710",
+      "sourceTitleBytes": 15319210
+    },
+    {
+      "title": 21,
+      "section": "802",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "13",
+          "title": "DRUG ABUSE PREVENTION AND CONTROL"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "CONTROL AND ENFORCEMENT"
+        },
+        {
+          "kind": "part",
+          "number": "A",
+          "title": "Introductory Provisions"
+        }
+      ],
+      "documentId": "21_802",
+      "currentThrough": "20250106",
+      "target": "21:802",
+      "titleName": "FOOD AND DRUGS",
+      "path": "raw/title-21-section-802.html",
+      "sha256": "ab756cf5dc86f5a066182ae3ccc349550f78321ae5e89327f22cce71a4b8b9b5",
+      "bytes": 56458,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title21/html/USCODE-2024-title21.htm",
+      "sourceTitleSha256": "9855f356a66da7b93860046807ecbf96f4b68d0e1a3901afe4a8a090f153b8d1",
+      "sourceTitleBytes": 8315708
+    },
+    {
+      "title": 22,
+      "section": "2131",
+      "heading": "Travel Promotion Act of 2009",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "31",
+          "title": "INTERNATIONAL TRAVEL"
+        },
+        {
+          "kind": "subchapter",
+          "number": "IV",
+          "title": "CORPORATION FOR TRAVEL PROMOTION"
+        }
+      ],
+      "documentId": "22_2131",
+      "currentThrough": "20250106",
+      "target": "22:2131",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-2131.html",
+      "sha256": "2f613debef9d4f22cbd44c621897b4451ad3c63ca3486cc71282d72473a0eef3",
+      "bytes": 26744,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "2371",
+      "heading": "Prohibition on assistance to governments supporting international terrorism",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "32",
+          "title": "FOREIGN ASSISTANCE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "GENERAL AND ADMINISTRATIVE PROVISIONS"
+        },
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "General Provisions"
+        }
+      ],
+      "documentId": "22_2371",
+      "currentThrough": "20250106",
+      "target": "22:2371",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-2371.html",
+      "sha256": "452ce01ebad64f59cf3e2cfcbb263d638656492adbcfedcba31dd928ff130073",
+      "bytes": 4559,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "2656f",
+      "heading": "Annual country reports on terrorism",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "38",
+          "title": "DEPARTMENT OF STATE"
+        }
+      ],
+      "documentId": "22_2656f",
+      "currentThrough": "20250106",
+      "target": "22:2656f",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-2656f.html",
+      "sha256": "1bfbf6549ec25dcc255d91b966866d502fbce0a7fafa9ef363ef86ef3675ac21",
+      "bytes": 13258,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "2708",
+      "heading": "Department of State rewards program",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "38",
+          "title": "DEPARTMENT OF STATE"
+        }
+      ],
+      "documentId": "22_2708",
+      "currentThrough": "20250106",
+      "target": "22:2708",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-2708.html",
+      "sha256": "d78d8613f5fe34f4da952e329e3b9e5027d9afee5a3686d9de85aab327500571",
+      "bytes": 22843,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "2780",
+      "heading": "Transactions with countries supporting acts of international terrorism",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "39",
+          "title": "ARMS EXPORT CONTROL"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "MILITARY EXPORT CONTROLS"
+        }
+      ],
+      "documentId": "22_2780",
+      "currentThrough": "20250106",
+      "target": "22:2780",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-2780.html",
+      "sha256": "ee0e7829d9af6581aa7925b8e5b9f99675dbc5cea210f9f3ea334faff126b2d6",
+      "bytes": 19590,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "288",
+      "heading": "\"International organization\" defined; authority of President",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "INTERNATIONAL BUREAUS, CONGRESSES, ETC."
+        },
+        {
+          "kind": "subchapter",
+          "number": "XVIII",
+          "title": "PRIVILEGES AND IMMUNITIES OF INTERNATIONAL ORGANIZATIONS"
+        }
+      ],
+      "documentId": "22_288",
+      "currentThrough": "20250106",
+      "target": "22:288",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-288.html",
+      "sha256": "bac93120de8514664832deb0b59747fb2b8bcdd0d66ed8da519361ef472ac8b3",
+      "bytes": 1963,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "3602",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "PANAMA CANAL"
+        }
+      ],
+      "documentId": "22_3602",
+      "currentThrough": "20250106",
+      "target": "22:3602",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-3602.html",
+      "sha256": "5317fdeee9027ebb44ba96f7b70c86151c12e6b81b21603f0a6a7ed75d50b1f4",
+      "bytes": 3814,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "4309a",
+      "heading": "United States responsibilities for employees of the United Nations",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "53",
+          "title": "AUTHORITIES RELATING TO THE REGULATION OF FOREIGN MISSIONS"
+        }
+      ],
+      "documentId": "22_4309a",
+      "currentThrough": "20250106",
+      "target": "22:4309a",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-4309a.html",
+      "sha256": "1f622c1f37111a7243c41c130fd6369a87ac8e40042a86535053440df370d03f",
+      "bytes": 3964,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "6091",
+      "heading": "Exclusion from United States of aliens who have confiscated property of United States nationals or who traffic in such property",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "69A",
+          "title": "CUBAN LIBERTY AND DEMOCRATIC SOLIDARITY (LIBERTAD)"
+        },
+        {
+          "kind": "subchapter",
+          "number": "IV",
+          "title": "EXCLUSION OF CERTAIN ALIENS"
+        }
+      ],
+      "documentId": "22_6091",
+      "currentThrough": "20250106",
+      "target": "22:6091",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-6091.html",
+      "sha256": "22182b275c3a0255fbe836af4169d2f479afd8cd50bc7b300ddc707390399dcc",
+      "bytes": 6074,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "6402",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "73",
+          "title": "INTERNATIONAL RELIGIOUS FREEDOM"
+        }
+      ],
+      "documentId": "22_6402",
+      "currentThrough": "20250106",
+      "target": "22:6402",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-6402.html",
+      "sha256": "e834004c87b909e8d776bda85afc14780c3a87fc9778fda3a75ad24c546db6ad",
+      "bytes": 7417,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "7102",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "78",
+          "title": "TRAFFICKING VICTIMS PROTECTION"
+        }
+      ],
+      "documentId": "22_7102",
+      "currentThrough": "20250106",
+      "target": "22:7102",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-7102.html",
+      "sha256": "e2bf56bc6439405dab746ca7f4b4b4a007f6928ac8370abddb9e34d6da9430e6",
+      "bytes": 12406,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 22,
+      "section": "7105",
+      "heading": "Protection and assistance for victims of trafficking",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "78",
+          "title": "TRAFFICKING VICTIMS PROTECTION"
+        }
+      ],
+      "documentId": "22_7105",
+      "currentThrough": "20250106",
+      "target": "22:7105",
+      "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
+      "path": "raw/title-22-section-7105.html",
+      "sha256": "dc0d190c300753bedf7c8b723df5838852da9aaa8b12f18cc683f61f9f60d216",
+      "bytes": 32226,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title22/html/USCODE-2024-title22.htm",
+      "sourceTitleSha256": "973a8d8885f0dd990a08742cb0b5a8a0954cc0779dc97aed5d2d6302ec904599",
+      "sourceTitleBytes": 20916041
+    },
+    {
+      "title": 25,
+      "section": "5304",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "46",
+          "title": "INDIAN SELF-DETERMINATION AND EDUCATION ASSISTANCE"
+        }
+      ],
+      "documentId": "25_5304",
+      "currentThrough": "20250106",
+      "target": "25:5304",
+      "titleName": "INDIANS",
+      "path": "raw/title-25-section-5304.html",
+      "sha256": "00bab80ad3c02945b0006099c1a477dea3a8caf3d55abbf0b4d80e7459d3f60d",
+      "bytes": 6294,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title25/html/USCODE-2024-title25.htm",
+      "sourceTitleSha256": "caaa5c5f4f315ac01ea4bf77aaf7bad0515e6bbec5e382ee745e42626b017333",
+      "sourceTitleBytes": 7689180
+    },
+    {
+      "title": 26,
+      "section": "3121",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "C",
+          "title": "Employment Taxes"
+        },
+        {
+          "kind": "chapter",
+          "number": "21",
+          "title": "FEDERAL INSURANCE CONTRIBUTIONS ACT"
+        },
+        {
+          "kind": "subchapter",
+          "number": "C",
+          "title": "General Provisions"
+        }
+      ],
+      "documentId": "26_3121",
+      "currentThrough": "20250106",
+      "target": "26:3121",
+      "titleName": "INTERNAL REVENUE CODE",
+      "path": "raw/title-26-section-3121.html",
+      "sha256": "ad46c38a773fff8abb062ce06cd13c2c435a47fd7faf53e5a44e8977e395d978",
+      "bytes": 102660,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26.htm",
+      "sourceTitleSha256": "475d096acb4eb3e34e9e9bbbc8c3dbcf3ea4f20d5b738c88ba0ea80126b8ad89",
+      "sourceTitleBytes": 35703799
+    },
+    {
+      "title": 26,
+      "section": "414",
+      "heading": "Definitions and special rules",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "A",
+          "title": "Income Taxes"
+        },
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "NORMAL TAXES AND SURTAXES"
+        },
+        {
+          "kind": "subchapter",
+          "number": "D",
+          "title": "Deferred Compensation, Etc."
+        },
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "PENSION, PROFIT-SHARING, STOCK BONUS PLANS, ETC."
+        },
+        {
+          "kind": "subpart",
+          "number": "B",
+          "title": "Special Rules"
+        }
+      ],
+      "documentId": "26_414",
+      "currentThrough": "20250106",
+      "target": "26:414",
+      "titleName": "INTERNAL REVENUE CODE",
+      "path": "raw/title-26-section-414.html",
+      "sha256": "b444106349e97a813e2bc8a387d388a2f819d6862bec7f26d68f335817023107",
+      "bytes": 140743,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26.htm",
+      "sourceTitleSha256": "475d096acb4eb3e34e9e9bbbc8c3dbcf3ea4f20d5b738c88ba0ea80126b8ad89",
+      "sourceTitleBytes": 35703799
+    },
+    {
+      "title": 26,
+      "section": "501",
+      "heading": "Exemption from tax on corporations, certain trusts, etc.",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "A",
+          "title": "Income Taxes"
+        },
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "NORMAL TAXES AND SURTAXES"
+        },
+        {
+          "kind": "subchapter",
+          "number": "F",
+          "title": "Exempt Organizations"
+        },
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "GENERAL RULE"
+        }
+      ],
+      "documentId": "26_501",
+      "currentThrough": "20250106",
+      "target": "26:501",
+      "titleName": "INTERNAL REVENUE CODE",
+      "path": "raw/title-26-section-501.html",
+      "sha256": "adf3fea4efddf100d284b01f0534f7b1a606a6550f4613968202da7dc0f5c358",
+      "bytes": 95994,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26.htm",
+      "sourceTitleSha256": "475d096acb4eb3e34e9e9bbbc8c3dbcf3ea4f20d5b738c88ba0ea80126b8ad89",
+      "sourceTitleBytes": 35703799
+    },
+    {
+      "title": 26,
+      "section": "5861",
+      "heading": "Prohibited acts",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "E",
+          "title": "Alcohol, Tobacco, and Certain Other Excise Taxes"
+        },
+        {
+          "kind": "chapter",
+          "number": "53",
+          "title": "MACHINE GUNS, DESTRUCTIVE DEVICES, AND CERTAIN OTHER FIREARMS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "C",
+          "title": "Prohibited Acts"
+        }
+      ],
+      "documentId": "26_5861",
+      "currentThrough": "20250106",
+      "target": "26:5861",
+      "titleName": "INTERNAL REVENUE CODE",
+      "path": "raw/title-26-section-5861.html",
+      "sha256": "b3be8fd9665064a29d7c9d4779478bfc781e48e3db3e029be5b2f9405ae83876",
+      "bytes": 2355,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26.htm",
+      "sourceTitleSha256": "475d096acb4eb3e34e9e9bbbc8c3dbcf3ea4f20d5b738c88ba0ea80126b8ad89",
+      "sourceTitleBytes": 35703799
+    },
+    {
+      "title": 26,
+      "section": "6103",
+      "heading": "Confidentiality and disclosure of returns and return information",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "F",
+          "title": "Procedure and Administration"
+        },
+        {
+          "kind": "chapter",
+          "number": "61",
+          "title": "INFORMATION AND RETURNS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "B",
+          "title": "Miscellaneous Provisions"
+        }
+      ],
+      "documentId": "26_6103",
+      "currentThrough": "20250106",
+      "target": "26:6103",
+      "titleName": "INTERNAL REVENUE CODE",
+      "path": "raw/title-26-section-6103.html",
+      "sha256": "0edfbcba2eafdf4bd33b7966ca62926fee3bbfb18abaacd559f8548b4f6b4b7f",
+      "bytes": 191811,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26.htm",
+      "sourceTitleSha256": "475d096acb4eb3e34e9e9bbbc8c3dbcf3ea4f20d5b738c88ba0ea80126b8ad89",
+      "sourceTitleBytes": 35703799
+    },
+    {
+      "title": 26,
+      "section": "7201",
+      "heading": "Attempt to evade or defeat tax",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "F",
+          "title": "Procedure and Administration"
+        },
+        {
+          "kind": "chapter",
+          "number": "75",
+          "title": "CRIMES, OTHER OFFENSES, AND FORFEITURES"
+        },
+        {
+          "kind": "subchapter",
+          "number": "A",
+          "title": "Crimes"
+        },
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "26_7201",
+      "currentThrough": "20250106",
+      "target": "26:7201",
+      "titleName": "INTERNAL REVENUE CODE",
+      "path": "raw/title-26-section-7201.html",
+      "sha256": "519de679edbf5b3a664e5defd32b812fda3b6020a2a1c10cfdc035768b81db09",
+      "bytes": 837,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26.htm",
+      "sourceTitleSha256": "475d096acb4eb3e34e9e9bbbc8c3dbcf3ea4f20d5b738c88ba0ea80126b8ad89",
+      "sourceTitleBytes": 35703799
+    },
+    {
+      "title": 28,
+      "section": "1254",
+      "heading": "Courts of appeals; certiorari; certified questions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "IV",
+          "title": "JURISDICTION AND VENUE"
+        },
+        {
+          "kind": "chapter",
+          "number": "81",
+          "title": "SUPREME COURT"
+        }
+      ],
+      "documentId": "28_1254",
+      "currentThrough": "20250106",
+      "target": "28:1254",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-1254.html",
+      "sha256": "c46da101c696b61fe036f39504650d87690fdfabb6fbcfed937333f011c529a4",
+      "bytes": 1061,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "1350",
+      "heading": "Alien's action for tort",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "IV",
+          "title": "JURISDICTION AND VENUE"
+        },
+        {
+          "kind": "chapter",
+          "number": "85",
+          "title": "DISTRICT COURTS; JURISDICTION"
+        }
+      ],
+      "documentId": "28_1350",
+      "currentThrough": "20250106",
+      "target": "28:1350",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-1350.html",
+      "sha256": "9de2684fe9b2142bd392d03155d8c04548b4b3615252863fcea2fb075e85c288",
+      "bytes": 523,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "1361",
+      "heading": "Action to compel an officer of the United States to perform his duty",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "IV",
+          "title": "JURISDICTION AND VENUE"
+        },
+        {
+          "kind": "chapter",
+          "number": "85",
+          "title": "DISTRICT COURTS; JURISDICTION"
+        }
+      ],
+      "documentId": "28_1361",
+      "currentThrough": "20250106",
+      "target": "28:1361",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-1361.html",
+      "sha256": "a0e7677f40055f441c056f87037f7cbd6c6e6948bce07ca4a1e93f845d684da9",
+      "bytes": 627,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "1651",
+      "heading": "Writs",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "V",
+          "title": "PROCEDURE"
+        },
+        {
+          "kind": "chapter",
+          "number": "111",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "28_1651",
+      "currentThrough": "20250106",
+      "target": "28:1651",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-1651.html",
+      "sha256": "1d91b0284d4bfeaece81a0299d6027dca1bdd8cb3c44b126b71bae8a24f999ab",
+      "bytes": 714,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "1746",
+      "heading": "Unsworn declarations under penalty of perjury",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "V",
+          "title": "PROCEDURE"
+        },
+        {
+          "kind": "chapter",
+          "number": "115",
+          "title": "EVIDENCE; DOCUMENTARY"
+        }
+      ],
+      "documentId": "28_1746",
+      "currentThrough": "20250106",
+      "target": "28:1746",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-1746.html",
+      "sha256": "d8ed1fed0f04a0d2b4594f36c85879f3ef7c8f9435abfd73c523c658e8bf3903",
+      "bytes": 1772,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "2201",
+      "heading": "Creation of remedy",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "VI",
+          "title": "PARTICULAR PROCEEDINGS"
+        },
+        {
+          "kind": "chapter",
+          "number": "151",
+          "title": "DECLARATORY JUDGMENTS"
+        }
+      ],
+      "documentId": "28_2201",
+      "currentThrough": "20250106",
+      "target": "28:2201",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-2201.html",
+      "sha256": "54c5e77dfe2acaaeed6cab7231b78633d71d52b8fbdb7183d830d0f33f06ad7d",
+      "bytes": 2157,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "2241",
+      "heading": "Power to grant writ",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "VI",
+          "title": "PARTICULAR PROCEEDINGS"
+        },
+        {
+          "kind": "chapter",
+          "number": "153",
+          "title": "HABEAS CORPUS"
+        }
+      ],
+      "documentId": "28_2241",
+      "currentThrough": "20250106",
+      "target": "28:2241",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-2241.html",
+      "sha256": "d2c50baa688bc50b36b5dcc305ad153c6c7dc162546cb6f9ab405d3a1f95988c",
+      "bytes": 4186,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "2253",
+      "heading": "Appeal",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "VI",
+          "title": "PARTICULAR PROCEEDINGS"
+        },
+        {
+          "kind": "chapter",
+          "number": "153",
+          "title": "HABEAS CORPUS"
+        }
+      ],
+      "documentId": "28_2253",
+      "currentThrough": "20250106",
+      "target": "28:2253",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-2253.html",
+      "sha256": "cc4d9fb9e6905277a5bfd17079158aff20b35ade7332e38db0be5423b7c819be",
+      "bytes": 1887,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "2347",
+      "heading": "Petitions to review; proceedings",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "VI",
+          "title": "PARTICULAR PROCEEDINGS"
+        },
+        {
+          "kind": "chapter",
+          "number": "158",
+          "title": "ORDERS OF FEDERAL AGENCIES; REVIEW"
+        }
+      ],
+      "documentId": "28_2347",
+      "currentThrough": "20250106",
+      "target": "28:2347",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-2347.html",
+      "sha256": "681b0b881ab4700b90a43e1b0082064e78b7a41f894f30834cd86164d85fe021",
+      "bytes": 2735,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "3201",
+      "heading": "Judgment liens",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "VI",
+          "title": "PARTICULAR PROCEEDINGS"
+        },
+        {
+          "kind": "chapter",
+          "number": "176",
+          "title": "FEDERAL DEBT COLLECTION PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "C",
+          "title": "POSTJUDGMENT REMEDIES"
+        }
+      ],
+      "documentId": "28_3201",
+      "currentThrough": "20250106",
+      "target": "28:3201",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-3201.html",
+      "sha256": "bc4c901f9f78bb49c85cc5c6a324448ec820fcb30815cc90f02d4e3a6b1cf563",
+      "bytes": 3352,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "3203",
+      "heading": "Execution",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "VI",
+          "title": "PARTICULAR PROCEEDINGS"
+        },
+        {
+          "kind": "chapter",
+          "number": "176",
+          "title": "FEDERAL DEBT COLLECTION PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "C",
+          "title": "POSTJUDGMENT REMEDIES"
+        }
+      ],
+      "documentId": "28_3203",
+      "currentThrough": "20250106",
+      "target": "28:3203",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-3203.html",
+      "sha256": "a711d677a473a3fc7df4c9e4797e5bd5fda73efe2a03cd720f09420cefcb65fe",
+      "bytes": 19263,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "3204",
+      "heading": "Installment payment order",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "VI",
+          "title": "PARTICULAR PROCEEDINGS"
+        },
+        {
+          "kind": "chapter",
+          "number": "176",
+          "title": "FEDERAL DEBT COLLECTION PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "C",
+          "title": "POSTJUDGMENT REMEDIES"
+        }
+      ],
+      "documentId": "28_3204",
+      "currentThrough": "20250106",
+      "target": "28:3204",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-3204.html",
+      "sha256": "5515cdb6ca5402d80ac5e212835d370282d3c2fb5c86943b28071849ee625bdd",
+      "bytes": 2554,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 28,
+      "section": "3205",
+      "heading": "Garnishment",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "VI",
+          "title": "PARTICULAR PROCEEDINGS"
+        },
+        {
+          "kind": "chapter",
+          "number": "176",
+          "title": "FEDERAL DEBT COLLECTION PROCEDURE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "C",
+          "title": "POSTJUDGMENT REMEDIES"
+        }
+      ],
+      "documentId": "28_3205",
+      "currentThrough": "20250106",
+      "target": "28:3205",
+      "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
+      "path": "raw/title-28-section-3205.html",
+      "sha256": "8d22deafd6aee1f75f878b9c299c4e6ec4c7643b5b3e31a8d13d4670eb6fa5d2",
+      "bytes": 10597,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title28/html/USCODE-2024-title28.htm",
+      "sourceTitleSha256": "8de2b62a561e679c8f2a5409b201a716e7ae15dfb12f8029cbfd063683430427",
+      "sourceTitleBytes": 6054819
+    },
+    {
+      "title": 29,
+      "section": "1802",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "20",
+          "title": "MIGRANT AND SEASONAL AGRICULTURAL WORKER PROTECTION"
+        }
+      ],
+      "documentId": "29_1802",
+      "currentThrough": "20250106",
+      "target": "29:1802",
+      "titleName": "LABOR",
+      "path": "raw/title-29-section-1802.html",
+      "sha256": "8b80f14a4a358345198ada5ed569db55d4231737b3de527758050ad022f22543",
+      "bytes": 5432,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29.htm",
+      "sourceTitleSha256": "e96eb2f9d3108d9fbaa91d35c25cbcd1db72fbeeadb7bbbc52c2fe8ab41796d1",
+      "sourceTitleBytes": 7881829
+    },
+    {
+      "title": 29,
+      "section": "203",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "8",
+          "title": "FAIR LABOR STANDARDS"
+        }
+      ],
+      "documentId": "29_203",
+      "currentThrough": "20250106",
+      "target": "29:203",
+      "titleName": "LABOR",
+      "path": "raw/title-29-section-203.html",
+      "sha256": "2114a7cba2cc98606557497fba79470607a6a92ef8843f57924b66c9739c1107",
+      "bytes": 20377,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29.htm",
+      "sourceTitleSha256": "e96eb2f9d3108d9fbaa91d35c25cbcd1db72fbeeadb7bbbc52c2fe8ab41796d1",
+      "sourceTitleBytes": 7881829
+    },
+    {
+      "title": 29,
+      "section": "3224a",
+      "heading": "Job training grants",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "32",
+          "title": "WORKFORCE INNOVATION AND OPPORTUNITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "WORKFORCE DEVELOPMENT ACTIVITIES"
+        },
+        {
+          "kind": "part",
+          "number": "D",
+          "title": "National Programs"
+        }
+      ],
+      "documentId": "29_3224a",
+      "currentThrough": "20250106",
+      "target": "29:3224a",
+      "titleName": "LABOR",
+      "path": "raw/title-29-section-3224a.html",
+      "sha256": "4c79a0e88c75e949bd493fe8563b9c4cda839a45d650a8dff14781fd8ccb60be",
+      "bytes": 5863,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title29/html/USCODE-2024-title29.htm",
+      "sourceTitleSha256": "e96eb2f9d3108d9fbaa91d35c25cbcd1db72fbeeadb7bbbc52c2fe8ab41796d1",
+      "sourceTitleBytes": 7881829
+    },
+    {
+      "title": 31,
+      "section": "1341",
+      "heading": "Limitations on expending and obligating amounts",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "II",
+          "title": "THE BUDGET PROCESS"
+        },
+        {
+          "kind": "chapter",
+          "number": "13",
+          "title": "APPROPRIATIONS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "LIMITATIONS, EXCEPTIONS, AND PENALTIES"
+        }
+      ],
+      "documentId": "31_1341",
+      "currentThrough": "20250106",
+      "target": "31:1341",
+      "titleName": "MONEY AND FINANCE",
+      "path": "raw/title-31-section-1341.html",
+      "sha256": "226f3fa0633c369ecb5dd2dbc36bb59bdea31e22c8b830c2f5292198f1c3c15d",
+      "bytes": 4088,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title31/html/USCODE-2024-title31.htm",
+      "sourceTitleSha256": "43a7f23920f50975fc2c0a7ecac9ed43212ba2e29a10a81f16f60e74e43f7630",
+      "sourceTitleBytes": 5388024
+    },
+    {
+      "title": 31,
+      "section": "1342",
+      "heading": "Limitation on voluntary services",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "II",
+          "title": "THE BUDGET PROCESS"
+        },
+        {
+          "kind": "chapter",
+          "number": "13",
+          "title": "APPROPRIATIONS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "LIMITATIONS, EXCEPTIONS, AND PENALTIES"
+        }
+      ],
+      "documentId": "31_1342",
+      "currentThrough": "20250106",
+      "target": "31:1342",
+      "titleName": "MONEY AND FINANCE",
+      "path": "raw/title-31-section-1342.html",
+      "sha256": "44447e91bb9a508f1816095af6e062560dbd3f1aa9589b58ab12b2149b9cd0f1",
+      "bytes": 1295,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title31/html/USCODE-2024-title31.htm",
+      "sourceTitleSha256": "43a7f23920f50975fc2c0a7ecac9ed43212ba2e29a10a81f16f60e74e43f7630",
+      "sourceTitleBytes": 5388024
+    },
+    {
+      "title": 31,
+      "section": "3302",
+      "heading": "Custodians of money",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "III",
+          "title": "FINANCIAL MANAGEMENT"
+        },
+        {
+          "kind": "chapter",
+          "number": "33",
+          "title": "DEPOSITING, KEEPING, AND PAYING MONEY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "DEPOSITS AND DEPOSITARIES"
+        }
+      ],
+      "documentId": "31_3302",
+      "currentThrough": "20250106",
+      "target": "31:3302",
+      "titleName": "MONEY AND FINANCE",
+      "path": "raw/title-31-section-3302.html",
+      "sha256": "6df2751a92e2c64547736fafb59619251b444af029f60686f9fb424862fea777",
+      "bytes": 3597,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title31/html/USCODE-2024-title31.htm",
+      "sourceTitleSha256": "43a7f23920f50975fc2c0a7ecac9ed43212ba2e29a10a81f16f60e74e43f7630",
+      "sourceTitleBytes": 5388024
+    },
+    {
+      "title": 31,
+      "section": "3324",
+      "heading": "Advances",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "III",
+          "title": "FINANCIAL MANAGEMENT"
+        },
+        {
+          "kind": "chapter",
+          "number": "33",
+          "title": "DEPOSITING, KEEPING, AND PAYING MONEY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "PAYMENTS"
+        }
+      ],
+      "documentId": "31_3324",
+      "currentThrough": "20250106",
+      "target": "31:3324",
+      "titleName": "MONEY AND FINANCE",
+      "path": "raw/title-31-section-3324.html",
+      "sha256": "dceb521d52df9e1b0b2763d932f85567030869fb85f4355d5383170800590bb3",
+      "bytes": 2395,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title31/html/USCODE-2024-title31.htm",
+      "sourceTitleSha256": "43a7f23920f50975fc2c0a7ecac9ed43212ba2e29a10a81f16f60e74e43f7630",
+      "sourceTitleBytes": 5388024
+    },
+    {
+      "title": 31,
+      "section": "9102",
+      "heading": "Establishing and acquiring corporations",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "VI",
+          "title": "MISCELLANEOUS"
+        },
+        {
+          "kind": "chapter",
+          "number": "91",
+          "title": "GOVERNMENT CORPORATIONS"
+        }
+      ],
+      "documentId": "31_9102",
+      "currentThrough": "20250106",
+      "target": "31:9102",
+      "titleName": "MONEY AND FINANCE",
+      "path": "raw/title-31-section-9102.html",
+      "sha256": "dbe2b833581ec005d801ee8a6938d4b7dad8d9c3fd0d0e400d59004dbaa1c575",
+      "bytes": 523,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title31/html/USCODE-2024-title31.htm",
+      "sourceTitleSha256": "43a7f23920f50975fc2c0a7ecac9ed43212ba2e29a10a81f16f60e74e43f7630",
+      "sourceTitleBytes": 5388024
+    },
+    {
+      "title": 31,
+      "section": "9701",
+      "heading": "Fees and charges for Government services and things of value",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "VI",
+          "title": "MISCELLANEOUS"
+        },
+        {
+          "kind": "chapter",
+          "number": "97",
+          "title": "MISCELLANEOUS"
+        }
+      ],
+      "documentId": "31_9701",
+      "currentThrough": "20250106",
+      "target": "31:9701",
+      "titleName": "MONEY AND FINANCE",
+      "path": "raw/title-31-section-9701.html",
+      "sha256": "48a21b936a0058d6126d7c85e3b3324e5a4781946e7f84a83da27d27eb2f00ea",
+      "bytes": 1876,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title31/html/USCODE-2024-title31.htm",
+      "sourceTitleSha256": "43a7f23920f50975fc2c0a7ecac9ed43212ba2e29a10a81f16f60e74e43f7630",
+      "sourceTitleBytes": 5388024
+    },
+    {
+      "title": 33,
+      "section": "1321",
+      "heading": "Oil and hazardous substance liability",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "26",
+          "title": "WATER POLLUTION PREVENTION AND CONTROL"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "STANDARDS AND ENFORCEMENT"
+        }
+      ],
+      "documentId": "33_1321",
+      "currentThrough": "20250106",
+      "target": "33:1321",
+      "titleName": "NAVIGATION AND NAVIGABLE WATERS",
+      "path": "raw/title-33-section-1321.html",
+      "sha256": "e8d14e88491e3678637dcf6b7671c186d9a52ec4f26936ed35ba7727e0a0a71a",
+      "bytes": 139791,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title33/html/USCODE-2024-title33.htm",
+      "sourceTitleSha256": "a417bf1e2cf9d127e03ad1f779748a958b35437e5ab778bfc54df6cf439b6ac5",
+      "sourceTitleBytes": 9036660
+    },
+    {
+      "title": 33,
+      "section": "932",
+      "heading": "Security for compensation",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "18",
+          "title": "LONGSHORE AND HARBOR WORKERS' COMPENSATION"
+        }
+      ],
+      "documentId": "33_932",
+      "currentThrough": "20250106",
+      "target": "33:932",
+      "titleName": "NAVIGATION AND NAVIGABLE WATERS",
+      "path": "raw/title-33-section-932.html",
+      "sha256": "c6040606c0613cbb2b14aa70552a10b888f4b95f74b2ab62a734001b4e8992d8",
+      "bytes": 3083,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title33/html/USCODE-2024-title33.htm",
+      "sourceTitleSha256": "a417bf1e2cf9d127e03ad1f779748a958b35437e5ab778bfc54df6cf439b6ac5",
+      "sourceTitleBytes": 9036660
+    },
+    {
+      "title": 34,
+      "section": "20911",
+      "heading": "Relevant definitions, including Amie Zyla expansion of sex offender definition and expanded inclusion of child predators",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "II",
+          "title": "Protection of Children and Other Persons"
+        },
+        {
+          "kind": "chapter",
+          "number": "209",
+          "title": "CHILD PROTECTION AND SAFETY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "SEX OFFENDER REGISTRATION AND NOTIFICATION"
+        },
+        {
+          "kind": "part",
+          "number": "A",
+          "title": "Sex Offender Registration and Notification"
+        }
+      ],
+      "documentId": "34_20911",
+      "currentThrough": "20250106",
+      "target": "34:20911",
+      "titleName": "CRIME CONTROL AND LAW ENFORCEMENT",
+      "path": "raw/title-34-section-20911.html",
+      "sha256": "06813e3d1b38b7cd865cdfeecf0ca393a3e7f2f2ab0453f4f516e3a93d6ffcf0",
+      "bytes": 9362,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title34/html/USCODE-2024-title34.htm",
+      "sourceTitleSha256": "b8bcdb0b9e51109fa63dc02bb60a835bbe3ce05e1738e6108028c455bf32fc54",
+      "sourceTitleBytes": 6037359
+    },
+    {
+      "title": 38,
+      "section": "101",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "GENERAL PROVISIONS"
+        },
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "GENERAL"
+        }
+      ],
+      "documentId": "38_101",
+      "currentThrough": "20250106",
+      "target": "38:101",
+      "titleName": "VETERANS' BENEFITS",
+      "path": "raw/title-38-section-101.html",
+      "sha256": "b790bea7b2e01033740a05efcfebbbaf24f83ee21a775b3ac1e0c6798e0db172",
+      "bytes": 26800,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title38/html/USCODE-2024-title38.htm",
+      "sourceTitleSha256": "67d7b32968f7a55540684111229b6564493d25abcf49a201096e662ddbb303b3",
+      "sourceTitleBytes": 12691841
+    },
+    {
+      "title": 38,
+      "section": "107",
+      "heading": "Certain service deemed not to be active service",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "I",
+          "title": "GENERAL PROVISIONS"
+        },
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "GENERAL"
+        }
+      ],
+      "documentId": "38_107",
+      "currentThrough": "20250106",
+      "target": "38:107",
+      "titleName": "VETERANS' BENEFITS",
+      "path": "raw/title-38-section-107.html",
+      "sha256": "53f79325466fa8c06583b76b816ebead08078f916057b0ab30105c71b6a15418",
+      "bytes": 5963,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title38/html/USCODE-2024-title38.htm",
+      "sourceTitleSha256": "67d7b32968f7a55540684111229b6564493d25abcf49a201096e662ddbb303b3",
+      "sourceTitleBytes": 12691841
+    },
+    {
+      "title": 38,
+      "section": "1304",
+      "heading": "Special provisions relating to surviving spouses",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "II",
+          "title": "GENERAL BENEFITS"
+        },
+        {
+          "kind": "chapter",
+          "number": "13",
+          "title": "DEPENDENCY AND INDEMNITY COMPENSATION FOR SERVICE-CONNECTED DEATHS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "GENERAL"
+        }
+      ],
+      "documentId": "38_1304",
+      "currentThrough": "20250106",
+      "target": "38:1304",
+      "titleName": "VETERANS' BENEFITS",
+      "path": "raw/title-38-section-1304.html",
+      "sha256": "2f4db0f21850d284df29985306b03b32633906f456a19383fedeed92a8d42602",
+      "bytes": 1260,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title38/html/USCODE-2024-title38.htm",
+      "sourceTitleSha256": "67d7b32968f7a55540684111229b6564493d25abcf49a201096e662ddbb303b3",
+      "sourceTitleBytes": 12691841
+    },
+    {
+      "title": 38,
+      "section": "5303A",
+      "heading": "Minimum active-duty service requirement",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "part",
+          "number": "IV",
+          "title": "GENERAL ADMINISTRATIVE PROVISIONS"
+        },
+        {
+          "kind": "chapter",
+          "number": "53",
+          "title": "SPECIAL PROVISIONS RELATING TO BENEFITS"
+        }
+      ],
+      "documentId": "38_5303A",
+      "currentThrough": "20250106",
+      "target": "38:5303a",
+      "titleName": "VETERANS' BENEFITS",
+      "path": "raw/title-38-section-5303a.html",
+      "sha256": "f47b017d06a376439e21213a417be4f153e674e030999bfd4b6550140e5c8920",
+      "bytes": 8310,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title38/html/USCODE-2024-title38.htm",
+      "sourceTitleSha256": "67d7b32968f7a55540684111229b6564493d25abcf49a201096e662ddbb303b3",
+      "sourceTitleBytes": 12691841
+    },
+    {
+      "title": 40,
+      "section": "3113",
+      "heading": "Acquisition by condemnation",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "II",
+          "title": "PUBLIC BUILDINGS AND WORKS"
+        },
+        {
+          "kind": "part",
+          "number": "A",
+          "title": "GENERAL"
+        },
+        {
+          "kind": "chapter",
+          "number": "31",
+          "title": "GENERAL"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "ACQUIRING LAND"
+        }
+      ],
+      "documentId": "40_3113",
+      "currentThrough": "20250106",
+      "target": "40:3113",
+      "titleName": "PUBLIC BUILDINGS, PROPERTY, AND WORKS",
+      "path": "raw/title-40-section-3113.html",
+      "sha256": "6b98dd426cda34593b705b028c54a23598f5d315f81ec93be96b082949d71d7c",
+      "bytes": 847,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title40/html/USCODE-2024-title40.htm",
+      "sourceTitleSha256": "6aee4d0285d6b4fc988b5cdebae3e4cb0c08fad034f518b92e44080e432dccc5",
+      "sourceTitleBytes": 2903892
+    },
+    {
+      "title": 40,
+      "section": "8141",
+      "heading": "Contract to rent buildings in the District of Columbia not to be made until appropriation enacted",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "II",
+          "title": "PUBLIC BUILDINGS AND WORKS"
+        },
+        {
+          "kind": "part",
+          "number": "D",
+          "title": "PUBLIC BUILDINGS, GROUNDS, AND PARKS IN THE DISTRICT OF COLUMBIA"
+        },
+        {
+          "kind": "chapter",
+          "number": "81",
+          "title": "ADMINISTRATIVE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "III",
+          "title": "SERVICES FOR FACILITIES"
+        }
+      ],
+      "documentId": "40_8141",
+      "currentThrough": "20250106",
+      "target": "40:8141",
+      "titleName": "PUBLIC BUILDINGS, PROPERTY, AND WORKS",
+      "path": "raw/title-40-section-8141.html",
+      "sha256": "e172302b6269afdaad14e7dfeb8e0139038e8f48199530056bc39d859f2e345c",
+      "bytes": 756,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title40/html/USCODE-2024-title40.htm",
+      "sourceTitleSha256": "6aee4d0285d6b4fc988b5cdebae3e4cb0c08fad034f518b92e44080e432dccc5",
+      "sourceTitleBytes": 2903892
+    },
+    {
+      "title": 41,
+      "section": "3901",
+      "heading": "Contracts awarded using procedures other than sealed-bid procedures",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "I",
+          "title": "Federal Procurement Policy"
+        },
+        {
+          "kind": "division",
+          "number": "C",
+          "title": "Procurement"
+        },
+        {
+          "kind": "chapter",
+          "number": "39",
+          "title": "SPECIFIC TYPES OF CONTRACTS"
+        }
+      ],
+      "documentId": "41_3901",
+      "currentThrough": "20250106",
+      "target": "41:3901",
+      "titleName": "PUBLIC CONTRACTS",
+      "path": "raw/title-41-section-3901.html",
+      "sha256": "e0059fb06bbd3572ea3a6f1de52944cac5950fda6f30f123bd11c9bbbfa050d7",
+      "bytes": 2114,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title41/html/USCODE-2024-title41.htm",
+      "sourceTitleSha256": "15fa3dc43da88d8af88a9f00f4fd28cbde0a293546ddddd61d62ff3db5eb6df9",
+      "sourceTitleBytes": 1973841
+    },
+    {
+      "title": 41,
+      "section": "6101",
+      "heading": "Advertising requirement for Federal Government purchases and sales",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "II",
+          "title": "Other Advertising and Contract Provisions"
+        },
+        {
+          "kind": "chapter",
+          "number": "61",
+          "title": "ADVERTISING"
+        }
+      ],
+      "documentId": "41_6101",
+      "currentThrough": "20250106",
+      "target": "41:6101",
+      "titleName": "PUBLIC CONTRACTS",
+      "path": "raw/title-41-section-6101.html",
+      "sha256": "63d900e45c975db12a58e08f726b01b581953813598dca14ff0ff0a8f8c8ff76",
+      "bytes": 2674,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title41/html/USCODE-2024-title41.htm",
+      "sourceTitleSha256": "15fa3dc43da88d8af88a9f00f4fd28cbde0a293546ddddd61d62ff3db5eb6df9",
+      "sourceTitleBytes": 1973841
+    },
+    {
+      "title": 41,
+      "section": "6301",
+      "heading": "Authorization requirement",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "II",
+          "title": "Other Advertising and Contract Provisions"
+        },
+        {
+          "kind": "chapter",
+          "number": "63",
+          "title": "GENERAL CONTRACT PROVISIONS"
+        }
+      ],
+      "documentId": "41_6301",
+      "currentThrough": "20250106",
+      "target": "41:6301",
+      "titleName": "PUBLIC CONTRACTS",
+      "path": "raw/title-41-section-6301.html",
+      "sha256": "a5c6b8cf36da499988d19ad031a0d325958f239defa3dc0fdb4d4b178dfd50b6",
+      "bytes": 2217,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title41/html/USCODE-2024-title41.htm",
+      "sourceTitleSha256": "15fa3dc43da88d8af88a9f00f4fd28cbde0a293546ddddd61d62ff3db5eb6df9",
+      "sourceTitleBytes": 1973841
+    },
+    {
+      "title": 41,
+      "section": "6306",
+      "heading": "Prohibition on Members of Congress making contracts with Federal Government",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "II",
+          "title": "Other Advertising and Contract Provisions"
+        },
+        {
+          "kind": "chapter",
+          "number": "63",
+          "title": "GENERAL CONTRACT PROVISIONS"
+        }
+      ],
+      "documentId": "41_6306",
+      "currentThrough": "20250106",
+      "target": "41:6306",
+      "titleName": "PUBLIC CONTRACTS",
+      "path": "raw/title-41-section-6306.html",
+      "sha256": "f2efc59f0a5234d046624ce7c669f9d8341f729e7fea2b4d9de2ddf1ddfc5200",
+      "bytes": 1534,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title41/html/USCODE-2024-title41.htm",
+      "sourceTitleSha256": "15fa3dc43da88d8af88a9f00f4fd28cbde0a293546ddddd61d62ff3db5eb6df9",
+      "sourceTitleBytes": 1973841
+    },
+    {
+      "title": 42,
+      "section": "12102",
+      "heading": "Definition of disability",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "126",
+          "title": "EQUAL OPPORTUNITY FOR INDIVIDUALS WITH DISABILITIES"
+        }
+      ],
+      "documentId": "42_12102",
+      "currentThrough": "20250106",
+      "target": "42:12102",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-12102.html",
+      "sha256": "4adca47fce7a8cb2741d1d8a0f1750b1383209e923bb6a3b42b64f5769f8dbc2",
+      "bytes": 5092,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1320b-7",
+      "heading": "Income and eligibility verification system",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "XI",
+          "title": "GENERAL PROVISIONS, PEER REVIEW, AND ADMINISTRATIVE SIMPLIFICATION"
+        },
+        {
+          "kind": "part",
+          "number": "A",
+          "title": "General Provisions"
+        }
+      ],
+      "documentId": "42_1320b-7",
+      "currentThrough": "20250106",
+      "target": "42:1320b-7",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1320b-7.html",
+      "sha256": "d057d2633926bf794c58d3bc2cd6243134d71982f756c004af3220675e9c48d6",
+      "bytes": 17295,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1382c",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "XVI",
+          "title": "SUPPLEMENTAL SECURITY INCOME FOR AGED, BLIND, AND DISABLED"
+        },
+        {
+          "kind": "part",
+          "number": "A",
+          "title": "Determination of Benefits"
+        }
+      ],
+      "documentId": "42_1382c",
+      "currentThrough": "20250106",
+      "target": "42:1382c",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1382c.html",
+      "sha256": "acfd76483c71b2a1b8d52dccd0ea577c7cefa9a9f768a8451134b4a6b6665349",
+      "bytes": 25441,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1382e",
+      "heading": "Supplementary assistance by State or subdivision to needy individuals",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "XVI",
+          "title": "SUPPLEMENTAL SECURITY INCOME FOR AGED, BLIND, AND DISABLED"
+        },
+        {
+          "kind": "part",
+          "number": "A",
+          "title": "Determination of Benefits"
+        }
+      ],
+      "documentId": "42_1382e",
+      "currentThrough": "20250106",
+      "target": "42:1382e",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1382e.html",
+      "sha256": "bd442f555fa426c662684a6622431fed85126b6ad113cb08b5c7b18785b84680",
+      "bytes": 13780,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1395ww",
+      "heading": "Payments to hospitals for inpatient hospital services",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "XVIII",
+          "title": "HEALTH INSURANCE FOR AGED AND DISABLED"
+        },
+        {
+          "kind": "part",
+          "number": "E",
+          "title": "Miscellaneous Provisions"
+        }
+      ],
+      "documentId": "42_1395ww",
+      "currentThrough": "20250106",
+      "target": "42:1395ww",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1395ww.html",
+      "sha256": "13172c3ae284aeac63ad691849431176cd211d783d0d659b70db5cb019b6f368",
+      "bytes": 454686,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1396a",
+      "heading": "State plans for medical assistance",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "XIX",
+          "title": "GRANTS TO STATES FOR MEDICAL ASSISTANCE PROGRAMS"
+        }
+      ],
+      "documentId": "42_1396a",
+      "currentThrough": "20250106",
+      "target": "42:1396a",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1396a.html",
+      "sha256": "3b27fbc4f2c16716706b249555610e7e861217f3dd88666518dd842f0c1bd0b1",
+      "bytes": 298036,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1396b",
+      "heading": "Payment to States",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "XIX",
+          "title": "GRANTS TO STATES FOR MEDICAL ASSISTANCE PROGRAMS"
+        }
+      ],
+      "documentId": "42_1396b",
+      "currentThrough": "20250106",
+      "target": "42:1396b",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1396b.html",
+      "sha256": "8a79b200f89fe666c1ae198da77bd06733405d00f7514d4176f60626dc1a2110",
+      "bytes": 202147,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1396o",
+      "heading": "Use of enrollment fees, premiums, deductions, cost sharing, and similar charges",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "XIX",
+          "title": "GRANTS TO STATES FOR MEDICAL ASSISTANCE PROGRAMS"
+        }
+      ],
+      "documentId": "42_1396o",
+      "currentThrough": "20250106",
+      "target": "42:1396o",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1396o.html",
+      "sha256": "6e65da0e14d1b9b273e397ff58fe07c7ef8f6c6046bf3fd89abd885d4a1b56bf",
+      "bytes": 23392,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1773",
+      "heading": "School breakfast program",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "13A",
+          "title": "CHILD NUTRITION"
+        }
+      ],
+      "documentId": "42_1773",
+      "currentThrough": "20250106",
+      "target": "42:1773",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1773.html",
+      "sha256": "278583fb68098586601c6685ae67a9307c972748ddf334683aebf767c6852d25",
+      "bytes": 12721,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1862",
+      "heading": "Functions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "16",
+          "title": "NATIONAL SCIENCE FOUNDATION"
+        }
+      ],
+      "documentId": "42_1862",
+      "currentThrough": "20250106",
+      "target": "42:1862",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1862.html",
+      "sha256": "30d675171677b458d237b576a98728056cadce24d980e4927dec9cac2b7216cd",
+      "bytes": 8522,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "1869c",
+      "heading": "Low-income scholarship program",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "16",
+          "title": "NATIONAL SCIENCE FOUNDATION"
+        }
+      ],
+      "documentId": "42_1869c",
+      "currentThrough": "20250106",
+      "target": "42:1869c",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-1869c.html",
+      "sha256": "ecf050f538cd2bd83de8e661ffd01a029414dead8ed5be143e6f43469302cff3",
+      "bytes": 3883,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "2000e",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "21",
+          "title": "CIVIL RIGHTS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "VI",
+          "title": "EQUAL EMPLOYMENT OPPORTUNITIES"
+        }
+      ],
+      "documentId": "42_2000e",
+      "currentThrough": "20250106",
+      "target": "42:2000e",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-2000e.html",
+      "sha256": "fd9dbd79bac7a3923c372ba2baf214e0a0f4991950845e409bb6869327826d9e",
+      "bytes": 9196,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "2000e-2",
+      "heading": "Unlawful employment practices",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "21",
+          "title": "CIVIL RIGHTS"
+        },
+        {
+          "kind": "subchapter",
+          "number": "VI",
+          "title": "EQUAL EMPLOYMENT OPPORTUNITIES"
+        }
+      ],
+      "documentId": "42_2000e-2",
+      "currentThrough": "20250106",
+      "target": "42:2000e-2",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-2000e-2.html",
+      "sha256": "2a759676fba4f5e9638d71d45659b631047e6086ca294044b0358421adbe7587",
+      "bytes": 16784,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "254e",
+      "heading": "Health professional shortage areas",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "6A",
+          "title": "PUBLIC HEALTH SERVICE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "GENERAL POWERS AND DUTIES"
+        },
+        {
+          "kind": "part",
+          "number": "D",
+          "title": "Primary Health Care"
+        },
+        {
+          "kind": "subpart",
+          "number": "ii",
+          "title": "national health service corps program"
+        }
+      ],
+      "documentId": "42_254e",
+      "currentThrough": "20250106",
+      "target": "42:254e",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-254e.html",
+      "sha256": "25b37f6131384753976f86e23c70ad299849e81b3f5977111c606a22c83a6b18",
+      "bytes": 14680,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "402",
+      "heading": "Old-age and survivors insurance benefit payments",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "FEDERAL OLD-AGE, SURVIVORS, AND DISABILITY INSURANCE BENEFITS"
+        }
+      ],
+      "documentId": "42_402",
+      "currentThrough": "20250106",
+      "target": "42:402",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-402.html",
+      "sha256": "5279c047f18dd8733739eac3c9bbcc1ba43b12f78af472a69dac758060c22882",
+      "bytes": 155683,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "405",
+      "heading": "Evidence, procedure, and certification for payments",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "FEDERAL OLD-AGE, SURVIVORS, AND DISABILITY INSURANCE BENEFITS"
+        }
+      ],
+      "documentId": "42_405",
+      "currentThrough": "20250106",
+      "target": "42:405",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-405.html",
+      "sha256": "c4a221a5811c9137dfcca35f43addc802ec4217a8012979fed2ffa64be19e063",
+      "bytes": 129372,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "433",
+      "heading": "International agreements",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "7",
+          "title": "SOCIAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "II",
+          "title": "FEDERAL OLD-AGE, SURVIVORS, AND DISABILITY INSURANCE BENEFITS"
+        }
+      ],
+      "documentId": "42_433",
+      "currentThrough": "20250106",
+      "target": "42:433",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-433.html",
+      "sha256": "bfe61fb66f1c2b7cffc497de876e96679a6dda765be832a4a762ef252a6d2502",
+      "bytes": 6125,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 42,
+      "section": "9902",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "106",
+          "title": "COMMUNITY SERVICES BLOCK GRANT PROGRAM"
+        }
+      ],
+      "documentId": "42_9902",
+      "currentThrough": "20250106",
+      "target": "42:9902",
+      "titleName": "THE PUBLIC HEALTH AND WELFARE",
+      "path": "raw/title-42-section-9902.html",
+      "sha256": "44ebf6f60e37a9b618089d16ae09f24fae16b4c4cd9e76e9e18706577da97bdd",
+      "bytes": 3189,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "sourceTitleBytes": 78235584
+    },
+    {
+      "title": 46,
+      "section": "116",
+      "heading": "Vessel of the United States",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "I",
+          "title": "General"
+        },
+        {
+          "kind": "chapter",
+          "number": "1",
+          "title": "DEFINITIONS"
+        }
+      ],
+      "documentId": "46_116",
+      "currentThrough": "20250106",
+      "target": "46:116",
+      "titleName": "SHIPPING",
+      "path": "raw/title-46-section-116.html",
+      "sha256": "afd61e46b160e3efbdd8076689ccee4a38da58b56011697af36cb05cc41c6616",
+      "bytes": 657,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title46/html/USCODE-2024-title46.htm",
+      "sourceTitleSha256": "e7fc8eb2c4d480bd65d4cbedb51d0bb8423bbef4f1d96abcd514ec675b10506b",
+      "sourceTitleBytes": 5875870
+    },
+    {
+      "title": 49,
+      "section": "40102",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "VII",
+          "title": "AVIATION PROGRAMS"
+        },
+        {
+          "kind": "part",
+          "number": "A",
+          "title": "AIR COMMERCE AND SAFETY"
+        },
+        {
+          "kind": "subpart",
+          "number": "i",
+          "title": "general"
+        },
+        {
+          "kind": "chapter",
+          "number": "401",
+          "title": "GENERAL PROVISIONS"
+        }
+      ],
+      "documentId": "49_40102",
+      "currentThrough": "20250106",
+      "target": "49:40102",
+      "titleName": "TRANSPORTATION",
+      "path": "raw/title-49-section-40102.html",
+      "sha256": "84322dc57f313e6ca053243d8c56d32d5eb4b65efce9702ab09fab9f7f0be1a4",
+      "bytes": 19518,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49.htm",
+      "sourceTitleSha256": "2207bcd9ac80140d2b384f169dfe1f4178b78e865924ada7e3852c972e8b499f",
+      "sourceTitleBytes": 16647167
+    },
+    {
+      "title": 49,
+      "section": "5103",
+      "heading": "General regulatory authority",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "III",
+          "title": "GENERAL AND INTERMODAL PROGRAMS"
+        },
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "TRANSPORTATION OF HAZARDOUS MATERIAL"
+        }
+      ],
+      "documentId": "49_5103",
+      "currentThrough": "20250106",
+      "target": "49:5103",
+      "titleName": "TRANSPORTATION",
+      "path": "raw/title-49-section-5103.html",
+      "sha256": "a89d2600f7fe7b82286883147cb2c22e600aefbce086a2686658cd75690b61ff",
+      "bytes": 5648,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49.htm",
+      "sourceTitleSha256": "2207bcd9ac80140d2b384f169dfe1f4178b78e865924ada7e3852c972e8b499f",
+      "sourceTitleBytes": 16647167
+    },
+    {
+      "title": 49,
+      "section": "5104",
+      "heading": "Representation and tampering",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "III",
+          "title": "GENERAL AND INTERMODAL PROGRAMS"
+        },
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "TRANSPORTATION OF HAZARDOUS MATERIAL"
+        }
+      ],
+      "documentId": "49_5104",
+      "currentThrough": "20250106",
+      "target": "49:5104",
+      "titleName": "TRANSPORTATION",
+      "path": "raw/title-49-section-5104.html",
+      "sha256": "a4ad9bdb04a692d2233ef48f4d460b5c81489c79f6c47c23526565fcbe440366",
+      "bytes": 1745,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49.htm",
+      "sourceTitleSha256": "2207bcd9ac80140d2b384f169dfe1f4178b78e865924ada7e3852c972e8b499f",
+      "sourceTitleBytes": 16647167
+    },
+    {
+      "title": 49,
+      "section": "5106",
+      "heading": "Handling criteria",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "III",
+          "title": "GENERAL AND INTERMODAL PROGRAMS"
+        },
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "TRANSPORTATION OF HAZARDOUS MATERIAL"
+        }
+      ],
+      "documentId": "49_5106",
+      "currentThrough": "20250106",
+      "target": "49:5106",
+      "titleName": "TRANSPORTATION",
+      "path": "raw/title-49-section-5106.html",
+      "sha256": "54da3d24beeb2d9b3d52a1d505050044083f009910c9f9151ec9fdb8bd804bdd",
+      "bytes": 1195,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49.htm",
+      "sourceTitleSha256": "2207bcd9ac80140d2b384f169dfe1f4178b78e865924ada7e3852c972e8b499f",
+      "sourceTitleBytes": 16647167
+    },
+    {
+      "title": 49,
+      "section": "5107",
+      "heading": "Hazmat employee training requirements and grants",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "III",
+          "title": "GENERAL AND INTERMODAL PROGRAMS"
+        },
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "TRANSPORTATION OF HAZARDOUS MATERIAL"
+        }
+      ],
+      "documentId": "49_5107",
+      "currentThrough": "20250106",
+      "target": "49:5107",
+      "titleName": "TRANSPORTATION",
+      "path": "raw/title-49-section-5107.html",
+      "sha256": "afaa6c426d325bdf6c92bc76af2b3ce1b170e36d884c5c085bd36a07827e98ec",
+      "bytes": 7638,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49.htm",
+      "sourceTitleSha256": "2207bcd9ac80140d2b384f169dfe1f4178b78e865924ada7e3852c972e8b499f",
+      "sourceTitleBytes": 16647167
+    },
+    {
+      "title": 49,
+      "section": "5110",
+      "heading": "Shipping papers and disclosure",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "subtitle",
+          "number": "III",
+          "title": "GENERAL AND INTERMODAL PROGRAMS"
+        },
+        {
+          "kind": "chapter",
+          "number": "51",
+          "title": "TRANSPORTATION OF HAZARDOUS MATERIAL"
+        }
+      ],
+      "documentId": "49_5110",
+      "currentThrough": "20250106",
+      "target": "49:5110",
+      "titleName": "TRANSPORTATION",
+      "path": "raw/title-49-section-5110.html",
+      "sha256": "e9e1d3ce3b06cc31ee332fbccd0cf03aed0611d998986129129b5de0cfcbcfb3",
+      "bytes": 3737,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49.htm",
+      "sourceTitleSha256": "2207bcd9ac80140d2b384f169dfe1f4178b78e865924ada7e3852c972e8b499f",
+      "sourceTitleBytes": 16647167
+    },
+    {
+      "title": 50,
+      "section": "1803",
+      "heading": "Designation of judges",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "36",
+          "title": "FOREIGN INTELLIGENCE SURVEILLANCE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "ELECTRONIC SURVEILLANCE"
+        }
+      ],
+      "documentId": "50_1803",
+      "currentThrough": "20250106",
+      "target": "50:1803",
+      "titleName": "WAR AND NATIONAL DEFENSE",
+      "path": "raw/title-50-section-1803.html",
+      "sha256": "74bc479d27c388ef7713cf668bc64449deb9f4a8778c34933db7fba08bf5ecd4",
+      "bytes": 22139,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/html/USCODE-2024-title50.htm",
+      "sourceTitleSha256": "ccab6e1743ed19de3fc70e5db3b57eaf8c982e39bc8ff33c9b182abc51d70a15",
+      "sourceTitleBytes": 10683940
+    },
+    {
+      "title": 50,
+      "section": "1806",
+      "heading": "Use of information",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "36",
+          "title": "FOREIGN INTELLIGENCE SURVEILLANCE"
+        },
+        {
+          "kind": "subchapter",
+          "number": "I",
+          "title": "ELECTRONIC SURVEILLANCE"
+        }
+      ],
+      "documentId": "50_1806",
+      "currentThrough": "20250106",
+      "target": "50:1806",
+      "titleName": "WAR AND NATIONAL DEFENSE",
+      "path": "raw/title-50-section-1806.html",
+      "sha256": "f1e408adbbebf7cd71b1e9fd328066a40b2dd9acd25c81c2614b63c734f68324",
+      "bytes": 11152,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/html/USCODE-2024-title50.htm",
+      "sourceTitleSha256": "ccab6e1743ed19de3fc70e5db3b57eaf8c982e39bc8ff33c9b182abc51d70a15",
+      "sourceTitleBytes": 10683940
+    },
+    {
+      "title": 50,
+      "section": "3003",
+      "heading": "Definitions",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "44",
+          "title": "NATIONAL SECURITY"
+        }
+      ],
+      "documentId": "50_3003",
+      "currentThrough": "20250106",
+      "target": "50:3003",
+      "titleName": "WAR AND NATIONAL DEFENSE",
+      "path": "raw/title-50-section-3003.html",
+      "sha256": "af0734ac59a02caeaeea8791fcfa9b86bb9f9d567b3f2c3ec53ec3fc7078ddd9",
+      "bytes": 5696,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/html/USCODE-2024-title50.htm",
+      "sourceTitleSha256": "ccab6e1743ed19de3fc70e5db3b57eaf8c982e39bc8ff33c9b182abc51d70a15",
+      "sourceTitleBytes": 10683940
+    },
+    {
+      "title": 50,
+      "section": "3121",
+      "heading": "Protection of identities of certain United States undercover intelligence officers, agents, informants, and sources",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "44",
+          "title": "NATIONAL SECURITY"
+        },
+        {
+          "kind": "subchapter",
+          "number": "IV",
+          "title": "PROTECTION OF CERTAIN NATIONAL SECURITY INFORMATION"
+        }
+      ],
+      "documentId": "50_3121",
+      "currentThrough": "20250106",
+      "target": "50:3121",
+      "titleName": "WAR AND NATIONAL DEFENSE",
+      "path": "raw/title-50-section-3121.html",
+      "sha256": "9247ccbeae34b0e9ae5ed7d3999a00e8ff3c80b3f8083ae06067514fab998579",
+      "bytes": 3196,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/html/USCODE-2024-title50.htm",
+      "sourceTitleSha256": "ccab6e1743ed19de3fc70e5db3b57eaf8c982e39bc8ff33c9b182abc51d70a15",
+      "sourceTitleBytes": 10683940
+    },
+    {
+      "title": 50,
+      "section": "3803",
+      "heading": "Persons liable for training and service",
+      "status": "active",
+      "breadcrumb": [
+        {
+          "kind": "chapter",
+          "number": "49",
+          "title": "MILITARY SELECTIVE SERVICE"
+        }
+      ],
+      "documentId": "50_3803",
+      "currentThrough": "20250106",
+      "target": "50:3803",
+      "titleName": "WAR AND NATIONAL DEFENSE",
+      "path": "raw/title-50-section-3803.html",
+      "sha256": "995a92adde4a1c5d363afa610b2a6f0b1f8949060efed7127449b0f8f8a4a02d",
+      "bytes": 29364,
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/html/USCODE-2024-title50.htm",
+      "sourceTitleSha256": "ccab6e1743ed19de3fc70e5db3b57eaf8c982e39bc8ff33c9b182abc51d70a15",
+      "sourceTitleBytes": 10683940
+    }
+  ],
+  "unavailable": [
+    {
+      "target": "42:259",
+      "status": "repealed",
+      "heading": "§§259 to 261a. Repealed. Pub. L. 106–310, div. B, title XXXIV, §3405(a), Oct. 17, 2000, 114 Stat. 1221, as amended by Pub. L. 114–198, title I, §110(b), July 22, 2016, 130 Stat. 710",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42.htm",
+      "documentId": "42_259_to_261a",
+      "sourceTitleSha256": "b1cc6f3ffc2ee4993038437795a9057085f20196fbe13e731833f9c37ba52be5",
+      "reason": "No current operative text in source edition; historical locator remains external."
+    },
+    {
+      "target": "50:403",
+      "status": "transferred",
+      "heading": "§403. Transferred",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/html/USCODE-2024-title50.htm",
+      "documentId": "50_403",
+      "sourceTitleSha256": "ccab6e1743ed19de3fc70e5db3b57eaf8c982e39bc8ff33c9b182abc51d70a15",
+      "reason": "No current operative text in source edition; historical locator remains external."
+    },
+    {
+      "target": "50:403-3",
+      "status": "transferred",
+      "heading": "§403–3. Transferred",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/html/USCODE-2024-title50.htm",
+      "documentId": "50_403-3",
+      "sourceTitleSha256": "ccab6e1743ed19de3fc70e5db3b57eaf8c982e39bc8ff33c9b182abc51d70a15",
+      "reason": "No current operative text in source edition; historical locator remains external."
+    },
+    {
+      "target": "50:4605",
+      "status": "repealed",
+      "heading": "§§4605 to 4610. Repealed. Pub. L. 115–232, div. A, title XVII, §1766(a), Aug. 13, 2018, 132 Stat. 2232",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title50/html/USCODE-2024-title50.htm",
+      "documentId": "50_4605_to_4610",
+      "sourceTitleSha256": "ccab6e1743ed19de3fc70e5db3b57eaf8c982e39bc8ff33c9b182abc51d70a15",
+      "reason": "No current operative text in source edition; historical locator remains external."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "file": "sources/legal/raw/historical-usc/statutes/STATUTE-100-Pg3445.pdf",
+    "url": "https://www.govinfo.gov/content/pkg/STATUTE-100/pdf/STATUTE-100-Pg3445.pdf",
+    "bytes": 14807695,
+    "sha256": "4faf7e824021b34bf53ece3ae97ef47a7fc7352722b71e5b3e57d56c532a02b8",
+    "capturedAt": "2026-10-11"
+  },
+  {
+    "url": "https://www.govinfo.gov/content/pkg/STATUTE-49/pdf/STATUTE-49-Pg1921.pdf",
+    "file": "sources/legal/raw/historical-usc/statutes/STATUTE-49-Pg1921.pdf",
+    "bytes": 437965,
+    "sha256": "a9ca3f6856c16d1b6585c8789b1f6c986a9370c9bba2aa5c2db70616a34901dd",
+    "capturedAt": "2026-10-11"
+  },
+  {
+    "url": "https://www.govinfo.gov/content/pkg/STATUTE-53/pdf/STATUTE-53-Pg843.pdf",
+    "file": "sources/legal/raw/historical-usc/statutes/STATUTE-53-Pg843.pdf",
+    "bytes": 419603,
+    "sha256": "1289fecf574ec3a233a165aa56d7abe64fb2d47a3c6455d7f8d10e9cceccbe43",
+    "capturedAt": "2026-10-11"
+  },
+  {
+    "url": "https://www.govinfo.gov/content/pkg/STATUTE-53/pdf/STATUTE-53-Pg844.pdf",
+    "file": "sources/legal/raw/historical-usc/statutes/STATUTE-53-Pg844.pdf",
+    "bytes": 418807,
+    "sha256": "ad609dfa71aa4e547d780efd31858e90707801f371a64e2beebeb7c5d56e1b74",
+    "capturedAt": "2026-10-11"
+  },
+  {
+    "file": "sources/legal/raw/historical-usc/statutes/STATUTE-33-Pg684-link.pdf",
+    "url": "https://www.govinfo.gov/link/statute/33/684?link-type=pdf",
+    "bytes": 12213122,
+    "sha256": "7c9adbdfc849a8819e7394cf22720c327d1f6cdc8d0a5853f57f6d4db1af7d52",
+    "capturedAt": "2026-10-11"
+  }
+]

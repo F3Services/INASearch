@@ -399,7 +399,7 @@
       return hierarchyIndexes.get(key);
     };
 
-    for (const section of corpus?.title8?.sections || []) {
+    for (const section of [...(corpus?.title8?.sections || []), ...(corpus?.referencedUsc?.titles || []).flatMap(title => title.sections || [])]) {
       if (section.status === "current") delete section.status;
       packStatuteTransferTargets(section);
       for (const node of section.body || []) packStatuteNode(node);
@@ -456,7 +456,7 @@
     hydrateRepeatedStrings(corpus, packing);
     hydrateRepeatedUrls(corpus, packing);
 
-    for (const section of corpus?.title8?.sections || []) {
+    for (const section of [...(corpus?.title8?.sections || []), ...(corpus?.referencedUsc?.titles || []).flatMap(title => title.sections || [])]) {
       if (!section.status) section.status = "current";
       hydrateStatuteTransferTargets(section);
       hydrateStatuteNodes(section.body);

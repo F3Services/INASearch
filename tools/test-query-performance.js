@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const zlib = require('node:zlib');
+const { readBuildCorpus } = require('./read-build-corpus');
 const { performance } = require('node:perf_hooks');
 const occurrence = require('../src/INASearch-Occurrence');
 const command = require('../src/INASearch-Command');
@@ -44,9 +44,7 @@ async function main() {
   assert(highlightReads>0,'Previews never requested saved highlight decoration.');
   assert.equal(noteReads,0);
 
-  const html = fs.readFileSync(path.join(root,'INASearch.html'),'utf8');
-  const packed = JSON.parse(zlib.gunzipSync(Buffer.from(html.match(/<script id="inaSearchCorpusData"[^>]*>([\s\S]*?)<\/script>/)[1],'base64')));
-  const corpus = require('../src/INASearch-Corpus-Packing').hydratePackedCorpus(packed);
+  const corpus = readBuildCorpus(path.join(root,'INASearch.html'));
   const full = occurrence.buildProjection(corpus);
   const law = {...full,fragments:full.fragments.filter(fragment=>(fragment.contentKind||'law')==='law')};
   const inputs = ['president','"good moral character"','alien citizen','common:section alien citizen'];
@@ -69,8 +67,10 @@ async function main() {
   assert.deepEqual(asyncResult.materializeOccurrences({limit:1000}),query.search(full,asts[0],{plan}).materializeOccurrences({limit:1000}));
   const frequentStarted = performance.now();
   const frequent = query.search(full,command.parseCommand('the'),{plan});
+  const frequentQueryDuration = performance.now() - frequentStarted;
   assert.equal(frequent.totalOccurrences,occurrence.search(law,command.parseCommand("the")).totalOccurrences);
-  assert(performance.now()-frequentStarted<300,'High-frequency structured search eagerly materialized too much work.');
+  const frequentTotalDuration = performance.now() - frequentStarted;
+  assert(frequentTotalDuration<300,`High-frequency structured search and parity check took ${frequentTotalDuration.toFixed(1)} ms (structured query ${frequentQueryDuration.toFixed(1)} ms).`);
   assert.equal(frequent.materializeOccurrences({start:frequent.totalOccurrences-1,limit:1}).rows.length,1);
   const controller = new AbortController();
   const cancelled = query.searchAsync(full,command.parseCommand('the'),{plan,signal:controller.signal,sliceMs:1});

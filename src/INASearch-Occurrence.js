@@ -22,7 +22,7 @@
   // The fragment/hierarchy format is unchanged. Extra cached fields are ignored,
   // so removing the redundant citation index need not force a cold rebuild.
   const PERSISTED_PROJECTION_SCHEMA_VERSION = 2;
-  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-6`;
+  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-8`;
   const DEFAULT_SLICE_MS = 8;
   const STATUTE_DEPTHS = Object.freeze({
     section: 0, subsection: 1, paragraph: 2, subparagraph: 3, clause: 4,
@@ -250,7 +250,7 @@
     const structural = new Set(), virtual = new Map(), virtualOwners = new Map(), collisions = new Set(), indexed = new Set();
     const collect = (nodes, parent = []) => {
       for (const node of nodes || []) {
-        const path = [...parent, String(node.label)];
+        const path = [...parent, ...node.label ? [String(node.label)] : []];
         structural.add(pathIdentity(path));
         collect(node.children, path);
       }
@@ -259,7 +259,7 @@
     structural.forEach(identity => indexed.add(identity));
     const walk = (nodes, parent = []) => {
       for (const node of nodes || []) {
-        const current = [...parent, String(node.label)], markers = runInMarkers(node.text, node.label);
+        const current = [...parent, ...node.label ? [String(node.label)] : []], markers = runInMarkers(node.text, node.label);
         let previous = null;
         for (const marker of markers) {
           const tokens = [marker.token], candidates = runInPathCandidates(current, tokens, previous), direct = candidates[0];
@@ -347,7 +347,10 @@
 
   function referenceLookup(corpus) {
     return {
-      uscIds: new Map((corpus?.title8?.sections || []).map(item => [String(item.section).toLowerCase(), item.id])),
+      uscIds: new Map([
+        ...(corpus?.title8?.sections || []).map(item => [`8:${String(item.section).toLowerCase()}`, item.id]),
+        ...(corpus?.referencedUsc?.titles || []).flatMap(title => (title.sections || []).map(item => [`${title.number}:${String(item.section).toLowerCase()}`, item.id]))
+      ]),
       inaLabels: new Map((corpus?.inaCrosswalk || []).filter(row => !row.isNote && row.inaSection).map(row => [String(row.uscSection).toLowerCase(), row.inaSection])),
       cfrIds: new Map((corpus?.cfr?.sections || []).map(item => [`${item.title}:${String(item.section).toLowerCase()}`, item.id]))
     };
@@ -355,17 +358,12 @@
 
   function buildProjection(corpus, options = {}) {
     const started = now(), fragments = [], hierarchy = makeHierarchyStore();
-    const requestedAuthorities = options.authorities === undefined
-      ? new Set(["ina", "cfr"])
-      : new Set(iterableValues(options.authorities).map(value => {
-        const authority = String(value || "").toLowerCase();
-        return ["statute", "statutes", "usc"].includes(authority) ? "ina" : authority;
-      }));
-    const includeIna = requestedAuthorities.has("ina"), includeCfr = requestedAuthorities.has("cfr");
+    const requestedAuthorities = new Set(projectionAuthorityKey(options).split(","));
+    const includeIna = requestedAuthorities.has("ina"), includeUsc = requestedAuthorities.has("usc"), includeCfr = requestedAuthorities.has("cfr");
     const stats = {
       buildMs: 0, fragmentCount: 0, rawCharacters: 0, normalizedCharacters: 0,
-      inaRecords: 0, cfrSections: 0, cfrAppendices: 0, repeatedCfrPaths: 0,
-      byAuthority: { ina: 0, cfr: 0 }, byKind: Object.create(null)
+      inaRecords: 0, uscRecords: 0, cfrSections: 0, cfrAppendices: 0, repeatedCfrPaths: 0,
+      byAuthority: { ina: 0, usc: 0, cfr: 0 }, byKind: Object.create(null)
     };
 
 
@@ -382,9 +380,10 @@
       const refs = packedReferences(corpus, host, property, codes[field], field);
       return refs.filter(ref => ref.resolution !== "unresolved").map(ref => {
         const family = ["ina", "usc"].includes(ref.family) ? "usc" : ref.family;
-        const sectionId = family === "usc" ? uscIds.get(String(ref.targetSection).toLowerCase()) : cfrIds.get(`${ref.targetTitle}:${String(ref.targetSection).toLowerCase()}`);
+        const targetTitle = ref.targetTitle || (ref.family === "ina" ? 8 : "");
+        const sectionId = family === "usc" ? uscIds.get(`${targetTitle}:${String(ref.targetSection).toLowerCase()}`) : cfrIds.get(`${targetTitle}:${String(ref.targetSection).toLowerCase()}`);
         const start = Number(ref.start || 0) - Number(source.start || 0), end = Number(ref.end || 0) - Number(source.start || 0);
-        const inaSection = family === "usc" ? inaLabels.get(String(ref.targetSection).toLowerCase()) : null;
+        const inaSection = family === "usc" && Number(targetTitle) === 8 ? inaLabels.get(String(ref.targetSection).toLowerCase()) : null;
         const raw = String(text || "").slice(start, end);
         const displayText = inaSection && /^(?:sections?\b|8\s*U\.?\s*S\.?\s*C\.?)/i.test(raw) ? `INA ${inaSection}${canonicalPath(ref.targetPath || [])}` : null;
         return { family, sectionId, path: ref.targetPath || [], start, end, ...(displayText ? { displayText } : {}) };
@@ -437,27 +436,42 @@
       mappedByRecord.get(section.id).rows.push(row);
     }
 
-    for (const { section, rows } of mappedByRecord.values()) {
-      const primary = rows[0], inaSections = rows.map(row => String(row.inaSection)), uscSections = [...new Set(rows.map(row => String(row.uscSection || row.localSection || section.section)))];
-      const metadata = inaSectionMetadata.get(String(primary.inaSection).toUpperCase());
-      const titleId = metadata?.titleId || `ina:title:${String(primary.inaSection).charAt(0)}`;
-      if (!hierarchy.nodes.has(titleId)) hierarchy.add({ id: titleId, authority: "ina", kind: "title", number: String(primary.inaSection).charAt(0), heading: primary.group || "", parentId: "ina:root" });
-      const parentId = metadata?.chapterId && hierarchy.nodes.has(metadata.chapterId) ? metadata.chapterId : titleId;
-      const hierarchyBranches = rows.map(row => {
-        const rowMetadata = inaSectionMetadata.get(String(row.inaSection).toUpperCase());
-        const rowTitle = rowMetadata?.titleId || titleId;
-        const rowParent = rowMetadata?.chapterId && hierarchy.nodes.has(rowMetadata.chapterId) ? rowMetadata.chapterId : rowTitle;
-        const leafId = `ina:section:${String(row.inaSection).toUpperCase()}`;
-        hierarchy.add({ id: leafId, authority: "ina", kind: "section", number: String(row.inaSection), heading: rowMetadata?.heading || row.title || section.heading || "", parentId: rowParent });
-        return ["ina:root", rowTitle, ...(rowParent !== rowTitle ? [rowParent] : []), leafId];
-      });
-      const hierarchyIds = hierarchyBranches[0];
-      const rootOccurrenceKey = `ina:${section.id}:section`;
-      const citationBase = `INA ${primary.inaSection}`;
-      const alternateCitations = rows.slice(1).map(row => `INA ${row.inaSection}`);
+    const statuteRecords = [...mappedByRecord.values()];
+    if (includeUsc) for (const title of corpus?.referencedUsc?.titles || []) {
+      for (const section of title.sections || []) statuteRecords.push({ section, rows: [], title });
+    }
+    for (const { section, rows, title } of statuteRecords) {
+      let common;
+      if (rows.length) {
+        const primary = rows[0], inaSections = rows.map(row => String(row.inaSection)), uscSections = [...new Set(rows.map(row => String(row.uscSection || row.localSection || section.section)))];
+        const metadata = inaSectionMetadata.get(String(primary.inaSection).toUpperCase());
+        const titleId = metadata?.titleId || `ina:title:${String(primary.inaSection).charAt(0)}`;
+        if (!hierarchy.nodes.has(titleId)) hierarchy.add({ id: titleId, authority: "ina", kind: "title", number: String(primary.inaSection).charAt(0), heading: primary.group || "", parentId: "ina:root" });
+        const parentId = metadata?.chapterId && hierarchy.nodes.has(metadata.chapterId) ? metadata.chapterId : titleId;
+        const hierarchyBranches = rows.map(row => {
+          const rowMetadata = inaSectionMetadata.get(String(row.inaSection).toUpperCase());
+          const rowTitle = rowMetadata?.titleId || titleId;
+          const rowParent = rowMetadata?.chapterId && hierarchy.nodes.has(rowMetadata.chapterId) ? rowMetadata.chapterId : rowTitle;
+          const leafId = `ina:section:${String(row.inaSection).toUpperCase()}`;
+          hierarchy.add({ id: leafId, authority: "ina", kind: "section", number: String(row.inaSection), heading: rowMetadata?.heading || row.title || section.heading || "", parentId: rowParent });
+          return ["ina:root", rowTitle, ...(rowParent !== rowTitle ? [rowParent] : []), leafId];
+        });
+        const hierarchyIds = hierarchyBranches[0];
+        const rootOccurrenceKey = `ina:${section.id}:section`;
+        const citationBase = `INA ${primary.inaSection}`;
+        const alternateCitations = rows.slice(1).map(row => `INA ${row.inaSection}`);
+        const statuteMappings = rows.map(row => ({ inaSection: String(row.inaSection), uscSection: String(row.uscSection || row.localSection || section.section) }));
+        common = { authority: "ina", title: 8, recordKind: "statute", recordId: section.id, section: String(section.section), uscSections, inaSection: String(primary.inaSection), inaSections, statuteMappings, citationBase, alternateCitations, rootOccurrenceKey, hierarchyIds, hierarchyBranches, heading: section.heading || primary.title || "" };
+      } else {
+        const titleNumber = Number(title.number), titleId = `usc:title:${titleNumber}`, sectionId = `usc:section:${titleNumber}:${section.section}`;
+        hierarchy.add({ id: "usc:root", authority: "usc", kind: "authority", number: "USC", heading: "United States Code", parentId: null });
+        hierarchy.add({ id: titleId, authority: "usc", kind: "title", number: String(titleNumber), heading: title.name || "", parentId: "usc:root" });
+        hierarchy.add({ id: sectionId, authority: "usc", kind: "section", number: String(section.section), heading: section.heading || "", parentId: titleId });
+        const hierarchyIds = ["usc:root", titleId, sectionId];
+        common = { authority: "usc", title: titleNumber, recordKind: "statute", recordId: section.id, section: String(section.section), uscSections: [String(section.section)], inaSections: [], statuteMappings: [], citationBase: `${titleNumber} U.S.C. ${section.section}`, alternateCitations: [], rootOccurrenceKey: `usc:${section.id}:section`, hierarchyIds, hierarchyBranches: [hierarchyIds], heading: section.heading || "" };
+      }
+      const { rootOccurrenceKey, citationBase } = common;
       const runIns = statuteRunInIndex(section);
-      const statuteMappings = rows.map(row => ({ inaSection: String(row.inaSection), uscSection: String(row.uscSection || row.localSection || section.section) }));
-      const common = { authority: "ina", recordKind: "statute", recordId: section.id, section: String(section.section), uscSections, inaSection: String(primary.inaSection), inaSections, statuteMappings, citationBase, alternateCitations, rootOccurrenceKey, hierarchyIds, hierarchyBranches, heading: section.heading || primary.title || "" };
       const structuralCounts = new Map(), virtualCounts = new Map(), virtualActive = new Map();
       const nextKey = (counts, prefix, identity) => {
         const count = (counts.get(identity) || 0) + 1;
@@ -487,7 +501,7 @@
       let nodeOrdinal = 0;
       const walkNodes = (nodes, parentPath = [], parentOccurrenceKeys = [], parentRecordPath = []) => {
         for (let nodeIndex = 0; nodeIndex < (nodes || []).length; nodeIndex += 1) {
-          const node = nodes[nodeIndex], path = [...parentPath, String(node.label)], occurrenceKeys = structuralKeysFor(path, parentOccurrenceKeys);
+          const node = nodes[nodeIndex], path = [...parentPath, ...node.label ? [String(node.label)] : []], occurrenceKeys = structuralKeysFor(path, parentOccurrenceKeys);
           const recordPath = [...parentRecordPath, nodeIndex], ordinal = nodeOrdinal++;
           const sourceBase = { field: "body", path: [...path], recordPath, ordinal };
           addStatuteFragment("statute-node-heading", node.heading, path, occurrenceKeys, { ...sourceBase, subfield: "heading" });
@@ -508,11 +522,13 @@
       const supplement = (kind, text, source, heading) => addFragment({ ...common, contentKind: "annotations", kind, text, path: source.path || [], occurrenceKeys: (source.path || []).map((_, depth) => `${rootOccurrenceKey}:annotation:${source.path.slice(0, depth + 1).join("/")}`), deepestOccurrenceKey: `${rootOccurrenceKey}:${source.field}:${source.noteIndex ?? 0}`, citation: citationBase, annotationHeading: heading, source, references: fragmentReferences(section, source, text) });
       supplement("source-credit", section.sourceCredit, { field: "sourceCredit" }, "Source credit");
       (section.notes || []).forEach((note, noteIndex) => {
+        if (note.role === "crossHeading") return;
         supplement("statutory-note-heading", note.heading, { field: "notes", subfield: "heading", noteIndex }, note.heading || note.topic);
-        supplement("statutory-note", note.text, { field: "notes", subfield: "text", noteIndex }, note.heading || note.topic || "Statutory and editorial note");
+        const start = Number.isInteger(note.bodyStart) ? note.bodyStart : 0;
+        supplement("statutory-note", String(note.text || "").slice(start), { field: "notes", subfield: "text", noteIndex, start }, note.heading || note.topic || "Statutory and editorial note");
       });
       (section.houseEditorialFootnotes || []).forEach((note, noteIndex) => supplement("editorial-footnote", note.text, { field: "houseEditorialFootnotes", noteIndex, footnoteId: note.id, path: String(note.sourceLocation?.sourceKey || "").split(":").slice(1).join(":").replace(/#\d+/g, "").split("/").filter(token => token && token !== "preamble" && token !== "heading") }, "House editorial footnote"));
-      stats.inaRecords += 1;
+      stats[common.authority === "ina" ? "inaRecords" : "uscRecords"] += 1;
     }
 
     function cfrHierarchy(record, recordKind) {
@@ -663,15 +679,15 @@
   }
 
   function projectionAuthorityKey(options = {}) {
-    return [...new Set((options.authorities === undefined ? ["ina", "cfr"] : iterableValues(options.authorities))
-      .map(value => ["statute", "statutes", "usc"].includes(String(value).toLowerCase()) ? "ina" : String(value).toLowerCase())
+    return [...new Set((options.authorities === undefined ? ["ina", "usc", "cfr"] : iterableValues(options.authorities))
+      .flatMap(value => ["statute", "statutes", "statutory", "usc"].includes(String(value).toLowerCase()) ? ["ina", "usc"] : [String(value).toLowerCase()])
       .sort())].join(",");
   }
 
   function projectionCacheDescriptor(corpus, options = {}) {
     return {
       cacheKey: `${options.cacheKey || "default"}\u0000${projectionAuthorityKey(options)}\u0000${options.deferNormalization ? "raw" : "normalized"}`,
-      version: `${corpus.corpusVersion || ""}\u0000${corpus.cfr?.captureTime || ""}\u0000${corpus.cfr?.structureRevision || 0}`
+      version: `${corpus.corpusVersion || ""}\u0000${corpus.cfr?.captureTime || ""}\u0000${corpus.cfr?.structureRevision || 0}\u0000${corpus.referencedUsc?.version || ""}`
     };
   }
 
@@ -680,6 +696,7 @@
     const corpusVersion = String(options.corpusVersion || corpus?.corpusVersion || corpus?.cfr?.captureTime || "");
     const corpusSha256 = String(options.corpusSha256 || "");
     const cfrStructureRevision = Number(options.cfrStructureRevision ?? corpus?.cfr?.structureRevision ?? 0);
+    const referencedUscVersion = String(corpus?.referencedUsc?.version || "");
     return {
       projectionSchemaVersion: PERSISTED_PROJECTION_SCHEMA_VERSION,
       searchAlgorithmVersion: SEARCH_ALGORITHM_VERSION,
@@ -688,7 +705,7 @@
       corpusSha256,
       cfrStructureRevision,
       authorityKey,
-      key: [PERSISTED_PROJECTION_SCHEMA_VERSION, SEARCH_ALGORITHM_VERSION, Number(options.corpusSchemaVersion ?? corpus?.schemaVersion ?? 0), corpusVersion, corpusSha256 || "unhashed", authorityKey, cfrStructureRevision].join(":"),
+      key: [PERSISTED_PROJECTION_SCHEMA_VERSION, SEARCH_ALGORITHM_VERSION, Number(options.corpusSchemaVersion ?? corpus?.schemaVersion ?? 0), corpusVersion, corpusSha256 || "unhashed", authorityKey, cfrStructureRevision, referencedUscVersion].join(":"),
     };
   }
 
@@ -778,8 +795,8 @@
       const sourceOrder = target.fragments.length;
       target.fragments.push({ ...source, id: `${source.authority}:${sourceOrder}`, sourceOrder });
     }
-    for (const field of ["rawCharacters", "normalizedCharacters", "inaRecords", "cfrSections", "cfrAppendices", "repeatedCfrPaths"]) target.stats[field] += Number(part.stats?.[field]) || 0;
-    for (const authority of ["ina", "cfr"]) target.stats.byAuthority[authority] += Number(part.stats?.byAuthority?.[authority]) || 0;
+    for (const field of ["rawCharacters", "normalizedCharacters", "inaRecords", "uscRecords", "cfrSections", "cfrAppendices", "repeatedCfrPaths"]) target.stats[field] += Number(part.stats?.[field]) || 0;
+    for (const authority of ["ina", "usc", "cfr"]) target.stats.byAuthority[authority] += Number(part.stats?.byAuthority?.[authority]) || 0;
     for (const [kind, count] of Object.entries(part.stats?.byKind || {})) target.stats.byKind[kind] = (target.stats.byKind[kind] || 0) + count;
   }
 
@@ -805,6 +822,12 @@
         build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [group.section] }, inaCrosswalk: group.rows, cfr: { ...(corpus.cfr || {}), sections: [], appendices: [] } }, { ...options, referenceCorpus: corpus, authorities: ["ina"], deferNormalization: true })
       });
     }
+    if (requested.has("usc")) {
+      for (const title of corpus?.referencedUsc?.titles || []) for (const section of title.sections || []) units.push({
+        count: 1,
+        build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [] }, inaCrosswalk: [], referencedUsc: { ...(corpus.referencedUsc || {}), titles: [{ ...title, sections: [section] }] }, cfr: { ...(corpus.cfr || {}), sections: [], appendices: [] } }, { ...options, referenceCorpus: corpus, authorities: ["usc"], deferNormalization: true })
+      });
+    }
     if (requested.has("cfr")) {
       for (const sections of chunkCfrRecords(corpus?.cfr?.sections || [])) units.push({
         count: sections.length,
@@ -820,8 +843,8 @@
       fragments: [], hierarchy: makeHierarchyStore(),
       stats: {
         buildMs: 0, workMs: 0, fragmentCount: 0, rawCharacters: 0, normalizedCharacters: 0,
-        inaRecords: 0, cfrSections: 0, cfrAppendices: 0, repeatedCfrPaths: 0,
-        byAuthority: { ina: 0, cfr: 0 }, byKind: Object.create(null),
+        inaRecords: 0, uscRecords: 0, cfrSections: 0, cfrAppendices: 0, repeatedCfrPaths: 0,
+        byAuthority: { ina: 0, usc: 0, cfr: 0 }, byKind: Object.create(null),
         yields: 0, slices: 1, maxSliceMs: 0
       }
     };
@@ -1036,18 +1059,14 @@
     if (value === undefined || value === null || value === "" || value === "deepest") return Infinity;
     if (Number.isInteger(value) && value >= 0) return value;
     const normalized = String(value).toLowerCase().replace(/_/g, "-");
-    if (authority === "ina") return STATUTE_DEPTHS[normalized] ?? Infinity;
+    if (authority === "ina" || authority === "usc") return STATUTE_DEPTHS[normalized] ?? Infinity;
     if (normalized === "section") return 0;
     const paragraph = normalized.match(/^paragraph(?:-|\s*)([1-6])$/);
     return paragraph ? Number(paragraph[1]) : CFR_DEPTHS[normalized] ?? Infinity;
   }
 
   function searchOptions(options = {}) {
-    const authorityValues = options.authorities === undefined ? ["ina", "cfr"] : iterableValues(options.authorities);
-    const authorities = new Set(authorityValues.map(value => {
-      const authority = String(value).toLowerCase();
-      return ["statute", "statutes", "usc"].includes(authority) ? "ina" : authority;
-    }));
+    const authorities = new Set(projectionAuthorityKey(options).split(","));
     const common = options.common || options.commonDepth || {};
     const commonLevels = common?.levels || common;
     return {
@@ -1055,6 +1074,7 @@
       authorities,
       commonDepths: {
         ina: commonDepth("ina", typeof commonLevels === "object" ? commonLevels.ina ?? commonLevels.statute : commonLevels),
+        usc: commonDepth("usc", typeof commonLevels === "object" ? commonLevels.usc ?? commonLevels.statute ?? commonLevels.ina : commonLevels),
         cfr: commonDepth("cfr", typeof commonLevels === "object" ? commonLevels.cfr : commonLevels)
       }
     };
@@ -1112,36 +1132,40 @@
 
   function makeFragmentFilter(options) {
     const scope = options.scope || {}, custom = typeof options.filter === "function" ? options.filter : null;
-    const ina = scope.ina || {}, cfr = scope.cfr || {};
+    const ina = scope.ina || {}, usc = scope.usc || {}, cfr = scope.cfr || {};
     const directSystem = String(scope.system || scope.citationSystem || "").toLowerCase();
     const directSections = scope.sections;
     const inaSections = valueSet(ina.inaSections ?? ina.sections ?? (directSystem === "ina" ? directSections : undefined));
-    const uscSections = valueSet(ina.uscSections ?? (directSystem === "usc" ? directSections : undefined));
+    const uscSections = valueSet(usc.sections ?? ina.uscSections ?? (directSystem === "usc" ? directSections : undefined));
+    const uscTitleSelector = usc.titles ?? usc.title ?? ina.uscTitles ?? (["usc", "statute"].includes(directSystem) || scope.family === "usc" ? scope.titles ?? scope.title : undefined);
+    const uscTitles = valueSet(uscTitleSelector ?? (Object.keys(ina).length || (directSystem === "usc" && (directSections || scope.ranges)) ? [8] : undefined));
     const inaRecordIds = valueSet(ina.recordIds ?? ina.sectionIds);
     const inaRanges = rangeList(ina.inaRanges ?? (directSystem === "ina" ? scope.ranges : undefined));
-    const uscRanges = rangeList(ina.uscRanges ?? (directSystem === "usc" ? scope.ranges : undefined));
+    const uscRanges = rangeList(usc.ranges ?? ina.uscRanges ?? (directSystem === "usc" ? scope.ranges : undefined));
     const cfrTitles = valueSet(cfr.titles ?? (directSystem === "cfr" ? scope.titles : undefined));
     const cfrParts = valueSet(cfr.parts ?? (directSystem === "cfr" ? scope.parts : undefined));
     const cfrSections = valueSet(cfr.sections ?? cfr.sectionIds ?? (directSystem === "cfr" ? directSections : undefined));
     const cfrAppendices = valueSet(cfr.appendices ?? (directSystem === "cfr" ? scope.appendices : undefined));
     const cfrRanges = rangeList(cfr.ranges ?? (directSystem === "cfr" ? scope.ranges : undefined));
-    const inaPrefixes = prefixesFor(ina.pathPrefixes || []), cfrPrefixes = prefixesFor(cfr.pathPrefixes || []);
+    const inaPrefixes = prefixesFor(usc.pathPrefixes || ina.pathPrefixes || []), cfrPrefixes = prefixesFor(cfr.pathPrefixes || []);
     const descriptorIds = valueSet(scope.sectionIds), descriptorAuthority = String(scope.authority || "").toLowerCase();
     const descriptorPaths = scope.pathsBySection;
-    const hasInaScope = directSystem === "ina" || directSystem === "usc" || Object.keys(ina).length > 0;
+    const hasInaScope = directSystem === "ina" || directSystem === "usc" || Object.keys(ina).length > 0 || Object.keys(usc).length > 0;
     const hasCfrScope = directSystem === "cfr" || Object.keys(cfr).length > 0;
     const pathMatches = (fragment, prefixes) => !prefixes.length || prefixes.some(prefix => prefix.every((token, index) => normalizedIdentifier(fragment.path[index]) === token));
     return fragment => {
       if ((fragment.contentKind || "law") !== (options.contentKind || "law")) return false;
       if (!options.authorities.has(fragment.authority)) return false;
-      if (hasInaScope && !hasCfrScope && fragment.authority !== "ina") return false;
+      if (hasInaScope && !hasCfrScope && !["ina", "usc"].includes(fragment.authority)) return false;
+      if ((directSystem === "ina" || descriptorAuthority === "ina") && fragment.authority !== "ina") return false;
       if (hasCfrScope && !hasInaScope && fragment.authority !== "cfr") return false;
-      if (["ina", "usc", "statute"].includes(descriptorAuthority) && fragment.authority !== "ina") return false;
+      if (["usc", "statute", "statutes"].includes(descriptorAuthority) && !["ina", "usc"].includes(fragment.authority)) return false;
       if (descriptorAuthority === "cfr" && fragment.authority !== "cfr") return false;
       if (descriptorIds && !descriptorIds.has(normalizedIdentifier(fragment.recordId))) return false;
       const descriptorPath = mapValue(descriptorPaths, fragment.recordId);
       if (descriptorPath?.length && !pathMatches(fragment, [pathTokens(descriptorPath).map(normalizedIdentifier)])) return false;
-      if (fragment.authority === "ina") {
+      if (fragment.authority === "ina" || fragment.authority === "usc") {
+        if (uscTitles && !uscTitles.has(normalizedIdentifier(fragment.title))) return false;
         if (inaRecordIds && !inaRecordIds.has(normalizedIdentifier(fragment.recordId))) return false;
         const inaSelected = Boolean(inaSections || inaRanges.length), uscSelected = Boolean(uscSections || uscRanges.length);
         const matchesIna = !inaSelected || fragment.inaSections.some(value => inaSections?.has(normalizedIdentifier(value)) || rangeMatches(value, inaRanges));

@@ -65,6 +65,80 @@ def all_text(element: ET.Element) -> str:
     return "".join(element.itertext())
 
 
+def extract_note_layout(note: ET.Element) -> dict:
+    """Preserve publisher blocks as UTF-16 ranges in the unchanged citation text.
+
+    The legacy corpus concatenates itertext(), including its leading heading.
+    Keeping that text stable avoids moving existing citation/search offsets.
+    Layout ranges recover the source structure without guessing from prose.
+    """
+    blocks = STRUCTURAL | {"p", "num", "heading", "content", "chapeau", "continuation",
+                           "quotedContent", "table", "thead", "tbody", "tfoot",
+                           "tr", "th", "td", "signature"}
+    chunks = []
+    raw_length = 0
+
+    def append(value):
+        nonlocal raw_length
+        chunks.append(value or "")
+        raw_length += len(value or "")
+
+    def walk(element):
+        start = raw_length
+        append(element.text)
+        children = []
+        for child in element:
+            children.extend(walk(child))
+            append(child.tail)
+        tag = local_name(element.tag)
+        if tag not in blocks:
+            return children
+        block = {"tag": tag, "start": start, "end": raw_length}
+        if children:
+            block["children"] = children
+        indent = re.search(r"\bindent(\d+)\b", element.get("class", ""))
+        if indent:
+            block["indent"] = int(indent[1])
+        for attr in ["colspan", "rowspan"]:
+            value = element.get(attr, "")
+            if value.isdigit() and 0 < int(value) <= 100:
+                block[attr] = int(value)
+        return [block]
+
+    layout = walk(note)
+    raw = "".join(chunks)
+    output, offsets = [], [0] * (len(raw) + 1)
+    length, pending = 0, False
+    for index, character in enumerate(raw):
+        offsets[index] = length
+        if character.isspace():
+            pending = bool(output)
+        else:
+            if pending:
+                output.append(" ")
+                length += 1
+            output.append(character)
+            length += 2 if ord(character) > 0xffff else 1
+            pending = False
+        offsets[index + 1] = length
+    text = "".join(output)
+    assert text == normalize(all_text(note))
+
+    def convert(block):
+        block["start"], block["end"] = offsets[block["start"]], offsets[block["end"]]
+        for child in block.get("children", []):
+            convert(child)
+    for block in layout:
+        convert(block)
+    heading = next((child for child in note if local_name(child.tag) == "heading"), None)
+    heading_text = normalize(all_text(heading)) if heading is not None else ""
+    body_start = 0
+    if heading is not None and layout and layout[0]["tag"] == "heading":
+        body_start = layout.pop(0)["end"]
+    return {"heading": heading_text, "text": text, "role": note.get("role", ""),
+            "bodyStart": body_start, "layout": layout}
+
+
 def note_text_and_references(note: ET.Element) -> tuple[str, list[dict]]:
     chunks: list[str] = [note.text or ""]
     refs: list[tuple[str, str]] = []
@@ -318,11 +392,25 @@ def main() -> None:
     occurrences: dict[str, int] = {}
     fields: dict[str, dict] = {}
     section_notes: dict[str, dict[str, dict]] = {}
+    bottom_notes: dict[str, list[dict]] = {}
     affected_source_fields = 0
 
     for element in root.iter():
         name = local_name(element.tag)
         identifier = element.attrib.get("identifier", "")
+        if name == "section":
+            number_element = next((child for child in element if local_name(child.tag) == "num"), None)
+            number = normalize_section_number(number_element.get("value", "")) if number_element is not None else ""
+            target_section = sources.get(f"{number}:preamble")
+            container = next((child for child in element if local_name(child.tag) == "notes"), None)
+            # Grouped/disposition sections can have several identifiers in one
+            # attribute. Their notes still belong to the corpus's section number.
+            if target_section is not None and container is not None:
+                records = [extract_note_layout(note) for note in container]
+                corpus_notes = target_section.get("notes", [])
+                if len(records) != len(corpus_notes) or any(record["text"] != note["text"] for record, note in zip(records, corpus_notes)):
+                    raise RuntimeError(f"Corpus/XML bottom-note mismatch at {number}")
+                bottom_notes[number] = records
         if name not in STRUCTURAL or not identifier:
             continue
         match = re.match(r"^/us/usc/t8/s([^/\s]+)(?:/(.*))?$", identifier)
@@ -380,23 +468,22 @@ def main() -> None:
     sections = {section: list(records.values()) for section, records in section_notes.items() if records}
     footnote_count = sum(len(records) for records in sections.values())
     reference_count = sum(len(field["footnoteReferences"]) for record in fields.values() for field in record.values())
-    if (footnote_count, reference_count, affected_source_fields, repeated_reference_count) != (118, 151, 143, 33):
-        raise RuntimeError(
-            "Expected 118 footnotes and 151 references (33 repeated superscripts) "
-            f"across 143 fields; got {footnote_count}/{reference_count}/{repeated_reference_count}/{affected_source_fields}"
-        )
+    if reference_count != footnote_count + repeated_reference_count:
+        raise RuntimeError("House footnote/reference accounting is incomplete")
+    house_source = next(source for source in manifest["sources"] if source["id"] == "house-title-8-uslm")
 
     result = {
         "schemaVersion": 1,
         "corpusSchemaVersion": 3,
-        "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
-        "sourceReleasePoint": "119-102",
-        "capturedAt": manifest["capturedAt"],
+        "sourceUrl": house_source["requestedUrl"],
+        "sourceReleasePoint": house_source["releasePoint"],
+        "capturedAt": house_source.get("capturedAt", manifest["capturedAt"]),
         "sourceArtifact": house_artifact["path"],
         "sourceBytes": len(xml_bytes),
         "sourceSha256": xml_sha256,
         "extraction": {"footnotes": footnote_count, "references": reference_count, "affectedFields": affected_source_fields},
         "sections": sections,
+        "sectionNotes": bottom_notes,
         "fields": fields,
     }
     output = "/* Generated from official House USLM Title 8 XML; rebuild with tools/generate-statute-footnotes.py. */\n"

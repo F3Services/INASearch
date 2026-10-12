@@ -1,0 +1,1230 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-11",
+  "reviewMethod": "Visual comparison with official Statutes at Large page images retained under audits/usc-history-2026-10-11/sources/naturalization-1950-p*.png",
+  "captures": [
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf",
+      "bytes": 10452929,
+      "sha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "url": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf",
+      "bytes": 1369550,
+      "sha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg384-link.pdf",
+      "url": "https://www.govinfo.gov/link/statute/64/384?link-type=pdf",
+      "bytes": 2522544,
+      "sha256": "d42c19d8239540573882cdfa9cecffda23b26d588855b1915c7ea547b5461aad",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-65-Pg191.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-65/pdf/STATUTE-65-Pg191.pdf",
+      "bytes": 289142,
+      "sha256": "5f2d7070c2756285a23a1a5dc6bd4149fec44be19f5715b5483de3645f7f8c8e",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg97.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg97.pdf",
+      "bytes": 342368,
+      "sha256": "106f9bebc0877a8c54a91cfe36af9c67573e2ca97487814553f62c2177a7a230",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg121.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg121.pdf",
+      "bytes": 587288,
+      "sha256": "13f405591c60f34c680377d63ddf928d5272e3909a3f4a881ef82d67af2d8bc0",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg414.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg414.pdf",
+      "bytes": 414194,
+      "sha256": "2015009269ec37c96d54f2f1f5206e3909c0aaf60bd1a986b70a4734a15854de",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg240.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg240.pdf",
+      "bytes": 357379,
+      "sha256": "06eab0fe74e50e6b86aa34307e3fff29e2f7731aeb87a3faf53e745f0f2eb814",
+      "capturedAt": "2026-10-11"
+    },
+    {
+      "file": "sources/legal/raw/historical-usc/statutes/STATUTE-62-Pg1026.pdf",
+      "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg1026.pdf",
+      "bytes": 419805,
+      "sha256": "f6ff6b5e6231bc2b84d76ab412f4e59e2c43e98025e8770f8c3adb74eac3355e",
+      "capturedAt": "2026-10-11"
+    }
+  ],
+  "sections": [
+    {
+      "uscSection": "705",
+      "originalTitle": "Belief in Government and property rights",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "No person shall hereafter be naturalized as a citizen of the United States—"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "who advocates or teaches, or who is a member of or affiliated with any organization that advocates or teaches, opposition to all organized government; or"
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "who is a member of or affiliated with any Communist action organization that is registered or required to be registered under the provisions of section 7 of the Subversive Activities Control Act of 1950; or"
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "text": "who, while not within any of the other provisions of this section, advocates the economic, international, and governmental doctrines of world communism or the economic or governmental doctrines of any other form of totalitarianism, or who is a member of or affiliated with any organization that advocates the economic, international, and governmental doctrines of world communism, or the economic and governmental doctrines of any other form of totalitarianism, either through its own utterances or through any written or printed publications issued or published by or with the permission or consent of or under authority of such organization or paid for by the funds of such organization; or"
+        },
+        {
+          "path": [
+            "a",
+            "4"
+          ],
+          "text": "who advocates or teaches or who is a member of or affiliated with any organization that advocates or teaches (i) the overthrow by force or violence or other unconstitutional means of the Government of the United States or of all forms of law; or (ii) the duty, necessity, or propriety of the unlawful assaulting or killing of any officer or officers (either of specific individuals or of officers generally) of the Government of the United States or of any other organized government because of his or their official character; or (iii) the unlawful damage, injury, or destruction of property; or (iv) sabotage; or"
+        },
+        {
+          "path": [
+            "a",
+            "5"
+          ],
+          "text": "who writes or publishes or causes to be written or published, or who knowingly circulates, distributes, prints, or displays, or knowingly causes to be circulated, distributed, printed, published, or displayed, or who knowingly has in his possession for the purpose of circulation, publication, or display, any written or printed matter, advocating or teaching opposition to all organized government, or advocating (i) the overthrow by force, violence, or other unconstitutional means of the Government of the United States or of all forms of law; or (ii) the duty, necessity, or propriety of the unlawful assaulting or killing of any officer or officers (either of specific individuals or of officers generally) of the Government of the United States or of any other organized government; or (iii) the unlawful damage, injury, or destruction of property; or (iv) sabotage; or (v) the economic, international, and governmental doctrines of world communism or the economic and governmental doctrines of any other form of totalitarianism; or"
+        },
+        {
+          "path": [
+            "a",
+            "6"
+          ],
+          "text": "who is a member of or affiliated with any organization that writes, circulates, distributes, prints, publishes, or displays, or causes to be written, circulated, distributed, printed, published, or displayed, or that has in its possession for the purpose of circulation, distribution, publication, issue, or display, any written or printed matter of the character described in subparagraph (5)."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "The provisions of this section or of any other section of this Act shall not be construed as declaring that any of the organizations referred to in this section or in any other section of this Act do not advocate the overthrow of the Government of the United States by force, violence, or other unconstitutional means."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "The provisions of this section shall be applicable to any applicant for naturalization who at any time within a period of ten years immediately preceding the filing of the petition for naturalization is, or has been found to be, within any of the classes enumerated within this section, notwithstanding that at the time petition is filed he may not be included within such classes."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "If a person who shall have been naturalized after January 1, 1951, shall within five years next following such naturalization—",
+          "continuation": "it shall be considered prima facie evidence that such person was not attached to the principles of the Constitution of the United States and was not well disposed to the good order and happiness of the United States at the time of naturalization, and, in the absence of countervailing evidence, it shall be sufficient in the proper proceeding to authorize the revocation and setting aside of the order admitting such person to citizenship and the cancellation of the certificate of naturalization as having been obtained by fraud or illegal procurement."
+        },
+        {
+          "path": [
+            "d",
+            "1"
+          ],
+          "text": "become a member of or affiliated with any organization, membership in or affiliation with which at the time of naturalization would have precluded such person from naturalization under the provisions of this section; or"
+        },
+        {
+          "path": [
+            "d",
+            "2"
+          ],
+          "text": "become a member of any organization, membership in which at the time of naturalization would have raised the presumption that such person was not attached to the principles of the Constitution of the United States and not well disposed to the good order and happiness of the United States, under the provisions of this section"
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "text": "Any alien who has been at any time within ten years next preceding the filing of his petition for naturalization, or is at the time of filing such petition, or has been at any time between such filing and the time of taking of the final oath of citizenship, a member of or affiliated with any Communist-front organization which is registered or required to be registered under section 7 of the Subversive Activities Control Act of 1950, shall be presumed to be a person not attached to the principles of the Constitution of the United States and not well disposed to the good order and happiness of the United States, and unless he shall rebut such presumption he shall not be naturalized as a citizen of the United States: Provided, That the provisions of this section shall not apply to any person who shall be a member of or affiliated with any such Communist-front organization who shall, within three months from the date upon which such organization was so registered or so required to be registered, renounce, withdraw from, and utterly abandon such membership or affiliation, and who thereafter ceases entirely to be affiliated with such organization."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=27",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        27,
+        28,
+        29
+      ],
+      "lastAmendmentDate": "1950-09-23",
+      "versionLabel": "Full replacement enacted September 23, 1950, section 25, 64 Stat. 1013–1015",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading derived from the former Code caption; the enacted replacement has no separate catchline.",
+      "transcriptionNote": "Compared with the official printed pages. Original Act section references are retained. Quotation marks surrounding the amendment, running page headings, margin annotations, and print line breaks are omitted; the OCR artifact ‘wTith’ is corrected to ‘with’.",
+      "unitsSha256": "bead5f2995b837511618f6431ee022737bf9d1d4c08e22e657dca7f8b6aa3ff6"
+    },
+    {
+      "uscSection": "725",
+      "originalTitle": "Persons serving on United States Government or private vessels",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "Any periods of time during all of which an alien who was previously lawfully admitted for permanent residence has served honorably or with good conduct, in any capacity other than as a member of the armed forces of the United States, (1) on board a vessel operated by the United States, or an agency thereof, the full legal and equitable title to which is in the United States; or (2) on board a vessel whose home port is in the United States, and (A) which is registered under the laws of the United States, or (B) the full legal and equitable title to which is in a citizen of the United States, or a corporation organized under the laws of any of the several States of the United States, shall be deemed residence within the United States within the meaning of section 307 (a) of this Act, if such service occurred within five years immediately preceding the date such alien shall file a petition for naturalization. Service with good conduct on vessels described in clause (1) of this subsection shall be proved by duly authenticated copies of the records of the executive departments or agency having custody of the records of such service. Service with good conduct on vessels described in clause (2) of this subsection may be proved by certificates from the masters of such vessels."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "Any alien who (1) was excepted from certain requirements of the naturalization laws under the provisions of this section prior to this amendment, and (2) has filed a petition for naturalization under this section prior to the date of approval of this amendment may, if such petition is pending on the date of approval of this section as amended, be naturalized upon compliance with the applicable provisions of the naturalization laws in effect upon the date such petition was filed."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=29",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        29
+      ],
+      "lastAmendmentDate": "1950-09-23",
+      "versionLabel": "Full replacement enacted September 23, 1950, section 26, 64 Stat. 1015",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading derived from the former Code caption; the enacted replacement has no separate catchline.",
+      "transcriptionNote": "Compared with the official printed pages. Original Act section references are retained. Quotation marks surrounding the amendment, running page headings, margin annotations, and print line breaks are omitted; the OCR artifact ‘wTith’ is corrected to ‘with’.",
+      "unitsSha256": "ca716fe5938f108c0e5415e66d6f491b33f79287dcdfa02d601582f4b039686f"
+    },
+    {
+      "uscSection": "733",
+      "originalTitle": "Hearing of petitions; preliminary hearings",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "The Commissioner or a Deputy Commissioner shall designate employees of the Service to conduct preliminary examinations upon petitions for naturalization to any naturalization court and to make recommendations thereon to such court. For such purposes any such employee so designated is hereby authorized to take testimony concerning any matter touching or in any way affecting the admissibility of any petitioner for naturalization, to administer oaths, and to require by subpena the attendance and testimony of witnesses, including petitioner, before such employee so designated and the production of relevant books, papers, and documents, and to that end may invoke the aid of any court exercising naturalization jurisdiction as specified in section 301 of this Act; and any such court wherein the petition is filed may, in the event of neglect or refusal to respond to a subpena issued by any such employee so designated or refusal to testify before such employee so designated, issue an order requiring such person to appear before such employee so designated, produce relevant books, papers, and documents if demanded, and testify; and any failure to obey such order of the court may be punished by the court as a contempt thereof. The record of the preliminary examination authorized by this subsection shall be admissible as evidence in any final hearing conducted by a naturalization court designated in section 301 of this Act."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "The record of the preliminary examination upon any petition for naturalization may be transmitted to the Commissioner and the recommendation with respect thereto of the employee designated to conduct such preliminary examination shall when made also be transmitted to the Commissioner."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "The recommendation of the employee designated to conduct any such preliminary examination shall be submitted to the court at the hearing upon the petition and shall include a recommendation that the petition be granted, or denied, or continued, with reasons therefor. In any case in which the recommendation of the Commissioner does not agree with that of the employee designated to conduct such preliminary examination, the recommendations of both such employee and the Commissioner shall be submitted to the court at the hearing upon the petition, and the officer of the Service in attendance at such hearing shall, at the request of the court, present both the views of such employee and those of the Commissioner with respect to such petition to the court. The recommendations of such employee and of the Commissioner shall be accompanied by duplicate lists containing the names of the petitioners, classified according to the character of the recommendations, and signed by such employee or the Commissioner, as the case may be. The judge to whom such recommendations are submitted shall, if he approve such recommendations, enter a written order with such exceptions as the judge may deem proper, by subscribing his name to each such list when corrected to conform to his conclusions upon such recommendations. One of each such lists shall thereafter be filed permanently of record in such court and the duplicate of each such list shall be sent by the clerk of such court to the Commissioner."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "After the petition for naturalization has been filed in the office of the clerk of the naturalization court, the petitioner shall not be permitted to withdraw his petition, except with the consent of the Commissioner. In cases where the Commissioner does not consent to withdrawal of the petition, the court shall determine the petition on its merits and enter a final order accordingly. In cases where the petitioner fails to prosecute his petition, the petition shall be decided upon its merits unless the Commissioner moves that the petition be dismissed for lack of prosecution."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=30",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        30,
+        31
+      ],
+      "lastAmendmentDate": "1950-09-23",
+      "versionLabel": "Full replacement enacted September 23, 1950, section 28(a), 64 Stat. 1016–1017",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading derived from the former Code caption; the enacted replacement has no separate catchline.",
+      "transcriptionNote": "Compared with the official printed pages. Original Act section references are retained. Quotation marks surrounding the amendment, running page headings, margin annotations, and print line breaks are omitted; the OCR artifact ‘wTith’ is corrected to ‘with’.",
+      "unitsSha256": "d1e411959e9929f9b9efb8b439e2f51cd48cb14d5ee30769fced453ea6029c66"
+    },
+    {
+      "uscSection": "735",
+      "originalTitle": "Oath of renunciation and allegiance",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "A person who has petitioned for naturalization shall, before being admitted to citizenship, take in open court one of the oaths set forth in subsection (b) of this section (1) to support the Constitution of the United States; (2) to renounce and abjure absolutely and entirely all allegiance and fidelity to any foreign prince, potentate, state, or sovereignty of whom or which the petitioner was before a subject or citizen; (3) to support and defend the Constitution and the laws of the United States against all enemies, foreign and domestic; (4) to bear true faith and allegiance to the same; and (5) to bear arms on behalf of the United States when required by law, or to perform noncombatant service in the Armed Forces of the United States when required by law: Provided, That any such person shall be required to take the oath prescribed in subsection (b) (1) of this section unless by clear and convincing evidence he can show to the satisfaction of the naturalization court that he is opposed to the bearing of arms or the performance of noncombatant service in the Armed Forces of the United States by reason of religious training and belief: Provided further, That in the case of the naturalization of a child under the provisions of section 315 or 316 of this Act the naturalization court may waive the taking of either of such oaths if in the opinion of the court the child is unable to understand their meaning."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "As provided in subsection (a) of this section, the petitioner for naturalization shall take one of the following oaths:"
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "text": "I hereby declare, on oath, that I absolutely and entirely renounce and abjure all allegiance and fidelity to any foreign prince, potentate, state, or sovereignty of whom or which I have heretofore been a subject or citizen; that I will support and defend the Constitution and laws of the United States of America against all enemies, foreign and domestic; that I will bear true faith and allegiance to the same; that I will bear arms on behalf of the United States or perform noncombatant service in the Armed Forces of the United States when required by law; and that I take this obligation freely without any mental reservation or purpose of evasion: So help me God. In acknowledgment whereof I have hereunto affixed my signature; or"
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ],
+          "text": "I hereby declare, on oath, that I absolutely and entirely renounce and abjure all allegiance and fidelity to any foreign prince, potentate, state, or sovereignty of whom or which I have heretofore been a subject or citizen; that I will support and defend the Constitution and laws of the United States of America against all enemies, foreign and domestic; that I will bear true faith and allegiance to the same; and that I take this obligation freely and without any mental reservation or purpose of evasion: So help me God. In acknowledgment whereof I have hereunto affixed my signature."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "In case the person petitioning for naturalization has borne any hereditary title, or has been of any of the orders of nobility in any foreign state, the petitioner shall in addition to complying with the requirements of subsections (a) and (b) of this section, make under oath in open court to which the petition for naturalization is made, an express renunciation of such title or order of nobility, and such renunciation shall be recorded in the court as a part of such proceedings."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "If the petitioner is prevented by sickness or other disability from being in open court, the oath required to be taken by subsection (a) of this section may be taken before a judge of the court at such place as may be designated by the court."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=31",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        31,
+        32
+      ],
+      "lastAmendmentDate": "1950-09-23",
+      "versionLabel": "Full replacement enacted September 23, 1950, section 29, 64 Stat. 1017–1018",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading derived from the former Code caption; the enacted replacement has no separate catchline.",
+      "transcriptionNote": "Compared with the official printed pages. Original Act section references are retained. Quotation marks surrounding the amendment, running page headings, margin annotations, and print line breaks are omitted; the OCR artifact ‘wTith’ is corrected to ‘with’.",
+      "unitsSha256": "5697801c638fbf0d4f5c56506c5527f7b69528134044e41631508d5dc1f2e5a6"
+    },
+    {
+      "uscSection": "704",
+      "originalTitle": "English-language requirement for naturalization",
+      "units": [
+        {
+          "path": [],
+          "text": "No person except as otherwise provided in this Act shall hereafter be naturalized as a citizen of the United States upon his own petition who cannot demonstrate—"
+        },
+        {
+          "path": [
+            "1"
+          ],
+          "text": "an understanding of the English language, including an ability to read, write, and speak words in ordinary usage in the English language: Provided, That this requirement shall not apply to any person physically unable to comply therewith, if otherwise qualified to be naturalized, or to any person who, on the date of approval of this amendment, is over fifty years of age and has been legally residing in the United States for twenty years: Provided further, That the requirements of this section relating to ability to read and write shall be met if the applicant can read or write simple words and phrases to the end that a reasonable test of his literacy shall be made and that no extraordinary or unreasonable conditions shall be imposed upon the applicant; and"
+        },
+        {
+          "path": [
+            "2"
+          ],
+          "text": "a knowledge and understanding of the fundamentals of the history, and the principles and form of government, of the United States."
+        }
+      ],
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf#page=32",
+      "sourceArtifact": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+      "sourceSha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        32
+      ],
+      "lastAmendmentDate": "1950-09-23",
+      "versionLabel": "Full replacement enacted September 23, 1950, section 30, 64 Stat. 1018",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading derived from the former Code caption; the enacted replacement has no separate catchline.",
+      "transcriptionNote": "Compared with the official printed pages. Original Act section references are retained. Quotation marks surrounding the amendment, running page headings, margin annotations, and print line breaks are omitted; the OCR artifact ‘wTith’ is corrected to ‘with’.",
+      "unitsSha256": "a2d8712dc65974ea75ebc25c3e4af217987f468384b61753d592623a608fe41d"
+    },
+    {
+      "uscSection": "703",
+      "originalTitle": "Racial eligibility for naturalization",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "The right to become a naturalized citizen under the provisions of this chapter shall extend only to—"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "white persons, persons of African nativity or descent, and persons who are descendants of races indigenous to the continents of North or South America or adjacent islands and Filipino persons or persons of Filipino descent;"
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "persons who possess, either singly or in combination, a preponderance of blood of one or more of the classes specified in clause (1);"
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "text": "Chinese persons and persons of Chinese descent, and persons of races indigenous to India; and"
+        },
+        {
+          "path": [
+            "a",
+            "4"
+          ],
+          "text": "persons who possess, either singly or in combination, a preponderance of blood of one or more of the classes specified in clause (3) or, either singly or in combination, as much as one-half blood of those classes and some additional blood of one of the classes specified in clause (1)."
+        },
+        {
+          "path": [
+            "a",
+            "5"
+          ],
+          "text": "Guamanian persons and persons of Guamanian descent."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "Nothing in the preceding subsection shall prevent the naturalization of former citizens of the United States who are otherwise eligible to naturalization under the provisions of section 717 of this title."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=5",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        5
+      ],
+      "lastAmendmentDate": "1950-08-01",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1950-08-01",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading based on the former Code caption and the cited subsequent changes.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg384-link.pdf",
+          "url": "https://www.govinfo.gov/link/statute/64/384?link-type=pdf",
+          "bytes": 2522544,
+          "sha256": "d42c19d8239540573882cdfa9cecffda23b26d588855b1915c7ea547b5461aad",
+          "capturedAt": "2026-10-11",
+          "label": "Organic Act of Guam, section 4(b), 64 Stat. 385"
+        }
+      ],
+      "historicalEditorialNote": "The 1950 Act added paragraph (a)(5); the other paragraphs remain as printed in the 1946 Code.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "85759c9c40ba49faf82f16940b0d34500eed4a04cf6168827307142f4d3c7f3e"
+    },
+    {
+      "uscSection": "723",
+      "originalTitle": "Former United States citizens losing citizenship by entering armed forces of nonenemy countries during World Wars I or II",
+      "units": [
+        {
+          "path": [],
+          "text": "A person who, while a citizen of the United States and during the first or second World War, entered the military or naval service of any country at war with a country with which the United States was or is at war, who has lost citizenship of the United States by reason of any oath or obligation taken for the purpose of entering such service, or by reason of entering or serving in such armed forces, and who intends to reside permanently in the United States, may be naturalized by taking before any naturalization court specified in subsection (a) of section 701 of this title, the oaths prescribed by section 735 of this title. Any such person who has lost citizenship of the United States during the second World War may, if he so desires, be naturalized by taking, before any diplomatic or consular officer of the United States abroad, the oaths prescribed by section 735 of this title. For the purposes of this section, the second World War shall be deemed to have commenced on September 1, 1939, and shall continue until such time as the United States shall cease to be in a state of war. Certified copies of such oath shall be sent by such diplomatic or consular officer or such court to the Department of State and to the Department of Justice."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=12",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        12
+      ],
+      "lastAmendmentDate": "1951-08-16",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1951-08-16",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading based on the former Code caption and the cited subsequent changes.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-65-Pg191.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-65/pdf/STATUTE-65-Pg191.pdf",
+          "bytes": 289142,
+          "sha256": "5f2d7070c2756285a23a1a5dc6bd4149fec44be19f5715b5483de3645f7f8c8e",
+          "capturedAt": "2026-10-11",
+          "label": "Act of August 16, 1951, section 2, 65 Stat. 191"
+        }
+      ],
+      "historicalEditorialNote": "The 1946 Code includes a second paragraph added by the Act of August 7, 1946 for former citizens who voted abroad. Section 2 of the 1951 Act repealed that 1946 Act. The displayed text retains the military-service paragraph and omits the repealed added paragraph. The 1951 Act's separate Italian-election naturalization provision is not inserted into this section.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "42cb5a165768e6e15abdde914e3b1f7ca6a6b76501a444e3d142429e771a6dd4"
+    },
+    {
+      "uscSection": "727",
+      "originalTitle": "Administration of naturalization laws; rules and regulations; instruction in citizenship; forms; oaths; depositions; documents in evidence; photographic studio",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "The Commissioner, or, in his absence, a Deputy Commissioner, shall have charge of the administration of the naturalization laws, under the immediate direction of the Attorney General, to whom the Commissioner shall report directly upon all naturalization matters annually and as otherwise required."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "The Commissioner, with the approval of the Attorney General, shall make such rules and regulations as may be necessary to carry into effect the provisions of this subchapter and is authorized to prescribe the scope and nature of the examination of petitioners for naturalization as to their admissibility to citizenship for the purpose of making appropriate recommendations to the naturalization courts. Such examination shall be limited to inquiry concerning the applicant's residence, good moral character, understanding of and attachment to the fundamental principles of the Constitution of the United States, and other qualifications to become a naturalized citizen as required by law, and shall be uniform throughout the United States."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "The Commissioner is authorized to promote instruction and training in citizenship responsibilities of applicants for naturalization including the sending of names of candidates for naturalization to the public schools, preparing and distributing citizenship textbooks to such candidates as are receiving instruction in preparation for citizenship within or under the supervision of the public schools, preparing and distributing monthly an immigration and naturalization bulletin and securing the aid of and cooperating with official State and National organizations, including those concerned with vocational education."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "The Commissioner shall prescribe and furnish such forms as may be required to give effect to the provisions of this subchapter, and only such forms as may be so provided shall be legal. All certificates of naturalization and of citizenship shall be printed on safety paper and shall be consecutively numbered in separate series."
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "text": "Members of the Service may be designated by the Commissioner or a Deputy Commissioner to administer oaths and to take depositions without charge in matters relating to the administration of the naturalization and citizenship laws. In cases where there is a likelihood of unusual delay or of hardship, the Commissioner or a Deputy Commissioner may, in his discretion, authorize such depositions to be taken before a postmaster without charge, or before a notary public or other person authorized to administer oaths for general purposes."
+        },
+        {
+          "path": [
+            "f"
+          ],
+          "text": "A certificate of naturalization or of citizenship issued by the Commissioner or a Deputy Commissioner under the authority of this chapter shall have the same effect in all courts, tribunals, and public offices of the United States, at home and abroad, of the District of Columbia, and of each State, Territory, and insular possession of the United States, as a certificate of naturalization or of citizenship issued by a court having naturalization jurisdiction."
+        },
+        {
+          "path": [
+            "g"
+          ],
+          "text": "Certifications and certified copies of all papers, documents, certificates, and records required or authorized to be issued, used, filed, recorded, or kept under any and all provisions of this subchapter shall be admitted in evidence equally with the originals in any and all cases and proceedings under this chapter and in all cases and proceedings in which the originals thereof might be admissible as evidence."
+        },
+        {
+          "path": [
+            "h"
+          ],
+          "text": "The officers in charge of property owned or leased by the Government are authorized, upon the recommendation of the Attorney General, to provide quarters, without payment of rent, in any building occupied by the Service, for a photographic studio, operated by welfare organizations without profit and solely for the benefit of persons seeking to comply with requirements under the immigration and nationality laws. Such studio shall be under the supervision of the Commissioner."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=15",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        15
+      ],
+      "lastAmendmentDate": "1947-05-16",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1947-05-16",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading based on the former Code caption and the cited subsequent changes.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg97.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg97.pdf",
+          "bytes": 342368,
+          "sha256": "106f9bebc0877a8c54a91cfe36af9c67573e2ca97487814553f62c2177a7a230",
+          "capturedAt": "2026-10-11",
+          "label": "Act of May 16, 1947, 61 Stat. 97"
+        }
+      ],
+      "historicalEditorialNote": "The 1947 Act replaced subsection (h); subsections (a)–(g) retain the 1946 Code wording.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "c6f159816a51880bceadb39a4663c4b0b2f299828c7ae0dc892662a3e909a541"
+    },
+    {
+      "uscSection": "729",
+      "originalTitle": "Certificate of arrival",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "The certificate of arrival required by this subchapter may be issued upon application to the Commissioner in accordance with regulations prescribed by the Commissioner, with the approval of the Attorney General, upon the making of a record of registry as authorized by section 728 of this title."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "No declaration of intention shall be made by any person who arrived in the United States after June 29, 1906, until such person's lawful entry for permanent residence shall have been established, and a certificate showing the date, place, and manner of arrival in the United States shall have been issued. It shall be the duty of the Commissioner or a Deputy Commissioner to cause to be issued such certificate."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "Except as otherwise provided in this Act, no person shall be naturalized unless he has been lawfully admitted to the United States for permanent residence in accordance with all applicable provisions of this Act and of the immigration laws. The burden of proof shall be upon such person to show that he entered the United States lawfully, and the time, place, and manner of such entry into the United States, but in presenting such proof he shall be entitled to the production of his immigration visa, if any, or of other documents concerning such entry, in the custody of the Commissioner. No person shall be naturalized against whom there is outstanding a final finding of deportability, and no petition for naturalization shall be finally heard by a naturalization court if there is pending against the petitioner a deportation proceeding pursuant to a warrant of arrest issued under the provisions of this or any other Act: Provided, That the findings of the Commissioner in terminating deportation proceedings or in suspending the deportation of an alien pursuant to law, shall not be deemed binding in any way upon the naturalization court with respect to the question of whether such person has established his eligibility for naturalization as required by this Act."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=16",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        16
+      ],
+      "lastAmendmentDate": "1950-09-23",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1950-09-23",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading based on the former Code caption and the cited subsequent changes.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf",
+          "bytes": 10452929,
+          "sha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+          "capturedAt": "2026-10-11",
+          "label": "Act of September 23, 1950, section 27, 64 Stat. 1015"
+        }
+      ],
+      "historicalEditorialNote": "The 1950 Act added subsection (c); subsections (a) and (b) retain the 1946 Code wording.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "8532da9567fbd0bfc2f23ec810667005fe86a14ae5f0a2715961703540b4e350"
+    },
+    {
+      "uscSection": "734",
+      "originalTitle": "Final hearings on naturalization petitions",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "Except as provided in subsection (b) of this section, every final hearing upon a petition for naturalization shall be had in open court before a judge thereof, and every final order which may be made upon such petition shall be under the hand of the court and entered in full upon a record kept for that purpose, and upon such final hearing of such petition the applicant and the witnesses shall be examined under oath before the court and in the presence of the court."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "The requirement of subsection (a) of this Section for the examination of the petitioner and witnesses under oath before the court and in the presence of the court shall not apply in any case where a designated examiner has conducted the preliminary examination authorized by subsection (a) of Section 333; except that the court may, in its discretion, and shall, upon the demand of the petitioner, require the examination of the petitioner and the witnesses under oath before the court and in the presence of the court. If the petitioner is prevented by sickness or other disability from being in open court for the final hearing upon petition for naturalization, such final hearing may be had by a judge or judges at such place as may be designated by the court."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "Except as otherwise specifically provided in this chapter, no final hearing shall be held on any petition for naturalization nor shall any person be naturalized nor shall any certificate of naturalization be issued by any court within thirty days after the filing of the petition for naturalization, nor within sixty days preceding the holding of any general election within the territorial jurisdiction of the naturalization court."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "The United States shall have the right to appear before any court in any naturalization proceedings for the purpose of cross-examining the petitioner and the witnesses produced in support of the petition concerning any matter touching or in any way affecting the petitioner's right to admission to citizenship, and shall have the right to call witnesses, produce evidence, and be heard in opposition to the granting of any petition in naturalization proceedings."
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "text": "It shall be lawful at the time and as a part of the naturalization of any person, for the court, in its discretion, upon the prayer of the petitioner included in the petition for naturalization of such person, to make a decree changing the name of said person, and the certificate of naturalization shall be issued in accordance therewith."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=19",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        19
+      ],
+      "lastAmendmentDate": "1950-09-23",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1950-09-23",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading based on the former Code caption and the cited subsequent changes.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg121.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg121.pdf",
+          "bytes": 587288,
+          "sha256": "13f405591c60f34c680377d63ddf928d5272e3909a3f4a881ef82d67af2d8bc0",
+          "capturedAt": "2026-10-11",
+          "label": "Act of May 31, 1947, section 3(a), 61 Stat. 122"
+        },
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-64-Pg987.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-64/pdf/STATUTE-64-Pg987.pdf",
+          "bytes": 10452929,
+          "sha256": "67ff11241bd35953e8d1b813ab15d9d965c1e90b728da6126e98ca1035f22074",
+          "capturedAt": "2026-10-11",
+          "label": "Act of September 23, 1950, section 28(b), 64 Stat. 1017"
+        }
+      ],
+      "historicalEditorialNote": "Subsection (a) is the 1947 replacement, subsection (b) is the 1950 replacement, and subsections (c)–(e) retain the 1946 Code wording.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "07a690e1792528d298e243df200f2678113dd1f17bcda6c940b1ce8e58a39c94"
+    },
+    {
+      "uscSection": "739",
+      "originalTitle": "Certificates of derivative citizenship",
+      "units": [
+        {
+          "path": [],
+          "text": "A person who claims to have derived United States citizenship through the naturalization of a parent or through the naturalization or citizenship of a husband, or who is a citizen of the United States by virtue of the provisions of section 1993 of the United States Revised Statutes, or of section 1993 of the United States Revised Statutes as amended by section 1 of the Act of May 24, 1934 (48 Stat. 797), or who is a citizen of the United States by virtue of the provisions of section 201 (c), (d), (e), and (g) of the Nationality Act of 1940 (54 Stat. 1138; U. S. C., title 8, sec. 601), or of the Act of May 7,1934 (48 Stat. 667), may apply to the Commissioner for a certificate of citizenship. Upon proof to the satisfaction of the Commissioner that the applicant is a citizen, and that the applicant's alleged citizenship was derived as claimed, or acquired, as the case may be, and upon taking and subscribing before a member of the Service within the United States to the oath of allegiance required by this chapter of a petitioner for naturalization, such individual shall be furnished by the Commissioner or a deputy commissioner with a certificate of citizenship, but only if such individual is at the time within the United States."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=21",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        21,
+        22
+      ],
+      "lastAmendmentDate": "1947-07-23",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1947-07-23",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading based on the former Code caption and the cited subsequent changes.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg414.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg414.pdf",
+          "bytes": 414194,
+          "sha256": "2015009269ec37c96d54f2f1f5206e3909c0aaf60bd1a986b70a4734a15854de",
+          "capturedAt": "2026-10-11",
+          "label": "Act of July 23, 1947, section 2, 61 Stat. 414"
+        }
+      ],
+      "historicalEditorialNote": "The 1947 Act replaced the first sentence. The remaining certificate procedure retains the 1946 Code wording.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "6a90aee342cd4941351a3225cda167ff9b96901f033bcffaae858b9c35823a8b"
+    },
+    {
+      "uscSection": "742",
+      "originalTitle": "Fiscal provisions; fees",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "The clerk of each and every naturalization court shall charge, collect, and account for the following fees:"
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "For receiving and filing a declaration of intention, and issuing a duplicate and triplicate thereof, $3."
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "For making, filing, and docketing a petition for naturalization, $8, including the final hearing on such petition, if such hearing be held, and a certificate of naturalization, if the issuance of such certificate is authorized by the naturalization court."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "The Commissioner shall charge, collect, and account for the following fees:",
+          "continuation": "Notwithstanding the preceding provisions of this subsection, no fee shall be charged or collected for an application for a declaration of intention in lieu of a declaration alleged to have been lost, mutilated, or destroyed or for an application for a certificate of naturalization in lieu of a certificate alleged to have been lost, mutilated, or destroyed, submitted by a person who was a member of the military or naval forces of the United States at any time after April 20, 1898, and before July 5, 1902; or at any time after April 5, 1917, and before November 12, 1918; or who served on the Mexican border as a member of the Regular Army or National Guard between June 1916 and April 1917; or who has served or hereafter serves in the military or naval forces of the United States after September 16, 1940, and who was not at any time during such period or thereafter separated from such forces under other than honorable conditions, who was not a conscientious objector who performed no military duty whatever or refused to wear the uniform, or who was not at any time during such period or thereafter discharged from such military or naval forces on account of alienage."
+        },
+        {
+          "path": [
+            "b",
+            "1"
+          ],
+          "text": "For application for record of registry, $18."
+        },
+        {
+          "path": [
+            "b",
+            "2"
+          ],
+          "text": "For application for a declaration of intention in lieu of a declaration alleged to have been lost, mutilated, or destroyed, $1."
+        },
+        {
+          "path": [
+            "b",
+            "3"
+          ],
+          "text": "For application for a certificate of naturalization in lieu of a certificate alleged to have been lost, mutilated, or destroyed, $1."
+        },
+        {
+          "path": [
+            "b",
+            "4"
+          ],
+          "text": "For application for a certificate of citizenship under section 739 of this title, $5."
+        },
+        {
+          "path": [
+            "b",
+            "5"
+          ],
+          "text": "For application for the issuance of a special certificate of citizenship to obtain recognition, $5."
+        },
+        {
+          "path": [
+            "b",
+            "6"
+          ],
+          "text": "For application for a certificate of naturalization under section 723 of this title, $1."
+        },
+        {
+          "path": [
+            "b",
+            "7"
+          ],
+          "text": "For application for a certificate of citizenship in changed name, $5."
+        },
+        {
+          "path": [
+            "b",
+            "8"
+          ],
+          "text": "Reasonable fees, with the approval of the Attorney General, in cases where such fees have not been established by law, to cover the cost of furnishing copies, whether certified or uncertified, of any part of the records, or information from the records, of the Service. Such fees shall not exceed a maximum of 25 cents per folio, with a minimum fee of 50 cents for any one such service, in addition to a fee of $1 for any official certification furnished under seal. No such fee shall be required from officers or agencies of the United States or of any State or any subdivision thereof, for such copies or information furnished for official use in connection with the official duties of such officers or agencies."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "The clerk of any naturalization court specified in subsection (a) of section 701 of this title (except the courts specified in subsection (d) of this section), shall account for and pay over to the Commissioner one-half of all fees up to the sum of $6,000, and all fees in excess of $6,000, collected by any such clerk in naturalization proceedings in any fiscal year."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "The clerk of any United States district court (except in Alaska) and the clerk of the District Court of the United States for the District of Columbia shall account for and pay over to the Commissioner all fees collected by any such clerks in naturalization proceedings."
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "text": "The accounting required by subsections (c) and (d) of this section shall be made and the fees paid over to the Commissioner by such respective clerks in their quarterly accounts, which they are hereby required to render to the Commissioner within thirty days from the close of each quarter of each and every fiscal year, in accordance with regulations prescribed by the Commissioner."
+        },
+        {
+          "path": [
+            "f"
+          ],
+          "text": "The clerks of the various naturalization courts shall pay all additional clerical force that may be required in performing the duties imposed by this chapter upon clerks of courts from fees retained under the provisions of this section by such clerks in naturalization proceedings."
+        },
+        {
+          "path": [
+            "g"
+          ],
+          "text": "All fees collected by the Commissioner and all fees paid over to the Commissioner by clerks of naturalization courts under the provisions of this chapter, shall be deposited by the Commissioner in the Treasury of the United States."
+        },
+        {
+          "path": [
+            "h"
+          ],
+          "text": "In all naturalization proceedings in which an alien applying for a certificate of naturalization or of citizenship is represented by counsel, there is hereby established a limit of $25 for counsel's fees, except where legal action before a court requires extended legal service when the court may approve a reasonable fee in excess of $25."
+        },
+        {
+          "path": [
+            "i"
+          ],
+          "text": "During the time when the United States is at war no clerk of a United States court shall charge or collect a naturalization fee from an alien in the military or naval service of the United States for filing a petition for naturalization or issuing a certificate of naturalization upon admission to citizenship, and no clerk of any State court shall charge or collect any fee for such services unless the laws of the State require such charge to be made, in which case nothing more than the portion of the fee required to be paid to the State shall be charged or collected. A report of all transactions under this subsection shall be made to the Commissioner as in the case of other reports required of clerks of courts by this chapter."
+        },
+        {
+          "path": [
+            "j"
+          ],
+          "text": "In addition to the other fees required by this chapter, the petitioner for naturalization shall, upon the filing of a petition for naturalization, deposit with and pay to the clerk of the naturalization court a sum of money sufficient to cover the expenses of subpenaing and paying the legal fees of any witnesses for whom such petitioner may request a subpena, and upon the final discharge of such witnesses, they shall receive, if they demand the same from the clerk, the customary and usual witness fees from the moneys which the petitioner shall have paid to such clerk for such purpose, and the residue, if any, shall be returned by the clerk to the petitioner."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=22",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        22,
+        23
+      ],
+      "lastAmendmentDate": "1947-07-01",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1947-07-01",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "editorial-description",
+      "headingEvidence": "Descriptive heading based on the former Code caption and the cited subsequent changes.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg240.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg240.pdf",
+          "bytes": 357379,
+          "sha256": "06eab0fe74e50e6b86aa34307e3fff29e2f7731aeb87a3faf53e745f0f2eb814",
+          "capturedAt": "2026-10-11",
+          "label": "Act of July 1, 1947, 61 Stat. 240"
+        }
+      ],
+      "historicalEditorialNote": "The 1947 Act corrected paragraph (b)(8), including changing the 50-cent fee from a maximum to a minimum. The unnumbered veterans' exemption remains the continuation of subsection (b). Other provisions retain the 1946 Code wording.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "25f105840ef44d20d3557d4dd9938bbeaa875f63815c62a64df1bb7c0c325faa"
+    },
+    {
+      "uscSection": "731",
+      "originalTitle": "Declaration of intention",
+      "units": [
+        {
+          "path": [],
+          "text": "An applicant for naturalization shall make, under oath before, and unless prevented by sickness or other physical disability only in the office of, the clerk of court or such clerk’s authorized deputy, regardless of the place of residence in the United States of the applicant, not less than two nor more than seven years at least prior to the applicant’s petition for naturalization, and after the applicant has reached the age of eighteen years, a signed declaration of intention to become a citizen of the United States, which declaration shall be set forth in writing, in triplicate, and shall contain substantially the following averments by such applicant:"
+        },
+        {
+          "path": [
+            "1"
+          ],
+          "text": "My full, true, and correct name is ____ (full, true name, without abbreviation, and any other name which has been used, must appear here)."
+        },
+        {
+          "path": [
+            "2"
+          ],
+          "text": "My present place of residence is ____ (number and street), ____ (city or town), ____ (county), ____ (State)."
+        },
+        {
+          "path": [
+            "3"
+          ],
+          "text": "My occupation is ____."
+        },
+        {
+          "path": [
+            "4"
+          ],
+          "text": "I am ____ years old."
+        },
+        {
+          "path": [
+            "5"
+          ],
+          "text": "My personal description is as follows: Sex ____; color ____, complexion ____, color of eyes ____, color of hair ____, height ____ feet ____ inches, weight ____ pounds; visible distinctive marks ____; race ____; present nationality ____."
+        },
+        {
+          "path": [
+            "6"
+          ],
+          "text": "I was born on ____ (month, day, and year), in ____ (city or town), ____ (county, district, province, or state), ____ (country)."
+        },
+        {
+          "path": [
+            "7"
+          ],
+          "text": "I am ____ married; the name of my wife or husband is ____; we were married on ____ (month, day, and year), at ____ (city or town), ____ (state or country); he or she was born at ____ (city or town), ____ (county, district, province, or state), ____ (country), on ____ (month, day, and year); and entered the United States at ____ (city or town), ____ (State), on ____ (month, day, and year), for permanent residence in the United States, and now resides at ____ (city or town), ____ (state or country)."
+        },
+        {
+          "path": [
+            "8"
+          ],
+          "text": "I have ____ children; and the name, sex, date, and place of birth, and present place of residence of each of said children who is living are as follows: ____."
+        },
+        {
+          "path": [
+            "9"
+          ],
+          "text": "My place of last foreign residence was ____ (city or town), ____ (county, district, or province), ____ (country)."
+        },
+        {
+          "path": [
+            "10"
+          ],
+          "text": "I emigrated to the United States from ____ (city or town), ____ (country)."
+        },
+        {
+          "path": [
+            "11"
+          ],
+          "text": "My lawful entry for permanent residence in the United States was at ____ (city or town), ____ (State), under the name of ____, on ____ (month, day, and year), on the ____ (name of vessel or other means of conveyance)."
+        },
+        {
+          "path": [
+            "12"
+          ],
+          "text": "I have ____ been absent from the United States, having departed therefrom on ____ (dates of departures), from the port or ports of ____, upon the following vessels or other means of conveyance: ____ (names of vessels or conveyances upon departures); and returned to the United States on ____ (dates of return to the United States), at the port or ports of ____, upon the following vessels or other means of conveyance ____ (names of vessels or conveyances upon return)."
+        },
+        {
+          "path": [
+            "13"
+          ],
+          "text": "I have ____ heretofore made declaration of intention number ____, on ____ (month, day, and year), at ____ (city or town), ____ (county), ____ (State), in the ____ (name of court)."
+        },
+        {
+          "path": [
+            "14"
+          ],
+          "text": "I am not an anarchist, nor a disbeliever in or opposed to organized government, nor a member of or affiliated with any organization or body of persons teaching disbelief in or opposition to organized government."
+        },
+        {
+          "path": [
+            "15"
+          ],
+          "text": "It is my intention in good faith to become a citizen of the United States and to reside permanently therein."
+        },
+        {
+          "path": [
+            "16"
+          ],
+          "text": "I will, before being admitted to citizenship, renounce forever all allegiance and fidelity to any foreign prince, potentate, state, or sovereignty of whom or which at the time of admission to citizenship I may be a subject or citizen."
+        },
+        {
+          "path": [
+            "17"
+          ],
+          "text": "I certify that the photograph affixed to the duplicate and triplicate hereof is a likeness of me and was signed by me."
+        },
+        {
+          "path": [
+            "18"
+          ],
+          "text": "So help me God."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=17",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        17
+      ],
+      "lastAmendmentDate": "1947-05-31",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1947-05-31",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "printed-code-catchline",
+      "headingEvidence": "1946 Code, Title 8, section 731, page 592: Declaration of intention.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg121.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg121.pdf",
+          "bytes": 587288,
+          "sha256": "13f405591c60f34c680377d63ddf928d5272e3909a3f4a881ef82d67af2d8bc0",
+          "capturedAt": "2026-10-11",
+          "label": "Act of May 31, 1947, section 1, 61 Stat. 121–122"
+        }
+      ],
+      "historicalEditorialNote": "The 1947 Act replaced only the introductory paragraph, allowing a declaration outside the clerk's office for an applicant prevented by sickness or physical disability. Numbered form fields (1)–(18) retain the 1946 Code wording; printed rule lengths are normalized to four underscores.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "baed86190d10911745b1cfd9690103b64a184eb933e257124db5cf25cd465148"
+    },
+    {
+      "uscSection": "732",
+      "originalTitle": "Petition for naturalization",
+      "units": [
+        {
+          "path": [
+            "a"
+          ],
+          "text": "An applicant for naturalization shall, not less than two nor more than seven years after such declaration of intention has been made, make and file in the office of the clerk of a naturalization court, in duplicate, a sworn petition in writing, signed by the applicant in the applicant’s own handwriting if physically able to write, and duly verified by witnesses, which petition shall contain substantially the following averments by such applicant."
+        },
+        {
+          "path": [
+            "a",
+            "1"
+          ],
+          "text": "My full, true, and correct name is ____ (full, true name, without abbreviation, and any other name which has been used, must appear here)."
+        },
+        {
+          "path": [
+            "a",
+            "2"
+          ],
+          "text": "My present place of residence is ____ (number and street), ____ (city or town), ____ (county), ____ (State)."
+        },
+        {
+          "path": [
+            "a",
+            "3"
+          ],
+          "text": "My occupation is ____."
+        },
+        {
+          "path": [
+            "a",
+            "4"
+          ],
+          "text": "I am ____ years old."
+        },
+        {
+          "path": [
+            "a",
+            "5"
+          ],
+          "text": "My personal description is: Sex ____; color ____, complexion ____, color of eyes ____, color of hair ____, height ____ feet ____ inches, weight ____ pounds; visible distinctive marks ____; race ____; present nationality ____."
+        },
+        {
+          "path": [
+            "a",
+            "6"
+          ],
+          "text": "I was born on ____ (month, day, and year), in ____ (city or town), ____ (county, district, province, or state), ____ (country)."
+        },
+        {
+          "path": [
+            "a",
+            "7"
+          ],
+          "text": "I am ____ married; the name of my wife or husband is ____; we were married on ____ (month, day, and year), at ____ (city or town), ____ (state or country); he or she was born at ____ (city or town), ____ (county, district, province, or state), ____ (country), on ____ (month, day, and year); entered the United States at ____ (city or town), ____ (State), on ____ (month, day, and year), for permanent residence in the United States, and now resides at ____ (city or town), ____ (state or country)."
+        },
+        {
+          "path": [
+            "a",
+            "8"
+          ],
+          "text": "I have ____ children; and the name, sex, date, and place of birth, and present place of residence of each of said children who is living are as follows: ____."
+        },
+        {
+          "path": [
+            "a",
+            "9"
+          ],
+          "text": "My last place of foreign residence was ____ (city or town), ____ (county, district, or province), ____ (country)."
+        },
+        {
+          "path": [
+            "a",
+            "10"
+          ],
+          "text": "I emigrated to the United States from ____ (city or town), ____ (country)."
+        },
+        {
+          "path": [
+            "a",
+            "11"
+          ],
+          "text": "My lawful entry for permanent residence in the United States was at ____ (city or town), ____ (State), under the name of ____, on ____ (month, day, and year), on the ____ (name of vessel or other means of conveyance) as shown by the certificate of my arrival attached to this petition."
+        },
+        {
+          "path": [
+            "a",
+            "12"
+          ],
+          "text": "I have ____ been absent from the United States, having departed therefrom on ____ (dates of departures), from the port or ports of ____, upon the following vessels or other means of conveyance: ____ (names of vessels or conveyances upon departures); and returned to the United States on ____ (dates of return to the United States), at the port or ports of ____, upon the following vessels or other means of conveyance: ____ (names of vessels or conveyances upon return)."
+        },
+        {
+          "path": [
+            "a",
+            "13"
+          ],
+          "text": "I have resided continuously in the United States of America for the term of five years at least immediately preceding the date of this petition, to wit, since ____, and continuously in the State in which this petition is made for the term of six months at least immediately preceding the date of this petition, to wit, since ____."
+        },
+        {
+          "path": [
+            "a",
+            "14"
+          ],
+          "text": "I declared my intention to become a citizen of the United States on ____ (month, day, and year), in the ____ (name of court) Court of ____, at ____ (city or town), ____ (State)."
+        },
+        {
+          "path": [
+            "a",
+            "15"
+          ],
+          "text": "I have ____ heretofore made petition for naturalization number ____, on ____ (month, day, and year), at ____ (city or town), ____ (county), ____ (State), in the ____ (name of court), and such petition was dismissed or denied by that Court for the following reasons and causes, to wit: ____, and the cause of such dismissal or denial has since been cured or removed."
+        },
+        {
+          "path": [
+            "a",
+            "16"
+          ],
+          "text": "I am not an anarchist, nor a disbeliever in or opposed to organized government, nor a member of or affiliated with any organization or body of persons teaching disbelief in or opposition to organized government."
+        },
+        {
+          "path": [
+            "a",
+            "17"
+          ],
+          "text": "I am attached to the principles of the Constitution of the United States and well disposed to the good order and happiness of the United States."
+        },
+        {
+          "path": [
+            "a",
+            "18"
+          ],
+          "text": "It is my intention in good faith to become a citizen of the United States, and to reside permanently therein."
+        },
+        {
+          "path": [
+            "a",
+            "19"
+          ],
+          "text": "It is my intention to renounce absolutely and forever all allegiance and fidelity to any foreign prince, potentate, state, or sovereignty of whom or which at this time I am a subject or citizen."
+        },
+        {
+          "path": [
+            "a",
+            "20"
+          ],
+          "text": "Attached hereto and made a part of this, my petition for naturalization, or my declaration of intention to become a citizen of the United States (if such declaration of intention be required by the naturalization law), a certificate of arrival from the Immigration and Naturalization Service of my said lawful entry into the United States for permanent residence (if such certificate of arrival be required by the naturalization law), and the affidavits of the two verifying witnesses required by law."
+        },
+        {
+          "path": [
+            "a",
+            "21"
+          ],
+          "text": "Wherefore, I, petitioner for naturalization, pray that I may be admitted a citizen of the United States of America, and that my name be changed to ____."
+        },
+        {
+          "path": [
+            "a",
+            "22"
+          ],
+          "text": "I, aforesaid petitioner, being duly sworn, depose and say that I have (read) (heard read) this petition and know that the same is true of my own knowledge except as to matters herein stated to be alleged upon information and belief, and that as to those matters I believe it to be true; and that this petition is signed by me with my full, true, and correct name. So help me God. ____ (full, true, and correct name of petitioner)."
+        },
+        {
+          "path": [
+            "b"
+          ],
+          "text": "The applicant's petition for naturalization, in addition to the averments required by subsection (a) of this section, shall include averments of all other facts which may be material to the applicant's naturalization and required to be proved upon the hearing of such petition."
+        },
+        {
+          "path": [
+            "c"
+          ],
+          "text": "At the time of filing the petition for naturalization there shall be filed with the clerk of court a certificate from the Service, if the petitioner arrived in the United States after June 29, 1906, stating the date, place, and manner of petitioner's arrival in the United States, and the declaration of intention of such petitioner, which certificate and declaration shall be attached to and made a part of said petition."
+        },
+        {
+          "path": [
+            "d"
+          ],
+          "text": "Petitions for naturalization may be made and filed during the term time or vacation of the court and shall be docketed the same day as filed, but final action thereon shall be had only on stated days, to be fixed by rule of the court."
+        },
+        {
+          "path": [
+            "e"
+          ],
+          "text": "If the applicant for naturalization is prevented by sickness or other disability from presenting himself in the office of the clerk to make the petition required by subsection (a), such applicant may make such petition at such other place as may be designated by the clerk of court or by such clerk’s authorized deputy."
+        }
+      ],
+      "sourceUrl": "https://tile.loc.gov/storage-services/service/ll/uscode/uscode1946-00100/uscode1946-001008011/uscode1946-001008011.pdf#page=17",
+      "sourceArtifact": "sources/legal/raw/historical-usc/loc/1946/chapter-11.pdf",
+      "sourceSha256": "a940fa66d02f67a5fc0806cf4253e2a78fa45dcafd007e3d3d2c7168d87b8171",
+      "sourceCapturedAt": "2026-10-11",
+      "sourcePdfPages": [
+        17,
+        18,
+        19
+      ],
+      "lastAmendmentDate": "1948-06-25",
+      "versionLabel": "1946 Code text incorporating the cited amendments through 1948-06-25",
+      "reviewStatus": "visually-reviewed",
+      "headingOrigin": "printed-code-catchline",
+      "headingEvidence": "1946 Code, Title 8, section 732, page 592: Petition for naturalization.",
+      "amendmentSources": [
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-61-Pg121.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg121.pdf",
+          "bytes": 587288,
+          "sha256": "13f405591c60f34c680377d63ddf928d5272e3909a3f4a881ef82d67af2d8bc0",
+          "capturedAt": "2026-10-11",
+          "label": "Act of May 31, 1947, section 2, 61 Stat. 122"
+        },
+        {
+          "file": "sources/legal/raw/historical-usc/statutes/STATUTE-62-Pg1026.pdf",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-62/pdf/STATUTE-62-Pg1026.pdf",
+          "bytes": 419805,
+          "sha256": "f6ff6b5e6231bc2b84d76ab412f4e59e2c43e98025e8770f8c3adb74eac3355e",
+          "capturedAt": "2026-10-11",
+          "label": "Act of June 25, 1948, 62 Stat. 1026"
+        }
+      ],
+      "historicalEditorialNote": "The 1948 Act replaced subsection (a)'s introductory paragraph, changing ten years to seven. The 1947 Act added subsection (e). Form fields (a)(1)–(22) and subsections (b)–(d) retain the 1946 Code wording; form blanks are normalized to four underscores.",
+      "transcriptionNote": "Compared with the official Code and amending-act page images. Print wrapping and form blank lengths are normalized; apparent OCR spelling and punctuation errors are corrected. Code references in unchanged text and Act references in enacted replacements are preserved as printed.",
+      "unitsSha256": "203cac6f928cf90a9be3f0402ee92aea590336ac995af4f251679305b4674a67"
+    }
+  ]
+}
