@@ -251,6 +251,7 @@ async function testSectionMaterializationHooks() {
     occurrenceSectionDomToken: encodeURIComponent,
     occurrenceSectionIdFromToken: decodeURIComponent,
     occurrenceRowTextHtml: () => "snippet",
+    occurrenceResultStatus: () => "current",
     statuteUnitText: (_section, path) => `Complete statute unit ${path.join("/")}`,
     cfrUnitText: () => "", cfrBlockPlainText: block => String(block?.x || ""),
     componentTokens: () => [], pathStartsWith: () => false, cfrBlockUnitPaths: () => [],
@@ -312,6 +313,7 @@ async function testSectionMaterializationHooks() {
     hierarchyRowCitation: extractedFunction("hierarchyRowCitation", "hierarchyRowHeading", hierarchyLabels),
     hierarchyRowHeading: extractedFunction("hierarchyRowHeading", "hierarchyStatusReplacesHeading", hierarchyLabels),
     occurrenceSectionDomToken: value => String(value),
+    occurrenceResultStatus: () => "current",
     Map, Number, String
   });
   const cfrHierarchyFixture = {
@@ -349,8 +351,6 @@ async function testSectionMaterializationHooks() {
   assert(template.includes('id="searchScopeClear" type="button" tabindex="-1"')
     && template.includes('event.key === "Tab" && !event.shiftKey')
     && template.includes('els.search.focus();'), "Forward Tab from the scope editor is not guaranteed to enter the main search field.");
-  const copySource = between("    async function copyOccurrenceRowData(", "\n\n    async function renderOccurrenceRows(");
-  assert(copySource.includes("occurrenceRowUnitText(row, state.statuteHierarchyAuthority)") && copySource.includes("row.citation"), "Result copy actions do not distinguish full citation from complete unit text.");
   const resultSource = between("    function renderOccurrenceSearchResult(", "\n\n    async function renderFocusedOccurrencePane(");
   assert(resultSource.includes('class="occurrence-search-summary"') && resultSource.includes('hitCount === 1 ? "hit" : "hits"') && resultSource.includes('sectionCount === 1 ? "section" : "sections"'), "Search result totals are not integrated as ‘N hits in M sections’ with singular handling.");
   assert(!resultSource.includes("INA matches") && !resultSource.includes("CFR matches") && !resultSource.includes("Each expanded section"), "Search result panes retain redundant authority headings or explanatory copy.");

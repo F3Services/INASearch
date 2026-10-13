@@ -15,11 +15,11 @@ assert.equal(typeof helper.readPackedCorpusHtml, "function", "The shared standal
 const hash = bytes => crypto.createHash("sha256").update(bytes).digest("hex");
 function payload(value, compression = "gzip") {
   const plain = Buffer.from(JSON.stringify(value));
-  const encoded = compression === "gzip" ? zlib.gzipSync(plain) : plain;
+  const encoded = compression === "brotli" ? zlib.brotliCompressSync(plain) : compression === "gzip" ? zlib.gzipSync(plain) : plain;
   return {
-    manifest: { compression, encoding: compression === "gzip" ? "base64" : "utf-8", uncompressedBytes: plain.length, uncompressedSha256: hash(plain),
-      ...(compression === "gzip" ? { compressedBytes: encoded.length, compressedSha256: hash(encoded) } : {}) },
-    text: compression === "gzip" ? encoded.toString("base64") : encoded.toString("utf8")
+    manifest: { compression, encoding: compression !== "none" ? "base64" : "utf-8", uncompressedBytes: plain.length, uncompressedSha256: hash(plain),
+      ...(compression !== "none" ? { compressedBytes: encoded.length, compressedSha256: hash(encoded) } : {}) },
+    text: compression !== "none" ? encoded.toString("base64") : encoded.toString("utf8")
   };
 }
 
@@ -37,6 +37,8 @@ const corpus = { schemaVersion: 5, corpusVersion: "fixture", sources: { title8: 
 const packed = packCorpusForDelivery(corpus);
 const ordinary = payload(packed);
 assert.deepEqual(helper.readPackedCorpusHtml(html(ordinary.manifest, ordinary.text)), packed, "The reader selected a script example rather than the actual gzip payload.");
+const brotli = payload(packed, "brotli");
+assert.deepEqual(helper.readPackedCorpusHtml(html(brotli.manifest, brotli.text)), packed, "Brotli reading changed the corpus.");
 const plain = payload(corpus, "none");
 assert.deepEqual(helper.readPackedCorpusHtml(html(plain.manifest, plain.text)), corpus, "Plain JSON corpus reading regressed.");
 const partition = partitionPackedCorpus(packed, 100);

@@ -3740,7 +3740,7 @@ function applyCfrReferences(corpus, changedPartIds) {
     embeddedIssues: []
   };
   const packedEvidence = corpus.legalReferenceEvidence?.format === "indexed-arrays-v1";
-  const referenceEvidence = packedEvidence ? null : (corpus.legalReferenceEvidence?.records || []);
+  const referenceEvidence = packedEvidence || !corpus.legalReferenceEvidence ? null : corpus.legalReferenceEvidence.records;
   const shared = { ...legalReferenceContext(corpus), referenceAudit, referenceEvidence, embeddedExceptionUsage: new Set() };
   let fields = 0;
   let references = 0;
@@ -3802,7 +3802,7 @@ function applyCfrReferences(corpus, changedPartIds) {
     attach(part, "authority", context, partState);
     attach(part, "source", context, partState);
   }
-  if (!packedEvidence) corpus.legalReferenceEvidence = { schemaVersion: 1, resolverVersion: EMBEDDED_RESOLVER_VERSION, records: referenceEvidence };
+  if (referenceEvidence) corpus.legalReferenceEvidence = { schemaVersion: 1, resolverVersion: EMBEDDED_RESOLVER_VERSION, records: referenceEvidence };
   return {
     engineVersion: 2,
     changedParts: [...changed].sort(),

@@ -137,7 +137,7 @@ def build(check_dir, output, root=ROOT):
             stage = Path(temporary)
             for directory in ['src', 'tools', 'sources/legal']:
                 shutil.copytree(root / directory, stage / directory, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
-            for name in ['package.json', 'package-lock.json']:
+            for name in ['package.json', 'package-lock.json', 'FAQ.md', 'LICENSE', 'THIRD-PARTY-NOTICES.txt']:
                 shutil.copy2(root / name, stage / name)
             if not (root / 'node_modules').is_dir(): raise ValueError('Run npm ci before building a candidate')
             (stage / 'node_modules').symlink_to(root / 'node_modules', target_is_directory=True)

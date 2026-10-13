@@ -114,7 +114,7 @@ async function syntheticTests() {
   const cfrOnly = occurrence.getProjection(corpus, { authorities: "cfr" });
   assert(inaOnly.fragments.every(fragment => fragment.authority === "ina"), "An INA-only projection contains CFR fragments.");
   assert(cfrOnly.fragments.every(fragment => fragment.authority === "cfr"), "A CFR-only projection contains statute fragments.");
-  assert(new Set(fullAfterIna.fragments.map(fragment => fragment.authority)).size === 2, "An authority-specific projection poisoned the default projection cache.");
+  assert(new Set(fullAfterIna.fragments.map(fragment => fragment.authority)).size === 3, "An authority-specific projection poisoned the default projection cache.");
   assert(occurrence.buildProjection(corpus, { authorities: new Set(["ina"]) }).fragments.every(fragment => fragment.authority === "ina"), "Projection construction does not accept an iterable authority set.");
   const deferred = occurrence.getProjection(corpus, { authorities: "ina", deferNormalization: true });
   assert.notStrictEqual(deferred, inaOnly, "A deferred-normalization projection shared the normal projection cache entry.");
@@ -122,7 +122,8 @@ async function syntheticTests() {
   corpus.corpusVersion = "synthetic-2";
   assert.notStrictEqual(occurrence.getProjection(corpus), fullAfterIna, "Projection caching survived a corpus-version change.");
   assert.strictEqual(projection.stats.inaRecords, 1, "Unmapped Title 8 records entered the primary INA projection.");
-  assert(!projection.fragments.some(fragment => fragment.normalized.includes("unmappedneedle")), "Unmapped U.S.C. prose entered INA search.");
+  assert(!inaOnly.fragments.some(fragment => fragment.normalized.includes("unmappedneedle")), "Unmapped U.S.C. prose entered an explicitly INA-only search.");
+  assert(projection.fragments.some(fragment => fragment.normalized.includes("unmappedneedle")), "Unmapped Title 8 prose must remain available to a full statutory search.");
 
   const statuteText = corpus.title8.sections[0].body[0].text;
   const statutePieces = projection.fragments

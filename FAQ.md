@@ -4,33 +4,11 @@ This FAQ explains how INASearch works behind the scenes. For a short introductio
 
 ## General
 
-### Does INASearch require installation or an account?
-
-No. Each edition is a standalone HTML file. Open it in a current version of Microsoft Edge or Chrome. There is no account, local server, browser extension, or background service.
-
 ### Does it work offline?
 
-Yes. The HTML file contains the legal corpus needed for searching and reading. Automatic CFR updates are off by default, so a new copy makes no network requests during ordinary use.
+Yes, when you use a local copy. Download `INASearch.html` while you have an internet connection, then open that file in your browser. The file contains the legal text needed for searching and reading, and you can use your notes and highlights without an internet connection. To rely on INASearch offline, use the downloaded file rather than the hosted website.
 
-Official-source buttons still require an internet connection because they open the [House U.S. Code](https://uscode.house.gov/), [eCFR](https://www.ecfr.gov/), [USCIS](https://www.uscis.gov/), or [GovInfo](https://www.govinfo.gov/) website.
-
-### Does INASearch support light and dark themes?
-
-Yes. INASearch follows the operating system's light or dark preference by default and responds when that preference changes. The sun/moon button in the top bar and **Settings → Appearance** switches to the theme shown on the button. The laptop button returns to System mode; its smaller sun or moon shows the operating system's current theme. The light theme uses a blue, white, and soft-gray palette inspired by the [USCIS Policy Manual](https://www.uscis.gov/policy-manual).
-
-The theme choice is part of the saved profile, so it travels through browser saving, connected data files, imports, and JSON backups. The standalone files use local font fallbacks and do not download USCIS fonts or other theme assets.
-
-Appearance also has separate settings for hiding the Updates display, save-status display, or theme buttons in the top bar. These are disabled by default. Hiding the top-bar theme buttons leaves both theme controls available in Settings.
-
-### Why Edge or Chrome?
-
-The search, reader, and automatic browser-profile saving use ordinary browser features, including IndexedDB. The limiting feature for the stronger connected-file workflow is `showSaveFilePicker()`: INASearch uses a writable file handle to save changes directly to the `INASearch_Data.json` file you selected. [That API is not available in every major browser](https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker).
-
-- Firefox does not provide the required local-file picker and writable-handle workflow.
-- Safari supports an origin-private file system, but [that storage belongs to the website](https://webkit.org/blog/12257/the-file-system-access-api-with-origin-private-file-system/); it does not provide the picker INASearch needs to keep writing to a user-selected JSON file. Chrome and Edge on iOS use the same WebKit engine and have the same limitation.
-- Other desktop Chromium browsers, such as Brave, Opera, and Vivaldi, may expose the required API, but they are not in the project's test matrix and their privacy or security settings may block it.
-
-Firefox and Safari may still run the reader, save a profile in their own browser storage, and download JSON backups, but they cannot provide the connected-file autosave workflow. Current desktop Edge and Chrome are therefore the fully supported browsers.
+Automatic CFR updates and official-source buttons require an internet connection. Updates are off by default. Official-source buttons open the [House U.S. Code](https://uscode.house.gov/), [eCFR](https://www.ecfr.gov/), [USCIS](https://www.uscis.gov/), or [GovInfo](https://www.govinfo.gov/) website.
 
 ## Notes, settings, and privacy
 
@@ -38,7 +16,7 @@ Firefox and Safari may still run the reader, save a profile in their own browser
 
 INASearch automatically saves notes, highlights, preferences, and daily-tip progress in browser-owned IndexedDB storage. “Saved in browser” means the current browser profile contains the latest verified copy; it does not mean the data is a durable filesystem document.
 
-Create a note from an exact INA, U.S.C., or CFR citation's actions menu. Notes use a neutral full-width layout, may be associated with several exact citations, and appear immediately above or below each citation according to the global setting. The optional handwritten-font setting uses an installed system font when available and otherwise keeps the normal rule-text font.
+Create a note from an exact INA, U.S.C., or CFR citation's actions menu, or from selected text. Notes use neutral full-width banners above their associated citations. They stay visible while you read the associated text and can be shared with several exact citations. Click a note to edit it in place. The optional handwritten-font setting uses an installed system font when available and otherwise keeps the normal rule-text font.
 
 Browser storage can disappear if you clear site data, use a private window, change browser profiles, run short of storage, or open the standalone HTML from a location the browser treats as a different storage context. INASearch requests persistent storage when supported, but the browser may decline and users can always clear browser data.
 
@@ -52,31 +30,11 @@ The main reader’s navigation dropdowns follow the citation at **Page view offs
 
 Scrolling changes neither navigation history nor the blue selection highlight. Selecting a citation, opening its menu, copying its citation or text, sharing it, adding a note, printing it, or opening its official source logs that citation. The action column stays fixed in the left gutter. Its actions use the blue-highlighted citation while any part of that unit is visible. Otherwise, hovering or focusing a button previews the first citation below the offset line. Click a citation in the text to select a broader unit when needed.
 
-The tall copy bubble has one copy icon and three choices separated by lines: § for the citation, T for legal text, and § + T for both with a preface. Hover anywhere in the bubble to preview the target citation. Its inner button borders appear on hover or keyboard focus. The INA/U.S.C. switch in the same column controls the copied statute format and the navigation hierarchy; it is disabled for regulations and statutes without an INA equivalent. **Citation and text preface** in Settings defaults to `[Citation] states the following`. The combined copy replaces `[Citation]` (case-insensitively), adds ` -` and a newline, then includes the legal text. If the token is missing, Settings shows `[citation] not detected`.
+The copy controls offer § for the citation and T for legal text using your saved format. Hover or focus a control to preview the target citation. The INA/U.S.C. switch in the same column controls the copied statute format and the navigation hierarchy; it is disabled for regulations and statutes without an INA equivalent. **Copied text format** in Settings defaults to `[citation] - [text]`, so T includes both by default. Those tokens are replaced with the citation and complete legal text, regardless of capitalization. You can put them in any order and include your own punctuation and line breaks; no separator is added automatically. Settings warns you if either token is missing.
 
 The search field’s copy controls target its displayed citation. Share stays beside the search field and uses the live navigation citation in the main reader. Hover or keyboard-focus Share to light the window edges and temporarily show the shared destination, including both panes in a split view. Moving away or pressing Escape restores your reading position; previewing does not add history. Clicking copies the previewed link. A recipient’s saved display preferences can affect the layout.
 
 If you jump to `INA 237(a)(3)` and scroll to `(a)(2)(D)`, Back first returns to `(a)(3)`. Pressing Back again visits the previous logged destination. History jumps align the citation at Page view offset. Side-by-side panes retain their own navigation history and copy targets.
-
-### What happens if I open INASearch in two windows?
-
-You usually do not need a second window to view multiple provisions. Enter two or more citations in the search box, separated by commas:
-
-```text
-INA 212(a)(6)(C)(i), INA 212(i), 8 CFR 212.7
-```
-
-INASearch opens each citation in its own reader pane. The panes remain visible together and scroll independently. Each has aligned history controls, citation copies inside its search field, and a stationary action column for its own text. The INA/U.S.C. setting is shared: switching one eligible pane updates all panes. Every switch shows that setting, but regulations and statutes without an INA equivalent disable their switch. With **Follow View Setting**, citation links update without moving the reading anchor in any pane. Remove the commas to return to the ordinary single-provision reader.
-
-### What if I want to anyways?
-
-You can open multiple windows, but each window has its own working copy. Browser-profile and connected-file writes both use revisions so a stale window cannot silently overwrite a newer one.
-
-The windows do not live-sync. Suppose window A and window B opened the same browser-profile revision. If A saves first, B's next browser write is rejected. B keeps its work in memory and offers to reload the newer copy, explicitly merge its notes and settings, or download B's copy before resolving the conflict. The same refusal occurs when a connected data file has a newer revision.
-
-An explicit merge retains notes from both copies, keeps B's version of same-ID notes and settings, and preserves the latest daily-tip selection and dismissal dates. Reconnect the data file afterward if its copy also needs reconciliation.
-
-You can deliberately connect different files in different windows, but those files are independent and do not sync. The most recently connected file is the one that browser profile will try to remember for the next session.
 
 ### Will the browser remember the data file?
 
@@ -184,7 +142,7 @@ The standalone browser cannot fetch the [House Title 8 release](https://uscode.h
 - the [USCIS Glossary](https://www.uscis.gov/tools/glossary); or
 - other non-CFR source material.
 
-Their capture dates remain visible on the **About** page.
+The **About** page gives the U.S. Code source date and lists the included law. Dates for the covered CFR parts appear in the reader. Automatic CFR updates do not change the statutory text; use a newer copy of INASearch to get updated statutes.
 
 ## Inline links and citations
 
@@ -296,7 +254,7 @@ For CFR structure, the capture includes both the eCFR XML text and the same-date
 
 ### What is the difference between the two HTML editions?
 
-Both contain the same expanded corpus at runtime. `INASearch.html` compresses and packs repeated corpus data to reduce its file size. `INASearch-Uncompressed.html` embeds plain JSON so the complete release corpus is easier to inspect. Neither edition depends on an external script or corpus server.
+Both contain the same expanded corpus at runtime. `INASearch.html` packs repeated data and compresses the corpus with Brotli. Its decoder is embedded in the file. After first use, subsequent opens use verified uncompressed corpus chunks and the saved search index from browser storage; a missing or obsolete cache is rebuilt. Detailed citation-resolution audit records remain build-time evidence and are omitted from both distributed editions. `INASearch-Uncompressed.html` embeds plain JSON so the complete release corpus is easier to inspect. Neither edition depends on an external script or corpus server.
 
 ### How do I build and test the project?
 
@@ -307,7 +265,7 @@ node tools/test-standalone.js
 node tools/test-ina-display.js
 ```
 
-The build uses pinned development dependencies to minify JavaScript, including the embedded worker. These tools are not shipped with the app. Readable builds in `tmp/debug/` support source-level tests; loading and browser tests exercise the minified releases. Both editions still work as single offline files.
+The build uses pinned development dependencies to minify JavaScript, including the embedded worker. The minifier is not shipped with the app; the Brotli WebAssembly decoder is embedded for offline use. Third-party licensing is included in the HTML source and `THIRD-PARTY-NOTICES.txt`. Readable builds in `tmp/debug/` support source-level tests; loading and browser tests exercise the minified releases. Both editions still work as single offline files.
 
 The test suite checks source hashes, the INA crosswalk, CFR coverage, legal-reference spans and targets, policy excerpts, browser loading, current JSON profile round trips, deterministic output, search performance, and size limits.
 

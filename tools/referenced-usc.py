@@ -167,13 +167,14 @@ def flatten_operative(section):
     visit(section.get('body',[]))
     return normalize(' '.join(result))
 
-def select_references(references):
+def select_references(references, ina_sections):
     selected=collections.defaultdict(list);excluded=[];corrections=[]
     fixes={('42','7'):('42','1320b-7'),('18','274'):('8','1324'),('20','655.202'):('cfr','655.202'),('8','214.2'):('cfr','214.2'),('49','4106'):('pl','4106'),('22','7081'):('pl','7081'),('22','4212-421'):('range','4212-4214')}
     for original in references:
         if original.get('family')!='usc' or str(original.get('targetTitle'))=='8': continue
         r=copy.deepcopy(original);t,s=str(r.get('targetTitle')),norm_section(r.get('targetSection')); reason=None
         if r.get('context')!='operative': reason='Reference outside current operative body or preamble'
+        elif norm_section(r.get('sourceSection')) not in ina_sections: reason='Reference outside INA-mapped operative provisions'
         elif not s: reason='Named group or whole title'
         elif (t,s) in fixes:
             old=(t,s);t,s=fixes[t,s]
@@ -228,7 +229,8 @@ for(const s of corpus.title8.sections){
  (s.body||[]).forEach((n,i)=>visit(s,n,'body.'+i+'.','operative'));
  (s.notes||[]).forEach((n,i)=>visit(s,n,'notes.'+i+'.','notes'));
 }
-process.stdout.write(JSON.stringify({references,title8Source:corpus.sources.title8}));
+const inaSections = corpus.inaCrosswalk.filter(row => !row.isNote && row.hasEquivalent !== false && row.uscSection).map(row => String(row.localSection || row.uscSection).toLowerCase());
+process.stdout.write(JSON.stringify({references,inaSections,title8Source:corpus.sources.title8}));
 '''
 
 def load_references():
@@ -271,7 +273,7 @@ def capture_sources(base, selected):
     (DEST/'source-inventory.json').write_text(json.dumps(inventory,ensure_ascii=False,indent=2)+'\n')
 
 def generate(capture_from=None):
-    exported=load_references();selected,excluded,corrections=select_references(exported['references'])
+    exported=load_references();selected,excluded,corrections=select_references(exported['references'], set(exported['inaSections']))
     if capture_from:capture_sources(Path(capture_from),selected)
     inventory=json.loads((DEST/'source-inventory.json').read_text())
     available={a['target']:a for a in inventory['artifacts']};unavailable={a['target']:a for a in inventory['unavailable']}
@@ -300,7 +302,7 @@ def generate(capture_from=None):
             if path and path not in paths:locators.append({'target':key,'path':list(path),'sourceSection':r['sourceSection'],'text':r['text'],'reason':'Exact locator absent in source edition; full parent section is included.'})
         titles.setdefault(a['title'],{'number':a['title'],'name':a['titleName'],'sections':[]})['sections'].append(section)
         records.append({'target':key,'operativeSha256':digest(flatten_operative(section).encode()),'occurrences':len(selected[key]),'nodeCount':len(paths)})
-    corpus={'schemaVersion':1,'scope':'Full parent sections directly cited by the included current Title 8 operative body or preamble. No notes, supplementary material, ranges, et seq. groups, or recursive expansion.','edition':2024,'currentThrough':'2025-01-06','titles':list(titles.values())}
+    corpus={'schemaVersion':1,'scope':'Full parent sections directly cited by current INA-mapped operative body or preamble. No non-INA provisions, notes, supplementary material, ranges, et seq. groups, or recursive expansion.','edition':2024,'currentThrough':'2025-01-06','titles':list(titles.values())}
     corpus['version']='referenced-usc-'+digest(json.dumps(corpus,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())[:20]
     # Retain citation evidence without copying complete Title 8 paragraphs.
     compact=lambda r:{k:v for k,v in r.items() if k not in {'sourceText','before','after'}}

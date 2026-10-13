@@ -38,6 +38,8 @@ for (const [query, kind, recordId] of [
 }
 assert.equal(select(headings, mapping, "president"), null);
 assert.deepEqual([...select(headings, mapping, "")], []);
+assert.deepEqual([...select(headings, mapping, "about")], []);
+assert.equal(select(headings, mapping, '"about"'), null);
 assert.deepEqual([...select(headings, mapping, "INA Title II")], []);
 const combined = select(headings, mapping, "101a15h2a,8cfr214.2h13iiia");
 assert(combined.includes(mapping.usc[headings.title8.sections.findIndex(record => record.id === "8-1101")]));
@@ -80,13 +82,15 @@ async function checkNoteMetadataUpgrade() {
   previous.corpusVersion = "newer-cfr-download";
   const context = { corpus: previous, build: { cfrHierarchyVersion: 1, statuteRunInRevision: 1, statuteNoteLayoutRevision: 1 },
     loadEmbeddedINASearchCorpus: async () => structuredClone(embedded), isValidCorpus: () => true, hydrateLegalReferences() {},
-    INA_SEARCH_CORPUS_COMPLETE: Promise.resolve(), INASearchLegalReferences: { applyCfrReferences() {} } };
+    INA_SEARCH_CORPUS_COMPLETE: Promise.resolve(), INASearchLegalReferences: { applyCfrReferences() {} }, TextEncoder,
+    INASearchStorage: { sha256Bytes: async bytes => require("node:crypto").createHash("sha256").update(bytes).digest("hex") } };
   context.window = context;
   vm.createContext(context);
   await vm.runInContext(`(async () => { ${source} })()`, context);
   assert.equal(context.corpus.title8.houseFootnoteMetadata.noteLayoutRevision, 1, "An existing cache must receive the structured editorial notes");
   assert.equal(context.INA_SEARCH_CORPUS_LOAD_SOURCE, "upgraded-cache");
   assert.equal(context.corpus.cfr.currentThrough[8], "2026-02-01", "The note upgrade must preserve newer downloaded regulations");
+  assert.equal(context.INA_SEARCH_UPGRADED_CORPUS_SHA256, require("node:crypto").createHash("sha256").update(JSON.stringify(context.corpus)).digest("hex"), "An upgraded reader must identify its new content with the same hash used by its next cached startup.");
 }
 (async () => {
   await checkNoteMetadataUpgrade();

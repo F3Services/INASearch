@@ -22,7 +22,7 @@
   // The fragment/hierarchy format is unchanged. Extra cached fields are ignored,
   // so removing the redundant citation index need not force a cold rebuild.
   const PERSISTED_PROJECTION_SCHEMA_VERSION = 2;
-  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-8`;
+  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-9`;
   const DEFAULT_SLICE_MS = 8;
   const STATUTE_DEPTHS = Object.freeze({
     section: 0, subsection: 1, paragraph: 2, subparagraph: 3, clause: 4,
@@ -429,14 +429,16 @@
     for (const row of includeIna ? corpus?.inaCrosswalk || [] : []) {
       if (!row || row.isNote || row.hasEquivalent === false || !row.uscSection) continue;
       const section = statuteSections.get(normalizedIdentifier(row.localSection || row.uscSection));
-      // A transferred shell contains no independent operative text; its current
-      // destination is already represented by its own mapped INA provision.
-      if (!section || section.status === "transferred") continue;
+      // Historical transferred text is distinct from its current destination.
+      if (!section || section.status === "transferred" && !section.historical) continue;
       if (!mappedByRecord.has(section.id)) mappedByRecord.set(section.id, { section, rows: [] });
       mappedByRecord.get(section.id).rows.push(row);
     }
 
     const statuteRecords = [...mappedByRecord.values()];
+    if (includeUsc) for (const section of corpus?.title8?.sections || []) {
+      if (!mappedByRecord.has(section.id)) statuteRecords.push({ section, rows: [], title: { number: 8, name: "Aliens and Nationality" } });
+    }
     if (includeUsc) for (const title of corpus?.referencedUsc?.titles || []) {
       for (const section of title.sections || []) statuteRecords.push({ section, rows: [], title });
     }
@@ -696,7 +698,7 @@
     const corpusVersion = String(options.corpusVersion || corpus?.corpusVersion || corpus?.cfr?.captureTime || "");
     const corpusSha256 = String(options.corpusSha256 || "");
     const cfrStructureRevision = Number(options.cfrStructureRevision ?? corpus?.cfr?.structureRevision ?? 0);
-    const referencedUscVersion = String(corpus?.referencedUsc?.version || "");
+    const referencedUscVersion = String(options.referencedUscVersion ?? corpus?.referencedUsc?.version ?? "");
     return {
       projectionSchemaVersion: PERSISTED_PROJECTION_SCHEMA_VERSION,
       searchAlgorithmVersion: SEARCH_ALGORITHM_VERSION,
@@ -704,6 +706,7 @@
       corpusVersion,
       corpusSha256,
       cfrStructureRevision,
+      referencedUscVersion,
       authorityKey,
       key: [PERSISTED_PROJECTION_SCHEMA_VERSION, SEARCH_ALGORITHM_VERSION, Number(options.corpusSchemaVersion ?? corpus?.schemaVersion ?? 0), corpusVersion, corpusSha256 || "unhashed", authorityKey, cfrStructureRevision, referencedUscVersion].join(":"),
     };
@@ -807,22 +810,30 @@
     options = { ...options, referenceLookup: options.referenceLookup || referenceLookup(options.referenceCorpus || corpus) };
     const started = now(), requested = new Set(projectionAuthorityKey(options).split(",").filter(Boolean));
     const units = [];
+    const mappedIds = new Set();
     if (requested.has("ina")) {
       const sections = new Map((corpus?.title8?.sections || []).map(section => [normalizedIdentifier(section.section), section]));
       const groups = new Map();
       for (const row of corpus?.inaCrosswalk || []) {
         if (!row || row.isNote || row.hasEquivalent === false || !row.uscSection) continue;
         const section = sections.get(normalizedIdentifier(row.localSection || row.uscSection));
-        if (!section || section.status === "transferred") continue;
+        if (!section || section.status === "transferred" && !section.historical) continue;
         if (!groups.has(section.id)) groups.set(section.id, { section, rows: [] });
         groups.get(section.id).rows.push(row);
       }
-      for (const group of groups.values()) units.push({
+      for (const group of groups.values()) {
+        mappedIds.add(group.section.id);
+        units.push({
         count: 1,
         build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [group.section] }, inaCrosswalk: group.rows, cfr: { ...(corpus.cfr || {}), sections: [], appendices: [] } }, { ...options, referenceCorpus: corpus, authorities: ["ina"], deferNormalization: true })
-      });
+        });
+      }
     }
     if (requested.has("usc")) {
+      for (const section of corpus?.title8?.sections || []) if (!mappedIds.has(section.id)) units.push({
+        count: 1,
+        build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [section] }, inaCrosswalk: [], referencedUsc: { ...(corpus.referencedUsc || {}), titles: [] }, cfr: { ...(corpus.cfr || {}), sections: [], appendices: [] } }, { ...options, referenceCorpus: corpus, authorities: ["usc"], deferNormalization: true })
+      });
       for (const title of corpus?.referencedUsc?.titles || []) for (const section of title.sections || []) units.push({
         count: 1,
         build: () => buildProjection({ ...corpus, title8: { ...(corpus.title8 || {}), sections: [] }, inaCrosswalk: [], referencedUsc: { ...(corpus.referencedUsc || {}), titles: [{ ...title, sections: [section] }] }, cfr: { ...(corpus.cfr || {}), sections: [], appendices: [] } }, { ...options, referenceCorpus: corpus, authorities: ["usc"], deferNormalization: true })

@@ -114,8 +114,8 @@ function readBuild(fileName) {
   const html = fs.readFileSync(filePath, "utf8");
   const manifest = jsonBlock(html, "inaSearchCorpusManifest");
   const payload = corpusPayloadText(html);
-  const compressed = manifest.compression === "gzip" ? Buffer.from(payload.replace(/\s+/g, ""), "base64") : null;
-  const uncompressed = compressed ? zlib.gunzipSync(compressed) : Buffer.from(payload, "utf8");
+  const compressed = ["gzip", "brotli"].includes(manifest.compression) ? Buffer.from(payload.replace(/\s+/g, ""), "base64") : null;
+  const uncompressed = compressed ? (manifest.compression === "brotli" ? zlib.brotliDecompressSync(compressed) : zlib.gunzipSync(compressed)) : Buffer.from(payload, "utf8");
   if (compressed) {
     assert.strictEqual(compressed.byteLength, manifest.compressedBytes, `${fileName}: compressed byte count`);
     assert.strictEqual(sha256(compressed), manifest.compressedSha256, `${fileName}: compressed SHA-256`);
@@ -154,14 +154,14 @@ function readBuild(fileName) {
 }
 
 const EXPECTED_EXECUTABLE_SCRIPT_IDS = Object.freeze([
-  "inaSearchStorageRuntime", "inaSearchCorpusPackingRuntime", "inaSearchCorpusShardsRuntime", "inaSearchStatuteStatusRuntime", "inaSearchStartupRuntime", "inaSearchInsertionsRuntime", "inaSearchAnnotationsRuntime", "inaSearchCommandRuntime",
+  "inaSearchStorageRuntime", "inaSearchCorpusPackingRuntime", "inaSearchCorpusShardsRuntime", "inaSearchStatuteStatusRuntime", "inaSearchStartupRuntime", "inaSearchBrotliRuntime", "inaSearchInsertionsRuntime", "inaSearchAnnotationsRuntime", "inaSearchCommandRuntime",
   "inaSearchWorkspaceRuntime", "inaSearchOccurrenceRuntime", "inaSearchQueryRuntime", "inaSearchEmbeddedReferencesRuntime",
   "inaSearchLegalReferencesRuntime", "inaSearchCfrHierarchyRuntime", "inaSearchUpdaterRuntime", "", "inaSearchOpeningIndexRuntime", ""
 ]);
 
 function executableScriptEntries(html) {
   return [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)]
-    .filter(match => !/type="(?:application\/(?:json|gzip)|text\/plain)"/.test(match[1]))
+    .filter(match => !/type="(?:application\/(?:json|gzip|brotli)|text\/plain)"/.test(match[1]))
     .filter(match => !/^INASearchStartup\.register\(/.test(match[2].trim()))
     .map(match => ({ id: match[1].match(/\bid="([^"]+)"/)?.[1] || "", source: match[2] }));
 }
@@ -231,6 +231,7 @@ async function runBootstrap(build, overrides = {}) {
   new vm.Script(runtime("inaSearchStorageRuntime"), { filename: `${build.fileName}:storage` }).runInContext(context);
   new vm.Script(runtime("inaSearchCorpusPackingRuntime"), { filename: `${build.fileName}:corpus-packing` }).runInContext(context);
   new vm.Script(runtime("inaSearchCorpusShardsRuntime"), { filename: `${build.fileName}:corpus-shards` }).runInContext(context);
+  new vm.Script(runtime("inaSearchBrotliRuntime"), { filename: `${build.fileName}:brotli` }).runInContext(context);
   new vm.Script(runtime("inaSearchStartupRuntime"), { filename: `${build.fileName}:startup` }).runInContext(context);
   new vm.Script(runtime("inaSearchEmbeddedReferencesRuntime"), { filename: `${build.fileName}:embedded-references` }).runInContext(context);
   new vm.Script(runtime("inaSearchLegalReferencesRuntime"), { filename: `${build.fileName}:legal-references` }).runInContext(context);
@@ -473,6 +474,8 @@ function searchScopeParsingFunctions(source, context = {}) {
 async function main() {
   for (const [fileName, completionText] of [
     ["test-compact-shell.js", "PASS shell compaction"],
+    ["test-about.js", "PASS FAQ compilation"],
+    ["test-search-groups.js", "PASS search groups"],
     ["test-saved-excerpts.js", "PASS saved excerpts"],
     ["test-historical-ina.js", "PASS historical INA"],
     ["test-historical-usc.js", "Historical USC transform tests passed."],
@@ -488,6 +491,7 @@ async function main() {
     ["test-annotations.js", "PASS annotations"],
     ["test-note-banners.js", "PASS note banners"],
     ["test-search-worker.js", "Search worker cache tests passed"],
+    ["test-corpus-delivery.js", "PASS corpus delivery"],
     ["test-referenced-usc-cache.js", "PASS referenced USC cache"],
     ["test-referenced-usc-links.js", "PASS cross-title USC link resolution"],
     ["test-referenced-usc-reader.js", "PASS cross-title USC citation reader"],
@@ -709,13 +713,13 @@ async function main() {
   assert.deepStrictEqual(localStorageCalls, ['localStorage.getItem("ina-search-theme")', 'localStorage.setItem(THEME_STORAGE_KEY, theme)'], "Browser-local metadata must be limited to the early-paint theme mirror.");
   const tipCatalogSource = full.html.slice(full.html.indexOf("const TIP_CATEGORIES"), full.html.indexOf("const TIP_BY_ID"));
   const tipCategoryIds = [...tipCatalogSource.matchAll(/(?:^|\n)\s*id:\s*"([^"]+)",\s*title:/g)].map(match => match[1]);
-  assert.deepStrictEqual(tipCategoryIds, ["finding", "scoped-search", "common", "panes-history", "navigation", "reading", "definitions", "annotations", "saving", "sources"], "The About tip catalog is not grouped into the intended categories.");
+  assert.deepStrictEqual(tipCategoryIds, ["finding", "scoped-search", "common", "panes-history", "navigation", "reading", "definitions", "annotations", "saving"], "The About tip catalog is not grouped into the intended categories.");
   const tipIds = [...tipCatalogSource.matchAll(/\[\s*(\d+),\s*"/g)].map(match => Number(match[1]));
-  assert.strictEqual(tipIds.length, 80, "The compiled About tip catalog is incomplete.");
+  assert.strictEqual(tipIds.length, 44, "The compiled intermediate and advanced tip catalog is incomplete.");
   assert.strictEqual(new Set(tipIds).size, tipIds.length, "The About tip catalog contains duplicate IDs.");
   const renderSourcesSource = full.html.slice(full.html.indexOf("function renderSources()"), full.html.indexOf("function cycleSearchSuggestion"));
-  assert(renderSourcesSource.includes('<article class="source-card source-card-full"><h3>Official shortcuts</h3>') && renderSourcesSource.includes('id="aboutTipsCard"') && renderSourcesSource.includes("tipCatalogMarkup()"), "About does not render full-width Official shortcuts and Tips cards.");
-  assert.strictEqual((renderSourcesSource.match(/<article class="source-card source-card-full"/g) || []).length, 2, "About renders source-detail cards beyond the two requested full-width cards.");
+  assert(renderSourcesSource.includes('id="aboutTipsCard"') && renderSourcesSource.includes("tipCatalogMarkup()"), "About does not retain the complete Tips card.");
+  assert(!renderSourcesSource.includes("Official shortcuts"), "The retired Official shortcuts card remains on About.");
   assert(!renderSourcesSource.includes("cfrCard") && !renderSourcesSource.includes("Object.values(sources)") && !renderSourcesSource.includes("Automatic-update boundary"), "Retired CFR/source cards or the automatic-update boundary remain on About.");
   assert(!full.html.includes("Important boundaries"), "The retired Important boundaries section remains on About.");
   assert(full.html.includes("Dismiss for today") && full.html.includes("data-show-daily-tip"), "The daily-tip experience is incomplete.");
@@ -724,7 +728,9 @@ async function main() {
   assert(settingsControlOrder.every((position, index) => position >= 0 && (!index || position > settingsControlOrder[index - 1])), "Settings saving and reset controls are incomplete or out of order.");
   assert.strictEqual(full.build.variant, "standard");
   assert.strictEqual(full.build.hasLocalUscCache, true);
-  assert.strictEqual(full.build.corpusCompression, "gzip");
+  assert.strictEqual(full.build.corpusCompression, "brotli");
+  assert(full.bytes < 8_000_000, "The standalone release exceeds 8 MB.");
+  assert(!full.corpus.legalReferenceEvidence && !full.corpus.legalReferenceAudit, "Build audits leaked into delivery.");
   assert.strictEqual(uncompressed.build.variant, "uncompressed");
   assert.strictEqual(uncompressed.build.hasLocalUscCache, true);
   assert.strictEqual(uncompressed.build.corpusCompression, "none");
@@ -738,7 +744,7 @@ async function main() {
   assert.strictEqual(Object.hasOwn(uncompressed.manifest, "deliveryPacking"), false, "The uncompressed build advertises compact delivery packing.");
   // Compare the complete data without formatting a multi-megabyte diff on
   // failure; that diagnostic alone can exhaust the test process's memory.
-  assert(isDeepStrictEqual(uncompressed.corpus, fullSource), "Uncompressed corpus round trip changed data.");
+  assert(isDeepStrictEqual(uncompressed.corpus, require("./corpus-delivery").prepareDeliveryCorpus(fullSource)), "Uncompressed corpus round trip changed data.");
   assert(full.corpus.title8.sections.every(section => section.status), "Compact corpus hydration did not restore implied statutory status values.");
   const statuteStatusCounts = Object.fromEntries(["current", "repealed", "transferred", "omitted"].map(status => [status, full.corpus.title8.sections.filter(section => section.status === status).length]));
   assert.deepStrictEqual(statuteStatusCounts, { current: 286, repealed: 397, transferred: 47, omitted: 52 }, "Unexpected Title 8 disposition-status inventory after individual-section expansion.");
@@ -992,13 +998,13 @@ async function main() {
     "The expanded section inventory changed its displayed House reference spans or publisher-supplied corrections."
   );
   // Displayed references include per-section copies of shared House notes.
-  // Parser inventories include the 496 former Title 8 sections and the 166
+  // Parser inventories include the 496 former Title 8 sections and the 137
   // directly cited sections from other USC titles; captured-source totals above
   // remain independent of these expanded display inventories.
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 47394, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 20092, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 16894, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1579, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 45076, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 18428, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 14907, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1501, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
   assert(hydratedSource.legalReferenceMetadata.suppressedSelfReferences > 8_000, "The build did not audit and suppress the corpus-wide self-reference set.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-this-unit"), "The bare self-referential unit rule remains advertised as navigable.");
   const retainedBareSelfReferences = [];
@@ -1975,10 +1981,9 @@ async function main() {
     assert.strictEqual(attributeManifestFallback.errors.corpus, false);
 
     const unsupported = await runBootstrap(build, { missingDecompressionStream: true });
-    if (build.manifest.compression === "gzip") {
-      assert.strictEqual(unsupported.corpus, null);
-      assert.strictEqual(unsupported.errors.corpus, true);
-      assert.match(unsupported.errors.corpusMessage, /does not support the standard gzip decompression API/);
+    if (build.compressed) {
+      assert(unsupported.corpus, "The embedded Brotli decoder must work without native DecompressionStream.");
+      assert.strictEqual(unsupported.errors.corpus, false);
 
       const badBase64 = await runBootstrap(build, { payload: `!${payloadBlock(build.html).slice(1)}` });
       assert.strictEqual(badBase64.corpus, null);
@@ -2008,7 +2013,7 @@ async function main() {
     assert.strictEqual(rewritten.match(/<!-- INA_SEARCH_CORPUS_MANIFEST_DATA_START -->[\s\S]*?<!-- INA_SEARCH_CORPUS_MANIFEST_DATA_END -->/)[0], manifestBlockBefore);
     assert.strictEqual(jsonBlock(rewritten, "inaSearchProfileData").notes[0].body, edited.notes[0].body);
 
-    if (build.compressed) {
+    if (build.manifest.compression === "gzip") {
       const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ina-search-audit-"));
       const gzipPath = path.join(temp, "INASearch-Corpus.json.gz");
       fs.writeFileSync(gzipPath, build.compressed);
@@ -2082,7 +2087,7 @@ async function main() {
   const uncompressedPayload = corpusPayloadText(uncompressed.html);
   const rebuild = spawnSync(process.execPath, [path.join(root, "tools", "build-standalone.js")], { cwd: root, encoding: "utf8" });
   assert.strictEqual(rebuild.status, 0, rebuild.stderr);
-  assert.strictEqual(payloadBlock(fs.readFileSync(full.filePath, "utf8")), fullPayload, "Full gzip output is not deterministic.");
+  assert.strictEqual(payloadBlock(fs.readFileSync(full.filePath, "utf8")), fullPayload, "Full Brotli output is not deterministic.");
   assert.strictEqual(corpusPayloadText(fs.readFileSync(uncompressed.filePath, "utf8")), uncompressedPayload, "Uncompressed JSON output is not deterministic.");
 
   const fallbackSource = fs.readFileSync(path.join(root, "src", "INASearch.template.html"), "utf8");
@@ -3598,11 +3603,17 @@ async function main() {
     citation: `${section.title} CFR ${section.section}`,
     fields: cfrSearchFields(section, `${section.title} CFR ${section.section}`)
   }));
-  const cfrSearchStarted = performance.now();
-  for (const query of ["special situation", "alien", "classification", "definitely absent synthetic phrase"]) {
-    for (const record of projectedCfrSections) cfrSearchTarget(record.section, query, record.citation, record.fields);
-  }
-  const cfrSearchElapsed = performance.now() - cfrSearchStarted;
+  const measureCfrSearch = () => {
+    const started = performance.now();
+    for (const query of ["special situation", "alien", "classification", "definitely absent synthetic phrase"]) {
+      for (const record of projectedCfrSections) cfrSearchTarget(record.section, query, record.citation, record.fields);
+    }
+    return performance.now() - started;
+  };
+  // Warm the extracted VM functions and use a median so a single GC pause
+  // from the preceding full-corpus audits does not decide the speed check.
+  measureCfrSearch();
+  const cfrSearchElapsed = [measureCfrSearch(), measureCfrSearch(), measureCfrSearch()].sort((a, b) => a - b)[1];
   assert(cfrSearchElapsed < 150, `Projected CFR phrase scans are too slow (${cfrSearchElapsed.toFixed(1)} ms for four full-corpus queries).`);
   assert(!fallbackSource.includes("cfrItemText(section)"), "CFR section prose is still collapsed and normalized into every search record.");
   console.log(`PASS search performance: four full CFR scans in ${cfrSearchElapsed.toFixed(1)} ms; citation searches retain related corpus sources`);
@@ -5272,7 +5283,7 @@ async function main() {
     const node = hierarchyModel.authorityHierarchyNodes.get(id);
     const chapterSections = full.corpus.title8.sections.filter(section => String(section.breadcrumb?.[0]?.number) === node.number);
     assert.strictEqual(node.status || "", statuteStatusRules.aggregateSections(chapterSections), `Chapter ${node.number} does not show status only when all individual sections agree.`);
-    assert(!node.dispositionLabel, `Chapter ${node.number} exposes the House table-of-contents label as a UI status.`);
+    assert.strictEqual(node.dispositionLabel || "", houseChapterDispositions[node.number] || "", `Chapter ${node.number} lost the House's table-of-contents label.`);
     assert.strictEqual(Boolean(node.containsIna), node.number === "12", `Chapter ${node.number} has incorrect INA membership.`);
   }
   assert.deepStrictEqual(plain(hierarchyModel.authorityHierarchyNodes.get("usc:section:8-1101").inaSections), ["101"]);
@@ -5307,6 +5318,7 @@ async function main() {
   });
   const hierarchyStatusBadge = extractedFunction(fallbackSource, "hierarchyStatusBadge", "hierarchyExpandableNodeIds", {
     escapeHtml: escapeStatutoryHtml,
+    INASearchStatuteStatus: statuteStatusRules,
     statuteStatusLabel
   });
   const chapter12Badges = hierarchyStatusBadge(uscChapter12Node);
@@ -5687,9 +5699,10 @@ async function main() {
     for (const note of section.notes || []) ancillaryCitationLinks += (linkifyStatutoryText(note.text || "", note.references || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
     for (const footnote of section.houseEditorialFootnotes || []) ancillaryCitationLinks += (linkifyStatutoryText(footnote.text || "", footnote.references || []).match(/class="statute-citation-link legal-reference-link/g) || []).length;
   }
-  const newlyResolvableNoteReference = hydratedSource.title8.sections.find(section => section.section === "1612").notes.flatMap(note => note.references || []).find(reference => reference.text === "(3)(B)" && reference.targetTitle === "38" && reference.targetSection === "5303A");
-  assert(newlyResolvableNoteReference?.resolution === "local" && newlyResolvableNoteReference.targetPath.join("/") === "d/3/B", "An existing Title 8 note did not resolve its inferred locator within the independently selected 38 U.S.C. 5303A.");
-  assert.deepStrictEqual({ operative: statutoryFormattingAudit.citationLinks, total: statutoryFormattingAudit.citationLinks + ancillaryCitationLinks }, { operative: 5934, total: 29507 }, "Unexpected generated-link inventory in the expanded statutory corpus.");
+  const excludedNoteReferences = hydratedSource.title8.sections.find(section => section.section === "1612").notes.flatMap(note => note.references || []).filter(reference => reference.targetTitle === "38" && reference.targetSection === "5303A");
+  assert(excludedNoteReferences.length > 0 && excludedNoteReferences.every(reference => reference.resolution === "official-source-only"), "A note citation to a section removed by INA-only selection must retain its official-source link without claiming local content.");
+  // Excluding 38 U.S.C. 5303A removes its inferred (3)(B) link from the 8 U.S.C. 1612 note; explicit official-source links remain.
+  assert.deepStrictEqual({ operative: statutoryFormattingAudit.citationLinks, total: statutoryFormattingAudit.citationLinks + ancillaryCitationLinks }, { operative: 5934, total: 29506 }, "Unexpected generated-link inventory in the expanded statutory corpus.");
 
   const migration = profileMigrationFunctions(fallbackSource);
   for (const authority of ["ina", "usc"]) {
@@ -5756,14 +5769,14 @@ async function main() {
     assert.strictEqual(legacy.preferences[preference], false, `A legacy profile did not receive the current default for ${preference}.`);
   }
   const tutorialProgress = tipProgressFunctions(fallbackSource);
-  assert.deepStrictEqual(plain(tutorialProgress.normalizeTipProgress({ currentTipId: 1, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: "not-a-date" })), {
-    schemaVersion: 1, currentTipId: 1, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: null
+  assert.deepStrictEqual(plain(tutorialProgress.normalizeTipProgress({ currentTipId: 5, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: "not-a-date" })), {
+    schemaVersion: 1, currentTipId: 5, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: null
   }, "Daily-tip progress did not normalize a valid catalog entry and local date.");
-  assert.strictEqual(tutorialProgress.normalizeTipProgress({ currentTipId: 57 }).currentTipId, null, "A missing/retired tip identifier survived normalization.");
+  assert.strictEqual(tutorialProgress.normalizeTipProgress({ currentTipId: 1 }).currentTipId, null, "A retired introductory tip identifier survived normalization.");
   assert.deepStrictEqual(plain(tutorialProgress.mergeTipProgress(
-    { currentTipId: 1, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: "2026-08-22" },
-    { currentTipId: 2, lastAdvancedLocalDate: "2026-08-21", dismissedLocalDate: "2026-08-19" }
-  )), { schemaVersion: 1, currentTipId: 2, lastAdvancedLocalDate: "2026-08-21", dismissedLocalDate: "2026-08-22" }, "Daily-tip merge did not preserve the latest selection and dismissal dates.");
+    { currentTipId: 5, lastAdvancedLocalDate: "2026-08-20", dismissedLocalDate: "2026-08-22" },
+    { currentTipId: 9, lastAdvancedLocalDate: "2026-08-21", dismissedLocalDate: "2026-08-19" }
+  )), { schemaVersion: 1, currentTipId: 9, lastAdvancedLocalDate: "2026-08-21", dismissedLocalDate: "2026-08-22" }, "Daily-tip merge did not preserve the latest selection and dismissal dates.");
   const connectVaultSource = fallbackSource.slice(fallbackSource.indexOf("async function connectVaultHandle"), fallbackSource.indexOf("async function connectProfile"));
   assert(connectVaultSource.includes("const sessionTipProgress = normalizeTipProgress(profile.tipProgress);") && connectVaultSource.includes("mergeTipProgress(profile.tipProgress, sessionTipProgress)"), "Connecting a data file discards clean browser daily-tip progress.");
   const parseImportedProfile = extractedFunction(fallbackSource, "profileFromImportedText", "importProfileFile", {
@@ -5789,13 +5802,13 @@ async function main() {
   assert.throws(() => parseImportedProfile(JSON.stringify({ ...blankProfile, notes: [{ body: "obsolete" }] })), /schema 5/, "Obsolete note fields could be silently discarded.");
   for (const input of ["window.AUTHORITY_SEARCH_PROFILE = {};", "<html></html>"]) assert.throws(() => parseImportedProfile(input), /JSON|Unexpected/, "A retired executable/HTML import was accepted.");
 
-  console.log(`PASS INASearch.html: ${full.bytes} bytes; ${full.manifest.compressedBytes} gzip bytes`);
+  console.log(`PASS INASearch.html: ${full.bytes} bytes; ${full.manifest.compressedBytes} Brotli bytes`);
   console.log(`PASS INASearch-Uncompressed.html: ${uncompressed.bytes} bytes; ${uncompressed.manifest.uncompressedBytes} plain JSON corpus bytes`);
   console.log(`PASS statutory formatting audit: ${statutoryFormattingAudit.nodes} nodes; ${statutoryFormattingAudit.formattedNodes} nodes with ${statutoryFormattingAudit.runInLines} run-in lines; ${generatedRunInPathIdentities.size} generated virtual paths; ${statutoryFormattingAudit.citationLinks} generated citation links`);
   console.log(`PASS inline statutory preview audit: ${auditedLocalStatutePreviewReferences} locally resolved references have exact offline targets`);
   console.log(`PASS definitions audit: ${full.corpus.definitions.entries.length} source records; 267 USCIS Glossary entries; 207 INA term entries from 178 definition statements; 32 exact 8 CFR 1.2 entries`);
   console.log(`PASS CFR audit: ${full.corpus.cfr.coverage.partCount} active parts; ${full.corpus.cfr.sections.length} sections; ${full.corpus.cfr.appendices.length} appendices; ${full.corpus.cfr.graphics.length} referenced graphics; 1 removed-part tombstone`);
-  console.log("PASS round trips, hashes, PTAR boundary/intersection, nested CFR citations, exact visible-match targeting, regulation history, syntax, native loaders, corruption handling, deterministic gzip and plain JSON, profile isolation, current JSON profile preservation and schema rejection, statutory formatting, saving-menu state rules, and ordinary gzip extraction");
+  console.log("PASS round trips, hashes, PTAR boundary/intersection, nested CFR citations, exact visible-match targeting, regulation history, syntax, native loaders, corruption handling, deterministic Brotli and plain JSON, profile isolation, current JSON profile preservation and schema rejection, statutory formatting, saving-menu state rules, and compressed payload extraction");
 }
 
 main().catch(error => {

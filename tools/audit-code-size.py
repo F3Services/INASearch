@@ -24,7 +24,7 @@ def measure(data):
         r'id="(?:ina|authority)SearchCorpusData"', m[1])), None)
     payload = corpus[2].encode() if corpus else b""
     shell = (html[:corpus.start(2)] + html[corpus.end(2):]).encode() if corpus else data
-    code = [m for m in blocks if not re.search(r'type="application/(?:json|gzip)"', m[1])]
+    code = [m for m in blocks if not re.search(r'type="application/(?:json|gzip|brotli)"', m[1])]
     # Remove scripts first: the reader's print template itself contains <style>.
     markup = SCRIPTS.sub("", html)
     css_bytes = sum(len(m.encode()) for m in re.findall(r"<style[^>]*>([\s\S]*?)</style>", markup))
@@ -36,7 +36,8 @@ def measure(data):
         "file_bytes": len(data), "file_sha256": hashlib.sha256(data).hexdigest(),
         "corpus_payload_bytes": len(payload),
         "corpus_payload_sha256": hashlib.sha256(payload).hexdigest() if corpus else None,
-        "corpus_gzip_bytes": manifest.get("compressedBytes"),
+        "corpus_compression": manifest.get("compression"),
+        "corpus_compressed_bytes": manifest.get("compressedBytes"),
         "shell_bytes": len(shell), "javascript_bytes": js_bytes, "css_bytes": css_bytes,
         "markup_and_metadata_bytes": len(shell) - js_bytes - css_bytes,
         "gzip_shell_bytes": len(gzip.compress(shell, compresslevel=9, mtime=0)),

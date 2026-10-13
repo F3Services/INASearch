@@ -17,17 +17,17 @@ assert(start >= 0 && end > start, "The About corpus audit renderer is missing.")
 const sha256 = bytes => crypto.createHash("sha256").update(bytes).digest("hex");
 const fixturePayload = (value, compressed = true) => {
   const json = Buffer.from(JSON.stringify(value));
-  const gzip = compressed ? zlib.gzipSync(json) : null;
+  const gzip = compressed === "brotli" ? zlib.brotliCompressSync(json) : compressed ? zlib.gzipSync(json) : null;
   return { json, payload: gzip ? gzip.toString("base64") : json.toString(), manifest: {
-    compression: compressed ? "gzip" : "none", encoding: compressed ? "base64" : "utf-8",
-    mediaType: compressed ? "application/gzip" : "application/json", contentType: "application/json", charset: "utf-8",
+    compression: compressed === "brotli" ? "brotli" : compressed ? "gzip" : "none", encoding: compressed ? "base64" : "utf-8",
+    mediaType: compressed === "brotli" ? "application/brotli" : compressed ? "application/gzip" : "application/json", contentType: "application/json", charset: "utf-8",
     uncompressedBytes: json.length, uncompressedSha256: sha256(json),
     ...(gzip ? { compressedBytes: gzip.length, compressedSha256: sha256(gzip) } : {})
   } };
 };
 
 function render(manifest, fileName = "Fixture.html") {
-  const els = { corpusManifestDetails: {}, corpusAuditPowerShell: {} };
+  const els = { corpusManifestDetails: {}, corpusAuditPowerShell: {}, corpusPackagingDescription: {} };
   const context = { corpusManifest: manifest, els, build: { fileName }, escapeHtml: value => String(value) };
   vm.runInNewContext(`${source.slice(start, end)}\nrenderCorpusAudit();`, context);
   return { details: els.corpusManifestDetails.innerHTML, script: els.corpusAuditPowerShell.textContent };
@@ -80,6 +80,9 @@ for (const [field, value, message] of [["compressedSha256", "incorrect-hash", "S
 }
 verifyExtraction(fixtureHtml.replace(block("inaSearchCorpusShard1", chunks[1].payload), ""), manifest, {}, "missing content chunk", "Missing embedded block");
 
+const brotli = fixturePayload({ text: "Brotli exact bytes: café § 101." }, "brotli");
+verifyExtraction(block("inaSearchCorpusManifest", JSON.stringify(brotli.manifest)) + block("inaSearchCorpusData", brotli.payload), brotli.manifest, { "corpus.json": brotli.json }, "Brotli corpus");
+
 const uncompressed = fixturePayload({ title8: { sections: [{ body: [{ text: "Expanded full corpus." }] }] } }, false);
 verifyExtraction(block("inaSearchCorpusManifest", JSON.stringify(uncompressed.manifest)) + block("inaSearchCorpusData", uncompressed.payload), uncompressed.manifest, { "corpus.json": uncompressed.json }, "expanded uncompressed corpus");
 
@@ -90,7 +93,7 @@ if (htmlArgument >= 0) {
   const read = id => scripts.find(match => new RegExp(`(?:^|\\s)id="${id}"`, "i").test(match[1]))[2];
   const realManifest = JSON.parse(read("inaSearchCorpusManifest"));
   const expected = {};
-  const decode = (id, entry) => entry.compression === "gzip" ? zlib.gunzipSync(Buffer.from(read(id).replace(/\s/g, ""), "base64")) : Buffer.from(read(id));
+  const decode = (id, entry) => entry.compression === "brotli" ? zlib.brotliDecompressSync(Buffer.from(read(id).replace(/\s/g, ""), "base64")) : entry.compression === "gzip" ? zlib.gunzipSync(Buffer.from(read(id).replace(/\s/g, ""), "base64")) : Buffer.from(read(id));
   expected[realManifest.shards?.length ? "metadata.json" : "corpus.json"] = decode("inaSearchCorpusData", realManifest);
   (realManifest.shards || []).forEach((entry, index) => { expected[`chunk-${index}.json`] = decode(`inaSearchCorpusShard${index}`, entry); });
   verifyExtraction(html, realManifest, expected, `built corpus (${realManifest.shards?.length || 0} content chunks)`);

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; worker-src blob:; style-src 'unsafe-inline'; img-src data:; connect-src https://www.ecfr.gov; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'wasm-unsafe-eval'; worker-src blob:; style-src 'unsafe-inline'; img-src data:; connect-src https://www.ecfr.gov; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>INASearch</title>
   <!-- INA_SEARCH_BUILD_DATA_START -->
   <script id="inaSearchBuildData" type="application/json">{"variant":"template","instanceId":"template"}</script>
@@ -33,6 +33,10 @@
   <!-- INA_SEARCH_STARTUP_RUNTIME_START -->
   <script id="inaSearchStartupRuntime"></script>
   <!-- INA_SEARCH_STARTUP_RUNTIME_END -->
+  <!-- INA_SEARCH_BROTLI_RUNTIME_START -->
+  <script id="inaSearchBrotliRuntime"></script>
+  <!-- INA_SEARCH_BROTLI_RUNTIME_END -->
+  <!-- INA_SEARCH_THIRD_PARTY_LICENSES -->
   <!-- INA_SEARCH_INSERTIONS_RUNTIME_START -->
   <script id="inaSearchInsertionsRuntime"></script>
   <!-- INA_SEARCH_INSERTIONS_RUNTIME_END -->
@@ -99,7 +103,7 @@
       const read = name => element.getAttribute(`data-${name}`);
       const compression = read("compression");
       const required = ["schema-version", "corpus-schema-version", "corpus-version", "encoding", "compression", "media-type", "content-type", "charset", "uncompressed-bytes", "uncompressed-sha256"];
-      if (compression === "gzip") required.push("compressed-bytes", "compressed-sha256");
+      if (["gzip", "brotli"].includes(compression)) required.push("compressed-bytes", "compressed-sha256");
       if (required.some(name => read(name) === null)) return null;
       return {
         schemaVersion: Number(read("schema-version")),
@@ -113,7 +117,7 @@
         uncompressedBytes: Number(read("uncompressed-bytes")),
         uncompressedSha256: read("uncompressed-sha256"),
         ...(read("delivery-packing") ? { deliveryPacking: read("delivery-packing") } : {}),
-        ...(compression === "gzip" ? {
+        ...(["gzip", "brotli"].includes(compression) ? {
           ...(read("shards") ? { shards: JSON.parse(read("shards")), fullUncompressedSha256: read("full-uncompressed-sha256") } : {}),
           compressedBytes: Number(read("compressed-bytes")),
           compressedSha256: read("compressed-sha256")
@@ -1016,6 +1020,12 @@
     .occurrence-section-label:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
     .occurrence-section-label:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     .occurrence-section-label small { display: inline; margin-left: 8px; color: var(--muted); font-family: var(--sans); font-size: 11px; font-weight: 650; }
+    .occurrence-section:is([data-legal-status="repealed"], [data-legal-status="transferred"]) .occurrence-section-label,
+    .occurrence-section:is([data-legal-status="repealed"], [data-legal-status="transferred"]) .occurrence-section-label small,
+    .occurrence-section:is([data-legal-status="repealed"], [data-legal-status="transferred"]) .occurrence-row-citation,
+    .occurrence-section:is([data-legal-status="repealed"], [data-legal-status="transferred"]) .occurrence-row-text,
+    .occurrence-section:is([data-legal-status="repealed"], [data-legal-status="transferred"]) .occurrence-row-text mark { color: var(--danger); }
+    .occurrence-section:is([data-legal-status="repealed"], [data-legal-status="transferred"]) .hierarchy-status { color: var(--danger); background: var(--danger-soft); }
     .occurrence-section > summary .occurrence-count { font-size: 10px; }
     .occurrence-section-rows { display: grid; gap: 5px; padding: 6px; }
     .occurrence-section-rows[data-windowed="true"] { display: block; }
@@ -1540,6 +1550,33 @@
     .source-card dl { display: grid; grid-template-columns: auto 1fr; gap: 5px 10px; margin: 12px 0; font-size: 11px; }
     .source-card dt { color: var(--muted); }
     .source-card dd { margin: 0; }
+    .about-guide { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .about-section h2 { margin: 0 0 12px; color: var(--navy); font-size: 21px; }
+    .about-section h3 { margin: 20px 0 8px; font-size: 15px; }
+    .about-section p, .about-section li { color: var(--ink); font-size: 13px; line-height: 1.65; }
+    .about-section p { margin: 9px 0; }
+    .about-feature-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px; padding-left: 20px; }
+    .about-feature-list strong { color: var(--navy); }
+    .about-table-wrap { overflow-x: auto; margin: 12px 0; border: 1px solid var(--line); border-radius: 9px; }
+    .about-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; line-height: 1.6; }
+    .about-table th, .about-table td { padding: 11px 14px; vertical-align: top; border-bottom: 1px solid var(--line); }
+    .about-table thead th { color: var(--navy); background: var(--canvas); font-size: 12px; }
+    .about-table tbody th { width: 30%; color: var(--ink); font-weight: 650; }
+    .about-table tr:last-child td, .about-table tr:last-child th { border-bottom: 0; }
+    .about-table code, .about-section p code { overflow-wrap: anywhere; font-size: .95em; }
+    .about-faq-group > h3 { margin-top: 22px; }
+    .about-faq { border-bottom: 1px solid var(--line); }
+    .about-faq > summary { padding: 12px 0; color: var(--navy); cursor: pointer; font-size: 13px; font-weight: 750; }
+    .about-faq-answer { padding: 0 0 12px 18px; }
+    .about-faq-answer pre { max-width: 100%; overflow: auto; border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: var(--canvas); font-size: 12px; line-height: 1.6; }
+    @media (max-width: 600px) {
+      .about-feature-list { grid-template-columns: 1fr; }
+      .about-table th, .about-table td { padding: 9px; }
+      .about-table tbody th { width: 36%; }
+      .about-faq-answer { padding-left: 0; }
+      .corpus-manifest { grid-template-columns: 1fr; }
+      .corpus-manifest dd { margin-bottom: 8px; }
+    }
     .tips-card-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
     .tips-card-head p { max-width: 760px; }
     .today-tip { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px 18px; margin: 14px 0; border-left: 4px solid var(--blue); border-radius: 9px; padding: 12px 14px; background: var(--blue-soft); }
@@ -1972,23 +2009,98 @@
 
     <section class="view" id="view-sources" hidden aria-labelledby="sourcesHeading">
       <div class="page-heading">
-        <div><h1 id="sourcesHeading">About</h1><p>Help, official shortcuts, and embedded-corpus details.</p></div>
+        <div><h1 id="sourcesHeading">About INASearch</h1><p>How to type citations, use the reader, and search the included law.</p></div>
       </div>
       <div id="sourceWarnings"></div>
+      <div class="about-guide">
+      <article class="source-card source-card-full about-section" id="aboutOverviewCard">
+        <h2>What is INASearch?</h2>
+        <p>INASearch is a research tool for the INA and its related CFRs. It contains the INA itself, as well as non-INA Title 8 sections, and CFR parts that reference the INA according to the PTAR (Parallel Table of Authorities and Rules).</p>
+        <h3>Flexible citation typing</h3>
+        <p>You can type a citation in its usual form or shorten it. These inputs all mean the same citation:</p>
+        <ul>
+          <li><code>INA 101(a)(15)(H)(ii)(a)</code></li>
+          <li><code>101a15hiia</code> — parentheses are optional, INA is assumed when you omit the prefix, and lowercase works too.</li>
+          <li><code>101a15h2a</code> — Roman numerals can be typed as ordinary numbers: <code>ii</code> as <code>2</code>, <code>i</code> as <code>1</code>, <code>iv</code> as <code>4</code>, and so on.</li>
+        </ul>
+        <p>The same flexible typing works for U.S.C. and CFR citations: try <code>usc1101a15h2a</code> or <code>8cfr214.2h</code>. U.S.C. citations assume Title 8 if you omit the title number. If an input has more than one valid reading, INASearch shows the citation choices so you can select the one you meant.</p>
+        <h3>Using the reader and search tools</h3>
+        <ul class="about-feature-list">
+          <li><strong>Text, scoped, and citation searches.</strong> Type <code>"good moral character"</code> to find that phrase. Use <code>in:237 cites:212</code> to find deportability provisions that cite inadmissibility provisions. The tables below explain the search modifiers and how to combine them.</li>
+          <li><strong>INA/U.S.C. switch and navigation menus.</strong> Switch between INA and U.S.C. numbering for the same text: INA 101 corresponds to 8 U.S.C. 1101. Use the title, chapter, section, and paragraph menus to move through the law.</li>
+          <li><strong>Side-by-side panes.</strong> Type <code>INA 212, 8 CFR 212.7</code> to read the statute and regulation together. Each pane scrolls independently and has its own search field and Back/Forward history.</li>
+          <li><strong>Reference previews, Split, and Insert.</strong> Hover over a citation within the legal text to preview the cited wording. In the preview, <strong>Split</strong> opens it in another pane; <strong>Insert</strong> places an excerpt immediately after the provision you are reading.</li>
+          <li><strong>Notes and highlights.</strong> Select legal text and choose <strong>Highlight</strong> or <strong>Highlight + note</strong>, or add a note from a citation's action menu. Click a note to edit it; use <strong>Shared with</strong> to attach it to other citations. Search note text with <code>in:notes waiver</code>.</li>
+          <li><strong>Definitions.</strong> Type <code>define: child</code>, or open the book icon beside About. Filter definitions by source and where they apply to distinguish an INA definition from a regulatory definition or USCIS glossary explanation.</li>
+          <li><strong>Copy, Share, and Print.</strong> Use <strong>§</strong> to copy a citation or <strong>T</strong> to copy legal text using your <strong>Copied text format</strong> in Settings; the default includes both citation and text. The Share button beside the search field copies a link to the current view. A citation's action menu also lets you print that provision or open its official source.</li>
+          <li><strong>Saving &amp; data.</strong> Notes and highlights save automatically in your browser. Open <strong>Settings → Saving &amp; data</strong> to download a backup or connect an <code>INASearch_Data.json</code> file that you can carry to another browser or computer.</li>
+        </ul>
+      </article>
+      <article class="source-card source-card-full about-section" id="aboutCoverageCard">
+        <h2>What law is included?</h2>
+        <div id="aboutCoverageSummary"></div>
+        <p>To search and read offline, download <code>INASearch.html</code> and open that local copy in your browser. Case law and the complete USCIS Policy Manual are not included. Use a provision's official-source action to check its current wording when you have an internet connection.</p>
+      </article>
+      <article class="source-card source-card-full about-section" id="aboutSearchCard">
+        <h2>Search modifiers and scopes</h2>
+        <p>The words before a colon are <strong>search modifiers</strong>. A modifier tells INASearch where to search or how to match. Its value can name a content scope, such as <code>notes</code>, or a legal citation.</p>
+        <div class="about-table-wrap"><table class="about-table" aria-label="Search modifiers"><thead><tr><th scope="col">Modifier</th><th scope="col">What it does</th></tr></thead><tbody>
+          <tr><th scope="row"><code>in:</code></th><td>Limit the search to a source, content type, citation, or citation range. <code>in:INA 212(a)</code> searches that subsection and its descendants.</td></tr>
+          <tr><th scope="row"><code>cites:</code></th><td>Find searched content that contains a reference to the named provision or one of its descendants. <code>cites:212</code> looks for references to INA 212; it does not search inside INA 212.</td></tr>
+          <tr><th scope="row"><code>common:</code></th><td>Choose the legal unit within which all terms and citation requirements must match. Try <code>common:section</code>, <code>common:subsection</code>, or <code>common:paragraph</code>; CFR depths also accept <code>P1</code>–<code>P6</code>. By default, matching uses the deepest citable unit.</td></tr>
+          <tr><th scope="row"><code>has:</code></th><td>Return legal-text units associated with saved notes or highlights. <code>has:notes</code> finds annotated law; <code>has:highlights</code> finds highlighted law. This filters the legal text, rather than searching the note body.</td></tr>
+        </tbody></table></div>
+        <h3>Values you can use with <code>in:</code></h3>
+        <div class="about-table-wrap"><table class="about-table" aria-label="Search content scopes"><thead><tr><th scope="col">Scope</th><th scope="col">Content searched</th></tr></thead><tbody>
+          <tr><th scope="row"><code>in:ina</code></th><td>Included INA legal text.</td></tr>
+          <tr><th scope="row"><code>in:usc</code><br><code>in:statutes</code></th><td>Included statutory text: Title 8 and the sections from other U.S.C. titles listed above.</td></tr>
+          <tr><th scope="row"><code>in:cfr</code><br><code>in:8 CFR</code></th><td>Included regulations across all covered titles, or just Title 8 CFR.</td></tr>
+          <tr><th scope="row"><code>in:notes</code></th><td>Your saved note bodies. Add a citation scope to restrict which associated notes are searched.</td></tr>
+          <tr><th scope="row"><code>in:annotations</code></th><td>Official editorial and supplementary material, including statutory notes and source credits. These are distinct from your personal notes.</td></tr>
+          <tr><th scope="row"><code>in:highlights</code></th><td>The legal units containing your saved highlights. Matching words may occur outside the highlighted selection within that unit.</td></tr>
+          <tr><th scope="row"><code>in:highlights-exact</code></th><td>Only the exact text you highlighted.</td></tr>
+        </tbody></table></div>
+        <p>With no <code>in:</code> modifier, a text search includes legal text and your personal notes. Official editorial annotations are searched separately with <code>in:annotations</code>. Highlighted legal text remains part of ordinary legal searches.</p>
+        <p>Space-separated words must all match. Use quotes for an exact phrase and <code>OR</code> for alternatives: <code>"good moral character"</code> or <code>(asylum OR refugee) eligibility</code>. <code>NOT</code> and nested alternative groups are not supported.</p>
+        <p>Comma-separated values within one modifier are alternatives: <code>in:212,237 waiver</code> searches either provision. Separate modifiers intersect: <code>in:237 in:highlights waiver</code> searches highlighted units within INA 237. Put modifiers outside parenthesized word groups. To open comparison panes, separate complete citations with a comma and a space: <code>INA 212, INA 237</code>.</p>
+      </article>
+      <article class="source-card source-card-full about-section" id="aboutExamplesCard">
+        <h2>Search combinations to try</h2>
+        <p>Each example explains what the search finds. Searches of notes and highlights use your own saved work.</p>
+        <div class="about-table-wrap"><table class="about-table" aria-label="Search examples"><thead><tr><th scope="col">Search</th><th scope="col">What it returns</th></tr></thead><tbody>
+          <tr><th scope="row"><code>in:237 cites:212</code></th><td>Provisions within INA 237 (deportability) that cite INA 212 (inadmissibility) or its descendants. This helps you trace references from deportability criteria to inadmissibility criteria.</td></tr>
+          <tr><th scope="row"><code>in:237 cites:212 admission</code></th><td>Matching units within INA 237 that both cite INA 212 and contain the word “admission.”</td></tr>
+          <tr><th scope="row"><code>in:INA 245 adjustment</code></th><td>Occurrences of “adjustment” within INA 245, including its smaller provisions.</td></tr>
+          <tr><th scope="row"><code>in:8 CFR 214.2(h) employer</code></th><td>Occurrences of “employer” within paragraph (h) of that regulation and its descendants.</td></tr>
+          <tr><th scope="row"><code>in:212,237 waiver</code></th><td>Occurrences of “waiver” within either INA 212 or INA 237.</td></tr>
+          <tr><th scope="row"><code>in:237 common:subsection conviction admission</code></th><td>Matches where “conviction” and “admission” occur within the same subsection of INA 237, even if they occur in different smaller units.</td></tr>
+          <tr><th scope="row"><code>in:notes in:212 waiver</code></th><td>Your notes associated with INA 212 or its descendants whose note bodies contain “waiver.”</td></tr>
+          <tr><th scope="row"><code>in:annotations repeal</code></th><td>Occurrences of “repeal” in official editorial or supplementary material.</td></tr>
+          <tr><th scope="row"><code>in:237 has:notes</code></th><td>Legal units within INA 237 with an associated personal note, regardless of the note's wording.</td></tr>
+          <tr><th scope="row"><code>in:highlights-exact waiver</code></th><td>Occurrences of “waiver” inside your exact highlighted selections.</td></tr>
+        </tbody></table></div>
+      </article>
+      <article class="source-card source-card-full about-section" id="aboutFaqCard">
+        <h2>Frequently asked questions</h2>
+        <p>Expand a question for details about using INASearch, saving your work, sources, and verification.</p>
+        <!-- INA_SEARCH_FAQ -->
+      </article>
       <div class="sources-grid" id="sourcesGrid"></div>
-      <details class="section-card inspection-guide" style="margin-top:14px">
-        <summary>Inspect the embedded corpus</summary>
-        <p>The release stores metadata and legal text in separate Base64-encoded gzip blocks, each with its own byte counts and SHA-256 hashes. The uncompressed edition stores one complete, expanded UTF-8 JSON file. Both formats are integrity-checked before use.</p>
+      <details class="section-card inspection-guide">
+        <summary>Check the embedded corpus</summary>
+        <p id="corpusPackagingDescription"></p>
+        <p>These sizes describe the corpus embedded in this HTML copy, not the entire HTML file or a newer CFR copy saved in your browser. MB means 1,000,000 bytes. The standard edition uses shared dictionaries to pack repeated data; its decoded JSON is smaller than the expanded JSON in the uncompressed edition.</p>
         <dl class="corpus-manifest" id="corpusManifestDetails"></dl>
         <ol>
           <li>Read <code>inaSearchCorpusManifest</code>, then extract <code>inaSearchCorpusData</code> and every listed <code>inaSearchCorpusShard</code> block.</li>
-          <li>Base64-decode and decompress each gzip block. Compare its compressed and decoded bytes with that block's manifest entry.</li>
-          <li>The example below saves the manifest, metadata, and content chunks as separate verified files; release JSON uses shared dictionaries.</li>
+          <li>For Brotli or gzip data, Base64-decode and decompress each block. For uncompressed data, retain the UTF-8 JSON directly. Compare the byte counts and SHA-256 hashes with the manifest.</li>
+          <li>The example below saves the manifest and verified corpus JSON. If a build lists separate content chunks, it exports those as separate files too.</li>
           <li>For one complete, readable JSON file, run the example from <code>INASearch-Uncompressed.html</code>.</li>
         </ol>
         <p><strong>PowerShell extraction example</strong></p>
         <pre id="corpusAuditPowerShell"></pre>
       </details>
+      </div>
     </section>
   </main>
 
@@ -2365,6 +2477,9 @@
           corpus.corpusVersion = previous.corpusVersion;
         }
         window.INA_SEARCH_CORPUS_LOAD_SOURCE = "upgraded-cache";
+        // Match the runtime hash that activateCorpus saves, so the first
+        // upgraded search index is reusable immediately on the next startup.
+        window.INA_SEARCH_UPGRADED_CORPUS_SHA256 = await globalThis.INASearchStorage.sha256Bytes(new TextEncoder().encode(JSON.stringify(corpus)));
       }
     }
     if (loadedCorpus && !corpus) {
@@ -2389,18 +2504,10 @@
     const DEFAULT_STARTUP_QUERY = "";
     const TIP_CATEGORIES = Object.freeze([
       {
-        id: "finding", title: "Finding things", tips: [
-          [1, "You can type a citation directly.", "Examples include INA 245(a), 8 U.S.C. 1255(a), 8 CFR 245.1, and ina245a."],
-          [2, "U.S.C. citations can omit Title 8.", "USC 1101(a)(15)(H), usc1101a15h, and 8 U.S.C. 1101(a)(15)(H) all identify Title 8; INASearch visibly shows when it supplied the 8."],
-          [3, "INA and U.S.C. numbers describe the same statutory text differently.", "INASearch automatically shows the corresponding citation when a crosswalk exists."],
-          [4, "Citation-equivalent buttons copy.", "Click anywhere on an INA, U.S.C., or CFR citation button to copy the displayed citation; it does not replace your search."],
+        id: "finding", title: "Citation interpretation and source scopes", tips: [
           [5, "INASearch checks ambiguous Roman numerals.", "When characters such as i, v, or x have multiple valid interpretations, the choices show the complete resulting citations and identify the current interpretation."],
-          [6, "The INASearch name is Home.", "Clicking the icon or name clears the search and shows the INA or Title 8 index above the CFR index. Home uses the same INA/USC choice as the readers."],
-          [7, "Quotes and OR solve different problems.", "Use \"good moral character\" for that exact phrase; use asylum OR refugee when either word is acceptable."],
-          [8, "Press / to return to search.", "The shortcut focuses the main search field from elsewhere in the interface."],
           [9, "Use in: to choose what gets searched.", "Ordinary searches include law and personal notes. in:ina or in:cfr selects law only; in:ina,notes includes INA law and notes."],
           [10, "Unfinished citations stay in navigation.", "Finish a citation prefix to open a provision. A trailing dot after a CFR part number opens that part using the usual title precedence: 41. opens 22 CFR Part 41."],
-          [11, "The suggested search is only a starting point.", "Clicking it runs that example; it does not change any saved preference."]
         ]
       },
       {
@@ -2425,11 +2532,8 @@
       },
       {
         id: "panes-history", title: "Side-by-side views and history", tips: [
-          [24, "A comma opens side-by-side legal views.", "Try INA 212, 8 CFR 212.7."],
           [25, "Comparison panes can contain different kinds of views.", "A hierarchy menu, section reader, and text-search result can coexist."],
           [26, "Each pane has its own search field.", "Editing one pane changes that pane without rebuilding the others."],
-          [27, "Closing one of two panes expands the remaining view.", "Its citation, reading position, and available history stay with it."],
-          [28, "Home stacks statutes above regulations.", "The INA/USC side button switches the upper list between INA and all of Title 8. Each list has its own Expand All and Collapse All controls."],
           [29, "Opening a section closes the other blank menu by default.", "Turn off Close the other blank menu after opening a section if you prefer to keep it beside the reader."],
           [30, "Pane history records meaningful navigation.", "Opening a section or search result, choosing a citation, and explicitly selecting a legal unit create Back/Forward destinations; ordinary scrolling does not."],
           [31, "Back first returns to your logged citation.", "After scrolling elsewhere in the main reader, Back returns to the current history entry. Press Back again for the preceding entry; Forward visits logged destinations."]
@@ -2437,36 +2541,20 @@
       },
       {
         id: "navigation", title: "Legal navigation bar", tips: [
-          [32, "Expand or collapse navigation beside the INASearch logo.", "The arrow to the left of the logo controls the dropdown row. The search field keeps the entered citation in either mode. Your collapse choice is remembered.", "hidden"],
-          [33, "Each navigation button represents part of the legal structure.", "Clicking one opens its choices and changes the structure displayed in the bar.", "visible"],
           [34, "The Section button's wording is configurable.", "Section display in Settings can show INA, U.S.C., both, or whichever numbering system the current hierarchy uses.", "visible"],
-          [35, "The INA/USC switch changes the upper statutory hierarchy.", "It changes how titles, chapters, and sections are organized without changing the underlying statutory text.", "visible"],
-          [36, "Navigation menus provide direct choices.", "Open a title, chapter, part, section, or paragraph button to jump to another available unit at that level.", "visible"],
           [37, "The last navigation button can offer immediate children.", "This makes it possible to descend into the next legal level without returning to a separate menu page.", "visible"],
           [38, "Settings controls the smallest unit shown in navigation.", "Statutes and CFR have separate depth settings.", "visible"],
-          [39, "The fixed action column uses a visible highlighted citation.", "Any visible part of the blue selection keeps its actions active. Otherwise, hover an action to preview the first citation below Page view offset. The three copy buttons provide the citation, text, or both with your saved preface.", "visible"]
+          [39, "The fixed action column uses a visible highlighted citation.", "Any visible part of the blue selection keeps its actions active. Otherwise, hover an action to preview the first citation below Page view offset. The § button copies the citation; T copies legal text using your saved Copied text format.", "visible"]
         ]
       },
       {
         id: "reading", title: "Reading and references", tips: [
           [40, "Clicking a legal unit selects it without moving the page.", "The search field, blue highlight, navigation bar, and history update while the current reading position stays fixed."],
           [41, "Page view offset controls jumps and live tracking.", "The default is 3% below the top of the readable area. The same point positions citation jumps and determines the live navigation citation."],
-          [42, "Citation-jump animation is optional.", "Animate citation jumps in Settings controls whether main-reader jumps move smoothly or instantly."],
-          [43, "Hover over an inline legal reference to preview it.", "The preview shows the referenced wording and its citation. Click the reference to navigate to it; local citations also update the search bar."],
-          [44, "The reference preview's Copy button copies the complete referenced unit.", "The copied text includes the complete legal unit shown in the preview."],
-          [45, "The Split button opens the referenced location in another viewer pane.", "Use it when you want to keep the citing and cited provisions visible together."],
-          [46, "Insert places the cited excerpt after the provision that cites it.", "The inserted card remains visually connected to its source reference."],
-          [47, "An inserted excerpt's source button opens its original legal location.", "Use it to move from the excerpt back to the complete source context."],
           [48, "Inserted excerpts can be remembered.", "Save inserted reference excerpts in Settings controls whether they return with saved data or last only for the current session."],
-          [49, "A legal unit's citation button opens its action menu.", "From there you can copy citations, copy the complete text, copy a link, print, or open the official source."],
           [50, "Copying a complete statute unit includes any House footnotes referenced by that unit.", "Publisher-supplied footnotes remain attached to the copied statutory context."],
-          [51, "Print produces a focused legal-unit page.", "It uses a light, text-oriented layout rather than printing the surrounding application."],
-          [52, "The official-source button opens that provision's location on House.gov or eCFR.gov.", "Use it to confirm the dated offline text against the current official source."],
-          [53, "CFR readers show the current-through date.", "It appears in the regulation's source details."],
           [54, "Repealed, transferred, and omitted sections remain listed and are clearly labeled.", "Read the status warning before relying on historical material."],
-          [55, "Typing a transferred Title 8 section opens its current section.", "The current reader still provides its official-source button."],
           [56, "House footnotes are editorial.", "Superscript-numbered House footnotes are publisher-supplied context, not operative statutory text."],
-          [59, "CFR source details contain authority and publication information.", "Expand them below the regulation when you need that background."]
         ]
       },
       {
@@ -2474,14 +2562,11 @@
           [60, "Defined terms include their legal scope.", "A definition preview states where the definition applies instead of assuming it governs every appearance of the word."],
           [61, "Experimental: highlight defined terms.", "Turn it on in Settings to preview possibly applicable definitions while reading; always check the stated scope and context."],
           [62, "The Definitions view can filter by source and applicability.", "This helps distinguish an INA definition, a regulatory definition, and a general USCIS glossary explanation."],
-          [63, "A definition's official-source button opens the location from which it was taken.", "The paired book icon in the top bar opens the complete Definitions view."],
           [82, "USCIS Glossary definitions are general agency explanations.", "Their source label distinguishes them from controlling statutory or regulatory definitions."]
         ]
       },
       {
         id: "annotations", title: "Notes, highlights, and annotation search", tips: [
-          [64, "Create notes and highlights while reading.", "Select text for a highlight or note, or add a citation note from the citation-actions menu."],
-          [65, "Citation notes edit in place.", "Click a note to edit it; its text stays synchronized everywhere that note appears."],
           [66, "Choose what to search.", "in:notes searches personal note bodies. in:annotations searches source editorial and supplementary material. Ordinary searches show INA, CFR, then Notes."],
           [67, "One note can appear at several citations.", "Use Shared with to edit its other citations. Saved notes follow their legal text as you scroll."],
           [80, "Search highlighted provisions or selected text.", "in:highlights president finds president in legal units containing a saved highlight. in:highlights-exact president requires president inside the highlighted text. in:notes without words lists all notes."],
@@ -2489,25 +2574,15 @@
         ]
       },
       {
-        id: "saving", title: "Saving, offline use, and appearance", tips: [
+        id: "saving", title: "Saving and research preferences", tips: [
           [68, "Browser saving and a connected data file serve different purposes.", "Browser saving is automatic on this device; a connected file gives you a portable copy you control."],
-          [69, "The save warning appears when personal work needs protection.", "Changing settings alone does not trigger it; notes, highlights, and other saved research do until you save or connect a data file."],
           [70, "A warning sign marks local-file links.", "Such a link works only on this device while the HTML file stays in the same location; Don't remind me again controls the automatic reminder."],
-          [71, "INASearch normally works offline.", "With automatic CFR updates off, searches and local readers make no network requests; official-source buttons intentionally open government sites."],
           [72, "Automatic CFR updates are optional.", "Enabling the setting checks included CFR material directly against eCFR; it does not update the U.S. Code, INA crosswalk, forms, or Policy Manual snapshot."],
-          [73, "The top status controls summarize saved-data and corpus health.", "Their detailed visibility can be changed in Settings."],
-          [74, "The theme button cycles Day, Night, and System.", "INASearch starts in Day unless you choose another preference."],
-          [75, "The startup search is configurable.", "Set a citation or query to open automatically, or leave it blank to start at Home."],
+          [75, "Start with a working research query.", "Set Default startup query in Settings to in:237 has:notes to open your annotated deportability provisions each time. You can save any citation or search there; leave it blank to start at Home."],
           [76, "Citation links in statutes and regulations can display INA or U.S.C. citations.", "Convert citations to INA format in Settings controls the wording without changing link destinations."],
-          [77, "INA citation links can be highlighted.", "The separate highlighting setting changes their appearance, not their meaning."]
+          [83, "Customize the format of copied legal text.", "Change Copied text format in Settings to control what T copies. The default is [citation] - [text]. Put [citation] and [text] in any order, with your own punctuation or line breaks; the tokens work regardless of capitalization."],
         ]
       },
-      {
-        id: "sources", title: "About and official sources", tips: [
-          [78, "About keeps help and official links together.", "It contains the grouped tip catalog, corpus inspection details, and a full-width set of approved official shortcuts."],
-          [79, "Official shortcuts remain available when local material is absent.", "They open approved government resources rather than inventing a local result."]
-        ]
-      }
     ]);
     const TIP_BY_ID = new Map(TIP_CATEGORIES.flatMap(category => category.tips.map(([id, title, text, eligibility]) => [id, { id, title, text, eligibility: eligibility || "always", categoryId: category.id, categoryTitle: category.title }])));
     const STATUTE_NAVIGATION_DEPTHS = ["Section", "Subsection", "Paragraph", "Subparagraph", "Clause", "Subclause", "Item", "Subitem", "Subsubitem"];
@@ -2718,7 +2793,7 @@
       highlights: [],
       annotationOrdinals: {},
       tipProgress: { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null },
-      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "view", statutoryLinkCitationSystemVersion: 2, highlightInaCitationLinks: false, notesUseHandwrittenFont: false, statutoryNavigationSystem: "ina", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, splitAuthoritySearchPanes: false, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, mainNavigatorCollapsed: false, citationCopyPreface: "[citation] [text]", citationCopyPrefaceVersion: 3, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
+      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "view", statutoryLinkCitationSystemVersion: 2, highlightInaCitationLinks: false, notesUseHandwrittenFont: false, statutoryNavigationSystem: "ina", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, splitAuthoritySearchPanes: false, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, mainNavigatorCollapsed: false, citationCopyPreface: "[citation] - [text]", citationCopyPrefaceVersion: 3, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
       referenceInsertions: emptyReferenceInsertions()
     });
 
@@ -2872,7 +2947,7 @@
       defaultStartupQueryForm: $("#defaultStartupQueryForm"), defaultStartupQueryInput: $("#defaultStartupQueryInput"), defaultStartupQueryFeedback: $("#defaultStartupQueryFeedback"),
       profileSummary: $("#profileSummary"), sourcesGrid: $("#sourcesGrid"),
       importProfileInput: $("#importProfileInput"),
-      corpusManifestDetails: $("#corpusManifestDetails"), corpusAuditPowerShell: $("#corpusAuditPowerShell"),
+      corpusManifestDetails: $("#corpusManifestDetails"), corpusAuditPowerShell: $("#corpusAuditPowerShell"), corpusPackagingDescription: $("#corpusPackagingDescription"), aboutCoverageSummary: $("#aboutCoverageSummary"),
       sourceWarnings: $("#sourceWarnings"),
       definitionTermFilter: $("#definitionTermFilter"), definitionSourceFilter: $("#definitionSourceFilter"),
       definitionScopeFilter: $("#definitionScopeFilter"), definitionNoResults: $("#definitionNoResults"),
@@ -3111,6 +3186,14 @@
       const assignContainerStatuses = node => {
         for (const child of descendants(node)) assignContainerStatuses(child);
         if (node.children?.length) node.status = statusRules.aggregateTree(node, descendants);
+        if (node.authority === "usc" && node.id.startsWith("usc:title:8:") && ["chapter", "subchapter"].includes(node.kind)) {
+          const sourceLabel = node.kind === "chapter" ? corpus.title8.chapterDispositions?.[node.number] : String(node.heading || "").match(/\[([^\]]+)\]/)?.[1];
+          const disposition = statusRules.dispositionBadge(sourceLabel);
+          if (disposition) {
+            node.dispositionLabel = disposition.label;
+            node.heading = String(node.heading || "").replace(/\s*\[[^\]]+\]\s*$/, "").trim();
+          }
+        }
       };
       addReferencedUscHierarchy(uscRoot);
       assignContainerStatuses(uscRoot);
@@ -4558,6 +4641,10 @@
       state.query = els.search.value.trim();
       if (state.searchScopeActive) refreshSearchScope();
       else renderSearchScopeEditor();
+      if (!state.searchScopeActive && /^about$/i.test(state.query)) {
+        closeSearchResults("sources");
+        return;
+      }
       const definitionCommand = state.searchScopeActive ? null : parseDefinitionCommand(state.query);
       if (definitionCommand) {
         resetOccurrenceWorkspacePresentation();
@@ -5915,7 +6002,7 @@
       return globalThis.INA_SEARCH_OCCURRENCE?.projectionIdentity?.(corpus, {
         corpusSchemaVersion: corpusManifest?.corpusSchemaVersion || corpus?.schemaVersion,
         corpusVersion: corpus?.corpusVersion || corpusManifest?.corpusVersion || "",
-        corpusSha256: record?.sourceCorpusSha256 || record?.runtimeSha256 || record?.sha256 || corpusManifest?.fullUncompressedSha256 || corpusManifest?.uncompressedSha256 || "",
+        corpusSha256: window.INA_SEARCH_UPGRADED_CORPUS_SHA256 || record?.sourceCorpusSha256 || record?.runtimeSha256 || record?.sha256 || corpusManifest?.fullUncompressedSha256 || corpusManifest?.uncompressedSha256 || "",
         authorities: ["ina", "usc", "cfr"]
       }) || null;
     }
@@ -6476,7 +6563,9 @@
       }
       const sectionHtml = section => {
         const token = occurrenceSectionDomToken(section.id);
-        return `<details class="occurrence-section" data-occurrence-section="${escapeHtml(token)}"${expandResults ? " open" : ""}><summary aria-label="Expand or collapse results for ${escapeHtml(section.citation)}"><span class="occurrence-section-disclosure" aria-hidden="true">›</span><button class="occurrence-section-label" type="button" data-occurrence-section-open="${escapeHtml(token)}" aria-label="Open ${escapeHtml(section.citation)}" title="Open ${escapeHtml(section.citation)}">${escapeHtml(section.citation)}${section.heading ? `<small>— ${escapeHtml(navigationTitleCase(section.heading))}</small>` : ""}</button><span class="occurrence-count">${Number(section.totalOccurrences || 0).toLocaleString()}</span></summary><div class="occurrence-section-rows" data-occurrence-section-rows="${escapeHtml(token)}"></div></details>`;
+        const status = occurrenceResultStatus(section);
+        const badge = ["repealed", "transferred"].includes(status) ? ` <span class="hierarchy-status ${status}">${status === "repealed" ? "Repealed" : "Transferred"}</span>` : "";
+        return `<details class="occurrence-section" data-legal-status="${escapeHtml(status)}" data-occurrence-section="${escapeHtml(token)}"${expandResults ? " open" : ""}><summary aria-label="Expand or collapse results for ${escapeHtml(section.citation)}"><span class="occurrence-section-disclosure" aria-hidden="true">›</span><button class="occurrence-section-label" type="button" data-occurrence-section-open="${escapeHtml(token)}" aria-label="Open ${escapeHtml(section.citation)}" title="Open ${escapeHtml(section.citation)}">${escapeHtml(section.citation)}${badge}${section.heading ? `<small>— ${escapeHtml(navigationTitleCase(section.heading))}</small>` : ""}</button><span class="occurrence-count">${Number(section.totalOccurrences || 0).toLocaleString()}</span></summary><div class="occurrence-section-rows" data-occurrence-section-rows="${escapeHtml(token)}"></div></details>`;
       };
       const render = node => {
         const sections = sectionsByLeaf.get(node.id) || [];
@@ -6749,16 +6838,6 @@
       return row;
     }
 
-    async function copyOccurrenceRowData(pane, copyButton) {
-      const rowElement = copyButton?.closest?.("[data-occurrence-row]"), row = occurrenceRowFromButton(pane, rowElement);
-      if (!row) return false;
-      const copiesText = copyButton.dataset.occurrenceCopy === "text";
-      const value = copiesText ? occurrenceRowUnitText(row, state.statuteHierarchyAuthority) : row.citation;
-      const copied = await copyLegalText(value);
-      toast(copied ? copiesText ? "Complete legal-unit text copied." : "Full citation copied." : copiesText ? "The complete legal-unit text could not be copied." : "The citation could not be copied.");
-      return copied;
-    }
-
     function selectOccurrenceRow(pane, element) {
       const row = occurrenceRowFromButton(pane, element);
       if (!row) return false;
@@ -6773,13 +6852,20 @@
 
     async function restoreOccurrenceResult(pane, selected) {
       const search = pane.searchState;
-      if (!search?.result || !occurrenceSectionById(search.result, selected.sectionId)) return false;
+      const sourceSection = search?.result && occurrenceSectionById(search.result, selected.sectionId);
+      if (!sourceSection) return false;
+      const displayedSections = occurrenceDisplayGroups(search.result).flatMap(group => group.result.sections);
+      const displayedSection = displayedSections.find(section => section.id === selected.sectionId)
+        || displayedSections.find(section => section.recordId === sourceSection.recordId && section.authority === sourceSection.authority);
+      if (!displayedSection) return false;
+      const sectionId = displayedSection.id;
+      const container = occurrenceSectionRowsContainer(pane, sectionId);
+      if (!container) return false;
       search.restoringResult = true;
-      const container = occurrenceSectionRowsContainer(pane, selected.sectionId);
       for (let ancestor = container?.closest('details'); ancestor; ancestor = ancestor.parentElement?.closest('details')) ancestor.open = true;
-      await renderOccurrenceRows(pane, Math.max(0, selected.index - 8), selected.sectionId);
+      await renderOccurrenceRows(pane, Math.max(0, selected.index - 8), sectionId);
       if (pane.searchState !== search || !pane.detail.isConnected) return false;
-      const rows = search.rowsBySection.get(selected.sectionId);
+      const rows = search.rowsBySection.get(sectionId);
       const element = $(`[data-occurrence-row="${selected.index - (rows?.start || 0)}"]`, container);
       if (element) {
         selectOccurrenceRow(pane, element);
@@ -6824,7 +6910,7 @@
         const repairControls = row.artifactUnassociated
           ? `<span class="occurrence-row-copy-controls" role="group" aria-label="Repair note"><button class="occurrence-row-copy" type="button" data-artifact-repair="${escapeHtml(row.artifactId)}" title="Repair association">↗</button><button class="occurrence-row-copy" type="button" data-artifact-delete="${escapeHtml(row.artifactId)}" title="Delete note">×</button></span>` : "";
         const selected = pane.searchState.selectedResult?.sectionId === sectionId && pane.searchState.selectedResult.index === start + index;
-        return `<div class="occurrence-row" role="option" tabindex="0" aria-selected="${selected}" aria-label="Search hit at ${escapeHtml(row.citation)}" data-occurrence-row="${index}" data-occurrence-row-section="${escapeHtml(sectionToken)}"${row.artifactUnassociated ? " data-artifact-unassociated" : ""}${artifactStyle}><button class="occurrence-row-citation occurrence-row-open" type="button" data-occurrence-open title="Open ${escapeHtml(row.citation)}" aria-label="Open ${escapeHtml(row.citation)}">${escapeHtml(row.artifactUnassociated ? "Unassociated" : occurrenceRowCitationLabel(row))}</button>${repairControls}<span class="occurrence-row-text">${occurrenceRowTextHtml(row)}</span></div>`;
+        return `<div class="occurrence-row" data-legal-status="${escapeHtml(occurrenceResultStatus(row))}" role="option" tabindex="0" aria-selected="${selected}" aria-label="Search hit at ${escapeHtml(row.citation)}" data-occurrence-row="${index}" data-occurrence-row-section="${escapeHtml(sectionToken)}"${row.artifactUnassociated ? " data-artifact-unassociated" : ""}${artifactStyle}><button class="occurrence-row-citation occurrence-row-open" type="button" data-occurrence-open title="Open ${escapeHtml(row.citation)}" aria-label="Open ${escapeHtml(row.citation)}">${escapeHtml(row.artifactUnassociated ? "Unassociated" : occurrenceRowCitationLabel(row))}</button>${repairControls}<span class="occurrence-row-text">${occurrenceRowTextHtml(row)}</span></div>`;
       }).join("");
       const container = occurrenceSectionRowsContainer(pane, sectionId);
       if (container) {
@@ -6893,6 +6979,9 @@
 
     function occurrenceAuthorityMetadata(authority) {
       if (authority === "ina") return { short: "INA", title: "Immigration and Nationality Act" };
+      if (authority === "title8") return { short: "Title 8", title: "U.S. Code · Aliens and Nationality" };
+      if (authority === "non-ina-title8") return { short: "Non-INA Title 8", title: "Title 8 provisions outside the INA" };
+      if (authority === "referenced-usc") return { short: "Referenced U.S. Code", title: "Sections cited by the INA from other U.S. Code titles" };
       if (authority === "statute" || authority === "usc") return { short: "USC", title: "United States Code" };
       if (authority === "cfr") return { short: "CFR", title: "Code of Federal Regulations" };
       if (authority === "notes") return { short: "Notes", title: "Your saved notes" };
@@ -6900,10 +6989,69 @@
       return { short: titleCaseTopic(authority || "Other"), title: "Other indexed source" };
     }
 
+    function occurrenceResultStatus(result) {
+      return uscSectionById.get(result?.recordId)?.status || "current";
+    }
+
+    function occurrenceReaderCommand(result) {
+      const record = uscSectionById.get(result?.recordId);
+      if (record && state.statuteHierarchyAuthority === "usc") return uscBase(record) + canonicalPath(result.path || []);
+      return String(result?.readerCommand || result?.citation || "");
+    }
+
+    function occurrenceDisplayGroups(result) {
+      const uscView = state.statuteHierarchyAuthority === "usc";
+      const groups = new Map();
+      const sources = result.authorityGroups?.length ? result.authorityGroups : [{ authority: "ina", result }];
+      for (const source of sources) {
+        if (["notes", "annotations"].includes(source.authority)) {
+          if (source.result.sections?.length) groups.set(source.authority, source);
+          continue;
+        }
+        const sourceNodes = new Map((source.result.hierarchy || []).map(node => [node.id, node]));
+        for (const section of source.result.sections || []) {
+          const record = uscSectionById.get(section.recordId);
+          const groupId = section.authority === "cfr" || source.authority === "cfr" ? "cfr"
+            : !uscView && section.authority === "ina" ? "ina"
+            : Number(record?.title || 8) === 8 ? (uscView ? "title8" : "non-ina-title8") : "referenced-usc";
+          if (!groups.has(groupId)) groups.set(groupId, { authority: groupId, result: { sections: [], hierarchy: [], totalOccurrences: 0 }, nodes: new Map(), recordIds: new Set(), nodeRecords: new Map() });
+          const group = groups.get(groupId);
+          // Several INA provisions can share one Code section. Show that Code
+          // section once in U.S.C. mode while retaining its original row identity.
+          if (groupId === "title8" && group.result.sections.some(item => item.recordId === section.recordId)) continue;
+          const codeLeaf = record && groupId !== "ina" ? authorityHierarchyNodes.get(`usc:section:${record.id}`) : null;
+          const nodeMap = codeLeaf ? authorityHierarchyNodes : sourceNodes;
+          const prefix = codeLeaf ? "search-display:" : "";
+          const leafId = codeLeaf?.id || section.hierarchyId || section.hierarchyIds?.at(-1);
+          let node = nodeMap.get(leafId);
+          while (node) {
+            const id = prefix + node.id;
+            if (!group.nodes.has(id)) group.nodes.set(id, { ...node, id, parentId: node.parentId ? prefix + node.parentId : null, totalOccurrences: 0 });
+            if (!group.nodeRecords.has(id)) group.nodeRecords.set(id, new Set());
+            if (!group.nodeRecords.get(id).has(section.recordId)) {
+              group.nodes.get(id).totalOccurrences += section.totalOccurrences;
+              group.nodeRecords.get(id).add(section.recordId);
+            }
+            node = nodeMap.get(node.parentId);
+          }
+          group.result.sections.push({ ...section, hierarchyId: prefix + leafId, citation: codeLeaf ? uscBase(record) : section.citation });
+          if (!group.recordIds.has(section.recordId)) {
+            group.result.totalOccurrences += section.totalOccurrences;
+            group.recordIds.add(section.recordId);
+          }
+        }
+      }
+      const order = [...(uscView ? ["title8"] : ["ina", "non-ina-title8"]), "cfr", "referenced-usc", "notes", "annotations"];
+      return order.filter(id => groups.has(id)).map(id => {
+        const group = groups.get(id);
+        if (group.nodes) group.result.hierarchy = [...group.nodes.values()];
+        return { authority: group.authority, result: group.result };
+      });
+    }
+
     function occurrenceAuthorityStreamHtml(result, expandResults) {
-      return `<div class="occurrence-authority-stream">${(result.authorityGroups || []).map(group => {
-        const metadata = group.authority === "ina" && group.result.sections?.some(section => section.authority === "usc")
-          ? { short: "Statutes", title: "INA and referenced U.S. Code" } : occurrenceAuthorityMetadata(group.authority);
+      return `<div class="occurrence-authority-stream">${occurrenceDisplayGroups(result).map(group => {
+        const metadata = occurrenceAuthorityMetadata(group.authority);
         const hits = Number(group.result.totalOccurrences || 0);
         const sections = Number(group.result.sections?.length || 0);
         const hierarchy = occurrenceHierarchyHtml(group.result, expandResults, group.authority);
@@ -6922,7 +7070,7 @@
       pane.searchState = { result, generation: pane.occurrenceGeneration, command: pane.entry?.text || "", offset: activeSectionId ? sectionOffsets.get(activeSectionId) || 0 : 0, activeSectionId, sectionOffsets, rowsBySection: new Map(), pageGenerations: new Map(), visibleRows: [], virtualizedRows, visibleSectionFrame: null };
       const expandResults = profile.preferences.expandSearchResultsByDefault !== false;
       const hitCount = Number(result.totalOccurrences || 0);
-      const sectionCount = Number(result.sections?.length || 0);
+      const sectionCount = occurrenceDisplayGroups(result).reduce((count, group) => count + group.result.sections.length, 0);
       const occurrenceBody = result.authorityGroups?.length
         ? occurrenceAuthorityStreamHtml(result, expandResults)
         : `<div class="occurrence-hierarchy">${occurrenceHierarchyHtml(result, expandResults, pane.entry.authority) || '<p class="hierarchy-empty">No matching legal occurrences.</p>'}</div>`;
@@ -6933,6 +7081,7 @@
           scheduleVisibleOccurrenceSections(pane);
         } else renderAllOccurrenceSections(pane);
       }
+      if (pane === state.mainOccurrencePane) syncMainReaderActionTarget();
       if (state.shareViewPreview) return;
       if (pane === state.mainOccurrencePane) consumePromotedHistoryRestore();
       else consumeFocusedPaneHistoryRestore(pane);
@@ -6976,7 +7125,7 @@
     }
 
     function openFocusedOccurrenceRow(pane, row) {
-      const command = String(row?.readerCommand || row?.citation || "");
+      const command = occurrenceReaderCommand(row);
       if (!pane || !command) return false;
       if (row.artifactKind) {
         if (row.artifactUnassociated) return repairUnassociatedNote(row.artifactId);
@@ -6991,7 +7140,7 @@
     }
 
     function openFocusedOccurrenceSection(pane, section) {
-      const command = String(section?.readerCommand || section?.citation || "");
+      const command = occurrenceReaderCommand(section);
       if (!pane || !command) return false;
       const descriptor = focusedPaneDescriptor(command, { child: true, childAuthority: pane.entry.authority, requireAuthority: true });
       if (!descriptor.ok || descriptor.mode !== "reader") return false;
@@ -7000,7 +7149,7 @@
     }
 
     function openMainOccurrenceSection(pane, section) {
-      const command = String(section?.readerCommand || section?.citation || "");
+      const command = occurrenceReaderCommand(section);
       if (!pane || !command) return false;
       const searchCommand = currentMainSearchExpression();
       activateNavigationLocation({
@@ -10799,7 +10948,9 @@
       }
       if (node.marker && (!node.status || node.status === "current")) badges.push(badge(node.marker === "not-in-ina" ? "Not in INA" : node.marker === "note-only" ? "Note Only" : "No equivalent", node.marker));
       const status = node.status || "current";
-      if (status !== "current") badges.push(badge(node.authority === "ina" && node.number === "242A" ? "Transferred to INA 238" : statuteStatusLabel(status), status, node.statusReason?.text || statuteStatusLabel(status)));
+      const disposition = INASearchStatuteStatus.dispositionBadge(node.dispositionLabel);
+      if (disposition) badges.push(badge(disposition.label, disposition.status));
+      else if (status !== "current") badges.push(badge(node.authority === "ina" && node.number === "242A" ? "Transferred to INA 238" : statuteStatusLabel(status), status, node.statusReason?.text || statuteStatusLabel(status)));
       return badges.join(" ");
     }
 
@@ -10874,13 +11025,18 @@
       return `<div class="hierarchy-page-actions"><button class="button small" type="button" data-hierarchy-expand-all="${escapeHtml(rootId)}">Expand All</button><button class="button small" type="button" data-hierarchy-collapse-all="${escapeHtml(rootId)}">Collapse All</button></div>`;
     }
 
+    function hierarchyActionRowIds(rootId) {
+      if (rootId === "referenced-usc") return (corpus?.referencedUsc?.titles || []).map(title => `usc:title:${title.number}`);
+      return rootId ? authorityHierarchyNodes.get(rootId)?.children || [] : hierarchyPageNodeIds(state.citation);
+    }
+
     function hierarchyPageRowsHtml(result) {
       const rowIds = hierarchyPageNodeIds(result);
       const rows = rowIds.length ? `<div class="hierarchy-list">${renderHierarchyRows(rowIds)}</div>` : `<p class="hierarchy-empty">No immediate child units are included in this edition.</p>`;
       if (!isStackedHome(result)) return rows;
       const cfrRoot = authorityHierarchyNodes.get("cfr:root");
       const relatedTitles = (corpus?.referencedUsc?.titles || []).map(title => `usc:title:${title.number}`);
-      const related = relatedTitles.length ? `<section class="home-cfr-index" aria-labelledby="homeRelatedUscTitle"><header class="authority-browse-header"><h2 class="authority-browse-title" id="homeRelatedUscTitle">Referenced U.S. Code</h2><div class="authority-browse-footer"><p class="authority-browse-meta">Sections cited by the statutory text of Title 8</p></div></header><div class="hierarchy-list" role="list" aria-label="Referenced U.S. Code index">${renderHierarchyRows(relatedTitles)}</div></section>` : "";
+      const related = relatedTitles.length ? `<section class="home-cfr-index" aria-labelledby="homeRelatedUscTitle"><header class="authority-browse-header"><h2 class="authority-browse-title" id="homeRelatedUscTitle">Referenced U.S. Code</h2><div class="authority-browse-footer"><p class="authority-browse-meta">Sections cited by the statutory text of the INA</p></div>${hierarchyPageActions("referenced-usc")}</header><div class="hierarchy-list" role="list" aria-label="Referenced U.S. Code index">${renderHierarchyRows(relatedTitles)}</div></section>` : "";
       return `${rows}<section class="home-cfr-index" aria-labelledby="homeCfrTitle"><header class="authority-browse-header">${authoritySourceLink("eCFR", hierarchyOfficialUrl(cfrRoot))}<h2 class="authority-browse-title" id="homeCfrTitle">CFR</h2><div class="authority-browse-footer"><p class="authority-browse-meta">Code of Federal Regulations</p></div>${hierarchyPageActions("cfr:root")}</header><div class="hierarchy-list" role="list" aria-label="CFR index">${renderHierarchyRows(cfrRoot?.children || [])}</div></section>${related}`;
     }
 
@@ -10889,7 +11045,7 @@
       if (!button) return false;
       const expand = button.hasAttribute("data-hierarchy-expand-all");
       const rootId = expand ? button.dataset.hierarchyExpandAll : button.dataset.hierarchyCollapseAll;
-      const rowIds = rootId ? authorityHierarchyNodes.get(rootId)?.children || [] : hierarchyPageNodeIds(state.citation);
+      const rowIds = hierarchyActionRowIds(rootId);
       for (const id of hierarchyExpandableNodeIds(rowIds)) {
         if (expand) state.hierarchyExpanded.add(id);
         else state.hierarchyExpanded.delete(id);
@@ -11309,7 +11465,7 @@
       const authorityToggle = $(".main-reader-authority", actions);
       const copies = $(".live-citation-copies", actions);
       const officialSource = $(".official-source-action", actions);
-      copies.hidden = false;
+      copies.hidden = pane ? pane.entry?.mode === "search-tree" : Boolean(state.mainOccurrencePane?.searchState);
       const target = mainReaderActionTarget();
       copies.setAttribute("aria-disabled", String(!target));
       const hierarchy = hierarchyActionNode();
@@ -14276,6 +14432,15 @@
         markProfileChanged();
       }
       const update = anchor => {
+        const pane = state.focusedPaneContext || state.mainOccurrencePane;
+        if (pane?.searchState && (!state.focusedPaneContext || pane.entry?.mode === "search-tree")) {
+          const scrollTop = pane.scrollRoot?.scrollTop ?? window.scrollY;
+          renderOccurrenceSearchResult(pane, pane.searchState.result);
+          if (pane.scrollRoot) pane.scrollRoot.scrollTop = scrollTop;
+          else window.scrollTo(0, scrollTop);
+          syncMainReaderActionTarget();
+          return;
+        }
         if (persist && hierarchyActionNode() && isStatuteRootHierarchy()) {
           openTopLevelStatuteHierarchy(!state.focusedPaneContext && !els.search.value.trim());
           return;
@@ -15009,23 +15174,34 @@
     }
 
     function renderCorpusAudit() {
-      const compressed = corpusManifest?.compression === "gzip";
+      const compressed = ["gzip", "brotli"].includes(corpusManifest?.compression);
+      const compressionLabel = corpusManifest?.compression === "brotli" ? "Brotli" : "gzip";
+      const compressionSpec = corpusManifest?.compression === "brotli" ? "RFC 7932 Brotli" : "RFC 1952 gzip";
       const shards = Array.isArray(corpusManifest?.shards) ? corpusManifest.shards : [];
       const sharded = shards.length > 0;
       const scope = sharded ? "Metadata" : "Corpus";
+      const packed = Boolean(corpusManifest?.deliveryPacking);
+      const size = value => `${(Number(value || 0) / 1000000).toFixed(2)} MB (${Number(value || 0).toLocaleString("en-US")} bytes)`;
+      els.corpusPackagingDescription.textContent = sharded
+        ? `This copy embeds metadata and ${shards.length} content chunk${shards.length === 1 ? "" : "s"} in separate Base64-encoded ${compressionLabel} blocks. Each block has its own byte counts and SHA-256 hashes.`
+        : compressed
+          ? `This copy embeds one Base64-encoded ${compressionLabel} payload containing the complete ${packed ? "packed" : "expanded"} corpus JSON. Its compressed and decoded bytes are integrity-checked before use.`
+          : "This copy embeds the complete expanded corpus as UTF-8 JSON, with its byte count and SHA-256 hash checked before use.";
       const rows = [
-        ["Packaging", sharded ? `Metadata + ${shards.length} content chunks; RFC 4648 Base64 containing RFC 1952 gzip` : compressed ? "RFC 4648 Base64 containing RFC 1952 gzip" : "Complete expanded UTF-8 JSON (uncompressed)"],
+        ["Edition", build.fileName || "INASearch.html"],
+        ["Embedded corpus version", corpusManifest?.corpusVersion || "Unavailable"],
+        ["Packaging", sharded ? `Metadata + ${shards.length} content chunks; RFC 4648 Base64 containing ${compressionSpec}` : compressed ? `RFC 4648 Base64 containing ${compressionSpec}` : "Complete expanded UTF-8 JSON (uncompressed)"],
         ["Encoding", corpusManifest?.encoding || "Unavailable"],
         ["Compression", corpusManifest?.compression || "Unavailable"],
         ["Media type", corpusManifest?.mediaType || "Unavailable"],
         ["Content", `${corpusManifest?.contentType || "Unavailable"}; charset=${corpusManifest?.charset || "unknown"}`],
-        [`${scope} JSON bytes`, Number(corpusManifest?.uncompressedBytes || 0).toLocaleString()],
+        [sharded ? "Metadata JSON size" : packed ? "Packed JSON after decompression" : "Expanded JSON size", size(corpusManifest?.uncompressedBytes)],
         [`${scope} JSON SHA-256`, corpusManifest?.uncompressedSha256 || "Unavailable"]
       ];
-      if (compressed) rows.splice(5, 0, [`${scope} gzip bytes`, Number(corpusManifest?.compressedBytes || 0).toLocaleString()], [`${scope} gzip SHA-256`, corpusManifest?.compressedSha256 || "Unavailable"]);
+      if (compressed) rows.splice(7, 0, [`${scope} ${compressionLabel} size`, size(corpusManifest?.compressedBytes)], [`${scope} ${compressionLabel} SHA-256`, corpusManifest?.compressedSha256 || "Unavailable"]);
       if (sharded) {
         const blocks = [corpusManifest, ...shards];
-        rows.splice(5, 0, ["Total gzip bytes (all blocks)", blocks.reduce((sum, block) => sum + Number(block.compressedBytes || 0), 0).toLocaleString()], ["Total JSON bytes (all blocks)", blocks.reduce((sum, block) => sum + Number(block.uncompressedBytes || 0), 0).toLocaleString()]);
+        rows.splice(7, 0, [`Total ${compressionLabel} size (all blocks)`, size(blocks.reduce((sum, block) => sum + Number(block.compressedBytes || 0), 0))], ["Total JSON size (all blocks)", size(blocks.reduce((sum, block) => sum + Number(block.uncompressedBytes || 0), 0))]);
         rows.push(["Packed corpus SHA-256 before splitting", corpusManifest?.fullUncompressedSha256 || "Unavailable"]);
       }
       els.corpusManifestDetails.innerHTML = rows.map(([label, value]) => `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd>`).join("");
@@ -15049,13 +15225,17 @@ function Assert-CorpusFile($path, $bytes, $hash) {
 function Export-CorpusBlock($id, $entry, $stem) {
   $text = Read-EmbeddedBlock $id
   $jsonPath = Join-Path $outDir "$stem.json"
-  if ($entry.compression -eq "gzip") {
-    $gzipPath = Join-Path $outDir "$stem.json.gz"
+  if ($entry.compression -in @("gzip", "brotli")) {
+    $extension = if ($entry.compression -eq "brotli") { "br" } else { "gz" }
+    $gzipPath = Join-Path $outDir "$stem.json.$extension"
     [IO.File]::WriteAllBytes($gzipPath, [Convert]::FromBase64String(($text -replace '\\s', '')))
     Assert-CorpusFile $gzipPath $entry.compressedBytes $entry.compressedSha256
     $sourceStream = [IO.File]::OpenRead($gzipPath)
     $jsonStream = [IO.File]::Create($jsonPath)
-    $gzip = [IO.Compression.GZipStream]::new($sourceStream, [IO.Compression.CompressionMode]::Decompress)
+    $gzip = if ($entry.compression -eq "brotli") {
+      if ($PSVersionTable.PSVersion.Major -lt 7) { throw "Brotli extraction requires PowerShell 7 or later." }
+      [IO.Compression.BrotliStream]::new($sourceStream, [IO.Compression.CompressionMode]::Decompress)
+    } else { [IO.Compression.GZipStream]::new($sourceStream, [IO.Compression.CompressionMode]::Decompress) }
     try { $gzip.CopyTo($jsonStream) }
     finally { $gzip.Dispose(); $jsonStream.Dispose(); $sourceStream.Dispose() }
   } else {
@@ -15114,7 +15294,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
     }
 
     function tipCatalogMarkup() {
-      return TIP_CATEGORIES.map(category => `<details class="tip-category" data-tip-category="${escapeHtml(category.id)}"><summary><span>${escapeHtml(category.title)}</span><small>${category.tips.length} tip${category.tips.length === 1 ? "" : "s"}</small></summary><ol class="tip-list">${category.tips.map(([id, title, text, eligibility]) => `<li value="${id}" data-tip-id="${id}"><strong>${escapeHtml(title)}</strong> ${escapeHtml(text)}${eligibility === "hidden" ? " <em>Shown when legal navigation is hidden.</em>" : eligibility === "visible" ? " <em>Shown when legal navigation is visible.</em>" : ""}</li>`).join("")}</ol></details>`).join("");
+      return TIP_CATEGORIES.map(category => `<details class="tip-category" data-tip-category="${escapeHtml(category.id)}"><summary><span>${escapeHtml(category.title)}</span><small>${category.tips.length} tip${category.tips.length === 1 ? "" : "s"}</small></summary><ol class="tip-list">${category.tips.map(([id, title, text, eligibility]) => `<li data-tip-id="${id}"><strong>${escapeHtml(title)}</strong> ${escapeHtml(text)}${eligibility === "hidden" ? " <em>Shown when legal navigation is hidden.</em>" : eligibility === "visible" ? " <em>Shown when legal navigation is visible.</em>" : ""}</li>`).join("")}</ol></details>`).join("");
     }
 
     function todayTipMarkup() {
@@ -15123,17 +15303,39 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       return `<div class="today-tip" data-featured-tip-id="${tip.id}"><div class="today-tip-copy"><span class="today-tip-kicker">Today's tip · ${escapeHtml(tip.categoryTitle)}</span><strong>${escapeHtml(tip.title)}</strong><p>${escapeHtml(tip.text)}</p></div><button class="button small" type="button" data-dismiss-daily-tip>Dismiss for today</button></div>`;
     }
 
+    function renderAboutCoverage() {
+      if (!corpus) {
+        els.aboutCoverageSummary.textContent = "The included legal text is unavailable. The search guide and FAQs remain readable.";
+        return;
+      }
+      const uscTitles = [...(corpus.referencedUsc?.titles || [])].sort((left, right) => Number(left.number) - Number(right.number));
+      const uscRows = uscTitles.map(title => {
+        const name = String(title.name || "").toLowerCase().replace(/\b[a-z]/g, letter => letter.toUpperCase());
+        return `<tr><th scope="row">${escapeHtml(title.number)} U.S.C.<br>${escapeHtml(name)}</th><td>${(title.sections || []).map(section => `<code>${escapeHtml(section.section)}</code>`).join(", ")}</td></tr>`;
+      }).join("");
+      const cfrTitles = new Map();
+      for (const part of corpus.cfr?.parts || []) {
+        if (Number(part.title) === 8) continue;
+        if (!cfrTitles.has(part.title)) cfrTitles.set(part.title, []);
+        cfrTitles.get(part.title).push(part.part);
+      }
+      const cfrRows = [...cfrTitles].sort(([left], [right]) => Number(left) - Number(right)).map(([title, parts]) =>
+        `<tr><th scope="row">${escapeHtml(title)} CFR<br>${escapeHtml(corpus.cfr.titleNames?.[title] || "")}</th><td>${parts.sort((left, right) => String(left).localeCompare(String(right), "en", { numeric: true })).map(part => `<code>${escapeHtml(part)}</code>`).join(", ")}</td></tr>`
+      ).join("");
+      const sourceDate = corpus.sources?.title8?.capturedAt;
+      els.aboutCoverageSummary.innerHTML = `<h3>U.S. Code</h3>
+        <p><strong>Title 8, Aliens and Nationality:</strong> the INA and the rest of Title 8, including provisions outside the INA. The INA/U.S.C. switch lets you browse the same law using either numbering system.</p>
+        <p><strong>Sections cited from other U.S.C. titles:</strong> sections directly cited by the INA, such as <code>18 U.S.C. 16</code> and <code>21 U.S.C. 802</code>. Other U.S.C. titles are included only at the listed sections.</p>
+        <details class="about-faq"><summary>Other U.S.C. sections included</summary><div class="about-table-wrap"><table class="about-table" aria-label="Included U.S. Code sections"><thead><tr><th scope="col">Title</th><th scope="col">Sections</th></tr></thead><tbody>${uscRows}</tbody></table></div></details>
+        <h3>CFR</h3>
+        <p><strong>All of 8 CFR, Aliens and Nationality,</strong> plus the parts listed below from other CFR titles. Those additional parts are selected because the <a href="https://www.govinfo.gov/content/pkg/GPO-CFR-INDEX-2025/html/GPO-CFR-INDEX-2025-4.htm" target="_blank" rel="noopener noreferrer">PTAR (Parallel Table of Authorities and Rules)</a> links them to Title 8 statutes, including the INA. The PTAR identifies the statutes agencies cite as authority for their regulations.</p>
+        <div class="about-table-wrap"><table class="about-table" aria-label="Included CFR parts outside Title 8"><thead><tr><th scope="col">Title</th><th scope="col">Parts included</th></tr></thead><tbody>${cfrRows}</tbody></table></div>
+        <p>${sourceDate ? `U.S. Code source date: ${escapeHtml(sourceDate)}. ` : ""}CFR dates appear in the reader for each part. Turn on <strong>Automatic CFR updates</strong> in Settings to check the included regulations against eCFR.</p>`;
+    }
+
     function renderSources() {
       renderCorpusAudit();
-      const shortcuts = corpus?.shortcuts || [
-        { title: "USCIS", url: "https://www.uscis.gov/" },
-        { title: "USCIS search", url: "https://www.uscis.gov/search" },
-        { title: "USCIS Forms", url: "https://www.uscis.gov/forms/all-forms" },
-        { title: "USCIS Policy Manual", url: "https://www.uscis.gov/policy-manual" },
-        { title: "Policy Manual search", url: "https://www.uscis.gov/policy-manual/search" },
-        { title: "U.S. Code Title 8", url: "https://uscode.house.gov/browse/prelim@title8&edition=prelim" },
-        { title: "eCFR", url: "https://www.ecfr.gov/current" }
-      ];
+      renderAboutCoverage();
       const cfr = corpus?.cfr;
       const updateStatus = window.INA_SEARCH_UPDATE_STATUS;
       const updateNotice = !cfr || updateStatus?.state === "updated" ? "" : updateStatus?.state === "disabled"
@@ -15150,8 +15352,8 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         : state.fileSyncPending
           ? `<div class="notice warning">This profile is saved in the browser, but the connected data file needs reconciliation.</div>`
           : "";
-      els.sourceWarnings.innerHTML = `${!corpus ? `<div class="notice danger"><strong>The embedded corpus could not be opened.</strong><br>${escapeHtml(loadErrors.corpusMessage || "The embedded data is missing, incompatible, or malformed.")} Local statute, regulation, and reference catalogs are unavailable; use the official shortcuts below to open current sources.</div>` : ""}${profileWarning}${updateNotice}${cfr?.coverage?.unavailableGraphics?.length ? `<div class="notice warning">${cfr.coverage.unavailableGraphics.length} referenced official graphic could not be embedded or retained from the release snapshot. Its official location is preserved and the local reader labels the omission.</div>` : ""}`;
-      els.sourcesGrid.innerHTML = `<article class="source-card source-card-full"><h3>Official shortcuts</h3><p>Open an approved government resource or its native search.</p><div class="detail-actions">${shortcuts.map(item => openButton(item.url, item.title)).join("")}</div></article><article class="source-card source-card-full" id="aboutTipsCard"><div class="tips-card-head"><div><h3>Tips</h3><p>Learn one feature at a time, or expand any category to revisit the complete tip catalog.</p></div></div>${todayTipMarkup()}<div class="tip-category-list">${tipCatalogMarkup()}</div></article>`;
+      els.sourceWarnings.innerHTML = `${!corpus ? `<div class="notice danger"><strong>The embedded corpus could not be opened.</strong><br>${escapeHtml(loadErrors.corpusMessage || "The embedded data is missing, incompatible, or malformed.")} Local statute, regulation, and reference catalogs are unavailable. The help below remains available.</div>` : ""}${profileWarning}${updateNotice}${cfr?.coverage?.unavailableGraphics?.length ? `<div class="notice warning">${cfr.coverage.unavailableGraphics.length} referenced official graphic could not be embedded or retained from the release snapshot. Its official location is preserved and the local reader labels the omission.</div>` : ""}`;
+      els.sourcesGrid.innerHTML = `<article class="source-card source-card-full" id="aboutTipsCard"><div class="tips-card-head"><div><h3>Tips</h3><p>Go further with scoped searches, matching units, reference excerpts, and saved research. Expand a category for intermediate and advanced techniques.</p></div></div>${todayTipMarkup()}<div class="tip-category-list">${tipCatalogMarkup()}</div></article>`;
     }
 
     function cycleSearchSuggestion(random = Math.random) {
@@ -15855,13 +16057,6 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (artifactRepair) { event.preventDefault(); event.stopPropagation(); repairUnassociatedNote(artifactRepair.dataset.artifactRepair); return; }
         const artifactDelete = event.target.closest("[data-artifact-delete]");
         if (artifactDelete) { event.preventDefault(); event.stopPropagation(); if (deleteNoteById(artifactDelete.dataset.artifactDelete)) applySearchQuery("in:notes", false, true); return; }
-        const occurrenceCopy = event.target.closest("[data-occurrence-copy]");
-        if (occurrenceCopy) {
-          event.preventDefault();
-          event.stopPropagation();
-          await copyOccurrenceRowData(pane, occurrenceCopy);
-          return;
-        }
         const occurrenceRow = event.target.closest("[data-occurrence-row]");
         if (occurrenceRow) {
           selectOccurrenceRow(pane, occurrenceRow);
@@ -15927,13 +16122,6 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (artifactRepair) { event.preventDefault(); event.stopPropagation(); repairUnassociatedNote(artifactRepair.dataset.artifactRepair); return; }
         const artifactDelete = event.target.closest("[data-artifact-delete]");
         if (artifactDelete) { event.preventDefault(); event.stopPropagation(); if (deleteNoteById(artifactDelete.dataset.artifactDelete)) applySearchQuery("in:notes", false, true); return; }
-        const occurrenceCopy = event.target.closest("[data-occurrence-copy]");
-        if (occurrenceCopy) {
-          event.preventDefault();
-          event.stopPropagation();
-          await copyOccurrenceRowData(state.mainOccurrencePane, occurrenceCopy);
-          return;
-        }
         const rowButton = event.target.closest("[data-occurrence-row]");
         if (rowButton) {
           selectOccurrenceRow(state.mainOccurrencePane, rowButton);
@@ -15956,7 +16144,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
             selectedResult: state.mainOccurrencePane.searchState?.selectedResult || null,
             scrollTop: window.scrollY || 0
           });
-          applySearchQuery(row.readerCommand || row.citation, true, true);
+          applySearchQuery(occurrenceReaderCommand(row), true, true);
           return;
         }
       });

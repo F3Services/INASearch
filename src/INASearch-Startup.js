@@ -109,7 +109,7 @@
     document.getElementById("authorityBrowseHeader").innerHTML = header(system === "ina" ? "GovInfo INA structure" : "House U.S. Code", data.urls[system], system === "ina" ? "INA" : "8 U.S.C.", system === "ina" ? "Immigration and Nationality Act" : "Aliens and Nationality", "authorityBrowseTitle") + actions(root);
     const list = document.getElementById("resultList");
     list.innerHTML = `<div class="hierarchy-list">${rows(data[system])}</div><section class="home-cfr-index" aria-labelledby="homeCfrTitle"><header class="authority-browse-header">${header("eCFR", "https://www.ecfr.gov/current", "CFR", "Code of Federal Regulations", "homeCfrTitle")}${actions("cfr:root")}</header><div class="hierarchy-list" role="list" aria-label="CFR index">${rows(data.cfr)}</div></section>`;
-    if (data.referencedUsc?.length) list.insertAdjacentHTML("beforeend", `<section class="home-cfr-index" aria-labelledby="homeRelatedUscTitle"><header class="authority-browse-header"><h2 class="authority-browse-title" id="homeRelatedUscTitle">Referenced U.S. Code</h2><div class="authority-browse-footer"><p class="authority-browse-meta">Sections cited by the statutory text of Title 8</p></div></header><div class="hierarchy-list" role="list" aria-label="Referenced U.S. Code index">${rows(data.referencedUsc)}</div></section>`);
+    if (data.referencedUsc?.length) list.insertAdjacentHTML("beforeend", `<section class="home-cfr-index" aria-labelledby="homeRelatedUscTitle"><header class="authority-browse-header"><h2 class="authority-browse-title" id="homeRelatedUscTitle">Referenced U.S. Code</h2><div class="authority-browse-footer"><p class="authority-browse-meta">Sections cited by the statutory text of the INA</p></div>${actions("referenced-usc")}</header><div class="hierarchy-list" role="list" aria-label="Referenced U.S. Code index">${rows(data.referencedUsc)}</div></section>`);
     list.setAttribute("role", "group");
     list.setAttribute("aria-label", `${system === "ina" ? "INA" : "8 U.S.C."} and CFR index`);
     list.removeAttribute("aria-busy");
@@ -134,17 +134,23 @@
     if (manifest?.schemaVersion !== 1 || manifest.contentType !== "application/json" || manifest.charset !== "utf-8" || !Number.isSafeInteger(manifest.uncompressedBytes) || !isHash(manifest.uncompressedSha256)) throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
     let bytes;
     let compressedCheck = Promise.resolve(true);
-    if (manifest.compression === "gzip") {
-      if (manifest.encoding !== "base64" || manifest.mediaType !== "application/gzip" || !Number.isSafeInteger(manifest.compressedBytes) || !isHash(manifest.compressedSha256)) throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
-      if (typeof DecompressionStream !== "function") throw new Error("This browser does not support the standard gzip decompression API required by INASearch.");
+    if (["gzip", "brotli"].includes(manifest.compression)) {
+      if (manifest.encoding !== "base64" || manifest.mediaType !== `application/${manifest.compression}` || !Number.isSafeInteger(manifest.compressedBytes) || !isHash(manifest.compressedSha256)) throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
+      if (manifest.compression === "gzip" && typeof DecompressionStream !== "function") throw new Error("This browser does not support the standard gzip decompression API required by INASearch.");
       const binary = atob(text.replace(/\s+/g, ""));
       const compressed = new Uint8Array(binary.length);
       for (let index = 0; index < binary.length; index++) compressed[index] = binary.charCodeAt(index);
       if (compressed.byteLength !== manifest.compressedBytes) throw new Error("The compressed corpus has an unexpected byte count.");
-      // Hashing and native gzip decoding can proceed together. Nothing is published until both hashes pass.
+      // Verify before handing bytes to the embedded decoder. Nothing is
+      // published until the decoded byte count and hash also pass.
       compressedCheck = sha256(compressed).then(hash => hash === manifest.compressedSha256);
-      try { bytes = new Uint8Array(await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer()); }
+      if (!await compressedCheck) throw new Error("The compressed corpus failed its SHA-256 integrity check.");
+      globalThis.INA_SEARCH_MARK_PERFORMANCE?.("corpus-decompression-start", { compression: manifest.compression });
+      try { bytes = manifest.compression === "brotli"
+        ? globalThis.INASearchBrotli.decode(compressed)
+        : new Uint8Array(await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer()); }
       catch (error) { if (!await compressedCheck) throw new Error("The compressed corpus failed its SHA-256 integrity check."); throw error; }
+      globalThis.INA_SEARCH_MARK_PERFORMANCE?.("corpus-decompression-end", { compression: manifest.compression });
     } else if (manifest.compression === "none" && manifest.encoding === "utf-8" && manifest.mediaType === "application/json") bytes = new TextEncoder().encode(text);
     else throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
     if (bytes.byteLength !== manifest.uncompressedBytes) throw new Error("The decompressed corpus has an unexpected byte count.");
@@ -166,7 +172,7 @@
     const add = (kind, index) => { const id = mapping[kind]?.[index]; if (Number.isInteger(id)) chunks.add(id); };
     for (const segment of segments) {
       const value = String(segment.text ?? segment.value ?? segment ?? "").trim();
-      if (!value || /^(?:define:|INA$|USC$|\d+\s*U\.?\s*S\.?\s*C\.?$|CFR$|\d+\s*CFR$)/i.test(value)) continue;
+      if (!value || /^(?:about$|define:|INA$|USC$|\d+\s*U\.?\s*S\.?\s*C\.?$|CFR$|\d+\s*CFR$)/i.test(value)) continue;
       if (/\b(?:chapter|title|subchapter|subpart)\b/i.test(value) && !/\b(?:in|cites):/i.test(value)) continue;
       const compact = value.replace(/[‐‑‒–—−]/g, "-").replace(/[\s§]/g, "").replace(/i\.?n\.?a\.?/gi, "ina").replace(/u\.?s\.?c\.?/gi, "usc").replace(/c\.?f\.?r\.?/gi, "cfr").replace(/^0+(?=\d)/, "");
       const cfr = compact.match(/^(?:(\d+)cfr)?(\d+[a-z]*\.\d+.*)$/i);

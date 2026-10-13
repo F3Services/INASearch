@@ -33,13 +33,18 @@ function extractFunction(source, start, end, context) {
 const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&#39;" })[char]);
 const badge = extractFunction(template, "    function hierarchyStatusBadge(", "    function hierarchyExpandableNodeIds(", {
   escapeHtml,
+  INASearchStatuteStatus: status,
   statuteStatusLabel: status.label
 });
 const omitted = badge({ authority: "usc", kind: "section", status: "omitted", statusReason: { text: "Omitted because the temporary authority expired in 1990." } });
 assert.match(omitted, /class="hierarchy-status omitted"/);
 assert.match(omitted, /title="Omitted because the temporary authority expired in 1990\."/);
 assert.match(omitted, /aria-label="Omitted because the temporary authority expired in 1990\."/);
-assert.doesNotMatch(badge({ authority: "usc", kind: "chapter", dispositionLabel: "Omitted", status: "" }), /disposition|omitted/i);
+for (const [label, kind] of [["Transferred", "transferred"], ["Repealed or Transferred", "repealed"], ["Transferred or Omitted", "omitted"], ["Transferred, Omitted, or Repealed", "repealed"], ["Omitted", "omitted"]]) {
+  const markup = badge({ authority: "usc", kind: "chapter", dispositionLabel: label, status: "" });
+  assert.match(markup, new RegExp(`class="hierarchy-status ${kind}"`), `${label} must use its warning color, with red taking precedence over transfer yellow.`);
+  assert(markup.includes(`>${label}</span>`), "The contents badge must retain the House's full label.");
+}
 assert.match(badge({ authority: "usc", kind: "chapter", containsIna: true, status: "" }), /Contains INA/);
 
 const warning = extractFunction(template, "    function statuteStatusWarning(", "    function renderStatutoryNote(", {
@@ -116,7 +121,7 @@ const openingIndexData = extractFunction(build, "function openingIndexData(", "f
   status
 });
 const fixture = {
-  title8: { sections: [
+  title8: { chapterDispositions: { "1": "Repealed or Omitted", "2": "Transferred" }, sections: [
     { id: 1, section: "1", breadcrumb: [{ number: "1", title: "FIRST", kind: "chapter" }], status: "omitted" },
     { id: 2, section: "2", breadcrumb: [{ number: "1", title: "FIRST", kind: "chapter" }], status: "omitted" },
     { id: 3, section: "3", breadcrumb: [{ number: "2", title: "SECOND", kind: "chapter" }], status: "omitted" },
@@ -133,8 +138,8 @@ const fixture = {
 const titleCaseTemplate = template;
 const opening = openingIndexData(titleCaseTemplate, fixture);
 assert.deepEqual(Array.from(opening.usc[0][3][0]), ["Contains INA", "ina-membership"]);
-assert.deepEqual(Array.from(opening.usc[0][3][1]), ["Omitted", "omitted"]);
-assert.equal(opening.usc[1][3].length, 0);
+assert.deepEqual(Array.from(opening.usc[0][3][1]), ["Repealed or Omitted", "repealed"]);
+assert.deepEqual(Array.from(opening.usc[1][3][0]), ["Transferred", "transferred"]);
 assert.deepEqual(Array.from(opening.referencedUsc[0][3][0]), ["Repealed", "repealed"]);
 assert.equal(opening.referencedUsc[1][3].length, 0);
 assert.match(template, /addReferencedUscHierarchy\(uscRoot\);[\s\S]{0,1000}assignContainerStatuses\(uscRoot\);/);

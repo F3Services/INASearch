@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 'use strict';
-const fs=require('fs'), path=require('path'), zlib=require('zlib'), crypto=require('crypto');
-const {hydratePackedCorpus}=require('../src/INASearch-Corpus-Packing');
+const fs=require('fs'), path=require('path'), crypto=require('crypto');
+const {readBuildCorpus}=require('./read-build-corpus');
 const root=path.resolve(__dirname,'..'), base=path.join(root,'audits/cfr-subpart-parser/baseline');
 const fields={references:'text',continuationReferences:'continuation',headingReferences:'heading',preambleReferences:'preamble',sourceCreditReferences:'sourceCredit',xReferences:'x',authorityReferences:'authority',sourceReferences:'source'};
-function read(file,pack){const html=fs.readFileSync(file,'utf8'); const script=id=>html.match(new RegExp(`<script id="${id}"[^>]*>([\\s\\S]*?)<\\/script>`))[1];const manifest=JSON.parse(script('inaSearchCorpusManifest'));const data=script('inaSearchCorpusData');return pack.unpackLegalReferences(hydratePackedCorpus(JSON.parse(manifest.compression==='gzip'?zlib.gunzipSync(Buffer.from(data.replace(/\s+/g,''),'base64')).toString():data)));}
+function read(file,pack){return pack.unpackLegalReferences(readBuildCorpus(file));}
 function collect(corpus){const out=new Map();function visit(v,p,source){if(!v||typeof v!=='object')return;if(Array.isArray(v)){v.forEach((x,i)=>visit(x,`${p}[${i}]`,source));return;}source=v.id||source;for(const [key,field]of Object.entries(fields))if(v[key]?.length)out.set(`${p}.${field}`,{sourceId:source,sourcePath:p,field,text:String(v[field]||''),references:v[key]});for(const[k,x]of Object.entries(v))if(!fields[k])visit(x,`${p}.${k}`,source);}visit(corpus,'corpus','');return out;}
 const clean=r=>({start:r.start,end:r.end,text:r.text,family:r.family,targetTitle:r.targetTitle||'',targetSection:r.targetSection||'',targetPath:r.targetPath||[],targetCongress:r.targetCongress||'',targetLaw:r.targetLaw||'',targetVolume:r.targetVolume||'',targetPage:r.targetPage||'',resolution:r.resolution,officialUrl:r.officialUrl||'',ruleId:r.ruleId});
 const identity=r=>JSON.stringify({...clean(r),ruleId:undefined});

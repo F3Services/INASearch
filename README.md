@@ -40,7 +40,7 @@ INASearch.html?q=8%20CFR%20214.2%28h%29
 
 ## Appearance
 
-INASearch follows your device's light or dark setting by default. In the top bar or **Settings → Appearance**, the sun/moon button switches to the theme shown on its face; the laptop button returns to System mode, and its small sun or moon shows the device's current theme. The choice is saved with your profile and applies to both standalone editions.
+New profiles start in Day (light) mode. In the top bar or **Settings → Appearance**, the sun/moon button switches themes; the laptop button selects System mode, and its small sun or moon shows the device's current theme. The choice is saved with your profile and applies to both standalone editions.
 
 Appearance also provides independent, off-by-default options to hide the Updates display, save-status display, or top-bar theme buttons. Hiding the top-bar theme buttons does not remove the controls from Settings.
 
@@ -48,7 +48,7 @@ The typography uses offline system font stacks inspired by the USCIS Policy Manu
 
 ## Saving notes and settings
 
-INASearch works without an account and does not save anything to a server. Notes, preferences, and tutorial progress save automatically in browser-owned IndexedDB storage.
+INASearch works without an account and does not save anything to a server. Notes, highlights, preferences, and daily-tip progress save automatically in browser-owned IndexedDB storage.
 
 Browser data can be cleared, evicted, or separated when the standalone HTML file is moved or renamed. For stronger protection, open **Saving & data** and connect an `INASearch_Data.json` file or download periodic JSON backups. A connected file is authoritative and updates automatically alongside the browser copy.
 
@@ -77,6 +77,10 @@ The **About** page shows the capture dates and coverage for the copy you are usi
 - `INASearch-Uncompressed.html` contains the same corpus as readable, uncompressed JSON for inspection.
 
 Both editions are complete standalone files.
+
+## License
+
+INASearch application code is available under the [MIT License](LICENSE). The embedded Brotli decoder also uses its MIT license option. Its copyright and license notice are included in both HTML editions and [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
 
 ## Learn more
 

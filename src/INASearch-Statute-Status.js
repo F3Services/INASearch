@@ -11,6 +11,13 @@
 
   function label(value) { return LABELS[normalize(value)]; }
 
+  function dispositionBadge(value) {
+    const label = String(value || "").trim();
+    const statuses = new Set(label.toLowerCase().match(/\b(?:repealed|omitted|transferred)\b/g) || []);
+    const status = ["repealed", "omitted", "transferred"].find(key => statuses.has(key));
+    return status ? { label, status } : null;
+  }
+
   function aggregateSections(sections) {
     if (!sections?.length) return "";
     const first = normalize(sections[0]);
@@ -24,7 +31,7 @@
     return first && first !== "current" && children.every(child => aggregateTree(child, getChildren) === first) ? first : "";
   }
 
-  const api = Object.freeze({ normalize, label, aggregateSections, aggregateTree });
+  const api = Object.freeze({ normalize, label, dispositionBadge, aggregateSections, aggregateTree });
   globalThis.INASearchStatuteStatus = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })();

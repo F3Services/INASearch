@@ -6,7 +6,8 @@
     "test": "node tools/test-standalone.js"
   },
   "devDependencies": {
-    "terser": "5.44.0",
-    "acorn": "8.15.0"
+    "acorn": "8.15.0",
+    "brotli-dec-wasm": "2.3.2",
+    "terser": "5.44.0"
   }
 }

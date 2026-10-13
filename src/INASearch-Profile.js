@@ -33,7 +33,7 @@ window.INA_SEARCH_PROFILE = {
     "scrollUpdatesSearch": false,
     "pageViewOffsetPercent": 3,
     "mainNavigatorCollapsed": false,
-    "citationCopyPreface": "[citation] [text]",
+    "citationCopyPreface": "[citation] - [text]",
     "citationCopyPrefaceVersion": 3,
     "expandSearchResultsByDefault": true,
     "showCfrChapterSubchapterInSearchHierarchy": false,

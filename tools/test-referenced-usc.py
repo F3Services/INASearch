@@ -16,6 +16,15 @@ class ReferencedUscTests(unittest.TestCase):
     def setUp(self):
         self.assertIsNotNone(m, "The direct-reference corpus generator is not implemented")
 
+    def test_only_ina_operative_citations_select_external_sections(self):
+        base = dict(family='usc', targetTitle='18', context='operative', text='18 U.S.C. 16', sourceSection='1101')
+        refs = [dict(base, targetSection='16'),
+                dict(base, targetSection='17', sourceSection='1611'),
+                dict(base, targetSection='18', context='notes')]
+        selected, excluded, _ = m.select_references(refs, {'1101'})
+        self.assertEqual(set(selected), {'18:16'})
+        self.assertEqual(len(excluded), 2)
+
     def test_full_section_keeps_uncited_siblings_and_nested_runins(self):
         html = '<p class="statutory-body">The term means—</p><p class="statutory-body">(a)(1) One.</p><p class="statutory-body-1em">(A) Two.</p><p class="statutory-body">(b) Three.</p>'
         section = m.parse_operative(html)
@@ -40,7 +49,7 @@ class ReferencedUscTests(unittest.TestCase):
     def test_range_endpoints_never_become_standalone_targets(self):
         source='Sections 3145 through 3148 of title 18 apply.'
         refs=[dict(family='usc',targetTitle='18',targetSection='3145',context='operative',text='3145',sourceText=source,start=9,end=13,sourceSection='1535',field='preamble')]
-        selected, excluded, _=m.select_references(refs)
+        selected, excluded, _=m.select_references(refs, {'1101', '1102', '1182', '1535'})
         self.assertEqual(selected,{})
         self.assertEqual(excluded[0]['reason'],'Section range')
 
@@ -94,13 +103,13 @@ class ReferencedUscTests(unittest.TestCase):
                 dict(family='usc', targetTitle='18', targetSection='17', context='notes', text='18 U.S.C. 17'),
                 dict(family='usc', targetTitle='18', targetSection='18', context='operative', text='18 U.S.C. 18 et seq.', after='', before='',start=0,end=20,field='preamble',sourceSection='1101'),
                 dict(family='usc', targetTitle='18', targetSection='19', context='operative', text='sections 19 through 21 of title 18', after='', before='',start=0,end=34,field='preamble',sourceSection='1102')]
-        selected, excluded, corrections = m.select_references(refs)
+        selected, excluded, corrections = m.select_references(refs, {'1101', '1102', '1182', '1535'})
         self.assertEqual(set(selected), {'18:16'})
         self.assertEqual(len(excluded), 3)
 
     def test_explicit_path_overrides_erroneous_house_markup(self):
-        refs = [dict(family='usc', targetTitle='7', targetSection='2012', targetPath=['j'], sourceSection='1612', context='operative', text='7 U.S.C. 2012(r)', after='', before='', start=0,end=16,field='body.0.text')]
-        selected, _, corrections = m.select_references(refs)
+        refs = [dict(family='usc', targetTitle='7', targetSection='2012', targetPath=['j'], sourceSection='1101', context='operative', text='7 U.S.C. 2012(r)', after='', before='', start=0,end=16,field='body.0.text')]
+        selected, _, corrections = m.select_references(refs, {'1101', '1102', '1182', '1535'})
         self.assertEqual(selected['7:2012'][0]['targetPath'], ['r'])
         self.assertTrue(corrections)
 
@@ -128,15 +137,15 @@ class GeneratedCorpusTests(unittest.TestCase):
             for reference in self.report['selection'][target]:
                 self.assertEqual(reference['context'],'operative')
                 self.assertFalse(reference['field'].startswith('notes.'))
-        for excluded in ['2:192','2:194','29:1803','29:1831','29:1853','29:1855','28:2671','28:2680','18:3145','18:3148']:
+        for excluded in ['42:1396b','26:6103','5:552a','6:485','2:192','2:194','29:1803','29:1831','29:1853','29:1855','28:2671','28:2680','18:3145','18:3148']:
             self.assertNotIn(excluded,self.sections)
 
     def test_repealed_and_transferred_targets_have_explicit_dispositions(self):
         unavailable={r['target']:r for r in self.report['unavailableTargets']}
         self.assertEqual(unavailable['42:259']['status'],'repealed')
         self.assertEqual(unavailable['50:4605']['status'],'repealed')
-        self.assertEqual(unavailable['50:403']['status'],'transferred')
-        self.assertEqual(unavailable['50:403-3']['status'],'transferred')
+        self.assertNotIn('50:403', unavailable)
+        self.assertNotIn('50:403-3', unavailable)
         self.assertTrue(all(r['sourceUrl'] for r in unavailable.values()))
 
     def test_every_source_excerpt_hash_and_complete_operative_text(self):
@@ -144,6 +153,7 @@ class GeneratedCorpusTests(unittest.TestCase):
         for record in inventory['artifacts']:
             blob=(ROOT/'sources/legal/referenced-usc'/record['path']).read_bytes()
             self.assertEqual(m.digest(blob),record['sha256'])
+            if record['target'] not in self.sections: continue
             section=self.sections[record['target']]
             raw=m.field(blob.decode(),'statute')
             original=m.normalize(' '.join(m.plain(b) for b in m.blocks(raw)))

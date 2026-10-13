@@ -29,11 +29,11 @@ const sha256 = bytes => crypto.createHash("sha256").update(bytes).digest("hex");
 
 function decodePayload(text, manifest, label) {
   let bytes;
-  if (manifest.compression === "gzip") {
+  if (["gzip", "brotli"].includes(manifest.compression)) {
     const compressed = Buffer.from(text.replace(/\s+/g, ""), "base64");
     assert.equal(compressed.length, manifest.compressedBytes, `${label}: compressed byte count`);
     assert.equal(sha256(compressed), manifest.compressedSha256, `${label}: compressed SHA-256`);
-    bytes = zlib.gunzipSync(compressed);
+    bytes = manifest.compression === "brotli" ? zlib.brotliDecompressSync(compressed) : zlib.gunzipSync(compressed);
   } else {
     assert.equal(manifest.compression, "none", `${label}: unsupported corpus compression`);
     bytes = Buffer.from(text, "utf8");

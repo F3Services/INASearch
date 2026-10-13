@@ -7,6 +7,9 @@ const path = require("path");
 const vm = require("vm");
 const zlib = require("zlib");
 const { compactShell } = require("./compact-shell");
+const { buildBrotliRuntime } = require("./build-brotli");
+const { prepareDeliveryCorpus } = require("./corpus-delivery");
+const { buildFaqMarkup } = require("./build-about");
 const { buildDefinitionCatalog } = require("./definition-catalog");
 const { applyStatuteReferences } = require("./statute-references");
 const { applyStatuteFootnotes } = require("./statute-footnotes");
@@ -74,24 +77,24 @@ function sha256(value) {
 
 function compressCorpus(corpus, deliveryPacking = "") {
   const json = Buffer.from(JSON.stringify(corpus), "utf8");
-  const gzip = zlib.gzipSync(json, { level: 9, mtime: 0 });
+  const compressed = zlib.brotliCompressSync(json, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11 } });
   return {
     manifest: {
       schemaVersion: 1,
       corpusSchemaVersion: corpus.schemaVersion,
       corpusVersion: corpus.corpusVersion,
       encoding: "base64",
-      compression: "gzip",
-      mediaType: "application/gzip",
+      compression: "brotli",
+      mediaType: "application/brotli",
       contentType: "application/json",
       charset: "utf-8",
       ...(deliveryPacking ? { deliveryPacking } : {}),
-      compressedBytes: gzip.byteLength,
+      compressedBytes: compressed.byteLength,
       uncompressedBytes: json.byteLength,
-      compressedSha256: sha256(gzip),
+      compressedSha256: sha256(compressed),
       uncompressedSha256: sha256(json)
     },
-    base64: gzip.toString("base64")
+    base64: compressed.toString("base64")
   };
 }
 
@@ -143,7 +146,7 @@ function replaceCorpusBlock(html, payload, manifest) {
     , ["full-uncompressed-sha256", manifest.fullUncompressedSha256]
     , ["shards", manifest.shards ? JSON.stringify(manifest.shards) : undefined]
   ].filter(([, value]) => value !== undefined).map(([name, value]) => `data-${name}="${htmlAttribute(value)}"`).join(" ");
-  const scriptType = manifest.compression === "none" ? "application/json" : "application/gzip";
+  const scriptType = manifest.compression === "none" ? "application/json" : `application/${manifest.compression}`;
   const replacement = `${start}\n  <script id="inaSearchCorpusData" type="${scriptType}" ${attributes}>${payload}</script>\n  ${end}`;
   const expression = new RegExp(`${start}[\\s\\S]*?${end}`);
   if (!expression.test(html)) throw new Error("Template is missing the CORPUS data block.");
@@ -168,8 +171,10 @@ function openingIndexData(template, corpus) {
     const containsIna = corpus.title8.sections.some(candidate => candidate.breadcrumb?.[0]?.number === chapter.number && corpus.inaCrosswalk.some(row => row.hasEquivalent !== false && String(row.uscSection) === String(candidate.section)));
     const badges = [];
     if (containsIna) badges.push(["Contains INA", "ina-membership"]);
-    const disposition = status.aggregateSections(sectionsByChapter.get(chapter.number));
-    if (disposition) badges.push([status.label(disposition), disposition]);
+    const disposition = status.dispositionBadge(corpus.title8.chapterDispositions?.[chapter.number]);
+    const aggregate = status.aggregateSections(sectionsByChapter.get(chapter.number));
+    if (disposition) badges.push([disposition.label, disposition.status]);
+    else if (aggregate) badges.push([status.label(aggregate), aggregate]);
     chapters.set(chapter.number, [`usc:title:8:chapter:${encodeURIComponent(chapter.number)}`, `Chapter ${chapter.number}`, titleCase(chapter.title), badges, "intermediate"]);
   }
   return {
@@ -242,12 +247,16 @@ function makeBuild(template, corpus, profile, options) {
 
 async function main() {
 let template = fs.readFileSync(path.join(sourceDir, "INASearch.template.html"), "utf8");
+if (!template.includes("<!-- INA_SEARCH_FAQ -->")) throw new Error("The About FAQ placeholder is missing.");
+template = template.replace("<!-- INA_SEARCH_FAQ -->", () => buildFaqMarkup(fs.readFileSync(path.join(root, "FAQ.md"), "utf8")));
 const annotationRuntimeSource = fs.readFileSync(path.join(sourceDir, "INASearch-Annotations.js"), "utf8");
 template = replaceRuntimeBlock(template, "STORAGE", "inaSearchStorageRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Storage.js"), "utf8"));
 template = replaceRuntimeBlock(template, "CORPUS_PACKING", "inaSearchCorpusPackingRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Corpus-Packing.js"), "utf8"));
 template = replaceRuntimeBlock(template, "CORPUS_SHARDS", "inaSearchCorpusShardsRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Corpus-Shards.js"), "utf8"));
 template = replaceRuntimeBlock(template, "STATUTE_STATUS", "inaSearchStatuteStatusRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Statute-Status.js"), "utf8"));
 template = replaceRuntimeBlock(template, "STARTUP", "inaSearchStartupRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Startup.js"), "utf8"));
+template = replaceRuntimeBlock(template, "BROTLI", "inaSearchBrotliRuntime", buildBrotliRuntime());
+template = template.replace("<!-- INA_SEARCH_THIRD_PARTY_LICENSES -->", () => `<!-- INA_SEARCH_THIRD_PARTY_LICENSES\nINASearch application code\n\n${fs.readFileSync(path.join(root, "LICENSE"), "utf8")}\n${fs.readFileSync(path.join(root, "THIRD-PARTY-NOTICES.txt"), "utf8")}\n-->`);
 template = replaceRuntimeBlock(template, "INSERTIONS", "inaSearchInsertionsRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Insertions.js"), "utf8"));
 template = replaceRuntimeBlock(template, "ANNOTATIONS", "inaSearchAnnotationsRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Annotations.js"), "utf8"));
 template = replaceRuntimeBlock(template, "COMMAND", "inaSearchCommandRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Command.js"), "utf8"));
@@ -284,6 +293,7 @@ const definitionSource = readAssignedObject("INASearch-Definitions.js", "INA_SEA
 const uscisGlossarySource = readAssignedObject("INASearch-USCIS-Glossary.js", "INA_SEARCH_USCIS_GLOSSARY");
 fullCorpus.definitions = buildDefinitionCatalog(fullCorpus, definitionSource, uscisGlossarySource);
 packLegalReferences(fullCorpus);
+const deliveredCorpus = prepareDeliveryCorpus(fullCorpus);
 const defaultProfile = readAssignedObject("INASearch-Profile.js", "INA_SEARCH_PROFILE");
 const openingIndex = openingIndexData(template, fullCorpus);
 const shellStyle = template.match(/<style>([\s\S]*?)<\/style>/)?.[1] || "";
@@ -317,12 +327,12 @@ const variants = [
     compactShell: true
   }
 ];
-const results = variants.map(options => makeBuild(template, fullCorpus, defaultProfile, { ...options, openingIndex }));
-for (const options of variants) makeBuild(debugTemplate, fullCorpus, defaultProfile, { ...options, openingIndex, outputDirectory: "tmp/debug" });
+const results = variants.map(options => makeBuild(template, deliveredCorpus, defaultProfile, { ...options, openingIndex }));
+for (const options of variants) makeBuild(debugTemplate, deliveredCorpus, defaultProfile, { ...options, openingIndex, outputDirectory: "tmp/debug" });
 
 for (const result of results) {
-  const corpusSize = result.manifest.compression === "gzip"
-    ? `${result.manifest.compressedBytes} gzip bytes`
+  const corpusSize = result.manifest.compression !== "none"
+    ? `${result.manifest.compressedBytes} ${result.manifest.compression} bytes`
     : `${result.manifest.uncompressedBytes} uncompressed JSON bytes`;
   console.log(`${result.fileName}\t${result.bytes} bytes\t${result.instanceId}\t${corpusSize}`);
 }
