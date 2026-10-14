@@ -9063,7 +9063,7 @@
     function statuteFieldPreviewHtml(source, field, start = 0, end = String(source?.[field] || "").length, usedFootnotes = new Set(), part = null) {
       const references = part ? globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(source, part) : source[`${field}FootnoteReferences`] || [];
       return globalThis.INA_SEARCH_OCCURRENCE.presentation.format(source[`${field}Layout`], start, end,
-        (from, to) => escapeHtml(statuteTextRangeWithHouseFootnotes(source[field], references, from, to, usedFootnotes)), { mode: "field", parentIndent: source[`${field}Presentation`]?.indent });
+        (from, to) => escapeHtml(statuteTextRangeWithHouseFootnotes(source[field], references, from, to, usedFootnotes)), { mode: "field", parentIndent: source[`${field}Presentation`]?.indent, parentFirstIndent: source[`${field}Presentation`]?.firstIndent });
     }
 
     function statuteReferencePreviewNodeHtml(node, usedFootnotes = new Set(), section = null, currentPath = [], textEnd = null) {
@@ -13691,7 +13691,7 @@
         const end = segmentEnd ?? String(value || "").length;
         return globalThis.INA_SEARCH_OCCURRENCE.presentation.format(definitionContext.sourceLayout, segmentStart, end,
           (start, stop) => linkifyStatutoryText(value, references, start, stop, searchMatch, footnoteReferences, { ...definitionContext, layoutApplied: true }),
-          { mode: "field", structuralOnly: true, plainText: definitionContext.plainText, parentIndent: definitionContext.sourcePresentation?.indent });
+          { mode: "field", structuralOnly: true, plainText: definitionContext.plainText, parentIndent: definitionContext.sourcePresentation?.indent, parentFirstIndent: definitionContext.sourcePresentation?.firstIndent });
       }
       if (profile.preferences.statutoryLinkCitationSystem === "view" && !definitionContext?.citationDisplaySystem && references.some(reference => ["usc", "ina"].includes(reference.family))) {
         // Keep the alternate fragment inert and ready. A format swap moves
@@ -13870,7 +13870,7 @@
       if (definitionContext?.sourceLayout?.length && !definitionContext.layoutApplied) {
         return globalThis.INA_SEARCH_OCCURRENCE.presentation.format(definitionContext.sourceLayout, start, end,
           (from, to) => formatStatutoryRunInText(value, currentLabel, references, searchMatch, legalUnit, footnoteReferences, { ...definitionContext, layoutApplied: true }, from, to),
-          { mode: "field", structuralOnly: true, parentIndent: definitionContext.sourcePresentation?.indent });
+          { mode: "field", structuralOnly: true, parentIndent: definitionContext.sourcePresentation?.indent, parentFirstIndent: definitionContext.sourcePresentation?.firstIndent });
       }
       const markers = statutoryRunInMarkers(input, currentLabel).filter(marker => marker.start >= start && marker.start < end);
       if (!markers.length) return linkifyStatutoryText(input, references, start, end, searchMatch, footnoteReferences, definitionContext);

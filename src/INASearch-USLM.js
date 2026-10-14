@@ -67,7 +67,10 @@
           const cls = units.has(block.tag) ? "note-unit" : ({ p: "note-paragraph", quotedContent: "note-quote" })[block.tag] || `note-${block.tag}`;
           const fieldBlock = mode === "field" && depth === 0 && cursor > from && blocks.has(block.tag) ? " uslm-field-block" : "";
           const leaders = block.presentation?.leaders ? " uslm-leaders" : "";
-          const attrs = attributes(mode === "field" && block.tag === "continuation" ? { ...block, style: { ...block.style, display: "block" } } : block, { parentIndent });
+          // The reader positions the opening text after its citation/heading.
+          // Publisher hanging margins require a block, not this inline span.
+          const inlineField = mode === "field" && depth === 0 && !fieldBlock && ["chapeau", "content"].includes(block.tag);
+          const attrs = attributes(mode === "field" && block.tag === "continuation" ? { ...block, style: { ...block.style, display: "block" } } : block, { parentIndent, typographyOnly: inlineField });
           const html = `<${tag} class="${escape(cls)}${fieldBlock}${leaders}" data-uslm-tag="${escape(block.tag)}"${attrs}>${tag === "col" ? "" : `${content}</${tag}>`}`;
           output += block.tag === "table" ? `<div class="note-table-wrap">${html}</div>` : html;
         }
@@ -75,7 +78,10 @@
       }
       return output + (to > cursor ? renderText(cursor, to) : "");
     }
-    const result = range(start, end, layout, options.parentIndent || 0);
+    // Structural fields begin at the publisher's first line, including the
+    // hanging offset; their reader container does not apply that offset itself.
+    const parentIndent = (options.parentIndent || 0) + (mode === "field" ? options.parentFirstIndent || 0 : 0);
+    const result = range(start, end, layout, parentIndent);
     return plain ? result.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim() : result;
   }
   function fieldParts(layout, start, end, text = null) {

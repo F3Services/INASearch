@@ -35,4 +35,19 @@ const continuationHtml = presentation.format(continuation, 0, 14, render, { mode
 assert(continuationHtml.includes("margin-left:0em"), "Source continuation indentation is relative to its structural parent");
 assert(continuationHtml.includes("display:block"), "Continuation indentation applies to all wrapped lines");
 assert(!continuationHtml.includes("uslm-field-block"), "Leading whitespace must not add a second paragraph margin");
+const parentContinuation = [{ tag: "continuation", start: 0, end: 16, presentation: { indent: 2, firstIndent: 0 } }];
+const parentContinuationHtml = presentation.format(parentContinuation, 0, 16, (start, end) => "is inadmissible.".slice(start, end), { mode: "field", parentIndent: 4, parentFirstIndent: -2 });
+assert(parentContinuationHtml.includes("margin-left:0em"), "INA 212's continuation must align with its parent's first line instead of escaping the paragraph padding");
+// INA 212(a)(1)(A)'s chapeau follows a separately rendered label and heading.
+// Its publisher indent (2) is below its parent's hanging indent (4); applying
+// that negative difference to an inline span pulls it over the heading.
+const chapeauText = "Any alien—";
+const chapeau = [{ tag: "chapeau", start: 0, end: chapeauText.length, presentation: { indent: 2, italic: true } }];
+const chapeauHtml = presentation.format(chapeau, 0, chapeauText.length, (start, end) => chapeauText.slice(start, end), { mode: "field", parentIndent: 4 });
+assert(!chapeauHtml.includes("margin-left:"), "An opening inline chapeau must follow the citation and heading without moving back over them");
+assert(chapeauHtml.includes("font-style:italic"), "Inline chapeaux retain source typography");
+assert.equal(chapeauHtml.replace(/<[^>]*>/g, ""), chapeauText, "Chapeau spacing must preserve every source character");
+const separateChapeaux = presentation.format([layout[0], { ...layout[1], presentation: { indent: 3 } }], 0, text.length, render, { mode: "field", parentIndent: 2 });
+assert(separateChapeaux.includes("uslm-field-block"), "Later chapeaux must keep their separate paragraph layout");
+assert(separateChapeaux.includes("margin-left:1.4em"), "Separate chapeau paragraphs retain their source indentation");
 console.log("PASS USLM layout runtime: blocks, emphasis, clipping, empty table columns, safe styles and hanging indentation");
