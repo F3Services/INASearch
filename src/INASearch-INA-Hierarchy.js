@@ -106,6 +106,21 @@ window.INA_SEARCH_INA_HIERARCHY = {
             "ina:section:242",
             "ina:section:243",
             "ina:section:244"
+          ],
+          "tocFootnoteReferences": [
+            {
+              "number": "6",
+              "noteId": "IDD540B7E5ECAD492D92AD088C4B12A202",
+              "sourceIdref": "IDD540B7E5ECAD492D92AD088C4B12A202"
+            }
+          ],
+          "tocFootnotes": [
+            {
+              "id": "IDD540B7E5ECAD492D92AD088C4B12A202",
+              "number": "6",
+              "text": "See the appendix in this compilation for the provisions as in effect before April 1, 1977.",
+              "sourceUrl": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml#IDD540B7E5ECAD492D92AD088C4B12A202"
+            }
           ]
         },
         {
@@ -371,7 +386,22 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Powers and duties of the Attorney General and the Commissioner",
       "titleId": "ina:title:I",
       "chapterId": null,
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1103&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1103&num=0&edition=prelim",
+      "tocFootnoteReferences": [
+        {
+          "number": "2",
+          "noteId": "IDFBB48081F75B449D88EE5B8B1A6F584C",
+          "sourceIdref": "IDFBB48081F75B449D88EE5B8B1A6F584C"
+        }
+      ],
+      "tocFootnotes": [
+        {
+          "id": "IDFBB48081F75B449D88EE5B8B1A6F584C",
+          "number": "2",
+          "text": "The section heading of section 103 was amended by section 1102(1) of the Homeland Security Act of 2002 (P.L. 107–296; 116 Stat. 2273). There was no conforming amendment to the table of contents.",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml#IDFBB48081F75B449D88EE5B8B1A6F584C"
+        }
+      ]
     },
     {
       "id": "ina:section:104",
@@ -379,7 +409,22 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Powers and duties of the Secretary of State",
       "titleId": "ina:title:I",
       "chapterId": null,
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1104&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1104&num=0&edition=prelim",
+      "tocFootnoteReferences": [
+        {
+          "number": "3",
+          "noteId": "IDD4E9A9F5C8E448CF97F978361921147C",
+          "sourceIdref": "IDD4E9A9F5C8E448CF97F978361921147C"
+        }
+      ],
+      "tocFootnotes": [
+        {
+          "id": "IDD4E9A9F5C8E448CF97F978361921147C",
+          "number": "3",
+          "text": "The item relating to section 104 was amended by §1(ee) of P.L. 103–415.",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml#IDD4E9A9F5C8E448CF97F978361921147C"
+        }
+      ]
     },
     {
       "id": "ina:section:105",
@@ -387,7 +432,22 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Liaison with internal security officers",
       "titleId": "ina:title:I",
       "chapterId": null,
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1105&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1105&num=0&edition=prelim",
+      "tocFootnoteReferences": [
+        {
+          "number": "4",
+          "noteId": "ID6DC756DA1E31476B93EA4EF44F2A32A7",
+          "sourceIdref": "ID6DC756DA1E31476B93EA4EF44F2A32A7"
+        }
+      ],
+      "tocFootnotes": [
+        {
+          "id": "ID6DC756DA1E31476B93EA4EF44F2A32A7",
+          "number": "4",
+          "text": "Section 403(a)(1) of P.L. 107–56 amended the heading for section 105. No conforming amendment was made to the table of contents.",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml#ID6DC756DA1E31476B93EA4EF44F2A32A7"
+        }
+      ]
     },
     {
       "id": "ina:section:106",
@@ -395,7 +455,22 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Employment authorization for battered spouses of certain nonimmigrants",
       "titleId": "ina:title:I",
       "chapterId": null,
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1105a&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1105a&num=0&edition=prelim",
+      "tocFootnoteReferences": [
+        {
+          "number": "5",
+          "noteId": "ID51BB75EB24D6425B968F3DC5B086301D",
+          "sourceIdref": "ID51BB75EB24D6425B968F3DC5B086301D"
+        }
+      ],
+      "tocFootnotes": [
+        {
+          "id": "ID51BB75EB24D6425B968F3DC5B086301D",
+          "number": "5",
+          "text": "See the appendix in this compilation for the provisions as in effect before April 1, 1977.",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml#ID51BB75EB24D6425B968F3DC5B086301D"
+        }
+      ]
     },
     {
       "id": "ina:section:201",
@@ -955,7 +1030,22 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Bringing in aliens subject to denial of admission on a health-related ground",
       "titleId": "ina:title:II",
       "chapterId": "ina:title:II:chapter:8",
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1322&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1322&num=0&edition=prelim",
+      "tocFootnoteReferences": [
+        {
+          "number": "7",
+          "noteId": "IDF544807442D14539B20BCC8EDC274834",
+          "sourceIdref": "IDF544807442D14539B20BCC8EDC274834"
+        }
+      ],
+      "tocFootnotes": [
+        {
+          "id": "IDF544807442D14539B20BCC8EDC274834",
+          "number": "7",
+          "text": "See the appendix in this compilation for the provisions as in effect before April 1, 1977.",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml#IDF544807442D14539B20BCC8EDC274834"
+        }
+      ]
     },
     {
       "id": "ina:section:273",
@@ -1019,7 +1109,15 @@ window.INA_SEARCH_INA_HIERARCHY = {
       "heading": "Reentry of removed alien",
       "titleId": "ina:title:II",
       "chapterId": "ina:title:II:chapter:8",
-      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1326&num=0&edition=prelim"
+      "sourceUrl": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1326&num=0&edition=prelim",
+      "tocFootnoteReferences": [
+        {
+          "number": "7",
+          "noteId": null,
+          "sourceIdref": null
+        }
+      ],
+      "tocFootnotes": []
     },
     {
       "id": "ina:section:277",

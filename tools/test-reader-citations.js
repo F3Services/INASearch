@@ -73,6 +73,21 @@ state.copyActionPreview = { pane: null, target: { query: "frozen" } };
 assert.equal(target().query, "frozen", "hover scrolling must not retarget a pending copy");
 console.log("PASS reader citation copy target: visible selection override, offscreen selection, and frozen hover preview");
 
+context.mainReaderActionTarget = target;
+const printTarget = vm.runInNewContext(`(${functionSource(template, "mainReaderPrintTarget")})`, context);
+state.copyActionPreview = null;
+state.statuteNavigationLocation.path = ["b"];
+selectedTop = -200;
+assert.equal(printTarget().query, "INA 212(b)", "Printing keeps the highlighted citation even when it is offscreen");
+assert.equal(printTarget().printHighlighted, true);
+highlighted = false;
+assert.equal(printTarget().query, "INA 212", "Without a highlight, print the section rather than the reading-line child");
+assert.equal(printTarget().path.length, 0);
+assert.equal(printTarget().printHighlighted, false);
+state.copyActionPreview = { pane: null, action: "print", target: { query: "frozen print", printHighlighted: true } };
+assert.equal(printTarget().query, "frozen print", "A print preview must freeze its target through scrolling and clicking");
+console.log("PASS reader print target: offscreen highlight, whole section, and frozen preview");
+
 const installBanners = vm.runInNewContext(`(${functionSource(template, "installCitationBanners")})`, {
   citationBannerControllers: new Map(),
   citationUnitRecords: () => { assert.fail("Readers without note banners must not scan, wrap, or position every citation marker"); }

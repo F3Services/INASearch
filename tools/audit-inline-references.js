@@ -78,6 +78,7 @@ function parentheticalSequences(text, vocabulary) {
 }
 
 function targetIdentity(reference) {
+  if (reference.targetChapter) return `usc:${reference.targetTitle}:chapter:${reference.targetChapter}${reference.targetSubchapter ? `:subchapter:${reference.targetSubchapter}` : ""}`;
   if (reference.family === "public-law") return `public-law:${reference.targetCongress}-${reference.targetLaw}/${(reference.targetPath || []).join("/")}`;
   if (reference.family === "statutes-at-large") return `statutes-at-large:${reference.targetVolume}/${reference.targetPage}/${(reference.targetPath || []).join("/")}`;
   return `${reference.family || "unknown"}:${reference.targetTitle || ""}:${reference.targetSection || ""}/${(reference.targetPath || []).join("/")}`;

@@ -10,6 +10,8 @@ const { performance } = require("perf_hooks");
 const root = path.resolve(__dirname, "..");
 const occurrenceSource = fs.readFileSync(path.join(root, "src", "INASearch-Occurrence.js"), "utf8");
 const workerSource = fs.readFileSync(path.join(root, "src", "INASearch-Search-Worker.js"), "utf8");
+const workerClientSource = require("./test-function-source")(fs.readFileSync(path.join(root, "src", "INASearch.template.html"), "utf8"), "createSearchWorkerClient");
+assert(workerClientSource.indexOf('"inaSearchUslmRuntime"') >= 0 && workerClientSource.indexOf('"inaSearchUslmRuntime"') < workerClientSource.indexOf('"inaSearchOccurrenceRuntime"'), "Search workers must load USLM presentation before its occurrence consumer");
 
 function fixtureCorpus() {
   const referenceText = "See 8 U.S.C. 1182 for the alpha rule.";
@@ -81,6 +83,7 @@ function createHarness(shared, corpus, options = {}) {
   context.globalThis = context;
   context.self = context;
   vm.createContext(context);
+  new vm.Script(fs.readFileSync(path.join(root, "src", "INASearch-USLM.js"), "utf8")).runInContext(context);
   new vm.Script(occurrenceSource, { filename: "INASearch-Occurrence.js" }).runInContext(context);
   for (const name of ["Annotations", "Query"]) new vm.Script(fs.readFileSync(path.join(root, "src", `INASearch-${name}.js`), "utf8")).runInContext(context);
   new vm.Script(fs.readFileSync(path.join(root, "src", "INASearch-Corpus-Shards.js"), "utf8")).runInContext(context);

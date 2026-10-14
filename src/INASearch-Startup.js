@@ -25,11 +25,15 @@
     arrivals.delete(id);
   }
   const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
-  function hierarchyRowHtml({ id, citation, label, size, expandable = true, expanded = false, children = "" }) {
+  function hierarchyRowHtml({ id, citation, label, size, expandable = true, expanded = false, children = "", interactiveLabel = false, navigationLabel = citation }) {
     const toggle = expandable
       ? `<button class="hierarchy-expand" type="button" data-hierarchy-expand="${escapeHtml(id)}" aria-expanded="${expanded ? "true" : "false"}" aria-label="${expanded ? "Collapse" : "Expand"} ${escapeHtml(citation)}"><span class="hierarchy-expand-icon" aria-hidden="true">›</span></button>`
       : `<span class="hierarchy-expand-placeholder" aria-hidden="true">•</span>`;
-    return `<article class="hierarchy-row" data-row-size="${escapeHtml(size)}" data-hierarchy-row="${escapeHtml(id)}"><div class="hierarchy-row-main">${toggle}<button class="hierarchy-label" type="button" data-hierarchy-open="${escapeHtml(id)}">${label}</button></div>${expandable ? `<div class="hierarchy-children" data-hierarchy-children="${escapeHtml(id)}"${expanded ? "" : " hidden"}>${children}</div>` : ""}</article>`;
+    // Keep inline note controls beside their heading without nesting buttons.
+    const labelHtml = interactiveLabel
+      ? `<div class="hierarchy-label hierarchy-label-annotated"><button class="hierarchy-open" type="button" data-hierarchy-open="${escapeHtml(id)}" aria-label="${escapeHtml(navigationLabel)}"></button>${label}</div>`
+      : `<button class="hierarchy-label" type="button" data-hierarchy-open="${escapeHtml(id)}">${label}</button>`;
+    return `<article class="hierarchy-row" data-row-size="${escapeHtml(size)}" data-hierarchy-row="${escapeHtml(id)}"><div class="hierarchy-row-main">${toggle}${labelHtml}</div>${expandable ? `<div class="hierarchy-children" data-hierarchy-children="${escapeHtml(id)}"${expanded ? "" : " hidden"}>${children}</div>` : ""}</article>`;
   }
   // Reconcile the opening markup in place. Browser scroll anchoring, focused
   // controls and the already painted rows survive the application handoff.

@@ -67,6 +67,49 @@ window.INA_SEARCH_CORPUS = {
     "sourceCreatedAt": "",
     "isPositiveLaw": false,
     "sourceUrl": "https://uscode.house.gov/download/download.shtml",
+    "divisionNotes": {
+      "/us/usc/t8/ch7": {
+        "identifier": "/us/usc/t8/ch7",
+        "kind": "chapter",
+        "number": "7",
+        "heading": "EXCLUSION OF CHINESE",
+        "breadcrumb": [
+          {
+            "kind": "chapter",
+            "number": "7",
+            "title": "EXCLUSION OF CHINESE"
+          }
+        ],
+        "notes": [
+          {
+            "id": "8-division-ch7-note-1",
+            "topic": "editorialNotes",
+            "heading": "Editorial Notes",
+            "text": "Editorial Notes",
+            "source": {
+              "resource": "United States Code, Title 8",
+              "locator": "8 U.S.C. > Chapter 7 > Editorial Notes",
+              "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-chapter7",
+              "captureDate": "2026-08-21",
+              "supportingExcerpt": "Editorial Notes"
+            }
+          },
+          {
+            "id": "8-division-ch7-note-2",
+            "topic": "codification",
+            "heading": "Codification",
+            "text": "Codification Former chapter 7 of this title included the provisions of the several Chinese Exclusion acts, beginning with the temporary act of May 6, 1882, ch. 126, 22 Stat. 58, which, as being then in force, were, by act Apr. 27, 1904, ch. 1630, § 5, 33 Stat. 428, amending act Apr. 29, 1902, ch. 641, 32 Stat. 176, “re-enacted, extended, and continued, without modification, limitation, or condition;” with the further provisions of the act and those of subsequent acts relating to the subject which remained in force.",
+            "source": {
+              "resource": "United States Code, Title 8",
+              "locator": "8 U.S.C. > Chapter 7 > Codification",
+              "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-chapter7",
+              "captureDate": "2026-08-21",
+              "supportingExcerpt": "Codification Former chapter 7 of this title included the provisions of the several Chinese Exclusion acts, beginning with the temporary act of May 6, 1882, ch. 126, 22 Stat. 58, which, as being then in force, were, by act Apr. 27, 1904, ch. 1630, § 5, 33 Stat. 428, amending act Apr. 29, 1902, ch. 641, 32 Stat. 176, “re-enacted, extended, and continued, without modification, limitation, or condition;” with the further provisions of the act and those of subsequent acts relating to the subject which remained in force."
+            }
+          }
+        ]
+      }
+    },
     "sections": [
       {
         "id": "8-1 to 18",
@@ -7062,6 +7105,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "15",
                       "S"
+                    ],
+                    "childTextOffsets": [
+                      51,
+                      51
                     ]
                   },
                   {
@@ -7822,6 +7869,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "27",
                       "K"
+                    ],
+                    "childTextOffsets": [
+                      276,
+                      276
                     ]
                   },
                   {
@@ -8315,6 +8366,29 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "a",
                   "43"
+                ],
+                "childTextOffsets": [
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35,
+                  35
                 ]
               },
               {
@@ -8369,6 +8443,12 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "44",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      106,
+                      106,
+                      106,
+                      106
                     ]
                   },
                   {
@@ -9102,6 +9182,17 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "f"
+            ],
+            "childTextOffsets": [
+              210,
+              210,
+              210,
+              210,
+              210,
+              210,
+              210,
+              210,
+              210
             ]
           },
           {
@@ -13528,6 +13619,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "4",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      228,
+                      228
                     ]
                   },
                   {
@@ -13637,6 +13732,11 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "e"
+            ],
+            "childTextOffsets": [
+              608,
+              608,
+              608
             ]
           }
         ],
@@ -13932,6 +14032,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "a",
                   "2"
+                ],
+                "childTextOffsets": [
+                  21,
+                  21
                 ]
               },
               {
@@ -14815,6 +14919,12 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "5",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      0,
+                      0,
+                      0
                     ]
                   },
                   {
@@ -21038,6 +21148,10 @@ window.INA_SEARCH_CORPUS = {
                           "1",
                           "A",
                           "v"
+                        ],
+                        "childTextOffsets": [
+                          13,
+                          13
                         ]
                       },
                       {
@@ -21452,6 +21566,10 @@ window.INA_SEARCH_CORPUS = {
                           "1",
                           "B",
                           "iv"
+                        ],
+                        "childTextOffsets": [
+                          13,
+                          13
                         ]
                       },
                       {
@@ -21847,6 +21965,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      378,
+                      378
                     ]
                   },
                   {
@@ -23002,6 +23124,15 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "e"
+            ],
+            "childTextOffsets": [
+              723,
+              723,
+              723,
+              723,
+              723,
+              723,
+              723
             ]
           },
           {
@@ -24270,6 +24401,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "a",
                   "1"
+                ],
+                "childTextOffsets": [
+                  86,
+                  86,
+                  86
                 ]
               },
               {
@@ -24333,6 +24469,13 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "b"
+            ],
+            "childTextOffsets": [
+              321,
+              321,
+              321,
+              321,
+              321
             ]
           },
           {
@@ -24566,6 +24709,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "1",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      37,
+                      37
                     ]
                   },
                   {
@@ -25001,6 +25148,10 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "7",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      8,
+                      8
                     ]
                   },
                   {
@@ -25874,6 +26025,12 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "1",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      10,
+                      10,
+                      10,
+                      10
                     ]
                   },
                   {
@@ -25926,6 +26083,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "1",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      63,
+                      63,
+                      63
                     ]
                   }
                 ],
@@ -26018,6 +26180,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      16
                     ]
                   },
                   {
@@ -26060,6 +26226,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      90,
+                      90
                     ]
                   },
                   {
@@ -26102,6 +26272,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "D"
+                    ],
+                    "childTextOffsets": [
+                      14,
+                      14,
+                      14
                     ]
                   },
                   {
@@ -26154,6 +26329,12 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "E"
+                    ],
+                    "childTextOffsets": [
+                      10,
+                      10,
+                      10,
+                      10
                     ]
                   },
                   {
@@ -26250,6 +26431,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "I"
+                    ],
+                    "childTextOffsets": [
+                      10,
+                      10
                     ]
                   }
                 ],
@@ -26302,6 +26487,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "3",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      184,
+                      184,
+                      184
                     ]
                   },
                   {
@@ -26585,6 +26775,14 @@ window.INA_SEARCH_CORPUS = {
                           "3",
                           "B",
                           "iii"
+                        ],
+                        "childTextOffsets": [
+                          308,
+                          308,
+                          308,
+                          308,
+                          308,
+                          439
                         ]
                       },
                       {
@@ -26854,6 +27052,14 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "3",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      208,
+                      208,
+                      208,
+                      208,
+                      208
                     ]
                   },
                   {
@@ -27129,6 +27335,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "3",
                       "E"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      168,
+                      168
                     ]
                   },
                   {
@@ -27627,6 +27838,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "5",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      555,
+                      555,
+                      555
                     ]
                   },
                   {
@@ -27972,6 +28188,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "7",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      16
                     ]
                   },
                   {
@@ -28052,6 +28272,12 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "7",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      16,
+                      16,
+                      16
                     ]
                   }
                 ],
@@ -28161,6 +28387,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "9",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      0,
+                      258
                     ]
                   },
                   {
@@ -28348,6 +28579,13 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "9",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      16,
+                      16,
+                      16,
+                      166
                     ]
                   },
                   {
@@ -28441,6 +28679,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "9",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      95,
+                      95
                     ]
                   }
                 ],
@@ -28493,6 +28736,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "10",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      10,
+                      10
                     ]
                   },
                   {
@@ -28901,6 +29148,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "d",
                   "12"
+                ],
+                "childTextOffsets": [
+                  177,
+                  177
                 ]
               },
               {
@@ -29021,6 +29272,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "g",
                   "1"
+                ],
+                "childTextOffsets": [
+                  53,
+                  53,
+                  53
                 ]
               },
               {
@@ -29157,6 +29413,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "h"
+            ],
+            "childTextOffsets": [
+              280,
+              280
             ]
           },
           {
@@ -29620,6 +29880,10 @@ window.INA_SEARCH_CORPUS = {
                           "2",
                           "A",
                           "viii"
+                        ],
+                        "childTextOffsets": [
+                          154,
+                          154
                         ]
                       }
                     ],
@@ -29678,6 +29942,12 @@ window.INA_SEARCH_CORPUS = {
                       "m",
                       "2",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      159,
+                      159,
+                      159,
+                      159
                     ]
                   },
                   {
@@ -30018,6 +30288,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "m",
                   "7"
+                ],
+                "childTextOffsets": [
+                  82,
+                  82
                 ]
               }
             ],
@@ -30069,6 +30343,10 @@ window.INA_SEARCH_CORPUS = {
                           "1",
                           "A",
                           "i"
+                        ],
+                        "childTextOffsets": [
+                          156,
+                          156
                         ]
                       },
                       {
@@ -30196,6 +30474,10 @@ window.INA_SEARCH_CORPUS = {
                       "n",
                       "1",
                       "F"
+                    ],
+                    "childTextOffsets": [
+                      219,
+                      219
                     ]
                   },
                   {
@@ -30256,6 +30538,15 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "n",
                   "1"
+                ],
+                "childTextOffsets": [
+                  197,
+                  197,
+                  197,
+                  197,
+                  197,
+                  197,
+                  197
                 ]
               },
               {
@@ -31331,6 +31622,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "p",
                   "1"
+                ],
+                "childTextOffsets": [
+                  207,
+                  207
                 ]
               },
               {
@@ -31528,6 +31823,10 @@ window.INA_SEARCH_CORPUS = {
                           "1",
                           "A",
                           "i"
+                        ],
+                        "childTextOffsets": [
+                          227,
+                          227
                         ]
                       },
                       {
@@ -34055,6 +34354,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "3",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      189,
+                      189
                     ]
                   },
                   {
@@ -34214,6 +34517,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "d",
                   "2"
+                ],
+                "childTextOffsets": [
+                  175,
+                  175
                 ]
               }
             ],
@@ -34927,6 +35234,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "c",
                   "3"
+                ],
+                "childTextOffsets": [
+                  46,
+                  46
                 ]
               },
               {
@@ -38841,6 +39152,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "1"
+                ],
+                "childTextOffsets": [
+                  266,
+                  266
                 ]
               },
               {
@@ -38924,6 +39239,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "2",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      103,
+                      103
                     ]
                   },
                   {
@@ -38976,6 +39295,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "3",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      3,
+                      3
                     ]
                   },
                   {
@@ -39059,6 +39382,12 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "c",
                   "4"
+                ],
+                "childTextOffsets": [
+                  229,
+                  229,
+                  229,
+                  229
                 ]
               }
             ],
@@ -39317,6 +39646,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "h",
                   "1"
+                ],
+                "childTextOffsets": [
+                  162,
+                  162,
+                  162
                 ]
               },
               {
@@ -39646,6 +39980,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "1"
+                ],
+                "childTextOffsets": [
+                  275,
+                  275,
+                  275
                 ]
               },
               {
@@ -39738,6 +40077,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "2",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      103,
+                      103
                     ]
                   },
                   {
@@ -39790,6 +40133,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "3",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      3,
+                      3
                     ]
                   },
                   {
@@ -40978,6 +41325,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "3",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      153,
+                      153
                     ]
                   },
                   {
@@ -42406,6 +42757,10 @@ window.INA_SEARCH_CORPUS = {
                       "h",
                       "1",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      0
                     ]
                   }
                 ],
@@ -43382,6 +43737,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "3",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      185,
+                      185
                     ]
                   },
                   {
@@ -47582,6 +47941,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "2",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      24,
+                      24
                     ]
                   },
                   {
@@ -48266,6 +48629,13 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "c",
                   "1"
+                ],
+                "childTextOffsets": [
+                  59,
+                  59,
+                  59,
+                  59,
+                  59
                 ]
               },
               {
@@ -49109,6 +49479,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "1",
                       "H"
+                    ],
+                    "childTextOffsets": [
+                      379,
+                      379
                     ]
                   }
                 ],
@@ -49221,6 +49595,14 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      14,
+                      14,
+                      14,
+                      14,
+                      14
                     ]
                   },
                   {
@@ -49316,6 +49698,12 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "D"
+                    ],
+                    "childTextOffsets": [
+                      161,
+                      161,
+                      161,
+                      161
                     ]
                   },
                   {
@@ -49421,6 +49809,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "3",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      45,
+                      45,
+                      45
                     ]
                   },
                   {
@@ -49539,6 +49932,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "4",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      81,
+                      81,
+                      81
                     ]
                   },
                   {
@@ -51480,6 +51878,10 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "5",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      36,
+                      36
                     ]
                   },
                   {
@@ -51544,6 +51946,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "6"
+                ],
+                "childTextOffsets": [
+                  42,
+                  42,
+                  42
                 ]
               },
               {
@@ -51621,6 +52028,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "c",
                   "2"
+                ],
+                "childTextOffsets": [
+                  59,
+                  59
                 ]
               },
               {
@@ -51749,6 +52160,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "3",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      228,
+                      228
                     ]
                   }
                 ],
@@ -51992,6 +52407,12 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "7",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      0,
+                      0,
+                      0
                     ]
                   }
                 ],
@@ -54468,6 +54889,12 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "3",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      137,
+                      137,
+                      137,
+                      137
                     ]
                   },
                   {
@@ -54961,6 +55388,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "d",
                   "2"
+                ],
+                "childTextOffsets": [
+                  146,
+                  146,
+                  146
                 ]
               },
               {
@@ -57047,6 +57479,12 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "4"
+                ],
+                "childTextOffsets": [
+                  39,
+                  39,
+                  39,
+                  39
                 ]
               },
               {
@@ -57142,6 +57580,10 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "7",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      110,
+                      110
                     ]
                   },
                   {
@@ -57939,6 +58381,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              197,
+              197
             ]
           },
           {
@@ -58094,6 +58540,12 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "a",
                   "1"
+                ],
+                "childTextOffsets": [
+                  161,
+                  161,
+                  161,
+                  161
                 ]
               },
               {
@@ -58740,6 +59192,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "1"
+                ],
+                "childTextOffsets": [
+                  184,
+                  184,
+                  184
                 ]
               },
               {
@@ -58769,6 +59226,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "2"
+                ],
+                "childTextOffsets": [
+                  93,
+                  93
                 ]
               },
               {
@@ -59865,6 +60326,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "h"
+            ],
+            "childTextOffsets": [
+              98,
+              98
             ]
           },
           {
@@ -59977,6 +60442,14 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "i",
                   "1"
+                ],
+                "childTextOffsets": [
+                  124,
+                  124,
+                  124,
+                  745,
+                  745,
+                  745
                 ]
               },
               {
@@ -60069,6 +60542,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "j",
                   "1"
+                ],
+                "childTextOffsets": [
+                  43,
+                  43
                 ]
               },
               {
@@ -60128,6 +60605,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "j",
                   "2"
+                ],
+                "childTextOffsets": [
+                  51,
+                  51,
+                  51
                 ]
               },
               {
@@ -60268,6 +60750,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "l",
                   "1"
+                ],
+                "childTextOffsets": [
+                  361,
+                  361,
+                  361
                 ]
               },
               {
@@ -61082,6 +61569,12 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "a",
                   "4"
+                ],
+                "childTextOffsets": [
+                  33,
+                  33,
+                  33,
+                  33
                 ]
               }
             ],
@@ -61352,6 +61845,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "c",
                   "1"
+                ],
+                "childTextOffsets": [
+                  112,
+                  112
                 ]
               },
               {
@@ -61687,6 +62184,11 @@ window.INA_SEARCH_CORPUS = {
                       "d",
                       "2",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      0,
+                      0,
+                      243
                     ]
                   },
                   {
@@ -62079,6 +62581,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "h",
                   "1"
+                ],
+                "childTextOffsets": [
+                  173,
+                  173
                 ]
               },
               {
@@ -64751,6 +65257,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "c",
                   "1"
+                ],
+                "childTextOffsets": [
+                  103,
+                  103
                 ]
               },
               {
@@ -67079,6 +67589,13 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "1",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      15,
+                      15,
+                      15,
+                      15,
+                      15
                     ]
                   },
                   {
@@ -67199,6 +67716,11 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "2",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      15,
+                      15,
+                      15
                     ]
                   }
                 ],
@@ -67683,6 +68205,10 @@ window.INA_SEARCH_CORPUS = {
                       "a",
                       "6",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      33,
+                      33
                     ]
                   },
                   {
@@ -67798,6 +68324,10 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "1",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      221,
+                      221
                     ]
                   },
                   {
@@ -67999,6 +68529,10 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "3",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      43,
+                      43
                     ]
                   }
                 ],
@@ -68291,6 +68825,11 @@ window.INA_SEARCH_CORPUS = {
                       "d",
                       "3",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      79,
+                      79,
+                      79
                     ]
                   },
                   {
@@ -68516,6 +69055,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "e",
                   "2"
+                ],
+                "childTextOffsets": [
+                  64,
+                  64,
+                  64
                 ]
               },
               {
@@ -68633,6 +69177,10 @@ window.INA_SEARCH_CORPUS = {
                       "e",
                       "4",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      33,
+                      33
                     ]
                   }
                 ],
@@ -69784,6 +70332,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "k",
                   "2"
+                ],
+                "childTextOffsets": [
+                  166,
+                  166
                 ]
               }
             ],
@@ -70168,6 +70720,11 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "d",
                   "1"
+                ],
+                "childTextOffsets": [
+                  64,
+                  64,
+                  64
                 ]
               },
               {
@@ -70237,6 +70794,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "d",
                   "3"
+                ],
+                "childTextOffsets": [
+                  198,
+                  198
                 ]
               },
               {
@@ -70527,6 +71088,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              50,
+              50
             ]
           },
           {
@@ -70691,6 +71256,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "b"
+            ],
+            "childTextOffsets": [
+              194,
+              194
             ]
           },
           {
@@ -70868,6 +71437,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              41,
+              41
             ]
           },
           {
@@ -70910,6 +71483,12 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "b"
+            ],
+            "childTextOffsets": [
+              86,
+              86,
+              86,
+              86
             ]
           },
           {
@@ -72938,6 +73517,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "f",
                   "2"
+                ],
+                "childTextOffsets": [
+                  3,
+                  3
                 ]
               },
               {
@@ -73082,6 +73665,14 @@ window.INA_SEARCH_CORPUS = {
                       "h",
                       "2",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      297,
+                      297,
+                      297,
+                      297,
+                      297,
+                      297
                     ]
                   },
                   {
@@ -74332,11 +74923,22 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "a",
                   "5"
+                ],
+                "childTextOffsets": [
+                  16,
+                  16
                 ]
               }
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              136,
+              136,
+              136,
+              136,
+              136
             ]
           },
           {
@@ -74387,6 +74989,11 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "d"
+            ],
+            "childTextOffsets": [
+              195,
+              195,
+              195
             ]
           },
           {
@@ -75384,6 +75991,12 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              159,
+              159,
+              159,
+              159
             ]
           },
           {
@@ -75824,6 +76437,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "2"
+                ],
+                "childTextOffsets": [
+                  75,
+                  75
                 ]
               }
             ],
@@ -75878,6 +76495,10 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "c",
                   "3"
+                ],
+                "childTextOffsets": [
+                  118,
+                  118
                 ]
               }
             ],
@@ -77691,6 +78312,14 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "a",
                   "1"
+                ],
+                "childTextOffsets": [
+                  180,
+                  180,
+                  180,
+                  180,
+                  180,
+                  180
                 ]
               },
               {
@@ -77704,6 +78333,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              358,
+              358
             ]
           },
           {
@@ -84738,6 +85371,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "4"
+            ],
+            "childTextOffsets": [
+              380,
+              380
             ]
           }
         ],
@@ -85214,6 +85851,10 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "2",
                       "B"
+                    ],
+                    "childTextOffsets": [
+                      239,
+                      239
                     ]
                   }
                 ],
@@ -86271,6 +86912,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "b"
+            ],
+            "childTextOffsets": [
+              1829,
+              1829
             ]
           },
           {
@@ -87651,6 +88296,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              515,
+              515
             ]
           },
           {
@@ -88752,6 +89401,11 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "b"
+            ],
+            "childTextOffsets": [
+              117,
+              117,
+              117
             ]
           },
           {
@@ -88821,6 +89475,10 @@ window.INA_SEARCH_CORPUS = {
                       "c",
                       "2",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      50,
+                      50
                     ]
                   },
                   {
@@ -90076,6 +90734,15 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "b"
+            ],
+            "childTextOffsets": [
+              86,
+              86,
+              86,
+              86,
+              86,
+              86,
+              86
             ]
           }
         ],
@@ -91168,6 +91835,12 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              100,
+              100,
+              100,
+              100
             ]
           },
           {
@@ -91530,6 +92203,10 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "b"
+            ],
+            "childTextOffsets": [
+              169,
+              169
             ]
           }
         ],
@@ -94171,6 +94848,10 @@ window.INA_SEARCH_CORPUS = {
                       "b",
                       "1",
                       "A"
+                    ],
+                    "childTextOffsets": [
+                      4,
+                      4
                     ]
                   },
                   {
@@ -94248,6 +94929,12 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "4"
+                ],
+                "childTextOffsets": [
+                  20,
+                  20,
+                  20,
+                  20
                 ]
               },
               {
@@ -94392,6 +95079,13 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "7"
+                ],
+                "childTextOffsets": [
+                  103,
+                  103,
+                  103,
+                  103,
+                  103
                 ]
               },
               {
@@ -94456,6 +95150,14 @@ window.INA_SEARCH_CORPUS = {
                 "path": [
                   "b",
                   "8"
+                ],
+                "childTextOffsets": [
+                  204,
+                  204,
+                  204,
+                  204,
+                  204,
+                  204
                 ]
               }
             ],
@@ -94778,6 +95480,11 @@ window.INA_SEARCH_CORPUS = {
                       "e",
                       "2",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      29,
+                      29,
+                      29
                     ]
                   }
                 ],
@@ -94951,6 +95658,10 @@ window.INA_SEARCH_CORPUS = {
                       "f",
                       "1",
                       "C"
+                    ],
+                    "childTextOffsets": [
+                      101,
+                      101
                     ]
                   }
                 ],
@@ -102242,6 +102953,11 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "a"
+            ],
+            "childTextOffsets": [
+              114,
+              114,
+              114
             ]
           },
           {
@@ -103746,6 +104462,12 @@ window.INA_SEARCH_CORPUS = {
             ],
             "path": [
               "c"
+            ],
+            "childTextOffsets": [
+              66,
+              66,
+              66,
+              66
             ]
           }
         ],
@@ -104385,7 +105107,11 @@ window.INA_SEARCH_CORPUS = {
           "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1645",
           "captureDate": "2026-07-30",
           "supportingExcerpt": "(Pub. L. 104–193, title IV, § 435, Aug. 22, 1996, 110 Stat. 2275; Pub. L. 105–33, title V, § 5573, Aug. 5, 1997, 111 Stat. 641.)"
-        }
+        },
+        "childTextOffsets": [
+          189,
+          189
+        ]
       },
       {
         "id": "8-1646",

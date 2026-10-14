@@ -11,6 +11,8 @@ import re
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
+from uslm_presentation import extract_presentation
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS_PATH = ROOT / "src" / "INASearch-Corpus.js"
@@ -65,78 +67,22 @@ def all_text(element: ET.Element) -> str:
     return "".join(element.itertext())
 
 
-def extract_note_layout(note: ET.Element) -> dict:
-    """Preserve publisher blocks as UTF-16 ranges in the unchanged citation text.
-
-    The legacy corpus concatenates itertext(), including its leading heading.
-    Keeping that text stable avoids moving existing citation/search offsets.
-    Layout ranges recover the source structure without guessing from prose.
-    """
-    blocks = STRUCTURAL | {"p", "num", "heading", "content", "chapeau", "continuation",
-                           "quotedContent", "table", "thead", "tbody", "tfoot",
-                           "tr", "th", "td", "signature"}
-    chunks = []
-    raw_length = 0
-
-    def append(value):
-        nonlocal raw_length
-        chunks.append(value or "")
-        raw_length += len(value or "")
-
-    def walk(element):
-        start = raw_length
-        append(element.text)
-        children = []
-        for child in element:
-            children.extend(walk(child))
-            append(child.tail)
-        tag = local_name(element.tag)
-        if tag not in blocks:
-            return children
-        block = {"tag": tag, "start": start, "end": raw_length}
-        if children:
-            block["children"] = children
-        indent = re.search(r"\bindent(\d+)\b", element.get("class", ""))
-        if indent:
-            block["indent"] = int(indent[1])
-        for attr in ["colspan", "rowspan"]:
-            value = element.get(attr, "")
-            if value.isdigit() and 0 < int(value) <= 100:
-                block[attr] = int(value)
-        return [block]
-
-    layout = walk(note)
-    raw = "".join(chunks)
-    output, offsets = [], [0] * (len(raw) + 1)
-    length, pending = 0, False
-    for index, character in enumerate(raw):
-        offsets[index] = length
-        if character.isspace():
-            pending = bool(output)
-        else:
-            if pending:
-                output.append(" ")
-                length += 1
-            output.append(character)
-            length += 2 if ord(character) > 0xffff else 1
-            pending = False
-        offsets[index + 1] = length
-    text = "".join(output)
-    assert text == normalize(all_text(note))
-
-    def convert(block):
-        block["start"], block["end"] = offsets[block["start"]], offsets[block["end"]]
-        for child in block.get("children", []):
-            convert(child)
-    for block in layout:
-        convert(block)
+def extract_note_layout(note: ET.Element, *, include_references=False) -> dict:
+    """Preserve source presentation without changing citation/search text."""
+    data = extract_presentation(note, clean_footnotes=False, include_references=include_references)
     heading = next((child for child in note if local_name(child.tag) == "heading"), None)
-    heading_text = normalize(all_text(heading)) if heading is not None else ""
+    heading_data = extract_presentation(heading, clean_footnotes=False) if heading is not None else {"text": "", "layout": []}
+    layout = data["layout"]
     body_start = 0
     if heading is not None and layout and layout[0]["tag"] == "heading":
         body_start = layout.pop(0)["end"]
-    return {"heading": heading_text, "text": text, "role": note.get("role", ""),
-            "bodyStart": body_start, "layout": layout}
+    result = {"heading": heading_data["text"], "text": data["text"], "role": note.get("role", ""),
+              "bodyStart": body_start, "layout": layout, "headingLayout": heading_data["layout"]}
+    if heading_data.get("presentation"):
+        result["headingPresentation"] = heading_data["presentation"]
+    if include_references:
+        result["uslmReferences"] = data["uslmReferences"]
+    return result
 
 
 def note_text_and_references(note: ET.Element) -> tuple[str, list[dict]]:
@@ -210,6 +156,7 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
     raw_clean: list[str] = [element.text or ""]
     raw_flattened: list[str] = [element.text or ""]
     events: list[dict] = []
+    child_prefixes: list[str] = []
 
     def append_standalone_superscript(child: ET.Element, clean: list[str], flattened: list[str]) -> None:
         """Record a repeated House footnote marker written as a bare ``sup``.
@@ -231,6 +178,7 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
             "flattenedInsertion": number,
             "sourceLocation": {"sourceKey": source_key, "field": field_name},
             "reusedReference": True,
+            "afterChild": len(child_prefixes),
         })
 
     def append_container(container: ET.Element, clean: list[str], flattened: list[str]) -> None:
@@ -264,6 +212,7 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
                     "xmlId": xml_id,
                     "number": number,
                     "flattenedInsertion": insertion,
+                    "afterChild": len(child_prefixes),
                     "sourceLocation": {"sourceKey": source_key, "field": field_name},
                 }
                 events.append(event)
@@ -304,6 +253,8 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
         child = children[index]
         name = local_name(child.tag)
         if name in exclude_direct:
+            if name in STRUCTURAL:
+                child_prefixes.append(''.join(raw_clean))
             raw_clean.append(child.tail or "")
             raw_flattened.append(child.tail or "")
             index += 1
@@ -336,6 +287,8 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
     flattened_text = normalize("".join(raw_flattened))
     for event, offset in zip(events, offsets):
         event["offset"] = offset
+        if not child_prefixes:
+            event.pop("afterChild", None)
 
     choices = [("", ""), (" ", ""), ("", " "), (" ", " ")]
     found = None
@@ -362,7 +315,18 @@ def extract_field(element: ET.Element, exclude_direct: set[str], source_key: str
         if event.get("xmlId"):
             notes[event["xmlId"]]["sourceLocation"]["offset"] = event["offset"]
         references.append(event)
-    return {"flattenedText": flattened_text, "cleanText": clean_text, "footnoteReferences": references}
+    for event in references:
+        event["offset"] = len(clean_text[:event["offset"]].encode("utf-16-le")) // 2
+        if event.get("xmlId"):
+            notes[event["xmlId"]]["sourceLocation"]["offset"] = event["offset"]
+    data = extract_presentation(element, exclude_direct)
+    if data["text"] != clean_text:
+        raise RuntimeError(f"Presentation/footnote text mismatch at {source_key}.{field_name}")
+    result = {"flattenedText": flattened_text, "cleanText": clean_text, "footnoteReferences": references,
+              "layout": data["layout"]}
+    if child_prefixes:
+        result['childTextOffsets'] = [len(normalized_with_offsets(prefix, len(events))[0].encode('utf-16-le')) // 2 for prefix in child_prefixes]
+    return result
 
 
 def safe_js_json(value: dict) -> str:
@@ -380,6 +344,7 @@ def main() -> None:
     )
     source_path = ROOT / house_artifact["path"]
     parser.add_argument("xml", nargs="?", type=Path, default=source_path, help="Official House USLM usc08.xml")
+    parser.add_argument("--output", type=Path, default=OUTPUT_PATH, help="Output overlay JavaScript")
     args = parser.parse_args()
     xml_bytes = args.xml.read_bytes()
     xml_sha256 = hashlib.sha256(xml_bytes).hexdigest()
@@ -389,10 +354,13 @@ def main() -> None:
     corpus = read_assigned_json(CORPUS_PATH, "INA_SEARCH_CORPUS")
     sources = corpus_sources(corpus)
     root = ET.fromstring(xml_bytes)
+    house_source = next(source for source in manifest["sources"] if source["id"] == "house-title-8-uslm")
     occurrences: dict[str, int] = {}
     fields: dict[str, dict] = {}
     section_notes: dict[str, dict[str, dict]] = {}
     bottom_notes: dict[str, list[dict]] = {}
+    division_notes: dict[str, list[dict]] = {}
+    presentation_fields: dict[str, dict] = {}
     affected_source_fields = 0
 
     for element in root.iter():
@@ -425,28 +393,58 @@ def main() -> None:
         if not target:
             continue
         notes = section_notes.setdefault(section_number, {})
-        if match.group(2):
-            heading = next((child for child in list(element) if local_name(child.tag) == "heading"), None)
-            if heading is not None:
-                extracted = extract_field(heading, set(), source_key, "heading", section_number, notes)
-                if extracted:
-                    if normalize(str(target.get("heading", ""))) != extracted["flattenedText"]:
-                        raise RuntimeError(f"Corpus/XML heading mismatch at {source_key}")
-                    fields.setdefault(source_key, {})["heading"] = extracted
-                    affected_source_fields += 1
-            extracted = extract_field(element, OWN_TEXT_EXCLUSIONS, source_key, "text", section_number, notes)
+        candidates = [("text" if match.group(2) else "preamble", element, OWN_TEXT_EXCLUSIONS)]
+        for field_name in ["heading", "sourceCredit"]:
+            field_element = next((child for child in element if local_name(child.tag) == field_name), None)
+            if field_element is not None:
+                candidates.append((field_name, field_element, set()))
+        for field_name, field_element, exclusions in candidates:
+            extracted = extract_field(field_element, exclusions, source_key, field_name, section_number, notes)
             if extracted:
-                if normalize(str(target.get("text", ""))) != extracted["flattenedText"]:
-                    raise RuntimeError(f"Corpus/XML text mismatch at {source_key}")
-                fields.setdefault(source_key, {})["text"] = extracted
+                if normalize(str(target.get(field_name, ""))) != extracted["flattenedText"]:
+                    raise RuntimeError(f"Corpus/XML {field_name} mismatch at {source_key}")
+                fields.setdefault(source_key, {})[field_name] = extracted
                 affected_source_fields += 1
-        else:
-            extracted = extract_field(element, OWN_TEXT_EXCLUSIONS, source_key, "preamble", section_number, notes)
-            if extracted:
-                if normalize(str(target.get("preamble", ""))) != extracted["flattenedText"]:
-                    raise RuntimeError(f"Corpus/XML preamble mismatch at {source_key}")
-                fields.setdefault(source_key, {})["preamble"] = extracted
-                affected_source_fields += 1
+            data = extract_presentation(field_element, exclusions)
+            if not data["text"] and field_name not in target:
+                continue
+            expected_text = extracted["cleanText"] if extracted else normalize(str(target.get(field_name, "")))
+            if data["text"] != expected_text:
+                raise RuntimeError(f"Corpus/XML presentation mismatch at {source_key}.{field_name}")
+            if data["layout"] or data.get("presentation") or data.get("style"):
+                presentation_fields.setdefault(source_key, {})[field_name] = data
+
+    # Section ranges with combined identifiers are mapped by their actual num
+    # value, just like the importer. Their headings/source credits still have
+    # presentation even when they do not have an operative body.
+    for element in root.iter():
+        tag = local_name(element.tag)
+        identifier = element.get("identifier", "")
+        if tag == "section":
+            number_element = next((child for child in element if local_name(child.tag) == "num"), None)
+            section_number = normalize_section_number(number_element.get("value", "")) if number_element is not None else ""
+            source_key = f"{section_number}:preamble"
+            target = sources.get(source_key)
+            if target is not None:
+                for field_name in ["heading", "sourceCredit"]:
+                    child = next((item for item in element if local_name(item.tag) == field_name), None)
+                    if child is None or field_name in presentation_fields.get(source_key, {}):
+                        continue
+                    data = extract_presentation(child)
+                    if data["text"] != normalize(str(target.get(field_name, ""))):
+                        raise RuntimeError(f"Corpus/XML presentation mismatch at {source_key}.{field_name}")
+                    if data["layout"] or data.get("presentation") or data.get("style"):
+                        presentation_fields.setdefault(source_key, {})[field_name] = data
+        if tag not in {"title", "subtitle", "chapter", "subchapter", "part", "subpart", "division"}:
+            continue
+        if not identifier.startswith("/us/usc/t8"):
+            continue
+        notes = [note for child in element for note in (list(child) if local_name(child.tag) == "notes" else [child])
+                 if local_name(note.tag) == "note"]
+        records = [extract_note_layout(note, include_references=True) for note in notes
+                   if normalize(all_text(note)) != "Current through " + house_source["releasePoint"]]
+        if records:
+            division_notes[identifier] = records
 
     repeated_reference_count = 0
     for source_key, source_fields in fields.items():
@@ -470,8 +468,6 @@ def main() -> None:
     reference_count = sum(len(field["footnoteReferences"]) for record in fields.values() for field in record.values())
     if reference_count != footnote_count + repeated_reference_count:
         raise RuntimeError("House footnote/reference accounting is incomplete")
-    house_source = next(source for source in manifest["sources"] if source["id"] == "house-title-8-uslm")
-
     result = {
         "schemaVersion": 1,
         "corpusSchemaVersion": 3,
@@ -484,11 +480,13 @@ def main() -> None:
         "extraction": {"footnotes": footnote_count, "references": reference_count, "affectedFields": affected_source_fields},
         "sections": sections,
         "sectionNotes": bottom_notes,
+        "divisionNotes": division_notes,
+        "presentationFields": presentation_fields,
         "fields": fields,
     }
     output = "/* Generated from official House USLM Title 8 XML; rebuild with tools/generate-statute-footnotes.py. */\n"
     output += f"window.INA_SEARCH_STATUTE_FOOTNOTES = {safe_js_json(result)};\n"
-    OUTPUT_PATH.write_text(output, encoding="utf-8")
+    args.output.write_text(output, encoding="utf-8")
     print(json.dumps(result["extraction"]))
 
 

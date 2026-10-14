@@ -72,15 +72,16 @@ async function checkFallbackPersistence(rejectLoading = false, legacy = false) {
   assert.equal(saved.length, rejectLoading ? 0 : 1, "Fallback persistence ignored the background load outcome");
   if (!rejectLoading) assert.equal(saved[0].title8.sections[0].body, "Verified complete statutory text");
 }
-async function checkNoteMetadataUpgrade() {
+async function checkNoteMetadataUpgrade(hierarchyOnly = false) {
   const template = fs.readFileSync(require.resolve("../src/INASearch.template.html"), "utf8");
-  const source = template.slice(template.indexOf("    if (corpus && (corpus.legalReferenceMetadata"), template.indexOf("    if (loadedCorpus && !corpus)"));
-  const embedded = { legalReferenceMetadata: { cfrHierarchyVersion: 1 }, title8: { runInRevision: 1, houseFootnoteMetadata: { noteLayoutRevision: 1 } }, cfr: { currentThrough: { 8: "2026-01-01" } } };
+  const source = template.slice(template.indexOf("    function corpusRequiresEmbeddedUpgrade"), template.indexOf("    if (loadedCorpus && !corpus)"));
+  const embedded = { legalReferenceMetadata: { cfrHierarchyVersion: 1, uscHierarchyVersion: 1 }, title8: { runInRevision: 1, houseFootnoteMetadata: { noteLayoutRevision: 1 } }, cfr: { currentThrough: { 8: "2026-01-01" } } };
   const previous = structuredClone(embedded);
-  delete previous.title8.houseFootnoteMetadata.noteLayoutRevision;
+  if (hierarchyOnly) delete previous.legalReferenceMetadata.uscHierarchyVersion;
+  else delete previous.title8.houseFootnoteMetadata.noteLayoutRevision;
   previous.cfr = { currentThrough: { 8: "2026-02-01" }, parts: [{ id: "8:214" }] };
   previous.corpusVersion = "newer-cfr-download";
-  const context = { corpus: previous, build: { cfrHierarchyVersion: 1, statuteRunInRevision: 1, statuteNoteLayoutRevision: 1 },
+  const context = { corpus: previous, build: { cfrHierarchyVersion: 1, uscHierarchyVersion: 1, statuteRunInRevision: 1, statuteNoteLayoutRevision: 1 },
     loadEmbeddedINASearchCorpus: async () => structuredClone(embedded), isValidCorpus: () => true, hydrateLegalReferences() {},
     INA_SEARCH_CORPUS_COMPLETE: Promise.resolve(), INASearchLegalReferences: { applyCfrReferences() {} }, TextEncoder,
     INASearchStorage: { sha256Bytes: async bytes => require("node:crypto").createHash("sha256").update(bytes).digest("hex") } };
@@ -88,12 +89,14 @@ async function checkNoteMetadataUpgrade() {
   vm.createContext(context);
   await vm.runInContext(`(async () => { ${source} })()`, context);
   assert.equal(context.corpus.title8.houseFootnoteMetadata.noteLayoutRevision, 1, "An existing cache must receive the structured editorial notes");
+  assert.equal(context.corpus.legalReferenceMetadata.uscHierarchyVersion, 1, "An existing cache must receive chapter and subchapter references");
   assert.equal(context.INA_SEARCH_CORPUS_LOAD_SOURCE, "upgraded-cache");
   assert.equal(context.corpus.cfr.currentThrough[8], "2026-02-01", "The note upgrade must preserve newer downloaded regulations");
   assert.equal(context.INA_SEARCH_UPGRADED_CORPUS_SHA256, require("node:crypto").createHash("sha256").update(JSON.stringify(context.corpus)).digest("hex"), "An upgraded reader must identify its new content with the same hash used by its next cached startup.");
 }
 (async () => {
   await checkNoteMetadataUpgrade();
+  await checkNoteMetadataUpgrade(true);
   await checkFallbackPersistence();
   await checkFallbackPersistence(true);
   await checkFallbackPersistence(false, true);

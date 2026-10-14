@@ -12,17 +12,16 @@
  */
 (function (root, factory) {
   "use strict";
-  const api = factory();
+  const api = factory(typeof module !== "undefined" && module.exports ? require("./INASearch-USLM") : root.INA_SEARCH_USLM);
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   if (root) root.INA_SEARCH_OCCURRENCE = api;
-})(typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this, function () {
+})(typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this, function (presentation) {
   "use strict";
 
   const SCHEMA_VERSION = 2;
-  // The fragment/hierarchy format is unchanged. Extra cached fields are ignored,
-  // so removing the redundant citation index need not force a cold rebuild.
-  const PERSISTED_PROJECTION_SCHEMA_VERSION = 2;
-  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-9`;
+  // Child insertion boundaries change fragment order and source ranges.
+  const PERSISTED_PROJECTION_SCHEMA_VERSION = 3;
+  const SEARCH_ALGORITHM_VERSION = `occurrence-${SCHEMA_VERSION}-scopes-10`;
   const DEFAULT_SLICE_MS = 8;
   const STATUTE_DEPTHS = Object.freeze({
     section: 0, subsection: 1, paragraph: 2, subparagraph: 3, clause: 4,
@@ -36,6 +35,53 @@
   const NOTE_TYPES = new Set(["ordinary", "editorial", "effective-date"]);
   const projectionCache = new WeakMap();
   const projectionAsyncCache = new WeakMap();
+
+  // Parent fields retain their reference offsets; these ranges restore the
+  // publisher's reading order without inventing citations for unnumbered prose.
+  function statuteContentParts(node, field = "text", childrenField = "children") {
+    const text = String(node[field] || ""), children = node[childrenField] || [];
+    const offsets = node.childTextOffsets || children.map(() => text.length);
+    if (offsets.length !== children.length) throw new Error("Invalid statute child/text order");
+    const parts = [];
+    const addText = (start, end, afterChild) => {
+      const ranges = end > start ? presentation.fieldParts(node[`${field}Layout`], start, end, text) : [{ start, end }];
+      for (const range of ranges) parts.push({ kind: "text", field, ...range, afterChild });
+    };
+    let start = 0;
+    children.forEach((child, index) => {
+      const end = offsets[index];
+      if (!Number.isInteger(end) || end < start || end > text.length) throw new Error("Invalid statute text boundary");
+      if (end > start || (node[`${field}FootnoteReferences`] || []).some(ref => ref.afterChild === index)) addText(start, end, index);
+      parts.push({ kind: "child", node: child, index });
+      start = end;
+    });
+    if (start < text.length || (node[`${field}FootnoteReferences`] || []).some(ref => ref.afterChild === children.length)) addText(start, text.length, children.length);
+    if (node.continuation) parts.push({ kind: "text", field: "continuation", start: 0, end: node.continuation.length });
+    return parts;
+  }
+
+  function statutePartFootnotes(node, part) {
+    if (!part) return [];
+    return (node[`${part.field}FootnoteReferences`] || [])
+      .filter(ref => !Number.isInteger(ref.afterChild) || ref.afterChild === part.afterChild)
+      .map(ref => Number.isInteger(ref.afterChild) ? { ...ref, includeAtRangeEnd: ref.offset === part.end && part.end === node.childTextOffsets?.[part.afterChild] } : ref);
+  }
+
+  function statuteRunInPart(node, segment) {
+    return { field: "text", afterChild: segment.textPart,
+      end: node.childTextOffsets?.[segment.textPart] ?? String(node.text || "").length };
+  }
+
+  function statuteTextPartIndex(node, offset) {
+    return (node?.childTextOffsets || []).filter(boundary => boundary <= offset).length;
+  }
+
+  function constrainStatuteRunInPath(node, currentPath, path, tokens, offset) {
+    // A USLM continuation belongs to its structural parent even when an inline
+    // marker looks like a sibling at the parent's usual citation depth.
+    return statuteTextPartIndex(node, offset) && !currentPath.every((token, index) => path[index] === token)
+      ? [...currentPath, ...tokens] : path;
+  }
 
   function now() {
     return typeof performance !== "undefined" && typeof performance.now === "function" ? performance.now() : Date.now();
@@ -162,7 +208,10 @@
       const precedingWord = prefix.match(/([A-Za-z]+)[\s“”'".:]*$/)?.[1]?.toLowerCase() || "";
       const referenceContinuation = referenceChainEnd >= 0 && RUN_IN_REFERENCE_CONNECTOR.test(input.slice(referenceChainEnd, start));
       const referenceNumberPrefix = /\b(?:section|sections|subsection|subsections|paragraph|paragraphs|subparagraph|subparagraphs|clause|clauses|subclause|subclauses|item|items)\s+\d+[A-Za-z-]*\s*$/i.test(prefix) || /\b\d{3,}[A-Za-z-]*\s*$/.test(prefix);
-      const isReference = referenceContinuation || RUN_IN_REFERENCE_WORDS.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(input[start - 1] || "");
+      const priorStructuralMarker = candidates.at(-1);
+      const structuralSibling = (Boolean(currentLabel) && immediateSibling(currentLabel, token) && /\b(?:and|or)\s*$/i.test(prefix) && /^\s+if\b/i.test(input.slice(end))) ||
+        (Boolean(priorStructuralMarker) && immediateSibling(priorStructuralMarker.token, token) && /\b(?:and|or)\s*$/i.test(prefix) && /^\s+(?:a|an|the|if|when|where|who|which|that|to|by|for|is|are|shall|may|has|have|establish)\b/i.test(input.slice(end)));
+      const isReference = !structuralSibling && (referenceContinuation || RUN_IN_REFERENCE_WORDS.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(input[start - 1] || ""));
       if (isReference) {
         referenceChainEnd = end;
         continue;
@@ -260,8 +309,11 @@
     const walk = (nodes, parent = []) => {
       for (const node of nodes || []) {
         const current = [...parent, ...node.label ? [String(node.label)] : []], markers = runInMarkers(node.text, node.label);
-        let previous = null;
+        let previous = null, previousPart = -1;
         for (const marker of markers) {
+          const part = statuteTextPartIndex(node, marker.start);
+          if (part !== previousPart) previous = null;
+          previousPart = part;
           const tokens = [marker.token], candidates = runInPathCandidates(current, tokens, previous), direct = candidates[0];
           let path = marker.nestedAfterPrevious && previous?.length ? [...previous, ...tokens]
             : candidates.find(candidate => indexed.has(pathIdentity(candidate)) && !structural.has(pathIdentity(candidate)))
@@ -269,6 +321,7 @@
               || (immediateSibling(current.at(-1), tokens[0]) ? [...parent, ...tokens] : null)
               || fallbackRunInPath(current, parent, tokens);
           if (structural.has(pathIdentity(path)) && !structural.has(pathIdentity(direct))) path = direct;
+          path = constrainStatuteRunInPath(node, current, path, tokens, marker.start);
           const identity = pathIdentity(path);
           previous = path;
           if (!virtualOwners.has(identity)) virtualOwners.set(identity, new Set());
@@ -288,19 +341,23 @@
 
   function resolvedRunInSegments(section, node, currentPath, runInIndex) {
     const markers = runInMarkers(node?.text, node?.label), segments = [];
-    let previous = null;
+    let previous = null, previousPart = -1;
     for (const marker of markers) {
+      const part = statuteTextPartIndex(node, marker.start);
+      if (part !== previousPart) previous = null;
+      previousPart = part;
       const tokens = [marker.token], candidates = runInPathCandidates(currentPath, tokens, previous);
-      const path = marker.nestedAfterPrevious && previous?.length ? [...previous, ...tokens]
+      let path = marker.nestedAfterPrevious && previous?.length ? [...previous, ...tokens]
         : candidates.find(candidate => runInIndex.virtual.has(pathIdentity(candidate)))
           || inferredSiblingPath(currentPath, tokens, previous)
           || (immediateSibling(currentPath.at(-1), tokens[0]) ? [...currentPath.slice(0, -1), ...tokens] : null)
           || fallbackRunInPath(currentPath, currentPath.slice(0, -1), tokens);
+      path = constrainStatuteRunInPath(node, currentPath, path, tokens, marker.start);
       previous = path;
       const identity = pathIdentity(path);
       if (runInIndex.virtual.has(identity)) segments.push({ ...marker, path, collision: runInIndex.collisions.has(identity) });
     }
-    return segments.map((segment, index) => ({ ...segment, sourceEnd: segments[index + 1]?.start ?? String(node?.text || "").length }));
+    return segments.map((segment, index) => ({ ...segment, sourceEnd: Math.min(segments[index + 1]?.start ?? String(node?.text || "").length, (node?.childTextOffsets || []).find(offset => offset > segment.start) ?? String(node?.text || "").length) }));
   }
 
   function expandedHouseHref(value) {
@@ -499,28 +556,39 @@
       };
       const addStatuteFragment = (kind, text, path, occurrenceKeys, source) => addFragment({ ...common, kind, text, path, occurrenceKeys, citation: `${citationBase}${canonicalPath(path)}`, source, references: fragmentReferences(section, source, text) });
       addStatuteFragment("statute-heading", section.heading, [], [], { field: "heading" });
-      addStatuteFragment("statute-preamble", section.preamble, [], [], { field: "preamble" });
       let nodeOrdinal = 0;
-      const walkNodes = (nodes, parentPath = [], parentOccurrenceKeys = [], parentRecordPath = []) => {
-        for (let nodeIndex = 0; nodeIndex < (nodes || []).length; nodeIndex += 1) {
+      const walkNodes = (nodes, parentPath = [], parentOccurrenceKeys = [], parentRecordPath = [], onlyIndex = null) => {
+        for (let nodeIndex = onlyIndex ?? 0; nodeIndex < (onlyIndex === null ? (nodes || []).length : onlyIndex + 1); nodeIndex += 1) {
           const node = nodes[nodeIndex], path = [...parentPath, ...node.label ? [String(node.label)] : []], occurrenceKeys = structuralKeysFor(path, parentOccurrenceKeys);
           const recordPath = [...parentRecordPath, nodeIndex], ordinal = nodeOrdinal++;
           const sourceBase = { field: "body", path: [...path], recordPath, ordinal };
           addStatuteFragment("statute-node-heading", node.heading, path, occurrenceKeys, { ...sourceBase, subfield: "heading" });
           const text = String(node.text || ""), segments = resolvedRunInSegments(section, node, path, runIns);
-          if (segments.length) {
-            addStatuteFragment("statute-node", text.slice(0, segments[0].start), path, occurrenceKeys, { ...sourceBase, subfield: "text", start: 0, end: segments[0].start });
-            for (let segmentIndex = 0; segmentIndex < segments.length; segmentIndex += 1) {
-              const segment = segments[segmentIndex], segmentPath = segment.collision ? path : segment.path;
-              const segmentKeys = segment.collision ? occurrenceKeys : virtualKeysFor(segmentPath, path, occurrenceKeys);
-              addStatuteFragment(segment.collision ? "statute-node" : "statute-run-in", text.slice(segment.start, segment.sourceEnd), segmentPath, segmentKeys, { ...sourceBase, subfield: "text", segmentIndex, start: segment.start, end: segment.sourceEnd, ...(segment.collision ? { runInCollision: true } : { virtual: true }) });
+          for (const part of statuteContentParts(node)) {
+            if (part.kind === "child") { walkNodes(node.children, path, occurrenceKeys, recordPath, part.index); continue; }
+            if (part.field !== "text") {
+              addStatuteFragment("statute-node", node[part.field].slice(part.start, part.end), path, occurrenceKeys, { ...sourceBase, subfield: part.field, start: part.start, end: part.end });
+              continue;
             }
-          } else addStatuteFragment("statute-node", text, path, occurrenceKeys, { ...sourceBase, subfield: "text", start: 0, end: text.length });
-          walkNodes(node.children, path, occurrenceKeys, recordPath);
-          if (node.continuation) addStatuteFragment("statute-node", node.continuation, path, occurrenceKeys, { ...sourceBase, subfield: "continuation", start: 0, end: String(node.continuation || "").length });
+            const partSegments = segments.filter(segment => segment.start >= part.start && segment.start < part.end);
+            if (partSegments.length) {
+              const initialEnd = Math.min(part.end, partSegments[0].start);
+              if (initialEnd > part.start) addStatuteFragment("statute-node", text.slice(part.start, initialEnd), path, occurrenceKeys, { ...sourceBase, subfield: "text", start: part.start, end: initialEnd });
+              for (const segment of partSegments) {
+                const segmentIndex = segments.indexOf(segment), segmentPath = segment.collision ? path : segment.path;
+                const start = Math.max(part.start, segment.start), end = Math.min(part.end, segment.sourceEnd);
+                if (end <= start) continue;
+                const segmentKeys = segment.collision ? occurrenceKeys : virtualKeysFor(segmentPath, path, occurrenceKeys);
+                addStatuteFragment(segment.collision ? "statute-node" : "statute-run-in", text.slice(start, end), segmentPath, segmentKeys, { ...sourceBase, subfield: "text", segmentIndex, start, end, ...(segment.collision ? { runInCollision: true } : { virtual: true }) });
+              }
+            } else addStatuteFragment("statute-node", text.slice(part.start, part.end), path, occurrenceKeys, { ...sourceBase, subfield: "text", start: part.start, end: part.end });
+          }
         }
       };
-      walkNodes(section.body);
+      for (const part of statuteContentParts(section, "preamble", "body")) {
+        if (part.kind === "child") walkNodes(section.body, [], [], [], part.index);
+        else addStatuteFragment("statute-preamble", section[part.field].slice(part.start, part.end), [], [], { field: part.field, start: part.start, end: part.end });
+      }
       const supplement = (kind, text, source, heading) => addFragment({ ...common, contentKind: "annotations", kind, text, path: source.path || [], occurrenceKeys: (source.path || []).map((_, depth) => `${rootOccurrenceKey}:annotation:${source.path.slice(0, depth + 1).join("/")}`), deepestOccurrenceKey: `${rootOccurrenceKey}:${source.field}:${source.noteIndex ?? 0}`, citation: citationBase, annotationHeading: heading, source, references: fragmentReferences(section, source, text) });
       supplement("source-credit", section.sourceCredit, { field: "sourceCredit" }, "Source credit");
       (section.notes || []).forEach((note, noteIndex) => {
@@ -1601,6 +1669,12 @@
   }
 
   return Object.freeze({
+    presentation,
+    statuteContentParts,
+    statutePartFootnotes,
+    statuteRunInPart,
+    statuteTextPartIndex,
+    constrainStatuteRunInPath,
     packedReferences,
     bucketFor,
     searchOptions,

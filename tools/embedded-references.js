@@ -515,7 +515,9 @@ function readSectionScope(input, position) {
   const value = input.slice(start);
   const codeOrAct = value.match(/^of\s+(?:the\s+)?(Internal\s+Revenue\s+Code(?:\s+of\s+(?:1954|1986))?|IRC|NACARA)\b/i);
   if (codeOrAct) return { start, end: start + codeOrAct[0].length, text: codeOrAct[0], type: "named-act", title: "", actName: codeOrAct[1] };
-  let match = value.match(/^of\s+(this|that|such)\s+title\b/i);
+  let match = value.match(/^of\s+this\s+(chapter|subchapter)\b/i);
+  if (match) return { start, end: start + match[0].length, text: match[0], type: `this-${match[1].toLowerCase()}`, title: "" };
+  match = value.match(/^of\s+(this|that|such)\s+title\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: `${match[1].toLowerCase()}-title`, title: "" };
   match = value.match(/^of\s+title\s+(\d+)\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: "numbered-title", title: match[1] };
@@ -626,13 +628,15 @@ function parseNumberedSectionReferences(text) {
   for (const entry of starts.sort((left, right) => left.start - right.start || Number(right.hasUnitWord) - Number(left.hasUnitWord))) {
     if (candidates.some(candidate => entry.start >= candidate.start && entry.start < candidate.end)) continue;
     const sequence = parseSectionAddressSequence(input, entry.start, entry.hasUnitWord);
+    if (["this-chapter", "this-subchapter"].includes(sequence?.scope?.type) &&
+        !sequence.members.some(member => member.type === "absolute-section-address")) continue;
     // A coordinated section list does not need a parenthetical sub-unit to
     // be a complete citation.  Lists such as “section 1229b, 1229c, 1255,
     // 1258, or 1259 of this title” are just as structurally explicit as
     // “sections 1158 or 1231(b)(3) of this title”.  Keep the old path
     // requirement for a lone address unless it has an explicit named owner.
     // "Section 1059 of Public Law 109-163" is complete without sub-units.
-    const explicitOwner = entry.hasUnitWord && ["public-law", "named-act", "named-instrument"].includes(sequence?.scope?.type);
+    const explicitOwner = entry.hasUnitWord && ["public-law", "named-act", "named-instrument", "this-chapter", "this-subchapter"].includes(sequence?.scope?.type);
     if (!sequence || !sequence.members.length ||
         (!explicitOwner && !sequence.members.some(member => member.tokens?.length) && sequence.members.length < 2)) continue;
     candidates.push({

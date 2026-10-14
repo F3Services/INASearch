@@ -31,7 +31,7 @@ const RULES = [
   "embedded-a-explicit-container-base", "embedded-a-preceding-container", "embedded-a-shared-trailing-container",
   "embedded-explicit-container", "embedded-this-container", "embedded-such-container", "embedded-relative-container",
   "embedded-numbered-section-list", "embedded-named-act-section", "embedded-named-instrument-section", "embedded-inferred-unit", "embedded-exception",
-  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "historical-reviewed-reference", "explicit-cfr-hierarchy", "house-uslm-ref"
+  "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "historical-reviewed-reference", "explicit-cfr-hierarchy", "house-uslm-ref", "explicit-usc-hierarchy"
 ];
 const EVIDENCE_UNITS = ["", "section", "subsection", "paragraph", "subparagraph", "clause", "subclause", "item", "subitem"];
 
@@ -65,7 +65,8 @@ function compactReference(reference, houseHrefIndex = () => 0, legalTargetIndex 
     reference.targetTitle || 0, reference.targetSection || 0, !derivedPath && reference.targetPath?.length ? reference.targetPath : 0,
     reference.targetCongress || 0, reference.targetLaw || 0, reference.targetVolume || 0, reference.targetPage || 0,
     Math.max(0, RULES.indexOf(reference.ruleId || "")), reference.inaSection || 0,
-    reference.policyScopeId || 0, reference.historicalTargetId || 0, reference.targetEdition || 0, reference.historicalOfficialUrl || 0, reference.citationNote || 0];
+    reference.policyScopeId || 0, reference.historicalTargetId || 0, reference.targetEdition || 0, reference.historicalOfficialUrl || 0, reference.citationNote || 0,
+    reference.targetChapter || 0, reference.targetSubchapter || 0, reference.targetChapter ? reference.officialUrl || 0 : 0];
   while (target.at(-1) === 0) target.pop();
   const packed = [1, reference.start - previousEnd, reference.end - reference.start, legalTargetIndex(target)];
   if (typeof reference.evidenceId === "number" && Number.isFinite(reference.evidenceId)) packed.push(reference.evidenceId);
@@ -83,6 +84,9 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     if (typeof target[4] === "string") target[4] = target[4] ? target[4].split("/") : [];
     Object.assign(output, { start, end, family: CODE_FAMILIES[target[0]] || "unknown", resolution: Number(target[1] || 0), targetTitle: target[2] || "", targetSection: target[3] || "", targetPath: target[4] || [], targetCongress: target[5] || "", targetLaw: target[6] || "", targetVolume: target[7] || "", targetPage: target[8] || "", ruleId: RULES[target[9] || 0] || "", inaSection: target[10] || "", policyScopeId: target[11] || "", ...(Number(target[12]) ? { historicalTargetId: Number(target[12]) } : {}), ...(target[13] ? { targetEdition: String(target[13]) } : {}), ...(target[14] ? { historicalOfficialUrl: String(target[14]) } : {}), ...(target[15] ? { citationNote: String(target[15]) } : {}) });
     if (typeof reference[4] === "number" && Number.isFinite(reference[4])) output.evidenceId = reference[4];
+    if (target[16]) output.targetChapter = String(target[16]);
+    if (target[17]) output.targetSubchapter = String(target[17]);
+    if (target[16] && target[18]) output.officialUrl = String(target[18]);
   }
   else for (const [key, value] of Object.entries(reference || {})) output[KEY_REFERENCES[key] || key] = value;
   output.resolution = output.resolution === 1 ? "local" : output.resolution === 2 ? "unresolved" : "official-source-only";
@@ -120,6 +124,10 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     output.officialUrl = `https://uscode.house.gov/view.xhtml?edition=${output.targetEdition}&num=0&req=${encodeURIComponent(`granuleid:USC-${output.targetEdition}-title${output.targetTitle}-section${output.targetSection}`)}`;
   }
   if (output.historicalOfficialUrl) output.officialUrl = output.historicalOfficialUrl;
+  if (output.targetChapter) {
+    output.targetKind = "usc-hierarchy";
+    output.officialUrl ||= "https://uscode.house.gov/browse.html";
+  }
   return output;
 }
 

@@ -9,7 +9,7 @@ const functionSource = require('./test-function-source');
 const template = fs.readFileSync('src/INASearch.template.html','utf8');
 const corpus = readArtifact('INASearch-Uncompressed.html');
 const api = runtime(template,corpus);
-for (const name of ['superscriptNumber','textWithHouseFootnoteMarkers','legalFieldPlainText','statuteNodePlainText','cfrBlockPlainText']) vm.runInContext(functionSource(template,name),api);
+for (const name of ['superscriptNumber','textWithHouseFootnoteMarkers','statuteTextRangeWithHouseFootnotes','legalFieldPlainText','statuteNodePlainText','cfrBlockPlainText']) vm.runInContext(functionSource(template,name),api);
 const fields=collectFields(corpus);
 const field=fields.find(f=>f.sourceId==='8-1226-c-1-B'&&f.field==='text');
 const expected='is deportable by reason of having committed any offense covered in INA 237(a)(2)(A)(ii), (A)(iii), (B), (C), or (D),';

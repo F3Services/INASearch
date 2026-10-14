@@ -215,6 +215,7 @@ function makeBuild(template, corpus, profile, options) {
       labels: corpus.title8.chapterDispositions
     },
     cfrHierarchyVersion: corpus.legalReferenceMetadata.cfrHierarchyVersion,
+    uscHierarchyVersion: corpus.legalReferenceMetadata.uscHierarchyVersion,
     statuteRunInRevision: corpus.title8.runInRevision,
     statuteNoteLayoutRevision: corpus.title8.houseFootnoteMetadata?.noteLayoutRevision || 0,
     referencedUscVersion: corpus.referencedUsc?.version || "",
@@ -261,6 +262,7 @@ template = replaceRuntimeBlock(template, "INSERTIONS", "inaSearchInsertionsRunti
 template = replaceRuntimeBlock(template, "ANNOTATIONS", "inaSearchAnnotationsRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Annotations.js"), "utf8"));
 template = replaceRuntimeBlock(template, "COMMAND", "inaSearchCommandRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Command.js"), "utf8"));
 template = replaceRuntimeBlock(template, "WORKSPACE", "inaSearchWorkspaceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Workspace.js"), "utf8"));
+template = replaceRuntimeBlock(template, "USLM", "inaSearchUslmRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-USLM.js"), "utf8"));
 template = replaceRuntimeBlock(template, "OCCURRENCE", "inaSearchOccurrenceRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Occurrence.js"), "utf8"));
 template = replaceRuntimeBlock(template, "QUERY", "inaSearchQueryRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Query.js"), "utf8"));
 template = replaceInertRuntimeBlock(template, "SEARCH_WORKER", "inaSearchSearchWorkerRuntime", fs.readFileSync(path.join(sourceDir, "INASearch-Search-Worker.js"), "utf8"));
@@ -282,8 +284,11 @@ require("./historical-usc.js").applyHistoricalUsc(fullCorpus);
 // Historical supplements have their own versions; a new current-law source
 // must still change the delivered corpus identity for the browser cache.
 if (fullCorpus.title8Update) fullCorpus.corpusVersion = fullCorpus.title8Update.corpusVersion;
+// Invalidate cached corpora from before source-ordered parent text was shipped.
+fullCorpus.corpusVersion += "-usc-order.1-uslm.1";
 indexStatuteRunIns(fullCorpus);
 fullCorpus.referencedUsc = JSON.parse(fs.readFileSync(path.join(root, "sources/legal/referenced-usc/corpus.json"), "utf8"));
+fullCorpus.uscHierarchyLinks = JSON.parse(fs.readFileSync(path.join(root, "sources/legal/usc-hierarchy-links.json"), "utf8"));
 indexStatuteRunIns({ title8: { sections: fullCorpus.referencedUsc.titles.flatMap(title => title.sections) } });
 fullCorpus.legalReferenceExceptions = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "embedded-reference-exceptions.json"), "utf8"));
 fullCorpus.historicalLocatorCorrections = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "historical-reference-locators.json"), "utf8"));

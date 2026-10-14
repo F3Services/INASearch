@@ -18,7 +18,7 @@ const context = {
   state: { hierarchyExpanded: new Set() }
 };
 vm.runInNewContext(fs.readFileSync("src/INASearch-Startup.js", "utf8"), context);
-const names = ["normalize", "normCitationPart", "escapeHtml", "titleCaseTopic", "navigationTitleCase", "hierarchyUnitKind", "hierarchyNodeId", "createHierarchyNode", "hierarchySourceHeading", "buildAuthorityHierarchies", "addReferencedUscHierarchy", "hierarchyNodeAncestors", "hierarchyOfficialUrl", "hierarchyNodeCitation", "hierarchyBrowseResult", "hierarchyDescendants", "hierarchyUnitMatches", "hierarchyResultForUnits", "namedHierarchyUnits", "parseCfrHierarchy", "hierarchyRowCitation", "hierarchyRowHeading", "hierarchyStatusBadge", "hierarchyStatusReplacesHeading", "renderHierarchyRows", "paneHierarchyRows", "hierarchyNavigationSegments", "hierarchyChildNavigationSegment"];
+const names = ["normalize", "normCitationPart", "escapeHtml", "titleCaseTopic", "navigationTitleCase", "hierarchyUnitKind", "hierarchyNodeId", "createHierarchyNode", "hierarchySourceHeading", "buildAuthorityHierarchies", "addReferencedUscHierarchy", "hierarchyNodeAncestors", "hierarchyOfficialUrl", "hierarchyNodeCitation", "hierarchyBrowseResult", "hierarchyDescendants", "hierarchyUnitMatches", "hierarchyResultForUnits", "namedHierarchyUnits", "parseCfrHierarchy", "hierarchyRowCitation", "hierarchyRowHeading", "hierarchyStatusBadge", "hierarchyStatusReplacesHeading", "hierarchyTocFootnoteMarkers", "renderHierarchyTocNotes", "hierarchyNoteEntries", "hierarchyNoteMarkers", "renderHierarchyRows", "paneHierarchyRows", "hierarchyNavigationSegments", "hierarchyChildNavigationSegment"];
 const declarations = names.map(name => {
   const start = source.indexOf(`function ${name}(`);
   assert(start >= 0, name);

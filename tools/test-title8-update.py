@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Offline source/import regression tests; no publisher or GitHub writes."""
 import io
+import runpy
 import json
 from pathlib import Path
 import unittest
 from unittest.mock import patch
 import zipfile
 import tempfile
+import re
+import xml.etree.ElementTree as ET
 
 from title8_update.source import discover, extract_zip, release_key, validate_xml
 from title8_update.uslm import import_title8
@@ -55,6 +58,53 @@ class DiscoveryTests(unittest.TestCase):
 
 
 class ImportTests(unittest.TestCase):
+    def test_footnotes_keep_their_side_of_child_boundaries(self):
+        extract = runpy.run_path(str(ROOT / 'tools/generate-statute-footnotes.py'))['extract_field']
+        node = ET.fromstring('<subsection><num>a</num><chapeau>Start<sup>1</sup></chapeau>'
+                             '<paragraph><num>1</num><content>One</content></paragraph>'
+                             '<continuation><sup>2</sup> End</continuation></subsection>')
+        field = extract(node, {'num', 'paragraph'}, '9000:a', 'text', '9000', {})
+        self.assertEqual(field['cleanText'], 'Start End')
+        self.assertEqual(field['childTextOffsets'], [5])
+        self.assertEqual([(ref['offset'], ref['afterChild']) for ref in field['footnoteReferences']], [(5, 0), (5, 1)])
+
+    def test_every_operative_section_preserves_original_uslm_reading_order(self):
+        # The oracle walks the publisher's XML in document order, independently
+        # of the importer's grouping of parent text and structural children.
+        result = import_title8(XML_PATH.read_bytes(), ADOPTED['releasePoint'], '2026-08-21')
+        root = ET.fromstring(XML_PATH.read_bytes())
+        source = {s.get('identifier'): s for s in root.iter(f'{{{NS}}}section') if s.get('identifier')}
+
+        def rendered(node, section=False):
+            text = node.get('preamble' if section else 'text', '')
+            children = node.get('body' if section else 'children', [])
+            offsets = node.get('childTextOffsets', [len(text.encode('utf-16-le')) // 2] * len(children))
+            encoded = text.encode('utf-16-le')
+            parts = [] if section else ['(' + node['label'] + ')', node.get('heading', '')]
+            cursor = 0
+            for offset, child in zip(offsets, children):
+                parts.extend([encoded[cursor * 2:offset * 2].decode('utf-16-le'), rendered(child)])
+                cursor = offset
+            parts.append(encoded[cursor * 2:].decode('utf-16-le'))
+            return ' '.join(parts)
+
+        for section in result['sections']:
+            element = source[section['identifier']]
+            expected = ' '.join(''.join(child.itertext()) for child in element
+                                if child.tag.rsplit('}', 1)[-1] not in {'num', 'heading', 'sourceCredit', 'notes'})
+            with self.subTest(section=section['section']):
+                self.assertEqual(re.sub(r'\s+', '', rendered(section, True)), re.sub(r'\s+', '', expected))
+
+    def test_multiple_middle_and_section_continuations_preserve_unicode_boundaries(self):
+        data = xml('<section identifier="/us/usc/t8/s9000"><num value="9000"/><heading>Test</heading>'
+                   '<chapeau>Start😀</chapeau><subsection identifier="/us/usc/t8/s9000/a"><num value="a"/>'
+                   '<chapeau>First😀</chapeau><paragraph identifier="/us/usc/t8/s9000/a/1"><num value="1"/><content>One</content></paragraph>'
+                   '<continuation>Middle</continuation><paragraph identifier="/us/usc/t8/s9000/a/2"><num value="2"/><content>Two</content></paragraph>'
+                   '<continuation>Last</continuation></subsection><continuation>End</continuation></section>')
+        section = import_title8(data, '119-103', '2026-10-13')['sections'][0]
+        self.assertEqual(section.get('childTextOffsets'), [7])
+        self.assertEqual(section['body'][0].get('childTextOffsets'), [7, 14])
+
     def test_nested_units_and_citations_are_distinct(self):
         data = xml('<chapter><num value="12"/><heading>IMMIGRATION</heading>'
                    '<section identifier="/us/usc/t8/s1101"><num value="1101"/><heading>Definitions</heading>'
@@ -97,6 +147,12 @@ class ImportTests(unittest.TestCase):
 
 
 class PipelineTests(unittest.TestCase):
+    def test_section_continuation_order_is_an_operative_change(self):
+        section = {'section': '9000', 'status': 'current', 'preamble': 'Start End', 'body': [{'label': 'a', 'text': 'Child'}]}
+        before = {'sections': [section]}
+        after = {'sections': [{**section, 'childTextOffsets': [5]}]}
+        self.assertEqual(changed_sections(before, after), (['9000'], []))
+
     def test_staging_failure_records_blocked_without_export(self):
         with tempfile.TemporaryDirectory() as temp:
             work = Path(temp)

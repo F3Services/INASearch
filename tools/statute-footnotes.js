@@ -62,6 +62,12 @@ function applyStatuteFootnotes(corpus, footnoteSource) {
         throw new Error(`House footnote reconstruction failed at ${sourceKey}.${fieldName}.`);
       }
       target[fieldName] = field.cleanText;
+      if (target.childTextOffsets && ["text", "preamble"].includes(fieldName)) {
+        if (!Array.isArray(field.childTextOffsets) || field.childTextOffsets.length !== target.childTextOffsets.length) {
+          throw new Error(`House footnote overlay is missing source order at ${sourceKey}.${fieldName}.`);
+        }
+        target.childTextOffsets = clone(field.childTextOffsets);
+      }
       target[`${fieldName}FootnoteReferences`] = clone(field.footnoteReferences);
       cleanedFields += 1;
       references += field.footnoteReferences.length;
@@ -84,7 +90,36 @@ function applyStatuteFootnotes(corpus, footnoteSource) {
       note.role = record.role;
       note.bodyStart = record.bodyStart;
       note.layout = clone(record.layout);
+      note.headingLayout = clone(record.headingLayout || []);
+      if (record.headingPresentation) note.headingPresentation = clone(record.headingPresentation);
+      if (record.uslmReferences) note.uslmReferences = clone(record.uslmReferences);
     });
+  }
+  for (const [identifier, records] of Object.entries(footnoteSource.divisionNotes || {})) {
+    const division = corpus.title8?.divisionNotes?.[identifier];
+    if (!division || division.notes?.length !== records.length) throw new Error(`House division note structure mismatch at ${identifier}.`);
+    records.forEach((record, index) => {
+      const note = division.notes[index];
+      if (note.text !== record.text || note.heading !== record.heading) throw new Error(`House division note text mismatch at ${note.id}.`);
+      note.role = record.role;
+      note.bodyStart = record.bodyStart;
+      note.layout = clone(record.layout);
+      note.headingLayout = clone(record.headingLayout || []);
+      if (record.headingPresentation) note.headingPresentation = clone(record.headingPresentation);
+      if (record.uslmReferences) note.uslmReferences = clone(record.uslmReferences);
+    });
+  }
+  let presentationFields = 0;
+  for (const [sourceKey, fields] of Object.entries(footnoteSource.presentationFields || {})) {
+    const target = sources.get(sourceKey);
+    if (!target) throw new Error(`House presentation points to missing legal field ${sourceKey}.`);
+    for (const [fieldName, record] of Object.entries(fields || {})) {
+      if (normalizedHouseText(target[fieldName]) !== record.text) throw new Error(`House presentation text mismatch at ${sourceKey}.${fieldName}.`);
+      target[`${fieldName}Layout`] = clone(record.layout);
+      if (record.presentation) target[`${fieldName}Presentation`] = clone(record.presentation);
+      if (record.style) target[`${fieldName}Style`] = clone(record.style);
+      presentationFields += 1;
+    }
   }
   const headingKey = value => normalizedHouseText(value).normalize("NFKC").toLowerCase();
   const targets = new Map();
@@ -112,7 +147,8 @@ function applyStatuteFootnotes(corpus, footnoteSource) {
   corpus.schemaVersion = Math.max(Number(corpus.schemaVersion) || 1, Number(footnoteSource.corpusSchemaVersion) || 3);
   corpus.title8.houseFootnoteMetadata = {
     schemaVersion: footnoteSource.schemaVersion,
-    noteLayoutRevision: Object.keys(footnoteSource.sectionNotes || {}).length ? 1 : 0,
+    noteLayoutRevision: Object.keys(footnoteSource.sectionNotes || {}).length ? 2 : 0,
+    presentationFields,
     sourceUrl: footnoteSource.sourceUrl,
     sourceReleasePoint: footnoteSource.sourceReleasePoint,
     capturedAt: footnoteSource.capturedAt,

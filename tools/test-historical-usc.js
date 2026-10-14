@@ -184,4 +184,61 @@ assert.match(securityAct.members.find(s => s.section === "137–7").body[0].text
 assert.match(securityAct.members.find(s => s.section === "137–8").body[0].text, /inconsistent with any of the provisions/);
 assert.match(securityAct.members.find(s => s.section === "137–9").body[0].text, /membership or affiliation which is or was voluntary/);
 assert.match(securityAct.members.find(s => s.section === "137–10").body[0].text, /ninth proviso of section 3/);
-console.log("Historical USC transform tests passed.");
+// Current publisher annotations belong to their exact fields. Replacing a
+// repeal heading with historical text must not retarget those old ranges.
+const fs = require("node:fs"), vm = require("node:vm");
+const originalData = { window: {} };
+for (const name of ["Corpus", "Statute-Footnotes", "Statute-References"])
+  vm.runInNewContext(fs.readFileSync(`src/INASearch-${name}.js`, "utf8"), originalData);
+const originalCorpus = originalData.window.INA_SEARCH_CORPUS;
+require("./statute-footnotes").applyStatuteFootnotes(originalCorpus, originalData.window.INA_SEARCH_STATUTE_FOOTNOTES);
+require("./statute-references").applyStatuteReferences(originalCorpus, originalData.window.INA_SEARCH_STATUTE_REFERENCES);
+require("./historical-ina").applyHistoricalIna(originalCorpus);
+require("./statute-status").applyStatuteStatusMetadata(originalCorpus);
+const before = new Map(originalCorpus.title8.sections.map(section => [section.section, structuredClone(section)]));
+applyHistoricalUsc(originalCorpus, captured, reviewed);
+let replacedHeadings = 0, obsoleteHeadingReferences = 0;
+for (const section of originalCorpus.title8.sections) {
+  const previous = before.get(section.section);
+  if (!previous || previous.heading === section.heading) continue;
+  for (const reference of section.headingReferences || [])
+    assert(reference.start >= 0 && reference.end <= section.heading.length && section.heading.slice(reference.start, reference.end) === reference.text,
+      `Historical §${section.section} heading has a reference outside its replacement source text`);
+  for (const suffix of ["References", "FootnoteReferences", "Layout", "Presentation", "Style"])
+    assert(!Object.hasOwn(section, `heading${suffix}`), `Historical §${section.section} retains obsolete heading${suffix}`);
+  assert.deepEqual(structuredClone(section.source), previous.source, `Historical §${section.section} must retain original publisher provenance`);
+  obsoleteHeadingReferences += previous.headingReferences?.length || 0;
+  replacedHeadings++;
+}
+assert(replacedHeadings > 0 && obsoleteHeadingReferences > 0, "Original publisher regression must exercise reference-bearing replaced headings");
+const replacedText = { title8: { sections: [{ id: "8-52", section: "52", heading: "Current heading", preamble: "Current text", body: [{}], childTextOffsets: [12],
+  preambleReferences: [{ start: 0, end: 12, text: "Current text" }], preambleFootnoteReferences: [{ offset: 12 }],
+  preambleLayout: [{ tag: "p", start: 0, end: 12 }], preamblePresentation: { italic: true }, preambleStyle: { "font-style": "italic" } }] } };
+applyHistoricalUsc(replacedText, { groups: [], singles: [{ section: "52", heading: "Historical heading" }] },
+  { sections: [{ uscSection: "52", originalTitle: "Historical heading", units: [{ path: ["a"], text: "Historical body" }] }] });
+const replacement = replacedText.title8.sections[0];
+assert(!Object.hasOwn(replacement, "preamble"), "Replacing a body must remove the former source's preamble when the new text has none");
+for (const key of ["childTextOffsets", "preambleReferences", "preambleFootnoteReferences", "preambleLayout", "preamblePresentation", "preambleStyle"])
+  assert(!Object.hasOwn(replacement, key), `Replacing statutory text must clear obsolete ${key}`);
+// The current House explanation accompanying a historical provision keeps its
+// current Code scope. Its untagged range comes from the original USLM record.
+const oldSection = originalCorpus.title8.sections.find(section => section.section === "724a");
+const currentNote = oldSection.notes.find(note => note.sourceNoteId === "8-701 to 724a-note-26");
+assert(currentNote.text.endsWith("See section 1440(a)–(c) of this title."));
+for (const current of [true, false]) {
+  const note = structuredClone(currentNote);
+  if (!current) note.source.url = note.source.url.replace("edition=prelim", "edition=1948");
+  const fixture = { title8: { sections: [
+    { ...structuredClone(oldSection), heading: "", preamble: "", body: [], notes: [note] },
+    { ...structuredClone(originalCorpus.title8.sections.find(section => section.section === "1440")), notes: [] }
+  ] } };
+  require("./legal-references").applyGeneratedLegalReferences(fixture);
+  const reference = note.references.find(reference => reference.text === "section 1440(a)");
+  if (current) {
+    assert(reference, "Current House note must not inherit its historical operative section's source scope");
+    assert.equal(reference.targetTitle, "8");
+    assert.equal(reference.targetSection, "1440");
+    assert.deepEqual(reference.targetPath, ["a"]);
+  } else assert(!reference, "A historical note source must retain historical authority restrictions");
+}
+console.log(`Historical USC transform tests passed; ${replacedHeadings} replacement headings clear ${obsoleteHeadingReferences} obsolete source references.`);

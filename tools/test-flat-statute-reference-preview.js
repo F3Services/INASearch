@@ -12,6 +12,7 @@ const source = fs.readFileSync(path.join(__dirname, "../src/INASearch.template.h
 const sectionsById = new Map(corpus.title8.sections.map(section => [section.id, section]));
 const context = vm.createContext({
   String, Math, Set, Number, Map,
+  INA_SEARCH_OCCURRENCE: require("../src/INASearch-Occurrence"),
   normCitationPart: api.normCitationPart,
   componentTokens: value => [...String(value || "").matchAll(/\(([^)]+)\)/g)].map(match => match[1]),
   compactStatutePathIndex: api.compactStatutePathIndex,
@@ -77,3 +78,26 @@ for (const [number, citation] of [["1231", "INA 241(a)(4)(B)(i)(I)"], ["1255", "
   assert(html.includes(`>${citation.slice(citation.indexOf("("))}</a>`), `Footnotes must identify their inline statutory unit: ${citation}`);
 }
 console.log(`PASS flat statute reference previews: ${audited} rendered markers retain indexed paths and exact previews.`);
+
+Object.assign(context, {
+  uscSection: (_title, number) => corpus.title8.sections.find(section => section.section === number),
+  legalCitationSelectionAttributes: () => "",
+  legalUnitTriggerHtml: (_kind, _section, _path, _citation, contents) => contents,
+  legalAugmentationSlotHtml: () => "",
+  statuteRunInHeading: () => ""
+});
+for (const name of ["renderSearchHighlightedText", "formatStatutoryRunInText", "renderStatutoryNode"])
+  vm.runInContext(functionSource(source, name), context);
+context.linkifyStatutoryText = (text, _references, start = 0, end, match) => context.renderSearchHighlightedText(text, match, start, end);
+const searchSection = corpus.title8.sections.find(section => section.section === "1363a");
+const searchTarget = { kind: "node-text", path: ["a", "1", "C"], match: { start: 0, end: 7 } };
+const searchHtml = context.renderStatutoryNode(searchSection.body[0], searchTarget.path, [], 0, searchTarget, "8 U.S.C. 1363a", searchSection.id, { sourceHost: { title: 8, section: "1363a" } });
+const searchMarks = [...searchHtml.matchAll(/<mark\b[^>]*>([^<]*)<\/mark>/g)].map(match => match[1]);
+assert.deepEqual(searchMarks, ["chapter"], "A child hit must not apply its offsets to parent text");
+const flat = corpus.title8.sections.find(section => section.section === "1251");
+const inlineSelection = context.statuteReferenceSelection(flat, ["a", "4", "B"]);
+const inlineStart = inlineSelection.segments[0].contentStart;
+const inlineTarget = { kind: "node-text", path: ["a", "4", "B"], match: { start: inlineStart, end: inlineStart + 8 } };
+const inlineHtml = context.renderStatutoryNode(flat.body[0], inlineTarget.path, [], 0, inlineTarget, "8 U.S.C. 1251", flat.id, { sourceHost: { title: 8, section: "1251" } });
+assert(inlineHtml.includes('<mark class="statute-search-match"'), "Virtual inline units must retain their hit highlight");
+console.log("PASS search hits highlight only their owning statutory text");

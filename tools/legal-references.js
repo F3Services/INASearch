@@ -26,6 +26,167 @@ function houseSectionUrl(title, section, edition = "prelim") {
   return `https://uscode.house.gov/view.xhtml?edition=${edition}&num=0&req=${encodeURIComponent(`granuleid:USC-${edition}-title${title}-section${section}`)}`;
 }
 
+function uscHierarchyReferenceCandidates(text, context, anchors = []) {
+  const input = String(text || "");
+  const source = context.uscSections?.get(`${context.title}:${context.section}`);
+  const sourceChapter = source?.breadcrumb?.find(unit => unit.kind === "chapter")?.number;
+  const currentAuthority = context.kind === "usc" && !context.historicalUscSource;
+  const containerSpans = [];
+  const precedingTitle = before => {
+    const explicit = [...input.slice(0, before).matchAll(/\btitle\s+(\d+)\b/gi)].at(-1);
+    if (explicit) return explicit[1];
+    const anchor = anchors.filter(ref => ref.end <= before && ref.family === "usc" && /(?:U\.?\s*S\.?\s*C\.?|title\s+\d+)/i.test(ref.text || "")).at(-1);
+    return anchor?.targetTitle || "";
+  };
+  const annotation = offset => {
+    const match = input.slice(offset).match(/^\s*\([^()]*\)/);
+    return match ? offset + match[0].length : offset;
+  };
+  function groupAt(start, inheritedKind = "", depth = 0) {
+    if (depth > 3) return null;
+    const members = [];
+    let offset = start, defaultKind = inheritedKind;
+    while (true) {
+      const match = input.slice(offset).match(/^(?:(subchapters?|chapters?)\s+)?(\d+[A-Za-z]?|[IVXLCDM]+|[A-Z])\b/i);
+      if (!match || (!match[1] && !defaultKind)) break;
+      if (!/^(?:\d+[A-Za-z]?|[IVXLCDM]+|[A-Z])$/.test(match[2])) break;
+      const kind = match[1]?.toLowerCase().replace(/s$/, "") || defaultKind;
+      if (kind === "chapter" && !/^\d+[A-Za-z]?$/.test(match[2])) break;
+      const member = { start: offset, end: offset + match[0].length, kind, number: match[2] };
+      offset = annotation(member.end);
+      const parentPrefix = input.slice(offset).match(/^\s+of\s+(?=(?:subchapter|chapter)\b)/i);
+      if (parentPrefix) {
+        member.parent = groupAt(offset + parentPrefix[0].length, "", depth + 1);
+        if (!member.parent) return null;
+        offset = member.parent.end;
+      }
+      const authority = input.slice(offset).match(/^\s*,?\s+of\s+(?:(?:title\s+(\d+))|((?:this|such|that)\s+(title|chapter)))\b/i);
+      if (authority) {
+        const anaphoricTitle = /^(?:such|that)\s+title$/i.test(authority[2] || "");
+        const anaphoricChapter = /^(?:such|that)\s+chapter$/i.test(authority[2] || "");
+        const priorChapter = members.filter(item => item.kind === "chapter").at(-1);
+        const priorReference = references.filter(ref => !ref.targetSubchapter && ref.end <= member.start).at(-1);
+        member.title = authority[1] || (anaphoricTitle ? precedingTitle(offset) : anaphoricChapter ? priorChapter?.title || priorReference?.targetTitle || "" : currentAuthority ? String(context.title) : "");
+        if (authority[3]?.toLowerCase() === "chapter") member.chapter = anaphoricChapter ? priorChapter?.number || priorReference?.targetChapter || "" : currentAuthority ? sourceChapter : "";
+        if (!member.title || anaphoricChapter && !member.chapter) member.invalid = true;
+        containerSpans.push({ start: offset, end: offset + authority[0].length });
+        offset += authority[0].length;
+      } else if (/^\s+of\s+/i.test(input.slice(offset)) && !member.parent) member.invalid = true;
+      if (/^\s+(?:parts?|titles?)\s+[IVX\d]+\s+of\s+(?:that|the|such)\s+Act\b/i.test(input.slice(offset))) member.invalid = true;
+      members.push(member);
+      defaultKind = kind;
+      const connector = input.slice(offset).match(/^(?:\s*,\s*(?:(?:and|or)\s+)?|\s+(?:and|or|through|to)\s+)(?:in\s+)?(?=(?:(?:subchapters?|chapters?)\s+)?(?:\d+[A-Za-z]?|[IVXLCDM]+|[A-Z])\b)/);
+      if (!connector) break;
+      offset += connector[0].length;
+    }
+    if (!members.length) return null;
+    // Classification notes put “respectively” before a shared container.
+    const respectively = input.slice(offset).match(/^,\s+respectively,\s+of\s+/i);
+    if (respectively) {
+      const parent = groupAt(offset + respectively[0].length, "", depth + 1);
+      if (parent) { members.at(-1).parent = parent; offset = parent.end; }
+    }
+    return { members, end: offset };
+  }
+  const references = [];
+  function addReference(start, end, title, chapter, subchapter = "") {
+    const local = title === "8" && context.uscHierarchyTargets?.has(`${chapter}:${subchapter}`);
+    const link = context.uscHierarchyLinks?.targets?.[`${title}:${chapter}:${subchapter}`];
+    const historical = !link && context.uscHierarchyLinks?.historicalTargets?.[`${title}:${chapter}:${subchapter}`];
+    references.push({ id: makeId(context, start, "explicit-usc-hierarchy"), start, end,
+      text: input.slice(start, end), family: "usc", targetKind: "usc-hierarchy", targetTitle: title,
+      targetChapter: chapter, ...(subchapter ? { targetSubchapter: subchapter } : {}), targetPath: [],
+      resolution: local ? "local" : "official-source-only", provenance: "deterministic-parser", ruleId: "explicit-usc-hierarchy",
+      ...(historical ? { targetEdition: historical.edition, historicalOfficialUrl: historical.url, citationNote: historical.citationNote } : {}),
+      officialUrl: link?.url || historical?.url || "https://uscode.house.gov/browse.html" });
+  }
+  const authorityFor = group => {
+    for (const member of [...group.members].reverse()) {
+      if (member.title) return { title: member.title, chapter: member.chapter };
+      if (member.parent) {
+        const authority = authorityFor(member.parent);
+        if (authority.title) return { ...authority, chapter: member.parent.members[0].number };
+      }
+    }
+    return {};
+  };
+  const validGroup = group => group.members.every(member => !member.invalid && (!member.parent || validGroup(member.parent)));
+  function emit(group, inherited = {}) {
+    const authority = { ...inherited, ...authorityFor(group) };
+    for (const member of group.members) {
+      const parentAuthority = member.parent ? authorityFor(member.parent) : {};
+      const title = member.title || parentAuthority.title || authority.title;
+      const chapter = member.kind === "chapter" ? member.number : member.parent?.members[0].number || member.chapter || authority.chapter;
+      const subchapter = member.kind === "subchapter" ? member.number : "";
+      if (!member.invalid && (!member.parent || validGroup(member.parent)) && title && chapter) {
+        addReference(member.start, member.end, title, chapter, subchapter);
+      }
+      if (member.parent) emit(member.parent, { title });
+    }
+  }
+  function precedingHierarchy(kind, number, before) {
+    const preceding = references.filter(ref => ref.end <= before && (kind === "chapter" ? !ref.targetSubchapter && ref.targetChapter === number : ref.targetSubchapter === number)).at(-1);
+    if (preceding) return { title: preceding.targetTitle, chapter: preceding.targetChapter };
+    // A continuation belongs to its node's opening text; descendants inherit
+    // the explicit authority written in their ancestor's opening text.
+    let nodes = source?.body || [];
+    const prior = [source?.preamble || ""];
+    for (const [index, token] of (context.path || []).entries()) {
+      const node = nodes.find(item => String(item.label) === String(token));
+      if (!node) break;
+      if (index < context.path.length - 1 || context.sourceField === "continuation") prior.push(node.text || "");
+      nodes = node.children || [];
+    }
+    const expression = new RegExp(`\\b${kind}\\s+${number}\\s+of\\s+${kind === "subchapter" ? "chapter\\s+(\\d+[A-Za-z]?)\\s+of\\s+" : ""}title\\s+(\\d+)\\b`, "gi");
+    const match = [...prior.join("\n").matchAll(expression)].at(-1);
+    return match ? { title: match[kind === "subchapter" ? 2 : 1], chapter: kind === "subchapter" ? match[1] : number } : {};
+  }
+  const parsedStarts = new Set();
+  const remember = group => {
+    for (const member of group.members) { parsedStarts.add(member.start); if (member.parent) remember(member.parent); }
+  };
+  for (const match of input.matchAll(/\b(?:subchapters?|chapters?)\s+(?=\d|[A-Z])/gi)) {
+    if (parsedStarts.has(match.index)) continue;
+    const group = groupAt(match.index);
+    if (!group) continue;
+    const prefix = input.slice(0, match.index).match(/(\d+)\s+U\.?\s*S\.?\s*C\.?\s*$/i);
+    const explicit = authorityFor(group);
+    const anaphoric = /\bsuch\s+$/i.test(input.slice(0, match.index));
+    const previous = anaphoric ? precedingHierarchy(group.members[0].kind, group.members[0].number, match.index) : {};
+    const contextual = !anaphoric && validGroup(group) && currentAuthority && context.sourceKind !== "usc-note" && group.members.every(member => {
+      const target = member.kind === "chapter" ? `${member.number}:` : `${sourceChapter}:${member.number}`;
+      return !member.invalid && (String(context.title) === "8" ? context.uscHierarchyTargets?.has(target) : context.uscHierarchyLinks?.targets?.[`${context.title}:${target}`]);
+    });
+    if (validGroup(group) && (explicit.title || prefix || previous.title || contextual)) emit(group, { title: prefix?.[1] || previous.title || (contextual ? String(context.title) : ""), chapter: previous.chapter || sourceChapter });
+    remember(group);
+  }
+  if (currentAuthority && sourceChapter && context.sourceKind !== "usc-note" && ["text", "continuation", "preamble"].includes(context.sourceField)) {
+    for (const match of input.matchAll(/\bthis\s+(subchapter|chapter)\b/gi)) {
+      if (containerSpans.some(span => span.start <= match.index && span.end >= match.index + match[0].length)) continue;
+      if (anchors.some(ref => ref.end <= match.index && /^\s+of\s+$/i.test(input.slice(ref.end, match.index)))) continue;
+      const subchapter = match[1].toLowerCase() === "subchapter" ? source.breadcrumb.find(unit => unit.kind === "subchapter")?.number : "";
+      if (match[1].toLowerCase() === "subchapter" && !subchapter) continue;
+      addReference(match.index, match.index + match[0].length, String(context.title), sourceChapter, subchapter);
+    }
+  }
+  // Unnumbered anaphors need an actual preceding hierarchy reference; never
+  // inherit the containing Code chapter merely because it has a familiar name.
+  for (const match of input.matchAll(/\b(?:such|that)\s+(subchapter|chapter)\b(?!\s+(?:\d|[IVXLCDM]+\b))/gi)) {
+    const subchapter = match[1].toLowerCase() === "subchapter";
+    const prior = references.filter(ref => ref.end <= match.index && Boolean(ref.targetSubchapter) === subchapter)
+      .sort((a, b) => a.start - b.start);
+    const previous = prior.at(-1);
+    if (!previous || /\b(?:more\s+than\s+one|each|any)\s+$/i.test(input.slice(0, match.index))) continue;
+    // “Such subchapter” after a coordinated set has no unique destination.
+    // Linking its last member would silently narrow the statutory reference.
+    const sibling = prior.at(-2);
+    if (sibling && /^\s*(?:,\s*(?:(?:and|or)\s*)?|(?:and|or|through|to)\s*)$/i.test(input.slice(sibling.end, previous.start)) &&
+        `${sibling.targetTitle}:${sibling.targetChapter}:${sibling.targetSubchapter || ""}` !== `${previous.targetTitle}:${previous.targetChapter}:${previous.targetSubchapter || ""}`) continue;
+    addReference(match.index, match.index + match[0].length, previous.targetTitle, previous.targetChapter, previous.targetSubchapter || "");
+  }
+  return references.sort((a, b) => a.start - b.start);
+}
+
 function ecfrSectionUrl(title, section) {
   const part = String(section || "").split(".")[0];
   const base = `https://www.ecfr.gov/current/title-${encodeURIComponent(title)}/part-${encodeURIComponent(part)}`;
@@ -830,9 +991,9 @@ function bareSectionReferenceCandidates(text, context) {
     const actOwner = writtenActOwner(trailingText);
     // An explicitly named instrument outranks a coincidentally matching USC number.
     if (/^\s+of\s+(?:Ex\.\s*Ord\.\s*No\.|Executive\s+Order)\s*\d/i.test(trailingText)) continue;
-    const titleContainer = trailingText.match(/^(?:\s*(?:,|and|or)\s*\d+[A-Za-z]*(?:\([^()]+\))*)*(?:\s+et\s+seq\.)?\s+of\s+(?:title\s+(\d+)|(such)\s+title)\b/i);
+    const titleContainer = trailingText.match(/^(?:\s*(?:,|and|or)\s*\d+[A-Za-z]*(?:\([^()]+\))*)*(?:\s+et\s+seq\.)?\s+of\s+(?:title\s+(\d+)|(such)\s+title|(this)\s+title)\b/i);
     const precedingTitle = titleContainer?.[2] ? [...input.slice(Math.max(0, match.index - 350), match.index).matchAll(/\btitle\s+(\d+)\b/gi)].at(-1)?.[1] : null;
-    const explicitTitle = titleContainer?.[1] || precedingTitle;
+    const explicitTitle = titleContainer?.[1] || precedingTitle || (context.quotedScope && titleContainer?.[3] ? String(context.title || 8) : "");
     let target = null;
     let ruleId = "context-bare-usc-section";
     if (actOwner) {
@@ -853,6 +1014,18 @@ function bareSectionReferenceCandidates(text, context) {
         resolution: localUscTarget(context, explicitTitle, section, writtenPath) ? "local" : "official-source-only", officialUrl: houseSectionUrl(explicitTitle, section) };
       ruleId = "context-bare-trailing-title-section";
     }
+    if (!target && context.quotedScope) {
+      // A publisher's adjacent recodification is explicit authority. Do not
+      // mistake the amending Act for the Act being discussed in its quotation.
+      const parallel = /^\s*\[\s*(?:(?:now|former)\s+)?\d+\s+U\.?\s*S\.?\s*C\.?/i.test(trailingText)
+        ? immediateBracketedParallelTargets({ end: match.index + match[0].length, members: [{}] }, input)[0] : null;
+      const editorial = trailingText.match(/^\s*\[\s*(?:subsec(?:tion)?\.?)\s*((?:\([A-Za-z0-9-]+\))+)\s+of\s+this\s+section\s*\]/i);
+      const editorialTarget = editorial && context.section ? { family: "usc", title: String(context.title || "8"), section: String(context.section), path: pathTokens(editorial[1]) } : null;
+      const quotedTarget = parallel || editorialTarget || enclosingAuthoritySectionTarget(context, section, writtenPath);
+      if (!quotedTarget) continue;
+      target = referenceFieldsForTarget(context, quotedTarget);
+      ruleId = "context-bare-historical-act-section";
+    }
     if (!target && !context.historicalUscSource && context.uscSections?.has(`${context.title || 8}:${section}`)) {
       const targetPath = canonicalLocalUscPath(context, String(context.title || 8), section, writtenPath);
       target = {
@@ -868,7 +1041,9 @@ function bareSectionReferenceCandidates(text, context) {
         ruleId = "context-bare-historical-act-section";
       } else {
         const suffix = input.slice(match.index + match[0].length, Math.min(input.length, match.index + match[0].length + 220));
-        const numberedTitle = suffix.match(/^[^.;!?]{0,190}?\bof\s+title\s+(\d+)\b/i);
+        // A written current-title/container qualifier owns this citation.
+        // Do not jump across it to a later citation's numbered title.
+        const numberedTitle = !/^\s+of\s+this\s+(?:title|chapter|subchapter)\b/i.test(suffix) && suffix.match(/^[^.;!?]{0,190}?\bof\s+title\s+(\d+)\b/i);
         if (numberedTitle) {
           const title = numberedTitle[1];
           target = {
@@ -887,6 +1062,7 @@ function bareSectionReferenceCandidates(text, context) {
     });
   }
   for (const [index, match] of [...input.matchAll(/\b(\d{3,5}[A-Za-z-]*)((?:\s*\([A-Za-z0-9-]+\))+)/g)].entries()) {
+    if (context.quotedScope) continue;
     if (/\b(?:section|sections|INA|U\.?\s*S\.?\s*C\.?|C\.?\s*F\.?\s*R\.?)\s*$/i.test(input.slice(Math.max(0, match.index - 24), match.index))) continue;
     if (!/(?:\b(?:and|or)|,)\s*$/i.test(input.slice(Math.max(0, match.index - 18), match.index))) continue;
     const section = String(match[1]);
@@ -1494,6 +1670,7 @@ function embeddedTargetUnitMatches(context, target, baseDepth, expectedKind) {
 }
 
 function currentContainerTarget(context, kind) {
+  if (context.quotedScope) return quotedContainerTarget(context, kind, context.referenceOffset);
   const family = context.kind === "cfr" ? "cfr" : "usc";
   const target = { family, title: String(context.title || "8"), section: String(context.section || ""), path: [] };
   if (kind === "section") return target;
@@ -1509,6 +1686,7 @@ function currentContainerTarget(context, kind) {
 }
 
 function relativeSiblingTarget(context, kind, direction) {
+  if (context.quotedScope) return null;
   const family = context.kind === "cfr" ? "cfr" : "usc";
   const title = String(context.title || "8");
   const section = String(context.section || "");
@@ -1545,6 +1723,7 @@ function parentContainerKind(kind) {
 }
 
 function inferredDirectContainer(context, phrase, anchorReferences = [], state = null) {
+  if (context.quotedScope) return quotedContainerTarget(context, parentContainerKind(phrase.unitKind), phrase.start);
   if (context.kind === "cfr") return null;
   const title = String(context.title || "8");
   const section = String(context.section || "");
@@ -2350,6 +2529,7 @@ function anaphoricActSectionTarget(input, candidate, member, context) {
   if (scope.type === "this-act") {
     const enclosing = enclosingAuthoritySectionTarget(context, member.section, member.tokens || []);
     if (enclosing) return enclosing;
+    if (context.quotedScope) return null;
   }
   const exactKey = `${String(member.section || "").toLowerCase()}:${(member.tokens || []).map(token => String(token).toLowerCase()).join("/")}`;
   const referencedTarget = context.actSectionTargets?.get(exactKey);
@@ -2720,11 +2900,12 @@ function numberedSectionReferenceCandidates(text, context, anchorReferences = []
       results.push(...references);
       continue;
     }
-    const cfrThisTitle = context.kind === "cfr" && candidate.scope.type === "this-title" &&
+    const currentCodeScope = ["this-title", "this-chapter", "this-subchapter"].includes(candidate.scope.type);
+    const cfrThisTitle = context.kind === "cfr" && currentCodeScope &&
       candidate.members.some(member => member.type === "absolute-section-address" && String(member.section).includes("."));
     let title = cfrThisTitle ? String(context.title || "")
       : candidate.scope.type === "numbered-title" ? String(candidate.scope.title)
-      : candidate.scope.type === "this-title" ? String(context.title || "8")
+      : currentCodeScope ? String(context.title || "8")
       : candidate.scope.type === "such-title" || candidate.scope.type === "that-title" ? writtenTitleBefore(input, candidate.scope.start)
       : authorityTitle || precedingTitle(candidate.start);
     if (!title) {
@@ -3005,7 +3186,7 @@ function embeddedReferenceCandidates(text, context, anchorReferences = []) {
         family: "cfr", title: String(context.title || ""), section: String(context.section || ""),
         path: candidate.baseTokens.map(String)
       } : null;
-      base = writtenCfrBase && embeddedTargetExists(context, writtenCfrBase) ? writtenCfrBase : currentContainerTarget(context, candidate.baseKind);
+      base = writtenCfrBase && embeddedTargetExists(context, writtenCfrBase) ? writtenCfrBase : currentContainerTarget({ ...context, referenceOffset: candidate.start }, candidate.baseKind);
       if (base) Object.assign(base, { kind: candidate.baseKind, sourceId: context.sourceId, sourceField: context.sourceField || "text", start: candidate.base.start, end: candidate.base.end, text: candidate.base.text });
       ruleId = "embedded-this-container";
     } else if (candidate.anaphorType === "such") {
@@ -3135,7 +3316,7 @@ function embeddedReferenceCandidates(text, context, anchorReferences = []) {
           text: candidate.base.text
         };
       }
-      if (!base && candidate.baseSection && !scopedBase && context.sourceKind === "usc-note" && !context.uscSections?.has(`8:${candidate.baseSection}`)) {
+      if (!base && candidate.baseSection && !scopedBase && context.sourceKind === "usc-note" && (context.quotedScope || !context.uscSections?.has(`8:${candidate.baseSection}`))) {
         const target = enclosingAuthoritySectionTarget(context, candidate.baseSection, candidate.baseTokens || []);
         if (target) base = {
           ...target,
@@ -3148,7 +3329,7 @@ function embeddedReferenceCandidates(text, context, anchorReferences = []) {
         };
         ruleId = "embedded-named-act-section";
       }
-      if (!base && (candidate.baseSection || context.kind === "cfr")) base = {
+      if (!base && !context.quotedScope && (candidate.baseSection || context.kind === "cfr")) base = {
         family: context.kind === "cfr" ? "cfr" : "usc",
         title: String(context.title || "8"),
         section: String(candidate.baseSection || context.section || ""),
@@ -3277,6 +3458,16 @@ function contextualReferenceCandidates(text, context) {
   const targetSection = String(context.section || "");
   const officialUrl = context.kind === "cfr" ? ecfrSectionUrl(targetTitle, targetSection) : houseSectionUrl(targetTitle, targetSection);
   const add = (start, end, path, ruleId, index = 0) => {
+    const editorialBracket = input.lastIndexOf("[", start) > input.lastIndexOf("]", start) && input.indexOf("]", end) >= 0;
+    if (context.quotedScope && !editorialBracket) {
+      const kind = input.slice(start, end).match(/\bthis\s+(section|subsection|paragraph|subparagraph|clause|subclause|item|subitem)\b/i)?.[1] || "section";
+      const target = quotedContainerTarget(context, kind, start);
+      if (!target) return;
+      if (ruleId === "context-path-this-section") target.path.push(...path);
+      results.push({ id: makeId(context, start, ruleId, index), start, end, text: input.slice(start, end),
+        ...referenceFieldsForTarget(context, target), provenance: "deterministic-context", ruleId });
+      return;
+    }
     const local = targetSection && localCheck(context, targetTitle, targetSection, path);
     results.push({
       id: makeId(context, start, ruleId, index), start, end, text: input.slice(start, end),
@@ -3324,10 +3515,14 @@ function applyExplicitUscEditions(references, text) {
   });
 }
 
-function applyReviewedHistoricalLocators(references, context, text) {
-  const corrections = (context.historicalLocatorCorrections || []).filter(row =>
+function reviewedHistoricalLocators(context, text) {
+  return (context.historicalLocatorCorrections || []).filter(row =>
     row.kind === context.kind && String(row.title) === String(context.title) && String(row.section) === String(context.section) &&
-    row.field === context.sourceField && row.sourceFingerprint === stableTextFingerprint(text));
+    row.field === context.sourceField && row.sourceFingerprint === (context.sourceTextFingerprint || stableTextFingerprint(text)));
+}
+
+function applyReviewedHistoricalLocators(references, context, text) {
+  const corrections = reviewedHistoricalLocators(context, text);
   if (!corrections.length) return references;
   return references.map(reference => {
     const correction = corrections.find(row => row.start === reference.start && row.end === reference.end && row.text === reference.text);
@@ -3422,7 +3617,94 @@ function applyHistoricalCitationDateGuard(references, context, text) {
   });
 }
 
+function quotedReferenceScopes(text, layout, existing, context) {
+  const scopes = [];
+  if (!layout?.length) return scopes;
+  const authorities = [...existing, ...explicitReferenceCandidates(text, context)]
+    .filter(reference => reference.family === "public-law");
+  const walk = (nodes, ancestors = [], parentQuote = null) => {
+    for (const node of nodes || []) {
+      let quote = parentQuote;
+      if (node.tag === "quotedContent") {
+        const paragraph = [...ancestors].reverse().find(item => item.tag === "p" && (!parentQuote || item.start >= parentQuote.start));
+        const start = paragraph?.start ?? (parentQuote ? node.start : 0);
+        const introduction = text.slice(start, node.start);
+        const amendment = introduction.search(/\bas\s+(?:amended|added|renumbered|redesignated|transferred)\s+by\b/i);
+        const end = amendment < 0 ? node.start : start + amendment;
+        const authority = authorities.filter(reference => reference.start >= start && reference.end <= end)
+          .sort((a, b) => a.start - b.start || a.end - b.end).at(-1);
+        quote = { start: node.start, end: node.end, authority: packedTargetBase(authority), units: [], children: [] };
+        if (parentQuote) parentQuote.children.push(quote);
+        scopes.push(quote);
+      }
+      if (quote && (node.tag === "section" || LEVELS.includes(node.tag))) {
+        const num = (node.children || []).find(child => child.tag === "num");
+        const label = String(num?.value || (num ? text.slice(num.start, num.end).match(/(?:Sec\.\s*)?(\d+[A-Za-z]*|[A-Za-z]+)\b/)?.[1] : "") || "");
+        if (label) quote.units.push({ start: node.start, end: node.end, kind: node.tag, label });
+      }
+      walk(node.children, [...ancestors, node], quote);
+    }
+  };
+  walk(layout);
+  return scopes;
+}
+
+function quotedContainerTarget(context, kind, offset = 0) {
+  const quote = context.quotedScope;
+  const authority = quote?.authority;
+  if (!authority) return null;
+  const units = quote.units.filter(unit => unit.start <= offset && unit.end > offset);
+  const sourcePath = [...(authority.path || [])];
+  const sectionIndex = sourcePath.findLastIndex(token => /^s\d/i.test(token));
+  const section = units.find(unit => unit.kind === "section");
+  let path = section ? [...sourcePath.slice(0, sectionIndex < 0 ? sourcePath.length : sectionIndex), `s${section.label}`]
+    : sourcePath.slice(0, sectionIndex + 1);
+  if (!path.length || !path.some(token => /^s\d/i.test(token))) return null;
+  if (kind === "section") return { ...authority, path };
+  for (const unit of units.filter(unit => unit.kind !== "section")) {
+    path = [...path, unit.label];
+    if (unit.kind === kind) return { ...authority, path };
+  }
+  return null;
+}
+
 function generatedReferences(text, context, existing = []) {
+  const input = String(text || "");
+  const scopes = quotedReferenceScopes(input, context.sourceLayout, existing, context);
+  if (!scopes.length) return generatedReferencesInScope(input, context, existing);
+  context = { ...context, sourceTextFingerprint: context.sourceTextFingerprint || stableTextFingerprint(input) };
+  const owner = reference => scopes.filter(scope => scope.start <= reference.start && scope.end >= reference.end).at(-1) || null;
+  const top = scopes.filter(scope => !scopes.some(parent => parent.children.includes(scope)));
+  const mask = (start, end, children) => {
+    let result = " ".repeat(start) + input.slice(start, end) + " ".repeat(input.length - end);
+    for (const child of children) result = result.slice(0, child.start) + " ".repeat(child.end - child.start) + result.slice(child.end);
+    return result;
+  };
+  const outside = mask(0, input.length, top);
+  const references = generatedReferencesInScope(outside, { ...context, sourceText: outside }, existing.filter(reference => !owner(reference)));
+  for (const scope of scopes) {
+    const sourceText = mask(scope.start, scope.end, scope.children);
+    const anchors = existing.filter(reference => owner(reference) === scope && !/^deterministic-/.test(reference.provenance || ""));
+    references.push(...generatedReferencesInScope(sourceText, {
+      ...context, sourceText, quotedScope: scope, enclosingAuthority: scope.authority,
+      embeddedState: { frames: [] }
+    }, anchors));
+  }
+  return references.filter(reference => input.slice(reference.start, reference.end) === reference.text)
+    .sort((a, b) => a.start - b.start || a.end - b.end);
+}
+
+function generatedReferencesInScope(text, context, existing = []) {
+  // Reviewed source locators are exact, independently verified anchors. Quote
+  // boundaries can change the inferred candidate's span, but must never make a
+  // reviewed source citation disappear or let a broader inference replace it.
+  if (context.sourceTextFingerprint) {
+    const reviewed = applyReviewedHistoricalLocators(reviewedHistoricalLocators(context, text)
+      .filter(row => String(text).slice(row.start, row.end) === row.text)
+      .map(row => ({ ...existing.find(reference => reference.start === row.start && reference.end === row.end && reference.text === row.text),
+        id: makeId(context, row.start, "historical-reviewed-reference"), start: row.start, end: row.end, text: row.text })), context, text);
+    existing = [...reviewed, ...existing.filter(reference => !overlaps(reference, reviewed))];
+  }
   const footnoteCorrectedExisting = [...(existing || [])].map(reference => applyHouseEditorialCorrection(reference, context));
   const footnoteCorrectedBases = [...explicitReferenceCandidates(text, context), ...bareSectionReferenceCandidates(text, context), ...inaActReferenceCandidates(text, context), ...scopedCfrActReferenceCandidates(text, context), ...contextualReferenceCandidates(text, context)]
     .map(reference => applyHouseEditorialCorrection(reference, context));
@@ -3450,7 +3732,7 @@ function generatedReferences(text, context, existing = []) {
   const unownedDeterministic = deterministic.filter(reference =>
     !["context-bare-usc-section", "context-bare-usc-address"].includes(reference.ruleId) ||
     !namedActMembers.some(member => overlaps(reference, [member])));
-  const candidates = retainNavigableReferences([...unownedDeterministic, ...precedingSharedContainerReferenceCandidates(text, context, contextualAnchors), ...sharedTrailingContainerReferenceCandidates(text, context, contextualAnchors), ...numbered, ...embeddedReferenceCandidates(text, context, contextualAnchors)]
+  const candidates = retainNavigableReferences([...uscHierarchyReferenceCandidates(text, context, contextualAnchors), ...unownedDeterministic, ...precedingSharedContainerReferenceCandidates(text, context, contextualAnchors), ...sharedTrailingContainerReferenceCandidates(text, context, contextualAnchors), ...numbered, ...embeddedReferenceCandidates(text, context, contextualAnchors)]
     .map(reference => applyHouseEditorialCorrection(reference, context))
     .map(reference => canonicalizeUscReference(reference, context))
     .filter(reference => reference.end > reference.start && String(text).slice(reference.start, reference.end) === reference.text)
@@ -3479,6 +3761,13 @@ function legalReferenceContext(corpus) {
   validateLegalReferencePolicy(corpus);
   validateEmbeddedReferenceExceptions(corpus?.legalReferenceExceptions);
   const allSections = [...(corpus.title8?.sections || []), ...(corpus.referencedUsc?.titles || []).flatMap(title => title.sections || [])];
+  const uscHierarchyTargets = new Set();
+  for (const section of corpus.title8?.sections || []) {
+    const chapter = section.breadcrumb?.find(unit => unit.kind === "chapter")?.number;
+    const subchapter = section.breadcrumb?.find(unit => unit.kind === "subchapter")?.number;
+    if (chapter) uscHierarchyTargets.add(`${chapter}:`);
+    if (chapter && subchapter) uscHierarchyTargets.add(`${chapter}:${subchapter}`);
+  }
   const uscSections = new Map(allSections.map(section => [`${section.title || 8}:${section.section}`, section]));
   const uscAliases = new Map();
   for (const row of corpus.inaCrosswalk || []) {
@@ -3572,7 +3861,7 @@ function legalReferenceContext(corpus) {
   for (const source of corpus.cfr?.sources || []) {
     cfrSourceArtifacts.set(`${source.title}:${source.part || "*"}`, source.url || `ecfr-title-${source.title}${source.part ? `-part-${source.part}` : ""}`);
   }
-  return { uscSections, uscPaths, uscUnits, uscSiblingLists, uscCanonicalPaths, cfrSections, cfrHierarchyTargets, cfrPaths, cfrUnits, cfrSiblingLists, inaMap, namedActs, embeddedExceptions, houseFootnotes, uscSourceArtifact, cfrSourceArtifacts, legalReferencePolicy: corpus.legalReferencePolicy || null,
+  return { uscHierarchyLinks: corpus.uscHierarchyLinks, uscHierarchyTargets, uscSections, uscPaths, uscUnits, uscSiblingLists, uscCanonicalPaths, cfrSections, cfrHierarchyTargets, cfrPaths, cfrUnits, cfrSiblingLists, inaMap, namedActs, embeddedExceptions, houseFootnotes, uscSourceArtifact, cfrSourceArtifacts, legalReferencePolicy: corpus.legalReferencePolicy || null,
     historicalLocatorCorrections: corpus.historicalLocatorCorrections || [] };
 }
 
@@ -3614,6 +3903,7 @@ function applyGeneratedLegalReferences(corpus) {
       sourceField: field,
       sourceText: String(source[field]),
       sourceTextSha256: sourceTextHash(source[field]),
+      sourceLayout: field === "text" && source.layout ? source.layout : source[`${field}Layout`],
       sourceFootnoteReferences: source[`${field}FootnoteReferences`] || [],
       embeddedState
     }, source[property] || []);
@@ -3652,12 +3942,38 @@ function applyGeneratedLegalReferences(corpus) {
     walkUsc(section, section.body, [], sectionState, context.actSectionTargets);
     (section.notes || []).forEach((note, index) => {
       const enclosingAuthority = packedTargetBase((note.references || []).find(reference => reference.family === "public-law"));
-      const noteContext = { ...context, sourceKind: "usc-note", enclosingAuthority, sourceId: `usc-${Number(section.title || 8) === 8 ? "" : `${section.title}-`}${section.section}-note-${index + 1}` };
+      // Current House editorial material accompanies historical operative text
+      // without inheriting that older edition's default citation authority.
+      const currentHouseNote = Number(section.title || 8) === 8 && note.source?.resource === "United States Code, Title 8" &&
+        /^https:\/\/uscode\.house\.gov\/view\.xhtml\?/.test(note.source?.url || "") && /[?&]edition=prelim(?:&|$)/.test(note.source.url);
+      const noteContext = { ...context, ...(currentHouseNote ? { historicalUscSource: null } : {}), sourceKind: "usc-note", enclosingAuthority, sourceId: `usc-${Number(section.title || 8) === 8 ? "" : `${section.title}-`}${section.section}-note-${index + 1}` };
       const noteState = newState();
       attach(note, "heading", noteContext, noteState);
       attach(note, "text", noteContext, noteState);
     });
     (section.houseEditorialFootnotes || []).forEach(footnote => attach(footnote, "text", { ...context, sourceId: footnote.id }, newState()));
+  }
+  for (const [identifier, division] of Object.entries(corpus.title8?.divisionNotes || {})) {
+    if (identifier !== "/us/usc/t8" && !identifier.startsWith("/us/usc/t8/")) continue;
+    for (const note of division.notes || []) {
+      const context = { kind: "usc", title: "8", section: "", path: [], sourceKind: "usc-note", sourceId: note.id || identifier };
+      const references = [...(note.references || [])];
+      for (const source of note.uslmReferences || []) {
+        if (String(note.text || "").slice(source.start, source.end) !== source.text) continue;
+        if (references.some(reference => reference.start === source.start && reference.end === source.end && reference.houseHref === source.houseHref)) continue;
+        const target = targetFromHouseHref(source.houseHref);
+        const fields = target ? referenceFieldsForTarget(shared, target)
+          : /^\/us\/act\/\d{4}-\d{2}-\d{2}\//.test(source.houseHref || "") ? {
+            family: "public-law", targetKind: "act", targetPath: source.houseHref.split("/").filter(Boolean).slice(2),
+            resolution: "official-source-only", officialUrl: govInfoSearchUrl(source.text)
+          } : null;
+        if (fields) references.push({ ...source, ...fields, id: makeId(context, source.start, "house-uslm-ref"),
+          provenance: "house-uslm-ref", ruleId: "house-uslm-ref" });
+      }
+      note.references = references;
+      attach(note, "heading", context, newState());
+      attach(note, "text", context, newState());
+    }
   }
   const attachCfrBlocks = (section, blocks, pathPrefix = [], inheritedState = newState()) => {
     const stateByPath = new Map([["", newState(inheritedState.frames)]]);
@@ -3710,6 +4026,7 @@ function applyGeneratedLegalReferences(corpus) {
     suppressedSelfReferencesByFamily: referenceAudit.suppressedByFamily,
     generatedAtBuild: true,
     cfrHierarchyVersion: 5,
+    uscHierarchyVersion: 2,
     runtimeNetworkForPreviews: false,
     policySchemaVersion: corpus.legalReferencePolicy?.schemaVersion || null,
     policyReviewedAt: corpus.legalReferencePolicy?.reviewedAt || null,
@@ -3723,7 +4040,7 @@ function applyGeneratedLegalReferences(corpus) {
     sourceBracketCitationCorrections: sourceBracketCorrectionUsage.size,
     houseTruncatedCitationCorrections: houseTruncatedCitationCorrectionUsage.size,
     historicalHouseCitationCorrections: shared.historicalHouseLocatorUsage.size,
-    rules: ["house-uslm-ref", "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "explicit-usc", "explicit-usc-continuation", "explicit-ina", "explicit-ina-continuation", "explicit-cfr", "explicit-cfr-continuation", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "source-authority-section", "source-authority-section-list", "source-authority-section-continuation", "context-bare-usc-section", "context-bare-usc-address", "context-bare-historical-act-section", "context-bare-trailing-title-section", "context-cfr-ina-act-section", "context-cfr-scoped-act-section", "context-path-this-section", "embedded-a-explicit-container-base", "embedded-a-preceding-container", "embedded-a-shared-trailing-container", "embedded-explicit-container", "embedded-this-container", "embedded-such-container", "embedded-relative-container", "embedded-numbered-section-list", "embedded-named-act-section", "embedded-named-instrument-section", "embedded-inferred-unit", "embedded-exception"]
+    rules: ["explicit-usc-hierarchy", "house-uslm-ref", "house-editorial-correction", "house-source-span-correction", "source-bracket-editorial-correction", "explicit-usc", "explicit-usc-continuation", "explicit-ina", "explicit-ina-continuation", "explicit-cfr", "explicit-cfr-continuation", "explicit-public-law", "explicit-statutes-at-large", "explicit-federal-register", "source-authority-section", "source-authority-section-list", "source-authority-section-continuation", "context-bare-usc-section", "context-bare-usc-address", "context-bare-historical-act-section", "context-bare-trailing-title-section", "context-cfr-ina-act-section", "context-cfr-scoped-act-section", "context-path-this-section", "embedded-a-explicit-container-base", "embedded-a-preceding-container", "embedded-a-shared-trailing-container", "embedded-explicit-container", "embedded-this-container", "embedded-such-container", "embedded-relative-container", "embedded-numbered-section-list", "embedded-named-act-section", "embedded-named-instrument-section", "embedded-inferred-unit", "embedded-exception"]
   };
   return corpus;
 }

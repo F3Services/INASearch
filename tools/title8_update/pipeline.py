@@ -21,6 +21,7 @@ GENERATED = [
     'INASearch.html', 'INASearch-Uncompressed.html',
 ]
 REGRESSIONS = [
+    'test-usc-source-order.js',
     'test-title8-update.js', 'test-mixed-citations.js',
     'test-flat-statute-reference-preview.js', 'test-historical-run-in-paths.js',
     'test-historical-reference-stability.js', 'test-reference-authorities.js',
@@ -85,7 +86,7 @@ def check(output, root=ROOT, zip_path=None, release=None):
 
 def changed_sections(old, new):
     def legal(section):
-        return {k:section.get(k) for k in ('identifier', 'heading', 'status', 'breadcrumb', 'preamble', 'body', 'sourceCredit')}
+        return {k:section.get(k) for k in ('identifier', 'heading', 'status', 'breadcrumb', 'preamble', 'body', 'childTextOffsets', 'sourceCredit')}
     before = {s['section']: s for s in old['sections']}
     after = {s['section']: s for s in new['sections']}
     # Historical/status overlays encode reviewed dispositions. A changed status

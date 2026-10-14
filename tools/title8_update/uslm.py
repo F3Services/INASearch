@@ -49,6 +49,25 @@ def check_children(element, allowed):
             raise ValueError('Unsupported operative table/image; review required')
 
 
+def ordered_text(element, output, field):
+    """Keep field offsets stable while retaining each child's source position.
+
+    Offsets are UTF-16 code units, like JavaScript string/reference offsets.
+    Missing offsets mean the traditional text-then-children order.
+    """
+    parts, offsets = [], []
+    for item in element:
+        if local(item) in TEXT:
+            parts.append(content(item))
+        elif local(item) in STRUCTURAL:
+            offsets.append(len(clean(' '.join(parts)).encode('utf-16-le')) // 2)
+    text = clean(' '.join(parts))
+    if text:
+        output[field] = text
+    if any(offset < len(text.encode('utf-16-le')) // 2 for offset in offsets):
+        output['childTextOffsets'] = offsets
+
+
 def unit(element, path, section_identifier):
     check_children(element, STRUCTURAL | TEXT | {'num', 'heading'})
     label = number(element)
@@ -57,9 +76,8 @@ def unit(element, path, section_identifier):
         raise ValueError('Unsupported or missing unit identifier; footnote/reference mapping requires explicit matching paths')
     output = {'label': label}
     heading = content(child(element, 'heading'))
-    text = clean(' '.join(content(e) for e in element if local(e) in TEXT))
     if heading: output['heading'] = heading
-    if text: output['text'] = text
+    ordered_text(element, output, 'text')
     children = [unit(e, current, section_identifier) for e in element if local(e) in STRUCTURAL]
     if children: output['children'] = children
     output['path'] = current
@@ -69,6 +87,7 @@ def unit(element, path, section_identifier):
 def import_title8(data, release, captured_at):
     root = validate_xml(data, release)
     sections = []
+    division_notes = {}
     seen = set()
 
     def visit(element, breadcrumb):
@@ -77,6 +96,37 @@ def import_title8(data, release, captured_at):
             check_children(element, DIVISIONS | {'section', 'num', 'heading', 'toc', 'notes', 'note'})
             if kind != 'title':
                 breadcrumb = breadcrumb + [{'kind': kind, 'number': number(element), 'title': content(child(element, 'heading'))}]
+            notes = []
+            for item in element:
+                if local(item) == 'notes':
+                    if any(local(note) != 'note' for note in item):
+                        raise ValueError('Unsupported division note container')
+                    notes.extend(item)
+                elif local(item) == 'note':
+                    notes.append(item)
+            # The title's currency declaration is already represented by
+            # currentThrough. Other title notes remain reader-facing content.
+            notes = [note for note in notes if not (kind == 'title' and content(note) == 'Current through ' + release)]
+            if notes:
+                identifier = element.get('identifier', '')
+                if identifier != '/us/usc/t8' and not identifier.startswith('/us/usc/t8/'):
+                    raise ValueError('Unsupported division identifier')
+                if identifier in division_notes:
+                    raise ValueError('Duplicate division note identifier')
+                key = identifier.removeprefix('/us/usc/t8').strip('/').replace('/', '-') or 'title'
+                granule = 'USC-prelim-title8' + ''.join('-' + item['kind'] + item['number'] for item in breadcrumb)
+                url = 'https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=' + quote('granuleid:' + granule)
+                locator = '8 U.S.C.' + ''.join(' > ' + item['kind'].capitalize() + ' ' + item['number'] for item in breadcrumb)
+                record = {'identifier': identifier, 'kind': kind, 'number': number(element),
+                          'heading': content(child(element, 'heading')), 'breadcrumb': breadcrumb, 'notes': []}
+                for index, note in enumerate(notes, 1):
+                    heading, text, topic = content(child(note, 'heading')), content(note), note.get('topic', '')
+                    record['notes'].append({'id': '8-division-' + key + '-note-' + str(index),
+                                            'topic': topic, 'heading': heading, 'text': text,
+                                            'source': {'resource': 'United States Code, Title 8',
+                                                       'locator': locator + ' > ' + (heading or topic), 'url': url,
+                                                       'captureDate': captured_at, 'supportingExcerpt': text}})
+                division_notes[identifier] = record
         if kind == 'section':
             check_children(element, STRUCTURAL | TEXT | {'num', 'heading', 'sourceCredit', 'notes'})
             identifier = element.get('identifier', '')
@@ -105,8 +155,7 @@ def import_title8(data, release, captured_at):
                     topic = note.get('topic', '')
                     result['notes'].append({'id': result['id'] + '-note-' + str(index), 'topic': topic,
                                             'heading': h, 'text': text, 'source': source(locator + ' > ' + (h or topic), text)})
-            preamble = clean(' '.join(content(e) for e in element if local(e) in TEXT))
-            if preamble: result['preamble'] = preamble
+            ordered_text(element, result, 'preamble')
             body = [unit(e, [], identifier) for e in element if local(e) in STRUCTURAL]
             if body: result['body'] = body
             credit = content(child(element, 'sourceCredit'))
@@ -127,4 +176,5 @@ def import_title8(data, release, captured_at):
     if not sections: raise ValueError('Title 8 contains no sections')
     return {'title': 8, 'name': 'Aliens and Nationality', 'publication': 'Online@' + release,
             'currentThrough': release, 'sourceCreatedAt': root.findtext('u:meta/{http://purl.org/dc/terms/}created', default='', namespaces=NS),
-            'isPositiveLaw': False, 'sourceUrl': 'https://uscode.house.gov/download/download.shtml', 'sections': sections}
+            'isPositiveLaw': False, 'sourceUrl': 'https://uscode.house.gov/download/download.shtml',
+            'divisionNotes': division_notes, 'sections': sections}

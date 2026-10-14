@@ -65,8 +65,11 @@ function sourceCorpus() {
   require("./historical-ina").applyHistoricalIna(corpus);
   applyStatuteStatusMetadata(corpus);
   require("./historical-usc").applyHistoricalUsc(corpus);
+  if (corpus.title8Update) corpus.corpusVersion = corpus.title8Update.corpusVersion;
+  corpus.corpusVersion += "-usc-order.1-uslm.1";
   indexStatuteRunIns(corpus);
   corpus.referencedUsc = JSON.parse(fs.readFileSync(path.join(root, "sources/legal/referenced-usc/corpus.json"), "utf8"));
+  corpus.uscHierarchyLinks = JSON.parse(fs.readFileSync(path.join(root, "sources/legal/usc-hierarchy-links.json"), "utf8"));
   indexStatuteRunIns({ title8: { sections: corpus.referencedUsc.titles.flatMap(title => title.sections) } });
   corpus.legalReferenceExceptions = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "embedded-reference-exceptions.json"), "utf8"));
   corpus.historicalLocatorCorrections = JSON.parse(fs.readFileSync(path.join(root, "sources", "legal", "historical-reference-locators.json"), "utf8"));
@@ -155,7 +158,7 @@ function readBuild(fileName) {
 
 const EXPECTED_EXECUTABLE_SCRIPT_IDS = Object.freeze([
   "inaSearchStorageRuntime", "inaSearchCorpusPackingRuntime", "inaSearchCorpusShardsRuntime", "inaSearchStatuteStatusRuntime", "inaSearchStartupRuntime", "inaSearchBrotliRuntime", "inaSearchInsertionsRuntime", "inaSearchAnnotationsRuntime", "inaSearchCommandRuntime",
-  "inaSearchWorkspaceRuntime", "inaSearchOccurrenceRuntime", "inaSearchQueryRuntime", "inaSearchEmbeddedReferencesRuntime",
+  "inaSearchWorkspaceRuntime", "inaSearchUslmRuntime", "inaSearchOccurrenceRuntime", "inaSearchQueryRuntime", "inaSearchEmbeddedReferencesRuntime",
   "inaSearchLegalReferencesRuntime", "inaSearchCfrHierarchyRuntime", "inaSearchUpdaterRuntime", "", "inaSearchOpeningIndexRuntime", ""
 ]);
 
@@ -270,12 +273,12 @@ function statuteTestContext(source, context = {}) {
 
 function extractedFunction(source, name, _nextName, context = {}) {
   const functionSource = require("./test-function-source")(source, name);
-  const sandbox = { JSON, String, INA_SEARCH_COMMAND: searchCommandRuntime, INASearchCfrHierarchy: require("../src/INASearch-CFR-Hierarchy"), ...statuteTestContext(source, context) };
+  const sandbox = { JSON, String, INA_SEARCH_OCCURRENCE: require("../src/INASearch-Occurrence"), INA_SEARCH_COMMAND: searchCommandRuntime, INASearchCfrHierarchy: require("../src/INASearch-CFR-Hierarchy"), ...statuteTestContext(source, context) };
   if (context.corpus) {
     sandbox.allUscSections ||= [...(context.corpus.title8?.sections || []), ...(context.corpus.referencedUsc?.titles || []).flatMap(title => title.sections || [])];
     sandbox.uscSectionById ||= new Map(sandbox.allUscSections.map(section => [section.id, section]));
   }
-  if (context.globalThis) sandbox.globalThis = { INASearchStatuteStatus: statuteStatusRules, INA_SEARCH_COMMAND: searchCommandRuntime, ...context.globalThis };
+  if (context.globalThis) sandbox.globalThis = { INA_SEARCH_OCCURRENCE: require("../src/INASearch-Occurrence"), INASearchStatuteStatus: statuteStatusRules, INA_SEARCH_COMMAND: searchCommandRuntime, ...context.globalThis };
   const dependencies = ["uscSection", "uscMapping", "uscBase", ...(name === "parseCitation" ? ["parseUscCitation"] : [])].filter(helper => helper !== name && !sandbox[helper]);
   const declarations = dependencies.map(helper => require("./test-function-source")(source, helper)).join("\n");
   return vm.runInNewContext(`${declarations}\n(${functionSource})`, sandbox);
@@ -478,7 +481,7 @@ async function main() {
     ["test-search-groups.js", "PASS search groups"],
     ["test-saved-excerpts.js", "PASS saved excerpts"],
     ["test-historical-ina.js", "PASS historical INA"],
-    ["test-historical-usc.js", "Historical USC transform tests passed."],
+    ["test-historical-usc.js", "Historical USC transform tests passed"],
     ["test-statute-status-ui.js", "PASS statute status UI"],
     ["test-historical-edition-references.js", "PASS historical edition reference safeguard"],
     ["test-historical-reference-stability.js", "PASS historical reference stability"],
@@ -494,6 +497,7 @@ async function main() {
     ["test-corpus-delivery.js", "PASS corpus delivery"],
     ["test-referenced-usc-cache.js", "PASS referenced USC cache"],
     ["test-referenced-usc-links.js", "PASS cross-title USC link resolution"],
+    ["test-usc-hierarchy-references.js", "PASS USC hierarchy link labels and table-of-contents navigation"],
     ["test-referenced-usc-reader.js", "PASS cross-title USC citation reader"],
     ["test-referenced-usc-search.js", "Referenced USC search"],
     ["test-command-language.js", "PASS command language"],
@@ -504,6 +508,16 @@ async function main() {
     ["test-cfr-subject-groups.js", "PASS CFR subject headings"],
     ["test-insertions.js", "Inserted-reference state tests passed."],
     ["test-copy-format.js", "PASS explicit copy formatting"],
+    ["test-legal-print.js", "PASS legal printing"],
+    ["test-reader-citations.js", "PASS reader print target"],
+    ["test-usc-source-order.js", "PASS USC reading order"],
+    ["test-uslm-rendering.js", "PASS USLM rendering"],
+    ["test-uslm-converted-presentation.js", "PASS converted USLM presentation"],
+    ["test-uslm-layout-runtime.js", "PASS USLM layout runtime"],
+    ["test-uslm-quoted-references.js", "PASS original USLM references"],
+    ["test-uslm-hierarchy-ui.js", "PASS USLM hierarchy UI"],
+    ["test-uslm-delivery.js", "PASS USLM delivery"],
+    ["test-ina-display.js", "PASS reviewed historical locators"],
     ["test-search-reference-display.js", "PASS search reference refresh"],
     ["test-occurrence-search.js", "Occurrence search tests passed."],
     ["test-viewer-overhaul.js", "Viewer overhaul tests passed."],
@@ -516,6 +530,12 @@ async function main() {
   }
   const referencedUscDataVerification = spawnSync("python3", [path.join(root, "tools", "test-referenced-usc.py")], { cwd: root, encoding: "utf8" });
   assert.strictEqual(referencedUscDataVerification.status, 0, referencedUscDataVerification.stderr || referencedUscDataVerification.stdout || "Referenced USC source-data checks failed.");
+  const uslmOrderVerification = spawnSync("python3", ["-B", path.join(root, "tools", "test-title8-update.py"), "ImportTests"], { cwd: root, encoding: "utf8" });
+  assert.strictEqual(uslmOrderVerification.status, 0, uslmOrderVerification.stderr || "Original USLM import checks failed.");
+  for (const fileName of ["test-uslm-presentation.py", "uslm-presentation-oracle.py", "test-uslm-hierarchy-notes.py"]) {
+    const verification = spawnSync("python3", ["-B", path.join(root, "tools", fileName)], { cwd: root, encoding: "utf8" });
+    assert.strictEqual(verification.status, 0, verification.stderr || verification.stdout || `${fileName} failed.`);
+  }
   const noteStructureVerification = spawnSync("python3", [path.join(root, "tools", "test-statute-notes.py")], { cwd: root, encoding: "utf8" });
   assert.strictEqual(noteStructureVerification.status, 0, noteStructureVerification.stderr || "House note structure checks failed.");
   const fullSource = sourceCorpus();
@@ -894,13 +914,14 @@ async function main() {
   assert.strictEqual(statutoryNode(hydratedSource, "1101", ["a", "15", "O", "ii", "III", "a"]).u, 8);
   assert.deepStrictEqual(hydratedSource.title8.houseFootnoteMetadata, {
     schemaVersion: 1,
-    noteLayoutRevision: 1,
+    noteLayoutRevision: 2,
     sourceUrl: "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
     sourceReleasePoint: "119-102",
     capturedAt: "2026-08-21",
     footnotes: 118,
     references: 151,
     affectedFields: 143,
+    presentationFields: 9002,
     statement: "House editorial footnotes are publisher-supplied editorial content and are not operative statutory text."
   });
   const allHouseFootnotes = hydratedSource.title8.sections.flatMap(section => section.houseEditorialFootnotes || []);
@@ -994,17 +1015,22 @@ async function main() {
     verifiedHouseReferences + hydratedSource.legalReferenceMetadata.houseSourceEditorialCitationCorrections +
       hydratedSource.legalReferenceMetadata.sourceBracketCitationCorrections + hydratedSource.legalReferenceMetadata.houseTruncatedCitationCorrections +
       hydratedSource.legalReferenceMetadata.historicalHouseCitationCorrections,
-    18837,
+    18795, // Excludes 42 obsolete ranges on replaced historical headings.
     "The expanded section inventory changed its displayed House reference spans or publisher-supplied corrections."
   );
   // Displayed references include per-section copies of shared House notes.
   // Parser inventories include the 496 former Title 8 sections and the 137
   // directly cited sections from other USC titles; captured-source totals above
   // remain independent of these expanded display inventories.
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 45076, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 18428, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 14907, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1501, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
+  // Source-ordered run-ins resolve §1357(a)(iii)'s reference to clause (ii).
+  const arrestContinuation = hydratedSource.title8.sections.find(section => section.section === "1357").body.find(node => node.label === "a");
+  assert(arrestContinuation.references.some(reference => reference.text === "(ii)" && reference.targetPath.join("/") === "a/ii"), "The continuation's clause (ii) reference must resolve within subsection (a).");
+  // Quote-local Act scopes and restored division-note citations resolve
+  // references against the authority printed in the original USLM.
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 47254, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 18802, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 15086, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1312, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
   assert(hydratedSource.legalReferenceMetadata.suppressedSelfReferences > 8_000, "The build did not audit and suppress the corpus-wide self-reference set.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-this-unit"), "The bare self-referential unit rule remains advertised as navigable.");
   const retainedBareSelfReferences = [];
@@ -1192,8 +1218,8 @@ async function main() {
     ["403(a)(1)", ["section-403", "a", "1"]], ["(8)", ["section-403", "a", "8"]], ["(11)", ["section-403", "a", "11"]],
     ["(13)", ["section-403", "a", "13"]], ["(16)", ["section-403", "a", "16"]], ["(48)", ["section-403", "a", "48"]]
   ].map(([text, path]) => ({ text, volume: "66", page: "279", path, resolution: "official-source-only" })), "A historical source-authority section chain did not retain its exact Statutes at Large page and subdivision path.");
-  assert.deepStrictEqual(plain(auditedNoteReferences("805", "8-801 to 810-note-5", [206, 215]).map(reference => ({ text: reference?.text, title: reference?.targetTitle, section: reference?.targetSection, path: reference?.targetPath, resolution: reference?.resolution }))), [
-    { text: "1485(1)", title: "8", section: "1485", path: ["1"], resolution: "local" },
+  assert.deepStrictEqual(plain(auditedNoteReferences("805", "8-801 to 810-note-5", [198, 215]).map(reference => ({ text: reference?.text, title: reference?.targetTitle, section: reference?.targetSection, path: reference?.targetPath, resolution: reference?.resolution }))), [
+    { text: "section 1485(1)", title: "8", section: "1485", path: ["1"], resolution: "local" },
     { text: "(2)", title: "8", section: "1485", path: ["2"], resolution: "local" }
   ], "A continuation under a repealed Title 8 section was dropped because the target is absent from the current local hierarchy.");
   assert.deepStrictEqual(plain(auditedNoteReferences("1101", "8-1101-note-17", [20962, 20968, 20975]).map(reference => ({ text: reference?.text, congress: reference?.targetCongress, law: reference?.targetLaw, path: reference?.targetPath }))), [
@@ -2125,7 +2151,7 @@ async function main() {
     ["a1952-06-27/ch477", "/us/act/1952-06-27/ch477"]
   ]) assert.strictEqual(expandPackedHouseHref(packed), expanded, `The browser did not expand packed House target ${packed}.`);
   const hydrateStart = fallbackSource.indexOf("    function hydrateLegalReferences(");
-  const hydrateEnd = fallbackSource.indexOf("\n    if (corpus &&", hydrateStart);
+  const hydrateEnd = fallbackSource.indexOf("\n    function corpusRequiresEmbeddedUpgrade(", hydrateStart);
   assert(hydrateStart >= 0 && hydrateEnd > hydrateStart, "Could not extract the browser legal-reference hydrator.");
   const hydrateLegalReferences = vm.runInNewContext(`(${fallbackSource.slice(hydrateStart, hydrateEnd).trim()})`, {
     expandPackedHouseHref,
@@ -3865,7 +3891,7 @@ async function main() {
       }
     }
   }
-  assert.strictEqual(auditedGeneratedRunInPaths, 936, "The exhaustive compact-citation audit did not visit every current and historical statutory run-in path.");
+  assert.strictEqual(auditedGeneratedRunInPaths, 937, "The exhaustive compact-citation audit did not visit every current and historical statutory run-in path.");
   const lowercaseRomanAmbiguity = plain(compactPathApi.resolveIndexedCompactStatutePath("ina", "101", section1101ForCompactPaths, "a15oiii"));
   assert.deepStrictEqual(lowercaseRomanAmbiguity.path, ["a", "15", "O", "iii"], "The longest valid clause was not selected for an ambiguous lowercase Roman sequence.");
   assert.strictEqual(lowercaseRomanAmbiguity.ambiguity.commonLabel, "INA 101(a)(15)(O)", "A lowercase Roman ambiguity does not expose its shared citation prefix once.");
@@ -4584,9 +4610,10 @@ async function main() {
   const statutoryReferenceCrosswalk = extractedFunction(fallbackSource, "statutoryReferenceCrosswalk", "inUnfinishedStatutoryList", { inaMap: citationPreferenceInaCrosswalk, uscToIna: citationPreferenceUscCrosswalk, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, String });
   const inUnfinishedStatutoryList = extractedFunction(fallbackSource, "inUnfinishedStatutoryList", "statutoryLinksUseIna");
   const statutoryLinkUsesConvertibleUscWording = extractedFunction(fallbackSource, "statutoryLinkUsesConvertibleUscWording", "statutoryLinkInaCitation", { inUnfinishedStatutoryList, normCitationPart: statutoryNormPart, String });
-  const statutoryLinkInaCitation = extractedFunction(fallbackSource, "statutoryLinkInaCitation", "legalReferenceTargetIdentity", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart, profile: citationPreferenceProfile, statutoryLinksUseIna, statutoryReferenceCrosswalk, statutoryLinkUsesConvertibleUscWording });
+  const statutoryHierarchyInaPresentation = extractedFunction(fallbackSource, "statutoryHierarchyInaPresentation", "statutoryLinkUsesConvertibleUscWording", { corpus: hydratedSource, statutoryLinksUseIna, uscSection: (title, section) => hydratedSource.title8.sections.find(item => String(title) === "8" && item.section === section), String });
+  const statutoryLinkInaCitation = extractedFunction(fallbackSource, "statutoryLinkInaCitation", "legalReferenceTargetIdentity", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart, profile: citationPreferenceProfile, statutoryLinksUseIna, statutoryHierarchyInaPresentation, statutoryReferenceCrosswalk, statutoryLinkUsesConvertibleUscWording });
   const legalReferenceSourceDiscrepancy = extractedFunction(fallbackSource, "legalReferenceSourceDiscrepancy", "legalReferenceHtml", { Number, String });
-  const legalReferenceHtml = extractedFunction(fallbackSource, "legalReferenceHtml", "legalReferenceContextForElement", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart, profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, legalReferenceCitation, statutoryReferenceCrosswalk, statutoryLinkInaCitation, legalReferenceSourceDiscrepancy, legalReferenceDisposition: () => ({ status: "current", section: null, transferTarget: null }), transferTargetUrl: () => "", transferTargetLabel: () => "", legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => "", canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, JSON, String });
+  const legalReferenceHtml = extractedFunction(fallbackSource, "legalReferenceHtml", "legalReferenceContextForElement", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart, profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, legalReferenceCitation, statutoryReferenceCrosswalk, statutoryLinkInaCitation, statutoryHierarchyInaPresentation, legalReferenceSourceDiscrepancy, legalReferenceDisposition: () => ({ status: "current", section: null, transferTarget: null }), transferTargetUrl: () => "", transferTargetLabel: () => "", legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => "", canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, JSON, String });
   for (const reference of intentionallyUnlinkedHistoricalReferences) {
     assert.strictEqual(legalReferenceHtml(reference), escapeStatutoryHtml(reference.text), "An unresolved historical citation must render as plain text, without a link to a different edition.");
   }
@@ -4594,7 +4621,7 @@ async function main() {
   const completeInaMap = new Map(hydratedSource.inaCrosswalk.map(row => [statutoryNormPart(row.inaSection), row]));
   const completeStatutoryReferenceCrosswalk = extractedFunction(fallbackSource, "statutoryReferenceCrosswalk", "inUnfinishedStatutoryList", { inaMap: completeInaMap, uscToIna: completeUscToIna, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, String });
   const coordinatedStatutoryInaLists = extractedFunction(fallbackSource, "coordinatedStatutoryInaLists", "statutoryLinkUsesConvertibleUscWording", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart, inUnfinishedStatutoryList, legalReferenceCitation, profile: citationPreferenceProfile, statutoryLinksUseIna, INASearchEmbeddedReferences: embeddedReferences, legalReferenceCitation, statutoryReferenceCrosswalk: completeStatutoryReferenceCrosswalk, normCitationPart: statutoryNormPart, Map, Math, Number, String, Set });
-  const coordinatedLegalReferenceHtml = extractedFunction(fallbackSource, "legalReferenceHtml", "legalReferenceContextForElement", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart, profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, legalReferenceCitation, statutoryReferenceCrosswalk: completeStatutoryReferenceCrosswalk, statutoryLinkInaCitation, legalReferenceSourceDiscrepancy, legalReferenceDisposition: () => ({ status: "current", section: null, transferTarget: null }), transferTargetUrl: () => "", transferTargetLabel: () => "", legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => "", canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, JSON, String });
+  const coordinatedLegalReferenceHtml = extractedFunction(fallbackSource, "legalReferenceHtml", "legalReferenceContextForElement", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart, profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, legalReferenceCitation, statutoryReferenceCrosswalk: completeStatutoryReferenceCrosswalk, statutoryLinkInaCitation, statutoryHierarchyInaPresentation, legalReferenceSourceDiscrepancy, legalReferenceDisposition: () => ({ status: "current", section: null, transferTarget: null }), transferTargetUrl: () => "", transferTargetLabel: () => "", legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => "", canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, JSON, String });
   const statusSectionMap = new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section]));
   const legalReferenceDisposition = extractedFunction(fallbackSource, "legalReferenceDisposition", "legalReferenceSourceDiscrepancy", {
     sectionMap: statusSectionMap,
@@ -4604,7 +4631,7 @@ async function main() {
     String
   });
   const statusLegalReferenceHtml = extractedFunction(fallbackSource, "legalReferenceHtml", "legalReferenceContextForElement", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart,
-    profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, legalReferenceCitation, statutoryReferenceCrosswalk, statutoryLinkInaCitation,
+    profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, legalReferenceCitation, statutoryReferenceCrosswalk, statutoryLinkInaCitation, statutoryHierarchyInaPresentation,
     legalReferenceDisposition, legalReferenceSourceDiscrepancy,
     transferTargetUrl: target => target ? `https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title${target.title}-section${target.section}` : "",
     transferTargetLabel: target => target ? `${target.title} U.S.C. ${target.section}` : "",
@@ -4679,10 +4706,10 @@ async function main() {
   assert(!legalReferenceHtml(amPrintedLaw, "101(e)", { sourceHost: { kind: "cfr", title: 22, section: "41.12" } }).includes("data-reference-source-discrepancy="), "AM source annotation leaked into another regulation.");
   assert(officialOnlyHtml.includes("reference-official-only") && officialOnlyHtml.includes('href="https://uscode.house.gov/"'), "A recognized out-of-corpus citation lost its existing official-source link.");
   citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "usc";
-  const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists: () => [], coordinatedInaListHtml: () => "", houseFootnoteReferenceHtml, statutoryLinkInaCitation, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
-  const scopedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches, renderScopedDefinitionAnnotatedText, definedTermHighlightingEnabled: () => true, coordinatedStatutoryInaLists: () => [], coordinatedInaListHtml: () => "", houseFootnoteReferenceHtml, statutoryLinkInaCitation, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
+  const linkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists: () => [], coordinatedInaListHtml: () => "", houseFootnoteReferenceHtml, statutoryLinkInaCitation, statutoryHierarchyInaPresentation, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
+  const scopedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches, renderScopedDefinitionAnnotatedText, definedTermHighlightingEnabled: () => true, coordinatedStatutoryInaLists: () => [], coordinatedInaListHtml: () => "", houseFootnoteReferenceHtml, statutoryLinkInaCitation, statutoryHierarchyInaPresentation, legalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
   const coordinatedInaListHtml = extractedFunction(fallbackSource, "coordinatedInaListHtml", "linkifyStatutoryText", { escapeHtml: escapeStatutoryHtml, renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), houseFootnoteReferenceHtml, legalReferenceHtml: coordinatedLegalReferenceHtml, Math, Number, String });
-  const coordinatedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists, coordinatedInaListHtml, houseFootnoteReferenceHtml, statutoryLinkInaCitation, legalReferenceHtml: coordinatedLegalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
+  const coordinatedLinkifyStatutoryText = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists, coordinatedInaListHtml, houseFootnoteReferenceHtml, statutoryLinkInaCitation, statutoryHierarchyInaPresentation, legalReferenceHtml: coordinatedLegalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
   citationPreferenceProfile.preferences.statutoryLinkCitationSystem = "ina";
   const ina209Section = hydratedSource.title8.sections.find(section => section.section === "1159");
   const ina209a1 = ina209Section.body.find(node => node.label === "a").children.find(node => node.label === "1");
@@ -4691,7 +4718,7 @@ async function main() {
   assert(ina209ListHtml.replace(/<[^>]+>/g, "").includes("with the provisions of INA 235, 240, and 241."), "INA 209(a)(1)'s coordinated Title 8 list was not converted to one natural INA-format citation list.");
   assert.strictEqual((ina209ListHtml.match(/data-reference-ina-citation=/g) || []).length, 4, "INA 209(a)(1) did not retain independent links and crosswalk metadata for every converted citation.");
   const incompleteCoordinatedLists = extractedFunction(fallbackSource, "coordinatedStatutoryInaLists", "statutoryLinkUsesConvertibleUscWording", { sectionMap: new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section])), normCitationPart: statutoryNormPart, inUnfinishedStatutoryList, legalReferenceCitation, profile: citationPreferenceProfile, statutoryLinksUseIna, INASearchEmbeddedReferences: embeddedReferences, statutoryReferenceCrosswalk: reference => reference.targetSection === "1231" ? null : completeStatutoryReferenceCrosswalk(reference), normCitationPart: statutoryNormPart, Map, Math, Number, String, Set });
-  const nativeFallbackLinkify = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists: incompleteCoordinatedLists, coordinatedInaListHtml, houseFootnoteReferenceHtml, statutoryLinkInaCitation, legalReferenceHtml: coordinatedLegalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
+  const nativeFallbackLinkify = extractedFunction(fallbackSource, "linkifyStatutoryText", "indexedStatutePathExists", { profile: citationPreferenceProfile, statutoryLinksUseIna, escapeHtml: escapeStatutoryHtml, renderSearchHighlightedText, scopedDefinitionMatches: () => [], renderScopedDefinitionAnnotatedText: (input, match, start, end) => renderSearchHighlightedText(input, match, start, end), definedTermHighlightingEnabled: () => false, coordinatedStatutoryInaLists: incompleteCoordinatedLists, coordinatedInaListHtml, houseFootnoteReferenceHtml, statutoryLinkInaCitation, statutoryHierarchyInaPresentation, legalReferenceHtml: coordinatedLegalReferenceHtml, canonicalPath: statutoryCanonicalPath, normCitationPart: statutoryNormPart, Math, Number, String, Set });
   const ina209NativeHtml = nativeFallbackLinkify(ina209a1.text, ina209a1.references, 0, undefined, null, [], ina209Context);
   assert(ina209NativeHtml.replace(/<[^>]+>/g, "").includes("INA 235, 240, and 8 U.S.C. 1231"), "A mixed list must explicitly identify the U.S.C. authority of its unmapped member.");
   const ina240Section = hydratedSource.title8.sections.find(section => section.section === "1229a");
@@ -4799,12 +4826,13 @@ async function main() {
   const superscriptNumber = extractedFunction(fallbackSource, "superscriptNumber", "textWithHouseFootnoteMarkers", { String });
   const textWithHouseFootnoteMarkers = extractedFunction(fallbackSource, "textWithHouseFootnoteMarkers", "statuteFootnoteAppendix", { superscriptNumber, String });
   const statuteFootnoteAppendix = extractedFunction(fallbackSource, "statuteFootnoteAppendix", "statuteNodePlainText", { HOUSE_FOOTNOTE_STATEMENT: "Footnotes embedded in original house.gov material, moved here for clarity" });
-  const statuteNodePlainText = extractedFunction(fallbackSource, "statuteNodePlainText", "statuteTextRangeWithHouseFootnotes", { textWithHouseFootnoteMarkers, Set });
   const statuteTextRangeWithHouseFootnotes = extractedFunction(fallbackSource, "statuteTextRangeWithHouseFootnotes", "statuteUnitText", { textWithHouseFootnoteMarkers, Math, Number, String, Set });
+  const statuteNodePlainText = extractedFunction(fallbackSource, "statuteNodePlainText", "statuteTextRangeWithHouseFootnotes", { textWithHouseFootnoteMarkers, statuteTextRangeWithHouseFootnotes, Set });
   const statuteUnitText = extractedFunction(fallbackSource, "statuteUnitText", "statuteReferenceRunInLineHtml", { statuteReferenceSelection, statuteNodePlainText, statuteTextRangeWithHouseFootnotes, statuteFootnoteAppendix, textWithHouseFootnoteMarkers, statuteStatus, Set, String });
-  const statuteReferenceRunInLineHtml = extractedFunction(fallbackSource, "statuteReferenceRunInLineHtml", "statuteReferencePreviewNodeHtml", { statuteTextRangeWithHouseFootnotes, escapeHtml: escapeStatutoryHtml, Math, Set });
-  const statuteReferencePreviewNodeHtml = extractedFunction(fallbackSource, "statuteReferencePreviewNodeHtml", "statuteReferencePreviewHtml", { textWithHouseFootnoteMarkers, statuteTextRangeWithHouseFootnotes, statuteReferenceUnitIndex, statuteReferencePathKey, statuteReferenceRunInLineHtml, escapeHtml: escapeStatutoryHtml, Math, Set, String });
-  const statuteReferencePreviewHtml = extractedFunction(fallbackSource, "statuteReferencePreviewHtml", "cfrBlockPlainText", { statuteReferenceSelection, statuteReferencePreviewNodeHtml, statuteReferenceRunInLineHtml, textWithHouseFootnoteMarkers, canonicalPath: statutoryCanonicalPath, escapeHtml: escapeStatutoryHtml, Set, String });
+  const statuteFieldPreviewHtml = extractedFunction(fallbackSource, "statuteFieldPreviewHtml", "statuteReferencePreviewNodeHtml", { statuteTextRangeWithHouseFootnotes, escapeHtml: escapeStatutoryHtml, Math, Set });
+  const statuteReferenceRunInLineHtml = extractedFunction(fallbackSource, "statuteReferenceRunInLineHtml", "statuteReferencePreviewNodeHtml", { statuteFieldPreviewHtml, statuteTextRangeWithHouseFootnotes, escapeHtml: escapeStatutoryHtml, Math, Set });
+  const statuteReferencePreviewNodeHtml = extractedFunction(fallbackSource, "statuteReferencePreviewNodeHtml", "statuteReferencePreviewHtml", { statuteFieldPreviewHtml, textWithHouseFootnoteMarkers, statuteTextRangeWithHouseFootnotes, statuteReferenceUnitIndex, statuteReferencePathKey, statuteReferenceRunInLineHtml, escapeHtml: escapeStatutoryHtml, Math, Set, String });
+  const statuteReferencePreviewHtml = extractedFunction(fallbackSource, "statuteReferencePreviewHtml", "cfrBlockPlainText", { statuteFieldPreviewHtml, statuteReferenceSelection, statuteReferencePreviewNodeHtml, statuteReferenceRunInLineHtml, textWithHouseFootnoteMarkers, canonicalPath: statutoryCanonicalPath, escapeHtml: escapeStatutoryHtml, Set, String });
   const previewSectionMap = new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section]));
   for (const row of hydratedSource.inaCrosswalk) {
     const section = previewSectionMap.get(statutoryNormPart(row.localSection || row.uscSection));
@@ -5331,6 +5359,10 @@ async function main() {
   assert(!hierarchyStatusReplacesHeading(hierarchyModel.authorityHierarchyNodes.get("ina:section:321")), "An original INA title was hidden behind its status.");
   const startupViewRuntime = {};
   vm.runInNewContext(fs.readFileSync(path.join(root, "src/INASearch-Startup.js"), "utf8"), startupViewRuntime);
+  const hierarchyTocFootnoteMarkers = extractedFunction(fallbackSource, "hierarchyTocFootnoteMarkers", "renderHierarchyTocNotes", { escapeHtml: escapeStatutoryHtml });
+  const renderHierarchyTocNotes = extractedFunction(fallbackSource, "renderHierarchyTocNotes", "renderHierarchyDivisionNotes", { escapeHtml: escapeStatutoryHtml });
+  const hierarchyNoteEntries = extractedFunction(fallbackSource, "hierarchyNoteEntries", "hierarchyNoteMarkers", { titleCaseTopic: value => value });
+  const hierarchyNoteMarkers = extractedFunction(fallbackSource, "hierarchyNoteMarkers", "renderHierarchyNoteContent", { hierarchyNoteEntries, escapeHtml: escapeStatutoryHtml });
   const renderStatusOnlyHierarchyRows = extractedFunction(fallbackSource, "renderHierarchyRows", "hierarchyPageNodeIds", {
     INASearchStartup: startupViewRuntime.INASearchStartup,
     authorityHierarchyNodes: hierarchyModel.authorityHierarchyNodes,
@@ -5340,7 +5372,10 @@ async function main() {
     hierarchyRowCitation: node => `INA ${node.number}`,
     hierarchyNodeCitation: node => node.query || `INA ${node.number}`,
     hierarchyStatusReplacesHeading,
-    hierarchyStatusBadge
+    hierarchyStatusBadge,
+    hierarchyTocFootnoteMarkers,
+    hierarchyNoteMarkers,
+    renderHierarchyTocNotes
   });
   const statusOnlyHierarchyMarkup = renderStatusOnlyHierarchyRows(statusOnlyHierarchyNodes.map(node => node.id));
   assert((statusOnlyHierarchyMarkup.match(/hierarchy-status hierarchy-status-title (?:repealed|transferred|omitted)/g) || []).length === statusOnlyHierarchyNodes.length, "A status-only section does not place its existing styled warning in the title column.");
@@ -5668,7 +5703,7 @@ async function main() {
       for (const address of addresses) assert(/^(?:\((?:\d{1,3}|[A-Za-z]|[a-z]\d{1,3}|[ivxlcdmIVXLCDM]{1,4}|([a-z])\1{1,2}|([A-Z])\2)\))+$/.test(address), `Invalid formatted statutory address ${address}.`);
       assert(!output.includes('<span class="statutory-runin-line"><strong class="inline-address"></strong>'), "Formatter emitted an empty statutory address.");
       if (addresses.length) {
-        const legalUnit = { sectionId: section.id, currentPath, parentPath, citationBase: `8 U.S.C. ${section.section}`, targetPath: [] };
+        const legalUnit = { sourceNode: node, sectionId: section.id, currentPath, parentPath, citationBase: `8 U.S.C. ${section.section}`, targetPath: [] };
         const actionable = formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], null, legalUnit, node.textFootnoteReferences || []);
         const renderedPaths = [...actionable.matchAll(/data-statute-inline-path="([^"]+)"/g)].map(match => JSON.parse(match[1].replace(/&quot;/g, '"').replace(/&amp;/g, "&")));
         const structuralDuplicates = (actionable.match(/statutory-runin-line structural-duplicate/g) || []).length;
@@ -5687,9 +5722,9 @@ async function main() {
   for (const section of hydratedSource.title8.sections) auditStatutoryNodes(section, section.body, [], collectStructuralPathIdentities(section.body));
   assert.strictEqual(statutoryFormattingAudit.nodes, 7816, `The statutory formatting audit did not visit every cached node: ${JSON.stringify(statutoryFormattingAudit)}`);
   assert.strictEqual(statutoryFormattingAudit.formattedNodes, 205, `Unexpected change in the set of cached nodes requiring run-in formatting: ${JSON.stringify(statutoryFormattingAudit)}`);
-  assert.strictEqual(statutoryFormattingAudit.runInLines, 955, "Unexpected change in the number of formatted cached run-in provisions.");
+  assert.strictEqual(statutoryFormattingAudit.runInLines, 956, "Unexpected change in the number of formatted cached run-in provisions.");
   assert.strictEqual(statutoryFormattingAudit.nestedRunInLevels, 8, "The corpus-wide audit did not preserve the current and historical nested run-in levels.");
-  assert.strictEqual(statutoryFormattingAudit.indexedRunInPaths, 953, `The corpus-wide audit found a missing or duplicate navigable statutory run-in path: ${JSON.stringify(statutoryFormattingAudit)}`);
+  assert.strictEqual(statutoryFormattingAudit.indexedRunInPaths, 954, `The corpus-wide audit found a missing or duplicate navigable statutory run-in path: ${JSON.stringify(statutoryFormattingAudit)}`);
   assert.strictEqual(statutoryFormattingAudit.structuralDuplicateRunIns, 2, "The corpus-wide audit did not isolate condition markers that duplicate structural paths.");
   assert.deepStrictEqual([...renderedVirtualRunInPathIdentities].sort(), [...generatedRunInPathIdentities].sort(), "The generated corpus run-in index has a missing or stale virtual path.");
   let ancillaryCitationLinks = 0;
@@ -5702,7 +5737,9 @@ async function main() {
   const excludedNoteReferences = hydratedSource.title8.sections.find(section => section.section === "1612").notes.flatMap(note => note.references || []).filter(reference => reference.targetTitle === "38" && reference.targetSection === "5303A");
   assert(excludedNoteReferences.length > 0 && excludedNoteReferences.every(reference => reference.resolution === "official-source-only"), "A note citation to a section removed by INA-only selection must retain its official-source link without claiming local content.");
   // Excluding 38 U.S.C. 5303A removes its inferred (3)(B) link from the 8 U.S.C. 1612 note; explicit official-source links remain.
-  assert.deepStrictEqual({ operative: statutoryFormattingAudit.citationLinks, total: statutoryFormattingAudit.citationLinks + ancillaryCitationLinks }, { operative: 5934, total: 29506 }, "Unexpected generated-link inventory in the expanded statutory corpus.");
+  // Explicit hierarchy antecedents also resolve “that subchapter” in former
+  // section 1161 and “such chapter” in section 1551's reorganization note.
+  assert.deepStrictEqual({ operative: statutoryFormattingAudit.citationLinks, total: statutoryFormattingAudit.citationLinks + ancillaryCitationLinks }, { operative: 6260, total: 30827 }, "Unexpected generated-link inventory in the expanded statutory corpus.");
 
   const migration = profileMigrationFunctions(fallbackSource);
   for (const authority of ["ina", "usc"]) {

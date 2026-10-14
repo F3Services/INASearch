@@ -72,14 +72,28 @@ for (const section of ['240.66', '1240.66']) {
   assert(field.references.some(ref => ref.targetSection === '1182' && ref.targetPath.join('/') === 'a/2'));
   assert(field.references.some(ref => ref.targetSection === '1182' && ref.targetPath.join('/') === 'a/3'));
 }
-let count = 0;
+let count = 0, unresolvedCount = 0;
 for (const field of fields) {
-  const html = render(field.text, field.references, contextFor(field, corpus));
+  const context = contextFor(field, corpus);
+  for (const reference of field.references) {
+    assert(Number.isInteger(reference.start) && Number.isInteger(reference.end) && reference.start >= 0 && reference.end > reference.start && reference.end <= field.text.length,
+      `${field.sourcePath}.${field.field}: reference ${reference.start}–${reference.end} must fit its delivered source text`);
+    assert.equal(field.text.slice(reference.start, reference.end), reference.text, `${field.sourcePath}.${field.field}: reference source text must round-trip`);
+  }
+  const html = render(field.text, field.references, context);
   const links = [...html.matchAll(/data-reference-source-text="([^"]*)"/g)].map(match => plain(match[1]));
-  assert.deepEqual(links, field.references.map(ref => ref.text), `${field.sourcePath}.${field.field}: source link order and membership`);
+  const resolved = field.references.filter(reference => reference.resolution !== 'unresolved');
+  assert.deepEqual(links, resolved.map(ref => ref.text), `${field.sourcePath}.${field.field}: source link order and membership`);
+  for (const reference of field.references.filter(reference => reference.resolution === 'unresolved')) {
+    assert.equal(field.text.slice(reference.start, reference.end), reference.text, `${field.sourcePath}.${field.field}: unresolved source span`);
+    const sourceHtml = api.linkifyStatutoryText(field.text, field.references, reference.start, reference.end, null, [], { ...context, citationDisplaySystem: 'usc' });
+    assert.equal(plain(sourceHtml), reference.text, `${field.sourcePath}.${field.field}: unresolved citation retains source text`);
+    assert(!sourceHtml.includes('data-legal-reference'), `${field.sourcePath}.${field.field}: unresolved citation must not invent a destination`);
+    unresolvedCount++;
+  }
   count += links.length;
 }
-console.log(`PASS INA display: examples, repeated citation ancestors, CFR alternatives, prose boundaries, preference off, and ${count} source links in exact order`);
+console.log(`PASS INA display: examples, repeated citation ancestors, CFR alternatives, prose boundaries, preference off, ${count} source links in exact order, and ${unresolvedCount} unresolved citations retained as text`);
 
 // Bare section citations use their resolved Title 8 target, including notes
 // and regulation text; the preference must never rewrite the stored source.
@@ -122,7 +136,8 @@ console.log('PASS reviewed authority tails, qualified continuation list, shared-
 const historicAlternative = fields.find(field => field.sourceId === '8-1229b-b-4-A-ii' && field.field === 'text');
 const historicAlternativeDisplay = plain(render(historicAlternative.text, historicAlternative.references, contextFor(historicAlternative, corpus)));
 assert(historicAlternativeDisplay.includes('INA 240A(b)(2) or 8 U.S.C. 1254(a)(3) (as in effect before'), 'An unmapped historical alternative must retain explicit USC authority and its temporal qualifier');
-const oldRange = fields.find(field=>field.sourceId==='8-701 to 724a-note-26'&&field.field==='text');
+const oldRange = fields.find(field => (field.sourceId === '8-701 to 724a-note-26' || field.owner.sourceNoteId === '8-701 to 724a-note-26') && field.field === 'text');
+assert(oldRange, 'The combined House record’s relative-range note must survive historical section expansion');
 assert(plain(render(oldRange.text,oldRange.references,contextFor(oldRange,corpus))).endsWith('See INA 329(a)–(c).'), 'A relative paragraph range must preserve endpoints and remove the dangling title container');
 const longListStart = performance.now();
 assert.equal(api.inUnfinishedStatutoryList('sections '+'1'.repeat(12000)+' unrelated prose'),false);

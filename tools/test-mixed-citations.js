@@ -78,6 +78,8 @@ function run() {
     assert.equal(result.label, label, input);
     return result;
   };
+  expect("8 USC1357(a)2", "8 U.S.C. 1357(a)(2)");
+  expect("8 USC1357(a)ii", "8 U.S.C. 1357(a)(ii)");
   expect("274a", "INA 274A");
   expect("274(a)", "INA 274(a)");
   for (const notation of ["a2b", "(a)2b", "(a)2(B)", "(a)(2)b", "a(2)b", "(a)(2)(B)"]) {

@@ -15,7 +15,7 @@ const corpus = unpackLegalReferences(readBuildCorpus(require.resolve("../INASear
 const sections = new Map(corpus.title8.sections.map(s => [s.section,s]));
 const nodeAt = (s, path) => path.reduce((parent, label) => parent.children?.find(n => n.label === label), { children: sections.get(s).body });
 assert.equal(corpus.historicalIna.sections.length, 14);
-assert.equal(corpus.corpusVersion, "2026.10.11-historical-usc.1");
+assert.equal(corpus.corpusVersion, "2026.10.11-historical-usc.1-usc-order.1-uslm.1");
 for (const record of data.sections) {
   const section = sections.get(record.uscSection);
   assert.equal(section.status, record.status || "repealed");
@@ -72,7 +72,8 @@ assert(nodeAt("1485",["10"]).references.some(r=>r.text.includes("Nationality Act
 const projected=occurrence.buildProjection(corpus,{authorities:["ina"]});
 assert(projected.fragments.some(f=>f.recordId==="8-1252b"&&f.source?.subfield==="continuation"&&f.text.includes("stay the deportation")));
 const template=fs.readFileSync(require.resolve("../src/INASearch.template.html"),"utf8");
-const ctx={Set,String,textWithHouseFootnoteMarkers:t=>t||""};vm.createContext(ctx);
+const ctx={Set,String,INA_SEARCH_OCCURRENCE:occurrence,textWithHouseFootnoteMarkers:t=>t||""};vm.createContext(ctx);
+vm.runInContext(functionSource(template,"statuteTextRangeWithHouseFootnotes"),ctx);
 vm.runInContext(functionSource(template,"statuteNodePlainText"),ctx);
 const copied=ctx.statuteNodePlainText(nodeAt("1252b",["c","3"]));
 assert(copied.indexOf("pending disposition")>copied.indexOf("Federal or State custody"));

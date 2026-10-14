@@ -34,7 +34,7 @@ assert.match(marker({ id: "f1", number: "1", offset: 9 }), /href="#house-footnot
 const first = marker({ id: "f3", number: "3", offset: 26, sourceLocation: { sourceKey: "1101:a/27/C/ii/II", field: "text" } });
 const repeated = marker({ id: "f3", number: "3", offset: 26, sourceLocation: { sourceKey: "1101:a/27/C/ii/III", field: "text" } });
 assert.notEqual(first.match(/id="([^"]+)"/)[1], repeated.match(/id="([^"]+)"/)[1], "Repeated footnotes at the same text offset need distinct return destinations");
-const context = vm.createContext({ escapeHtml, console });
+const context = vm.createContext({ escapeHtml, console, INA_SEARCH_OCCURRENCE: require("../src/INASearch-Occurrence") });
 for (const name of ["statuteNoteBodyStart", "statuteNoteGroups", "formatStatuteNoteBody"])
   vm.runInContext(source(template, name), context);
 const note = { heading: "Funds", text: "FundsFirst.Second.", bodyStart: 5, layout: [{ tag: "p", start: 5, end: 11 }, { tag: "p", start: 11, end: 18 }] };

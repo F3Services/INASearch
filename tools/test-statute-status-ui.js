@@ -79,7 +79,11 @@ assert.doesNotMatch(omittedReference, /legal-status-warning transferred/);
 assert.match(referenceWarning({ referenceStatus: "omitted" }), /legal-status-warning omitted/);
 
 const detail = { innerHTML: "" };
+const renderInaTocNotes = vm.runInNewContext(`(${require("./test-function-source")(template, "renderInaTocNotes")})`, {
+  authorityHierarchyNodes: new Map(), corpus: { inaCrosswalk: [] }
+});
 const renderIna = extractFunction(template, "    function renderIna(", "    function linkifyCfrText(", {
+  renderInaTocNotes,
   inaMappedSection: () => section("omitted", reason),
   statuteStatus: status.normalize,
   statuteStatusWarning: warning,
@@ -94,6 +98,7 @@ renderIna({ inaSection: "900", title: "Former provision", status: "omitted", has
 assert.match(detail.innerHTML, /Omitted as executed under Pub\. L\. 90-123\./);
 assert.doesNotMatch(detail.innerHTML, /Warning: this provision was omitted as executed/);
 const renderUnmappedIna = extractFunction(template, "    function renderIna(", "    function linkifyCfrText(", {
+  renderInaTocNotes,
   inaMappedSection: () => null,
   statuteStatus: status.normalize,
   statuteStatusWarning: warning,
@@ -145,6 +150,7 @@ assert.equal(opening.referencedUsc[1][3].length, 0);
 assert.match(template, /addReferencedUscHierarchy\(uscRoot\);[\s\S]{0,1000}assignContainerStatuses\(uscRoot\);/);
 
 const statuteUnitText = extractFunction(template, "    function statuteUnitText(", "    function statuteReferenceRunInLineHtml(", {
+  INA_SEARCH_OCCURRENCE: require("../src/INASearch-Occurrence"),
   statuteReferenceSelection: () => ({ kind: "section" }),
   textWithHouseFootnoteMarkers: value => value || "",
   statuteFootnoteAppendix: () => "",

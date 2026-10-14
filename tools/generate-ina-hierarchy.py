@@ -107,10 +107,38 @@ def build_hierarchy(xml_bytes: bytes, corpus: dict, captured_on: str) -> dict:
         value = metadata.find(f"uslm:{name}", NS) if metadata is not None else None
         return clean_text(value)
 
+    footnotes: dict[str, dict] = {}
+    for note in toc.iter(f"{{{NS['uslm']}}}footnote"):
+        note_id = note.get("id")
+        if not note_id or note_id in footnotes:
+            raise ValueError("Missing or duplicate GovInfo TOC footnote identifier")
+        marker = note.find("uslm:sup", NS)
+        text = re.sub(r"\s+", " ", " ".join("".join(child.itertext()) for child in note if local_name(child) != "sup")).strip()
+        footnotes[note_id] = {"id": note_id, "number": clean_text(marker), "text": text, "sourceUrl": USLM_URL + "#" + note_id}
+    associated_notes: set[str] = set()
+
+    def annotations(item: ET.Element) -> dict:
+        references, attached = [], []
+        for ref in item.iter(f"{{{NS['uslm']}}}ref"):
+            if ref.get("class") != "footnoteRef":
+                continue
+            target = ref.get("idref")
+            if target and target not in footnotes:
+                raise ValueError(f"GovInfo TOC footnote target {target} is absent")
+            # A source-dangling marker has no idref. Keep its number without
+            # fabricating a body or guessing another note's destination.
+            references.append({"number": re.sub(r"\s+", " ", "".join(ref.itertext())).strip(),
+                               "noteId": target, "sourceIdref": target})
+            if target and target not in {note['id'] for note in attached}:
+                attached.append(footnotes[target])
+                associated_notes.add(target)
+        return {"tocFootnoteReferences": references, "tocFootnotes": attached} if references else {}
+
     titles: list[dict] = []
     title_by_numeric: dict[int, dict] = {}
     chapter_by_key: dict[tuple[int, str], dict] = {}
     placement: dict[str, tuple[int, str | None, str]] = {}
+    section_annotations: dict[str, dict] = {}
     current_title: dict | None = None
     current_chapter: dict | None = None
 
@@ -134,6 +162,7 @@ def build_hierarchy(xml_bytes: bytes, corpus: dict, captured_on: str) -> dict:
                 "heading": label.strip(" ."),
                 "chapters": [],
                 "sectionIds": [],
+                **annotations(item),
             }
             titles.append(current_title)
             title_by_numeric[numeric] = current_title
@@ -151,6 +180,7 @@ def build_hierarchy(xml_bytes: bytes, corpus: dict, captured_on: str) -> dict:
                 "number": number,
                 "heading": label.strip(" ."),
                 "sectionIds": [],
+                **annotations(item),
             }
             current_title["chapters"].append(current_chapter)
             chapter_by_key[(current_title["numeric"], number)] = current_chapter
@@ -169,6 +199,10 @@ def build_hierarchy(xml_bytes: bytes, corpus: dict, captured_on: str) -> dict:
             raise ValueError(f"Duplicate INA section {section} in GovInfo hierarchy")
         heading = label.strip(" .") or re.sub(r"^.*?\.\s*", "", clean_text(item).strip("[] "), count=1).strip(" .")
         placement[section] = (current_title["numeric"], current_chapter["number"] if current_chapter else None, heading)
+        section_annotations[section] = annotations(item)
+
+    if associated_notes != set(footnotes):
+        raise ValueError("GovInfo TOC contains a footnote without a hierarchy association")
 
     verify_former_placements(corpus)
     crosswalk = corpus.get("inaCrosswalk", [])
@@ -199,6 +233,7 @@ def build_hierarchy(xml_bytes: bytes, corpus: dict, captured_on: str) -> dict:
             "titleId": title["id"],
             "chapterId": chapter["id"] if chapter else None,
             "sourceUrl": row.get("url") or INA_SOURCE_URL,
+            **section_annotations.get(ina_section, {}),
         }
         sections.append(record)
         (chapter["sectionIds"] if chapter else title["sectionIds"]).append(node_id)

@@ -13,6 +13,7 @@ const plain = value => String(value).replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/g, '')
 function runtime(template, corpus) {
   const allUscSections = [...(corpus.title8?.sections || []), ...(corpus.referencedUsc?.titles || []).flatMap(title => title.sections || [])];
   const scope = {
+    INA_SEARCH_OCCURRENCE: require('../src/INASearch-Occurrence'),
     corpus, allUscSections, uscSectionById: new Map(allUscSections.map(section => [section.id, section])),
     INASearchStatuteStatus: statuteStatus,
     state: { statuteHierarchyAuthority: 'ina' },
@@ -28,8 +29,9 @@ function runtime(template, corpus) {
     transferTargetUrl: () => '', transferTargetLabel: () => '', legalReferenceInsertionRecord: () => null, legalReferenceSourceAttributes: () => ''
   };
   vm.createContext(scope);
+  if (template.includes('function statuteFieldPreviewHtml(')) vm.runInContext(functionSource(template, 'statuteFieldPreviewHtml'), scope);
   if (template.includes('function statutoryLinksUseIna(')) vm.runInContext(functionSource(template, 'statutoryLinksUseIna'), scope);
-  for (const name of ['uscSection', 'uscMapping', 'uscBase', 'normCitationPart', 'statuteStatus', 'transferSourceKey', 'transferTargetForSource', 'transferTargetLabel', 'houseSectionUrl', 'transferTargetUrl', 'legalReferenceDisposition', 'renderSearchHighlightedText', 'legalReferenceCitation', 'statutoryReferenceCrosswalk', 'inUnfinishedStatutoryList', 'coordinatedStatutoryInaLists', 'statutoryLinkUsesConvertibleUscWording', 'statutoryLinkInaCitation', 'legalReferenceSourceDiscrepancy', 'legalReferenceHtml', 'houseFootnoteReferenceHtml', 'coordinatedInaListHtml', 'linkifyStatutoryText']) {
+  for (const name of ['uscSection', 'uscMapping', 'uscBase', 'normCitationPart', 'statuteStatus', 'transferSourceKey', 'transferTargetForSource', 'transferTargetLabel', 'houseSectionUrl', 'transferTargetUrl', 'legalReferenceDisposition', 'renderSearchHighlightedText', 'legalReferenceCitation', 'statutoryReferenceCrosswalk', 'inUnfinishedStatutoryList', 'coordinatedStatutoryInaLists', 'statutoryHierarchyInaPresentation', 'statutoryLinkUsesConvertibleUscWording', 'statutoryLinkInaCitation', 'legalReferenceSourceDiscrepancy', 'legalReferenceHtml', 'houseFootnoteReferenceHtml', 'coordinatedInaListHtml', 'linkifyStatutoryText']) {
     if (name === "inUnfinishedStatutoryList" && !template.includes(`function ${name}(`)) continue; // Pre-change snapshots have no such helper.
     vm.runInContext(functionSource(template, name), scope);
   }

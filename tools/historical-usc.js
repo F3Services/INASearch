@@ -54,9 +54,25 @@ function applyHistoricalUsc(corpus, data = readHistoricalUsc(), reviewed = readR
   const groupSources = [];
   const output = [];
   const existing = new Map(corpus.title8.sections.map(s => [s.section, s]));
+  const clearFieldAnnotations = (section, field) => {
+    for (const suffix of ["References", "FootnoteReferences", "Layout", "Presentation", "Style"]) delete section[`${field}${suffix}`];
+  };
+  const replaceHeading = (section, heading) => {
+    if (section.heading !== heading) clearFieldAnnotations(section, "heading");
+    section.heading = heading;
+  };
+  const replaceText = (section, text) => {
+    // The new body and preamble have independent source coordinates. Current
+    // House provenance stays in source/status records, not on historical words.
+    clearFieldAnnotations(section, "preamble");
+    delete section.childTextOffsets;
+    delete section.preamble;
+    delete section.body;
+    Object.assign(section, text);
+  };
   const enrich = (section, member, source) => {
     if (member.status) section.status = member.status;
-    if (member.heading && !section.historical) section.heading = member.heading;
+    if (member.heading && !section.historical) replaceHeading(section, member.heading);
     if (member.headingSource) section.headingSource = member.headingSource;
     if (source && section !== source) section.houseHeading = source.heading;
     if (member.statusReason) section.statusReason = { ...member.statusReason, sourceUrl: member.statusReason.sourceUrl || source?.url || section.url };
@@ -67,16 +83,17 @@ function applyHistoricalUsc(corpus, data = readHistoricalUsc(), reviewed = readR
     if (record && !section.historical) {
       const { units, ...metadata } = record;
       section.historical = metadata;
-      section.heading = record.displayHeading || (record.originalTitle?.toLowerCase().startsWith("same;") ? member.heading : record.originalTitle) || member.heading;
+      replaceHeading(section, record.displayHeading || (record.originalTitle?.toLowerCase().startsWith("same;") ? member.heading : record.originalTitle) || member.heading);
       if (section.heading !== record.originalTitle && !section.historical.headingOrigin) {
         section.historical.headingOrigin = "editorial-contextualization";
         section.historical.headingEvidence = `Printed catchline: ${record.originalTitle}`;
       }
-      Object.assign(section, parseHistoricalUnits(units));
+      replaceText(section, parseHistoricalUnits(units));
     } else if (!section.historical && member.historical) {
       section.historical = member.historical;
-      if (member.body?.length) section.body = member.body;
-      if (member.preamble) section.preamble = member.preamble;
+      if (member.body?.length || member.preamble) replaceText(section, {
+        body: member.body || [], ...(member.preamble ? { preamble: member.preamble } : {})
+      });
     }
     return section;
   };
@@ -101,8 +118,7 @@ function applyHistoricalUsc(corpus, data = readHistoricalUsc(), reviewed = readR
       section.identifier = `/us/usc/t8/s${member.section}`;
       section.combinedHouseRecord = source.id;
       section.houseHeading = source.heading;
-      delete section.headingReferences;
-      delete section.headingFootnoteReferences;
+      clearFieldAnnotations(section, "heading");
       const noteIds = new Set(member.noteIds || []);
       section.notes = (source.notes || []).filter(note => noteIds.has(note.id)).map((note, index) => ({ ...note, sourceNoteId: note.id, id: `${section.id}-note-${index + 1}` }));
       delete section.body;

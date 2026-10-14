@@ -1,10 +1,11 @@
 "use strict";
+const { statuteTextPartIndex, constrainStatuteRunInPath } = require("../src/INASearch-Occurrence");
 
 const markerPattern = /\((\d{1,3}|[A-Za-z]{1,4}|[a-z]\d{1,3})\)/g;
 const romanPattern = /^(?:i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)$/i;
 const referenceWords = new Set(["section", "sections", "subsection", "subsections", "paragraph", "paragraphs", "subparagraph", "subparagraphs", "clause", "clauses", "subclause", "subclauses", "item", "items", "subdivision", "subdivisions", "part", "parts", "chapter", "chapters", "title", "titles", "under"]);
 const referenceConnector = /^[\s,()[\]]*(?:(?:and|or|through|to)[\s,()[\]]*)*$/i;
-const RUN_IN_REVISION = 2;
+const RUN_IN_REVISION = 3;
 
 function isAddressToken(token) {
   return /^\d{1,3}$/.test(token) || /^[A-Za-z]$/.test(token) || /^[a-z]\d{1,3}$/.test(token) || romanPattern.test(token) || /^([a-z])\1{1,2}$/.test(token) || /^([A-Z])\1$/.test(token);
@@ -39,7 +40,7 @@ function statuteRunInMarkers(value, currentLabel = "") {
       // the citation.  The earlier accepted inline marker supplies the
       // structural sequence evidence.
       (Boolean(priorStructuralMarker) && isImmediateSibling(priorStructuralMarker.token, token) &&
-        /\b(?:and|or)\s*$/i.test(prefix) && /^\s+(?:a|an|the|if|when|where|who|which|that|to|by|for|is|are|shall|may|has|have)\b/i.test(input.slice(end)));
+        /\b(?:and|or)\s*$/i.test(prefix) && /^\s+(?:a|an|the|if|when|where|who|which|that|to|by|for|is|are|shall|may|has|have|establish)\b/i.test(input.slice(end)));
     const isReference = !structuralSibling && (referenceContinuation || referenceWords.has(precedingWord) || referenceNumberPrefix || /[\p{L}\p{M}\p{N}§]/u.test(previousChar));
     if (isReference) {
       referenceChainEnd = end;
@@ -194,8 +195,11 @@ function indexStatuteRunIns(corpus) {
         const currentPath = [...parentPath, ...node.label ? [String(node.label)] : []];
         const markers = statuteRunInMarkers(node.text, node.label);
         if (markers.length) stats.sourceNodes += 1;
-        let previousInlinePath = null;
+        let previousInlinePath = null, previousPart = -1;
         for (const marker of markers) {
+          const part = statuteTextPartIndex(node, marker.start);
+          if (part !== previousPart) previousInlinePath = null;
+          previousPart = part;
           const candidates = runInPathCandidates(currentPath, marker.tokens, previousInlinePath);
           const directPath = candidates[0];
           const flatHistorical = Boolean(section.historical && !currentPath.length);
@@ -208,6 +212,7 @@ function indexStatuteRunIns(corpus) {
               || (isImmediateSibling(currentPath.at(-1), marker.tokens[0]) ? [...parentPath, ...marker.tokens] : null)
               || fallbackRunInPath(currentPath, parentPath, marker.tokens);
           if (structuralIdentities.has(pathIdentity(inlinePath)) && !structuralIdentities.has(pathIdentity(directPath))) inlinePath = directPath;
+          inlinePath = constrainStatuteRunInPath(node, currentPath, inlinePath, marker.tokens, marker.start);
           const identity = pathIdentity(inlinePath);
           previousInlinePath = inlinePath;
           stats.markers += 1;
@@ -235,18 +240,22 @@ function statuteRunInPathMarkers(section, node, currentPath = []) {
   const markers = statuteRunInMarkers(node?.text, node?.label);
   const virtualIdentities = new Set((section?.runInPaths || []).map(pathIdentity));
   const parentPath = currentPath.slice(0, -1);
-  let previousInlinePath = null;
+  let previousInlinePath = null, previousPart = -1;
   return markers.map(marker => {
+    const part = statuteTextPartIndex(node, marker.start);
+    if (part !== previousPart) previousInlinePath = null;
+    previousPart = part;
     const candidates = runInPathCandidates(currentPath, marker.tokens, previousInlinePath);
     const flatHistorical = Boolean(section.historical && !currentPath.length);
     const contextualPath = inferredSiblingPath(currentPath, marker.tokens, previousInlinePath)
       || (flatHistorical ? historicalFlatChildPath(previousInlinePath, marker.tokens) : null);
     const reusedPath = candidates.find(candidate => virtualIdentities.has(pathIdentity(candidate)));
-    const path = marker.nestedAfterPrevious && previousInlinePath?.length
+    let path = marker.nestedAfterPrevious && previousInlinePath?.length
       ? [...previousInlinePath, ...marker.tokens]
       : (flatHistorical ? contextualPath || reusedPath : reusedPath || contextualPath)
         || (isImmediateSibling(currentPath.at(-1), marker.tokens[0]) ? [...parentPath, ...marker.tokens] : null)
         || fallbackRunInPath(currentPath, parentPath, marker.tokens);
+    path = constrainStatuteRunInPath(node, currentPath, path, marker.tokens, marker.start);
     previousInlinePath = path;
     return { ...marker, path };
   });
