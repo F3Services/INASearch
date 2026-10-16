@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const vm = require("node:vm");
 const path = require("node:path");
 const { performance } = require("node:perf_hooks");
-const { runtime } = require("./audit-ina-display");
+const { runtime, plain } = require("./audit-ina-display");
 const { readArtifact } = require("./audit-inline-references");
 const functionSource = require("./test-function-source");
 const root = path.resolve(__dirname, "..");
@@ -31,7 +31,22 @@ assert(parsedCharacters <= note.text.length, "Formatting separate paragraphs mus
 assert(html.includes('class="note-paragraph"'), "The editorial paragraph layout must remain intact");
 assert(html.includes("data-legal-reference"), "The editorial note must retain its citation links");
 const independentlyRendered = api.formatStatuteNoteBody(note, (start, end) => api.linkifyStatutoryText(note.text, note.references || [], start, end, null, [], sourceContext));
-assert.equal(html, independentlyRendered, "Reusing citation analysis must produce exactly the same editorial layout and links");
+const referenceLinks = value => [...value.matchAll(/<a\b([^>]*\bdata-legal-reference\b[^>]*)>([\s\S]*?)<\/a>/g)].map(match => {
+  const attributes = Object.fromEntries([...match[1].matchAll(/([\w-]+)="([^"]*)"/g)].map(attribute => [attribute[1], plain(attribute[2])]));
+  return { text: plain(match[2]), href: attributes.href, family: attributes["data-reference-family"], title: attributes["data-reference-title"],
+    section: attributes["data-reference-section"], path: attributes["data-reference-path"], citation: attributes["data-reference-citation"] };
+});
+assert.equal(plain(html), plain(independentlyRendered), "Reusing citation analysis must preserve the complete editorial wording");
+assert.deepEqual(referenceLinks(html), referenceLinks(independentlyRendered), "Reusing citation analysis must preserve link wording, order, and legal targets");
+assert.equal((html.match(/class="note-paragraph"/g) || []).length, (independentlyRendered.match(/class="note-paragraph"/g) || []).length,
+  "Citation analysis reuse must preserve source paragraph boundaries");
+const layoutRecords = records => (records || []).flatMap(record => [record, ...layoutRecords(record.children)]);
+const sourceItalics = layoutRecords(note.layout).filter(record => (record.tag === "i" || record.presentation?.italic) && !record.children?.length
+  && !(note.references || []).some(reference => reference.start < record.end && reference.end > record.start))
+  .map(record => note.text.slice(record.start, record.end)).filter(Boolean);
+assert(sourceItalics.length, "The long editorial fixture must include source italics outside converted citations");
+const renderedItalics = [...html.matchAll(/<i\b[^>]*>([\s\S]*?)<\/i>/g)].map(match => plain(match[1]));
+for (const text of new Set(sourceItalics)) assert(renderedItalics.includes(text), `Source italics must remain emphasized: ${text}`);
 api.profile.preferences.statutoryLinkCitationSystem = "view";
 parsedCharacters = 0; calls = 0;
 api.renderStatuteNoteBody(note, null, sourceContext);

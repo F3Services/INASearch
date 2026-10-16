@@ -1288,8 +1288,11 @@
     .cfr-block[data-cfr-path] { scroll-margin-top: calc(var(--topbar-height) + 95px); }
     .cfr-block.target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
     .cfr-subtree { display: grid; gap: 8px; white-space: normal; }
-    .cfr-subtree.cfr-block.target { padding: 0; border: 0; background: transparent; box-shadow: none; isolation: isolate; }
-    .cfr-subtree.target::before { content: ""; position: absolute; inset: 0; inset-inline-start: var(--cfr-selection-inset, 0px); z-index: -1; pointer-events: none; border: 2px solid var(--blue); border-radius: 6px; background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
+    .cfr-subtree.cfr-block { padding: 0; border: 0; isolation: isolate; }
+    .cfr-subtree.cfr-block:is(.target, .citation-hover-target) { background: transparent; box-shadow: none; }
+    .cfr-subtree.target::before,
+    .cfr-subtree.citation-hover-target::before { content: ""; position: absolute; inset: 0; inset-inline-start: var(--cfr-selection-inset, 0px); z-index: -1; pointer-events: none; border: 2px solid var(--blue); border-radius: 6px; background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
+    .cfr-subtree.citation-hover-target::before { opacity: .5; }
     .cfr-subtree > .cfr-block { background: transparent; }
     .cfr-block.search-target { background: var(--amber-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 35%, transparent); }
     .cfr-table .search-target { background: var(--amber-soft); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--warning) 42%, transparent); }
@@ -1405,8 +1408,8 @@
     .inserted-reference-card > [data-inserted-toggle-full] { margin: 0 9px 7px; border: 0; border-radius: 4px; padding: 3px 5px; color: var(--inserted-reference-strong); background: transparent; font: inherit; font-size: .8em; cursor: pointer; }
     .inserted-reference-card > [data-inserted-toggle-full]:hover { background: var(--inserted-reference-soft); }
     .inserted-reference-body { position: relative; max-height: 18rem; overflow: hidden; padding: 7px 9px; font: inherit; }
-    .inserted-reference-card[data-expanded="true"] .inserted-reference-body { max-height: none; overflow: visible; }
-    .inserted-reference-card:not([data-expanded="true"]) .inserted-reference-body[data-overflowing="true"]::after { position: absolute; right: 0; bottom: 0; left: 0; height: 3.2rem; background: linear-gradient(transparent, color-mix(in srgb, var(--panel) 78%, var(--inserted-reference-soft) 22%)); content: ""; pointer-events: none; }
+    .inserted-reference-card:is([data-expanded="true"], [data-footnote-revealed="true"]) .inserted-reference-body { max-height: none; overflow: visible; }
+    .inserted-reference-card:not([data-expanded="true"]):not([data-footnote-revealed="true"]) .inserted-reference-body[data-overflowing="true"]::after { position: absolute; right: 0; bottom: 0; left: 0; height: 3.2rem; background: linear-gradient(transparent, color-mix(in srgb, var(--panel) 78%, var(--inserted-reference-soft) 22%)); content: ""; pointer-events: none; }
     .inserted-reference-excerpt { min-width: 0; }
     .inserted-reference-lazy-placeholder { margin: 0; color: var(--muted); font-family: var(--sans); font-size: 11px; }
     .inserted-reference-excerpt p { margin: 0 0 7px; }
@@ -2346,9 +2349,9 @@
           </div>
           <div class="notice" id="savingMenuStatus" role="status"></div>
           <div class="settings-inline-status" id="browserConflictActions" hidden>
-            <span>Resolve the browser-profile conflict:</span>
-            <button class="button" id="reloadBrowserProfileButton" type="button">Reload newer copy</button>
-            <button class="button" id="mergeBrowserProfileButton" type="button">Merge this window</button>
+            <span>Resume browser saving:</span>
+            <button class="button" id="reloadBrowserProfileButton" type="button">Reload saved copy</button>
+            <button class="button" id="mergeBrowserProfileButton" type="button">Keep this window</button>
           </div>
           <div class="saving-menu-actions">
             <button class="saving-menu-action" id="savingMenuEnableButton" type="button">
@@ -2752,7 +2755,10 @@
       profileValid: false,
       profileChanged: false,
       profileRevision: 0,
-      cacheRevision: Number(cachedProfileLoad?.record?.cacheRevision) || 0,
+      cacheRevision: 0,
+      cacheRevisionFloor: 0,
+      cacheSha256: null,
+      preservePreviousBrowserProfile: false,
       browserStorageAvailable: browserStorageAvailableAtStartup,
       browserProfileLoaded: false,
       browserSaveConflict: false,
@@ -2971,6 +2977,7 @@
     state.profileValid = cachedVaultValid || isValidProfile(window.INA_SEARCH_PROFILE);
     state.browserProfileLoaded = cachedVaultValid;
     if (cachedVaultValid) {
+      useBrowserProfileRevision(cachedProfileLoad);
       state.vaultId = cachedProfileLoad.vault.vaultId;
       state.vaultRevision = cachedProfileLoad.vault.revision;
     }
@@ -3718,10 +3725,23 @@
       if (targets.length === 1) return `Transferred record; the current location is ${transferTargetLabel(targets[0])}.`;
       return targets.length ? `Transferred record with ${targets.length.toLocaleString()} indexed destinations. The codification notes below describe the material moved to each location.` : "The local source does not identify a verified destination. Consult the official source record below.";
     }
-    function statuteReaderCitationBase(section, citationResult, selectedTransferTarget, mapping) {
-      if (citationResult?.type === "ina" && mapping?.inaSection) return `INA ${mapping.inaSection}`;
+    function statuteReaderCitationBase(section, citationResult, selectedTransferTarget, mapping, sourceContext = null) {
       if (selectedTransferTarget?.source) return `8 U.S.C. ${selectedTransferTarget.source}`;
+      if (mapping?.inaSection && statutoryLinksUseIna(sourceContext)) return `INA ${mapping.inaSection}`;
       return `${uscBase(section)}`.trim();
+    }
+    function statuteReaderCitationHtml(section, selectedTransferTarget, mapping) {
+      const citation = statuteReaderCitationBase(section, null, selectedTransferTarget, mapping);
+      let contents = escapeHtml(citation);
+      if (profile.preferences.statutoryLinkCitationSystem === "view") {
+        const render = system => escapeHtml(statuteReaderCitationBase(section, null, selectedTransferTarget, mapping, { citationDisplaySystem: system }));
+        const ina = render("ina"), usc = render("usc");
+        if (ina !== usc) {
+          const useIna = statutoryLinksUseIna();
+          contents = `<span data-citation-display="${useIna ? "ina" : "usc"}"><span data-citation-visible>${useIna ? ina : usc}</span><template>${useIna ? usc : ina}</template></span>`;
+        }
+      }
+      return legalUnitTriggerHtml("usc", section.id, [], citation, contents, "legal-unit-section-trigger");
     }
     function safeUrl(url) {
       try { const parsed = new URL(url); return parsed.protocol === "https:" && allowedHosts.has(parsed.hostname) ? parsed.href : ""; }
@@ -4495,6 +4515,7 @@
       if (!selection) return [];
       if (selection.kind === "virtual") return selection.segments.map(segment => ({
         kind: "node-text",
+        sourceNode: selection.node,
         path: segment.path,
         text: String(selection.node.text || "").slice(segment.start, segment.contentEnd),
         sourceStart: segment.start
@@ -4502,19 +4523,19 @@
       const scopedNode = selection.node;
       const structuralPath = selection.path;
       const fields = [];
-      const addNodes = (nodes, path = []) => {
+      const addNodes = (nodes, path = [], physicalOwner = null) => {
         for (const node of nodes || []) {
           const currentPath = [...path, ...(node.label ? [node.label] : [])];
-          fields.push({ kind: "node-label", path: currentPath, text: node.label ? `(${node.label})` : "" });
-          fields.push({ kind: "node-heading", path: currentPath, text: node.heading || "" });
+          fields.push({ kind: "node-label", sourceNode: physicalOwner || node, path: currentPath, text: node.label ? `(${node.label})` : "" });
+          fields.push({ kind: "node-heading", sourceNode: physicalOwner || node, path: currentPath, text: node.heading || "" });
           for (const part of globalThis.INA_SEARCH_OCCURRENCE.statuteContentParts(node)) {
             if (part.kind === "child") addNodes([part.node], currentPath);
-            else fields.push({ kind: part.field === "text" ? "node-text" : "node-continuation", path: currentPath, text: node[part.field].slice(part.start, part.end), sourceStart: part.start });
+            else fields.push({ kind: part.field === "text" ? "node-text" : "node-continuation", sourceNode: physicalOwner || node, path: currentPath, text: node[part.field].slice(part.start, part.end), sourceStart: part.start });
           }
         }
       };
       const text = String(scopedNode.text || "").slice(0, selection.textEnd);
-      addNodes([{ ...scopedNode, text, ...(scopedNode.childTextOffsets ? { childTextOffsets: scopedNode.childTextOffsets.map(offset => Math.min(offset, text.length)) } : {}) }], structuralPath.slice(0, scopedNode.label ? -1 : undefined));
+      addNodes([{ ...scopedNode, text, ...(scopedNode.childTextOffsets ? { childTextOffsets: scopedNode.childTextOffsets.map(offset => Math.min(offset, text.length)) } : {}) }], structuralPath.slice(0, scopedNode.label ? -1 : undefined), scopedNode);
       return fields;
     }
 
@@ -5663,16 +5684,8 @@
 
     function captureFocusedPaneReadingAnchor(pane) {
       if (!pane?.element?.isConnected || !pane.scrollRoot?.clientHeight) return null;
-      const rootRect = pane.scrollRoot.getBoundingClientRect();
-      const readingLine = rootRect.top;
-      const candidates = $$('[data-statute-start], .statutory-node[data-statute-path] > .statutory-line, .statutory-runin-line[data-statute-inline-path], .cfr-block[data-cfr-path]', pane.detail);
-      if (!candidates.length) return null;
-      let anchor = candidates[0];
-      for (const candidate of candidates) {
-        if (candidate.getBoundingClientRect().top > readingLine + 1) break;
-        anchor = candidate;
-      }
-      return { element: anchor, offset: anchor.getBoundingClientRect().top - readingLine };
+      const position = legalReaderReadingPosition(pane.detail, pane.scrollRoot.getBoundingClientRect().top);
+      return position.before || position.after;
     }
 
     function rememberFocusedPaneReadingAnchor(pane) {
@@ -5763,7 +5776,7 @@
         element.id = nextId;
       }
       if (!replacements.size) return;
-      for (const element of $$('[href^="#"], [aria-labelledby], [aria-describedby], [data-house-footnote-return]', pane.detail)) {
+      for (const element of $$('[href^="#"], [aria-labelledby], [aria-describedby], [data-house-footnote-return], [data-house-footnote-origin]', pane.detail)) {
         const href = element.getAttribute("href");
         if (href?.startsWith("#") && replacements.has(href.slice(1))) element.setAttribute("href", `#${replacements.get(href.slice(1))}`);
         for (const attribute of ["aria-labelledby", "aria-describedby"]) {
@@ -5772,6 +5785,8 @@
         }
         const returnId = element.dataset.houseFootnoteReturn;
         if (returnId && replacements.has(returnId)) element.dataset.houseFootnoteReturn = replacements.get(returnId);
+        const originId = element.dataset.houseFootnoteOrigin;
+        if (originId && replacements.has(originId)) element.dataset.houseFootnoteOrigin = replacements.get(originId);
       }
     }
 
@@ -7173,7 +7188,7 @@
       if (["ina", "usc"].includes(row?.authority)) {
         if (["sourceCredit", "notes", "houseEditorialFootnotes"].includes(source.field)) return { family: "usc", sectionId, target: { kind: source.field, noteIndex: source.noteIndex, footnoteId: source.footnoteId, subfield: source.subfield, path: [], match }, occurrenceKey: row.occurrenceKey };
         const kind = source.field === "heading" ? "heading" : source.field === "preamble" ? "preamble" : source.subfield === "heading" ? "node-heading" : source.subfield === "continuation" ? "node-continuation" : "node-text";
-        return { family: "usc", sectionId, target: { kind, path: [...(row.path || [])], match }, occurrenceKey: row.occurrenceKey };
+        return { family: "usc", sectionId, target: { kind, path: [...(row.path || [])], ...(Array.isArray(source.recordPath) ? { recordPath: [...source.recordPath] } : {}), match }, occurrenceKey: row.occurrenceKey };
       }
       const kind = source.field === "heading" ? "heading" : source.subfield === "caption" ? "table-caption" : Number.isInteger(source.rowIndex) && Number.isInteger(source.cellIndex) ? "table-cell" : "block";
       return { family: "cfr", sectionId, target: { kind, blockPath: [...(source.blockPath || [])], path: canonicalPath(row.path || []), rowIndex: source.rowIndex, cellIndex: source.cellIndex, match }, occurrenceKey: row.occurrenceKey };
@@ -7307,29 +7322,7 @@
       pane.readerActions.classList.add("pane-reader-actions");
       for (const control of $$("[id]", pane.readerActions)) control.removeAttribute("id");
       $(".focused-citation-pane-body", element).prepend(pane.readerActions);
-      bindCopyActionPreview(pane.readerActions, pane);
-      pane.readerActions.addEventListener("mouseenter", () => withFocusedCitationPane(pane, syncMainReaderActionTarget));
-      pane.readerActions.addEventListener("mouseleave", () => setLegalCitationHover(null));
-      pane.readerActions.addEventListener("focusin", () => withFocusedCitationPane(pane, syncMainReaderActionTarget));
-      pane.readerActions.addEventListener("focusout", () => requestAnimationFrame(() => {
-        if (!pane.readerActions.contains(document.activeElement) && !pane.readerActions.matches(":hover")) setLegalCitationHover(null);
-      }));
-      pane.readerActions.addEventListener("click", event => {
-        const button = event.target.closest("button");
-        if (!button || button.disabled) return;
-        event.preventDefault();
-        event.stopPropagation();
-        if (button.matches(".main-reader-authority")) {
-          setStatuteHierarchyAuthority(state.statuteHierarchyAuthority === "ina" ? "usc" : "ina", true);
-          return;
-        }
-        withFocusedCitationPane(pane, () => {
-          const context = mainReaderActionContext(button.dataset.liveCitationAction === "print" ? mainReaderPrintTarget() : undefined);
-          if (!context) { handleHierarchySourceAction(button.dataset.liveCitationAction); return; }
-          selectLegalCitationLocation(context.kind, context.sectionId, context.path, context.occurrenceBlockPath);
-          void handleLegalUnitAction(button.dataset.liveCitationAction === "copy-text" ? "copy-citation-text" : button.dataset.liveCitationAction, context);
-        });
-      });
+      bindReaderActions(pane.readerActions, pane);
       pane.input.addEventListener("input", () => { cancelLegalReaderScroll(pane.scrollRoot); handleFocusedPaneInput(pane); });
       pane.input.addEventListener("blur", () => commitFocusedPaneInput(pane));
       pane.input.addEventListener("keydown", event => {
@@ -7350,7 +7343,6 @@
       });
       pane.scrollRoot.addEventListener("scroll", () => withFocusedCitationPane(pane, () => {
         if (state.shareViewPreview || state.copyActionPreview) return;
-        rememberFocusedPaneReadingAnchor(pane);
         scheduleStatuteNavigationUpdate();
         scheduleVisibleOccurrenceSections(pane);
         if (!els.legalReferencePopover.hidden) state.legalReferenceContext?.pinned ? positionLegalReferencePopover(state.legalReferenceContext.trigger) : closeLegalReferencePopover(true);
@@ -8827,11 +8819,12 @@
       if (!parsed?.valid) return false;
       trigger.removeAttribute("title");
       const crosswalk = citationCrosswalk(parsed);
+      const location = associationFromCitationResult(parsed);
       trigger.dataset.legalReference = "";
-      trigger.dataset.referenceFamily = parsed.type;
+      trigger.dataset.referenceFamily = location?.family || parsed.type;
       trigger.dataset.referenceResolution = "local";
-      trigger.dataset.referenceTitle = String(parsed.type === "cfr" ? parsed.title : 8);
-      trigger.dataset.referenceSection = String(parsed.type === "ina" ? parsed.record?.item?.section || "" : parsed.section || parsed.record?.item?.section || "");
+      trigger.dataset.referenceTitle = String(location?.title || parsed.title || parsed.section?.title || 8);
+      trigger.dataset.referenceSection = String(location?.start.unit || (typeof parsed.section === "string" ? parsed.section : parsed.section?.section) || parsed.record?.item?.section || "");
       trigger.dataset.referencePath = JSON.stringify(parsed.path || []);
       trigger.dataset.referenceCitation = parsed.label;
       trigger.dataset.referenceSourceText = trigger.dataset.noteReferenceRaw || trigger.textContent;
@@ -9094,6 +9087,24 @@
       return `<div class="statutory-node"><div class="statutory-line">${node.label ? `<span class="node-number">(${escapeHtml(node.label)})</span>` : ""}${heading ? `<span class="node-heading">${heading} </span>` : ""}${textHtml ? `<span class="node-text">${textHtml}</span>` : ""}</div>${(node.children || []).map(child => statuteReferencePreviewNodeHtml(child, usedFootnotes, section, [...currentPath, String(child.label)])).join("")}${node.continuation ? `<p class="node-continuation">${statuteFieldPreviewHtml(node, "continuation", 0, node.continuation.length, usedFootnotes)}</p>` : ""}</div>`;
     }
 
+    function statuteExcerptFootnotesHtml(section, usedFootnotes, namespace = "reference-preview", origins = new Map(), context = null) {
+      const footnotes = (section.houseEditorialFootnotes || []).filter(footnote => usedFootnotes.has(footnote.id));
+      if (!footnotes.length) return "";
+      const prefix = namespace ? `${namespace}-` : "";
+      const notes = new Map();
+      const rows = footnotes.map(footnote => {
+        const note = footnote.targetNoteId && section.notes?.find(note => note.id === footnote.targetNoteId);
+        if (note) notes.set(note.id, note);
+        const origin = origins.get(footnote.id);
+        return `<li id="${escapeHtml(prefix)}house-footnote-${escapeHtml(footnote.id)}" tabindex="-1" value="${escapeHtml(footnote.number)}">${linkifyStatutoryText(footnote.text, footnote.references || [], 0, undefined, null, [], context)}${note ? ` <a href="#${escapeHtml(prefix)}statute-note-${escapeHtml(note.id)}" data-house-footnote-jump="${escapeHtml(footnote.id)}">View ${escapeHtml(note.heading || "source note")}</a>` : ""}${origin ? ` <a href="#${escapeHtml(origin)}" data-house-footnote-return="${escapeHtml(origin)}">↩ Return to reference</a>` : ""}</li>`;
+      }).join("");
+      const related = [...notes.values()].map(note => {
+        const origin = footnotes.filter(footnote => footnote.targetNoteId === note.id).map(footnote => origins.get(footnote.id)).find(Boolean);
+        return `<details class="statute-note" id="${escapeHtml(prefix)}statute-note-${escapeHtml(note.id)}" tabindex="-1"><summary>${escapeHtml(note.heading || "Source note")}</summary><div class="statute-note-body">${renderStatuteNoteBody(note, null, context)}${origin ? ` <a href="#${escapeHtml(origin)}" data-house-footnote-return="${escapeHtml(origin)}">↩ Return to reference</a>` : ""}</div></details>`;
+      }).join("");
+      return `<aside class="legal-reference-preview-footnotes"><strong>House editorial footnotes</strong><ol>${rows}</ol>${related}</aside>`;
+    }
+
     function statuteReferencePreviewHtml(section, path = []) {
       if (!section) return "";
       const usedFootnotes = new Set();
@@ -9111,11 +9122,12 @@
         : selection.kind === "structural"
           ? statuteReferencePreviewNodeHtml(selection.node, usedFootnotes, section, selection.path, selection.textEnd)
           : (selection.nodes || section.body || []).map(node => statuteReferencePreviewNodeHtml(node, usedFootnotes, section, [String(node.label)])).join("");
-      const footnotes = (section.houseEditorialFootnotes || []).filter(footnote => usedFootnotes.has(footnote.id));
-      const footnoteHtml = footnotes.length
-        ? `<aside class="legal-reference-preview-footnotes"><strong>House editorial footnotes</strong>${footnotes.map(footnote => `<p>${escapeHtml(`${footnote.number}. ${footnote.text}`)}</p>`).join("")}</aside>`
-        : "";
+      const footnoteHtml = statuteExcerptFootnotesHtml(section, usedFootnotes);
       return `<article class="legal-reference-preview">${preamble}<div class="statute-body">${body}</div>${footnoteHtml}</article>`;
+    }
+
+    function cfrGraphicHtml(block, className = "cfr-block", sourceAttributes = "") {
+      return block.data ? `<figure class="${escapeHtml(className)}"${sourceAttributes}><img class="cfr-graphic" src="data:${escapeHtml(block.mime || "image/gif")};base64,${block.data}" alt="${escapeHtml(block.alt)}"></figure>` : `<div class="notice warning ${escapeHtml(className)}"${sourceAttributes}><strong>Official graphic reference:</strong> ${escapeHtml(block.src)} could not be embedded because the publisher returned an access interstitial during capture. Use “Open current eCFR” to inspect it.</div>`;
     }
 
     function cfrBlockPlainText(block, format = null) {
@@ -9132,7 +9144,7 @@
       for (const block of blocks || []) {
         if (block.t === "note") {
           if (["", "ordinary"].includes(block.noteType || "ordinary")) flattenedCfrBlocks(block.blocks, result);
-        } else if (block.t !== "graphic") result.push(block);
+        } else result.push(block);
       }
       return result;
     }
@@ -9141,14 +9153,28 @@
       if (!section) return "";
       const format = citationSystem === "ina" ? { kind: "cfr", title: section.title, sourceHost: { kind: "cfr", title: section.title, section: section.section } } : null;
       if (format) hydrateLegalReferences(section);
-      const blocks = flattenedCfrBlocks(section.blocks);
-      if (!path.length) {
-        const heading = section.section ? `§ ${section.section}. ${section.heading || ""}` : section.heading || section.label || "";
-        return [heading.trim(), ...blocks.map(block => cfrBlockPlainText(block, format))].filter(Boolean).join("\n\n");
+      const blocks = new Set(flattenedCfrBlocks(section.blocks));
+      const ranges = path.length ? new Map(globalThis.INASearchCfrHierarchy.scope(section, path, locator).map(range => [range.block, range])) : null;
+      const baseDepth = path.length || 1;
+      const body = [];
+      // Events retain compound markers and parent continuations as separate
+      // physical ranges. Their legal depth supplies the shared print layout.
+      for (const event of globalThis.INASearchCfrHierarchy.index(section).events) {
+        if (event.excluded || !blocks.has(event.block) || (ranges && !ranges.has(event.block))) continue;
+        const range = ranges?.get(event.block);
+        const start = Math.max(event.start, range?.start ?? event.start);
+        const end = Math.min(event.end, range?.end ?? event.end);
+        const text = event.block.x !== undefined
+          ? end > start ? (format ? legalFieldPlainText(event.block, "x", format, null, start, end) : event.block.x.slice(start, end)).trim() : ""
+          : cfrBlockPlainText(event.block, format);
+        if (!text) continue;
+        const depth = (componentTokens(event.node?.path || "") || []).length;
+        const indent = "  ".repeat(Math.max(0, depth - baseDepth));
+        body.push(text.split("\n").map(line => indent + line).join("\n"));
       }
-      return globalThis.INASearchCfrHierarchy.scope(section, path, locator).map(range => range.block.x !== undefined
-        ? (format ? legalFieldPlainText(range.block, "x", format, null, range.start, range.end) : range.block.x.slice(range.start, range.end)).trim()
-        : cfrBlockPlainText(range.block, format)).filter(Boolean).join("\n\n");
+      const headingText = format ? legalFieldPlainText(section, "heading", format) : section.heading || "";
+      const heading = section.section ? `§ ${section.section}. ${headingText}` : headingText || section.label || "";
+      return [...(!path.length ? [heading.trim()] : []), ...body].filter(Boolean).join("\n\n");
     }
 
     function legalUnitContextForTrigger(trigger) {
@@ -9684,6 +9710,7 @@
       } else if (resolution === "local" && family === "cfr") {
         const section = cfrSectionIdMap.get(`${title}:${sectionNumber}`);
         text = cfrUnitText(section, path);
+        previewHtml = section ? cfrReferencePreviewHtml(section, path) : "";
         const contentStart = !path.length ? text.indexOf("\n\n") : -1;
         displayText = contentStart >= 0 ? text.slice(contentStart + 2) : text;
         hierarchyTarget = !section ? parseCfr(title, sectionNumber) : null;
@@ -9759,12 +9786,13 @@
       return `<div class="inserted-reference-excerpt-unit" data-inserted-excerpt-path="${escapeHtml(JSON.stringify(currentPath))}">${number ? `<strong class="inserted-reference-excerpt-address">${escapeHtml(number)}</strong>` : ""}${heading ? `<strong>${linkifyStatutoryText(heading, node.headingReferences || [], 0, undefined, null, node.headingFootnoteReferences || [], { ...referenceContext, sourceLayout: node.headingLayout, sourcePresentation: node.headingPresentation })}</strong> ` : ""}${content}</div>`;
     }
 
-    function insertedStatuteExcerptHtml(target, expanded = false) {
+    function insertedStatuteExcerptHtml(target, expanded = false, footnoteNamespace = "inserted-excerpt") {
       const selection = statuteReferenceSelection(target.section, target.path);
       if (!selection) return "";
+      const usedFootnotes = new Set(), footnoteOrigins = new Map();
       const budget = { remaining: expanded ? Number.MAX_SAFE_INTEGER : 12000, truncated: false };
       const mapping = uscMapping(target.section);
-      const context = { ...(statuteDefinitionContext(target.section, mapping, target.path) || {}), sourceHost: { kind: "usc", title: Number(target.section.title || 8), section: target.section.section, path: target.path }, insideInsertedReference: true };
+      const context = { ...(statuteDefinitionContext(target.section, mapping, target.path) || {}), sourceHost: { kind: "usc", title: Number(target.section.title || 8), section: target.section.section, path: target.path }, insideInsertedReference: true, footnoteNamespace, usedFootnotes, footnoteOrigins };
       let body = "";
       if (selection.kind === "virtual") {
         const input = String(selection.node.text || "");
@@ -9793,7 +9821,7 @@
         body += nodes.map(node => insertedStatuteNodeHtml(node, context, budget, parentPath)).join("");
         }
       }
-      return `<div class="inserted-reference-excerpt" data-inserted-reference-excerpt>${body}${budget.truncated ? `<p class="inserted-reference-source-label">More text is available with Show full.</p>` : ""}</div>`;
+      return `<div class="inserted-reference-excerpt" data-inserted-reference-excerpt>${body}${statuteExcerptFootnotesHtml(target.section, usedFootnotes, footnoteNamespace, footnoteOrigins, context)}${budget.truncated ? `<p class="inserted-reference-source-label">More text is available with Show full.</p>` : ""}</div>`;
     }
 
     function insertedCfrTextRanges(block, requestedPath) {
@@ -9812,7 +9840,11 @@
 
     function insertedCfrBlockHtml(block, target, blockPath, budget) {
       if (!block || budget.remaining <= 0) return "";
-      if (block.t === "graphic") return "";
+      if (block.t === "graphic") {
+        const graphicPath = componentTokens(block.u?.[0]?.a || block.a || block.c || "") || [];
+        if (target.scopeRanges ? !target.scopeRanges.some(range => range.block === block) : target.path.length && !pathStartsWith(graphicPath, target.path)) return "";
+        return cfrGraphicHtml(block, "inserted-reference-excerpt-graphic");
+      }
       if (block.t === "note" && !["ordinary", ""].includes(block.noteType || "ordinary")) return "";
       if (block.t === "note") return (block.blocks || []).map((child, index) => insertedCfrBlockHtml(child, target, [...blockPath, index], budget)).join("");
       if (block.t === "table") {
@@ -9848,17 +9880,22 @@
       return `<p>${value}</p>`;
     }
 
-    function insertedCfrExcerptHtml(target, expanded = false) {
+    function insertedCfrExcerptHtml(target, expanded = false, preview = false) {
       if (target.path.length) target = { ...target, scopeRanges: globalThis.INASearchCfrHierarchy.scope(target.section, target.path) };
       const budget = { remaining: expanded ? Number.MAX_SAFE_INTEGER : 12000, truncated: false };
       const body = (target.section.blocks || []).map((block, index) => insertedCfrBlockHtml(block, target, [index], budget)).join("");
-      return `<div class="inserted-reference-excerpt" data-inserted-reference-excerpt>${body || `<pre>${escapeHtml(target.text || "")}</pre>`}${budget.truncated ? `<p class="inserted-reference-source-label">More text is available with Show full.</p>` : ""}</div>`;
+      return `<div class="inserted-reference-excerpt" data-inserted-reference-excerpt>${body || `<pre>${escapeHtml(target.text || "")}</pre>`}${budget.truncated ? `<p class="inserted-reference-source-label">${preview ? "Open another viewer pane to read the rest." : "More text is available with Show full."}</p>` : ""}</div>`;
     }
 
-    function insertedReferenceExcerptHtml(target, expanded = false) {
+    function cfrReferencePreviewHtml(section, path = []) {
+      hydrateLegalReferences(section);
+      return `<article class="legal-reference-preview">${insertedCfrExcerptHtml({ kind: "cfr", section, path }, false, true)}</article>`;
+    }
+
+    function insertedReferenceExcerptHtml(target, expanded = false, footnoteNamespace = "inserted-excerpt") {
       // Insertions can display a section before its normal reader has hydrated its links.
       hydrateLegalReferences(target?.section);
-      return target?.kind === "usc" ? statuteStatusWarning(target.section) + insertedStatuteExcerptHtml(target, expanded) : target?.kind === "cfr" ? insertedCfrExcerptHtml(target, expanded) : "";
+      return target?.kind === "usc" ? statuteStatusWarning(target.section) + insertedStatuteExcerptHtml(target, expanded, footnoteNamespace) : target?.kind === "cfr" ? insertedCfrExcerptHtml(target, expanded) : "";
     }
 
     function insertedReferenceCopyIconHtml() {
@@ -9878,7 +9915,7 @@
       const titleId = `inserted-reference-title-${idToken}`;
       const bodyId = `inserted-reference-body-${idToken}`;
       const materialized = expanded || insertedReferenceMaterializedKeys.has(record.key);
-      const body = materialized ? insertedReferenceExcerptHtml(target, expanded) : `<p class="inserted-reference-lazy-placeholder">Excerpt loads when this card enters view.</p>`;
+      const body = materialized ? insertedReferenceExcerptHtml(target, expanded, bodyId) : `<p class="inserted-reference-lazy-placeholder">Excerpt loads when this card enters view.</p>`;
       return `<aside class="inserted-reference-card" role="listitem" data-inserted-reference-key="${escapeHtml(record.key)}" data-expanded="${expanded ? "true" : "false"}" aria-labelledby="${escapeHtml(titleId)}"><header class="inserted-reference-card-head"><div class="inserted-reference-card-title" id="${escapeHtml(titleId)}"><span>(${number}) -</span>${insertedReferenceCitationHtml(target)}</div><div class="inserted-reference-card-actions"><button type="button" data-inserted-copy-text="${escapeHtml(record.key)}" data-legal-copy-label="Copy complete inserted legal text" aria-label="${escapeHtml(legalCopyDescription("Copy complete inserted legal text"))}" title="${escapeHtml(legalCopyDescription("Copy complete inserted legal text"))}"><span aria-hidden="true">⧉</span></button><button type="button" data-inserted-remove="${escapeHtml(record.key)}" aria-label="Remove inserted reference" title="Remove inserted reference"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m5 5 10 10M15 5 5 15"/></svg></button></div></header><div class="inserted-reference-body" id="${escapeHtml(bodyId)}" role="region" aria-label="Inserted text for ${escapeHtml(target.inaCitation || target.citation)}" data-inserted-body-key="${escapeHtml(record.key)}"${materialized ? "" : " data-inserted-body-pending"}>${body}</div><button type="button" data-inserted-toggle-full="${escapeHtml(record.key)}" aria-controls="${escapeHtml(bodyId)}" aria-expanded="${expanded ? "true" : "false"}">${expanded ? "Collapse" : "Show full"}</button></aside>`;
     }
 
@@ -10046,7 +10083,7 @@
       if (!record || !target) return false;
       const anchors = insertionReadingAnchors();
       insertedReferenceMaterializedKeys.add(key);
-      body.innerHTML = insertedReferenceExcerptHtml(target, false);
+      body.innerHTML = insertedReferenceExcerptHtml(target, false, body.id);
       body.removeAttribute("data-inserted-body-pending");
       requestAnimationFrame(() => {
         const overflowing = body.scrollHeight > body.clientHeight + 2;
@@ -10199,15 +10236,9 @@
         }
         return anchors;
       }
-      const candidates = $$('[data-statute-start], .statutory-node[data-statute-path] > .statutory-line, .statutory-runin-line[data-statute-inline-path], .cfr-unit-wrapper[data-cfr-path], .cfr-block[data-cfr-path]', els.detail);
-      if (!candidates.length) return anchors;
-      const readingLine = statuteReadingLine();
-      let element = candidates[0];
-      for (const candidate of candidates) {
-        if (candidate.getBoundingClientRect().top > readingLine + 1) break;
-        element = candidate;
-      }
-      anchors.push({ pane: null, element, offset: element.getBoundingClientRect().top - readingLine });
+      const position = legalReaderReadingPosition(els.detail, statuteReadingLine());
+      const anchor = position.before || position.after;
+      if (anchor) anchors.push({ pane: null, ...anchor });
       return anchors;
     }
 
@@ -11519,6 +11550,16 @@
       return path?.length ? visit(section?.body, 0) : null;
     }
 
+    function statuteSourceNodeAtRecordPath(section, recordPath) {
+      let nodes = section?.body || [], node = null;
+      for (const index of recordPath || []) {
+        if (!Number.isInteger(index) || index < 0 || index >= nodes.length) return null;
+        node = nodes[index];
+        nodes = node.children || [];
+      }
+      return node;
+    }
+
     function statuteSiblingNodes(section, path) {
       const parentPath = (path || []).slice(0, -1);
       let parents = [{ children: section?.body || [] }];
@@ -11805,6 +11846,39 @@
       }
     }
 
+    function bindReaderActions(actions, pane = null) {
+      const inReader = callback => pane ? withFocusedCitationPane(pane, callback) : callback();
+      bindCopyActionPreview(actions, pane);
+      actions.addEventListener("mouseenter", () => inReader(syncMainReaderActionTarget));
+      actions.addEventListener("mouseleave", () => setLegalCitationHover(null));
+      actions.addEventListener("focusin", () => inReader(syncMainReaderActionTarget));
+      actions.addEventListener("focusout", () => requestAnimationFrame(() => {
+        if (!actions.contains(document.activeElement) && !actions.matches(":hover")) setLegalCitationHover(null);
+      }));
+      actions.addEventListener("click", event => {
+        const button = event.target.closest("button");
+        if (!button || button.disabled || !actions.contains(button)) return;
+        const action = button.dataset.liveCitationAction;
+        const authority = button.matches(".main-reader-authority");
+        if (!authority && !action) return;
+        if (authority) {
+          if (pane) { event.preventDefault(); event.stopPropagation(); }
+          setStatuteHierarchyAuthority(state.statuteHierarchyAuthority === "ina" ? "usc" : "ina", true);
+          return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        inReader(() => {
+          const context = mainReaderActionContext(action === "print" ? mainReaderPrintTarget() : undefined);
+          if (!context) { handleHierarchySourceAction(action); return; }
+          // The main dispatcher commits its target; focused readers commit in
+          // their own pane because they are excluded from isMainLegalReader().
+          if (pane) selectLegalCitationLocation(context.kind, context.sectionId, context.path, context.occurrenceBlockPath);
+          void handleLegalUnitAction(action === "copy-text" ? "copy-citation-text" : action, context);
+        });
+      });
+    }
+
     function hierarchyActionNode() {
       if (state.view !== "search" || !isHierarchyBrowse(state.citation)) return null;
       if (state.focusedPaneContext && state.focusedPaneContext.entry?.mode !== "hierarchy") return null;
@@ -11906,12 +11980,62 @@
       return true;
     }
 
+    const legalReaderAnchorIndexes = new WeakMap();
+
+    function legalReaderAnchors(root) {
+      if (!root) return [];
+      let entry = legalReaderAnchorIndexes.get(root);
+      if (!entry) {
+        entry = { anchors: [], valid: false, observer: null };
+        if (typeof MutationObserver === "function") {
+          entry.observer = new MutationObserver(() => { entry.valid = false; });
+          entry.observer.observe(root, { childList: true, subtree: true });
+        }
+        legalReaderAnchorIndexes.set(root, entry);
+      }
+      if (entry.observer?.takeRecords().length) entry.valid = false;
+      if (entry.valid) return entry.anchors;
+      entry.anchors = [];
+      const selector = ".detail-heading-row, .statutory-node > .statutory-line, .statutory-runin-line[data-statute-inline-path], .cfr-unit-wrapper, .cfr-block";
+      for (const element of root.querySelectorAll(selector)) {
+        if (element.closest(".inserted-reference-card, .legal-reference-preview, .statute-supplements")) continue;
+        if (element.classList.contains("cfr-subtree")) continue;
+        // A paragraph's unit wrappers already supply its physical anchors.
+        if (element.classList.contains("cfr-block") && element.querySelector(".cfr-unit-wrapper")) continue;
+        const scope = element.closest(".cfr-subtree[data-cfr-path]");
+        const cfrPath = element.dataset.cfrPath ?? scope?.dataset.cfrPath;
+        const encodedPath = element.dataset.statuteInlinePath || element.parentElement?.dataset.statutePath;
+        let path = null, kind = null;
+        if (encodedPath) {
+          try { path = JSON.parse(encodedPath); kind = "usc"; } catch {}
+        } else if (cfrPath !== undefined) {
+          path = componentTokens(cfrPath) || [];
+          kind = "cfr";
+        }
+        const occurrence = scope && scope.dataset.cfrPath === cfrPath ? scope : element;
+        entry.anchors.push({ element, kind, path,
+          occurrenceBlockPath: occurrence.dataset.cfrBlockPath?.split(".").map(Number) || null });
+      }
+      entry.valid = true;
+      return entry.anchors;
+    }
+
+    function legalReaderReadingPosition(root, readingLine, kind = null) {
+      let before = null, after = null;
+      for (const anchor of legalReaderAnchors(root)) {
+        if (kind && anchor.kind !== kind) continue;
+        const offset = anchor.element.getBoundingClientRect().top - readingLine;
+        const position = { ...anchor, offset };
+        if (offset > 1) { after = position; break; }
+        before = position;
+      }
+      return { before, after };
+    }
+
     function captureMainReadingAnchor() {
       if (!isMainLegalReader()) return null;
-      const line = statuteReadingLine();
-      const candidates = $$(".detail-heading-row, .statutory-node > .statutory-line, .statutory-runin-line, .cfr-block", els.detail);
-      const element = candidates.reduce((nearest, candidate) => Math.abs(candidate.getBoundingClientRect().top - line) < Math.abs(nearest.getBoundingClientRect().top - line) ? candidate : nearest, candidates[0]);
-      return element ? { element, offset: element.getBoundingClientRect().top - line } : null;
+      const { before, after } = legalReaderReadingPosition(els.detail, statuteReadingLine());
+      return !before ? after : !after || Math.abs(before.offset) <= Math.abs(after.offset) ? before : after;
     }
 
     function restoreMainReadingAnchor(anchor) {
@@ -12495,21 +12619,17 @@
     function legalCitationHoverHostForSelection(selection) {
       if (!selection) return null;
       if (selection.dataset.legalCitationSelect !== "cfr") return selection;
-      const host = selection.closest(".cfr-block") || selection;
-      const target = host.closest(".cfr-subtree.target");
-      if (target) {
-        try { if (canonicalPath(JSON.parse(selection.dataset.legalCitationPath || "[]")) === target.dataset.cfrPath) return null; } catch {}
-      }
-      return host;
+      const host = selection.closest(".cfr-subtree") || selection.closest(".cfr-block") || selection;
+      return host.classList.contains("target") ? null : host;
     }
 
     function setLegalCitationHover(selection) {
-      const nextHost = legalCitationHoverHostForSelection(selection);
-      if (nextHost === legalCitationHoverHost) return nextHost;
+      const host = legalCitationHoverHostForSelection(selection);
+      if (host === legalCitationHoverHost) return host;
       legalCitationHoverHost?.classList.remove("citation-hover-target");
-      legalCitationHoverHost = nextHost;
+      legalCitationHoverHost = host;
       legalCitationHoverHost?.classList.add("citation-hover-target");
-      return nextHost;
+      return legalCitationHoverHost;
     }
 
     function clickIntersectsCitationInteractiveArea(event, selection) {
@@ -12713,29 +12833,17 @@
       else root.scrollTo({ top: destination, left, behavior: "instant" });
     }
 
+    function currentLegalReaderAnchor(kind) {
+      if (!state.statuteNavigationSectionId) return null;
+      return legalReaderReadingPosition(els.detail, statuteReadingLine(), kind).before;
+    }
+
     function currentStatutePathAtReadingLine() {
-      if (!state.statuteNavigationSectionId) return [];
-      const readingLine = statuteReadingLine();
-      let currentPath = [];
-      for (const line of $$(".statutory-node > .statutory-line, .statutory-runin-line[data-statute-inline-path]", els.detail)) {
-        if (line.getBoundingClientRect().top > readingLine + 1) break;
-        const encodedPath = line.dataset?.statuteInlinePath || line.parentElement?.dataset.statutePath;
-        if (encodedPath) {
-          try { currentPath = JSON.parse(encodedPath); } catch {}
-        }
-      }
-      return currentPath;
+      return currentLegalReaderAnchor("usc")?.path || [];
     }
 
     function currentCfrPathAtReadingLine() {
-      if (!state.statuteNavigationSectionId) return [];
-      const readingLine = statuteReadingLine();
-      let currentPath = [];
-      for (const block of $$(".cfr-unit-wrapper[data-cfr-path], .cfr-block[data-cfr-path]", els.detail)) {
-        if (block.getBoundingClientRect().top > readingLine + 1) break;
-        currentPath = componentTokens(block.dataset.cfrPath || "") || currentPath;
-      }
-      return currentPath;
+      return currentLegalReaderAnchor("cfr")?.path || [];
     }
 
     function sameLegalPath(left, right) {
@@ -12760,7 +12868,7 @@
         if (section && body) {
           const citationBase = `${section.title} CFR ${section.section}`;
           const context = { ...(cfrDefinitionContext(section, []) || {}), sourceHost: { kind: "cfr", title: Number(section.title), section: section.section, path: [] } };
-          if (!updateRenderedCfrBody(body, section, canonicalPath(path), occurrenceBlockPath, citationBase, context)) {
+          if (!updateRenderedCfrBody(body, section, canonicalPath(path), occurrenceBlockPath)) {
             body.innerHTML = renderCfrBody(section, canonicalPath(path), occurrenceBlockPath ? { blockPath: occurrenceBlockPath } : null, citationBase, context);
             renderedCfrBodies.set(body, { blocks: section.blocks, profileRevision: state.profileRevision, key: `${canonicalPath(path)}:${(occurrenceBlockPath || []).join(".")}` });
             renderInsertedReferenceGroups(els.detail);
@@ -12819,6 +12927,8 @@
       state.statuteNavigationFrame = null;
       if (legalReaderBusy(els.detail)) return;
       if (state.shareViewPreview || state.copyActionPreview) return;
+      if (state.focusedPaneContext) rememberFocusedPaneReadingAnchor(state.focusedPaneContext);
+      else if (isMainLegalReader() && !state.mainLayoutRestorePending) state.mainReadingAnchor = captureMainReadingAnchor();
       syncMainReaderActionTarget();
       if (state.restoringLegalHistory) return;
       if (isMainLegalReader() && state.mainLivePinned) return;
@@ -12826,12 +12936,10 @@
       if (state.statuteNavigationKind === "cfr") {
         const section = (corpus?.cfr?.sections || []).find(item => item.id === state.statuteNavigationSectionId);
         if (!section) return;
-        const path = currentCfrPathAtReadingLine();
+        const anchor = currentLegalReaderAnchor("cfr");
+        const path = anchor?.path || [];
         if (isMainLegalReader()) {
-          const readingLine = statuteReadingLine();
-          const block = $$(".cfr-block[data-cfr-block-path][data-cfr-path]", els.detail)
-            .filter(element => element.getBoundingClientRect().top <= readingLine + 1 && sameLegalPath(componentTokens(element.dataset.cfrPath) || [], path)).at(-1);
-          state.mainLiveLocation = { ...normalizedStatuteHistoryLocation(section.id, path, "cfr"), occurrenceBlockPath: block?.dataset.cfrBlockPath?.split(".").map(Number) || null };
+          state.mainLiveLocation = { ...normalizedStatuteHistoryLocation(section.id, path, "cfr"), occurrenceBlockPath: anchor?.occurrenceBlockPath || null };
         }
         if (JSON.stringify(path.map(normCitationPart)) !== JSON.stringify(state.statuteNavigationPath.map(normCitationPart))) renderCfrNavigation(section, path);
         syncSearchToScrolledLegalLocation("cfr", section, path);
@@ -13178,11 +13286,11 @@
       const addNodes = (nodes, path = []) => {
         for (const node of nodes || []) {
           const currentPath = [...path, ...(node.label ? [node.label] : [])];
-          fields.push({ kind: "node-label", path: currentPath, text: node.label ? `(${node.label})` : "" });
-          fields.push({ kind: "node-heading", path: currentPath, text: node.heading || "" });
+          fields.push({ kind: "node-label", sourceNode: node, path: currentPath, text: node.label ? `(${node.label})` : "" });
+          fields.push({ kind: "node-heading", sourceNode: node, path: currentPath, text: node.heading || "" });
           for (const part of globalThis.INA_SEARCH_OCCURRENCE.statuteContentParts(node)) {
             if (part.kind === "child") addNodes([part.node], currentPath);
-            else fields.push({ kind: part.field === "text" ? "node-text" : "node-continuation", path: currentPath, text: node[part.field].slice(part.start, part.end), sourceStart: part.start });
+            else fields.push({ kind: part.field === "text" ? "node-text" : "node-continuation", sourceNode: node, path: currentPath, text: node[part.field].slice(part.start, part.end), sourceStart: part.start });
           }
         }
       };
@@ -13368,10 +13476,14 @@
       return `<details class="statute-supplements"${selected ? " open" : ""}><summary><span>Notes and supplementary material</span><span class="statute-supplements-actions"><button type="button" data-statute-notes-expand="true">Expand all</button><button type="button" data-statute-notes-expand="false">Collapse all</button></span></summary>${extraHtml}${credit}${groups || '<div class="statute-note-empty">Notes — None</div>'}</details>`;
     }
 
+    const houseFootnoteReturnPositions = new WeakMap();
+
     function revealStatuteNoteTarget(target, reference = null) {
       if (!target) return;
+      const card = target.closest?.(".inserted-reference-card");
+      if (card) card.dataset.footnoteRevealed = "true";
       for (let element = target; element && element !== els.detail; element = element.parentElement) if (element.tagName === "DETAILS") element.open = true;
-      if (reference?.id && target.matches(".house-editorial-footnotes li")) target.dataset.houseFootnoteActiveReference = reference.id;
+      if (reference?.id && target.matches(".house-editorial-footnotes li, .legal-reference-preview-footnotes li")) target.dataset.houseFootnoteActiveReference = reference.id;
       if (reference?.id) for (const link of $$('[data-house-footnote-return]', target)) {
         link.dataset.houseFootnoteReturn = reference.id;
         link.setAttribute("href", `#${reference.id}`);
@@ -13386,7 +13498,10 @@
       const citationTargetPath = citationResult?.path || [];
       const scopedPath = state.searchScopeActive && state.searchScopeMode !== "cites" ? state.searchScope?.pathsBySection?.get(section.id) || [] : [];
       const explicitOccurrence = state.explicitOccurrenceTarget?.family === "usc" && state.explicitOccurrenceTarget.sectionId === section.id ? state.explicitOccurrenceTarget.target : null;
-      const searchTarget = explicitOccurrence || (citationResult ? null : statuteSearchTarget(section, state.query, scopedPath));
+      const requestedSearchTarget = explicitOccurrence || (citationResult ? null : statuteSearchTarget(section, state.query, scopedPath));
+      const searchTarget = requestedSearchTarget?.recordPath
+        ? { ...requestedSearchTarget, sourceNode: statuteSourceNodeAtRecordPath(section, requestedSearchTarget.recordPath) }
+        : requestedSearchTarget;
       const navigationPath = citationTargetPath.length ? citationTargetPath : searchTarget?.path || [];
       state.statuteNavigationKind = "usc";
       state.hierarchyPageNodeId = null;
@@ -13438,7 +13553,7 @@
         ${Number(section.title || 8) !== 8 && section.source?.edition ? `<p class="source-banner">U.S. Code ${escapeHtml(section.source.edition)} edition · Current through ${escapeHtml(section.source.currentThrough || "")}</p>` : ""}
         `);
       els.detail.innerHTML = `<div class="detail-content" data-statute-start>${presentationKey}${Number(section.title || 8) === 8 && section.section === "1252c" ? '<div class="source-banner"><span class="hierarchy-status not-in-ina">Not in INA</span> This provision was enacted separately as AEDPA § 439. It has no INA section number; its citation is 8 U.S.C. 1252c.</div>' : ""}
-        <div class="detail-heading-row legal-reader-heading"><div class="detail-heading-citation">${legalUnitTriggerHtml("usc", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}</div><div class="detail-heading-title"><h2 class="detail-title">${linkifyStatutoryText(section.heading || `Section ${section.section}`, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, [], headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(officialTextFragment(section.url, citationTargetPath), "Open in House.gov", `${citationBase}${canonicalPath(citationTargetPath)}`)}</div></div>
+        <div class="detail-heading-row legal-reader-heading"><div class="detail-heading-citation">${statuteReaderCitationHtml(section, selectedTransferTarget, mapping)}</div><div class="detail-heading-title"><h2 class="detail-title">${linkifyStatutoryText(section.heading || `Section ${section.section}`, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, [], headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(officialTextFragment(section.url, citationTargetPath), "Open in House.gov", `${citationBase}${canonicalPath(citationTargetPath)}`)}</div></div>
         ${section.preamble && !section.childTextOffsets ? `<p class="statute-preamble">${linkifyStatutoryText(section.preamble, section.preambleReferences || [], 0, undefined, searchTarget?.kind === "preamble" ? searchTarget.match : null, section.preambleFootnoteReferences || [], preambleReferenceContext)}</p>` : ""}
         ${legalAugmentationSlotHtml("usc", Number(section.title || 8), section.section, [], citationBase)}
         <div class="statute-body">${sliced ? "" : section.childTextOffsets ? orderedSectionBody() : (section.body || []).map(node => renderStatutoryNode(node, citationTargetPath, [], 0, searchTarget, citationBase, section.id, baseDefinitionContext)).join("")}</div>
@@ -13530,7 +13645,10 @@
           };
           const segments = statutoryRunInSegments(node.text, node.label, legalUnit);
           const record = { node, path: currentPath, segments };
-          index.structural.set(statuteReferencePathKey(currentPath), record);
+          const key = statuteReferencePathKey(currentPath);
+          // Anonymous source children (including tables) belong to the labelled
+          // legal unit and must not replace its full copy/preview scope.
+          if (!index.structural.has(key)) index.structural.set(key, record);
           for (const segment of segments) {
             const key = statuteReferencePathKey(segment.path);
             if (!index.virtual.has(key)) index.virtual.set(key, { ...record, segment });
@@ -13590,8 +13708,14 @@
       scrollStatuteAnchorToReadingLine(searchMatch || citationTarget || $("[data-cfr-start]", els.detail), instant);
     }
 
-    function statutoryTableHtml(table) {
-      return `<div class="cfr-table-wrap"><table class="cfr-table"><tbody>${(table.rows || []).map(row => `<tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    function statutoryTableHtml(table, match = null, sourceText = "") {
+      let cursor = 0;
+      return `<div class="cfr-table-wrap"><table class="cfr-table"><tbody>${(table.rows || []).map(row => `<tr>${row.map(cell => {
+        const text = String(cell), start = sourceText.indexOf(text, cursor);
+        if (start >= 0) cursor = start + text.length;
+        const cellMatch = match && start >= 0 ? { start: match.start - start, end: match.end - start } : null;
+        return `<td>${renderSearchHighlightedText(text, cellMatch)}</td>`;
+      }).join("")}</tr>`).join("")}</tbody></table></div>`;
     }
 
     function renderStatutoryNode(node, targetPath, path, depth, searchTarget = null, citationBase = "", sectionId = "", baseDefinitionContext = null, childrenHtml = null) {
@@ -13601,9 +13725,9 @@
       const definitionContext = baseDefinitionContext ? { ...baseDefinitionContext, path: currentPath, sourceHost } : null;
       const headingReferenceContext = { ...definitionContext, sourceLayout: node.headingLayout, sourcePresentation: node.headingPresentation, sourceRecord: { kind: "node-heading", recordPath: currentPath.map(String), field: "heading" } };
       const textReferenceContext = { ...definitionContext, sourceLayout: node.textLayout, sourcePresentation: node.textPresentation, sourceRecord: { kind: "node-text", recordPath: currentPath.map(String), field: "text" } };
-      const isTarget = targetPath.length && currentPath.length === targetPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(targetPath[i]));
-      const isSearchTarget = searchTarget?.path?.length === currentPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(searchTarget.path[i]));
-      const containsInlineSearchTarget = searchTarget?.kind === "node-text" && searchTarget.path?.length > currentPath.length &&
+      const isTarget = Boolean(node.label) && targetPath.length && currentPath.length === targetPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(targetPath[i]));
+      const isSearchTarget = (!searchTarget?.sourceNode || searchTarget.sourceNode === node) && searchTarget?.path?.length === currentPath.length && currentPath.every((x, i) => normCitationPart(x) === normCitationPart(searchTarget.path[i]));
+      const containsInlineSearchTarget = (!searchTarget?.sourceNode || searchTarget.sourceNode === node) && searchTarget?.kind === "node-text" && searchTarget.path?.length > currentPath.length &&
         currentPath.every((x, i) => normCitationPart(x) === normCitationPart(searchTarget.path[i])) &&
         statuteReferenceSelection(section, searchTarget.path)?.node === node;
       const number = node.label ? `(${node.label})` : "";
@@ -13617,7 +13741,7 @@
         ? renderStatutoryNode(part.node, targetPath, currentPath, depth + 1, searchTarget, citationBase, sectionId, baseDefinitionContext)
         : `<p class="node-continuation">${formatStatutoryRunInText(node[part.field], node.label || "", node[part.field === "text" ? "references" : `${part.field}References`] || [], part.field === "text" ? textMatch : null, unit, globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(node, part) || [], textReferenceContext, part.start, part.end)}</p>`).join("") : null;
       return `<div class="statutory-node${isTarget ? " target" : ""}${isSearchTarget || containsInlineSearchTarget ? " search-target" : ""}" style="--depth:${depth}" data-statute-path="${escapeHtml(JSON.stringify(currentPath))}"${legalCitationSelectionAttributes("usc", sectionId, currentPath)}${isTarget ? " aria-label=\"Citation target\"" : isSearchTarget || containsInlineSearchTarget ? " aria-label=\"Search match\"" : ""}>
-        <div class="statutory-line">${node.label ? legalUnitTriggerHtml("usc", sectionId, currentPath, citation, numberContents, "node-number") : ""}${node.heading ? `<span class="node-heading">${linkifyStatutoryText(node.heading, node.headingReferences || [], 0, undefined, isSearchTarget && searchTarget.kind === "node-heading" ? searchTarget.match : null, node.headingFootnoteReferences || [], headingReferenceContext)} </span>` : ""}<span class="node-text">${node.table ? statutoryTableHtml(node.table) : formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], textMatch, unit, orderedParts ? globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(node, firstPart) : node.textFootnoteReferences || [], textReferenceContext, 0, orderedParts ? firstPart?.end || 0 : undefined)}</span></div>
+        <div class="statutory-line">${node.label ? legalUnitTriggerHtml("usc", sectionId, currentPath, citation, numberContents, "node-number") : ""}${node.heading ? `<span class="node-heading">${linkifyStatutoryText(node.heading, node.headingReferences || [], 0, undefined, isSearchTarget && searchTarget.kind === "node-heading" ? searchTarget.match : null, node.headingFootnoteReferences || [], headingReferenceContext)} </span>` : ""}<span class="node-text">${node.table ? statutoryTableHtml(node.table, textMatch, node.text || "") : formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], textMatch, unit, orderedParts ? globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(node, firstPart) : node.textFootnoteReferences || [], textReferenceContext, 0, orderedParts ? firstPart?.end || 0 : undefined)}</span></div>
         ${section && node.label ? legalAugmentationSlotHtml("usc", Number(section.title || 8), section.section, currentPath, citation) : ""}
         ${orderedBody ?? childrenHtml ?? (node.children || []).map(child => renderStatutoryNode(child, targetPath, currentPath, depth + 1, searchTarget, citationBase, sectionId, baseDefinitionContext)).join("")}
         ${!orderedParts && node.continuation ? `<p class="node-continuation">${linkifyStatutoryText(node.continuation, node.continuationReferences || [], 0, undefined, isSearchTarget && searchTarget.kind === "node-continuation" ? searchTarget.match : null, node.continuationFootnoteReferences || [], { ...definitionContext, sourceRecord: { kind: "node-continuation", recordPath: currentPath.map(String), field: "continuation" } })}</p>` : ""}</div>`;
@@ -13633,15 +13757,18 @@
       return `${escapeHtml(input.slice(start, highlightStart))}<mark class="statute-search-match" data-statute-search-match>${escapeHtml(input.slice(highlightStart, highlightEnd))}</mark>${escapeHtml(input.slice(highlightEnd, end))}`;
     }
 
-    function houseFootnoteReferenceHtml(reference) {
-      const referenceId = houseFootnoteReferenceId(reference);
-      return `<sup class="house-footnote-reference"><a id="${escapeHtml(referenceId)}" href="#house-footnote-${escapeHtml(reference.id)}" data-house-footnote-jump="${escapeHtml(reference.id)}" aria-label="House editorial footnote ${escapeHtml(reference.number)}">${escapeHtml(reference.number)}</a></sup>`;
+    function houseFootnoteReferenceHtml(reference, context = null) {
+      const prefix = context?.footnoteNamespace ? `${context.footnoteNamespace}-` : "";
+      const referenceId = prefix + houseFootnoteReferenceId(reference);
+      context?.usedFootnotes?.add(reference.id);
+      if (context?.footnoteOrigins && !context.footnoteOrigins.has(reference.id)) context.footnoteOrigins.set(reference.id, referenceId);
+      return `<sup class="house-footnote-reference"><a id="${escapeHtml(referenceId)}" href="#${escapeHtml(prefix)}house-footnote-${escapeHtml(reference.id)}" data-house-footnote-jump="${escapeHtml(reference.id)}" aria-label="House editorial footnote ${escapeHtml(reference.number)}">${escapeHtml(reference.number)}</a></sup>`;
     }
 
     function coordinatedInaListHtml(group, input, references, searchMatch, footnoteReferences, definitionContext) {
       const plainText = definitionContext?.plainText === true;
       const renderText = (start, end) => plainText ? input.slice(start, end) : definitionContext?.renderText ? definitionContext.renderText(start, end) : renderScopedDefinitionAnnotatedText(input, searchMatch, start, end, definitionContext);
-      const renderFootnote = reference => plainText ? superscriptNumber(reference.number) : houseFootnoteReferenceHtml(reference);
+      const renderFootnote = reference => plainText ? superscriptNumber(reference.number) : houseFootnoteReferenceHtml(reference, definitionContext);
       const footnotes = (footnoteReferences || []).filter(reference => Number.isInteger(reference.offset) && reference.offset >= group.start && reference.offset <= group.end).sort((left, right) => left.offset - right.offset);
       const parts = [];
       let footnoteIndex = 0;
@@ -13753,7 +13880,7 @@
         } else if (annotation.kind === "citation-authority-suffix") {
           cursor = annotation.end;
         } else if (annotation.kind === "footnote") {
-          parts.push(plainText ? superscriptNumber(reference.number) : houseFootnoteReferenceHtml(reference));
+          parts.push(plainText ? superscriptNumber(reference.number) : houseFootnoteReferenceHtml(reference, definitionContext));
           cursor = annotation.start;
         } else if (annotation.kind === "citation-list") {
           parts.push(coordinatedInaListHtml(annotation.group, input, references, searchMatch, footnoteReferences, definitionContext));
@@ -13768,13 +13895,13 @@
             let position = reference.start;
             for (const item of nestedFootnotes) {
               if (position < item.start) parts.push(legalReferenceHtml(reference, renderText(position, item.start), referenceContext, { preserveContents: true }));
-              parts.push(plainText ? superscriptNumber(item.reference.number) : houseFootnoteReferenceHtml(item.reference));
+              parts.push(plainText ? superscriptNumber(item.reference.number) : houseFootnoteReferenceHtml(item.reference, definitionContext));
               position = item.start;
             }
             if (position < reference.end) parts.push(legalReferenceHtml(reference, renderText(position, reference.end), referenceContext, { preserveContents: true }));
           } else {
             parts.push(legalReferenceHtml(reference, plainText ? input.slice(reference.start, reference.end) : definitionContext.renderText || definitionContext.sourceLayout ? renderText(reference.start, reference.end) : renderSearchHighlightedText(input, searchMatch, reference.start, reference.end), referenceContext));
-            for (const item of nestedFootnotes) parts.push(plainText ? superscriptNumber(item.reference.number) : houseFootnoteReferenceHtml(item.reference));
+            for (const item of nestedFootnotes) parts.push(plainText ? superscriptNumber(item.reference.number) : houseFootnoteReferenceHtml(item.reference, definitionContext));
           }
           cursor = reference.end;
         }
@@ -13944,7 +14071,9 @@
       return `<section class="house-editorial-footnotes"><h3>House editorial footnotes</h3><p class="house-editorial-footnotes-intro">${escapeHtml(HOUSE_FOOTNOTE_STATEMENT)}</p><ol>${footnotes.map(footnote => {
         const citations = (origins.get(footnote.id) || []).map(({ reference, path, citation }) => `<a href="#" data-show-citation="${escapeHtml(`${citationBase}${canonicalPath(path)}`)}" data-house-footnote-origin="${escapeHtml(houseFootnoteReferenceId(reference))}">${escapeHtml(citation)}</a>`).join("; ");
         const text = linkifyStatutoryText(footnote.text, footnote.references || [], 0, undefined, searchTarget?.kind === "houseEditorialFootnotes" && searchTarget.footnoteId === footnote.id ? searchTarget.match : null, [], definitionContext);
-        return `<li id="house-footnote-${escapeHtml(footnote.id)}" tabindex="-1" value="${escapeHtml(footnote.number)}"><span class="house-footnote-origins">${citations}</span>${footnote.targetNoteId ? `<a href="#statute-note-${escapeHtml(footnote.targetNoteId)}" data-house-footnote-jump="${escapeHtml(footnote.id)}">${text}</a>` : text}</li>`;
+        const reference = origins.get(footnote.id)?.[0]?.reference;
+        const returnId = reference ? houseFootnoteReferenceId(reference) : "";
+        return `<li id="house-footnote-${escapeHtml(footnote.id)}" tabindex="-1" value="${escapeHtml(footnote.number)}"><span class="house-footnote-origins">${citations}</span>${footnote.targetNoteId ? `<a href="#statute-note-${escapeHtml(footnote.targetNoteId)}" data-house-footnote-jump="${escapeHtml(footnote.id)}">${text}</a>` : text}${returnId ? `<a class="house-footnote-return" href="#${escapeHtml(returnId)}" data-house-footnote-return="${escapeHtml(returnId)}">↩ Return to reference</a>` : ""}</li>`;
       }).join("")}</ol></section>`;
     }
 
@@ -14097,11 +14226,11 @@
         const unit = units[index];
         const nextStart = units[index + 1]?.s ?? text.length;
         if (clip && (nextStart <= clip.start || unit.s >= clip.end)) continue;
-        const marker = text.slice(unit.s, unit.e);
         const path = componentTokens(unit.a || "") || [];
         const citation = `${citationBase}${canonicalPath(path)}`;
         const context = cfrReferenceContext(baseDefinitionContext, section, blockPath, path, sourceKind);
-        const address = section ? legalUnitTriggerHtml("cfr", section.id, path, citation, escapeHtml(marker), "cfr-address") : renderCfrStyledRange(block, unit.s, unit.e, searchMatch, context);
+        const styledMarker = renderCfrStyledRange(block, unit.s, unit.e, searchMatch, context);
+        const address = section ? legalUnitTriggerHtml("cfr", section.id, path, citation, styledMarker, "cfr-address") : styledMarker;
         const contents = renderCfrStyledRange(block, unit.e, nextStart, searchMatch, context);
         const locator = { recordPath: blockPath, kind: sourceKind, field: "x", start: unit.e, end: nextStart };
         const unitTarget = targetPath && canonicalPath(path) === targetPath;
@@ -14111,11 +14240,12 @@
     }
 
     function renderCfrBlock(block, blockPath, targetPath, searchTarget, section = null, citationBase = "", baseDefinitionContext = null, containerNoteType = "", clip = null) {
+      const sourceAttributes = ` data-cfr-block-path="${blockPath.join(".")}"`;
       const citationTarget = Boolean(targetPath && cfrBlockUnitPaths(block).includes(targetPath));
       const sameSearchBlock = Boolean(searchTarget && sameBlockPath(searchTarget.blockPath, blockPath));
       const searchHit = searchTarget?.kind === "block" && sameSearchBlock;
       const classes = `${citationTarget ? " target" : ""}${searchHit ? " search-target" : ""}`;
-      const displayPath = block.u?.[0]?.a || block.a || block.c || "";
+      const displayPath = (clip ? block.u?.findLast(unit => unit.s <= clip.start)?.a : null) || block.u?.[0]?.a || block.a || block.c || "";
       const displayTokens = componentTokens(displayPath) || [];
       const noteType = block.noteType || "ordinary";
       const insertionsAllowed = containerNoteType ? containerNoteType === "ordinary" : true;
@@ -14124,7 +14254,7 @@
         const level = Math.min(6, Math.max(3, Number(block.l || 4) + 2));
         const sourceKind = containerNoteType ? "cfr-note" : "cfr-heading";
         const locator = { recordPath: blockPath, kind: sourceKind, field: "x", start: 0, end: String(block.x || "").length };
-        return `<h${level} class="cfr-heading${classes}"${searchHit ? " data-cfr-search-match" : ""}>${linkifyCfrText(block.x, block.xReferences || [], 0, undefined, searchHit ? searchTarget.match : null, context)}</h${level}>${insertionsAllowed && section ? legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, displayTokens, `${citationBase}${canonicalPath(displayTokens)}`, "div", locator) : ""}`;
+        return `<h${level} class="cfr-heading${classes}"${sourceAttributes}${searchHit ? " data-cfr-search-match" : ""}>${linkifyCfrText(block.x, block.xReferences || [], 0, undefined, searchHit ? searchTarget.match : null, context)}</h${level}>${insertionsAllowed && section ? legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, displayTokens, `${citationBase}${canonicalPath(displayTokens)}`, "div", locator) : ""}`;
       }
       if (block.t === "table") {
         const tablePath = displayTokens;
@@ -14136,141 +14266,126 @@
         }).join("")}</tr>`).join("");
         const locator = { recordPath: blockPath, prefix: true, kind: "cfr-table-cell", field: "cell" };
         const captionContext = insertionsAllowed ? cfrReferenceContext(baseDefinitionContext, section, blockPath, tablePath, "cfr-table-caption", "caption") : baseDefinitionContext;
-        return `<div class="cfr-table-wrap cfr-block${classes}"${searchHit ? " data-cfr-search-match" : ""}><table class="cfr-table">${block.caption ? `<caption${captionHit ? ' class="search-target" data-cfr-search-match aria-label="Search match"' : ""}>${linkifyCfrText(block.caption, block.captionReferences || [], 0, undefined, captionHit ? searchTarget.match : null, captionContext)}</caption>` : ""}<tbody>${rows}</tbody></table></div>${insertionsAllowed && section ? legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, tablePath, `${citationBase}${canonicalPath(tablePath)}`, "div", locator) : ""}`;
+        return `<div class="cfr-table-wrap cfr-block${classes}"${sourceAttributes}${searchHit ? " data-cfr-search-match" : ""}><table class="cfr-table">${block.caption ? `<caption${captionHit ? ' class="search-target" data-cfr-search-match aria-label="Search match"' : ""}>${linkifyCfrText(block.caption, block.captionReferences || [], 0, undefined, captionHit ? searchTarget.match : null, captionContext)}</caption>` : ""}<tbody>${rows}</tbody></table></div>${insertionsAllowed && section ? legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, tablePath, `${citationBase}${canonicalPath(tablePath)}`, "div", locator) : ""}`;
       }
       if (block.t === "note") return `<aside class="cfr-note cfr-note-${escapeHtml(noteType)}${classes}" data-cfr-note-type="${escapeHtml(noteType)}">${(block.blocks || []).map((child, index) => renderCfrBlock(child, [...blockPath, index], targetPath, searchTarget, section, citationBase, baseDefinitionContext, noteType)).join("")}</aside>`;
       if (block.t === "graphic") {
-        return block.data ? `<figure class="cfr-block${classes}"><img class="cfr-graphic" src="data:${escapeHtml(block.mime || "image/gif")};base64,${block.data}" alt="${escapeHtml(block.alt)}"></figure>` : `<div class="notice warning cfr-block${classes}"><strong>Official graphic reference:</strong> ${escapeHtml(block.src)} could not be embedded because the publisher returned an access interstitial during capture. Use “Open current eCFR” to inspect it.</div>`;
+        return cfrGraphicHtml(block, `cfr-block${classes}`, sourceAttributes);
       }
       const text = block.x || "";
       const sourceKind = block.t === "footnote" ? "cfr-footnote" : containerNoteType ? "cfr-note" : "cfr-unit";
       const contents = renderCfrParagraphContents(block, blockPath, searchHit ? searchTarget.match : null, section, citationBase, baseDefinitionContext, insertionsAllowed ? sourceKind : "", targetPath || "", clip);
       const depth = Math.min(7, Number(block.d || 0) || (componentTokens(displayPath) || []).length);
       const depthAttribute = depth ? ` data-cfr-depth="${depth}"` : "";
-      if (block.t === "footnote") return `<div role="note" class="cfr-footnote cfr-block${classes}"${depthAttribute}${searchHit ? " data-cfr-search-match" : ""}>${contents}</div>`;
+      if (block.t === "footnote") return `<div role="note" class="cfr-footnote cfr-block${classes}"${sourceAttributes}${depthAttribute}${searchHit ? " data-cfr-search-match" : ""}>${contents}</div>`;
       const selectionAttributes = section && displayTokens.length ? legalCitationSelectionAttributes("cfr", section.id, displayTokens) : "";
-      return `<div role="paragraph" class="cfr-block${classes}"${block.a ? ` data-cfr-path="${escapeHtml(block.a)}"` : ""}${selectionAttributes}${depthAttribute}${citationTarget ? ' aria-label="Citation target"' : searchHit ? ' aria-label="Search match"' : ""}${searchHit ? " data-cfr-search-match" : ""}>${contents}</div>`;
+      return `<div role="paragraph" class="cfr-block${classes}"${sourceAttributes}${block.a ? ` data-cfr-path="${escapeHtml(displayPath)}"` : ""}${selectionAttributes}${depthAttribute}${citationTarget ? ' aria-label="Citation target"' : searchHit ? ' aria-label="Search match"' : ""}${searchHit ? " data-cfr-search-match" : ""}>${contents}</div>`;
     }
 
-    // Keep source fragments in the DOM while the user moves within a section.
-    // Comment boundaries include continuation text, slots and compound markers.
+    // Build the CFR's occurrence-aware scopes once, just as statute nodes are
+    // permanent reader hosts. Hover and selection then only change classes.
     const renderedCfrBodies = new WeakMap();
 
     function cfrBodySegments(section, targetPath, locator = null) {
-      const ranges = targetPath ? globalThis.INASearchCfrHierarchy.scope(section, targetPath, locator) : [];
-      const selected = new Map();
-      for (const range of ranges) {
-        const key = range.blockPath[0], previous = selected.get(key);
-        if (previous) previous.end = range.end;
-        else selected.set(key, { ...range });
+      const structure = globalThis.INASearchCfrHierarchy.index(section);
+      const candidates = structure.byPath.get(targetPath) || [];
+      const target = (locator && candidates.find(node => sameBlockPath(node.row.blockPath, locator))) || candidates[0];
+      const byBlock = new Map(), groups = new Map();
+      for (const event of structure.events) {
+        const i = event.blockPath[0];
+        if (!byBlock.has(i)) byBlock.set(i, []);
+        byBlock.get(i).push(event);
       }
       const segments = [];
-      const add = (i, start, end, selected) => segments.push({ i, start, end, selected, key: `${i}:${start}:${end}` });
       for (let i = 0; i < (section.blocks || []).length; i++) {
-        const block = section.blocks[i], range = selected.get(i), end = String(block.x || "").length;
-        if (!range) { add(i, 0, end, false); continue; }
-        if (block.x && range.start > 0) add(i, 0, range.start, false);
-        add(i, range.start, range.end, true);
-        if (block.x && range.end < end) add(i, range.end, end, false);
+        const block = section.blocks[i], events = byBlock.get(i) || [];
+        // Notes retain their source container; their unnumbered rows share the
+        // enclosing provision. Compound paragraph markers get permanent cuts.
+        const pieces = block.t === "note" ? events.slice(0, 1) : events;
+        if (!pieces.length) pieces.push({ start: 0, end: String(block.x || "").length, node: null });
+        for (const event of pieces) {
+          const ancestors = [];
+          for (let node = event.excluded ? null : event.node; node; node = node.parent) ancestors.unshift(node);
+          const displayPath = block.u?.findLast(unit => unit.s <= event.start)?.a || block.a || block.c || "";
+          const depth = ["h", "table", "note", "graphic"].includes(block.t) ? 0
+            : Number(block.d || 0) || (componentTokens(displayPath) || []).length;
+          const scopes = ancestors.map(node => {
+            if (!groups.has(node)) groups.set(node, { key: String(node.start), path: node.path, locator: node.row.blockPath,
+              selected: node === target, depth: 7 });
+            const group = groups.get(node);
+            group.depth = Math.min(group.depth, depth);
+            return group;
+          });
+          const start = block.x ? event.start : 0, end = block.x ? event.end : 0;
+          segments.push({ i, start, end, selected: ancestors.includes(target), key: `${i}:${start}:${end}`, groups: scopes });
+        }
       }
       return segments;
     }
 
-    function cfrSelectionInset(section, segments) {
-      // Match the widest selected source block's existing indentation without reflowing text.
-      const depth = segments.filter(segment => segment.selected).reduce((minimum, segment) => {
-        const block = section.blocks[segment.i];
-        if (["h", "table", "note", "graphic"].includes(block.t)) return 0;
-        return Math.min(minimum, Number(block.d || 0) || (componentTokens(block.u?.[0]?.a || block.a || block.c || "") || []).length);
-      }, 7);
+    function cfrSelectionInset(depth) {
       const level = Math.max(0, depth - 1);
       return `clamp(${level * 12}px, ${level * 2}vw, ${level * 24}px)`;
     }
 
+    function cfrScopeHtml(group, section) {
+      return `<div class="cfr-subtree cfr-block${group.selected ? " target" : ""}" data-cfr-scope="${group.key}" data-cfr-path="${escapeHtml(group.path)}" data-cfr-block-path="${group.locator.join(".")}"${legalCitationSelectionAttributes("cfr", section.id, componentTokens(group.path) || [])} style="--cfr-selection-inset:${cfrSelectionInset(group.depth)}"${group.selected ? ' aria-label="Citation target"' : ""}>`;
+    }
+
     function renderCfrSegment(section, segment, searchTarget, citationBase, context) {
-      // Escape the opening bracket so HTML comment stripping preserves these runtime boundaries.
       const block = section.blocks[segment.i];
-      return `\x3c!--cfr-render:${segment.key}-->${renderCfrBlock(block, [segment.i], "", searchTarget, section, citationBase, context, "", block.x ? segment : null)}\x3c!--/cfr-render-->`;
+      return renderCfrBlock(block, [segment.i], "", searchTarget, section, citationBase, context, "", block.x ? segment : null);
     }
 
     function renderCfrBody(section, targetPath, searchTarget, citationBase, context) {
-      const output = []; let open = false;
-      const segments = cfrBodySegments(section, targetPath, searchTarget?.blockPath), inset = cfrSelectionInset(section, segments);
-      for (const segment of segments) {
-        if (open && !segment.selected) { output.push("</div>"); open = false; }
-        if (segment.selected && !open) {
-          output.push(`<div class="cfr-subtree cfr-block target" data-cfr-path="${escapeHtml(targetPath)}" style="--cfr-selection-inset:${inset}" aria-label="Citation target">`);
-          open = true;
-        }
+      const output = [], stack = [];
+      for (const segment of cfrBodySegments(section, targetPath, searchTarget?.blockPath)) {
+        let shared = 0;
+        while (shared < stack.length && stack[shared].key === segment.groups[shared]?.key) shared++;
+        while (stack.length > shared) { output.push("</div>"); stack.pop(); }
+        for (const group of segment.groups.slice(shared)) { output.push(cfrScopeHtml(group, section)); stack.push(group); }
         output.push(renderCfrSegment(section, segment, searchTarget, citationBase, context));
       }
-      if (open) output.push("</div>");
+      while (stack.length) { output.push("</div>"); stack.pop(); }
       return output.join("");
     }
 
     function fillCfrBody(body, section, targetPath, searchTarget, citationBase, context, finish) {
-      const segments = cfrBodySegments(section, targetPath, searchTarget?.blockPath), inset = cfrSelectionInset(section, segments);
-      const entries = []; let wrapper = null;
-      for (const segment of segments) {
-        if (!segment.selected) wrapper = null;
-        else if (!wrapper) {
-          wrapper = document.createElement("div");
-          wrapper.className = "cfr-subtree cfr-block target";
-          wrapper.dataset.cfrPath = targetPath;
-          wrapper.style.setProperty("--cfr-selection-inset", inset);
-          wrapper.setAttribute("aria-label", "Citation target");
-          body.append(wrapper);
+      const entries = [], stack = [];
+      for (const segment of cfrBodySegments(section, targetPath, searchTarget?.blockPath)) {
+        let shared = 0;
+        while (shared < stack.length && stack[shared].key === segment.groups[shared]?.key) shared++;
+        stack.length = shared;
+        for (const group of segment.groups.slice(shared)) {
+          const template = document.createElement("template");
+          template.innerHTML = cfrScopeHtml(group, section) + "</div>";
+          const element = template.content.firstChild;
+          (stack.at(-1)?.element || body).append(element);
+          stack.push({ key: group.key, element });
         }
-        entries.push({ segment, slot: readerSlot(wrapper || body) });
+        entries.push({ segment, slot: readerSlot(stack.at(-1)?.element || body) });
       }
       const ordered = [...entries.filter(entry => entry.segment.selected), ...entries.filter(entry => !entry.segment.selected)];
       fillLegalReader(body, ordered.reverse().map(({ segment, slot }) => () => replaceReaderSlot(slot, renderCfrSegment(section, segment, searchTarget, citationBase, context))), finish);
     }
 
-    function updateRenderedCfrBody(body, section, targetPath, locator, citationBase, context) {
+    function updateRenderedCfrBody(body, section, targetPath, locator) {
       const previous = renderedCfrBodies.get(body);
       if (!previous || previous.blocks !== section.blocks || previous.profileRevision !== state.profileRevision) return false;
-      const key = `${targetPath}:${(locator || []).join(".")}`;
       setLegalCitationHover(null);
+      if (previous.searchTarget?.kind) return false;
+      const key = `${targetPath}:${(locator || []).join(".")}`;
       if (previous.key === key) return true;
-      for (const wrapper of body.querySelectorAll(":scope > .cfr-subtree")) wrapper.replaceWith(...wrapper.childNodes);
-      const chunks = new Map(); let chunk = null;
-      for (const node of body.childNodes) {
-        if (node.nodeType === 8 && node.data.startsWith("cfr-render:")) {
-          chunk = { start: node }; chunks.set(node.data.slice(11), chunk);
-        } else if (node.nodeType === 8 && node.data === "/cfr-render" && chunk) { chunk.end = node; chunk = null; }
-      }
-      let cursor = body.firstChild, wrapper = null, replaced = false;
-      const segments = cfrBodySegments(section, targetPath, locator), inset = cfrSelectionInset(section, segments);
-      for (const segment of segments) {
-        let existing = chunks.get(segment.key);
-        if (existing) {
-          while (cursor && cursor !== existing.start) { const next = cursor.nextSibling; cursor.remove(); cursor = next; }
-        } else {
-          const template = document.createElement("template");
-          template.innerHTML = renderCfrSegment(section, segment, null, citationBase, context);
-          existing = { start: template.content.firstChild, end: template.content.lastChild };
-          body.insertBefore(template.content, cursor); replaced = true;
-        }
-        const next = existing.end.nextSibling;
-        if (segment.selected) {
-          if (!wrapper) {
-            wrapper = document.createElement("div");
-            wrapper.className = "cfr-subtree cfr-block target";
-            wrapper.dataset.cfrPath = targetPath;
-            wrapper.style.setProperty("--cfr-selection-inset", inset);
-            wrapper.setAttribute("aria-label", "Citation target");
-            body.insertBefore(wrapper, existing.start);
-          }
-          let node = existing.start;
-          while (node !== next) { const following = node.nextSibling; wrapper.append(node); node = following; }
-        } else wrapper = null;
-        cursor = next;
-      }
-      while (cursor) { const next = cursor.nextSibling; cursor.remove(); cursor = next; }
+      const candidates = globalThis.INASearchCfrHierarchy.index(section).byPath.get(targetPath) || [];
+      const node = (locator && candidates.find(item => sameBlockPath(item.row.blockPath, locator))) || candidates[0];
+      const target = node ? body.querySelector(`[data-cfr-scope="${node.start}"]`) : null;
+      if (node && !target) return false;
+      const oldTarget = body.querySelector(".cfr-subtree.target");
+      oldTarget?.classList.remove("target");
+      oldTarget?.removeAttribute("aria-label");
+      target?.classList.add("target");
+      target?.setAttribute("aria-label", "Citation target");
       previous.key = key;
-      // Only changed compound boundaries need new annotation/insertion hosts.
-      if (replaced) { renderInsertedReferenceGroups(els.detail); renderInlineLegalNotes(); }
       return true;
     }
 
@@ -14321,7 +14436,7 @@
       if (section.id) activateNavigationLocation(normalizedStatuteHistoryLocation(section.id, citationResult?.path || [], "cfr"));
       const headingInsertionLocator = { recordPath: ["heading"], kind: "cfr-heading", field: "heading", start: 0, end: String(section.heading || cite).length };
       const existingBody = $(".cfr-body", els.detail);
-      if (citationResult && !searchTarget?.kind && updateRenderedCfrBody(existingBody, section, targetPath, searchTarget?.blockPath, citationBase, baseDefinitionContext)) {
+      if (citationResult && !searchTarget?.kind && updateRenderedCfrBody(existingBody, section, targetPath, searchTarget?.blockPath)) {
         $(".legal-unit-section-trigger", els.detail)?.classList.remove("citation-target");
         $(".detail-heading-actions", els.detail).innerHTML = openButton(cfrOfficialTextFragment(section, citationResult.path || []), "Current eCFR", `${citationBase}${canonicalPath(citationResult.path || [])}`);
         renderCfrNavigation(section, citationResult.path || []);
@@ -14333,7 +14448,8 @@
       const sliced = largeLegalBody(section.blocks || []);
       els.detail.innerHTML = `<div class="detail-content" data-cfr-start>${cfrSectionFamilyHtml(section)}${cfrSectionTitleAlternativesHtml(section)}<div class="detail-heading-row legal-reader-heading"><div class="detail-heading-citation">${legalUnitTriggerHtml("cfr", section.id, [], citationBase, escapeHtml(citationBase), "legal-unit-section-trigger")}</div><div class="detail-heading-title"><h2 class="detail-title">${linkifyCfrText(section.heading || cite, section.headingReferences || [], 0, undefined, searchTarget?.kind === "heading" ? searchTarget.match : null, headingReferenceContext)}</h2></div><div class="detail-heading-actions">${openButton(cfrOfficialTextFragment(section, citationResult?.path || []), "Current eCFR", `${citationBase}${canonicalPath(citationResult?.path || [])}`)}</div></div>${legalAugmentationSlotHtml("cfr", section.title, section.section || section.label, [], citationBase, "div", headingInsertionLocator)}<div class="cfr-body">${sliced ? "" : renderCfrBody(section, targetPath, searchTarget, citationBase, baseDefinitionContext)}</div><details class="regulation-source-details"><summary>Source details</summary><div class="source-banner">This regulation text is from the eCFR edition current through ${escapeHtml(currentThrough)}. Use “Current eCFR” to check for changes.${part?.authority ? `<br><strong>Authority:</strong> ${linkifyCfrText(part.authority, part.authorityReferences || [])}` : ""}${part?.source ? `<br><strong>Source:</strong> ${linkifyCfrText(part.source, part.sourceReferences || [])}` : ""}</div></details></div>`;
       const finish = () => {
-        if (!searchTarget?.kind) renderedCfrBodies.set($(".cfr-body", els.detail), { blocks: section.blocks, profileRevision: state.profileRevision, key: `${targetPath}:${(searchTarget?.blockPath || []).join(".")}` });
+        renderedCfrBodies.set($(".cfr-body", els.detail), { blocks: section.blocks, profileRevision: state.profileRevision,
+          key: `${targetPath}:${(searchTarget?.blockPath || []).join(".")}`, searchTarget });
         renderInsertedReferenceGroups(els.detail);
         renderInlineLegalNotes();
         renderCfrNavigation(section, citationResult?.path || (searchTarget?.path ? componentTokens(searchTarget.path) || [] : []));
@@ -14461,12 +14577,12 @@
       if (mode === "idle") return;
       const problem = mode === "conflict" || mode === "error";
       els.profileSetupTitle.textContent = mode === "conflict"
-        ? "Saving stopped because another window changed this profile"
+        ? "The saved browser copy changed or is unavailable"
         : mode === "error"
           ? "Saving in this browser needs attention"
           : "Save a data file to protect your work";
       els.profileSetupMessage.textContent = mode === "conflict"
-        ? "Open Settings to reload, merge, or export this window before resolving the conflict."
+        ? "Open Settings and choose Keep this window to resume browser saving with your current work."
         : mode === "error"
           ? `${state.browserSaveError || "Browser storage is unavailable."} Download or connect a data file before closing this tab.`
           : "Without a saved data file, your notes, highlights, settings, and other research exist only in this browser and can be lost if its site data is cleared.";
@@ -14480,7 +14596,7 @@
       const needsAttention = Boolean(state.browserSaveConflict || state.browserSaveError || state.fileSyncPending);
       els.savingMenuStatus.className = `notice${needsAttention ? " warning" : " success"}`;
       els.savingMenuStatus.innerHTML = state.browserSaveConflict
-        ? `<strong>Browser autosaving stopped on a revision conflict.</strong><br>This window's work remains in memory. Download it before reloading, or reconnect the data file and explicitly merge.`
+        ? `<strong>Browser autosaving is paused.</strong><br>This window's work remains in memory. Choose <strong>Keep this window</strong> to resume browser saving. Any readable saved copy will be merged; if none is available, this window's notes and settings will rebuild it.`
         : state.browserSaveError
           ? `<strong>Browser saving failed.</strong><br>${escapeHtml(state.browserSaveError)} Current work remains in this tab${connected ? ` and ${escapeHtml(state.vaultFileName)}` : ""}.`
           : connected
@@ -14489,7 +14605,7 @@
               ? `<strong>Saved in this browser; the data file needs reconciliation.</strong><br>Reconnect the file to merge or replace its older contents.`
               : `<strong>${changed ? "Saving changes in this browser…" : "Saved in this browser."}</strong><br>Browser data can be cleared; <button class="notice-inline-action" type="button" data-connect-filesystem-autosaving>connect a data file</button> for durable protection.`;
       els.savingMenuEnableButton.hidden = connected;
-      els.browserConflictActions.hidden = !state.browserSaveConflict;
+      els.browserConflictActions.hidden = !state.browserSaveConflict && !state.browserSaveError;
       syncThemeControls();
       els.showDetailedStatusToggle.checked = profile.preferences.showDetailedStatus === true;
       els.hideTopThemeControlsToggle.checked = profile.preferences.hideTopThemeControls === true;
@@ -14900,6 +15016,11 @@
         visible.append(alternate);
         alternate.append(previous);
         wrapper.dataset.citationDisplay = system;
+        const sectionTrigger = wrapper.closest(".legal-unit-section-trigger");
+        if (sectionTrigger) {
+          sectionTrigger.dataset.legalUnitCitation = visible.textContent;
+          sectionTrigger.title = `Select ${visible.textContent}`;
+        }
       }
       if (profile.highlights?.length) renderUserHighlights();
       restoreCitationDisplayAnchor(anchor);
@@ -15306,14 +15427,27 @@
       return state.persistenceStatus;
     }
 
+    function useBrowserProfileRevision(loaded) {
+      state.cacheRevisionFloor = Math.max(state.cacheRevisionFloor || 0, state.cacheRevision || 0, Number(loaded.record?.cacheRevision) || 0);
+      state.cacheRevision = loaded.cacheRevision ?? (Number(loaded.record?.cacheRevision) || 0);
+      state.cacheSha256 = loaded.activeSha256 ?? (loaded.slot === "active" ? loaded.record?.sha256 ?? null : null);
+      state.preservePreviousBrowserProfile = loaded.slot !== "active";
+    }
+
     async function saveVaultInBrowser(vault, { reason = "profile-autosave", fileSyncState = { status: "none" } } = {}) {
       if (!globalThis.INASearchStorage?.saveProfile) throw new Error("IndexedDB profile storage is unavailable in this browser context.");
       const saved = await globalThis.INASearchStorage.saveProfile(vault, {
         expectedRevision: state.cacheRevision,
+        ...(state.cacheSha256 !== undefined ? { expectedSha256: state.cacheSha256 } : {}),
+        revisionFloor: state.cacheRevisionFloor,
+        preservePrevious: state.preservePreviousBrowserProfile,
         reason,
         fileSyncState
       });
       state.cacheRevision = saved.cacheRevision;
+      state.cacheRevisionFloor = saved.cacheRevision;
+      state.cacheSha256 = saved.record.sha256;
+      state.preservePreviousBrowserProfile = false;
       state.browserStorageAvailable = true;
       state.browserProfileLoaded = true;
       state.browserSaveConflict = false;
@@ -15323,15 +15457,20 @@
     }
 
     async function mirrorVaultInBrowser(vault, fileSyncState = { status: "current", vaultId: vault.vaultId, vaultRevision: vault.revision }) {
-      try {
-        await saveVaultInBrowser(validateVaultDocument(vault), { reason: "filesystem-authoritative-load", fileSyncState });
-        return true;
-      } catch (error) {
-        state.browserSaveConflict = error?.name === "ProfileConflictError";
-        state.browserSaveError = error?.message || String(error);
-        updateSaveStatus("Browser mirror failed", "bad");
-        return false;
-      }
+      // File reconnects and autosaves share one queue so this window cannot
+      // race its own compare-and-swap revision check.
+      state.saveQueue = state.saveQueue.then(async () => {
+        try {
+          await saveVaultInBrowser(validateVaultDocument(vault), { reason: "filesystem-authoritative-load", fileSyncState });
+          return true;
+        } catch (error) {
+          state.browserSaveConflict = error?.name === "ProfileConflictError";
+          state.browserSaveError = error?.message || String(error);
+          updateSaveStatus("Browser mirror failed", "bad");
+          return false;
+        }
+      });
+      return state.saveQueue;
     }
 
     async function queueProfileWrite(force = false) {
@@ -15377,9 +15516,9 @@
           state.browserSaveConflict = error?.name === "ProfileConflictError";
           state.browserSaveError = error?.message || String(error);
           if (fileSaved && revision === state.profileRevision) state.profileChanged = false;
-          updateSaveStatus(state.browserSaveConflict ? "Another window changed the browser profile" : "Browser save failed", "bad");
+          updateSaveStatus(state.browserSaveConflict ? "The saved browser copy changed or is unavailable" : "Browser save failed", "bad");
           if (state.view === "sources") renderSources();
-          toast(state.browserSaveConflict ? "Autosaving stopped because another window saved a newer profile. Open Settings to resolve it." : `Browser autosave failed: ${error.message || error}`);
+          toast(state.browserSaveConflict ? "Browser autosaving paused because the saved copy changed or is unavailable. Open Settings and choose Keep this window to resume." : `Browser autosave failed: ${error.message || error}`);
         }
       });
       return state.saveQueue;
@@ -15520,24 +15659,27 @@
       }
     }
 
-    async function latestBrowserProfile() {
-      const loaded = await globalThis.INASearchStorage?.loadActiveProfile?.();
-      if (!loaded?.vault) throw new Error("No saved browser profile is available.");
+    async function latestBrowserProfile({ allowMissing = false } = {}) {
+      const loaded = await globalThis.INASearchStorage?.loadActiveProfile?.({ includeRecoveryState: allowMissing });
+      if (!loaded?.vault) {
+        if (allowMissing && loaded) return loaded;
+        throw new Error("No readable saved browser copy is available. Choose Keep this window to rebuild browser saving with your current work.");
+      }
       return { ...loaded, vault: validateVaultDocument(loaded.vault) };
     }
 
     async function reloadBrowserProfile() {
-      if (!confirm("Discard this window's conflicting working copy and load the newer profile saved in the browser? Download a backup first if you may need this window's version.")) return false;
+      if (!confirm("Discard this window's working copy and load the profile saved in the browser? Download a backup first if you may need this window's version.")) return false;
       try {
         const loaded = await latestBrowserProfile();
-        state.cacheRevision = loaded.record.cacheRevision;
-        state.fileSyncPending = loaded.record.fileSyncState?.status === "pending" || Boolean(state.fileHandle);
+        useBrowserProfileRevision(loaded);
+        state.fileSyncPending = loaded.record?.fileSyncState?.status === "pending" || Boolean(state.fileHandle);
         state.fileConnected = false;
         state.browserSaveConflict = false;
         state.browserSaveError = "";
         applyVaultProfile(loaded.vault);
-        updateSaveStatus("Loaded the newer browser profile", "");
-        toast("Loaded the newer profile saved in this browser.");
+        updateSaveStatus("Loaded the saved browser copy", "");
+        toast("Loaded the profile saved in this browser.");
         return true;
       } catch (error) {
         toast(`Could not reload the browser profile: ${error.message || error}`);
@@ -15547,11 +15689,13 @@
 
     async function mergeBrowserProfile() {
       try {
+        const loaded = await latestBrowserProfile({ allowMissing: true });
         const working = profileSnapshot();
-        const loaded = await latestBrowserProfile();
-        const merged = { ...loaded.vault, profile: mergeUnsavedProfileIntoVault(loaded.vault.profile, working) };
-        state.cacheRevision = loaded.record.cacheRevision;
-        state.fileSyncPending = loaded.record.fileSyncState?.status === "pending" || Boolean(state.fileHandle);
+        const merged = loaded.vault
+          ? { ...loaded.vault, profile: mergeUnsavedProfileIntoVault(loaded.vault.profile, working) }
+          : vaultDocument(working, state.vaultRevision);
+        useBrowserProfileRevision(loaded);
+        state.fileSyncPending = state.fileSyncPending || loaded.record?.fileSyncState?.status === "pending" || Boolean(state.fileHandle);
         state.fileConnected = false;
         state.browserSaveConflict = false;
         state.browserSaveError = "";
@@ -15559,7 +15703,8 @@
         state.profileChanged = true;
         state.profileRevision += 1;
         await queueProfileWrite(true);
-        toast("Merged this window with the newer browser profile. Local settings and same-ID notes were kept.");
+        if (state.browserSaveConflict || state.browserSaveError) return false;
+        toast(loaded.vault ? "Browser saving resumed. Saved notes were merged with this window; current settings and same-ID notes were kept." : "Browser saving resumed with this window's notes and settings.");
         return true;
       } catch (error) {
         toast(`Could not merge the browser profiles: ${error.message || error}`);
@@ -16228,25 +16373,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         event.stopPropagation();
         setMainNavigatorCollapsed(profile.preferences.mainNavigatorCollapsed !== true);
       });
-      els.mainReaderAuthorityToggle.addEventListener("click", () => {
-        if (!els.mainReaderAuthorityToggle.disabled) setStatuteHierarchyAuthority(state.statuteHierarchyAuthority === "ina" ? "usc" : "ina", true);
-      });
-      bindCopyActionPreview(els.mainReaderActions);
-      els.mainReaderActions.addEventListener("mouseenter", syncMainReaderActionTarget);
-      els.mainReaderActions.addEventListener("mouseleave", () => setLegalCitationHover(null));
-      els.mainReaderActions.addEventListener("focusin", syncMainReaderActionTarget);
-      els.mainReaderActions.addEventListener("focusout", () => requestAnimationFrame(() => {
-        if (!els.mainReaderActions.contains(document.activeElement) && !els.mainReaderActions.matches(":hover")) setLegalCitationHover(null);
-      }));
-      els.mainReaderActions.addEventListener("click", event => {
-        const button = event.target.closest("[data-live-citation-action]");
-        if (!button || button.disabled) return;
-        event.preventDefault();
-        event.stopPropagation();
-        const context = mainReaderActionContext(button.dataset.liveCitationAction === "print" ? mainReaderPrintTarget() : undefined);
-        if (context) void handleLegalUnitAction(button.dataset.liveCitationAction === "copy-text" ? "copy-citation-text" : button.dataset.liveCitationAction, context);
-        else handleHierarchySourceAction(button.dataset.liveCitationAction);
-      });
+      bindReaderActions(els.mainReaderActions);
       els.mainShareLocalWarning.addEventListener("mouseenter", () => showLocalShareWarning(false, els.mainShareLocalWarning, true));
       els.mainShareLocalWarning.addEventListener("mouseleave", scheduleLocalShareWarningClose);
       els.localShareWarningPopover.addEventListener("mouseenter", () => clearTimeout(state.localShareWarningCloseTimer));
@@ -16578,7 +16705,6 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       window.addEventListener("scroll", () => {
         if (state.shareViewPreview || state.copyActionPreview) return;
         if (!els.profileSetupNotice.hidden) syncProfileNoticeOffset();
-        if (!state.mainLayoutRestorePending) state.mainReadingAnchor = captureMainReadingAnchor();
         scheduleStatuteNavigationUpdate();
         if (state.mainOccurrencePane && !state.focusedCitationMode) scheduleVisibleOccurrenceSections(state.mainOccurrencePane);
         if (!els.legalReferencePopover.hidden) state.legalReferenceContext?.pinned ? positionLegalReferencePopover(state.legalReferenceContext.trigger) : closeLegalReferencePopover(true);
@@ -16801,13 +16927,22 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (notesExpansion) {
           event.preventDefault();
           const supplements = notesExpansion.closest(".statute-supplements");
-          supplements.open = true;
-          for (const detail of $$("details", supplements)) detail.open = notesExpansion.dataset.statuteNotesExpand === "true";
+          const expanded = notesExpansion.dataset.statuteNotesExpand === "true";
+          supplements.open = expanded;
+          for (const detail of $$("details", supplements)) detail.open = expanded;
           return;
         }
         const footnoteJump = event.target.closest("[data-house-footnote-jump]");
         if (footnoteJump) {
           event.preventDefault();
+          if (footnoteJump.id) {
+            const root = legalReaderScrollRequest().root;
+            cancelLegalReaderScroll(root);
+            houseFootnoteReturnPositions.set(footnoteJump, {
+              root, top: root === window ? window.scrollY : root.scrollTop,
+              left: root === window ? window.scrollX : root.scrollLeft
+            });
+          }
           const target = document.getElementById((footnoteJump.getAttribute("href") || "").replace(/^#/, "")) || document.getElementById(`house-footnote-${footnoteJump.dataset.houseFootnoteJump}`);
           const entry = footnoteJump.closest("li");
           const reference = footnoteJump.id ? footnoteJump : document.getElementById(entry?.dataset.houseFootnoteActiveReference || entry?.querySelector("[data-house-footnote-origin]")?.dataset.houseFootnoteOrigin || "");
@@ -16818,7 +16953,12 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (footnoteReturn) {
           event.preventDefault();
           const target = document.getElementById((footnoteReturn.getAttribute("href") || "").replace(/^#/, ""));
-          revealStatuteNoteTarget(target);
+          const position = target && houseFootnoteReturnPositions.get(target);
+          if (position && (position.root === window || position.root.isConnected)) {
+            cancelLegalReaderScroll(position.root);
+            position.root.scrollTo({ top: position.top, left: position.left, behavior: "instant" });
+            target.focus({ preventScroll: true });
+          } else revealStatuteNoteTarget(target);
           return;
         }
         const citationSelection = legalCitationSelectionForElement(event.target);
@@ -16857,7 +16997,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       document.addEventListener("mouseover", event => {
         const handleReaderMouseover = () => {
         if (event.target.closest?.(".main-reader-actions")) syncMainReaderActionTarget();
-        else setLegalCitationHover(legalCitationSelectionForElement(event.target));
+        else if (!(event.buttons & 1)) setLegalCitationHover(legalCitationSelectionForElement(event.target));
         const definedTerm = event.target.closest?.("[data-scoped-definition-ids]");
         if (definedTerm && !definedTerm.contains(event.relatedTarget)) scheduleScopedDefinitionPreview(definedTerm, false);
         if (event.target.closest?.("#scopedDefinitionPopover")) clearTimeout(state.scopedDefinitionCloseTimer);
@@ -16873,7 +17013,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       document.addEventListener("mouseout", event => {
         const handleReaderMouseout = () => {
         if (event.relatedTarget?.closest?.(".main-reader-actions")) syncMainReaderActionTarget();
-        else setLegalCitationHover(legalCitationSelectionForElement(event.relatedTarget));
+        else if (!(event.buttons & 1)) setLegalCitationHover(legalCitationSelectionForElement(event.relatedTarget));
         const definedTerm = event.target.closest?.("[data-scoped-definition-ids]");
         if (definedTerm && !definedTerm.contains(event.relatedTarget) && !els.scopedDefinitionPopover.contains(event.relatedTarget)) scheduleScopedDefinitionClose();
         if (event.target.closest?.("#scopedDefinitionPopover") && !els.scopedDefinitionPopover.contains(event.relatedTarget)) scheduleScopedDefinitionClose();
@@ -17193,7 +17333,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
           window.INA_SEARCH_RECOVERY_PROFILE = {
             profile: profileSnapshot(),
             state: Object.fromEntries([
-              "profileRevision", "profileChanged", "profileValid", "cacheRevision",
+              "profileRevision", "profileChanged", "profileValid", "cacheRevision", "cacheRevisionFloor", "cacheSha256", "preservePreviousBrowserProfile",
               "vaultId", "vaultRevision", "browserStorageAvailable", "browserProfileLoaded",
               "browserSaveConflict", "browserSaveError", "fileSyncPending", "persistenceStatus",
               "backupReminderEligibleAtStartup"

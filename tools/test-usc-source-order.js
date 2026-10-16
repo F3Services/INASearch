@@ -98,7 +98,7 @@ assert.equal(splitProjection.fragments.find(fragment => fragment.text.trim() ===
 
 separatedRunIn.textFootnoteReferences = [{ id: "boundary-inline", number: "1", offset: 9, afterChild: 0 }];
 Object.assign(api, { hydrateLegalReferences: () => {}, statuteDefinitionContext: () => null });
-for (const name of ["statuteFootnoteAppendix", "statuteReferenceRunInLineHtml", "statuteUnitText", "insertedStatuteExcerptHtml"]) vm.runInContext(functionSource(template, name), api);
+for (const name of ["statuteFootnoteAppendix", "statuteReferenceRunInLineHtml", "statuteUnitText", "statuteExcerptFootnotesHtml", "insertedStatuteExcerptHtml"]) vm.runInContext(functionSource(template, name), api);
 assert.equal(squeeze(plain(api.statuteReferenceRunInLineHtml(separatedRunIn, splitSelection.segments[0], ["a", "1", "A"]))), "(i)First¹", "An inline preview must retain a footnote before the structural child");
 for (const format of ["source", "ina"]) assert.equal(squeeze(api.statuteUnitText(splitSection, ["a", "1", "A", "i"], format)), "(i)First¹", "Inline copy must preserve its boundary footnote");
 assert.equal(squeeze(plain(api.insertedStatuteExcerptHtml({ section: splitSection, path: ["a", "1", "A", "i"] }))), "(i)First1", "An inline excerpt must preserve its boundary footnote");

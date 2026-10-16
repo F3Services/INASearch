@@ -491,6 +491,7 @@ async function main() {
     ["test-act-authority-boundaries.js", "PASS Act authority boundaries"],
     ["test-read-build-corpus.js", "PASS standalone corpus reader"],
     ["test-startup.js", "PASS staged startup"],
+    ["test-profile-saving.js", "# fail 0"],
     ["test-annotations.js", "PASS annotations"],
     ["test-note-banners.js", "PASS note banners"],
     ["test-search-worker.js", "Search worker cache tests passed"],
@@ -510,6 +511,11 @@ async function main() {
     ["test-copy-format.js", "PASS explicit copy formatting"],
     ["test-legal-print.js", "PASS legal printing"],
     ["test-reader-citations.js", "PASS reader print target"],
+    ["test-reader-action-binding.js", "PASS reader action binding"],
+    ["test-reader-anchors.js", "PASS reader anchors"],
+    ["test-reader-render-performance.js", "PASS reader rendering"],
+    ["test-viewer-output.js", "PASS viewer output"],
+    ["test-viewer-references.js", "PASS CFR previews"],
     ["test-usc-source-order.js", "PASS USC reading order"],
     ["test-uslm-rendering.js", "PASS USLM rendering"],
     ["test-uslm-converted-presentation.js", "PASS converted USLM presentation"],
@@ -3220,7 +3226,11 @@ async function main() {
   const transferTargetForSource = extractedFunction(fallbackSource, "transferTargetForSource", "transferRecord", { transferSourceKey });
   const transferRecord = extractedFunction(fallbackSource, "transferRecord", "transferStatusMessage", { normalize: searchNormalize, transferSourceKey, transferTargetLabel });
   const transferStatusMessage = extractedFunction(fallbackSource, "transferStatusMessage", "statuteReaderCitationBase", { transferTargetLabel });
-  const statuteReaderCitationBase = extractedFunction(fallbackSource, "statuteReaderCitationBase", "safeUrl");
+  const statuteReaderCitationBase = extractedFunction(fallbackSource, "statuteReaderCitationBase", "safeUrl", {
+    statutoryLinksUseIna: extractedFunction(fallbackSource, "statutoryLinksUseIna", "coordinatedStatutoryInaLists", {
+      profile: { preferences: { statutoryLinkCitationSystem: "view" } }, state: { statuteHierarchyAuthority: "ina" }
+    })
+  });
   const repealedStatusSection = full.corpus.title8.sections.find(section => section.status === "repealed");
   const transferredStatusSection = full.corpus.title8.sections.find(section => section.section === "31");
   const currentStatusSection = full.corpus.title8.sections.find(section => section.section === "1101");
@@ -3232,7 +3242,7 @@ async function main() {
   assert.strictEqual(transferSourceKey("724a–1"), transferSourceKey("724a-1"), "A typographic dash and keyboard hyphen do not resolve to the same transferred source section.");
   assert.strictEqual(statuteReaderCitationBase(currentStatusSection, { type: "usc", label: "8 U.S.C. 1101(a)(15)" }, null, null), "8 U.S.C. 1101", "A deep citation was reused as the reader's section base and would duplicate its paragraph path.");
   assert.strictEqual(statuteReaderCitationBase(transferredStatusSection, { type: "usc" }, { source: "31", title: 52, section: "10101" }, null), "8 U.S.C. 31", "A transferred reader landing did not preserve the exact former source citation.");
-  assert.strictEqual(statuteReaderCitationBase(currentStatusSection, { type: "ina" }, null, { inaSection: "101" }), "INA 101", "An INA reader landing lost its citation system.");
+  assert.strictEqual(statuteReaderCitationBase(currentStatusSection, { type: "usc" }, null, { inaSection: "101" }), "INA 101", "A USC arrival overrode the reader's INA display setting.");
   assert(transferRecord(transferredStatusSection, transferredStatusSection.transferTargets[0]).text.includes("8 usc 31"), "A transferred source section was not pre-indexed under its exact former citation.");
   const statuteStatusWarning = extractedFunction(fallbackSource, "statuteStatusWarning", "renderStatutoryNote", {
     state: { statuteHierarchyAuthority: "ina" },
@@ -4832,7 +4842,15 @@ async function main() {
   const statuteFieldPreviewHtml = extractedFunction(fallbackSource, "statuteFieldPreviewHtml", "statuteReferencePreviewNodeHtml", { statuteTextRangeWithHouseFootnotes, escapeHtml: escapeStatutoryHtml, Math, Set });
   const statuteReferenceRunInLineHtml = extractedFunction(fallbackSource, "statuteReferenceRunInLineHtml", "statuteReferencePreviewNodeHtml", { statuteFieldPreviewHtml, statuteTextRangeWithHouseFootnotes, escapeHtml: escapeStatutoryHtml, Math, Set });
   const statuteReferencePreviewNodeHtml = extractedFunction(fallbackSource, "statuteReferencePreviewNodeHtml", "statuteReferencePreviewHtml", { statuteFieldPreviewHtml, textWithHouseFootnoteMarkers, statuteTextRangeWithHouseFootnotes, statuteReferenceUnitIndex, statuteReferencePathKey, statuteReferenceRunInLineHtml, escapeHtml: escapeStatutoryHtml, Math, Set, String });
-  const statuteReferencePreviewHtml = extractedFunction(fallbackSource, "statuteReferencePreviewHtml", "cfrBlockPlainText", { statuteFieldPreviewHtml, statuteReferenceSelection, statuteReferencePreviewNodeHtml, statuteReferenceRunInLineHtml, textWithHouseFootnoteMarkers, canonicalPath: statutoryCanonicalPath, escapeHtml: escapeStatutoryHtml, Set, String });
+  const excerptRuntime = require("./audit-ina-display").runtime(fallbackSource, hydratedSource);
+  Object.assign(excerptRuntime, { INASearchCfrHierarchy: require("../src/INASearch-CFR-Hierarchy"),
+    INA_SEARCH_INSERTIONS: require("../src/INASearch-Insertions"), cfrDefinitionContext: () => null,
+    hydrateLegalReferences: record => record, // hydratedSource was unpacked above.
+    componentTokens: testComponentTokens, pathStartsWith: testPathStartsWith });
+  for (const name of ["statuteNoteBodyStart", "formatStatuteNoteBody", "renderStatuteNoteBody", "statuteExcerptFootnotesHtml",
+    "linkifyCfrText", "renderCfrStyledRange", "cfrGraphicHtml", "insertedCfrTextRanges", "insertedCfrBlockHtml", "insertedCfrExcerptHtml", "cfrReferencePreviewHtml"])
+    vm.runInContext(require("./test-function-source")(fallbackSource, name), excerptRuntime);
+  const statuteReferencePreviewHtml = extractedFunction(fallbackSource, "statuteReferencePreviewHtml", "cfrBlockPlainText", { statuteFieldPreviewHtml, statuteReferenceSelection, statuteReferencePreviewNodeHtml, statuteReferenceRunInLineHtml, statuteExcerptFootnotesHtml: excerptRuntime.statuteExcerptFootnotesHtml, textWithHouseFootnoteMarkers, canonicalPath: statutoryCanonicalPath, escapeHtml: escapeStatutoryHtml, Set, String });
   const previewSectionMap = new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section]));
   for (const row of hydratedSource.inaCrosswalk) {
     const section = previewSectionMap.get(statutoryNormPart(row.localSection || row.uscSection));
@@ -4841,7 +4859,7 @@ async function main() {
   const legalReferenceContextStart = fallbackSource.indexOf("    function legalReferenceContextForElement(");
   const legalReferenceContextEnd = fallbackSource.indexOf("\n\n    const insertedReferenceObserverByRoot", legalReferenceContextStart);
   assert(legalReferenceContextStart >= 0 && legalReferenceContextEnd > legalReferenceContextStart, "Could not extract legalReferenceContextForElement from the insertion-enabled reader.");
-  const legalReferenceContextForElement = vm.runInNewContext(`(${fallbackSource.slice(legalReferenceContextStart, legalReferenceContextEnd).trim()})`, statuteTestContext(fallbackSource, { corpus: hydratedSource, sectionMap: previewSectionMap, normCitationPart: statutoryNormPart, statuteUnitText, statuteReferencePreviewHtml, cfrSectionIdMap, cfrUnitText, JSON, String, INA_SEARCH_INSERTIONS: require(path.join(root, "src", "INASearch-Insertions")) }));
+  const legalReferenceContextForElement = vm.runInNewContext(`(${fallbackSource.slice(legalReferenceContextStart, legalReferenceContextEnd).trim()})`, statuteTestContext(fallbackSource, { corpus: hydratedSource, sectionMap: previewSectionMap, normCitationPart: statutoryNormPart, statuteUnitText, statuteReferencePreviewHtml, cfrReferencePreviewHtml: excerptRuntime.cfrReferencePreviewHtml, cfrSectionIdMap, cfrUnitText, JSON, String, INA_SEARCH_INSERTIONS: require(path.join(root, "src", "INASearch-Insertions")) }));
   const legalReferencePopoverPlacement = extractedFunction(fallbackSource, "legalReferencePopoverPlacement", "positionLegalReferencePopover", { Math, Number });
   const referenceTriggerRect = { left: 425, right: 585, top: 250, bottom: 270 };
   const referencePopoverRect = { width: 590, height: 410 };
@@ -5196,20 +5214,6 @@ async function main() {
   scrollToRenderedStatuteTarget();
   scrollToRenderedCfrTarget();
   assert.strictEqual(alignedAnchors.length, 0, "Default citation scrolling must not overwrite restored history reading positions.");
-  const visibleStatuteLines = [
-    { top: 100, path: ["a"] },
-    { top: 200, path: ["a", "15"] },
-    { top: 260, path: ["a", "16"] }
-  ].map(item => ({ getBoundingClientRect: () => ({ top: item.top }), parentElement: { dataset: { statutePath: JSON.stringify(item.path) } } }));
-  const currentStatutePathAtReadingLine = extractedFunction(fallbackSource, "currentStatutePathAtReadingLine", "currentCfrPathAtReadingLine", {
-    els: { statuteNavigator: { hidden: false }, detail: {} },
-    state: { statuteNavigationSectionId: "usc-1101" },
-    statuteReadingLine: () => 230,
-    $$: () => visibleStatuteLines,
-    JSON
-  });
-  assert.deepStrictEqual(plain(currentStatutePathAtReadingLine()), ["a", "15"], "The live hierarchy does not follow the statutory line touching the tenth-view reading line.");
-
   const scrollSection1101 = fullSource.title8.sections.find(section => section.section === "1101");
   const scrollHistoryState = {
     view: "search",

@@ -101,9 +101,54 @@ for (const citation of ["INA 101(a)(27)(C)(ii)(II)", "INA 101(a)(27)(C)(ii)(III)
 const origins = [...fundsRow.matchAll(/data-house-footnote-origin="(house-footnote-reference-[^"]+)"/g)].map(match => match[1]);
 assert.equal(origins.length, 2);
 assert.equal(new Set(origins).size, 2, "Each cited provision must retain its distinct marker for onward-note return navigation");
-assert.doesNotMatch(footnoteList, /<details|data-house-footnote-return=/, "Footnotes stay visible and their citation destinations must not be rewritten by return navigation");
+assert.doesNotMatch(footnoteList, /<details/, "Footnotes stay visible outside disclosures");
+assert.match(fundsRow, /class="house-footnote-return"[^>]*data-house-footnote-return=/, "Editorial footnotes need a separate return control alongside their citation links");
 assert.doesNotMatch(context.renderStatuteSupplements(section, null, null), /House editorial footnotes/, "The visible footnotes must be outside the supplemental disclosure");
 const preambleFootnote = { id: "preamble-footnote", number: "1", text: "Section context." };
 const preambleHtml = context.renderHouseEditorialFootnotes({ id: "usc-1", section: "1", preambleFootnoteReferences: [preambleFootnote], houseEditorialFootnotes: [preambleFootnote] }, null, "8 U.S.C. 1");
 assert.match(preambleHtml, /data-show-citation="8 U.S.C. 1"/, "Section-level footnotes must use section navigation without an invented subsection");
+// Exercise the real click branches with a reader that moves independently of
+// the marker's destination. Return must restore the pre-jump position, rather
+// than put the superscript at the configured citation reading line.
+const clickStart = template.indexOf('        const notesExpansion = event.target.closest("[data-statute-notes-expand]");');
+const clickEnd = template.indexOf('        const citationSelection = ', clickStart);
+assert(clickStart >= 0 && clickEnd > clickStart);
+const reader = { scrollY: 840, scrollX: 11, scrollTo({ top, left = 0 }) { this.scrollY = top; this.scrollX = left; } };
+const ref = { id: "marker", tagName: "A", jumpTop: 300, focus() {} };
+const onward = { id: "onward-note", tagName: "DETAILS", jumpTop: 21000, dataset: {}, matches: () => false, focus() {} };
+const entry = { id: "footnote", tagName: "LI", jumpTop: 20000, dataset: {}, matches: () => true, focus() {} };
+const returnLink = { dataset: {}, href: "#marker", setAttribute(name, value) { this[name] = value; }, getAttribute(name) { return this[name]; } };
+const nodes = new Map([[ref.id, ref], [entry.id, entry], [onward.id, onward]]);
+const navigation = vm.createContext({
+  window: reader, document: { getElementById: id => nodes.get(id) }, els: { detail: {} },
+  houseFootnoteReturnPositions: new WeakMap(),
+  $$: () => [returnLink], legalReaderScrollRequest: () => ({ root: reader }),
+  cancelLegalReaderScroll() {}, scrollStatuteAnchorToReadingLine: target => reader.scrollTo({ top: target.jumpTop })
+});
+vm.runInContext(source(template, "revealStatuteNoteTarget"), navigation);
+const click = vm.runInContext(`(function(event) { ${template.slice(clickStart, clickEnd)} })`, navigation);
+const event = matches => ({ preventDefault() {}, target: { closest: selector => matches[selector] || null } });
+const markerClick = { ...ref, dataset: { houseFootnoteJump: "footnote" }, getAttribute: () => "#footnote", closest: () => null };
+// Keep the exact marker element as the reference used by the real handler.
+nodes.set(ref.id, markerClick);
+click(event({ "[data-house-footnote-jump]": markerClick }));
+assert.equal(reader.scrollY, 20000, "The marker first opens its editorial footnote");
+click(event({ "[data-house-footnote-jump]": { dataset: { houseFootnoteJump: "footnote" }, getAttribute: () => "#onward-note", closest: () => entry } }));
+assert.equal(reader.scrollY, 21000, "An onward note remains reachable");
+click(event({ "[data-house-footnote-return]": returnLink }));
+assert.deepEqual([reader.scrollY, reader.scrollX], [840, 11], "Returning through an onward note must restore the original reading position");
+const supplementsControl = { open: true }, nested = [{ open: true }, { open: true }];
+navigation.$$ = () => nested;
+click(event({ "[data-statute-notes-expand]": { dataset: { statuteNotesExpand: "false" }, closest: () => supplementsControl } }));
+assert.equal(supplementsControl.open, false, "Collapse all must close the supplements container itself");
+assert(nested.every(detail => !detail.open), "Collapse all must also close nested notes");
+click(event({ "[data-statute-notes-expand]": { dataset: { statuteNotesExpand: "true" }, closest: () => supplementsControl } }));
+assert(supplementsControl.open && nested.every(detail => detail.open), "Expand all must reopen the container and its notes");
+const scopedMarker = { id: "marker" };
+const scopedOrigin = { dataset: { houseFootnoteOrigin: "marker", houseFootnoteReturn: "marker" }, getAttribute: () => "#marker", setAttribute(name, value) { this[name] = value; } };
+const scoping = vm.createContext({ $$: selector => selector === '[id]' ? [scopedMarker] : [scopedOrigin] });
+vm.runInContext(source(template, "scopeFocusedPaneIds"), scoping);
+scoping.scopeFocusedPaneIds({ id: "pane-2", detail: {} });
+assert.equal(scopedOrigin.dataset.houseFootnoteOrigin, "pane-2-marker", "Onward-note returns must use the marker in their own viewer pane");
+assert.equal(scopedOrigin.dataset.houseFootnoteReturn, "pane-2-marker");
 console.log("Statute note navigation checks passed.");

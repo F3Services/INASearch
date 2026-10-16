@@ -187,10 +187,11 @@
     const text = JSON.stringify(vault);
     const bytes = new TextEncoder().encode(text);
     const expectedRevision = Math.max(0, Number(details.expectedRevision) || 0);
+    const revisionFloor = Math.max(expectedRevision, Number(details.revisionFloor) || 0);
     return {
       recordSchemaVersion: 1,
       storageFormat: "json",
-      cacheRevision: expectedRevision + 1,
+      cacheRevision: revisionFloor + 1,
       bytes: bytes.byteLength,
       sha256: await sha256Bytes(bytes),
       storedAt: new Date().toISOString(),
@@ -212,18 +213,20 @@
     return vault;
   }
 
-  async function loadActiveProfile() {
+  async function loadActiveProfile({ includeRecoveryState = false } = {}) {
+    const active = await read("profiles", ACTIVE_PROFILE_KEY);
+    const cacheRevision = Number.isSafeInteger(active?.cacheRevision) ? Math.max(0, active.cacheRevision) : 0;
+    const activeSha256 = typeof active?.sha256 === "string" ? active.sha256 : null;
     for (const key of [ACTIVE_PROFILE_KEY, PREVIOUS_PROFILE_KEY]) {
-      const record = await read("profiles", key);
+      const record = key === ACTIVE_PROFILE_KEY ? active : await read("profiles", key);
       if (!record) continue;
       try {
-        return { vault: await decodeProfileRecord(record), record, slot: key };
+        return { vault: await decodeProfileRecord(record), record, slot: key, cacheRevision, activeSha256 };
       } catch (error) {
-        if (key === ACTIVE_PROFILE_KEY) await remove("profiles", ACTIVE_PROFILE_KEY).catch(() => {});
         await write("metadata", "last-profile-cache-error", { at: new Date().toISOString(), slot: key, message: error?.message || String(error) }).catch(() => {});
       }
     }
-    return null;
+    return includeRecoveryState ? { vault: null, record: null, slot: null, cacheRevision, activeSha256 } : null;
   }
 
   async function saveProfile(vault, details = {}) {
@@ -246,14 +249,17 @@
         const currentRequest = store.get(ACTIVE_PROFILE_KEY);
         currentRequest.onsuccess = () => {
           const current = currentRequest.result;
-          const actualRevision = Number.isSafeInteger(current?.cacheRevision) ? current.cacheRevision : 0;
-          if (actualRevision !== expectedRevision) {
-            conflictError = new Error(`The browser profile changed in another window (expected revision ${expectedRevision}, found ${actualRevision}).`);
+          const actualRevision = Number.isSafeInteger(current?.cacheRevision) ? Math.max(0, current.cacheRevision) : 0;
+          const actualSha256 = typeof current?.sha256 === "string" ? current.sha256 : null;
+          // A cleared cache can reuse an old revision. Match the payload too
+          // so a stale window cannot overwrite a different recovered copy.
+          if (actualRevision !== expectedRevision || ("expectedSha256" in details && actualSha256 !== details.expectedSha256)) {
+            conflictError = new Error(`The saved browser profile changed or is missing (expected revision ${expectedRevision}, found ${actualRevision}).`);
             conflictError.name = "ProfileConflictError";
             transaction.abort();
             return;
           }
-          if (current) store.put(current, PREVIOUS_PROFILE_KEY);
+          if (current && details.preservePrevious !== true) store.put(current, PREVIOUS_PROFILE_KEY);
           store.put(persistedStage, ACTIVE_PROFILE_KEY);
           store.delete(stagingKey);
         };
@@ -321,10 +327,14 @@
       return null;
     };
     const chooseProfile = async () => {
+      // A recovered payload belongs to the previous slot, but the next save
+      // must compare against the active slot read in this same snapshot.
+      const cacheRevision = Number.isSafeInteger(values[2]?.cacheRevision) ? Math.max(0, values[2].cacheRevision) : 0;
+      const activeSha256 = typeof values[2]?.sha256 === "string" ? values[2].sha256 : null;
       for (const [offset, slot] of [ACTIVE_PROFILE_KEY, PREVIOUS_PROFILE_KEY].entries()) {
         const record = values[2 + offset];
         if (!record) continue;
-        try { return { vault: await decodeProfileRecord(record), record, slot }; }
+        try { return { vault: await decodeProfileRecord(record), record, slot, cacheRevision, activeSha256 }; }
         catch (error) { errors[`profile:${slot}`] = error?.message || String(error); }
       }
       return null;

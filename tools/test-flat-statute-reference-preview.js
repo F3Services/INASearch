@@ -101,3 +101,33 @@ const inlineTarget = { kind: "node-text", path: ["a", "4", "B"], match: { start:
 const inlineHtml = context.renderStatutoryNode(flat.body[0], inlineTarget.path, [], 0, inlineTarget, "8 U.S.C. 1251", flat.id, { sourceHost: { title: 8, section: "1251" } });
 assert(inlineHtml.includes('<mark class="statute-search-match"'), "Virtual inline units must retain their hit highlight");
 console.log("PASS search hits highlight only their owning statutory text");
+
+// An unnumbered table is physical content of its labelled legal parent, not a
+// second legal unit with permission to overwrite that parent's copy scope.
+const tableParent = { label: "iii", heading: "Special rule", text: "A defined benefit plan must meet this table:", children: [
+  { label: "", text: "If the participant's age is— The percentage is— 30 or less 2", table: {
+    rows: [["If the participant's age is—", "The percentage is—"], ["30 or less", "2"]]
+  }, children: [] }
+] };
+const tableSection = { id: "usc:26:9000", title: 26, section: "9000", body: [{ label: "x", children: [tableParent] }] };
+const existingUscSection = context.uscSection;
+context.uscSection = (title, number) => Number(title) === 26 && number === "9000" ? tableSection : existingUscSection(title, number);
+context.uscSectionById.set(tableSection.id, tableSection);
+assert.equal(context.statuteReferenceSelection(tableSection, ["x", "iii"]).node, tableParent,
+  "An anonymous table must not replace the labelled parent legal-unit scope");
+const tableTarget = { kind: "node-text", path: ["x", "iii"], sourceNode: tableParent.children[0], match: { start: 7, end: 24 } };
+context.statutoryTableHtml = vm.runInContext(`(${functionSource(source, "statutoryTableHtml")})`, context);
+const tableHtml = context.renderStatutoryNode(tableSection.body[0], [], [], 0, tableTarget, "26 U.S.C. 9000", tableSection.id, { sourceHost: { title: 26, section: "9000" } });
+assert.deepEqual([...tableHtml.matchAll(/<mark\b[^>]*>([^<]*)<\/mark>/g)].map(match => match[1]), ["participant's age"],
+  "A physical table hit highlights its cell instead of applying cell offsets to the parent's prose");
+const selectedTable = context.renderStatutoryNode(tableSection.body[0], ["x", "iii"], [], 0, null, "26 U.S.C. 9000", tableSection.id, { sourceHost: { title: 26, section: "9000" } });
+assert.equal((selectedTable.match(/class="statutory-node target"/g) || []).length, 1,
+  "The labelled parent owns one selection box around prose and its anonymous table");
+vm.runInContext(functionSource(source, "occurrenceReaderTarget"), context);
+const exactTarget = context.occurrenceReaderTarget({ authority: "usc", recordId: tableSection.id, path: ["x", "iii"],
+  target: { field: "body", subfield: "text", recordPath: [0, 0, 0], start: 0 }, snippet: { matchStart: 7, matchEnd: 24 } });
+assert.deepEqual([...exactTarget.target.recordPath], [0, 0, 0], "The reader retains the search projection's separate physical source locator");
+const ordinaryTarget = context.occurrenceReaderTarget({ authority: "ina", recordId: "8-1101", path: ["a", "15", "H", "ii", "a"], target: { field: "body", subfield: "text" } });
+assert.deepEqual([...ordinaryTarget.target.path], ["a", "15", "H", "ii", "a"]);
+assert.equal(Object.hasOwn(ordinaryTarget.target, "recordPath"), false, "Ordinary citations without a physical locator do not acquire extra identifier fields");
+console.log("PASS statute targets: legal parent scope, exact physical table hits and optional occurrence metadata");
