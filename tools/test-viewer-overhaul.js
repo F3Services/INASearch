@@ -442,6 +442,7 @@ function testPaneModesAndHistory() {
     editSourceSnapshot: null, lastAcceptedCommand: "8cfr205.2", typingCommitTimer: "old"
   };
   const handleFocusedPaneInput = extractedFunction("handleFocusedPaneInput", "navigateFocusedPaneCommandHistory", {
+    clearScrolledSearchLocation: extractedFunction("clearScrolledSearchLocation", "syncSearchToScrolledLegalLocation", { state: {} }),
     invalidatePaneSearchWork: () => immediateEvents.push(["cancel"]),
     String,
     FOCUSED_PANE_TYPING_COMMIT_DELAY: 750,

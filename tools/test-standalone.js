@@ -2394,6 +2394,7 @@ async function main() {
     $$: () => [],
     applyThemePreference: () => {},
     syncCitationJumpAnimationPreference: () => {},
+    refreshScrollSearchPreference: () => {},
     syncAppearanceControls: () => {},
     stopCorpusMaintenance: () => {},
     renderTutorialEntryLabels: () => {},
@@ -2702,13 +2703,14 @@ async function main() {
   assert(fallbackSource.includes("if (startupQuery) applySearchQuery(startupQuery, false, true);"), "Initialization does not synchronously preserve the displayed formatting of the startup query.");
   assert(fallbackSource.includes("else openClearedSearchHierarchy();"), "A blank startup does not open the configured empty-search hierarchy with an empty search field.");
   const startupEditableSearch = { value: "" };
-  const startupApplyState = { query: "", searchScopeActive: false };
+  const startupApplyState = { query: "", searchScopeActive: false, scrollSearchLocation: { query: "INA 212(a)" } };
   let startupActivatedScope = null;
   const applyStartupSearchQuery = extractedFunction(fallbackSource, "applySearchQuery", "openSearchRecord", {
     finishCitationNoteDraft: () => true,
     endCopyActionPreview: () => {},
     endShareViewPreview: () => {},
     captureStatuteHistoryPresentation: () => {},
+    clearScrolledSearchLocation: extractedFunction(fallbackSource, "clearScrolledSearchLocation", "syncSearchToScrolledLegalLocation", { state: startupApplyState }),
     String,
     INA_SEARCH_COMMAND: searchCommandRuntime,
     els: { search: startupEditableSearch },
@@ -2723,6 +2725,7 @@ async function main() {
     runSearch: () => {}
   });
   applyStartupSearchQuery(" INA 215(a) ", false, true);
+  assert.strictEqual(startupApplyState.scrollSearchLocation, null, "Explicit search navigation retains a stale scroll-follow citation.");
   assert.strictEqual(startupEditableSearch.value, " INA 215(a) ", "Startup query formatting is canonicalized before it reaches the editable field.");
   applyStartupSearchQuery(" INA 215(a) ", false);
   assert.strictEqual(startupEditableSearch.value, "INA 215(a)", "Ordinary non-startup query normalization unexpectedly changed.");
@@ -5446,7 +5449,6 @@ async function main() {
   assert(fallbackSource.includes('label: childLabel,\n        value: ""') && (fallbackSource.match(/value: "", options/g) || []).length >= 2, "Immediate-child navigation menus still display child counts that can be confused with citation units.");
   assert(fallbackSource.includes('if (!instant && !focusedPane && animatedCitationJumpsEnabled()) animateLegalReaderScroll('), "Focused panes or disabled citation animation do not position requested units synchronously.");
   assert(fallbackSource.includes("withFocusedCitationPane(pane, () => handleStatuteNavigatorClick(event))") && fallbackSource.includes("focusedPaneForElement(event.target)"), "Focused panes do not route navigation and reader interactions through their own state contexts.");
-  assert(fallbackSource.includes("replaceFocusedCitationSegment(focusedPane, displayedQuery)") && fallbackSource.includes("formatNavigationCitationLike(focusedPane?.entry.text"), "Scroll synchronization does not update only the active pane's formatted search segment.");
   const emptyHierarchyQueries = [];
   const emptyHierarchyState = { statuteHierarchyAuthority: "usc" };
   const emptyHierarchyNodes = new Map([

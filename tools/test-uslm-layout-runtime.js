@@ -38,6 +38,19 @@ assert(!continuationHtml.includes("uslm-field-block"), "Leading whitespace must 
 const parentContinuation = [{ tag: "continuation", start: 0, end: 16, presentation: { indent: 2, firstIndent: 0 } }];
 const parentContinuationHtml = presentation.format(parentContinuation, 0, 16, (start, end) => "is inadmissible.".slice(start, end), { mode: "field", parentIndent: 4, parentFirstIndent: -2 });
 assert(parentContinuationHtml.includes("margin-left:0em"), "INA 212's continuation must align with its parent's first line instead of escaping the paragraph padding");
+// INA 212(a)(3)(B)(iii) has a second hanging offset on its continuation.
+// Its parent starts at 5 - 2 = 3, but the continuation starts at 4 - 2 = 2.
+// Keep the hanging shape while placing its first line inside the citation.
+const hangingContinuation = [{ tag: "continuation", start: 0, end: 16, presentation: { indent: 4, firstIndent: -2 } }];
+const hangingContinuationHtml = presentation.format(hangingContinuation, 0, 16, render, { mode: "field", parentIndent: 5, parentFirstIndent: -2 });
+assert(hangingContinuationHtml.includes("margin-left:2.8em"), "A continuation's hanging first line must not escape its citation container");
+assert(hangingContinuationHtml.includes("text-indent:-2.8em"), "Containing a continuation must retain its hanging layout");
+const alignedContinuation = [{ tag: "continuation", start: 0, end: 16, presentation: { indent: 3, firstIndent: -1 } }];
+const alignedContinuationHtml = presentation.format(alignedContinuation, 0, 16, render, { mode: "field", parentIndent: 4, parentFirstIndent: -2 });
+assert(alignedContinuationHtml.includes("margin-left:1.4em"), "Already-contained continuations retain their source indentation");
+assert(alignedContinuationHtml.includes("text-indent:-1.4em"));
+const noteHangingHtml = presentation.format(hangingContinuation, 0, 16, render, { mode: "note", parentIndent: 3 });
+assert(noteHangingHtml.includes("margin-left:1.4em"), "Standalone notes retain their publisher coordinate system");
 // INA 212(a)(1)(A)'s chapeau follows a separately rendered label and heading.
 // Its publisher indent (2) is below its parent's hanging indent (4); applying
 // that negative difference to an inline span pulls it over the heading.

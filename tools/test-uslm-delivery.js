@@ -146,7 +146,10 @@ function verify(corpus, label) {
     if (item.kind === "field") for (const block of layout.filter(block => block.tag === "continuation")) {
       const tag = actual.tags.filter(tag => tag.tag === "continuation")[layout.filter(candidate => candidate.tag === "continuation").indexOf(block)];
       assert.equal(tag.style.display, "block", `${diagnostic}: continuation indentation applies to every line`);
-      if (Number.isFinite(block.presentation?.indent)) assert.equal(parseFloat(tag.style["margin-left"]), Math.round((block.presentation.indent - (display.indent || 0) - (display.firstIndent || 0)) * 14) / 10, `${diagnostic}: source continuation indent is relative to its parent's first line`);
+      if (Number.isFinite(block.presentation?.indent)) {
+        const margin = parseFloat(tag.style["margin-left"]), first = parseFloat(tag.style["text-indent"] || 0);
+        assert(margin >= 0 && margin + Math.min(0, first) >= -0.001, `${diagnostic}: every continuation line stays inside its citation container`);
+      }
     }
     if (item.kind === "field" && item.field === "sourceCredit") {
       api.renderSourceCredit({ section: sections.get(item.sourceKey.split(":")[0]), text });

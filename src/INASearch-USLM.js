@@ -21,7 +21,12 @@
     if (p.fontSize === 8) style["font-size"] = "8pt";
     if (p.inline) style.display = "inline";
     const indent = p.indent ?? block.indent;
-    if (Number.isFinite(indent)) style["margin-left"] = em(indent - (options.parentIndent || 0));
+    if (Number.isFinite(indent) || options.containIndent && Number.isFinite(p.firstIndent)) {
+      const relativeIndent = Number.isFinite(indent) ? indent - (options.parentIndent || 0) : 0;
+      // A field lives inside a separately positioned citation box. Keep both
+      // its first line and wrapped lines inside that box, retaining the hang.
+      style["margin-left"] = em(options.containIndent ? Math.max(0, relativeIndent, -(p.firstIndent || 0)) : relativeIndent);
+    }
     if (Number.isFinite(p.firstIndent)) style["text-indent"] = em(p.firstIndent);
     const lengths = /^(?:-?\d+(?:\.\d+)?(?:em|rem|pt|px|%)?|auto)$/;
     const lengthProperties = new Set(["width", "height", "min-width", "max-width", "margin-left", "margin-right", "margin-top", "margin-bottom", "padding-left", "padding-right", "padding-top", "padding-bottom", "text-indent", "font-size", "line-height", "border-spacing"]);
@@ -70,7 +75,7 @@
           // The reader positions the opening text after its citation/heading.
           // Publisher hanging margins require a block, not this inline span.
           const inlineField = mode === "field" && depth === 0 && !fieldBlock && ["chapeau", "content"].includes(block.tag);
-          const attrs = attributes(mode === "field" && block.tag === "continuation" ? { ...block, style: { ...block.style, display: "block" } } : block, { parentIndent, typographyOnly: inlineField });
+          const attrs = attributes(mode === "field" && block.tag === "continuation" ? { ...block, style: { ...block.style, display: "block" } } : block, { parentIndent, typographyOnly: inlineField, containIndent: mode === "field" && depth === 0 });
           const html = `<${tag} class="${escape(cls)}${fieldBlock}${leaders}" data-uslm-tag="${escape(block.tag)}"${attrs}>${tag === "col" ? "" : `${content}</${tag}>`}`;
           output += block.tag === "table" ? `<div class="note-table-wrap">${html}</div>` : html;
         }

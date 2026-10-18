@@ -86,6 +86,41 @@ function applicationFixture(storage, state = {}) {
   return { app: context, messages };
 }
 
+test("main navigation expands by default and remembers collapse and reopen across browser sessions", async () => {
+  const { stores, storage } = storageFixture();
+  const blankScope = { window: {} };
+  vm.runInNewContext(fs.readFileSync(require.resolve("../src/INASearch-Profile.js"), "utf8"), blankScope);
+  const initialProfile = structuredClone(blankScope.window.INA_SEARCH_PROFILE);
+  stores.profiles.set("active", await storage.profileRecord({ ...vault, profile: initialProfile }, { expectedRevision: 6 }));
+  const { app } = applicationFixture(storage, {
+    profileChanged: false, statuteNavigationKind: "usc", statuteNavigationSectionId: "8-1101",
+    statuteNavigationLocation: { view: "reader" }, selected: { item: { id: "8-1101" } }
+  });
+  let scheduledSave;
+  Object.assign(app, {
+    profile: initialProfile, corpus: null, structuredCloneSafe: structuredClone,
+    els: { mainNavigatorToggle: { focus() {} } },
+    captureMainReadingAnchor: () => null, restoreMainReadingAnchor() {}, refreshLegalNavigatorVisibility() {},
+    requestAnimationFrame: callback => callback(),
+    clearTimeout() { scheduledSave = null; },
+    setTimeout(callback) { scheduledSave = callback; return 1; }
+  });
+  for (const name of ["isMainLegalReader", "legalNavigatorVisibleForCurrentContext", "emptyReferenceInsertions", "normalizeReferenceInsertions", "referenceInsertionPersistenceRoot", "profileSnapshot", "markProfileChanged", "setMainNavigatorCollapsed"]) {
+    vm.runInContext(functionSource(template, name), app);
+  }
+  assert.equal(app.legalNavigatorVisibleForCurrentContext(), true, "A fresh profile must show main navigation");
+  for (const [collapsed, visible] of [[true, false], [false, true]]) {
+    assert.equal(app.setMainNavigatorCollapsed(collapsed), true);
+    assert.equal(typeof scheduledSave, "function", "Changing main navigation must queue profile autosave");
+    await scheduledSave();
+    assert.equal(app.state.profileChanged, false);
+    const reloaded = await storage.loadActiveProfile();
+    app.profile = structuredClone(reloaded.vault.profile);
+    assert.equal(app.profile.preferences.mainNavigatorCollapsed, collapsed, "Browser reload must retain the chosen state");
+    assert.equal(app.legalNavigatorVisibleForCurrentContext(), visible, "The reopened reader must use the saved state");
+  }
+});
+
 for (const first of ["autosave", "mirror"]) {
   test(`one window can overlap ${first} with the other save path`, async () => {
     const { stores, storage } = storageFixture();

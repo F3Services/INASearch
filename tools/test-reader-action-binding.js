@@ -32,7 +32,7 @@ class Control extends EventTarget {
 class Rail extends EventTarget {
   constructor() {
     super();
-    this.buttons = [new Control("", true), ...["copy-citation", "copy-text", "print", "open"].map(action => new Control(action))];
+    this.buttons = [new Control("", true), ...["copy-citation", "copy-text", "add-note", "print", "open"].map(action => new Control(action))];
     this.hovered = false;
   }
   contains(element) { return this.buttons.includes(element); }
@@ -47,18 +47,20 @@ function fire(target, type, properties = {}) {
 }
 const plain = value => JSON.parse(JSON.stringify(value));
 function harness(paneMode = false) {
-  const rail = new Rail(), pane = paneMode ? { id: "pane-cfr", readerActions: rail } : null;
+  const rail = new Rail(), pane = paneMode ? { id: "pane-cfr", readerActions: rail, scrollRoot: { scrollTop: 900, scrollLeft: 0, isConnected: true, scrollTo: value => restores.push(value) } } : null;
   const context = { kind: paneMode ? "cfr" : "usc", sectionId: paneMode ? "8:212.4" : "8-1101", path: ["a", "1"],
     occurrenceBlockPath: paneMode ? [7] : null, citation: paneMode ? "8 CFR 212.4(a)(1)" : "8 U.S.C. 1101(a)(1)",
     cfrCitation: paneMode ? "8 CFR 212.4(a)(1)" : "", uscCitation: paneMode ? "" : "8 U.S.C. 1101(a)(1)",
     text: "(1) Original source text.", heading: "Heading", noun: paneMode ? "Regulation" : "Statute", url: "https://example.test/source" };
-  const copies = [], selections = [], prints = [], opened = [], previews = [], syncs = [], hover = [], hierarchy = [], frames = [];
+  const copies = [], selections = [], prints = [], opened = [], previews = [], syncs = [], hover = [], hierarchy = [], frames = [], notes = [], restores = [];
   const scope = vm.createContext({
     state: { statuteHierarchyAuthority: "usc", focusedCitationMode: paneMode, focusedPaneContext: null, view: "search",
       statuteNavigationKind: context.kind, statuteNavigationSectionId: context.sectionId,
       statuteNavigationLocation: { view: "reader" }, selected: { item: { id: context.sectionId } } },
+    els: { detail: {} }, window: { scrollY: 900, scrollX: 0, scrollTo: value => restores.push(value) },
     profile: { preferences: { citationCopyPreface: "[citation] - [text]" } }, document: { activeElement: null },
-    $$: (selector, root) => root.buttons.filter(button => selector.includes(`[data-live-citation-action="${button.dataset.liveCitationAction}"]`)),
+    $: (selector, root) => selector === ".reader-action-preview" ? root : null,
+    $$: (selector, root) => root.buttons.filter(button => selector === "[data-live-citation-action]" || selector.includes(`[data-live-citation-action="${button.dataset.liveCitationAction}"]`)),
     withFocusedCitationPane: (activePane, callback) => {
       const previous = scope.state.focusedPaneContext;
       scope.state.focusedPaneContext = activePane;
@@ -66,10 +68,12 @@ function harness(paneMode = false) {
     },
     syncMainReaderActionTarget: () => syncs.push(scope.state.focusedPaneContext?.id || "main"),
     setLegalCitationHover: selection => hover.push(selection), requestAnimationFrame: callback => frames.push(callback),
-    beginCopyActionPreview: (activePane, action) => { previews.push([activePane?.id || "main", action]); scope.frozen = context; },
-    endCopyActionPreview: () => { scope.frozen = null; },
-    mainReaderActionContext: target => target || scope.frozen || scope.current,
-    mainReaderPrintTarget: () => scope.printTarget,
+    mainReaderActionTarget: () => scope.state.copyActionPreview?.target || scope.current,
+    mainReaderActionContext: target => target || scope.state.copyActionPreview?.target || scope.current,
+    mainReaderPrintTarget: () => scope.state.copyActionPreview?.target || scope.current,
+    shareCitationAnchor: () => ({}), parseCitation: value => value, endShareViewPreview: () => {},
+    scrollStatuteAnchorToReadingLine: (anchor, instant) => previews.push([scope.state.focusedPaneContext?.id || "main", instant]),
+    startInlineNoteEditor: (...args) => notes.push(args), legalUnitNoteLocation: (...args) => args,
     setStatuteHierarchyAuthority: value => { scope.state.statuteHierarchyAuthority = value; },
     adoptPromotedNavigationHistory: () => {},
     selectLegalCitationLocation: (...args) => selections.push({ pane: scope.state.focusedPaneContext?.id || "main", args: plain(args) }),
@@ -79,11 +83,11 @@ function harness(paneMode = false) {
   });
   scope.current = context;
   scope.printTarget = { ...context, path: ["b"], citation: context.citation.replace("(a)(1)", "(b)"), text: "(b) Highlighted print text." };
-  for (const name of ["isMainLegalReader", "commitMainLegalContext", "preferredLegalUnitCitation", "legalUnitCopyText", "citationCopyPreface", "citationWithLegalText", "handleLegalUnitAction", "bindCopyActionPreview", "bindReaderActions"]) {
+  for (const name of ["isMainLegalReader", "commitMainLegalContext", "preferredLegalUnitCitation", "legalUnitCopyText", "citationCopyPreface", "citationWithLegalText", "handleLegalUnitAction", "beginCopyActionPreview", "endCopyActionPreview", "bindCopyActionPreview", "bindReaderActions"]) {
     vm.runInContext(functionSource(template, name), scope);
   }
   scope.bindReaderActions(rail, pane);
-  return { rail, pane, scope, context, copies, selections, prints, opened, previews, syncs, hover, hierarchy, frames };
+  return { rail, pane, scope, context, copies, selections, prints, opened, previews, syncs, hover, hierarchy, frames, notes, restores };
 }
 
 async function checkHost(paneMode) {
@@ -94,7 +98,11 @@ async function checkHost(paneMode) {
 
   const copy = h.rail.button("copy-text");
   fire(copy, "mouseenter");
-  assert.deepEqual(h.previews, [[host, "copy"]]);
+  assert.deepEqual(h.previews, [[host, true]], "Entering the group instantly previews its citation");
+  fire(copy, "mouseleave", { relatedTarget: h.rail });
+  fire(h.rail.button("add-note"), "mouseenter");
+  assert.equal(h.restores.length, 0, "Moving through gaps between actions must not restore the old view");
+  assert.equal(h.previews.length, 1, "Moving to another action must not jump again");
   h.scope.current = { ...h.context, text: "Wrong target after preview scrolling." };
   const click = fire(h.rail, "click", { target: copy });
   await Promise.resolve();
@@ -106,8 +114,10 @@ async function checkHost(paneMode) {
   assert.equal(h.selections.length, 1);
 
   fire(h.rail, "click", { target: h.rail.button("print") });
-  assert.equal(h.prints[0].text, "(b) Highlighted print text.", "Print uses the separate highlighted target");
-  assert.deepEqual(h.selections[1].args[2], ["b"]);
+  assert.equal(h.prints[0].text, "(1) Original source text.", "Print shares the frozen target with every action");
+  assert.deepEqual(h.selections[1].args[2], ["a", "1"]);
+  fire(h.rail, "click", { target: h.rail.button("add-note") });
+  assert.equal(h.notes[0][3][2].join("/"), "a/1", "The note is attached to the shared citation");
   fire(h.rail, "click", { target: h.rail.button("open") });
   assert.deepEqual(h.opened, ["https://example.test/source"]);
 
@@ -119,7 +129,7 @@ async function checkHost(paneMode) {
   assert.equal(h.selections.length, before);
   assert.equal(h.previews.length, 1);
 
-  h.scope.frozen = null;
+  h.scope.state.copyActionPreview = null;
   h.scope.current = null;
   fire(h.rail, "click", { target: h.rail.button("open") });
   assert.deepEqual(h.hierarchy, ["open"], "Hierarchy sources remain available without a section context");
@@ -133,20 +143,22 @@ async function checkHost(paneMode) {
   assert.equal(h.scope.state.statuteHierarchyAuthority, "ina");
 
   h.scope.document.activeElement = h.rail.button("print");
-  fire(h.rail, "focusout"); h.frames.shift()();
+  fire(h.rail, "focusout"); while (h.frames.length) h.frames.shift()();
   assert.equal(h.hover.length, 0, "Moving focus inside the rail retains the preview");
   h.scope.document.activeElement = null;
   h.rail.hovered = true;
-  fire(h.rail, "focusout"); h.frames.shift()();
+  fire(h.rail, "focusout"); while (h.frames.length) h.frames.shift()();
   assert.equal(h.hover.length, 0, "Pointer hover retains the preview after focus leaves");
   h.rail.hovered = false;
-  fire(h.rail, "focusout"); h.frames.shift()();
+  fire(h.rail, "focusout"); while (h.frames.length) h.frames.shift()();
   fire(h.rail, "mouseleave");
-  assert.deepEqual(h.hover, [null, null], "The preview clears after focus and pointer both leave");
+  while (h.frames.length) h.frames.shift()();
+  assert.equal(h.hover.at(-1), null, "The hover highlight clears after focus and pointer both leave");
+  assert.equal(h.scope.state.copyActionPreview, null, "Leaving the group clears the temporary preview");
   assert.equal(h.scope.state.focusedPaneContext, null, "Pane actions restore the outer reader context");
 }
 (async () => {
   await checkHost(false);
   await checkHost(true);
-  console.log("PASS reader action binding: main/pane context, frozen copy target, print target, occurrence commit, source action, disabled controls and hover lifetime");
+  console.log("PASS reader action binding: shared target, continuous instant preview, note, print, source and main/pane contexts");
 })().catch(error => { console.error(error); process.exitCode = 1; });

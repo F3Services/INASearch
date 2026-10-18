@@ -31,6 +31,8 @@ window.INA_SEARCH_PROFILE = {
     "splitAuthoritySearchPanes": false,
     "legalNavigatorVisibility": "single",
     "scrollUpdatesSearch": false,
+    "scrollSearchDepth": 2,
+    "selectionUpdatesSearch": true,
     "pageViewOffsetPercent": 3,
     "mainNavigatorCollapsed": false,
     "citationCopyPreface": "[citation] - [text]",
