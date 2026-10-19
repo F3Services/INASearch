@@ -1302,10 +1302,13 @@
     .cfr-block[data-cfr-path] { scroll-margin-top: calc(var(--topbar-height) + 95px); }
     .cfr-block.target { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
     .cfr-subtree { display: grid; gap: 8px; white-space: normal; }
-    .cfr-subtree.cfr-block { padding: 0; border: 0; isolation: isolate; }
+    .cfr-subtree.cfr-block { padding: 0; border: 0; isolation: isolate; pointer-events: none; }
+    /* Match each scope's hit area to its highlight, preserving ancestor gutters. */
+    .cfr-subtree::before { content: ""; position: absolute; inset: 0; inset-inline-start: var(--cfr-selection-inset, 0px); z-index: -1; pointer-events: auto; border-radius: 6px; }
+    .cfr-subtree > :not(.cfr-subtree) { pointer-events: auto; }
     .cfr-subtree.cfr-block:is(.target, .citation-hover-target) { background: transparent; box-shadow: none; }
     .cfr-subtree.target::before,
-    .cfr-subtree.citation-hover-target::before { content: ""; position: absolute; inset: 0; inset-inline-start: var(--cfr-selection-inset, 0px); z-index: -1; pointer-events: none; border: 2px solid var(--blue); border-radius: 6px; background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
+    .cfr-subtree.citation-hover-target::before { border: 2px solid var(--blue); background: var(--blue-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
     .cfr-subtree.citation-hover-target::before { opacity: .5; }
     .cfr-subtree > .cfr-block { background: transparent; }
     .cfr-block.search-target { background: var(--amber-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--warning) 35%, transparent); }
