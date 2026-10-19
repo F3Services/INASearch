@@ -2,8 +2,12 @@
 "use strict";
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
+const vm = require("node:vm");
 const { execFileSync } = require("node:child_process");
-const { runtime } = require("./audit-ina-display");
+const functionSource = require("./test-function-source");
+const { runtime, plain } = require("./audit-ina-display");
+const { readBuildCorpus } = require("./read-build-corpus");
+const { unpackLegalReferences } = require("./pack-legal-references");
 const template = fs.readFileSync("src/INASearch.template.html", "utf8");
 const api = runtime(template, { title8: { sections: [] }, inaCrosswalk: [] });
 api.profile.preferences.statutoryLinkCitationSystem = "usc";
@@ -41,3 +45,58 @@ for (const match of html.matchAll(/<\/?a\b[^>]*>/g)) {
 }
 assert.equal(anchorDepth, 0);
 console.log("PASS USLM rendering: original editorial marker survives citation overlap");
+
+const corpus = unpackLegalReferences(readBuildCorpus("INASearch.html"));
+const previewApi = runtime(template, corpus);
+for (const name of ["superscriptNumber", "textWithHouseFootnoteMarkers", "statuteTextRangeWithHouseFootnotes"])
+  vm.runInContext(functionSource(template, name), previewApi);
+const visibleText = html => plain(html.replace(/<template\b[^>]*>[\s\S]*?<\/template>/g, ""));
+for (const [sectionNumber, path, convertedCitation] of [
+  ["1182", ["n", "2", "C", "vii", "II"], "INA 214(c)(1)"],
+  ["1184", ["c", "1"], "INA 218"]
+]) {
+  const section = corpus.title8.sections.find(section => section.section === sectionNumber);
+  let node = { children: section.body };
+  for (const token of path) node = node.children.find(child => child.label === token);
+  const context = { kind: "usc", uscSection: sectionNumber, path,
+    sourceHost: { kind: "usc", title: 8, section: sectionNumber, path } };
+  for (const preference of ["ina", "usc", "view"]) for (const view of ["ina", "usc"]) {
+    previewApi.profile.preferences.statutoryLinkCitationSystem = preference;
+    previewApi.state.statuteHierarchyAuthority = view;
+    const native = previewApi.linkifyStatutoryText(node.text, node.references, 0, undefined, null, [],
+      { ...context, sourceLayout: node.textLayout, sourcePresentation: node.textPresentation });
+    const preview = previewApi.statuteFieldPreviewHtml(node, "text", 0, node.text.length, new Set(), null, context);
+    assert.equal(visibleText(native).includes(convertedCitation), preference === "ina" || preference === "view" && view === "ina",
+      "The native reader fixture must exercise the selected citation display setting");
+    assert.equal(visibleText(preview), visibleText(native),
+      `${sectionNumber}${path.join("/")}: hover text must match native citation formatting (${preference}/${view})`);
+  }
+}
+console.log("PASS hover citation formatting: reported INA 212 reference and INA 214(c)(1) target follow all three view settings");
+
+// Open a complete preview from a cold, packed section, as hovering does before
+// the native reader has ever visited the target.
+const packed = readBuildCorpus("INASearch.html");
+const coldPreview = runtime(template, packed);
+Object.assign(coldPreview, {
+  hydratedLegalReferenceRoots: new WeakSet(), statuteReferenceUnitIndexCache: new WeakMap(),
+  compactStatutePathIndex: require("./test-mixed-citations").createParser().api.compactStatutePathIndex,
+  pathStartsWith: (path, prefix) => prefix.every((token, index) => path[index] === token)
+});
+for (const name of ["componentTokens", "statuteNodeAtPath", "statuteDefinitionContext", "expandPackedHouseHref", "hydrateLegalReferences",
+  "superscriptNumber", "statutoryRunInMarkers", "indexedStatutePathExists", "structuralStatutePathExists", "resolvedRunInStatutePath",
+  "statutoryRunInSegments", "statuteReferencePathKey", "statuteReferenceUnitIndex", "statuteReferenceSelection",
+  "statuteReferenceRunInLineHtml", "statuteReferencePreviewNodeHtml", "statuteExcerptFootnotesHtml", "statuteReferencePreviewHtml"])
+  vm.runInContext(functionSource(template, name), coldPreview);
+const targetSection = packed.title8.sections.find(section => section.section === "1184");
+const targetNode = coldPreview.statuteNodeAtPath(targetSection, ["c", "1"]);
+assert(targetNode._lr && !targetNode.references, "The cold-preview fixture must start with packed references");
+for (const view of ["ina", "usc"]) {
+  coldPreview.profile.preferences.statutoryLinkCitationSystem = "view";
+  coldPreview.state.statuteHierarchyAuthority = view;
+  const preview = coldPreview.statuteReferencePreviewHtml(targetSection, ["c", "1"]);
+  assert.equal(visibleText(preview).includes("INA 218"), view === "ina", "The full hover preview must apply Follow View to hydrated references");
+  assert(!preview.includes("data-legal-reference"), "Formatting preview text must not introduce nested citation hover triggers");
+}
+assert(targetNode.references.length > 0, "Hovering must hydrate the previously unopened target's citations");
+console.log("PASS complete hover preview: cold packed target, source context and Follow View");

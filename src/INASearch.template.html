@@ -249,6 +249,7 @@
       --navy: #17365d;
       --navy-2: #005288;
       --blue: #005288;
+      --on-blue: #ffffff;
       --blue-soft: #e7f2f8;
       --ink: #1b1b1b;
       --muted: #565c65;
@@ -279,6 +280,7 @@
       --navy: #d8e9f8;
       --navy-2: #b9d7ef;
       --blue: #69b4ff;
+      --on-blue: #102a43;
       --blue-soft: #102e49;
       --ink: #edf3f8;
       --muted: #aab8c5;
@@ -304,6 +306,7 @@
         --navy: #d8e9f8;
         --navy-2: #b9d7ef;
         --blue: #69b4ff;
+        --on-blue: #102a43;
         --blue-soft: #102e49;
         --ink: #edf3f8;
         --muted: #aab8c5;
@@ -634,7 +637,7 @@
     .common-depth-group-title { border-bottom: 1px solid var(--line); padding: 6px 7px 8px; color: var(--navy); font-size: 10px; }
     .common-depth-choice { width: 100%; min-height: 30px; border: 0; border-radius: 6px; padding: 5px 7px; color: var(--muted); background: transparent; cursor: pointer; font-size: 10px; font-weight: 800; text-align: left; }
     .common-depth-choice:hover, .common-depth-choice:focus-visible { color: var(--navy); background: var(--blue-soft); }
-    .common-depth-choice[aria-checked="true"] { color: #fff; background: var(--blue); }
+    .common-depth-choice[aria-checked="true"] { color: var(--canvas); background: var(--blue); }
     .common-search-note { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 9px; line-height: 1.4; }
     .global-search .search-field-shell { flex: 1; min-width: 120px; }
     .global-search .search-input {
@@ -999,7 +1002,7 @@
     .occurrence-progress { display: grid; place-items: center; min-height: 180px; color: var(--muted); font-size: 11px; }
     .occurrence-rows { display: grid; gap: 5px; margin-top: 12px; }
     .occurrence-row { display: grid; grid-template-columns: clamp(76px, 15%, 106px) minmax(0, 1fr); width: 100%; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 7px; padding: 8px 9px; color: var(--ink); background: var(--panel); text-align: left; cursor: pointer; }
-    .occurrence-row:hover, .occurrence-row:focus-visible, .occurrence-row[aria-selected="true"], .occurrence-row.citation-hover-target { border-color: var(--blue); background: var(--blue-soft); }
+    .occurrence-row:hover, .occurrence-row:focus-within, .occurrence-row[data-selected="true"], .occurrence-row.citation-hover-target { border-color: var(--blue); background: var(--blue-soft); }
     .occurrence-row:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     .occurrence-row[data-artifact-unassociated] { grid-template-columns: clamp(76px, 15%, 106px) 62px minmax(0, 1fr); }
     .occurrence-row-open { border: 0; border-radius: 4px; padding: 1px 2px; color: inherit; background: transparent; cursor: pointer; text-align: left; }
@@ -1041,7 +1044,10 @@
     .occurrence-section > summary .occurrence-count { font-size: 10px; }
     .occurrence-section-rows { display: grid; gap: 5px; padding: 6px; }
     .occurrence-section-rows[data-windowed="true"] { display: block; }
-    .occurrence-section-rows[data-windowed="true"] .occurrence-row { margin-bottom: 5px; }
+    .occurrence-row-list { display: grid; gap: 5px; }
+    .occurrence-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; font-size: 12px; }
+    .occurrence-pagination button { min-height: 32px; border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; color: var(--ink); background: var(--panel); cursor: pointer; font: inherit; }
+    .occurrence-pagination button:disabled { opacity: .55; cursor: default; }
     .occurrence-virtual-spacer { width: 1px; min-height: 0; pointer-events: none; }
     .workspace.occurrence-single { grid-template-columns: minmax(0,1fr); }
     .workspace.occurrence-single .detail-panel { min-height: min(72vh, 900px); overflow: visible; }
@@ -1203,7 +1209,7 @@
       font-size: 13px;
     }
     .button:hover { border-color: var(--blue); color: var(--blue); }
-    .button.primary { border-color: var(--blue); color: white; background: var(--blue); }
+    .button.primary { border-color: var(--blue); color: var(--on-blue); background: var(--blue); }
     .button.danger { border-color: var(--danger); color: var(--danger); }
     .button.small { min-height: 30px; padding: 4px 8px; font-size: 11px; }
     .source-banner, .notice {
@@ -1318,7 +1324,8 @@
     .statute-citation-link:hover { color: var(--navy); background: var(--blue-soft); }
     .statute-citation-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     .statute-citation-link.citation-display-ina { color: var(--warning); background: color-mix(in srgb, var(--warning-soft) 72%, transparent); text-decoration-color: currentColor; }
-    .occurrence-row-text .citation-display-ina { color: var(--warning); background: color-mix(in srgb, var(--warning-soft) 72%, transparent); }
+    .occurrence-row-text .citation-display-ina,
+    .legal-reference-preview .citation-display-ina { color: var(--warning); background: color-mix(in srgb, var(--warning-soft) 72%, transparent); }
     .statute-citation-link.citation-display-ina:hover { color: var(--warning); background: var(--warning-soft); }
     .statute-citation-link.citation-display-ina:focus-visible { outline-color: var(--warning); }
     .legal-reference-link.reference-unavailable { text-decoration-style: dotted; }
@@ -1533,7 +1540,7 @@
     .citation-note-text { min-height: 24px; }
     .citation-note-text:empty::before { content: "Click to write a note…"; opacity: .7; }
     .citation-note-editor { display: block; box-sizing: border-box; width: 100%; min-height: 92px; max-height: 40vh; border: 1px solid var(--line); border-radius: 5px; padding: 7px; color: var(--ink); background: var(--canvas); resize: vertical; font: inherit; }
-    .citation-note-reference { border-bottom: 1px dotted currentColor; border-radius: 2px; cursor: help; font-weight: 750; }
+    .citation-note-reference { border-bottom: 1px dotted currentColor; border-radius: 2px; color: inherit; text-decoration: none; cursor: pointer; font-weight: 750; }
     .citation-note-reference:hover, .citation-note-reference:focus-visible { background: var(--blue-soft); outline: 2px solid color-mix(in srgb,var(--blue) 36%,transparent); }
     .citation-note-sharing { display: flex; align-items: baseline; gap: 5px; margin-top: 5px; font: 12px/1.5 var(--sans); }
     .citation-note-sharing-list { min-width: 0; overflow-wrap: anywhere; }
@@ -1544,7 +1551,7 @@
     .citation-note-help-panel { position: fixed; inset: auto; box-sizing: border-box; width: max-content; max-width: min(360px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); overflow: auto; margin: 0; border: 1px solid var(--line); border-radius: 9px; padding: 16px; color: var(--ink); background: var(--panel); box-shadow: var(--shadow); font: 14px/1.5 var(--sans); }
     .citation-note-controls { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; }
     .citation-note-action { min-height: 30px; border: 1px solid transparent; border-radius: 5px; padding: 6px 10px; cursor: pointer; font: 800 12px/1 var(--sans); }
-    .citation-note-action[data-note-save] { color: #fff; background: var(--blue); }
+    .citation-note-action[data-note-save] { color: var(--on-blue); background: var(--blue); }
     .citation-note-action[data-note-delete] { color: #fff; background: #b42318; }
     .citation-note-action[data-note-discard] { color: #493300; background: #f5cf58; }
     .citation-note-associations { margin-top: 7px; }
@@ -1566,7 +1573,7 @@
     .user-highlight-needs-review { display: block; clear: both; margin: 7px 0; border: 1px dashed var(--warning); border-radius: 6px; padding: 6px 8px; color: var(--ink); background: var(--warning-soft); cursor: pointer; font: 700 11px/1.35 var(--sans); text-align: left; }
     .annotation-selection-toolbar { position: fixed; z-index: 145; display: flex; gap: 4px; border: 1px solid var(--line); border-radius: 8px; padding: 5px; background: var(--panel); box-shadow: var(--shadow); }
     .annotation-selection-toolbar[hidden] { display: none; }
-    .annotation-selection-toolbar button { border: 0; border-radius: 5px; padding: 6px 8px; color: #fff; background: var(--blue); cursor: pointer; font: 800 11px/1 var(--sans); }
+    .annotation-selection-toolbar button { border: 0; border-radius: 5px; padding: 6px 8px; color: var(--on-blue); background: var(--blue); cursor: pointer; font: 800 11px/1 var(--sans); }
     .artifact-note-text { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; white-space: pre-wrap; }
     .occurrence-row[data-artifact-kind] { border-left: 4px solid var(--artifact-color,var(--blue)); }
     .occurrence-row[data-artifact-kind="highlight"] .occurrence-row-text mark { color: inherit; background: color-mix(in srgb,var(--artifact-color) 58%,transparent); }
@@ -1724,12 +1731,15 @@
     .notice-inline-action:focus-visible { border-radius: 2px; outline: 2px solid var(--blue); outline-offset: 2px; }
     .settings-reset-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
     .settings-reset-button { position: relative; isolation: isolate; overflow: hidden; width: 100%; min-height: 43px; border: 1px solid color-mix(in srgb, var(--danger) 52%, var(--line)); border-radius: 9px; padding: 9px 13px; color: var(--danger); background: var(--panel); cursor: pointer; font-weight: 850; touch-action: manipulation; user-select: none; -webkit-touch-callout: none; -webkit-user-select: none; }
-    .settings-reset-button::before { position: absolute; z-index: -1; inset: 0; background: color-mix(in srgb, var(--danger) 17%, transparent); content: ""; transform: scaleX(0); transform-origin: left center; }
-    .settings-reset-button.is-holding::before { animation: settings-reset-hold var(--settings-reset-hold-duration, 1.5s) linear forwards; }
     .settings-reset-button:hover { border-color: var(--danger); }
     .settings-reset-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--danger) 45%, transparent); outline-offset: 2px; }
     .settings-reset-everything-description { margin: 9px 0 0; color: var(--danger); font-size: 10px; line-height: 1.45; }
-    @keyframes settings-reset-hold { to { transform: scaleX(1); } }
+    .reset-confirmation { width: min(440px, calc(100vw - 32px)); box-sizing: border-box; border: 1px solid var(--line); border-radius: 12px; padding: 22px; color: var(--ink); background: var(--panel); box-shadow: var(--shadow); }
+    .reset-confirmation::backdrop { background: rgba(12, 29, 46, .6); }
+    .reset-confirmation h2 { margin: 0 0 12px; font-size: 20px; }
+    .reset-confirmation p { line-height: 1.5; }
+    .reset-confirmation-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .reset-confirmation-actions .settings-reset-button { width: auto; }
     @media (max-width: 520px) { .settings-reset-actions { grid-template-columns: 1fr; } }
     .settings-section + .settings-section { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 18px; }
     .settings-section-heading { margin: 0 0 9px; color: var(--navy); font-size: 14px; }
@@ -1829,7 +1839,7 @@
       font-weight: 900;
       line-height: 1;
     }
-    .settings-info-button:hover, .settings-info-button:focus { color: white; background: var(--blue); }
+    .settings-info-button:hover, .settings-info-button:focus { color: var(--on-blue); background: var(--blue); }
     .settings-info-button .settings-experimental-tooltip { right: 0; left: auto; color: var(--ink); text-align: left; }
     .settings-info-button:hover .settings-experimental-tooltip,
     .settings-info-button:focus .settings-experimental-tooltip { visibility: visible; opacity: 1; transform: translateY(0); }
@@ -1902,7 +1912,7 @@
       <button class="statute-history-button main-navigator-toggle" id="mainNavigatorToggle" type="button" aria-controls="statuteNavigator" aria-expanded="true" aria-label="Collapse live navigation" title="Collapse live navigation"><svg class="reader-action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
       <button class="brand" id="inaSearchBrand" type="button" aria-label="INASearch home" aria-describedby="brandTribute">
         <span class="brand-mark" aria-hidden="true">§</span>
-        <span class="brand-label"><strong>INASearch</strong><small>Statutes &amp; Regulations</small></span>
+        <span class="brand-label"><strong>INASearch</strong><small>Find your authority</small></span>
         <span class="brand-tribute" id="brandTribute" role="tooltip" hidden>Inspired by the excellent work of 2604</span>
       </button>
     </div>
@@ -2173,7 +2183,7 @@
   <section class="hierarchy-note-popover" id="hierarchyNotePopover" role="dialog" aria-label="Editorial note" hidden></section>
   <section class="legal-reference-popover scoped-definition-popover" id="scopedDefinitionPopover" role="dialog" aria-label="Scoped definition" hidden>
     <div class="legal-reference-popover-head scoped-definition-popover-head"><div><strong id="scopedDefinitionPopoverTerm"></strong><small id="scopedDefinitionPopoverStatus"></small></div><button class="legal-reference-popover-close" id="scopedDefinitionPopoverClose" type="button" aria-label="Close definition preview">×</button></div>
-    <div class="legal-reference-popover-body scoped-definition-popover-body" id="scopedDefinitionPopoverBody"></div>
+    <div class="legal-reference-popover-body scoped-definition-popover-body" id="scopedDefinitionPopoverBody" tabindex="0" role="region" aria-label="Definition text"></div>
     <div class="scoped-definition-popover-actions"><button class="scoped-definition-jump" id="scopedDefinitionPopoverJump" type="button">View in Definitions</button></div>
   </section>
 
@@ -2394,8 +2404,8 @@
           <h3 class="settings-section-heading" id="resetSettingsHeading">Reset</h3>
           <p class="settings-section-description" id="resetSettingsDescription">Notes, inserted references, and other saved content will not be removed.</p>
           <div class="settings-reset-actions">
-            <button class="settings-reset-button" id="resetSettingsButton" type="button" aria-describedby="resetSettingsDescription" data-hold-duration="1500">Hold to reset settings</button>
-            <button class="settings-reset-button" id="resetEverythingButton" type="button" aria-describedby="resetEverythingDescription" data-hold-duration="3000">Hold to reset everything</button>
+            <button class="settings-reset-button" id="resetSettingsButton" type="button" aria-describedby="resetSettingsDescription">Reset settings…</button>
+            <button class="settings-reset-button" id="resetEverythingButton" type="button" aria-describedby="resetEverythingDescription">Reset everything…</button>
           </div>
           <p class="settings-reset-everything-description" id="resetEverythingDescription">Reset everything deletes notes, highlights, inserted references, daily-tip progress, and settings. A connected data file remains connected so the reset can be saved.</p>
         </section>
@@ -2404,6 +2414,16 @@
   </div>
 
   <!-- INA_SEARCH_OPENING_INDEX -->
+  <dialog class="reset-confirmation" id="resetConfirmationDialog" aria-labelledby="resetConfirmationTitle" aria-describedby="resetConfirmationMessage">
+    <form method="dialog">
+      <h2 id="resetConfirmationTitle">Reset settings?</h2>
+      <p id="resetConfirmationMessage"></p>
+      <div class="reset-confirmation-actions">
+        <button class="button" type="submit" value="cancel" autofocus>Cancel</button>
+        <button class="settings-reset-button" type="submit" value="confirm">Confirm reset</button>
+      </div>
+    </form>
+  </dialog>
   <script>
   window.INA_SEARCH_MARK_PERFORMANCE?.("boot-shell");
   (async function startINASearch() {
@@ -2817,8 +2837,6 @@
       definitionSourceFilters: ["all"],
       definitionScopeFilters: ["all"],
       tipProgressSaveScheduled: false,
-      settingsResetTimer: null,
-      resetEverythingTimer: null,
     };
 
     function normalizedStoredAssociation(value) {
@@ -3038,6 +3056,7 @@
       backupReminderLaterButton: $("#backupReminderLaterButton"), backupReminderDisableButton: $("#backupReminderDisableButton"),
       savingMenuModal: $("#savingMenuModal"), savingMenuStatus: $("#savingMenuStatus"),
       savingMenuEnableButton: $("#savingMenuEnableButton"), savingMenuImportButton: $("#savingMenuImportButton"), resetSettingsButton: $("#resetSettingsButton"), resetEverythingButton: $("#resetEverythingButton"),
+      resetConfirmationDialog: $("#resetConfirmationDialog"), resetConfirmationTitle: $("#resetConfirmationTitle"), resetConfirmationMessage: $("#resetConfirmationMessage"),
       showDetailedStatusToggle: $("#showDetailedStatusToggle"), hideTopThemeControlsToggle: $("#hideTopThemeControlsToggle"), inaCitationLinksToggle: $("#inaCitationLinksToggle"), highlightInaCitationLinksToggle: $("#highlightInaCitationLinksToggle"), definedTermHighlightingToggle: $("#definedTermHighlightingToggle"), notesUseHandwrittenFontToggle: $("#notesUseHandwrittenFontToggle"), automaticCfrUpdatesToggle: $("#automaticCfrUpdatesToggle"),
       browserConflictActions: $("#browserConflictActions"), reloadBrowserProfileButton: $("#reloadBrowserProfileButton"), mergeBrowserProfileButton: $("#mergeBrowserProfileButton"),
       splitAuthoritySearchPanesToggle: $("#splitAuthoritySearchPanesToggle"), legalNavigatorVisibilitySelect: $("#legalNavigatorVisibilitySelect"), syncCfrCommonDepthFromStatuteToggle: $("#syncCfrCommonDepthFromStatuteToggle"), expandSearchResultsByDefaultToggle: $("#expandSearchResultsByDefaultToggle"), showCfrChapterSubchapterInSearchHierarchyToggle: $("#showCfrChapterSubchapterInSearchHierarchyToggle"),
@@ -4080,7 +4099,7 @@
       let cursor = start;
       for (const match of matches) {
         parts.push(renderSearchHighlightedText(input, searchMatch, cursor, match.start));
-        parts.push(`<span class="scoped-defined-term" tabindex="0" aria-haspopup="dialog" aria-expanded="false" data-scoped-definition-ids="${escapeHtml(JSON.stringify(match.entryIds))}">${renderSearchHighlightedText(input, searchMatch, match.start, match.end)}</span>`);
+        parts.push(`<span class="scoped-defined-term" role="button" tabindex="0" aria-haspopup="dialog" aria-expanded="false" aria-controls="scopedDefinitionPopover" data-scoped-definition-ids="${escapeHtml(JSON.stringify(match.entryIds))}">${renderSearchHighlightedText(input, searchMatch, match.start, match.end)}</span>`);
         cursor = match.end;
       }
       parts.push(renderSearchHighlightedText(input, searchMatch, cursor, end));
@@ -6991,7 +7010,10 @@
       pane.searchState.selectedRow = row;
       pane.searchState.selectedOccurrenceKey = row.occurrenceKey;
       pane.searchState.selectedResult = { sectionId: pane.searchState.activeSectionId, index: pane.searchState.offset + Number(element.dataset.occurrenceRow), occurrenceKey: row.occurrenceKey };
-      for (const candidate of $$('[data-occurrence-row]', pane.detail)) candidate.setAttribute('aria-selected', String(candidate === element));
+      for (const candidate of $$('[data-occurrence-row]', pane.detail)) {
+        candidate.dataset.selected = String(candidate === element);
+        candidate.querySelector('[data-occurrence-open]')?.setAttribute('aria-current', candidate === element ? 'location' : 'false');
+      }
       if (pane === state.mainOccurrencePane) syncMainReaderActionTarget();
       else withFocusedCitationPane(pane, syncMainReaderActionTarget);
       return true;
@@ -7018,7 +7040,7 @@
         selectOccurrenceRow(pane, element);
         if (search.virtualizedRows) measureOccurrenceWindows(pane);
         element.scrollIntoView({ block: 'center', behavior: 'instant' });
-        element.focus({ preventScroll: true });
+        element.querySelector('[data-occurrence-open]')?.focus({ preventScroll: true });
       }
       search.restoringResult = false;
       scheduleVisibleOccurrenceSections(pane);
@@ -7027,12 +7049,13 @@
 
     async function renderOccurrenceRows(pane, offset = 0, sectionId = pane?.searchState?.activeSectionId || pane?.searchState?.result?.sections?.[0]?.id || "", options = {}) {
       const result = pane?.searchState?.result;
+      const searchGeneration = pane?.occurrenceGeneration;
       if (!result || !sectionId) return;
       const section = occurrenceSectionById(result, sectionId);
       if (!section) return;
       const windowed = options.windowed ?? pane.searchState.virtualizedRows;
       const maximum = Math.max(1, Math.min(section.totalOccurrences || 1, Number(options.limit) || (windowed ? OCCURRENCE_WINDOW_ROW_LIMIT : section.totalOccurrences || 1)));
-      const start = Math.max(0, Math.min(Number(offset) || 0, Math.max(0, section.totalOccurrences - maximum)));
+      const start = Math.max(0, Math.min(Number(offset) || 0, Math.max(0, section.totalOccurrences - (options.paged ? 1 : maximum))));
       pane.searchState.pageGenerations ||= new Map();
       const pageGeneration = (pane.searchState.pageGenerations.get(sectionId) || 0) + 1;
       pane.searchState.pageGenerations.set(sectionId, pageGeneration);
@@ -7040,10 +7063,16 @@
       try { materialized = await Promise.resolve(result.materializeOccurrences({ sectionId, start, limit: maximum, contextCharacters: windowed ? 60 : 90 })); }
       catch (error) {
         const failedContainer = occurrenceSectionRowsContainer(pane, sectionId);
-        if (failedContainer && pane.searchState?.result === result) failedContainer.innerHTML = `<p class="hierarchy-empty">${escapeHtml(error?.message || "This result page could not be loaded.")}</p>`;
+        if (failedContainer && pane.searchState?.result === result && pane.occurrenceGeneration === searchGeneration) failedContainer.innerHTML = `<p class="hierarchy-empty">${escapeHtml(error?.message || "This result page could not be loaded.")}</p>`;
         return;
       }
-      if (pane.searchState?.result !== result || pane.searchState.pageGenerations.get(sectionId) !== pageGeneration) return;
+      if (pane.occurrenceGeneration !== searchGeneration || pane.searchState?.result !== result || pane.searchState.pageGenerations.get(sectionId) !== pageGeneration) return;
+      const container = occurrenceSectionRowsContainer(pane, sectionId);
+      // A worker response may arrive after focus entered the existing window.
+      if (options.activate === false && container?.contains(document.activeElement)) return;
+      if (options.focusFrom && document.activeElement !== options.focusFrom && container?.contains(document.activeElement)) return;
+      const focusPage = options.paged && (options.focusFrom
+        ? document.activeElement === options.focusFrom : container?.contains(document.activeElement));
       const sectionToken = occurrenceSectionDomToken(sectionId);
       if (options.activate !== false) {
         pane.searchState.offset = start;
@@ -7057,16 +7086,24 @@
         const repairControls = row.artifactUnassociated
           ? `<span class="occurrence-row-copy-controls" role="group" aria-label="Repair note"><button class="occurrence-row-copy" type="button" data-artifact-repair="${escapeHtml(row.artifactId)}" title="Repair association">↗</button><button class="occurrence-row-copy" type="button" data-artifact-delete="${escapeHtml(row.artifactId)}" title="Delete note">×</button></span>` : "";
         const selected = pane.searchState.selectedResult?.sectionId === sectionId && pane.searchState.selectedResult.index === start + index;
-        return `<div class="occurrence-row" data-legal-status="${escapeHtml(occurrenceResultStatus(row))}" role="option" tabindex="0" aria-selected="${selected}" aria-label="Search hit at ${escapeHtml(row.citation)}" data-occurrence-row="${index}" data-occurrence-row-section="${escapeHtml(sectionToken)}"${row.artifactUnassociated ? " data-artifact-unassociated" : ""}${artifactStyle}><button class="occurrence-row-citation occurrence-row-open" type="button" data-occurrence-open title="Open ${escapeHtml(row.citation)}" aria-label="Open ${escapeHtml(row.citation)}">${escapeHtml(row.artifactUnassociated ? "Unassociated" : occurrenceRowCitationLabel(row))}</button>${repairControls}<span class="occurrence-row-text">${occurrenceRowTextHtml(row)}</span></div>`;
+        const snippetId = `${pane.id || "main"}-hit-${sectionToken}-${start + index}-text`;
+        return `<div class="occurrence-row" data-legal-status="${escapeHtml(occurrenceResultStatus(row))}" role="listitem" aria-posinset="${start + index + 1}" aria-setsize="${materialized.total}" data-selected="${selected}" data-occurrence-row="${index}" data-occurrence-row-section="${escapeHtml(sectionToken)}"${row.artifactUnassociated ? " data-artifact-unassociated" : ""}${artifactStyle}><button class="occurrence-row-citation occurrence-row-open" type="button" tabindex="0" data-occurrence-open title="Open ${escapeHtml(row.citation)}" aria-label="Open ${escapeHtml(row.citation)}" aria-describedby="${escapeHtml(snippetId)}" aria-current="${selected ? "location" : "false"}">${escapeHtml(row.artifactUnassociated ? "Unassociated" : occurrenceRowCitationLabel(row))}</button>${repairControls}<span class="occurrence-row-text" id="${escapeHtml(snippetId)}">${occurrenceRowTextHtml(row)}</span></div>`;
       }).join("");
-      const container = occurrenceSectionRowsContainer(pane, sectionId);
       if (container) {
         container.dataset.windowed = windowed ? "true" : "false";
-        container.setAttribute("role", "listbox");
+        container.setAttribute("role", "group");
         container.setAttribute("aria-label", "Search hits");
         const before = windowed ? occurrenceVirtualSpacerHtml(occurrenceWindowOffset(pane, sectionId, start)) : "";
         const after = windowed ? occurrenceVirtualSpacerHtml(occurrenceWindowOffset(pane, sectionId, materialized.total) - occurrenceWindowOffset(pane, sectionId, start + materialized.returned)) : "";
-        container.innerHTML = `${before}${rows || '<p class="hierarchy-empty">No matching occurrences.</p>'}${after}`;
+        const end = start + materialized.returned;
+        const paging = windowed && materialized.total > maximum
+          ? `<div class="occurrence-pagination" role="group" aria-label="Result pages"><button type="button" data-occurrence-page="${Math.max(0, start - maximum)}"${start === 0 ? " disabled" : ""}>Previous results</button><span role="status">Results ${start + 1}–${end} of ${materialized.total}</span><button type="button" data-occurrence-page="${end}"${end >= materialized.total ? " disabled" : ""}>Next results</button></div>` : "";
+        container.innerHTML = `${before}<div class="occurrence-result-page"><div class="occurrence-row-list" role="list" aria-label="Search hits">${rows || '<p class="hierarchy-empty">No matching occurrences.</p>'}</div>${paging}</div>${after}`;
+        if (focusPage) {
+          const first = options.focusLast ? $$('[data-occurrence-row] button:not(:disabled)', container).at(-1) : $('[data-occurrence-open]', container);
+          first?.focus({ preventScroll: true });
+          first?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+        }
       }
       const details = container?.closest?.('[data-occurrence-section]');
       if (details) details.open = true;
@@ -7078,6 +7115,95 @@
       await Promise.all(sections.map(section => renderOccurrenceRows(pane, 0, section.id, { activate: false, windowed: false, limit: section.totalOccurrences })));
       if (sections.length && !pane.searchState.activeSectionId) pane.searchState.activeSectionId = sections[0].id;
       pane.searchState.offset = pane.searchState.sectionOffsets.get(pane.searchState.activeSectionId) || 0;
+    }
+
+    async function showOccurrencePage(pane, button) {
+      const search = pane?.searchState;
+      const container = button.closest('[data-occurrence-section-rows]');
+      const sectionId = occurrenceSectionIdFromToken(container?.dataset.occurrenceSectionRows || "");
+      if (!search || !sectionId) return;
+      await renderOccurrenceRows(pane, Number(button.dataset.occurrencePage), sectionId, { paged: true });
+    }
+
+    function occurrenceKeyboardPaneForElement(element) {
+      const child = focusedPaneForElement(element);
+      if (child) return child;
+      if (state.focusedCitationMode) return element === els.search
+        ? state.focusedCitationPanes.find(pane => pane.entry?.mode === "search-tree") || null : null;
+      return state.mainOccurrencePane;
+    }
+
+    async function handleOccurrenceResultTab(pane, event) {
+      const search = pane?.searchState;
+      if (event.key !== "Tab" || event.defaultPrevented || event.ctrlKey || event.altKey || event.metaKey
+        || !search?.result || search.generation !== pane.occurrenceGeneration) return;
+      const origin = event.target;
+      const entering = origin.matches('#searchInput, .focused-citation-pane-search') && !event.shiftKey;
+      let sections;
+      const orderedSections = () => sections ||= $$('[data-occurrence-section]', pane.detail);
+      let details = entering ? orderedSections()[0] : origin.closest('[data-occurrence-section]');
+      if (!details || (!entering && !details.open)) return;
+      let container = details.querySelector('[data-occurrence-section-rows]');
+      let sectionId = occurrenceSectionIdFromToken(container?.dataset.occurrenceSectionRows || "");
+      const current = search.rowsBySection.get(sectionId);
+      let limit = search.virtualizedRows ? OCCURRENCE_WINDOW_ROW_LIMIT : occurrenceSectionById(search.result, sectionId).totalOccurrences;
+      let offset = 0;
+      const adjacentSection = direction => {
+        const ordered = orderedSections();
+        const next = ordered[ordered.indexOf(details) + direction];
+        if (!next) return false;
+        details = next;
+        container = details.querySelector('[data-occurrence-section-rows]');
+        sectionId = occurrenceSectionIdFromToken(container?.dataset.occurrenceSectionRows || "");
+        const total = occurrenceSectionById(search.result, sectionId).totalOccurrences;
+        limit = search.virtualizedRows ? OCCURRENCE_WINDOW_ROW_LIMIT : total;
+        offset = direction < 0 ? Math.max(0, total - limit) : 0;
+        return true;
+      };
+      if (entering || (origin.matches('[data-occurrence-section-open]') && !event.shiftKey && (!current?.rows.length || current.start !== 0))) {
+        // Enter the actual first hit, including in Safari's restricted Tab mode.
+      } else if (origin.matches('[data-occurrence-open], [data-artifact-repair], [data-artifact-delete]') && current?.rows.length) {
+        const controls = $$('[data-occurrence-row] button:not(:disabled)', container);
+        const controlIndex = controls.indexOf(origin);
+        const next = controlIndex >= 0 ? controls[controlIndex + (event.shiftKey ? -1 : 1)] : null;
+        if (next) {
+          event.preventDefault();
+          next.focus({ preventScroll: true });
+          next.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+          return;
+        }
+        const row = origin.closest('[data-occurrence-row]');
+        const rowControls = $$('button:not(:disabled)', row);
+        if (origin !== (event.shiftKey ? rowControls[0] : rowControls.at(-1))) return;
+        const index = Number(row.dataset.occurrenceRow);
+        if (!event.shiftKey && index === current.rows.length - 1) {
+          if (current.start + current.rows.length < occurrenceSectionById(search.result, sectionId).totalOccurrences) offset = current.start + current.rows.length;
+          else if (!adjacentSection(1)) return;
+        } else if (event.shiftKey && index === 0) {
+          if (current.start > 0) {
+            limit = Math.min(OCCURRENCE_WINDOW_ROW_LIMIT, current.start);
+            offset = current.start - limit;
+          } else if (!adjacentSection(-1)) return;
+        } else return;
+      } else if (event.shiftKey && origin === details.firstElementChild
+        && details.previousElementSibling?.matches('[data-occurrence-section][open]')) {
+        if (!adjacentSection(-1)) return;
+        const previous = search.rowsBySection.get(sectionId);
+        const total = occurrenceSectionById(search.result, sectionId).totalOccurrences;
+        if (previous?.rows.length && previous.start + previous.rows.length === total) return;
+      } else return;
+      event.preventDefault();
+      if (search.keyboardNavigation) return;
+      search.keyboardNavigation = { sectionId };
+      for (let ancestor = details; ancestor; ancestor = ancestor.parentElement?.closest('details')) ancestor.open = true;
+      container.setAttribute('aria-busy', 'true');
+      try {
+        await renderOccurrenceRows(pane, offset, sectionId, { paged: true, limit, focusFrom: origin, focusLast: event.shiftKey });
+      } finally {
+        container.removeAttribute('aria-busy');
+        search.keyboardNavigation = null;
+        if (pane.searchState === search) scheduleVisibleOccurrenceSections(pane);
+      }
     }
 
     function scheduleVisibleOccurrenceSections(pane) {
@@ -7105,9 +7231,13 @@
           const start = Math.max(0, low - 8);
           return { sectionId, section, start, distance };
         }).filter(Boolean).sort((left, right) => left.distance - right.distance || left.section.firstSourceOrder - right.section.firstSourceOrder);
-        let remaining = OCCURRENCE_WINDOW_DOM_LIMIT;
-        const retained = new Set();
+        const focusedContainer = document.activeElement?.closest?.('[data-occurrence-section-rows]');
+        const focusedSectionId = pane.searchState.keyboardNavigation?.sectionId || (focusedContainer && pane.detail.contains(focusedContainer)
+          ? occurrenceSectionIdFromToken(focusedContainer.dataset.occurrenceSectionRows || "") : "");
+        let remaining = OCCURRENCE_WINDOW_DOM_LIMIT - (pane.searchState.rowsBySection.get(focusedSectionId)?.rows.length || 0);
+        const retained = new Set(focusedSectionId ? [focusedSectionId] : []);
         for (const candidate of candidates) {
+          if (retained.has(candidate.sectionId)) continue;
           if (remaining <= 0) break;
           const limit = Math.min(OCCURRENCE_WINDOW_ROW_LIMIT, candidate.section.totalOccurrences, remaining);
           const start = Math.min(candidate.start, Math.max(0, candidate.section.totalOccurrences - limit));
@@ -8372,7 +8502,7 @@
       for (const span of spans) {
         if (span.start < cursor || span.end > input.length) continue;
         parts.push(escapeHtml(input.slice(cursor, span.start)));
-        parts.push(`<span class="citation-note-reference" tabindex="0" data-note-reference="${escapeHtml(span.citation)}" data-note-reference-raw="${escapeHtml(span.raw || input.slice(span.start, span.end))}">${escapeHtml(input.slice(span.start, span.end))}</span>`);
+        parts.push(`<a class="citation-note-reference" href="?q=${escapeHtml(encodeURIComponent(span.citation))}" data-note-reference="${escapeHtml(span.citation)}" data-note-reference-raw="${escapeHtml(span.raw || input.slice(span.start, span.end))}">${escapeHtml(input.slice(span.start, span.end))}</a>`);
         cursor = span.end;
       }
       parts.push(escapeHtml(input.slice(cursor)));
@@ -9128,44 +9258,46 @@
       return [historicalNotice, body, statuteFootnoteAppendix(section, usedFootnotes, format)].filter(Boolean).join("\n\n");
     }
 
-    function statuteReferenceRunInLineHtml(node, segment, basePath, usedFootnotes = new Set(), contentEnd = segment.contentEnd) {
-      const contents = statuteFieldPreviewHtml(node, "text", segment.contentStart, contentEnd, usedFootnotes, globalThis.INA_SEARCH_OCCURRENCE.statuteRunInPart(node, segment));
+    function statuteReferenceRunInLineHtml(node, segment, basePath, usedFootnotes = new Set(), contentEnd = segment.contentEnd, context = null) {
+      const contents = statuteFieldPreviewHtml(node, "text", segment.contentStart, contentEnd, usedFootnotes, globalThis.INA_SEARCH_OCCURRENCE.statuteRunInPart(node, segment), { ...context, path: segment.path });
       const depth = Math.max(0, segment.path.length - (basePath || []).length);
       return `<span class="statutory-runin-line" style="--depth:${depth}"><strong class="inline-address">${escapeHtml(segment.address)}</strong><span>${escapeHtml(segment.prefixText || "")}${contents}</span></span>`;
     }
 
-    function statuteFieldPreviewHtml(source, field, start = 0, end = String(source?.[field] || "").length, usedFootnotes = new Set(), part = null) {
-      const references = part ? globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(source, part) : source[`${field}FootnoteReferences`] || [];
-      return globalThis.INA_SEARCH_OCCURRENCE.presentation.format(source[`${field}Layout`], start, end,
-        (from, to) => escapeHtml(statuteTextRangeWithHouseFootnotes(source[field], references, from, to, usedFootnotes)), { mode: "field", parentIndent: source[`${field}Presentation`]?.indent, parentFirstIndent: source[`${field}Presentation`]?.firstIndent });
+    function statuteFieldPreviewHtml(source, field, start = 0, end = String(source?.[field] || "").length, usedFootnotes = new Set(), part = null, context = null) {
+      const references = source[field === "text" ? "references" : `${field}References`] || [];
+      const footnotes = part ? globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(source, part) : source[`${field}FootnoteReferences`] || [];
+      return linkifyStatutoryText(source[field], references, start, end, null, footnotes,
+        { ...context, referenceTextOnly: true, usedFootnotes, sourceLayout: source[`${field}Layout`], sourcePresentation: source[`${field}Presentation`] });
     }
 
-    function statuteReferencePreviewNodeHtml(node, usedFootnotes = new Set(), section = null, currentPath = [], textEnd = null) {
+    function statuteReferencePreviewNodeHtml(node, usedFootnotes = new Set(), section = null, currentPath = [], textEnd = null, context = null) {
       if (!node) return "";
+      context = { ...context, path: currentPath };
       if (node.childTextOffsets) {
-        const heading = statuteFieldPreviewHtml(node, "heading", 0, String(node.heading || "").length, usedFootnotes);
+        const heading = statuteFieldPreviewHtml(node, "heading", 0, String(node.heading || "").length, usedFootnotes, null, context);
         const parts = globalThis.INA_SEARCH_OCCURRENCE.statuteContentParts(node);
         const content = parts.map((part, index) => {
-          if (part.kind === "child") return statuteReferencePreviewNodeHtml(part.node, usedFootnotes, section, [...currentPath, ...(part.node.label ? [String(part.node.label)] : [])]);
+          if (part.kind === "child") return statuteReferencePreviewNodeHtml(part.node, usedFootnotes, section, [...currentPath, ...(part.node.label ? [String(part.node.label)] : [])], null, context);
           const end = part.field === "text" && textEnd !== null ? Math.min(part.end, textEnd) : part.end;
-          const text = end >= part.start ? statuteFieldPreviewHtml(node, part.field, part.start, end, usedFootnotes, part) : "";
+          const text = end >= part.start ? statuteFieldPreviewHtml(node, part.field, part.start, end, usedFootnotes, part, context) : "";
           return index === 0 ? text + '</div>' : `<p class="node-continuation">${text}</p>`;
         }).join("");
-        return `<div class="statutory-node"><div class="statutory-line">${node.label ? `<span class="node-number">(${escapeHtml(node.label)})</span>` : ""}${heading ? `<span class="node-heading">${heading} </span>` : ""}${parts[0]?.kind !== "text" ? "</div>" : ""}${content}</div>`;
+        return `<div class="statutory-node"><div class="statutory-line">${node.label ? `<span class="node-number">(${escapeHtml(node.label)})</span>` : ""}${heading ? `<span class="node-heading" role="heading" aria-level="${Math.max(3, Math.min(6, currentPath.length + 2))}">${heading} </span>` : ""}${parts[0]?.kind !== "text" ? "</div>" : ""}${content}</div>`;
       }
-      const heading = statuteFieldPreviewHtml(node, "heading", 0, String(node.heading || "").length, usedFootnotes);
+      const heading = statuteFieldPreviewHtml(node, "heading", 0, String(node.heading || "").length, usedFootnotes, null, context);
       const input = String(node.text || "");
       const limit = textEnd === null ? input.length : Math.max(0, Math.min(input.length, textEnd));
       const record = section ? statuteReferenceUnitIndex(section)?.structural.get(statuteReferencePathKey(currentPath)) : null;
       const segments = (record?.segments || []).filter(segment => segment.start < limit);
       let textHtml = "";
       if (segments.length) {
-        const initial = statuteFieldPreviewHtml(node, "text", 0, Math.min(limit, segments[0].start), usedFootnotes).trimEnd();
-        textHtml = `${initial ? `<span class="statutory-runin-chapeau">${initial}</span>` : ""}${segments.map(segment => statuteReferenceRunInLineHtml(node, segment, currentPath, usedFootnotes, Math.min(limit, segment.contentEnd))).join("")}`;
+        const initial = statuteFieldPreviewHtml(node, "text", 0, Math.min(limit, segments[0].start), usedFootnotes, null, context).trimEnd();
+        textHtml = `${initial ? `<span class="statutory-runin-chapeau">${initial}</span>` : ""}${segments.map(segment => statuteReferenceRunInLineHtml(node, segment, currentPath, usedFootnotes, Math.min(limit, segment.contentEnd), context)).join("")}`;
       } else {
-        textHtml = statuteFieldPreviewHtml(node, "text", 0, limit, usedFootnotes);
+        textHtml = statuteFieldPreviewHtml(node, "text", 0, limit, usedFootnotes, null, context);
       }
-      return `<div class="statutory-node"><div class="statutory-line">${node.label ? `<span class="node-number">(${escapeHtml(node.label)})</span>` : ""}${heading ? `<span class="node-heading">${heading} </span>` : ""}${textHtml ? `<span class="node-text">${textHtml}</span>` : ""}</div>${(node.children || []).map(child => statuteReferencePreviewNodeHtml(child, usedFootnotes, section, [...currentPath, String(child.label)])).join("")}${node.continuation ? `<p class="node-continuation">${statuteFieldPreviewHtml(node, "continuation", 0, node.continuation.length, usedFootnotes)}</p>` : ""}</div>`;
+      return `<div class="statutory-node"><div class="statutory-line">${node.label ? `<span class="node-number">(${escapeHtml(node.label)})</span>` : ""}${heading ? `<span class="node-heading" role="heading" aria-level="${Math.max(3, Math.min(6, currentPath.length + 2))}">${heading} </span>` : ""}${textHtml ? `<span class="node-text">${textHtml}</span>` : ""}</div>${(node.children || []).map(child => statuteReferencePreviewNodeHtml(child, usedFootnotes, section, [...currentPath, String(child.label)], null, context)).join("")}${node.continuation ? `<p class="node-continuation">${statuteFieldPreviewHtml(node, "continuation", 0, node.continuation.length, usedFootnotes, null, context)}</p>` : ""}</div>`;
     }
 
     function statuteExcerptFootnotesHtml(section, usedFootnotes, namespace = "reference-preview", origins = new Map(), context = null) {
@@ -9188,22 +9320,25 @@
 
     function statuteReferencePreviewHtml(section, path = []) {
       if (!section) return "";
+      hydrateLegalReferences(section);
       const usedFootnotes = new Set();
+      const context = { ...statuteDefinitionContext(section, uscMapping(section), path), referenceTextOnly: true, usedFootnotes,
+        sourceHost: { kind: "usc", title: Number(section.title || 8), section: section.section, path } };
       const selection = statuteReferenceSelection(section, path);
       if (!selection) return "";
       const preamble = !path.length && section.preamble && !section.childTextOffsets
-        ? `<p class="statute-preamble">${statuteFieldPreviewHtml(section, "preamble", 0, section.preamble.length, usedFootnotes)}</p>`
+        ? `<p class="statute-preamble">${statuteFieldPreviewHtml(section, "preamble", 0, section.preamble.length, usedFootnotes, null, context)}</p>`
         : "";
       const body = selection.kind === "section" && section.childTextOffsets
         ? globalThis.INA_SEARCH_OCCURRENCE.statuteContentParts(section, "preamble", "body").map(part => part.kind === "child"
-          ? statuteReferencePreviewNodeHtml(part.node, usedFootnotes, section, part.node.label ? [String(part.node.label)] : [])
-          : `<p class="statute-preamble">${statuteFieldPreviewHtml(section, part.field, part.start, part.end, usedFootnotes, part)}</p>`).join("")
+          ? statuteReferencePreviewNodeHtml(part.node, usedFootnotes, section, part.node.label ? [String(part.node.label)] : [], null, context)
+          : `<p class="statute-preamble">${statuteFieldPreviewHtml(section, part.field, part.start, part.end, usedFootnotes, part, context)}</p>`).join("")
         : selection.kind === "virtual"
-        ? `<div class="statutory-node statute-reference-virtual">${selection.segments.map(segment => statuteReferenceRunInLineHtml(selection.node, segment, selection.path, usedFootnotes)).join("")}</div>`
+        ? `<div class="statutory-node statute-reference-virtual">${selection.segments.map(segment => statuteReferenceRunInLineHtml(selection.node, segment, selection.path, usedFootnotes, segment.contentEnd, context)).join("")}</div>`
         : selection.kind === "structural"
-          ? statuteReferencePreviewNodeHtml(selection.node, usedFootnotes, section, selection.path, selection.textEnd)
-          : (selection.nodes || section.body || []).map(node => statuteReferencePreviewNodeHtml(node, usedFootnotes, section, [String(node.label)])).join("");
-      const footnoteHtml = statuteExcerptFootnotesHtml(section, usedFootnotes);
+          ? statuteReferencePreviewNodeHtml(selection.node, usedFootnotes, section, selection.path, selection.textEnd, context)
+          : (selection.nodes || section.body || []).map(node => statuteReferencePreviewNodeHtml(node, usedFootnotes, section, [String(node.label)], null, context)).join("");
+      const footnoteHtml = statuteExcerptFootnotesHtml(section, usedFootnotes, "reference-preview", new Map(), context);
       return `<article class="legal-reference-preview">${preamble}<div class="statute-body">${body}</div>${footnoteHtml}</article>`;
     }
 
@@ -10640,7 +10775,7 @@
       els.scopedDefinitionPopover.style.top = `${Math.round(placement.top)}px`;
     }
 
-    function closeScopedDefinitionPopover(force = false) {
+    function closeScopedDefinitionPopover(force = false, returnFocus = false) {
       clearTimeout(state.scopedDefinitionPreviewTimer);
       clearTimeout(state.scopedDefinitionCloseTimer);
       if (!force && state.scopedDefinitionContext?.pinned) return;
@@ -10648,6 +10783,28 @@
       trigger?.setAttribute("aria-expanded", "false");
       els.scopedDefinitionPopover.hidden = true;
       state.scopedDefinitionContext = null;
+      if (returnFocus) {
+        trigger?.focus({ preventScroll: true });
+        clearTimeout(state.scopedDefinitionPreviewTimer);
+      }
+    }
+
+    function handleScopedDefinitionKeydown(event) {
+      const trigger = event.target.closest?.("[data-scoped-definition-ids]");
+      if (trigger && ["Enter", " ", "ArrowDown"].includes(event.key)) {
+        event.preventDefault();
+        if (openScopedDefinitionPopover(trigger, true)) els.scopedDefinitionPopoverClose.focus();
+        return true;
+      }
+      if (els.scopedDefinitionPopover.hidden) return false;
+      if (event.key === "Escape" || event.key === "Tab" && state.scopedDefinitionContext?.pinned
+        && (event.shiftKey && event.target === els.scopedDefinitionPopoverClose
+          || !event.shiftKey && event.target === els.scopedDefinitionPopoverJump)) {
+        event.preventDefault();
+        closeScopedDefinitionPopover(true, true);
+        return true;
+      }
+      return false;
     }
 
     function openScopedDefinitionPopover(trigger, pinned = false) {
@@ -11482,7 +11639,7 @@
 
     function hierarchyPageRowsHtml(result) {
       const rowIds = hierarchyPageNodeIds(result);
-      const rows = rowIds.length ? `<div class="hierarchy-list">${renderHierarchyRows(rowIds)}</div>` : `<p class="hierarchy-empty">No immediate child units are included in this edition.</p>`;
+      const rows = rowIds.length ? `<div class="hierarchy-list" role="list">${renderHierarchyRows(rowIds)}</div>` : `<p class="hierarchy-empty">No immediate child units are included in this edition.</p>`;
       const pageRows = rows;
       if (!isStackedHome(result)) return pageRows;
       const cfrRoot = authorityHierarchyNodes.get("cfr:root");
@@ -11538,7 +11695,7 @@
         sourceLabel: hierarchySourceLabel(result.type), sourceUrl,
         title, meta: navigationTitleCase(heading), markers: hierarchyNoteMarkers(node)
       })}${expandableCount ? hierarchyPageActions(node?.id) : ""}`;
-      els.resultList.setAttribute("role", isStackedHome(result) ? "group" : "list");
+      els.resultList.setAttribute("role", "group");
       els.resultList.setAttribute("aria-label", `${title}${isStackedHome(result) ? " and CFR" : ""} index`);
       const rowsHtml = hierarchyPageRowsHtml(result);
       if (!globalThis.INASearchStartup.adoptOpeningIndex(isStackedHome(result) ? node?.id : "", headerHtml, rowsHtml)) {
@@ -11796,7 +11953,7 @@
         const mapping = kind === "usc" ? uscMapping(section) : null;
         const base = kind === "cfr" ? `${section.title} CFR ${section.section || section.label}`
           : state.statuteHierarchyAuthority === "ina" && mapping?.inaSection ? `INA ${mapping.inaSection}` : uscBase(section);
-        const preview = $('[data-occurrence-row][aria-selected="true"]', occurrencePane.detail);
+        const preview = $('[data-occurrence-row][data-selected="true"]', occurrencePane.detail);
         return { kind, sectionId: row.recordId, path: row.path || [], query: `${base}${canonicalPath(row.path || [])}`,
           trigger: preview, preview, occurrenceBlockPath: row.target?.blockPath || null, occurrenceRow: row };
       }
@@ -11952,7 +12109,7 @@
       const authorityToggle = $(".main-reader-authority", actions);
       const copies = $(".live-citation-copies", actions);
       const officialSource = $(".official-source-action", actions);
-      copies.hidden = pane ? pane.entry?.mode === "search-tree" : Boolean(state.mainOccurrencePane?.searchState);
+      copies.hidden = false;
       const target = mainReaderActionTarget();
       const printTarget = mainReaderPrintTarget();
       copies.setAttribute("aria-disabled", String(!target));
@@ -13809,7 +13966,7 @@
         ? renderStatutoryNode(part.node, targetPath, currentPath, depth + 1, searchTarget, citationBase, sectionId, baseDefinitionContext)
         : `<p class="node-continuation">${formatStatutoryRunInText(node[part.field], node.label || "", node[part.field === "text" ? "references" : `${part.field}References`] || [], part.field === "text" ? textMatch : null, unit, globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(node, part) || [], textReferenceContext, part.start, part.end)}</p>`).join("") : null;
       return `<div class="statutory-node${isTarget ? " target" : ""}${isSearchTarget || containsInlineSearchTarget ? " search-target" : ""}" style="--depth:${depth}" data-statute-path="${escapeHtml(JSON.stringify(currentPath))}"${legalCitationSelectionAttributes("usc", sectionId, currentPath)}${isTarget ? " aria-label=\"Citation target\"" : isSearchTarget || containsInlineSearchTarget ? " aria-label=\"Search match\"" : ""}>
-        <div class="statutory-line">${node.label ? legalUnitTriggerHtml("usc", sectionId, currentPath, citation, numberContents, "node-number") : ""}${node.heading ? `<span class="node-heading">${linkifyStatutoryText(node.heading, node.headingReferences || [], 0, undefined, isSearchTarget && searchTarget.kind === "node-heading" ? searchTarget.match : null, node.headingFootnoteReferences || [], headingReferenceContext)} </span>` : ""}<span class="node-text">${node.table ? statutoryTableHtml(node.table, textMatch, node.text || "") : formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], textMatch, unit, orderedParts ? globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(node, firstPart) : node.textFootnoteReferences || [], textReferenceContext, 0, orderedParts ? firstPart?.end || 0 : undefined)}</span></div>
+        <div class="statutory-line">${node.label ? legalUnitTriggerHtml("usc", sectionId, currentPath, citation, numberContents, "node-number") : ""}${node.heading ? `<span class="node-heading" role="heading" aria-level="${Math.min(6, depth + 3)}">${linkifyStatutoryText(node.heading, node.headingReferences || [], 0, undefined, isSearchTarget && searchTarget.kind === "node-heading" ? searchTarget.match : null, node.headingFootnoteReferences || [], headingReferenceContext)} </span>` : ""}<span class="node-text">${node.table ? statutoryTableHtml(node.table, textMatch, node.text || "") : formatStatutoryRunInText(node.text || "", node.label || "", node.references || [], textMatch, unit, orderedParts ? globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(node, firstPart) : node.textFootnoteReferences || [], textReferenceContext, 0, orderedParts ? firstPart?.end || 0 : undefined)}</span></div>
         ${section && node.label ? legalAugmentationSlotHtml("usc", Number(section.title || 8), section.section, currentPath, citation) : ""}
         ${orderedBody ?? childrenHtml ?? (node.children || []).map(child => renderStatutoryNode(child, targetPath, currentPath, depth + 1, searchTarget, citationBase, sectionId, baseDefinitionContext)).join("")}
         ${!orderedParts && node.continuation ? `<p class="node-continuation">${linkifyStatutoryText(node.continuation, node.continuationReferences || [], 0, undefined, isSearchTarget && searchTarget.kind === "node-continuation" ? searchTarget.match : null, node.continuationFootnoteReferences || [], { ...definitionContext, sourceRecord: { kind: "node-continuation", recordPath: currentPath.map(String), field: "continuation" } })}</p>` : ""}</div>`;
@@ -13826,9 +13983,10 @@
     }
 
     function houseFootnoteReferenceHtml(reference, context = null) {
+      context?.usedFootnotes?.add(reference.id);
+      if (context?.referenceTextOnly) return escapeHtml(superscriptNumber(reference.number));
       const prefix = context?.footnoteNamespace ? `${context.footnoteNamespace}-` : "";
       const referenceId = prefix + houseFootnoteReferenceId(reference);
-      context?.usedFootnotes?.add(reference.id);
       if (context?.footnoteOrigins && !context.footnoteOrigins.has(reference.id)) context.footnoteOrigins.set(reference.id, referenceId);
       return `<sup class="house-footnote-reference"><a id="${escapeHtml(referenceId)}" href="#${escapeHtml(prefix)}house-footnote-${escapeHtml(reference.id)}" data-house-footnote-jump="${escapeHtml(reference.id)}" aria-label="House editorial footnote ${escapeHtml(reference.number)}">${escapeHtml(reference.number)}</a></sup>`;
     }
@@ -15118,7 +15276,8 @@
     function swapCitationDisplayFragments(system, anchor) {
       // Keep transient annotation markup out of the cached alternate form.
       if (profile.highlights?.length) unwrapUserHighlights();
-      for (const wrapper of $$("[data-citation-display]", els.detail)) {
+      const roots = [els.detail, els.legalReferencePopoverContent].filter(Boolean);
+      for (const wrapper of roots.flatMap(root => $$("[data-citation-display]", root))) {
         if (wrapper.dataset.citationDisplay === system) continue;
         const visible = wrapper.firstElementChild, alternate = wrapper.lastElementChild.content;
         const previous = document.createDocumentFragment();
@@ -15291,46 +15450,19 @@
       toast("Everything reset. Notes, highlights, inserted references, daily-tip progress, and settings were removed.");
     }
 
-    function cancelResetHold(timerKey, button, event = null) {
-      if (event?.type === "keyup" && ![" ", "Enter"].includes(event.key)) return;
-      if (!state[timerKey]) return;
-      if (event?.cancelable) event.preventDefault();
-      clearTimeout(state[timerKey]);
-      state[timerKey] = null;
-      button.classList.remove("is-holding");
-      button.removeAttribute("aria-busy");
-    }
-
-    function beginResetHold(timerKey, button, complete, event) {
-      if (event.type === "keydown" && (![" ", "Enter"].includes(event.key) || event.repeat)) return;
-      if (state[timerKey]) return;
-      if (event.cancelable) event.preventDefault();
-      const holdDuration = Math.max(1, Number(button.dataset.holdDuration) || 1500);
-      button.style.setProperty("--settings-reset-hold-duration", `${holdDuration}ms`);
-      button.classList.add("is-holding");
-      button.setAttribute("aria-busy", "true");
-      state[timerKey] = setTimeout(() => {
-        state[timerKey] = null;
-        button.classList.remove("is-holding");
-        button.removeAttribute("aria-busy");
-        complete();
-      }, holdDuration);
-    }
-
-    function cancelSettingsResetHold(event = null) {
-      cancelResetHold("settingsResetTimer", els.resetSettingsButton, event);
-    }
-
-    function beginSettingsResetHold(event) {
-      beginResetHold("settingsResetTimer", els.resetSettingsButton, resetSettingsToDefaults, event);
-    }
-
-    function cancelEverythingResetHold(event = null) {
-      cancelResetHold("resetEverythingTimer", els.resetEverythingButton, event);
-    }
-
-    function beginEverythingResetHold(event) {
-      beginResetHold("resetEverythingTimer", els.resetEverythingButton, resetEverythingToDefaults, event);
+    async function requestReset(everything = false) {
+      const dialog = els.resetConfirmationDialog;
+      if (dialog.open) return;
+      els.resetConfirmationTitle.textContent = everything ? "Reset everything?" : "Reset settings?";
+      els.resetConfirmationMessage.textContent = everything
+        ? "This permanently removes notes, highlights, inserted references, daily-tip progress, and settings. A connected data file will also save this reset."
+        : "Settings will return to their defaults. Notes, highlights, inserted references, and other saved content will be kept.";
+      dialog.returnValue = "cancel";
+      const approved = new Promise(resolve => dialog.addEventListener("close", () => resolve(dialog.returnValue === "confirm"), { once: true }));
+      dialog.showModal();
+      if (!await approved) return;
+      if (everything) resetEverythingToDefaults();
+      else resetSettingsToDefaults();
     }
 
     function beginProfileSavingSetup(event = null) {
@@ -16719,6 +16851,8 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (artifactRepair) { event.preventDefault(); event.stopPropagation(); repairUnassociatedNote(artifactRepair.dataset.artifactRepair); return; }
         const artifactDelete = event.target.closest("[data-artifact-delete]");
         if (artifactDelete) { event.preventDefault(); event.stopPropagation(); if (deleteNoteById(artifactDelete.dataset.artifactDelete)) applySearchQuery("in:notes", false, true); return; }
+        const pageButton = event.target.closest("[data-occurrence-page]");
+        if (pageButton) { event.preventDefault(); event.stopPropagation(); await showOccurrencePage(pane, pageButton); return; }
         const occurrenceRow = event.target.closest("[data-occurrence-row]");
         if (occurrenceRow) {
           selectOccurrenceRow(pane, occurrenceRow);
@@ -16785,6 +16919,8 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (artifactRepair) { event.preventDefault(); event.stopPropagation(); repairUnassociatedNote(artifactRepair.dataset.artifactRepair); return; }
         const artifactDelete = event.target.closest("[data-artifact-delete]");
         if (artifactDelete) { event.preventDefault(); event.stopPropagation(); if (deleteNoteById(artifactDelete.dataset.artifactDelete)) applySearchQuery("in:notes", false, true); return; }
+        const pageButton = event.target.closest("[data-occurrence-page]");
+        if (pageButton) { event.preventDefault(); event.stopPropagation(); await showOccurrencePage(state.mainOccurrencePane, pageButton); return; }
         const rowButton = event.target.closest("[data-occurrence-row]");
         if (rowButton) {
           selectOccurrenceRow(state.mainOccurrencePane, rowButton);
@@ -16811,13 +16947,13 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
           return;
         }
       });
+      document.addEventListener("focusin", event => {
+        const pane = occurrenceKeyboardPaneForElement(event.target);
+        if (pane) scheduleVisibleOccurrenceSections(pane);
+      });
       document.addEventListener("keydown", event => {
-        const row = event.target.closest('[data-occurrence-row]');
-        if (!row || event.target !== row || !["Enter", " "].includes(event.key)) return;
-        const pane = state.focusedCitationPanes.find(pane => pane.detail.contains(row)) || state.mainOccurrencePane;
-        if (!pane) return;
-        event.preventDefault();
-        row.click();
+        const pane = occurrenceKeyboardPaneForElement(event.target);
+        if (pane) void handleOccurrenceResultTab(pane, event);
       });
       window.addEventListener("scroll", () => {
         if (state.shareViewPreview || state.copyActionPreview) return;
@@ -16924,11 +17060,13 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         }
       }, true);
       document.addEventListener("keydown", event => {
+        if (els.resetConfirmationDialog.open) return;
         const noteCard = event.target.closest?.(".citation-note");
         const openSharingHelp = $$('[data-note-sharing-help][aria-expanded="true"]');
         if (event.key === "Escape" && openSharingHelp.length) {
           event.preventDefault(); openSharingHelp.forEach(button => showNoteSharingHelp(button, false)); return;
         }
+        if (handleScopedDefinitionKeydown(event)) return;
         if (noteCard && event.target === noteCard && ["Enter", " "].includes(event.key)) { event.preventDefault(); noteCard.click(); return; }
         const focusedHighlight = event.target.closest?.("[data-highlight-id]");
         if (focusedHighlight && (event.key === "Delete" || event.key === "Backspace")) {
@@ -16943,7 +17081,6 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
           return;
         }
         if (event.key === "/" && !/input|textarea|select/i.test(document.activeElement?.tagName || "")) { event.preventDefault(); els.search.focus(); }
-        else if (event.key === "Escape" && !els.scopedDefinitionPopover.hidden) { const trigger = state.scopedDefinitionContext?.trigger; event.preventDefault(); closeScopedDefinitionPopover(true); trigger?.focus(); }
         else if (event.key === "Escape" && !els.legalReferencePopover.hidden) { const trigger = state.legalReferenceContext?.trigger; event.preventDefault(); closeLegalReferencePopover(true); trigger?.focus(); }
         else if (event.key === "Escape" && !els.localShareWarningPopover.hidden) { event.preventDefault(); hideLocalShareWarning(true); els.mainShareButton.focus(); }
         else if (event.key === "Escape" && !els.savingMenuModal.hidden) closeSavingMenu();
@@ -17019,7 +17156,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         }
         const legalUnitTrigger = event.target.closest("[data-legal-unit-kind]");
         if (legalUnitTrigger) { event.preventDefault(); selectLegalUnitTrigger(legalUnitTrigger); return; }
-        if (event.target.closest("#scopedDefinitionPopoverClose")) { event.preventDefault(); closeScopedDefinitionPopover(true); return; }
+        if (event.target.closest("#scopedDefinitionPopoverClose")) { event.preventDefault(); closeScopedDefinitionPopover(true, true); return; }
         const scopedDefinitionJump = event.target.closest("#scopedDefinitionPopoverJump");
         if (scopedDefinitionJump) {
           event.preventDefault();
@@ -17205,19 +17342,8 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (event.target.closest("[data-connect-filesystem-autosaving]")) void connectFilesystemAutosavingFromSettings();
       });
       els.savingMenuImportButton.addEventListener("click", () => { closeSavingMenu(); els.importProfileInput.click(); });
-      els.resetSettingsButton.addEventListener("pointerdown", beginSettingsResetHold);
-      for (const type of ["pointerup", "pointercancel", "pointerleave"]) els.resetSettingsButton.addEventListener(type, cancelSettingsResetHold);
-      els.resetSettingsButton.addEventListener("keydown", beginSettingsResetHold);
-      els.resetSettingsButton.addEventListener("keyup", cancelSettingsResetHold);
-      els.resetSettingsButton.addEventListener("blur", cancelSettingsResetHold);
-      els.resetSettingsButton.addEventListener("click", event => event.preventDefault());
-      els.resetEverythingButton.addEventListener("pointerdown", beginEverythingResetHold);
-      for (const type of ["pointerup", "pointercancel", "pointerleave"]) els.resetEverythingButton.addEventListener(type, cancelEverythingResetHold);
-      els.resetEverythingButton.addEventListener("keydown", beginEverythingResetHold);
-      els.resetEverythingButton.addEventListener("keyup", cancelEverythingResetHold);
-      els.resetEverythingButton.addEventListener("blur", cancelEverythingResetHold);
-      els.resetEverythingButton.addEventListener("click", event => event.preventDefault());
-      for (const button of [els.resetSettingsButton, els.resetEverythingButton]) button.addEventListener("contextmenu", event => event.preventDefault());
+      els.resetSettingsButton.addEventListener("click", () => requestReset(false));
+      els.resetEverythingButton.addEventListener("click", () => requestReset(true));
       els.reloadBrowserProfileButton.addEventListener("click", reloadBrowserProfile);
       els.mergeBrowserProfileButton.addEventListener("click", mergeBrowserProfile);
       els.removeUnavailableReferenceInsertionsButton.addEventListener("click", removeUnavailableReferenceInsertions);

@@ -395,3 +395,28 @@ for (const section of [...cfrCorpusContext.window.INA_SEARCH_CFR.sections, ...cf
   }
 }
 console.log(`PASS CFR citation hover: stable parent/child hosts and ${verifiedScopes} corpus scopes`);
+
+// A pinned preview lives outside the reader, but its Follow View fragments
+// must take part in the same authority change.
+const displayReaderRoot = {}, displayPreviewRoot = {};
+const displayWrapper = () => ({
+  dataset: { citationDisplay: "usc" },
+  firstElementChild: { childNodes: [], append() {} },
+  lastElementChild: { content: { append() {} } },
+  closest: () => null
+});
+const readerDisplay = displayWrapper(), previewDisplay = displayWrapper();
+const swapScope = vm.createContext({
+  els: { detail: displayReaderRoot, legalReferencePopoverContent: displayPreviewRoot },
+  profile: { highlights: [] }, document: { createDocumentFragment: () => ({ append() {} }) },
+  $$: (selector, root) => selector === "[data-citation-display]"
+    ? root === displayReaderRoot ? [readerDisplay] : root === displayPreviewRoot ? [previewDisplay] : [] : [],
+  restoreCitationDisplayAnchor() {}
+});
+vm.runInContext(functionSource(template, "swapCitationDisplayFragments"), swapScope);
+for (const authority of ["ina", "usc"]) {
+  swapScope.swapCitationDisplayFragments(authority, null);
+  assert.equal(readerDisplay.dataset.citationDisplay, authority);
+  assert.equal(previewDisplay.dataset.citationDisplay, authority, "A pinned hover preview must follow the reader authority toggle");
+}
+console.log("PASS Follow View swaps: reader and pinned hover preview stay in the same citation system");

@@ -527,6 +527,7 @@ async function main() {
     ["test-search-reference-display.js", "PASS search reference refresh"],
     ["test-occurrence-search.js", "Occurrence search tests passed."],
     ["test-viewer-overhaul.js", "Viewer overhaul tests passed."],
+    ["test-accessible-controls.js", "# fail 0"],
     ["test-statute-notes.js", "Statute note navigation checks passed."],
     ["test-navigation-title-case.js", "Navigation title-case tests passed."]
   ]) {
@@ -2318,57 +2319,6 @@ async function main() {
     && fallbackSource.includes('savingMenuEnableButton.addEventListener("click", connectFilesystemAutosavingFromSettings)')
     && fallbackSource.includes('event.target.closest("[data-connect-filesystem-autosaving]")')
     && fallbackSource.includes("connectFilesystemAutosavingFromSettings()"), "The inline connect-a-data-file action does not share the filesystem-autosaving flow.");
-  assert(/id="resetSettingsButton"[^>]*data-hold-duration="1500"[^>]*>Hold to reset settings</.test(fallbackSource)
-    && fallbackSource.includes("animation: settings-reset-hold var(--settings-reset-hold-duration, 1.5s) linear forwards")
-    && fallbackSource.includes('resetSettingsButton.addEventListener("pointerdown", beginSettingsResetHold)')
-    && fallbackSource.includes('resetSettingsButton.addEventListener("keydown", beginSettingsResetHold)')
-    && fallbackSource.includes('beginResetHold("settingsResetTimer", els.resetSettingsButton, resetSettingsToDefaults, event)')
-    && fallbackSource.includes("Number(button.dataset.holdDuration)"), "The Reset Settings control does not require a visible continuous 1.5-second hold.");
-  assert(/id="resetEverythingButton"[^>]*data-hold-duration="3000"[^>]*>Hold to reset everything</.test(fallbackSource)
-    && fallbackSource.includes('resetEverythingButton.addEventListener("pointerdown", beginEverythingResetHold)')
-    && fallbackSource.includes('resetEverythingButton.addEventListener("keydown", beginEverythingResetHold)')
-    && fallbackSource.includes('beginResetHold("resetEverythingTimer", els.resetEverythingButton, resetEverythingToDefaults, event)')
-    && fallbackSource.includes("--settings-reset-hold-duration"), "Reset Everything does not require a visible continuous three-second hold.");
-  assert(!fallbackSource.includes("Hold continuously for 1.5 seconds to restore the default settings."), "The Reset Settings description redundantly repeats the button's hold instruction.");
-  const holdState = { resetEverythingTimer: null };
-  const holdClasses = new Set();
-  const holdAttributes = new Map();
-  const holdStyles = new Map();
-  const holdButton = {
-    dataset: { holdDuration: "3000" },
-    style: { setProperty: (key, value) => holdStyles.set(key, value) },
-    classList: { add: value => holdClasses.add(value), remove: value => holdClasses.delete(value) },
-    setAttribute: (key, value) => holdAttributes.set(key, value),
-    removeAttribute: key => holdAttributes.delete(key)
-  };
-  let holdCallback = null;
-  let holdDelay = null;
-  let holdCompletions = 0;
-  let clearedHoldTimer = null;
-  const beginResetHold = extractedFunction(fallbackSource, "beginResetHold", "cancelSettingsResetHold", {
-    state: holdState,
-    setTimeout: (callback, delay) => { holdCallback = callback; holdDelay = delay; return "hold-timer"; },
-    Math,
-    Number
-  });
-  const cancelResetHold = extractedFunction(fallbackSource, "cancelResetHold", "beginResetHold", {
-    state: holdState,
-    clearTimeout: timer => { clearedHoldTimer = timer; }
-  });
-  const holdEvent = { type: "pointerdown", cancelable: true, preventDefault() {} };
-  beginResetHold("resetEverythingTimer", holdButton, () => { holdCompletions += 1; }, holdEvent);
-  assert.strictEqual(holdDelay, 3000, "Reset Everything does not wait exactly three seconds.");
-  assert.strictEqual(holdStyles.get("--settings-reset-hold-duration"), "3000ms", "Reset Everything's visible hold progress does not match its timer.");
-  assert(holdClasses.has("is-holding") && holdAttributes.get("aria-busy") === "true", "Reset Everything does not expose its active hold state.");
-  cancelResetHold("resetEverythingTimer", holdButton, { type: "pointerup", cancelable: true, preventDefault() {} });
-  assert.strictEqual(clearedHoldTimer, "hold-timer", "Releasing Reset Everything early did not cancel its timer.");
-  assert.strictEqual(holdCompletions, 0, "Releasing Reset Everything early activated the reset.");
-  assert.strictEqual(holdState.resetEverythingTimer, null, "The canceled Reset Everything timer remained active.");
-  beginResetHold("resetEverythingTimer", holdButton, () => { holdCompletions += 1; }, holdEvent);
-  holdCallback();
-  assert.strictEqual(holdCompletions, 1, "A continuous three-second Reset Everything hold did not activate exactly once.");
-  assert.strictEqual(holdState.resetEverythingTimer, null, "The completed Reset Everything timer remained active.");
-  assert(!holdClasses.has("is-holding") && !holdAttributes.has("aria-busy"), "Reset Everything retained its active hold state after completion.");
   const resetNotes = [{ id: "note-kept" }];
   const resetTutorialProgress = { schemaVersion: 1, modules: { notes: { status: "completed" } } };
   const resetInsertionRecords = [{ key: "insertion-kept" }];
@@ -2418,7 +2368,7 @@ async function main() {
   assert.strictEqual(resetProfile.preferences.customNondefault, undefined, "Reset Settings retained a nondefault preference.");
   assert.strictEqual(resetProfile.preferences.persistInlineReferenceInsertions, true, "Reset Settings disabled persistence needed to retain existing inserted references.");
   assert.strictEqual(resetMarks, 1, "Reset Settings did not queue exactly one profile save.");
-  assert.strictEqual(resetFocuses, 1, "Reset Settings did not return focus to its hold control.");
+  assert.strictEqual(resetFocuses, 1, "Reset Settings did not return focus to its reset control.");
   assert(resetToast.includes("Notes and inserted references were not changed"), "Reset Settings did not confirm its data-preservation boundary.");
   const resetEverythingProfile = {
     schemaVersion: 5,
@@ -2467,7 +2417,7 @@ async function main() {
   assert.strictEqual(resetEverythingProfile.preferences.theme, "light", "Reset Everything did not restore default settings.");
   assert.strictEqual(resetEverythingProfile.preferences.customNondefault, undefined, "Reset Everything retained a nondefault preference.");
   assert.strictEqual(replacementInsertionRecords?.length, 0, "Reset Everything did not clear the live inserted-reference session.");
-  const resetEverythingSource = fallbackSource.slice(fallbackSource.indexOf("function resetEverythingToDefaults()"), fallbackSource.indexOf("function cancelResetHold"));
+  const resetEverythingSource = fallbackSource.slice(fallbackSource.indexOf("function resetEverythingToDefaults()"), fallbackSource.indexOf("function requestReset"));
   assert(resetEverythingSource.includes("state.inlineNoteEditor = null")
     && resetEverythingSource.includes("insertedReferenceMaterializedKeys.clear()")
     && resetEverythingSource.includes("resetAnnotationIndex()")
@@ -2959,7 +2909,7 @@ async function main() {
   reminderProfile.notes = [];
   reminderProfile.preferences = { backupReminder: "weekly", theme: "dark" };
   assert.strictEqual(await maybeShowBackupReminder(), true, "Existing customized settings did not schedule a startup reminder.");
-  assert(/<button class="brand" id="inaSearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>INASearch<\/strong><small>Statutes &amp; Regulations<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area and Home control do not continuously wrap the full INASearch brand.");
+  assert(/<button class="brand" id="inaSearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>INASearch<\/strong><small>Find your authority<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area and Home control do not continuously wrap the full INASearch brand and tagline.");
   assert(fallbackSource.includes("Inspired by the excellent work of 2604"), "The INASearch tribute text is missing.");
   assert(fallbackSource.includes('els.brand.addEventListener("mouseenter", beginBrandTributeHover);'), "The tribute timer is not attached to the continuous brand area.");
   assert(fallbackSource.includes('els.brand.addEventListener("mouseleave", endBrandTributeHover);'), "The tribute popup is not dismissed when the pointer leaves the brand area.");
@@ -4601,7 +4551,8 @@ async function main() {
   assert(!/href=|data-show-citation|data-definition-reference/.test(scopedChildHtml), "Clicking an annotated term can navigate directly instead of only opening its scoped preview.");
   assert(fallbackSource.includes('openDefinitionReference(query)') && fallbackSource.includes('id="scopedDefinitionPopoverJump"'), "The hover pane lacks its explicit Definitions-page jump control.");
   const houseFootnoteReferenceId = extractedFunction(fallbackSource, "houseFootnoteReferenceId", "statuteStatusWarning", { encodeURIComponent });
-  const houseFootnoteReferenceHtml = extractedFunction(fallbackSource, "houseFootnoteReferenceHtml", "coordinatedInaListHtml", { escapeHtml: escapeStatutoryHtml, houseFootnoteReferenceId, String });
+  const superscriptNumber = extractedFunction(fallbackSource, "superscriptNumber", "textWithHouseFootnoteMarkers", { String });
+  const houseFootnoteReferenceHtml = extractedFunction(fallbackSource, "houseFootnoteReferenceHtml", "coordinatedInaListHtml", { escapeHtml: escapeStatutoryHtml, houseFootnoteReferenceId, superscriptNumber, String });
   const legalReferenceCitation = extractedFunction(fallbackSource, "legalReferenceCitation", "statutoryReferenceCrosswalk", { canonicalPath: statutoryCanonicalPath, String });
   const citationPreferenceProfile = { preferences: { statutoryLinkCitationSystem: "usc", highlightInaCitationLinks: false } };
   const citationPreferenceState = { statuteHierarchyAuthority: "ina" };
@@ -4836,13 +4787,12 @@ async function main() {
   const testStatuteReferenceUnitIndexCache = new WeakMap();
   const statuteReferenceUnitIndex = extractedFunction(fallbackSource, "statuteReferenceUnitIndex", "statuteReferenceSelection", { statuteReferenceUnitIndexCache: testStatuteReferenceUnitIndexCache, statutoryRunInSegments, statuteReferencePathKey, Map, String });
   const statuteReferenceSelection = extractedFunction(fallbackSource, "statuteReferenceSelection", "scrollToRenderedStatuteTarget", { statuteReferenceUnitIndex, statuteReferencePathKey, normCitationPart: statutoryNormPart, pathStartsWith: testPathStartsWith, String });
-  const superscriptNumber = extractedFunction(fallbackSource, "superscriptNumber", "textWithHouseFootnoteMarkers", { String });
   const textWithHouseFootnoteMarkers = extractedFunction(fallbackSource, "textWithHouseFootnoteMarkers", "statuteFootnoteAppendix", { superscriptNumber, String });
   const statuteFootnoteAppendix = extractedFunction(fallbackSource, "statuteFootnoteAppendix", "statuteNodePlainText", { HOUSE_FOOTNOTE_STATEMENT: "Footnotes embedded in original house.gov material, moved here for clarity" });
   const statuteTextRangeWithHouseFootnotes = extractedFunction(fallbackSource, "statuteTextRangeWithHouseFootnotes", "statuteUnitText", { textWithHouseFootnoteMarkers, Math, Number, String, Set });
   const statuteNodePlainText = extractedFunction(fallbackSource, "statuteNodePlainText", "statuteTextRangeWithHouseFootnotes", { textWithHouseFootnoteMarkers, statuteTextRangeWithHouseFootnotes, Set });
   const statuteUnitText = extractedFunction(fallbackSource, "statuteUnitText", "statuteReferenceRunInLineHtml", { statuteReferenceSelection, statuteNodePlainText, statuteTextRangeWithHouseFootnotes, statuteFootnoteAppendix, textWithHouseFootnoteMarkers, statuteStatus, Set, String });
-  const statuteFieldPreviewHtml = extractedFunction(fallbackSource, "statuteFieldPreviewHtml", "statuteReferencePreviewNodeHtml", { statuteTextRangeWithHouseFootnotes, escapeHtml: escapeStatutoryHtml, Math, Set });
+  const statuteFieldPreviewHtml = extractedFunction(fallbackSource, "statuteFieldPreviewHtml", "statuteReferencePreviewNodeHtml", { linkifyStatutoryText: coordinatedLinkifyStatutoryText, Math, Set });
   const statuteReferenceRunInLineHtml = extractedFunction(fallbackSource, "statuteReferenceRunInLineHtml", "statuteReferencePreviewNodeHtml", { statuteFieldPreviewHtml, statuteTextRangeWithHouseFootnotes, escapeHtml: escapeStatutoryHtml, Math, Set });
   const statuteReferencePreviewNodeHtml = extractedFunction(fallbackSource, "statuteReferencePreviewNodeHtml", "statuteReferencePreviewHtml", { statuteFieldPreviewHtml, textWithHouseFootnoteMarkers, statuteTextRangeWithHouseFootnotes, statuteReferenceUnitIndex, statuteReferencePathKey, statuteReferenceRunInLineHtml, escapeHtml: escapeStatutoryHtml, Math, Set, String });
   const excerptRuntime = require("./audit-ina-display").runtime(fallbackSource, hydratedSource);
@@ -4853,7 +4803,9 @@ async function main() {
   for (const name of ["statuteNoteBodyStart", "formatStatuteNoteBody", "renderStatuteNoteBody", "statuteExcerptFootnotesHtml",
     "linkifyCfrText", "renderCfrStyledRange", "cfrGraphicHtml", "insertedCfrTextRanges", "insertedCfrBlockHtml", "insertedCfrExcerptHtml", "cfrReferencePreviewHtml"])
     vm.runInContext(require("./test-function-source")(fallbackSource, name), excerptRuntime);
-  const statuteReferencePreviewHtml = extractedFunction(fallbackSource, "statuteReferencePreviewHtml", "cfrBlockPlainText", { statuteFieldPreviewHtml, statuteReferenceSelection, statuteReferencePreviewNodeHtml, statuteReferenceRunInLineHtml, statuteExcerptFootnotesHtml: excerptRuntime.statuteExcerptFootnotesHtml, textWithHouseFootnoteMarkers, canonicalPath: statutoryCanonicalPath, escapeHtml: escapeStatutoryHtml, Set, String });
+  const statuteReferencePreviewHtml = extractedFunction(fallbackSource, "statuteReferencePreviewHtml", "cfrBlockPlainText", { corpus: hydratedSource, hydrateLegalReferences: excerptRuntime.hydrateLegalReferences, uscMapping: excerptRuntime.uscMapping,
+    statuteDefinitionContext: extractedFunction(fallbackSource, "statuteDefinitionContext", "cfrDefinitionContext"),
+    statuteFieldPreviewHtml, statuteReferenceSelection, statuteReferencePreviewNodeHtml, statuteReferenceRunInLineHtml, statuteExcerptFootnotesHtml: excerptRuntime.statuteExcerptFootnotesHtml, textWithHouseFootnoteMarkers, canonicalPath: statutoryCanonicalPath, escapeHtml: escapeStatutoryHtml, Set, String });
   const previewSectionMap = new Map(hydratedSource.title8.sections.map(section => [statutoryNormPart(section.section), section]));
   for (const row of hydratedSource.inaCrosswalk) {
     const section = previewSectionMap.get(statutoryNormPart(row.localSection || row.uscSection));

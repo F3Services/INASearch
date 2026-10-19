@@ -80,7 +80,8 @@ const corpus = {
   const displayedId = context.occurrenceDisplayGroups(duplicateResult)[0].result.sections.find(section => section.recordId === "8-1101").id;
   const aliasId = duplicateResult.sections.find(section => section.recordId === "8-1101" && section.id !== displayedId).id;
   let restoredId;
-  const restoredElement = { scrollIntoView() {}, focus() {} };
+  let restoredButtonFocused = false;
+  const restoredElement = { scrollIntoView() {}, querySelector(selector) { assert.equal(selector, '[data-occurrence-open]'); return { focus() { restoredButtonFocused = true; } }; } };
   const restoredContainer = { closest: () => null };
   const restorePane = { detail: { isConnected: true }, searchState: { result: duplicateResult, rowsBySection: new Map() } };
   const restoreContext = vm.createContext({ occurrenceDisplayGroups: context.occurrenceDisplayGroups, occurrenceSectionById: (result, id) => result.sections.find(section => section.id === id),
@@ -91,6 +92,7 @@ const corpus = {
   vm.runInContext(functionSource(template, "restoreOccurrenceResult"), restoreContext);
   assert.equal(await restoreContext.restoreOccurrenceResult(restorePane, { sectionId: aliasId, index: 0 }), true);
   assert.equal(restoredId, displayedId, "History must restore an INA alias through its displayed Code section.");
+  assert(restoredButtonFocused, "History must restore keyboard focus to the result's opening button.");
 
   const click = expand => ({ target: { closest: () => ({ hasAttribute: () => expand, dataset: expand ? { hierarchyExpandAll: "referenced-usc" } : { hierarchyCollapseAll: "referenced-usc" }, isConnected: true }) } });
   context.handleHierarchyPageActions(click(true));

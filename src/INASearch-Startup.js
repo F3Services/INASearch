@@ -33,7 +33,7 @@
     const labelHtml = interactiveLabel
       ? `<div class="hierarchy-label hierarchy-label-annotated"><button class="hierarchy-open" type="button" data-hierarchy-open="${escapeHtml(id)}" aria-label="${escapeHtml(navigationLabel)}"></button>${label}</div>`
       : `<button class="hierarchy-label" type="button" data-hierarchy-open="${escapeHtml(id)}">${label}</button>`;
-    return `<article class="hierarchy-row" data-row-size="${escapeHtml(size)}" data-hierarchy-row="${escapeHtml(id)}"><div class="hierarchy-row-main">${toggle}${labelHtml}</div>${expandable ? `<div class="hierarchy-children" data-hierarchy-children="${escapeHtml(id)}"${expanded ? "" : " hidden"}>${children}</div>` : ""}</article>`;
+    return `<article class="hierarchy-row" role="listitem" data-row-size="${escapeHtml(size)}" data-hierarchy-row="${escapeHtml(id)}"><div class="hierarchy-row-main">${toggle}${labelHtml}</div>${expandable ? `<div class="hierarchy-children" role="list" data-hierarchy-children="${escapeHtml(id)}"${expanded ? "" : " hidden"}>${children}</div>` : ""}</article>`;
   }
   // Reconcile the opening markup in place. Browser scroll anchoring, focused
   // controls and the already painted rows survive the application handoff.
@@ -112,7 +112,7 @@
     const root = system === "ina" ? "ina:root" : "usc:title:8";
     document.getElementById("authorityBrowseHeader").innerHTML = header(system === "ina" ? "GovInfo INA structure" : "House U.S. Code", data.urls[system], system === "ina" ? "INA" : "8 U.S.C.", system === "ina" ? "Immigration and Nationality Act" : "Aliens and Nationality", "authorityBrowseTitle") + actions(root);
     const list = document.getElementById("resultList");
-    list.innerHTML = `<div class="hierarchy-list">${rows(data[system])}</div><section class="home-cfr-index" aria-labelledby="homeCfrTitle"><header class="authority-browse-header">${header("eCFR", "https://www.ecfr.gov/current", "CFR", "Code of Federal Regulations", "homeCfrTitle")}${actions("cfr:root")}</header><div class="hierarchy-list" role="list" aria-label="CFR index">${rows(data.cfr)}</div></section>`;
+    list.innerHTML = `<div class="hierarchy-list" role="list">${rows(data[system])}</div><section class="home-cfr-index" aria-labelledby="homeCfrTitle"><header class="authority-browse-header">${header("eCFR", "https://www.ecfr.gov/current", "CFR", "Code of Federal Regulations", "homeCfrTitle")}${actions("cfr:root")}</header><div class="hierarchy-list" role="list" aria-label="CFR index">${rows(data.cfr)}</div></section>`;
     if (data.referencedUsc?.length) list.insertAdjacentHTML("beforeend", `<section class="home-cfr-index" aria-labelledby="homeRelatedUscTitle"><header class="authority-browse-header"><h2 class="authority-browse-title" id="homeRelatedUscTitle">Referenced U.S. Code</h2><div class="authority-browse-footer"><p class="authority-browse-meta">Sections cited by the statutory text of the INA</p></div>${actions("referenced-usc")}</header><div class="hierarchy-list" role="list" aria-label="Referenced U.S. Code index">${rows(data.referencedUsc)}</div></section>`);
     list.setAttribute("role", "group");
     list.setAttribute("aria-label", `${system === "ina" ? "INA" : "8 U.S.C."} and CFR index`);

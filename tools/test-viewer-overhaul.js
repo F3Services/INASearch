@@ -235,16 +235,24 @@ function testChildHardScopes() {
 
 async function testSectionMaterializationHooks() {
   const calls = [];
+  const focusedDocument = { activeElement: null };
   const sectionIds = ["cfr:8:204.1", "cfr:8:204.2"];
-  const containers = sectionIds.map(sectionId => ({ dataset: { occurrenceSectionRows: encodeURIComponent(sectionId) }, innerHTML: "", setAttribute() {} }));
+  const containers = sectionIds.map(sectionId => ({ dataset: { occurrenceSectionRows: encodeURIComponent(sectionId) }, innerHTML: "", setAttribute() {}, removeAttribute() {} }));
+  containers.forEach(container => { container.contains = element => element?.container === container; });
+  const firstButtons = containers.map(container => ({ container, focus() { focusedDocument.activeElement = this; }, scrollIntoView() {} }));
+  const lastButtons = containers.map(container => ({ container, focus() { focusedDocument.activeElement = this; }, scrollIntoView() {} }));
   const details = sectionIds.map(sectionId => ({ dataset: { occurrenceSection: encodeURIComponent(sectionId) }, open: false }));
+  details.forEach((detail, index) => { detail.querySelector = () => containers[index]; });
   containers.forEach((container, index) => { container.closest = () => details[index]; });
-  const $$ = selector => selector === "[data-occurrence-section-rows]" ? containers : selector === "[data-occurrence-section]" ? details : [];
+  const $$ = (selector, container) => ['[data-occurrence-open]', '[data-occurrence-row] button:not(:disabled)'].includes(selector) ? container.tabControls || [firstButtons[containers.indexOf(container)], lastButtons[containers.indexOf(container)]]
+    : selector === 'button:not(:disabled)' ? container.controls
+    : selector === "[data-occurrence-section-rows]" ? containers : selector === "[data-occurrence-section]" ? details : [];
   const declarations = between("    const OCCURRENCE_EAGER_ROW_LIMIT", "\n\n    function scheduleVisibleOccurrenceSections(");
   const unitCorpus = { title8: { sections: [{ id: "8-1101" }] }, cfr: { sections: [], appendices: [] } };
-  const helpers = vm.runInNewContext(`${declarations}\n({ occurrenceRowCitationLabel, occurrenceRowUnitText, renderOccurrenceRows, renderAllOccurrenceSections })`, {
+  const helpers = vm.runInNewContext(`${declarations}\n({ occurrenceRowCitationLabel, occurrenceRowUnitText, renderOccurrenceRows, renderAllOccurrenceSections, showOccurrencePage, handleOccurrenceResultTab: typeof handleOccurrenceResultTab === 'function' ? handleOccurrenceResultTab : null })`, {
     legalCopyDescription: label => label, scheduleVisibleOccurrenceSections: () => {},
-    $$, $: () => null,
+    $$, $: (selector, container) => selector === '[data-occurrence-open]' ? firstButtons[containers.indexOf(container)] : null,
+    document: focusedDocument,
     corpus: unitCorpus,
     uscSectionById: new Map(unitCorpus.title8.sections.map(section => [section.id, section])),
     escapeHtml: value => String(value),
@@ -280,13 +288,173 @@ async function testSectionMaterializationHooks() {
   assert.strictEqual(count(containers[0].innerHTML, /data-occurrence-row=/g), 80, "The first nearby section was evicted when another section populated.");
   assert.strictEqual(count(containers[1].innerHTML, /data-occurrence-row=/g), 80, "The second nearby section did not populate.");
   assert(containers[0].innerHTML.includes("occurrence-row-citation") && containers[0].innerHTML.includes("occurrence-row-text"), "Occurrence hits are not rendered as citation/text columns.");
+  assert(containers[0].innerHTML.includes('role="list"') && containers[0].innerHTML.includes('role="listitem"'), "Search hits must expose a list with separately operable controls.");
+  assert(!containers[0].innerHTML.includes('role="option"') && !/role="listitem"[^>]*tabindex="0"/.test(containers[0].innerHTML), "Each hit still adds a duplicate composite-widget tab stop.");
+  assert(containers[0].innerHTML.includes('aria-describedby=') && containers[0].innerHTML.includes('aria-posinset="1"') && containers[0].innerHTML.includes('aria-setsize="120"'), "A hit does not expose its snippet and position in the complete section.");
+  assert(containers[0].innerHTML.includes('data-occurrence-page="80"'), "The unrendered hits cannot be reached through an explicit Next results action.");
   assert(details.every(item => item.open), "Materializing rows did not leave both sections expanded.");
+
+  const searchInput = { matches: selector => selector === '#searchInput, .focused-citation-pane-search', closest: () => null };
+  pane.input = searchInput;
+  focusedDocument.activeElement = searchInput;
+  let enteredDirectly = false;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: searchInput, preventDefault() { enteredDirectly = true; } });
+  assert(enteredDirectly && focusedDocument.activeElement === firstButtons[0], "One Tab from the search input must focus the first actual hit, not a toolbar or hierarchy header.");
+
+  const immediateMaterialize = result.materializeOccurrences;
+  let completeOldEntry;
+  result.materializeOccurrences = options => new Promise(resolve => { completeOldEntry = () => resolve(immediateMaterialize(options)); });
+  focusedDocument.activeElement = searchInput;
+  const outdatedEntry = helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: searchInput, preventDefault() {} });
+  pane.occurrenceGeneration = (pane.occurrenceGeneration || 0) + 1;
+  completeOldEntry();
+  await outdatedEntry;
+  assert(focusedDocument.activeElement === searchInput, "An old Tab-entry response interrupted input editing after the search generation changed.");
+  result.materializeOccurrences = immediateMaterialize;
+  let usedOldResults = false;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: searchInput, preventDefault() { usedOldResults = true; } });
+  assert(!usedOldResults && focusedDocument.activeElement === searchInput, "Tab entered retained results while a replacement search was still loading.");
+  pane.searchState.generation = pane.occurrenceGeneration;
+
+  await helpers.renderOccurrenceRows(pane, 80, sectionIds[0], { windowed: true, paged: true, limit: 80 });
+  assert.strictEqual(calls.at(-1).start, 80, "Next results shifted backward instead of reaching the remaining hits.");
+  assert.strictEqual(count(containers[0].innerHTML, /data-occurrence-row=/g), 40, "The final page lost or repeated the section's remaining hits.");
+  assert(containers[0].innerHTML.includes('aria-posinset="81"') && containers[0].innerHTML.includes('Results 81–120 of 120'), "The final page does not describe its actual range.");
+  assert(/data-occurrence-page="120" disabled/.test(containers[0].innerHTML), "Next results remains enabled after the final hit.");
+
+  const materialize = result.materializeOccurrences;
+  let finishPage;
+  result.materializeOccurrences = options => new Promise(resolve => { finishPage = () => resolve(materialize(options)); });
+  const focusedMarkup = containers[0].innerHTML;
+  const automaticPage = helpers.renderOccurrenceRows(pane, 0, sectionIds[0], { windowed: true, activate: false });
+  focusedDocument.activeElement = firstButtons[0];
+  finishPage();
+  await automaticPage;
+  assert(containers[0].innerHTML === focusedMarkup, "A pending automatic page removed a control after keyboard focus entered its section.");
+
+  const nextButton = { container: containers[0], dataset: { occurrencePage: "80" }, closest: () => containers[0] };
+  focusedDocument.activeElement = nextButton;
+  const explicitPage = helpers.showOccurrencePage(pane, nextButton);
+  const outsideControl = {};
+  focusedDocument.activeElement = outsideControl;
+  finishPage();
+  await explicitPage;
+  assert(focusedDocument.activeElement === outsideControl, "A pending Next results response stole focus after the user left the section.");
+  focusedDocument.activeElement = nextButton;
+  const focusedPage = helpers.showOccurrencePage(pane, nextButton);
+  finishPage();
+  await focusedPage;
+  assert(focusedDocument.activeElement === firstButtons[0], "Next results did not place keyboard focus on its newly rendered first hit.");
+  result.materializeOccurrences = materialize;
+  focusedDocument.activeElement = null;
+
+  // Native Tab must enter a section even when its worker response is delayed.
+  pane.searchState.rowsBySection.delete(sectionIds[1]);
+  containers[1].innerHTML = "";
+  details[1].querySelector = () => containers[1];
+  const header = { matches: selector => selector === '[data-occurrence-section-open]', closest: () => details[1] };
+  focusedDocument.activeElement = header;
+  result.materializeOccurrences = options => new Promise(resolve => { finishPage = () => resolve(materialize(options)); });
+  let prevented = false;
+  const entering = helpers.handleOccurrenceResultTab?.(pane, { key: 'Tab', shiftKey: false, target: header, preventDefault() { prevented = true; } });
+  assert(prevented, "Tab skipped the hits in an unloaded section instead of waiting to enter them.");
+  finishPage();
+  await entering;
+  assert(focusedDocument.activeElement === firstButtons[1], "Tab from the header did not focus the first loaded hit.");
+
+  pane.searchState.rowsBySection.delete(sectionIds[1]);
+  focusedDocument.activeElement = header;
+  const canceledEntry = helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: header, preventDefault() {} });
+  focusedDocument.activeElement = outsideControl;
+  finishPage();
+  await canceledEntry;
+  assert(focusedDocument.activeElement === outsideControl, "Delayed keyboard entry stole focus after the user left.");
+  result.materializeOccurrences = materialize;
+
+  const edgeRow = { dataset: { occurrenceRow: '79' } };
+  const edgeButton = { matches: selector => ['[data-occurrence-open]', '[data-occurrence-open], [data-artifact-repair], [data-artifact-delete]'].includes(selector), closest: selector => selector === '[data-occurrence-row]' ? edgeRow : details[0], focus() { focusedDocument.activeElement = this; }, scrollIntoView() {} };
+  edgeRow.controls = [edgeButton];
+  focusedDocument.activeElement = edgeButton;
+  await helpers.renderOccurrenceRows(pane, 0, sectionIds[0]);
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: edgeButton, preventDefault() {} });
+  assert.equal(pane.searchState.rowsBySection.get(sectionIds[0]).start, 80, "Tab left the section before reaching all its hits.");
+  assert(focusedDocument.activeElement === firstButtons[0], "Tab across a page boundary did not focus the next hit.");
+  edgeRow.dataset.occurrenceRow = '0';
+  focusedDocument.activeElement = edgeButton;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: true, target: edgeButton, preventDefault() {} });
+  assert.equal(pane.searchState.rowsBySection.get(sectionIds[0]).start, 0, "Shift+Tab did not reach the previous result page.");
+  assert(focusedDocument.activeElement === lastButtons[0], "Shift+Tab across a page boundary did not focus the previous hit.");
+
+  pane.searchState.rowsBySection.delete(sectionIds[0]);
+  const summary = { matches: () => false, closest: () => details[1] };
+  details[1].firstElementChild = summary;
+  details[1].previousElementSibling = details[0];
+  details[0].matches = () => true;
+  focusedDocument.activeElement = summary;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: true, target: summary, preventDefault() {} });
+  assert.equal(pane.searchState.rowsBySection.get(sectionIds[0]).start, 40, "Shift+Tab skipped an unloaded previous section instead of loading its final hits.");
+  assert(focusedDocument.activeElement === lastButtons[0], "Backward entry did not focus the previous section's final hit.");
+
+  await helpers.renderOccurrenceRows(pane, 40, sectionIds[0]);
+  focusedDocument.activeElement = edgeButton;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: true, target: edgeButton, preventDefault() {} });
+  const backwardWindow = pane.searchState.rowsBySection.get(sectionIds[0]);
+  assert.equal(backwardWindow.start + backwardWindow.rows.length, 40, "Shift+Tab from an automatically positioned window jumped forward instead of to the immediately preceding hit.");
+
+  await helpers.renderOccurrenceRows(pane, 40, sectionIds[1]);
+  focusedDocument.activeElement = header;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: header, preventDefault() {} });
+  assert.equal(pane.searchState.rowsBySection.get(sectionIds[1]).start, 0, "Tab from a section header skipped hits before an already loaded middle window.");
+
+  await helpers.renderOccurrenceRows(pane, 0, sectionIds[0]);
+  focusedDocument.activeElement = summary;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: true, target: summary, preventDefault() {} });
+  const previousSectionEnd = pane.searchState.rowsBySection.get(sectionIds[0]);
+  assert.equal(previousSectionEnd.start + previousSectionEnd.rows.length, 120, "Shift+Tab skipped the end of a previous section whose first page was already loaded.");
+
+  await helpers.renderOccurrenceRows(pane, 0, sectionIds[0]);
+  const beforeCanceledPage = containers[0].innerHTML;
+  edgeRow.dataset.occurrenceRow = '79';
+  focusedDocument.activeElement = edgeButton;
+  result.materializeOccurrences = options => new Promise(resolve => { finishPage = () => resolve(materialize(options)); });
+  const abandonedPage = helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: edgeButton, preventDefault() {} });
+  focusedDocument.activeElement = firstButtons[0];
+  finishPage();
+  await abandonedPage;
+  assert.equal(containers[0].innerHTML, beforeCanceledPage, "A pending keyboard page removed another hit that received focus in the same section.");
+  result.materializeOccurrences = materialize;
+
+  const repairButton = { ...edgeButton }, deleteButton = { ...edgeButton };
+  edgeRow.controls = [edgeButton, repairButton, deleteButton];
+  containers[0].tabControls = edgeRow.controls;
+  focusedDocument.activeElement = edgeButton;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: edgeButton, preventDefault() {} });
+  assert(focusedDocument.activeElement === repairButton, "Tab skipped the last hit's Repair control.");
+  focusedDocument.activeElement = deleteButton;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: deleteButton, preventDefault() {} });
+  assert.equal(pane.searchState.rowsBySection.get(sectionIds[0]).start, 80, "Tab after the last repair control did not continue to the next hit.");
+  delete containers[0].tabControls;
+  edgeRow.controls = [edgeButton];
+
+  // An ordinary loaded hit must explicitly focus its successor too: some browsers
+  // otherwise include summaries in sequential navigation while skipping buttons.
+  containers[0].tabControls = [edgeButton, firstButtons[0]];
+  focusedDocument.activeElement = edgeButton;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: edgeButton, preventDefault() {} });
+  assert(focusedDocument.activeElement === firstButtons[0], "Tab delegated ordinary hit-to-hit focus back to the browser.");
+  delete containers[0].tabControls;
+
+  edgeRow.dataset.occurrenceRow = '39';
+  focusedDocument.activeElement = edgeButton;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: edgeButton, preventDefault() {} });
+  assert(focusedDocument.activeElement === firstButtons[1], "Tab from a section's final hit must enter the next section's first hit, not its header.");
+  focusedDocument.activeElement = null;
 
   calls.length = 0;
   result.totalOccurrences = 53;
   result.sections[0].totalOccurrences = 20;
   result.sections[1].totalOccurrences = 33;
-  pane.searchState = { result, offset: 0, activeSectionId: sectionIds[0], sectionOffsets: new Map(), rowsBySection: new Map(), visibleRows: [], virtualizedRows: false };
+  pane.searchState = { result, generation: pane.occurrenceGeneration, offset: 0, activeSectionId: sectionIds[0], sectionOffsets: new Map(), rowsBySection: new Map(), visibleRows: [], virtualizedRows: false };
   result.materializeOccurrences = options => {
     calls.push(options);
     const total = options.sectionId === sectionIds[0] ? 20 : 33;
@@ -295,6 +463,16 @@ async function testSectionMaterializationHooks() {
   await helpers.renderAllOccurrenceSections(pane);
   assert.strictEqual(pane.searchState.visibleRows.length, 53, "A 53-hit search was not rendered completely.");
   assert.strictEqual(count(containers.map(container => container.innerHTML).join(""), /data-occurrence-row=/g), 53, "Small-result rows were omitted from the DOM.");
+
+  const closedParent = { open: false };
+  details[0].open = false;
+  details[0].parentElement = { closest: () => closedParent };
+  focusedDocument.activeElement = searchInput;
+  await helpers.handleOccurrenceResultTab(pane, { key: 'Tab', shiftKey: false, target: searchInput, preventDefault() {} });
+  assert(focusedDocument.activeElement === firstButtons[0] && details[0].open && closedParent.open,
+    "One Tab from a small search did not reveal and focus the first hit inside collapsed ancestors.");
+  details[0].parentElement = null;
+  focusedDocument.activeElement = null;
 
   const hierarchySource = between("    function occurrenceHierarchyHtml(", "\n\n    function occurrenceSectionDomToken(");
   assert(hierarchySource.includes("node.totalOccurrences") && hierarchySource.includes("section.totalOccurrences"), "Search trees do not display both ancestor and section occurrence totals.");
