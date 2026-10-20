@@ -60,7 +60,8 @@ for(const r of records){
  }
 }
 const s214=cfr.sections.find(r=>r.id==='8:214.2');
-for(const [path,count] of [['(h)',684],['(h)(2)',42],['(h)(2)(i)',37],['(h)(2)(i)(A)',1]])assert.strictEqual(H.scope(s214,path).filter(r=>r.block.a).length,count,path);
+// Independently counted addressable paragraph groups in the October 16, 2026 renderer.
+for(const [path,count] of [['(h)',661],['(h)(2)',42],['(h)(2)(i)',37],['(h)(2)(i)(A)',1]])assert.strictEqual(H.scope(s214,path).filter(r=>r.block.a).length,count,path);
 const ambiguous214=api.parseCfr(8,'214.2h2ii');same(ambiguous214.path,['h','2','ii']);assert.strictEqual(ambiguous214.ambiguity.options.length,2);
 same(api.parseCfr(8,'214.2h2iI').path,['h','2','i','I']);
 assert.strictEqual(api.citationWithStatuteInterpretation('214.2h2ii',ambiguous214.ambiguity,ambiguous214.ambiguity.options.find(o=>o.path.at(-1)==='I')),'214.2h2iI');
@@ -80,5 +81,6 @@ const unique=H.rebindAnchor(admissions,{exact:'Every nonimmigrant alien who appl
 same(unique.path,['a','3','i']);
 same(H.rebindAnchor(admissions,{exact:'Text that no longer appears in the source.'}),null);
 const results={canonical,compact,boundaries,ambiguous,scopes,shared,letterSuffixedSections:letters.length};
-fs.writeFileSync('sources/legal/cfr-hierarchy/verification.json',JSON.stringify(results,null,2)+'\n');
+const reportIndex=process.argv.indexOf('--report');
+if(reportIndex>=0)fs.writeFileSync(process.argv[reportIndex+1],JSON.stringify(results,null,2)+'\n');
 console.log(results);

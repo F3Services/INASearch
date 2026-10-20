@@ -21,6 +21,7 @@ for (const everything of [false, true]) {
     };
     const requestReset = vm.runInNewContext(`(${functionSource(template, "requestReset")})`, {
       confirm: () => true,
+      state: {},
       els: { resetConfirmationDialog: dialog, resetConfirmationTitle: {}, resetConfirmationMessage: {} },
       resetSettingsToDefaults: () => { profile.preferences = { theme: "light" }; },
       resetEverythingToDefaults: () => { profile.preferences = { theme: "light" }; profile.notes = []; }

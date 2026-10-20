@@ -273,7 +273,7 @@ async function realCorpusTests() {
   assert(projection.stats.buildMs < 1_000, `Runtime occurrence projection took ${projection.stats.buildMs.toFixed(1)}ms.`);
   assert(projection.stats.fragmentCount > 40_000, "The real legal projection is unexpectedly incomplete.");
   assert.strictEqual(projection.stats.inaRecords, 172, "The mapped operative INA record set changed unexpectedly.");
-  assert.strictEqual(projection.stats.cfrSections, 3039, "The CFR section set changed unexpectedly.");
+  assert.strictEqual(projection.stats.cfrSections, 3034, "The CFR section set changed unexpectedly.");
   assert(projection.fragments.some(fragment => fragment.kind === "statute-run-in"), "No statute run-in fragments were projected.");
   const agriculturalClauses = projection.fragments.filter(fragment => fragment.recordId === "8-1160" && fragment.kind === "statute-run-in" && fragment.path[1] === "2");
   assert.deepStrictEqual(agriculturalClauses.map(fragment => fragment.path.join("/")), ["a/2/A/I", "a/2/A/II", "a/2/B/I", "a/2/B/II"], "INA 210's run-in clauses must remain separately searchable under their correct A/B paragraphs.");

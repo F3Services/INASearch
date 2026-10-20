@@ -272,10 +272,68 @@ def capture_sources(base, selected):
         if str(path.relative_to(DEST)) not in used:path.unlink()
     (DEST/'source-inventory.json').write_text(json.dumps(inventory,ensure_ascii=False,indent=2)+'\n')
 
-def generate(capture_from=None):
+def capture_current_sources(base, selected):
+    """Excerpt the reviewed current OLRC title captures without changing scope."""
+    manifest=json.loads((base/'manifest.json').read_text())
+    release=manifest['releasePoint'];current=manifest['currentThrough']
+    if not re.fullmatch(r'\d+-\d+',release) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}',current):
+        raise ValueError('Invalid captured current release metadata')
+    inventory={k:manifest[k] for k in ['edition','releasePoint','currentThrough','capturedAt','publisher']}
+    inventory.update({'schemaVersion':1,'captureMethod':'Fields excerpted from SHA-256 verified current official OLRC title XHTML archives; head, statute, sourcecredit, and operative footnote fields only. CRLF line endings are normalized to LF; source title hashes and byte counts describe the unmodified publisher bytes.','artifacts':[],'unavailable':[]})
+    (DEST/'raw').mkdir(parents=True,exist_ok=True)
+    for title in sorted({int(k.split(':')[0]) for k in selected}):
+        artifact=next(a for a in manifest['artifacts'] if a['title']==title)
+        raw=(base/artifact['path']).read_bytes()
+        if digest(raw)!=artifact['sha256']:raise ValueError('Official current archive hash mismatch: '+artifact['path'])
+        # Retain malformed publisher bytes outside the selected fields without
+        # silently replacing them. Each adopted excerpt is encoded strictly.
+        source=raw.decode('utf-8',errors='surrogateescape')
+        currency=re.search(r'AUTHORITIES-LAWS-ENACTED-THROUGH:([^<]+)-->',source)
+        expected=current[5:7]+'/'+current[8:10]+'/'+current[:4]
+        if not currency or normalize(currency[1])!=release+' ('+expected+')':raise ValueError('Current source currency mismatch')
+        title_head=re.search(r'AUTHORITIES-USC-TITLE-NAME:TITLE\s+'+str(title)+r'\s*-\s*(.*?)\s*-->',source)
+        if not title_head:raise ValueError('Missing current title metadata')
+        docs={re.search(r'documentid:(\S+)',part)[1].lower():part for part in re.split(r'(?=<!--\s*documentid:)',source) if re.search(r'documentid:(\S+)',part)}
+        for key in sorted(k for k in selected if k.startswith(str(title)+':')):
+            number=key.split(':')[1];document=f'{title}_{number}'
+            if document not in docs:
+                document=next((d for d in docs if d.startswith(f'{title}_{number}_to_')),document)
+            record=docs.get(document,'')
+            if not record:raise ValueError('No current source disposition found: '+key)
+            canonical_document=re.search(r'documentid:(\S+)',record)[1]
+            canonical_number=canonical_document.removeprefix(str(title)+'_')
+            heading=normalize(plain(Fragment(field(record,'head') or field(record,'repealedhead')).root))
+            heading=re.sub(r'^§{1,2}\s*[^.]+\.\s*','',heading)
+            operative=field(record,'statute')
+            if not operative.strip():
+                status=next((word for word in ['repealed','transferred','omitted','reserved'] if word in heading.lower()),'no-current-individual-record')
+                inventory['unavailable'].append({'target':key,'status':status,'heading':heading,'sourceUrl':artifact['url'],'documentId':document,'sourceTitleSha256':artifact['sha256'],'reason':'No current operative text in source release; historical locator remains external.'})
+                continue
+            # Verify the operative source can be represented before adopting it.
+            parse_operative(operative)
+            cite=re.search(r'<!--\s*expcite:(.*?)\s*-->',record)
+            breadcrumb=[]
+            for item in (cite[1].split('!@!')[1:-1] if cite else []):
+                match=re.match(r'(SUBTITLE|SUBPART|SUBCHAPTER|DIVISION|PART|CHAPTER|SUBDIVISION)\s+([^ -]+)[ -]+(.*)',item,re.I)
+                if not match:raise ValueError('Unknown current hierarchy: '+item)
+                breadcrumb.append({'kind':match[1].lower(),'number':match[2],'title':html.unescape(match[3])})
+            if not cite:raise ValueError('Missing current section hierarchy: '+key)
+            excerpt='\n'.join('<!-- field-start:'+f+' -->\n'+field(record,f)+'\n<!-- field-end:'+f+' -->' for f in ['head','statute','sourcecredit','footnote'] if field(record,f))
+            filename=f'raw/title-{title}-section-{number}.html';blob=excerpt.replace('\r\n','\n').encode()
+            (DEST/filename).write_bytes(blob)
+            inventory['artifacts'].append({'title':title,'section':canonical_number,'heading':heading,'status':'active','breadcrumb':breadcrumb,'documentId':canonical_document,'currentThrough':current,'target':key,'titleName':html.unescape(title_head[1]),'path':filename,'sha256':digest(blob),'bytes':len(blob),'sourceUrl':artifact['url'],'sourceTitleSha256':artifact['sha256'],'sourceTitleBytes':len(raw),'releasePoint':release})
+    used={a['path'] for a in inventory['artifacts']}
+    for path in (DEST/'raw').glob('title-*-section-*.html'):
+        if path.relative_to(DEST).as_posix() not in used:path.unlink()
+    (DEST/'source-inventory.json').write_text(json.dumps(inventory,ensure_ascii=False,indent=2)+'\n')
+
+
+def generate(capture_from=None, capture_current_from=None):
     exported=load_references();selected,excluded,corrections=select_references(exported['references'], set(exported['inaSections']))
     if capture_from:capture_sources(Path(capture_from),selected)
+    if capture_current_from:capture_current_sources(Path(capture_current_from),selected)
     inventory=json.loads((DEST/'source-inventory.json').read_text())
+    edition=inventory['edition'];current=inventory['currentThrough']
     available={a['target']:a for a in inventory['artifacts']};unavailable={a['target']:a for a in inventory['unavailable']}
     unknown=set(selected)-set(available)-set(unavailable)
     if unknown:raise ValueError('Capture official source records for new targets: '+', '.join(sorted(unknown)))
@@ -286,7 +344,7 @@ def generate(capture_from=None):
         if digest(blob)!=a['sha256']:raise ValueError('Source excerpt hash mismatch: '+key)
         source=blob.decode();parsed=parse_operative(field(source,'statute'))
         section={k:copy.deepcopy(a[k]) for k in ['title','section','heading','status','breadcrumb']}
-        section.update({'id':f"usc:{a['title']}:{a['section']}",**parsed,'notes':[], 'url':f"https://uscode.house.gov/view.xhtml?req=granuleid:USC-2024-title{a['title']}-section{a['section']}&num=0&edition=2024",'source':{'edition':2024,'currentThrough':'2025-01-06','publisher':inventory['publisher'],'artifact':'sources/legal/referenced-usc/'+a['path'],'sha256':a['sha256'],'url':a['sourceUrl']}})
+        section.update({'id':f"usc:{a['title']}:{a['section']}",**parsed,'notes':[], 'url':f"https://uscode.house.gov/view.xhtml?req=granuleid:USC-{edition}-title{a['title']}-section{a['section']}&num=0&edition={edition}",'source':{'edition':edition,'currentThrough':current,'publisher':inventory['publisher'],'artifact':'sources/legal/referenced-usc/'+a['path'],'sha256':a['sha256'],'url':a['sourceUrl']}})
         paths=set();path_counts=collections.Counter()
         def walk(nodes,parent=()):
             for n in nodes:
@@ -302,11 +360,12 @@ def generate(capture_from=None):
             if path and path not in paths:locators.append({'target':key,'path':list(path),'sourceSection':r['sourceSection'],'text':r['text'],'reason':'Exact locator absent in source edition; full parent section is included.'})
         titles.setdefault(a['title'],{'number':a['title'],'name':a['titleName'],'sections':[]})['sections'].append(section)
         records.append({'target':key,'operativeSha256':digest(flatten_operative(section).encode()),'occurrences':len(selected[key]),'nodeCount':len(paths)})
-    corpus={'schemaVersion':1,'scope':'Full parent sections directly cited by current INA-mapped operative body or preamble. No non-INA provisions, notes, supplementary material, ranges, et seq. groups, or recursive expansion.','edition':2024,'currentThrough':'2025-01-06','titles':list(titles.values())}
+    corpus={'schemaVersion':1,'scope':'Full parent sections directly cited by current INA-mapped operative body or preamble. No non-INA provisions, notes, supplementary material, ranges, et seq. groups, or recursive expansion.','edition':edition,'currentThrough':current,'titles':list(titles.values())}
+    if inventory.get('releasePoint'):corpus['releasePoint']=inventory['releasePoint']
     corpus['version']='referenced-usc-'+digest(json.dumps(corpus,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())[:20]
     # Retain citation evidence without copying complete Title 8 paragraphs.
     compact=lambda r:{k:v for k,v in r.items() if k not in {'sourceText','before','after'}}
-    report={'schemaVersion':1,'title8Source':exported['title8Source'],'sourceEdition':2024,'sourceCurrentThrough':'2025-01-06','selectedOccurrences':sum(map(len,selected.values())),'selectedTargets':len(selected),'includedSections':len(records),'includedTitles':len(titles),'selection':{k:[compact(r) for r in rs] for k,rs in selected.items()},'exclusions':[compact(r) for r in excluded],'corrections':corrections,'unavailableTargets':[unavailable[k] for k in selected if k in unavailable],'unresolvedLocators':locators,'publishedDuplicateDesignators':published_duplicates,'sourceTextChecks':records}
+    report={'schemaVersion':1,'title8Source':exported['title8Source'],'sourceEdition':edition,'sourceCurrentThrough':current,'selectedOccurrences':sum(map(len,selected.values())),'selectedTargets':len(selected),'includedSections':len(records),'includedTitles':len(titles),'selection':{k:[compact(r) for r in rs] for k,rs in selected.items()},'exclusions':[compact(r) for r in excluded],'corrections':corrections,'unavailableTargets':[unavailable[k] for k in selected if k in unavailable],'unresolvedLocators':locators,'publishedDuplicateDesignators':published_duplicates,'sourceTextChecks':records}
     DEST.mkdir(parents=True,exist_ok=True)
     (DEST/'corpus.json').write_text(json.dumps(corpus,ensure_ascii=False,separators=(',',':'))+'\n')
     (DEST/'selection.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
@@ -315,4 +374,5 @@ def generate(capture_from=None):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--capture-from',type=Path)
-    args=parser.parse_args();generate(args.capture_from)
+    parser.add_argument('--capture-current-from',type=Path,help='Reviewed current OLRC title XHTML captures and manifest')
+    args=parser.parse_args();generate(args.capture_from,args.capture_current_from)

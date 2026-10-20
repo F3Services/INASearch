@@ -274,7 +274,10 @@ def delivery_cases(xml_path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--xml', type=Path, default=ROOT / 'sources/legal/raw/usc08@119-102.xml')
+    manifest=json.loads((ROOT / 'sources/legal/source-manifest.json').read_text())
+    house=next(source for source in manifest['sources'] if source['id']=='house-title-8-uslm')
+    artifact=next(a for a in house['artifacts'] if a['id']=='house-title-8-xml')
+    parser.add_argument('--xml', type=Path, default=ROOT / artifact['path'])
     parser.add_argument('--overlay', type=Path, default=ROOT / 'src/INASearch-Statute-Footnotes.js')
     parser.add_argument('--cases', action='store_true', help='Emit source-only expected cases for delivery tests')
     args = parser.parse_args()

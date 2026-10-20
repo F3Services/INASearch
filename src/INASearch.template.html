@@ -369,7 +369,7 @@
       color: #fff;
       box-shadow: 0 3px 16px rgba(0, 0, 0, .18);
     }
-    .topbar-main { position: relative; display: flex; align-items: center; padding-left: max(0px, calc(31px - clamp(16px, 3vw, 42px))); min-width: max-content; }
+    .topbar-main { position: relative; display: flex; align-items: center; padding-left: max(0px, calc(38px - clamp(16px, 3vw, 42px))); min-width: max-content; }
     .brand { position: relative; display: flex; align-items: center; gap: 11px; min-width: max-content; margin: -3px -4px; border: 0; border-radius: 10px; padding: 3px 4px; color: inherit; background: transparent; cursor: pointer; font: inherit; text-align: left; }
     .topbar.brand-logo-only .brand-label { display: none; }
     .topbar.search-on-second-row { grid-template-columns: auto minmax(0, 1fr); gap: 6px 10px; }
@@ -411,9 +411,10 @@
       pointer-events: none;
     }
     .brand-tribute::before { position: absolute; top: -6px; left: 17px; width: 10px; height: 10px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); background: var(--panel); content: ""; transform: rotate(45deg); }
-    .topbar, #statuteNavigator { --main-navigator-surface: color-mix(in srgb, var(--panel) 90%, var(--ink) 10%); --main-navigator-border: color-mix(in srgb, var(--ink) 24%, var(--line)); }
+    .topbar, #statuteNavigator { --main-navigator-surface: color-mix(in srgb, var(--panel) 78%, var(--blue) 22%); --main-navigator-border: color-mix(in srgb, var(--blue) 48%, var(--line)); --main-navigator-shoulder-radius: 7px; }
     .statute-navigator { position: sticky; top: var(--topbar-height, 0px); z-index: 19; border-bottom: 1px solid color-mix(in srgb, var(--blue) 48%, var(--line)); padding: 7px clamp(16px, 3vw, 42px); background: color-mix(in srgb, var(--panel) 78%, var(--blue) 22%); box-shadow: 0 3px 10px rgba(16, 42, 67, .12); }
-    #statuteNavigator { padding-left: max(12px, calc(max(0px, (100% - 1580px) / 2) + clamp(14px, 3vw, 42px) - 25px)); border-bottom-color: var(--main-navigator-border); background: var(--main-navigator-surface); }
+    #statuteNavigator { padding-left: max(12px, calc(max(0px, (100% - 1580px) / 2) + clamp(14px, 3vw, 42px) - 25px)); border: 1px solid var(--main-navigator-border); border-radius: 0; background: var(--main-navigator-surface); }
+    #statuteNavigator::before { position: absolute; top: -1px; left: calc(var(--main-navigator-left, 13px) - var(--main-navigator-shoulder-radius) - 1px); width: calc(23px + var(--main-navigator-shoulder-radius) * 2); height: 1px; background: var(--main-navigator-surface); content: ""; pointer-events: none; }
     .statute-nav-inner { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; min-width: 0; }
     .main-navigator-row { display: flex; align-items: center; flex-wrap: nowrap; gap: 5px; width: 100%; min-height: 31px; }
     .main-navigator-row > .statute-nav-inner > * { flex-shrink: 0; }
@@ -460,12 +461,21 @@
     .official-source-action:hover:not(:disabled) .official-source-action-label, .official-source-action:focus-visible .official-source-action-label,
     .print-action:hover:not(:disabled) .print-action-label, .print-action:focus-visible .print-action-label { display: inline; }
     .main-navigator-toggle { flex: 0 0 auto; }
-    .topbar .main-navigator-toggle { position: absolute; left: max(calc(2px - clamp(16px, 3vw, 42px)), -29px); top: 50%; translate: 0 -50%; width: 23px; height: 27px; min-height: 27px; color: var(--ink); border-color: var(--main-navigator-border); background: var(--main-navigator-surface); }
+    .topbar .main-navigator-toggle { position: absolute; left: max(calc(9px - clamp(16px, 3vw, 42px)), -29px); top: 50%; translate: 0 -50%; width: 23px; height: 27px; min-height: 27px; color: var(--navy); border-color: var(--main-navigator-border); background: var(--main-navigator-surface); }
+    .main-navigator-connection { display: none; position: absolute; left: var(--main-navigator-left, 13px); top: var(--main-navigator-top, 16px); bottom: -1px; width: 23px; border: 1px solid var(--main-navigator-border); border-bottom: 0; border-radius: 8px 8px 0 0; background: var(--main-navigator-surface); pointer-events: none; }
+    .main-navigator-shoulder { position: absolute; bottom: 0; width: calc(var(--main-navigator-shoulder-radius) + 1px); height: calc(var(--main-navigator-shoulder-radius) + 1px); background: var(--main-navigator-surface); }
+    .main-navigator-shoulder::before { position: absolute; inset: 0; background: var(--topbar); content: ""; }
+    .main-navigator-shoulder-left { right: 100%; }
+    .main-navigator-shoulder-left::before { border-right: 1px solid var(--main-navigator-border); border-bottom: 1px solid var(--main-navigator-border); border-bottom-right-radius: 100%; }
+    .main-navigator-shoulder-right { left: 100%; }
+    .main-navigator-shoulder-right::before { border-left: 1px solid var(--main-navigator-border); border-bottom: 1px solid var(--main-navigator-border); border-bottom-left-radius: 100%; }
     .topbar:has(.main-navigator-toggle:not([hidden])[aria-expanded="true"]) { box-shadow: none; }
-    .topbar:has(.main-navigator-toggle:not([hidden])[aria-expanded="true"])::before { position: absolute; inset: 0 auto -1px 0; width: max(29px, calc(clamp(16px, 3vw, 42px) - 2px)); border-right: 1px solid var(--main-navigator-border); background: var(--main-navigator-surface); content: ""; pointer-events: none; }
-    .topbar .main-navigator-toggle[aria-expanded="true"] { border-color: transparent; }
+    .topbar:has(.main-navigator-toggle:not([hidden])[aria-expanded="true"]) .main-navigator-connection { display: block; }
+    .topbar .main-navigator-toggle[aria-expanded="true"] { border: 0; border-radius: 0; background: transparent; }
     .topbar .main-navigator-toggle:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-soft); }
-    .topbar.search-on-second-row:has(.main-navigator-toggle:not([hidden])[aria-expanded="true"]) .global-search { padding-left: max(0px, calc(31px - clamp(16px, 3vw, 42px))); }
+    .topbar .main-navigator-toggle[aria-expanded="true"]:hover:not(:disabled) { background: transparent; }
+    .topbar:has(.main-navigator-toggle:is(:hover, :focus-visible)), .topbar:has(.main-navigator-toggle:is(:hover, :focus-visible)) ~ #statuteNavigator { --main-navigator-border: var(--blue); }
+    .topbar.search-on-second-row:has(.main-navigator-toggle:not([hidden])[aria-expanded="true"]) .global-search { padding-left: max(0px, calc(40px - clamp(16px, 3vw, 42px))); }
     .topbar .main-navigator-toggle .reader-action-icon { width: 15px; height: 15px; }
     .main-navigator-toggle[aria-expanded="true"] .reader-action-icon { transform: rotate(180deg); }
     .statute-history-controls { display: flex; align-items: center; gap: 3px; align-self: stretch; margin-right: 4px; border-right: 1px solid color-mix(in srgb, var(--blue) 28%, var(--line)); padding-right: 8px; }
@@ -1911,6 +1921,7 @@
 </head>
 <body>
   <header class="topbar">
+    <span class="main-navigator-connection" aria-hidden="true"><span class="main-navigator-shoulder main-navigator-shoulder-left"></span><span class="main-navigator-shoulder main-navigator-shoulder-right"></span></span>
     <div class="topbar-main">
       <button class="statute-history-button main-navigator-toggle" id="mainNavigatorToggle" type="button" aria-controls="statuteNavigator" aria-expanded="true" aria-label="Collapse live navigation" title="Collapse live navigation"><svg class="reader-action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
       <button class="brand" id="inaSearchBrand" type="button" aria-label="INASearch home" aria-describedby="brandTribute">
@@ -2216,7 +2227,7 @@
             </div>
           </div>
           <label class="settings-toggle" for="showDetailedStatusToggle">
-            <span><strong>Show Detailed Status</strong><small>Shows update availability and browser-saving status in the top bar. Update, saving, and recovery controls remain available in Settings when this is off.</small></span>
+            <span><strong>Show Detailed Status</strong><small>Shows update availability and browser-saving status in the top bar. Errors always appear, even when this is off. Select a status to see details and recovery controls.</small></span>
             <input id="showDetailedStatusToggle" type="checkbox" role="switch">
           </label>
           <label class="settings-toggle" for="hideTopThemeControlsToggle">
@@ -2364,6 +2375,11 @@
             <span><span class="settings-toggle-title"><label for="automaticCfrUpdatesToggle"><strong>Automatically update CFR material</strong></label><button class="settings-info-button" type="button" aria-label="About automatic CFR updates" aria-describedby="automaticCfrUpdatesHelp">i<span class="settings-experimental-tooltip" id="automaticCfrUpdatesHelp" role="tooltip">Off by default. Turn this on to check the included CFR material directly against eCFR in the background. When it is off, the local CFR text remains available and INASearch makes no network requests. The choice is saved with the browser profile and any connected data file.</span></button></span><small>Off by default; turn on to check the included CFR material directly against eCFR.</small></span>
             <input id="automaticCfrUpdatesToggle" type="checkbox" role="switch" aria-describedby="automaticCfrUpdatesHelp">
           </div>
+          <div id="corpusUpdateDetails" class="notice" role="status" aria-live="polite"></div>
+          <div class="reset-confirmation-actions">
+            <button class="button small" id="checkCfrUpdatesButton" type="button">Check now</button>
+            <button class="button small" id="reloadCfrUpdatesButton" type="button" hidden>Reload CFR update</button>
+          </div>
         </section>
         <section class="settings-section" aria-labelledby="savingSettingsHeading">
           <h3 class="settings-section-heading" id="savingSettingsHeading">Saving &amp; data</h3>
@@ -2410,7 +2426,7 @@
             <button class="settings-reset-button" id="resetSettingsButton" type="button" aria-describedby="resetSettingsDescription">Reset settings…</button>
             <button class="settings-reset-button" id="resetEverythingButton" type="button" aria-describedby="resetEverythingDescription">Reset everything…</button>
           </div>
-          <p class="settings-reset-everything-description" id="resetEverythingDescription">Reset everything deletes notes, highlights, inserted references, daily-tip progress, and settings. A connected data file remains connected so the reset can be saved.</p>
+          <p class="settings-reset-everything-description" id="resetEverythingDescription">Reset everything deletes notes, highlights, inserted references, daily-tip progress, settings, downloaded corpus updates, recovery copies, source artifacts, search caches, and update history. It then reloads the corpus built into this file. A connected data file remains connected so the reset can be saved.</p>
         </section>
       </div>
     </section>
@@ -3058,6 +3074,7 @@
       profileSetupMessage: $("#profileSetupMessage"), backupReminderConnectButton: $("#backupReminderConnectButton"), backupReminderDownloadButton: $("#backupReminderDownloadButton"),
       backupReminderLaterButton: $("#backupReminderLaterButton"), backupReminderDisableButton: $("#backupReminderDisableButton"),
       savingMenuModal: $("#savingMenuModal"), savingMenuStatus: $("#savingMenuStatus"),
+      corpusUpdateDetails: $("#corpusUpdateDetails"), checkCfrUpdatesButton: $("#checkCfrUpdatesButton"), reloadCfrUpdatesButton: $("#reloadCfrUpdatesButton"),
       savingMenuEnableButton: $("#savingMenuEnableButton"), savingMenuImportButton: $("#savingMenuImportButton"), resetSettingsButton: $("#resetSettingsButton"), resetEverythingButton: $("#resetEverythingButton"),
       resetConfirmationDialog: $("#resetConfirmationDialog"), resetConfirmationTitle: $("#resetConfirmationTitle"), resetConfirmationMessage: $("#resetConfirmationMessage"),
       showDetailedStatusToggle: $("#showDetailedStatusToggle"), hideTopThemeControlsToggle: $("#hideTopThemeControlsToggle"), inaCitationLinksToggle: $("#inaCitationLinksToggle"), highlightInaCitationLinksToggle: $("#highlightInaCitationLinksToggle"), definedTermHighlightingToggle: $("#definedTermHighlightingToggle"), notesUseHandwrittenFontToggle: $("#notesUseHandwrittenFontToggle"), automaticCfrUpdatesToggle: $("#automaticCfrUpdatesToggle"),
@@ -3106,10 +3123,9 @@
 
     function syncTopBarVisibility() {
       const showDetailedStatus = profile.preferences.showDetailedStatus === true;
-      els.saveStatus.hidden = !showDetailedStatus;
+      els.saveStatus.hidden = !showDetailedStatus && els.saveStatus.dataset.statusKind !== "bad";
       els.topThemeControls.hidden = profile.preferences.hideTopThemeControls === true;
-      if (!showDetailedStatus) els.corpusStatus.hidden = true;
-      else updateCorpusStatus();
+      updateCorpusStatus();
     }
 
     function syncAppearanceControls() {
@@ -6354,6 +6370,7 @@
     }
 
     function ensureSearchWorker() {
+      if (state.resetInProgress) return null;
       if (state.searchWorkerClient && !state.searchWorkerClient.failed) return state.searchWorkerClient;
       if (state.searchWorkerFailure) return null;
       try { state.searchWorkerClient = createSearchWorkerClient(); }
@@ -12331,7 +12348,13 @@
     }
 
     function syncStatuteNavigationOffset() {
-      const height = Math.max(0, $(".topbar")?.getBoundingClientRect?.().height || 0);
+      const topbarBounds = $(".topbar")?.getBoundingClientRect?.();
+      const height = Math.max(0, topbarBounds?.height || 0);
+      const toggleBounds = els.mainNavigatorToggle?.getBoundingClientRect?.();
+      if (topbarBounds && toggleBounds?.width) {
+        document.documentElement.style.setProperty("--main-navigator-left", `${toggleBounds.left - topbarBounds.left}px`);
+        document.documentElement.style.setProperty("--main-navigator-top", `${toggleBounds.top - topbarBounds.top}px`);
+      }
       const navigatorHeight = els.statuteNavigator.hidden ? 0 : Math.max(0, els.statuteNavigator.getBoundingClientRect?.().height || 0);
       const focusedPane = typeof focusedPaneById === "function" ? focusedPaneById(state.focusedActivePaneId) : null;
       if (focusedPane) {
@@ -14820,6 +14843,7 @@
     }
 
     function renderSavingMenu() {
+      renderCorpusUpdateDetails();
       const connected = state.fileConnected;
       const changed = state.profileChanged;
       const needsAttention = Boolean(state.browserSaveConflict || state.browserSaveError || state.fileSyncPending);
@@ -15422,49 +15446,75 @@
       return profile;
     }
 
-    function resetEverythingToDefaults() {
-      const blankWorkspace = state.view === "search" && !String(els.search.value || "").trim() && !state.searchScopeActive;
-      state.pendingAnnotationFocus = null;
-      state.focusedAnnotation = null;
-      state.inlineNoteEditor = null;
-      state.backupReminderDue = false;
-      resetProfileContentToDefaults();
-      insertedReferenceMaterializedKeys.clear();
-      resetAnnotationIndex();
-      state.statuteHierarchyAuthority = profile.preferences.statutoryNavigationSystem;
-      state.lastScrollSyncedCitation = "";
-      applyThemePreference(profile.preferences.theme);
-      syncCitationJumpAnimationPreference();
-      syncAppearanceControls();
-      stopCorpusMaintenance(true);
-      markProfileChanged();
-      updateProfileSummary();
-      if (blankWorkspace) openClearedSearchHierarchy();
-      else if (state.view === "search" && String(els.search.value || "").trim()) applySearchQuery(els.search.value, false, true);
-      else {
-        refreshStatutoryCitationDisplay();
-        refreshLegalNavigatorVisibility();
-        syncNavigationDepthSettings();
-        rerenderOccurrenceExpansionPreference();
+    async function resetEverythingToDefaults() {
+      if (state.resetInProgress) return false;
+      state.resetInProgress = true;
+      els.resetEverythingButton.disabled = true;
+      els.resetSettingsButton.disabled = true;
+      document.body.inert = true;
+      let reloading = false;
+      try {
+        const maintenanceStopped = stopCorpusMaintenance(true);
+        clearTimeout(state.saveTimer);
+        state.searchWorkerClient?.terminate();
+        state.searchWorkerClient = null;
+        state.searchWorkerReady = false;
+        await maintenanceStopped;
+        await state.saveQueue;
+        state.pendingAnnotationFocus = null;
+        state.focusedAnnotation = null;
+        state.inlineNoteEditor = null;
+        state.backupReminderDue = false;
+        resetProfileContentToDefaults();
+        insertedReferenceMaterializedKeys.clear();
+        resetAnnotationIndex();
+        state.statuteHierarchyAuthority = profile.preferences.statutoryNavigationSystem;
+        state.lastScrollSyncedCitation = "";
+        applyThemePreference(profile.preferences.theme);
+        syncCitationJumpAnimationPreference();
+        syncAppearanceControls();
+        markProfileChanged();
+        clearTimeout(state.saveTimer);
+        await queueProfileWrite(true);
+        if (state.browserSaveError || state.browserSaveConflict || state.profileChanged || state.fileSyncPending) {
+          throw new Error(state.browserSaveError || "The reset profile could not be saved. Resolve the saving issue and try again.");
+        }
+        if (!await globalThis.INASearchStorage?.clearResetCaches()) throw new Error("The saved corpus and caches could not be cleared.");
+        toast("Everything reset. Reloading the built-in corpus.");
+        location.reload();
+        reloading = true;
+        return true;
+      } catch (error) {
+        state.browserSaveError = error?.message || String(error);
+        updateSaveStatus(state.browserSaveError, "bad");
+        toast(`Reset failed: ${state.browserSaveError}`);
+        return false;
+      } finally {
+        if (!reloading) {
+          state.resetInProgress = false;
+          els.resetEverythingButton.disabled = false;
+          els.resetSettingsButton.disabled = false;
+          document.body.inert = false;
+          updateProfileSummary();
+          renderSavingMenu();
+          els.resetEverythingButton.focus();
+        }
       }
-      rerenderAllInsertedReferenceGroups();
-      renderSavingMenu();
-      els.resetEverythingButton.focus();
-      toast("Everything reset. Notes, highlights, inserted references, daily-tip progress, and settings were removed.");
     }
 
     async function requestReset(everything = false) {
+      if (state.resetInProgress) return;
       const dialog = els.resetConfirmationDialog;
       if (dialog.open) return;
       els.resetConfirmationTitle.textContent = everything ? "Reset everything?" : "Reset settings?";
       els.resetConfirmationMessage.textContent = everything
-        ? "This permanently removes notes, highlights, inserted references, daily-tip progress, and settings. A connected data file will also save this reset."
+        ? "This permanently removes notes, highlights, inserted references, daily-tip progress, settings, downloaded corpus updates, recovery copies, source artifacts, search caches, and update history. INASearch will then reload the corpus built into this file. A connected data file will also save this reset."
         : "Settings will return to their defaults. Notes, highlights, inserted references, and other saved content will be kept.";
       dialog.returnValue = "cancel";
       const approved = new Promise(resolve => dialog.addEventListener("close", () => resolve(dialog.returnValue === "confirm"), { once: true }));
       dialog.showModal();
       if (!await approved) return;
-      if (everything) resetEverythingToDefaults();
+      if (everything) await resetEverythingToDefaults();
       else resetSettingsToDefaults();
     }
 
@@ -15476,12 +15526,13 @@
       const connected = state.fileConnected;
       const needsAttention = Boolean(state.browserSaveConflict || state.browserSaveError || state.fileSyncPending);
       const displayText = needsAttention ? "Saving needs attention" : connected ? "File saving on" : "Saved in browser";
-      const dotKind = needsAttention ? "warn" : kind;
+      const dotKind = state.browserSaveError || kind === "bad" ? "bad" : needsAttention ? "warn" : kind;
       els.saveStatus.innerHTML = `<span class="status-dot${dotKind ? ` ${dotKind}` : ""}"></span>${escapeHtml(displayText)}`;
       els.saveStatus.classList.toggle("attention", needsAttention);
       els.saveStatus.classList.toggle("connected", connected);
       els.saveStatus.disabled = false;
-      els.saveStatus.hidden = profile.preferences.showDetailedStatus !== true;
+      els.saveStatus.dataset.statusKind = dotKind;
+      els.saveStatus.hidden = profile.preferences.showDetailedStatus !== true && dotKind !== "bad";
       els.saveStatus.setAttribute("aria-label", `${displayText}. ${text}. Open settings.`);
       renderProfileSetupNotice();
       if (!els.savingMenuModal.hidden) renderSavingMenu();
@@ -16552,6 +16603,8 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       on(els.definedTermHighlightingToggle, "change", () => setDefinedTermHighlighting(els.definedTermHighlightingToggle.checked));
       on(els.notesUseHandwrittenFontToggle, "change", () => setNotesUseHandwrittenFont(els.notesUseHandwrittenFontToggle.checked));
       on(els.automaticCfrUpdatesToggle, "change", () => setAutomaticCfrUpdates(els.automaticCfrUpdatesToggle.checked));
+      on(els.checkCfrUpdatesButton, "click", () => startCorpusMaintenance({ force: true }));
+      on(els.reloadCfrUpdatesButton, "click", reloadUpdatedCorpus);
       on(els.automaticStatutoryNavigationSystemToggle, "change", () => setAutomaticStatutoryNavigationSystem(els.automaticStatutoryNavigationSystemToggle.checked));
       on(els.splitAuthoritySearchPanesToggle, "change", () => setSplitAuthoritySearchPanes(els.splitAuthoritySearchPanesToggle.checked));
       on(els.legalNavigatorVisibilitySelect, "change", () => setLegalNavigatorVisibility(els.legalNavigatorVisibilitySelect.value));
@@ -17331,7 +17384,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       els.importProfileInput.addEventListener("change", importProfileFile);
       $("#downloadProfileButton").addEventListener("click", downloadProfile);
       els.saveStatus.addEventListener("click", beginProfileSavingSetup);
-      els.corpusStatus.addEventListener("click", reloadUpdatedCorpus);
+      els.corpusStatus.addEventListener("click", handleCorpusStatusClick);
       SYSTEM_THEME_MEDIA?.addEventListener?.("change", syncThemeControls);
       els.backupReminderConnectButton.addEventListener("click", connectProfile);
       els.backupReminderDownloadButton.addEventListener("click", downloadProfile);
@@ -17367,7 +17420,32 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       return true;
     }
 
+    function handleCorpusStatusClick() {
+      if (window.INA_SEARCH_UPDATE_STATUS?.state === "updated") return reloadUpdatedCorpus();
+      openSavingMenu("updates", els.corpusStatus);
+      return true;
+    }
+
+    function renderCorpusUpdateDetails(status = window.INA_SEARCH_UPDATE_STATUS) {
+      const failed = !corpus || ["error", "unsupported"].includes(status?.state);
+      const checking = status?.state === "checking" || status?.state === "already-running";
+      const enabled = automaticCfrUpdatesEnabled();
+      const labels = { error: "CFR update failed", unsupported: "CFR updates unavailable", checking: "Checking eCFR", "already-running": "An update check is running", updated: "CFR update ready", current: "Included CFR material is current", deferred: "eCFR check deferred", disabled: "Automatic CFR updates are off" };
+      const label = !corpus ? "Corpus unavailable" : labels[status?.state] || "CFR updates";
+      const message = !corpus ? loadErrors.corpusMessage || "The embedded corpus could not be loaded."
+        : status?.message || (enabled ? "Checks run after startup and every 12 hours. You can check again now." : "The dated local copy remains available. Turn on automatic updates to check eCFR.");
+      const checkedAt = Date.parse(status?.checkedAt || "");
+      const timing = Number.isFinite(checkedAt) ? `<p>Last check: ${escapeHtml(new Date(checkedAt).toLocaleString())}</p>` : "";
+      const request = status?.requestUrl ? `<p>Source request: <code style="overflow-wrap:anywhere">${escapeHtml(status.requestUrl)}</code></p>` : "";
+      els.corpusUpdateDetails.className = `notice${failed ? " danger" : status?.state === "updated" || status?.state === "current" ? " success" : ""}`;
+      els.corpusUpdateDetails.innerHTML = `<strong>${escapeHtml(label)}</strong><p>${escapeHtml(message)}</p>${timing}${request}${failed && corpus ? "<p>The last verified local text remains available. Retry the check after resolving the error.</p>" : ""}`;
+      els.checkCfrUpdatesButton.disabled = !corpus || !enabled || checking || !window.INA_SEARCH_CORPUS_FULLY_LOADED;
+      els.checkCfrUpdatesButton.textContent = failed ? "Retry update check" : "Check now";
+      els.reloadCfrUpdatesButton.hidden = status?.state !== "updated";
+    }
+
     function updateCorpusStatus(status = window.INA_SEARCH_UPDATE_STATUS) {
+      renderCorpusUpdateDetails(status);
       if (corpus && (!status || status.state === "current")) {
         els.corpusStatus.hidden = true;
         els.corpusStatus.disabled = true;
@@ -17391,8 +17469,8 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
           ? ` Background work took ${(status.metrics.elapsedMs / 1000).toFixed(1)} seconds and did not block local search.`
           : "";
         const updateReady = status.state === "updated" && status.reloadRequired !== false;
-        els.corpusStatus.hidden = profile.preferences.showDetailedStatus !== true;
-        els.corpusStatus.disabled = !updateReady;
+        els.corpusStatus.hidden = profile.preferences.showDetailedStatus !== true && kind !== "bad";
+        els.corpusStatus.disabled = false;
         els.corpusStatus.classList.toggle("update-ready", updateReady);
         if (updateReady) {
           const changedCount = Array.isArray(status.changedParts) ? status.changedParts.length : 0;
@@ -17402,14 +17480,14 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
           els.corpusStatus.setAttribute("aria-label", `Update ready. ${status.message || "Updated CFR material is ready."} Activate to reload now.${timing}`);
         } else {
           els.corpusStatus.innerHTML = `<span class="status-dot ${kind}"></span>${escapeHtml(label)}`;
-          els.corpusStatus.title = `${status.message || "INASearch corpus maintenance status"}${timing}`;
-          els.corpusStatus.setAttribute("aria-label", `${label}. ${status.message || ""}${timing}`.trim());
+          els.corpusStatus.title = `${status.message || "INASearch corpus maintenance status"} Select to view update details.${timing}`;
+          els.corpusStatus.setAttribute("aria-label", `${label}. ${status.message || ""} Open update details.${timing}`.trim());
         }
         return;
       }
       const failure = loadErrors.corpusMessage || "The embedded corpus could not be loaded.";
-      els.corpusStatus.hidden = profile.preferences.showDetailedStatus !== true;
-      els.corpusStatus.disabled = true;
+      els.corpusStatus.hidden = false;
+      els.corpusStatus.disabled = false;
       els.corpusStatus.classList.remove("update-ready");
       els.corpusStatus.innerHTML = `<span class="status-dot bad"></span>Corpus Unavailable`;
       els.corpusStatus.title = failure;
@@ -17434,15 +17512,18 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
     }
 
     function stopCorpusMaintenance(reportDisabled = false) {
-      state.stopCorpusMaintenance?.();
+      const pending = state.stopCorpusMaintenance?.();
       state.stopCorpusMaintenance = null;
-      if (!reportDisabled) return;
-      const status = disabledCorpusMaintenanceStatus();
-      window.INA_SEARCH_UPDATE_STATUS = status;
-      handleCorpusMaintenanceStatus(status);
+      if (reportDisabled) {
+        const status = disabledCorpusMaintenanceStatus();
+        window.INA_SEARCH_UPDATE_STATUS = status;
+        handleCorpusMaintenanceStatus(status);
+      }
+      return pending;
     }
 
-    function startCorpusMaintenance() {
+    function startCorpusMaintenance(options = {}) {
+      if (state.resetInProgress) return;
       state.stopCorpusMaintenance?.();
       state.stopCorpusMaintenance = null;
       if (!automaticCfrUpdatesEnabled()) {
@@ -17454,6 +17535,8 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       updateCorpusStatus();
       if (state.view === "sources") renderSources();
       state.stopCorpusMaintenance = globalThis.INASearchUpdater?.start(corpus, {
+        force: options.force === true,
+        ...(options.force ? { startDelayMs: 0 } : {}),
         enabled: automaticCfrUpdatesEnabled,
         onStatus: handleCorpusMaintenanceStatus
       }) || null;

@@ -2,10 +2,8 @@
     <meta style="-uslm-dtd:compilation-act-form">
         <dc:title>Immigration and Nationality Act</dc:title>
         <containsShortTitle>IMMIGRATION AND NATIONALITY ACT</containsShortTitle>
-        <citableAs>Chapter 477 of the 82nd Congress, as amended</citableAs>
         <citableAsShortTitle>Immigration and Nationality Act</citableAsShortTitle>
-        <docNumber>ch477</docNumber>
-        <currentThroughPublicLaw>119–21</currentThroughPublicLaw>
+        <docNumber/>
         <dc:type>Statute Compilation</dc:type>
         <dc:creator>United States House of Representatives</dc:creator>
         <dc:creator>Office of the Legislative Counsel</dc:creator>
@@ -13,7 +11,7 @@
         <dc:language>EN</dc:language>
         <dc:rights>Pursuant to Title 17 Section 105 of the United States Code, this file is not subject to copyright protection and is in the public domain.</dc:rights>
         <processedBy>GPO Statute Compilations USLM converter, version 20240419</processedBy>
-        <processedDate>2026-01-23</processedDate>
+        <processedDate>2026-10-16</processedDate>
         <containsShortTitle>Immigration and Nationality Act</containsShortTitle>
         <property role="fileId">1376</property>
         <congress>82</congress>
@@ -2474,7 +2472,7 @@ Sec. 401. Repealed.
                                     </subclause>
                                 </clause>
                                 <clause identifier="/us/sComp/82/414/tII/ch1/s203/b/5/J/v" style="-uslm-dtd:clause" styleType="OLC">
-                                    <num style="-uslm-dtd:enum" value="v">(v) </num><heading style="-uslm-dtd:header">Report.—</heading><content style="-uslm-dtd:text">The Secretary shall submit an annual report to the <foreign id="warning-d76172e5170" note="processing mode: unknown" role="passthroughContent"><compsdtd:committee-name xmlns:compsdtd="http://schemas.gpo.gov/xml/comps-dtd" committee-id="">Committee on the Judiciary of the Senate</compsdtd:committee-name></foreign> and the <foreign id="warning-d76172e5173" note="processing mode: unknown" role="passthroughContent"><compsdtd:committee-name xmlns:compsdtd="http://schemas.gpo.gov/xml/comps-dtd" committee-id="">Committee on the Judiciary of the House of Representatives</compsdtd:committee-name></foreign> that describes how amounts in the Fund were expended during the previous fiscal year.</content>
+                                    <num style="-uslm-dtd:enum" value="v">(v) </num><heading style="-uslm-dtd:header">Report.—</heading><content style="-uslm-dtd:text">The Secretary shall submit an annual report to the <foreign id="warning-d236633e5170" note="processing mode: unknown" role="passthroughContent"><compsdtd:committee-name xmlns:compsdtd="http://schemas.gpo.gov/xml/comps-dtd" committee-id="">Committee on the Judiciary of the Senate</compsdtd:committee-name></foreign> and the <foreign id="warning-d236633e5173" note="processing mode: unknown" role="passthroughContent"><compsdtd:committee-name xmlns:compsdtd="http://schemas.gpo.gov/xml/comps-dtd" committee-id="">Committee on the Judiciary of the House of Representatives</compsdtd:committee-name></foreign> that describes how amounts in the Fund were expended during the previous fiscal year.</content>
                                 </clause>
                             </subparagraph>
                             <subparagraph identifier="/us/sComp/82/414/tII/ch1/s203/b/5/K" style="-uslm-dtd:subparagraph" styleType="OLC">
@@ -4026,7 +4024,7 @@ Sec. 401. Repealed.
                             </clause>
                             <clause identifier="/us/sComp/82/414/tII/ch2/s212/a/1/A/iv" style="-uslm-dtd:clause" styleType="OLC">
                                 <num style="-uslm-dtd:enum" value="iv">(iv) </num><content style="-uslm-dtd:text">who is determined (in accordance with regulations prescribed by the Secretary of Health and Human Services) to be a drug abuser or addict,</content>
-                            </clause><continuation role="subparagraph" style="-uslm-dtd:continuation-text">is inadmissibility.<ref class="footnoteRef" idref="ID269BEC6C6EC64E24B5C51EC981C3AE53" style="-uslm-dtd:footnote-ref">121</ref></continuation><footnote id="ID269BEC6C6EC64E24B5C51EC981C3AE53" style="-uslm-dtd:footnote"><sup style="-uslm-dtd:superscript">121</sup><p style="-uslm-dtd:para; margin-left:1em">See the appendix in this compilation for the provisions as in effect before April 1, 1997.</p></footnote>
+                            </clause><continuation role="subparagraph" style="-uslm-dtd:continuation-text">is inadmissible.<ref class="footnoteRef" idref="ID269BEC6C6EC64E24B5C51EC981C3AE53" style="-uslm-dtd:footnote-ref">121</ref></continuation><footnote id="ID269BEC6C6EC64E24B5C51EC981C3AE53" style="-uslm-dtd:footnote"><sup style="-uslm-dtd:superscript">121</sup><p style="-uslm-dtd:para; margin-left:1em">See the appendix in this compilation for the provisions as in effect before April 1, 1997.</p></footnote>
                         </subparagraph>
                         <subparagraph identifier="/us/sComp/82/414/tII/ch2/s212/a/1/B" style="-uslm-dtd:subparagraph" styleType="OLC">
                             <num style="-uslm-dtd:enum" value="B">(B) </num><heading style="-uslm-dtd:header">Waiver authorized.—</heading><content style="-uslm-dtd:text">For provision authorizing waiver of certain clauses of subparagraph (A), see subsection (g).</content>

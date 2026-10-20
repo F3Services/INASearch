@@ -9,7 +9,10 @@ const { runtime } = require("./audit-ina-display");
 // citation conversion replacing the styled source contents with an unstyled label.
 const original = JSON.parse(execFileSync("python3", ["-B", "-c", `
 import json,re,xml.etree.ElementTree as E
-root=E.parse('sources/legal/raw/usc08@119-102.xml').getroot()
+manifest=json.load(open('sources/legal/source-manifest.json'))
+house=next(source for source in manifest['sources'] if source['id']=='house-title-8-uslm')
+artifact=next(a for a in house['artifacts'] if a['id']=='house-title-8-xml')
+root=E.parse(artifact['path']).getroot()
 unit=next(n for n in root.iter() if n.get('identifier')=='/us/usc/t8/s1101/a/15/F/i')
 paragraph=next(n for n in unit.iter() if n.tag.endswith('}content'))
 text='';styles=[]

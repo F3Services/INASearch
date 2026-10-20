@@ -18,6 +18,7 @@ import urllib.request
 import zipfile
 from email.message import Message
 from pathlib import Path
+from title8_update.source import DOWNLOAD_PAGE, discover, validate_xml
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,13 +26,8 @@ SOURCE_ROOT = ROOT / "sources" / "legal"
 RAW_ROOT = SOURCE_ROOT / "raw"
 MANIFEST_PATH = SOURCE_ROOT / "source-manifest.json"
 
-HOUSE_RELEASE_POINT = "119-102"
-HOUSE_URL = (
-    "https://uscode.house.gov/download/releasepoints/us/pl/119/102/"
-    "xml_usc08@119-102.zip"
-)
 GOVINFO_URL = "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml"
-USCIS_URL = "https://www.uscis.gov/legal-resources/immigration-and-nationality-act"
+USCIS_URL = "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act"
 
 
 def sha256(value: bytes) -> str:
@@ -87,7 +83,9 @@ def capture(captured_at: str, refresh: bool) -> dict:
             f"{MANIFEST_PATH.relative_to(ROOT)} already exists; pass --refresh to replace a reviewed capture"
         )
 
-    house_zip, house_final_url, house_headers = fetch(HOUSE_URL)
+    download_page, _, _ = fetch(DOWNLOAD_PAGE)
+    house_release, house_url = discover(download_page.decode("utf-8"))
+    house_zip, house_final_url, house_headers = fetch(house_url)
     with tempfile.TemporaryDirectory(prefix="inasearch-house-") as temporary:
         archive_path = Path(temporary) / "title8.zip"
         archive_path.write_bytes(house_zip)
@@ -98,6 +96,7 @@ def capture(captured_at: str, refresh: bool) -> dict:
             house_xml = archive.read("usc08.xml")
     if b"/us/usc/t8" not in house_xml or b"aliens and nationality" not in house_xml.lower():
         raise RuntimeError("House archive does not appear to contain Title 8 USLM")
+    validate_xml(house_xml, house_release)
 
     govinfo_xml, govinfo_final_url, govinfo_headers = fetch(GOVINFO_URL)
     if b"Immigration and Nationality Act" not in govinfo_xml or b"statuteCompilation" not in govinfo_xml:
@@ -108,8 +107,8 @@ def capture(captured_at: str, refresh: bool) -> dict:
         raise RuntimeError("USCIS artifact does not contain the expected INA crosswalk")
 
     paths = {
-        "house_zip": RAW_ROOT / f"xml_usc08@{HOUSE_RELEASE_POINT}.zip",
-        "house_xml": RAW_ROOT / f"usc08@{HOUSE_RELEASE_POINT}.xml",
+        "house_zip": RAW_ROOT / f"xml_usc08@{house_release}.zip",
+        "house_xml": RAW_ROOT / f"usc08@{house_release}.xml",
         "govinfo": RAW_ROOT / "COMPS-1376.xml",
         "uscis": RAW_ROOT / "uscis-ina-crosswalk.html",
     }
@@ -125,9 +124,9 @@ def capture(captured_at: str, refresh: bool) -> dict:
             {
                 "id": "house-title-8-uslm",
                 "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
-                "releasePoint": HOUSE_RELEASE_POINT,
-                "currentThroughPublicLaw": HOUSE_RELEASE_POINT,
-                **response_metadata(HOUSE_URL, house_final_url, house_headers),
+                "releasePoint": house_release,
+                "currentThroughPublicLaw": house_release,
+                **response_metadata(house_url, house_final_url, house_headers),
                 "artifacts": [
                     artifact("house-title-8-archive", "downloaded-archive", paths["house_zip"], house_zip, "application/zip"),
                     artifact("house-title-8-xml", "extracted-uslm", paths["house_xml"], house_xml, "application/xml"),

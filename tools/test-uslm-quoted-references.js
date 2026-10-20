@@ -62,7 +62,10 @@ for index, note in enumerate(chapter.findall('u:notes/u:note', ns)):
     division['notes'].append(record)
 print(json.dumps({'notes': notes, 'division': division}))
 `;
-const sourceData = JSON.parse(execFileSync("python3", ["-c", oracle, path.join(root, "sources/legal/raw/usc08@119-102.xml")], { maxBuffer: 32 * 1024 * 1024 }));
+const manifest = JSON.parse(fs.readFileSync(path.join(root, "sources/legal/source-manifest.json"), "utf8"));
+const house = manifest.sources.find(source => source.id === "house-title-8-uslm");
+const sourceXml = house.artifacts.find(artifact => artifact.id === "house-title-8-xml").path;
+const sourceData = JSON.parse(execFileSync("python3", ["-c", oracle, path.join(root, sourceXml)], { maxBuffer: 32 * 1024 * 1024 }));
 const sourceNotes = sourceData.notes;
 const flatten = nodes => nodes.flatMap(node => [node, ...flatten(node.children || [])]);
 function sourceAnchors(note) {

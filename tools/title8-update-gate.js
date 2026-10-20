@@ -62,12 +62,17 @@ function verify(before) {
     assert(allowedSkips.has(JSON.stringify(skipped)), `New unmapped House reference: ${skipped.sourceKey}`);
   }
   const corpus = readArtifact("INASearch.html");
-  assert.equal(corpus.corpusVersion, corpus.title8Update.corpusVersion, "Fresh law must invalidate the old browser corpus cache");
-  assert.equal(corpus.sources.title8.sourceSha256, corpus.title8Update.xmlSha256);
+  verifyCorpusIdentity(corpus);
   // Every reviewed exact-span override must remain identifiable. A changed
   // source note needs new review instead of silently losing its correction.
   const rows = verifyReviewed(corpus);
   console.log(`PASS update preservation: ${unchanged} unchanged sections retain corrected addresses/references; ${rows} reviewed locators reapplied`);
+}
+function verifyCorpusIdentity(corpus) {
+  // The standalone build adds reviewed source-order and presentation revisions
+  // after choosing the new source identity. Both must remain in the cache key.
+  assert.equal(corpus.corpusVersion, corpus.title8Update.corpusVersion + "-usc-order.1-uslm.1", "Fresh law must invalidate the old browser corpus cache");
+  assert.equal(corpus.sources.title8.sourceSha256, corpus.title8Update.xmlSha256);
 }
 function verifyReviewed(corpus) {
   const rows = JSON.parse(fs.readFileSync("sources/legal/historical-reference-locators.json", "utf8"));
@@ -89,4 +94,4 @@ if (require.main === module) {
   else if (process.argv[2] === "verify") verify(JSON.parse(fs.readFileSync(process.argv[3], "utf8")));
   else throw new Error("Usage: title8-update-gate.js snapshot|verify FILE");
 }
-module.exports = { correctedProjection, legalSource, verifyReviewed };
+module.exports = { correctedProjection, legalSource, verifyReviewed, verifyCorpusIdentity };

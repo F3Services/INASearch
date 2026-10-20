@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CORPUS_PATH = ROOT / "src" / "INASearch-Corpus.js"
 MANIFEST_PATH = ROOT / "sources" / "legal" / "source-manifest.json"
 AUDIT_PATH = ROOT / "sources" / "legal" / "ina-crosswalk-audit.json"
-USCIS_SOURCE_URL = "https://www.uscis.gov/legal-resources/immigration-and-nationality-act"
+USCIS_SOURCE_URL = "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act"
 
 REPEALED_TOC_ONLY = {"210A", "321", "323", "345", "348", "350", "352", "353", "354", "355"}
 FORMER_SECTIONS = {
@@ -80,6 +80,7 @@ class CrosswalkParser(HTMLParser):
         self.groups: list[str] = []
         self.rows: list[dict] = []
         self._accordion_depth = 0
+        self._accordion_tag = ""
         self._accordion_chunks: list[str] = []
         self._in_table = False
         self._row: list[dict] | None = None
@@ -92,11 +93,12 @@ class CrosswalkParser(HTMLParser):
 
     def handle_starttag(self, tag: str, attributes: list[tuple[str, str | None]]) -> None:
         classes = self.classes(attributes)
-        if tag == "div" and "accordion__header" in classes:
+        if tag in {"div", "h2", "h3", "h4", "h5", "h6"} and "accordion__header" in classes:
             self._accordion_depth = 1
+            self._accordion_tag = tag
             self._accordion_chunks = []
             return
-        if self._accordion_depth and tag == "div":
+        if self._accordion_depth and tag == self._accordion_tag:
             self._accordion_depth += 1
         if tag == "table" and "dataTable" in classes:
             self._in_table = True
@@ -108,7 +110,7 @@ class CrosswalkParser(HTMLParser):
             self._cell["href"] = next((value or "" for name, value in attributes if name == "href"), "")
 
     def handle_endtag(self, tag: str) -> None:
-        if self._accordion_depth and tag == "div":
+        if self._accordion_depth and tag == self._accordion_tag:
             self._accordion_depth -= 1
             if self._accordion_depth == 0:
                 value = normalized_text("".join(self._accordion_chunks))

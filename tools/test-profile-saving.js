@@ -54,6 +54,7 @@ function storageFixture() {
   };
   const context = vm.createContext({
     Blob, TextEncoder, TextDecoder, Uint8Array, crypto: globalThis.crypto,
+    resetCachesCleared: false,
     ACTIVE_PROFILE_KEY: "active", PREVIOUS_PROFILE_KEY: "previous", STAGING_PROFILE_KEY: "staging",
     ACTIVE_CORPUS_KEY: "active", PREVIOUS_CORPUS_KEY: "previous", STARTUP_METADATA_KEYS: [],
     openDatabase: async () => database,

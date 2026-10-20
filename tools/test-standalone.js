@@ -528,6 +528,11 @@ async function main() {
     ["test-occurrence-search.js", "Occurrence search tests passed."],
     ["test-viewer-overhaul.js", "Viewer overhaul tests passed."],
     ["test-accessible-controls.js", "# fail 0"],
+    ["test-cfr-update-status.js", "# fail 0"],
+    ["test-cfr-updater.js", "# fail 0"],
+    ["test-cfr-xml.js", "# fail 0"],
+    ["test-cfr-reconciled-fixtures.js", "PASS CFR captured-source reconciliation"],
+    ["test-full-reset.js", "# fail 0"],
     ["test-statute-notes.js", "Statute note navigation checks passed."],
     ["test-navigation-title-case.js", "Navigation title-case tests passed."]
   ]) {
@@ -539,7 +544,7 @@ async function main() {
   assert.strictEqual(referencedUscDataVerification.status, 0, referencedUscDataVerification.stderr || referencedUscDataVerification.stdout || "Referenced USC source-data checks failed.");
   const uslmOrderVerification = spawnSync("python3", ["-B", path.join(root, "tools", "test-title8-update.py"), "ImportTests"], { cwd: root, encoding: "utf8" });
   assert.strictEqual(uslmOrderVerification.status, 0, uslmOrderVerification.stderr || "Original USLM import checks failed.");
-  for (const fileName of ["test-uslm-presentation.py", "uslm-presentation-oracle.py", "test-uslm-hierarchy-notes.py"]) {
+  for (const fileName of ["test-cfr-corpus-fetch.py", "test-uslm-presentation.py", "uslm-presentation-oracle.py", "test-uslm-hierarchy-notes.py"]) {
     const verification = spawnSync("python3", ["-B", path.join(root, "tools", fileName)], { cwd: root, encoding: "utf8" });
     assert.strictEqual(verification.status, 0, verification.stderr || verification.stdout || `${fileName} failed.`);
   }
@@ -603,10 +608,10 @@ async function main() {
   assert.strictEqual(cfrStructureAudit.summary.result, "pass", "The independent CFR structure audit did not pass.");
   assert.strictEqual(cfrStructureAudit.summary.currentStructureMismatchCount, 0, "The generated CFR corpus disagrees with captured eCFR structure.");
   assert.strictEqual(cfrStructureAudit.summary.currentBoundaryMismatchCount, 0, "Generated CFR block boundaries disagree with official eCFR paragraph boundaries.");
-  assert.strictEqual(cfrStructureAudit.summary.rendererAddressGroupCount, 30297, "Unexpected official eCFR addressable-line inventory.");
+  assert.strictEqual(cfrStructureAudit.summary.rendererAddressGroupCount, 30317, "Unexpected official eCFR addressable-line inventory.");
   assert.strictEqual(cfrStructureAudit.summary.currentContextMismatchCount, 0, "Renderer-contained CFR prose lost its official parent context.");
   assert.strictEqual(cfrStructureAudit.summary.failureCount, 0, "The independent CFR structure audit retained failures.");
-  assert.strictEqual(cfrStructureAudit.summary.baselineStructureMismatchCount, 1454, "The documented pre-fix CFR mismatch inventory changed.");
+  assert.strictEqual(cfrStructureAudit.summary.baselineStructureMismatchCount, 1451, "The documented pre-fix CFR mismatch inventory changed.");
   assert(cfrStructureAudit.baselineStructureMismatches.some(item => item.id === "8:204.2" && item.differences.some(difference => difference.actual === "(h)(2)(i)")), "The audit no longer records the reported false 8 CFR 204.2(h)(2)(i) hierarchy.");
   assert.strictEqual(cfrStructureAudit.inputs.corpus.sha256, sha256(fs.readFileSync(path.join(root, "src", "INASearch-CFR.js"))), "The CFR structure audit is not bound to the committed generated corpus.");
 
@@ -645,9 +650,9 @@ async function main() {
   // Individual former Title 8 sections now include their sourced text and
   // provenance. Retain a bounded delivery budget for the expanded corpus.
   assert(full.bytes <= 10_000_000, "INASearch.html exceeds 10 MB acceptance limit.");
-  // The requested embedded cross-title corpus adds 3.4 MB of source JSON.
-  // Keep the compressed release budget unchanged; allow this bounded addition in the plain-JSON build.
-  assert(uncompressed.bytes <= 44_000_000, "INASearch-Uncompressed.html exceeds 44 MB acceptance limit.");
+  // Current USLM presentation metadata and the refreshed policy catalog expand
+  // the plain-JSON corpus. Keep a bounded budget and the compressed limit above.
+  assert(uncompressed.bytes <= 45_000_000, "INASearch-Uncompressed.html exceeds 45 MB acceptance limit.");
   const retiredProfileFields = ["unlocks", "visaSummaryUnlocks", "visaChallengeLockouts", "visaFactUnlocks", "visaFactChallengeLockouts", "resourceUnlocks", "resourceChallengeLockouts"];
   for (const field of retiredProfileFields) assert.strictEqual(Object.hasOwn(blankProfile, field), false, `Blank profile still exports ${field}.`);
   for (const preference of ["quizCursorKey", "quizClassification"]) assert.strictEqual(Object.hasOwn(blankProfile.preferences, preference), false, `Blank profile still exports ${preference}.`);
@@ -813,19 +818,19 @@ async function main() {
   assert.strictEqual(new Set(assignedInaHierarchySections).size, 183, "The INA hierarchy contains duplicate section membership.");
   assert.deepStrictEqual(new Set(assignedInaHierarchySections), new Set(full.corpus.inaHierarchy.sections.map(section => section.id)), "The INA hierarchy contains an orphan section.");
   assert.strictEqual(full.corpus.cfr.ptarYear, 2025, "Unexpected CFR Parallel Table year.");
-  assert.strictEqual(full.corpus.cfr.coverage.sectionCount, 3039, "Unexpected cached CFR section count.");
-  assert.strictEqual(full.corpus.cfr.sections.length, 3039, "CFR section records do not match the manifest.");
+  assert.strictEqual(full.corpus.cfr.coverage.sectionCount, 3034, "Unexpected cached CFR section count.");
+  assert.strictEqual(full.corpus.cfr.sections.length, 3034, "CFR section records do not match the manifest.");
   assert.strictEqual(full.corpus.cfr.appendices.length, 10, "Unexpected cached CFR appendix count.");
   assert.strictEqual(full.corpus.cfr.graphics.length, 15, "Unexpected referenced CFR graphic count.");
   assert.strictEqual(full.corpus.cfr.coverage.embeddedGraphicsCount, 15, "Unexpected embedded CFR graphic count.");
   assert.deepStrictEqual(full.corpus.cfr.coverage.unavailableGraphics, [], "A referenced CFR graphic is unavailable offline.");
   assert.strictEqual(full.corpus.cfr.coverage.structureSourceCount, 174, "The CFR corpus is missing same-date enhanced-renderer evidence for a captured part.");
-  assert.strictEqual(full.corpus.cfr.coverage.structureRecordCount, 3049, "Unexpected eCFR renderer record inventory.");
-  assert.strictEqual(full.corpus.cfr.coverage.structureParagraphCount, 37577, "Unexpected eCFR renderer paragraph inventory.");
-  assert.strictEqual(full.corpus.cfr.coverage.structureElementCount, 37743, "Unexpected auditable eCFR structure-element inventory.");
-  assert.strictEqual(full.corpus.cfr.coverage.structureAddressableElementCount, 30297, "Unexpected addressable eCFR element inventory.");
-  assert.strictEqual(full.corpus.cfr.coverage.structureTitledElementCount, 31898, "Unexpected data-title eCFR element inventory.");
-  assert.strictEqual(full.corpus.cfr.coverage.structureContextElementCount, 1382, "Unexpected renderer-contained CFR context inventory.");
+  assert.strictEqual(full.corpus.cfr.coverage.structureRecordCount, 3044, "Unexpected eCFR renderer record inventory.");
+  assert.strictEqual(full.corpus.cfr.coverage.structureParagraphCount, 37595, "Unexpected eCFR renderer paragraph inventory.");
+  assert.strictEqual(full.corpus.cfr.coverage.structureElementCount, 37761, "Unexpected auditable eCFR structure-element inventory.");
+  assert.strictEqual(full.corpus.cfr.coverage.structureAddressableElementCount, 30317, "Unexpected addressable eCFR element inventory.");
+  assert.strictEqual(full.corpus.cfr.coverage.structureTitledElementCount, 31795, "Unexpected data-title eCFR element inventory.");
+  assert.strictEqual(full.corpus.cfr.coverage.structureContextElementCount, 1384, "Unexpected renderer-contained CFR context inventory.");
   assert.strictEqual(full.corpus.cfr.structureSources.length, 174, "The CFR structure-source manifest is incomplete.");
   assert(full.corpus.cfr.structureSources.every(source => source.bytes > 0 && /^[a-f0-9]{64}$/.test(source.sha256) && source.url.includes("/api/renderer/v1/content/enhanced/")), "A CFR hierarchy source lacks pinned eCFR renderer provenance.");
   const fallbackGraphic = full.corpus.cfr.graphics.find(graphic => graphic.sourcePath === "/graphics/er15ja25.063.gif");
@@ -922,9 +927,9 @@ async function main() {
   assert.deepStrictEqual(hydratedSource.title8.houseFootnoteMetadata, {
     schemaVersion: 1,
     noteLayoutRevision: 2,
-    sourceUrl: "https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip",
-    sourceReleasePoint: "119-102",
-    capturedAt: "2026-08-21",
+    sourceUrl: "https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip",
+    sourceReleasePoint: "119-121",
+    capturedAt: "2026-10-20",
     footnotes: 118,
     references: 151,
     affectedFields: 143,
@@ -1034,10 +1039,10 @@ async function main() {
   assert(arrestContinuation.references.some(reference => reference.text === "(ii)" && reference.targetPath.join("/") === "a/ii"), "The continuation's clause (ii) reference must resolve within subsection (a).");
   // Quote-local Act scopes and restored division-note citations resolve
   // references against the authority printed in the original USLM.
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 47254, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 18802, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 15086, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1312, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 47354, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 18918, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 15193, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1313, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
   assert(hydratedSource.legalReferenceMetadata.suppressedSelfReferences > 8_000, "The build did not audit and suppress the corpus-wide self-reference set.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-this-unit"), "The bare self-referential unit rule remains advertised as navigable.");
   const retainedBareSelfReferences = [];
@@ -1750,11 +1755,15 @@ async function main() {
     ["section 1915(c)", "42", "1396n", "c", "official-source-only"],
     ["section 1902(e)(3)", "42", "1396a", "e/3", "local"]
   ], "20 CFR part 416 did not apply its reviewed Social Security Act scope and Title 42 section map.");
-  const cfr1013ActList = findCfrBlock(hydratedSource.cfr.sections.find(section => section.id === "8:101.3"), "paragraph (15)(A)");
-  assert.deepStrictEqual(plain(cfr1013ActList.xReferences.filter(reference => reference.ruleId === "embedded-explicit-container").map(reference => ({ section: reference.targetSection, path: reference.targetPath }))), [
+  // This former source wording remains a parser regression after the September
+  // amendment removed the statutory list from current 8 CFR 101.3.
+  const formerCfr1013ActList = generatedReferences("under paragraph (15)(A) or (15)(G) of section 101(a) of the Act", {
+    ...sharedLegalContext, kind: "cfr", title: "8", chapter: "I", part: "101", section: "101.3", path: ["d"], sourceId: "former-cfr-101.3-act-list"
+  });
+  assert.deepStrictEqual(plain(formerCfr1013ActList.filter(reference => reference.ruleId === "embedded-explicit-container").map(reference => ({ section: reference.targetSection, path: reference.targetPath }))), [
     { section: "1101", path: ["a", "15", "A"] },
     { section: "1101", path: ["a", "15", "G"] }
-  ], "The rebuilt CFR corpus did not preserve the INA base for an embedded list.");
+  ], "The CFR parser did not preserve the INA base for an embedded list.");
   const cfr23612Immact = findCfrBlock(hydratedSource.cfr.sections.find(section => section.id === "8:236.12"), "section 301 of IMMACT 90");
   assert(cfr23612Immact.xReferences.filter(reference => reference.ruleId === "embedded-named-act-section").every(reference => reference.family === "public-law" && reference.targetCongress === "101" && reference.targetLaw === "649"), "The rebuilt CFR corpus retained CFR targets for IMMACT 90 references.");
   const continuingAppropriationsBlock = findCfrBlock(hydratedSource.cfr.sections.find(section => section.id === "8:214.2"), "Continuing Appropriations and Extensions Act");
@@ -2093,9 +2102,9 @@ async function main() {
   vm.createContext(updaterContext);
   const updaterRuntimeSource = scriptBody(full.html, "inaSearchUpdaterRuntime");
   assert(updaterRuntimeSource.indexOf("applyCfrReferences(updated, plan.changedParts)") < updaterRuntimeSource.indexOf("activateCorpus(updated, { reason: \"ecfr-incremental-update\""), "The updater can activate changed CFR text before regenerating inline legal references.");
-  assert(updaterRuntimeSource.includes("/api/renderer/v1/content/enhanced/") && updaterRuntimeSource.includes("rendererHtml") && updaterRuntimeSource.includes("class ParagraphOracle"), "The updater does not require same-date enhanced-renderer hierarchy evidence.");
+  assert(!updaterRuntimeSource.includes("/api/renderer/v1/content/enhanced/") && updaterRuntimeSource.includes("createCfrXmlParagraphResolver") && updaterRuntimeSource.includes("class ParagraphOracle"), "Browser updates must derive structure from the CORS-enabled official XML API.");
   assert(!updaterRuntimeSource.includes("function markerLevel") && !updaterRuntimeSource.includes("function paragraphUnits"), "The updater still guesses CFR hierarchy from ambiguous marker styles.");
-  assert(updaterRuntimeSource.includes("oracle.finish()") && updaterRuntimeSource.includes("XML/enhanced-renderer section inventories differ") && updaterRuntimeSource.includes("structureRendererVerified: true"), "The updater does not fail closed on incomplete XML/renderer structure parity.");
+  assert(updaterRuntimeSource.includes("oracle.finish()") && updaterRuntimeSource.includes("source.unresolvedCount") && updaterRuntimeSource.includes("structureXmlVerified: true"), "The updater does not fail closed on incomplete or ambiguous XML structure.");
   new vm.Script(updaterRuntimeSource, { filename: "inaSearchUpdaterRuntime" }).runInContext(updaterContext);
   const updaterFixtureCorpus = { schemaVersion: 5, corpusVersion: "fixture", inaHierarchy: { schemaVersion: 1, titles: [], sections: [] }, cfr: { parts: [], sections: [], appendices: [], currentThrough: {} } };
   let updaterEnabled = false;
@@ -2247,7 +2256,7 @@ async function main() {
   assert(fallbackSource.includes('on(els.themeCycleButton, "click", cycleThemePreference)') && fallbackSource.includes("profile.preferences.theme = next;\n      markProfileChanged();"), "The cycling theme button does not flow through profile autosave.");
   assert(fallbackSource.includes('const nextTheme = { light: "dark", dark: "system", system: "light" }[theme];') && fallbackSource.includes('const labels = { light: "Day", dark: "Night", system: "System" };'), "The top-bar theme button does not advertise the Day → Night → System cycle.");
   assert(fallbackSource.includes('SYSTEM_THEME_MEDIA?.addEventListener?.("change", syncThemeControls)') && fallbackSource.includes('effectiveThemePreference(theme)'), "Theme controls do not respond to the current or live system theme.");
-  assert(fallbackSource.includes('const showDetailedStatus = profile.preferences.showDetailedStatus === true;') && fallbackSource.includes('els.saveStatus.hidden = !showDetailedStatus;') && fallbackSource.includes('els.corpusStatus.hidden = profile.preferences.showDetailedStatus !== true;') && fallbackSource.includes('els.topThemeControls.hidden = profile.preferences.hideTopThemeControls === true;'), "The combined detailed-status preference is not applied to both top-bar status displays.");
+  assert(fallbackSource.includes('els.saveStatus.hidden = !showDetailedStatus && els.saveStatus.dataset.statusKind !== "bad";') && fallbackSource.includes('els.corpusStatus.hidden = profile.preferences.showDetailedStatus !== true && kind !== "bad";') && fallbackSource.includes('els.topThemeControls.hidden = profile.preferences.hideTopThemeControls === true;'), "Routine status must respect the visibility preference while red errors remain visible.");
   assert(fallbackSource.includes(':root[data-theme="dark"]') && fallbackSource.includes(':root:not([data-theme="light"]):not([data-theme="dark"])'), "Manual and system dark-theme selectors are incomplete.");
   for (const token of ["--blue: #005288", "--canvas: #f5f7f9", "--ink: #1b1b1b", "--muted: #565c65", "--line: #dfe1e2", "--topbar: #005288"]) {
     assert(fallbackSource.includes(token), `The USCIS-inspired day palette is missing ${token}.`);
@@ -2422,7 +2431,9 @@ async function main() {
     && resetEverythingSource.includes("insertedReferenceMaterializedKeys.clear()")
     && resetEverythingSource.includes("resetAnnotationIndex()")
     && resetEverythingSource.includes("markProfileChanged()")
-    && resetEverythingSource.includes("rerenderAllInsertedReferenceGroups()"), "Reset Everything does not clear and rerender all live saved-content surfaces.");
+    && resetEverythingSource.includes("await queueProfileWrite(true)")
+    && resetEverythingSource.includes("await globalThis.INASearchStorage?.clearResetCaches()")
+    && resetEverythingSource.includes("location.reload()"), "Reset Everything does not save the blank profile, clear caches, and reload the embedded corpus.");
   const themeDeclarationsStart = fallbackSource.indexOf('    const THEME_STORAGE_KEY = "ina-search-theme";');
   const themeDeclarationsEnd = fallbackSource.indexOf("\n    const state = {", themeDeclarationsStart);
   assert(themeDeclarationsStart >= 0 && themeDeclarationsEnd > themeDeclarationsStart, "Could not extract the theme preference functions.");
@@ -2811,6 +2822,7 @@ async function main() {
     els: { corpusStatus: corpusStatusElement },
     profile: { preferences: { showDetailedStatus: true } },
     loadErrors: {},
+    renderCorpusUpdateDetails: () => {},
     window: {},
     escapeHtml: value => String(value ?? "")
   });
@@ -2824,7 +2836,7 @@ async function main() {
   assert(corpusStatusElement.attributes["aria-label"].includes("Activate to reload now") && corpusStatusElement.title.includes("Click to reload now"), "The ready CFR update action does not state what clicking it will do.");
   const hiddenCorpusStatusProfile = { preferences: { showDetailedStatus: false } };
   const updateHiddenCorpusStatus = extractedFunction(fallbackSource, "updateCorpusStatus", "disabledCorpusMaintenanceStatus", {
-    corpus: { corpusVersion: "2026.08.02-7" }, els: { corpusStatus: corpusStatusElement }, profile: hiddenCorpusStatusProfile, loadErrors: {}, window: {}, escapeHtml: value => String(value ?? "")
+    corpus: { corpusVersion: "2026.08.02-7" }, els: { corpusStatus: corpusStatusElement }, profile: hiddenCorpusStatusProfile, loadErrors: {}, renderCorpusUpdateDetails: () => {}, window: {}, escapeHtml: value => String(value ?? "")
   });
   updateHiddenCorpusStatus({ state: "disabled", message: "Updates off" });
   assert.strictEqual(corpusStatusElement.hidden, true, "Disabling detailed status did not hide a non-routine update status.");
@@ -2843,6 +2855,7 @@ async function main() {
   assert(!fallbackSource.includes('>Corpus Loaded</span>'), "The removed Corpus Loaded success chip remains in the interface.");
   const saveStatusClasses = new Map();
   const saveStatusElement = {
+    dataset: {},
     innerHTML: "",
     disabled: true,
     hidden: false,
@@ -3277,7 +3290,7 @@ async function main() {
   for (const parts of cfrPartsByNumber.values()) parts.sort(cfrPrecedenceSort);
   assert.strictEqual(cfrPartsByNumber.size, 171, "The CFR corpus no longer has the audited count of distinct part identifiers.");
   assert.strictEqual([...cfrPartsByNumber.values()].filter(parts => new Set(parts.map(part => Number(part.title))).size > 1).length, 3, "The CFR part index no longer has the audited multi-title identifier count.");
-  assert.strictEqual(cfrSectionsByNumber.size, 3027, "The CFR corpus no longer has the audited count of distinct section identifiers.");
+  assert.strictEqual(cfrSectionsByNumber.size, 3022, "The CFR corpus no longer has the audited count of distinct section identifiers.");
   assert.strictEqual([...cfrSectionsByNumber.values()].filter(sections => new Set(sections.map(section => Number(section.title))).size > 1).length, 12, "The CFR section index no longer has the audited multi-title identifier count.");
   const cfrRemovedPartMap = new Map(full.corpus.cfr.removedParts.map(part => [`${part.title}:${statutoryNormPart(part.part)}`, part]));
   const INA_TITLE_ROMAN = ["", "I", "II", "III", "IV", "V"];

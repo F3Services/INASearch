@@ -7,6 +7,7 @@
   const STATUS_KEY = "ecfr-maintenance-status-v2";
   const LAST_CHECK_KEY = "ecfr-last-check-v2";
   const CHECK_INTERVAL_MS = 12 * 60 * 60 * 1000;
+  const ERROR_RETRY_MS = 5 * 60 * 1000;
   const START_DELAY_MS = 900;
   const MAX_RETRIES = 3;
   const REQUEST_TIMEOUT_MS = 30_000;
@@ -82,7 +83,15 @@
       } catch (error) {
         if (signal?.aborted) throw abortFailure();
         lastError = error;
-        if (attempt === MAX_RETRIES || !(error?.name === "AbortError" || error instanceof TypeError)) throw error;
+        if (attempt === MAX_RETRIES || !["AbortError", "TypeError"].includes(error?.name)) {
+          const failure = new Error(error?.name === "AbortError"
+            ? `The eCFR request timed out after ${REQUEST_TIMEOUT_MS / 1000} seconds.`
+            : error?.name === "TypeError"
+              ? "The browser could not download the eCFR source. Check the network connection and whether the browser or network blocks this request."
+              : error?.message || String(error));
+          failure.requestUrl = url;
+          throw failure;
+        }
         await sleep(Math.min(500 * (2 ** attempt), 4_000), signal);
       } finally {
         clearTimeout(timeout);
@@ -95,7 +104,7 @@
   async function fetchJson(url, metrics, signal) {
     const { text } = await fetchAuthority(url, "application/json", metrics, signal);
     try { return { value: JSON.parse(text), text }; }
-    catch { throw new Error(`eCFR returned malformed JSON for ${new URL(url).pathname}.`); }
+    catch { throw Object.assign(new Error(`eCFR returned malformed JSON for ${new URL(url).pathname}.`), { requestUrl: url }); }
   }
 
   const paragraphPath = tokens => (tokens || []).map(value => `(${value})`).join("");
@@ -192,6 +201,7 @@
 
     entryUnits(entry, text, entryStart) {
       if (!entry.addressable || entry.term || entry.disabled) return [];
+      if (entry.units) return entry.units.map(unit => ({ ...unit, s: entryStart + unit.s, e: entryStart + unit.e }));
       const leadingRange = CFR_LEADING_RANGE_RE.exec(entry.text);
       const leading = leadingRange || CFR_LEADING_MARKERS_RE.exec(entry.text);
       if (!leading) {
@@ -248,7 +258,7 @@
         searchFrom = found + consumedLength;
         this.currentDepth = entry.indent || (!entry.addressable ? entry.path.length : 0);
         if (entry.term || entry.disabled) { this.currentPath = []; this.currentContext = []; }
-        else if (!entry.addressable) { this.currentPath = []; this.currentContext = [...entry.path]; }
+        else if (!entry.addressable) { this.currentPath = []; this.currentContext = entry.context !== undefined ? markerMatches(entry.context).map(match => match[1]) : [...entry.path]; }
         else if (units.length) { this.currentPath = markerMatches(units.at(-1).a).map(match => match[1]); this.currentContext = [...this.currentPath]; }
       }
       const consumed = this.index !== startingIndex;
@@ -260,7 +270,7 @@
         const end = rawEnd - (raw.length - raw.trimEnd().length);
         const entryUnits = item.units.filter(unit => start <= unit.s && unit.s < unit.e && unit.e <= end).map(unit => ({ ...unit, s: unit.s - start, e: unit.e - start }));
         const address = item.entry.addressable && !item.entry.term && !item.entry.disabled ? entryUnits.at(-1)?.a || paragraphPath(item.entry.path) : "";
-        const context = address || (item.entry.path.length && !item.entry.term && !item.entry.disabled ? paragraphPath(item.entry.path) : "");
+        const context = address || item.entry.context || (item.entry.path.length && !item.entry.term && !item.entry.disabled ? paragraphPath(item.entry.path) : "");
         const depth = item.entry.indent || (!item.entry.addressable ? item.entry.path.length : 0);
         return { start, end, a: address, c: context, d: depth, u: entryUnits, q: item.entry.term || item.entry.disabled };
       });
@@ -290,6 +300,7 @@
       this.currentDepth = entry.indent || entry.path.length;
       const units = [];
       if (entry.addressable && entry.path.length) {
+        if (entry.units) return { units: this.entryUnits(entry, text, 0), path: paragraphPath(this.currentPath), depth: this.currentDepth, context: paragraphPath(this.currentContext) };
         const token = entry.path.at(-1), start = text.length - text.trimStart().length;
         if (!text.startsWith(token, start)) throw new Error(`Rendered heading path ${entry.dataTitle || entry.canonicalId} is not visible in its XML heading.`);
         units.push({ a: paragraphPath(entry.path), s: start, e: start + token.length });
@@ -470,17 +481,27 @@
     return section ? `${path}/section-${section}` : path;
   }
 
-  function normalizeEcfrXml(raw, { title, part: expectedPart = "", rendererHtml, mappings = [], graphics = new Map() }) {
+  function normalizeEcfrXml(raw, { title, part: expectedPart = "", rendererHtml, previousCfr = null, mappings = [], graphics = new Map() }) {
     if (!(globalThis.DOMParser)) throw new Error("This browser does not provide the XML parser required for eCFR updates.");
-    if (!rendererHtml) throw new Error("A same-date enhanced eCFR rendering is required to verify paragraph hierarchy.");
-    const renderedPart = parseEnhancedHtml(rendererHtml, { title: Number(title), part: String(expectedPart) });
+    const renderedPart = rendererHtml ? parseEnhancedHtml(rendererHtml, { title: Number(title), part: String(expectedPart) }) : null;
+    const resolveXml = !renderedPart && globalThis.INASearchCfrXml?.createCfrXmlParagraphResolver({ flattened, inlineRuns, canonicalMatchText, canonicalMatchMap, cleanText, hierarchy: globalThis.INASearchCfrHierarchy });
+    if (!renderedPart && !resolveXml) throw new Error("The CFR XML structure parser is unavailable.");
     const documentNode = new DOMParser().parseFromString(raw, "application/xml");
     const parserError = documentNode.getElementsByTagName("parsererror")[0];
     if (parserError) throw new Error(`The current eCFR XML could not be parsed: ${cleanText(parserError.textContent).slice(0, 180)}`);
     const root = documentNode.documentElement;
     if (!root?.tagName?.startsWith("DIV")) throw new Error("The current eCFR response did not contain the expected regulatory XML root.");
-    const parts = [], sections = [], appendices = [];
+    const parts = [], sections = [], appendices = [], xmlElements = [], diagnostics = [];
     const rendererUsage = { sections: new Set(), appendixCount: 0 };
+    const sourceOracle = (node, id, previous, rendered) => {
+      const source = renderedPart ? rendered : resolveXml(node, previous);
+      if (!renderedPart) {
+        diagnostics.push(...source.diagnostics.map(item => ({ record: id, ...item })));
+        if (source.unresolvedCount) throw new Error(`${id}: the XML paragraph hierarchy has ${source.unresolvedCount} unresolved designations.`);
+        xmlElements.push(...source.paragraphs);
+      }
+      return new ParagraphOracle(source, id);
+    };
     const walk = (node, ancestors, partRecord = null) => {
       const nodeType = String(node.getAttribute("TYPE") || "").toLowerCase();
       const current = node.tagName.startsWith("DIV") && nodeType ? breadcrumb(node, ancestors) : ancestors;
@@ -495,28 +516,31 @@
         parts.push(partRecord);
       } else if (node.tagName === "DIV8" && nodeType === "section" && partRecord) {
         const number = node.getAttribute("N") || "", head = childText(node, "HEAD");
-        const oracle = new ParagraphOracle(renderedPart.sections.get(number), `${title} CFR ${number}`);
+        const id = `${title}:${number}`;
+        const oracle = sourceOracle(node, id, previousCfr?.sections?.find(record => record.id === id), renderedPart?.sections.get(number));
         const record = {
           id: `${title}:${number}`, title: Number(title), section: number, partId: partRecord.id,
           heading: head.replace(/^§\s*[^ ]+\s*/, ""), hierarchy: current, blocks: normalizedBlocks(node, graphics, oracle),
           url: sourceUrl(title, current.slice(0, -1), number)
         };
         oracle.finish();
-        globalThis.INASearchCfrHierarchy.reconcile(record);
+        globalThis.INASearchCfrHierarchy.reconcile(record, null, previousCfr?.sections?.find(previous => previous.id === record.id), { preserveSourceDuplicates: !renderedPart });
         sections.push(record);
         partRecord.sectionIds.push(record.id);
         rendererUsage.sections.add(number);
         return;
       } else if (node.tagName === "DIV9" && partRecord) {
         const number = node.getAttribute("N") || childText(node, "HEAD");
-        if (rendererUsage.appendixCount >= renderedPart.appendices.length) throw new Error(`The enhanced eCFR response has no appendix record for ${title} CFR ${number}.`);
-        const oracle = new ParagraphOracle(renderedPart.appendices[rendererUsage.appendixCount], `${title} CFR ${number}`);
+        if (renderedPart && rendererUsage.appendixCount >= renderedPart.appendices.length) throw new Error(`The enhanced eCFR response has no appendix record for ${title} CFR ${number}.`);
+        const id = `${partRecord.id}:appendix:${appendices.length + 1}`;
+        const previous = previousCfr?.appendices?.find(record => record.partId === partRecord.id && record.label === number && record.heading === childText(node, "HEAD"));
+        const oracle = sourceOracle(node, id, previous, renderedPart?.appendices[rendererUsage.appendixCount]);
         const record = {
           id: `${partRecord.id}:appendix:${appendices.length + 1}`, title: Number(title), partId: partRecord.id,
           label: number, heading: childText(node, "HEAD"), hierarchy: current, blocks: normalizedBlocks(node, graphics, oracle), url: partRecord.url
         };
         oracle.finish();
-        globalThis.INASearchCfrHierarchy.reconcile(record);
+        globalThis.INASearchCfrHierarchy.reconcile(record, null, previous, { preserveSourceDuplicates: !renderedPart });
         appendices.push(record);
         partRecord.appendixIds.push(record.id);
         rendererUsage.appendixCount += 1;
@@ -526,15 +550,16 @@
     };
     walk(root, []);
     if (parts.length !== 1) throw new Error(`The eCFR part response produced ${parts.length} part records instead of one.`);
-    const rendererOnlySections = [...renderedPart.sections.keys()].filter(section => !rendererUsage.sections.has(section)).sort();
-    const xmlOnlySections = [...rendererUsage.sections].filter(section => !renderedPart.sections.has(section)).sort();
+    const rendererOnlySections = renderedPart ? [...renderedPart.sections.keys()].filter(section => !rendererUsage.sections.has(section)).sort() : [];
+    const xmlOnlySections = renderedPart ? [...rendererUsage.sections].filter(section => !renderedPart.sections.has(section)).sort() : [];
     if (rendererOnlySections.length || xmlOnlySections.length) throw new Error(`The XML/enhanced-renderer section inventories differ; renderer-only=${rendererOnlySections.join(",") || "none"}; XML-only=${xmlOnlySections.join(",") || "none"}.`);
-    if (rendererUsage.appendixCount !== renderedPart.appendices.length) throw new Error(`The XML has ${rendererUsage.appendixCount} appendices but the enhanced renderer has ${renderedPart.appendices.length}.`);
-    const rendererElements = [...renderedPart.sections.values(), ...renderedPart.appendices].flatMap(record => record.paragraphs);
+    if (renderedPart && rendererUsage.appendixCount !== renderedPart.appendices.length) throw new Error(`The XML has ${rendererUsage.appendixCount} appendices but the enhanced renderer has ${renderedPart.appendices.length}.`);
+    const rendererElements = renderedPart ? [...renderedPart.sections.values(), ...renderedPart.appendices].flatMap(record => record.paragraphs) : xmlElements;
     return {
-      parts, sections, appendices,
+      parts, sections, appendices, diagnostics,
       structureMetrics: {
-        recordCount: renderedPart.sections.size + renderedPart.appendices.length,
+        method: renderedPart ? "enhanced-renderer" : "xml-with-prior-anchors-v1",
+        recordCount: sections.length + appendices.length,
         paragraphCount: rendererElements.filter(element => element.elementKind === "p").length,
         elementCount: rendererElements.length,
         addressableElementCount: rendererElements.filter(element => element.addressable && element.path.length && !element.term && !element.disabled).length,
@@ -573,14 +598,16 @@
 
   async function mapConcurrent(items, concurrency, worker) {
     const results = new Array(items.length);
-    let cursor = 0;
+    let cursor = 0, failure = null;
     async function run() {
-      while (cursor < items.length) {
+      while (cursor < items.length && !failure) {
         const index = cursor++;
-        results[index] = await worker(items[index], index);
+        try { results[index] = await worker(items[index], index); }
+        catch (error) { failure ||= error; }
       }
     }
     await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, run));
+    if (failure) throw failure;
     return results;
   }
 
@@ -745,23 +772,18 @@
     const downloads = await mapConcurrent(tasks, FETCH_CONCURRENCY, async task => {
       throwIfAborted(signal);
       const url = `${ECFR_ORIGIN}/api/versioner/v1/full/${encodeURIComponent(task.date)}/title-${encodeURIComponent(task.title)}.xml?part=${encodeURIComponent(task.part)}`;
-      const rendererUrl = `${ECFR_ORIGIN}/api/renderer/v1/content/enhanced/${encodeURIComponent(task.date)}/title-${encodeURIComponent(task.title)}?part=${encodeURIComponent(task.part)}`;
       try {
-        const [{ text }, { text: rendererHtml }] = await Promise.all([
-          fetchAuthority(url, "application/xml", metrics, signal),
-          fetchAuthority(rendererUrl, "text/html", metrics, signal)
-        ]);
+        const { text } = await fetchAuthority(url, "application/xml", metrics, signal);
         throwIfAborted(signal);
         const artifact = await sourceArtifact(`ecfr:${task.title}:${task.part}:${task.date}`, text, { mediaType: "application/xml", sourceUrl: url });
-        const rendererArtifact = await sourceArtifact(`ecfr-renderer:${task.title}:${task.part}:${task.date}`, rendererHtml, { mediaType: "text/html", sourceUrl: rendererUrl });
         await globalThis.INASearchStorage.storeSourceArtifact(`ecfr:${task.title}:${task.part}:${task.date}`, artifact);
-        await globalThis.INASearchStorage.storeSourceArtifact(`ecfr-renderer:${task.title}:${task.part}:${task.date}`, rendererArtifact);
         const mappings = existingParts.get(task.key)?.uscMappings || [];
-        const normalized = normalizeEcfrXml(text, { title: Number(task.title), part: task.part, rendererHtml, mappings, graphics });
+        const normalized = normalizeEcfrXml(text, { title: Number(task.title), part: task.part, previousCfr: cfr, mappings, graphics });
         retainExactReferences(cfr, normalized, existingParts.get(task.key));
-        return { ...task, url, rendererUrl, text, artifact, rendererArtifact, normalized };
+        return { ...task, url, text, artifact, normalized };
       } catch (error) {
         if (/HTTP 404 for \/api\/versioner\/v1\/full\//.test(error?.message || "")) return { ...task, url, removed: true };
+        error.requestUrl ||= url;
         throw error;
       }
     });
@@ -791,8 +813,9 @@
         sha256: download.artifact.sha256, currentThrough: download.date, runtimeUpdate: true
       });
       if (!download.removed) cfr.structureSources.push({
-        title: Number(download.title), part: download.part, url: download.rendererUrl, bytes: download.rendererArtifact.bytes,
-        sha256: download.rendererArtifact.sha256, currentThrough: download.date, runtimeUpdate: true,
+        title: Number(download.title), part: download.part, url: download.url, bytes: download.artifact.bytes,
+        sha256: download.artifact.sha256, currentThrough: download.date, runtimeUpdate: true,
+        diagnostics: download.normalized.diagnostics,
         ...download.normalized.structureMetrics
       });
     }
@@ -820,8 +843,8 @@
       citationReferenceFields: citationMaintenance.fields,
       citationReferenceCount: citationMaintenance.references,
       citationReferenceEngineVersion: citationMaintenance.engineVersion,
-      structureRendererVerified: true,
-      structureRendererParts: tasks.map(task => task.key),
+      structureXmlVerified: true,
+      structureXmlParts: tasks.map(task => task.key),
       requestPattern: "fixed-corpus-coverage",
       navigationIndependent: true
     };
@@ -845,7 +868,7 @@
     throwIfAborted(signal);
     const previous = await storage.getMetadata(LAST_CHECK_KEY);
     const previousTime = Date.parse(previous?.checkedAt || "");
-    if (!options.force && Number.isFinite(previousTime) && Date.now() - previousTime < CHECK_INTERVAL_MS) {
+    if (!options.force && previous?.state !== "error" && Number.isFinite(previousTime) && Date.now() - previousTime < CHECK_INTERVAL_MS) {
       await storage.ensureActiveCorpus(corpus, { reason: "local-baseline", sourceState: { authority: "embedded-release" } });
       return report({ ...previous, state: previous.state === "updated" ? "current" : previous.state, cachedCheck: true }, onStatus);
     }
@@ -926,7 +949,7 @@
         updated.corpusVersion = runtimeCorpusVersion(updated.corpusVersion, maximumDate);
         updated.verifiedAt = checkedAt;
         updated.runtimeMaintenance = { schemaVersion: 1, authority: ECFR_ORIGIN, checkedAt, currentThrough: Object.fromEntries(targetDates), changedParts: [], requestPattern: "fixed-corpus-coverage", navigationIndependent: true };
-        await storage.activateCorpus(updated, { reason: "ecfr-currency-advance", sourceState: updated.runtimeMaintenance });
+        if (!await storage.activateCorpus(updated, { reason: "ecfr-currency-advance", sourceState: updated.runtimeMaintenance })) throw new Error("Browser storage could not activate the verified CFR update.");
         corpus = updated;
       } else await storage.ensureActiveCorpus(corpus, { reason: "local-baseline", sourceState: { authority: "embedded-release" } });
       const status = { state: "current", checkedAt, nextCheckAfter: new Date(Date.now() + CHECK_INTERVAL_MS).toISOString(), coveredTitles: corpusCoverage.titles.length, coveredParts: [...corpusCoverage.byTitle.values()].reduce((sum, parts) => sum + parts.size, 0), changedParts: [], metrics: { ...metrics, elapsedMs: performance.now() - started } };
@@ -936,7 +959,7 @@
 
     const updated = await updateCorpusFromPlan(corpus, plan, metrics, signal);
     throwIfAborted(signal);
-    await storage.activateCorpus(updated, { reason: "ecfr-incremental-update", sourceState: updated.runtimeMaintenance });
+    if (!await storage.activateCorpus(updated, { reason: "ecfr-incremental-update", sourceState: updated.runtimeMaintenance })) throw new Error("Browser storage could not activate the verified CFR update.");
     const status = {
       state: "updated", checkedAt, nextCheckAfter: new Date(Date.now() + CHECK_INTERVAL_MS).toISOString(),
       coveredTitles: corpusCoverage.titles.length, coveredParts: [...corpusCoverage.byTitle.values()].reduce((sum, parts) => sum + parts.size, 0),
@@ -964,15 +987,15 @@
     catch (error) {
       if (error?.name === "AbortError") return report({ state: "disabled", networkActivity: false, message: "Automatic CFR updates are off. INASearch is using local data only and making no network requests." }, options.onStatus);
       await globalThis.INASearchStorage?.ensureActiveCorpus(corpus, { reason: "local-baseline-after-update-error", sourceState: { authority: "embedded-release" } }).catch(() => {});
-      const status = { state: "error", checkedAt: nowIso(), message: error?.message || String(error) };
+      const status = { state: "error", checkedAt: nowIso(), nextCheckAfter: new Date(Date.now() + ERROR_RETRY_MS).toISOString(), message: error?.message || String(error), ...(error?.requestUrl ? { requestUrl: error.requestUrl } : {}) };
       await globalThis.INASearchStorage?.setMetadata(LAST_CHECK_KEY, status).catch(() => {});
       return report(status, options.onStatus);
     }
   }
 
   function start(corpus, options = {}) {
-    let timer = null, controller = null, stopped = false;
-    const run = async () => {
+    let timer = null, controller = null, stopped = false, running = null;
+    const runCheck = async () => {
       if (stopped || options.enabled?.() === false) return;
       let result = null;
       controller = new AbortController();
@@ -985,8 +1008,9 @@
         timer = setTimeout(run, delay);
       }
     };
+    const run = () => { running = runCheck(); return running; };
     const initial = setTimeout(run, options.startDelayMs ?? START_DELAY_MS);
-    return () => { stopped = true; clearTimeout(initial); clearTimeout(timer); controller?.abort(); };
+    return () => { stopped = true; clearTimeout(initial); clearTimeout(timer); controller?.abort(); return running || Promise.resolve(); };
   }
 
   globalThis.INASearchUpdater = Object.freeze({

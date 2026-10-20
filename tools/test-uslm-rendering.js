@@ -17,7 +17,10 @@ api.houseFootnoteReferenceId = reference => reference.id;
 // the original sentence or trusting generated overlay offsets.
 const original = JSON.parse(execFileSync("python3", ["-c", `
 import json, re, xml.etree.ElementTree as E
-r=E.parse('sources/legal/raw/usc08@119-102.xml').getroot()
+manifest=json.load(open('sources/legal/source-manifest.json'))
+house=next(source for source in manifest['sources'] if source['id']=='house-title-8-uslm')
+artifact=next(a for a in house['artifacts'] if a['id']=='house-title-8-xml')
+r=E.parse(artifact['path']).getroot()
 n=next(n for n in r.iter() if n.get('identifier')=='/us/usc/t8/s1158/c/3')
 p=next(n for n in n.iter() if n.tag.endswith('}p'))
 text=''; marker=None

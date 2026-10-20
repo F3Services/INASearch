@@ -11,6 +11,7 @@ import argparse
 import base64
 import concurrent.futures
 import datetime as dt
+import gzip
 import hashlib
 import html
 import json
@@ -81,11 +82,15 @@ def flattened(element: ET.Element) -> str:
 
 
 def fetch(url: str) -> bytes:
-    request = urllib.request.Request(url, headers={"User-Agent": "INASearch-Corpus-Builder/2.0 (+offline legal research corpus)"})
+    request = urllib.request.Request(url, headers={
+        "User-Agent": "INASearch-Corpus-Builder/2.0 (+offline legal research corpus)",
+        "Accept-Encoding": "gzip",
+    })
     for attempt in range(12):
         try:
             with urllib.request.urlopen(request, timeout=90) as response:
-                return response.read()
+                data = response.read()
+                return gzip.decompress(data) if response.headers.get("Content-Encoding", "").lower() == "gzip" else data
         except urllib.error.HTTPError as error:
             if error.code != 429 or attempt == 11:
                 raise

@@ -5,6 +5,8 @@ import pathlib
 import json
 import collections
 import unittest
+import tempfile
+from unittest.mock import patch
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("referenced_usc", ROOT / "tools/referenced-usc.py")
 m = None
@@ -15,6 +17,39 @@ if SPEC and pathlib.Path(SPEC.origin).exists():
 class ReferencedUscTests(unittest.TestCase):
     def setUp(self):
         self.assertIsNotNone(m, "The direct-reference corpus generator is not implemented")
+
+    def test_current_capture_preserves_source_fields_and_publisher_currency(self):
+        source = """<!-- AUTHORITIES-LAWS-ENACTED-THROUGH:119-121 (10/09/2026) -->
+<!-- AUTHORITIES-USC-TITLE-NAME:TITLE 18 - CRIMES AND CRIMINAL PROCEDURE -->
+<!-- documentid:18_16 currentthrough:20261009_119-121 -->
+<!-- expcite:TITLE 18-CRIMES AND CRIMINAL PROCEDURE!@!PART I-CRIMES!@!CHAPTER 1-GENERAL PROVISIONS!@!Sec. 16 -->
+<!-- field-start:head --><h3>§16. Crime of violence defined</h3><!-- field-end:head -->
+<!-- field-start:statute --><p>The term means—</p><p>(a) An offense.</p><!-- field-end:statute -->
+<!-- field-start:sourcecredit --><p>Added by law.</p><!-- field-end:sourcecredit -->
+<!-- field-start:footnote --><p>Official footnote.</p><!-- field-end:footnote -->
+<!-- documentid:18_17 currentthrough:20261009_119-121 -->
+<!-- field-start:repealedhead --><h3>§17. Repealed.</h3><!-- field-end:repealedhead -->
+<!-- documentid:18_2251A currentthrough:20261009_119-121 -->
+<!-- expcite:TITLE 18-CRIMES AND CRIMINAL PROCEDURE!@!CHAPTER 110-SEXUAL EXPLOITATION!@!Sec. 2251A -->
+<!-- field-start:head --><h3>§2251A. Test</h3><!-- field-end:head -->
+<!-- field-start:statute --><p>Current law.</p><!-- field-end:statute -->"""
+        with tempfile.TemporaryDirectory() as temporary:
+            base=pathlib.Path(temporary); dest=base/'output'; dest.mkdir()
+            # Publisher title files can contain malformed bytes in unrelated
+            # bottom notes. Included operative fields must remain strict UTF-8.
+            blob=source.encode()+b'\n<!-- field-start:notes -->\xff<!-- field-end:notes -->';(base/'title-18.htm').write_bytes(blob)
+            manifest={'edition':'prelim','releasePoint':'119-121','currentThrough':'2026-10-09','capturedAt':'2026-10-20','publisher':'OLRC','artifacts':[{'title':18,'path':'title-18.htm','sha256':m.digest(blob),'url':'https://uscode.house.gov/download/releasepoints/us/pl/119/121/htm_usc18@119-121.zip'}]}
+            (base/'manifest.json').write_text(json.dumps(manifest))
+            with patch.object(m,'DEST',dest): m.capture_current_sources(base,{'18:16':[], '18:17':[], '18:2251a':[]})
+            inventory=json.loads((dest/'source-inventory.json').read_text())
+            self.assertEqual(inventory['currentThrough'],'2026-10-09')
+            self.assertEqual(inventory['releasePoint'],'119-121')
+            artifact=inventory['artifacts'][0]
+            self.assertEqual(artifact['heading'],'Crime of violence defined')
+            self.assertEqual(artifact['breadcrumb'],[{'kind':'part','number':'I','title':'CRIMES'},{'kind':'chapter','number':'1','title':'GENERAL PROVISIONS'}])
+            self.assertEqual(m.field((dest/artifact['path']).read_text(),'footnote').strip(),'<p>Official footnote.</p>')
+            self.assertEqual(inventory['unavailable'][0]['status'],'repealed')
+            self.assertEqual(inventory['artifacts'][1]['section'],'2251A')
 
     def test_only_ina_operative_citations_select_external_sections(self):
         base = dict(family='usc', targetTitle='18', context='operative', text='18 U.S.C. 16', sourceSection='1101')

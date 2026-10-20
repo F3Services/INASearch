@@ -6,7 +6,7 @@ This layer does not interpret parenthesized citations as child subdivisions.
 import re
 from urllib.parse import quote
 
-from .source import NAMESPACE, validate_xml
+from .source import DOWNLOAD_PAGE, NAMESPACE, validate_xml
 
 STRUCTURAL = {'subsection', 'paragraph', 'subparagraph', 'clause', 'subclause',
               'item', 'subitem', 'subsubitem', 'level'}
@@ -176,5 +176,5 @@ def import_title8(data, release, captured_at):
     if not sections: raise ValueError('Title 8 contains no sections')
     return {'title': 8, 'name': 'Aliens and Nationality', 'publication': 'Online@' + release,
             'currentThrough': release, 'sourceCreatedAt': root.findtext('u:meta/{http://purl.org/dc/terms/}created', default='', namespaces=NS),
-            'isPositiveLaw': False, 'sourceUrl': 'https://uscode.house.gov/download/download.shtml',
+            'isPositiveLaw': False, 'sourceUrl': DOWNLOAD_PAGE,
             'divisionNotes': division_notes, 'sections': sections}

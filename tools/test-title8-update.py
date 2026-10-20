@@ -10,8 +10,9 @@ import zipfile
 import tempfile
 import re
 import xml.etree.ElementTree as ET
+from email.message import Message
 
-from title8_update.source import discover, extract_zip, release_key, validate_xml
+from title8_update.source import DOWNLOAD_PAGE, discover, extract_zip, official_url, release_key, validate_xml
 from title8_update.uslm import import_title8
 from title8_update.pipeline import check, build, changed_sections
 
@@ -37,6 +38,21 @@ def archive(content, name='usc08.xml'):
 
 
 class DiscoveryTests(unittest.TestCase):
+    def test_uscis_heading_accordions_preserve_crosswalk_groups(self):
+        parser_type=runpy.run_path(str(ROOT / 'tools/generate-ina-crosswalk.py'))['CrosswalkParser']
+        for tag in ['div','h4']:
+            parser=parser_type()
+            parser.feed(f'<{tag} class="accordion__header">Title I: <span>General Provisions</span></{tag}><div class="accordion__panel"><table class="dataTable"><tr><td>INA 101</td><td>8 U.S.C. 1101</td><td>Definitions</td></tr></table></div>')
+            self.assertEqual(parser.groups,['Title I: General Provisions'])
+            self.assertEqual(parser.rows[0]['group'],'Title I: General Provisions')
+
+    def test_current_publisher_download_page_and_links(self):
+        self.assertEqual(DOWNLOAD_PAGE, 'https://uscode.house.gov/download.html')
+        self.assertEqual(official_url(DOWNLOAD_PAGE), DOWNLOAD_PAGE)
+        page = '<a href="download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip">XML</a>'
+        self.assertEqual(discover(page), ('119-121', 'https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip'))
+        with self.assertRaises(ValueError): official_url('https://uscode.house.gov/other.html')
+
     def test_title8_link_only_and_relative_urls(self):
         page = '<a href="releasepoints/us/pl/120/1/xml_usc07@120-1.zip">7</a><a href="releasepoints/us/pl/119/103/xml_usc08@119-103.zip">XML</a>'
         self.assertEqual(discover(page), ('119-103', 'https://uscode.house.gov/download/releasepoints/us/pl/119/103/xml_usc08@119-103.zip'))
@@ -55,6 +71,23 @@ class DiscoveryTests(unittest.TestCase):
             with self.subTest(data=data[:20]), self.assertRaises(ValueError): extract_zip(data)
         for content in [xml(title='9'), xml(release='119-102'), b'<!DOCTYPE x><x/>']:
             with self.subTest(content=content[:20]), self.assertRaises(ValueError): validate_xml(content, '119-103')
+
+    def test_source_recapture_discovers_current_release_before_downloading(self):
+        module = runpy.run_path(str(ROOT / 'tools/capture-legal-sources.py'))
+        capture = module['capture']
+        url = 'https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip'
+        responses = {
+            DOWNLOAD_PAGE: b'<a href="download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip">XML</a>',
+            url: archive(xml(release='119-121')),
+            module['GOVINFO_URL']: (ROOT / 'sources/legal/raw/COMPS-1376.xml').read_bytes(),
+            module['USCIS_URL']: (ROOT / 'sources/legal/raw/uscis-ina-crosswalk.html').read_bytes(),
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            work=Path(temporary)
+            with patch.dict(capture.__globals__, {'ROOT':work,'RAW_ROOT':work/'raw','MANIFEST_PATH':work/'manifest.json','fetch':lambda requested:(responses[requested],requested,Message())}):
+                result=capture('2026-10-20',True)
+            self.assertEqual(result['sources'][0]['releasePoint'],'119-121')
+            self.assertEqual(result['sources'][0]['requestedUrl'],url)
 
 
 class ImportTests(unittest.TestCase):

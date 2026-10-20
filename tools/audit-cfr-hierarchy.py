@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Classify numbering anomalies independently of the runtime hierarchy engine."""
+import argparse
 import collections
 import importlib.util
 import json
@@ -8,8 +9,13 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/generate-cfr-corpus.py')
 gen=importlib.util.module_from_spec(spec);spec.loader.exec_module(gen)
-cache=ROOT/'tmp/cfr-cache';capture=json.loads((cache/'capture.json').read_text())
-source=(ROOT/'src/INASearch-CFR.js').read_text();corpus=json.loads(source[source.index('=')+1:source.rindex(';')])
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--cache',type=Path,required=True)
+parser.add_argument('--corpus',type=Path,default=ROOT/'src/INASearch-CFR.js')
+parser.add_argument('--report',type=Path,required=True)
+args=parser.parse_args()
+cache=args.cache;capture=json.loads((cache/'capture.json').read_text())
+source=args.corpus.read_text();corpus=json.loads(source[source.index('=')+1:source.rindex(';')])
 records={record['id']:record for record in corpus['sections']}
 reviews=json.loads((ROOT/'sources/legal/cfr-hierarchy/reviewed-expectations.json').read_text())['reviews']
 findings=[];unclassified=[];counts=collections.Counter();paragraphs=0
@@ -52,5 +58,5 @@ for record in [*corpus['sections'],*corpus['appendices']]:
    repeated.append({'record':record['id'],'path':path,'blocks':positions,'classification':classification})
 assert not unclassified,unclassified
 report={'result':'pass','sourceParagraphsInspected':paragraphs,'markerFindings':dict(counts),'sourceMarkerOccurrences':occurrences,'parentPaths':len(parents),'isolatedItalicMarkersChecked':italic,'repeatedDesignations':repeated,'findings':findings}
-p=ROOT/'sources/legal/cfr-hierarchy/source-findings.json';p.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+p=args.report;p.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print({key:value for key,value in report.items() if key not in ['findings','repeatedDesignations']})

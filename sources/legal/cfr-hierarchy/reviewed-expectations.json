@@ -1,123 +1,37 @@
 {
   "schemaVersion": 1,
-  "reviewedSnapshot": "2026-09-10",
+  "reviewedSnapshot": "2026-10-20",
   "reviews": [
     {
       "id": "8:214.1",
       "rule": "admission-compound-headings",
-      "reason": "Visible (a)(3), General requirements / (i), and (b), Readmission / (1) headings; successive (i)-(iv), (2)-(4) admission categories corroborate the parent reset. Inline statutory references are not markers.",
-      "firstBlock": 16,
-      "lastBlock": 40,
-      "sourceGuard": "78e0cc75a268a1f1",
-      "firstGuard": "892c30070fe94def",
+      "reason": "The current XML and enhanced renderer contain separate (a)(3) and (a)(4) headings, then join visible (b) and (1) admission headings. Their successive (i)-(iv), (2), and (3) F/J/M categories establish the new parent reset; the renderer incorrectly retains (a)(4) ancestry. Inline statutory references are not markers. This replaces the prior edition repair after the September 15, 2026 amendments.",
+      "firstBlock": 29,
+      "lastBlock": 45,
+      "sourceGuard": "ab6f1c9d9db00e05",
+      "firstGuard": "a5d842bbe2030d13",
+      "sourceVerification": {
+        "currentThrough": "2026-10-16",
+        "xmlSha256": "310210ce5a19bc8bc6dc90c2f107913685d8131ca7ad3461a2d93be910b9defb",
+        "rendererSha256": "b9f391be2cc26ac78408e50b8ec5bee30d04c240d6d23d15d855736bb607aca9"
+      },
       "expectations": [
         {
           "blockPath": [
-            16
+            29
           ],
           "original": [
             "p",
-            "(3) General requirements. (i) Every nonimmigrant alien who applies for admission to, or an extension of stay in, the United States, must establish that he or she is admissible to the United States, or that any ground of inadmissibility has been waived under section 212(d)(3) of the Act. Upon application for admission, the alien must present a valid passport and valid visa unless either or both documents have been waived. A nonimmigrant alien's admission to the United States is conditioned on compliance with any inspection requirement in § 235.1(d) or of this chapter, as well as compliance with part 215, subpart B, of this chapter, if applicable. The passport of an alien applying for admission must be valid for a minimum of six months from the expiration date of the contemplated period of stay, unless otherwise provided in this chapter, and the alien must agree to abide by the terms and conditions of his or her admission. An alien applying for extension of stay must present a passport only if requested to do so by the Department of Homeland Security. The passport of an alien applying for extension of stay must be valid at the time of application for extension, unless otherwise provided in this chapter, and the alien must agree to maintain the validity of his or her passport and to abide by all the terms and conditions of his extension.",
+            "(b) Admission of nonimmigrants under section 101(a)(15)(F), (J), or (M) whose visa validity is considered automatically extended to complete unexpired periods of previous admission or extension of stay—(1) Section 101(a)(15)(F). The inspecting immigration officer may admit, up to the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa validity is considered automatically extended pursuant to 22 CFR 41.112(d) and who is applying for admission under section 101(a)(15)(F) of the Act, if the alien:",
             "",
-            "",
-            [],
-            [
-              {
-                "x": "(3) "
-              },
-              {
-                "x": "General requirements.",
-                "s": "i"
-              },
-              {
-                "x": " (i) Every nonimmigrant alien who applies for admission to, or an extension of stay in, the United States, must establish that he or she is admissible to the United States, or that any ground of inadmissibility has been waived under section 212(d)(3) of the Act. Upon application for admission, the alien must present a valid passport and valid visa unless either or both documents have been waived. A nonimmigrant alien's admission to the United States is conditioned on compliance with any inspection requirement in § 235.1(d) or of this chapter, as well as compliance with part 215, subpart B, of this chapter, if applicable. The passport of an alien applying for admission must be valid for a minimum of six months from the expiration date of the contemplated period of stay, unless otherwise provided in this chapter, and the alien must agree to abide by the terms and conditions of his or her admission. An alien applying for extension of stay must present a passport only if requested to do so by the Department of Homeland Security. The passport of an alien applying for extension of stay must be valid at the time of application for extension, unless otherwise provided in this chapter, and the alien must agree to maintain the validity of his or her passport and to abide by all the terms and conditions of his extension."
-              }
-            ],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(a)(3)",
-              0,
-              3
-            ],
-            [
-              "(a)(3)(i)",
-              26,
-              29
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            17
-          ],
-          "original": [
-            "p",
-            "(ii) At the time of admission or extension of stay, every nonimmigrant alien must also agree to depart the United States at the expiration of his or her authorized period of admission or extension of stay, or upon abandonment of his or her authorized nonimmigrant status, and to comply with the departure procedures at section 215.8 of this chapter if such procedures apply to the particular alien. The nonimmigrant alien's failure to comply with those departure requirements, including any requirement that the alien provide biometric identifiers, may constitute a failure of the alien to maintain the terms of his or her nonimmigrant status.",
-            "(a)(2)(ii)",
-            "",
-            [
-              {
-                "a": "(a)(2)(ii)",
-                "s": 0,
-                "e": 4
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(a)(3)(ii)",
-              0,
-              4
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            18
-          ],
-          "original": [
-            "p",
-            "(iii) At the time a nonimmigrant alien applies for admission or extension of stay, he or she must post a bond on Form I-352 in the sum of not less than $500, to ensure the maintenance of his or her nonimmigrant status and departure from the United States, if required to do so by the Commissioner of CBP, the Director of U.S. Citizenship and Immigration Services, an immigration judge, or the Board of Immigration Appeals.",
-            "(a)(2)(iii)",
-            "",
-            [
-              {
-                "a": "(a)(2)(iii)",
-                "s": 0,
-                "e": 5
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(a)(3)(iii)",
-              0,
-              5
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            19
-          ],
-          "original": [
-            "p",
-            "(b) Readmission of nonimmigrants under section 101(a)(15) (F), (J), (M), or (Q)(ii) to complete unexpired periods of previous admission or extension of stay—(1) Section 101(a)(15)(F). The inspecting immigration officer shall readmit for duration of status as defined in § 214.2(f)(5)(i), any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(F) of the Act, if the alien:",
-            "",
-            "(a)(2)(iii)((b)(a)(15)(F)(J)(M)(Q)(ii)",
+            "(a)(4)(iii)((b)(a)(15)(F)(J)(M)",
             [],
             [
               {
                 "x": "(b) "
               },
               {
-                "x": "Readmission of nonimmigrants under section 101(a)(15) (F), (J), (M), or (Q)(ii) to complete unexpired periods of previous admission or extension of stay",
+                "x": "Admission of nonimmigrants under section 101(a)(15)(F), (J), or (M) whose visa validity is considered automatically extended to complete unexpired periods of previous admission or extension of stay",
                 "s": "i"
               },
               {
@@ -128,7 +42,7 @@
                 "s": "i"
               },
               {
-                "x": " The inspecting immigration officer shall readmit for duration of status as defined in § 214.2(f)(5)(i), any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(F) of the Act, if the alien:"
+                "x": " The inspecting immigration officer may admit, up to the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa validity is considered automatically extended pursuant to 22 CFR 41.112(d) and who is applying for admission under section 101(a)(15)(F) of the Act, if the alien:"
               }
             ],
             []
@@ -141,23 +55,23 @@
             ],
             [
               "(b)(1)",
-              157,
-              160
+              202,
+              205
             ]
           ]
         },
         {
           "blockPath": [
-            20
+            30
           ],
           "original": [
             "p",
             "(i) Is admissible;",
-            "(a)(2)(i)",
+            "(a)(4)(i)",
             "",
             [
               {
-                "a": "(a)(2)(i)",
+                "a": "(a)(4)(i)",
                 "s": 0,
                 "e": 3
               }
@@ -175,16 +89,16 @@
         },
         {
           "blockPath": [
-            21
+            31
           ],
           "original": [
             "p",
             "(ii) Is applying for readmission after an absence from the United States not exceeding thirty days solely in contiguous territory or adjacent islands;",
-            "(a)(2)(ii)",
+            "(a)(4)(ii)",
             "",
             [
               {
-                "a": "(a)(2)(ii)",
+                "a": "(a)(4)(ii)",
                 "s": 0,
                 "e": 4
               }
@@ -202,16 +116,16 @@
         },
         {
           "blockPath": [
-            22
+            32
           ],
           "original": [
             "p",
             "(iii) Is in possession of a valid passport unless exempt from the requirement for presentation of a passport; and",
-            "(a)(2)(iii)",
+            "(a)(4)(iii)",
             "",
             [
               {
-                "a": "(a)(2)(iii)",
+                "a": "(a)(4)(iii)",
                 "s": 0,
                 "e": 5
               }
@@ -229,16 +143,16 @@
         },
         {
           "blockPath": [
-            23
+            33
           ],
           "original": [
             "p",
             "(iv) Presents, or is the accompanying spouse or child of an alien who presents, an Arrival-Departure Record, Form I-94 (see § 1.4 of this chapter), issued to the alien in connection with the previous admission or stay, and either:",
-            "(a)(2)(iv)",
+            "(a)(4)(iv)",
             "",
             [
               {
-                "a": "(a)(2)(iv)",
+                "a": "(a)(4)(iv)",
                 "s": 0,
                 "e": 4
               }
@@ -256,16 +170,16 @@
         },
         {
           "blockPath": [
-            24
+            34
           ],
           "original": [
             "p",
             "(A) A properly endorsed Form I-20 or successor form if there has been no substantive change in the information on the student's most recent Form I-20 or successor form since the form was initially issued; or",
-            "(a)(2)(iv)(A)",
+            "(a)(4)(iv)(A)",
             "",
             [
               {
-                "a": "(a)(2)(iv)(A)",
+                "a": "(a)(4)(iv)(A)",
                 "s": 0,
                 "e": 3
               }
@@ -283,16 +197,16 @@
         },
         {
           "blockPath": [
-            25
+            35
           ],
           "original": [
             "p",
             "(B) A new Form I-20 or successor form if there has been any substantive change in the information on the student's most recent Form I-20 or successor form since the form was initially issued.",
-            "(a)(2)(iv)(B)",
+            "(a)(4)(iv)(B)",
             "",
             [
               {
-                "a": "(a)(2)(iv)(B)",
+                "a": "(a)(4)(iv)(B)",
                 "s": 0,
                 "e": 3
               }
@@ -310,20 +224,14 @@
         },
         {
           "blockPath": [
-            26
+            36
           ],
           "original": [
             "p",
-            "(2) Section 101(a)(15)(J). The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(J) of the Act, if the alien:",
-            "(a)(2)",
+            "(2) Section 101(a)(15)(J). The inspecting immigration officer may admit, up to the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa validity is considered automatically extended pursuant to 22 CFR 41.112(d) and who is applying for admission under section 101(a)(15)(J) of the Act, if the alien:",
             "",
-            [
-              {
-                "a": "(a)(2)",
-                "s": 0,
-                "e": 3
-              }
-            ],
+            "",
+            [],
             [
               {
                 "x": "(2) "
@@ -333,7 +241,7 @@
                 "s": "i"
               },
               {
-                "x": " The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(J) of the Act, if the alien:"
+                "x": " The inspecting immigration officer may admit, up to the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa validity is considered automatically extended pursuant to 22 CFR 41.112(d) and who is applying for admission under section 101(a)(15)(J) of the Act, if the alien:"
               }
             ],
             []
@@ -341,298 +249,6 @@
           "correctedMarkers": [
             [
               "(b)(2)",
-              0,
-              3
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            27
-          ],
-          "original": [
-            "p",
-            "(i) Is admissible;",
-            "(a)(2)(i)",
-            "",
-            [
-              {
-                "a": "(a)(2)(i)",
-                "s": 0,
-                "e": 3
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(2)(i)",
-              0,
-              3
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            28
-          ],
-          "original": [
-            "p",
-            "(ii) Is applying for readmission after an absence from the United States not exceeding thirty days solely in contiguous territory or adjacent islands;",
-            "(a)(2)(ii)",
-            "",
-            [
-              {
-                "a": "(a)(2)(ii)",
-                "s": 0,
-                "e": 4
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(2)(ii)",
-              0,
-              4
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            29
-          ],
-          "original": [
-            "p",
-            "(iii) Is in possession of a valid passport unless exempt from the requirement for the presentation of a passport; and",
-            "(a)(2)(iii)",
-            "",
-            [
-              {
-                "a": "(a)(2)(iii)",
-                "s": 0,
-                "e": 5
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(2)(iii)",
-              0,
-              5
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            30
-          ],
-          "original": [
-            "p",
-            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, Form I-94 issued to the alien in connection with the previous admission or stay or the last Form DS-2019 issued to the alien. Form I-94 or Form DS-2019 must show the unexpired period of the alien's stay properly endorsed.",
-            "(a)(2)(iv)",
-            "",
-            [
-              {
-                "a": "(a)(2)(iv)",
-                "s": 0,
-                "e": 4
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(2)(iv)",
-              0,
-              4
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            31
-          ],
-          "original": [
-            "p",
-            "(3) Section 101(a)(15)(M). The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(M) of the Act, if the alien:",
-            "(a)(3)",
-            "",
-            [
-              {
-                "a": "(a)(3)",
-                "s": 0,
-                "e": 3
-              }
-            ],
-            [
-              {
-                "x": "(3) "
-              },
-              {
-                "x": "Section 101(a)(15)(M).",
-                "s": "i"
-              },
-              {
-                "x": " The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa is considered automatically revalidated pursuant to 22 CFR 41.112(d) and who is applying for readmission under section 101(a)(15)(M) of the Act, if the alien:"
-              }
-            ],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(3)",
-              0,
-              3
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            32
-          ],
-          "original": [
-            "p",
-            "(i) Is admissible;",
-            "(a)(3)(i)",
-            "",
-            [
-              {
-                "a": "(a)(3)(i)",
-                "s": 0,
-                "e": 3
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(3)(i)",
-              0,
-              3
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            33
-          ],
-          "original": [
-            "p",
-            "(ii) Is applying for readmission after an absence not exceeding thirty days solely in contiguous territory;",
-            "(a)(3)(ii)",
-            "",
-            [
-              {
-                "a": "(a)(3)(ii)",
-                "s": 0,
-                "e": 4
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(3)(ii)",
-              0,
-              4
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            34
-          ],
-          "original": [
-            "p",
-            "(iii) Is in possession of a valid passport unless exempt from the requirement for presentation of a passport; and",
-            "(a)(3)(iii)",
-            "",
-            [
-              {
-                "a": "(a)(3)(iii)",
-                "s": 0,
-                "e": 5
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(3)(iii)",
-              0,
-              5
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            35
-          ],
-          "original": [
-            "p",
-            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, Form I-94 issued to the alien in connection with the previous admission or stay, and the alien's properly endorsed Form I-20 or successor form.",
-            "(a)(3)(iv)",
-            "",
-            [
-              {
-                "a": "(a)(3)(iv)",
-                "s": 0,
-                "e": 4
-              }
-            ],
-            [],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(3)(iv)",
-              0,
-              4
-            ]
-          ]
-        },
-        {
-          "blockPath": [
-            36
-          ],
-          "original": [
-            "p",
-            "(4) Section 101(a)(15)(Q)(ii). The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, if the alien:",
-            "(a)(4)",
-            "",
-            [
-              {
-                "a": "(a)(4)",
-                "s": 0,
-                "e": 3
-              }
-            ],
-            [
-              {
-                "x": "(4) "
-              },
-              {
-                "x": "Section 101(a)(15)(Q)(ii).",
-                "s": "i"
-              },
-              {
-                "x": " The inspecting immigration officer shall readmit for the unexpired period of stay authorized prior to the alien's departure, if the alien:"
-              }
-            ],
-            []
-          ],
-          "correctedMarkers": [
-            [
-              "(b)(4)",
               0,
               3
             ]
@@ -659,7 +275,7 @@
           ],
           "correctedMarkers": [
             [
-              "(b)(4)(i)",
+              "(b)(2)(i)",
               0,
               3
             ]
@@ -671,7 +287,7 @@
           ],
           "original": [
             "p",
-            "(ii) Is applying for readmission after an absence from the United States not exceeding 30 days solely in contiguous territory or adjacent islands;",
+            "(ii) Is applying for readmission after an absence from the United States not exceeding thirty days solely in contiguous territory or adjacent islands;",
             "(a)(4)(ii)",
             "",
             [
@@ -686,7 +302,7 @@
           ],
           "correctedMarkers": [
             [
-              "(b)(4)(ii)",
+              "(b)(2)(ii)",
               0,
               4
             ]
@@ -698,7 +314,7 @@
           ],
           "original": [
             "p",
-            "(iii) Is in possession of a valid passport;",
+            "(iii) Is in possession of a valid passport unless exempt from the requirement for the presentation of a passport; and",
             "(a)(4)(iii)",
             "",
             [
@@ -713,7 +329,7 @@
           ],
           "correctedMarkers": [
             [
-              "(b)(4)(iii)",
+              "(b)(2)(iii)",
               0,
               5
             ]
@@ -725,7 +341,7 @@
           ],
           "original": [
             "p",
-            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, an Arrival-Departure Record, Form I-94, issued to the alien in connection with the previous admission or stay. The principal alien must also present a Certification Letter issued by the Department of State's Program Administrator.",
+            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, Form I-94 issued to the alien in connection with the previous admission or stay or the last Form DS-2019 issued to the alien. Form I-94 or Form DS-2019 must show the unexpired period of the alien's stay properly endorsed.",
             "(a)(4)(iv)",
             "",
             [
@@ -740,7 +356,147 @@
           ],
           "correctedMarkers": [
             [
-              "(b)(4)(iv)",
+              "(b)(2)(iv)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            41
+          ],
+          "original": [
+            "p",
+            "(3) Section 101(a)(15)(M). The inspecting immigration officer may admit, up to the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa validity is considered automatically extended pursuant to 22 CFR 41.112(d) and who is applying for admission under section 101(a)(15)(M) of the Act, if the alien:",
+            "",
+            "",
+            [],
+            [
+              {
+                "x": "(3) "
+              },
+              {
+                "x": "Section 101(a)(15)(M).",
+                "s": "i"
+              },
+              {
+                "x": " The inspecting immigration officer may admit, up to the unexpired period of stay authorized prior to the alien's departure, any nonimmigrant alien whose nonimmigrant visa validity is considered automatically extended pursuant to 22 CFR 41.112(d) and who is applying for admission under section 101(a)(15)(M) of the Act, if the alien:"
+              }
+            ],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            42
+          ],
+          "original": [
+            "p",
+            "(i) Is admissible;",
+            "(a)(4)(i)",
+            "",
+            [
+              {
+                "a": "(a)(4)(i)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(i)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            43
+          ],
+          "original": [
+            "p",
+            "(ii) Is applying for readmission after an absence not exceeding thirty days solely in contiguous territory;",
+            "(a)(4)(ii)",
+            "",
+            [
+              {
+                "a": "(a)(4)(ii)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(ii)",
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            44
+          ],
+          "original": [
+            "p",
+            "(iii) Is in possession of a valid passport unless exempt from the requirement for presentation of a passport; and",
+            "(a)(4)(iii)",
+            "",
+            [
+              {
+                "a": "(a)(4)(iii)",
+                "s": 0,
+                "e": 5
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iii)",
+              0,
+              5
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            45
+          ],
+          "original": [
+            "p",
+            "(iv) Presents, or is the accompanying spouse or child of an alien who presents, Form I-94 issued to the alien in connection with the previous admission or stay, and the alien's properly endorsed Form I-20 or successor form.",
+            "(a)(4)(iv)",
+            "",
+            [
+              {
+                "a": "(a)(4)(iv)",
+                "s": 0,
+                "e": 4
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(b)(3)(iv)",
               0,
               4
             ]
@@ -5222,6 +4978,285 @@
       "lastBlock": 15,
       "sourceGuard": "02d61d7587f5ca5d",
       "firstGuard": "4036e79b45bf568b",
+      "expectations": []
+    },
+    {
+      "id": "8:106.3",
+      "rule": "fee-waiver-joined-subparagraph",
+      "reason": "Both current XML and enhanced renderer join the visible (ii) waiver-category heading to (i)(M), then mislabel its A-H children under (i). The visible (ii) and its explicit reference to (a)(3)(ii)(A) through (H), followed by (iii), establish the sibling heading and its child paths. Preserve the publisher text and joined block boundary.",
+      "firstBlock": 20,
+      "lastBlock": 28,
+      "sourceGuard": "c51267b35c96e34f",
+      "firstGuard": "c03fc19a34ff8162",
+      "sourceVerification": {
+        "currentThrough": "2026-10-16",
+        "xmlSha256": "310210ce5a19bc8bc6dc90c2f107913685d8131ca7ad3461a2d93be910b9defb",
+        "rendererSha256": "948ff869fc34eafd5ca3027705a853f5285818b2969c5d4f69b4acb08d97622b"
+      },
+      "expectations": [
+        {
+          "blockPath": [
+            20
+          ],
+          "original": [
+            "p",
+            "(M) Application for Citizenship and Issuance of Certificate under section 322 of the Act (N-600K). (ii) The following form fees may be waived based on the conditions described in paragraphs (a)(3)(ii)(A) through (H) of this section:",
+            "(a)(3)(i)(M)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(M)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(i)(M)",
+              0,
+              3
+            ],
+            [
+              "(a)(3)(ii)",
+              99,
+              103
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            21
+          ],
+          "original": [
+            "p",
+            "(A) Petition for a CNMI-Only Nonimmigrant Transitional Worker (Form I-129CW) for a CW-1, CNMI-only transitional worker. Waiver of the fee for Form I-129CW does not waive the requirement for an employer petitioning for a CW-1, CNMI-only transitional worker to pay any fees in § 106.2(c) that may apply.",
+            "(a)(3)(i)(A)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(A)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)(A)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            22
+          ],
+          "original": [
+            "p",
+            "(B) An Application to Extend/Change Nonimmigrant Status (Form I-539), only in the case of a noncitizen applying for CW-2 nonimmigrant status;",
+            "(a)(3)(i)(B)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(B)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)(B)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            23
+          ],
+          "original": [
+            "p",
+            "(C) Application for Travel Document (Form I-131), when filed to request humanitarian parole;",
+            "(a)(3)(i)(C)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(C)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)(C)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            24
+          ],
+          "original": [
+            "p",
+            "(D) Notice of Appeal or Motion (Form I-290B), when there is no fee for the underlying application or petition or that fee may be waived;",
+            "(a)(3)(i)(D)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(D)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)(D)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            25
+          ],
+          "original": [
+            "p",
+            "(E) Notice of Appeal of Decision Under Sections 245A or 210 of the Immigration and Nationality Act (Form I-694), if the underlying application or petition was fee exempt, the filing fee was waived, or was eligible for a fee waiver;",
+            "(a)(3)(i)(E)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(E)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)(E)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            26
+          ],
+          "original": [
+            "p",
+            "(F) Application for Employment Authorization (Form I-765), except persons filing under category (c)(33), Deferred Action for Childhood Arrivals;",
+            "(a)(3)(i)(F)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(F)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)(F)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            27
+          ],
+          "original": [
+            "p",
+            "(G) Petition for Nonimmigrant Worker (Form I-129) or Application to Extend/Change Nonimmigrant Status (Form I-539), only in the case of a noncitizen applying for E-2 CNMI Investor for an extension of stay; and",
+            "(a)(3)(i)(G)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(G)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)(G)",
+              0,
+              3
+            ]
+          ]
+        },
+        {
+          "blockPath": [
+            28
+          ],
+          "original": [
+            "p",
+            "(H) Request for Waiver of E-filing Requirement (Form I-936) if the form for which a waiver is requested is subject to paragraph (a)(3)(iii) of this section.",
+            "(a)(3)(i)(H)",
+            "",
+            [
+              {
+                "a": "(a)(3)(i)(H)",
+                "s": 0,
+                "e": 3
+              }
+            ],
+            [],
+            []
+          ],
+          "correctedMarkers": [
+            [
+              "(a)(3)(ii)(H)",
+              0,
+              3
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8:214.2",
+      "rule": "exchange-visitor-repeated-source-designation",
+      "reason": "Both current official XML and same-date enhanced renderer publish consecutive (j)(1)(iv) paragraphs, one headed Extensions of Stay and one Extension of stay. Preserve both occurrences and their exact text; do not silently remove or renumber the publisher content. The second occurrence has visible A-F children.",
+      "firstBlock": 1165,
+      "lastBlock": 1166,
+      "sourceGuard": "e4fd9573b5812df7",
+      "firstGuard": "7aa0926620af735a",
+      "sourceVerification": {
+        "currentThrough": "2026-10-16",
+        "xmlSha256": "310210ce5a19bc8bc6dc90c2f107913685d8131ca7ad3461a2d93be910b9defb",
+        "rendererSha256": "b9f391be2cc26ac78408e50b8ec5bee30d04c240d6d23d15d855736bb607aca9"
+      },
       "expectations": []
     }
   ]

@@ -24,6 +24,12 @@ For stronger protection, open **Saving & data** and select or create `INASearch_
 
 The browser grants access only to the file you selected. INASearch does not receive permission to browse the surrounding folder. It checks the file before writing and reads it back afterward to confirm that the save succeeded.
 
+### What does Reset everything remove?
+
+**Reset everything** removes notes, highlights, inserted references, daily-tip progress, and settings, plus downloaded corpus updates, recovery copies, saved source artifacts, search caches, and update history. After saving the reset, INASearch reloads the corpus built into the HTML file. Automatic updates return to their default off setting. New search caches may be built as you use the restored corpus.
+
+A connected data file stays connected and receives the reset. **Reset settings** changes preferences while keeping saved content and downloaded corpus updates.
+
 ### How does the live navigation bar work?
 
 The main reader’s navigation dropdowns follow the citation at **Page view offset**, which defaults to 3% below the top of the readable area. The same setting controls where citation jumps land. Use the arrow to the left of the INASearch logo to expand or collapse the dropdown row. Your choice is saved. The search field keeps the entered or explicitly selected citation in either mode.
@@ -59,7 +65,7 @@ No. It has no analytics, user account, or project-operated server. With automati
 
 ### What is the source for the statutes?
 
-The statutory text and structure come from the [official Title 8 USLM release](https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip) published by the [House Office of the Law Revision Counsel](https://uscode.house.gov/). INASearch retains the complete captured Title 8 release, including current provisions and House material identified as repealed, transferred, omitted, or set out as a note.
+The statutory text and structure come from the [official Title 8 USLM release](https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip) published by the [House Office of the Law Revision Counsel](https://uscode.house.gov/). INASearch retains the complete captured Title 8 release, including current provisions and House material identified as repealed, transferred, omitted, or set out as a note.
 
 The source ZIP and extracted XML are stored under `sources/legal/raw/`. Their URLs, byte counts, release point, and SHA-256 hashes are recorded in `sources/legal/source-manifest.json`.
 
@@ -113,20 +119,17 @@ The cross-title corpus should therefore be understood as a consistent, reviewabl
 They are off by default. If a user turns them on, INASearch checks the covered material against [eCFR](https://www.ecfr.gov/):
 
 1. asks eCFR whether any of the already covered titles or parts may have changed;
-2. downloads both the dated XML and the same-date enhanced renderer only for covered parts reported as changed;
-3. normalizes XML/renderer evidence, verifies complete inventory parity, and runs the same guarded hierarchy reconciliation used to generate the shipped corpus; both source artifacts retain their hashes;
+2. downloads dated official XML for covered parts reported as changed;
+3. preserves the XML text, tables, notes, and formatting; derives paragraph structure from visible markers, formatting, and verified prior-text anchors; and validates parent relationships and complete source consumption;
 4. regenerates definitions and inline citations affected by the change;
 5. stages and verifies the new corpus; and
 6. activates it for use after a reload while retaining the previous corpus for rollback.
 
 Searches and viewed provisions do not affect which network requests are made. Multiple tabs coordinate so they do not run the same update at once.
 
-If the downloaded structure fails validation or a known defect no longer matches
-its reviewed source guard, the update is rejected and the previous corpus and
-currency dates remain active. An unfamiliar defect may require a reviewed repair
-in a later application release. A structure revision prevents an obsolete cached
-hierarchy from replacing the repaired release. Detailed correction logs are kept
-in the GitHub repository; the application does not embed or download them.
+The XML source and its hash are retained locally. Browser updates do not require the enhanced-renderer endpoint, which does not provide browser cross-origin access. Reviewed build repairs also run in the browser through the shared hierarchy module. Genuine repeated source designations retain distinct occurrences, with structural diagnostics saved alongside source metadata.
+
+If the source cannot be fully parsed or its hierarchy remains ambiguous, the update is rejected and the previous corpus and currency dates remain active. A red error status always appears, including when **Show Detailed Status** is off. Select it to inspect the error, see the failing source URL when available, and retry. **Settings → Updates** also provides check and reload controls. The search index is rebuilt for a changed corpus and can then be reused from browser storage.
 
 ### Do CFR updates expand the corpus automatically?
 
@@ -134,7 +137,7 @@ No. Runtime updates maintain the fixed coverage already reviewed for the release
 
 ### What does not update automatically?
 
-The standalone browser cannot fetch the [House Title 8 release](https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip) or [USCIS INA source page](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act) directly because those sites do not provide the required browser cross-origin access. Automatic maintenance therefore does not update:
+The standalone browser cannot fetch the [House Title 8 release](https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip) or [USCIS INA source page](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act) directly because those sites do not provide the required browser cross-origin access. Automatic maintenance therefore does not update:
 
 - [Title 8 U.S.C.](https://uscode.house.gov/browse/prelim@title8&edition=prelim);
 - the [INA crosswalk](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act);
@@ -221,7 +224,7 @@ Golden fixtures run the same examples through both Node and a browser-like envir
 
 `sources/legal/source-manifest.json` records the requested and final URLs, publisher identifiers, byte counts, and SHA-256 hashes for:
 
-- the [House Title 8 ZIP](https://uscode.house.gov/download/releasepoints/us/pl/119/102/xml_usc08@119-102.zip) and extracted USLM XML;
+- the [House Title 8 ZIP](https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip) and extracted USLM XML;
 - the [USCIS INA page](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act); and
 - the [GovInfo INA compilation](https://www.govinfo.gov/app/details/COMPS-1376).
 

@@ -15,7 +15,7 @@ const corpus = unpackLegalReferences(readBuildCorpus(require.resolve("../INASear
 const sections = new Map(corpus.title8.sections.map(s => [s.section,s]));
 const nodeAt = (s, path) => path.reduce((parent, label) => parent.children?.find(n => n.label === label), { children: sections.get(s).body });
 assert.equal(corpus.historicalIna.sections.length, 14);
-assert.equal(corpus.corpusVersion, "2026.10.11-historical-usc.1-usc-order.1-uslm.1");
+assert.equal(corpus.corpusVersion, `${corpus.title8Update?.corpusVersion || "2026.10.11-historical-usc.1"}-usc-order.1-uslm.1`);
 for (const record of data.sections) {
   const section = sections.get(record.uscSection);
   assert.equal(section.status, record.status || "repealed");

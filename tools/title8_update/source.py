@@ -8,7 +8,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 import zipfile
 
-DOWNLOAD_PAGE = 'https://uscode.house.gov/download/download.shtml'
+DOWNLOAD_PAGE = 'https://uscode.house.gov/download.html'
 NAMESPACE = 'http://xml.house.gov/schemas/uslm/1.0'
 MAX_BYTES = 64 * 1024 * 1024
 RELEASE = r'\d+-\d+(?:not\d+-\d+)*'
@@ -28,7 +28,7 @@ def official_url(url):
     parts = urllib.parse.urlsplit(url)
     if (parts.scheme != 'https' or parts.netloc != 'uscode.house.gov'
             or parts.username or parts.password or parts.fragment or parts.query
-            or not parts.path.startswith('/download/') or '..' in parts.path):
+            or not (parts.path.startswith('/download/') or parts.path == '/download.html') or '..' in parts.path):
         raise ValueError('Source URL must be an HTTPS OLRC download URL')
     return url
 
@@ -50,7 +50,10 @@ def discover(page):
     for href in links.hrefs:
         match = re.search(r'/xml_usc08@(' + RELEASE + r')\.zip$', href)
         if match:
-            found.add((match[1], official_url(urllib.parse.urljoin(DOWNLOAD_PAGE, href))))
+            # Older captured pages used links relative to /download/; current
+            # pages use download/... links relative to the origin root.
+            base = 'https://uscode.house.gov/download/' if href.startswith('releasepoints/') else DOWNLOAD_PAGE
+            found.add((match[1], official_url(urllib.parse.urljoin(base, href))))
     if len(found) != 1:
         raise ValueError('OLRC page has no unambiguous current Title 8 ZIP link (publisher may be unavailable)')
     return next(iter(found))

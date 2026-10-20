@@ -105,6 +105,44 @@ function createHarness(shared, corpus, options = {}) {
 
 async function main() {
   const corpus = fixtureCorpus();
+  // Reopening a locally activated CFR update must not reuse the shipped search
+  // projection, even though the embedded artifact and its digest are unchanged.
+  const shippedCfr = fixtureCorpus();
+  shippedCfr.cfr = { structureRevision: 1, captureTime: "2026-08-03", currentThrough: { 8: "2026-08-03" },
+    parts: [{ id: "8:214", title: 8, part: "214", heading: "Nonimmigrant classes", sectionIds: ["8:214.1"] }],
+    sections: [{ id: "8:214.1", title: 8, section: "214.1", partId: "8:214", heading: "Requirements", blocks: [{ t: "p", a: "(m)", x: "(m) shippedregulationneedle" }] }], appendices: [] };
+  const updatedCfr = structuredClone(shippedCfr);
+  updatedCfr.corpusVersion += "+ecfr.2026.10.15";
+  updatedCfr.cfr.captureTime = "2026-10-15";
+  updatedCfr.cfr.currentThrough[8] = "2026-10-15";
+  updatedCfr.cfr.sections[0].blocks[0].x = "(m) updatedtransitionneedle";
+  const cfrCache = { searchIndexes: new Map(), persistedCorpus: shippedCfr, corpusWrites: 0, corpusReads: 0 };
+  const digest = value => require("node:crypto").createHash("sha256").update(JSON.stringify(value)).digest("hex");
+  const identityFunction = require("./test-function-source")(fs.readFileSync(path.join(root, "src/INASearch.template.html"), "utf8"), "searchWorkerCorpusIdentity");
+  const cachedIdentity = value => vm.runInNewContext(`(${identityFunction})()`, {
+    corpus: value, corpusManifest: { corpusSchemaVersion: 5, corpusVersion: shippedCfr.corpusVersion, uncompressedSha256: digest(shippedCfr) },
+    window: { INA_SEARCH_ACTIVE_CORPUS_RECORD: { runtimeSha256: digest(value), sourceCorpusSha256: "" } },
+    INA_SEARCH_OCCURRENCE: require("../src/INASearch-Occurrence")
+  });
+  const oldCfrWorker = createHarness(cfrCache, shippedCfr);
+  oldCfrWorker.send({ type: "init", identity: cachedIdentity(shippedCfr), source: "indexeddb" });
+  await oldCfrWorker.waitFor(message => message.name === "projection-cache-saved");
+  // The same storage slot receives the updater's verified snapshot.
+  cfrCache.persistedCorpus = updatedCfr;
+  const updatedIdentity = cachedIdentity(updatedCfr);
+  assert.strictEqual(updatedIdentity.corpusSha256, digest(updatedCfr), "Updated CFR search must identify the activated snapshot rather than the shipped digest.");
+  const updatedCfrWorker = createHarness(cfrCache, shippedCfr);
+  updatedCfrWorker.send({ type: "init", identity: updatedIdentity, source: "indexeddb" });
+  assert.strictEqual((await updatedCfrWorker.waitFor(message => message.type === "ready")).source, "built", "An activated CFR update reused the obsolete search index.");
+  for (const [query, expected] of [["updatedtransitionneedle", 1], ["shippedregulationneedle", 0]]) {
+    updatedCfrWorker.send({ type: "search", sessionId: query, generation: 1, requestId: query,
+      query: require("../src/INASearch-Command").parseCommand(query), options: { authorities: ["cfr"], plan: { branches: [{ kind: "law", scopes: [] }], citationScopes: [] } } });
+    assert.strictEqual((await updatedCfrWorker.waitFor(message => message.type === "search-result" && message.sessionId === query)).result.totalOccurrences, expected, `CFR search used outdated text for ${query}.`);
+  }
+  await updatedCfrWorker.waitFor(message => message.name === "projection-cache-saved");
+  const reopenedCfrWorker = createHarness(cfrCache, updatedCfr);
+  reopenedCfrWorker.send({ type: "init", identity: updatedIdentity, source: "indexeddb" });
+  assert.strictEqual((await reopenedCfrWorker.waitFor(message => message.type === "ready")).source, "indexeddb", "The refreshed CFR search index was not reusable after reopening.");
   const identity = { corpusSchemaVersion: 5, corpusVersion: corpus.corpusVersion, corpusSha256: "a".repeat(64), authorities: ["ina", "cfr"] };
   const shared = { searchIndexes: new Map(), persistedCorpus: null, corpusWrites: 0, corpusReads: 0 };
   const upgraded = structuredClone(corpus);

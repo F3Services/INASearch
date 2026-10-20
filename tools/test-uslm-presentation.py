@@ -2,6 +2,7 @@
 """Regression tests for source presentation retained in clean legal text."""
 
 import importlib.util
+import json
 from pathlib import Path
 import unittest
 import xml.etree.ElementTree as ET
@@ -26,7 +27,10 @@ def utf16_slice(value, start, end):
 class PresentationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.root = ET.parse(ROOT / 'sources/legal/raw/usc08@119-102.xml').getroot()
+        manifest=json.loads((ROOT / 'sources/legal/source-manifest.json').read_text())
+        house=next(source for source in manifest['sources'] if source['id']=='house-title-8-uslm')
+        artifact=next(a for a in house['artifacts'] if a['id']=='house-title-8-xml')
+        cls.root = ET.parse(ROOT / artifact['path']).getroot()
 
     def element(self, identifier):
         return next(e for e in self.root.iter() if e.get('identifier') == identifier)

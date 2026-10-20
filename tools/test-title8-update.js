@@ -2,7 +2,11 @@
 const assert = require("node:assert/strict");
 const { applyStatuteFootnotes } = require("./statute-footnotes");
 const { indexStatuteRunIns, statuteRunInMarkers } = require("./statute-run-ins");
-const { correctedProjection } = require("./title8-update-gate");
+const { correctedProjection, verifyCorpusIdentity } = require("./title8-update-gate");
+const freshIdentity = { corpusVersion: "title8-119-121-source-usc-order.1-uslm.1", title8Update: { corpusVersion: "title8-119-121-source", xmlSha256: "source" }, sources: { title8: { sourceSha256: "source" } } };
+verifyCorpusIdentity(freshIdentity);
+assert.throws(() => verifyCorpusIdentity({ ...freshIdentity, corpusVersion: "older-usc-order.1-uslm.1" }), /corpus cache/);
+assert.throws(() => verifyCorpusIdentity({ ...freshIdentity, corpusVersion: "title8-119-121-source-unreviewed" }), /corpus cache/);
 const projection = correctedProjection({ section: "1", heading: "Example", notes: [{ text: "Note" }] });
 assert.deepEqual(projection, JSON.parse(JSON.stringify(projection)), "Preservation snapshots must survive JSON serialization");
 

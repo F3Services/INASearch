@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Extract replay fixtures from the pinned, hash-verified eCFR capture; no network."""
+import argparse
 import copy
 import hashlib
 import importlib.util
@@ -10,7 +11,11 @@ from html.parser import HTMLParser
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/generate-cfr-corpus.py')
 gen=importlib.util.module_from_spec(spec);spec.loader.exec_module(gen)
-cache=ROOT/'tmp/cfr-cache';capture=json.loads((cache/'capture.json').read_text())
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--cache',type=Path,required=True)
+parser.add_argument('--output',type=Path,default=ROOT/'sources/legal/cfr-hierarchy/download-fixtures.json')
+args=parser.parse_args()
+cache=args.cache;capture=json.loads((cache/'capture.json').read_text())
 reviews=json.loads((ROOT/'sources/legal/cfr-hierarchy/reviewed-expectations.json').read_text())['reviews']
 wanted={item['id'] for item in reviews}
 class Sections(HTMLParser):
@@ -45,6 +50,6 @@ for key,source in capture['sources'].items():
   xml=ET.tostring(wrapper,encoding='unicode');rendered=f'<div class="part" id="part-{partnum}">'+ '\n'.join(reader.sections[section.get('N')] for section in selected) + '</div>'
   _,records,_=gen.normalize_document(xml.encode(),title,{}, {},{partnum:gen.parse_enhanced_html(rendered.encode(),title,partnum)})
   fixtures.append({'title':title,'part':partnum,'sourceXmlSha256':source['sha256'],'sourceRendererSha256':renderSource['sha256'],'xml':xml,'rendererHtml':rendered,'normalized':records})
-path=ROOT/'sources/legal/cfr-hierarchy/download-fixtures.json'
+path=args.output
 path.write_text(json.dumps({'schemaVersion':1,'fixtures':fixtures},ensure_ascii=False,separators=(',',':'))+'\n')
 print(len(fixtures),'part fixtures;',path.stat().st_size,'bytes')

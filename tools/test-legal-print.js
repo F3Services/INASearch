@@ -28,7 +28,10 @@ assert.equal(rows[5].html, "Child continuation", "Continuations have no invented
 const source = JSON.parse(execFileSync("python3", ["-c", `
 import json, re, xml.etree.ElementTree as E
 ns={'u':'http://xml.house.gov/schemas/uslm/1.0'}
-r=E.parse('sources/legal/raw/usc08@119-102.xml').getroot()
+manifest=json.load(open('sources/legal/source-manifest.json'))
+house=next(source for source in manifest['sources'] if source['id']=='house-title-8-uslm')
+artifact=next(a for a in house['artifacts'] if a['id']=='house-title-8-xml')
+r=E.parse(artifact['path']).getroot()
 n=next(n for n in r.iter() if n.get('identifier')=='/us/usc/t8/s1101/a/27/K')
 rows=[]
 def text(n):return re.sub(r'\\s+', ' ', ''.join(n.itertext())).strip()

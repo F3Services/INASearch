@@ -13,6 +13,8 @@
   const STAGING_PROFILE_KEY = "staging";
   const SEARCH_INDEX_STORE = "search-indexes";
   const STARTUP_METADATA_KEYS = ["last-backup-reminder-at", "last-filesystem-protection-at", "storage-persistence"];
+  let resetCachesCleared = false;
+  const resetCacheWrite = store => ["corpus", "sources", SEARCH_INDEX_STORE, "metadata", "profiles"].includes(store);
 
   function requestResult(request) {
     return new Promise((resolve, reject) => {
@@ -48,9 +50,11 @@
   }
 
   async function write(storeName, key, value) {
+    if (resetCachesCleared && resetCacheWrite(storeName)) return false;
     const database = await openDatabase();
     if (!database) return false;
     try {
+      if (resetCachesCleared && resetCacheWrite(storeName)) return false;
       await new Promise((resolve, reject) => {
         const transaction = database.transaction(storeName, "readwrite");
         transaction.objectStore(storeName).put(value, key);
@@ -230,6 +234,7 @@
   }
 
   async function saveProfile(vault, details = {}) {
+    if (resetCachesCleared) throw new Error("Browser profile saving was stopped by a full reset.");
     const expectedRevision = Math.max(0, Number(details.expectedRevision) || 0);
     const staged = await profileRecord(vault, { ...details, expectedRevision });
     // Verify the exact record shape and payload before it can become active.
@@ -240,9 +245,11 @@
     try {
       if (!(await write("profiles", stagingKey, staged))) throw new Error("Browser profile storage is unavailable.");
       const persistedStage = await read("profiles", stagingKey);
+      if (resetCachesCleared) throw new Error("Browser profile saving was stopped by a full reset.");
       await decodeProfileRecord(persistedStage);
       database = await openDatabase();
       if (!database) throw new Error("Browser profile storage is unavailable.");
+      if (resetCachesCleared) throw new Error("Browser profile saving was stopped by a full reset.");
       await new Promise((resolve, reject) => {
         const transaction = database.transaction("profiles", "readwrite");
         const store = transaction.objectStore("profiles");
@@ -351,9 +358,11 @@
   }
 
   async function removeStaleSearchIndexes(currentKey = "") {
+    if (resetCachesCleared) return false;
     const database = await openDatabase();
     if (!database) return false;
     try {
+      if (resetCachesCleared) return false;
       await new Promise((resolve, reject) => {
         const transaction = database.transaction(SEARCH_INDEX_STORE, "readwrite");
         const store = transaction.objectStore(SEARCH_INDEX_STORE);
@@ -373,12 +382,14 @@
   }
 
   async function saveSearchIndex(record) {
+    if (resetCachesCleared) return false;
     if (!record?.key || record.recordSchemaVersion !== 1 || !record.payload || !Array.isArray(record.payload.fragments) || !Array.isArray(record.payload.hierarchyNodes)) {
       throw new Error("The search-index cache record is malformed.");
     }
     const database = await openDatabase();
     if (!database) throw new Error("Browser search-index storage is unavailable.");
     try {
+      if (resetCachesCleared) return false;
       await new Promise((resolve, reject) => {
         const transaction = database.transaction(SEARCH_INDEX_STORE, "readwrite");
         const store = transaction.objectStore(SEARCH_INDEX_STORE);
@@ -399,14 +410,17 @@
   }
 
   async function activateCorpus(corpus, details = {}) {
+    if (resetCachesCleared) return false;
     const staged = await corpusRecord(corpus, details);
-    await write("corpus", STAGING_CORPUS_KEY, staged);
+    if (!await write("corpus", STAGING_CORPUS_KEY, staged)) return false;
     // Decode what IndexedDB returned, not the in-memory object, before activation.
     const persistedStage = await read("corpus", STAGING_CORPUS_KEY);
+    if (resetCachesCleared) return false;
     await decodeCorpusRecord(persistedStage);
     const database = await openDatabase();
     if (!database) return false;
     try {
+      if (resetCachesCleared) return false;
       await new Promise((resolve, reject) => {
         const transaction = database.transaction("corpus", "readwrite");
         const store = transaction.objectStore("corpus");
@@ -439,6 +453,37 @@
   async function storeSourceArtifact(key, value) {
     if (!key || !value || typeof value !== "object") throw new Error("A source artifact key and record are required.");
     return write("sources", key, value);
+  }
+
+  async function clearResetCaches() {
+    // Keep this window's late callbacks from restoring its pre-reset corpus.
+    // A fresh page load creates a new storage runtime for the embedded edition.
+    resetCachesCleared = true;
+    let database;
+    try {
+      database = await openDatabase();
+      if (!database) { resetCachesCleared = false; return false; }
+      await new Promise((resolve, reject) => {
+        const stores = ["corpus", "sources", SEARCH_INDEX_STORE, "metadata", "profiles"];
+        const transaction = database.transaction(stores, "readwrite");
+        for (const name of stores.slice(0, -1)) transaction.objectStore(name).clear();
+        // The newly saved blank profile remains active. Its old recovery copies
+        // must not bring deleted personal content back after a reset.
+        const profiles = transaction.objectStore("profiles");
+        const keysRequest = profiles.getAllKeys();
+        keysRequest.onsuccess = () => {
+          for (const key of keysRequest.result || []) if (key !== ACTIVE_PROFILE_KEY) profiles.delete(key);
+        };
+        keysRequest.onerror = () => transaction.abort();
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(transaction.error || new Error("Reset storage cleanup failed."));
+        transaction.onabort = () => reject(transaction.error || new Error("Reset storage cleanup was aborted."));
+      });
+      return true;
+    } catch (error) {
+      resetCachesCleared = false;
+      throw error;
+    } finally { database?.close(); }
   }
 
   async function requestPersistentStorage() {
@@ -481,6 +526,7 @@
     profileRecord,
     decodeProfileRecord,
     storeSourceArtifact,
+    clearResetCaches,
     requestPersistentStorage,
     loadVaultHandle: () => read("handles", PRIMARY_VAULT_HANDLE_KEY),
     storeVaultHandle: handle => write("handles", PRIMARY_VAULT_HANDLE_KEY, handle),
