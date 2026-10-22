@@ -3,12 +3,12 @@
   "title8Source": {
     "name": "United States Code, Title 8 — Aliens and Nationality",
     "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
-    "url": "https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip",
-    "capturedAt": "2026-10-20",
-    "currentThrough": "119-121",
-    "sourceArtifact": "sources/legal/raw/usc08@119-121.xml",
+    "url": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip",
+    "capturedAt": "2026-10-22",
+    "currentThrough": "119-124",
+    "sourceArtifact": "sources/legal/raw/usc08@119-124.xml",
     "sourceBytes": 7384424,
-    "sourceSha256": "dacd49660b6bae3039c1083ffd54c84f4f39ba9ef8da8457104e63283bcada5f",
+    "sourceSha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8",
     "manifest": "sources/legal/source-manifest.json",
     "currentThroughDate": "2026-10-09",
     "checkedAt": "2026-10-20"

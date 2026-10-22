@@ -23,9 +23,9 @@
       "sha256": "cdc4d5d77cf5e893ac58680cd89522694f926d10e1cd26efeba70b6eb79ba9ca"
     },
     "house": {
-      "path": "sources/legal/raw/usc08@119-121.xml",
+      "path": "sources/legal/raw/usc08@119-124.xml",
       "bytes": 7384424,
-      "sha256": "dacd49660b6bae3039c1083ffd54c84f4f39ba9ef8da8457104e63283bcada5f"
+      "sha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8"
     }
   },
   "rows": [

@@ -5,32 +5,33 @@
     {
       "id": "house-title-8-uslm",
       "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
-      "releasePoint": "119-121",
-      "currentThroughPublicLaw": "119-121",
-      "requestedUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip",
-      "finalUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip",
-      "lastModified": "Thu, 15 Oct 2026 10:51:11 GMT",
-      "etag": "\"8a6fb517935cdd1:0\"",
+      "releasePoint": "119-124",
+      "currentThroughPublicLaw": "119-124",
+      "requestedUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip",
+      "finalUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip",
+      "lastModified": null,
+      "etag": null,
       "artifacts": [
         {
           "id": "house-title-8-archive",
           "role": "downloaded-archive",
-          "path": "sources/legal/raw/xml_usc08@119-121.zip",
+          "path": "sources/legal/raw/xml_usc08@119-124.zip",
           "mediaType": "application/zip",
           "bytes": 1232042,
-          "sha256": "8e94ff972f2292912dc017cce23cc3ca0f6f2dfb57679f942c648552cea0a43a"
+          "sha256": "bd778da45714e4501724ce131d2f89dce38358d5af3157aa628d5337f9a08bcc"
         },
         {
           "id": "house-title-8-xml",
           "role": "extracted-uslm",
-          "path": "sources/legal/raw/usc08@119-121.xml",
+          "path": "sources/legal/raw/usc08@119-124.xml",
           "mediaType": "application/xml",
           "bytes": 7384424,
-          "sha256": "dacd49660b6bae3039c1083ffd54c84f4f39ba9ef8da8457104e63283bcada5f"
+          "sha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8"
         }
       ],
       "currentThroughDate": "2026-10-09",
-      "checkedAt": "2026-10-20"
+      "checkedAt": "2026-10-20",
+      "capturedAt": "2026-10-22"
     },
     {
       "id": "govinfo-ina-compilation",
