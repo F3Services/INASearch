@@ -31,12 +31,12 @@ const UNIT_KINDS = Object.freeze([
 
 const UNIT_KIND_SET = new Set(UNIT_KINDS);
 const UNIT_WORD = /\b(subsections?|paragraphs?|subdivisions?|subparagraphs?|clauses?|subclauses?|items?|subitems?)\b/gi;
-const ANAPHOR_WORD = /\b(this|such|preceding|following)\b/iy;
+const ANAPHOR_WORD = /\b(this|such|that|preceding|following)\b/iy;
 // Labels in the House/USLM hierarchy are words, numbers, or hyphenated
 // combinations thereof.  Keeping this conservative prevents prose in a
 // parenthetical from becoming a guessed statutory address.
 const LABEL = /[A-Za-z0-9]+(?:[-\u2010\u2011\u2012\u2013\u2014][A-Za-z0-9]+)*/y;
-const LIST_CONNECTOR = /(?:,|\b(?:and|or|through|to)\b)/iy;
+const LIST_CONNECTOR = /(?:,|[–—-](?=\s*\()|\b(?:and|or|through|to)\b)/iy;
 
 function canonicalUnitName(value) {
   const singular = String(value || "").toLowerCase().replace(/s$/, "");
@@ -222,9 +222,9 @@ function readBaseAddress(input, start) {
 
 function readNumberedSectionAddress(input, start) {
   const cursor = skipWhitespace(input, start);
-  const match = input.slice(cursor).match(/^((?:\d+[A-Za-z]+-\d+[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?))/);
+  const match = input.slice(cursor).match(/^((?:\d+[A-Za-z]+[–—-]\d+[A-Za-z]*|\d+[A-Za-z]*\.\d+[A-Za-z]*[–—-]\d+[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?))/);
   if (!match) return null;
-  const section = match[1];
+  const section = match[1].replace(/[–—]/g, "-");
   const sectionStart = cursor;
   let end = cursor + section.length;
   const address = readBaseAddress(input, end);
@@ -314,6 +314,10 @@ function candidateFromMatch(input, unitMatch, unitWord, list, base) {
 
 function readContainerAfterOf(input, position) {
   let cursor = skipWhitespace(input, position);
+  const qualification=input.slice(cursor).match(/^,\s*as\s+appropriate\s*,\s*/i);
+  if(qualification)cursor=skipWhitespace(input,cursor+qualification[0].length);
+  const exception = input.slice(cursor).match(/^\(\s*other\s+than\s+(?:subsections?|paragraphs?|subparagraphs?|clauses?|subclauses?)\s+(?:\([A-Za-z0-9]+\)\s*)+\)\s*/i);
+  if (exception) cursor=skipWhitespace(input,cursor+exception[0].length);
   const editorialMarker = input.slice(cursor).match(/^\d{1,2}(?=\s+of\b)/i);
   if (editorialMarker) cursor = skipWhitespace(input, cursor + editorialMarker[0].length);
   if (!/^of\b/i.test(input.slice(cursor))) return null;
@@ -338,7 +342,7 @@ function readContainerAfterOf(input, position) {
     const unitEnd = kindStart + baseWord.length;
     if (bracketed && input[unitEnd] !== "]") return null;
     const baseEnd = unitEnd + (bracketed ? 1 : 0);
-    const address = readBaseAddress(input, baseEnd);
+    const address = baseKind === "section" ? readNumberedSectionAddress(input, baseEnd) || readBaseAddress(input, baseEnd) : readBaseAddress(input, baseEnd);
     const base = makeBase(input, baseKind, baseWord, kindStart, address, {
       type: anaphorType,
       start: cursor,
@@ -473,9 +477,9 @@ function parseEmbeddedStatutoryReference(text) {
 
 function readNumericSectionAddress(input, position) {
   const start = skipWhitespace(input, position);
-  const match = input.slice(start).match(/^((?:\d+[A-Za-z]+-\d+[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?))/);
+  const match = input.slice(start).match(/^((?:\d+[A-Za-z]+[–—-]\d+[A-Za-z]*|\d+[A-Za-z]*\.\d+[A-Za-z]*[–—-]\d+[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?))/);
   if (!match) return null;
-  const section = match[1];
+  const section = match[1].replace(/[–—]/g, "-");
   let end = start + section.length;
   const groups = [];
   let cursor = skipWhitespace(input, end);
@@ -510,17 +514,28 @@ function readRelativeSectionAddress(input, position) {
   };
 }
 
+function readNumberedTitle(input, position) {
+  const match = input.slice(position).match(/^title\s+(\d+)\b/i);
+  if (!match) return null;
+  // The title number alone is shared by USC and CFR. Keep an immediately
+  // written CFR owner with the scope instead of silently defaulting to USC.
+  const cfr = input.slice(position + match[0].length).match(/^(?:\s*,\s*|\s+of\s+|\s+)(?:the\s+)?(?:Code\s+of\s+Federal\s+Regulations\b|C\.?\s*F\.?\s*R\.?(?!\w))/i);
+  const end = position + match[0].length + (cfr?.[0].length || 0);
+  return { start: position, end, text: input.slice(position, end), type: "numbered-title", title: match[1], ...(cfr ? { family: "cfr" } : {}) };
+}
+
 function readSectionScope(input, position) {
   const start = skipWhitespace(input, position);
   const value = input.slice(start);
-  const codeOrAct = value.match(/^of\s+(?:the\s+)?(Internal\s+Revenue\s+Code(?:\s+of\s+(?:1954|1986))?|IRC|NACARA)\b/i);
+  const codeOrAct = value.match(/^of\s+(?:the\s+)?(Internal\s+Revenue\s+Code(?:\s+of\s+(?:1954|1986))?|IRC|NACARA|INA|TWEA)\b/i);
   if (codeOrAct) return { start, end: start + codeOrAct[0].length, text: codeOrAct[0], type: "named-act", title: "", actName: codeOrAct[1] };
   let match = value.match(/^of\s+this\s+(chapter|subchapter)\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: `this-${match[1].toLowerCase()}`, title: "" };
   match = value.match(/^of\s+(this|that|such)\s+title\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: `${match[1].toLowerCase()}-title`, title: "" };
-  match = value.match(/^of\s+title\s+(\d+)\b/i);
-  if (match) return { start, end: start + match[0].length, text: match[0], type: "numbered-title", title: match[1] };
+  match = value.match(/^of\s+(?=title\b)/i);
+  const numberedTitle = match && readNumberedTitle(input, start + match[0].length);
+  if (numberedTitle) return { ...numberedTitle, start, text: input.slice(start, numberedTitle.end) };
   match = value.match(/^of\s+(?:division|div\.)\s+([A-Z0-9-]+)\.?\s+of\s+(?:Public\s+Law|Pub\.\s*L\.)\s*(\d+)[–—-](\d+)\b/i);
   if (match) return {
     start,
@@ -560,7 +575,7 @@ function readSectionScope(input, position) {
   // A bare "of the Act" is contextual, not a named-Act citation. Requiring
   // a real name token before "Act" also prevents this expression from
   // consuming prose until it encounters a later occurrence of that word.
-  match = value.match(/^of\s+(?:the\s+)?((?!Act\b)[A-Z0-9][A-Za-z0-9’'&.,\-–—]*(?:\s+[A-Za-z0-9][A-Za-z0-9’'&.,\-–—]*){0,24}?\s+Act(?:\s+of\s+\d{4}|,\s*\d{4}|\s+for\s+Fiscal\s+Year\s+\d{4}|,\s*Fiscal\s+Years?\s+\d{4}(?:\s+and\s+\d{4})?)?)\b/);
+  match = value.match(/^of\s+(?:the\s+)?((?!Act\b)[A-Z0-9][A-Za-z0-9’'&.,\-–—]*(?:\s+(?:[A-Za-z0-9][A-Za-z0-9’'&.,\-–—]*|\([A-Z0-9-]+\))){0,24}?\s+Act(?:\s+of\s+\d{4}|,\s*\d{4}|\s+for\s+Fiscal\s+Year\s+\d{4}|,\s*Fiscal\s+Years?\s+\d{4}(?:\s+and\s+\d{4})?)?)\b/);
   if (match) return { start, end: start + match[0].length, text: match[0], type: "named-act", title: "", actName: match[1].trim() };
   match = value.match(/^of\s+(?:the\s+)?(Agreement\s+regarding\s+the\s+Headquarters\s+of\s+the\s+United\s+Nations)\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: "named-instrument", title: "", instrumentName: match[1].trim() };
@@ -587,19 +602,31 @@ function parseSectionAddressSequence(input, start, hasUnitWord) {
     // section address and its "of title ..." scope. They are not additional
     // section-list members (for example, "section 4605(j) 2 of title 50").
     if (needsConnector) {
+      const editorial = input.slice(cursor).match(/^\[[^\]]+\]\s*/);
+      if (editorial) {
+        const owned = readSectionScope(input, cursor + editorial[0].length);
+        if (owned) return { members, connectors, scope: owned, end: owned.end };
+      }
+      const respectively = input.slice(cursor).match(/^,\s*respectively,\s*/i);
+      if (respectively) {
+        const owned = readSectionScope(input, cursor + respectively[0].length);
+        if (owned) return { members, connectors, scope: owned, end: owned.end };
+      }
       const editorialMarker = input.slice(cursor).match(/^\d{1,2}(?=\s+of\b)/i);
       if (editorialMarker) {
         const markerEnd = skipWhitespace(input, cursor + editorialMarker[0].length);
         const markedScope = readSectionScope(input, markerEnd);
         if (markedScope) return { members, connectors, scope: markedScope, end: markedScope.end };
       }
-      const connector = input.slice(cursor).match(/^(?:,\s*(?:and\b|or\b)?|;|\band\b|\bor\b|\bthrough\b|\bto\b)/i);
+      const connector = input.slice(cursor).match(/^(?:,\s*(?:and\b|or\b)?|;|[–—-]|\band\b|\bor\b|\bthrough\b|\bto\b)/i);
       if (!connector) return null;
       connectors.push(span(input, cursor, cursor + connector[0].length, { kind: connector[0].toLowerCase() }));
       cursor += connector[0].length;
       needsConnector = false;
       continue;
     }
+    const citationQualifier = input.slice(cursor).match(/^(?:as\s+)?(?:defined|described|specified)\s+in\s+(?=sections?\b)/i);
+    if (citationQualifier && members.length) { cursor += citationQualifier[0].length; continue; }
     const repeatedWord = input.slice(cursor).match(/^(?:sections?\b|secs?\.)/i);
     if (repeatedWord) { cursor += repeatedWord[0].length; continue; }
     const absolute = readNumericSectionAddress(input, cursor);
@@ -620,7 +647,7 @@ function parseNumberedSectionReferences(text) {
   const input = String(text || "");
   const starts = [];
   for (const match of input.matchAll(/\b(?:sections?\b|secs?\.)/gi)) starts.push({ start: match.index, hasUnitWord: true });
-  for (const match of input.matchAll(/\b(?:\d+[A-Za-z]+-\d+[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?)(?=\s*\([A-Za-z0-9-]+\))/g)) {
+  for (const match of input.matchAll(/\b(?:\d+[A-Za-z]+[–—-]\d+[A-Za-z]*|\d+[A-Za-z]*\.\d+[A-Za-z]*[–—-]\d+[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?)(?=\s*\([A-Za-z0-9-]+\))/g)) {
     if (/\bsections?\s*$/i.test(input.slice(Math.max(0, match.index - 18), match.index))) continue;
     starts.push({ start: match.index, hasUnitWord: false });
   }
@@ -636,9 +663,11 @@ function parseNumberedSectionReferences(text) {
     // “sections 1158 or 1231(b)(3) of this title”.  Keep the old path
     // requirement for a lone address unless it has an explicit named owner.
     // "Section 1059 of Public Law 109-163" is complete without sub-units.
-    const explicitOwner = entry.hasUnitWord && ["public-law", "named-act", "named-instrument", "this-chapter", "this-subchapter"].includes(sequence?.scope?.type);
+    const explicitOwner = entry.hasUnitWord && (sequence?.scope?.family === "cfr" || ["public-law", "named-act", "named-instrument", "numbered-title", "this-title", "this-chapter", "this-subchapter", "such-act", "that-act"].includes(sequence?.scope?.type));
+    const anaphoricDecimal = entry.hasUnitWord && ["such-title", "that-title"].includes(sequence?.scope?.type) &&
+      sequence.members.some(member => /\d\.\d/.test(member.section || ""));
     if (!sequence || !sequence.members.length ||
-        (!explicitOwner && !sequence.members.some(member => member.tokens?.length) && sequence.members.length < 2)) continue;
+        (!explicitOwner && !anaphoricDecimal && !sequence.members.some(member => member.tokens?.length) && sequence.members.length < 2)) continue;
     candidates.push({
       type: "numbered-section-list",
       kind: "numbered-section-list",
@@ -716,6 +745,7 @@ return {
   parseEmbeddedStatutoryReferences,
   parseCoordinatedSectionReferences,
   parseNumberedSectionReferences,
+  readNumberedTitle,
   parseUnitList
 };
 });

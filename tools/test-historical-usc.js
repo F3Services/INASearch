@@ -239,6 +239,23 @@ for (const current of [true, false]) {
     assert.equal(reference.targetTitle, "8");
     assert.equal(reference.targetSection, "1440");
     assert.deepEqual(reference.targetPath, ["a"]);
-  } else assert(!reference, "A historical note source must retain historical authority restrictions");
+    assert.equal(reference.resolution, "local", "The current House explanation may link the current Code provision");
+    assert(!reference.historicalEditionGuard, "Current editorial material must not inherit the operative text's old edition");
+  } else {
+    const historicalRange = note.references.filter(reference => reference.targetSection === "1440");
+    assert.deepEqual(historicalRange.map(reference => reference.targetPath), [["a"], ["c"]], "Both historical range endpoints retain their printed identity");
+    for (const reference of historicalRange) {
+      assert.equal(reference.resolution, "unresolved", "A historical note must not navigate to unverified current text");
+      assert(reference.historicalEditionGuard, "A historical note source must retain historical authority restrictions");
+      assert.match(reference.citationNote, /historical destination has not been verified/);
+      assert(!reference.officialUrl, "An unresolved historical note must not expose a current source action");
+    }
+    const packer = require("./pack-legal-references");
+    packer.packLegalReferences(fixture);
+    packer.unpackLegalReferences(fixture);
+    assert(fixture.title8.sections[0].notes[0].references.filter(reference => reference.targetSection === "1440")
+      .every(reference => reference.resolution === "unresolved" && reference.officialUrl === ""),
+    "Packed historical notes must not reconstruct a current source URL");
+  }
 }
 console.log(`Historical USC transform tests passed; ${replacedHeadings} replacement headings clear ${obsoleteHeadingReferences} obsolete source references.`);

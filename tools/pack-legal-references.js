@@ -1,5 +1,7 @@
 "use strict";
 
+const { normalizeOfficialDestination } = require("./legal-references");
+
 const PROPERTY_CODES = {
   references: "t",
   continuationReferences: "c",
@@ -57,16 +59,22 @@ function expandHouseHref(value) {
 }
 
 function compactReference(reference, houseHrefIndex = () => 0, legalTargetIndex = () => 0, previousEnd = 0) {
-  const houseReference = reference.provenance === "house-uslm-ref" && reference.houseHref;
+  reference = normalizeOfficialDestination(reference);
+  const houseReference = reference.provenance === "house-uslm-ref" && reference.houseHref && !reference.citationNote && !reference.historicalOfficialUrl;
   const resolution = reference.resolution === "local" ? 1 : reference.resolution === "unresolved" ? 2 : 0;
-  if (houseReference) return [0, reference.start - previousEnd, reference.end - reference.start, houseHrefIndex(reference.houseHref), resolution];
+  if (houseReference) {
+    const decoded = expandReference([0, 0, reference.end - reference.start, 0, resolution], reference.text, [compactHouseHref(reference.houseHref)]);
+    const fields = ["family", "targetTitle", "targetSection", "targetPath", "targetCongress", "targetLaw", "targetVolume", "targetPage", "inaSection", "policyScopeId", "historicalTargetId", "targetEdition", "targetChapter", "targetSubchapter", "targetNote", "officialUrl", "evidenceId"];
+    const lossless = fields.every(key => reference[key] === undefined || JSON.stringify(reference[key]) === JSON.stringify(decoded[key]));
+    if (lossless) return [0, reference.start - previousEnd, reference.end - reference.start, houseHrefIndex(reference.houseHref), resolution];
+  }
   const derivedPath = reference.ruleId === "context-path-this-section";
   const target = [FAMILY_CODES[reference.family] || "?", resolution,
     reference.targetTitle || 0, reference.targetSection || 0, !derivedPath && reference.targetPath?.length ? reference.targetPath : 0,
     reference.targetCongress || 0, reference.targetLaw || 0, reference.targetVolume || 0, reference.targetPage || 0,
     Math.max(0, RULES.indexOf(reference.ruleId || "")), reference.inaSection || 0,
     reference.policyScopeId || 0, reference.historicalTargetId || 0, reference.targetEdition || 0, reference.historicalOfficialUrl || 0, reference.citationNote || 0,
-    reference.targetChapter || 0, reference.targetSubchapter || 0, reference.targetChapter ? reference.officialUrl || 0 : 0];
+    reference.targetChapter || 0, reference.targetSubchapter || 0, reference.officialUrl === "" ? -1 : reference.officialUrl || 0, reference.targetNote ? 1 : 0];
   while (target.at(-1) === 0) target.pop();
   const packed = [1, reference.start - previousEnd, reference.end - reference.start, legalTargetIndex(target)];
   if (typeof reference.evidenceId === "number" && Number.isFinite(reference.evidenceId)) packed.push(reference.evidenceId);
@@ -86,13 +94,15 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     if (typeof reference[4] === "number" && Number.isFinite(reference[4])) output.evidenceId = reference[4];
     if (target[16]) output.targetChapter = String(target[16]);
     if (target[17]) output.targetSubchapter = String(target[17]);
-    if (target[16] && target[18]) output.officialUrl = String(target[18]);
+    if (target[18]) output.officialUrl = String(target[18]) === "-1" ? "" : String(target[18]);
+    if (Number(target[19])) output.targetNote = true;
   }
   else for (const [key, value] of Object.entries(reference || {})) output[KEY_REFERENCES[key] || key] = value;
   output.resolution = output.resolution === 1 ? "local" : output.resolution === 2 ? "unresolved" : "official-source-only";
   if (!output.targetPath) output.targetPath = [];
   output.text = String(sourceText || "").slice(output.start, output.end);
   if (output.ruleId === "context-path-this-section" && !output.targetPath.length) output.targetPath = pathTokens(output.text);
+  const preservedOfficialUrl = output.officialUrl;
   if (output.houseHref) {
     output.provenance = "house-uslm-ref";
     output.ruleId = "house-uslm-ref";
@@ -105,7 +115,7 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     output.provenance = output.ruleId === "house-uslm-ref" ? "house-uslm-ref" : output.ruleId === "historical-reviewed-reference" ? "reviewed-historical-source" : output.ruleId === "context-cfr-scoped-act-section" ? "reviewed-semantic-policy"
       : output.ruleId === "house-editorial-correction" ? "house-editorial-correction"
       : output.ruleId === "embedded-exception" ? "reviewed-exception"
-      : String(output.ruleId || "").startsWith("context-") || String(output.ruleId || "").startsWith("embedded-") ? "deterministic-context"
+      : String(output.ruleId || "").startsWith("context-") || String(output.ruleId || "").startsWith("embedded-") || output.ruleId === "ambiguous-antecedent" ? "deterministic-context"
       : "deterministic-parser";
     output.targetKind = output.family === "ina" && output.resolution !== "local" ? "ina" : output.family;
     if (output.family === "usc" && output.targetSection) output.officialUrl = `https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=${encodeURIComponent(`granuleid:USC-prelim-title${output.targetTitle}-section${output.targetSection}`)}`;
@@ -120,15 +130,15 @@ function expandReference(reference, sourceText = "", houseHrefs = [], source = n
     else if (output.family === "unknown") output.officialUrl = `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(`${output.targetTitle || output.text || ""} section ${output.targetSection || ""}${(output.targetPath || []).map(token => `(${token})`).join("")}`)}%22%7D`;
   }
   if (output.targetEdition && output.family === "usc") {
-    output.resolution = "official-source-only";
     output.officialUrl = `https://uscode.house.gov/view.xhtml?edition=${output.targetEdition}&num=0&req=${encodeURIComponent(`granuleid:USC-${output.targetEdition}-title${output.targetTitle}-section${output.targetSection}`)}`;
   }
+  if (preservedOfficialUrl !== undefined) output.officialUrl = preservedOfficialUrl;
   if (output.historicalOfficialUrl) output.officialUrl = output.historicalOfficialUrl;
   if (output.targetChapter) {
     output.targetKind = "usc-hierarchy";
     output.officialUrl ||= "https://uscode.house.gov/browse.html";
   }
-  return output;
+  return normalizeOfficialDestination(output);
 }
 
 function visit(value, callback) {

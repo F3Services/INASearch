@@ -115,21 +115,24 @@
   }
 
   async function corpusRecord(corpus, details = {}) {
-    const runtimeSha256 = await sha256Bytes(new TextEncoder().encode(JSON.stringify(corpus)));
-    const partition = globalThis.INASearchCorpusShards.partitionPackedCorpus(corpus);
-    const encode = async value => {
-      const bytes = new TextEncoder().encode(JSON.stringify(value));
+    // Finish the entire snapshot before the first asynchronous digest. Inputs
+    // may be updated while hashing, but these JSON strings no longer alias them.
+    const snapshot = globalThis.INASearchCorpusShards.serializePackedCorpus(corpus);
+    const corpusSchemaVersion = Number(corpus?.schemaVersion), corpusVersion = String(corpus?.corpusVersion || "");
+    const encode = async text => {
+      const bytes = new TextEncoder().encode(text);
       return { bytes: bytes.byteLength, sha256: await sha256Bytes(bytes), payload: new Blob([bytes], { type: "application/json;charset=utf-8" }) };
     };
-    const header = await encode(partition.metadata);
+    const runtimeSha256 = await sha256Bytes(new TextEncoder().encode(snapshot.runtimeJson));
+    const header = await encode(snapshot.metadataJson);
     return {
       recordSchemaVersion: 3,
       storageFormat: "runtime-json-chunks",
-      corpusSchemaVersion: Number(corpus?.schemaVersion),
-      corpusVersion: String(corpus?.corpusVersion || ""),
+      corpusSchemaVersion,
+      corpusVersion,
       ...header,
       runtimeSha256,
-      chunks: await Promise.all(partition.chunks.map(encode)),
+      chunks: await Promise.all(snapshot.chunkJson.map(encode)),
       sourceCorpusSha256: typeof details.sourceCorpusSha256 === "string" ? details.sourceCorpusSha256 : "",
       storedAt: new Date().toISOString(),
       legalReferencesPacked: details.legalReferencesPacked === true,

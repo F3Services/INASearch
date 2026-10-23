@@ -71,6 +71,34 @@ const separateHeading = { id: "separate-heading", heading: "Title", text: "x".re
 assert(!/^<details[^>]* open>/.test(context.renderStatuteNote({}, separateHeading, 0, null, null)), "A separately stored title must count toward the limit");
 assert(/^<details[^>]* open>/.test(context.renderStatuteNote({}, separateHeading, 0, { kind: "notes", noteIndex: 0 }, null)), "A search target must remain expanded even when long");
 const supplements = context.renderStatuteSupplements({ notes: [{ id: "cat", role: "crossHeading", heading: "Editorial Notes" }, {...note, id: "funds"}], sourceCredit: "Credit" }, null, null);
+let richBodyCalls = 0;
+const richBodyRenderer = context.renderStatuteNoteBody;
+context.renderStatuteNoteBody = (...args) => { richBodyCalls++; return richBodyRenderer(...args); };
+const deferred = context.renderStatuteSupplements({ notes: [{ ...note, id: "deferred" }] }, null, null, true);
+assert.equal(richBodyCalls, 0, "Closed supplements must not build rich note bodies");
+assert.match(deferred, /data-reader-note-body="0"/, "Deferred notes must remain addressable");
+assert(deferred.includes("First.Second."), "Deferred notes must retain searchable source text outside a template");
+assert.doesNotMatch(deferred, /<template data-reader-note-body/, "Native Find must be able to search deferred note text");
+const selectedDeferred = context.renderStatuteSupplements({ notes: [{ ...note, id: "deferred" }] }, { kind: "notes", noteIndex: 0, subfield: "text" }, null, true);
+assert.equal(richBodyCalls, 1, "A selected note must render immediately for exact search highlighting and scrolling");
+assert.doesNotMatch(selectedDeferred, /data-reader-note-body/);
+context.renderStatuteNoteBody = richBodyRenderer;
+const closedDetails = { tagName: "DETAILS", open: false, parentElement: null };
+const openDetails = { tagName: "DETAILS", open: true, parentElement: null };
+const hiddenSlot = { parentElement: closedDetails, closest: () => null };
+const visibleSlot = { parentElement: openDetails, closest: () => null };
+const deferredBodies = new WeakMap([[hiddenSlot, () => "closed legal text"], [visibleSlot, () => "visible legal text"]]);
+const filled = [];
+const materializing = vm.createContext({ $$: () => [hiddenSlot, visibleSlot], deferredStatuteNoteBodies: deferredBodies,
+  focusedPaneForElement: () => null, replaceReaderSlot: (slot, html) => filled.push([slot, html]) });
+vm.runInContext(source(template, "materializeStatuteNotes"), materializing);
+materializing.materializeStatuteNotes({});
+assert.deepEqual(filled.map(([, html]) => html), ["visible legal text"], "Opening a group must render only notes with every ancestor open");
+materializing.materializeStatuteNotes({});
+assert.equal(filled.length, 1, "Repeated disclosure events must not rebuild existing note bodies");
+materializing.materializeStatuteNotes({}, true);
+assert.equal(filled[1][1], "closed legal text", "Find and print must materialize closed notes too");
+assert(!deferredBodies.has(hiddenSlot) && !deferredBodies.has(visibleSlot));
 assert.equal((supplements.match(/class="statute-supplements"/g) || []).length, 1);
 assert(supplements.indexOf("Notes and supplementary material") < supplements.indexOf("Editorial Notes"));
 const searched = context.renderStatuteSupplements({ notes: [{ id: "cat", role: "crossHeading", heading: "Editorial Notes" }, {...note, id: "funds"}] }, {kind:"notes",noteIndex:1,subfield:"text"}, null);
@@ -122,6 +150,7 @@ const nodes = new Map([[ref.id, ref], [entry.id, entry], [onward.id, onward]]);
 const navigation = vm.createContext({
   window: reader, document: { getElementById: id => nodes.get(id) }, els: { detail: {} },
   houseFootnoteReturnPositions: new WeakMap(),
+  materializeStatuteNotes() {},
   $$: () => [returnLink], legalReaderScrollRequest: () => ({ root: reader }),
   cancelLegalReaderScroll() {}, scrollStatuteAnchorToReadingLine: target => reader.scrollTo({ top: target.jumpTop })
 });

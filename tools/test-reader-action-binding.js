@@ -46,20 +46,23 @@ function fire(target, type, properties = {}) {
   return event;
 }
 const plain = value => JSON.parse(JSON.stringify(value));
-function harness(paneMode = false) {
-  const rail = new Rail(), pane = paneMode ? { id: "pane-cfr", readerActions: rail, scrollRoot: { scrollTop: 900, scrollLeft: 0, isConnected: true, scrollTo: value => restores.push(value) } } : null;
+function harness(paneMode = false, anchorTop = 50) {
+  const rail = new Rail(), pane = paneMode ? { id: "pane-cfr", readerActions: rail, scrollRoot: { scrollTop: 900, scrollLeft: 0, isConnected: true,
+    clientHeight: 400, getBoundingClientRect: () => ({ top: 200, height: 400 }), scrollTo: value => restores.push(value) } } : null;
   const context = { kind: paneMode ? "cfr" : "usc", sectionId: paneMode ? "8:212.4" : "8-1101", path: ["a", "1"],
     occurrenceBlockPath: paneMode ? [7] : null, citation: paneMode ? "8 CFR 212.4(a)(1)" : "8 U.S.C. 1101(a)(1)",
     cfrCitation: paneMode ? "8 CFR 212.4(a)(1)" : "", uscCitation: paneMode ? "" : "8 U.S.C. 1101(a)(1)",
     text: "(1) Original source text.", heading: "Heading", noun: paneMode ? "Regulation" : "Statute", url: "https://example.test/source" };
   const copies = [], selections = [], prints = [], opened = [], previews = [], syncs = [], hover = [], hierarchy = [], frames = [], notes = [], restores = [];
   const scope = vm.createContext({
+    uscSectionById: new Map(),
     state: { statuteHierarchyAuthority: "usc", focusedCitationMode: paneMode, focusedPaneContext: null, view: "search",
       statuteNavigationKind: context.kind, statuteNavigationSectionId: context.sectionId,
       statuteNavigationLocation: { view: "reader" }, selected: { item: { id: context.sectionId } } },
-    els: { detail: {} }, window: { scrollY: 900, scrollX: 0, scrollTo: value => restores.push(value) },
-    profile: { preferences: { citationCopyPreface: "[citation] - [text]" } }, document: { activeElement: null },
-    $: (selector, root) => selector === ".reader-action-preview" ? root : null,
+    els: { detail: {}, statuteNavigator: { hidden: false, getBoundingClientRect: () => ({ bottom: 150 }) } },
+    window: { scrollY: 900, scrollX: 0, innerHeight: 800, scrollTo: value => restores.push(value) },
+    profile: { preferences: { citationCopyPreface: "[citation] - [text]", pageViewOffsetPercent: 40 } }, document: { activeElement: null },
+    $: (selector, root) => selector === ".reader-action-preview" ? root : selector === ".topbar" ? { getBoundingClientRect: () => ({ bottom: 100 }) } : null,
     $$: (selector, root) => root.buttons.filter(button => selector === "[data-live-citation-action]" || selector.includes(`[data-live-citation-action="${button.dataset.liveCitationAction}"]`)),
     withFocusedCitationPane: (activePane, callback) => {
       const previous = scope.state.focusedPaneContext;
@@ -71,7 +74,9 @@ function harness(paneMode = false) {
     mainReaderActionTarget: () => scope.state.copyActionPreview?.target || scope.current,
     mainReaderActionContext: target => target || scope.state.copyActionPreview?.target || scope.current,
     mainReaderPrintTarget: () => scope.state.copyActionPreview?.target || scope.current,
-    shareCitationAnchor: () => ({}), parseCitation: value => value, endShareViewPreview: () => {},
+    shareCitationAnchor: () => ({ getBoundingClientRect: () => ({ top: anchorTop }) }), parseCitation: value => value, endShareViewPreview: () => {},
+    focusedPaneById: () => scope.state.focusedPaneContext,
+    normalizeReadingOffsetPercent: value => Number(value) || 0,
     scrollStatuteAnchorToReadingLine: (anchor, instant) => previews.push([scope.state.focusedPaneContext?.id || "main", instant]),
     startInlineNoteEditor: (...args) => notes.push(args), legalUnitNoteLocation: (...args) => args,
     setStatuteHierarchyAuthority: value => { scope.state.statuteHierarchyAuthority = value; },
@@ -83,7 +88,7 @@ function harness(paneMode = false) {
   });
   scope.current = context;
   scope.printTarget = { ...context, path: ["b"], citation: context.citation.replace("(a)(1)", "(b)"), text: "(b) Highlighted print text." };
-  for (const name of ["isMainLegalReader", "commitMainLegalContext", "preferredLegalUnitCitation", "legalUnitCopyText", "citationCopyPreface", "citationWithLegalText", "handleLegalUnitAction", "beginCopyActionPreview", "endCopyActionPreview", "bindCopyActionPreview", "bindReaderActions"]) {
+  for (const name of ["isMainLegalReader", "commitMainLegalContext", "preferredLegalUnitCitation", "legalUnitCopyText", "citationCopyPreface", "citationWithLegalText", "handleLegalUnitAction", "statuteReadingLine", "beginCopyActionPreview", "endCopyActionPreview", "bindCopyActionPreview", "bindReaderActions"]) {
     vm.runInContext(functionSource(template, name), scope);
   }
   scope.bindReaderActions(rail, pane);
@@ -107,7 +112,7 @@ async function checkHost(paneMode) {
   const click = fire(h.rail, "click", { target: copy });
   await Promise.resolve();
   assert.equal(click.defaultPrevented, true);
-  assert.equal(h.copies[0], `${paneMode ? "8 CFR 212.4(a)(1)" : "8 U.S.C. 1101(a)(1)"} - (1) Original source text.`,
+  assert.equal(h.copies[0], `${paneMode ? "8 CFR 212.4(a)(1)" : "8 U.S.C. 1101(a)(1)"} - Original source text.`,
     "The text action keeps citation formatting and the frozen copy target");
   assert.deepEqual(h.selections[0], { pane: host, args: [h.context.kind, h.context.sectionId, ["a", "1"], paneMode ? [7] : null] },
     "The action commits exactly once, including a pane's occurrence locator");
@@ -158,6 +163,27 @@ async function checkHost(paneMode) {
   assert.equal(h.scope.state.focusedPaneContext, null, "Pane actions restore the outer reader context");
 }
 (async () => {
+  for (const [paneMode, visible, hidden] of [[false, [150, 170, 799], [149, 800, 900]], [true, [200, 210, 599], [180, 600, 650]]]) {
+    for (const top of visible) {
+      const h = harness(paneMode, top);
+      fire(h.rail, "mouseenter");
+      fire(h.rail, "focusin", { target: h.rail.button("copy-text") });
+      assert.equal(h.previews.length, 0, `Hover/focus must preserve the view when the citation starts at visible y=${top}, pane=${paneMode}`);
+      fire(h.rail, "click", { target: h.rail.button("copy-text") });
+      await Promise.resolve();
+      assert.equal(h.copies[0], `${h.context.citation} - Original source text.`, "Visible citations remain the action target");
+      fire(h.rail, "mouseleave");
+      while (h.frames.length) h.frames.shift()();
+      assert.equal(h.restores.length, 0, "Leaving an unscrolled hover must not move the reader");
+    }
+    for (const top of hidden) {
+      const h = harness(paneMode, top);
+      fire(h.rail, "mouseenter");
+      assert.equal(h.previews.length, 1, `An out-of-view citation start at y=${top} must still preview, pane=${paneMode}`);
+      fire(h.rail, "mouseleave");
+      assert.equal(h.restores[0].top, 900, "Leaving a scrolled preview restores the original view");
+    }
+  }
   await checkHost(false);
   await checkHost(true);
   console.log("PASS reader action binding: shared target, continuous instant preview, note, print, source and main/pane contexts");

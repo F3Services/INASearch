@@ -41,7 +41,7 @@ function contrastRatio(foreground, background) {
   return (values[0] + 0.05) / (values[1] + 0.05);
 }
 
-function sourceCorpus() {
+function sourceCorpus({ beforeReferencePacking } = {}) {
   const sandbox = { window: {} };
   vm.createContext(sandbox);
   vm.runInContext(fs.readFileSync(path.join(root, "src", "INASearch-Corpus.js"), "utf8"), sandbox);
@@ -76,8 +76,22 @@ function sourceCorpus() {
   applyGeneratedLegalReferences(corpus);
   require("./historical-ina").applyHistoricalReferences(corpus);
   corpus.definitions = buildDefinitionCatalog(corpus, definitions, uscisGlossary);
+  beforeReferencePacking?.(corpus);
   packLegalReferences(corpus);
   return corpus;
+}
+
+function referenceEvidenceBindings(corpus) {
+  const bindings = [];
+  const visit = (value, pointer) => {
+    if (!value || typeof value !== "object") return;
+    if (Number.isInteger(value.start) && Number.isInteger(value.end) && value.ruleId && value.resolution) {
+      bindings.push({ pointer, ruleId: value.ruleId, evidenceId: Number.isInteger(value.evidenceId) ? value.evidenceId : null });
+    }
+    for (const [key, child] of Object.entries(value)) visit(child, `${pointer}/${key}`);
+  };
+  visit(corpus, "");
+  return bindings.sort((a, b) => a.pointer.localeCompare(b.pointer));
 }
 
 function sourceProfile() {
@@ -286,7 +300,7 @@ function extractedFunction(source, name, _nextName, context = {}) {
 
 function authorityHierarchyFunctions(source, context = {}) {
   const start = source.indexOf("    const authorityHierarchyNodes = new Map();");
-  const end = source.indexOf("\n    const policyMap =", start);
+  const end = source.indexOf("\n    const knownInaCitationPaths =", start);
   assert(start >= 0 && end > start, "Could not extract the normalized authority hierarchy builder.");
   const declarations = ["uscBase", "addReferencedUscHierarchy"].map(name => require("./test-function-source")(source, name)).join("\n") + "\n" + source.slice(start, end);
   return vm.runInNewContext(`${declarations}\n({ authorityHierarchyNodes, hierarchyLeafByReader, cfrPartHierarchyNode, hierarchyUnitKind, hierarchyNodeId })`, {
@@ -489,13 +503,18 @@ async function main() {
     ["test-historical-section-identifiers.js", "PASS historical section identifiers"],
     ["test-flat-statute-reference-preview.js", "PASS flat statute reference previews"],
     ["test-act-authority-boundaries.js", "PASS Act authority boundaries"],
+    ["test-reference-authorities.js", "PASS authority regressions"],
+    ["test-reference-diff.js", "PASS complete reference diff"],
+    ["test-reference-source-guards.js", "PASS exact-source reference guards"],
     ["test-read-build-corpus.js", "PASS standalone corpus reader"],
+    ["test-corpus-string-delivery.js", "PASS lossless corpus string delivery"],
     ["test-startup.js", "PASS staged startup"],
     ["test-profile-saving.js", "# fail 0"],
     ["test-annotations.js", "PASS annotations"],
     ["test-note-banners.js", "PASS note banners"],
     ["test-search-worker.js", "Search worker cache tests passed"],
     ["test-corpus-delivery.js", "PASS corpus delivery"],
+    ["test-delivery-projection.js", "PASS delivery projection"],
     ["test-referenced-usc-cache.js", "PASS referenced USC cache"],
     ["test-referenced-usc-links.js", "PASS cross-title USC link resolution"],
     ["test-usc-hierarchy-references.js", "PASS USC hierarchy link labels and table-of-contents navigation"],
@@ -509,6 +528,7 @@ async function main() {
     ["test-cfr-subject-groups.js", "PASS CFR subject headings"],
     ["test-insertions.js", "Inserted-reference state tests passed."],
     ["test-copy-format.js", "PASS explicit copy formatting"],
+    ["test-share-links.js", "# fail 0"],
     ["test-legal-print.js", "PASS legal printing"],
     ["test-reader-citations.js", "PASS reader print target"],
     ["test-reader-action-binding.js", "PASS reader action binding"],
@@ -550,7 +570,8 @@ async function main() {
   }
   const noteStructureVerification = spawnSync("python3", [path.join(root, "tools", "test-statute-notes.py")], { cwd: root, encoding: "utf8" });
   assert.strictEqual(noteStructureVerification.status, 0, noteStructureVerification.stderr || "House note structure checks failed.");
-  const fullSource = sourceCorpus();
+  let sourceEvidenceBindings;
+  const fullSource = sourceCorpus({ beforeReferencePacking: corpus => { sourceEvidenceBindings = referenceEvidenceBindings(corpus); } });
   let repeatedLegalCorpus = sourceCorpus();
   assert.deepStrictEqual(repeatedLegalCorpus.legalReferenceAudit, fullSource.legalReferenceAudit, "Two corpus-generator runs produced different embedded-reference audits.");
   assert.deepStrictEqual(repeatedLegalCorpus.legalReferenceEvidence, fullSource.legalReferenceEvidence, "Two corpus-generator runs produced different embedded-reference evidence.");
@@ -729,7 +750,7 @@ async function main() {
   assert(full.html.includes("national or international acclaim") && full.html.includes("it is an adjective there"), "The defined-term warning does not explain the risk of a misleading match.");
   assert(/id="automaticCfrUpdatesToggle"[^>]*type="checkbox"[^>]*role="switch"/.test(full.html), "The automatic CFR update setting is missing.");
   assert(/id="automaticStatutoryNavigationSystemToggle"[^>]*type="checkbox"[^>]*role="switch"/.test(full.html), "The automatic INA/U.S.C. hierarchy setting is missing.");
-  assert(full.html.includes("On by default. An INA citation switches the upper navigation levels to the INA structure"), "The automatic statute-hierarchy setting does not explain its enabled default.");
+  assert(/for="automaticStatutoryNavigationSystemToggle">\s*<span>[\s\S]*?<small>Off by default\. Keep the view you choose with the INA\/U\.S\.C\. button\. Turn this on to switch views automatically when you type an INA or U\.S\.C\. citation\.<\/small>/.test(full.html), "The automatic statute-hierarchy setting must explain its opt-in default and preserve the chosen view.");
   assert(!/id="navigationUpdatesSearchToggle"/.test(full.html), "The retired navigation-to-search synchronization setting remains visible.");
   assert(/id="scrollUpdatesSearchToggle"[^>]*type="checkbox"[^>]*role="switch"/.test(full.html), "The scroll-to-search synchronization setting is missing.");
   assert(/id="pageViewOffsetInput"[^>]*type="number"[^>]*min="0"[^>]*max="100"/.test(full.html), "The citation-jump percentage setting is missing or unbounded.");
@@ -831,8 +852,9 @@ async function main() {
   assert.strictEqual(full.corpus.cfr.coverage.structureAddressableElementCount, 30317, "Unexpected addressable eCFR element inventory.");
   assert.strictEqual(full.corpus.cfr.coverage.structureTitledElementCount, 31795, "Unexpected data-title eCFR element inventory.");
   assert.strictEqual(full.corpus.cfr.coverage.structureContextElementCount, 1384, "Unexpected renderer-contained CFR context inventory.");
-  assert.strictEqual(full.corpus.cfr.structureSources.length, 174, "The CFR structure-source manifest is incomplete.");
-  assert(full.corpus.cfr.structureSources.every(source => source.bytes > 0 && /^[a-f0-9]{64}$/.test(source.sha256) && source.url.includes("/api/renderer/v1/content/enhanced/")), "A CFR hierarchy source lacks pinned eCFR renderer provenance.");
+  assert.strictEqual(fullSource.cfr.structureSources.length, 174, "The CFR structure-source manifest is incomplete.");
+  assert(fullSource.cfr.structureSources.every(source => source.bytes > 0 && /^[a-f0-9]{64}$/.test(source.sha256) && source.url.includes("/api/renderer/v1/content/enhanced/")), "A CFR hierarchy source lacks pinned eCFR renderer provenance.");
+  assert.strictEqual(full.corpus.cfr.structureSources, undefined, "Build structure-source evidence must not enter delivery.");
   const fallbackGraphic = full.corpus.cfr.graphics.find(graphic => graphic.sourcePath === "/graphics/er15ja25.063.gif");
   assert(fallbackGraphic.available && fallbackGraphic.fallbackSource?.page === 46 && /^[a-f0-9]{64}$/.test(fallbackGraphic.fallbackSource.sha256), "The GovInfo-PDF fallback graphic lacks reviewed provenance.");
   assert(full.corpus.cfr.sources.every(source => source.bytes > 0 && /^[a-f0-9]{64}$/.test(source.sha256)), "A CFR source is missing its byte count or SHA-256.");
@@ -898,11 +920,15 @@ async function main() {
   }), "A combined CFR block still hides a later official legal unit after prose instead of starting a new line.");
   assert(allCfrBlocks.every(block => hasReviewedMarkers(block) || (block.u || []).every(unit => /^(?:\([^)]+\)|[A-Za-z0-9ivxlcdmIVXLCDM]+\.)$/.test(String(block.x || "").slice(unit.s, unit.e)))), "A CFR unit offset does not point to its displayed parenthetical or appendix-outline marker.");
   assert.strictEqual(allCfrBlocks.filter(block => block.t === "graphic").length, 15, "Referenced CFR graphics were not retained in document order.");
-  assert.strictEqual(full.corpus.forms.length, 105);
+  assert.strictEqual(fullSource.forms.length, 105);
+  assert.deepStrictEqual(full.corpus.forms, [], "Dormant forms retain an empty schema array.");
   assert.strictEqual(full.corpus.namedActs.length, 5);
   assert.deepStrictEqual(full.corpus.verification, {}, "Retired classification verification counters remain in the corpus.");
   assert(full.corpus.inaCrosswalk.length > 0);
-  assert(full.corpus.policyManual.catalog.length > 0);
+  assert(fullSource.policyManual.catalog.length > 0);
+  assert.deepStrictEqual(full.corpus.policyManual.catalog, [], "Dormant Policy Manual records retain an empty schema array.");
+  assert.deepStrictEqual(full.corpus.sources.policyManual, fullSource.sources.policyManual);
+  assert.deepStrictEqual(full.corpus.sources.forms, fullSource.sources.forms);
   assert.strictEqual(hydratedSource.title8.referenceMetadata.generatedReferences, 16080, "Unexpected House legal-reference count.");
   assert.strictEqual(hydratedSource.title8.referenceMetadata.localReferences, 3514, "Unexpected locally resolved House reference count.");
   assert.strictEqual(hydratedSource.title8.referenceMetadata.officialSourceOnlyReferences, 12566, "Unexpected official-source-only House reference count.");
@@ -924,12 +950,14 @@ async function main() {
     subsubitem: 5
   });
   assert.strictEqual(statutoryNode(hydratedSource, "1101", ["a", "15", "O", "ii", "III", "a"]).u, 8);
+  const adoptedTitle8Source = legalSourceManifest.sources.find(source => source.id === "house-title-8-uslm");
+  assert(adoptedTitle8Source, "The validated source manifest lacks the adopted Title 8 source.");
   assert.deepStrictEqual(hydratedSource.title8.houseFootnoteMetadata, {
     schemaVersion: 1,
     noteLayoutRevision: 2,
-    sourceUrl: "https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip",
-    sourceReleasePoint: "119-121",
-    capturedAt: "2026-10-20",
+    sourceUrl: adoptedTitle8Source.finalUrl,
+    sourceReleasePoint: adoptedTitle8Source.releasePoint,
+    capturedAt: legalSourceManifest.capturedAt,
     footnotes: 118,
     references: 151,
     affectedFields: 143,
@@ -992,6 +1020,7 @@ async function main() {
     ["b", "2", "B", "i"], ["b", "2", "B", "ii"]
   ], "The parallel flattened clauses at 8 U.S.C. 1255a(b)(2)(B) were not recovered by the hierarchy correction.");
   let verifiedHouseReferences = 0;
+  const correctedHouseSpans = [];
   const verifyLegalField = (source, field, label) => {
     const property = field === "text" ? "references" : `${field}References`;
     let cursor = 0;
@@ -1001,6 +1030,9 @@ async function main() {
       cursor = reference.end;
       assert(reference.provenance && reference.ruleId, `${label}.${field}: a generated legal reference lacks provenance.`);
       if (reference.provenance === "house-uslm-ref") verifiedHouseReferences++;
+      if (reference.ruleId === "house-source-span-correction") correctedHouseSpans.push([
+        reference.text, reference.targetTitle, reference.targetSection, reference.targetPath || []
+      ]);
     }
   };
   const verifyStatuteNodes = (section, nodes, path = []) => {
@@ -1022,16 +1054,25 @@ async function main() {
   assert.strictEqual(hydratedSource.legalReferenceMetadata.houseEditorialCitationCorrections, 11, "The reviewed House editorial citation-correction count changed.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.houseSourceEditorialCitationCorrections, 3, "The number of corrected House-origin reference records changed.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.sourceBracketCitationCorrections, 1, "The number of immediately adjacent square-bracket source corrections changed.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.houseTruncatedCitationCorrections, 3, "The reviewed truncated House citation-correction count changed.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.houseTruncatedCitationCorrections, 7, "The reviewed truncated House citation-correction count changed.");
+  assert.deepStrictEqual(plain(correctedHouseSpans), [
+    ["8 U.S.C. 1151", "8", "1151", []],
+    ["8 U.S.C. 1101", "8", "1101", []],
+    ["22 U.S.C. 4212", "22", "4212", []],
+    ["8 U.S.C. 1182(l)", "8", "1182", ["l"]],
+    ["8 U.S.C. 1184(l)", "8", "1184", ["l"]],
+    ["8 U.S.C. 1229", "8", "1229", []],
+    ["42 U.S.C. 1396o(a)(2)(D)", "42", "1396o", ["a", "2", "D"]]
+  ], "House span repairs must preserve the reviewed range endpoints and complete subsection locators.");
   assert.strictEqual(
     verifiedHouseReferences + hydratedSource.legalReferenceMetadata.houseSourceEditorialCitationCorrections +
       hydratedSource.legalReferenceMetadata.sourceBracketCitationCorrections + hydratedSource.legalReferenceMetadata.houseTruncatedCitationCorrections +
       hydratedSource.legalReferenceMetadata.historicalHouseCitationCorrections,
-    18795, // Excludes 42 obsolete ranges on replaced historical headings.
+    18757, // Also excludes 30 reviewed source exceptions and 8 named-Act authority replacements.
     "The expanded section inventory changed its displayed House reference spans or publisher-supplied corrections."
   );
   // Displayed references include per-section copies of shared House notes.
-  // Parser inventories include the 496 former Title 8 sections and the 137
+  // Parser inventories include the 496 former Title 8 sections and the 136
   // directly cited sections from other USC titles; captured-source totals above
   // remain independent of these expanded display inventories.
   // Source-ordered run-ins resolve §1357(a)(iii)'s reference to clause (ii).
@@ -1039,10 +1080,14 @@ async function main() {
   assert(arrestContinuation.references.some(reference => reference.text === "(ii)" && reference.targetPath.join("/") === "a/ii"), "The continuation's clause (ii) reference must resolve within subsection (a).");
   // Quote-local Act scopes and restored division-note citations resolve
   // references against the authority printed in the original USLM.
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 47354, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 18918, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 15193, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1313, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
+  // Reviewed trailing CFR authorities add six links and replace six bare
+  // statutory guesses with evidenced regulatory addresses.
+  // Excluding the et-seq.-only 42 USC 2000e section removes 14 references,
+  // six embedded candidates, and four resolved evidence records.
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 49854, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 22249, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 19822, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1125, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
   assert(hydratedSource.legalReferenceMetadata.suppressedSelfReferences > 8_000, "The build did not audit and suppress the corpus-wide self-reference set.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-this-unit"), "The bare self-referential unit rule remains advertised as navigable.");
   const retainedBareSelfReferences = [];
@@ -1054,6 +1099,7 @@ async function main() {
   collectRetainedBareSelfReferences(hydratedSource);
   assert.strictEqual(retainedBareSelfReferences.length, 0, "The built corpus still contains a bare self-referential link record.");
   const retainedAncestorReferences = [];
+  const retainedReviewedAncestorCorrections = [];
   const inspectOperativeReferences = (source, properties, kind, title, section, sourcePath, label, inlineMarkers = []) => {
     for (const property of properties) for (const reference of source?.[property] || []) {
       const targetPath = reference.targetPath || [];
@@ -1063,7 +1109,16 @@ async function main() {
       const effectiveSourcePath = activeInlinePath || sourcePath;
       const sameAuthority = reference.resolution === "local" && reference.family === kind && String(reference.targetTitle) === String(title) && String(reference.targetSection) === String(section);
       const ancestor = targetPath.length <= effectiveSourcePath.length && targetPath.every((token, index) => String(token).toLowerCase() === String(effectiveSourcePath[index]).toLowerCase());
-      if (sameAuthority && ancestor) retainedAncestorReferences.push(`${label}.${property}: ${reference.text}`);
+      if (sameAuthority && ancestor) {
+        const reviewed = hydratedSource.legalReferenceExceptions.exceptions.find(exception =>
+          exception.sourceText === String(source.x ?? source.text ?? "") && exception.start === reference.start && exception.end === reference.end &&
+          exception.text === reference.text && exception.target.family === kind && String(exception.target.title) === String(title) &&
+          String(exception.target.section) === String(section) && isDeepStrictEqual(exception.target.path, targetPath) &&
+          exception.citationNote && exception.citationNote === reference.citationNote);
+        if (reviewed && reference.ruleId === "embedded-exception" && reference.provenance === "reviewed-exception") {
+          retainedReviewedAncestorCorrections.push([label, reference.start, reference.text, targetPath]);
+        } else retainedAncestorReferences.push(`${label}.${property}: ${reference.text}`);
+      }
     }
   };
   const inspectStatuteAncestors = (section, nodes, path = []) => {
@@ -1090,9 +1145,16 @@ async function main() {
     inspectCfrAncestors(section, section.blocks);
   }
   assert.deepStrictEqual(retainedAncestorReferences, [], "The built corpus retains verified links to the current operative unit or one of its ancestors.");
+  // These source-bound corrections retain their explanatory notice even when the
+  // corrected destination is an ancestor. Ordinary self-links remain suppressed.
+  assert.deepStrictEqual(retainedReviewedAncestorCorrections, [
+    ["8 CFR 214.2", 30, "(h)(10)(iv)", ["h", "10", "v"]],
+    ["8 CFR 214.2", 76, "§ 214.2(K)(10)(i)", ["k", "10", "i"]],
+    ["8 CFR 245.1", 227, "(v)", ["e", "3", "v"]]
+  ], "The exact reviewed ancestor corrections or their source-bound notices changed.");
   const sharedLegalContext = legalReferenceContext(hydratedSource);
   assert.deepStrictEqual(validateLegalReferencePolicy(hydratedSource), { schemaVersion: 1, scopes: 10, reviewedAt: "2026-08-21" }, "The reviewed semantic legal-reference policy did not validate against exact CFR source text.");
-  assert.deepStrictEqual(validateEmbeddedReferenceExceptions(hydratedSource.legalReferenceExceptions), { schemaVersion: 1, resolverVersion: "embedded-v1", exceptions: 1, reviewedAt: "2026-08-31" }, "The embedded-reference exception manifest did not validate.");
+  assert.deepStrictEqual(validateEmbeddedReferenceExceptions(hydratedSource.legalReferenceExceptions), { schemaVersion: 1, resolverVersion: "embedded-v1", exceptions: 358, reviewedAt: "2026-10-23" }, "The embedded-reference exception manifest did not validate.");
   const tamperedPolicyCorpus = JSON.parse(JSON.stringify(hydratedSource));
   tamperedPolicyCorpus.legalReferencePolicy.scopes[0].basis.excerpt += " altered";
   assert.throws(() => validateLegalReferencePolicy(tamperedPolicyCorpus), /not exact source text/, "A stale semantic-policy excerpt was accepted.");
@@ -1243,8 +1305,8 @@ async function main() {
     { text: "1185(a)", title: "8", section: "1185", path: ["a"] },
     { text: "section 301 of title 3", title: "3", section: "301", path: [] }
   ], "A trailing numbered-title scope reached backward across a repeated ‘section’ group.");
-  assert.deepStrictEqual(plain(auditedNoteReferences("1184", "8-1184-note-33", [965, 985, 1004]).map(reference => ({ text: reference?.text, title: reference?.targetTitle, section: reference?.targetSection, path: reference?.targetPath, rule: reference?.ruleId }))), [
-    { text: "204(b)", title: "8", section: "1154", path: ["b"], rule: "embedded-named-act-section" },
+  assert.deepStrictEqual(plain(auditedNoteReferences("1184", "8-1184-note-33", [957, 985, 1004]).map(reference => ({ text: reference?.text, title: reference?.targetTitle, section: reference?.targetSection, path: reference?.targetPath, rule: reference?.ruleId }))), [
+    { text: "section 204(b)", title: "8", section: "1154", path: ["b"], rule: "embedded-named-act-section" },
     { text: "3 U.S.C. 1154(b)", title: "8", section: "1154", path: ["b"], rule: "source-bracket-editorial-correction" },
     { text: "8 U.S.C. 1154(b)", title: "8", section: "1154", path: ["b"], rule: "house-uslm-ref" }
   ], "An immediately adjacent House square-bracket correction did not govern the erroneous parenthetical citation and its Act-section parallel.");
@@ -1259,24 +1321,28 @@ async function main() {
   assert.deepStrictEqual(plain([
     ...auditedNoteReferences("1622", "8-1622-note-3", [155, 392]),
     ...auditedNoteReferences("1641", "8-1641-note-3", [611, 848])
-  ].map(reference => ({ text: reference?.text, title: reference?.targetTitle, section: reference?.targetSection, path: reference?.targetPath, resolution: reference?.resolution }))), Array.from({ length: 4 }, () => ({
-    text: "243(h)", title: "8", section: "1253", path: ["h"], resolution: "official-source-only"
+  ].map(reference => ({ text: reference?.text, title: reference?.targetTitle, section: reference?.targetSection, path: reference?.targetPath, resolution: reference?.resolution }))), Array.from({ length: 4 }, (_, index) => ({
+    text: "243(h)", title: "8", section: "1253", path: ["h"], resolution: index % 2 ? "unresolved" : "official-source-only"
   })), "Historical INA section 243(h) continuations did not reuse the corpus's former-section codification evidence.");
   const oldIna244AmendmentReference = auditedNoteReference("1641", "8-1641-note-3", 2709);
   assert.deepStrictEqual(plain({ text: oldIna244AmendmentReference?.text, title: oldIna244AmendmentReference?.targetTitle, section: oldIna244AmendmentReference?.targetSection, path: oldIna244AmendmentReference?.targetPath, resolution: oldIna244AmendmentReference?.resolution }), {
-    text: "244(a)(3)", title: "8", section: "1254", path: ["a", "3"], resolution: "official-source-only"
+    text: "244(a)(3)", title: "8", section: "1254", path: ["a", "3"], resolution: "unresolved"
   }, "A historical suspension-of-deportation citation was redirected to current INA section 244/8 U.S.C. 1254a.");
-  for (const [offset, path] of [[7332, ["a"]], [10241, ["a", "3"]]]) {
+  for (const [offset, path, resolution] of [[7332, ["a"], "official-source-only"], [10241, ["a", "3"], "local"]]) {
     const reference = auditedNoteReference("1101", "8-1101-note-17", offset);
     assert.deepStrictEqual(plain({ section: reference?.targetSection, path: reference?.targetPath, resolution: reference?.resolution }), {
-      section: "1254", path, resolution: "official-source-only"
+      section: "1254", path, resolution
     }, "A former INA section 244 citation was redirected to current INA section 244/8 U.S.C. 1254a.");
   }
   const oldIna309Reference = auditedNoteReference("1409", "8-1409-note-7", 1170);
   assert.deepStrictEqual(plain({ section: oldIna309Reference?.targetSection, path: oldIna309Reference?.targetPath, resolution: oldIna309Reference?.resolution }), {
-    section: "1409", path: ["a"], resolution: "official-source-only"
+    section: "1409", path: ["a"], resolution: "unresolved"
   }, "An expressly historical version of INA section 309(a) was presented as the current local provision.");
-  const ina404NoteReference = auditedNoteReference("1101", "8-1101-note-64", 2461);
+  for (const reference of [oldIna244AmendmentReference, oldIna309Reference,
+    auditedNoteReference("1622", "8-1622-note-3", 392), auditedNoteReference("1641", "8-1641-note-3", 848)]) {
+    assert(reference.citationNote && /historical|verified|former/i.test(reference.citationNote), "An unverified historical destination must retain its explanatory notice.");
+  }
+  const ina404NoteReference = auditedNoteReference("1101", "8-1101-note-64", 2453);
   assert.deepStrictEqual(plain({ section: ina404NoteReference?.targetSection, path: ina404NoteReference?.targetPath, resolution: ina404NoteReference?.resolution }), {
     section: "1101", path: [], resolution: "official-source-only"
   }, "An INA provision located in a U.S. Code note was projected into the current section's nested path.");
@@ -1307,11 +1373,11 @@ async function main() {
   const note1990ActReferences = section1101Notes[19].references.filter(reference => reference.start >= 3400 && reference.start < 3430 && ["(1)", "(2)", "(3)"].includes(reference.text));
   assert(note1990ActReferences.every(reference => reference.family === "usc" && reference.targetSection === "1153" && reference.targetPath[0] === "b"), "The 1990 effective-date note lost the INA 203(b) codification behind ‘such Act’.");
   const note1990SourceActReferences = section1101Notes[19].references.filter(reference => reference.start >= 10500 && reference.start < 10540 && ["(5)", "(13)"].includes(reference.text));
-  assert(note1990SourceActReferences.every(reference => reference.family === "public-law" && reference.targetCongress === "101" && reference.targetLaw === "649" && reference.targetPath[0] === "s603"), "The 1990 effective-date note treated source-Act section 603 as a current U.S.C. section.");
+  assert(note1990SourceActReferences.every(reference => reference.family === "public-law" && reference.targetCongress === "101" && reference.targetLaw === "649" && reference.targetPath.slice(0, 2).map(token => token.replace(/^title-/, "t")).join("/") === "tVI/s603"), "The 1990 effective-date note treated source-Act section 603 as a current U.S.C. section.");
   const note1980SourceActReferences = section1101Notes[24].references.filter(reference => reference.start >= 880 && reference.start < 920 && ["(b)", "(c)", "(d)"].includes(reference.text) && reference.ruleId === "embedded-named-act-section");
   assert(note1980SourceActReferences.length === 3 && note1980SourceActReferences.every(reference => reference.family === "public-law" && reference.targetCongress === "96" && reference.targetLaw === "212" && reference.targetPath[0] === "s203"), "The 1980 effective-date note treated Refugee Act section 203 as current Title 8.");
   const note1977SourceActReferences = section1101Notes[26].references.filter(reference => reference.start >= 400 && reference.start < 440 && ["(b)(4)", "(d)"].includes(reference.text));
-  assert(note1977SourceActReferences.every(reference => reference.family === "public-law" && reference.targetCongress === "94" && reference.targetLaw === "484" && reference.targetPath[0] === "s601"), "The 1977 effective-date note treated source-Act section 601 as current Title 8.");
+  assert(note1977SourceActReferences.every(reference => reference.family === "public-law" && reference.targetCongress === "94" && reference.targetLaw === "484" && reference.targetPath.slice(0, 2).join("/") === "tVI/s601"), "The 1977 effective-date note treated source-Act section 601 as current Title 8.");
   const noteIna101References = section1101Notes[94].references.filter(reference => /^\((?:O|P)\)/.test(reference.text));
   assert(noteIna101References.length === 4 && noteIna101References.every(reference => reference.targetSection === "1101" && reference.targetPath[0] === "a" && reference.targetPath[1] === "15"), "A historical INA 101 note target was not converted through the INA codification map.");
   const noteIna212References = hydratedSource.title8.sections.find(section => section.section === "1182").notes[13].references.filter(reference => /^\((?:IV|V|VI)\)\((?:bb|cc)\)$/.test(reference.text));
@@ -1365,13 +1431,19 @@ async function main() {
     for (const child of Object.values(value)) collectNavigableReferences(child);
   };
   collectNavigableReferences(hydratedSource);
-  assert.strictEqual(navigableReferences.filter(reference => reference.ruleId === "ambiguous-antecedent").length, 0, "The rebuilt corpus still contains legacy ambiguous-antecedent links.");
+  const ambiguousPrintedRanges = navigableReferences.filter(reference => reference.ruleId === "ambiguous-antecedent");
+  assert.strictEqual(ambiguousPrintedRanges.length, 2, "The exact reviewed malformed-range inventory changed.");
+  assert(ambiguousPrintedRanges.every(reference => reference.text === "42 U.S.C. 2000e-2000e17" && reference.resolution === "unresolved" && reference.citationNote && !reference.officialUrl), "A malformed range must remain disclosed plain text without a fabricated target action.");
   const embeddedNavigableReferences = navigableReferences.filter(reference => reference.ruleId.startsWith("embedded-"));
   const evidencedNavigableReferences = navigableReferences.filter(reference => Number.isInteger(reference.evidenceId));
   assert.strictEqual(hydratedSource.legalReferenceEvidence.format, "indexed-arrays-v1", "Embedded-reference evidence was not compactly indexed for delivery.");
   assert(hydratedSource.legalReferenceMetadata.rules.every(rule => rule === "house-uslm-ref" || hydratedSource.legalReferenceEvidence.rules.includes(rule)), "The compact delivery rule dictionary omits a generated legal-reference rule.");
   assert.strictEqual(new Set(evidencedNavigableReferences.map(reference => reference.evidenceId)).size, hydratedSource.legalReferenceEvidence.records.length, "A generated embedded-reference evidence record is missing or orphaned.");
-  assert(embeddedNavigableReferences.every(reference => Number.isInteger(reference.evidenceId) && hydratedSource.legalReferenceEvidence.records[reference.evidenceId]), "An embedded-reference evidence ID does not survive packing and hydration.");
+  // Several deterministic rules share the embedded-* namespace without
+  // producing indexed AST evidence. Compare the actual pre-packing bindings,
+  // including absent IDs, instead of inferring their contract from a rule name.
+  assert.deepStrictEqual(referenceEvidenceBindings(hydratedSource), sourceEvidenceBindings, "A reference evidence binding changed during packing and hydration.");
+  assert(evidencedNavigableReferences.every(reference => hydratedSource.legalReferenceEvidence.records[reference.evidenceId]), "A delivered reference evidence ID has no indexed record.");
   const goldenReferenceFixtures = JSON.parse(fs.readFileSync(path.join(root, "tools", "fixtures", "legal-reference-golden.json"), "utf8"));
   assert.strictEqual(goldenReferenceFixtures.schemaVersion, 1, "Unexpected legal-reference fixture schema.");
   const browserReferenceContext = { globalThis: null };
@@ -1551,7 +1623,7 @@ async function main() {
   assert.deepStrictEqual(invalidContinuationReferences.map(reference => reference.text), ["section 101(a)(27)(H)"], "An abbreviated INA target absent from the indexed statute was guessed from its typography.");
   assert(!generatedReferences("section 1110(b) of the Act", { ...actFixtureContext, title: "20", part: "416", section: "416.250" }).some(reference => reference.ruleId === "context-cfr-ina-act-section"), "A Social Security Act reference was mistaken for an INA reference outside an INA-defined CFR scope.");
   assert(!generatedReferences("section 3 of the Act of February 5, 1917", actFixtureContext).some(reference => reference.ruleId === "context-cfr-ina-act-section"), "A citation to a named historical Act was mistaken for an INA citation merely because it appears in Title 8 CFR.");
-  assert(generatedReferences("section 101(a)(27)(H) of the Immigration and Nationality Act", { ...actFixtureContext, title: "28", part: "65" }).some(reference => reference.ruleId === "context-cfr-ina-act-section" && reference.targetPath.join("/") === "a/27/H"), "A CFR citation naming the Immigration and Nationality Act explicitly was not recognized across titles.");
+  assert(generatedReferences("section 101(a)(27)(H) of the Immigration and Nationality Act", { ...actFixtureContext, title: "28", part: "65" }).some(reference => reference.ruleId === "embedded-named-act-section" && reference.family === "usc" && reference.targetTitle === "8" && reference.targetSection === "1101" && reference.targetPath.join("/") === "a/27/H"), "A CFR citation naming the Immigration and Nationality Act explicitly was not recognized across titles.");
   const embeddedActReferences = generatedReferences("paragraphs (15)(A) or (15)(G) of section 101(a) of the Act", actFixtureContext)
     .filter(reference => reference.ruleId === "embedded-explicit-container");
   assert.deepStrictEqual(plain(embeddedActReferences.map(reference => ({ section: reference.targetSection, path: reference.targetPath }))), [
@@ -1589,8 +1661,8 @@ async function main() {
   const sourceActReferences = generatedReferences("subsections (b)(4) and (d) of section 601 [amending this section]", { ...absentSectionContext, enclosingAuthority: { family: "public-law", title: "94", section: "484", path: ["tVI", "s602"] } })
     .filter(reference => reference.ruleId === "embedded-named-act-section");
   assert.deepStrictEqual(plain(sourceActReferences.map(reference => ({ congress: reference.targetCongress, law: reference.targetLaw, path: reference.targetPath }))), [
-    { congress: "94", law: "484", path: ["s601", "b", "4"] },
-    { congress: "94", law: "484", path: ["s601", "d"] }
+    { congress: "94", law: "484", path: ["tVI", "s601", "b", "4"] },
+    { congress: "94", law: "484", path: ["tVI", "s601", "d"] }
   ], "A historical section absent from Title 8 did not inherit the enclosing statutory-note authority.");
   const abbreviatedPublicLawReferences = generatedReferences("sections 302(e)(4), (5) and 308(b) of Pub. L. 102–232 effective as if included in the enactment of the Immigration Act of 1990", noteFixtureContext)
     .filter(reference => reference.ruleId === "embedded-named-act-section");
@@ -1644,7 +1716,7 @@ async function main() {
   }, "An expressly written Public Law division was omitted from its section target.");
   const bareTitleSectionReference = generatedReferences("section 1101(a)(15)(U) of this title", {
     ...sharedLegalContext, kind: "usc", title: "8", section: "1367", path: ["d"], sourceId: "bare-title-section-fixture"
-  }).find(reference => reference.ruleId === "context-bare-usc-section");
+  }).find(reference => reference.ruleId === "context-bare-trailing-title-section");
   assert.deepStrictEqual(plain({ title: bareTitleSectionReference?.targetTitle, section: bareTitleSectionReference?.targetSection, path: bareTitleSectionReference?.targetPath, resolution: bareTitleSectionReference?.resolution }), {
     title: "8", section: "1101", path: ["a", "15", "U"], resolution: "local"
   }, "A bare numeric section address expressly scoped to this title was not recognized.");
@@ -1819,30 +1891,29 @@ async function main() {
   };
   for (const section of [...hydratedSource.cfr.sections, ...hydratedSource.cfr.appendices]) { verifyLegalField(section, "heading", section.id); verifyCfrBlocks(section, section.blocks); }
   assert(verifiedCfrReferences > 10_000, "The build-time CFR reference audit did not cover the regulation blocks.");
-  const forbiddenInlineReferences = [];
-  const collectForbiddenInlineReferences = value => {
-    if (!value || typeof value !== "object") return;
-    if (value.resolution === "unresolved") intentionallyUnlinkedHistoricalReferences.push(value);
-    if (value.ruleId === "context-cfr-the-act" || value.family === "unknown" || /^the Act$/i.test(value.text || "")) forbiddenInlineReferences.push(value);
-    for (const child of Object.values(value)) collectForbiddenInlineReferences(child);
-  };
-  const intentionallyUnlinkedHistoricalReferences = [];
-  collectForbiddenInlineReferences(hydratedSource);
-  assert.deepStrictEqual(forbiddenInlineReferences, [], "The built corpus retained a bare-Act or unknown-family displayed inline reference.");
-  const unresolvedSignature = (start, text, target) => JSON.stringify([start, text, target]);
-  assert.deepStrictEqual(
-    intentionallyUnlinkedHistoricalReferences.map(reference => unresolvedSignature(reference.start, reference.text, `${reference.targetTitle}:${reference.targetSection}`)).sort(),
-    plain(hydratedSource.legalReferenceAudit.historicalEdition.issues.map(issue => unresolvedSignature(issue.start, issue.text, issue.target)).sort()),
-    "Every unresolved span must be accounted for by the historical edition safeguard."
-  );
+  const intentionallyUnlinkedHistoricalReferences = navigableReferences.filter(reference => reference.resolution === "unresolved");
+  const forbiddenInlineReferences = navigableReferences.filter(reference => reference.ruleId === "context-cfr-the-act" || /^the Act$/i.test(reference.text || "") || reference.family === "unknown" && reference.resolution !== "unresolved");
+  assert.deepStrictEqual(forbiddenInlineReferences, [], "A bare-Act or unidentified-authority reference became navigable.");
+  const unidentifiedAuthorityReferences = navigableReferences.filter(reference => reference.family === "unknown");
+  assert.strictEqual(unidentifiedAuthorityReferences.length, 13, "The reviewed unsupported-authority inventory changed.");
+  for (const reference of unidentifiedAuthorityReferences) {
+    assert(hydratedSource.legalReferenceExceptions.exceptions.some(exception =>
+      exception.resolution === "unresolved" && exception.text === reference.text && exception.start === reference.start &&
+      exception.citationNote === reference.citationNote && exception.target.family === "unknown" &&
+      exception.target.title === reference.targetTitle && exception.target.section === reference.targetSection &&
+      isDeepStrictEqual(exception.target.path, reference.targetPath)), "An unsupported authority lacks its exact reviewed exception and explanatory notice.");
+  }
+  // Former INA 244A remains disclosed plain text without a verified historical target.
+  assert.strictEqual(intentionallyUnlinkedHistoricalReferences.length, 1432, "The exact reviewed plain-text reference inventory changed.");
+  assert(intentionallyUnlinkedHistoricalReferences.every(reference => reference.citationNote), "Every historical, malformed or otherwise unverified target must disclose why it remains unlinked.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-cfr-the-act"), "Build metadata still advertises the removed bare-Act rule.");
   assert.strictEqual(full.corpus.definitions.entries.length, 506, "Unexpected definition record count.");
   assert.strictEqual(full.corpus.definitions.schemaVersion, 3, "The definitions catalog schema was not upgraded for machine-readable applicability targets.");
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "uscis-glossary").length, 267, "Unexpected USCIS Glossary definition count.");
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "ina").length, 207, "Unexpected indexed INA term count.");
   assert.strictEqual(full.corpus.definitions.entries.filter(entry => entry.sourceFamily === "cfr").length, 32, "Unexpected 8 CFR 1.2 definition count.");
-  assert.strictEqual(full.corpus.definitions.glossaryVerification.entries, 267, "USCIS Glossary verification metadata does not match the catalog.");
-  assert.deepStrictEqual(full.corpus.definitions.inaVerification, {
+  assert.strictEqual(fullSource.definitions.glossaryVerification.entries, 267, "USCIS Glossary verification metadata does not match the catalog.");
+  assert.deepStrictEqual(fullSource.definitions.inaVerification, {
     mappedSections: 177,
     lexicalFields: 176,
     definitionFields: 175,
@@ -1856,8 +1927,10 @@ async function main() {
     }],
     unresolvedScopes: []
   }, "The embedded INA definition completeness audit changed or left an unresolved scope.");
+  assert.strictEqual(full.corpus.definitions.inaVerification, undefined);
+  assert.strictEqual(full.corpus.definitions.glossaryVerification, undefined);
   const independentInaCatalog = deriveInaCatalog(hydratedSource, rawDefinitionSource);
-  assert.deepStrictEqual(independentInaCatalog.audit, full.corpus.definitions.inaVerification, "A fresh scan of the House-backed INA corpus does not reproduce the embedded definition audit.");
+  assert.deepStrictEqual(independentInaCatalog.audit, fullSource.definitions.inaVerification, "A fresh scan of the House-backed INA corpus does not reproduce the embedded definition audit.");
   assert.strictEqual(independentInaCatalog.entries.reduce((total, entry) => total + entry.aliases.length, 0), 207, "The INA scan did not index every quoted term in multi-term definition statements.");
   assert.strictEqual(new Set(independentInaCatalog.entries.map(entry => entry.sourceFilter)).size, 43, "The Defined-in registry does not cover every INA section containing a definition.");
   assert.deepStrictEqual(definitionStatementGroups('The terms “Commissioner” and “Deputy Commissioner” mean the two offices, respectively.').map(group => group.terms), [["Commissioner", "Deputy Commissioner"]], "A shared multi-term definition is not indexed under every quoted term.");
@@ -2690,7 +2763,7 @@ async function main() {
   assert.strictEqual(startupEditableSearch.value, " INA 215(a) ", "Startup query formatting is canonicalized before it reaches the editable field.");
   applyStartupSearchQuery(" INA 215(a) ", false);
   assert.strictEqual(startupEditableSearch.value, "INA 215(a)", "Ordinary non-startup query normalization unexpectedly changed.");
-  const startupShareLink = extractedFunction(fallbackSource, "currentViewShareLink", "syncMainShareWarning", { String, URL, currentShareQuery: () => null });
+  const startupShareLink = extractedFunction(fallbackSource, "currentViewShareLink", "syncMainShareWarning", { String, URL, profile: blankProfile, currentShareQuery: () => null });
   const advancedStartupCases = [
     { expression: "INA", route: "hierarchy" },
     { expression: "CFR", route: "hierarchy" },
@@ -3374,7 +3447,7 @@ async function main() {
     { system: "INA", citation: "INA 101(a)(15)(H)(i)(b)", action: "copy-ina-citation" },
     { system: "USC", citation: "8 U.S.C. 1101(a)(15)(H)(i)(b)", action: "copy-usc-citation" }
   ], "An INA-opened statutory menu does not show the selected citation followed by its U.S.C. crosswalk.");
-  const currentViewShareLink = extractedFunction(fallbackSource, "currentViewShareLink", "syncMainShareWarning", { String, URL, currentShareQuery: () => null });
+  const currentViewShareLink = extractedFunction(fallbackSource, "currentViewShareLink", "syncMainShareWarning", { String, URL, profile: blankProfile, currentShareQuery: () => null });
   const hostedShareLink = plain(currentViewShareLink({ href: "https://example.test/INASearch.html?old=value#stale" }, "INA 101(a)(15)(H)(i)(b)"));
   const hostedShareUrl = new URL(hostedShareLink.href);
   assert.strictEqual(hostedShareUrl.searchParams.get("q"), "INA 101(a)(15)(H)(i)(b)", "A hosted share link does not encode the selected legal unit in q.");
@@ -3383,7 +3456,8 @@ async function main() {
   assert.strictEqual(hostedShareLink.local, false, "A hosted share link was incorrectly marked local.");
   const localShareLink = plain(currentViewShareLink({ href: "file:///Users/Test/INASearch.html" }, "8 CFR 214.2(a)(2)"));
   assert.strictEqual(new URL(localShareLink.href).searchParams.get("q"), "8 CFR 214.2(a)(2)", "A local share link does not encode the selected legal unit in q.");
-  assert.strictEqual(localShareLink.local, true, "A file URL share link is missing its local-only warning state.");
+  assert.strictEqual(new URL(localShareLink.href).origin, "https://inasearch.pages.dev", "A file URL share link did not use the designated hosted destination.");
+  assert.strictEqual(localShareLink.local, false, "A hosted destination retained the local-link warning state.");
   const legalUnitShareLink = extractedFunction(fallbackSource, "legalUnitShareLink", "copyLegalText", { String, window: { location: { href: "file:///unused" } }, currentViewShareLink });
   const citationShareLink = plain(legalUnitShareLink("INA 101(a)(15)(H)(i)(b)", { href: "https://example.test/INASearch.html?q=unrelated#stale" }));
   assert.strictEqual(new URL(citationShareLink.href).searchParams.get("q"), "INA 101(a)(15)(H)(i)(b)", "The citation-specific share link copied the global view instead of only the selected citation.");
@@ -5391,7 +5465,7 @@ async function main() {
   assert(fallbackSource.includes('on(els.statuteNavigationDepthSelect, "change"') && fallbackSource.includes('on(els.cfrNavigationDepthSelect, "change"'), "The Settings unit-depth selectors are not wired to their persisted preferences.");
   assert(fallbackSource.includes('id="mainShareButton"') && fallbackSource.includes('.main-share-button {') && fallbackSource.includes('.main-share-icon {'), "The former unit-depth space does not contain the icon-only global share control.");
   assert(fallbackSource.includes("STATUTE_NAVIGATION_DEPTHS") && fallbackSource.includes("CFR_NAVIGATION_DEPTHS"), "The navigation bar lacks separate persisted statute and regulation depth options.");
-  assert(fallbackSource.includes('statutoryNavigationSystem: "ina"') && fallbackSource.includes('statuteSectionDisplay: "hierarchy"') && fallbackSource.includes("automaticStatutoryNavigationSystem: true") && fallbackSource.includes("splitAuthoritySearchPanes: false") && fallbackSource.includes('legalNavigatorVisibility: "single"') && fallbackSource.includes("scrollUpdatesSearch: false") && fallbackSource.includes("pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT") && fallbackSource.includes("mainNavigatorCollapsed: false") && fallbackSource.includes("expandSearchResultsByDefault: true") && fallbackSource.includes("showCfrChapterSubchapterInSearchHierarchy: false") && fallbackSource.includes("syncCfrCommonDepthFromStatute: true") && fallbackSource.includes("persistInlineReferenceInsertions: false") && fallbackSource.includes("animatedCitationJumps: true"), "Viewer and navigation preference defaults do not match the overhaul contract.");
+  assert(fallbackSource.includes('statutoryNavigationSystem: "ina"') && fallbackSource.includes('statuteSectionDisplay: "hierarchy"') && fallbackSource.includes("automaticStatutoryNavigationSystem: false") && fallbackSource.includes("splitAuthoritySearchPanes: false") && fallbackSource.includes('legalNavigatorVisibility: "single"') && fallbackSource.includes("scrollUpdatesSearch: false") && fallbackSource.includes("pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT") && fallbackSource.includes("mainNavigatorCollapsed: false") && fallbackSource.includes("expandSearchResultsByDefault: true") && fallbackSource.includes("showCfrChapterSubchapterInSearchHierarchy: false") && fallbackSource.includes("syncCfrCommonDepthFromStatute: true") && fallbackSource.includes("persistInlineReferenceInsertions: false") && fallbackSource.includes("animatedCitationJumps: true"), "Viewer and navigation preference defaults do not match the overhaul contract.");
   assert(!fallbackSource.includes("navigationUpdatesSearch: true"), "The retired explicit-navigation synchronization preference remains in defaults.");
   assert(fallbackSource.includes("syncSearchToScrolledLegalLocation(\"statute\"") && fallbackSource.includes("syncSearchToScrolledLegalLocation(\"cfr\""), "Scroll-follow mode is not connected to both statutory and regulatory readers.");
   const scrollSearchSyncSource = fallbackSource.slice(fallbackSource.indexOf("function syncSearchToScrolledLegalLocation"), fallbackSource.indexOf("function updateStatuteNavigationFromScroll"));
@@ -5710,7 +5784,9 @@ async function main() {
   // Excluding 38 U.S.C. 5303A removes its inferred (3)(B) link from the 8 U.S.C. 1612 note; explicit official-source links remain.
   // Explicit hierarchy antecedents also resolve “that subchapter” in former
   // section 1161 and “such chapter” in section 1551's reorganization note.
-  assert.deepStrictEqual({ operative: statutoryFormattingAudit.citationLinks, total: statutoryFormattingAudit.citationLinks + ancillaryCitationLinks }, { operative: 6260, total: 30827 }, "Unexpected generated-link inventory in the expanded statutory corpus.");
+  // CFR detection adds the 34.2 link and makes the formerly unresolved
+  // 655.202(b)(6) citation in former section 1186 navigable.
+  assert.deepStrictEqual({ operative: statutoryFormattingAudit.citationLinks, total: statutoryFormattingAudit.citationLinks + ancillaryCitationLinks }, { operative: 6439, total: 32263 }, "Unexpected generated-link inventory in the expanded statutory corpus.");
 
   const migration = profileMigrationFunctions(fallbackSource);
   for (const authority of ["ina", "usc"]) {
@@ -5768,6 +5844,13 @@ async function main() {
   delete missingThemePreferences.theme;
   const missingThemeProfile = plain(migration.normalizeProfile({ ...blankProfile, preferences: missingThemePreferences }));
   assert.strictEqual(missingThemeProfile.preferences.theme, "light", "A legacy profile without a theme did not default to Day.");
+  for (const enabled of [true, false]) {
+    const saved = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, useHostedShareLinks: enabled } }));
+    assert.strictEqual(saved.preferences.useHostedShareLinks, enabled, "Profile normalization discarded the saved hosted-sharing choice.");
+  }
+  const oldSharePreferences = { ...blankProfile.preferences };
+  delete oldSharePreferences.useHostedShareLinks;
+  assert.strictEqual(migration.normalizeProfile({ ...blankProfile, preferences: oldSharePreferences }).preferences.useHostedShareLinks, true, "Existing profiles did not default to hosted sharing.");
   for (const preference of ["showDetailedStatus", "hideTopThemeControls", "hideLocalShareWarning", "highlightInaCitationLinks"]) {
     const enabled = plain(migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, [preference]: true } }));
     const legacyPreferences = { ...blankProfile.preferences };

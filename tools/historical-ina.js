@@ -97,16 +97,23 @@ function applyHistoricalReferences(corpus) {
     return true;
   };
   const numbered = (reference, source) => {
-    if (reference.historicalEditionGuard) return null;
+    // Explicit editions already have a verified archive or an unresolved date
+    // guard. A second wrapper must not override that citation's identity.
+    if (reference.historicalEditionGuard || reference.targetEdition || reference.resolution === "unresolved") return null;
     if (!["usc", "ina"].includes(reference.family) || String(reference.targetTitle || 8) !== "8") return null;
     const number = String(reference.targetSection), path = reference.targetPath || [];
     if (number === "1105a") return { status: "repealed", heading: "Former INA §106 — Judicial review of orders of deportation and exclusion", message: "The former judicial-review provision was repealed by Public Law 104-208 in 1996, effective April 1, 1997 with transitional provisions. The Code number was reused in 2006 for a different provision concerning battered spouses. Historical target text is not included in this corpus.", url: currentUrl(number), historicalUrl: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1995-title8-section1105a&num=0&edition=1995", destination: { citation: "Current judicial-review provision: 8 U.S.C. 1252", url: currentUrl("1252") } };
     if (number === "1252") return { status: "replaced", heading: "Former INA §242 — Apprehension and deportation of aliens", message: "The former deportation provision was replaced by Public Law 104-208. Current 8 U.S.C. 1252 concerns judicial review and is a different provision. The historical target text is not included in this corpus.", url: currentUrl(number), historicalUrl: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1995-title8-section1252&num=0&edition=1995" };
     if (number === "1251") return { status: "transferred", heading: "Former INA §241 — Deportable aliens", message: "The deportability provision was transferred to INA §237 (8 U.S.C. 1227). This link preserves its historical location and subsection identity; the historical target text is not included in this corpus.", url: currentUrl(number), destination: { citation: "INA 237 / 8 U.S.C. 1227", url: currentUrl("1227") } };
     if (number === "1253" && source.section === "1252a") return { status: "replaced", heading: "Former INA §243 — Countries to which aliens shall be deported", message: "The former destination-of-deportation provision was replaced by IIRIRA. Current 8 U.S.C. 1253 concerns penalties. Historical target text is not included in this corpus.", url: currentUrl(number), historicalUrl: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-1995-title8-section1253&num=0&edition=1995" };
-    if (number === "1450" && source.section === "1459") return { status: "replaced", heading: "Former INA §339 — Functions and duties of clerks", message: "The court-clerk provisions cited here were replaced by Public Law 101-649 §407(c). Today's subsection lettering does not identify the former provisions. Historical target text is not included in this corpus.", url: currentUrl(number) };
+    if (number === "1450" && source.section === "1459") return { status: "replaced", heading: "Former INA §339 — Functions and duties of clerks", message: "The court-clerk provisions cited here were replaced by Public Law 101-649 §407(d)(17). Today's subsection lettering does not identify the former provisions. Historical target text is not included in this corpus.", url: currentUrl(number) };
     const target = sections.get(number);
-    if (target?.historical && ["repealed", "transferred"].includes(target.status)) return { status: target.status, heading: target.historical?.originalTitle || `Former 8 U.S.C. ${number}`, message: (target.status === "transferred" ? "Transferred—not current at this location." : "Repealed—not current law.") + (!availablePath(target, path) ? " The cited historical target text is not available in the imported final version." : ""), url: target.url, available: availablePath(target, path) };
+    if (target?.historical && ["repealed", "transferred"].includes(target.status)) {
+      // Split House repeal records can retain the first section's source URL.
+      // The historical capture belongs to this individual target provision.
+      const historicalUrl = reference.historicalOfficialUrl || target.historical.sourceUrl;
+      return { status: target.status, heading: target.historical.originalTitle || `Former 8 U.S.C. ${number}`, message: (target.status === "transferred" ? "Transferred—not current at this location." : "Repealed—not current law.") + (!availablePath(target, path) ? " The cited historical target text is not available in the imported final version." : ""), url: historicalUrl || currentUrl(number), ...(historicalUrl ? { historicalUrl } : {}), available: availablePath(target, path) };
+    }
     return null;
   };
   for (const section of corpus.title8.sections.filter(s => s.historical)) {
@@ -144,6 +151,10 @@ function applyHistoricalReferences(corpus) {
           const target = numbered(ref, section);
           if (target) {
             ref.historicalTargetId = register(target);
+            if (target.historicalUrl) {
+              ref.historicalOfficialUrl ||= target.historicalUrl;
+              ref.officialUrl = ref.historicalOfficialUrl;
+            }
             if (!target.available) ref.resolution = "official-source-only";
           }
         }
@@ -158,7 +169,7 @@ function applyHistoricalReferences(corpus) {
   // imported. Upgrade only citations whose exact target is now locally present.
   const upgrade = object => {
     if (!object || typeof object !== "object") return;
-    if (["usc", "ina"].includes(object.family) && String(object.targetTitle || 8) === "8" && !object.forceOfficial && !object.historicalEditionGuard && !object.targetEdition && !object.historicalTargetId && availablePath(sections.get(String(object.targetSection)), object.targetPath || [])) object.resolution = "local";
+    if (["usc", "ina"].includes(object.family) && object.resolution !== "unresolved" && String(object.targetTitle || 8) === "8" && !object.forceOfficial && !object.historicalEditionGuard && !object.targetEdition && !object.historicalTargetId && availablePath(sections.get(String(object.targetSection)), object.targetPath || [])) object.resolution = "local";
     for (const child of Object.values(object)) if (child && typeof child === "object") upgrade(child);
   };
   upgrade(corpus);

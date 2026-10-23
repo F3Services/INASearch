@@ -5,6 +5,7 @@ const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 const zlib = require("zlib");
+const vm = require("vm");
 const { readPackedCorpusHtml } = require("./read-build-corpus");
 const { packCorpusForDelivery, hydratePackedCorpus } = require("../src/INASearch-Corpus-Packing");
 const shardPath = path.join(__dirname, "..", "src", "INASearch-Corpus-Shards.js");
@@ -119,6 +120,36 @@ function assertConsumedHydration(packed, partitioned) {
 assert.strictEqual(typeof shards.partitionPackedCorpus, "function", "The corpus shard partitioner is missing.");
 const packed = packCorpusForDelivery(fixtureCorpus());
 const partitioned = assertPartitionRoundTrip(packed, 600);
+const browser = { INASEARCH_BROWSER: true };
+vm.runInNewContext(fs.readFileSync(shardPath, "utf8"), browser);
+assert.deepStrictEqual(JSON.parse(JSON.stringify(browser.INASearchCorpusShards.serializePackedCorpus(packed, 600))), shards.serializePackedCorpus(packed, 600), "The browser serializer differs from the build runtime.");
+// The serialized runtime path must retain the existing character-based chunk
+// boundaries and JSON property order, including escapes and UTF-16 characters.
+for (const input of [packed, fixtureCorpus(), {}, { title8: {}, cfr: {} }]) {
+  const original = clone(input);
+  for (const budget of [1, 60, 600, 1e6]) {
+    const expected = shards.partitionPackedCorpus(input, budget);
+    const actual = shards.serializePackedCorpus(input, budget);
+    assert.strictEqual(actual.runtimeJson, JSON.stringify(original));
+    assert.strictEqual(actual.metadataJson, JSON.stringify(expected.metadata));
+    assert.deepStrictEqual(actual.chunkJson, expected.chunks.map(chunk => JSON.stringify(chunk)));
+    assert.deepStrictEqual(input, original, "Serializing cache chunks changed the runtime input.");
+    assert.deepStrictEqual(shards.serializePackedCorpus(input, budget), actual, "Serialized cache output was not deterministic.");
+  }
+}
+{
+  const input = { title8: { sections: [{ id: "one", body: "é😀\n\"\\" }, { id: "two", body: "" }] } };
+  // First entry has 30 UTF-16 characters; the wrapper has 21. The second
+  // entry adds 21 characters plus its comma, so 73 fits and 72 splits.
+  const together = '{"id":0,"records":[["usc",0,{"body":"é😀\\n\\\"\\\\"}],["usc",1,{"body":""}]]}';
+  assert.deepStrictEqual(shards.serializePackedCorpus(input, 73).chunkJson, [together]);
+  assert.deepStrictEqual(shards.serializePackedCorpus(input, 72).chunkJson, [
+    '{"id":0,"records":[["usc",0,{"body":"é😀\\n\\\"\\\\"}]]}', '{"id":1,"records":[["usc",1,{"body":""}]]}'
+  ]);
+  const snapshot = shards.serializePackedCorpus(input, 73);
+  input.title8.sections[0].body = "Later";
+  assert.deepStrictEqual(snapshot.chunkJson, [together], "A serialized chunk retained mutable input aliases.");
+}
 assertHydratedRoundTrip(packed, partitioned);
 const consumedChunks = assertConsumedHydration(packed, partitioned);
 const consumedBody = consumedChunks.flatMap(chunk => chunk.records).find(([kind, , fields]) => kind === "usc" && fields.body?.length)[2].body;
@@ -158,4 +189,14 @@ if (htmlArgument >= 0) {
   const base64Bytes = metadataGzip.toString("base64").length + chunkGzips.reduce((sum, item) => sum + item.toString("base64").length, 0);
   console.log(`PASS complete corpus shards: ${fullPartitioned.chunks.length} chunks; exact packed and expanded round trips`);
   console.log(JSON.stringify({ originalGzipBytes: originalGzip.length, metadataGzipBytes: metadataGzip.length, chunkGzipBytes: chunkGzips.map(item => item.length), compressedBytes, gzipDelta: compressedBytes - originalGzip.length, base64Bytes, base64Delta: base64Bytes - originalGzip.toString("base64").length }));
+}
+
+// Source records can be shared by an indexed entry and its provenance entry.
+// The packer must transform each shared object once before JSON serialization.
+{
+ const source={locator:'Shared provenance locator with enough text for the dictionary.',supportingExcerpt:'Shared provenance excerpt with enough text for the dictionary.'};
+ const original={title8:{sections:[]},namedActs:[],first:{source},second:{source}};
+ const result=hydratePackedCorpus(JSON.parse(JSON.stringify(packCorpusForDelivery(original))));
+ assert.deepStrictEqual(result.first.source,source);
+ assert.deepStrictEqual(result.second.source,source);
 }

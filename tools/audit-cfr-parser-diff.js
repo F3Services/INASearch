@@ -1,19 +1,54 @@
 #!/usr/bin/env node
 'use strict';
-const fs=require('fs'), path=require('path'), crypto=require('crypto');
-const {readBuildCorpus}=require('./read-build-corpus');
-const root=path.resolve(__dirname,'..'), base=path.join(root,'audits/cfr-subpart-parser/baseline');
-const fields={references:'text',continuationReferences:'continuation',headingReferences:'heading',preambleReferences:'preamble',sourceCreditReferences:'sourceCredit',xReferences:'x',authorityReferences:'authority',sourceReferences:'source'};
-function read(file,pack){return pack.unpackLegalReferences(readBuildCorpus(file));}
-function collect(corpus){const out=new Map();function visit(v,p,source){if(!v||typeof v!=='object')return;if(Array.isArray(v)){v.forEach((x,i)=>visit(x,`${p}[${i}]`,source));return;}source=v.id||source;for(const [key,field]of Object.entries(fields))if(v[key]?.length)out.set(`${p}.${field}`,{sourceId:source,sourcePath:p,field,text:String(v[field]||''),references:v[key]});for(const[k,x]of Object.entries(v))if(!fields[k])visit(x,`${p}.${k}`,source);}visit(corpus,'corpus','');return out;}
-const clean=r=>({start:r.start,end:r.end,text:r.text,family:r.family,targetTitle:r.targetTitle||'',targetSection:r.targetSection||'',targetPath:r.targetPath||[],targetCongress:r.targetCongress||'',targetLaw:r.targetLaw||'',targetVolume:r.targetVolume||'',targetPage:r.targetPage||'',resolution:r.resolution,officialUrl:r.officialUrl||'',ruleId:r.ruleId});
-const identity=r=>JSON.stringify({...clean(r),ruleId:undefined});
-const beforeFile=process.argv[3]||path.join(base,'INASearch-Uncompressed.html');
-const afterFile=path.join(root,'INASearch-Uncompressed.html');
-const before=read(beforeFile,process.argv[3]?require('./pack-legal-references'):require(path.join(base,'pack-legal-references.js'))),after=read(afterFile,require('./pack-legal-references'));
-const old=collect(before),now=collect(after),rows=[];
-for(const key of new Set([...old.keys(),...now.keys()])){const a=old.get(key),b=now.get(key);if(a&&b&&a.text!==b.text)throw Error(`Source text changed: ${key}`);const oa=a?.references||[],nb=b?.references||[];const oi=new Set(oa.map(identity)),ni=new Set(nb.map(identity));const removed=oa.filter(r=>!ni.has(identity(r))),added=nb.filter(r=>!oi.has(identity(r)));const pending=[...removed.map(r=>({side:'before',r})),...added.map(r=>({side:'after',r}))].sort((x,y)=>x.r.start-y.r.start);while(pending.length){const group=[pending.shift()];let end=group[0].r.end;while(pending.length&&pending[0].r.start<end){group.push(pending.shift());end=Math.max(end,group.at(-1).r.end);}const f=b||a,start=group[0].r.start;rows.push({id:`delta-${String(rows.length+1).padStart(5,'0')}`,sourceId:f.sourceId,sourcePath:f.sourcePath,field:f.field,start,end,context:f.text.slice(Math.max(0,start-300),Math.min(f.text.length,end+300)),fieldReferences:nb.map(clean),before:group.filter(x=>x.side==='before').map(x=>clean(x.r)),after:group.filter(x=>x.side==='after').map(x=>clean(x.r))});}}
-const dir=path.resolve(process.argv[2]||path.join(root,'audits/cfr-subpart-parser/cycle-1'));fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'changes.jsonl'),rows.map(r=>JSON.stringify(r)).join('\n')+'\n');
-const total=m=>[...m.values()].reduce((n,x)=>n+x.references.length,0);
-const summary={beforeSha256:crypto.createHash('sha256').update(fs.readFileSync(beforeFile)).digest('hex'),afterSha256:crypto.createHash('sha256').update(fs.readFileSync(afterFile)).digest('hex'),before:total(old),after:total(now),packedBefore:before.legalReferencePacking.references,packedAfter:after.legalReferencePacking.references,changes:rows.length,removed:rows.reduce((n,r)=>n+r.before.length,0),added:rows.reduce((n,r)=>n+r.after.length,0)};
-for(let i=0;i<3;i++)fs.writeFileSync(path.join(dir,`review-${i+1}.jsonl`),rows.filter((_,j)=>j%3===i).map(r=>JSON.stringify(r)).join('\n')+'\n');fs.writeFileSync(path.join(dir,'summary.json'),JSON.stringify(summary,null,2)+'\n');console.log(summary);
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
+const { compareCorpora } = require('./compare-reference-corpora');
+function decodeArtifact(file, runtimeRoot = path.resolve(__dirname, '..')) {
+  const root = fs.realpathSync(runtimeRoot), files = {}, seen = new Set();
+  const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+  const readerPath = require.resolve(path.join(root, 'tools/read-build-corpus.js'));
+  const packerPath = require.resolve(path.join(root, 'tools/pack-legal-references.js'));
+  const reader = require(readerPath), packer = require(packerPath);
+  const corpus = packer.unpackLegalReferences(reader.readBuildCorpus(file));
+  const visit = module => {
+    if (!module || seen.has(module.id)) return;
+    seen.add(module.id);
+    if (module.filename?.startsWith(root + path.sep)) files[path.relative(root,module.filename)] = hash(fs.readFileSync(module.filename));
+    module.children.forEach(visit);
+  };
+  visit(require.cache[readerPath]); visit(require.cache[packerPath]);
+  return { corpus, decoder: { root, files } };
+}
+function main(args) {
+  const option = name => { const index = args.indexOf(name); return index < 0 ? null : args[index + 1]; };
+  const beforeFile = option('--before'), afterFile = option('--after'), output = option('--out');
+  if (!beforeFile || !afterFile || !output) throw Error('Usage: node tools/audit-cfr-parser-diff.js --before BEFORE.html --after AFTER.html --out OUTPUT_DIRECTORY [--before-runtime FROZEN_RUNTIME_ROOT] [--after-runtime RUNTIME_ROOT]');
+  const beforeDecoded = decodeArtifact(beforeFile, option('--before-runtime') || undefined);
+  const afterDecoded = decodeArtifact(afterFile, option('--after-runtime') || undefined);
+  const before = beforeDecoded.corpus, after = afterDecoded.corpus;
+  const result = compareCorpora(before, after), dir = path.resolve(output);
+  fs.mkdirSync(path.join(dir, 'field-contexts'), { recursive: true });
+  const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+  const fieldFiles = new Map();
+  for (const [key, context] of result.fieldContexts) {
+    const file = `field-contexts/${hash(key).slice(0, 20)}.json`;
+    fs.writeFileSync(path.join(dir, file), JSON.stringify(context) + '\n'); fieldFiles.set(key, file);
+  }
+  const currentFieldFiles = new Set(fieldFiles.values());
+  for (const file of fs.readdirSync(path.join(dir, 'field-contexts'))) if (/^[a-f0-9]{20}\.json$/.test(file) && !currentFieldFiles.has(`field-contexts/${file}`)) fs.unlinkSync(path.join(dir, 'field-contexts', file));
+  const rows = result.rows.map(row => ({ ...row, fieldContextFile: fieldFiles.get(row.referenceArrayPointer) }));
+  const jsonl = (name, values) => fs.writeFileSync(path.join(dir, name), values.map(value => JSON.stringify(value)).join('\n') + (values.length ? '\n' : ''));
+  jsonl('changes.jsonl', rows); jsonl('rule-id-only-changes.jsonl', result.ruleOnlyChanges); jsonl('source-changes.jsonl', result.sourceChanges); jsonl('configuration-changes.jsonl', result.configurationChanges);
+  jsonl('historical-target-registry.jsonl', result.historicalTargetRegistry);
+  jsonl('historical-target-changes.jsonl', result.historicalTargetChanges);
+  jsonl('historical-target-reindexings.jsonl', result.historicalTargetReindexings);
+  jsonl('historical-target-diagnostics.jsonl', result.historicalTargetDiagnostics);
+  for (let i = 0; i < 3; i++) jsonl(`review-${i + 1}.jsonl`, rows.filter((_, index) => index % 3 === i));
+  const summary = { ...result.summary, beforeSha256: hash(fs.readFileSync(beforeFile)), afterSha256: hash(fs.readFileSync(afterFile)), packedBefore: before.legalReferencePacking?.references, packedAfter: after.legalReferencePacking?.references, ignoredReferenceProperties: { parsedFamilyBearingRecordsOnly: ['id', 'evidenceId'], rawAndSupplementalRecords: [] }, ruleId: 'Compared separately; never hides changes to any other property.', historicalTargetScope: 'Every complete target record is compared by content with before/after IDs and all reference bindings. Reference identity dereferences historicalTargetId; reindexings are recorded separately, and missing target IDs fail integrity validation. Raw IDs and resolved targets remain in row and field evidence.', referenceScope: 'Every reference-property array, including raw records, supplemental markers, and derived fields.', sourceScope: 'Every string outside reference arrays, derived reference metadata (including the separately audited historical target registry), and separately recorded resolver configuration; unlinked fields included.' };
+  summary.toolSha256 = Object.fromEntries(['audit-cfr-parser-diff.js', 'compare-reference-corpora.js', 'read-build-corpus.js', 'pack-legal-references.js', 'legal-references.js'].map(file => [file, hash(fs.readFileSync(path.join(__dirname, file)))]));
+  summary.decoders = { before: beforeDecoded.decoder, after: afterDecoded.decoder };
+  fs.writeFileSync(path.join(dir, 'summary.json'), JSON.stringify(summary, null, 2) + '\n');
+  console.log(summary);
+  if (result.sourceChanges.length || result.historicalTargetDiagnostics.length) process.exitCode = 1;
+}
+if (require.main === module) main(process.argv.slice(2));
+module.exports = { main, decodeArtifact };

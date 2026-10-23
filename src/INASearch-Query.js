@@ -31,28 +31,71 @@
     return prefix(fragment.path, association.start.path);
   }
   const coverageCache = new WeakMap();
-  function resolveHighlights(projection, personal = {}) {
+  const highlightLookupCache = new WeakMap();
+  const highlightRecordKey = (family, title, section) => `${family}:${Number(title)}:${String(section).toLowerCase()}`;
+  const highlightHostKey = fragment => `${fragment.recordId}:${JSON.stringify(fragment.source.blockPath)}`;
+  function* highlightLookup(projection, options) {
+    const cached = highlightLookupCache.get(projection);
+    if (cached) return cached;
+    const records = new Map(), hosts = new Map(), order = new Map();
+    for (let index = 0; index < projection.fragments.length; index++) {
+      if ((index & 255) === 0) { cancelled(options); yield; }
+      const fragment = projection.fragments[index];
+      if ((fragment.contentKind || "law") !== "law") continue;
+      order.set(fragment, index);
+      const family = fragment.authority === "cfr" ? "cfr" : "usc";
+      const key = highlightRecordKey(family, fragment.title, fragment.section);
+      if (!records.has(key)) records.set(key, new Map());
+      const paths = records.get(key), path = pathKey(fragment.path);
+      if (!paths.has(path)) paths.set(path, []);
+      paths.get(path).push(fragment);
+      if (fragment.authority === "cfr" && fragment.source?.field === "blocks") {
+        const host = highlightHostKey(fragment);
+        if (!hosts.has(host)) hosts.set(host, []);
+        hosts.get(host).push(fragment);
+      }
+    }
+    cancelled(options);
+    const lookup = { records, hosts, order };
+    highlightLookupCache.set(projection, lookup);
+    return lookup;
+  }
+  function* resolveHighlightSteps(projection, personal, options) {
     const cacheKey = JSON.stringify(personal.highlights || []), cached = coverageCache.get(projection);
     if (cached?.key === cacheKey) return cached.ranges;
+    // Fallback callers pass live profile objects. Resolve the same independent
+    // snapshot as the key before yielding, so edits cannot mix cache identities.
+    const saved = JSON.parse(cacheKey);
     const ranges = new Map();
-    for (const highlight of personal.highlights || []) for (const segment of highlight.segments || []) {
+    let lookup, processed = 0;
+    for (const highlight of saved) for (const segment of highlight.segments || []) {
+      if ((processed++ & 31) === 0) { cancelled(options); yield; }
       if (segment.anchor?.status === "needs-review" || segment.association?.structureStatus === "needs-review") continue;
+      const association = segment.association;
+      if (!association?.start) continue;
+      if (!lookup) lookup = yield* highlightLookup(projection, options);
       // A host can contain a heading and several run-in fragments. Resolve its quote as
       // a whole before mapping offsets back to fragments; never guess repeated text.
-      let candidates = projection.fragments.filter(f => (f.contentKind || "law") === "law" && associationMatches(f, segment.association) && pathKey(f.path) === pathKey(segment.association.start.path));
-      if (segment.association?.family === "cfr") {
+      const key = highlightRecordKey(association.family, association.title || (association.family === "usc" ? 8 : 0), association.start.unit);
+      let candidates = (lookup.records.get(key)?.get(pathKey(association.start.path)) || []).filter(fragment => associationMatches(fragment, association));
+      if (association.family === "cfr") {
         // Several CFR units can share one rendered paragraph. Resolve against
         // that complete source host, then assign coverage to the actual unit.
-        const hosts = new Set(candidates.filter(f => f.source?.field === "blocks").map(f => `${f.recordId}:${JSON.stringify(f.source.blockPath)}`));
-        candidates = projection.fragments.filter(f => candidates.includes(f) || ((f.contentKind || "law") === "law" && f.authority === "cfr" && f.source?.field === "blocks" && hosts.has(`${f.recordId}:${JSON.stringify(f.source.blockPath)}`)));
+        const hosts = new Set(candidates.filter(f => f.source?.field === "blocks").map(highlightHostKey));
+        const expanded = new Set(candidates);
+        for (const host of hosts) for (const fragment of lookup.hosts.get(host) || []) expanded.add(fragment);
+        candidates = [...expanded].sort((a, b) => lookup.order.get(a) - lookup.order.get(b));
       }
       if (!candidates.length) continue;
       let located = null;
       for (const display of [false, true]) {
         if (located) break;
         for (const separator of ["", " ", "\n"]) {
+          cancelled(options); yield;
           let source = ""; const entries = [];
-          for (const fragment of candidates) {
+          for (let index = 0; index < candidates.length; index++) {
+            if (index && (index & 255) === 0) { cancelled(options); yield; }
+            const fragment = candidates[index];
             if (source) source += separator;
             const mapped = display ? displayMappedText(fragment) : { text: fragment.text, starts: Array.from({ length: fragment.text.length }, (_, i) => i), ends: Array.from({ length: fragment.text.length }, (_, i) => i + 1) };
             entries.push({ fragment, mapped, start: source.length, end: source.length + mapped.text.length });
@@ -71,8 +114,14 @@
           selectedText: entry.mapped.text.slice(start, end), starts: entry.mapped.starts.slice(start, end), ends: entry.mapped.ends.slice(start, end) });
       }
     }
+    cancelled(options);
     coverageCache.set(projection, { key: cacheKey, ranges });
     return ranges;
+  }
+  function resolveHighlights(projection, personal = {}) {
+    const iterator = resolveHighlightSteps(projection, personal, {}); let step;
+    do { step = iterator.next(); } while (!step.done);
+    return step.value;
   }
   function displayMappedText(fragment) {
     const result = { text: "", starts: [], ends: [] };
@@ -201,7 +250,7 @@
     const needsHighlights = has.some(clause => clause.kinds.includes("highlights")) || plan.branches.some(branch => branch.highlightMode);
     let highlights;
     const getHighlights = () => highlights ||= resolveHighlights(projection, personal);
-    if (needsHighlights) getHighlights();
+    if (needsHighlights) highlights = yield* resolveHighlightSteps(projection, personal, options);
     const mappings = new Map();
     const mergeBranches = plan.branches.filter(branch => branch.kind !== "notes").length > 1;
     const selectedRows = new Map(), selectedGroups = [], scanned = { fragmentsScanned: 0 };

@@ -980,7 +980,7 @@
     .occurrence-search-summary { color: var(--ink); font-size: 13px; font-weight: 700; }
     .occurrence-search-summary strong { color: var(--blue); font-family: var(--mono); font-size: 15px; font-weight: 900; }
     .occurrence-authority-stream { display: grid; gap: 0; }
-    .occurrence-authority-group { position: relative; min-width: 0; padding-bottom: 18px; }
+    .occurrence-authority-group { position: relative; min-width: 0; padding-bottom: 18px; scroll-margin-top: calc(var(--topbar-height, 0px) + var(--statute-nav-height, 0px)); }
     .occurrence-authority-group + .occurrence-authority-group { border-top: 1px solid var(--line); }
     .occurrence-authority-header {
       position: sticky;
@@ -1001,6 +1001,10 @@
     .occurrence-authority-title strong { display: block; font-family: var(--serif); font-size: 18px; }
     .occurrence-authority-title small { display: block; margin-top: 1px; overflow: hidden; color: var(--muted); font-size: 10px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
     .occurrence-authority-count { color: var(--blue); font-family: var(--mono); font-size: 11px; font-weight: 850; white-space: nowrap; }
+    .occurrence-section-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 8px 0; color: var(--muted); font-size: 11px; }
+    .occurrence-section-pagination :is(button, select) { border: 1px solid var(--line); border-radius: 5px; padding: 5px 8px; background: var(--panel); color: var(--navy); font: inherit; }
+    .occurrence-section-pagination button:not(:disabled), .occurrence-section-pagination select { cursor: pointer; }
+    .occurrence-section-pagination button:disabled { opacity: .45; }
     .pane-hierarchy-list, .occurrence-hierarchy { display: grid; gap: 4px; }
     .pane-hierarchy-node { border-left: 1px solid color-mix(in srgb, var(--blue) 24%, var(--line)); padding-left: 8px; }
     .pane-hierarchy-node > summary { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 7px; border-radius: 6px; padding: 6px; cursor: pointer; list-style: none; }
@@ -1981,7 +1985,7 @@
         <span class="main-share-control">
         <button class="main-share-button" id="mainShareButton" type="button" aria-label="Copy link to current view" title="Copy link to current view">
           <svg class="main-share-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"></path></svg>
-          <span class="main-share-local-warning" id="mainShareLocalWarning" role="img" aria-label="Local-file link warning" hidden>⚠</span>
+          <span class="main-share-local-warning" id="mainShareLocalWarning" role="img" aria-label="Local link warning" hidden>⚠</span>
         </button>
         </span>
       </span>
@@ -2185,7 +2189,7 @@
 
   <aside class="local-share-warning-popover" id="localShareWarningPopover" role="note" aria-live="polite" hidden>
     <span class="local-share-warning-popover-sign" aria-hidden="true">⚠</span>
-    <div class="local-share-warning-popover-copy"><strong>Local-file link</strong><p id="localShareWarningText">This link is not shareable with other people. It will only work on this device while this HTML file remains at its current location.</p></div>
+    <div class="local-share-warning-popover-copy"><strong>Local link</strong><p id="localShareWarningText">This link points to a local copy of INASearch. Other people cannot use it unless they can open the same address.</p></div>
     <button class="local-share-warning-dismiss" id="localShareWarningDismiss" type="button">Don't remind me again</button>
   </aside>
 
@@ -2286,6 +2290,13 @@
             <p class="citation-copy-warning" id="citationCopyPrefaceWarning" role="status" aria-live="polite" hidden>[citation] not detected</p>
           </div>
         </section>
+        <section class="settings-section" aria-labelledby="sharingSettingsHeading">
+          <h3 class="settings-section-heading" id="sharingSettingsHeading">Sharing</h3>
+          <label class="settings-toggle" for="useHostedShareLinksToggle">
+            <span><strong>Use inasearch.pages.dev for local share links</strong><small>On by default. Downloaded files and localhost copies share links to https://inasearch.pages.dev/. Copies hosted elsewhere keep their own address.</small></span>
+            <input id="useHostedShareLinksToggle" type="checkbox" role="switch">
+          </label>
+        </section>
         <section class="settings-section" aria-labelledby="navigationSettingsHeading">
           <h3 class="settings-section-heading" id="navigationSettingsHeading">Navigation &amp; scrolling</h3>
           <div class="settings-toggle">
@@ -2296,7 +2307,7 @@
             </select>
           </div>
           <label class="settings-toggle" for="automaticStatutoryNavigationSystemToggle">
-            <span><strong>Match statute hierarchy to typed citations</strong><small>On by default. An INA citation switches the upper navigation levels to the INA structure and a U.S.C. citation switches them to the U.S.C. structure. The compact INA/U.S.C. button remains available either way.</small></span>
+            <span><strong>Match statute hierarchy to typed citations</strong><small>Off by default. Keep the view you choose with the INA/U.S.C. button. Turn this on to switch views automatically when you type an INA or U.S.C. citation.</small></span>
             <input id="automaticStatutoryNavigationSystemToggle" type="checkbox" role="switch">
           </label>
           <label class="settings-toggle" for="syncCfrCommonDepthFromStatuteToggle">
@@ -2527,7 +2538,8 @@
                 if (typeof reference[4] === "number" && Number.isFinite(reference[4])) expanded.evidenceId = reference[4];
                 if (target[16]) expanded.targetChapter = String(target[16]);
                 if (target[17]) expanded.targetSubchapter = String(target[17]);
-                if (target[16] && target[18]) expanded.officialUrl = String(target[18]);
+                if (target[18]) expanded.officialUrl = String(target[18]) === "-1" ? "" : String(target[18]);
+                if (Number(target[19])) expanded.targetNote = true;
               }
               else for (const [key, child] of Object.entries(reference)) expanded[keys[key] || key] = child;
               previousEnd = expanded.end;
@@ -2535,6 +2547,7 @@
               if (!expanded.targetPath) expanded.targetPath = [];
               expanded.text = String(item[fields[code]] || "").slice(expanded.start, expanded.end);
               if (expanded.ruleId === "context-path-this-section" && !expanded.targetPath.length) expanded.targetPath = componentTokens(expanded.text) || [];
+              const preservedOfficialUrl = expanded.officialUrl;
               if (expanded.houseHref) {
                 expanded.provenance = "house-uslm-ref";
                 expanded.ruleId = "house-uslm-ref";
@@ -2558,13 +2571,31 @@
                 else if (expanded.family === "unknown") expanded.officialUrl = `https://www.govinfo.gov/app/search/%7B%22query%22%3A%22${encodeURIComponent(`${expanded.targetTitle || expanded.text || ""} section ${expanded.targetSection || ""}${canonicalPath(expanded.targetPath || [])}`)}%22%7D`;
               }
               if (expanded.targetEdition && expanded.family === "usc") {
-                expanded.resolution = "official-source-only";
                 expanded.officialUrl = `https://uscode.house.gov/view.xhtml?edition=${expanded.targetEdition}&num=0&req=${encodeURIComponent(`granuleid:USC-${expanded.targetEdition}-title${expanded.targetTitle}-section${expanded.targetSection}`)}`;
               }
+              if (preservedOfficialUrl !== undefined) expanded.officialUrl = preservedOfficialUrl;
               if (expanded.historicalOfficialUrl) expanded.officialUrl = expanded.historicalOfficialUrl;
               if (expanded.targetChapter) {
                 expanded.targetKind = "usc-hierarchy";
                 expanded.officialUrl ||= "https://uscode.house.gov/browse.html";
+              }
+              if (expanded.family === "public-law" && Number(expanded.targetCongress) > 0 && Number(expanded.targetCongress) < 104 && !expanded.historicalOfficialUrl &&
+                  (!expanded.officialUrl || /\/PLAW-\d+publ\d+(?:[/?#]|$)/.test(expanded.officialUrl))) {
+                delete expanded.houseHref;
+                if (String(expanded.targetCongress)==="99" && String(expanded.targetLaw)==="603") {
+                  expanded.officialUrl = "https://www.govinfo.gov/content/pkg/STATUTE-100/pdf/STATUTE-100-Pg3445.pdf";
+                  expanded.historicalOfficialUrl = expanded.officialUrl;
+                } else {
+                expanded.officialUrl = `https://www.govinfo.gov/app/search/${encodeURIComponent(JSON.stringify({query: `collection:statute plawcitation:"Public Law ${expanded.targetCongress}-${expanded.targetLaw}"`}))}`;
+                const notice = "The official link searches GovInfo for this Public Law. A verified direct archive is not available here; the slip-law collection begins with the 104th Congress.";
+                expanded.citationNote = [expanded.citationNote, notice].filter(Boolean).join(" ");
+                }
+              }
+              if (expanded.family === "statutes-at-large" && expanded.targetVolume && !expanded.historicalOfficialUrl &&
+                  /\/app\/details\/STATUTE-[^/]+\/STATUTE-[^/]+-Pg/.test(expanded.officialUrl || "")) {
+                delete expanded.houseHref;
+                expanded.officialUrl = expanded.targetVolume==="100" && expanded.targetPage==="3359" ? "https://www.govinfo.gov/content/pkg/STATUTE-100/pdf/STATUTE-100-Pg3445.pdf" : `https://www.govinfo.gov/link/statute/${expanded.targetVolume}/${expanded.targetPage}`;
+                expanded.citationNote = [expanded.citationNote,"The official citation link locates the printed page within its containing Statutes at Large document."].filter(Boolean).join(" ");
               }
               return expanded;
             });
@@ -2671,7 +2702,7 @@
           [34, "The Section button's wording is configurable.", "Section display in Settings can show INA, U.S.C., both, or whichever numbering system the current hierarchy uses.", "visible"],
           [37, "The last navigation button can offer immediate children.", "This makes it possible to descend into the next legal level without returning to a separate menu page.", "visible"],
           [38, "Settings controls the smallest unit shown in navigation.", "Statutes and CFR have separate depth settings.", "visible"],
-          [39, "The fixed action column uses a visible highlighted citation.", "Any visible part of the blue selection keeps its actions active. Otherwise, hover an action to preview the first citation below Page view offset. The § button copies the citation; T copies legal text using your saved Copied text format.", "visible"]
+          [39, "Sidebar previews keep a visible citation start in place.", "Hovering or focusing an action keeps your position when the highlighted citation's start is visible. Otherwise it temporarily brings that start to Page view offset. The § button copies the citation; T copies legal text using your saved Copied text format.", "visible"]
         ]
       },
       {
@@ -2703,7 +2734,7 @@
       {
         id: "saving", title: "Saving and research preferences", tips: [
           [68, "Browser saving and a connected data file serve different purposes.", "Browser saving is automatic on this device; a connected file gives you a portable copy you control."],
-          [70, "A warning sign marks local-file links.", "Such a link works only on this device while the HTML file stays in the same location; Don't remind me again controls the automatic reminder."],
+          [70, "Local copies share hosted links by default.", "Settings → Sharing uses inasearch.pages.dev for links from downloaded files and localhost copies. Turn it off to copy the local address instead; a warning sign then marks those local links."],
           [72, "Automatic CFR updates are optional.", "Enabling the setting checks included CFR material directly against eCFR; it does not update the U.S. Code, INA crosswalk, forms, or Policy Manual snapshot."],
           [75, "Start with a working research query.", "Set Default startup query in Settings to in:237 has:notes to open your annotated deportability provisions each time. You can save any citation or search there; leave it blank to start at Home."],
           [76, "Citation links in statutes and regulations can display INA or U.S.C. citations.", "Convert citations to INA format in Settings controls the wording without changing link destinations."],
@@ -2927,7 +2958,7 @@
       highlights: [],
       annotationOrdinals: {},
       tipProgress: { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null },
-      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, statutoryLinkCitationSystem: "view", statutoryLinkCitationSystemVersion: 2, highlightInaCitationLinks: false, notesUseHandwrittenFont: false, statutoryNavigationSystem: "ina", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: true, splitAuthoritySearchPanes: false, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, scrollSearchDepth: 2, selectionUpdatesSearch: true, pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, mainNavigatorCollapsed: false, citationCopyPreface: "[citation] - [text]", citationCopyPrefaceVersion: 3, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
+      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, useHostedShareLinks: true, statutoryLinkCitationSystem: "view", statutoryLinkCitationSystemVersion: 2, highlightInaCitationLinks: false, notesUseHandwrittenFont: false, statutoryNavigationSystem: "ina", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: false, splitAuthoritySearchPanes: false, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, scrollSearchDepth: 2, selectionUpdatesSearch: true, pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, mainNavigatorCollapsed: false, citationCopyPreface: "[citation] - [text]", citationCopyPrefaceVersion: 3, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
       referenceInsertions: emptyReferenceInsertions()
     });
 
@@ -2957,6 +2988,7 @@
       normalized.preferences.showDetailedStatus = normalized.preferences.showDetailedStatus === true;
       normalized.preferences.hideTopThemeControls = normalized.preferences.hideTopThemeControls === true;
       normalized.preferences.hideLocalShareWarning = normalized.preferences.hideLocalShareWarning === true;
+      normalized.preferences.useHostedShareLinks = normalized.preferences.useHostedShareLinks !== false;
       // Unversioned profiles kept the old on/off choice when Follow View Setting
       // was introduced. Adopt the new default once, then preserve explicit choices.
       normalized.preferences.statutoryLinkCitationSystem = normalized.preferences.statutoryLinkCitationSystemVersion === 2 && ["ina", "view", "usc"].includes(normalized.preferences.statutoryLinkCitationSystem) ? normalized.preferences.statutoryLinkCitationSystem : "view";
@@ -2964,7 +2996,7 @@
       normalized.preferences.highlightInaCitationLinks = normalized.preferences.highlightInaCitationLinks === true;
       normalized.preferences.statutoryNavigationSystem = normalized.preferences.statutoryNavigationSystem === "usc" ? "usc" : "ina";
       normalized.preferences.statuteSectionDisplay = ["usc", "ina", "both", "hierarchy"].includes(normalized.preferences.statuteSectionDisplay) ? normalized.preferences.statuteSectionDisplay : "hierarchy";
-      normalized.preferences.automaticStatutoryNavigationSystem = normalized.preferences.automaticStatutoryNavigationSystem !== false;
+      normalized.preferences.automaticStatutoryNavigationSystem = normalized.preferences.automaticStatutoryNavigationSystem === true;
       normalized.preferences.splitAuthoritySearchPanes = normalized.preferences.splitAuthoritySearchPanes === true;
       normalized.preferences.legalNavigatorVisibility = ["never", "single", "all"].includes(normalized.preferences.legalNavigatorVisibility) ? normalized.preferences.legalNavigatorVisibility : "single";
       normalized.preferences.scrollUpdatesSearch = normalized.preferences.scrollUpdatesSearch === true;
@@ -3059,7 +3091,7 @@
 
     const els = {
       search: $("#searchInput"), searchScopeToken: $("#searchScopeToken"), searchScopeLabel: $("#searchScopeLabel"), searchScopeInput: $("#searchScopeInput"), searchScopeClear: $("#searchScopeClear"),
-      mainSearchHistoryControls: $("#mainSearchHistoryControls"), mainSearchHistoryBack: $("#mainSearchHistoryBack"), mainSearchHistoryForward: $("#mainSearchHistoryForward"), mainCitationToolbar: $("#mainCitationToolbar"), mainReaderActions: $("#mainReaderActions"), mainReaderAuthorityToggle: $("#mainReaderAuthorityToggle"), citationCopyPrefaceInput: $("#citationCopyPrefaceInput"), citationCopyPrefaceWarning: $("#citationCopyPrefaceWarning"), mainNavigatorToggle: $("#mainNavigatorToggle"), mainNavigatorLeading: $("#mainNavigatorLeading"), mainNavigatorOverflow: $("#mainNavigatorOverflow"), mainNavigatorOverflowMenu: $("#mainNavigatorOverflowMenu"), liveCitationCopies: $("#liveCitationCopies"), liveOfficialSource: $("#liveOfficialSource"), mainShareButton: $("#mainShareButton"), mainShareLocalWarning: $("#mainShareLocalWarning"),
+      mainSearchHistoryControls: $("#mainSearchHistoryControls"), mainSearchHistoryBack: $("#mainSearchHistoryBack"), mainSearchHistoryForward: $("#mainSearchHistoryForward"), mainCitationToolbar: $("#mainCitationToolbar"), mainReaderActions: $("#mainReaderActions"), mainReaderAuthorityToggle: $("#mainReaderAuthorityToggle"), citationCopyPrefaceInput: $("#citationCopyPrefaceInput"), citationCopyPrefaceWarning: $("#citationCopyPrefaceWarning"), mainNavigatorToggle: $("#mainNavigatorToggle"), mainNavigatorLeading: $("#mainNavigatorLeading"), mainNavigatorOverflow: $("#mainNavigatorOverflow"), mainNavigatorOverflowMenu: $("#mainNavigatorOverflowMenu"), liveCitationCopies: $("#liveCitationCopies"), liveOfficialSource: $("#liveOfficialSource"), mainShareButton: $("#mainShareButton"), useHostedShareLinksToggle: $("#useHostedShareLinksToggle"), mainShareLocalWarning: $("#mainShareLocalWarning"),
       mainCommonSearchControl: $("#mainCommonSearchControl"), mainCommonSearchSummary: $("#mainCommonSearchSummary"), mainCommonStatuteRow: $("#mainCommonStatuteRow"), mainCommonCfrRow: $("#mainCommonCfrRow"),
       searchInputMirror: $("#searchInputMirror"), citationEquivalent: $("#citationEquivalent"),
       citationEquivalentIna: $("#citationEquivalentIna"), citationEquivalentInaLabel: $("#citationEquivalentInaLabel"), citationEquivalentInaCopy: $("#citationEquivalentInaCopy"),
@@ -3386,7 +3418,6 @@
     }
 
     buildAuthorityHierarchies();
-    const policyMap = new Map((corpus?.policyManual?.catalog || []).map(x => [x.id, x]));
     const knownInaCitationPaths = new Map();
     const knownUscCitationPaths = new Map();
 
@@ -5570,7 +5601,7 @@
         statuteHierarchyAuthority: pane?.readerState?.statuteHierarchyAuthority,
         targetOccurrence: pane?.readerState?.explicitOccurrenceTarget || null,
         hierarchyExpanded: $$('[data-pane-hierarchy-node][open]', pane?.detail || document).map(element => element.dataset.paneHierarchyNode),
-        searchState: pane?.searchState ? { offset: Number(pane.searchState.offset) || 0, sectionId: pane.searchState.activeSectionId || "", bucketId: pane.searchState.activeSectionId || "", selectedResult: pane.searchState.selectedResult || null, totalOccurrences: Number(pane.searchState.result?.totalOccurrences) || 0 } : null,
+        searchState: pane?.searchState ? { offset: Number(pane.searchState.offset) || 0, sectionId: pane.searchState.activeSectionId || "", bucketId: pane.searchState.activeSectionId || "", selectedResult: pane.searchState.selectedResult || null, totalOccurrences: Number(pane.searchState.result?.totalOccurrences) || 0, ...(pane.searchState.sectionPages?.size ? { sectionPages: [...pane.searchState.sectionPages] } : {}) } : null,
         scrollTop: copyPreviewReadingScrollTop(pane),
         timestamp: Date.now()
       };
@@ -6044,6 +6075,7 @@
         replaceFocusedCitationSegmentText(pane, target.command);
       }
       for (const nodeId of target.hierarchyExpanded || []) $(`[data-pane-hierarchy-node="${CSS.escape(nodeId)}"]`, pane.detail)?.setAttribute("open", "");
+      if (target.mode === "search-tree") for (const [authority, page] of target.searchState?.sectionPages || []) renderOccurrenceAuthorityPage(pane, authority, page);
       if (target.mode === "search-tree" && pane.searchState && target.searchState?.selectedResult) { pane.scrollSearchRestorePending = false; void restoreOccurrenceResult(pane, target.searchState.selectedResult); return true; }
       if (target.mode === "search-tree" && pane.searchState && target.searchState) renderOccurrenceRows(pane, target.searchState.offset || 0, target.searchState.sectionId || target.searchState.bucketId || pane.searchState.activeSectionId);
       requestAnimationFrame(() => {
@@ -6881,6 +6913,7 @@
     }
 
     const OCCURRENCE_EAGER_ROW_LIMIT = 250;
+    const OCCURRENCE_SECTION_PAGE_SIZE = 80;
     const OCCURRENCE_WINDOW_ROW_LIMIT = 80;
     const OCCURRENCE_WINDOW_DOM_LIMIT = 250;
     const OCCURRENCE_WINDOW_ROW_STRIDE = 45;
@@ -7011,7 +7044,7 @@
     }
 
     function primeOccurrenceVirtualSections(pane) {
-      for (const section of pane?.searchState?.result?.sections || []) resetOccurrenceVirtualSection(pane, section.id);
+      for (const container of $$('[data-occurrence-section-rows]', pane.detail)) resetOccurrenceVirtualSection(pane, occurrenceSectionIdFromToken(container.dataset.occurrenceSectionRows));
     }
 
     function occurrenceRowFromButton(pane, button) {
@@ -7043,11 +7076,12 @@
       const search = pane.searchState;
       const sourceSection = search?.result && occurrenceSectionById(search.result, selected.sectionId);
       if (!sourceSection) return false;
-      const displayedSections = occurrenceDisplayGroups(search.result).flatMap(group => group.result.sections);
+      const displayedSections = (search.displayGroups || occurrenceDisplayGroups(search.result)).flatMap(group => group.result.sections);
       const displayedSection = displayedSections.find(section => section.id === selected.sectionId)
         || displayedSections.find(section => section.recordId === sourceSection.recordId && section.authority === sourceSection.authority);
       if (!displayedSection) return false;
       const sectionId = displayedSection.id;
+      ensureOccurrenceSectionPage(pane, sectionId);
       const container = occurrenceSectionRowsContainer(pane, sectionId);
       if (!container) return false;
       search.restoringResult = true;
@@ -7073,6 +7107,7 @@
       if (!result || !sectionId) return;
       const section = occurrenceSectionById(result, sectionId);
       if (!section) return;
+      if (options.activate !== false) ensureOccurrenceSectionPage(pane, sectionId);
       const windowed = options.windowed ?? pane.searchState.virtualizedRows;
       const maximum = Math.max(1, Math.min(section.totalOccurrences || 1, Number(options.limit) || (windowed ? OCCURRENCE_WINDOW_ROW_LIMIT : section.totalOccurrences || 1)));
       const start = Math.max(0, Math.min(Number(offset) || 0, Math.max(0, section.totalOccurrences - (options.paged ? 1 : maximum))));
@@ -7083,11 +7118,12 @@
       try { materialized = await Promise.resolve(result.materializeOccurrences({ sectionId, start, limit: maximum, contextCharacters: windowed ? 60 : 90 })); }
       catch (error) {
         const failedContainer = occurrenceSectionRowsContainer(pane, sectionId);
-        if (failedContainer && pane.searchState?.result === result && pane.occurrenceGeneration === searchGeneration) failedContainer.innerHTML = `<p class="hierarchy-empty">${escapeHtml(error?.message || "This result page could not be loaded.")}</p>`;
+        if (failedContainer && pane.searchState?.result === result && pane.occurrenceGeneration === searchGeneration && pane.searchState.pageGenerations.get(sectionId) === pageGeneration) failedContainer.innerHTML = `<p class="hierarchy-empty">${escapeHtml(error?.message || "This result page could not be loaded.")}</p>`;
         return;
       }
       if (pane.occurrenceGeneration !== searchGeneration || pane.searchState?.result !== result || pane.searchState.pageGenerations.get(sectionId) !== pageGeneration) return;
       const container = occurrenceSectionRowsContainer(pane, sectionId);
+      if (!container) return;
       // A worker response may arrive after focus entered the existing window.
       if (options.activate === false && container?.contains(document.activeElement)) return;
       if (options.focusFrom && document.activeElement !== options.focusFrom && container?.contains(document.activeElement)) return;
@@ -7131,7 +7167,7 @@
     }
 
     async function renderAllOccurrenceSections(pane) {
-      const sections = pane?.searchState?.result?.sections || [];
+      const sections = $$('[data-occurrence-section-rows]', pane.detail).map(container => occurrenceSectionById(pane.searchState.result, occurrenceSectionIdFromToken(container.dataset.occurrenceSectionRows))).filter(Boolean);
       await Promise.all(sections.map(section => renderOccurrenceRows(pane, 0, section.id, { activate: false, windowed: false, limit: section.totalOccurrences })));
       if (sections.length && !pane.searchState.activeSectionId) pane.searchState.activeSectionId = sections[0].id;
       pane.searchState.offset = pane.searchState.sectionOffsets.get(pane.searchState.activeSectionId) || 0;
@@ -7315,7 +7351,7 @@
           const group = groups.get(groupId);
           // Several INA provisions can share one Code section. Show that Code
           // section once in U.S.C. mode while retaining its original row identity.
-          if (groupId === "title8" && group.result.sections.some(item => item.recordId === section.recordId)) continue;
+          if (groupId === "title8" && group.recordIds.has(section.recordId)) continue;
           const codeLeaf = record && groupId !== "ina" ? authorityHierarchyNodes.get(`usc:section:${record.id}`) : null;
           const nodeMap = codeLeaf ? authorityHierarchyNodes : sourceNodes;
           const prefix = codeLeaf ? "search-display:" : "";
@@ -7346,13 +7382,78 @@
       });
     }
 
-    function occurrenceAuthorityStreamHtml(result, expandResults) {
-      return `<div class="occurrence-authority-stream">${occurrenceDisplayGroups(result).map(group => {
+    function occurrenceSectionPage(result, page = 0) {
+      const lastPage = Math.max(0, Math.ceil((result.sections?.length || 0) / OCCURRENCE_SECTION_PAGE_SIZE) - 1);
+      const start = Math.max(0, Math.min(lastPage, Math.floor(Number(page) || 0))) * OCCURRENCE_SECTION_PAGE_SIZE;
+      const sections = (result.sections || []).slice(start, start + OCCURRENCE_SECTION_PAGE_SIZE);
+      const nodes = new Map((result.hierarchy || []).map(node => [node.id, node]));
+      const retained = new Set();
+      for (const section of sections) {
+        let id = section.hierarchyId || section.hierarchyIds?.at(-1);
+        while (id && !retained.has(id)) { retained.add(id); id = nodes.get(id)?.parentId; }
+      }
+      return { ...result, sections, hierarchy: (result.hierarchy || []).filter(node => retained.has(node.id)) };
+    }
+
+    function occurrenceSectionPageHtml(group, expandResults, requestedPage = 0) {
+      const total = group.result.sections?.length || 0;
+      const pages = Math.max(1, Math.ceil(total / OCCURRENCE_SECTION_PAGE_SIZE));
+      const page = Math.max(0, Math.min(pages - 1, Math.floor(Number(requestedPage) || 0)));
+      const metadata = occurrenceAuthorityMetadata(group.authority);
+      const pager = pages > 1 ? `<nav class="occurrence-section-pagination" aria-label="${escapeHtml(metadata.short)} result pages"><button type="button" data-occurrence-section-page="${page - 1}"${page === 0 ? " disabled" : ""}>Previous</button><span>Sections ${(page * OCCURRENCE_SECTION_PAGE_SIZE + 1).toLocaleString()}–${Math.min(total, (page + 1) * OCCURRENCE_SECTION_PAGE_SIZE).toLocaleString()} of ${total.toLocaleString()}</span><select data-occurrence-section-page aria-label="${escapeHtml(metadata.short)} result page">${Array.from({ length: pages }, (_, index) => `<option value="${index}"${index === page ? " selected" : ""}>Page ${index + 1} of ${pages}</option>`).join("")}</select><button type="button" data-occurrence-section-page="${page + 1}"${page === pages - 1 ? " disabled" : ""}>Next</button></nav>` : "";
+      const hierarchy = occurrenceHierarchyHtml(occurrenceSectionPage(group.result, page), expandResults, group.authority);
+      return `${pager}<div class="occurrence-hierarchy">${hierarchy || '<p class="hierarchy-empty">No matching legal occurrences.</p>'}</div>${pager}`;
+    }
+
+    function renderOccurrenceAuthorityPage(pane, authority, requestedPage, navigate = false) {
+      const search = pane?.searchState;
+      const group = search?.displayGroups?.find(group => group.authority === authority);
+      const root = $$('[data-occurrence-authority]', pane?.detail).find(element => element.dataset.occurrenceAuthority === authority);
+      if (!group || !root) return;
+      const page = Math.max(0, Math.min(Math.ceil(group.result.sections.length / OCCURRENCE_SECTION_PAGE_SIZE) - 1, Math.floor(Number(requestedPage) || 0)));
+      if ((search.sectionPages.get(authority) || 0) === page) return;
+      search.sectionPages.set(authority, page);
+      for (const section of group.result.sections) {
+        search.rowsBySection.delete(section.id);
+        search.pageGenerations.set(section.id, (search.pageGenerations.get(section.id) || 0) + 1);
+      }
+      search.visibleRows = [...search.rowsBySection.values()].flatMap(windowState => windowState.rows);
+      search.containers = null;
+      $('[data-occurrence-page-content]', root).innerHTML = occurrenceSectionPageHtml(group, profile.preferences.expandSearchResultsByDefault !== false, page);
+      if (profile.preferences.expandSearchResultsByDefault !== false) {
+        if (search.virtualizedRows) {
+          for (const section of occurrenceSectionPage(group.result, page).sections) resetOccurrenceVirtualSection(pane, section.id);
+          scheduleVisibleOccurrenceSections(pane);
+        } else void renderAllOccurrenceSections(pane);
+      }
+      if (navigate) {
+        search.selectedResult = null;
+        search.selectedRow = null;
+        search.selectedOccurrenceKey = null;
+        const first = $('[data-occurrence-section] > summary', root);
+        first?.focus({ preventScroll: true });
+        root.scrollIntoView({ block: "start", behavior: "instant" });
+        search.activeSectionId = group.result.sections[page * OCCURRENCE_SECTION_PAGE_SIZE]?.id || "";
+        search.offset = 0;
+        if (pane === state.mainOccurrencePane) syncMainReaderActionTarget();
+        else withFocusedCitationPane(pane, syncMainReaderActionTarget);
+      }
+    }
+
+    function ensureOccurrenceSectionPage(pane, sectionId) {
+      for (const group of pane?.searchState?.displayGroups || []) {
+        const index = group.result.sections.findIndex(section => section.id === sectionId);
+        if (index >= 0) { renderOccurrenceAuthorityPage(pane, group.authority, Math.floor(index / OCCURRENCE_SECTION_PAGE_SIZE)); return; }
+      }
+    }
+
+    function occurrenceAuthorityStreamHtml(result, expandResults, groups = occurrenceDisplayGroups(result), sectionPages = new Map()) {
+      return `<div class="occurrence-authority-stream">${groups.map(group => {
         const metadata = occurrenceAuthorityMetadata(group.authority);
         const hits = Number(group.result.totalOccurrences || 0);
         const sections = Number(group.result.sections?.length || 0);
-        const hierarchy = occurrenceHierarchyHtml(group.result, expandResults, group.authority);
-        return `<section class="occurrence-authority-group" data-occurrence-authority="${escapeHtml(group.authority)}"><header class="occurrence-authority-header"><span class="occurrence-authority-title"><strong>${escapeHtml(metadata.short)}</strong><small>${escapeHtml(metadata.title)}</small></span><span class="occurrence-authority-count">${hits.toLocaleString()} ${hits === 1 ? "hit" : "hits"} · ${sections.toLocaleString()} ${sections === 1 ? "section" : "sections"}</span></header><div class="occurrence-hierarchy">${hierarchy || '<p class="hierarchy-empty">No matching legal occurrences.</p>'}</div></section>`;
+        const body = occurrenceSectionPageHtml(group, expandResults, sectionPages.get(group.authority) || 0);
+        return `<section class="occurrence-authority-group" data-occurrence-authority="${escapeHtml(group.authority)}">${result.authorityGroups?.length ? `<header class="occurrence-authority-header"><span class="occurrence-authority-title"><strong>${escapeHtml(metadata.short)}</strong><small>${escapeHtml(metadata.title)}</small></span><span class="occurrence-authority-count">${hits.toLocaleString()} ${hits === 1 ? "hit" : "hits"} · ${sections.toLocaleString()} ${sections === 1 ? "section" : "sections"}</span></header>` : ""}<div data-occurrence-page-content>${body}</div></section>`;
       }).join("")}</div>`;
     }
 
@@ -7363,14 +7464,14 @@
       const previousSectionId = sameCommand ? pane.searchState?.activeSectionId : "";
       const activeSectionId = result.sections?.some(section => section.id === previousSectionId) ? previousSectionId : result.sections?.[0]?.id || "";
       const sectionOffsets = sameCommand && pane.searchState?.sectionOffsets instanceof Map ? pane.searchState.sectionOffsets : new Map();
+      const sectionPages = sameCommand && pane.searchState?.sectionPages instanceof Map ? pane.searchState.sectionPages : new Map();
+      const displayGroups = result.authorityGroups?.length ? occurrenceDisplayGroups(result) : [{ authority: pane.entry.authority || "ina", result }];
       const virtualizedRows = Number(result.totalOccurrences || 0) > OCCURRENCE_EAGER_ROW_LIMIT;
-      pane.searchState = { result, generation: pane.occurrenceGeneration, command: pane.entry?.text || "", offset: activeSectionId ? sectionOffsets.get(activeSectionId) || 0 : 0, activeSectionId, sectionOffsets, rowsBySection: new Map(), pageGenerations: new Map(), visibleRows: [], virtualizedRows, visibleSectionFrame: null };
+      pane.searchState = { result, displayGroups, sectionPages, generation: pane.occurrenceGeneration, command: pane.entry?.text || "", offset: activeSectionId ? sectionOffsets.get(activeSectionId) || 0 : 0, activeSectionId, sectionOffsets, rowsBySection: new Map(), pageGenerations: new Map(), visibleRows: [], virtualizedRows, visibleSectionFrame: null };
       const expandResults = profile.preferences.expandSearchResultsByDefault !== false;
       const hitCount = Number(result.totalOccurrences || 0);
-      const sectionCount = occurrenceDisplayGroups(result).reduce((count, group) => count + group.result.sections.length, 0);
-      const occurrenceBody = result.authorityGroups?.length
-        ? occurrenceAuthorityStreamHtml(result, expandResults)
-        : `<div class="occurrence-hierarchy">${occurrenceHierarchyHtml(result, expandResults, pane.entry.authority) || '<p class="hierarchy-empty">No matching legal occurrences.</p>'}</div>`;
+      const sectionCount = displayGroups.reduce((count, group) => count + group.result.sections.length, 0);
+      const occurrenceBody = occurrenceAuthorityStreamHtml(result, expandResults, displayGroups, sectionPages);
       pane.detail.innerHTML = `<section class="occurrence-search-view"><header class="pane-view-heading occurrence-search-heading"><span class="occurrence-search-summary"><strong>${hitCount.toLocaleString()}</strong> ${hitCount === 1 ? "hit" : "hits"} in <strong>${sectionCount.toLocaleString()}</strong> ${sectionCount === 1 ? "section" : "sections"}</span></header>${occurrenceBody}</section>`;
       if (expandResults) {
         if (virtualizedRows) {
@@ -7622,6 +7723,7 @@
         }
       }
       if (snapshot.mode === "search-tree" && state.mainOccurrencePane?.searchState && snapshot.searchState) {
+        for (const [authority, page] of snapshot.searchState.sectionPages || []) renderOccurrenceAuthorityPage(state.mainOccurrencePane, authority, page);
         if (snapshot.searchState.selectedResult) { void restoreOccurrenceResult(state.mainOccurrencePane, snapshot.searchState.selectedResult); return true; }
         renderOccurrenceRows(state.mainOccurrencePane, snapshot.searchState.offset || 0, snapshot.searchState.sectionId || snapshot.searchState.bucketId || state.mainOccurrencePane.searchState.activeSectionId);
       }
@@ -9458,17 +9560,28 @@
     function legalReferenceCitation(reference) {
       const path = canonicalPath(reference.targetPath || []);
       if (reference.family === "usc" && reference.targetChapter) return `${reference.targetTitle} U.S.C. Chapter ${reference.targetChapter}${reference.targetSubchapter ? ` Subchapter ${reference.targetSubchapter}` : ""}`;
-      if (reference.family === "usc") return `${reference.targetTitle || 8} U.S.C. ${reference.targetSection || ""}${path}`.trim();
+      if (reference.family === "usc") return `${reference.targetTitle || 8} U.S.C. ${reference.targetSection || ""}${path}${reference.targetNote ? " note" : ""}`.trim();
       if (reference.family === "ina") return `INA ${reference.inaSection || reference.targetSection || ""}${path}`.trim();
       if (reference.family === "cfr") return `${reference.targetTitle || ""} CFR ${reference.targetSection || ""}${path}`.trim();
-      if (reference.family === "public-law" && reference.targetCongress && reference.targetLaw) return `Public Law ${reference.targetCongress}-${reference.targetLaw}`;
+      if (reference.family === "public-law" && reference.targetCongress && reference.targetLaw) {
+        const tokens = (reference.targetPath || []).map(String);
+        const sectionIndex = tokens.findIndex(token => /^(?:s|section-)\d+[A-Za-z0-9-]*$/.test(token));
+        const containers = tokens.slice(0, sectionIndex < 0 ? tokens.length : sectionIndex).map(token => {
+          const division = token.match(/^(?:division-|d)([A-Za-z0-9]+)$/);
+          const subdivision = token.match(/^subdivision-([A-Za-z0-9]+)$/);
+          const title = token.match(/^(?:title-|t)([A-Za-z0-9]+)$/);
+          return division ? `Division ${division[1]}` : subdivision ? `Subdivision ${subdivision[1]}` : title ? `Title ${title[1]}` : "";
+        }).filter(Boolean);
+        if (sectionIndex >= 0) containers.push(`§ ${tokens[sectionIndex].replace(/^(?:section-|s)/, "")}${canonicalPath(tokens.slice(sectionIndex + 1))}`);
+        return [`Public Law ${reference.targetCongress}-${reference.targetLaw}`, ...containers].join(", ");
+      }
       if (reference.family === "statutes-at-large") return `${reference.targetVolume || ""} Stat. ${reference.targetPage || ""}`.trim();
       if (reference.family === "federal-register") return `${reference.targetVolume || ""} Federal Register ${reference.targetPage || ""}`.trim();
       return reference.text || "Legal reference";
     }
 
     function statutoryReferenceCrosswalk(reference, sourceContext = null) {
-      if (reference?.targetChapter) return null;
+      if (reference?.targetChapter || reference?.targetNote) return null;
       if (!reference || reference.resolution === "unresolved" || !["usc", "ina"].includes(reference.family)) return null;
       const path = canonicalPath(reference.targetPath || []);
       const targetTitle = normCitationPart(reference.targetTitle || 8);
@@ -9954,7 +10067,7 @@
       }
       const historicalTarget = corpus?.historicalReferenceTargets?.[Number(trigger.dataset.referenceHistoricalTarget)] || (trigger.dataset.referenceEdition ? {
         heading: `${citation} (${trigger.dataset.referenceEdition} edition)`,
-        message: `This reference opens the ${trigger.dataset.referenceEdition} U.S. Code edition. Open the official source to read that historical version.`
+        message: `This reference opens the ${trigger.dataset.referenceEdition} ${family === "cfr" ? "CFR" : ["usc", "ina"].includes(family) ? "U.S. Code" : "source"} edition. Open the official source to read that historical version.`
       } : null);
       if (referenceStatus !== "current" && statuteSection?.heading) heading = statuteSection.heading;
       if (historicalTarget?.heading) heading = historicalTarget.heading;
@@ -10863,7 +10976,7 @@
       state.scopedDefinitionCloseTimer = setTimeout(() => closeScopedDefinitionPopover(false), 140);
     }
 
-    const LOCAL_SHARE_LINK_WARNING = "This link is not shareable with other people. It will only work on this device while this HTML file remains at its current location.";
+    const LOCAL_SHARE_LINK_WARNING = "This link points to a local copy of INASearch. Other people cannot use it unless they can open the same address.";
 
     function currentShareQuery() {
       if (state.shareViewPreview && !state.shareViewPreview.ending) return state.shareViewPreview.link.query;
@@ -10883,13 +10996,18 @@
       const expression = query == null ? "" : String(query).trim();
       if (!expression) return null;
       try {
-        const url = new URL(String(locationLike?.href || ""));
-        if (!["file:", "http:", "https:"].includes(url.protocol)) return null;
+        const sourceUrl = new URL(String(locationLike?.href || ""));
+        if (!["file:", "http:", "https:"].includes(sourceUrl.protocol)) return null;
+        const hostname = sourceUrl.hostname.toLowerCase();
+        const localSource = sourceUrl.protocol === "file:" || hostname === "localhost" || hostname.endsWith(".localhost")
+          || /^127\./.test(hostname) || hostname === "[::1]" || hostname === "0.0.0.0";
+        const useHosted = localSource && profile.preferences.useHostedShareLinks !== false;
+        const url = useHosted ? new URL("https://inasearch.pages.dev/") : sourceUrl;
         url.search = "";
         url.hash = "";
         url.searchParams.set("q", expression);
         url.searchParams.set("qv", "2");
-        return { href: url.href, local: url.protocol === "file:", query: expression };
+        return { href: url.href, local: localSource && !useHosted, query: expression };
       } catch {
         return null;
       }
@@ -10997,6 +11115,15 @@
       els.mainShareButton.title = "Copy link to current view";
     }
 
+    function setUseHostedShareLinks(enabled) {
+      endShareViewPreview(true);
+      profile.preferences.useHostedShareLinks = enabled === true;
+      els.useHostedShareLinksToggle.checked = profile.preferences.useHostedShareLinks;
+      hideLocalShareWarning(true);
+      syncMainShareWarning();
+      markProfileChanged();
+    }
+
     function positionLocalShareWarning(anchor = state.localShareWarningAnchor || els.mainShareButton) {
       if (!anchor || els.localShareWarningPopover.hidden) return;
       const anchorRect = anchor.getBoundingClientRect();
@@ -11047,7 +11174,7 @@
       profile.preferences.hideLocalShareWarning = true;
       markProfileChanged();
       hideLocalShareWarning(true);
-      toast("Automatic local-file link reminders turned off. Hover the warning sign to view it anytime.");
+      toast("Automatic local-link reminders turned off. Hover the warning sign to view it anytime.");
     }
 
     async function copyCurrentViewLink() {
@@ -11210,7 +11337,31 @@
     }
 
     function citationWithLegalText(context, citation = preferredLegalUnitCitation(context)) {
-      return citationCopyPreface(citation, legalUnitCopyText(context));
+      let text = legalUnitCopyText(context);
+      // The template's citation already identifies the selected unit. Keep its
+      // heading and descendants, but omit that unit's own marker from [text].
+      if (context?.occurrenceRow?.contentKind !== "annotations") {
+        const section = context?.statuteSection || (typeof context?.section === "object" ? context.section : null)
+          || (context?.sectionId ? uscSectionById.get(context.sectionId) : null);
+        const noticeEnd = section?.historical ? text.indexOf("\n\n") : -1;
+        const notice = noticeEnd < 0 ? "" : text.slice(0, noticeEnd + 2);
+        text = text.slice(notice.length);
+        const path = context?.path || [];
+        if (path.length) {
+          const duplicateRoots = path.length === 1 && (section?.body || []).filter(node => normCitationPart(node.label) === normCitationPart(path[0])).length > 1;
+          for (let start = 0; start < path.length; start++) {
+            const marker = path.slice(start).map(token => `(${token})`).join("");
+            if (!text.startsWith(marker)) continue;
+            const stripMarker = block => block.startsWith(marker) ? block.slice(marker.length).replace(/^[ \t]+/, "") : block;
+            text = duplicateRoots ? text.split("\n\n").map(stripMarker).join("\n\n") : stripMarker(text);
+            break;
+          }
+        } else if (["usc", "ina", "cfr"].includes(context?.kind || context?.family) && context?.occurrenceRow?.authority !== "cfr") {
+          text = text.replace(/^§[ \t]*\S+[ \t]*/, "");
+        }
+        text = notice + text;
+      }
+      return citationCopyPreface(citation, text);
     }
 
     function syncCitationCopyFormatWarning() {
@@ -11779,8 +11930,6 @@
       else if (record.kind === "ina") renderIna(record.item);
       else if (record.kind === "cfr" || record.kind === "cfr-appendix") renderCfr(record.item, citationResult, record.instantCitationJump === true);
       else if (record.kind === "act") renderAct(record.item);
-      else if (record.kind === "policy") renderPolicy(record.item);
-      else if (record.kind === "form") renderForm(record.item);
       else if (record.kind === "definition-index") renderDefinitionCatalogPreview();
       else if (record.kind === "definition") renderDefinitionPreview(record.item);
     }
@@ -12022,6 +12171,8 @@
       if (target?.occurrenceRow) return;
       const anchor = target && shareCitationAnchor(els.detail, parseCitation(target.query), target.trigger);
       if (!anchor) return;
+      const startTop = anchor.getBoundingClientRect().top;
+      if (startTop >= statuteReadingLine(0) && startTop < statuteReadingLine(100)) return;
       const root = pane?.scrollRoot || window;
       // Freeze the shared action target before the temporary jump so scroll
       // listeners cannot change the citation, reading anchor, or history.
@@ -13294,7 +13445,7 @@
         schedulePromotedHistoryRestore({
           command: location.command || location.query,
           mode: "search-tree",
-          searchState: { offset: location.offset || 0, sectionId: location.sectionId || location.bucketId || "", bucketId: location.sectionId || location.bucketId || "", selectedResult: location.selectedResult || null },
+          searchState: { offset: location.offset || 0, sectionId: location.sectionId || location.bucketId || "", bucketId: location.sectionId || location.bucketId || "", selectedResult: location.selectedResult || null, sectionPages: location.sectionPages || [] },
           scrollTop: location.scrollTop || 0
         });
         opened = true;
@@ -13357,7 +13508,7 @@
       if (!snapshot) return null;
       if (snapshot.mode === "search-tree") return {
         view: "search-tree", command: snapshot.command, query: snapshot.command, authority: snapshot.authority,
-        offset: snapshot.searchState?.offset || 0, sectionId: snapshot.searchState?.sectionId || snapshot.searchState?.bucketId || "", selectedResult: snapshot.searchState?.selectedResult || null, scrollTop: snapshot.scrollTop || 0
+        offset: snapshot.searchState?.offset || 0, sectionId: snapshot.searchState?.sectionId || snapshot.searchState?.bucketId || "", selectedResult: snapshot.searchState?.selectedResult || null, sectionPages: snapshot.searchState?.sectionPages || [], scrollTop: snapshot.scrollTop || 0
       };
       const result = parseCitation(snapshot.query || snapshot.command);
       const record = focusedCitationRecord(result);
@@ -13588,6 +13739,7 @@
 
     const legalReaderJobs = new WeakMap();
     const renderedStatuteBodies = new WeakMap();
+    const deferredStatuteNoteBodies = new WeakMap();
 
     function legalReaderBusy(root) {
       return Boolean(root?.querySelector('.statute-body[aria-busy="true"], .cfr-body[aria-busy="true"]'));
@@ -13697,6 +13849,31 @@
       return formatStatuteNoteBody(note, (start, end) => format ? legalFieldPlainText(note, "text", format, null, start, end) : String(note.text || "").slice(start, end), true);
     }
 
+    function materializeStatuteNotes(root, all = false) {
+      const readers = new Set();
+      for (const slot of $$('[data-reader-note-body]', root)) {
+        const render = deferredStatuteNoteBodies.get(slot);
+        if (!render) continue;
+        let hidden = false;
+        for (let ancestor = slot.parentElement; !all && ancestor; ancestor = ancestor.parentElement) {
+          if (ancestor.tagName === "DETAILS" && !ancestor.open) { hidden = true; break; }
+        }
+        if (hidden) continue;
+        const reader = slot.closest('[data-statute-start]');
+        const pane = focusedPaneForElement(slot);
+        const fill = () => replaceReaderSlot(slot, render());
+        if (pane) withFocusedCitationPane(pane, fill); else fill();
+        deferredStatuteNoteBodies.delete(slot);
+        if (reader) readers.add(reader);
+      }
+      for (const reader of readers) {
+        const pane = focusedPaneForElement(reader);
+        const finish = () => { renderInsertedReferenceGroups(reader); renderInlineLegalNotes(); };
+        if (pane) { withFocusedCitationPane(pane, finish); scopeFocusedPaneIds(pane); }
+        else finish();
+      }
+    }
+
     function renderStatuteNote(section, note, index, searchTarget, context, deferBody = false, topLevel = false) {
       const selected = searchTarget?.kind === "notes" && searchTarget.noteIndex === index;
       const headingText = note.heading || titleCaseTopic(note.topic);
@@ -13708,7 +13885,9 @@
       if (!String(note.text || "").slice(statuteNoteBodyStart(note)).trim()) return `<section class="statute-note-empty" ${attrs}><strong>${heading}</strong> — None</section>`;
       const footnote = (section.houseEditorialFootnotes || []).find(item => item.targetNoteId === note.id);
       const returnId = footnote ? houseFootnoteReferenceId(footnote) : "";
-      const body = deferBody ? `<template data-reader-note-body="${index}"></template>` : renderStatuteNoteBody(note, selected && searchTarget.subfield !== "heading" ? searchTarget.match : null, context);
+      // Keep source text searchable by native Find while closed, without building
+      // citation links, highlights and layout nodes until the note is needed.
+      const body = deferBody && !selected ? `<div data-reader-note-body="${index}">${escapeHtml(String(note.text || "").slice(statuteNoteBodyStart(note)))}</div>` : renderStatuteNoteBody(note, selected && searchTarget.subfield !== "heading" ? searchTarget.match : null, context);
       return `<details class="${topLevel ? "statute-note-group" : "note-block"}" ${attrs}${expanded ? " open" : ""}><summary${headingAttributes}>${heading}</summary><div class="statute-note-body">${body}${returnId ? `<a class="house-footnote-return" href="#${escapeHtml(returnId)}" data-house-footnote-return="${escapeHtml(returnId)}">↩ Return to reference</a>` : ""}</div></details>`;
     }
 
@@ -13734,6 +13913,7 @@
       const card = target.closest?.(".inserted-reference-card");
       if (card) card.dataset.footnoteRevealed = "true";
       for (let element = target; element && element !== els.detail; element = element.parentElement) if (element.tagName === "DETAILS") element.open = true;
+      materializeStatuteNotes(target);
       if (reference?.id && target.matches(".house-editorial-footnotes li, .legal-reference-preview-footnotes li")) target.dataset.houseFootnoteActiveReference = reference.id;
       if (reference?.id) for (const link of $$('[data-house-footnote-return]', target)) {
         link.dataset.houseFootnoteReturn = reference.id;
@@ -13800,7 +13980,7 @@
       const orderedSectionBody = () => globalThis.INA_SEARCH_OCCURRENCE.statuteContentParts(section, "preamble", "body").map(part => part.kind === "child"
         ? renderStatutoryNode(part.node, citationTargetPath, [], 0, searchTarget, citationBase, section.id, baseDefinitionContext)
         : `<p class="statute-preamble">${linkifyStatutoryText(section[part.field], section[`${part.field}References`] || [], part.start, part.end, searchTarget?.kind === "preamble" ? searchTarget.match : null, globalThis.INA_SEARCH_OCCURRENCE.statutePartFootnotes(section, part) || [], preambleReferenceContext)}</p>`).join("");
-      const footer = () => renderStatuteSupplements(section, searchTarget, baseDefinitionContext, sliced, `
+      const footer = () => renderStatuteSupplements(section, searchTarget, baseDefinitionContext, true, `
         ${Number(section.title || 8) !== 8 && section.source?.edition ? `<p class="source-banner">U.S. Code ${escapeHtml(section.source.edition)} edition · Current through ${escapeHtml(section.source.currentThrough || "")}</p>` : ""}
         `);
       els.detail.innerHTML = `<div class="detail-content" data-statute-start>${presentationKey}${Number(section.title || 8) === 8 && section.section === "1252c" ? '<div class="source-banner"><span class="hierarchy-status not-in-ina">Not in INA</span> This provision was enacted separately as AEDPA § 439. It has no INA section number; its citation is 8 U.S.C. 1252c.</div>' : ""}
@@ -13812,6 +13992,11 @@
         ${renderInaTocNotes(section)}
         ${footer()}
       </div>`;
+      for (const slot of $$('[data-reader-note-body]', els.detail)) {
+        const note = section.notes[Number(slot.dataset.readerNoteBody)];
+        deferredStatuteNoteBodies.set(slot, () => renderStatuteNoteBody(note, null, baseDefinitionContext));
+      }
+      materializeStatuteNotes(els.detail);
       const finish = () => {
         const body = $(".statute-body", els.detail);
         if (citationResult && !searchTarget) renderedStatuteBodies.set(body, { section, base: citationBase, revision: state.profileRevision, presentationKey });
@@ -13829,12 +14014,7 @@
         }));
       };
       if (sliced) {
-        const tasks = [];
-        for (const slot of $$("template[data-reader-note-body]", els.detail).reverse()) {
-          const index = Number(slot.dataset.readerNoteBody), note = section.notes[index];
-          tasks.push(() => replaceReaderSlot(slot, renderStatuteNoteBody(note, searchTarget?.kind === "notes" && searchTarget.noteIndex === index && searchTarget.subfield !== "heading" ? searchTarget.match : null, baseDefinitionContext)));
-        }
-        fillStatuteBody($(".statute-body", els.detail), section, citationTargetPath, searchTarget, citationBase, baseDefinitionContext, finish, tasks);
+        fillStatuteBody($(".statute-body", els.detail), section, citationTargetPath, searchTarget, citationBase, baseDefinitionContext, finish);
       } else finish();
     }
 
@@ -14727,19 +14907,6 @@
         ${refs.length > 120 ? `<p class="notice">Showing the first 120 of ${refs.length} indexed references. Narrow the Act citation to a section locator.</p>` : ""}</div>`;
     }
 
-    function renderPolicy(item) {
-      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">USCIS Policy Manual ${escapeHtml(item.kind)}</p><h2 class="detail-title">${escapeHtml(item.title)}</h2>
-        <div class="breadcrumb">${(item.path || []).map(x => `<span>${escapeHtml(x)}</span>`).join("")}</div>
-        <div class="detail-actions">${openButton(item.url)}</div>
-        <div class="source-banner">Only hierarchy and resource metadata are stored locally. The complete Policy Manual text remains on USCIS.gov.</div></div>`;
-    }
-
-    function renderForm(form) {
-      els.detail.innerHTML = `<div class="detail-content"><p class="eyebrow">USCIS form catalog</p><h2 class="detail-title">${escapeHtml(form.title)}</h2><p class="detail-subtitle">${escapeHtml(form.number)}</p>
-        <div class="detail-actions">${openButton(form.url, "Open official form page")}</div>
-        <div class="source-banner">INASearch includes only the form number, title, and official page link because form content can change.</div></div>`;
-    }
-
     function noteLabel(note) {
       const firstLine = String(note?.text || "").split(/\r?\n/).map(line => line.trim()).find(Boolean);
       if (firstLine) return truncate(firstLine, 80);
@@ -14862,6 +15029,7 @@
       syncThemeControls();
       els.showDetailedStatusToggle.checked = profile.preferences.showDetailedStatus === true;
       els.hideTopThemeControlsToggle.checked = profile.preferences.hideTopThemeControls === true;
+      els.useHostedShareLinksToggle.checked = profile.preferences.useHostedShareLinks !== false;
       els.backupReminderToggle.checked = profile.preferences.backupReminder !== "disabled";
       els.inaCitationLinksToggle.value = profile.preferences.statutoryLinkCitationSystem;
       els.highlightInaCitationLinksToggle.checked = profile.preferences.highlightInaCitationLinks === true;
@@ -16597,6 +16765,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       };
       on(els.showDetailedStatusToggle, "change", () => setDetailedStatus(els.showDetailedStatusToggle.checked));
       on(els.hideTopThemeControlsToggle, "change", () => setTopBarVisibilityPreference("hideTopThemeControls", els.hideTopThemeControlsToggle.checked));
+      on(els.useHostedShareLinksToggle, "change", () => setUseHostedShareLinks(els.useHostedShareLinksToggle.checked));
       on(els.backupReminderToggle, "change", () => setBackupReminderEnabled(els.backupReminderToggle.checked));
       on(els.inaCitationLinksToggle, "change", () => setStatutoryLinkCitationSystem(els.inaCitationLinksToggle.value));
       on(els.highlightInaCitationLinksToggle, "change", () => setInaCitationLinkHighlighting(els.highlightInaCitationLinksToggle.checked));
@@ -16927,7 +17096,6 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         const copyCitation = event.target.closest("[data-focused-copy-citation]");
         if (copyCitation) {
           event.stopPropagation();
-          withFocusedCitationPane(pane, () => commitMainCitationCopy(copyCitation.dataset.focusedCopyCitation));
           const copied = await copyLegalText(copyCitation.dataset.focusedCopyCitation);
           toast(copied ? `${copyCitation.dataset.focusedCopySystem} citation copied.` : "The citation could not be copied.");
           return;
@@ -16997,11 +17165,26 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
             sectionId: state.mainOccurrencePane.searchState?.activeSectionId || "",
             bucketId: state.mainOccurrencePane.searchState?.activeSectionId || "",
             selectedResult: state.mainOccurrencePane.searchState?.selectedResult || null,
+            sectionPages: [...(state.mainOccurrencePane.searchState?.sectionPages || [])],
             scrollTop: window.scrollY || 0
           });
           applySearchQuery(occurrenceReaderCommand(row), true, true);
           return;
         }
+      });
+      const changeOccurrenceSectionPage = (event, control) => {
+        const pane = occurrenceKeyboardPaneForElement(control);
+        const authority = control.closest('[data-occurrence-authority]')?.dataset.occurrenceAuthority;
+        if (!pane || !authority) return;
+        event.preventDefault();
+        renderOccurrenceAuthorityPage(pane, authority, control.tagName === "SELECT" ? control.value : control.dataset.occurrenceSectionPage, true);
+      };
+      document.addEventListener("click", event => {
+        const control = event.target.closest('button[data-occurrence-section-page]');
+        if (control) changeOccurrenceSectionPage(event, control);
+      });
+      document.addEventListener("change", event => {
+        if (event.target.matches('select[data-occurrence-section-page]')) changeOccurrenceSectionPage(event, event.target);
       });
       document.addEventListener("focusin", event => {
         const pane = occurrenceKeyboardPaneForElement(event.target);
@@ -17058,6 +17241,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       });
       window.addEventListener("beforeprint", () => {
         commitMainLegalContext(mainLiveCitationContext());
+        materializeStatuteNotes(document, true);
         materializeInsertedReferencesForPrint();
       });
       window.addEventListener("afterprint", restoreInsertedReferencesAfterPrint);
@@ -17067,7 +17251,6 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       els.citationEquivalent.addEventListener("click", async event => {
         const copyButton = event.target.closest("[data-copy-citation]");
         if (copyButton) {
-          commitMainCitationCopy(copyButton.dataset.copyCitation);
           const copied = await copyLegalText(copyButton.dataset.copyCitation);
           toast(copied ? `${copyButton.dataset.copySystem} citation copied.` : "The citation could not be copied.");
           return;
@@ -17101,9 +17284,13 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       document.addEventListener("pointerdown", () => { state.notePointerDown = true; }, true);
       document.addEventListener("pointercancel", () => { state.notePointerDown = false; }, true);
       document.addEventListener("toggle", event => {
+        if (event.target.open && event.target.matches?.(".statute-supplements, .statute-note-group, .note-block")) materializeStatuteNotes(event.target);
         if (!event.target.matches?.(".citation-note-help-panel")) return;
         const button = event.target.closest(".citation-note")?.querySelector("[data-note-sharing-help]");
         button?.setAttribute("aria-expanded", String(event.newState === "open"));
+      }, true);
+      document.addEventListener("keydown", event => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f") materializeStatuteNotes(document, true);
       }, true);
       document.addEventListener("click", event => {
         state.notePointerDown = false;
@@ -17240,6 +17427,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
           const expanded = notesExpansion.dataset.statuteNotesExpand === "true";
           supplements.open = expanded;
           for (const detail of $$("details", supplements)) detail.open = expanded;
+          if (expanded) materializeStatuteNotes(supplements);
           return;
         }
         const footnoteJump = event.target.closest("[data-house-footnote-jump]");

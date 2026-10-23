@@ -85,6 +85,7 @@ const corpus = {
   const restoredContainer = { closest: () => null };
   const restorePane = { detail: { isConnected: true }, searchState: { result: duplicateResult, rowsBySection: new Map() } };
   const restoreContext = vm.createContext({ occurrenceDisplayGroups: context.occurrenceDisplayGroups, occurrenceSectionById: (result, id) => result.sections.find(section => section.id === id),
+    ensureOccurrenceSectionPage() {},
     occurrenceSectionRowsContainer: (_pane, id) => id === displayedId ? restoredContainer : null,
     async renderOccurrenceRows(_pane, _offset, id) { restoredId = id; },
     $: (_selector, container) => { assert(container, "History must not query a missing alias container."); return restoredElement; },
@@ -93,6 +94,20 @@ const corpus = {
   assert.equal(await restoreContext.restoreOccurrenceResult(restorePane, { sectionId: aliasId, index: 0 }), true);
   assert.equal(restoredId, displayedId, "History must restore an INA alias through its displayed Code section.");
   assert(restoredButtonFocused, "History must restore keyboard focus to the result's opening button.");
+
+  const paging = vm.createContext({ OCCURRENCE_SECTION_PAGE_SIZE: 80 });
+  vm.runInContext(functionSource(template, "occurrenceSectionPage"), paging);
+  const manySections = Array.from({ length: 183 }, (_, index) => ({ id: `s${index}`, hierarchyId: `leaf${index}`, totalOccurrences: index + 1 }));
+  const largeResult = { sections: manySections, totalOccurrences: 16836, hierarchy: [{ id: "root", totalOccurrences: 16836 }, ...manySections.map((section, index) => ({ id: `leaf${index}`, parentId: "root", totalOccurrences: section.totalOccurrences }))] };
+  const pages = [0, 1, 2].map(page => paging.occurrenceSectionPage(largeResult, page));
+  assert.deepEqual(pages.map(page => page.sections.length), [80, 80, 23], "Every result page must bound section markup");
+  assert.deepEqual(pages.flatMap(page => Array.from(page.sections, section => section.id)), manySections.map(section => section.id), "Paging must retain every section once, in source order");
+  assert(pages.every(page => page.totalOccurrences === largeResult.totalOccurrences), "Paging must not change full-query hit counts");
+  assert.equal(pages[1].hierarchy.length, 81, "Only displayed sections and their ancestors should be rendered");
+  assert.equal(pages[1].hierarchy[0].totalOccurrences, 16836, "Hierarchy counts must retain the complete result totals");
+  assert.equal(paging.occurrenceSectionPage(largeResult, 999).sections[0].id, "s160", "Out-of-range page requests must clamp to the last page");
+  assert.equal(paging.occurrenceSectionPage(largeResult, -1).sections[0].id, "s0");
+  assert.equal(largeResult.sections.length, 183, "Paging must not mutate the searchable result");
 
   const click = expand => ({ target: { closest: () => ({ hasAttribute: () => expand, dataset: expand ? { hierarchyExpandAll: "referenced-usc" } : { hierarchyCollapseAll: "referenced-usc" }, isConnected: true }) } });
   context.handleHierarchyPageActions(click(true));

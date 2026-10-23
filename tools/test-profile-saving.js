@@ -54,19 +54,67 @@ function storageFixture() {
   };
   const context = vm.createContext({
     Blob, TextEncoder, TextDecoder, Uint8Array, crypto: globalThis.crypto,
+    INASearchCorpusShards: require("../src/INASearch-Corpus-Shards"),
     resetCachesCleared: false,
     ACTIVE_PROFILE_KEY: "active", PREVIOUS_PROFILE_KEY: "previous", STAGING_PROFILE_KEY: "staging",
-    ACTIVE_CORPUS_KEY: "active", PREVIOUS_CORPUS_KEY: "previous", STARTUP_METADATA_KEYS: [],
+    ACTIVE_CORPUS_KEY: "active", PREVIOUS_CORPUS_KEY: "previous", STAGING_CORPUS_KEY: "staging", STARTUP_METADATA_KEYS: [],
     openDatabase: async () => database,
     read: async (name, key) => structuredClone(stores[name].get(key)),
     write: async (name, key, value) => { stores[name].set(key, value); return true; },
     remove: async (name, key) => { stores[name].delete(key); return true; }
   });
-  for (const name of ["requestResult", "sha256Bytes", "validProfileRecord", "profileRecord", "decodeProfileRecord", "loadActiveProfile", "loadStartupSnapshot", "saveProfile"]) {
+  for (const name of ["requestResult", "sha256Bytes", "validProfileRecord", "profileRecord", "decodeProfileRecord", "loadActiveProfile", "loadStartupSnapshot", "saveProfile", "validCorpusRecord", "corpusRecord", "decodeCorpusJson", "readCorpusChunk", "decodeCorpusRecord", "activateCorpus", "loadActiveCorpus", "compareVersions"]) {
     vm.runInContext(functionSource(storageSource, name), context);
   }
   return { stores, storage: context };
 }
+
+test("corpus activation hashes and persists one immutable snapshot before asynchronous hashing", async () => {
+  const { stores, storage } = storageFixture();
+  const corpus = { schemaVersion: 1, corpusVersion: "snapshot-1", extra: { text: "é 😀 \\\"\n" },
+    title8: { sections: [{ id: "8-1", section: "1", heading: "Before", body: [{ text: "Original text 😀" }] }] },
+    referencedUsc: { titles: [{ number: 18, sections: [{ id: "18-16", title: 18, section: "16", body: [] }] }] },
+    cfr: { sections: [{ id: "8:1.1", title: 8, section: "1.1", blocks: [{ x: "Original regulation" }] }], appendices: [] },
+    legalReferenceAudit: { entries: ["Original audit"] } };
+  const expected = structuredClone(corpus), runtimeJson = JSON.stringify(expected);
+  const hash = storage.sha256Bytes;
+  let release, started, calls = 0;
+  const barrier = new Promise(resolve => { release = resolve; });
+  const firstHash = new Promise(resolve => { started = resolve; });
+  storage.sha256Bytes = async bytes => {
+    if (calls++ === 0) { started(); await barrier; }
+    return hash(bytes);
+  };
+  const activating = storage.activateCorpus(corpus, { sourceCorpusSha256: "source-identity", legalReferencesPacked: true });
+  await firstHash;
+  assert.deepEqual(corpus, expected, "Preparing a corpus write mutated its source");
+  corpus.corpusVersion = "snapshot-2";
+  corpus.title8.sections[0].heading = "After";
+  corpus.title8.sections[0].body[0].text = "Changed text";
+  corpus.cfr.sections[0].blocks.push({ x: "Later regulation" });
+  corpus.extra.text = "Changed metadata";
+  corpus.legalReferenceAudit.entries.push("Later audit");
+  release();
+  assert.equal(await activating, true);
+  const record = stores.corpus.get("active");
+  assert.deepEqual(JSON.parse(JSON.stringify(await storage.decodeCorpusRecord(record))), expected, "An asynchronous corpus write persisted a mixed snapshot");
+  assert.equal(record.runtimeSha256, await hash(new TextEncoder().encode(runtimeJson)), "Runtime identity changed from the original JSON byte order");
+  assert.equal(record.corpusVersion, "snapshot-1");
+  assert.equal(record.sourceCorpusSha256, "source-identity");
+  assert.equal(record.legalReferencesPacked, true);
+  for (const item of [record, ...record.chunks]) {
+    const bytes = new Uint8Array(await item.payload.arrayBuffer());
+    assert.equal(item.bytes, bytes.byteLength);
+    assert.equal(item.sha256, await hash(bytes));
+  }
+  assert(!stores.corpus.has("staging"), "Successful activation retained staging content");
+  await storage.activateCorpus(corpus);
+  assert.equal(stores.corpus.get("previous").runtimeSha256, record.runtimeSha256);
+  stores.corpus.get("active").chunks[0].sha256 = "0".repeat(64);
+  const recovered = await storage.loadActiveCorpus({ corpusSchemaVersion: 1 });
+  assert.equal(recovered.slot, "previous");
+  assert.deepEqual(JSON.parse(JSON.stringify(recovered.corpus)), expected);
+});
 
 function applicationFixture(storage, state = {}) {
   const messages = [];

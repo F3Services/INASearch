@@ -38,6 +38,19 @@ function generatedCorpus(includeOldSections) {
   corpus.referencedUsc = readJson("sources/legal/referenced-usc/corpus.json");
   indexStatuteRunIns({ title8: { sections: corpus.referencedUsc.titles.flatMap(title => title.sections) } });
   corpus.legalReferenceExceptions = readJson("sources/legal/embedded-reference-exceptions.json");
+  // This fixture deliberately excludes restored bodies in one arm. Bind only
+  // exceptions whose exact source fields are present in that fixture; the
+  // complete build still requires every manifest entry to be used.
+  const present = new Map();
+  for (const section of corpus.title8.sections) {
+    const prefix=`usc-${section.section}`;
+    for (const field of ["heading","preamble","sourceCredit"]) if(section[field])present.set(`${prefix}:${field}`,section[field]);
+    (section.notes||[]).forEach((note,index)=>present.set(`${prefix}-note-${index+1}:text`,note.text));
+    const walk=(nodes,labels=[])=>{for(const node of nodes||[]){const path=[...labels,String(node.label)];present.set(`${prefix}-${path.join('-')}:text`,node.text);walk(node.children,path)}};
+    walk(section.body);
+  }
+  corpus.legalReferenceExceptions.exceptions = corpus.legalReferenceExceptions.exceptions.filter(row =>
+    !row.sourceId.startsWith('usc-') || !row.sourceText || present.get(`${row.sourceId}:${row.sourceField}`)===row.sourceText);
   corpus.historicalLocatorCorrections = readJson("sources/legal/historical-reference-locators.json");
   applyGeneratedLegalReferences(corpus);
   return corpus;
@@ -73,12 +86,17 @@ for (const row of corrections) {
   const original = reviewedReference(before, row);
   const expanded = reviewedReference(after, row);
   assert.equal(expanded.sourceText, original.sourceText, `${row.id}: current source note changed`);
+  assert.equal(expanded.reference.resolution,original.reference.resolution,`${row.id}: restoring unrelated old sections cannot change the dated resolution`);
+  assert.equal(expanded.reference.targetEdition,original.reference.targetEdition);
   for (const { reference } of [original, expanded]) {
     assert.equal(reference.ruleId, "historical-reviewed-reference", row.id);
     assert.equal(reference.targetTitle, String(row.target.title), row.id);
     assert.equal(reference.targetSection, row.target.section, row.id);
     assert.deepEqual(reference.targetPath, row.target.path, row.id);
-    assert.equal(reference.targetEdition, row.target.edition, row.id);
+    if(reference.resolution==="unresolved") {
+      assert(!reference.targetEdition, `${row.id}: an unverified date cannot inherit an approximate annual edition`);
+      assert.match(reference.citationNote,/No text verified for that date/);
+    } else assert.equal(reference.targetEdition, row.target.edition, row.id);
   }
 }
 console.log(`PASS historical reference stability: ${corrections.length} reviewed current-text locators survive individual old USC sections.`);

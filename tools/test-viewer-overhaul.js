@@ -119,6 +119,65 @@ function testProfileContracts() {
     && template.includes(".occurrence-row-text mark { border-radius: 2px; padding: 0 1px; color: var(--search-hit-ink); background: var(--search-hit); }"), "Search-hit highlighting does not use an explicit contrasting foreground/background pair.");
 }
 
+function testAutomaticCitationViewSwitching() {
+  const state = { statuteHierarchyAuthority: "ina" }, profile = { preferences: {} };
+  const runtime = vm.runInNewContext(`${between("    const normalizeReadingOffsetPercent =", "\n    function normalizeThemePreference(")}\n${between("    function normalizedStoredAssociation(", "\n\n    const cachedVaultValid =")}\n${require("./test-function-source")(template, "applyAutomaticStatuteHierarchyAuthority")}\n({ defaultProfile, normalizeProfile, applyAutomaticStatuteHierarchyAuthority })`, {
+    state, profile, corpus: null, makeId: () => "test-profile",
+    structuredCloneSafe: structuredClone, TIP_BY_ID: new Map(),
+    DEFAULT_STARTUP_QUERY: "", DEFAULT_READING_OFFSET_PERCENT: 3,
+    STATUTE_NAVIGATION_DEPTHS: Array(9), CFR_NAVIGATION_DEPTHS: Array(7),
+    normalizeThemePreference: extractedFunction("normalizeThemePreference"),
+    INA_SEARCH_COMMAND: command,
+    setStatuteHierarchyAuthority(authority, persist) {
+      assert.strictEqual(persist, false, "Automatic switching must preserve the manual default.");
+      state.statuteHierarchyAuthority = authority;
+      return true;
+    }
+  });
+  const blank = assignedObject("INASearch-Profile.js", "INA_SEARCH_PROFILE");
+  const cases = [
+    ["new profile", runtime.defaultProfile().preferences, false],
+    ["embedded profile", runtime.normalizeProfile(blank).preferences, false],
+    ...[undefined, null, false, "true", true].map(value => [
+      `imported preference ${String(value)}`,
+      runtime.normalizeProfile({ ...blank, preferences: { automaticStatutoryNavigationSystem: value } }).preferences,
+      value === true
+    ])
+  ];
+  for (const [name, preferences, enabled] of cases) {
+    profile.preferences = preferences;
+    for (const [current, typed] of [["ina", "usc"], ["usc", "ina"]]) {
+      state.statuteHierarchyAuthority = current;
+      runtime.applyAutomaticStatuteHierarchyAuthority({ type: typed });
+      assert.strictEqual(state.statuteHierarchyAuthority, enabled ? typed : current,
+        `${name}: typing the opposite citation format must ${enabled ? "switch the opted-in view" : "keep the chosen view"}.`);
+    }
+  }
+}
+
+async function testCitationChipCopy() {
+  for (const focused of [false, true]) {
+    let click;
+    const copied = [], pane = {};
+    const selector = focused ? "[data-focused-copy-citation]" : "[data-copy-citation]";
+    const button = { dataset: { copyCitation: "8 U.S.C. 1101(a)(1)", copySystem: "U.S.C.",
+      focusedCopyCitation: "8 U.S.C. 1101(a)(1)", focusedCopySystem: "U.S.C." } };
+    const region = { addEventListener(type, listener) { assert.strictEqual(type, "click"); click = listener; } };
+    const registration = focused
+      ? between('      els.focusedCitationWorkspace.addEventListener("click",', '      els.detail.addEventListener("click",')
+      : between('      els.citationEquivalent.addEventListener("click",', '      els.legalReferencePopover.addEventListener("click",');
+    vm.runInNewContext(registration, {
+      els: { citationEquivalent: region, focusedCitationWorkspace: region },
+      focusedPaneForElement: () => pane,
+      withFocusedCitationPane: (_pane, action) => action(),
+      commitMainCitationCopy: () => assert.fail("A citation chip must copy without committing a reader selection or changing the search."),
+      copyLegalText: async text => { copied.push(text); return true; }, toast() {}
+    });
+    await click({ target: { closest: value => value === selector ? button : null }, stopPropagation() {} });
+    assert.deepStrictEqual(copied, ["8 U.S.C. 1101(a)(1)"], "The citation chip must copy its complete formatted citation.");
+  }
+}
+
 function occurrenceRoutingHarness(state, classification, { citation = null, splitAuthoritySearchPanes = false } = {}) {
   const events = [];
   const tryRunOccurrenceSearch = extractedFunction("tryRunOccurrenceSearch", "runSearch", {
@@ -251,6 +310,7 @@ async function testSectionMaterializationHooks() {
   const unitCorpus = { title8: { sections: [{ id: "8-1101" }] }, cfr: { sections: [], appendices: [] } };
   const helpers = vm.runInNewContext(`${declarations}\n({ occurrenceRowCitationLabel, occurrenceRowUnitText, renderOccurrenceRows, renderAllOccurrenceSections, showOccurrencePage, handleOccurrenceResultTab: typeof handleOccurrenceResultTab === 'function' ? handleOccurrenceResultTab : null })`, {
     legalCopyDescription: label => label, scheduleVisibleOccurrenceSections: () => {},
+    ensureOccurrenceSectionPage() {},
     $$, $: (selector, container) => selector === '[data-occurrence-open]' ? firstButtons[containers.indexOf(container)] : null,
     document: focusedDocument,
     corpus: unitCorpus,
@@ -347,6 +407,20 @@ async function testSectionMaterializationHooks() {
   assert(focusedDocument.activeElement === firstButtons[0], "Next results did not place keyboard focus on its newly rendered first hit.");
   result.materializeOccurrences = materialize;
   focusedDocument.activeElement = null;
+
+  for (const rejectOld of [false, true]) {
+    let completeOld;
+    result.materializeOccurrences = options => new Promise((resolve, reject) => { completeOld = () => rejectOld ? reject(new Error("obsolete page failure")) : resolve(materialize(options)); });
+    const oldRequest = helpers.renderOccurrenceRows(pane, 0, sectionIds[0], { windowed: true, activate: false });
+    // Replacing an authority page invalidates pending requests for its sections.
+    pane.searchState.pageGenerations.set(sectionIds[0], pane.searchState.pageGenerations.get(sectionIds[0]) + 1);
+    result.materializeOccurrences = materialize;
+    await helpers.renderOccurrenceRows(pane, 80, sectionIds[0], { windowed: true, activate: false });
+    const freshRows = containers[0].innerHTML;
+    completeOld();
+    await oldRequest;
+    assert.equal(containers[0].innerHTML, freshRows, `A stale ${rejectOld ? "failure" : "success"} must not replace the current section page`);
+  }
 
   // Native Tab must enter a section even when its worker response is delayed.
   pane.searchState.rowsBySection.delete(sectionIds[1]);
@@ -567,7 +641,7 @@ function testAuthorityStreamAndLegacySearchRetirement() {
 
   const streamSource = between("    function occurrenceAuthorityStreamHtml(", "\n\n    function renderOccurrenceSearchResult(");
   assert(streamSource.includes('data-occurrence-authority=') && streamSource.includes('class="occurrence-authority-header"'), "The combined result does not render a distinct header for each authority.");
-  assert(streamSource.includes("occurrenceHierarchyHtml(group.result, expandResults, group.authority)"), "Each authority header is not followed by its own result hierarchy.");
+  assert(streamSource.includes("occurrenceSectionPageHtml(group, expandResults"), "Each authority header is not followed by its own paged result hierarchy.");
 
   for (const retiredId of ["searchFilterBar", "citationResultsNotification", "citationResultsNotificationCount", "secondaryOccurrencePanel", "secondaryOccurrenceList"]) {
     assert(!template.includes(`id="${retiredId}"`), `Retired legacy search UI #${retiredId} remains in the document.`);
@@ -729,6 +803,8 @@ function testInsertionExclusions() {
 async function main() {
   testRuntimeBlocks();
   testProfileContracts();
+  testAutomaticCitationViewSwitching();
+  await testCitationChipCopy();
   testOccurrenceRouting();
   testCommonControls();
   testChildHardScopes();

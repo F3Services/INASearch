@@ -105,4 +105,30 @@ assert.equal(compoundResult.totalOccurrences,1,'A shared rendered CFR host canno
 assert.deepEqual(rows(compoundResult)[0].path,['b']);
 const inlineProjection={...projection,fragments:projection.fragments.map(f=>({...f,source:{...f.source,path:['a']}}))};
 assert.equal(query.resolveHighlights(inlineProjection,personal).size,1,'A run-in must resolve by its legal path, not only its parent source record path');
+// Expand the complete CFR host in projection order, even when its associated
+// unit follows a sibling and its sourceOrder values have a different order.
+{
+  const first = {id:'first',authority:'cfr',title:8,section:'1.1',recordId:'8:1.1',path:['b'],sourceOrder:20,text:'😀 café and ',source:{field:'blocks',blockPath:[0]}};
+  const last = {id:'last',authority:'cfr',title:8,section:'1.1',recordId:'8:1.1',path:['a'],sourceOrder:10,text:'212 repeated repeated.',source:{field:'blocks',blockPath:[0]},references:[{start:0,end:3,displayText:'INA 212'}]};
+  const projected = {fragments:[first,{...first,id:'editorial',contentKind:'annotations',text:'Excluded annotation'},last,{...first,id:'other-record',recordId:'8:1.2',section:'1.2',text:'Excluded record'}]};
+  const association = {family:'cfr',title:'8',start:{unit:'1.1',path:['a']}};
+  const saved = anchor => ({highlights:[{id:'ink',color:'pink',segments:[{id:'piece',association,anchor}]}]});
+  const source = first.text + last.text, start = source.indexOf('café'), end = source.indexOf('212')+3;
+  const coverage = query.resolveHighlights(projected,saved(annotations.quoteAnchor(source,start,end)));
+  assert.deepEqual([...coverage.keys()],['first','last'],'Shared CFR host candidates changed source order or included unrelated fragments');
+  assert.deepEqual([...coverage.values()].map(ranges=>ranges.map(({start,end,selectedText})=>({start,end,selectedText}))),[[{start:3,end:12,selectedText:'café and '}],[{start:0,end:3,selectedText:'212'}]]);
+  const display = first.text + 'INA 212 repeated repeated.';
+  const converted = query.resolveHighlights(projected,saved(annotations.quoteAnchor(display,12,19)));
+  assert.deepEqual([...converted.keys()],['last']);
+  assert.deepEqual(converted.get('last')[0],{start:0,end:3,color:'pink',id:'ink',segmentId:'piece',selectedText:'INA 212',starts:[0,0,0,0,0,0,0],ends:[3,3,3,3,3,3,3]});
+  const repeated = query.resolveHighlights(projected,saved(annotations.quoteAnchor(source,source.lastIndexOf('repeated'),source.lastIndexOf('repeated')+8)));
+  assert.equal(repeated.get('last')[0].start,13,'A repeated quote lost its whole-host offset');
+  assert.equal(query.resolveHighlights(projected,saved({exact:'repeated',prefix:'',suffix:'',fingerprint:'changed'})).size,0,'An ambiguous repeated quote was guessed');
+  const review = saved(annotations.quoteAnchor(source,start,end));
+  review.highlights[0].segments[0].association = {...association,structureStatus:'needs-review'};
+  assert.equal(query.resolveHighlights(projected,review).size,0);
+  const separated = {fragments:[{...first,text:'Alpha'},{...last,text:'Beta',references:[]}]};
+  const joined = query.resolveHighlights(separated,saved(annotations.quoteAnchor('Alpha Beta',0,10)));
+  assert.deepEqual([...joined.values()].map(ranges=>ranges[0].selectedText),['Alpha','Beta'],'Whole-host matching lost separator fallback');
+}
 (async()=>{const ast=command.parseCommand('in:237 cites:212');const options={plan:{branches:ast.branches.map(b=>({...b,scopes:b.locations.map(scope)})),citationScopes:ast.citationGroups.map(g=>g.map(scope))}};assert.deepEqual(rows(await query.searchAsync(projection,ast,options)),rows(query.search(projection,ast,options)));assert.deepEqual(rows(query.search(await occurrence.buildProjectionAsync(corpus),ast,options)),rows(query.search(projection,ast,options)));console.log('PASS structured scopes, citations/Common, annotations, highlight modes, previews and migrations');})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,18 +1,18 @@
 /* Generated from https://www.uscis.gov/tools/glossary. Run tools/generate-uscis-glossary.js to refresh. */
 window.INA_SEARCH_USCIS_GLOSSARY = {
   "schemaVersion": 1,
-  "capturedAt": "2026-10-20",
+  "capturedAt": "2026-10-23",
   "source": {
     "name": "USCIS Glossary",
     "publisher": "U.S. Citizenship and Immigration Services",
     "locator": "USCIS Tools — Glossary",
     "url": "https://www.uscis.gov/tools/glossary",
-    "capturedAt": "2026-10-20",
-    "lastModified": "Tue, 20 Oct 2026 13:37:58 GMT"
+    "capturedAt": "2026-10-23",
+    "lastModified": "Fri, 23 Oct 2026 23:12:04 GMT"
   },
   "verification": {
     "entries": 267,
-    "sourceSha256": "859d2a42c6822b57554dc97d2088f6ed072508d38f5df73166b45694acad6528"
+    "sourceSha256": "a32664fd2d94affa9396b7d5fc31812ddc9002cb20fb8fb70c0a11cb1353eb14"
   },
   "entries": [
     {

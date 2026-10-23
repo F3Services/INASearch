@@ -60,23 +60,26 @@ function assertInlinePresentation(rendered, blocks, start, label) {
   }
 }
 
-function verify(corpus, label) {
+function verify(corpus, label, canonicalGroups = []) {
   // Historical expansion preserves original grouped House records separately
   // and assigns selected notes to individual members via sourceNoteId.
   const deliveredSections = [...(corpus.historicalUsc?.groupSources || []), ...corpus.title8.sections];
-  const sources = statuteFootnoteSourceMap({ title8: { sections: deliveredSections } });
-  const sections = new Map(deliveredSections.map(section => [String(section.section), section]));
-  const deliveredNotes = new Map(deliveredSections.flatMap(section => (section.notes || []).flatMap(note => [[note.id, note], ...(note.sourceNoteId ? [[note.sourceNoteId, note]] : [])])));
+  const evidenceSections = new Set(canonicalGroups.map(section => section.section));
+  const checkedSections = [...canonicalGroups, ...deliveredSections];
+  const sources = statuteFootnoteSourceMap({ title8: { sections: checkedSections } });
+  const sections = new Map(checkedSections.map(section => [String(section.section), section]));
+  const deliveredNotes = new Map(checkedSections.flatMap(section => (section.notes || []).flatMap(note => [[note.id, note], ...(note.sourceNoteId ? [[note.sourceNoteId, note]] : [])])));
   const api = runtime(template, corpus);
   api.profile.preferences.statutoryLinkCitationSystem = "usc";
   Object.assign(api, { els: { detail: { innerHTML: "" } }, statuteDefinitionContext: () => ({}), statuteStatusWarning: () => "", kindLabel: value => value, noteResultKind: value => value, titleCaseTopic: value => value, openButton: () => "" });
   for (const name of ["statuteNoteBodyStart", "formatStatuteNoteBody", "renderStatuteNoteBody", "statuteNoteBodyPlainText", "renderStatuteNote", "renderStatutoryNote", "renderSourceCredit"])
     vm.runInContext(functionSource(template, name), api);
   const totals = {};
-  let cases = 0, historicalCases = 0;
+  let cases = 0, historicalCases = 0, canonicalEvidenceCases = 0;
   for (const item of expected) {
     const where = item.sourceKey ? `${item.sourceKey}.${item.field}` : `${item.division || item.section}.note${item.index}.${item.kind}`;
-    const diagnostic = `${label}: ${where}`;
+    const evidenceOnly = evidenceSections.has(item.section || item.sourceKey?.split(":")[0]);
+    const diagnostic = `${label}${evidenceOnly ? " canonical grouped evidence" : ""}: ${where}`;
     let source, layout, display, text, references;
     if (item.kind === "field") {
       source = sources.get(item.sourceKey);
@@ -182,10 +185,11 @@ function verify(corpus, label) {
       assert.equal(plain.replace(/\s+/g, ""), text.slice(item.start).replace(/\s+/g, ""), `${diagnostic}: note copy retains source text`);
     }
     cases++;
+    if (evidenceOnly) canonicalEvidenceCases++;
   }
   for (const [tag, count] of Object.entries({ i: 409, inline: 1125, title: 5, signature: 30, name: 30, col: 2, span: 4 }))
     assert.equal(totals[tag], count, `${label}: all original ${tag} elements are covered`);
-  console.log(`PASS ${label}: ${cases} original-XML presentation cases; all 409 italics, 1125 inline spans, 5 quoted titles, 30 signatures, 2 columns; ${historicalCases} historical fields use separate source coverage`);
+  console.log(`PASS ${label}: ${cases} original-XML presentation cases; all 409 italics, 1125 inline spans, 5 quoted titles, 30 signatures, 2 columns; ${historicalCases} historical fields use separate source coverage; ${canonicalEvidenceCases} omitted grouped-evidence cases checked against canonical input`);
 }
 
 const generated = { window: {} };
@@ -194,6 +198,16 @@ const overlayArgument = process.argv.indexOf("--overlay");
 vm.runInNewContext(fs.readFileSync(overlayArgument < 0 ? "src/INASearch-Statute-Footnotes.js" : process.argv[overlayArgument + 1], "utf8"), generated);
 verify(applyStatuteFootnotes(generated.window.INA_SEARCH_CORPUS, generated.window.INA_SEARCH_STATUTE_FOOTNOTES), "generated overlay");
 if (!process.argv.includes("--generated-only")) {
-  for (const file of ["INASearch.html", "INASearch-Uncompressed.html"]) verify(unpackLegalReferences(readBuildCorpus(file)), file);
+  const canonicalExpanded = structuredClone(generated.window.INA_SEARCH_CORPUS);
+  require("./historical-ina").applyHistoricalIna(canonicalExpanded);
+  require("./statute-status").applyStatuteStatusMetadata(canonicalExpanded);
+  require("./historical-usc").applyHistoricalUsc(canonicalExpanded);
+  assert.equal(canonicalExpanded.historicalUsc.groupSources.length, 44, "All canonical grouped House evidence remains available");
+  for (const file of ["INASearch.html", "INASearch-Uncompressed.html"]) {
+    const delivered = unpackLegalReferences(readBuildCorpus(file));
+    assert.equal(delivered.historicalUsc.groupSources, undefined, "Grouped build evidence is omitted from the reader");
+    assert(canonicalExpanded.historicalUsc.groupSources.every(group => !delivered.title8.sections.some(section => section.section === group.section)), "Grouped evidence must not replace individually browsable sections");
+    verify(delivered, file, canonicalExpanded.historicalUsc.groupSources);
+  }
 }
 console.log("PASS USLM delivery: original source presentation preserved in all checked artifacts");

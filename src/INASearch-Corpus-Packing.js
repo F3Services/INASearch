@@ -142,12 +142,15 @@
       .sort((left, right) => right[1] - left[1] || right[0].length - left[0].length || left[0].localeCompare(right[0]))
       .map(([value]) => value);
     const indexes = new Map(packing.s.map((value, index) => [value, index]));
+    const visited = new WeakSet();
     const replace = value => {
       if (typeof value === "string") {
         if (indexes.has(value)) return `~${indexes.get(value)}`;
-        return /^~\d+$/.test(value) ? `~${value}` : value;
+        const token = packing.mode === "strings" ? /^~+\d+$/ : /^~\d+$/;
+        return token.test(value) ? `~${value}` : value;
       }
-      if (!value || typeof value !== "object") return value;
+      if (!value || typeof value !== "object" || visited.has(value)) return value;
+      visited.add(value);
       if (Array.isArray(value)) {
         for (let index = 0; index < value.length; index += 1) value[index] = replace(value[index]);
       } else {
@@ -161,7 +164,8 @@
   function hydrateRepeatedStrings(corpus, packing) {
     const expand = value => {
       if (typeof value === "string") {
-        if (/^~~\d+$/.test(value)) return value.slice(1);
+        const escapedToken = packing.mode === "strings" ? /^~~+\d+$/ : /^~~\d+$/;
+        if (escapedToken.test(value)) return value.slice(1);
         const match = value.match(/^~(\d+)$/);
         return match ? packing.s[Number(match[1])] : value;
       }
@@ -448,9 +452,25 @@
     return corpus;
   }
 
+  // The uncompressed edition keeps its full record structure. Only repeated
+  // strings move into a readable dictionary; no field is inferred or omitted.
+  function packCorpusStringsForDelivery(source) {
+    const corpus = clone(source);
+    if (!corpus || typeof corpus !== "object" || corpus._pack) return corpus;
+    const packing = { v: 1, mode: "strings" };
+    packRepeatedStrings(corpus, packing);
+    corpus._pack = packing;
+    return corpus;
+  }
+
   function hydratePackedCorpus(corpus) {
     const packing = corpus?._pack;
     if (!packing) return corpus;
+    if (packing.v === 1 && packing.mode === "strings" && Array.isArray(packing.s)) {
+      hydrateRepeatedStrings(corpus, packing);
+      delete corpus._pack;
+      return corpus;
+    }
     if (packing.v !== 1 || !Array.isArray(packing.h) || !Array.isArray(packing.e) || !Array.isArray(packing.u) || !Array.isArray(packing.s)) throw new Error("The embedded corpus uses an unsupported compact delivery format.");
 
     hydrateRepeatedStrings(corpus, packing);
@@ -508,7 +528,7 @@
   // The encoder is a build-time dependency; the shipped reader only decodes.
   const api = Object.freeze(typeof INASEARCH_BROWSER !== "undefined" && INASEARCH_BROWSER
     ? { FORMAT, hydratePackedCorpus }
-    : { FORMAT, packCorpusForDelivery, hydratePackedCorpus });
+    : { FORMAT, packCorpusForDelivery, packCorpusStringsForDelivery, hydratePackedCorpus });
   globalThis.INASearchCorpusPacking = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })();

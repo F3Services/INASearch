@@ -1,6 +1,6 @@
 # INASearch
 
-**Try INASearch:** [Open the live app at inasearch.pages.dev](https://inasearch.pages.dev/).
+**Try INASearch:** [Open the inasearch.pages.dev site](https://inasearch.pages.dev/).
 
 INASearch is a fast reference tool for federal immigration statutes and regulations. It runs as a single HTML file and includes its legal corpus, so you can search and read it without installing software or relying on an internet connection.
 
@@ -12,7 +12,7 @@ Enter an INA, U.S.C., or CFR citation to open the provision, browse its structur
 - Switch between INA and U.S.C. citations using the built-in crosswalk.
 - Open exact subsections and paragraphs in a structured legal reader.
 - Preview many cross-referenced provisions without leaving the page.
-- Find source-specific definitions and links to USCIS forms and Policy Manual resources.
+- Find source-specific definitions from statutes, regulations, and the USCIS Glossary.
 - Attach searchable notes to exact legal citations, share them with other citations, and keep their banners visible while reading the associated text.
 - Browse repealed, transferred, omitted, and note-based statutory material with clear labels.
 
@@ -58,7 +58,7 @@ The data file is not encrypted, so protect it like any other document containing
 
 Automatic CFR updates are **off by default**. With updates off, INASearch uses its built-in legal corpus and makes no network requests.
 
-Title 8 release checks run separately through the optional [GitHub corpus updater](docs/title8-updater.md). It prepares corrected, tested update pull requests for review; adopting one produces a new standalone app with the updated statute corpus.
+Title 8 release checks run separately through the optional [GitHub corpus updater](docs/title8-updater.md). It prepares corrected, tested update pull requests for review; adopting one produces a new standalone file with the updated statute corpus.
 
 You can turn updates on in **Settings**. When enabled, INASearch checks the included CFR material directly against eCFR's dated XML API. It preserves source content and verifies paragraph structure using visible markers, formatting, and prior verified text. An incomplete or ambiguous update leaves the previous local corpus active. Red errors remain visible with detailed status off; select an error for details and retry controls. After activation and reload, search uses the updated corpus and index. This setting does not update the U.S. Code, INA crosswalk, USCIS resources, or other non-CFR material.
 
@@ -69,7 +69,7 @@ You can turn updates on in **Settings**. When enabled, INASearch checks the incl
 - Regulations come from [eCFR](https://www.ecfr.gov/current/title-8). The release pairs the official XML text with same-date eCFR enhanced-renderer paragraph IDs and independently audits the resulting hierarchy. Cross-title CFR coverage is selected using GovInfo's [Parallel Table of Authorities and Rules](https://www.govinfo.gov/content/pkg/GPO-CFR-INDEX-2025/html/GPO-CFR-INDEX-2025-4.htm).
 - Definitions come from the [USCIS Glossary](https://www.uscis.gov/tools/glossary), [INA 101](https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1101&num=0&edition=prelim), and [8 CFR 1.2](https://www.ecfr.gov/current/title-8/part-1/section-1.2).
 
-The October 20, 2026 source refresh includes the U.S. Code release current through Public Law 119-121 (October 9, 2026) and the included eCFR material current through October 16, 2026. The INA crosswalk and USCIS resource metadata were checked on October 20. Historical material retains its identified edition.
+The October 23, 2026 source refresh includes the U.S. Code release current through Public Law 119-124 (October 15, 2026) and the included eCFR material current through October 21, 2026. The INA crosswalk and USCIS resource metadata were checked on October 23. Historical material retains its identified edition.
 
 The **About** page shows the capture dates and coverage for the copy you are using. Official-source links are available throughout the reader when you need to confirm current law.
 

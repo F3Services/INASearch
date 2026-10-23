@@ -9,7 +9,7 @@ a/6	521	(A)	run-in	521:524 (A) -> RUN-IN a/6/A
 a/6	656	(B)	run-in	656:659 (B) -> RUN-IN a/6/B
 a/13/B	42	(d)(5)	reference	30:62 "section 1182(d)(5) of this title" -> USC 8:1182/d/5 [local;house-uslm-ref]
 a/13/C/v	51	(a)(2)	reference	39:71 "section 1182(a)(2) of this title" -> USC 8:1182/a/2 [local;house-uslm-ref]
-a/13/C/v	151	(h)	reference	139:154 "section 1182(h)" -> USC 8:1182/h [local;context-bare-usc-section]
+a/13/C/v	151	(h)	reference	139:154 "section 1182(h)" -> USC 8:1182/h [local;context-bare-trailing-title-section]
 a/13/C/v	163	(a)	reference	158:166 "1229b(a)" -> USC 8:1229b/a [local;context-bare-usc-address]
 a/15/A/iii	180	(i)	reference	180:183 "(i)" -> USC 8:1101/a/15/A/i [local;embedded-inferred-unit]
 a/15/A/iii	188	(ii)	reference	188:192 "(ii)" -> USC 8:1101/a/15/A/ii [local;embedded-inferred-unit]
@@ -22,7 +22,7 @@ a/15/E	692	(i)	run-in	692:695 (i) -> RUN-IN a/15/E/i
 a/15/E	880	(ii)	run-in	880:884 (ii) -> RUN-IN a/15/E/ii
 a/15/E	1095	(iii)	run-in	1095:1100 (iii) -> RUN-IN a/15/E/iii
 a/15/E	1472	(t)(1)	reference	1460:1492 "section 1182(t)(1) of this title" -> USC 8:1182/t/1 [local;house-uslm-ref]
-a/15/F/i	303	(l)	reference	291:306 "section 1184(l)" -> USC 8:1184/l [local;context-bare-usc-section]
+a/15/F/i	303	(l)	reference	291:306 "section 1184(l)" -> USC 8:1184/l [local;context-bare-trailing-title-section]
 a/15/F/i	913	(ii)	run-in	913:917 (ii) -> RUN-IN a/15/F/ii
 a/15/F/i	987	(i)	reference	987:990 "(i)" -> USC 8:1101/a/15/F/i [local;embedded-inferred-unit]
 a/15/F/i	1047	(iii)	run-in	1047:1052 (iii) -> RUN-IN a/15/F/iii
@@ -93,7 +93,7 @@ a/15/S	108	(ii)	reference	108:112 "(ii)" -> USC 8:1101/a/15/S/ii [local;embedded
 a/15/S	301	(i)	reference	301:304 "(i)" -> USC 8:1101/a/15/S/i [local;embedded-inferred-unit]
 a/15/S	308	(ii)	reference	308:312 "(ii)" -> USC 8:1101/a/15/S/ii [local;embedded-inferred-unit]
 a/15/S/ii/IV	50	(a)	reference	38:65 "section 2708(a) of title 22" -> USC 22:2708/a [local;house-uslm-ref]
-a/15/T/i	23	(o)	reference	11:26 "section 1184(o)" -> USC 8:1184/o [local;context-bare-usc-section]
+a/15/T/i	23	(o)	reference	11:26 "section 1184(o)" -> USC 8:1184/o [local;context-bare-trailing-title-section]
 a/15/T/i	119	(III)(aa)	reference	119:128 "(III)(aa)" -> USC 8:1101/a/15/T/i/III/aa [local;embedded-inferred-unit]
 a/15/T/i/III/bb	115	(aa)	reference	115:119 "(aa)" -> USC 8:1101/a/15/T/i/III/aa [local;embedded-inferred-unit]
 a/15/T/ii	69	(i)	reference	69:72 "(i)" -> USC 8:1101/a/15/T/i [local;embedded-inferred-unit]
@@ -119,7 +119,7 @@ a/19	494	(a)	reference	480:497 "50 U.S.C. 3803(a)" -> USC 50:3803/a [local;house
 a/22	47	(A)	run-in	47:50 (A) -> RUN-IN a/22/A
 a/22	86	(B)	run-in	86:89 (B) -> RUN-IN a/22/B
 a/24	43	(m)(1)	reference	10:49 "Pub. L. 102–232, title III, § 305(m)(1)" -> PL 102-232/tIII/s305/m/1 [official-source-only;house-uslm-ref]
-a/27/B	79	(a)	reference	67:82 "section 1435(a)" -> USC 8:1435/a [local;context-bare-usc-section]
+a/27/B	79	(a)	reference	67:82 "section 1435(a)" -> USC 8:1435/a [local;context-bare-trailing-title-section]
 a/27/C/ii/III	221	(c)(3)	reference	210:239 "section 501(c)(3) of title 26" -> USC 26:501/c/3 [local;house-uslm-ref]
 a/27/C/iii	133	(i)	reference	133:136 "(i)" -> USC 8:1101/a/27/C/i [local;embedded-inferred-unit]
 a/27/E	226	(a)(1)	reference	214:244 "section 3602(a)(1) of title 22" -> USC 22:3602/a/1 [local;house-uslm-ref]
@@ -179,14 +179,14 @@ a/43/E/ii	82	(h)	reference	82:85 "(h)" -> USC 18:924/h [local;embedded-numbered-
 a/43/N	34	(1)(A)	reference	34:40 "(1)(A)" -> USC 8:1324/a/1/A [local;embedded-a-shared-trailing-container]
 a/43/N	44	(2)	reference	44:47 "(2)" -> USC 8:1324/a/2 [local;embedded-a-shared-trailing-container]
 a/43/N	63	(a)	reference	51:80 "section 1324(a) of this title" -> USC 8:1324/a [local;house-uslm-ref]
-a/43/O	36	(a)	reference	24:39 "section 1325(a)" -> USC 8:1325/a [local;context-bare-usc-section]
+a/43/O	36	(a)	reference	24:39 "section 1325(a)" -> USC 8:1325/a [local;context-bare-trailing-title-section]
 a/43/P	11	(i)	run-in	11:14 (i) -> RUN-IN a/43/P/i
 a/43/P	193	(a)	reference	181:196 "section 1546(a)" -> USC 18:1546/a [local;context-bare-trailing-title-section]
 a/43/P	244	(ii)	run-in	244:248 (ii) -> RUN-IN a/43/P/ii
 a/45	56	(15)(E)	reference	56:63 "(15)(E)" -> USC 8:1101/a/15/E [local;embedded-inferred-unit]
 a/46	67	(a)(15)(O)(i)	reference	67:80 "(a)(15)(O)(i)" -> USC 8:1101/a/15/O/i [local;embedded-inferred-unit]
 a/47/B	39	(A)	reference	39:42 "(A)" -> USC 8:1101/a/47/A [local;embedded-inferred-unit]
-a/50	91	(a)(1)(A)(iii)(II)(aa)(BB)	reference	79:117 "section 1154(a)(1)(A)(iii)(II)(aa)(BB)" -> USC 8:1154/a/1/A/iii/II/aa/BB [local;context-bare-usc-section]
+a/50	91	(a)(1)(A)(iii)(II)(aa)(BB)	reference	79:117 "section 1154(a)(1)(A)(iii)(II)(aa)(BB)" -> USC 8:1154/a/1/A/iii/II/aa/BB [local;context-bare-trailing-title-section]
 a/50	123	(a)(1)(B)(ii)(II)(aa)(BB)	reference	119:148 "1154(a)(1)(B)(ii)(II)(aa)(BB)" -> USC 8:1154/a/1/B/ii/II/aa/BB [local;context-bare-usc-address]
 a/50	158	(b)(2)(A)(i)(III)	reference	153:175 "1229b(b)(2)(A)(i)(III)" -> USC 8:1229b/b/2/A/i/III [local;context-bare-usc-address]
 a/51/A	7	(iii)	reference	7:12 "(iii)" -> USC 8:1154/a/1/A/iii [local;embedded-a-shared-trailing-container]

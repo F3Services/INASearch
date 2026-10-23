@@ -34,11 +34,13 @@ A connected data file stays connected and receives the reset. **Reset settings**
 
 The main reader’s navigation dropdowns follow the citation at **Page view offset**, which defaults to 3% below the top of the readable area. The same setting controls where citation jumps land. Use the arrow to the left of the INASearch logo to expand or collapse the dropdown row. Your choice is saved. The search field keeps the entered or explicitly selected citation in either mode.
 
-Scrolling changes neither navigation history nor the blue selection highlight. Selecting a citation, opening its menu, copying its citation or text, sharing it, adding a note, printing it, or opening its official source logs that citation. The action column stays fixed in the left gutter. Its actions use the blue-highlighted citation while any part of that unit is visible. Otherwise, hovering or focusing a button previews the first citation below the offset line. Click a citation in the text to select a broader unit when needed.
+Scrolling changes neither navigation history nor the blue selection highlight. Selecting a citation, opening its menu, copying its citation or text, sharing it, adding a note, printing it, or opening its official source logs that citation. The action column stays fixed in the left gutter. Its actions use the blue-highlighted citation. Hovering or focusing a button keeps your reading position when that citation’s start is visible. When its start is out of view, the preview temporarily brings it to Page view offset and restores your position when you leave the buttons. Click a citation in the text to select a broader unit when needed.
 
 The copy controls offer § for the citation and T for legal text using your saved format. Hover or focus a control to preview the target citation. The INA/U.S.C. switch in the same column controls the copied statute format and the navigation hierarchy; it is disabled for regulations and statutes without an INA equivalent. **Copied text format** in Settings defaults to `[citation] - [text]`, so T includes both by default. Those tokens are replaced with the citation and complete legal text, regardless of capitalization. You can put them in any order and include your own punctuation and line breaks; no separator is added automatically. Settings warns you if either token is missing.
 
 The search field’s copy controls target its displayed citation. Share stays beside the search field and uses the live navigation citation in the main reader. Hover or keyboard-focus Share to light the window edges and temporarily show the shared destination, including both panes in a split view. Moving away or pressing Escape restores your reading position; previewing does not add history. Clicking copies the previewed link. A recipient’s saved display preferences can affect the layout.
+
+Downloaded files and localhost copies use `https://inasearch.pages.dev/` for share links by default, including citation-specific links. Copies hosted at another public address keep that address. Turn off **Settings → Sharing → Use inasearch.pages.dev for local share links** to copy the local address instead. The local-link warning appears only when the copied link still points to a local copy.
 
 If you jump to `INA 237(a)(3)` and scroll to `(a)(2)(D)`, Back first returns to `(a)(3)`. Pressing Back again visits the previous logged destination. History jumps align the citation at Page view offset. Side-by-side panes retain their own navigation history and copy targets.
 
@@ -65,7 +67,7 @@ No. It has no analytics, user account, or project-operated server. With automati
 
 ### What is the source for the statutes?
 
-The statutory text and structure come from the [official Title 8 USLM release](https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip) published by the [House Office of the Law Revision Counsel](https://uscode.house.gov/). INASearch retains the complete captured Title 8 release, including current provisions and House material identified as repealed, transferred, omitted, or set out as a note.
+The statutory text and structure come from the [official Title 8 USLM release](https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip) published by the [House Office of the Law Revision Counsel](https://uscode.house.gov/). INASearch retains the complete captured Title 8 release, including current provisions and House material identified as repealed, transferred, omitted, or set out as a note.
 
 The source ZIP and extracted XML are stored under `sources/legal/raw/`. Their URLs, byte counts, release point, and SHA-256 hashes are recorded in `sources/legal/source-manifest.json`.
 
@@ -137,7 +139,7 @@ No. Runtime updates maintain the fixed coverage already reviewed for the release
 
 ### What does not update automatically?
 
-The standalone browser cannot fetch the [House Title 8 release](https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip) or [USCIS INA source page](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act) directly because those sites do not provide the required browser cross-origin access. Automatic maintenance therefore does not update:
+The standalone browser cannot fetch the [House Title 8 release](https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip) or [USCIS INA source page](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act) directly because those sites do not provide the required browser cross-origin access. Automatic maintenance therefore does not update:
 
 - [Title 8 U.S.C.](https://uscode.house.gov/browse/prelim@title8&edition=prelim);
 - the [INA crosswalk](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act);
@@ -224,7 +226,7 @@ Golden fixtures run the same examples through both Node and a browser-like envir
 
 `sources/legal/source-manifest.json` records the requested and final URLs, publisher identifiers, byte counts, and SHA-256 hashes for:
 
-- the [House Title 8 ZIP](https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip) and extracted USLM XML;
+- the [House Title 8 ZIP](https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip) and extracted USLM XML;
 - the [USCIS INA page](https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act); and
 - the [GovInfo INA compilation](https://www.govinfo.gov/app/details/COMPS-1376).
 

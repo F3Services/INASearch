@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-10-20",
+  "capturedAt": "2026-10-23",
   "crosswalkRows": 183,
   "counts": {
     "govinfo-direct-mapping": 161,
@@ -14,8 +14,8 @@
   "sources": {
     "uscis": {
       "path": "sources/legal/raw/uscis-ina-crosswalk.html",
-      "bytes": 112222,
-      "sha256": "2cf9941dd9091d2fd4c91adffdb6b97481c94c39a3345e27a501a3370caf5b17"
+      "bytes": 111944,
+      "sha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812"
     },
     "govinfo": {
       "path": "sources/legal/raw/COMPS-1376.xml",
@@ -23,9 +23,9 @@
       "sha256": "cdc4d5d77cf5e893ac58680cd89522694f926d10e1cd26efeba70b6eb79ba9ca"
     },
     "house": {
-      "path": "sources/legal/raw/usc08@119-121.xml",
+      "path": "sources/legal/raw/usc08@119-124.xml",
       "bytes": 7384424,
-      "sha256": "dacd49660b6bae3039c1083ffd54c84f4f39ba9ef8da8457104e63283bcada5f"
+      "sha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8"
     }
   },
   "rows": [

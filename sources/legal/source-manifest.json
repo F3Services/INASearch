@@ -1,36 +1,36 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-10-20",
+  "capturedAt": "2026-10-23",
   "sources": [
     {
       "id": "house-title-8-uslm",
       "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
-      "releasePoint": "119-121",
-      "currentThroughPublicLaw": "119-121",
-      "requestedUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip",
-      "finalUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/121/xml_usc08@119-121.zip",
-      "lastModified": "Thu, 15 Oct 2026 10:51:11 GMT",
-      "etag": "\"8a6fb517935cdd1:0\"",
+      "releasePoint": "119-124",
+      "currentThroughPublicLaw": "119-124",
+      "requestedUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip",
+      "finalUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip",
+      "lastModified": "Mon, 19 Oct 2026 15:43:01 GMT",
+      "etag": "\"2c6df085e05fdd1:0\"",
       "artifacts": [
         {
           "id": "house-title-8-archive",
           "role": "downloaded-archive",
-          "path": "sources/legal/raw/xml_usc08@119-121.zip",
+          "path": "sources/legal/raw/xml_usc08@119-124.zip",
           "mediaType": "application/zip",
           "bytes": 1232042,
-          "sha256": "8e94ff972f2292912dc017cce23cc3ca0f6f2dfb57679f942c648552cea0a43a"
+          "sha256": "bd778da45714e4501724ce131d2f89dce38358d5af3157aa628d5337f9a08bcc"
         },
         {
           "id": "house-title-8-xml",
           "role": "extracted-uslm",
-          "path": "sources/legal/raw/usc08@119-121.xml",
+          "path": "sources/legal/raw/usc08@119-124.xml",
           "mediaType": "application/xml",
           "bytes": 7384424,
-          "sha256": "dacd49660b6bae3039c1083ffd54c84f4f39ba9ef8da8457104e63283bcada5f"
+          "sha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8"
         }
       ],
-      "currentThroughDate": "2026-10-09",
-      "checkedAt": "2026-10-20"
+      "checkedAt": "2026-10-23",
+      "currentThroughDate": "2026-10-15"
     },
     {
       "id": "govinfo-ina-compilation",
@@ -50,29 +50,29 @@
           "sha256": "cdc4d5d77cf5e893ac58680cd89522694f926d10e1cd26efeba70b6eb79ba9ca"
         }
       ],
+      "checkedAt": "2026-10-23",
       "currentThroughPublicLaw": "119-21",
       "amendedThroughDate": "2025-07-04",
-      "processedDate": "2026-10-16",
-      "checkedAt": "2026-10-20"
+      "processedDate": "2026-10-16"
     },
     {
       "id": "uscis-ina-crosswalk",
       "publisher": "U.S. Citizenship and Immigration Services",
       "requestedUrl": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
       "finalUrl": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-      "lastModified": "Tue, 20 Oct 2026 13:33:04 GMT",
-      "etag": "\"1792503184\"",
+      "lastModified": "Fri, 23 Oct 2026 22:42:49 GMT",
+      "etag": "\"1792795369\"",
       "artifacts": [
         {
           "id": "uscis-ina-crosswalk-html",
           "role": "downloaded-html",
           "path": "sources/legal/raw/uscis-ina-crosswalk.html",
           "mediaType": "text/html",
-          "bytes": 112222,
-          "sha256": "2cf9941dd9091d2fd4c91adffdb6b97481c94c39a3345e27a501a3370caf5b17"
+          "bytes": 111944,
+          "sha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812"
         }
       ],
-      "checkedAt": "2026-10-20"
+      "checkedAt": "2026-10-23"
     }
   ]
 }

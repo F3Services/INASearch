@@ -4,7 +4,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
 const { readBuildCorpus } = require("./read-build-corpus");
-const { readHistoricalIna, parseHistoricalUnits } = require("./historical-ina");
+const { readHistoricalIna, parseHistoricalUnits, applyHistoricalIna } = require("./historical-ina");
 const { packLegalReferences, unpackLegalReferences } = require("./pack-legal-references");
 const { hydratePackedCorpus, packCorpusForDelivery } = require("../src/INASearch-Corpus-Packing");
 const occurrence = require("../src/INASearch-Occurrence");
@@ -12,6 +12,12 @@ const annotations = require("../src/INASearch-Annotations");
 const functionSource = require("./test-function-source");
 const data = readHistoricalIna();
 const corpus = unpackLegalReferences(readBuildCorpus(require.resolve("../INASearch.html")));
+const sandbox = { window: {} };
+vm.runInNewContext(fs.readFileSync(require.resolve("../src/INASearch-Corpus.js"), "utf8"), sandbox);
+const canonical = structuredClone(sandbox.window.INA_SEARCH_CORPUS);
+applyHistoricalIna(canonical, data);
+require("./historical-usc").applyHistoricalUsc(canonical);
+const canonicalSections = new Map(canonical.title8.sections.map(section => [section.section, section]));
 const sections = new Map(corpus.title8.sections.map(s => [s.section,s]));
 const nodeAt = (s, path) => path.reduce((parent, label) => parent.children?.find(n => n.label === label), { children: sections.get(s).body });
 assert.equal(corpus.historicalIna.sections.length, 14);
@@ -20,7 +26,11 @@ for (const record of data.sections) {
   const section = sections.get(record.uscSection);
   assert.equal(section.status, record.status || "repealed");
   assert.equal(section.heading, record.originalTitle);
-  assert.equal(section.historical.unitsSha256, record.unitsSha256);
+  assert.equal(canonicalSections.get(record.uscSection).historical.unitsSha256, record.unitsSha256);
+  const capture = data.captures.find(item => item.file.endsWith(`/${record.sourceFile}`));
+  assert.equal(canonicalSections.get(record.uscSection).historical.sourceSha256, capture.sha256);
+  assert.equal(section.historical.unitsSha256, undefined, "Transcription checksum belongs in canonical evidence, not delivery");
+  assert.equal(section.historical.sourceSha256, undefined, "Source checksum belongs in canonical evidence, not delivery");
   assert(section.houseHeading.startsWith(record.status === "transferred" ? "Transferred" : "Repealed"));
   const parsed = parseHistoricalUnits(record.units);
   assert.equal(section.preamble || "", parsed.preamble || "");
@@ -38,7 +48,8 @@ for (const record of data.sections) {
 assert.deepEqual(["352","353","354","355","401"].map(ina => corpus.inaCrosswalk.find(r=>r.inaSection===ina).localSection), ["1484","1485","1486","1487","1106"]);
 assert(!sections.has("1484 to 1487"), "The combined 8 U.S.C. 1484 to 1487 record remained browsable after individual-section expansion.");
 for (const section of ["1484", "1485", "1486", "1487"]) assert(sections.has(section), `Individual 8 U.S.C. ${section} record is missing.`);
-assert(corpus.historicalUsc.groupSources.some(section => section.section === "1484 to 1487"), "The original combined House record was not retained as source evidence.");
+assert.equal(corpus.historicalUsc.groupSources, undefined, "Grouped build evidence is omitted from delivery");
+assert(canonical.historicalUsc.groupSources.some(section => section.section === "1484 to 1487"), "The original combined House record was not retained as source evidence.");
 assert.equal(corpus.inaCrosswalk.find(r=>r.inaSection==="401").originalCrosswalk.hasEquivalent,false);
 assert.match(nodeAt("1252b",["d","1"]).text,/an immigration judge/);
 assert.match(nodeAt("1161",["e","1"]).text,/paragraphs \(5\) and \(7\)\(A\)/);
@@ -62,10 +73,12 @@ for (const sectionId of corpus.historicalIna.sections) {
 for (const s of ["1252","1105a","1450","1251"]) {
   const selected=refs.filter(r=>r.targetTitle==="8"&&r.targetSection===s);
   assert(selected.length);
-  for(const ref of selected){const target=corpus.historicalReferenceTargets[ref.historicalTargetId];assert(target);assert.equal(ref.resolution,"official-source-only");assert(target.message.includes("Historical target text")||target.message.includes("historical target text"));}
+  for (const ref of selected) {
+    assert.equal(ref.resolution,"unresolved","An unverified historical version must remain plain text instead of receiving a current-law wrapper");
+    assert.match(ref.citationNote || "",/historical.*(?:not.*verified|not.*included)|matching historical destination/i);
+    assert.equal(ref.historicalTargetId,undefined,"An unresolved edition guard must not bind to a separately indexed historical wrapper");
+  }
 }
-assert.equal(corpus.historicalReferenceTargets[refs.find(r=>r.targetSection==="1251").historicalTargetId].status,"transferred");
-assert.equal(corpus.historicalReferenceTargets[refs.find(r=>r.targetSection==="1105a").historicalTargetId].status,"repealed");
 const range=nodeAt("1485",["7"]).references.filter(r=>["(1)","(5)","(6)"].includes(r.text));
 assert.deepEqual(range.map(r=>[r.targetSection,r.targetPath]),[["1485",["1"]],["1485",["5"]],["1485",["6"]]]);
 assert(nodeAt("1485",["10"]).references.some(r=>r.text.includes("Nationality Act of 1940")&&r.historicalTargetId));

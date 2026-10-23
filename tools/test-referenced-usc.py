@@ -18,6 +18,23 @@ class ReferencedUscTests(unittest.TestCase):
     def setUp(self):
         self.assertIsNotNone(m, "The direct-reference corpus generator is not implemented")
 
+    def test_reference_export_validates_full_corpus_without_selecting_historical_bodies(self):
+        exported = m.load_references()
+        selected, _, _ = m.select_references(exported['references'], set(exported['inaSections']))
+        self.assertIn('18:16', selected)
+        self.assertTrue(any(ref['sourceSection'] == '1101' for ref in selected['18:16']))
+        historical = json.loads((ROOT / 'sources/legal/historical-ina.json').read_text())
+        historical_sections = {str(record['uscSection']) for record in historical['sections']}
+        self.assertFalse(historical_sections.intersection(exported['inaSections']))
+        self.assertFalse(any(ref['sourceSection'] in historical_sections for ref in exported['references']))
+
+    def test_reference_export_still_rejects_stale_exact_source_exceptions(self):
+        injection = "corpus.legalReferenceExceptions.exceptions.push({...corpus.legalReferenceExceptions.exceptions[0],id:'stale-export-test',sourceId:'missing-export-source'});"
+        script = m.NODE_REFERENCE_EXPORT.replace("require('./tools/legal-references').applyGeneratedLegalReferences(corpus);", injection + "require('./tools/legal-references').applyGeneratedLegalReferences(corpus);")
+        with patch.object(m, 'NODE_REFERENCE_EXPORT', script):
+            with self.assertRaisesRegex(RuntimeError, 'Stale embedded-reference exceptions:.*stale-export-test'):
+                m.load_references()
+
     def test_current_capture_preserves_source_fields_and_publisher_currency(self):
         source = """<!-- AUTHORITIES-LAWS-ENACTED-THROUGH:119-121 (10/09/2026) -->
 <!-- AUTHORITIES-USC-TITLE-NAME:TITLE 18 - CRIMES AND CRIMINAL PROCEDURE -->

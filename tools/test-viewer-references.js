@@ -63,7 +63,7 @@ const secondOrigin = { id: "pane-two-second-marker" };
 const localReturn = { dataset: {}, setAttribute(name, value) { this[name] = value; } };
 const excerptEntry = { tagName: "LI", dataset: {}, parentElement: null,
   matches: selector => selector.split(/,\s*/).includes(".legal-reference-preview-footnotes li"), focus() {} };
-const navigation = vm.createContext({ els: { detail: {} }, $$: () => [localReturn], scrollStatuteAnchorToReadingLine() {} });
+const navigation = vm.createContext({ els: { detail: {} }, $$: () => [localReturn], materializeStatuteNotes() {}, scrollStatuteAnchorToReadingLine() {} });
 vm.runInContext(functionSource(template, "revealStatuteNoteTarget"), navigation);
 navigation.revealStatuteNoteTarget(excerptEntry, secondOrigin);
 assert.equal(excerptEntry.dataset.houseFootnoteActiveReference, secondOrigin.id,
@@ -108,6 +108,11 @@ assert(cfrPreview.previewHtml.includes("source-diagram.gif"), "An unavailable gr
 assert(!cfrPreview.previewHtml.includes("Other diagram"), "A scoped preview must exclude a sibling provision's graphic");
 assert(!cfrPreview.previewHtml.includes('class="cfr-block'), "Preview graphics must not become main reader citation hosts");
 console.log("PASS CFR previews: shared rich excerpt rendering retains tables and scoped graphics");
+for (const [family,title,section,edition,label] of [['cfr','20','655.202','2013','CFR'],['usc','8','1254','1994','U.S. Code']]) {
+  const archived=api.legalReferenceContextForElement({dataset:{referenceFamily:family,referenceResolution:'official-source-only',referenceTitle:title,referenceSection:section,referencePath:'["b","6"]',referenceEdition:edition}});
+  assert(archived.historicalTarget.message.includes(`${edition} ${label} edition`),'Historical preview must name the cited authority family');
+  if(family==='cfr')assert(!archived.historicalTarget.message.includes('U.S. Code'),'Archived CFR preview cannot describe a Code edition');
+}
 
 const packedCorpus = require("./read-build-corpus").readBuildCorpus(require.resolve("../INASearch.html"));
 const coldSection = packedCorpus.cfr.sections.find(item => item.id === "8:212.4");

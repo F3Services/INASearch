@@ -212,7 +212,16 @@ corpus.inaHierarchy=assigned('INASearch-INA-Hierarchy.js','INA_SEARCH_INA_HIERAR
 corpus.legalReferencePolicy=assigned('INASearch-Legal-Reference-Policy.js','INA_SEARCH_LEGAL_REFERENCE_POLICY');
 require('./tools/statute-footnotes').applyStatuteFootnotes(corpus,assigned('INASearch-Statute-Footnotes.js','INA_SEARCH_STATUTE_FOOTNOTES'));
 require('./tools/statute-references').applyStatuteReferences(corpus,assigned('INASearch-Statute-References.js','INA_SEARCH_STATUTE_REFERENCES'));
+// Validate the same complete source context as the standalone build. Exact
+// exceptions in supplements must be checked, even though selection below is
+// restricted to current Title 8 provisions and never follows their references.
+require('./tools/historical-ina').applyHistoricalIna(corpus);
+require('./tools/statute-status').applyStatuteStatusMetadata(corpus);
+require('./tools/historical-usc').applyHistoricalUsc(corpus);
 require('./tools/statute-run-ins').indexStatuteRunIns(corpus);
+corpus.referencedUsc=JSON.parse(fs.readFileSync('sources/legal/referenced-usc/corpus.json'));
+corpus.uscHierarchyLinks=JSON.parse(fs.readFileSync('sources/legal/usc-hierarchy-links.json'));
+require('./tools/statute-run-ins').indexStatuteRunIns({title8:{sections:corpus.referencedUsc.titles.flatMap(title=>title.sections)}});
 corpus.legalReferenceExceptions=JSON.parse(fs.readFileSync('sources/legal/embedded-reference-exceptions.json'));
 corpus.historicalLocatorCorrections=JSON.parse(fs.readFileSync('sources/legal/historical-reference-locators.json'));
 require('./tools/legal-references').applyGeneratedLegalReferences(corpus);
@@ -224,12 +233,12 @@ function visit(s,node,fieldPath,context){
  }
  (node.children||[]).forEach((n,i)=>visit(s,n,fieldPath+'children.'+i+'.',context));
 }
-for(const s of corpus.title8.sections){
+for(const s of corpus.title8.sections.filter(section=>!section.historical)){
  visit(s,s,'','operative');
  (s.body||[]).forEach((n,i)=>visit(s,n,'body.'+i+'.','operative'));
  (s.notes||[]).forEach((n,i)=>visit(s,n,'notes.'+i+'.','notes'));
 }
-const inaSections = corpus.inaCrosswalk.filter(row => !row.isNote && row.hasEquivalent !== false && row.uscSection).map(row => String(row.localSection || row.uscSection).toLowerCase());
+const inaSections = corpus.inaCrosswalk.filter(row => !row.historicalMapping && !row.isNote && row.hasEquivalent !== false && row.uscSection).map(row => String(row.localSection || row.uscSection).toLowerCase());
 process.stdout.write(JSON.stringify({references,inaSections,title8Source:corpus.sources.title8}));
 '''
 

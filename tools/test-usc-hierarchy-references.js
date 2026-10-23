@@ -28,7 +28,8 @@ for (const container of ["title", "chapter", "subchapter"]) {
   assert.deepEqual(refs.map(r => [r.text, r.targetTitle, r.targetSection]), [["section 1151", "8", "1151"]], `Only the section is linked in ${value}`);
   const externalValue = `section 923(d) of this ${container}`;
   const externalRefs = generatedReferences(externalValue, { ...context, title: "18", sourceText: externalValue });
-  assert.deepEqual(externalRefs.map(r => [r.text, r.targetTitle, r.targetSection, r.targetPath]), [["923(d)", "18", "923", ["d"]]], `An uncached section still owns the reference in ${externalValue}`);
+  assert.deepEqual(externalRefs.map(r => [r.text, r.targetTitle, r.targetSection, r.targetPath]), [[container === "title" ? "section 923(d)" : "923(d)", "18", "923", ["d"]]], `An uncached section still owns the reference in ${externalValue}`);
+  for (const reference of externalRefs) assert.equal(externalValue.slice(reference.start, reference.end), reference.text, "An expanded section prefix must remain an exact source span");
   if (container !== "title") {
     const simpleValue = `section 923 of this ${container}`;
     assert.deepEqual(generatedReferences(simpleValue, { ...context, title: "18", sourceText: simpleValue }).map(r => [r.text, r.targetTitle, r.targetSection]), [["923", "18", "923"]]);

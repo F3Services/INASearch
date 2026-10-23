@@ -127,6 +127,16 @@ function verifyRefugee() {
   }
 }
 verifyRefugee();
+const investorBenefits = corpus.title8.sections.find(section => section.section === "1186b").notes.find(note => note.heading === "Immigration Benefits");
+assert(investorBenefits, "The original multi-section investor-benefits quotation is present");
+const internalClauses = investorBenefits.text.indexOf("clause (i), (ii), or (iii) of subparagraph (A)");
+assert(internalClauses >= 0);
+for (const label of ['i', 'ii', 'iii']) {
+  const offset = investorBenefits.text.indexOf(`(${label})`, internalClauses);
+  const reference = investorBenefits.references.find(item => item.start === offset);
+  assert.deepEqual([reference?.family, reference?.targetCongress, reference?.targetLaw, reference?.targetPath],
+    ['public-law','107','273',['dC','tI','s11031','c','1','A',label]], 'A quoted law retains ownership of its own subparagraph despite neighboring INA citations');
+}
 const addedProvision = corpus.title8.sections.find(section => section.section === "1101").notes.find(note => note.text.includes("as added by") && note.text.includes("subsections (b)(4) and (d) of section 601"));
 assert(addedProvision, "Original added-provision example must be available");
 for (const reference of addedProvision.references.filter(item => ["(b)(4)", "(d)", "section 601"].includes(item.text))) {
@@ -152,7 +162,12 @@ function verifyDivision() {
   assert.equal(codification.uslmReferences.length, 6);
   for (const source of codification.uslmReferences) {
     const reference = codification.references?.find(item => item.start === source.start && item.end === source.end);
-    assert.equal(reference?.houseHref, source.houseHref, `Division source reference ${source.text} must be navigable`);
+    const address=source.houseHref.match(/^\/us\/stat\/([^/]+)\/([^/]+)/);
+    if(address) {
+      assert.equal(reference?.targetVolume,address[1]);
+      assert.equal(reference?.targetPage,address[2]);
+      assert.equal(reference?.resolution,"official-source-only",`Division source reference ${source.text} must be navigable`);
+    } else assert.equal(reference?.houseHref,source.houseHref);
     assert.equal(reference?.text, source.text);
     assert(reference.officialUrl.startsWith("https://www.govinfo.gov/"));
   }
@@ -172,7 +187,7 @@ assert.deepEqual(leakedCodeReferences, [], "Bare references in source quotations
 
 // Boundary and ambiguity cases augment the real-source regression. Origin is
 // deliberately a different law: it identifies provenance, not quoted authority.
-const text = "Pub. L. 96-422, § 101, provided: “(a) Outer section 103. section 103 of this title. section 201 of the Immigration and Nationality Act. subsection (b) of this section. " +
+const text = "Pub. L. 96-422, § 101, provided: “(a) Outer section 103. section 103 of title 8. section 201 of the Immigration and Nationality Act. subsection (b) of this section. " +
   "Pub. L. 100-1, § 2, provided: ‘Nested section 103.’ " +
   "Inserted text: ‘Unidentified section 103.’ Outer again section 103.” Outside section 103.";
 const span = (tag, value, children = [], extra = {}) => {
@@ -206,7 +221,7 @@ for (const phrase of ["Outer section 103", "Outer again section 103"]) {
 const nested = referenceAt("Nested section 103");
 assert.deepEqual([nested?.family, nested?.targetCongress, nested?.targetLaw, nested?.targetPath], ["public-law", "100", "1", ["s103"]], "A nested quote uses its own introducing authority");
 assert.equal(referenceAt("Unidentified section 103"), undefined, "A nested quote cannot silently inherit the outer Act or Code");
-for (const phrase of ["section 103 of this title", "Outside section 103"]) {
+for (const phrase of ["section 103 of title 8", "Outside section 103"]) {
   const reference = referenceAt(phrase);
   assert.deepEqual([reference?.family, reference?.targetTitle, reference?.targetSection], ["usc", "8", "103"], "Explicit Code scope and text outside quotations retain their own authority");
 }

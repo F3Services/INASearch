@@ -135,7 +135,10 @@ assert.equal(former22Field.references.find(reference=>reference.text==='section 
 console.log('PASS reviewed authority tails, qualified continuation list, shared-prefix preservation, Title 28, executive-order and former Title 22 regressions');
 const historicAlternative = fields.find(field => field.sourceId === '8-1229b-b-4-A-ii' && field.field === 'text');
 const historicAlternativeDisplay = plain(render(historicAlternative.text, historicAlternative.references, contextFor(historicAlternative, corpus)));
-assert(historicAlternativeDisplay.includes('INA 240A(b)(2) or 8 U.S.C. 1254(a)(3) (as in effect before'), 'An unmapped historical alternative must retain explicit USC authority and its temporal qualifier');
+assert(historicAlternativeDisplay.includes('INA 240A(b)(2) or 1254(a)(3) of this title (as in effect before'), 'An unresolved historical alternative must retain the printed citation and temporal qualifier');
+const historicalAlternativeReference = historicAlternative.references.find(reference => reference.targetSection === '1254');
+assert.equal(historicalAlternativeReference.resolution, 'unresolved');
+assert.equal(render(historicalAlternativeReference.text, [{...historicalAlternativeReference,start:0,end:historicalAlternativeReference.text.length}], contextFor(historicAlternative, corpus)), historicalAlternativeReference.text, 'An unverified historical alternative must remain plain source text');
 const oldRange = fields.find(field => (field.sourceId === '8-701 to 724a-note-26' || field.owner.sourceNoteId === '8-701 to 724a-note-26') && field.field === 'text');
 assert(oldRange, 'The combined House record’s relative-range note must survive historical section expansion');
 assert(plain(render(oldRange.text,oldRange.references,contextFor(oldRange,corpus))).endsWith('See INA 329(a)–(c).'), 'A relative paragraph range must preserve endpoints and remove the dangling title container');
@@ -203,13 +206,35 @@ for (const { field, reference } of dated) {
 console.log('PASS explicit USC display: 29 CFR 501.6, Follow view, source metadata, note/sequence/parallel guards, and historical edition URLs');
 const sha = value => require('crypto').createHash('sha256').update(value).digest('hex');
 const hashedFields = new Map(allFields.filter(field => field.context.sourceHost).map(field => [`${field.context.sourceHost.kind}:${field.context.sourceHost.title}:${field.context.sourceHost.section}:${field.field}:${sha(field.text)}`, field]));
-for (const correction of corpus.historicalLocatorCorrections || []) {
+let guardedHistoricalLocators = 0;
+let linkedHistoricalLocators = 0;
+const canonicalLocators = JSON.parse(fs.readFileSync('sources/legal/historical-reference-locators.json', 'utf8'));
+assert.deepEqual(corpus.historicalLocatorCorrections, canonicalLocators.filter(row => row.kind !== 'usc').map(({ review, reason, sourceSha256, ...guard }) => guard), 'Delivery retains exact runtime guards without build-only USC rows or audit attributes');
+for (const correction of canonicalLocators) {
   const field = hashedFields.get(`${correction.kind}:${correction.title}:${correction.section}:${correction.field}:${correction.sourceSha256}`);
   assert(field, correction.id);
   const reference = field.references.find(reference => reference.start === correction.start && reference.end === correction.end);
   assert.equal(reference.text, correction.text);
   assert.equal(reference.targetSection, correction.target.section);
   assert.deepEqual(reference.targetPath, correction.target.path);
+  if (reference.resolution === 'unresolved') {
+    guardedHistoricalLocators++;
+    assert(/as in effect|prior to|before|repeal/i.test(field.text), 'A historical guard must be grounded in the source temporal qualification');
+    assert(/historical|verified|effect/i.test(reference.citationNote || ''), 'A guarded locator must explain why its old default edition is insufficient');
+    assert(!reference.targetEdition, 'An unverified exact date must not claim a verified edition');
+    assert.equal(render(reference.text, [{...reference,start:0,end:reference.text.length}], field.context), reference.text, 'A guarded historical locator must not render an action');
+    continue;
+  }
+  if (reference.resolution === 'local' && reference.targetSection === '1254' && !reference.targetEdition) {
+    const historical = corpus.title8.sections.find(section => section.section === '1254').historical;
+    assert.match(historical.versionLabel, /1995.*104-132/);
+    assert.equal(reference.historicalOfficialUrl, historical.sourceUrl);
+    assert.match(reference.citationNote, /1995 base edition.*subsequent amendments/);
+    assert(render(field.text, field.references, field.context).includes('data-show-citation'), 'The supplemented retained historical body remains locally navigable');
+    linkedHistoricalLocators++;
+    continue;
+  }
+  linkedHistoricalLocators++;
   assert.equal(reference.targetEdition, correction.target.edition === 'prelim' ? undefined : correction.target.edition);
   assert.equal(reference.resolution, correction.target.edition === 'prelim' ? 'local' : 'official-source-only');
   const html = render(field.text, field.references, field.context);
@@ -217,4 +242,5 @@ for (const correction of corpus.historicalLocatorCorrections || []) {
   if (correction.target.url) assert.equal(reference.officialUrl, correction.target.url);
   if (correction.citationNote) assert.equal(reference.citationNote, correction.citationNote);
 }
-console.log(`PASS reviewed historical locators: ${(corpus.historicalLocatorCorrections || []).length} exact source spans and edition targets survive corpus packing`);
+assert(guardedHistoricalLocators > 0 && linkedHistoricalLocators > 0, 'Exercise both exact-date abstention and verified historical edition destinations');
+console.log(`PASS reviewed historical locators: ${canonicalLocators.length} canonical exact source spans and edition targets survive corpus packing`);

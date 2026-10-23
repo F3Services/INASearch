@@ -34,9 +34,17 @@
     });
   }
 
-  function partitionPackedCorpus(packed, maxChars = 1e6) {
+  function partitionCorpus(packed, maxChars, serialized) {
     if (!Number.isFinite(maxChars) || maxChars <= 0) throw new Error("The corpus chunk size must be positive.");
-    const metadata = clone(packed);
+    // Copy only the containers whose properties are removed below. The runtime
+    // writer serializes every borrowed value synchronously before returning.
+    const metadata = { ...packed };
+    const copySections = group => ({ ...group, ...(Array.isArray(group.sections) ? { sections: group.sections.map(record => ({ ...record })) } : {}) });
+    if (packed.title8) metadata.title8 = copySections(packed.title8);
+    if (packed.referencedUsc) metadata.referencedUsc = { ...packed.referencedUsc,
+      ...(Array.isArray(packed.referencedUsc.titles) ? { titles: packed.referencedUsc.titles.map(copySections) } : {}) };
+    if (packed.cfr) metadata.cfr = { ...copySections(packed.cfr),
+      ...(Array.isArray(packed.cfr.appendices) ? { appendices: packed.cfr.appendices.map(record => ({ ...record })) } : {}) };
     const chunks = [];
     const mapping = { v: 1, usc: [], cfr: [], appendix: [] };
     const fieldNames = {
@@ -46,6 +54,10 @@
     };
     let current = null;
     let currentChars = 0;
+    let entries = [];
+    const finishChunk = () => {
+      if (serialized && current) chunks.push(`{"id":${current.id},"records":[${entries.join(",")}]}`);
+    };
     for (const kind of ["usc", "cfr", "appendix"]) {
       recordsForKind(metadata, kind).forEach((record, index) => {
         const fields = {};
@@ -59,17 +71,23 @@
           return;
         }
         const entry = [kind, index, fields];
-        const entryChars = JSON.stringify(entry).length;
+        const entryJson = JSON.stringify(entry), entryChars = entryJson.length;
         if (!current || current.records.length && currentChars + entryChars + 1 > maxChars) {
+          finishChunk();
           current = { id: chunks.length, records: [] };
-          chunks.push(current);
+          if (!serialized) chunks.push(current);
+          entries = [];
           currentChars = JSON.stringify(current).length;
         }
-        current.records.push(entry);
+        // Only the count is needed on the serialized path; retain no borrowed
+        // body objects once their JSON has been captured.
+        current.records.push(serialized ? null : entry);
+        if (serialized) entries.push(entryJson);
         currentChars += entryChars + (current.records.length > 1 ? 1 : 0);
         mapping[kind].push(current.id);
       });
     }
+    finishChunk();
     const auxiliary = {};
     for (const key of AUXILIARY_FIELDS) {
       if (!Object.hasOwn(metadata, key)) continue;
@@ -78,11 +96,21 @@
     }
     if (Object.keys(auxiliary).length) {
       const chunk = { id: chunks.length, records: [["corpus", 0, auxiliary]] };
-      chunks.push(chunk);
+      chunks.push(serialized ? JSON.stringify(chunk) : chunk);
       mapping.corpus = [chunk.id];
     }
     metadata._shards = mapping;
     return { metadata, chunks };
+  }
+
+  function partitionPackedCorpus(packed, maxChars = 1e6) {
+    return partitionCorpus(clone(packed), maxChars, false);
+  }
+
+  function serializePackedCorpus(corpus, maxChars = 1e6) {
+    const runtimeJson = JSON.stringify(corpus);
+    const { metadata, chunks } = partitionCorpus(corpus, maxChars, true);
+    return { runtimeJson, metadataJson: JSON.stringify(metadata), chunkJson: chunks };
   }
 
   function mergePackedChunk(metadata, chunk) {
@@ -144,8 +172,8 @@
 
   // The browser partitions runtime JSON when writing its independently readable cache.
   const api = Object.freeze(typeof INASEARCH_BROWSER !== "undefined" && INASEARCH_BROWSER
-    ? { FORMAT, partitionPackedCorpus, mergePackedChunk }
-    : { FORMAT, partitionPackedCorpus, mergePackedChunk, hydrateChunk });
+    ? { FORMAT, serializePackedCorpus, mergePackedChunk }
+    : { FORMAT, partitionPackedCorpus, serializePackedCorpus, mergePackedChunk, hydrateChunk });
   globalThis.INASearchCorpusShards = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })();

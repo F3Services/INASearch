@@ -18,7 +18,7 @@ const { packLegalReferences } = require("./pack-legal-references");
 const { indexStatuteRunIns } = require("./statute-run-ins");
 const { applyStatuteStatusMetadata } = require("./statute-status");
 const status = require("../src/INASearch-Statute-Status");
-const { FORMAT: CORPUS_PACKING_FORMAT, packCorpusForDelivery } = require("../src/INASearch-Corpus-Packing");
+const { FORMAT: CORPUS_PACKING_FORMAT, packCorpusForDelivery, packCorpusStringsForDelivery } = require("../src/INASearch-Corpus-Packing");
 
 const root = path.resolve(__dirname, "..");
 const sourceDir = path.join(root, "src");
@@ -190,7 +190,8 @@ function openingIndexData(template, corpus) {
 }
 
 function makeBuild(template, corpus, profile, options) {
-  const deliveryCorpus = options.compactCorpus ? packCorpusForDelivery(corpus) : corpus;
+  const deliveryCorpus = options.compactCorpus ? packCorpusForDelivery(corpus)
+    : options.uncompressedCorpus ? packCorpusStringsForDelivery(corpus) : corpus;
   const fullPayload = options.uncompressedCorpus
     ? encodeUncompressedCorpus(deliveryCorpus)
     : compressCorpus(deliveryCorpus, options.compactCorpus ? CORPUS_PACKING_FORMAT : "");
