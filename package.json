@@ -3,11 +3,14 @@
   "private": true,
   "scripts": {
     "build": "node tools/build-standalone.js",
-    "test": "node tools/test-standalone.js"
+    "test": "node tools/test-standalone.js",
+    "preflight": "node tools/check-node.js"
   },
   "devDependencies": {
     "acorn": "8.15.0",
-    "brotli-dec-wasm": "2.3.2",
     "terser": "5.44.0"
+  },
+  "engines": {
+    "node": ">=22.23.4 <23 || >=24.22.1 <25 || >=26.12.1 <27"
   }
 }

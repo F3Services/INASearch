@@ -1,0 +1,20 @@
+[package]
+name = "inasearch-brotli-decoder"
+version = "1.0.0"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+brotli-decompressor = "=5.0.3"
+wasm-bindgen = "=0.2.105"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = "debuginfo"

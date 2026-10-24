@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "decoder": "brotli-decompressor",
+  "version": "5.0.3",
+  "wasmBindgen": "0.2.105",
+  "rust": "1.90.0",
+  "features": [
+    "std"
+  ],
+  "unsafeFeatures": false,
+  "outputLimitBytes": 67108864,
+  "memoryLimitBytes": 268435456,
+  "files": {
+    "decoder.js": "08bba1c650d1731bb86fff5757f1756023594ba175c3c09da1608d14b007006d",
+    "decoder_bg.wasm": "85e7c73872351e4194a2b89e1236e47e8dda09eb64db37b070465fb3482e8bc5"
+  },
+  "sources": {
+    "tools/brotli-decoder/Cargo.toml": "d7f7af1a8ad658bf82cb7e91b13058cda5b9398b5dfc54119f33d4563abcc165",
+    "tools/brotli-decoder/Cargo.lock": "da1e1b5f52d68b565e7e46850240092d098062e1d36e34f4af0875fdba149fc5",
+    "tools/brotli-decoder/src/lib.rs": "5988aa4b3096406f5ab00e1e77172e309e571ec5098d20ea6a69e578e7e7e0af",
+    "tools/build-brotli-decoder.js": "e56fe39bcfcdf4d1b39a21522549fa31dfc4ab15ebf2786d73026a6f11113daa"
+  },
+  "rustCrates": [
+    {
+      "name": "alloc-no-stdlib",
+      "version": "2.0.4",
+      "checksum": "cc7bb162ec39d46ab1ca8c77bf72e890535becd1751bb45f64c597edb4c8c6b3"
+    },
+    {
+      "name": "alloc-stdlib",
+      "version": "0.2.4",
+      "checksum": "0e76a019e91224d279006ff972f1e984179a6e9feb050adba6ce8274aef23195"
+    },
+    {
+      "name": "brotli-decompressor",
+      "version": "5.0.3",
+      "checksum": "3a32acac15fe1967bc3986b2a6347dffc965602354ea6f450ad07e8bfd253583"
+    },
+    {
+      "name": "bumpalo",
+      "version": "3.20.3",
+      "checksum": "72f5acc6cb2ba439de613abc23857ec3d78374d8ed5ac84e9d11336e87da8649"
+    },
+    {
+      "name": "cfg-if",
+      "version": "1.0.5",
+      "checksum": "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600"
+    },
+    {
+      "name": "once_cell",
+      "version": "1.21.4",
+      "checksum": "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
+    },
+    {
+      "name": "proc-macro2",
+      "version": "1.0.107",
+      "checksum": "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9"
+    },
+    {
+      "name": "quote",
+      "version": "1.0.47",
+      "checksum": "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001"
+    },
+    {
+      "name": "rustversion",
+      "version": "1.0.23",
+      "checksum": "cf54715a573b99ac80df0bc206da022bcd442c974952c7b9720069370852e21f"
+    },
+    {
+      "name": "syn",
+      "version": "2.0.119",
+      "checksum": "872831b642d1a07999a962a351ed35b955ea2cfc8f3862091e2a240a84f17297"
+    },
+    {
+      "name": "unicode-ident",
+      "version": "1.0.27",
+      "checksum": "a2c754d6c33795a1c324727428e5a7dedb5b06195f9890bdbcba760d3e246563"
+    },
+    {
+      "name": "wasm-bindgen",
+      "version": "0.2.105",
+      "checksum": "da95793dfc411fbbd93f5be7715b0578ec61fe87cb1a42b12eb625caa5c5ea60"
+    },
+    {
+      "name": "wasm-bindgen-macro",
+      "version": "0.2.105",
+      "checksum": "04264334509e04a7bf8690f2384ef5265f05143a4bff3889ab7a3269adab59c2"
+    },
+    {
+      "name": "wasm-bindgen-macro-support",
+      "version": "0.2.105",
+      "checksum": "420bc339d9f322e562942d52e115d57e950d12d88983a14c79b86859ee6c7ebc"
+    },
+    {
+      "name": "wasm-bindgen-shared",
+      "version": "0.2.105",
+      "checksum": "76f218a38c84bcb33c25ec7059b07847d465ce0e0a76b995e134a45adcb6af76"
+    }
+  ]
+}

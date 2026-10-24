@@ -92,7 +92,7 @@ const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cryp
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'reference-decoders-'));
 try {
  const legacy=path.join(temporary,'legacy');
- for(const file of ['tools/read-build-corpus.js','tools/pack-legal-references.js','tools/legal-references.js','tools/embedded-references.js','tools/statute-run-ins.js','src/INASearch-Corpus-Packing.js','src/INASearch-Corpus-Shards.js','src/INASearch-Occurrence.js','src/INASearch-USLM.js']) {
+ for(const file of ['tools/check-node.js','tools/decode-corpus-payload.js','tools/read-build-corpus.js','tools/pack-legal-references.js','tools/legal-references.js','tools/embedded-references.js','tools/statute-run-ins.js','src/INASearch-Corpus-Packing.js','src/INASearch-Corpus-Shards.js','src/INASearch-Occurrence.js','src/INASearch-USLM.js']) {
   fs.mkdirSync(path.dirname(path.join(legacy,file)),{recursive:true});fs.copyFileSync(path.join(__dirname,'..',file),path.join(legacy,file));
  }
  const legacyPacker=path.join(legacy,'tools/pack-legal-references.js');
@@ -100,7 +100,7 @@ try {
  const packed={title8:{sections:[{text:'8 U.S.C. 1254',references:[{start:0,end:13,text:'8 U.S.C. 1254',family:'usc',targetTitle:'8',targetSection:'1254',targetPath:[],resolution:'unresolved',officialUrl:'',ruleId:'explicit-usc'}]}]}};
  require('./pack-legal-references').packLegalReferences(packed);
  const payload=JSON.stringify(packed),artifact=path.join(temporary,'same.html');
- fs.writeFileSync(artifact,`<script id="inaSearchCorpusManifest">${JSON.stringify({compression:'none',uncompressedBytes:Buffer.byteLength(payload),uncompressedSha256:crypto.createHash('sha256').update(payload).digest('hex')})}</script><script id="inaSearchCorpusData">${payload}</script>`);
+ fs.writeFileSync(artifact,`<script id="inaSearchCorpusManifest">${JSON.stringify({schemaVersion:1,contentType:'application/json',charset:'utf-8',mediaType:'application/json',encoding:'utf-8',compression:'none',uncompressedBytes:Buffer.byteLength(payload),uncompressedSha256:crypto.createHash('sha256').update(payload).digest('hex')})}</script><script id="inaSearchCorpusData">${payload}</script>`);
  const {decodeArtifact}=require('./audit-cfr-parser-diff');
  const old=decodeArtifact(artifact,legacy),current=decodeArtifact(artifact,path.resolve(__dirname,'..'));
  const delivery=compareCorpora(old.corpus,current.corpus);

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 "use strict";
+require("./check-node");
 
 const crypto = require("crypto");
 const fs = require("fs");

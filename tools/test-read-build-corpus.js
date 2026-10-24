@@ -17,7 +17,7 @@ function payload(value, compression = "gzip") {
   const plain = Buffer.from(JSON.stringify(value));
   const encoded = compression === "brotli" ? zlib.brotliCompressSync(plain) : compression === "gzip" ? zlib.gzipSync(plain) : plain;
   return {
-    manifest: { compression, encoding: compression !== "none" ? "base64" : "utf-8", uncompressedBytes: plain.length, uncompressedSha256: hash(plain),
+    manifest: { schemaVersion: 1, contentType: "application/json", charset: "utf-8", mediaType: compression === "none" ? "application/json" : `application/${compression}`, compression, encoding: compression !== "none" ? "base64" : "utf-8", uncompressedBytes: plain.length, uncompressedSha256: hash(plain),
       ...(compression !== "none" ? { compressedBytes: encoded.length, compressedSha256: hash(encoded) } : {}) },
     text: compression !== "none" ? encoded.toString("base64") : encoded.toString("utf8")
   };
@@ -49,5 +49,5 @@ const staged = html(manifest, metadata.text, chunks);
 assert.deepEqual(helper.readPackedCorpusHtml(staged), packed, "The reader failed to restore exact sharded legal content.");
 assert.throws(() => helper.readPackedCorpusHtml(staged.replace(chunks[0].text, "AAAA" + chunks[0].text.slice(4))), /compressed SHA-256/i, "A corrupted shard was accepted.");
 assert.throws(() => helper.readPackedCorpusHtml(staged.replace(`id="inaSearchCorpusShard0"`, 'id="missing"')), /Missing inaSearchCorpusShard0/, "A missing shard was accepted.");
-assert.throws(() => helper.readPackedCorpusHtml(html({ ...ordinary.manifest, uncompressedSha256: "incorrect" }, ordinary.text)), /uncompressed SHA-256/i, "Corrupted decoded integrity metadata was accepted.");
+assert.throws(() => helper.readPackedCorpusHtml(html({ ...ordinary.manifest, uncompressedSha256: "incorrect" }, ordinary.text)), /invalid manifest/i, "Corrupted decoded integrity metadata was accepted.");
 console.log("PASS standalone corpus reader: actual script selection, gzip/plain JSON, exact shard merge, and missing/corrupt chunk detection");

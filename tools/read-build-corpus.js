@@ -1,9 +1,8 @@
 "use strict";
 
 const assert = require("node:assert/strict");
-const crypto = require("node:crypto");
 const fs = require("node:fs");
-const zlib = require("node:zlib");
+const { decodeCorpusPayload } = require("./decode-corpus-payload");
 const { hydratePackedCorpus } = require("../src/INASearch-Corpus-Packing");
 const { mergePackedChunk } = require("../src/INASearch-Corpus-Shards");
 
@@ -25,22 +24,8 @@ function scriptText(scripts, id) {
   return scripts.get(id);
 }
 
-const sha256 = bytes => crypto.createHash("sha256").update(bytes).digest("hex");
-
 function decodePayload(text, manifest, label) {
-  let bytes;
-  if (["gzip", "brotli"].includes(manifest.compression)) {
-    const compressed = Buffer.from(text.replace(/\s+/g, ""), "base64");
-    assert.equal(compressed.length, manifest.compressedBytes, `${label}: compressed byte count`);
-    assert.equal(sha256(compressed), manifest.compressedSha256, `${label}: compressed SHA-256`);
-    bytes = manifest.compression === "brotli" ? zlib.brotliDecompressSync(compressed) : zlib.gunzipSync(compressed);
-  } else {
-    assert.equal(manifest.compression, "none", `${label}: unsupported corpus compression`);
-    bytes = Buffer.from(text, "utf8");
-  }
-  assert.equal(bytes.length, manifest.uncompressedBytes, `${label}: uncompressed byte count`);
-  assert.equal(sha256(bytes), manifest.uncompressedSha256, `${label}: uncompressed SHA-256`);
-  return JSON.parse(bytes.toString("utf8"));
+  return JSON.parse(decodeCorpusPayload(text, manifest, label).toString("utf8"));
 }
 
 function readPackedCorpusHtml(html) {

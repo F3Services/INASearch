@@ -8,6 +8,7 @@ const os = require("os");
 const path = require("path");
 const vm = require("vm");
 const zlib = require("zlib");
+const { decodeCorpusPayload } = require("./decode-corpus-payload");
 const { spawnSync } = require("child_process");
 const { performance } = require("perf_hooks");
 const { isDeepStrictEqual } = require("util");
@@ -132,22 +133,13 @@ function readBuild(fileName) {
   const manifest = jsonBlock(html, "inaSearchCorpusManifest");
   const payload = corpusPayloadText(html);
   const compressed = ["gzip", "brotli"].includes(manifest.compression) ? Buffer.from(payload.replace(/\s+/g, ""), "base64") : null;
-  const uncompressed = compressed ? (manifest.compression === "brotli" ? zlib.brotliDecompressSync(compressed) : zlib.gunzipSync(compressed)) : Buffer.from(payload, "utf8");
-  if (compressed) {
-    assert.strictEqual(compressed.byteLength, manifest.compressedBytes, `${fileName}: compressed byte count`);
-    assert.strictEqual(sha256(compressed), manifest.compressedSha256, `${fileName}: compressed SHA-256`);
-  } else {
-    assert.strictEqual(manifest.compression, "none", `${fileName}: unsupported corpus compression`);
-    assert.strictEqual(manifest.encoding, "utf-8", `${fileName}: unsupported uncompressed encoding`);
-  }
-  assert.strictEqual(uncompressed.byteLength, manifest.uncompressedBytes, `${fileName}: uncompressed byte count`);
-  assert.strictEqual(sha256(uncompressed), manifest.uncompressedSha256, `${fileName}: uncompressed SHA-256`);
+  const uncompressed = decodeCorpusPayload(payload, manifest, fileName);
   const deliveryCorpus = JSON.parse(uncompressed.toString("utf8"));
   for (const [id, shard] of (manifest.shards || []).entries()) {
     const encoded = Buffer.from(scriptBody(html, `inaSearchCorpusShard${id}`), "base64");
     assert.strictEqual(encoded.byteLength, shard.compressedBytes, `${fileName}: chunk ${id} compressed byte count`);
     assert.strictEqual(sha256(encoded), shard.compressedSha256, `${fileName}: chunk ${id} compressed SHA-256`);
-    const decoded = zlib.gunzipSync(encoded);
+    const decoded = decodeCorpusPayload(scriptBody(html, `inaSearchCorpusShard${id}`), shard, `chunk ${id}`);
     assert.strictEqual(decoded.byteLength, shard.uncompressedBytes, `${fileName}: chunk ${id} decoded byte count`);
     assert.strictEqual(sha256(decoded), shard.uncompressedSha256, `${fileName}: chunk ${id} decoded SHA-256`);
     require("../src/INASearch-Corpus-Shards").mergePackedChunk(deliveryCorpus, JSON.parse(decoded));
@@ -514,6 +506,8 @@ async function main() {
     ["test-note-banners.js", "PASS note banners"],
     ["test-search-worker.js", "Search worker cache tests passed"],
     ["test-corpus-delivery.js", "PASS corpus delivery"],
+    ["test-brotli-security.js", "# fail 0"],
+    ["test-corpus-security.js", "# fail 0"],
     ["test-delivery-projection.js", "PASS delivery projection"],
     ["test-referenced-usc-cache.js", "PASS referenced USC cache"],
     ["test-referenced-usc-links.js", "PASS cross-title USC link resolution"],

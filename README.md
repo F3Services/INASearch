@@ -82,7 +82,7 @@ Both editions are complete standalone files.
 
 ## License
 
-INASearch application code is available under the [MIT License](LICENSE). The embedded Brotli decoder also uses its MIT license option. Its copyright and license notice are included in both HTML editions and [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
+INASearch application code is available under the [MIT License](LICENSE). The embedded Brotli decoder and its dependencies use BSD and MIT licenses. Their copyright and license notices are included in both HTML editions and [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
 
 ## Learn more
 

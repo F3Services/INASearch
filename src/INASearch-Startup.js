@@ -132,15 +132,35 @@
     const digest = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
     return [...digest].map(byte => byte.toString(16).padStart(2, "0")).join("");
   };
+  async function decodeGzip(compressed, limit) {
+    const reader = new Blob([compressed]).stream().pipeThrough(new DecompressionStream("gzip")).getReader();
+    const output = new Uint8Array(limit);
+    let offset = 0;
+    try {
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        if (value.byteLength > limit - offset) {
+          await reader.cancel();
+          throw new Error("Gzip output exceeds its size limit.");
+        }
+        output.set(value, offset);
+        offset += value.byteLength;
+      }
+    } finally { reader.releaseLock(); }
+    if (offset !== limit) throw new Error("The decompressed corpus has an unexpected byte count.");
+    return output;
+  }
   async function decode(text, manifest, parse = true) {
     if (!globalThis.crypto?.subtle) throw new Error("This browser does not support the standard SHA-256 API required to verify the INASearch corpus.");
     const isHash = value => typeof value === "string" && /^[0-9a-f]{64}$/.test(value);
-    if (manifest?.schemaVersion !== 1 || manifest.contentType !== "application/json" || manifest.charset !== "utf-8" || !Number.isSafeInteger(manifest.uncompressedBytes) || !isHash(manifest.uncompressedSha256)) throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
+    if (manifest?.schemaVersion !== 1 || manifest.contentType !== "application/json" || manifest.charset !== "utf-8" || (!Number.isSafeInteger(manifest.uncompressedBytes) || manifest.uncompressedBytes <= 0 || manifest.uncompressedBytes > 64 * 1024 * 1024) || !isHash(manifest.uncompressedSha256)) throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
     let bytes;
     let compressedCheck = Promise.resolve(true);
     if (["gzip", "brotli"].includes(manifest.compression)) {
-      if (manifest.encoding !== "base64" || manifest.mediaType !== `application/${manifest.compression}` || !Number.isSafeInteger(manifest.compressedBytes) || !isHash(manifest.compressedSha256)) throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
+      if (manifest.encoding !== "base64" || manifest.mediaType !== `application/${manifest.compression}` || (!Number.isSafeInteger(manifest.compressedBytes) || manifest.compressedBytes <= 0 || manifest.compressedBytes > 64 * 1024 * 1024) || !isHash(manifest.compressedSha256)) throw new Error("The corpus manifest is present but has invalid or unsupported fields.");
       if (manifest.compression === "gzip" && typeof DecompressionStream !== "function") throw new Error("This browser does not support the standard gzip decompression API required by INASearch.");
+      if (text.length > Math.ceil(manifest.compressedBytes / 3) * 4 + 1024) throw new Error("The compressed corpus has an unexpected byte count.");
       const binary = atob(text.replace(/\s+/g, ""));
       const compressed = new Uint8Array(binary.length);
       for (let index = 0; index < binary.length; index++) compressed[index] = binary.charCodeAt(index);
@@ -151,8 +171,8 @@
       if (!await compressedCheck) throw new Error("The compressed corpus failed its SHA-256 integrity check.");
       globalThis.INA_SEARCH_MARK_PERFORMANCE?.("corpus-decompression-start", { compression: manifest.compression });
       try { bytes = manifest.compression === "brotli"
-        ? globalThis.INASearchBrotli.decode(compressed)
-        : new Uint8Array(await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer()); }
+        ? await globalThis.INASearchBrotli.decode(compressed, manifest.uncompressedBytes)
+        : await decodeGzip(compressed, manifest.uncompressedBytes); }
       catch (error) { if (!await compressedCheck) throw new Error("The compressed corpus failed its SHA-256 integrity check."); throw error; }
       globalThis.INA_SEARCH_MARK_PERFORMANCE?.("corpus-decompression-end", { compression: manifest.compression });
     } else if (manifest.compression === "none" && manifest.encoding === "utf-8" && manifest.mediaType === "application/json") bytes = new TextEncoder().encode(text);

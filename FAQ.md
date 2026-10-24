@@ -263,6 +263,8 @@ Both contain the same expanded corpus at runtime. `INASearch.html` packs repeate
 
 ### How do I build and test the project?
 
+Use Node.js 22.23.4+, 24.22.1+, or 26.12.1+ within those supported major versions. Build and test commands enforce these security baselines.
+
 ```bash
 npm ci
 node tools/build-standalone.js
@@ -270,7 +272,7 @@ node tools/test-standalone.js
 node tools/test-ina-display.js
 ```
 
-The build uses pinned development dependencies to minify JavaScript, including the embedded worker. The minifier is not shipped with the app; the Brotli WebAssembly decoder is embedded for offline use. Third-party licensing is included in the HTML source and `THIRD-PARTY-NOTICES.txt`. Readable builds in `tmp/debug/` support source-level tests; loading and browser tests exercise the minified releases. Both editions still work as single offline files.
+The build uses pinned development dependencies to minify JavaScript, including the embedded worker. The minifier is not shipped with the app; the Brotli WebAssembly decoder is embedded for offline use. The decoder has a fixed output limit, rejects malformed/trailing data, and runs in a temporary background worker when available. The checked-in decoder avoids requiring Rust for ordinary builds; see [decoder maintenance](tools/brotli-decoder/README.md) for reproducible rebuilding and Rust dependency checks. Third-party licensing is included in the HTML source and `THIRD-PARTY-NOTICES.txt`. Readable builds in `tmp/debug/` support source-level tests; loading and browser tests exercise the minified releases. Both editions still work as single offline files.
 
 The test suite checks source hashes, the INA crosswalk, CFR coverage, legal-reference spans and targets, policy excerpts, browser loading, current JSON profile round trips, deterministic output, search performance, and size limits.
 

@@ -93,7 +93,7 @@ if (htmlArgument >= 0) {
   const read = id => scripts.find(match => new RegExp(`(?:^|\\s)id="${id}"`, "i").test(match[1]))[2];
   const realManifest = JSON.parse(read("inaSearchCorpusManifest"));
   const expected = {};
-  const decode = (id, entry) => entry.compression === "brotli" ? zlib.brotliDecompressSync(Buffer.from(read(id).replace(/\s/g, ""), "base64")) : entry.compression === "gzip" ? zlib.gunzipSync(Buffer.from(read(id).replace(/\s/g, ""), "base64")) : Buffer.from(read(id));
+  const decode = (id, entry) => require("./decode-corpus-payload").decodeCorpusPayload(read(id), entry, id);
   expected[realManifest.shards?.length ? "metadata.json" : "corpus.json"] = decode("inaSearchCorpusData", realManifest);
   (realManifest.shards || []).forEach((entry, index) => { expected[`chunk-${index}.json`] = decode(`inaSearchCorpusShard${index}`, entry); });
   verifyExtraction(html, realManifest, expected, `built corpus (${realManifest.shards?.length || 0} content chunks)`);
