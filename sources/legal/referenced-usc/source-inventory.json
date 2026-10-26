@@ -2,7 +2,7 @@
   "edition": "prelim",
   "releasePoint": "119-124",
   "currentThrough": "2026-10-15",
-  "capturedAt": "2026-10-23T23:12:08.162357+00:00",
+  "capturedAt": "2026-10-26T06:22:34.182448+00:00",
   "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
   "schemaVersion": 1,
   "captureMethod": "Fields excerpted from SHA-256 verified current official OLRC title XHTML archives; head, statute, sourcecredit, and operative footnote fields only. CRLF line endings are normalized to LF; source title hashes and byte counts describe the unmodified publisher bytes.",
@@ -4096,5 +4096,6 @@
       "sourceTitleSha256": "cc097f3fb8d13e8df57960644c9a8bcf8921b4a1872fae4d3c1c677cd126c1b0",
       "reason": "No current operative text in source release; historical locator remains external."
     }
-  ]
+  ],
+  "checkedAt": "2026-10-26T06:22:34.182448+00:00"
 }

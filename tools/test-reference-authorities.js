@@ -26,6 +26,218 @@ function check(text, expected, forbidden=[], overrides={}) {
  for(const reference of references) assert.equal(text.slice(reference.start,reference.end),reference.text,'Reference span must preserve source text');
  return references;
 }
+const classificationTableContext = {title:'8',chapter:'I',part:'214',section:'214.1',path:[],tableHeaders:['Section','Designation'],tableColumn:0};
+check('section 203(1) of the Adult Education and Family Literacy Act',[
+ ['203(1)',['usc','29','3272',['1']]]
+]);
+check('under the authority contained in section 412(a)(9), Immigration and Nationality Act (8 U.S.C. 1522(a)(9)).',[
+ ['section 412(a)(9), Immigration and Nationality Act',['ina','8','1522',['a','9']]]
+],[],{title:'45',part:'401',section:'401.12'});
+check('if the arrival falls under subsection (i) or (ii).',[
+ ['(i)',['cfr','8','235.1',['b','8','i']]], ['(ii)',['cfr','8','235.1',['b','8','ii']]]
+],[],{title:'8',chapter:'I',part:'235',section:'235.1',path:['b','8']});
+assert(!check('Section 101 of the Act states the rule in subsection (i) or (ii).',[],[],
+ {title:'8',chapter:'I',part:'235',section:'235.1',path:['b','8']}).some(reference=>reference.family==='cfr'),
+ 'Nonstandard CFR subsection terminology does not override a preceding foreign authority');
+check('the applicable fiscal year in (h)(8)(iii)(A)(4), and the other provisions',[
+ ['(h)(8)(iii)(A)(4)',['cfr','8','214.2',['h','8','iii','A','4']]]
+],[],{title:'8',chapter:'I',part:'214',section:'214.2',path:['h','8','v','B']});
+assert(!check('the provision in (h)(8)(iii)(A)(4) of another Act applies.',[],[],
+ {title:'8',chapter:'I',part:'214',section:'214.2',path:['h','8','v','B']}).some(reference=>reference.family==='cfr'),
+ 'A unit-noun omission does not override a written foreign owner');
+assert(!check('An ordinary parenthetical (h)(8)(iii)(A)(4) follows.',[],[],
+ {title:'8',chapter:'I',part:'214',section:'214.2',path:['h','8','v','B']}).some(reference=>reference.family==='cfr'),
+ 'A matching path alone does not turn a parenthetical into a reference');
+assert(!check('Section 101(a) of the Act provides the rule in (h)(8)(iii)(A)(4).',[],[],
+ {title:'8',chapter:'I',part:'214',section:'214.2',path:['h','8','v','B']}).some(reference=>reference.family==='cfr'),
+ 'An omitted unit noun cannot borrow the CFR section after a foreign authority anchor');
+check('101(a)(15)(S) qualified family members',[
+ ['101(a)(15)(S)',['ina','8','1101',['a','15','S']]]
+],[],classificationTableContext);
+check('nonimmigrant students at § 214.1, 214.2(f), and/or 214.2(m); change of classification',[
+ ['§ 214.1',['cfr','8','214.1',[]]], ['214.2(f)',['cfr','8','214.2',['f']]], ['214.2(m)',['cfr','8','214.2',['m']]]
+],[],{title:'8',chapter:'I',part:'214',section:'214.3'});
+for(const [title,section,index] of [['8','214.2',1779],['8','214.2',1782],['22','41.57',1]]) {
+ const block=corpus.cfr.sections.find(record=>record.id===`${title}:${section}`).blocks[index];
+ const refs=check(block.x,[],[],{title,chapter:'I',part:section.split('.')[0],section,path:engine.pathTokens(block.a||'')});
+ const cultural=refs.filter(reference=>reference.targetSection==='1101'&&reference.targetPath.slice(0,3).join('/')==='a/15/Q');
+ assert(cultural.length,'The cultural-exchange citation remains linked');
+ for(const reference of cultural) {assert.deepEqual(reference.targetPath,['a','15','Q'],'The continuing Q-1 provision no longer has an (i) designation');assert.match(reference.citationNote,/108-449/);}
+}
+for(const [section,route] of [['729','728'],['742','728'],['133','132'],['134','132'],['135','132'],['136','132'],
+ ['9','1'],['10','1'],['137–3','132'],['145','137b'],['202','201'],['218','204c'],['226a','221'],['230','229'],
+ ['338','331'],['381','351'],['409','351'],['459','451'],['724','701'],['726','725'],['809','801'],['902','901'],
+ ['906','904'],['1005','1001'],['1485','1484']]) {
+ const original={family:'usc',targetTitle:'8',targetSection:section,targetPath:['b'],officialUrl:`https://uscode.house.gov/us/usc/t8/s${section.replace(/[–—]/g,'-')}/`};
+ const corrected=engine.normalizeOfficialDestination(original);
+ assert.equal(corrected.officialUrl,`https://uscode.house.gov/us/usc/t8/s${route}/`,'Former section uses its verified grouped repeal page');
+ assert.equal(corrected.targetSection,section,'A publisher route correction does not reclassify the legal target');
+ assert.deepEqual(corrected.targetPath,['b']);
+ assert.match(corrected.citationNote,/repeal history/);
+ assert.deepEqual(engine.normalizeOfficialDestination(corrected),corrected,'Grouped-history normalization is idempotent');
+ assert.deepEqual(JSON.parse(JSON.stringify(browser.INASearchLegalReferences.normalizeOfficialDestination(original))),corrected,'Browser/Node grouped-history destination parity');
+ const archived={...original,targetEdition:'1946',historicalOfficialUrl:'https://example.test/archive',officialUrl:'https://example.test/archive'};
+ assert.deepEqual(engine.normalizeOfficialDestination(archived),archived,'A verified historical edition is never replaced by a repeal-history page');
+}
+const headquartersSource=corpus.cfr.sections.find(section=>section.id==='22:46.7').blocks[0].x;
+const headquartersRefs=check(headquartersSource,[
+ ['11 (4)',['statutes-at-large','61','758',['section-11','4']]], ['11(5)',['statutes-at-large','61','758',['section-11','5']]]
+]);
+for(const reference of headquartersRefs.filter(reference=>reference.targetVolume==='61'&&reference.targetPage==='758'))
+ assert.match(reference.officialUrl,/STATUTE-61-Pg756-2\.pdf#page=6$/,'The complete Headquarters Agreement archive contains section11');
+check('a veteran (as defined in section 101, 1101, or 1301, or as described in section 107 of title 38) with a discharge',[
+ ['section 101',['usc','38','101',[]]], ['1101',['usc','38','1101',[]]], ['1301',['usc','38','1301',[]]], ['section 107',['usc','38','107',[]]]
+],[],{kind:'usc',title:'8',section:'1612'});
+for (const [act,section,path,title,codeSection] of [
+ ['Social Security Act','1614',['f'],'42','1382c'], ['Social Security Act','1616',['a'],'42','1382e'],
+ ['Social Security Act','1633',['a'],'42','1383b'], ['Fair Labor Standards Act of 1938','3',['f'],'29','203'],
+ ['FLSA','3',['m'],'29','203'], ['FLSA','7',['a'],'29','207'],
+ ['Trafficking Victims Protection Act','107',['c','3'],'22','7105'], ['TVPA','107',['c'],'22','7105']
+]) {
+ const locator=section+path.map(token=>'('+token+')').join('');
+ check(`section ${locator} of the ${act}`,[[locator,['usc',title,codeSection,path]]]);
+}
+const scopePolicySandbox={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'src/INASearch-Legal-Reference-Policy.js'),'utf8'),scopePolicySandbox);
+const tvpaDefinition=corpus.cfr.sections.find(section=>section.id==='8:214.201').blocks[0].x;
+const tvpaAmendment=check(tvpaDefinition,[['107(e)',['public-law','106','386',['division-A','s107','e']]]])
+ .find(reference=>reference.text==='107(e)');
+assert.match(tvpaAmendment.officialUrl,/PLAW-106publ386\.pdf#page=15$/,'TVPA amendatory subsection uses the original public law');
+assert.match(tvpaAmendment.citationNote,/amendatory/);
+check('Regulations means regulations in this subpart issued under sections 1102, 1631(c) and 1633(a) of the Act, unless otherwise indicated.',
+ [['1633(a)',['usc','42','1383b',['a']]]],[],{title:'20',part:'416',section:'416.1002',legalReferencePolicy:scopePolicySandbox.window.INA_SEARCH_LEGAL_REFERENCE_POLICY});
+check('satisfied the requirements of clause (1) or (2) of the first sentence of section 1440(a) of this title.',[
+ ['(1)',['usc','8','1440',['a','1']]], ['(2)',['usc','8','1440',['a','2']]]
+],[],{kind:'usc',title:'8',section:'1440–1',path:['c','1','B']});
+const interruptedStatutoryGrounds = corpus.cfr.sections.find(section=>section.id==='8:245a.4').blocks[111].x;
+assert(!check(interruptedStatutoryGrounds,[],[],{title:'8',part:'245a',section:'245a.4',path:['b','11','i']}).some(reference=>reference.family==='cfr'),
+ 'Semicolon-separated statutory grounds with explanatory parentheses must not be truncated into a local CFR paragraph guess');
+const maintainedExceptions = new Map(JSON.parse(fs.readFileSync(path.join(root,'sources/legal/embedded-reference-exceptions.json'),'utf8')).exceptions.map(exception=>[exception.id,exception]));
+const adultEducationSource=corpus.cfr.sections.find(section=>section.id==='8:214.3').blocks[22].x;
+check(adultEducationSource,[['203(1)',['usc','29','3272',['1']]],['U.S.C. 3272(1)',['usc','29','3272',['1']]]],[],
+ {title:'8',chapter:'I',part:'214',section:'214.3',sourceId:'cfr-8:214.3-22',sourceField:'x',embeddedExceptions:maintainedExceptions});
+const absentLawSectionSource=corpus.title8.sections.find(section=>section.section==='1357').notes[2].text;
+const absentLawSections=check(absentLawSectionSource,[],[],{kind:'usc',title:'8',section:'1357',sourceId:'usc-1357-note-3',sourceField:'text',sourceKind:'usc-note',sourceTopic:'amendments',embeddedExceptions:maintainedExceptions})
+ .filter(reference=>reference.text==='section 726');
+assert.equal(absentLawSections.length,2,'Both quoted nonexistent-law locators retain their source identity');
+for(const reference of absentLawSections) {
+ assert.equal(reference.family,'public-law'); assert.equal(reference.targetCongress,'109'); assert.equal(reference.targetLaw,'162');
+ assert.equal(reference.resolution,'unresolved'); assert.equal(reference.officialUrl,'');
+ assert.match(reference.citationNote,/does not contain/);
+}
+for(const [section,index,surface,destination] of [
+ ['204.2',174,'201(b)',['usc','8','1151',['b']]],
+ ['214.6',110,'(i)(1)',['cfr','8','214.6',['i','1']]],
+ ['217.5',18,'8 U.S.C. 217(h)(3)(C)(iv)',['usc','8','1187',['h','3','C','iv']]]
+]) {
+ const source=corpus.cfr.sections.find(sectionRecord=>sectionRecord.id==='8:'+section).blocks[index].x;
+ check(source,[[surface,destination]],[],{title:'8',chapter:'I',part:section.split('.')[0],section,sourceId:`cfr-8:${section}-${index}`,sourceField:'x',embeddedExceptions:maintainedExceptions});
+}
+for(const index of [5,9,12,13]) {
+ const source=corpus.cfr.sections.find(section=>section.id==='8:214.7').blocks[index].x;
+ const refs=check(source,[],[],{title:'8',chapter:'I',part:'214',section:'214.7',sourceId:`cfr-8:214.7-${index}`,sourceField:'x',embeddedExceptions:maintainedExceptions});
+ const compacts=refs.filter(reference=>reference.targetTitle==='Compacts of Free Association (FSM, RMI, and Palau), §');
+ assert.equal(compacts.length,index===9?2:1,'Every collective Compact citation retains all three instruments');
+ for(const reference of compacts) {
+  assert.equal(reference.targetSection,'141'); assert.deepEqual(reference.targetPath,['a']);
+  assert.equal(reference.targetEdition,'2024');
+  assert.match(reference.officialUrl,/USCODE-2024-title48-chap18\.pdf$/);
+  assert.match(reference.citationNote,/1901.*1921.*1931/);
+ }
+}
+const irishProgramSource=corpus.cfr.sections.find(section=>section.id==='8:1212.1').blocks[50].x;
+const irishProgramRef=check(irishProgramSource,[['section 101(a)(15)(Q)(ii) of the Act',['usc','8','1101',['a','15','Q','ii']]]],[],
+ {title:'8',chapter:'V',part:'1212',section:'1212.1',sourceId:'cfr-8:1212.1-50',sourceField:'x',embeddedExceptions:maintainedExceptions})
+ .find(reference=>reference.text==='section 101(a)(15)(Q)(ii) of the Act');
+assert.equal(irishProgramRef.targetEdition,'2007','The repealed Irish program remains distinct from the continuing Q cultural-exchange class');
+for(const [section,index,surface,destination,edition] of [
+ ['101.1',10,'section 8(a)(1) of the Act of March 24, 1934',['public-law','73','127',['s8','a','1']],'1934'],
+ ['101.1',18,'section 4(a) 1924 Act',['public-law','68','139',['s4','a']],'1924'],
+ ['204.6',80,'section 610(a) of the Appropriations Act',['public-law','102','395',['title-VI','s610','a']],'2020']
+]) {
+ const source=corpus.cfr.sections.find(record=>record.id==='8:'+section).blocks[index].x;
+ const refs=check(source,[[surface,destination]],[],{title:'8',section,sourceId:`cfr-8:${section}-${index}`,sourceField:'x',embeddedExceptions:maintainedExceptions});
+ const cited=refs.filter(reference=>reference.text===surface);
+ assert.equal(cited.length,section==='101.1'&&index===18?2:1,'Every historical Act occurrence is retained');
+ for(const reference of cited) assert.equal(reference.targetEdition,edition,'Historical instrument edition is explicit');
+}
+const facilitySource=corpus.cfr.sections.find(section=>section.id==='20:655.1102').blocks[42].x;
+check(facilitySource,[['(2)',['instrument','20 CFR 655.1102, definition “Facility,” paragraph','2',[]]]],[],
+ {title:'20',section:'655.1102',sourceId:'cfr-20:655.1102-42',sourceField:'x',embeddedExceptions:maintainedExceptions});
+const militaryDerivativeSource=corpus.cfr.sections.find(section=>section.id==='8:204.9').blocks[11].x;
+check(militaryDerivativeSource,[['section 103(a)(27)(K)',['usc','8','1101',['a','27','K']]]],[],
+ {title:'8',part:'204',section:'204.9',sourceId:'cfr-8:204.9-11',sourceField:'x',embeddedExceptions:maintainedExceptions});
+const legacyMedicalSource=corpus.cfr.sections.find(section=>section.id==='8:245a.4').blocks[107].x;
+const legacyMedicalRefs=check(legacyMedicalSource,[],[],{title:'8',part:'245a',section:'245a.4',path:['b','9','i'],sourceId:'cfr-8:245a.4-107',sourceField:'x',embeddedExceptions:maintainedExceptions})
+ .filter(reference=>reference.targetSection==='1182');
+assert.equal(legacyMedicalRefs.length,6,'Five former medical grounds and their shared statutory container remain represented');
+for(const reference of legacyMedicalRefs) assert.equal(reference.targetEdition,'1988','Legacy medical grounds must not navigate to same-number current grounds');
+const priorViolations=corpus.cfr.sections.find(section=>section.id==='8:214.2').blocks[991].x;
+const priorViolationRefs=check(priorViolations,[],[],{title:'8',part:'214',section:'214.2',path:['h','10','v','F'],sourceId:'cfr-8:214.2-991',sourceField:'x',embeddedExceptions:maintainedExceptions})
+ .filter(reference=>reference.text==='(h)(10)(iv)(B)');
+assert.equal(priorViolationRefs.length,2,'Both repeated stale violator cross-references must remain linked');
+for(const reference of priorViolationRefs) assert.deepEqual(reference.targetPath,['h','10','v','B'],'Both occurrences follow the verified redesignation');
+const formerTitle5Note = corpus.title8.sections.find(section=>section.section==='1553').notes[1].text;
+check(formerTitle5Note,[['section 342b–1 of Title 5',['usc','8','1553',[]]]],[],
+ {kind:'usc',title:'8',section:'1553',sourceKind:'usc-note',sourceId:'usc-1553-note-2',sourceField:'text',embeddedExceptions:maintainedExceptions});
+for (const [noteIndex,surface,path,edition] of [
+ [1,'Section 403–3 of title 50',[],'2002'],[3,'section 403–3(c)(7) of title 50',['c','7'],'2002'],[3,'section 403–3(c)(6) of title 50',['c','6'],'2000']
+]) {
+ const source=corpus.title8.sections.find(section=>section.section==='1721').notes[noteIndex].text;
+ const refs=check(source,[[surface,['usc','50','403-3',path]]],[],{kind:'usc',title:'8',section:'1721',sourceKind:'usc-note',sourceId:`usc-1721-note-${noteIndex+1}`,sourceField:'text',embeddedExceptions:maintainedExceptions});
+ assert.equal(refs.find(reference=>reference.text===surface).targetEdition,edition,'Repealed intelligence provisions retain the edition matching their quoted numbering');
+}
+for (const [section,index,surface,path] of [
+ ['245a.4',111,'(14)',['a','14']], ['210.3',29,'(10)',['a','10']], ['245a.4',27,'212(a)(19)',['a','19']]
+]) {
+ const source=corpus.cfr.sections.find(record=>record.id==='8:'+section).blocks[index].x;
+ const refs=check(source,[[surface,['usc','8','1182',path]]],[],{title:'8',section,sourceId:`cfr-8:${section}-${index}`,sourceField:'x',embeddedExceptions:maintainedExceptions});
+ const historical=refs.find(reference=>reference.text===surface);
+ assert.equal(historical.targetEdition,'1988','Legacy exclusion grounds retain their pre-1990 numbering and edition');
+ assert(historical.officialUrl.includes('uscode1988-002008012.pdf#page='));
+ assert.equal(historical.resolution,'official-source-only');
+}
+const traffickingDefinition = corpus.cfr.sections.find(section=>section.id==='8:214.201').blocks[0].x;
+const traffickingChapter = check(traffickingDefinition,[],[],{title:'8',part:'214',section:'214.201',sourceId:'cfr-8:214.201-0',sourceField:'x',embeddedExceptions:maintainedExceptions}).find(reference=>reference.text==='18 U.S.C. 77');
+assert.equal(traffickingChapter?.targetChapter,'77','The trafficking definition cites Chapter 77, not nonexistent section 77');
+assert.equal(traffickingChapter.targetSection,undefined,'A corrected chapter target must not also carry a section number');
+assert.equal(traffickingChapter.targetKind,'usc-hierarchy');
+assert(traffickingChapter.officialUrl.endsWith('/t18/partI-chapter77-front.html'));
+const recruitmentCriteria = corpus.cfr.sections.find(section=>section.id==='20:655.739').blocks[12].x;
+check(recruitmentCriteria,[['(b) (1)',['cfr','20','655.739',['f','1']]],['(3)',['cfr','20','655.739',['f','3']]]],[],
+ {title:'20',part:'655',section:'655.739',path:['f'],sourceId:'cfr-20:655.739-12',sourceField:'x',embeddedExceptions:maintainedExceptions});
+const aggravatedFelonyNote = corpus.title8.sections.find(section=>section.section==='1101').notes[4].text;
+const smugglingTypo = check(aggravatedFelonyNote,[],[],{kind:'usc',title:'8',section:'1101',sourceKind:'usc-note',sourceId:'usc-1101-note-5',sourceField:'text',embeddedExceptions:maintainedExceptions})
+ .find(reference=>reference.text==='section 274(a)(1) of title 18');
+assert.deepEqual(smugglingTypo && target(smugglingTypo),['usc','8','1324',['a','1']],'The quoted alien-smuggling locator belongs to INA 274, not Title 18');
+assert(/printed.*18/.test(smugglingTypo.citationNote),'An incorrect printed authority must retain a correction notice');
+check('An alien described in section 3(b) of the Presidential Proclamation of June 3, 2024, as defined in 8 CFR 208.13(h).', [
+ ['section 3(b)',['instrument','Proclamation 10773 (as amended September 27, 2024), §','3',['b']]]
+], [], {title:'8',part:'208',section:'208.35',path:['a','1']});
+const agriculturalDefinition = 'An agricultural commodity in sec. 15(g) of the Agricultural Marketing Act, as amended, 12 U.S.C. 1141j; see also 12 U.S.C. 1141j(g).';
+const commodityRefs = check(agriculturalDefinition,[['15(g)',['usc','12','1141j',['f']]],['12 U.S.C. 1141j',['usc','12','1141j',[]]],['12 U.S.C. 1141j(g)',['usc','12','1141j',['f']]]],[],
+ {title:'29',part:'501',section:'501.3',path:['b','1','i','C']});
+assert(commodityRefs.filter(reference=>reference.targetPath[0]==='f').every(reference=>/redesignated/.test(reference.citationNote)), 'Former AMA numbering must retain an explanatory notice');
+check('12 U.S.C. 1141j(g)',[['12 U.S.C. 1141j(g)',['usc','12','1141j',['g']]]],[],{title:'29',part:'501',section:'501.3'});
+for (const [surface,section,path] of [
+ ['101(a)(15)(A)(i)','1101',['a','15','A','i']], ['212(d)(8)','1182',['d','8']],
+ ['101(a)(15)(B)(ii)','1101',['a','15','B']], ['101(a)(15)(H)(i)(C)','1101',['a','15','H','i','c']],
+ ['101(a)(15)(H)(iv)','1101',['a','15','H']], ['101(a)(15)(T)(iii)','1101',['a','15','T','ii']],
+ ['101(a)(15)(Q)(i)','1101',['a','15','Q']]
+]) check(surface,[[surface,['ina','8',section,path]]],[],classificationTableContext);
+assert(!check('101(a)(15)(B)(ii)',[],[],{title:'8',section:'214.1'}).length,'Administrative classification inference requires its actual table column');
+assert(!check('101(a)(15)(Q)(ii)',[],[],classificationTableContext).length,'The former Irish program must not map to the surviving current Q cultural-exchange provision');
+for (const [clause,expectedPath] of [['ii',['a','15','Q','ii']],['iii',['a','15','Q','ii','II']]]) {
+ const surface=`101(a)(15)(Q)(${clause})`;
+ const rows=corpus.cfr.sections.find(section=>section.id==='8:214.1').blocks[12].rows;
+ const row=rows.findIndex(row=>row[0].x===surface);
+ const refs=check(surface,[[surface,['usc','8','1101',expectedPath]]],[],{...classificationTableContext,sourceId:`cfr-8:214.1-12-cell-${row}-0`,sourceField:'x',
+  embeddedExceptions:new Map(JSON.parse(fs.readFileSync(path.join(root,'sources/legal/embedded-reference-exceptions.json'),'utf8')).exceptions.map(exception=>[exception.id,exception]))});
+ assert(refs.some(reference=>reference.targetEdition==='2007'&&reference.resolution==='official-source-only'&&reference.officialUrl.includes('USCODE-2007')),
+  'Irish program classes retain their historical edition and official archive');
+}
+check('Paragraphs (a)(1) thru (a)(6) and paragraphs (b) and (c) of this section also apply to the H-1B1 and E-3 visa categories.', [
+ ['(a)(1)',['cfr','20','655.760',['a','1']]], ['(a)(6)',['cfr','20','655.760',['a','6']]]
+], [], {title:'20',part:'655',section:'655.760',path:[]});
 check('15 U.S.C. 80b–1 et seq.', [['15 U.S.C. 80b–1',['usc','15','80b-1',[]]]]);
 check('Sections 78o–5(a)(1)(A) and 78q–1(b)(4)(A) of this title.', [
  ['78o–5(a)(1)(A)',['usc','15','78o-5',['a','1','A']]],
@@ -502,6 +714,13 @@ for(const [section,phrase,sourcePath,endPath,endText] of [
 // is bound to the whole source field, not to a generic paragraph pattern.
 const transition = corpus.title8.sections.find(s=>s.section==='1101').notes.find(n=>n.id==='8-1101-note-17');
 const exceptions = JSON.parse(fs.readFileSync(path.join(root,'sources/legal/embedded-reference-exceptions.json'),'utf8'));
+const compactActNote = corpus.title8.sections.find(section=>section.section==='1105').notes[5].text;
+const compactActRanges = check(compactActNote,[
+ ['42 U.S.C. 14611–16',['usc','34','40311–40316',[]]], ['34 U.S.C. 40311–16',['usc','34','40311–40316',[]]]
+],[],{kind:'usc',title:'8',section:'1105',sourceKind:'usc-note',sourceId:'usc-1105-note-6',sourceField:'text',
+ embeddedExceptions:new Map(exceptions.exceptions.map(exception=>[exception.id,exception]))});
+assert(compactActRanges.filter(reference=>reference.targetSection==='40311–40316').every(reference=>reference.targetEdition==='2024'&&reference.officialUrl.includes('chap403-subchapII.pdf')),
+ 'Complete Code ranges open the verified full subchapter archive with its edition, not an invented single-section URL');
 assert.equal(engine.validateEmbeddedReferenceExceptions(exceptions).exceptions,exceptions.exceptions.length,'The exact maintained build-input manifest must validate');
 const historicalHeadingException=exceptions.exceptions.find(e=>e.sourceId==='usc-1486'&&e.sourceField==='heading');
 assert(historicalHeadingException,'The retained original INA heading must not lose its historical section identity');
@@ -522,7 +741,9 @@ for (const [index, exception] of exceptions.exceptions.entries()) {
  const browserRefs=browser.INASearchLegalReferences.generatedReferences(exception.sourceText,{...overrides,sourceId:overrides.kind==='cfr'?'runtime-'+exception.sourceId:exception.sourceId});
  const ref=refs.find(r=>r.start===exception.start&&r.end===exception.end);
  const runtime=browserRefs.find(r=>r.start===exception.start&&r.end===exception.end);
- assert.deepEqual(target(ref),[exception.target.family,exception.target.title,exception.target.section,exception.target.path],exception.id);
+ assert.deepEqual(target(ref),[exception.target.family,exception.target.title,exception.target.section||'',exception.target.path],exception.id);
+ assert.equal(ref.targetChapter,exception.target.chapter,exception.id+' chapter identity');
+ assert.equal(runtime.targetChapter,ref.targetChapter,'Runtime chapter identity must survive the source exception');
  assert(ref.citationNote === exception.citationNote || ref.citationNote?.startsWith(exception.citationNote + " The official "), "The exception notice must be retained before any archive-search notice");
  assert.deepEqual(JSON.parse(JSON.stringify(target(runtime))),target(ref),'Runtime source identity must retain the exact-source exception');
  assert.equal(runtime.historicalOfficialUrl,ref.historicalOfficialUrl);
@@ -532,7 +753,8 @@ require('./pack-legal-references').packLegalReferences(reviewedDelivery);
 require('./pack-legal-references').unpackLegalReferences(reviewedDelivery);
 for(const node of reviewedDelivery.title8.sections[0].body) {
  const exception=exceptions.exceptions[+node.label];const ref=node.references.find(r=>r.start===exception.start&&r.end===exception.end);
- assert.deepEqual(target(ref),[exception.target.family,exception.target.title,exception.target.section,exception.target.path]);
+ assert.deepEqual(target(ref),[exception.target.family,exception.target.title,exception.target.section||'',exception.target.path]);
+ assert.equal(ref.targetChapter,exception.target.chapter,'Packed exceptions retain chapter identity');
  assert(ref.citationNote === exception.citationNote || ref.citationNote?.startsWith(exception.citationNote + ' The official '), 'Correction notices survive standalone delivery');
  if(exception.target.edition) {assert.equal(ref.targetEdition,exception.target.edition);assert.equal(ref.officialUrl,exception.officialUrl);}
 }
@@ -626,7 +848,6 @@ lawRow(rows42,'SP',[['421',['public-law','107','56',['s421']]]]);
 for(const symbol of ['SR1','SR2','SR3']) lawRow(rows42,symbol,[['(III)',['ina','8','1101',['a','27','C','ii','III']]]]);
 for(const symbol of ['DV2','DV3']) lawRow(rows42,symbol,[['203(d)',['ina','8','1153',['d']]]]);
 for(const row of [...rows41,...rows42]) for(const cell of row) for(const ref of cell.xReferences||[]) assert.equal(cell.x.slice(ref.start,ref.end),ref.text,'Table span must preserve source text');
-console.log(`PASS authority regressions, Node/browser parity, and both visa-table checks (${rows41.length+rows42.length} visa rows).`);
 
 for (const id of ['8:208.13','8:208.16','8:1208.13','8:1208.16']) {
  const block=corpus.cfr.sections.find(s=>s.id===id).blocks.find(b=>b.x?.includes('section 319 of the Public Health Service Act, 42 U.S.C. 247d'));
@@ -759,3 +980,109 @@ for(const ref of former242B) {
  assert.match(ref.citationNote,/retained historical text/i);
  assert.match(ref.citationNote,/base source.*amendments/i);
 }
+check('Eligibility requirements found in paragraphs (k)(1) through (k)(3) of § 204.5.', [
+ ['(k)(1)',['cfr','8','204.5',['k','1']]],
+ ['(k)(3)',['cfr','8','204.5',['k','3']]]
+], [], {title:'8',part:'204',section:'204.12',path:['c']});
+check('At all steps in the disciplinary process provided in paragraph (a), sanctions shall be commensurate.', [
+ ['(a)',['cfr','6','115.78',['a']]]
+], [], {title:'6',part:'115',section:'115.78',path:['b']});
+check('A principal beneficiary granted a renewal of employment authorization under paragraph (p)(3)(i) that remains valid.', [
+ ['(p)(3)(i)',['cfr','8','204.5',['p','3','i']]]
+], [], {title:'8',part:'204',section:'204.5',path:['p','3','ii']});
+check('USCIS has received all of the required evidence in paragraph (d), and the time period will be reset.', [
+ ['(d)',['cfr','8','204.11',['d']]]
+], [], {title:'8',part:'204',section:'204.11',path:['g','1']});
+const foreignParagraph = check('The requirement in paragraph (a) of the agreement applies.', [], [], {title:'6',section:'115.78',path:['b']});
+assert(!foreignParagraph.some(r=>r.text==='(a)'), 'A written non-CFR owner must not inherit the containing CFR section');
+const ambiguousParagraph = check('See paragraph (i).', [], [], {title:'8',section:'214.2',path:['f','1'],cfrPaths:new Set(['8:214.2:i','8:214.2:f/1/i'])});
+assert(!ambiguousParagraph.some(r=>r.text==='(i)'), 'An unqualified label with two locally valid container depths must remain ambiguous');
+check('The asylum application is filed after the period of time in 208.13(g) during which the alien entered.', [
+ ['208.13(g)',['cfr','8','208.13',['g']]]
+], [], {title:'8',part:'208',section:'208.35',path:['d','2','ii']});
+check('Consistent with section 10(c) of the Administrative Procedure Act, 5 U.S.C. 704, the decision is final.', [
+ ['10(c)',['usc','5','704',[]]]
+], [], {title:'8',part:'103',section:'103.6',path:['f','1']});
+const renumberedDeportability = exceptions.exceptions.find(e=>e.id==='cfr-8:214.2-28-reviewed-245');
+const renumberedReferences = check(renumberedDeportability.sourceText, [
+ ['section 241(a)(1)(C)(i) of the Act',['usc','8','1227',['a','1','C','i']]]
+], [], {title:'8',part:'214',section:'214.2',path:['a','10'],sourceId:'cfr-8:214.2-28',sourceField:'x',
+ embeddedExceptions:new Map(exceptions.exceptions.map(e=>[e.id,e]))}).filter(r=>r.text==='section 241(a)(1)(C)(i) of the Act');
+assert.equal(renumberedReferences.length,2,'Both preserved pre-IIRIRA citations receive the enacted redesignation');
+assert(renumberedReferences.every(r=>r.resolution==='local'&&r.targetSection==='1227'&&/308\(g\)\(1\)/.test(r.citationNote)),
+ 'The current counterpart must carry the source-numbering explanation');
+const physicianWaiverSource = corpus.cfr.sections.find(s=>s.id==='8:204.12').blocks.find(b=>b.a==='(d)(5)').x;
+const physicianWaivers = check(physicianWaiverSource, [
+ ['section 214(1) of the Act',['usc','8','1184',['l']]]
+], [], {title:'8',part:'204',section:'204.12',path:['d','5'],sourceId:'cfr-8:204.12-26',sourceField:'x',
+ embeddedExceptions:new Map(exceptions.exceptions.map(e=>[e.id,e]))}).filter(r=>r.text==='section 214(1) of the Act');
+assert.equal(physicianWaivers.length,2);
+assert(physicianWaivers.every(r=>r.resolution==='local'&&r.targetPath.join('/')==='l'&&/lowercase/.test(r.citationNote)),
+ 'Both printed digit-one physician-waiver citations require the verified lowercase-l destination and a correction notice');
+const truncatedParagraph = check('If evidence required in paragraph (e)(4), (e)(9) or (e)(10 of this section is unavailable, secondary evidence may be submitted.', [], [],
+ {title:'8',part:'1245',section:'1245.13',path:['f']});
+assert(!truncatedParagraph.some(r=>r.text==='(e)'&&r.targetPath.join('/')==='e'),
+ 'An incomplete adjacent numeric token must not silently broaden a malformed compound citation to its parent');
+const secondaryEvidenceSource = corpus.cfr.sections.find(s=>s.id==='8:1245.13').blocks[71].x;
+const secondaryEvidenceReferences = check(secondaryEvidenceSource, [
+ ['(e)(4)',['cfr','8','1245.13',['e','4']]],
+ ['(e)(9)',['cfr','8','1245.13',['e','9']]],
+ ['(e)(10',['cfr','8','1245.13',['e','10']]]
+], [], {title:'8',part:'1245',section:'1245.13',path:['f'],sourceId:'cfr-8:1245.13-71',sourceField:'x',
+ embeddedExceptions:new Map(exceptions.exceptions.map(e=>[e.id,e]))});
+assert(secondaryEvidenceReferences.some(r=>r.text==='(e)(10'&&r.resolution==='local'&&/closing parenthesis/.test(r.citationNote)),
+ 'The reviewed missing parenthesis must retain the source wording and explain its exact destination');
+check('The information required by items (ii) and (iii) shall be furnished only with respect to the initial entry. Item (ii) does not apply to a bona fide crewman.', [
+ ['(ii)',['cfr','8','212.4',['a','1','ii']]],
+ ['(iii)',['cfr','8','212.4',['a','1','iii']]]
+], [], {title:'8',part:'212',section:'212.4',path:['a','1']});
+const temporaryAdmissionSource = corpus.cfr.sections.find(s=>s.id==='8:212.15').blocks[157].x;
+check(temporaryAdmissionSource, [
+ ['8 CFR part 212(d)(1)',['cfr','8','212.15',['d','1']]]
+], [], {title:'8',part:'212',section:'212.15',path:['n','2'],sourceId:'cfr-8:212.15-157',sourceField:'x',
+ embeddedExceptions:new Map(exceptions.exceptions.map(e=>[e.id,e]))});
+check('An alien defined in section (101)(a)(15)(A)(iii) of the Act.', [
+ ['section (101)(a)(15)(A)(iii) of the Act',['ina','8','1101',['a','15','A','iii']]]
+], [], {title:'8',chapter:'I',part:'214',section:'214.2',path:['a','1']});
+check('An alien defined in section (101)(a)(15)(G)(v) of the Act.', [
+ ['section (101)(a)(15)(G)(v) of the Act',['ina','8','1101',['a','15','G','v']]]
+], [], {title:'8',chapter:'I',part:'214',section:'214.2',path:['g','1']});
+check('Pursuant to section 2242(d) of the Foreign Affairs Reform and Restructuring Act of 1998.', [
+ ['2242(d)',['public-law','105','277',['division-G','subdivision-B','title-XXII','s2242','d']]]
+]);
+const ac21References = check('H-1B status under sections 106(a) and (b) of AC21, as amended by the 21st Century Department of Justice Appropriations Authorization Act.', [
+ ['106(a)',['public-law','106','313',['title-I','s106','a']]],
+ ['(b)',['public-law','106','313',['title-I','s106','b']]]
+]);
+assert(ac21References.filter(r=>r.targetLaw==='313').every(r=>r.resolution==='official-source-only'&&r.officialUrl==='https://uscode.house.gov/us/usc/t8/s1184/'&&/amended/.test(r.citationNote)),
+ 'AC21 extension provisions must open the amended text in the official Code notes');
+const ac21Scope = require('./embedded-references').parseNumberedSectionReferences('sections 106(a) and (b) of AC21, as amended by the 21st Century Department of Justice Appropriations Authorization Act.')[0]?.scope;
+assert.equal(ac21Scope?.text,'of AC21','An Act acronym ends before the separate amending instrument');
+for (const [section,article,path] of [['204.301','6',['1']],['204.309','5',['c']],['204.313','5',['c']]]) {
+ const wording=`The notice under article ${article}(${path[0]}) of the Convention applies.`;
+ check(wording, [[`article ${article}(${path[0]}) of the Convention`,['instrument','Hague Adoption Convention, Article',article,path]]], [], {title:'8',chapter:'I',part:'204',section});
+}
+assert(!check('The notice under article 5(c) of the Convention applies.', [], [], {title:'8',part:'208',section:'208.18'}).some(r=>r.family==='instrument'),
+ 'A Hague adoption scope must not own a different Convention in the asylum regulations');
+const proclamationTitle = 'Proclamation 10773 (as amended September 27, 2024), §';
+for (const [section,block,path,expected] of [
+ ['208.13',119,['g'],[['section 4(d)',['instrument',proclamationTitle,'4',['d']]],['section 2(a)',['instrument',proclamationTitle,'2',['a']]],['section 2(b)',['instrument',proclamationTitle,'2',['b']]]]],
+ ['235.15',0,['a'],[['section 3(b)',['instrument',proclamationTitle,'3',['b']]]]]
+]) {
+ const source=corpus.cfr.sections.find(s=>s.id==='8:'+section).blocks[block].x;
+ const references=check(source,expected,[],{title:'8',chapter:'I',section,path,sourceId:`cfr-8:${section}-${block}`,sourceField:'x',embeddedExceptions:new Map(exceptions.exceptions.map(e=>[e.id,e]))});
+ for(const ref of references.filter(r=>r.family==='instrument')) assert.equal(ref.resolution,'official-source-only');
+ if(section==='208.13') assert.equal(references.filter(r=>r.family==='instrument'&&r.targetSection==='2'&&r.targetPath[0]==='a').length,2,'Both references to the amended suspension threshold retain the same destination');
+}
+const staffDefinitionTitle = '6 CFR 115.6, definition “sexual abuse of a detainee by a staff member, contractor, or volunteer,” paragraphs';
+for(const section of ['115.76','115.176']) {
+const staffDisciplineSection = corpus.cfr.sections.find(s=>s.id===`6:${section}`);
+const staffDisciplineIndex = staffDisciplineSection.blocks.findIndex(b=>b.a==='(b)');
+const staffDefinitionRefs = check(staffDisciplineSection.blocks[staffDisciplineIndex].x, [
+ ['(1)-(4) and (7)-(8)',['instrument',staffDefinitionTitle,'1–4 and 7–8',[]]]
+], [], {title:'6',part:'115',section,path:['b'],sourceId:`cfr-6:${section}-${staffDisciplineIndex}`,sourceField:'x',embeddedExceptions:new Map(exceptions.exceptions.map(e=>[e.id,e]))});
+assert(staffDefinitionRefs.some(r=>r.family==='instrument'&&r.resolution==='official-source-only'),
+ 'Repeated numeric labels in separate definitions require the named-definition identity, not an invented section-level paragraph path');
+}
+
+console.log(`PASS authority regressions, Node/browser parity, and both visa-table checks (${rows41.length+rows42.length} visa rows).`);

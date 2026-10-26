@@ -36,7 +36,7 @@ const ANAPHOR_WORD = /\b(this|such|that|preceding|following)\b/iy;
 // combinations thereof.  Keeping this conservative prevents prose in a
 // parenthetical from becoming a guessed statutory address.
 const LABEL = /[A-Za-z0-9]+(?:[-\u2010\u2011\u2012\u2013\u2014][A-Za-z0-9]+)*/y;
-const LIST_CONNECTOR = /(?:,|[–—-](?=\s*\()|\b(?:and|or|through|to)\b)/iy;
+const LIST_CONNECTOR = /(?:,|[–—-](?=\s*\()|\b(?:and|or|through|thru|to)\b)/iy;
 
 function canonicalUnitName(value) {
   const singular = String(value || "").toLowerCase().replace(/s$/, "");
@@ -356,10 +356,10 @@ function readContainerAfterOf(input, position) {
     return base;
   }
 
-  const baseWordMatch = input.slice(cursor).match(/^(sections?|subsections?|paragraphs?|subdivisions?|subparagraphs?|clauses?|subclauses?|items?|subitems?)\b/i);
+  const baseWordMatch = input.slice(cursor).match(/^(?:(sections?|subsections?|paragraphs?|subdivisions?|subparagraphs?|clauses?|subclauses?|items?|subitems?)\b|§(?!§))/i);
   if (!baseWordMatch) return null;
   const baseWord = baseWordMatch[0];
-  const baseKind = canonicalUnitName(baseWord);
+  const baseKind = baseWord === "§" ? "section" : canonicalUnitName(baseWord);
   const baseUnitStart = cursor;
   const address = baseKind === "section"
     ? readNumberedSectionAddress(input, cursor + baseWord.length)
@@ -527,7 +527,7 @@ function readNumberedTitle(input, position) {
 function readSectionScope(input, position) {
   const start = skipWhitespace(input, position);
   const value = input.slice(start);
-  const codeOrAct = value.match(/^of\s+(?:the\s+)?(Internal\s+Revenue\s+Code(?:\s+of\s+(?:1954|1986))?|IRC|NACARA|INA|TWEA)\b/i);
+  const codeOrAct = value.match(/^of\s+(?:the\s+)?(Internal\s+Revenue\s+Code(?:\s+of\s+(?:1954|1986))?|IRC|NACARA|INA|TWEA|AC-?21|FLSA|TVPA)\b/i);
   if (codeOrAct) return { start, end: start + codeOrAct[0].length, text: codeOrAct[0], type: "named-act", title: "", actName: codeOrAct[1] };
   let match = value.match(/^of\s+this\s+(chapter|subchapter)\b/i);
   if (match) return { start, end: start + match[0].length, text: match[0], type: `this-${match[1].toLowerCase()}`, title: "" };
@@ -577,8 +577,8 @@ function readSectionScope(input, position) {
   // consuming prose until it encounters a later occurrence of that word.
   match = value.match(/^of\s+(?:the\s+)?((?!Act\b)[A-Z0-9][A-Za-z0-9’'&.,\-–—]*(?:\s+(?:[A-Za-z0-9][A-Za-z0-9’'&.,\-–—]*|\([A-Z0-9-]+\))){0,24}?\s+Act(?:\s+of\s+\d{4}|,\s*\d{4}|\s+for\s+Fiscal\s+Year\s+\d{4}|,\s*Fiscal\s+Years?\s+\d{4}(?:\s+and\s+\d{4})?)?)\b/);
   if (match) return { start, end: start + match[0].length, text: match[0], type: "named-act", title: "", actName: match[1].trim() };
-  match = value.match(/^of\s+(?:the\s+)?(Agreement\s+regarding\s+the\s+Headquarters\s+of\s+the\s+United\s+Nations)\b/i);
-  if (match) return { start, end: start + match[0].length, text: match[0], type: "named-instrument", title: "", instrumentName: match[1].trim() };
+  match = value.match(/^of\s+(?:the\s+)?Agreement\s+(?:between\s+the\s+United\s+Nations\s+and\s+the\s+United\s+States\s+of\s+America\s+)?regarding\s+the\s+Headquarters\s+of\s+the\s+United\s+Nations\b/i);
+  if (match) return { start, end: start + match[0].length, text: match[0], type: "named-instrument", title: "", instrumentName: "Agreement regarding the Headquarters of the United Nations" };
   match = value.match(/^of\s+(?:the\s+)?Headquarters\s+Agreement\b/i);
   if (match && /United\s+Nations/i.test(input.slice(0, start))) return { start, end: start + match[0].length, text: match[0], type: "named-instrument", title: "", instrumentName: "Agreement regarding the Headquarters of the United Nations" };
   return null;
@@ -618,7 +618,7 @@ function parseSectionAddressSequence(input, start, hasUnitWord) {
         const markedScope = readSectionScope(input, markerEnd);
         if (markedScope) return { members, connectors, scope: markedScope, end: markedScope.end };
       }
-      const connector = input.slice(cursor).match(/^(?:,\s*(?:and\b|or\b)?|;|[–—-]|\band\b|\bor\b|\bthrough\b|\bto\b)/i);
+      const connector = input.slice(cursor).match(/^(?:,\s*(?:and\b|or\b)?|;|[–—-]|\band\b|\bor\b|\bthrough\b|\bthru\b|\bto\b)/i);
       if (!connector) return null;
       connectors.push(span(input, cursor, cursor + connector[0].length, { kind: connector[0].toLowerCase() }));
       cursor += connector[0].length;

@@ -2503,7 +2503,7 @@
       const properties = { c: "continuationReferences", t: "references", h: "headingReferences", p: "preambleReferences", s: "sourceCreditReferences", x: "xReferences", a: "authorityReferences", o: "sourceReferences" };
       const fields = { c: "continuation", t: "text", h: "heading", p: "preamble", s: "sourceCredit", x: "x", a: "authority", o: "source" };
       const keys = { i: "id", s: "start", e: "end", x: "text", f: "family", r: "resolution", k: "targetKind", t: "targetTitle", n: "targetSection", a: "targetPath", c: "targetCongress", l: "targetLaw", v: "targetVolume", g: "targetPage", h: "houseHref", u: "officialUrl", p: "provenance", q: "ruleId", z: "sourceKind", d: "inaSection", y: "policyScopeId", b: "evidenceId" };
-      const families = { u: "usc", i: "ina", c: "cfr", p: "public-law", s: "statutes-at-large", f: "federal-register", "?": "unknown" };
+      const families = { u: "usc", i: "ina", c: "cfr", p: "public-law", s: "statutes-at-large", f: "federal-register", x: "instrument", "?": "unknown" };
       const rules = [
         "",
         "explicit-usc", "explicit-usc-continuation", "explicit-ina", "explicit-ina-continuation", "explicit-cfr", "explicit-cfr-continuation",
@@ -2575,6 +2575,14 @@
               }
               if (preservedOfficialUrl !== undefined) expanded.officialUrl = preservedOfficialUrl;
               if (expanded.historicalOfficialUrl) expanded.officialUrl = expanded.historicalOfficialUrl;
+              if (!expanded.historicalOfficialUrl && (!expanded.targetEdition || expanded.targetEdition === "prelim") &&
+                  /^https:\/\/uscode\.house\.gov\/view\.xhtml\?/.test(expanded.officialUrl || "")) {
+                try {
+                  const req = expanded.officialUrl.match(/[?&]req=([^&#]+)/)?.[1];
+                  const granule = decodeURIComponent(req || "").match(/^granuleid:USC-prelim-title(\d+)-section([^\s/]+)$/);
+                  if (granule) expanded.officialUrl = houseSectionUrl(granule[2], granule[1]) + (expanded.officialUrl.match(/#.*$/)?.[0] || "");
+                } catch {}
+              }
               if (expanded.targetChapter) {
                 expanded.targetKind = "usc-hierarchy";
                 expanded.officialUrl ||= "https://uscode.house.gov/browse.html";
@@ -9208,7 +9216,7 @@
     const HOUSE_FOOTNOTE_STATEMENT = "Footnotes embedded in original house.gov material, moved here for clarity";
 
     function houseSectionUrl(section, title = 8) {
-      return `https://uscode.house.gov/view.xhtml?req=${encodeURIComponent(`granuleid:USC-prelim-title${title}-section${section}`)}&num=0&edition=prelim`;
+      return `https://uscode.house.gov/us/usc/t${encodeURIComponent(title)}/s${encodeURIComponent(String(section).replace(/[–—]/g, "-"))}/`;
     }
 
     function houseSubstructureFragment(path) {
@@ -9223,6 +9231,8 @@
         const granule = decodeURIComponent(parsed.searchParams.get("req") || "").match(/granuleid:USC-prelim-title([^\s-]+)-section(.+)$/);
         if (parsed.hostname === "uscode.house.gov" && granule) base = houseSectionUrl(granule[2], granule[1]);
       } catch {}
+      // OLRC's current section pages do not expose subsection anchors.
+      if (/^https:\/\/uscode\.house\.gov\/us\/usc\/(?:[^/]+\/)?t\d+\/s[^/]+\/?$/.test(base)) return base;
       return `${base}${houseSubstructureFragment(path)}`;
     }
 
@@ -9577,6 +9587,7 @@
       }
       if (reference.family === "statutes-at-large") return `${reference.targetVolume || ""} Stat. ${reference.targetPage || ""}`.trim();
       if (reference.family === "federal-register") return `${reference.targetVolume || ""} Federal Register ${reference.targetPage || ""}`.trim();
+      if (reference.family === "instrument") return `${reference.targetTitle || ""} ${reference.targetSection || ""}${path}`.trim();
       return reference.text || "Legal reference";
     }
 

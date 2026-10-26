@@ -21,7 +21,7 @@ const REFERENCE_KEYS = {
   ruleId: "q", sourceKind: "z", inaSection: "d", policyScopeId: "y", evidenceId: "b"
 };
 const KEY_REFERENCES = Object.fromEntries(Object.entries(REFERENCE_KEYS).map(([property, key]) => [key, property]));
-const FAMILY_CODES = { usc: "u", ina: "i", cfr: "c", "public-law": "p", "statutes-at-large": "s", "federal-register": "f", unknown: "?" };
+const FAMILY_CODES = { usc: "u", ina: "i", cfr: "c", "public-law": "p", "statutes-at-large": "s", "federal-register": "f", instrument: "x", unknown: "?" };
 const CODE_FAMILIES = Object.fromEntries(Object.entries(FAMILY_CODES).map(([family, code]) => [code, family]));
 const RULES = [
   "",

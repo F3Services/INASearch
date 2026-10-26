@@ -4,6 +4,10 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs"), vm = require("node:vm");
 const functionSource = require("./test-function-source");
 const template = fs.readFileSync(require.resolve("../src/INASearch.template.html"), "utf8");
+const officialLinks = vm.createContext({ URL });
+for (const name of ["houseSectionUrl", "houseSubstructureFragment", "officialTextFragment"]) vm.runInContext(functionSource(template, name), officialLinks);
+assert.equal(officialLinks.officialTextFragment("https://uscode.house.gov/us/usc/t8/s1184/", ["l"]),
+  "https://uscode.house.gov/us/usc/t8/s1184/", "The current House publisher does not support subsection deep links");
 const { api: parser } = require("./test-mixed-citations").createParser();
 const noteContext = vm.createContext({ parseCitation: parser.parseCitation, citationCrosswalk: () => null });
 for (const name of ["associationFromCitationResult", "prepareNoteReferenceTrigger"]) vm.runInContext(functionSource(template, name), noteContext);
@@ -25,6 +29,8 @@ const section = { id: "8-9000", section: "9000", body: [{ label: "a", text: "Alp
   notes: [{ id: "source-note", heading: "Source", text: "Full related explanation.", bodyStart: 0 }] };
 const fixture = { inaCrosswalk: [], title8: { sections: [section] } };
 const api = require("./audit-ina-display").runtime(template, fixture);
+assert.equal(api.legalReferenceCitation({ family: "instrument", targetTitle: "Hague Adoption Convention, Article", targetSection: "5", targetPath: ["c"], text: "5(c)" }),
+  "Hague Adoption Convention, Article 5(c)", "External instruments retain their authority and exact provision in the citation label");
 Object.assign(api, {
   statuteReferenceUnitIndexCache: new WeakMap(),
   statutoryRunInMarkers: require("./statute-run-ins").statuteRunInMarkers,
@@ -123,8 +129,10 @@ Object.assign(coldApi, { INASearchCfrHierarchy: api.INASearchCfrHierarchy, INA_S
   hydratedLegalReferenceRoots: new WeakSet() });
 for (const name of cfrPreviewFunctions) vm.runInContext(functionSource(template, name), coldApi);
 const coldHtml = coldApi.cfrReferencePreviewHtml(coldSection, ["a", "1"]);
-assert.equal((coldHtml.match(/\bdata-legal-reference\b/g) || []).length, 3,
-  "Opening a CFR preview before its reader must decode and retain all three packed citation links");
+assert.equal((coldHtml.match(/\bdata-legal-reference\b/g) || []).length, 6,
+  "A cold CFR preview retains the three statutory citations and three local item references");
+assert.equal((coldHtml.match(/data-reference-family="cfr"/g) || []).length, 3,
+  "The continuation's references to items (ii), (iii), and (ii) survive packed hydration");
 coldApi.hydrateLegalReferences(coldSection);
 assert.equal(coldApi.cfrReferencePreviewHtml(coldSection, ["a", "1"]), coldHtml,
   "A cold CFR preview must match the same preview after normal reader hydration");

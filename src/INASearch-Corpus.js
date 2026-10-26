@@ -1,7 +1,7 @@
 /* INASearch public corpus. Replace as one reviewed unit. */
 window.INA_SEARCH_CORPUS = {
   "schemaVersion": 5,
-  "corpusVersion": "title8-119-124-e810a9d5856a",
+  "corpusVersion": "title8-119-124-e810a9d5856a-release-20261026.1",
   "capturedAt": "2026-07-30",
   "verifiedAt": "2026-10-23",
   "verification": {},
@@ -25,36 +25,36 @@ window.INA_SEARCH_CORPUS = {
       "name": "United States Code, Title 8 — Aliens and Nationality",
       "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
       "url": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip",
-      "capturedAt": "2026-10-23",
+      "capturedAt": "2026-10-26",
       "currentThrough": "119-124",
       "sourceArtifact": "sources/legal/raw/usc08@119-124.xml",
       "sourceBytes": 7384424,
       "sourceSha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8",
       "manifest": "sources/legal/source-manifest.json",
       "currentThroughDate": "2026-10-15",
-      "checkedAt": "2026-10-23"
+      "checkedAt": "2026-10-26"
     },
     "inaCrosswalk": {
       "name": "Immigration and Nationality Act",
       "publisher": "U.S. Citizenship and Immigration Services",
       "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-      "capturedAt": "2026-10-23",
+      "capturedAt": "2026-10-26",
       "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
       "sourceBytes": 111944,
       "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
       "manifest": "sources/legal/source-manifest.json",
       "independentAudit": "sources/legal/ina-crosswalk-audit.json",
       "independentAuditSource": "GovInfo COMPS-1376 with reviewed House evidence for omitted former and repealed mappings",
-      "checkedAt": "2026-10-23"
+      "checkedAt": "2026-10-26"
     },
     "policyManual": {
       "name": "USCIS Policy Manual",
       "publisher": "U.S. Citizenship and Immigration Services",
       "url": "https://www.uscis.gov/policy-manual",
-      "capturedAt": "2026-10-23",
+      "capturedAt": "2026-10-26",
       "coverage": "Hierarchy and resource metadata only; complete Policy Manual prose is not included.",
-      "checkedAt": "2026-10-23",
-      "sourceSha256": "f34d3d1d4d2b9c0723e3b3a8ee1cf7dc74c00096c968ae5bfeb676a41020b673",
+      "checkedAt": "2026-10-26",
+      "sourceSha256": "b37a92dba06ffdb1f9b3bb642e5e844a177cb2a6796e6c23e4857e66d7bf44f3",
       "sourceBytes": 266874,
       "sourceManifest": "sources/legal/uscis-catalog-source-manifest.json"
     },
@@ -62,10 +62,10 @@ window.INA_SEARCH_CORPUS = {
       "name": "All Forms",
       "publisher": "U.S. Citizenship and Immigration Services",
       "url": "https://www.uscis.gov/forms/all-forms",
-      "capturedAt": "2026-10-23",
+      "capturedAt": "2026-10-26",
       "coverage": "Form numbers, titles, and official form-page links only.",
-      "checkedAt": "2026-10-23",
-      "sourceSha256": "8ace42caaa5cd309b408080b250230f2d99bd1731d5b387b79b934b84ff415fe",
+      "checkedAt": "2026-10-26",
+      "sourceSha256": "4e406d338a5e0f1e095aee557351ce4b3d53800a3dab2844d53ba4b53b5a0748",
       "sourceBytes": 159839,
       "sourceManifest": "sources/legal/uscis-catalog-source-manifest.json"
     }
@@ -115186,7 +115186,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 101 > 8 U.S.C. 1101",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 101 | 8 U.S.C. 1101 | Definitions.",
@@ -115207,7 +115207,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 102 > 8 U.S.C. 1102",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 102 | 8 U.S.C. 1102 | Diplomatic and semidiplomatic immunities.",
@@ -115228,7 +115228,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 103 > 8 U.S.C. 1103",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 103 | 8 U.S.C. 1103 | Powers and duties of the Secretary, the Under Secretary, and the Attorney General.",
@@ -115249,7 +115249,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 104 > 8 U.S.C. 1104",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 104 | 8 U.S.C. 1104 | Powers and duties of Secretary of State.",
@@ -115270,7 +115270,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 105 > 8 U.S.C. 1105",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 105 | 8 U.S.C. 1105 | Liaison with internal security officers; data exchange.",
@@ -115291,7 +115291,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title I: General Provisions > INA 106 > 8 U.S.C. 1105a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 106 | 8 U.S.C. 1105a | Employment authorization for battered spouses of certain nonimmigrants.",
@@ -115312,7 +115312,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 201 > 8 U.S.C. 1151",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 201 | 8 U.S.C. 1151 | Worldwide level of immigration.",
@@ -115333,7 +115333,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 202 > 8 U.S.C. 1152",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 202 | 8 U.S.C. 1152 | Numerical limitations on individual foreign states.",
@@ -115354,7 +115354,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 203 > 8 U.S.C. 1153",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 203 | 8 U.S.C. 1153 | Allocation of immigrant visas.",
@@ -115375,7 +115375,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 204 > 8 U.S.C. 1154",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 204 | 8 U.S.C. 1154 | Procedure for granting immigrant status.",
@@ -115396,7 +115396,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 205 > 8 U.S.C. 1155",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 205 | 8 U.S.C. 1155 | Revocation of approval of petitions; effective date.",
@@ -115417,7 +115417,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 206 > 8 U.S.C. 1156",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 206 | 8 U.S.C. 1156 | Unused immigrant visas.",
@@ -115438,7 +115438,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 207 > 8 U.S.C. 1157",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 207 | 8 U.S.C. 1157 | Annual admission of refugees and admission of emergency situation refugees.",
@@ -115459,7 +115459,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 208 > 8 U.S.C. 1158",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 208 | 8 U.S.C. 1158 | Asylum.",
@@ -115480,7 +115480,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 209 > 8 U.S.C. 1159",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 209 | 8 U.S.C. 1159 | Adjustment of status of refugees.",
@@ -115501,7 +115501,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 210 > 8 U.S.C. 1160",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 210 | 8 U.S.C. 1160 | Special agricultural workers.",
@@ -115522,7 +115522,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 210A > 8 U.S.C. 1161",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 210A | 8 U.S.C. 1161 | Repealed.",
@@ -115543,7 +115543,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 211 > 8 U.S.C. 1181",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 211 | 8 U.S.C. 1181 | Admission of immigrants into the United States.",
@@ -115564,7 +115564,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 212 > 8 U.S.C. 1182",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 212 | 8 U.S.C. 1182 | Inadmissible aliens.",
@@ -115585,7 +115585,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 213 > 8 U.S.C. 1183",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 213 | 8 U.S.C. 1183 | Admission of aliens on giving bond or undertaking; return upon permanent departure.",
@@ -115606,7 +115606,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 213A > 8 U.S.C. 1183a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 213A | 8 U.S.C. 1183a | Requirements for sponsor's affidavit of support.",
@@ -115627,7 +115627,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 214 > 8 U.S.C. 1184",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 214 | 8 U.S.C. 1184 | Admission of nonimmigrants.",
@@ -115648,7 +115648,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 215 > 8 U.S.C. 1185",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 215 | 8 U.S.C. 1185 | Travel control of citizens and aliens.",
@@ -115669,7 +115669,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 216 > 8 U.S.C. 1186a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 216 | 8 U.S.C. 1186a | Conditional permanent resident status for certain alien spouses and sons and daughters.",
@@ -115690,7 +115690,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 216A > 8 U.S.C. 1186b",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 216A | 8 U.S.C. 1186b | Conditional permanent resident status for certain alien entrepreneurs, spouses, and children.",
@@ -115711,7 +115711,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 217 > 8 U.S.C. 1187",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 217 | 8 U.S.C. 1187 | Visa waiver program for certain visitors.",
@@ -115732,7 +115732,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 218 > 8 U.S.C. 1188",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 218 | 8 U.S.C. 1188 | Admission of temporary H–2A workers.",
@@ -115753,7 +115753,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 219 > 8 U.S.C. 1189",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 219 | 8 U.S.C. 1189 | Designation of foreign terrorist organizations.",
@@ -115774,7 +115774,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 221 > 8 U.S.C. 1201",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 221 | 8 U.S.C. 1201 | Issuance of visas.",
@@ -115795,7 +115795,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 222 > 8 U.S.C. 1202",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 222 | 8 U.S.C. 1202 | Application for visas.",
@@ -115816,7 +115816,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 223 > 8 U.S.C. 1203",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 223 | 8 U.S.C. 1203 | Reentry permit.",
@@ -115837,7 +115837,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 224 > 8 U.S.C. 1204",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 224 | 8 U.S.C. 1204 | Immediate relative and special immigrant visas.",
@@ -115858,7 +115858,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 231 > 8 U.S.C. 1221",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 231 | 8 U.S.C. 1221 | Lists of alien and citizen passengers arriving and departing.",
@@ -115879,7 +115879,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 232 > 8 U.S.C. 1222",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 232 | 8 U.S.C. 1222 | Detention of aliens for physical and mental examination.",
@@ -115900,7 +115900,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 233 > 8 U.S.C. 1223",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 233 | 8 U.S.C. 1223 | Entry through or from foreign territory and adjacent islands.",
@@ -115921,7 +115921,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 234 > 8 U.S.C. 1224",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 234 | 8 U.S.C. 1224 | Designation of ports of entry for aliens arriving by aircraft.",
@@ -115942,7 +115942,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 235 > 8 U.S.C. 1225",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 235 | 8 U.S.C. 1225 | Inspection by immigration officers; expedited removal of inadmissible arriving aliens; referral for hearing.",
@@ -115963,7 +115963,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 235A > 8 U.S.C. 1225a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 235A | 8 U.S.C. 1225a | Preinspection at foreign airports.",
@@ -115984,7 +115984,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 236 > 8 U.S.C. 1226",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 236 | 8 U.S.C. 1226 | Apprehension and detention of aliens.",
@@ -116005,7 +116005,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 236A > 8 U.S.C. 1226a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 236A | 8 U.S.C. 1226a | Mandatory detention of suspected terrorists; habeas corpus; judicial review.",
@@ -116026,7 +116026,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 237 > 8 U.S.C. 1227",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 237 | 8 U.S.C. 1227 | Deportable aliens.",
@@ -116047,7 +116047,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 238 > 8 U.S.C. 1228",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 238 | 8 U.S.C. 1228 | Expedited removal of aliens convicted of committing aggravated felonies.",
@@ -116068,7 +116068,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 239 > 8 U.S.C. 1229",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 239 | 8 U.S.C. 1229 | Initiation of removal proceedings.",
@@ -116089,7 +116089,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 240 > 8 U.S.C. 1229a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 240 | 8 U.S.C. 1229a | Removal proceedings.",
@@ -116110,7 +116110,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 240A > 8 U.S.C. 1229b",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 240A | 8 U.S.C. 1229b | Cancellation of removal; adjustment of status.",
@@ -116131,7 +116131,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 240B > 8 U.S.C. 1229c",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 240B | 8 U.S.C. 1229c | Voluntary departure.",
@@ -116152,7 +116152,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 240C > 8 U.S.C. 1230",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 240C | 8 U.S.C. 1230 | Records of admission.",
@@ -116173,7 +116173,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 241 > 8 U.S.C. 1231",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 241 | 8 U.S.C. 1231 | Detention and removal of aliens ordered removed.",
@@ -116194,7 +116194,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 242 > 8 U.S.C. 1252",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 242 | 8 U.S.C. 1252 | Judicial review of orders of removal.",
@@ -116215,7 +116215,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 242A > 8 U.S.C. 1252a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 242A | 8 U.S.C. 1252a | Transferred.",
@@ -116236,7 +116236,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 242B > 8 U.S.C. 1252b",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 242B | 8 U.S.C. 1252b | Repealed.",
@@ -116257,7 +116257,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 243 > 8 U.S.C. 1253",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 243 | 8 U.S.C. 1253 | Penalties related to removal.",
@@ -116278,7 +116278,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 244 > 8 U.S.C. 1254a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 244 | 8 U.S.C. 1254a | Temporary protected status.",
@@ -116299,7 +116299,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 245 > 8 U.S.C. 1255",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 245 | 8 U.S.C. 1255 | Adjustment of status of nonimmigrant to that of person admitted for permanent residence.",
@@ -116320,7 +116320,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 245A > 8 U.S.C. 1255a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 245A | 8 U.S.C. 1255a | Adjustment of status of certain entrants before January 1, 1982, to that of person admitted for lawful residence.",
@@ -116341,7 +116341,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 246 > 8 U.S.C. 1256",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 246 | 8 U.S.C. 1256 | Rescission of adjustment of status; effect upon naturalized citizen.",
@@ -116362,7 +116362,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 247 > 8 U.S.C. 1257",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 247 | 8 U.S.C. 1257 | Adjustment of status of certain resident aliens to nonimmigrant status; exceptions.",
@@ -116383,7 +116383,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 248 > 8 U.S.C. 1258",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 248 | 8 U.S.C. 1258 | Change of nonimmigrant classification.",
@@ -116404,7 +116404,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 249 > 8 U.S.C. 1259",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 249 | 8 U.S.C. 1259 | Record of admission for permanent residence in the case of certain aliens who entered the United States prior to January 1, 1972.",
@@ -116425,7 +116425,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 250 > 8 U.S.C. 1260",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 250 | 8 U.S.C. 1260 | Removal of aliens falling into distress.",
@@ -116446,7 +116446,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 251 > 8 U.S.C. 1281",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 251 | 8 U.S.C. 1281 | Alien crewmen.",
@@ -116467,7 +116467,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 252 > 8 U.S.C. 1282",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 252 | 8 U.S.C. 1282 | Conditional permits to land temporarily.",
@@ -116488,7 +116488,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 253 > 8 U.S.C. 1283",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 253 | 8 U.S.C. 1283 | Hospital treatment of alien crewmen afflicted with certain diseases.",
@@ -116509,7 +116509,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 254 > 8 U.S.C. 1284",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 254 | 8 U.S.C. 1284 | Control of alien crewmen.",
@@ -116530,7 +116530,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 255 > 8 U.S.C. 1285",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 255 | 8 U.S.C. 1285 | Employment on passenger vessels of aliens afflicted with certain disabilities.",
@@ -116551,7 +116551,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 256 > 8 U.S.C. 1286",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 256 | 8 U.S.C. 1286 | Discharge of alien crewmen; penalties.",
@@ -116572,7 +116572,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 257 > 8 U.S.C. 1287",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 257 | 8 U.S.C. 1287 | Alien crewmen brought into the United States with intent to evade immigration laws; penalties.",
@@ -116593,7 +116593,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 258 > 8 U.S.C. 1288",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 258 | 8 U.S.C. 1288 | Limitations on performance of longshore work by alien crewmen.",
@@ -116614,7 +116614,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 261 > 8 U.S.C. 1301",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 261 | 8 U.S.C. 1301 | Alien seeking entry; contents.",
@@ -116635,7 +116635,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 262 > 8 U.S.C. 1302",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 262 | 8 U.S.C. 1302 | Registration of aliens.",
@@ -116656,7 +116656,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 263 > 8 U.S.C. 1303",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 263 | 8 U.S.C. 1303 | Registration of special groups.",
@@ -116677,7 +116677,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 264 > 8 U.S.C. 1304",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 264 | 8 U.S.C. 1304 | Forms for registration and fingerprinting.",
@@ -116698,7 +116698,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 265 > 8 U.S.C. 1305",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 265 | 8 U.S.C. 1305 | Notices of change of address.",
@@ -116719,7 +116719,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 266 > 8 U.S.C. 1306",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 266 | 8 U.S.C. 1306 | Penalties.",
@@ -116740,7 +116740,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 271 > 8 U.S.C. 1321",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 271 | 8 U.S.C. 1321 | Prevention of unauthorized landing of aliens.",
@@ -116761,7 +116761,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 272 > 8 U.S.C. 1322",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 272 | 8 U.S.C. 1322 | Bringing in aliens subject to denial of admission on a health-related ground; persons liable; clearance papers; exceptions; \"person\" defined.",
@@ -116782,7 +116782,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 273 > 8 U.S.C. 1323",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 273 | 8 U.S.C. 1323 | Unlawful bringing of aliens into United States.",
@@ -116803,7 +116803,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274 > 8 U.S.C. 1324",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 274 | 8 U.S.C. 1324 | Bringing in and harboring certain aliens.",
@@ -116824,7 +116824,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274A > 8 U.S.C. 1324a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 274A | 8 U.S.C. 1324a | Unlawful employment of aliens.",
@@ -116845,7 +116845,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274B > 8 U.S.C. 1324b",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 274B | 8 U.S.C. 1324b | Unfair immigration-related employment practices.",
@@ -116866,7 +116866,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274C > 8 U.S.C. 1324c",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 274C | 8 U.S.C. 1324c | Penalties for document fraud.",
@@ -116887,7 +116887,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 274D > 8 U.S.C. 1324d",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 274D | 8 U.S.C. 1324d | Civil penalties for failure to depart.",
@@ -116908,7 +116908,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 275 > 8 U.S.C. 1325",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 275 | 8 U.S.C. 1325 | Improper entry by alien.",
@@ -116929,7 +116929,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 276 > 8 U.S.C. 1326",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 276 | 8 U.S.C. 1326 | Reentry of removed aliens.",
@@ -116950,7 +116950,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 277 > 8 U.S.C. 1327",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 277 | 8 U.S.C. 1327 | Aiding or assisting certain aliens to enter.",
@@ -116971,7 +116971,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 278 > 8 U.S.C. 1328",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 278 | 8 U.S.C. 1328 | Importation of alien for immoral purpose.",
@@ -116992,7 +116992,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 279 > 8 U.S.C. 1329",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 279 | 8 U.S.C. 1329 | Jurisdiction of district courts.",
@@ -117013,7 +117013,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 280 > 8 U.S.C. 1330",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 280 | 8 U.S.C. 1330 | Collection of penalties and expenses.",
@@ -117034,7 +117034,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 281 > 8 U.S.C. 1351",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 281 | 8 U.S.C. 1351 | Nonimmigrant visa fees.",
@@ -117055,7 +117055,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 282 > 8 U.S.C. 1352",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 282 | 8 U.S.C. 1352 | Printing of reentry permits and blank forms of manifest and crew lists; sale to public.",
@@ -117076,7 +117076,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 283 > 8 U.S.C. 1353",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 283 | 8 U.S.C. 1353 | Travel expenses and expense of transporting remains of officers and employees dying outside of United States.",
@@ -117097,7 +117097,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 284 > 8 U.S.C. 1354",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 284 | 8 U.S.C. 1354 | Applicability to members of the Armed Forces.",
@@ -117118,7 +117118,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 285 > 8 U.S.C. 1355",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 285 | 8 U.S.C. 1355 | Disposal of privileges at immigrant stations; rentals; retail sale; disposition of receipts.",
@@ -117139,7 +117139,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 286 > 8 U.S.C. 1356",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 286 | 8 U.S.C. 1356 | Disposition of moneys collected under the provisions of this subchapter.",
@@ -117160,7 +117160,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 287 > 8 U.S.C. 1357",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 287 | 8 U.S.C. 1357 | Powers of immigration officers and employees.",
@@ -117181,7 +117181,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 288 > 8 U.S.C. 1358",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 288 | 8 U.S.C. 1358 | Local jurisdiction over immigrant stations.",
@@ -117202,7 +117202,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 289 > 8 U.S.C. 1359",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 289 | 8 U.S.C. 1359 | Application to American Indians born in Canada.",
@@ -117223,7 +117223,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 290 > 8 U.S.C. 1360",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 290 | 8 U.S.C. 1360 | Establishment of central file; information from other departments and agencies.",
@@ -117244,7 +117244,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 291 > 8 U.S.C. 1361",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 291 | 8 U.S.C. 1361 | Burden of proof upon alien.",
@@ -117265,7 +117265,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 292 > 8 U.S.C. 1362",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 292 | 8 U.S.C. 1362 | Right to counsel.",
@@ -117286,7 +117286,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 293 > 8 U.S.C. 1363",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 293 | 8 U.S.C. 1363 | Deposit of and interest on cash received to secure immigration bonds.",
@@ -117307,7 +117307,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 294 > 8 U.S.C. 1363a",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 294 | 8 U.S.C. 1363a | Undercover investigation authority.",
@@ -117328,7 +117328,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title II: Immigration > INA 295 > 8 U.S.C. 1363b",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 295 | 8 U.S.C. 1363b | Repealed.",
@@ -117349,7 +117349,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 301 > 8 U.S.C. 1401",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 301 | 8 U.S.C. 1401 | Nationals and citizens of United States at birth.",
@@ -117370,7 +117370,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 302 > 8 U.S.C. 1402",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 302 | 8 U.S.C. 1402 | Persons born in Puerto Rico on or after April 11, 1899.",
@@ -117391,7 +117391,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 303 > 8 U.S.C. 1403",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 303 | 8 U.S.C. 1403 | Persons born in the Canal Zone or Republic of Panama on or after February 26, 1904.",
@@ -117412,7 +117412,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 304 > 8 U.S.C. 1404",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 304 | 8 U.S.C. 1404 | Persons born in Alaska on or after March 30, 1867.",
@@ -117433,7 +117433,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 305 > 8 U.S.C. 1405",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 305 | 8 U.S.C. 1405 | Persons born in Hawaii.",
@@ -117454,7 +117454,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 306 > 8 U.S.C. 1406",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 306 | 8 U.S.C. 1406 | Persons living in and born in the Virgin Islands.",
@@ -117475,7 +117475,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 307 > 8 U.S.C. 1407",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 307 | 8 U.S.C. 1407 | Persons living in and born in Guam.",
@@ -117496,7 +117496,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 308 > 8 U.S.C. 1408",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 308 | 8 U.S.C. 1408 | Nationals but not citizens of the United States at birth.",
@@ -117517,7 +117517,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 309 > 8 U.S.C. 1409",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 309 | 8 U.S.C. 1409 | Children born out of wedlock.",
@@ -117538,7 +117538,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 310 > 8 U.S.C. 1421",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 310 | 8 U.S.C. 1421 | Naturalization authority.",
@@ -117559,7 +117559,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 311 > 8 U.S.C. 1422",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 311 | 8 U.S.C. 1422 | Eligibility for naturalization.",
@@ -117580,7 +117580,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 312 > 8 U.S.C. 1423",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 312 | 8 U.S.C. 1423 | Requirements as to understanding the English language, history, principles and form of government of the United States.",
@@ -117601,7 +117601,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 313 > 8 U.S.C. 1424",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 313 | 8 U.S.C. 1424 | Prohibition upon the naturalization of persons opposed to government or law, or who favor totalitarian forms of government.",
@@ -117622,7 +117622,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 314 > 8 U.S.C. 1425",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 314 | 8 U.S.C. 1425 | Ineligibility to naturalization of deserters from the Armed Forces.",
@@ -117643,7 +117643,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 315 > 8 U.S.C. 1426",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 315 | 8 U.S.C. 1426 | Citizenship denied alien relieved of service in Armed Forces because of alienage.",
@@ -117664,7 +117664,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 316 > 8 U.S.C. 1427",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 316 | 8 U.S.C. 1427 | Requirements of naturalization.",
@@ -117685,7 +117685,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 317 > 8 U.S.C. 1428",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 317 | 8 U.S.C. 1428 | Temporary absence of persons performing religious duties.",
@@ -117706,7 +117706,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 318 > 8 U.S.C. 1429",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 318 | 8 U.S.C. 1429 | Prerequisite to naturalization; burden of proof.",
@@ -117727,7 +117727,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 319 > 8 U.S.C. 1430",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 319 | 8 U.S.C. 1430 | Married persons and employees of certain nonprofit organizations.",
@@ -117748,7 +117748,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 320 > 8 U.S.C. 1431",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 320 | 8 U.S.C. 1431 | Children born outside the United States and residing permanently in the United States; conditions under which citizenship automatically acquired; determinations of name and birth date.",
@@ -117769,7 +117769,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 321 > 8 U.S.C. 1432",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 321 | 8 U.S.C. 1432 | Repealed.",
@@ -117790,7 +117790,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 322 > 8 U.S.C. 1433",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 322 | 8 U.S.C. 1433 | Children born and residing outside the United States; conditions for acquiring certificate of citizenship.",
@@ -117811,7 +117811,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 323 > 8 U.S.C. 1434",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 323 | 8 U.S.C. 1434 | Repealed.",
@@ -117832,7 +117832,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 324 > 8 U.S.C. 1435",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 324 | 8 U.S.C. 1435 | Former citizens regaining citizenship.",
@@ -117853,7 +117853,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 325 > 8 U.S.C. 1436",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 325 | 8 U.S.C. 1436 | Nationals but not citizens; residence within outlying possessions.",
@@ -117874,7 +117874,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 326 > 8 U.S.C. 1437",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 326 | 8 U.S.C. 1437 | Resident Philippine citizens excepted from certain requirements.",
@@ -117895,7 +117895,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 327 > 8 U.S.C. 1438",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 327 | 8 U.S.C. 1438 | Former citizens losing citizenship by entering armed forces of foreign countries during World War II.",
@@ -117916,7 +117916,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 328 > 8 U.S.C. 1439",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 328 | 8 U.S.C. 1439 | Naturalization through service in the armed forces.",
@@ -117937,7 +117937,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 329 > 8 U.S.C. 1440",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 329 | 8 U.S.C. 1440 | Naturalization through active-duty service in the Armed Forces during World War I, World War II, Korean hostilities, Vietnam hostilities, or other periods of military hostilities.",
@@ -117958,7 +117958,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 329A > 8 U.S.C. 1440-1",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 329A | 8 U.S.C. 1440-1 | Posthumous citizenship through death while on active-duty service in armed forces during World War I, World War II, the Korean hostilities, the Vietnam hostilities, or in other periods of military hostilities.",
@@ -117979,7 +117979,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 330 > 8 U.S.C. 1441",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 330 | 8 U.S.C. 1441 | Constructive residence through service on certain United States vessels.",
@@ -118000,7 +118000,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 331 > 8 U.S.C. 1442",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 331 | 8 U.S.C. 1442 | Alien enemies.",
@@ -118021,7 +118021,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 332 > 8 U.S.C. 1443",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 332 | 8 U.S.C. 1443 | Administration.",
@@ -118042,7 +118042,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 333 > 8 U.S.C. 1444",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 333 | 8 U.S.C. 1444 | Photographs; number.",
@@ -118063,7 +118063,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 334 > 8 U.S.C. 1445",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 334 | 8 U.S.C. 1445 | Application for naturalization; declaration of intention.",
@@ -118084,7 +118084,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 335 > 8 U.S.C. 1446",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 335 | 8 U.S.C. 1446 | Investigation of applicants; examination of applications.",
@@ -118105,7 +118105,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 336 > 8 U.S.C. 1447",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 336 | 8 U.S.C. 1447 | Hearings on denials of applications for naturalization.",
@@ -118126,7 +118126,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 337 > 8 U.S.C. 1448",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 337 | 8 U.S.C. 1448 | Oath of renunciation and allegiance.",
@@ -118147,7 +118147,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 338 > 8 U.S.C. 1449",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 338 | 8 U.S.C. 1449 | Certificate of naturalization; contents.",
@@ -118168,7 +118168,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 339 > 8 U.S.C. 1450",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 339 | 8 U.S.C. 1450 | Functions and duties of clerks and records of declarations of intention and applications for naturalization.",
@@ -118189,7 +118189,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 340 > 8 U.S.C. 1451",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 340 | 8 U.S.C. 1451 | Revocation of naturalization.",
@@ -118210,7 +118210,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 341 > 8 U.S.C. 1452",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 341 | 8 U.S.C. 1452 | Certificates of citizenship or U.S. national status; procedure.",
@@ -118231,7 +118231,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 342 > 8 U.S.C. 1453",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 342 | 8 U.S.C. 1453 | Cancellation of certificates issued by Attorney General, the Commissioner or a Deputy Commissioner; action not to affect citizenship status.",
@@ -118252,7 +118252,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 343 > 8 U.S.C. 1454",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 343 | 8 U.S.C. 1454 | Documents and copies issued by Attorney General.",
@@ -118273,7 +118273,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 344 > 8 U.S.C. 1455",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 344 | 8 U.S.C. 1455 | Fiscal provisions.",
@@ -118294,7 +118294,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 345 > 8 U.S.C. 1456",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 345 | 8 U.S.C. 1456 | Repealed.",
@@ -118315,7 +118315,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 346 > 8 U.S.C. 1457",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 346 | 8 U.S.C. 1457 | Publication and distribution of citizenship textbooks; use of naturalization fees.",
@@ -118336,7 +118336,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 347 > 8 U.S.C. 1458",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 347 | 8 U.S.C. 1458 | Compilation of naturalization statistics and payment for equipment.",
@@ -118357,7 +118357,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 348 > 8 U.S.C. 1459",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 348 | 8 U.S.C. 1459 | Repealed.",
@@ -118378,7 +118378,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 349 > 8 U.S.C. 1481",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 349 | 8 U.S.C. 1481 | Loss of nationality by native-born or naturalized citizen; voluntary action; burden of proof; presumptions.",
@@ -118399,7 +118399,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 350 > 8 U.S.C. 1482",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 350 | 8 U.S.C. 1482 | Repealed.",
@@ -118420,7 +118420,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 351 > 8 U.S.C. 1483",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 351 | 8 U.S.C. 1483 | Restrictions on loss of nationality.",
@@ -118441,7 +118441,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 352 > 8 U.S.C. 1484",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 352 | 8 U.S.C. 1484 | Repealed.",
@@ -118462,7 +118462,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 353 > 8 U.S.C. 1485",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 353 | 8 U.S.C. 1485 | Repealed."
@@ -118482,7 +118482,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 354 > 8 U.S.C. 1486",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 354 | 8 U.S.C. 1486 | Repealed."
@@ -118502,7 +118502,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 355 > 8 U.S.C. 1487",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 355 | 8 U.S.C. 1487 | Repealed."
@@ -118522,7 +118522,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 356 > 8 U.S.C. 1488",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 356 | 8 U.S.C. 1488 | Nationality lost solely from performance of acts or fulfillment of conditions.",
@@ -118543,7 +118543,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 357 > 8 U.S.C. 1489",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 357 | 8 U.S.C. 1489 | Application of treaties; exceptions.",
@@ -118564,7 +118564,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 358 > 8 U.S.C. 1501",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 358 | 8 U.S.C. 1501 | Certificate of diplomatic or consular officer of United States as to loss of American nationality.",
@@ -118585,7 +118585,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 359 > 8 U.S.C. 1502",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 359 | 8 U.S.C. 1502 | Certificate of nationality issued by Secretary of State for person not a naturalized citizen of United States for use in proceedings of a foreign state.",
@@ -118606,7 +118606,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 360 > 8 U.S.C. 1503",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 360 | 8 U.S.C. 1503 | Denial of rights and privileges as national.",
@@ -118627,7 +118627,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title III: Nationality and Naturalization > INA 361 > 8 U.S.C. 1504",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 361 | 8 U.S.C. 1504 | Cancellation of United States passports and Consular Reports of Birth.",
@@ -118648,7 +118648,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 401 > No equivalent",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 401 | No equivalent | Repealed."
@@ -118668,7 +118668,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 402 > No equivalent",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 402 | No equivalent | Omitted as executed."
@@ -118688,7 +118688,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 403 > No equivalent",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 403 | No equivalent | Omitted as executed."
@@ -118708,7 +118708,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 404 > 8 U.S.C. 1101, note",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 404 | 8 U.S.C. 1101, note | Authorization of Appropriations.",
@@ -118729,7 +118729,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 405 > 8 U.S.C. 1101, note",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 405 | 8 U.S.C. 1101, note | Savings Clauses.",
@@ -118750,7 +118750,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 406 > 8 U.S.C. 1101, note",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 406 | 8 U.S.C. 1101, note | Separability.",
@@ -118771,7 +118771,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 407 > 8 U.S.C. 1101, note",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 407 | 8 U.S.C. 1101, note | Effective Date.",
@@ -118792,7 +118792,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 411 > 8 U.S.C. 1521",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 411 | 8 U.S.C. 1521 | Office of Refugee Resettlement; establishment; appointment of Director; functions.",
@@ -118813,7 +118813,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 412 > 8 U.S.C. 1522",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 412 | 8 U.S.C. 1522 | Authorization for programs for domestic resettlement of and assistance to refugees.",
@@ -118834,7 +118834,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 413 > 8 U.S.C. 1523",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 413 | 8 U.S.C. 1523 | Congressional reports.",
@@ -118855,7 +118855,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title IV: Refugee Assistance > INA 414 > 8 U.S.C. 1524",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 414 | 8 U.S.C. 1524 | Authorization of appropriations.",
@@ -118876,7 +118876,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 501 > 8 U.S.C. 1531",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 501 | 8 U.S.C. 1531 | Definitions.",
@@ -118897,7 +118897,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 502 > 8 U.S.C. 1532",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 502 | 8 U.S.C. 1532 | Establishment of removal court.",
@@ -118918,7 +118918,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 503 > 8 U.S.C. 1533",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 503 | 8 U.S.C. 1533 | Removal court procedure.",
@@ -118939,7 +118939,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 504 > 8 U.S.C. 1534",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 504 | 8 U.S.C. 1534 | Removal hearing.",
@@ -118960,7 +118960,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 505 > 8 U.S.C. 1535",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 505 | 8 U.S.C. 1535 | Appeals.",
@@ -118981,7 +118981,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 506 > 8 U.S.C. 1536",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 506 | 8 U.S.C. 1536 | Custody and release pending removal hearing.",
@@ -119002,7 +119002,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS Immigration and Nationality Act crosswalk",
         "locator": "Title V: Alien Terrorist Removal Procedures > INA 507 > 8 U.S.C. 1537",
         "url": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "sourceArtifact": "sources/legal/raw/uscis-ina-crosswalk.html",
         "sourceSha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812",
         "supportingExcerpt": "INA 507 | 8 U.S.C. 1537 | Custody and release after removal hearing.",
@@ -119024,7 +119024,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 1 - General Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 1 - General Policies and Procedures"
         }
       },
@@ -119040,7 +119040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Public Services",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Public Services"
         }
       },
@@ -119056,7 +119056,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119072,7 +119072,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Changes of Address",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Changes of Address"
         }
       },
@@ -119088,7 +119088,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Web-Based Information",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Web-Based Information"
         }
       },
@@ -119104,7 +119104,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Types of Assistance",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Types of Assistance"
         }
       },
@@ -119120,7 +119120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Service Request Management Tool",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Service Request Management Tool"
         }
       },
@@ -119136,7 +119136,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Expedite Requests",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Expedite Requests"
         }
       },
@@ -119152,7 +119152,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Disability Accommodation Requests",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Disability Accommodation Requests"
         }
       },
@@ -119168,7 +119168,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Privacy and Confidentiality",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Privacy and Confidentiality"
         }
       },
@@ -119184,7 +119184,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Conduct in USCIS Facilities",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Conduct in USCIS Facilities"
         }
       },
@@ -119200,7 +119200,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Feedback, Complaints, Misconduct, and Discrimination",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Feedback, Complaints, Misconduct, and Discrimination"
         }
       },
@@ -119216,7 +119216,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Submission of Benefit Requests",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Submission of Benefit Requests"
         }
       },
@@ -119232,7 +119232,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119248,7 +119248,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Signatures",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Signatures"
         }
       },
@@ -119264,7 +119264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Fees",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Fees"
         }
       },
@@ -119280,7 +119280,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Fee Waivers and Fee Exemptions"
         }
       },
@@ -119296,7 +119296,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Interpreters and Preparers",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Interpreters and Preparers"
         }
       },
@@ -119312,7 +119312,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Submitting Requests",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Submitting Requests"
         }
       },
@@ -119328,7 +119328,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - Biometrics Collection and Security Checks",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - Biometrics Collection and Security Checks"
         }
       },
@@ -119344,7 +119344,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119360,7 +119360,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Biometrics Collection",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Biometrics Collection"
         }
       },
@@ -119376,7 +119376,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Attorneys and Representatives",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Attorneys and Representatives"
         }
       },
@@ -119392,7 +119392,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119408,7 +119408,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Representation",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Representation"
         }
       },
@@ -119424,7 +119424,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Other Representatives",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Other Representatives"
         }
       },
@@ -119440,7 +119440,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Establishing and Changing Representation",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Establishing and Changing Representation"
         }
       },
@@ -119456,7 +119456,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Professional Conduct and Reporting Misconduct"
         }
       },
@@ -119472,7 +119472,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part E - Adjudications",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part E - Adjudications"
         }
       },
@@ -119488,7 +119488,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119504,7 +119504,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Post-Decision Actions",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Post-Decision Actions"
         }
       },
@@ -119520,7 +119520,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Record of Proceeding",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Record of Proceeding"
         }
       },
@@ -119536,7 +119536,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Jurisdiction",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Jurisdiction"
         }
       },
@@ -119552,7 +119552,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Burden and Standards of Proof",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Burden and Standards of Proof"
         }
       },
@@ -119568,7 +119568,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Verification of Identifying Information",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Verification of Identifying Information"
         }
       },
@@ -119584,7 +119584,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Evidence"
         }
       },
@@ -119600,7 +119600,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Discretionary Analysis",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Discretionary Analysis"
         }
       },
@@ -119616,7 +119616,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Rendering a Decision",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Rendering a Decision"
         }
       },
@@ -119632,7 +119632,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Motions and Appeals",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Motions and Appeals"
         }
       },
@@ -119648,7 +119648,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part H - Emergencies or Unforeseen Circumstances",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-h",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part H - Emergencies or Unforeseen Circumstances"
         }
       },
@@ -119664,7 +119664,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119680,7 +119680,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Emergencies or Unforeseen Circumstances-Related Flexibilities",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-h-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Emergencies or Unforeseen Circumstances-Related Flexibilities"
         }
       },
@@ -119696,7 +119696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Operational Responses",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-h-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Operational Responses"
         }
       },
@@ -119712,7 +119712,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part I – Deferred Action",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part I – Deferred Action"
         }
       },
@@ -119728,7 +119728,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119744,7 +119744,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Overview of Prosecutorial Discretion",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Overview of Prosecutorial Discretion"
         }
       },
@@ -119760,7 +119760,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Who Can Request Deferred Action",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Who Can Request Deferred Action"
         }
       },
@@ -119776,7 +119776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Process for Requesting Deferred Action",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Process for Requesting Deferred Action"
         }
       },
@@ -119792,7 +119792,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Deferred Action Determinations",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Deferred Action Determinations"
         }
       },
@@ -119808,7 +119808,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 10 - Employment Authorization",
           "url": "https://www.uscis.gov/policy-manual/volume-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 10 - Employment Authorization"
         }
       },
@@ -119824,7 +119824,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Employment Authorization Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Employment Authorization Policies and Procedures"
         }
       },
@@ -119840,7 +119840,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119856,7 +119856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -119872,7 +119872,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Adjudication"
         }
       },
@@ -119888,7 +119888,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Specific Categories",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Specific Categories"
         }
       },
@@ -119904,7 +119904,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -119920,7 +119920,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Employment Authorization for Certain H-4, E, and L Nonimmigrant Dependent Spouses",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Employment Authorization for Certain H-4, E, and L Nonimmigrant Dependent Spouses"
         }
       },
@@ -119936,7 +119936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Certain Employment-Based Immigrants in Compelling Circumstances",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Certain Employment-Based Immigrants in Compelling Circumstances"
         }
       },
@@ -119952,7 +119952,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 11 - Travel and Identity Documents",
           "url": "https://www.uscis.gov/policy-manual/volume-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 11 - Travel and Identity Documents"
         }
       },
@@ -119968,7 +119968,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Secure Identity Documents Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Secure Identity Documents Policies and Procedures"
         }
       },
@@ -119984,7 +119984,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120000,7 +120000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - USCIS-Issued Secure Identity Documents",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - USCIS-Issued Secure Identity Documents"
         }
       },
@@ -120016,7 +120016,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Reissuance of Secure Identity Documents",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Reissuance of Secure Identity Documents"
         }
       },
@@ -120032,7 +120032,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Permanent Resident Cards",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Permanent Resident Cards"
         }
       },
@@ -120048,7 +120048,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120064,7 +120064,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Replacement of Permanent Resident Card",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Replacement of Permanent Resident Card"
         }
       },
@@ -120080,7 +120080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Expired Permanent Resident Cards",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Expired Permanent Resident Cards"
         }
       },
@@ -120096,7 +120096,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Commuter Cards",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Commuter Cards"
         }
       },
@@ -120112,7 +120112,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - Reentry Permits",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - Reentry Permits"
         }
       },
@@ -120128,7 +120128,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Refugee Travel Documents",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Refugee Travel Documents"
         }
       },
@@ -120144,7 +120144,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part E - Advance Parole Documents",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-e",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part E - Advance Parole Documents"
         }
       },
@@ -120160,7 +120160,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Arrival-Departure Records",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Arrival-Departure Records"
         }
       },
@@ -120176,7 +120176,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120192,7 +120192,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Application for Replacement/Initial Nonimmigrant Arrival-Departure Record (Form I-102)",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Application for Replacement/Initial Nonimmigrant Arrival-Departure Record (Form I-102)"
         }
       },
@@ -120208,7 +120208,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 12 - Citizenship and Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 12 - Citizenship and Naturalization"
         }
       },
@@ -120224,7 +120224,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Citizenship and Naturalization Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Citizenship and Naturalization Policies and Procedures"
         }
       },
@@ -120240,7 +120240,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120256,7 +120256,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen"
         }
       },
@@ -120272,7 +120272,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - USCIS Authority to Naturalize",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - USCIS Authority to Naturalize"
         }
       },
@@ -120288,7 +120288,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Investigation and Examination of Alien",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Investigation and Examination of Alien"
         }
       },
@@ -120304,7 +120304,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120320,7 +120320,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Background Investigation and Security Checks",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Background Investigation and Security Checks"
         }
       },
@@ -120336,7 +120336,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Naturalization Examination",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Naturalization Examination"
         }
       },
@@ -120352,7 +120352,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Results of the Naturalization Examination",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Results of the Naturalization Examination"
         }
       },
@@ -120368,7 +120368,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Motion to Reopen",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Motion to Reopen"
         }
       },
@@ -120384,7 +120384,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - USCIS Hearing and Judicial Review",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - USCIS Hearing and Judicial Review"
         }
       },
@@ -120400,7 +120400,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - Accommodations",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - Accommodations"
         }
       },
@@ -120416,7 +120416,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120432,7 +120432,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Accommodation Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-c-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Accommodation Policies and Procedures"
         }
       },
@@ -120448,7 +120448,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Types of Accommodations",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-c-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Types of Accommodations"
         }
       },
@@ -120464,7 +120464,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - General Naturalization Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - General Naturalization Requirements"
         }
       },
@@ -120480,7 +120480,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120496,7 +120496,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization"
         }
       },
@@ -120512,7 +120512,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Continuous Residence",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Continuous Residence"
         }
       },
@@ -120528,7 +120528,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Physical Presence",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Physical Presence"
         }
       },
@@ -120544,7 +120544,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence"
         }
       },
@@ -120560,7 +120560,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Jurisdiction, Place of Residence, and Early Filing",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Jurisdiction, Place of Residence, and Early Filing"
         }
       },
@@ -120576,7 +120576,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Attachment to the Constitution",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Attachment to the Constitution"
         }
       },
@@ -120592,7 +120592,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Educational Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Educational Requirements"
         }
       },
@@ -120608,7 +120608,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Good Moral Character",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Good Moral Character"
         }
       },
@@ -120624,7 +120624,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part E - English and Civics Testing and Exceptions",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-e",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part E - English and Civics Testing and Exceptions"
         }
       },
@@ -120640,7 +120640,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120656,7 +120656,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - English and Civics Testing",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - English and Civics Testing"
         }
       },
@@ -120672,7 +120672,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Medical Certification for Disability Exceptions (Form N-648)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Medical Certification for Disability Exceptions (Form N-648)"
         }
       },
@@ -120688,7 +120688,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Good Moral Character",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Good Moral Character"
         }
       },
@@ -120704,7 +120704,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120720,7 +120720,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Adjudicative Factors",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Adjudicative Factors"
         }
       },
@@ -120736,7 +120736,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Evidence and the Record",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Evidence and the Record"
         }
       },
@@ -120752,7 +120752,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Permanent Bars to Good Moral Character",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Permanent Bars to Good Moral Character"
         }
       },
@@ -120768,7 +120768,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Conditional Bars for Acts in Statutory Period",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Conditional Bars for Acts in Statutory Period"
         }
       },
@@ -120784,7 +120784,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part G - Spouses of U.S. Citizens",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part G - Spouses of U.S. Citizens"
         }
       },
@@ -120800,7 +120800,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120816,7 +120816,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Marriage and Marital Union for Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Marriage and Marital Union for Naturalization"
         }
       },
@@ -120832,7 +120832,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Spouses of U.S. Citizens Residing in the United States",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Spouses of U.S. Citizens Residing in the United States"
         }
       },
@@ -120848,7 +120848,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Spouses of U.S. Citizens Employed Abroad",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Spouses of U.S. Citizens Employed Abroad"
         }
       },
@@ -120864,7 +120864,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Conditional Permanent Resident Spouses and Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Conditional Permanent Resident Spouses and Naturalization"
         }
       },
@@ -120880,7 +120880,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part H - Children of U.S. Citizens",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part H - Children of U.S. Citizens"
         }
       },
@@ -120896,7 +120896,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -120912,7 +120912,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Definition of Child and Residence for Citizenship and Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Definition of Child and Residence for Citizenship and Naturalization"
         }
       },
@@ -120928,7 +120928,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - U.S. Citizens at Birth (INA 301 and 309)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - U.S. Citizens at Birth (INA 301 and 309)"
         }
       },
@@ -120944,7 +120944,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Automatic Acquisition of Citizenship after Birth (INA 320)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Automatic Acquisition of Citizenship after Birth (INA 320)"
         }
       },
@@ -120960,7 +120960,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Child Residing Outside the United States (INA 322)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Child Residing Outside the United States (INA 322)"
         }
       },
@@ -120976,7 +120976,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Special Provisions for the Naturalization of Children",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Special Provisions for the Naturalization of Children"
         }
       },
@@ -120992,7 +120992,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Deriving Citizenship Before the Child Citizenship Act of 2000 (Former INA 321 and 320)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Deriving Citizenship Before the Child Citizenship Act of 2000 (Former INA 321 and 320)"
         }
       },
@@ -121008,7 +121008,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part I - Military Members and their Families",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part I - Military Members and their Families"
         }
       },
@@ -121024,7 +121024,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121040,7 +121040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - One Year of Military Service during Peacetime (INA 328)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - One Year of Military Service during Peacetime (INA 328)"
         }
       },
@@ -121056,7 +121056,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Military Service during Hostilities (INA 329)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Military Service during Hostilities (INA 329)"
         }
       },
@@ -121072,7 +121072,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Permanent Bars to Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Permanent Bars to Naturalization"
         }
       },
@@ -121088,7 +121088,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Application and Filing for Service Members (INA 328 and 329)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Application and Filing for Service Members (INA 328 and 329)"
         }
       },
@@ -121104,7 +121104,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Required Background Checks",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Required Background Checks"
         }
       },
@@ -121120,7 +121120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Revocation of Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Revocation of Naturalization"
         }
       },
@@ -121136,7 +121136,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Posthumous Citizenship (INA 329A)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Posthumous Citizenship (INA 329A)"
         }
       },
@@ -121152,7 +121152,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Spouses, Children, and Surviving Family Benefits",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Spouses, Children, and Surviving Family Benefits"
         }
       },
@@ -121168,7 +121168,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part J - Oath of Allegiance",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part J - Oath of Allegiance"
         }
       },
@@ -121184,7 +121184,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121200,7 +121200,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - The Oath of Allegiance",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - The Oath of Allegiance"
         }
       },
@@ -121216,7 +121216,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Oath of Allegiance Modifications and Waivers",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Oath of Allegiance Modifications and Waivers"
         }
       },
@@ -121232,7 +121232,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - General Considerations for All Oath Ceremonies",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - General Considerations for All Oath Ceremonies"
         }
       },
@@ -121248,7 +121248,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Administrative Naturalization Ceremonies",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Administrative Naturalization Ceremonies"
         }
       },
@@ -121264,7 +121264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Judicial and Expedited Oath Ceremonies",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Judicial and Expedited Oath Ceremonies"
         }
       },
@@ -121280,7 +121280,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part K - Certificates of Citizenship and Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part K - Certificates of Citizenship and Naturalization"
         }
       },
@@ -121296,7 +121296,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121312,7 +121312,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Certificate of Citizenship",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Certificate of Citizenship"
         }
       },
@@ -121328,7 +121328,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Certificate of Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Certificate of Naturalization"
         }
       },
@@ -121344,7 +121344,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Application for Replacement of Naturalization/Citizenship Document",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Application for Replacement of Naturalization/Citizenship Document"
         }
       },
@@ -121360,7 +121360,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Cancellation of Certificate of Citizenship or Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Cancellation of Certificate of Citizenship or Naturalization"
         }
       },
@@ -121376,7 +121376,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part L - Loss of U.S. Nationality and Revocation of Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-l",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part L - Loss of U.S. Nationality and Revocation of Naturalization"
         }
       },
@@ -121392,7 +121392,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1- Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1- Purpose and Background"
         }
       },
@@ -121408,7 +121408,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Revocation of Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-l-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Revocation of Naturalization"
         }
       },
@@ -121424,7 +121424,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 2 - Nonimmigrants",
           "url": "https://www.uscis.gov/policy-manual/volume-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 2 - Nonimmigrants"
         }
       },
@@ -121440,7 +121440,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Nonimmigrant Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Nonimmigrant Policies and Procedures"
         }
       },
@@ -121456,7 +121456,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121472,7 +121472,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Extension of Stay, Change of Status, and Extension of Petition Validity",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Extension of Stay, Change of Status, and Extension of Petition Validity"
         }
       },
@@ -121488,7 +121488,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Exchange Visitors (J)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Exchange Visitors (J)"
         }
       },
@@ -121504,7 +121504,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121520,7 +121520,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - J Exchange Visitor Eligibility",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - J Exchange Visitor Eligibility"
         }
       },
@@ -121536,7 +121536,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Terms and Conditions of J Exchange Visitor Status",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Terms and Conditions of J Exchange Visitor Status"
         }
       },
@@ -121552,7 +121552,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Waiver of the Foreign Residence Requirement",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Waiver of the Foreign Residence Requirement"
         }
       },
@@ -121568,7 +121568,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Change of Status, Extensions of Stay, Program Transfers, and Reinstatement",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Change of Status, Extensions of Stay, Program Transfers, and Reinstatement"
         }
       },
@@ -121584,7 +121584,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Family Members of J-1 Exchange Visitor",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Family Members of J-1 Exchange Visitor"
         }
       },
@@ -121600,7 +121600,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part E - Cultural Visitors (Q)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part E - Cultural Visitors (Q)"
         }
       },
@@ -121616,7 +121616,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121632,7 +121632,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -121648,7 +121648,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Filing and Documentation",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Filing and Documentation"
         }
       },
@@ -121664,7 +121664,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Adjudication"
         }
       },
@@ -121680,7 +121680,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Admissions, Extensions of Stay, and Changes of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Admissions, Extensions of Stay, and Changes of Status"
         }
       },
@@ -121696,7 +121696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Students (F, M)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Students (F, M)"
         }
       },
@@ -121712,7 +121712,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121728,7 +121728,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -121744,7 +121744,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Courses and Enrollment, Full Course of Study, and Reduced Course Load",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Courses and Enrollment, Full Course of Study, and Reduced Course Load"
         }
       },
@@ -121760,7 +121760,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - School Transfer",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - School Transfer"
         }
       },
@@ -121776,7 +121776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Practical Training",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Practical Training"
         }
       },
@@ -121792,7 +121792,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Employment",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Employment"
         }
       },
@@ -121808,7 +121808,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Absences From the United States",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Absences From the United States"
         }
       },
@@ -121824,7 +121824,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Change of Status, Extension of Stay, and Length of Stay",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Change of Status, Extension of Stay, and Length of Stay"
         }
       },
@@ -121840,7 +121840,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Dependents",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Dependents"
         }
       },
@@ -121856,7 +121856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part G - Treaty Traders and Treaty Investors (E-1, E-2)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-g",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part G - Treaty Traders and Treaty Investors (E-1, E-2)"
         }
       },
@@ -121872,7 +121872,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part H - Specialty Occupation Workers (H-1B, E-3)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-h",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part H - Specialty Occupation Workers (H-1B, E-3)"
         }
       },
@@ -121888,7 +121888,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part I - Temporary Agricultural and Nonagricultural Workers (H-2)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part I - Temporary Agricultural and Nonagricultural Workers (H-2)"
         }
       },
@@ -121904,7 +121904,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121920,7 +121920,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 11 - Temporary Nonagricultural Worker (H-2B) Petitions Requiring Special Handling",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 11 - Temporary Nonagricultural Worker (H-2B) Petitions Requiring Special Handling"
         }
       },
@@ -121936,7 +121936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part J - Trainees (H-3)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part J - Trainees (H-3)"
         }
       },
@@ -121952,7 +121952,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -121968,7 +121968,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - H-3 Categories",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - H-3 Categories"
         }
       },
@@ -121984,7 +121984,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Trainee Program Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Trainee Program Requirements"
         }
       },
@@ -122000,7 +122000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Special Education Exchange Visitor Program Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Special Education Exchange Visitor Program Requirements"
         }
       },
@@ -122016,7 +122016,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Family Members of H-3 Beneficiaries",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Family Members of H-3 Beneficiaries"
         }
       },
@@ -122032,7 +122032,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Adjudication"
         }
       },
@@ -122048,7 +122048,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Admissions, Extensions of Stay, and Change of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Admissions, Extensions of Stay, and Change of Status"
         }
       },
@@ -122064,7 +122064,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part K - Media Representatives (I)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part K - Media Representatives (I)"
         }
       },
@@ -122080,7 +122080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -122096,7 +122096,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility"
         }
       },
@@ -122112,7 +122112,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Distinction between News and Entertainment",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Distinction between News and Entertainment"
         }
       },
@@ -122128,7 +122128,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Family Members",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Family Members"
         }
       },
@@ -122144,7 +122144,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication"
         }
       },
@@ -122160,7 +122160,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part L - Intracompany Transferees (L)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part L - Intracompany Transferees (L)"
         }
       },
@@ -122176,7 +122176,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -122192,7 +122192,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Period of Stay",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Period of Stay"
         }
       },
@@ -122208,7 +122208,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - General Eligibility",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - General Eligibility"
         }
       },
@@ -122224,7 +122224,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Managers and Executives (L-1A)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Managers and Executives (L-1A)"
         }
       },
@@ -122240,7 +122240,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Specialized Knowledge Beneficiaries (L-1B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Specialized Knowledge Beneficiaries (L-1B)"
         }
       },
@@ -122256,7 +122256,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Ownership and Control",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Ownership and Control"
         }
       },
@@ -122272,7 +122272,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Key Concepts",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Key Concepts"
         }
       },
@@ -122288,7 +122288,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Filing",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Filing"
         }
       },
@@ -122304,7 +122304,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Documentation and Evidence"
         }
       },
@@ -122320,7 +122320,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Adjudication"
         }
       },
@@ -122336,7 +122336,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part M - Nonimmigrants of Extraordinary Ability or Achievement (O)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part M - Nonimmigrants of Extraordinary Ability or Achievement (O)"
         }
       },
@@ -122352,7 +122352,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -122368,7 +122368,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility for O Classification",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility for O Classification"
         }
       },
@@ -122384,7 +122384,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Petitioners",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Petitioners"
         }
       },
@@ -122400,7 +122400,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - O-1 Beneficiaries",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - O-1 Beneficiaries"
         }
       },
@@ -122416,7 +122416,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - O-2 Beneficiaries",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - O-2 Beneficiaries"
         }
       },
@@ -122432,7 +122432,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Family Members",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Family Members"
         }
       },
@@ -122448,7 +122448,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Documentation and Evidence"
         }
       },
@@ -122464,7 +122464,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Adjudication"
         }
       },
@@ -122480,7 +122480,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Admission, Extension of Stay, Change of Status, and Change of Employer",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Admission, Extension of Stay, Change of Status, and Change of Employer"
         }
       },
@@ -122496,7 +122496,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part N - Athletes and Entertainers (P)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part N - Athletes and Entertainers (P)"
         }
       },
@@ -122512,7 +122512,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -122528,7 +122528,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -122544,7 +122544,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Petitioners",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Petitioners"
         }
       },
@@ -122560,7 +122560,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Documentation and Evidence"
         }
       },
@@ -122576,7 +122576,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication"
         }
       },
@@ -122592,7 +122592,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Post-Adjudication Actions",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Post-Adjudication Actions"
         }
       },
@@ -122608,7 +122608,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part O - Religious Workers (R)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part O - Religious Workers (R)"
         }
       },
@@ -122624,7 +122624,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -122640,7 +122640,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - General Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - General Requirements"
         }
       },
@@ -122656,7 +122656,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Petitioner Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Petitioner Requirements"
         }
       },
@@ -122672,7 +122672,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Beneficiary Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Beneficiary Requirements"
         }
       },
@@ -122688,7 +122688,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication"
         }
       },
@@ -122704,7 +122704,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Admissions, Extensions of Stay, and Changes of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Admissions, Extensions of Stay, and Changes of Status"
         }
       },
@@ -122720,7 +122720,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Period of Stay",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Period of Stay"
         }
       },
@@ -122736,7 +122736,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part P - USMCA Professionals (TN)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part P - USMCA Professionals (TN)"
         }
       },
@@ -122752,7 +122752,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -122768,7 +122768,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -122784,7 +122784,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Documentation and Evidence"
         }
       },
@@ -122800,7 +122800,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Extension of Stay and Change of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Extension of Stay and Change of Status"
         }
       },
@@ -122816,7 +122816,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Other Factors to Consider",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Other Factors to Consider"
         }
       },
@@ -122832,7 +122832,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Requirements for Specific Occupations",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Requirements for Specific Occupations"
         }
       },
@@ -122848,7 +122848,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part Q - Nonimmigrants Intending to Adjust Status (K, V)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-q",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part Q - Nonimmigrants Intending to Adjust Status (K, V)"
         }
       },
@@ -122864,7 +122864,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 3 - Humanitarian Protection and Parole",
           "url": "https://www.uscis.gov/policy-manual/volume-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 3 - Humanitarian Protection and Parole"
         }
       },
@@ -122880,7 +122880,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Victims of Trafficking",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Victims of Trafficking"
         }
       },
@@ -122896,7 +122896,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -122912,7 +122912,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Duration and Extensions of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Duration and Extensions of Status"
         }
       },
@@ -122928,7 +122928,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 11 - Federal Benefits and Work Authorization",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 11 - Federal Benefits and Work Authorization"
         }
       },
@@ -122944,7 +122944,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 12 - Travel Outside the United States",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-12",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 12 - Travel Outside the United States"
         }
       },
@@ -122960,7 +122960,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 13 - Revocation of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-13",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 13 - Revocation of Status"
         }
       },
@@ -122976,7 +122976,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 14 - Confidentiality Protections and Prohibitions Against Disclosure",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 14 - Confidentiality Protections and Prohibitions Against Disclosure"
         }
       },
@@ -122992,7 +122992,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -123008,7 +123008,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Documentation and Evidence for Principal Applicants",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Documentation and Evidence for Principal Applicants"
         }
       },
@@ -123024,7 +123024,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Family Members",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Family Members"
         }
       },
@@ -123040,7 +123040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Documentation and Evidence for Family Members",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Documentation and Evidence for Family Members"
         }
       },
@@ -123056,7 +123056,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Bona Fide Determinations",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Bona Fide Determinations"
         }
       },
@@ -123072,7 +123072,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Adjudication"
         }
       },
@@ -123088,7 +123088,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Annual Cap and Waiting List",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Annual Cap and Waiting List"
         }
       },
@@ -123104,7 +123104,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Applicants in Removal Proceedings",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Applicants in Removal Proceedings"
         }
       },
@@ -123120,7 +123120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - Victims of Crimes",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - Victims of Crimes"
         }
       },
@@ -123136,7 +123136,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -123152,7 +123152,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements for U Nonimmigrant Status",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements for U Nonimmigrant Status"
         }
       },
@@ -123168,7 +123168,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Adjudication"
         }
       },
@@ -123184,7 +123184,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Bona Fide Determination Process",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Bona Fide Determination Process"
         }
       },
@@ -123200,7 +123200,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Waiting List",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Waiting List"
         }
       },
@@ -123216,7 +123216,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Final Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Final Adjudication"
         }
       },
@@ -123232,7 +123232,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Violence Against Women Act",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Violence Against Women Act"
         }
       },
@@ -123248,7 +123248,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -123264,7 +123264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements and Evidence"
         }
       },
@@ -123280,7 +123280,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Effect of Certain Life Events",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Effect of Certain Life Events"
         }
       },
@@ -123296,7 +123296,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Filing Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Filing Requirements"
         }
       },
@@ -123312,7 +123312,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication"
         }
       },
@@ -123328,7 +123328,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Post-Adjudicative Matters",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Post-Adjudicative Matters"
         }
       },
@@ -123344,7 +123344,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part E - Employment Authorization for Abused Spouses of Certain Nonimmigrants",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-e",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part E - Employment Authorization for Abused Spouses of Certain Nonimmigrants"
         }
       },
@@ -123360,7 +123360,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Parolees",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Parolees"
         }
       },
@@ -123376,7 +123376,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -123392,7 +123392,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part G - International Entrepreneur Parole",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part G - International Entrepreneur Parole"
         }
       },
@@ -123408,7 +123408,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -123424,7 +123424,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Requirements for Consideration",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Requirements for Consideration"
         }
       },
@@ -123440,7 +123440,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Documentation and Evidence"
         }
       },
@@ -123456,7 +123456,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Adjudication"
         }
       },
@@ -123472,7 +123472,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Additional Periods of Parole",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Additional Periods of Parole"
         }
       },
@@ -123488,7 +123488,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Family Members",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Family Members"
         }
       },
@@ -123504,7 +123504,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Conditions on Parole and Termination",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Conditions on Parole and Termination"
         }
       },
@@ -123520,7 +123520,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part J - Temporary Protected Status",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-j",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part J - Temporary Protected Status"
         }
       },
@@ -123536,7 +123536,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 4 - Refugees and Asylees",
           "url": "https://www.uscis.gov/policy-manual/volume-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 4 - Refugees and Asylees"
         }
       },
@@ -123552,7 +123552,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - Relative Petitions",
           "url": "https://www.uscis.gov/policy-manual/volume-4-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - Relative Petitions"
         }
       },
@@ -123568,7 +123568,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-4-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -123584,7 +123584,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-4-part-c-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -123600,7 +123600,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Admissibility and Waiver Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-4-part-c-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Admissibility and Waiver Requirements"
         }
       },
@@ -123616,7 +123616,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-4-part-c-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Documentation and Evidence"
         }
       },
@@ -123632,7 +123632,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-4-part-c-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication"
         }
       },
@@ -123648,7 +123648,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 5 - Adoptions",
           "url": "https://www.uscis.gov/policy-manual/volume-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 5 - Adoptions"
         }
       },
@@ -123664,7 +123664,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Adoptions Overview",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Adoptions Overview"
         }
       },
@@ -123680,7 +123680,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -123696,7 +123696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Adoption Processes",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Adoption Processes"
         }
       },
@@ -123712,7 +123712,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - U.S. Citizens Residing Outside the United States",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - U.S. Citizens Residing Outside the United States"
         }
       },
@@ -123728,7 +123728,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Adoption Definition and Order Validity",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Adoption Definition and Order Validity"
         }
       },
@@ -123744,7 +123744,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Authorized Adoption Service Providers",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Authorized Adoption Service Providers"
         }
       },
@@ -123760,7 +123760,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Adoptive Parent Suitability Determinations",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Adoptive Parent Suitability Determinations"
         }
       },
@@ -123776,7 +123776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -123792,7 +123792,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility, Documentation, and Evidence (Orphan Process)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility, Documentation, and Evidence (Orphan Process)"
         }
       },
@@ -123808,7 +123808,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Eligibility, Documentation, and Evidence (Hague Process)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Eligibility, Documentation, and Evidence (Hague Process)"
         }
       },
@@ -123824,7 +123824,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Home Studies",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Home Studies"
         }
       },
@@ -123840,7 +123840,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Action on Pending or Approved Suitability Determinations",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Action on Pending or Approved Suitability Determinations"
         }
       },
@@ -123856,7 +123856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Adjudication"
         }
       },
@@ -123872,7 +123872,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - Child Eligibility Determinations (Orphan)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - Child Eligibility Determinations (Orphan)"
         }
       },
@@ -123888,7 +123888,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -123904,7 +123904,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility"
         }
       },
@@ -123920,7 +123920,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Identity and Age",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Identity and Age"
         }
       },
@@ -123936,7 +123936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Eligibility Requirements Specific to Orphans",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Eligibility Requirements Specific to Orphans"
         }
       },
@@ -123952,7 +123952,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Qualifying Adoptive or Custodial Relationship",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Qualifying Adoptive or Custodial Relationship"
         }
       },
@@ -123968,7 +123968,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Additional Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Additional Requirements"
         }
       },
@@ -123984,7 +123984,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Documentation and Evidence"
         }
       },
@@ -124000,7 +124000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Adjudication"
         }
       },
@@ -124016,7 +124016,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Pre-Adoption Immigration Review Programs",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Pre-Adoption Immigration Review Programs"
         }
       },
@@ -124032,7 +124032,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Child Eligibility Determinations (Hague)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Child Eligibility Determinations (Hague)"
         }
       },
@@ -124048,7 +124048,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -124064,7 +124064,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility"
         }
       },
@@ -124080,7 +124080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Identity and Age",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Identity and Age"
         }
       },
@@ -124096,7 +124096,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Eligibility Requirements Specific to Convention Adoptees",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Eligibility Requirements Specific to Convention Adoptees"
         }
       },
@@ -124112,7 +124112,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Qualifying Adoptive or Custodial Relationship",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Qualifying Adoptive or Custodial Relationship"
         }
       },
@@ -124128,7 +124128,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Additional Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Additional Requirements"
         }
       },
@@ -124144,7 +124144,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Required Order of Immigration and Adoption Steps",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Required Order of Immigration and Adoption Steps"
         }
       },
@@ -124160,7 +124160,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Documentation and Evidence"
         }
       },
@@ -124176,7 +124176,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Adjudication"
         }
       },
@@ -124192,7 +124192,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part E - Family-Based Adoption Petitions",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-e",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part E - Family-Based Adoption Petitions"
         }
       },
@@ -124208,7 +124208,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -124224,7 +124224,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility"
         }
       },
@@ -124240,7 +124240,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Hague Restrictions on Family-Based Petitions",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Hague Restrictions on Family-Based Petitions"
         }
       },
@@ -124256,7 +124256,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Documentation and Evidence"
         }
       },
@@ -124272,7 +124272,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication"
         }
       },
@@ -124288,7 +124288,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Post-Adjudication Actions",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Post-Adjudication Actions"
         }
       },
@@ -124304,7 +124304,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Citizenship for Adopted Children",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Citizenship for Adopted Children"
         }
       },
@@ -124320,7 +124320,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -124336,7 +124336,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Definitions",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Definitions"
         }
       },
@@ -124352,7 +124352,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Eligibility, Documentation, and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Eligibility, Documentation, and Evidence"
         }
       },
@@ -124368,7 +124368,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Citizenship Following a Disrupted or Dissolved Adoption",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Citizenship Following a Disrupted or Dissolved Adoption"
         }
       },
@@ -124384,7 +124384,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 6 - Immigrants",
           "url": "https://www.uscis.gov/policy-manual/volume-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 6 - Immigrants"
         }
       },
@@ -124400,7 +124400,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Immigrant Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Immigrant Policies and Procedures"
         }
       },
@@ -124416,7 +124416,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Family-Based Immigrants",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Family-Based Immigrants"
         }
       },
@@ -124432,7 +124432,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -124448,7 +124448,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - General Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - General Eligibility Requirements"
         }
       },
@@ -124464,7 +124464,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Filing",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Filing"
         }
       },
@@ -124480,7 +124480,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Documentation and Evidence"
         }
       },
@@ -124496,7 +124496,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication of Family-Based Petitions",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication of Family-Based Petitions"
         }
       },
@@ -124512,7 +124512,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Spouses",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Spouses"
         }
       },
@@ -124528,7 +124528,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Children, Sons, and Daughters",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Children, Sons, and Daughters"
         }
       },
@@ -124544,7 +124544,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - Adam Walsh Act",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - Adam Walsh Act"
         }
       },
@@ -124560,7 +124560,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Surviving Relatives",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Surviving Relatives"
         }
       },
@@ -124576,7 +124576,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part E - Employment-Based Immigration",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part E - Employment-Based Immigration"
         }
       },
@@ -124592,7 +124592,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -124608,7 +124608,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Decision and Post-Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Decision and Post-Adjudication"
         }
       },
@@ -124624,7 +124624,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -124640,7 +124640,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Successor-in-Interest in Permanent Labor Certification Cases",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Successor-in-Interest in Permanent Labor Certification Cases"
         }
       },
@@ -124656,7 +124656,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Ability to Pay",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Ability to Pay"
         }
       },
@@ -124672,7 +124672,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Permanent Labor Certification",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Permanent Labor Certification"
         }
       },
@@ -124688,7 +124688,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Schedule A Designation Petitions",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Schedule A Designation Petitions"
         }
       },
@@ -124704,7 +124704,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Documentation and Evidence"
         }
       },
@@ -124720,7 +124720,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Evaluation of Education Credentials",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Evaluation of Education Credentials"
         }
       },
@@ -124736,7 +124736,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Employment-Based Classifications",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Employment-Based Classifications"
         }
       },
@@ -124752,7 +124752,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -124768,7 +124768,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Extraordinary Ability",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Extraordinary Ability"
         }
       },
@@ -124784,7 +124784,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Outstanding Professor or Researcher",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Outstanding Professor or Researcher"
         }
       },
@@ -124800,7 +124800,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Multinational Executive or Manager",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Multinational Executive or Manager"
         }
       },
@@ -124816,7 +124816,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Advanced Degree or Exceptional Ability"
         }
       },
@@ -124832,7 +124832,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Physician",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Physician"
         }
       },
@@ -124848,7 +124848,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Skilled Worker, Professional, or Other Worker",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Skilled Worker, Professional, or Other Worker"
         }
       },
@@ -124864,7 +124864,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part G - Investors",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part G - Investors"
         }
       },
@@ -124880,7 +124880,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -124896,7 +124896,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Immigrant Petition Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Immigrant Petition Eligibility Requirements"
         }
       },
@@ -124912,7 +124912,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Immigrant Petition Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Immigrant Petition Adjudication"
         }
       },
@@ -124928,7 +124928,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Regional Center Applications",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Regional Center Applications"
         }
       },
@@ -124944,7 +124944,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Project Applications",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Project Applications"
         }
       },
@@ -124960,7 +124960,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Direct and Third-Party Promoters",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Direct and Third-Party Promoters"
         }
       },
@@ -124976,7 +124976,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Removal of Conditions",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Removal of Conditions"
         }
       },
@@ -124992,7 +124992,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Sanctions and Discretionary Determinations",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Sanctions and Discretionary Determinations"
         }
       },
@@ -125008,7 +125008,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part H - Designated and Special Immigrants",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part H - Designated and Special Immigrants"
         }
       },
@@ -125024,7 +125024,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -125040,7 +125040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Certain Iraqi and Afghan Translators and Interpreters",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Certain Iraqi and Afghan Translators and Interpreters"
         }
       },
@@ -125056,7 +125056,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 11 - Decision and Post-Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 11 - Decision and Post-Adjudication"
         }
       },
@@ -125072,7 +125072,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Religious Workers",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Religious Workers"
         }
       },
@@ -125088,7 +125088,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Panama Canal Zone Employees",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Panama Canal Zone Employees"
         }
       },
@@ -125104,7 +125104,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Members of the U.S. Armed Forces",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Members of the U.S. Armed Forces"
         }
       },
@@ -125120,7 +125120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Certain Iraqi Nationals",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Certain Iraqi Nationals"
         }
       },
@@ -125136,7 +125136,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Certain Afghan Nationals",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Certain Afghan Nationals"
         }
       },
@@ -125152,7 +125152,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part I - Family-Based Conditional Permanent Residents",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part I - Family-Based Conditional Permanent Residents"
         }
       },
@@ -125168,7 +125168,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -125184,7 +125184,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Terms and Conditions of CPR Status",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Terms and Conditions of CPR Status"
         }
       },
@@ -125200,7 +125200,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Petition to Remove Conditions on Residence",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Petition to Remove Conditions on Residence"
         }
       },
@@ -125216,7 +125216,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Joint Petitions and Individual Filing Requests",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Joint Petitions and Individual Filing Requests"
         }
       },
@@ -125232,7 +125232,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Waiver of Joint Filing Requirement",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Waiver of Joint Filing Requirement"
         }
       },
@@ -125248,7 +125248,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Decision and Post-Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Decision and Post-Adjudication"
         }
       },
@@ -125264,7 +125264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Effect of Removal Proceedings",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Effect of Removal Proceedings"
         }
       },
@@ -125280,7 +125280,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part J - Special Immigrant Juveniles",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part J - Special Immigrant Juveniles"
         }
       },
@@ -125296,7 +125296,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -125312,7 +125312,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -125328,7 +125328,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Documentation and Evidence"
         }
       },
@@ -125344,7 +125344,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Adjudication"
         }
       },
@@ -125360,7 +125360,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Appeals, Motions to Reopen, and Motions to Reconsider",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Appeals, Motions to Reopen, and Motions to Reconsider"
         }
       },
@@ -125376,7 +125376,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Data",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Data"
         }
       },
@@ -125392,7 +125392,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part K - CNMI Resident Status",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-k",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part K - CNMI Resident Status"
         }
       },
@@ -125408,7 +125408,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 7 - Adjustment of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 7 - Adjustment of Status"
         }
       },
@@ -125424,7 +125424,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Adjustment of Status Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Adjustment of Status Policies and Procedures"
         }
       },
@@ -125440,7 +125440,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -125456,7 +125456,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Legal Analysis and Use of Discretion",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Legal Analysis and Use of Discretion"
         }
       },
@@ -125472,7 +125472,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 11 - Decision Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 11 - Decision Procedures"
         }
       },
@@ -125488,7 +125488,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -125504,7 +125504,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Filing Instructions",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Filing Instructions"
         }
       },
@@ -125520,7 +125520,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Documentation",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Documentation"
         }
       },
@@ -125536,7 +125536,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Interview Guidelines",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Interview Guidelines"
         }
       },
@@ -125552,7 +125552,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Adjudicative Review",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Adjudicative Review"
         }
       },
@@ -125568,7 +125568,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Child Status Protection Act",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Child Status Protection Act"
         }
       },
@@ -125584,7 +125584,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Transfer of Underlying Basis",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Transfer of Underlying Basis"
         }
       },
@@ -125600,7 +125600,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Death of Petitioner or Principal Beneficiary",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Death of Petitioner or Principal Beneficiary"
         }
       },
@@ -125616,7 +125616,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - 245(a) Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - 245(a) Adjustment"
         }
       },
@@ -125632,7 +125632,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -125648,7 +125648,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -125664,7 +125664,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Unlawful Immigration Status at Time of Filing (INA 245(c)(2))",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Unlawful Immigration Status at Time of Filing (INA 245(c)(2))"
         }
       },
@@ -125680,7 +125680,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Status and Nonimmigrant Visa Violations (INA 245(c)(2) and INA 245(c)(8))",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Status and Nonimmigrant Visa Violations (INA 245(c)(2) and INA 245(c)(8))"
         }
       },
@@ -125696,7 +125696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Employment-Based Applicant Not in Lawful Nonimmigrant Status (INA 245(c)(7))",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Employment-Based Applicant Not in Lawful Nonimmigrant Status (INA 245(c)(7))"
         }
       },
@@ -125712,7 +125712,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Unauthorized Employment (INA 245(c)(2) and INA 245(c)(8))",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Unauthorized Employment (INA 245(c)(2) and INA 245(c)(8))"
         }
       },
@@ -125728,7 +125728,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Other Barred Adjustment Applicants",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Other Barred Adjustment Applicants"
         }
       },
@@ -125744,7 +125744,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Inapplicability of Bars to Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-b-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Inapplicability of Bars to Adjustment"
         }
       },
@@ -125760,7 +125760,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - 245(i) Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - 245(i) Adjustment"
         }
       },
@@ -125776,7 +125776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -125792,7 +125792,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Grandfathering Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-c-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Grandfathering Requirements"
         }
       },
@@ -125808,7 +125808,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Eligibility and Filing Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-c-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Eligibility and Filing Requirements"
         }
       },
@@ -125824,7 +125824,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-c-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Documentation and Evidence"
         }
       },
@@ -125840,7 +125840,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication and Decision",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-c-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication and Decision"
         }
       },
@@ -125856,7 +125856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Family-Based Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Family-Based Adjustment"
         }
       },
@@ -125872,7 +125872,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part E - Employment-Based Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part E - Employment-Based Adjustment"
         }
       },
@@ -125888,7 +125888,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions"
         }
       },
@@ -125904,7 +125904,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Special Immigrant-Based Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Special Immigrant-Based Adjustment"
         }
       },
@@ -125920,7 +125920,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -125936,7 +125936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Certain Afghan and Iraqi Nationals",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Certain Afghan and Iraqi Nationals"
         }
       },
@@ -125952,7 +125952,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Religious Workers",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Religious Workers"
         }
       },
@@ -125968,7 +125968,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - International Employees of U.S. Government Abroad",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - International Employees of U.S. Government Abroad"
         }
       },
@@ -125984,7 +125984,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Panama Canal Zone Employees",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Panama Canal Zone Employees"
         }
       },
@@ -126000,7 +126000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Certain Physicians",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Certain Physicians"
         }
       },
@@ -126016,7 +126016,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Certain G-4 or NATO-6 Employees and their Family Members",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Certain G-4 or NATO-6 Employees and their Family Members"
         }
       },
@@ -126032,7 +126032,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Special Immigrant Juveniles",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Special Immigrant Juveniles"
         }
       },
@@ -126048,7 +126048,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Members of the U.S. Armed Forces",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Members of the U.S. Armed Forces"
         }
       },
@@ -126064,7 +126064,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Certain Broadcasters",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Certain Broadcasters"
         }
       },
@@ -126080,7 +126080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part G - Diversity Immigrant-Based Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part G - Diversity Immigrant-Based Adjustment"
         }
       },
@@ -126096,7 +126096,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -126112,7 +126112,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -126128,7 +126128,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Documentation and Evidence"
         }
       },
@@ -126144,7 +126144,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Adjudication"
         }
       },
@@ -126160,7 +126160,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part I - Adjustment Based on Violence Against Women Act",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-i",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part I - Adjustment Based on Violence Against Women Act"
         }
       },
@@ -126176,7 +126176,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part J - Trafficking Victim-Based Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part J - Trafficking Victim-Based Adjustment"
         }
       },
@@ -126192,7 +126192,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -126208,7 +126208,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -126224,7 +126224,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Documentation and Evidence"
         }
       },
@@ -126240,7 +126240,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Filing",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Filing"
         }
       },
@@ -126256,7 +126256,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication"
         }
       },
@@ -126272,7 +126272,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part K - Crime Victim-Based Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-k",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part K - Crime Victim-Based Adjustment"
         }
       },
@@ -126288,7 +126288,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part L - Refugee Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part L - Refugee Adjustment"
         }
       },
@@ -126304,7 +126304,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -126320,7 +126320,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -126336,7 +126336,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Admissibility and Waiver Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Admissibility and Waiver Requirements"
         }
       },
@@ -126352,7 +126352,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Documentation and Evidence"
         }
       },
@@ -126368,7 +126368,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication Procedures"
         }
       },
@@ -126384,7 +126384,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Termination of Status and Notice to Appear Considerations",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Termination of Status and Notice to Appear Considerations"
         }
       },
@@ -126400,7 +126400,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part M - Asylee Adjustment",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-m",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part M - Asylee Adjustment"
         }
       },
@@ -126416,7 +126416,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-m-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -126432,7 +126432,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-m-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility Requirements"
         }
       },
@@ -126448,7 +126448,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Admissibility and Waiver Requirements",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-m-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Admissibility and Waiver Requirements"
         }
       },
@@ -126464,7 +126464,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Documentation and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Documentation and Evidence"
         }
       },
@@ -126480,7 +126480,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-m-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication Procedures"
         }
       },
@@ -126496,7 +126496,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Termination of Status and Notice to Appear Considerations",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-m-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Termination of Status and Notice to Appear Considerations"
         }
       },
@@ -126512,7 +126512,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part N - Legalization",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-n",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part N - Legalization"
         }
       },
@@ -126528,7 +126528,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part O - Registration",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part O - Registration"
         }
       },
@@ -126544,7 +126544,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Presumption of Lawful Admission",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Presumption of Lawful Admission"
         }
       },
@@ -126560,7 +126560,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Presumption of Lawful Admission Despite Certain Errors Occurring at Entry",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Presumption of Lawful Admission Despite Certain Errors Occurring at Entry"
         }
       },
@@ -126576,7 +126576,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Children Born in the United States to Foreign Government Employees",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Children Born in the United States to Foreign Government Employees"
         }
       },
@@ -126592,7 +126592,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Aliens Who Entered the United States Prior to January 1, 1972",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Aliens Who Entered the United States Prior to January 1, 1972"
         }
       },
@@ -126608,7 +126608,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Other Special Laws",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Other Special Laws"
         }
       },
@@ -126624,7 +126624,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part P - Other Adjustment Programs",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part P - Other Adjustment Programs"
         }
       },
@@ -126640,7 +126640,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Liberian Refugee Immigration Fairness",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Liberian Refugee Immigration Fairness"
         }
       },
@@ -126656,7 +126656,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Amerasian Immigrants",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Amerasian Immigrants"
         }
       },
@@ -126672,7 +126672,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part Q - Rescission of Lawful Permanent Residence",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part Q - Rescission of Lawful Permanent Residence"
         }
       },
@@ -126688,7 +126688,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -126704,7 +126704,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Eligibility",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Eligibility"
         }
       },
@@ -126720,7 +126720,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Rescission Process",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Rescission Process"
         }
       },
@@ -126736,7 +126736,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Effective Date of Rescission",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Effective Date of Rescission"
         }
       },
@@ -126752,7 +126752,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Adjudication Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Adjudication Procedures"
         }
       },
@@ -126768,7 +126768,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 8 - Admissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 8 - Admissibility"
         }
       },
@@ -126784,7 +126784,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Health-Related Grounds of Inadmissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Health-Related Grounds of Inadmissibility"
         }
       },
@@ -126800,7 +126800,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -126816,7 +126816,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Other Medical Conditions",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Other Medical Conditions"
         }
       },
@@ -126832,7 +126832,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 11 - Inadmissibility Determination",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 11 - Inadmissibility Determination"
         }
       },
@@ -126848,7 +126848,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 12 - Waiver Authority",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-12",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 12 - Waiver Authority"
         }
       },
@@ -126864,7 +126864,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Medical Examination and Vaccination Record",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Medical Examination and Vaccination Record"
         }
       },
@@ -126880,7 +126880,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Applicability of Medical Examination and Vaccination Requirement",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Applicability of Medical Examination and Vaccination Requirement"
         }
       },
@@ -126896,7 +126896,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Review of Medical Examination Documentation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Review of Medical Examination Documentation"
         }
       },
@@ -126912,7 +126912,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Review of Overall Findings",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Review of Overall Findings"
         }
       },
@@ -126928,7 +126928,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Communicable Diseases of Public Health Significance",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Communicable Diseases of Public Health Significance"
         }
       },
@@ -126944,7 +126944,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Physical or Mental Disorder with Associated Harmful Behavior",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Physical or Mental Disorder with Associated Harmful Behavior"
         }
       },
@@ -126960,7 +126960,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Drug Abuse or Drug Addiction",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Drug Abuse or Drug Addiction"
         }
       },
@@ -126976,7 +126976,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Vaccination Requirement",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Vaccination Requirement"
         }
       },
@@ -126992,7 +126992,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part C - Civil Surgeon Designation and Revocation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-c",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part C - Civil Surgeon Designation and Revocation"
         }
       },
@@ -127008,7 +127008,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -127024,7 +127024,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Application for Civil Surgeon Designation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-c-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Application for Civil Surgeon Designation"
         }
       },
@@ -127040,7 +127040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Blanket Civil Surgeon Designation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-c-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Blanket Civil Surgeon Designation"
         }
       },
@@ -127056,7 +127056,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Termination and Revocation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-c-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Termination and Revocation"
         }
       },
@@ -127072,7 +127072,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Civil Surgeon List",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-c-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Civil Surgeon List"
         }
       },
@@ -127088,7 +127088,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Criminal and Related Grounds of Inadmissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Criminal and Related Grounds of Inadmissibility"
         }
       },
@@ -127104,7 +127104,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Controlled Substance Traffickers",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Controlled Substance Traffickers"
         }
       },
@@ -127120,7 +127120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 14 - Significant Traffickers in Persons",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 14 - Significant Traffickers in Persons"
         }
       },
@@ -127136,7 +127136,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 15 - Money Laundering",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-15",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 15 - Money Laundering"
         }
       },
@@ -127152,7 +127152,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - National Security and Related Grounds of Inadmissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - National Security and Related Grounds of Inadmissibility"
         }
       },
@@ -127168,7 +127168,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Immigrant Membership in Totalitarian Party",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Immigrant Membership in Totalitarian Party"
         }
       },
@@ -127184,7 +127184,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part G - Public Charge Ground of Inadmissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part G - Public Charge Ground of Inadmissibility"
         }
       },
@@ -127200,7 +127200,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -127216,7 +127216,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 10 - Adjudicating Public Charge Inadmissibility for Adjustment of Status Applications",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 10 - Adjudicating Public Charge Inadmissibility for Adjustment of Status Applications"
         }
       },
@@ -127232,7 +127232,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 11 - Public Charge Bonds",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 11 - Public Charge Bonds"
         }
       },
@@ -127248,7 +127248,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 12 - Public Charge Bonds: Posting and Accepting Bonds",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-12",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 12 - Public Charge Bonds: Posting and Accepting Bonds"
         }
       },
@@ -127264,7 +127264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 13 - Public Charge Bonds: Maintaining, Substituting, and Canceling Bonds",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-13",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 13 - Public Charge Bonds: Maintaining, Substituting, and Canceling Bonds"
         }
       },
@@ -127280,7 +127280,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Key Concepts",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Key Concepts"
         }
       },
@@ -127296,7 +127296,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Applicability",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Applicability"
         }
       },
@@ -127312,7 +127312,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Prospective Determination Based on the Totality of the Circumstances",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Prospective Determination Based on the Totality of the Circumstances"
         }
       },
@@ -127328,7 +127328,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Statutory Minimum Factors",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Statutory Minimum Factors"
         }
       },
@@ -127344,7 +127344,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Affidavit of Support Under Section 213A of the INA",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Affidavit of Support Under Section 213A of the INA"
         }
       },
@@ -127360,7 +127360,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Consideration of Any Current or Past Application for, Approval or Certification to Receive, and Receipt of Means-Tested Public Benefits",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Consideration of Any Current or Past Application for, Approval or Certification to Receive, and Receipt of Means-Tested Public Benefits"
         }
       },
@@ -127376,7 +127376,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 8 - Other Relevant Factors",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 8 - Other Relevant Factors"
         }
       },
@@ -127392,7 +127392,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 9 - Waivers of Inadmissibility Based on Public Charge Ground",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 9 - Waivers of Inadmissibility Based on Public Charge Ground"
         }
       },
@@ -127408,7 +127408,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part I - Illegal Entrants and Other Immigration Violators",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-i",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part I - Illegal Entrants and Other Immigration Violators"
         }
       },
@@ -127424,7 +127424,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part J - Fraud and Willful Misrepresentation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-j",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part J - Fraud and Willful Misrepresentation"
         }
       },
@@ -127440,7 +127440,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -127456,7 +127456,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Overview of Fraud and Willful Misrepresentation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-j-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Overview of Fraud and Willful Misrepresentation"
         }
       },
@@ -127472,7 +127472,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Adjudicating Inadmissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Adjudicating Inadmissibility"
         }
       },
@@ -127488,7 +127488,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part K - False Claim to U.S. Citizenship",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-k",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part K - False Claim to U.S. Citizenship"
         }
       },
@@ -127504,7 +127504,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -127520,7 +127520,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Determining False Claim to U.S. Citizenship",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-k-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Determining False Claim to U.S. Citizenship"
         }
       },
@@ -127536,7 +127536,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Adjudication",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-k-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Adjudication"
         }
       },
@@ -127552,7 +127552,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Exemptions, Exceptions, and Waivers",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-k-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Exemptions, Exceptions, and Waivers"
         }
       },
@@ -127568,7 +127568,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part O - Aliens Unlawfully Present",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-o",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part O - Aliens Unlawfully Present"
         }
       },
@@ -127584,7 +127584,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Effect of Seeking Admission Following Accrual of Unlawful Presence",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-o-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Effect of Seeking Admission Following Accrual of Unlawful Presence"
         }
       },
@@ -127600,7 +127600,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part P - Aliens Present After Previous Immigration Violation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-p",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part P - Aliens Present After Previous Immigration Violation"
         }
       },
@@ -127616,7 +127616,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Volume 9 - Waivers and Other Forms of Relief",
           "url": "https://www.uscis.gov/policy-manual/volume-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Volume 9 - Waivers and Other Forms of Relief"
         }
       },
@@ -127632,7 +127632,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part A - Waiver Policies and Procedures",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part A - Waiver Policies and Procedures"
         }
       },
@@ -127648,7 +127648,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -127664,7 +127664,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Forms of Relief",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Forms of Relief"
         }
       },
@@ -127680,7 +127680,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Review of Inadmissibility Grounds",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Review of Inadmissibility Grounds"
         }
       },
@@ -127696,7 +127696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Waiver Eligibility and Evidence",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Waiver Eligibility and Evidence"
         }
       },
@@ -127712,7 +127712,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Discretion",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Discretion"
         }
       },
@@ -127728,7 +127728,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Validity of an Approved Waiver",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Validity of an Approved Waiver"
         }
       },
@@ -127744,7 +127744,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Denials, Appeals, and Motions",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Denials, Appeals, and Motions"
         }
       },
@@ -127760,7 +127760,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part B - Extreme Hardship",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part B - Extreme Hardship"
         }
       },
@@ -127776,7 +127776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -127792,7 +127792,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Extreme Hardship Policy",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Extreme Hardship Policy"
         }
       },
@@ -127808,7 +127808,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Adjudicating Extreme Hardship Claims",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Adjudicating Extreme Hardship Claims"
         }
       },
@@ -127824,7 +127824,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Qualifying Relative",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Qualifying Relative"
         }
       },
@@ -127840,7 +127840,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Extreme Hardship Considerations and Factors",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Extreme Hardship Considerations and Factors"
         }
       },
@@ -127856,7 +127856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Extreme Hardship Determinations",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Extreme Hardship Determinations"
         }
       },
@@ -127872,7 +127872,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 7 - Discretion",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 7 - Discretion"
         }
       },
@@ -127888,7 +127888,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part D - Health-Related Grounds of Inadmissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part D - Health-Related Grounds of Inadmissibility"
         }
       },
@@ -127904,7 +127904,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -127920,7 +127920,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Waiver of Communicable Disease of Public Health Significance",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Waiver of Communicable Disease of Public Health Significance"
         }
       },
@@ -127936,7 +127936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Waiver of Immigrant Vaccination Requirement",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Waiver of Immigrant Vaccination Requirement"
         }
       },
@@ -127952,7 +127952,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - Waiver of Physical or Mental Disorder Accompanied by Harmful Behavior",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - Waiver of Physical or Mental Disorder Accompanied by Harmful Behavior"
         }
       },
@@ -127968,7 +127968,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Waiver of Drug Abuse and Addiction",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Waiver of Drug Abuse and Addiction"
         }
       },
@@ -127984,7 +127984,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part F - Fraud and Willful Misrepresentation",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-f",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part F - Fraud and Willful Misrepresentation"
         }
       },
@@ -128000,7 +128000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 1 - Purpose and Background",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 1 - Purpose and Background"
         }
       },
@@ -128016,7 +128016,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Adjudication of Fraud and Willful Misrepresentation Waivers",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Adjudication of Fraud and Willful Misrepresentation Waivers"
         }
       },
@@ -128032,7 +128032,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - Effect of Granting a Waiver",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - Effect of Granting a Waiver"
         }
       },
@@ -128048,7 +128048,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part O - Victims of Trafficking",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part O - Victims of Trafficking"
         }
       },
@@ -128064,7 +128064,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 2 - Waivers for Victims of Trafficking",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 2 - Waivers for Victims of Trafficking"
         }
       },
@@ -128080,7 +128080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 3 - INA 212(d)(13) Waivers",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 3 - INA 212(d)(13) Waivers"
         }
       },
@@ -128096,7 +128096,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 4 - INA 212(d)(3) Waivers",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 4 - INA 212(d)(3) Waivers"
         }
       },
@@ -128112,7 +128112,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 5 - Waivers for T Nonimmigrants Applying for Adjustment of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 5 - Waivers for T Nonimmigrants Applying for Adjustment of Status"
         }
       },
@@ -128128,7 +128128,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Chapter 6 - Adjudication and Post-Adjudication Matters",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 6 - Adjudication and Post-Adjudication Matters"
         }
       },
@@ -128144,7 +128144,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual table of contents",
           "locator": "Part S - Consent to Reapply",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-s",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Part S - Consent to Reapply"
         }
       },
@@ -128164,7 +128164,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 29 U.S.C. 701",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "29 U.S.C. 701"
         }
       },
@@ -128184,7 +128184,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 5 U.S.C. 552a(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "5 U.S.C. 552a(b)"
         }
       },
@@ -128204,7 +128204,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 103",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103"
         }
       },
@@ -128224,7 +128224,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > How to Use the USCIS Policy Manual Website",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "How to Use the USCIS Policy Manual Website"
         }
       },
@@ -128244,7 +128244,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 103",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 103"
         }
       },
@@ -128264,7 +128264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Changes of Address > Legal Authorities > 8 CFR 265.1",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 265.1"
         }
       },
@@ -128284,7 +128284,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Changes of Address > Forms > AR-11, Change of Address",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "AR-11, Change of Address"
         }
       },
@@ -128304,7 +128304,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Changes of Address > Legal Authorities > INA 265",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 265"
         }
       },
@@ -128324,7 +128324,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Disability Accommodation Requests > Forms > I-864P, Poverty Guidelines",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-864P, Poverty Guidelines"
         }
       },
@@ -128342,7 +128342,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Appendix: Update on Interpretation of 8 U.S.C. 1367 Duration of Confidentiality Protections",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Update on Interpretation of 8 U.S.C. 1367 Duration of Confidentiality Protections"
         }
       },
@@ -128362,7 +128362,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 13 U.S.C. 8",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "13 U.S.C. 8"
         }
       },
@@ -128382,7 +128382,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 CFR 208.6",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 208.6"
         }
       },
@@ -128402,7 +128402,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 CFR 210",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 210"
         }
       },
@@ -128422,7 +128422,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 CFR 244",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 244"
         }
       },
@@ -128442,7 +128442,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 CFR 244.16",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 244.16"
         }
       },
@@ -128462,7 +128462,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 CFR 245a.2",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245a.2"
         }
       },
@@ -128482,7 +128482,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 CFR 245a.21",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245a.21"
         }
       },
@@ -128502,7 +128502,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 CFR 245a.3",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245a.3"
         }
       },
@@ -128522,7 +128522,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 U.S.C. 1367",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1367"
         }
       },
@@ -128542,7 +128542,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > 8 U.S.C. 1641",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1641"
         }
       },
@@ -128562,7 +128562,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > 9, Petition for Qualifying Family Member of a U-1 Nonimmigrant",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "9, Petition for Qualifying Family Member of a U-1 Nonimmigrant"
         }
       },
@@ -128582,7 +128582,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > G-28, Notice of Entry of Appearance as Attorney or Accredited Representative",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "G-28, Notice of Entry of Appearance as Attorney or Accredited Representative"
         }
       },
@@ -128602,7 +128602,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-131, Application for Travel Documents, Parole Documents, and Arrival/Departure Records",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-131, Application for Travel Documents, Parole Documents, and Arrival/Departure Records"
         }
       },
@@ -128622,7 +128622,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-290B, Notice of Appeal or Motion",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-290B, Notice of Appeal or Motion"
         }
       },
@@ -128642,7 +128642,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-360, Petition for Amerasian, Widow(er), or Special Immigrant",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-360, Petition for Amerasian, Widow(er), or Special Immigrant"
         }
       },
@@ -128662,7 +128662,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-485, Application to Register Permanent Residence or Adjust Status",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-485, Application to Register Permanent Residence or Adjust Status"
         }
       },
@@ -128682,7 +128682,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-539, Application To Extend/Change Nonimmigrant Status Application To Extend/Change Nonimmigrant Status",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-539, Application To Extend/Change Nonimmigrant Status Application To Extend/Change Nonimmigrant Status"
         }
       },
@@ -128702,7 +128702,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-589, Application for Asylum or Withholding of Removal",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-589, Application for Asylum or Withholding of Removal"
         }
       },
@@ -128722,7 +128722,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-601, Application for Waiver of Grounds of Inadmissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-601, Application for Waiver of Grounds of Inadmissibility"
         }
       },
@@ -128742,7 +128742,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-730, Refugee/Asylee Relative Petition",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-730, Refugee/Asylee Relative Petition"
         }
       },
@@ -128762,7 +128762,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-751, Petition to Remove Conditions on Residence",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-751, Petition to Remove Conditions on Residence"
         }
       },
@@ -128782,7 +128782,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-765, Application for Employment Authorization",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-765, Application for Employment Authorization"
         }
       },
@@ -128802,7 +128802,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-765V, Application for Employment Authorization for Abused Nonimmigrant Spouse",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-765V, Application for Employment Authorization for Abused Nonimmigrant Spouse"
         }
       },
@@ -128822,7 +128822,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-854, Inter-Agency Alien Witness and Informant Record",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-854, Inter-Agency Alien Witness and Informant Record"
         }
       },
@@ -128842,7 +128842,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-914 Supplement A, Application for Family Member of T-1 Recipient",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-914 Supplement A, Application for Family Member of T-1 Recipient"
         }
       },
@@ -128862,7 +128862,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-914, Application for T Nonimmigrant Status",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-914, Application for T Nonimmigrant Status"
         }
       },
@@ -128882,7 +128882,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-918 Supplement A, Petition for Qualifying Family Member of U-1 Recipient",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-918 Supplement A, Petition for Qualifying Family Member of U-1 Recipient"
         }
       },
@@ -128902,7 +128902,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Forms > I-92",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-92"
         }
       },
@@ -128922,7 +128922,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > INA 101(i)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(i)(1)"
         }
       },
@@ -128942,7 +128942,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > INA 210",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 210"
         }
       },
@@ -128962,7 +128962,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > INA 244",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 244"
         }
       },
@@ -128982,7 +128982,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Privacy and Confidentiality > Legal Authorities > INA 245A(c)(4)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245A(c)(4)"
         }
       },
@@ -129000,7 +129000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 9 - Feedback, Complaints, Misconduct, and Discrimination > Appendix: Dissatisfaction with USCIS: Terms and Definitions",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Dissatisfaction with USCIS: Terms and Definitions"
         }
       },
@@ -129020,7 +129020,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Feedback, Complaints, Misconduct, and Discrimination > Forms > Report Misconduct (Office of Inspector General)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-a-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Report Misconduct (Office of Inspector General)"
         }
       },
@@ -129040,7 +129040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 103.2",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2"
         }
       },
@@ -129060,7 +129060,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 103.7",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.7"
         }
       },
@@ -129080,7 +129080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 106.1",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 106.1"
         }
       },
@@ -129100,7 +129100,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 106.2",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 106.2"
         }
       },
@@ -129120,7 +129120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 106.3",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 106.3"
         }
       },
@@ -129140,7 +129140,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > G-1055, Fee Schedule",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "G-1055, Fee Schedule"
         }
       },
@@ -129160,7 +129160,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-797C, Notice of Action",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-797C, Notice of Action"
         }
       },
@@ -129180,7 +129180,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-912, Request for Fee Waiver",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-912, Request for Fee Waiver"
         }
       },
@@ -129200,7 +129200,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Fees > Legal Authorities > 8 CFR 103.2(a)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2(a)(1)"
         }
       },
@@ -129220,7 +129220,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Fees > Legal Authorities > 8 CFR 103.2(a)(7)(ii)(D)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2(a)(7)(ii)(D)"
         }
       },
@@ -129240,7 +129240,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Fees > Legal Authorities > 8 CFR 103.7(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.7(a)"
         }
       },
@@ -129260,7 +129260,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Fees > Forms > G-1450, Authorization for Credit Card Transactions",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "G-1450, Authorization for Credit Card Transactions"
         }
       },
@@ -129280,7 +129280,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Fees > Legal Authorities > INA 286(m)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 286(m)"
         }
       },
@@ -129300,7 +129300,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 44 CFR 206",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "44 CFR 206"
         }
       },
@@ -129320,7 +129320,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 8 CFR 1003.24(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1003.24(d)"
         }
       },
@@ -129340,7 +129340,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 8 CFR 103.7(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.7(c)"
         }
       },
@@ -129360,7 +129360,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 8 CFR 103.7(c)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.7(c)(2)"
         }
       },
@@ -129380,7 +129380,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 8 CFR 103.7(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.7(d)"
         }
       },
@@ -129400,7 +129400,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 8 CFR 1103.7",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1103.7"
         }
       },
@@ -129420,7 +129420,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 8 CFR 212.7(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.7(e)"
         }
       },
@@ -129440,7 +129440,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 8 CFR 214.2(e)(23)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(e)(23)"
         }
       },
@@ -129460,7 +129460,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 8 CFR 245.15",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.15"
         }
       },
@@ -129480,7 +129480,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > 90 FR 34511 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "90 FR 34511 (PDF)"
         }
       },
@@ -129500,7 +129500,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > INA 204(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(a)"
         }
       },
@@ -129520,7 +129520,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Forms > IRS Form 4506-T, Request for Transcript of Tax Return",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "IRS Form 4506-T, Request for Transcript of Tax Return"
         }
       },
@@ -129540,7 +129540,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Fee Waivers and Fee Exemptions > Legal Authorities > Pub. L. 119-21 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 119-21 (PDF)"
         }
       },
@@ -129560,7 +129560,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Submitting Requests > Legal Authorities > 8 CFR 1.2",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1.2"
         }
       },
@@ -129580,7 +129580,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Submitting Requests > Legal Authorities > 8 CFR 103.3",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.3"
         }
       },
@@ -129600,7 +129600,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Submitting Requests > Legal Authorities > 8 CFR 204.1(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.1(b)"
         }
       },
@@ -129620,7 +129620,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Submitting Requests > Legal Authorities > 8 CFR 205.2",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 205.2"
         }
       },
@@ -129640,7 +129640,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 1003.47(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1003.47(d)"
         }
       },
@@ -129660,7 +129660,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 103.16",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.16"
         }
       },
@@ -129680,7 +129680,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 103.16(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.16(a)"
         }
       },
@@ -129700,7 +129700,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 103.2(b)(13)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2(b)(13)(ii)"
         }
       },
@@ -129720,7 +129720,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 335",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 335"
         }
       },
@@ -129740,7 +129740,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > How to Change Your Address",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "How to Change Your Address"
         }
       },
@@ -129760,7 +129760,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-130, Petition for Alien Relative",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-130, Petition for Alien Relative"
         }
       },
@@ -129780,7 +129780,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-600, Petition to Classify Orphan as an Immediate Relative",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-600, Petition to Classify Orphan as an Immediate Relative"
         }
       },
@@ -129800,7 +129800,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-600A, Application for Advance Processing of an Orphan Petition",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-600A, Application for Advance Processing of an Orphan Petition"
         }
       },
@@ -129820,7 +129820,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-698, Application to Adjust Status from Temporary to Permanent Resident (Under Section 245A of the INA)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-698, Application to Adjust Status from Temporary to Permanent Resident (Under Section 245A of the INA)"
         }
       },
@@ -129840,7 +129840,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-800, Petition to Classify Convention Adoptee as an Immediate Relative",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-800, Petition to Classify Convention Adoptee as an Immediate Relative"
         }
       },
@@ -129860,7 +129860,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-800A, Application for Determination of Suitability to Adopt a Child from a Convention Country",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-800A, Application for Determination of Suitability to Adopt a Child from a Convention Country"
         }
       },
@@ -129880,7 +129880,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-817, Application for Family Unity Benefits",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-817, Application for Family Unity Benefits"
         }
       },
@@ -129900,7 +129900,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-821, Application for Temporary Protected Status",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-821, Application for Temporary Protected Status"
         }
       },
@@ -129920,7 +129920,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-829, Petition by Entrepreneur to Remove Conditions on Permanent Resident Status",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-829, Petition by Entrepreneur to Remove Conditions on Permanent Resident Status"
         }
       },
@@ -129940,7 +129940,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-90, Application to Replace Permanent Residence Card",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-90, Application to Replace Permanent Residence Card"
         }
       },
@@ -129960,12 +129960,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 105",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 105"
         }
       },
       {
-        "id": "pm-resource-636",
+        "id": "pm-resource-a914e5893f614232",
         "kind": "resource",
         "title": "INA 335",
         "category": "Legal Authorities",
@@ -129974,13 +129974,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 335"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1446&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1446/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 335",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 335"
         }
       },
@@ -130000,7 +130000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > N-336, Request for a Hearing on a Decision in Naturalization Proceedings",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-336, Request for a Hearing on a Decision in Naturalization Proceedings"
         }
       },
@@ -130020,7 +130020,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > N-400, Application for Naturalization",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-400, Application for Naturalization"
         }
       },
@@ -130040,7 +130040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > Preparing for Your Biometric Services Appointment",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Preparing for Your Biometric Services Appointment"
         }
       },
@@ -130060,7 +130060,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > USCIS Contact Center",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "USCIS Contact Center"
         }
       },
@@ -130080,7 +130080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 103.2(a)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2(a)(3)"
         }
       },
@@ -130100,7 +130100,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 292.1",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 292.1"
         }
       },
@@ -130120,7 +130120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > G-28I, Notice of Entry of Appearance as Attorney in Matters Outside the Geographical Confines of the United States",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "G-28I, Notice of Entry of Appearance as Attorney in Matters Outside the Geographical Confines of the United States"
         }
       },
@@ -130140,7 +130140,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 292",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 292"
         }
       },
@@ -130158,7 +130158,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 2 - Representation > Appendix: Sample Declaration - Reputable Individual",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Sample Declaration - Reputable Individual"
         }
       },
@@ -130176,7 +130176,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 2 - Representation > Appendix: Sample Statement - Law Graduate",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Sample Statement - Law Graduate"
         }
       },
@@ -130194,7 +130194,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 2 - Representation > Appendix: Sample Statement - Law Student",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Sample Statement - Law Student"
         }
       },
@@ -130214,7 +130214,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Representation > Legal Authorities > 8 CFR Part 1292",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR Part 1292"
         }
       },
@@ -130234,7 +130234,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Representation > Other Materials > Legal Services",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Legal Services"
         }
       },
@@ -130254,7 +130254,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Representation > Other Materials > List of Pro Bono Legal Service Providers",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "List of Pro Bono Legal Service Providers"
         }
       },
@@ -130274,7 +130274,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Representation > Other Materials > List of Recognized Organizations and Accredited Representatives",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "List of Recognized Organizations and Accredited Representatives"
         }
       },
@@ -130294,7 +130294,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct > Legal Authorities > 8 CFR 1003.110",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1003.110"
         }
       },
@@ -130314,7 +130314,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct > Legal Authorities > 8 CFR 1292.17",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1292.17"
         }
       },
@@ -130334,7 +130334,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct > Legal Authorities > 8 CFR 1292.19",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1292.19"
         }
       },
@@ -130354,7 +130354,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct > Legal Authorities > 8 CFR 292.3",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 292.3"
         }
       },
@@ -130374,7 +130374,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct > Legal Authorities > 8 CFR Part 1003 Subpart G",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR Part 1003 Subpart G"
         }
       },
@@ -130394,7 +130394,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct > Other Materials > Commons Scams",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Commons Scams"
         }
       },
@@ -130414,7 +130414,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct > Other Materials > List of Currently Disciplined Practitioners",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "List of Currently Disciplined Practitioners"
         }
       },
@@ -130434,7 +130434,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Professional Conduct and Reporting Misconduct > Other Materials > Report Immigration Scams",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Report Immigration Scams"
         }
       },
@@ -130454,7 +130454,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 44 U.S.C. 31",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "44 U.S.C. 31"
         }
       },
@@ -130474,7 +130474,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 5 U.S.C. 552",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "5 U.S.C. 552"
         }
       },
@@ -130494,7 +130494,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 5 U.S.C. 552a",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "5 U.S.C. 552a"
         }
       },
@@ -130514,7 +130514,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Delegation of Authority 0150.1",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Delegation of Authority 0150.1"
         }
       },
@@ -130534,7 +130534,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 291",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 291"
         }
       },
@@ -130554,7 +130554,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 107-296 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 107-296 (PDF)"
         }
       },
@@ -130574,7 +130574,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Evidence > Legal Authorities > 8 CFR 103.2(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2(b)"
         }
       },
@@ -130594,7 +130594,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Evidence > Legal Authorities > 8 CFR 103.8",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.8"
         }
       },
@@ -130614,7 +130614,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204"
         }
       },
@@ -130634,7 +130634,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Delegation 15006",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Delegation 15006"
         }
       },
@@ -130654,7 +130654,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > G-325A, Biographic Information",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "G-325A, Biographic Information"
         }
       },
@@ -130674,7 +130674,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-918, Petition for U Nonimmigrant Status",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-918, Petition for U Nonimmigrant Status"
         }
       },
@@ -130694,7 +130694,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 204",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204"
         }
       },
@@ -130714,7 +130714,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 242(g)",
           "url": "https://www.uscis.gov/policy-manual/volume-1-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 242(g)"
         }
       },
@@ -130734,7 +130734,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 274a Subpart B",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a Subpart B"
         }
       },
@@ -130754,7 +130754,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-9, Employment Eligibility Verification",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-9, Employment Eligibility Verification"
         }
       },
@@ -130774,7 +130774,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 274A",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 274A"
         }
       },
@@ -130794,7 +130794,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 274a.13",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a.13"
         }
       },
@@ -130814,7 +130814,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 274a.12",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a.12"
         }
       },
@@ -130834,7 +130834,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Certain Employment-Based Immigrants in Compelling Circumstances > Legal Authorities > 8 CFR 204.5(p)",
           "url": "https://www.uscis.gov/policy-manual/volume-10-part-b-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(p)"
         }
       },
@@ -130854,7 +130854,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-131A, Application for Travel Document (Carrier Documentation)",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-131A, Application for Travel Document (Carrier Documentation)"
         }
       },
@@ -130874,7 +130874,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > N-565, Application for Replacement Naturalization/Citizenship Document",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-565, Application for Replacement Naturalization/Citizenship Document"
         }
       },
@@ -130894,7 +130894,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 211.5",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 211.5"
         }
       },
@@ -130914,7 +130914,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 264.5",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 264.5"
         }
       },
@@ -130934,7 +130934,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(20)",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(20)"
         }
       },
@@ -130954,7 +130954,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 262",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 262"
         }
       },
@@ -130974,7 +130974,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 264",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 264"
         }
       },
@@ -130994,7 +130994,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 1.4",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1.4"
         }
       },
@@ -131014,7 +131014,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 264.6",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 264.6"
         }
       },
@@ -131034,7 +131034,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-102, Application for Replacement/Initial Nonimmigrant Arrival-Departure Document",
           "url": "https://www.uscis.gov/policy-manual/volume-11-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-102, Application for Replacement/Initial Nonimmigrant Arrival-Departure Document"
         }
       },
@@ -131052,7 +131052,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: History of Acquiring Citizenship under INA 320 for Children of U.S. Citizens who are Members of the U.S. Armed Forces, U.S. Government Employees, or their Spouses",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: History of Acquiring Citizenship under INA 320 for Children of U.S. Citizens who are Members of the U.S. Armed Forces, U.S. Government Employees, or their Spouses"
         }
       },
@@ -131072,7 +131072,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 2",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 2"
         }
       },
@@ -131092,7 +131092,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 310",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 310"
         }
       },
@@ -131112,7 +131112,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 312",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 312"
         }
       },
@@ -131132,7 +131132,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 316",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 316"
         }
       },
@@ -131152,7 +131152,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 332",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 332"
         }
       },
@@ -131172,7 +131172,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 336",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 336"
         }
       },
@@ -131192,7 +131192,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 337",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 337"
         }
       },
@@ -131212,7 +131212,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > Citizenship Resource Center: Check for Test Updates",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Citizenship Resource Center: Check for Test Updates"
         }
       },
@@ -131232,7 +131232,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > Citizenship Resource Center: Study for the Test",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Citizenship Resource Center: Study for the Test"
         }
       },
@@ -131252,7 +131252,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > Citizenship Resource Center: The Naturalization Interview and Test",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Citizenship Resource Center: The Naturalization Interview and Test"
         }
       },
@@ -131272,7 +131272,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 310",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 310"
         }
       },
@@ -131292,12 +131292,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 312",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 312"
         }
       },
       {
-        "id": "pm-resource-700",
+        "id": "pm-resource-1c2d97fca7e66e5f",
         "kind": "resource",
         "title": "INA 316",
         "category": "Legal Authorities",
@@ -131306,18 +131306,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 316"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1427&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1427/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 316",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 316"
         }
       },
       {
-        "id": "pm-resource-702",
+        "id": "pm-resource-a9d12eea53f9ae10",
         "kind": "resource",
         "title": "INA 318",
         "category": "Legal Authorities",
@@ -131326,18 +131326,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 318"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1429&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1429/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 318",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 318"
         }
       },
       {
-        "id": "pm-resource-703",
+        "id": "pm-resource-69cd5d23ab185057",
         "kind": "resource",
         "title": "INA 332",
         "category": "Legal Authorities",
@@ -131346,18 +131346,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 332"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1443&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1443/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 332",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 332"
         }
       },
       {
-        "id": "pm-resource-705",
+        "id": "pm-resource-947f626c98ae7f0c",
         "kind": "resource",
         "title": "INA 336",
         "category": "Legal Authorities",
@@ -131366,18 +131366,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 336"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1447&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1447/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 336",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 336"
         }
       },
       {
-        "id": "pm-resource-707",
+        "id": "pm-resource-dfd1ba8d4d1ef226",
         "kind": "resource",
         "title": "INA 337",
         "category": "Legal Authorities",
@@ -131386,13 +131386,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 337"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1448&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1448/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 337",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 337"
         }
       },
@@ -131412,7 +131412,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > N-300, Application to File Declaration of Intent",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-300, Application to File Declaration of Intent"
         }
       },
@@ -131432,7 +131432,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > N-600, Application for Certificate of Citizenship",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-600, Application for Certificate of Citizenship"
         }
       },
@@ -131452,7 +131452,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen > Legal Authorities > 8 CFR 101.3 (Aug. 2026)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 101.3 (Aug. 2026)"
         }
       },
@@ -131472,7 +131472,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen > Legal Authorities > INA 301",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 301"
         }
       },
@@ -131492,7 +131492,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen > Legal Authorities > INA 302",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 302"
         }
       },
@@ -131512,7 +131512,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen > Legal Authorities > INA 303",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 303"
         }
       },
@@ -131532,7 +131532,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen > Legal Authorities > INA 306",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 306"
         }
       },
@@ -131552,7 +131552,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen > Legal Authorities > INA 307",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 307"
         }
       },
@@ -131572,7 +131572,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen > Legal Authorities > INA 308",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 308"
         }
       },
@@ -131592,7 +131592,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Born in the United States and Becoming a U.S. Naturalized Citizen > Legal Authorities > INA 309",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 309"
         }
       },
@@ -131612,7 +131612,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 334",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 334"
         }
       },
@@ -131632,12 +131632,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > G-1256, Declaration for Interpreted USCIS Interview",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "G-1256, Declaration for Interpreted USCIS Interview"
         }
       },
       {
-        "id": "pm-resource-722",
+        "id": "pm-resource-d08aac3c2db00835",
         "kind": "resource",
         "title": "INA 334",
         "category": "Legal Authorities",
@@ -131646,13 +131646,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 334"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1445&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1445/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 334",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 334"
         }
       },
@@ -131672,7 +131672,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 29 U.S.C. 794",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "29 U.S.C. 794"
         }
       },
@@ -131692,7 +131692,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 6 CFR 15",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "6 CFR 15"
         }
       },
@@ -131712,7 +131712,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 334.4",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 334.4"
         }
       },
@@ -131732,7 +131732,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 93-112 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 93-112 (PDF)"
         }
       },
@@ -131752,7 +131752,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > 8 CFR 212",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212"
         }
       },
@@ -131772,7 +131772,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > 8 CFR 245",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245"
         }
       },
@@ -131792,7 +131792,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > 8 CFR 318",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 318"
         }
       },
@@ -131812,7 +131812,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > 8 CFR 328",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 328"
         }
       },
@@ -131832,7 +131832,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > 8 CFR 329",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 329"
         }
       },
@@ -131852,7 +131852,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > 8 CFR 329.2",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 329.2"
         }
       },
@@ -131872,7 +131872,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Forms > I-407, Record of Abandonment of Lawful Permanent Resident Status",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-407, Record of Abandonment of Lawful Permanent Resident Status"
         }
       },
@@ -131892,7 +131892,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > INA 212",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212"
         }
       },
@@ -131912,12 +131912,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > INA 245",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245"
         }
       },
       {
-        "id": "pm-resource-733",
+        "id": "pm-resource-a1c5b6be6af7ffce",
         "kind": "resource",
         "title": "INA 328",
         "category": "Legal Authorities",
@@ -131926,18 +131926,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 328"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1439&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1439/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > INA 328",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 328"
         }
       },
       {
-        "id": "pm-resource-735",
+        "id": "pm-resource-f770b1d096f3c173",
         "kind": "resource",
         "title": "INA 329",
         "category": "Legal Authorities",
@@ -131946,13 +131946,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 329"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1440&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1440/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > INA 329",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 329"
         }
       },
@@ -131972,7 +131972,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Forms > N-426, Request for Certification of Military or Naval Service",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-426, Request for Certification of Military or Naval Service"
         }
       },
@@ -131992,7 +131992,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > Pub. L. 104-208 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 104-208 (PDF)"
         }
       },
@@ -132012,7 +132012,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > Pub. L. 116-92 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 116-92 (PDF)"
         }
       },
@@ -132032,7 +132032,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Lawful Permanent Resident Admission for Naturalization > Legal Authorities > Pub. L. 89-732 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 89-732 (PDF)"
         }
       },
@@ -132052,7 +132052,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Continuous Residence > Forms > N-470, Application to Preserve Residence for Naturalization Purposes",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-470, Application to Preserve Residence for Naturalization Purposes"
         }
       },
@@ -132072,7 +132072,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence > Legal Authorities > 8 CFR 319",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 319"
         }
       },
@@ -132092,12 +132092,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence > Legal Authorities > 8 CFR 320",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 320"
         }
       },
       {
-        "id": "pm-resource-740",
+        "id": "pm-resource-d8fc85677bfbb0c4",
         "kind": "resource",
         "title": "INA 317",
         "category": "Legal Authorities",
@@ -132106,18 +132106,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 317"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1428&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1428/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence > Legal Authorities > INA 317",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 317"
         }
       },
       {
-        "id": "pm-resource-741",
+        "id": "pm-resource-8646e236d420bce8",
         "kind": "resource",
         "title": "INA 319",
         "category": "Legal Authorities",
@@ -132126,18 +132126,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 319"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1430&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1430/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence > Legal Authorities > INA 319",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 319"
         }
       },
       {
-        "id": "pm-resource-743",
+        "id": "pm-resource-c6669044d1cb45a9",
         "kind": "resource",
         "title": "INA 320",
         "category": "Legal Authorities",
@@ -132146,18 +132146,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 320"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1431&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1431/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence > Legal Authorities > INA 320",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 320"
         }
       },
       {
-        "id": "pm-resource-745",
+        "id": "pm-resource-87c71fa789057cde",
         "kind": "resource",
         "title": "INA 325",
         "category": "Legal Authorities",
@@ -132166,18 +132166,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 325"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1436&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1436/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence > Legal Authorities > INA 325",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 325"
         }
       },
       {
-        "id": "pm-resource-746",
+        "id": "pm-resource-67d1c6c9a2f78abc",
         "kind": "resource",
         "title": "INA 327",
         "category": "Legal Authorities",
@@ -132186,18 +132186,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 327"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1438&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1438/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence > Legal Authorities > INA 327",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 327"
         }
       },
       {
-        "id": "pm-resource-747",
+        "id": "pm-resource-0516833d34239d6e",
         "kind": "resource",
         "title": "INA 330",
         "category": "Legal Authorities",
@@ -132206,13 +132206,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 330"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1441&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1441/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Modifications and Exceptions to Continuous Residence and Physical Presence > Legal Authorities > INA 330",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 330"
         }
       },
@@ -132232,12 +132232,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Jurisdiction, Place of Residence, and Early Filing > Legal Authorities > 8 CFR 334.2(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 334.2(b)"
         }
       },
       {
-        "id": "pm-resource-748",
+        "id": "pm-resource-6020318fd6729c41",
         "kind": "resource",
         "title": "INA 334(a)",
         "category": "Legal Authorities",
@@ -132246,13 +132246,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 334(a)"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1445&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1445/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-6",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Jurisdiction, Place of Residence, and Early Filing > Legal Authorities > INA 334(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 334(a)"
         }
       },
@@ -132272,12 +132272,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Attachment to the Constitution > Legal Authorities > 8 CFR 313",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 313"
         }
       },
       {
-        "id": "pm-resource-750",
+        "id": "pm-resource-ca7e8ebe4fbac85f",
         "kind": "resource",
         "title": "INA 313",
         "category": "Legal Authorities",
@@ -132286,18 +132286,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 313"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1424&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1424/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-7",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Attachment to the Constitution > Legal Authorities > INA 313",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 313"
         }
       },
       {
-        "id": "pm-resource-752",
+        "id": "pm-resource-8e9c0e5b978cfdfd",
         "kind": "resource",
         "title": "INA 314",
         "category": "Legal Authorities",
@@ -132306,13 +132306,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 314"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1425&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1425/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-7",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Attachment to the Constitution > Legal Authorities > INA 314",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 314"
         }
       },
@@ -132332,7 +132332,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Educational Requirements > Legal Authorities > 8 CFR 245a.17",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245a.17"
         }
       },
@@ -132352,7 +132352,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Educational Requirements > Legal Authorities > INA 245A(b)(1)(D)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245A(b)(1)(D)"
         }
       },
@@ -132372,7 +132372,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Educational Requirements > Forms > N-648, Medical Certification for Disability Exceptions",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-648, Medical Certification for Disability Exceptions"
         }
       },
@@ -132392,7 +132392,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Good Moral Character > Legal Authorities > 8 CFR 316.10",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 316.10"
         }
       },
@@ -132412,12 +132412,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Good Moral Character > Legal Authorities > INA 101(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(f)"
         }
       },
       {
-        "id": "pm-resource-757",
+        "id": "pm-resource-352864fc54b9e6eb",
         "kind": "resource",
         "title": "INA 316(e)",
         "category": "Legal Authorities",
@@ -132426,13 +132426,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 316(e)"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1427&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1427/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-9",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Good Moral Character > Legal Authorities > INA 316(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-d-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 316(e)"
         }
       },
@@ -132452,7 +132452,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(48)(A)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(48)(A)"
         }
       },
@@ -132472,7 +132472,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 237(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 237(a)"
         }
       },
@@ -132492,7 +132492,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Permanent Bars to Good Moral Character > Legal Authorities > INA 101(a)(43)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(43)"
         }
       },
@@ -132512,7 +132512,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Conditional Bars for Acts in Statutory Period > Legal Authorities > 18 U.S.C. 611",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "18 U.S.C. 611"
         }
       },
@@ -132532,7 +132532,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 316.5(b)(6)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 316.5(b)(6)"
         }
       },
@@ -132552,7 +132552,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 316.6",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 316.6"
         }
       },
@@ -132572,12 +132572,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 U.S.C. 1443a",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1443a"
         }
       },
       {
-        "id": "pm-resource-764",
+        "id": "pm-resource-aafe833b78717dba",
         "kind": "resource",
         "title": "INA 319(e)",
         "category": "Legal Authorities",
@@ -132586,13 +132586,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 319(e)"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1430&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1430/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-4",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Spouses of U.S. Citizens Employed Abroad > Legal Authorities > INA 319(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 319(e)"
         }
       },
@@ -132612,7 +132612,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Conditional Permanent Resident Spouses and Naturalization > Legal Authorities > 8 CFR 216",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 216"
         }
       },
@@ -132632,7 +132632,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Conditional Permanent Resident Spouses and Naturalization > Legal Authorities > INA 216",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-g-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 216"
         }
       },
@@ -132652,7 +132652,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 322",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 322"
         }
       },
@@ -132672,7 +132672,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 341",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 341"
         }
       },
@@ -132692,12 +132692,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(c)"
         }
       },
       {
-        "id": "pm-resource-768",
+        "id": "pm-resource-24d5581c66d41052",
         "kind": "resource",
         "title": "INA 322",
         "category": "Legal Authorities",
@@ -132706,18 +132706,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 322"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1433&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1433/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 322",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 322"
         }
       },
       {
-        "id": "pm-resource-770",
+        "id": "pm-resource-2ea4abd393ae087a",
         "kind": "resource",
         "title": "INA 341",
         "category": "Legal Authorities",
@@ -132726,13 +132726,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 341"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1452&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1452/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 341",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 341"
         }
       },
@@ -132752,7 +132752,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > N-600K, Application for Citizenship and Issuance of Certificate Under Section 322",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-600K, Application for Citizenship and Issuance of Certificate Under Section 322"
         }
       },
@@ -132772,7 +132772,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Definition of Child and Residence for Citizenship and Naturalization > Legal Authorities > INA 101(b)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(b)(1)"
         }
       },
@@ -132790,7 +132790,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 3 - U.S. Citizens at Birth (INA 301 and 309) > Appendix: Nationality Chart 1 - Children Born Outside the United States in Wedlock",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Nationality Chart 1 - Children Born Outside the United States in Wedlock"
         }
       },
@@ -132808,7 +132808,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 3 - U.S. Citizens at Birth (INA 301 and 309) > Appendix: Nationality Chart 2 - Children Born Outside the United States Out of Wedlock",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Nationality Chart 2 - Children Born Outside the United States Out of Wedlock"
         }
       },
@@ -132826,7 +132826,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 3 - U.S. Citizens at Birth (INA 301 and 309) > Appendix: Nationality Chart 3 - Derivative Citizenship of Children",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Nationality Chart 3 - Derivative Citizenship of Children"
         }
       },
@@ -132844,7 +132844,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 3 - U.S. Citizens at Birth (INA 301 and 309) > Appendix: Nationality Chart 4 - Children of U.S. Citizens Regularly Residing Outside United States (INA 322)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-h-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Nationality Chart 4 - Children of U.S. Citizens Regularly Residing Outside United States (INA 322)"
         }
       },
@@ -132862,7 +132862,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Legislation Assisting Military Members and their Families Obtain Immigration Benefits",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Legislation Assisting Military Members and their Families Obtain Immigration Benefits"
         }
       },
@@ -132882,7 +132882,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 392",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 392"
         }
       },
@@ -132902,12 +132902,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 284",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 284"
         }
       },
       {
-        "id": "pm-resource-779",
+        "id": "pm-resource-b9808dad1eaf5726",
         "kind": "resource",
         "title": "INA 329A",
         "category": "Legal Authorities",
@@ -132916,18 +132916,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 329A"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1440-1&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1440-1/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 329A",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 329A"
         }
       },
       {
-        "id": "pm-resource-782",
+        "id": "pm-resource-cb045436bd7431f8",
         "kind": "resource",
         "title": "INA 315",
         "category": "Legal Authorities",
@@ -132936,13 +132936,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 315"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1426&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1426/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-4",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Permanent Bars to Naturalization > Legal Authorities > INA 315",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 315"
         }
       },
@@ -132962,12 +132962,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Revocation of Naturalization > Legal Authorities > 8 CFR 340",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 340"
         }
       },
       {
-        "id": "pm-resource-783",
+        "id": "pm-resource-c068e4d2f65442e8",
         "kind": "resource",
         "title": "INA 328(f)",
         "category": "Legal Authorities",
@@ -132976,18 +132976,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 328(f)"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1439&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1439/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-7",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Revocation of Naturalization > Legal Authorities > INA 328(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 328(f)"
         }
       },
       {
-        "id": "pm-resource-784",
+        "id": "pm-resource-15f69d58f89815a8",
         "kind": "resource",
         "title": "INA 329(c)",
         "category": "Legal Authorities",
@@ -132996,18 +132996,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 329(c)"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1440&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1440/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-7",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Revocation of Naturalization > Legal Authorities > INA 329(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 329(c)"
         }
       },
       {
-        "id": "pm-resource-785",
+        "id": "pm-resource-2afce95d0c3f62f9",
         "kind": "resource",
         "title": "INA 340",
         "category": "Legal Authorities",
@@ -133016,13 +133016,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 340"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1451&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1451/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-7",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Revocation of Naturalization > Legal Authorities > INA 340",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 340"
         }
       },
@@ -133042,7 +133042,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Posthumous Citizenship (INA 329A) > Forms > N-644, Application for Posthumous Citizenship",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-i-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "N-644, Application for Posthumous Citizenship"
         }
       },
@@ -133062,7 +133062,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 106-448 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 106-448 (PDF)"
         }
       },
@@ -133082,7 +133082,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - General Considerations for All Oath Ceremonies > Legal Authorities > 8 CFR 310.1",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 310.1"
         }
       },
@@ -133102,7 +133102,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - General Considerations for All Oath Ceremonies > Legal Authorities > 8 CFR 335.5",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 335.5"
         }
       },
@@ -133122,7 +133122,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 338",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 338"
         }
       },
@@ -133142,7 +133142,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 342",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 342"
         }
       },
@@ -133162,12 +133162,12 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 310(b)(4)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 310(b)(4)"
         }
       },
       {
-        "id": "pm-resource-790",
+        "id": "pm-resource-d277edd4850f4728",
         "kind": "resource",
         "title": "INA 332(e)",
         "category": "Legal Authorities",
@@ -133176,18 +133176,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 332(e)"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1443&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1443/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 332(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 332(e)"
         }
       },
       {
-        "id": "pm-resource-791",
+        "id": "pm-resource-58b7800a35652f1f",
         "kind": "resource",
         "title": "INA 338",
         "category": "Legal Authorities",
@@ -133196,18 +133196,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 338"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1449&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1449/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 338",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 338"
         }
       },
       {
-        "id": "pm-resource-793",
+        "id": "pm-resource-7c29d115a857f5d3",
         "kind": "resource",
         "title": "INA 340(f)",
         "category": "Legal Authorities",
@@ -133216,18 +133216,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 340(f)"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1451&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1451/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 340(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 340(f)"
         }
       },
       {
-        "id": "pm-resource-795",
+        "id": "pm-resource-d06accd632be9ace",
         "kind": "resource",
         "title": "INA 342",
         "category": "Legal Authorities",
@@ -133236,18 +133236,18 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 342"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1453&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1453/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 342",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 342"
         }
       },
       {
-        "id": "pm-resource-57a9aea7c4e45940",
+        "id": "pm-resource-2b0d543ebd4e0773",
         "kind": "resource",
         "title": "INA 349",
         "category": "Legal Authorities",
@@ -133256,13 +133256,13 @@ window.INA_SEARCH_CORPUS = {
           "Legal Authorities",
           "INA 349"
         ],
-        "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1481&num=0&edition=prelim",
+        "url": "https://uscode.house.gov/us/usc/t8/s1481/",
         "parentUrl": "https://www.uscis.gov/policy-manual/volume-12-part-l-chapter-1",
         "source": {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1- Purpose and Background > Legal Authorities > INA 349",
           "url": "https://www.uscis.gov/policy-manual/volume-12-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 349"
         }
       },
@@ -133280,7 +133280,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Summary of Nonimmigrant Categories and Eligibility to Apply for Extension of Stay and Change of Status",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Summary of Nonimmigrant Categories and Eligibility to Apply for Extension of Stay and Change of Status"
         }
       },
@@ -133300,7 +133300,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214"
         }
       },
@@ -133320,7 +133320,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.1(c)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.1(c)(5)"
         }
       },
@@ -133340,7 +133340,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(q)(5)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(5)(ii)"
         }
       },
@@ -133360,7 +133360,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 248",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 248"
         }
       },
@@ -133380,7 +133380,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-129, Petition for Nonimmigrant Worker",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-129, Petition for Nonimmigrant Worker"
         }
       },
@@ -133400,7 +133400,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)"
         }
       },
@@ -133420,7 +133420,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214"
         }
       },
@@ -133440,7 +133440,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)"
         }
       },
@@ -133460,7 +133460,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 248",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 248"
         }
       },
@@ -133480,7 +133480,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 22 CFR 62, Subpart B",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 62, Subpart B"
         }
       },
@@ -133500,7 +133500,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 212.7(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.7(c)"
         }
       },
@@ -133520,7 +133520,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(j)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(j)"
         }
       },
@@ -133540,7 +133540,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 248.2",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 248.2"
         }
       },
@@ -133560,7 +133560,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(J)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(J)"
         }
       },
@@ -133580,7 +133580,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(e)"
         }
       },
@@ -133600,7 +133600,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(j)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(j)(1)"
         }
       },
@@ -133620,7 +133620,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(l)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(l)"
         }
       },
@@ -133640,7 +133640,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(q)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)"
         }
       },
@@ -133660,7 +133660,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(q)(3)(iii)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(3)(iii)(B)"
         }
       },
@@ -133680,7 +133680,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(Q)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(Q)"
         }
       },
@@ -133700,7 +133700,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(q)(1)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(1)(iii)"
         }
       },
@@ -133720,7 +133720,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(q)(2)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(2)(ii)"
         }
       },
@@ -133740,7 +133740,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(q)(3)(iii)(C)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(3)(iii)(C)"
         }
       },
@@ -133760,7 +133760,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(q)(3)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(3)(iv)"
         }
       },
@@ -133780,7 +133780,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(q)(4)(i)(A)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(4)(i)(A)"
         }
       },
@@ -133800,7 +133800,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(q)(4)(i)(C)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(4)(i)(C)"
         }
       },
@@ -133820,7 +133820,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(q)(5)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(5)(iii)"
         }
       },
@@ -133840,7 +133840,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(q)(7)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(7)(iv)"
         }
       },
@@ -133860,7 +133860,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing and Documentation > Legal Authorities > 8 CFR 214.2(q)(11)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(11)(ii)"
         }
       },
@@ -133880,7 +133880,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing and Documentation > Legal Authorities > 8 CFR 214.2(q)(4)(i)(B), (C), (D), and (E)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(4)(i)(B), (C), (D), and (E)"
         }
       },
@@ -133900,7 +133900,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing and Documentation > Legal Authorities > 8 CFR 214.2(q)(4)(ii)(A)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(4)(ii)(A)"
         }
       },
@@ -133920,7 +133920,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing and Documentation > Legal Authorities > 8 CFR 214.2(q)(4)(ii)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(4)(ii)(B)"
         }
       },
@@ -133940,7 +133940,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing and Documentation > Legal Authorities > 8 CFR 214.2(q)(5)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(5)(i)"
         }
       },
@@ -133960,7 +133960,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing and Documentation > Legal Authorities > 8 CFR 214.2(q)(5)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(5)(iv)"
         }
       },
@@ -133980,7 +133980,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 103.2(b)(19)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2(b)(19)"
         }
       },
@@ -134000,7 +134000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 103.2(b)(8)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2(b)(8)"
         }
       },
@@ -134020,7 +134020,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 103.3(a)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.3(a)(2)"
         }
       },
@@ -134040,7 +134040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 103.5(a)(1)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.5(a)(1)(ii)"
         }
       },
@@ -134060,7 +134060,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 214.2(q)(6)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(6)"
         }
       },
@@ -134080,7 +134080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 214.2(q)(7)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(7)(iii)"
         }
       },
@@ -134100,7 +134100,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 214.2(q)(8)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(8)(i)"
         }
       },
@@ -134120,7 +134120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 214.2(q)(9)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(9)(ii)"
         }
       },
@@ -134140,7 +134140,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 214.2(q)(9)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(9)(iii)"
         }
       },
@@ -134160,7 +134160,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 214.2(q)(9)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(9)(iv)"
         }
       },
@@ -134180,7 +134180,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Adjudication > Legal Authorities > 8 CFR 214.2(q)(9)(v)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(9)(v)"
         }
       },
@@ -134200,7 +134200,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Admissions, Extensions of Stay, and Changes of Status > Legal Authorities > 8 CFR 214.2(q)(5)(v)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(q)(5)(v)"
         }
       },
@@ -134220,7 +134220,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Admissions, Extensions of Stay, and Changes of Status > Legal Authorities > 8 CFR 248.3(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 248.3(a)"
         }
       },
@@ -134240,7 +134240,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Admissions, Extensions of Stay, and Changes of Status > Legal Authorities > 8 CFR 248.3(g)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 248.3(g)"
         }
       },
@@ -134258,7 +134258,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Comparison Chart for F and M Students",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Comparison Chart for F and M Students"
         }
       },
@@ -134278,7 +134278,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 22 CFR 41.61",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 41.61"
         }
       },
@@ -134298,7 +134298,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.13",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.13"
         }
       },
@@ -134318,7 +134318,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(f)"
         }
       },
@@ -134338,7 +134338,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(m)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(m)"
         }
       },
@@ -134358,7 +134358,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.3",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.3"
         }
       },
@@ -134378,7 +134378,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 274a.12(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a.12(c)"
         }
       },
@@ -134398,7 +134398,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(F)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(F)"
         }
       },
@@ -134418,7 +134418,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(M)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(M)"
         }
       },
@@ -134438,7 +134438,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(m)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(m)"
         }
       },
@@ -134458,7 +134458,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)"
         }
       },
@@ -134478,7 +134478,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(H)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(H)"
         }
       },
@@ -134498,7 +134498,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 11 - Temporary Nonagricultural Worker (H-2B) Petitions Requiring Special Handling > Legal Authorities > Pub. L. 110-229 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 110-229 (PDF)"
         }
       },
@@ -134518,7 +134518,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 11 - Temporary Nonagricultural Worker (H-2B) Petitions Requiring Special Handling > Legal Authorities > Pub. L. 115-232 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 115-232 (PDF)"
         }
       },
@@ -134538,7 +134538,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 11 - Temporary Nonagricultural Worker (H-2B) Petitions Requiring Special Handling > Legal Authorities > Pub. L. 115-91 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 115-91 (PDF)"
         }
       },
@@ -134558,7 +134558,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 11 - Temporary Nonagricultural Worker (H-2B) Petitions Requiring Special Handling > Legal Authorities > Pub. L. 116-283 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-i-chapter-11",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 116-283 (PDF)"
         }
       },
@@ -134578,7 +134578,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(1)(ii)(E)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(1)(ii)(E)"
         }
       },
@@ -134598,7 +134598,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(10)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(10)"
         }
       },
@@ -134618,7 +134618,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(11)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(11)"
         }
       },
@@ -134638,7 +134638,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(12)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(12)"
         }
       },
@@ -134658,7 +134658,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(13)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(13)"
         }
       },
@@ -134678,7 +134678,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(14)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(14)"
         }
       },
@@ -134698,7 +134698,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(15)(ii)(D)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(15)(ii)(D)"
         }
       },
@@ -134718,7 +134718,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(16)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(16)(ii)"
         }
       },
@@ -134738,7 +134738,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(17)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(17)"
         }
       },
@@ -134758,7 +134758,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(7)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(7)"
         }
       },
@@ -134778,7 +134778,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(8)(i)(D)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(8)(i)(D)"
         }
       },
@@ -134798,7 +134798,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(9)(iii)(C)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(9)(iii)(C)"
         }
       },
@@ -134818,7 +134818,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(h)(9)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(9)(iv)"
         }
       },
@@ -134838,7 +134838,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(H)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(H)(iii)"
         }
       },
@@ -134858,7 +134858,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Trainee Program Requirements > Legal Authorities > 8 CFR 214.2(h)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(2)"
         }
       },
@@ -134878,7 +134878,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Trainee Program Requirements > Forms > I-907, Request for Premium Processing Service",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-907, Request for Premium Processing Service"
         }
       },
@@ -134898,7 +134898,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Trainee Program Requirements > Legal Authorities > INA 214(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(b)"
         }
       },
@@ -134918,7 +134918,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Special Education Exchange Visitor Program Requirements > Legal Authorities > 8 CFR 214.2(h)(13)(i)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(13)(i)(B)"
         }
       },
@@ -134938,7 +134938,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudication > Legal Authorities > 8 CFR 214.2(h)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(1)"
         }
       },
@@ -134958,7 +134958,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudication > Legal Authorities > 8 CFR 214.2(h)(9)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(h)(9)"
         }
       },
@@ -134978,7 +134978,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Admissions, Extensions of Stay, and Change of Status > Legal Authorities > 8 CFR 248.1(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-j-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 248.1(b)"
         }
       },
@@ -134998,7 +134998,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(i)"
         }
       },
@@ -135018,7 +135018,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(I)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(I)"
         }
       },
@@ -135038,7 +135038,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Distinction between News and Entertainment > Legal Authorities > INA 101(a)(15)(O)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(O)"
         }
       },
@@ -135058,7 +135058,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Distinction between News and Entertainment > Legal Authorities > INA 101(a)(15)(P)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(P)"
         }
       },
@@ -135078,7 +135078,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication > Legal Authorities > 8 CFR 214.1",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.1"
         }
       },
@@ -135098,7 +135098,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication > Legal Authorities > INA 248(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-k-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 248(a)"
         }
       },
@@ -135118,7 +135118,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(l)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(l)"
         }
       },
@@ -135138,7 +135138,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(L)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(L)"
         }
       },
@@ -135158,7 +135158,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(44)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(44)"
         }
       },
@@ -135178,7 +135178,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(c)(12)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(12)"
         }
       },
@@ -135198,7 +135198,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(c)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(2)"
         }
       },
@@ -135218,7 +135218,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - General Eligibility > Forms > I-129S, Nonimmigrant Petition Based on Blanket L Petition",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-129S, Nonimmigrant Petition Based on Blanket L Petition"
         }
       },
@@ -135238,7 +135238,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Ownership and Control > Other Materials > Business Structures",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-l-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Business Structures"
         }
       },
@@ -135258,7 +135258,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(o)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)"
         }
       },
@@ -135278,7 +135278,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(46)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(46)"
         }
       },
@@ -135298,7 +135298,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility for O Classification > Legal Authorities > 8 CFR 214.2(o)(1)(ii)(A)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(1)(ii)(A)(1)"
         }
       },
@@ -135318,7 +135318,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility for O Classification > Legal Authorities > 8 CFR 214.2(o)(1)(ii)(A)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(1)(ii)(A)(2)"
         }
       },
@@ -135338,7 +135338,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility for O Classification > Legal Authorities > 8 CFR 214.2(o)(1)(ii)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(1)(ii)(B)"
         }
       },
@@ -135358,7 +135358,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Petitioners > Legal Authorities > 8 CFR 214.2(o)(16)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(16)"
         }
       },
@@ -135378,7 +135378,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Petitioners > Legal Authorities > 8 CFR 214.2(o)(2)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(2)(iv)"
         }
       },
@@ -135398,7 +135398,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Petitioners > Legal Authorities > 8 CFR 214.2(o)(2)(iv)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(2)(iv)(B)"
         }
       },
@@ -135418,7 +135418,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - O-1 Beneficiaries > Legal Authorities > 59 FR 41818 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "59 FR 41818 (PDF)"
         }
       },
@@ -135438,7 +135438,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - O-1 Beneficiaries > Legal Authorities > 8 CFR 214.2(o)(12)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(12)(ii)"
         }
       },
@@ -135458,7 +135458,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - O-1 Beneficiaries > Legal Authorities > 8 CFR 214.2(o)(3)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(3)(ii)"
         }
       },
@@ -135478,7 +135478,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - O-1 Beneficiaries > Legal Authorities > 8 CFR 214.2(o)(3)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(3)(iii)"
         }
       },
@@ -135498,7 +135498,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - O-1 Beneficiaries > Legal Authorities > 8 CFR 214.2(o)(3)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(3)(iv)"
         }
       },
@@ -135518,7 +135518,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - O-1 Beneficiaries > Legal Authorities > 8 CFR 214.2(o)(3)(v)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(3)(v)"
         }
       },
@@ -135538,7 +135538,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - O-1 Beneficiaries > Legal Authorities > 8 CFR 214.2(o)(6)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(6)(iii)"
         }
       },
@@ -135558,7 +135558,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - O-2 Beneficiaries > Legal Authorities > 8 CFR 214.2(o)(4)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(4)"
         }
       },
@@ -135578,7 +135578,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Family Members > Legal Authorities > 8 CFR 214.2(o)(6)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(6)(iv)"
         }
       },
@@ -135598,7 +135598,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Documentation and Evidence > Legal Authorities > 8 CFR 214.2(o)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(2)"
         }
       },
@@ -135618,7 +135618,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Documentation and Evidence > Legal Authorities > 8 CFR 214.2(o)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(5)"
         }
       },
@@ -135638,7 +135638,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Adjudication > Legal Authorities > 8 CFR 214.2(o)(7)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(7)"
         }
       },
@@ -135658,7 +135658,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Adjudication > Legal Authorities > 8 CFR 214.2(o)(8)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(8)(ii)"
         }
       },
@@ -135678,7 +135678,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Adjudication > Legal Authorities > 8 CFR 214.2(o)(9)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(9)(ii)"
         }
       },
@@ -135698,7 +135698,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Admission, Extension of Stay, Change of Status, and Change of Employer > Legal Authorities > 8 CFR 214.1(l)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.1(l)(2)"
         }
       },
@@ -135718,7 +135718,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Admission, Extension of Stay, Change of Status, and Change of Employer > Legal Authorities > 8 CFR 214.2(o)(1)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(1)(i)"
         }
       },
@@ -135738,7 +135738,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Admission, Extension of Stay, Change of Status, and Change of Employer > Legal Authorities > 8 CFR 214.2(o)(10)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(10)"
         }
       },
@@ -135758,7 +135758,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Admission, Extension of Stay, Change of Status, and Change of Employer > Legal Authorities > 8 CFR 214.2(o)(13)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(13)"
         }
       },
@@ -135778,7 +135778,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Admission, Extension of Stay, Change of Status, and Change of Employer > Legal Authorities > 8 CFR 214.2(o)(2)(ii)(C)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(o)(2)(ii)(C)"
         }
       },
@@ -135798,7 +135798,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Admission, Extension of Stay, Change of Status, and Change of Employer > Legal Authorities > 8 CFR 248.1(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-m-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 248.1(a)"
         }
       },
@@ -135818,7 +135818,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(p)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)"
         }
       },
@@ -135838,7 +135838,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 204(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(i)"
         }
       },
@@ -135858,7 +135858,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(a)(2)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(a)(2)(B)"
         }
       },
@@ -135878,7 +135878,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(c)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(1)"
         }
       },
@@ -135898,7 +135898,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(c)(4)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(4)"
         }
       },
@@ -135918,7 +135918,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(c)(5)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(5)(B)"
         }
       },
@@ -135938,7 +135938,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(c)(6)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(6)"
         }
       },
@@ -135958,7 +135958,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 102-110 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 102-110 (PDF)"
         }
       },
@@ -135978,7 +135978,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 109-463 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 109-463 (PDF)"
         }
       },
@@ -135998,7 +135998,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(p)(1)(ii)(A)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)(1)(ii)(A)(1)"
         }
       },
@@ -136018,7 +136018,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(p)(4)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)(4)(i)"
         }
       },
@@ -136038,7 +136038,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(p)(4)(ii)(A)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)(4)(ii)(A)"
         }
       },
@@ -136058,7 +136058,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.2(p)(4)(ii)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)(4)(ii)(B)"
         }
       },
@@ -136078,7 +136078,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > INA 214(c)(4)(A)(i)(I)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(4)(A)(i)(I)"
         }
       },
@@ -136098,7 +136098,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > INA 214(c)(4)(A)(ii)(I)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(4)(A)(ii)(I)"
         }
       },
@@ -136118,7 +136118,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation and Evidence > Legal Authorities > 8 CFR 214.2(p)(2)(ii)(D)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)(2)(ii)(D)"
         }
       },
@@ -136138,7 +136138,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation and Evidence > Legal Authorities > 8 CFR 214.2(p)(4)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)(4)(iii)"
         }
       },
@@ -136158,7 +136158,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation and Evidence > Legal Authorities > 8 CFR 214.2(p)(4)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)(4)(iv)"
         }
       },
@@ -136178,7 +136178,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation and Evidence > Legal Authorities > 8 CFR 214.2(p)(7)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(p)(7)"
         }
       },
@@ -136198,7 +136198,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation and Evidence > Legal Authorities > INA 101(a)(15)(P)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(P)(i)"
         }
       },
@@ -136218,7 +136218,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation and Evidence > Legal Authorities > INA 214(c)(4)(A)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(c)(4)(A)"
         }
       },
@@ -136238,7 +136238,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.2(r)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(r)"
         }
       },
@@ -136258,7 +136258,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(R)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-o-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(R)"
         }
       },
@@ -136278,7 +136278,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.6",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.6"
         }
       },
@@ -136298,7 +136298,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Chapter 16",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Chapter 16"
         }
       },
@@ -136318,7 +136318,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(e)"
         }
       },
@@ -136338,7 +136338,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 103-182 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 103-182 (PDF)"
         }
       },
@@ -136358,7 +136358,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 116-113 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 116-113 (PDF)"
         }
       },
@@ -136378,7 +136378,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > United States-Mexico-Canada Agreement (USMCA) (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "United States-Mexico-Canada Agreement (USMCA) (PDF)"
         }
       },
@@ -136396,7 +136396,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Case Law References for T Visa Adjudications",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Case Law References for T Visa Adjudications"
         }
       },
@@ -136416,7 +136416,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 22 CFR 41.84",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 41.84"
         }
       },
@@ -136436,7 +136436,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 22 U.S.C. 7105(b)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 U.S.C. 7105(b)(1)"
         }
       },
@@ -136456,7 +136456,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 28 CFR 1100.35",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "28 CFR 1100.35"
         }
       },
@@ -136476,7 +136476,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 212.16",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.16"
         }
       },
@@ -136496,7 +136496,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 212.18",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.18"
         }
       },
@@ -136516,7 +136516,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214 Subpart C",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214 Subpart C"
         }
       },
@@ -136536,7 +136536,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.11",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.11"
         }
       },
@@ -136556,7 +136556,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 274a.12(a)(16)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a.12(a)(16)"
         }
       },
@@ -136576,7 +136576,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 274a.12(c)(25)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a.12(c)(25)"
         }
       },
@@ -136596,7 +136596,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(13)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(13)(B)"
         }
       },
@@ -136616,7 +136616,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(T)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(T)"
         }
       },
@@ -136636,7 +136636,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(i)"
         }
       },
@@ -136656,7 +136656,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(d)(13)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(d)(13)"
         }
       },
@@ -136676,7 +136676,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(d)(3)(A)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(d)(3)(A)(ii)"
         }
       },
@@ -136696,7 +136696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(o)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(o)"
         }
       },
@@ -136716,7 +136716,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 237(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 237(d)"
         }
       },
@@ -136736,7 +136736,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Duration and Extensions of Status > Legal Authorities > 8 CFR 212.1",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.1"
         }
       },
@@ -136756,7 +136756,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 18 U.S.C. 1584",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "18 U.S.C. 1584"
         }
       },
@@ -136776,7 +136776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 18 U.S.C. 1589",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "18 U.S.C. 1589"
         }
       },
@@ -136796,7 +136796,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 22 U.S.C. 7102(11)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 U.S.C. 7102(11)"
         }
       },
@@ -136816,7 +136816,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 212.5",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.5"
         }
       },
@@ -136836,7 +136836,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > INA 101(a)(38)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(38)"
         }
       },
@@ -136856,7 +136856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > INA 212(d)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(d)(5)"
         }
       },
@@ -136876,7 +136876,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Family Members > Legal Authorities > INA 204(l)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(l)"
         }
       },
@@ -136896,7 +136896,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Bona Fide Determinations > Legal Authorities > 8 CFR 274a.13(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a.13(c)"
         }
       },
@@ -136916,7 +136916,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Bona Fide Determinations > Legal Authorities > 8 CFR 274a.14(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a.14(b)"
         }
       },
@@ -136936,7 +136936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Bona Fide Determinations > Legal Authorities > INA 103(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 103(a)"
         }
       },
@@ -136956,7 +136956,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Applicants in Removal Proceedings > Legal Authorities > 8 CFR 241.4",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 241.4"
         }
       },
@@ -136976,7 +136976,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Applicants in Removal Proceedings > Legal Authorities > 8 CFR 241.6(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-b-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 241.6(a)"
         }
       },
@@ -136994,7 +136994,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Bona Fide Determination Process Flowchart",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Bona Fide Determination Process Flowchart"
         }
       },
@@ -137012,7 +137012,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Bona Fide Determination Process and Administrative Procedure Act Considerations",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Bona Fide Determination Process and Administrative Procedure Act Considerations"
         }
       },
@@ -137032,7 +137032,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 212.17",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.17"
         }
       },
@@ -137052,7 +137052,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.14",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.14"
         }
       },
@@ -137072,7 +137072,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-192, Application for Advance Permission to Enter as a Nonimmigrant",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-192, Application for Advance Permission to Enter as a Nonimmigrant"
         }
       },
@@ -137092,7 +137092,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-918 Supplement B, U Nonimmigrant Status Certification",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-918 Supplement B, U Nonimmigrant Status Certification"
         }
       },
@@ -137112,7 +137112,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(15)(U)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(15)(U)"
         }
       },
@@ -137132,7 +137132,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)"
         }
       },
@@ -137152,7 +137152,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(a)(4)(E)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(4)(E)(ii)"
         }
       },
@@ -137172,7 +137172,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(d)(14)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(d)(14)"
         }
       },
@@ -137192,7 +137192,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(d)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(d)(3)"
         }
       },
@@ -137212,7 +137212,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 214(p)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(p)"
         }
       },
@@ -137232,7 +137232,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 248(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 248(b)"
         }
       },
@@ -137252,7 +137252,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.2",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2"
         }
       },
@@ -137272,7 +137272,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(51)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(51)"
         }
       },
@@ -137290,7 +137290,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 2 - Eligibility Requirements and Evidence > Appendix: Statutory Bars to Establishing Good Moral Character – Waivable Conduct",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-d-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Statutory Bars to Establishing Good Moral Character – Waivable Conduct"
         }
       },
@@ -137310,7 +137310,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 U.S.C. 1804",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1804"
         }
       },
@@ -137330,7 +137330,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 90 FR 48317",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "90 FR 48317"
         }
       },
@@ -137350,7 +137350,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Delegation of Authority 7030.2",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Delegation of Authority 7030.2"
         }
       },
@@ -137370,7 +137370,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 96-422 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 96-422 (PDF)"
         }
       },
@@ -137390,7 +137390,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 212.19",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.19"
         }
       },
@@ -137410,7 +137410,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 274a",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 274a"
         }
       },
@@ -137430,7 +137430,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 82 FR 5238 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "82 FR 5238 (PDF)"
         }
       },
@@ -137450,7 +137450,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 86 FR 50839 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "86 FR 50839 (PDF)"
         }
       },
@@ -137470,7 +137470,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > Consumer Price Index",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Consumer Price Index"
         }
       },
@@ -137490,7 +137490,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-941, Application for Entrepreneur Parole",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-941, Application for Entrepreneur Parole"
         }
       },
@@ -137510,7 +137510,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > International Entrepreneur Parole",
           "url": "https://www.uscis.gov/policy-manual/volume-3-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "International Entrepreneur Parole"
         }
       },
@@ -137530,7 +137530,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 22 CFR 96",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 96"
         }
       },
@@ -137550,7 +137550,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204 Subpart C",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204 Subpart C"
         }
       },
@@ -137570,7 +137570,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.1",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.1"
         }
       },
@@ -137590,7 +137590,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.2(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2(d)"
         }
       },
@@ -137610,7 +137610,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.3",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.3"
         }
       },
@@ -137630,7 +137630,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Convention of 29 May 1993 on Protection of Children and Co-operation in Respect of Intercountry Adoption",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Convention of 29 May 1993 on Protection of Children and Co-operation in Respect of Intercountry Adoption"
         }
       },
@@ -137650,7 +137650,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(b)(1)(E)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(b)(1)(E)"
         }
       },
@@ -137670,7 +137670,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(b)(1)(F)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(b)(1)(F)"
         }
       },
@@ -137690,7 +137690,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(b)(1)(G)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(b)(1)(G)"
         }
       },
@@ -137710,7 +137710,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 201(b)(2)(A)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 201(b)(2)(A)(i)"
         }
       },
@@ -137730,7 +137730,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(a)"
         }
       },
@@ -137750,7 +137750,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 106-139 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 106-139 (PDF)"
         }
       },
@@ -137770,7 +137770,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 106-279 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 106-279 (PDF)"
         }
       },
@@ -137790,7 +137790,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 111-287 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 111-287 (PDF)"
         }
       },
@@ -137810,7 +137810,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 112-276 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 112-276 (PDF)"
         }
       },
@@ -137830,7 +137830,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 80-774 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 80-774 (PDF)"
         }
       },
@@ -137850,7 +137850,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 87-301 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 87-301 (PDF)"
         }
       },
@@ -137870,7 +137870,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 89-236 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 89-236 (PDF)"
         }
       },
@@ -137890,7 +137890,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.301",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.301"
         }
       },
@@ -137910,7 +137910,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.311",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.311"
         }
       },
@@ -137930,7 +137930,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 205.1",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 205.1"
         }
       },
@@ -137950,7 +137950,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(b)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(b)(2)"
         }
       },
@@ -137970,7 +137970,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 204(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(d)"
         }
       },
@@ -137990,7 +137990,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 201(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 201(b)"
         }
       },
@@ -138010,7 +138010,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.303",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.303"
         }
       },
@@ -138028,7 +138028,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Citizenship and Naturalization for Adopted Children by Main Visa Classification Codes",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Citizenship and Naturalization for Adopted Children by Main Visa Classification Codes"
         }
       },
@@ -138046,7 +138046,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: How Previous Citizenship Provisions Apply to Adopted Children",
           "url": "https://www.uscis.gov/policy-manual/volume-5-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: How Previous Citizenship Provisions Apply to Adopted Children"
         }
       },
@@ -138066,7 +138066,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-129F, Petition for Alien Fiancé(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-129F, Petition for Alien Fiancé(e)"
         }
       },
@@ -138086,7 +138086,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 201",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 201"
         }
       },
@@ -138106,7 +138106,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 202",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 202"
         }
       },
@@ -138126,7 +138126,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203"
         }
       },
@@ -138146,7 +138146,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication of Family-Based Petitions > Legal Authorities > 8 CFR 204.2(a)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2(a)(3)"
         }
       },
@@ -138166,7 +138166,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication of Family-Based Petitions > Legal Authorities > 8 CFR 204.2(b)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2(b)(3)"
         }
       },
@@ -138186,7 +138186,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication of Family-Based Petitions > Legal Authorities > 8 CFR 204.2(c)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2(c)(3)"
         }
       },
@@ -138206,7 +138206,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication of Family-Based Petitions > Legal Authorities > 8 CFR 204.2(e)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2(e)(3)"
         }
       },
@@ -138226,7 +138226,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication of Family-Based Petitions > Legal Authorities > 8 CFR 204.2(f)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2(f)(3)"
         }
       },
@@ -138246,7 +138246,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication of Family-Based Petitions > Legal Authorities > 8 CFR 204.2(g)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-b-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2(g)(3)"
         }
       },
@@ -138266,7 +138266,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 20 CFR 656",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656"
         }
       },
@@ -138286,7 +138286,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.5",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5"
         }
       },
@@ -138306,7 +138306,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.5(a)-(l), (n)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(a)-(l), (n)"
         }
       },
@@ -138326,7 +138326,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > ETA Form 9089, Application for Permanent Employment Certification (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "ETA Form 9089, Application for Permanent Employment Certification (PDF)"
         }
       },
@@ -138346,7 +138346,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > Form ETA-9141, Application for Prevailing Wage Determination (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Form ETA-9141, Application for Prevailing Wage Determination (PDF)"
         }
       },
@@ -138366,7 +138366,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-140, Immigrant Petition for Alien Worker",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-140, Immigrant Petition for Alien Worker"
         }
       },
@@ -138386,7 +138386,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203(b)(1), (2), (3)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(1), (2), (3)"
         }
       },
@@ -138406,7 +138406,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203(b)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(2)"
         }
       },
@@ -138426,7 +138426,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203(b)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(3)"
         }
       },
@@ -138446,7 +138446,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Decision and Post-Adjudication > Legal Authorities > 8 CFR 204.2(a)(1)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.2(a)(1)(ii)"
         }
       },
@@ -138466,7 +138466,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Decision and Post-Adjudication > Legal Authorities > INA 203(g)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(g)"
         }
       },
@@ -138486,7 +138486,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Decision and Post-Adjudication > Legal Authorities > INA 204(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(c)"
         }
       },
@@ -138506,7 +138506,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Decision and Post-Adjudication > Legal Authorities > INA 205",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 205"
         }
       },
@@ -138526,7 +138526,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > INA 212(a)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(5)"
         }
       },
@@ -138546,7 +138546,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Successor-in-Interest in Permanent Labor Certification Cases > Legal Authorities > INA 204(j)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(j)"
         }
       },
@@ -138566,7 +138566,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Successor-in-Interest in Permanent Labor Certification Cases > Legal Authorities > Pub. L. 106-313 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 106-313 (PDF)"
         }
       },
@@ -138586,7 +138586,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Ability to Pay > Legal Authorities > 8 CFR 204.5(g)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(g)(2)"
         }
       },
@@ -138606,7 +138606,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 20 CFR 656.11",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.11"
         }
       },
@@ -138626,7 +138626,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 20 CFR 656.17",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.17"
         }
       },
@@ -138646,7 +138646,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 20 CFR 656.26",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.26"
         }
       },
@@ -138666,7 +138666,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 20 CFR 656.30(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.30(a)"
         }
       },
@@ -138686,7 +138686,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 20 CFR 656.30(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.30(b)"
         }
       },
@@ -138706,7 +138706,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 20 CFR 656.30(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.30(e)"
         }
       },
@@ -138726,7 +138726,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 20 CFR 656.32",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.32"
         }
       },
@@ -138746,7 +138746,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 72 FR 27904 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "72 FR 27904 (PDF)"
         }
       },
@@ -138766,7 +138766,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 8 CFR 204.5(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(d)"
         }
       },
@@ -138786,7 +138786,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Permanent Labor Certification > Legal Authorities > 8 CFR 204.5(g)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(g)(1)"
         }
       },
@@ -138804,7 +138804,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 7 - Schedule A Designation Petitions > Appendix: Sample Notice of Filing",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Sample Notice of Filing"
         }
       },
@@ -138824,7 +138824,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Schedule A Designation Petitions > Legal Authorities > 20 CFR 656.10",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.10"
         }
       },
@@ -138844,7 +138844,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Schedule A Designation Petitions > Legal Authorities > 20 CFR 656.15",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.15"
         }
       },
@@ -138864,7 +138864,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Schedule A Designation Petitions > Legal Authorities > 20 CFR 656.20",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.20"
         }
       },
@@ -138884,7 +138884,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Schedule A Designation Petitions > Legal Authorities > 20 CFR 656.3",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.3"
         }
       },
@@ -138904,7 +138904,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Schedule A Designation Petitions > Legal Authorities > 20 CFR 656.5",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.5"
         }
       },
@@ -138924,7 +138924,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Documentation and Evidence > Legal Authorities > 8 CFR 103.2(a)(7)(ii)(D)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.2(a)(7)(ii)(D)"
         }
       },
@@ -138944,7 +138944,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Documentation and Evidence > Legal Authorities > 8 CFR 204.5(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(e)"
         }
       },
@@ -138964,7 +138964,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Documentation and Evidence > Legal Authorities > 8 CFR 245.1(g)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.1(g)"
         }
       },
@@ -138984,7 +138984,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Documentation and Evidence > Legal Authorities > INA 203(b)(1)(A)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(1)(A)"
         }
       },
@@ -139004,7 +139004,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Documentation and Evidence > Legal Authorities > INA 203(b)(2)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-e-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(2)(B)"
         }
       },
@@ -139024,7 +139024,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.12",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.12"
         }
       },
@@ -139044,7 +139044,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203(b)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(1)"
         }
       },
@@ -139064,7 +139064,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Extraordinary Ability > Legal Authorities > 8 CFR 204.5(h)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(h)"
         }
       },
@@ -139084,7 +139084,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Outstanding Professor or Researcher > Legal Authorities > 8 CFR 204.5(j)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(j)"
         }
       },
@@ -139104,7 +139104,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Outstanding Professor or Researcher > Legal Authorities > INA 203(b)(1)(C)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(1)(C)"
         }
       },
@@ -139124,7 +139124,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability > Legal Authorities > 20 CFR 656.17(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "20 CFR 656.17(i)"
         }
       },
@@ -139144,7 +139144,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability > Legal Authorities > 8 CFR 103.3(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.3(a)"
         }
       },
@@ -139164,7 +139164,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability > Legal Authorities > 8 CFR 204.5(k)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(k)"
         }
       },
@@ -139184,7 +139184,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability > Legal Authorities > 8 CFR 214.2(f)(10)(ii)(C)(2)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.2(f)(10)(ii)(C)(2)(i)"
         }
       },
@@ -139204,7 +139204,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability > Legal Authorities > INA 101(a)(32)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(32)"
         }
       },
@@ -139224,7 +139224,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability > Legal Authorities > INA 203(b)(2)(B)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(2)(B)(i)"
         }
       },
@@ -139244,7 +139244,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability > Legal Authorities > INA 212(a)(5)(A)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(5)(A)"
         }
       },
@@ -139264,7 +139264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Advanced Degree or Exceptional Ability > Legal Authorities > Pub. L. 102-232 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 102-232 (PDF)"
         }
       },
@@ -139284,7 +139284,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Physician > Legal Authorities > 8 CFR 245.18",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.18"
         }
       },
@@ -139304,7 +139304,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Physician > Legal Authorities > INA 203(b)(2)(B)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(2)(B)(ii)"
         }
       },
@@ -139324,7 +139324,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Skilled Worker, Professional, or Other Worker > Legal Authorities > 8 CFR 204.5(l)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(l)"
         }
       },
@@ -139342,7 +139342,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Regional Center Program Prior to March 15, 2022",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Regional Center Program Prior to March 15, 2022"
         }
       },
@@ -139362,7 +139362,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.6 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.6 (PDF)"
         }
       },
@@ -139382,7 +139382,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 216.3",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 216.3"
         }
       },
@@ -139402,7 +139402,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 216.6",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 216.6"
         }
       },
@@ -139422,7 +139422,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-526, Immigrant Petition by Standalone Investor",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-526, Immigrant Petition by Standalone Investor"
         }
       },
@@ -139442,7 +139442,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-526E, Immigrant Petition by Regional Center Investor",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-526E, Immigrant Petition by Regional Center Investor"
         }
       },
@@ -139462,7 +139462,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-956, Application for Regional Center Designation",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-956, Application for Regional Center Designation"
         }
       },
@@ -139482,7 +139482,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-956F, Application for Approval of an Investment in a Commercial Enterprise",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-956F, Application for Approval of an Investment in a Commercial Enterprise"
         }
       },
@@ -139502,7 +139502,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-956G, Regional Center Annual Statement",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-956G, Regional Center Annual Statement"
         }
       },
@@ -139522,7 +139522,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-956H, Bona Fides of Persons Involved with Regional Center Program",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-956H, Bona Fides of Persons Involved with Regional Center Program"
         }
       },
@@ -139542,7 +139542,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203(b)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(5)"
         }
       },
@@ -139562,7 +139562,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 204(a)(1)(H)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(a)(1)(H)"
         }
       },
@@ -139582,7 +139582,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 216A",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 216A"
         }
       },
@@ -139602,7 +139602,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 102-395 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 102-395 (PDF)"
         }
       },
@@ -139622,7 +139622,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 102-395 (as amended)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 102-395 (as amended)"
         }
       },
@@ -139642,7 +139642,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 117-103 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 117-103 (PDF)"
         }
       },
@@ -139662,7 +139662,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.9",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.9"
         }
       },
@@ -139682,7 +139682,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(27)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)"
         }
       },
@@ -139702,7 +139702,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203(b)(4)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)(4)"
         }
       },
@@ -139722,7 +139722,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 204(a)(1)(G)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(a)(1)(G)(i)"
         }
       },
@@ -139742,7 +139742,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 109-163 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 109-163 (PDF)"
         }
       },
@@ -139762,7 +139762,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 110-181 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 110-181 (PDF)"
         }
       },
@@ -139782,7 +139782,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 111-8 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 111-8 (PDF)"
         }
       },
@@ -139802,7 +139802,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Religious Workers > Legal Authorities > 26 U.S.C. 501",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "26 U.S.C. 501"
         }
       },
@@ -139822,7 +139822,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Religious Workers > Legal Authorities > 73 FR 72275 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "73 FR 72275 (PDF)"
         }
       },
@@ -139842,7 +139842,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Religious Workers > Legal Authorities > Legal Settlement Notice",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-h-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Legal Settlement Notice"
         }
       },
@@ -139862,7 +139862,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > DHS Implementation of Section 1367 Information Provisions (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "DHS Implementation of Section 1367 Information Provisions (PDF)"
         }
       },
@@ -139882,7 +139882,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > Information for Conditional Permanent Residents Seeking to Change the Basis of Form I-751 From a Waiver Based on Battery or Extreme Cruelty to a Joint Petition",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Information for Conditional Permanent Residents Seeking to Change the Basis of Form I-751 From a Waiver Based on Battery or Extreme Cruelty to a Joint Petition"
         }
       },
@@ -139902,7 +139902,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Section 384 of the Illegal Immigration Reform and Immigrant Responsibility Act (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Section 384 of the Illegal Immigration Reform and Immigrant Responsibility Act (PDF)"
         }
       },
@@ -139922,7 +139922,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > The Immigration Marriage Fraud Amendments of 1986 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-i-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "The Immigration Marriage Fraud Amendments of 1986 (PDF)"
         }
       },
@@ -139940,7 +139940,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Update to Special Immigrant Juvenile Policy and Administrative Procedure Act (APA) Considerations",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Update to Special Immigrant Juvenile Policy and Administrative Procedure Act (APA) Considerations"
         }
       },
@@ -139960,7 +139960,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 204.11",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.11"
         }
       },
@@ -139980,7 +139980,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 205.1(a)(3)(iv)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 205.1(a)(3)(iv)"
         }
       },
@@ -140000,7 +140000,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(27)(J)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(J)"
         }
       },
@@ -140020,7 +140020,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 245(h)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(h)"
         }
       },
@@ -140040,7 +140040,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 287(h)",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 287(h)"
         }
       },
@@ -140060,7 +140060,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Appeals, Motions to Reopen, and Motions to Reconsider > Legal Authorities > 8 CFR 103.5",
           "url": "https://www.uscis.gov/policy-manual/volume-6-part-j-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.5"
         }
       },
@@ -140080,7 +140080,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 208.24",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 208.24"
         }
       },
@@ -140100,7 +140100,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 209",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 209"
         }
       },
@@ -140120,7 +140120,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 209",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 209"
         }
       },
@@ -140140,7 +140140,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Legal Analysis and Use of Discretion > Legal Authorities > 8 CFR 245.23(e)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.23(e)(3)"
         }
       },
@@ -140160,7 +140160,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Legal Analysis and Use of Discretion > Legal Authorities > 8 CFR 245.24(d)(11)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.24(d)(11)"
         }
       },
@@ -140180,7 +140180,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 9 FAM 502.1-1(C)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "9 FAM 502.1-1(C)"
         }
       },
@@ -140200,7 +140200,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Forms > I-508, Request for Waiver of Certain Rights, Privileges, Exemptions and Immunities",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-508, Request for Waiver of Certain Rights, Privileges, Exemptions and Immunities"
         }
       },
@@ -140220,7 +140220,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Forms > I-566, Interagency Record of Request - A, G or NATO Dependent Employment Authorization or Change/Adjustment to/from A, G or NATO Status",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-566, Interagency Record of Request - A, G or NATO Dependent Employment Authorization or Change/Adjustment to/from A, G or NATO Status"
         }
       },
@@ -140240,7 +140240,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Forms > I-612, Application for Waiver of the Foreign Residence Requirement (under Section 212(e) of the Immigration and Nationality Act, as Amended)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-612, Application for Waiver of the Foreign Residence Requirement (under Section 212(e) of the Immigration and Nationality Act, as Amended)"
         }
       },
@@ -140260,7 +140260,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > INA 245(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(c)"
         }
       },
@@ -140280,7 +140280,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing Instructions > Legal Authorities > 8 CFR 1245.2",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1245.2"
         }
       },
@@ -140300,7 +140300,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing Instructions > Legal Authorities > 8 CFR 245.2(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.2(a)"
         }
       },
@@ -140320,7 +140320,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Filing Instructions > Legal Authorities > INA 101(g)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(g)"
         }
       },
@@ -140340,7 +140340,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation > Forms > I-693, Report of Medical Examination and Vaccination Record",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-693, Report of Medical Examination and Vaccination Record"
         }
       },
@@ -140360,7 +140360,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation > Forms > I-864, Affidavit of Support Under Section 213A of the INA",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-864, Affidavit of Support Under Section 213A of the INA"
         }
       },
@@ -140380,7 +140380,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation > Forms > I-864A, Contract Between Sponsor and Household Member",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-864A, Contract Between Sponsor and Household Member"
         }
       },
@@ -140400,7 +140400,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Documentation > Forms > I-864EZ, Affidavit of Support Under Section 213A of the INA",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-864EZ, Affidavit of Support Under Section 213A of the INA"
         }
       },
@@ -140420,7 +140420,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Interview Guidelines > Legal Authorities > 8 CFR 209.1(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 209.1(d)"
         }
       },
@@ -140440,7 +140440,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Interview Guidelines > Legal Authorities > 8 CFR 209.2(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 209.2(e)"
         }
       },
@@ -140460,7 +140460,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Interview Guidelines > Legal Authorities > 8 CFR 245.10",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.10"
         }
       },
@@ -140480,7 +140480,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Interview Guidelines > Legal Authorities > 8 CFR 245.6",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.6"
         }
       },
@@ -140500,7 +140500,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Interview Guidelines > Legal Authorities > INA 245(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(i)"
         }
       },
@@ -140520,7 +140520,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudicative Review > Legal Authorities > 22 CFR 42.12",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 42.12"
         }
       },
@@ -140540,7 +140540,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudicative Review > Legal Authorities > 8 CFR 213a",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 213a"
         }
       },
@@ -140560,7 +140560,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudicative Review > Legal Authorities > 9 FAM 503.3-2",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "9 FAM 503.3-2"
         }
       },
@@ -140580,7 +140580,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudicative Review > Legal Authorities > INA 213A",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 213A"
         }
       },
@@ -140600,7 +140600,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudicative Review > Legal Authorities > INA 245(a)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(a)"
         }
       },
@@ -140620,7 +140620,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudicative Review > Legal Authorities > INA 245(k)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(k)"
         }
       },
@@ -140638,7 +140638,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 7 - Child Status Protection Act > Appendix: Update on Interpretation of Sought to Acquire",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Update on Interpretation of Sought to Acquire"
         }
       },
@@ -140656,7 +140656,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 7 - Child Status Protection Act > Appendix: Update on Visa Availability and Child Status Protection Act Age Calculation",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Update on Visa Availability and Child Status Protection Act Age Calculation"
         }
       },
@@ -140676,7 +140676,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Child Status Protection Act > Legal Authorities > INA 201(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 201(f)"
         }
       },
@@ -140696,7 +140696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Child Status Protection Act > Legal Authorities > INA 203(h)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(h)"
         }
       },
@@ -140716,7 +140716,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Child Status Protection Act > Legal Authorities > INA 207(c)(2)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 207(c)(2)(B)"
         }
       },
@@ -140736,7 +140736,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Child Status Protection Act > Legal Authorities > INA 208(b)(3)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 208(b)(3)(B)"
         }
       },
@@ -140756,7 +140756,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Child Status Protection Act > Legal Authorities > INA 209(a)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 209(a)(1)"
         }
       },
@@ -140776,7 +140776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Child Status Protection Act > Legal Authorities > Pub. L. 107-208 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 107-208 (PDF)"
         }
       },
@@ -140796,7 +140796,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Transfer of Underlying Basis > Legal Authorities > 8 CFR 204.12(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.12(f)"
         }
       },
@@ -140816,7 +140816,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Transfer of Underlying Basis > Forms > I-485 Supplement A, Adjustment of Status Under Section 245(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-485 Supplement A, Adjustment of Status Under Section 245(i)"
         }
       },
@@ -140836,7 +140836,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Transfer of Underlying Basis > Legal Authorities > INA 203(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-a-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(b)"
         }
       },
@@ -140856,7 +140856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions > Legal Authorities > 8 CFR 204.5(e)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(e)(5)"
         }
       },
@@ -140876,7 +140876,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions > Legal Authorities > 8 CFR 204.5(h)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(h)(5)"
         }
       },
@@ -140896,7 +140896,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions > Legal Authorities > 8 CFR 205.1(a)(3)(iii)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 205.1(a)(3)(iii)"
         }
       },
@@ -140916,7 +140916,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions > Legal Authorities > 8 CFR 245.25",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.25"
         }
       },
@@ -140936,7 +140936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions > Legal Authorities > 8 CFR 245.25(a)(2)(ii)(B)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.25(a)(2)(ii)(B)(2)"
         }
       },
@@ -140956,7 +140956,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions > Legal Authorities > 8 CFR 245.25(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.25(b)"
         }
       },
@@ -140976,7 +140976,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions > Forms > Form I-485 Supplement J, Confirmation of Bona Fide Job Offer or Request for Job Portability Under INA Section 204(j)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Form I-485 Supplement J, Confirmation of Bona Fide Job Offer or Request for Job Portability Under INA Section 204(j)"
         }
       },
@@ -140996,7 +140996,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Job Portability after Adjustment Filing and Other AC21 Provisions > Legal Authorities > Pub. L. 107-273 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-e-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 107-273 (PDF)"
         }
       },
@@ -141016,7 +141016,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 116-260",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 116-260"
         }
       },
@@ -141036,7 +141036,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Religious Workers > Legal Authorities > 8 CFR 204.5(m)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.5(m)"
         }
       },
@@ -141056,7 +141056,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Religious Workers > Legal Authorities > INA 101(a)(27)(C)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(C)"
         }
       },
@@ -141076,7 +141076,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - International Employees of U.S. Government Abroad > Legal Authorities > 22 CFR 42.32(d)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 42.32(d)(2)"
         }
       },
@@ -141096,7 +141096,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - International Employees of U.S. Government Abroad > Legal Authorities > INA 101(a)(27)(D)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(D)"
         }
       },
@@ -141116,7 +141116,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Panama Canal Zone Employees > Legal Authorities > 22 CFR 42.32(d)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 42.32(d)(3)"
         }
       },
@@ -141136,7 +141136,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Panama Canal Zone Employees > Legal Authorities > INA 101(a)(27)(E)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(E)"
         }
       },
@@ -141156,7 +141156,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Panama Canal Zone Employees > Legal Authorities > INA 101(a)(27)(F)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(F)"
         }
       },
@@ -141176,7 +141176,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 4 - Panama Canal Zone Employees > Legal Authorities > INA 101(a)(27)(G)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-4",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(G)"
         }
       },
@@ -141196,7 +141196,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Certain Physicians > Legal Authorities > 18 U.S.C. 1015(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "18 U.S.C. 1015(f)"
         }
       },
@@ -141216,7 +141216,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Certain Physicians > Legal Authorities > INA 101(a)(27)(H)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(H)"
         }
       },
@@ -141236,7 +141236,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Certain G-4 or NATO-6 Employees and their Family Members > Legal Authorities > 22 CFR 41.24",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 41.24"
         }
       },
@@ -141256,7 +141256,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Certain G-4 or NATO-6 Employees and their Family Members > Legal Authorities > 22 CFR 41.25",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 41.25"
         }
       },
@@ -141276,7 +141276,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Certain G-4 or NATO-6 Employees and their Family Members > Legal Authorities > 22 CFR 42.32(d)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 42.32(d)(5)"
         }
       },
@@ -141296,7 +141296,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Certain G-4 or NATO-6 Employees and their Family Members > Legal Authorities > 8 CFR 101.5",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 101.5"
         }
       },
@@ -141316,7 +141316,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Certain G-4 or NATO-6 Employees and their Family Members > Legal Authorities > INA 101(a)(27)(I)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(I)"
         }
       },
@@ -141336,7 +141336,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Certain G-4 or NATO-6 Employees and their Family Members > Legal Authorities > INA 101(a)(27)(L)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(L)"
         }
       },
@@ -141356,7 +141356,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Special Immigrant Juveniles > Legal Authorities > 8 CFR 245.1(e)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.1(e)(3)"
         }
       },
@@ -141376,7 +141376,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Special Immigrant Juveniles > Legal Authorities > Pub. L. 101-649 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 101-649 (PDF)"
         }
       },
@@ -141396,7 +141396,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Special Immigrant Juveniles > Legal Authorities > Pub. L. 105-119 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 105-119 (PDF)"
         }
       },
@@ -141416,7 +141416,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 7 - Special Immigrant Juveniles > Legal Authorities > Pub. L. 110-457 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-7",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 110-457 (PDF)"
         }
       },
@@ -141436,7 +141436,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Members of the U.S. Armed Forces > Legal Authorities > 8 CFR 245.8",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.8"
         }
       },
@@ -141456,7 +141456,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Members of the U.S. Armed Forces > Legal Authorities > INA 101(a)(27)(K)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(K)"
         }
       },
@@ -141476,7 +141476,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 8 - Members of the U.S. Armed Forces > Legal Authorities > INA 245(g)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-8",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(g)"
         }
       },
@@ -141496,7 +141496,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Certain Broadcasters > Legal Authorities > 8 CFR 204.13",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.13"
         }
       },
@@ -141516,7 +141516,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Certain Broadcasters > Legal Authorities > INA 101(a)(27)(M)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-f-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(27)(M)"
         }
       },
@@ -141536,7 +141536,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 22 CFR 42.33",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 42.33"
         }
       },
@@ -141556,7 +141556,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 9 FAM 502.6",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "9 FAM 502.6"
         }
       },
@@ -141576,7 +141576,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 201(e)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 201(e)"
         }
       },
@@ -141596,7 +141596,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203(c)"
         }
       },
@@ -141616,7 +141616,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 9 FAM 502.1-1(D)(4)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "9 FAM 502.1-1(D)(4)"
         }
       },
@@ -141636,7 +141636,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Other Materials > Department of Labor O*NET OnLine",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Department of Labor O*NET OnLine"
         }
       },
@@ -141656,7 +141656,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Other Materials > Department of State Diversity Visa Instructions",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Department of State Diversity Visa Instructions"
         }
       },
@@ -141676,7 +141676,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Other Materials > Department of State Electronic Diversity Visa Program",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Department of State Electronic Diversity Visa Program"
         }
       },
@@ -141696,7 +141696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > INA 202(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 202(b)"
         }
       },
@@ -141716,7 +141716,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > INA 245(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(b)"
         }
       },
@@ -141736,7 +141736,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > Pub. L. 100-658 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 100-658 (PDF)"
         }
       },
@@ -141756,7 +141756,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > Pub. L. 99-603 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 99-603 (PDF)"
         }
       },
@@ -141776,7 +141776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Other Materials > Visa Bulletin",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Visa Bulletin"
         }
       },
@@ -141796,7 +141796,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Documentation and Evidence > Other Materials > CBP Arrival/Departure Forms: I-94 and I-94W",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-g-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "CBP Arrival/Departure Forms: I-94 and I-94W"
         }
       },
@@ -141816,7 +141816,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 214.201",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.201"
         }
       },
@@ -141836,7 +141836,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 245.23",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.23"
         }
       },
@@ -141856,7 +141856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 245(l)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(l)"
         }
       },
@@ -141876,7 +141876,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility Requirements > Legal Authorities > 8 CFR 214.203",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 214.203"
         }
       },
@@ -141896,7 +141896,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Documentation and Evidence > Legal Authorities > 8 CFR 245.22",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.22"
         }
       },
@@ -141916,7 +141916,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Documentation and Evidence > Legal Authorities > 8 CFR 245.5",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.5"
         }
       },
@@ -141936,7 +141936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication > Legal Authorities > 8 CFR 239",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 239"
         }
       },
@@ -141956,7 +141956,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Adjudication > Legal Authorities > INA 239",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-j-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 239"
         }
       },
@@ -141976,7 +141976,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 207",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 207"
         }
       },
@@ -141996,7 +141996,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 101(a)(42)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(42)"
         }
       },
@@ -142016,7 +142016,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 207",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 207"
         }
       },
@@ -142036,7 +142036,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 96-212 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 96-212 (PDF)"
         }
       },
@@ -142056,7 +142056,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Admissibility and Waiver Requirements > Forms > I-602, Application by Refugee for Waiver of Inadmissibility Grounds",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-l-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-602, Application by Refugee for Waiver of Inadmissibility Grounds"
         }
       },
@@ -142076,7 +142076,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Termination of Status and Notice to Appear Considerations > Legal Authorities > INA 208(c)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-m-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 208(c)(2)"
         }
       },
@@ -142096,7 +142096,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Presumption of Lawful Admission > Legal Authorities > 8 CFR 101.1",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 101.1"
         }
       },
@@ -142116,7 +142116,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Presumption of Lawful Admission > Legal Authorities > 8 CFR 249",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 249"
         }
       },
@@ -142136,7 +142136,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Presumption of Lawful Admission > Legal Authorities > 8 CFR 264.2",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 264.2"
         }
       },
@@ -142156,7 +142156,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Presumption of Lawful Admission > Legal Authorities > INA 249",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 249"
         }
       },
@@ -142176,7 +142176,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Presumption of Lawful Admission Despite Certain Errors Occurring at Entry > Legal Authorities > 8 CFR 101.2",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 101.2"
         }
       },
@@ -142196,7 +142196,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Children Born in the United States to Foreign Government Employees > Legal Authorities > 8 CFR 101.3",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-o-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 101.3"
         }
       },
@@ -142216,7 +142216,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Liberian Refugee Immigration Fairness > Legal Authorities > INA 101",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101"
         }
       },
@@ -142236,7 +142236,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Amerasian Immigrants > Legal Authorities > 8 CFR 204.4",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 204.4"
         }
       },
@@ -142256,7 +142256,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Amerasian Immigrants > Forms > I-134, Declaration of Financial Support",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-134, Declaration of Financial Support"
         }
       },
@@ -142276,7 +142276,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Amerasian Immigrants > Legal Authorities > INA 204(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 204(f)"
         }
       },
@@ -142296,7 +142296,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Amerasian Immigrants > Legal Authorities > Pub. L. 100-202 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 100-202 (PDF)"
         }
       },
@@ -142316,7 +142316,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 9 - Amerasian Immigrants > Legal Authorities > Pub. L. 97-359",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-p-chapter-9",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 97-359"
         }
       },
@@ -142336,7 +142336,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 246",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 246"
         }
       },
@@ -142356,7 +142356,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 240",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 240"
         }
       },
@@ -142376,7 +142376,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 246",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 246"
         }
       },
@@ -142396,7 +142396,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility > Legal Authorities > 8 CFR 245a",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245a"
         }
       },
@@ -142416,7 +142416,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility > Legal Authorities > INA 240A",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 240A"
         }
       },
@@ -142436,7 +142436,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Eligibility > Legal Authorities > INA 245A",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245A"
         }
       },
@@ -142456,7 +142456,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Rescission Process > Legal Authorities > 8 CFR 240.70",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 240.70"
         }
       },
@@ -142476,7 +142476,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Rescission Process > Legal Authorities > INA 214(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-7-part-q-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 214(d)"
         }
       },
@@ -142496,7 +142496,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 42 CFR 34",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "42 CFR 34"
         }
       },
@@ -142516,7 +142516,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 42 U.S.C. 252",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "42 U.S.C. 252"
         }
       },
@@ -142536,7 +142536,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 232",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 232"
         }
       },
@@ -142556,7 +142556,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(a)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(1)"
         }
       },
@@ -142576,7 +142576,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(a)(4)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(4)"
         }
       },
@@ -142596,7 +142596,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(a)(9)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(9)(B)"
         }
       },
@@ -142616,7 +142616,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 221(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 221(d)"
         }
       },
@@ -142636,7 +142636,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 232",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 232"
         }
       },
@@ -142656,7 +142656,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Technical Instructions for Civil Surgeons",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Technical Instructions for Civil Surgeons"
         }
       },
@@ -142676,7 +142676,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 12 - Waiver Authority > Forms > I-690, Application for Waiver of Grounds of Inadmissibility Under Sections 245A or 210 of the Act",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-12",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-690, Application for Waiver of Grounds of Inadmissibility Under Sections 245A or 210 of the Act"
         }
       },
@@ -142696,7 +142696,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 12 - Waiver Authority > Legal Authorities > INA 212(g)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-b-chapter-12",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(g)"
         }
       },
@@ -142716,7 +142716,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-910, Application for Civil Surgeon Designation",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-c-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-910, Application for Civil Surgeon Designation"
         }
       },
@@ -142736,7 +142736,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 10 - Controlled Substance Traffickers > Legal Authorities > INA 212(a)(2)(C)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-10",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(2)(C)"
         }
       },
@@ -142756,7 +142756,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > 22 CFR 41.21(d)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 41.21(d)(2)"
         }
       },
@@ -142776,7 +142776,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > 22 U.S.C. 7102",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 U.S.C. 7102"
         }
       },
@@ -142796,7 +142796,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > 8 CFR 209.2(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 209.2(b)"
         }
       },
@@ -142816,7 +142816,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > 8 CFR 245.1(e)(3)(v)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.1(e)(3)(v)"
         }
       },
@@ -142836,7 +142836,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > 8 CFR 245.24(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.24(b)"
         }
       },
@@ -142856,7 +142856,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > INA 102",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 102"
         }
       },
@@ -142876,7 +142876,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > INA 209(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 209(c)"
         }
       },
@@ -142896,7 +142896,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > INA 212(a)(2)(H)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(2)(H)"
         }
       },
@@ -142916,7 +142916,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > INA 212(d)(1)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(d)(1)"
         }
       },
@@ -142936,7 +142936,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > INA 245(h)(2)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(h)(2)(B)"
         }
       },
@@ -142956,7 +142956,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > INA 245(l)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(l)(2)"
         }
       },
@@ -142976,7 +142976,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > INA 245(m)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(m)"
         }
       },
@@ -142996,7 +142996,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 14 - Significant Traffickers in Persons > Legal Authorities > INA 245A(d)(2)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-14",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245A(d)(2)(B)"
         }
       },
@@ -143016,7 +143016,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 15 - Money Laundering > Legal Authorities > 18 U.S.C. 1956",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-15",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "18 U.S.C. 1956"
         }
       },
@@ -143036,7 +143036,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 15 - Money Laundering > Legal Authorities > 18 U.S.C. 1957",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-15",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "18 U.S.C. 1957"
         }
       },
@@ -143056,7 +143056,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 15 - Money Laundering > Legal Authorities > INA 212(a)(2)(I)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-d-chapter-15",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(2)(I)"
         }
       },
@@ -143076,7 +143076,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Immigrant Membership in Totalitarian Party > Legal Authorities > INA 101(a)(37)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 101(a)(37)"
         }
       },
@@ -143096,7 +143096,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 3 - Immigrant Membership in Totalitarian Party > Legal Authorities > INA 212(a)(3)(D)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-f-chapter-3",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(3)(D)"
         }
       },
@@ -143114,7 +143114,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: 2022 Public Charge Ground of Inadmissibility",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: 2022 Public Charge Ground of Inadmissibility"
         }
       },
@@ -143132,7 +143132,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Applicability of INA 212(a)(4) to Employment-Based Adjustment of Status Applications",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Applicability of INA 212(a)(4) to Employment-Based Adjustment of Status Applications"
         }
       },
@@ -143150,7 +143150,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Applicability of INA 212(a)(4) to Family-Based Adjustment of Status Applications",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Applicability of INA 212(a)(4) to Family-Based Adjustment of Status Applications"
         }
       },
@@ -143168,7 +143168,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Applicability of INA 212(a)(4) to Other Applicants",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Applicability of INA 212(a)(4) to Other Applicants"
         }
       },
@@ -143186,7 +143186,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Applicability of INA 212(a)(4) to Refugee, Asylee, and Parolee Adjustment of Status Applications",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Applicability of INA 212(a)(4) to Refugee, Asylee, and Parolee Adjustment of Status Applications"
         }
       },
@@ -143204,7 +143204,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual appendices catalog",
           "locator": "Chapter 1 - Purpose and Background > Appendix: Applicability of INA 212(a)(4) to Special Immigrant Adjustment of Status Applications",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Appendix: Applicability of INA 212(a)(4) to Special Immigrant Adjustment of Status Applications"
         }
       },
@@ -143224,7 +143224,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 10 U.S.C. 504(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "10 U.S.C. 504(b)"
         }
       },
@@ -143244,7 +143244,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 15 U.S.C. 1681",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "15 U.S.C. 1681"
         }
       },
@@ -143264,7 +143264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 21 U.S.C. 802",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "21 U.S.C. 802"
         }
       },
@@ -143284,7 +143284,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 21 U.S.C. 841",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "21 U.S.C. 841"
         }
       },
@@ -143304,7 +143304,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 22 CFR 40.51",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 CFR 40.51"
         }
       },
@@ -143324,7 +143324,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 22 Stat 214 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 Stat 214 (PDF)"
         }
       },
@@ -143344,7 +143344,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 26 Stat 1084 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "26 Stat 1084 (PDF)"
         }
       },
@@ -143364,7 +143364,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 29 CFR 570",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "29 CFR 570"
         }
       },
@@ -143384,7 +143384,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 29 U.S.C. 213(c)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "29 U.S.C. 213(c)"
         }
       },
@@ -143404,7 +143404,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 31 U.S.C. 9304-9308",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "31 U.S.C. 9304-9308"
         }
       },
@@ -143424,7 +143424,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 42 CFR 34.4",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "42 CFR 34.4"
         }
       },
@@ -143444,7 +143444,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 42 U.S.C. 1382c (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "42 U.S.C. 1382c (PDF)"
         }
       },
@@ -143464,7 +143464,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 42 U.S.C. 413",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "42 U.S.C. 413"
         }
       },
@@ -143484,7 +143484,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 42 U.S.C. 416(l)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "42 U.S.C. 416(l)"
         }
       },
@@ -143504,7 +143504,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 66 Stat 163 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "66 Stat 163 (PDF)"
         }
       },
@@ -143524,7 +143524,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 7 CFR 273",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "7 CFR 273"
         }
       },
@@ -143544,7 +143544,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 1.3",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1.3"
         }
       },
@@ -143564,7 +143564,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 1003.1",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1003.1"
         }
       },
@@ -143584,7 +143584,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 1003.14",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 1003.14"
         }
       },
@@ -143604,7 +143604,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 103.6",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 103.6"
         }
       },
@@ -143624,7 +143624,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 212.4",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.4"
         }
       },
@@ -143644,7 +143644,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 213.1",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 213.1"
         }
       },
@@ -143664,7 +143664,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 235",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 235"
         }
       },
@@ -143684,7 +143684,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 245.11",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 245.11"
         }
       },
@@ -143704,7 +143704,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 292",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 292"
         }
       },
@@ -143724,7 +143724,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 U.S.C. 1601-1646",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1601-1646"
         }
       },
@@ -143744,7 +143744,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 U.S.C. 1611 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1611 (PDF)"
         }
       },
@@ -143764,7 +143764,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 U.S.C. 1612 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1612 (PDF)"
         }
       },
@@ -143784,7 +143784,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 U.S.C. 1613 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1613 (PDF)"
         }
       },
@@ -143804,7 +143804,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 U.S.C. 1641 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 U.S.C. 1641 (PDF)"
         }
       },
@@ -143824,7 +143824,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Final Specification of Community Programs Necessary For Protection Of Life Or Safety Under Welfare Reform Legislation,",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Final Specification of Community Programs Necessary For Protection Of Life Or Safety Under Welfare Reform Legislation,"
         }
       },
@@ -143844,7 +143844,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 201",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 201"
         }
       },
@@ -143864,7 +143864,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 203",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 203"
         }
       },
@@ -143884,7 +143884,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 208",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 208"
         }
       },
@@ -143904,7 +143904,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(d)"
         }
       },
@@ -143924,7 +143924,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 213",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 213"
         }
       },
@@ -143944,7 +143944,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 235",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 235"
         }
       },
@@ -143964,7 +143964,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 237(a)(5)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 237(a)(5)"
         }
       },
@@ -143984,7 +143984,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 245(j)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245(j)"
         }
       },
@@ -144004,7 +144004,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 289",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 289"
         }
       },
@@ -144024,7 +144024,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 104-193 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 104-193 (PDF)"
         }
       },
@@ -144044,7 +144044,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 106-395 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 106-395 (PDF)"
         }
       },
@@ -144064,7 +144064,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 111-293 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 111-293 (PDF)"
         }
       },
@@ -144084,7 +144084,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > Pub. L. 113-4 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Pub. L. 113-4 (PDF)"
         }
       },
@@ -144104,7 +144104,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Other Materials > Public Charge Inadmissibility, USCIS National Engagement (Sept. 29, 2022) Power Point Presentation (PDF, 1.24 MB)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-g-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "Public Charge Inadmissibility, USCIS National Engagement (Sept. 29, 2022) Power Point Presentation (PDF, 1.24 MB)"
         }
       },
@@ -144124,7 +144124,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(a)(6)(C)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(6)(C)(i)"
         }
       },
@@ -144144,7 +144144,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-j-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(i)"
         }
       },
@@ -144164,7 +144164,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(a)(6)(C)(ii)",
           "url": "https://www.uscis.gov/policy-manual/volume-8-part-k-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(6)(C)(ii)"
         }
       },
@@ -144184,7 +144184,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 211",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 211"
         }
       },
@@ -144204,7 +144204,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 212.7",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.7"
         }
       },
@@ -144224,7 +144224,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Forms > I-601A, Application for Provisional Unlawful Presence Waiver",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-601A, Application for Provisional Unlawful Presence Waiver"
         }
       },
@@ -144244,7 +144244,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 211",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 211"
         }
       },
@@ -144264,7 +144264,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Forms of Relief > Forms > I-212, Application for Permission to Reapply for Admission into the United States After Deportation or Removal",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-a-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "I-212, Application for Permission to Reapply for Admission into the United States After Deportation or Removal"
         }
       },
@@ -144284,7 +144284,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(a)(9)(B)(v)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(9)(B)(v)"
         }
       },
@@ -144304,7 +144304,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 212(h)(1)(B)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-b-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(h)(1)(B)"
         }
       },
@@ -144324,7 +144324,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 207.3",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 207.3"
         }
       },
@@ -144344,7 +144344,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 209.1(f)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 209.1(f)"
         }
       },
@@ -144364,7 +144364,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 207(c)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 207(c)(3)"
         }
       },
@@ -144384,7 +144384,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 210(c)(2)(B)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 210(c)(2)(B)(i)"
         }
       },
@@ -144404,7 +144404,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 245A(d)(2)(B)(i)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-d-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 245A(d)(2)(B)(i)"
         }
       },
@@ -144424,7 +144424,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > 8 CFR 244.3",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 244.3"
         }
       },
@@ -144444,7 +144444,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 1 - Purpose and Background > Legal Authorities > INA 244(c)(2)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-f-chapter-1",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 244(c)(2)"
         }
       },
@@ -144464,7 +144464,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 2 - Waivers for Victims of Trafficking > Legal Authorities > INA 212(a)(3)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-2",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "INA 212(a)(3)"
         }
       },
@@ -144484,7 +144484,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Waivers for T Nonimmigrants Applying for Adjustment of Status > Legal Authorities > 22 U.S.C. 7101 (PDF)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "22 U.S.C. 7101 (PDF)"
         }
       },
@@ -144504,7 +144504,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Waivers for T Nonimmigrants Applying for Adjustment of Status > Legal Authorities > 8 CFR 212.18(b)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.18(b)"
         }
       },
@@ -144524,7 +144524,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 5 - Waivers for T Nonimmigrants Applying for Adjustment of Status > Legal Authorities > 8 CFR 212.23",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-5",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.23"
         }
       },
@@ -144544,7 +144544,7 @@ window.INA_SEARCH_CORPUS = {
           "resource": "USCIS Policy Manual resources catalog",
           "locator": "Chapter 6 - Adjudication and Post-Adjudication Matters > Legal Authorities > 8 CFR 212.18(d)",
           "url": "https://www.uscis.gov/policy-manual/volume-9-part-o-chapter-6",
-          "captureDate": "2026-10-23",
+          "captureDate": "2026-10-26",
           "supportingExcerpt": "8 CFR 212.18(d)"
         }
       }
@@ -144559,7 +144559,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "AR-11",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "AR-11 | Alien’s Change of Address Card"
       }
     },
@@ -144571,7 +144571,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "EOIR-29",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "EOIR-29 | Notice of Appeal to the Board of Immigration Appeals from a Decision of a DHS Officer"
       }
     },
@@ -144583,7 +144583,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-28",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-28 | Notice of Entry of Appearance as Attorney or Accredited Representative"
       }
     },
@@ -144595,7 +144595,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-28I",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-28I | Notice of Entry of Appearance as Attorney in Matters Outside the Geographical Confines of the United States"
       }
     },
@@ -144607,7 +144607,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-325A",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-325A | Biographic Information (for Deferred Action)"
       }
     },
@@ -144619,7 +144619,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-325R",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-325R | Biographic Information (Registration)"
       }
     },
@@ -144631,7 +144631,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-639",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-639 | Freedom of Information/Privacy Act and Online FOIA Request"
       }
     },
@@ -144643,7 +144643,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-845",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-845 | Verification Request"
       }
     },
@@ -144655,7 +144655,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-845 Supplement",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-845 Supplement | Verification Request"
       }
     },
@@ -144667,7 +144667,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-884",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-884 | Request for the Return of Original Documents"
       }
     },
@@ -144679,7 +144679,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1041",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1041 | Genealogy Index Search Request"
       }
     },
@@ -144691,7 +144691,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1041A",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1041A | Genealogy Records Request"
       }
     },
@@ -144703,7 +144703,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1055",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1055 | Fee Schedule"
       }
     },
@@ -144715,7 +144715,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1145",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1145 | E-Notification of Application/Petition Acceptance"
       }
     },
@@ -144727,7 +144727,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1256",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1256 | Declaration for Interpreted USCIS Interview"
       }
     },
@@ -144739,7 +144739,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1450",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1450 | Authorization for Credit Card Transactions"
       }
     },
@@ -144751,7 +144751,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1566",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1566 | Request for Certificate of Non-Existence"
       }
     },
@@ -144763,7 +144763,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1650",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1650 | Authorization for ACH Transactions"
       }
     },
@@ -144775,7 +144775,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "G-1651",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "G-1651 | Exemption for Paper Fee Payment"
       }
     },
@@ -144787,7 +144787,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-9",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-9 | Employment Eligibility Verification"
       }
     },
@@ -144799,7 +144799,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-90",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-90 | Application to Replace Permanent Resident Card (Green Card)"
       }
     },
@@ -144811,7 +144811,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-102",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-102 | Application for Replacement/Initial Nonimmigrant Arrival-Departure Document"
       }
     },
@@ -144823,7 +144823,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-129",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-129 | Petition for a Nonimmigrant Worker"
       }
     },
@@ -144835,7 +144835,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-129CW",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-129CW | Petition for a CNMI-Only Nonimmigrant Transitional Worker"
       }
     },
@@ -144847,7 +144847,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-129CWR",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-129CWR | Semiannual Report for CW-1 Employers"
       }
     },
@@ -144859,7 +144859,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-129F",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-129F | Petition for Alien Fiancé(e)"
       }
     },
@@ -144871,7 +144871,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-129S",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-129S | Nonimmigrant Petition Based on Blanket L Petition"
       }
     },
@@ -144883,7 +144883,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-130",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-130 | Petition for Alien Relative"
       }
     },
@@ -144895,7 +144895,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-131",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-131 | Application for Travel Documents, Parole Documents, and Arrival/Departure Records"
       }
     },
@@ -144907,7 +144907,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-131A",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-131A | Application for Carrier Documentation"
       }
     },
@@ -144919,7 +144919,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-134",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-134 | Declaration of Financial Support"
       }
     },
@@ -144931,7 +144931,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-140",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-140 | Immigrant Petition for Alien Workers"
       }
     },
@@ -144943,7 +144943,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-140G",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-140G | Immigrant Petition for the Gold Card Program"
       }
     },
@@ -144955,7 +144955,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-191",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-191 | Application for Relief Under Former Section 212(c) of the Immigration and Nationality Act (INA)"
       }
     },
@@ -144967,7 +144967,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-192",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-192 | Application for Advance Permission to Enter as a Nonimmigrant"
       }
     },
@@ -144979,7 +144979,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-193",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-193 | Application for Waiver of Passport and/or Visa"
       }
     },
@@ -144991,7 +144991,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-212",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-212 | Application for Permission to Reapply for Admission into the United States After Deportation or Removal"
       }
     },
@@ -145003,7 +145003,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-290B",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-290B | Notice of Appeal or Motion"
       }
     },
@@ -145015,7 +145015,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-356",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-356 | Request for Cancellation of Public Charge Bond"
       }
     },
@@ -145027,7 +145027,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-360",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-360 | Petition for Amerasian, Widow(er), or Special Immigrant"
       }
     },
@@ -145039,7 +145039,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-361",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-361 | Affidavit of Financial Support and Intent to Petition for Legal Custody for Public Law 97-359 Amerasian"
       }
     },
@@ -145051,7 +145051,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-363",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-363 | Request to Enforce Affidavit of Financial Support and Intent to Petition for Legal Custody for Public Law 97-359 Amerasian"
       }
     },
@@ -145063,7 +145063,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-407",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-407 | Record of Abandonment of Lawful Permanent Resident Status"
       }
     },
@@ -145075,7 +145075,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-485",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-485 | Application to Register Permanent Residence or Adjust Status"
       }
     },
@@ -145087,7 +145087,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-485 Supplement A",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-485 Supplement A | Supplement A to Form I-485, Adjustment of Status Under Section 245(i)"
       }
     },
@@ -145099,7 +145099,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-485 Supplement J",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-485 Supplement J | Confirmation of Valid Job Offer or Request for Job Portability Under INA Section 204(j)"
       }
     },
@@ -145111,7 +145111,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-508",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-508 | Request for Waiver of Certain Rights, Privileges, Exemptions and Immunities"
       }
     },
@@ -145123,7 +145123,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-526",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-526 | Immigrant Petition by Standalone Investor"
       }
     },
@@ -145135,7 +145135,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-526E",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-526E | Immigrant Petition by Regional Center Investor"
       }
     },
@@ -145147,7 +145147,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-539",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-539 | Application to Extend/Change Nonimmigrant Status"
       }
     },
@@ -145159,7 +145159,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-566",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-566 | Interagency Record of Request - A, G or NATO Dependent Employment Authorization or Change/Adjustment to/from A, G or NATO Status"
       }
     },
@@ -145171,7 +145171,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-589",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-589 | Application for Asylum and for Withholding of Removal"
       }
     },
@@ -145183,7 +145183,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-600",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-600 | Petition to Classify Orphan as an Immediate Relative"
       }
     },
@@ -145195,7 +145195,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-600A",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-600A | Application for Advance Processing of an Orphan Petition"
       }
     },
@@ -145207,7 +145207,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-601",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-601 | Application for Waiver of Grounds of Inadmissibility"
       }
     },
@@ -145219,7 +145219,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-601A",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-601A | Application for Provisional Unlawful Presence Waiver"
       }
     },
@@ -145231,7 +145231,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-602",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-602 | Application by Refugee for Waiver of Inadmissibility Grounds"
       }
     },
@@ -145243,7 +145243,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-612",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-612 | Application for Waiver of the Foreign Residence Requirement (under Section 212(e) of the Immigration and Nationality Act, as Amended)"
       }
     },
@@ -145255,7 +145255,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-687",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-687 | Application for Status as a Temporary Resident Under Section 245A of the Immigration and Nationality Act"
       }
     },
@@ -145267,7 +145267,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-690",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-690 | Application for Waiver of Grounds of Inadmissibility Under Sections 245A or 210 of the Immigration and Nationality Act"
       }
     },
@@ -145279,7 +145279,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-693",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-693 | Report of Immigration Medical Examination and Vaccination Record"
       }
     },
@@ -145291,7 +145291,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-694",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-694 | Notice of Appeal of Decision Under Sections 210 or 245A of the Immigration and Nationality Act"
       }
     },
@@ -145303,7 +145303,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-698",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-698 | Application to Adjust Status from Temporary to Permanent Resident (Under Section 245A of the INA)"
       }
     },
@@ -145315,7 +145315,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-730",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-730 | Refugee/Asylee Relative Petition"
       }
     },
@@ -145327,7 +145327,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-751",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-751 | Petition to Remove Conditions on Residence"
       }
     },
@@ -145339,7 +145339,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-765",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-765 | Application for Employment Authorization"
       }
     },
@@ -145351,7 +145351,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-765V",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-765V | Application for Employment Authorization for Abused Nonimmigrant Spouse"
       }
     },
@@ -145363,7 +145363,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-800",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-800 | Petition to Classify Convention Adoptee as an Immediate Relative"
       }
     },
@@ -145375,7 +145375,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-800A",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-800A | Application for Determination of Suitability to Adopt a Child from a Convention Country"
       }
     },
@@ -145387,7 +145387,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-817",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-817 | Application for Family Unity Benefits"
       }
     },
@@ -145399,7 +145399,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-821",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-821 | Application for Temporary Protected Status"
       }
     },
@@ -145411,7 +145411,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-821D",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-821D | Consideration of Deferred Action for Childhood Arrivals"
       }
     },
@@ -145423,7 +145423,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-824",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-824 | Application for Action on an Approved Application or Petition"
       }
     },
@@ -145435,7 +145435,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-829",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-829 | Petition by Investor to Remove Conditions on Permanent Resident Status"
       }
     },
@@ -145447,7 +145447,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-854",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-854 | Inter-Agency Alien Witness and Informant Record"
       }
     },
@@ -145459,7 +145459,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-864",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-864 | Affidavit of Support Under Section 213A of the INA"
       }
     },
@@ -145471,7 +145471,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-864A",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-864A | Contract Between Sponsor and Household Member"
       }
     },
@@ -145483,7 +145483,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-864EZ",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-864EZ | Affidavit of Support Under Section 213A of the INA"
       }
     },
@@ -145495,7 +145495,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-864P",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-864P | HHS Poverty Guidelines for Affidavit of Support"
       }
     },
@@ -145507,7 +145507,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-865",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-865 | Sponsor's Notice of Change of Address"
       }
     },
@@ -145519,7 +145519,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-881",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-881 | Application for Suspension of Deportation or Special Rule Cancellation of Removal (Pursuant to Section 203 of Public Law 105-100 (NACARA))"
       }
     },
@@ -145531,7 +145531,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-905",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-905 | Application for Authorization to Issue Certification for Health Care Workers"
       }
     },
@@ -145543,7 +145543,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-907",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-907 | Request for Premium Processing Service"
       }
     },
@@ -145555,7 +145555,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-910",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-910 | Application for Civil Surgeon Designation"
       }
     },
@@ -145567,7 +145567,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-912",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-912 | Request for Fee Waiver"
       }
     },
@@ -145579,7 +145579,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-914",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-914 | Application for T Nonimmigrant Status"
       }
     },
@@ -145591,7 +145591,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-918",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-918 | Petition for U Nonimmigrant Status"
       }
     },
@@ -145603,7 +145603,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-929",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-929 | Petition for Qualifying Family Member of a U-1 Nonimmigrant"
       }
     },
@@ -145615,7 +145615,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-941",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-941 | Application for Entrepreneur Parole"
       }
     },
@@ -145627,7 +145627,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-945",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-945 | Public Charge Bond"
       }
     },
@@ -145639,7 +145639,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-956",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-956 | Application for Regional Center Designation"
       }
     },
@@ -145651,7 +145651,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-956F",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-956F | Application for Approval of an Investment in a Commercial Enterprise"
       }
     },
@@ -145663,7 +145663,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-956G",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-956G | Regional Center Annual Statement"
       }
     },
@@ -145675,7 +145675,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-956H",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-956H | Bona Fides of Persons Involved with Regional Center Program"
       }
     },
@@ -145687,7 +145687,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "I-956K",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "I-956K | Registration for Direct and Third-Party Promoters"
       }
     },
@@ -145699,7 +145699,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-300",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-300 | Application to File Declaration of Intention"
       }
     },
@@ -145711,7 +145711,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-336",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-336 | Request for a Hearing on a Decision in Naturalization Proceedings (Under Section 336 of the INA)"
       }
     },
@@ -145723,7 +145723,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-400",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-400 | Application for Naturalization"
       }
     },
@@ -145735,7 +145735,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-426",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-426 | Request for Certification of Military or Naval Service"
       }
     },
@@ -145747,7 +145747,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-470",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-470 | Application to Preserve Residence for Naturalization Purposes"
       }
     },
@@ -145759,7 +145759,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-565",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-565 | Application for Replacement Naturalization/Citizenship Document"
       }
     },
@@ -145771,7 +145771,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-600",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-600 | Application for Certificate of Citizenship"
       }
     },
@@ -145783,7 +145783,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-600K",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-600K | Application for Citizenship and Issuance of Certificate Under Section 322"
       }
     },
@@ -145795,7 +145795,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-644",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-644 | Application for Posthumous Citizenship"
       }
     },
@@ -145807,7 +145807,7 @@ window.INA_SEARCH_CORPUS = {
         "resource": "USCIS All Forms catalog",
         "locator": "N-648",
         "url": "https://www.uscis.gov/forms/all-forms",
-        "captureDate": "2026-10-23",
+        "captureDate": "2026-10-26",
         "supportingExcerpt": "N-648 | Medical Certification for Disability Exceptions"
       }
     }
@@ -177824,7 +177824,7 @@ window.INA_SEARCH_CORPUS = {
     }
   ],
   "title8Update": {
-    "corpusVersion": "title8-119-124-e810a9d5856a",
+    "corpusVersion": "title8-119-124-e810a9d5856a-release-20261026.1",
     "release": "119-124",
     "xmlSha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8"
   }

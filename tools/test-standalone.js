@@ -1062,7 +1062,7 @@ async function main() {
     verifiedHouseReferences + hydratedSource.legalReferenceMetadata.houseSourceEditorialCitationCorrections +
       hydratedSource.legalReferenceMetadata.sourceBracketCitationCorrections + hydratedSource.legalReferenceMetadata.houseTruncatedCitationCorrections +
       hydratedSource.legalReferenceMetadata.historicalHouseCitationCorrections,
-    18757, // Also excludes 30 reviewed source exceptions and 8 named-Act authority replacements.
+    18750, // Excludes reviewed source exceptions and named-Act authority replacements.
     "The expanded section inventory changed its displayed House reference spans or publisher-supplied corrections."
   );
   // Displayed references include per-section copies of shared House notes.
@@ -1078,10 +1078,10 @@ async function main() {
   // statutory guesses with evidenced regulatory addresses.
   // Excluding the et-seq.-only 42 USC 2000e section removes 14 references,
   // six embedded candidates, and four resolved evidence records.
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 49854, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 22249, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 19822, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 1125, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 50288, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 22265, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 20103, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 662, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
   assert(hydratedSource.legalReferenceMetadata.suppressedSelfReferences > 8_000, "The build did not audit and suppress the corpus-wide self-reference set.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-this-unit"), "The bare self-referential unit rule remains advertised as navigable.");
   const retainedBareSelfReferences = [];
@@ -1148,7 +1148,7 @@ async function main() {
   ], "The exact reviewed ancestor corrections or their source-bound notices changed.");
   const sharedLegalContext = legalReferenceContext(hydratedSource);
   assert.deepStrictEqual(validateLegalReferencePolicy(hydratedSource), { schemaVersion: 1, scopes: 10, reviewedAt: "2026-08-21" }, "The reviewed semantic legal-reference policy did not validate against exact CFR source text.");
-  assert.deepStrictEqual(validateEmbeddedReferenceExceptions(hydratedSource.legalReferenceExceptions), { schemaVersion: 1, resolverVersion: "embedded-v1", exceptions: 358, reviewedAt: "2026-10-23" }, "The embedded-reference exception manifest did not validate.");
+  assert.deepStrictEqual(validateEmbeddedReferenceExceptions(hydratedSource.legalReferenceExceptions), { schemaVersion: 1, resolverVersion: "embedded-v1", exceptions: 456, reviewedAt: "2026-10-26" }, "The embedded-reference exception manifest did not validate.");
   const tamperedPolicyCorpus = JSON.parse(JSON.stringify(hydratedSource));
   tamperedPolicyCorpus.legalReferencePolicy.scopes[0].basis.excerpt += " altered";
   assert.throws(() => validateLegalReferencePolicy(tamperedPolicyCorpus), /not exact source text/, "A stale semantic-policy excerpt was accepted.");
@@ -1898,7 +1898,7 @@ async function main() {
       isDeepStrictEqual(exception.target.path, reference.targetPath)), "An unsupported authority lacks its exact reviewed exception and explanatory notice.");
   }
   // Former INA 244A remains disclosed plain text without a verified historical target.
-  assert.strictEqual(intentionallyUnlinkedHistoricalReferences.length, 1432, "The exact reviewed plain-text reference inventory changed.");
+  assert.strictEqual(intentionallyUnlinkedHistoricalReferences.length, 1429, "The exact reviewed plain-text reference inventory changed.");
   assert(intentionallyUnlinkedHistoricalReferences.every(reference => reference.citationNote), "Every historical, malformed or otherwise unverified target must disclose why it remains unlinked.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-cfr-the-act"), "Build metadata still advertises the removed bare-Act rule.");
   assert.strictEqual(full.corpus.definitions.entries.length, 506, "Unexpected definition record count.");
@@ -2240,7 +2240,7 @@ async function main() {
     expandPackedHouseHref,
     hydratedLegalReferenceRoots: new WeakSet(),
     componentTokens: () => [],
-    houseSectionUrl: (section, title = 8) => `https://uscode.house.gov/view.xhtml?req=${encodeURIComponent(`granuleid:USC-prelim-title${title}-section${section}`)}&num=0&edition=prelim`,
+    houseSectionUrl: extractedFunction(fallbackSource, "houseSectionUrl", "houseSubstructureFragment", { encodeURIComponent, String }),
     encodeURIComponent,
     Array,
     Number,
@@ -2266,7 +2266,7 @@ async function main() {
     targetKind: "usc",
     targetTitle: "8",
     targetSection: "1184",
-    officialUrl: "https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title8-section1184&num=0&edition=prelim"
+    officialUrl: "https://uscode.house.gov/us/usc/t8/s1184/"
   }, "The browser-side hydrator lost a packed local House target while retaining its local-resolution flag.");
   const runtimeCfrInaText = "section 101(a)(27)(H)";
   const runtimeCfrInaFixture = {
@@ -3314,15 +3314,15 @@ async function main() {
   assert.strictEqual(redirectedTransferQuery, "8 U.S.C. 1551", "Clicking an internal transferred result does not navigate to its current location.");
   assert.strictEqual(openedTransferUrl, "", "An internal transferred result unnecessarily opened an external tab.");
   assert(openTransferDestination({ cite: "8 U.S.C. 31", dispositionTarget: { source: "31", title: 52, section: "10101" } }), "A cross-title transfer destination was not actionable.");
-  assert(openedTransferUrl.includes("title52-section10101"), "Clicking a cross-title transferred result does not open its official House destination.");
+  assert(openedTransferUrl.includes("/t52/s10101/"), "Clicking a cross-title transferred result does not open its official House destination.");
   assert.strictEqual(transferToasts.length, 2, "Transferred-result navigation did not provide confirmation for each path.");
   const houseSubstructureFragment = extractedFunction(fallbackSource, "houseSubstructureFragment", "officialTextFragment", { String });
   const officialTextFragment = extractedFunction(fallbackSource, "officialTextFragment", "cfrOfficialTextFragment", { houseSectionUrl, houseSubstructureFragment, decodeURIComponent, URL, String });
   const cfrOfficialTextFragment = extractedFunction(fallbackSource, "cfrOfficialTextFragment", "legalCitationSelectionAttributes", { canonicalPath: statutoryCanonicalPath, String });
   assert.strictEqual(houseSubstructureFragment(["a", "15", "H", "i"]), "#substructure-location_a_15_H_i", "House deep links do not use the publisher's structural anchors.");
-  assert.strictEqual(houseSectionUrl("1153"), "https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title8-section1153&num=0&edition=prelim", "The House URL builder does not follow the publisher's documented direct-link format.");
+  assert.strictEqual(houseSectionUrl("1153"), "https://uscode.house.gov/us/usc/t8/s1153/", "The House URL builder does not follow the publisher's documented direct-link format.");
   assert.strictEqual(officialTextFragment("https://uscode.house.gov/view.xhtml?req=section1101", ["a", "15", "H"]), "https://uscode.house.gov/view.xhtml?req=section1101#substructure-location_a_15_H", "A House unit link does not target the exact statutory structure.");
-  assert.strictEqual(officialTextFragment("https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1153", ["b", "1", "A"]), "https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title8-section1153&num=0&edition=prelim#substructure-location_b_1_A", "A cached House URL was not normalized to the documented deep-link form.");
+  assert.strictEqual(officialTextFragment("https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title8-section1153", ["b", "1", "A"]), "https://uscode.house.gov/us/usc/t8/s1153/", "A cached House URL was not normalized to the supported current section link.");
   assert.strictEqual(cfrOfficialTextFragment({ section: "214.2", url: "https://www.ecfr.gov/current/title-8/section-214.2" }, ["h", "13", "iii", "A"]), "https://www.ecfr.gov/current/title-8/section-214.2#p-214.2(h)(13)(iii)(A)", "An eCFR unit link does not target the exact paragraph ID.");
   assert.strictEqual(cfrOfficialTextFragment({ label: "Appendix A to Part 19", url: "https://www.ecfr.gov/current/title-6/part-19" }, ["a"]), "https://www.ecfr.gov/current/title-6/part-19/appendix-Appendix%20A%20to%20Part%2019", "A CFR appendix action does not open the publisher's appendix route.");
   assert(!fallbackSource.includes("#:~:text="), "Fragile browser text fragments remain in official statutory links.");
@@ -5780,7 +5780,8 @@ async function main() {
   // section 1161 and “such chapter” in section 1551's reorganization note.
   // CFR detection adds the 34.2 link and makes the formerly unresolved
   // 655.202(b)(6) citation in former section 1186 navigable.
-  assert.deepStrictEqual({ operative: statutoryFormattingAudit.citationLinks, total: statutoryFormattingAudit.citationLinks + ancillaryCitationLinks }, { operative: 6439, total: 32263 }, "Unexpected generated-link inventory in the expanded statutory corpus.");
+  // The 1357 amendment note's nonexistent Public Law section 726 stays plain text.
+  assert.deepStrictEqual({ operative: statutoryFormattingAudit.citationLinks, total: statutoryFormattingAudit.citationLinks + ancillaryCitationLinks }, { operative: 6439, total: 32262 }, "Unexpected generated-link inventory in the expanded statutory corpus.");
 
   const migration = profileMigrationFunctions(fallbackSource);
   for (const authority of ["ina", "usc"]) {

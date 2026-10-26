@@ -5,7 +5,7 @@ window.INA_SEARCH_INA_HIERARCHY = {
     "publisher": "GovInfo / U.S. Government Publishing Office",
     "url": "https://www.govinfo.gov/content/pkg/COMPS-1376/uslm/COMPS-1376.xml",
     "detailUrl": "https://www.govinfo.gov/app/details/COMPS-1376",
-    "captureDate": "2026-10-23",
+    "captureDate": "2026-10-26",
     "processedDate": "2026-10-16",
     "currentThroughPublicLaw": "",
     "bytes": 3368803,

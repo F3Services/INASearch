@@ -11,9 +11,53 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function (EmbeddedReferences, textSha256, StatuteRunIns) {
 "use strict";
 
+// These former sections have no individual current House route. Their exact
+// repeal histories are published on the indicated grouped section pages.
+const HOUSE_REPEAL_HISTORY_ROUTES = Object.freeze(Object.fromEntries(
+  Object.entries({
+    "1": "9 10",
+    "132": "133 134 135 136 137 137-1 137-2 137-3 137-9",
+    "137b": "138 139 140 141 142 143 144 145",
+    "201": "202 203",
+    "204c": "204d 205 206 207 208 209 210 211 212 212a 212b 212c 213 213a 214 215 216 217 218",
+    "221": "222 223 224 225 226 226a",
+    "229": "230",
+    "331": "332 333 334 335 336 337 338",
+    "351": "354 355 356 356a 359 360 361 362 363 366 366a 367 368b 370 371 372 372a 373 374 375 375a 376 377 377a 377b 377c 378 379 380 380a 380b 381 382 383 384 385 386 387 388 389 389a 392a 398a 399 399a 399e 399f 402a 405 408 409",
+    "451": "452 453 454 455 456 457 458 459",
+    "701": "702 703 704 705 706 707 708 709 710 711 712 713 714 715 716 717 720a 721 721a 722 723 723a 724",
+    "725": "726",
+    "728": "729 730 731 732 732a 733 734 735 736 737 738 739 740 741 742",
+    "801": "802 803 804 805 806 807 808 809",
+    "901": "902",
+    "904": "905 906",
+    "1001": "1002 1003 1004 1005",
+    "1484": "1485"
+  }).flatMap(([group, sections]) => sections.split(" ").map(section => [`8:${section}`, group]))
+));
+
 // GovInfo's slip-law collection begins with the 104th Congress. Older
 // identities retain a labeled official search unless an archive is verified.
 function normalizeOfficialDestination(reference) {
+  if (!reference.historicalOfficialUrl && (!reference.targetEdition || reference.targetEdition === "prelim") &&
+      /^https:\/\/uscode\.house\.gov\/view\.xhtml\?/.test(reference.officialUrl || "")) {
+    try {
+      const req = reference.officialUrl.match(/[?&]req=([^&#]+)/)?.[1];
+      const granule = decodeURIComponent(req || "").match(/^granuleid:USC-prelim-title(\d+)-section([^\s/]+)$/);
+      if (granule) reference = { ...reference, officialUrl: houseSectionUrl(granule[1], granule[2]) + (reference.officialUrl.match(/#.*$/)?.[0] || "") };
+    } catch {}
+  }
+  const groupedSection = HOUSE_REPEAL_HISTORY_ROUTES[`${reference.targetTitle}:${String(reference.targetSection || "").replace(/[–—]/g, "-")}`];
+  if (groupedSection && ["usc", "ina"].includes(reference.family) && !reference.historicalOfficialUrl &&
+      (!reference.targetEdition || reference.targetEdition === "prelim")) {
+    const originalUrl = houseSectionUrl(reference.targetTitle, reference.targetSection);
+    const groupedUrl = houseSectionUrl(reference.targetTitle, groupedSection);
+    if (!reference.officialUrl || [originalUrl, groupedUrl].includes(reference.officialUrl)) {
+      const notice = "The official link opens the grouped repeal history for this former section; it does not reproduce the former subsection text.";
+      reference = { ...reference, officialUrl: groupedUrl,
+        citationNote: String(reference.citationNote || "").includes(notice) ? reference.citationNote : [reference.citationNote, notice].filter(Boolean).join(" ") };
+    }
+  }
   if (reference.family === "statutes-at-large" && reference.targetVolume && !reference.historicalOfficialUrl &&
       /\/app\/details\/STATUTE-[^/]+\/STATUTE-[^/]+-Pg/.test(reference.officialUrl || "")) {
     const {houseHref,...clean}=reference;
@@ -45,6 +89,7 @@ function canonicalPath(path = []) {
 }
 
 function houseSectionUrl(title, section, edition = "prelim") {
+  if (edition === "prelim") return `https://uscode.house.gov/us/usc/t${encodeURIComponent(title)}/s${encodeURIComponent(String(section).replace(/[–—]/g, "-"))}/`;
   return `https://uscode.house.gov/view.xhtml?edition=${edition}&num=0&req=${encodeURIComponent(`granuleid:USC-${edition}-title${title}-section${section}`)}`;
 }
 
@@ -284,11 +329,28 @@ function isSelfReference(reference, context) {
   if (!context.suppressSelfReferences || reference.resolution !== "local") return false;
   const family = context.kind === "cfr" ? "cfr" : "usc";
   const activeMarker = activeInlineUnitMarker(context, reference.start);
-  const sourcePath = activeMarker?.path || context.path || [];
+  const sourcePath = activeMarker?.path || context.suppressionPath || context.path || [];
   return reference.family === family &&
     String(reference.targetTitle || "") === String(context.title || "") &&
     String(reference.targetSection || "") === String(context.section || "") &&
     pathStartsWith(sourcePath, reference.targetPath || []);
+}
+
+// Indented, unnumbered definition entries can belong to a numbered paragraph
+// without having their own unique address. Keep that ancestry only for deciding
+// whether a link is self/ancestor; it must not invent a target or a scope frame.
+function cfrSuppressionTracker() {
+  const ancestors = [];
+  return (block, path) => {
+    const depth = Number.isInteger(block.d) ? block.d : path.length || null;
+    if (depth === null || block.t !== "p") {
+      ancestors.length = 0;
+      return path;
+    }
+    while (ancestors.length && (ancestors.at(-1).depth >= depth || (path.length && !pathStartsWith(path, ancestors.at(-1).path)))) ancestors.pop();
+    if (path.length) ancestors.push({ depth, path });
+    return path.length ? path : ancestors.at(-1)?.path || [];
+  };
 }
 
 function isHouseEditorialSourceError(reference, context) {
@@ -482,16 +544,27 @@ function validateEmbeddedReferenceExceptions(source) {
     throw new Error("The embedded-reference exception manifest lacks valid schema metadata.");
   }
   const ids = new Set();
+  const spansBySource = new Map();
   for (const exception of source.exceptions) {
     if (!exception?.id || ids.has(exception.id)) throw new Error(`Duplicate or missing embedded-reference exception id ${exception?.id || "(missing)"}.`);
     ids.add(exception.id);
+    const chapterTarget = exception.target?.family === "usc" && /^\d+$/.test(exception.target.chapter || "") &&
+      !exception.target.section && exception.target.path?.length === 0;
     if (!exception.sourceArtifact || !exception.sourceId || !exception.sourceField || !/^[a-f0-9]{64}$/.test(exception.sourceTextSha256 || "") ||
         !Number.isInteger(exception.start) || !Number.isInteger(exception.end) || exception.end <= exception.start || !exception.text ||
         !exception.reason || typeof exception.officialUrl !== "string" || (!exception.officialUrl && exception.resolution !== "unresolved") ||
-        !exception.reviewedAt || !exception.target?.family || !exception.target?.section || !Array.isArray(exception.target.path)) {
+        !exception.reviewedAt || !exception.target?.family || (!exception.target?.section && !chapterTarget) || !Array.isArray(exception.target.path)) {
       throw new Error(`Embedded-reference exception ${exception.id} is incomplete.`);
     }
     if (exception.resolution && !["local", "official-source-only", "unresolved"].includes(exception.resolution)) throw new Error(`Embedded-reference exception ${exception.id} has an invalid resolution.`);
+    // Two reviewed interpretations of one source span cannot both be rendered.
+    // Reject stale replacements before they can hide the adopted destination.
+    const sourceKey = JSON.stringify([exception.sourceId, exception.sourceField, exception.sourceTextSha256]);
+    const spans = spansBySource.get(sourceKey) || [];
+    const conflict = spans.find(span => exception.start < span.end && exception.end > span.start);
+    if (conflict) throw new Error(`Overlapping embedded-reference exceptions ${conflict.id} and ${exception.id}.`);
+    spans.push(exception);
+    spansBySource.set(sourceKey, spans);
   }
   return { schemaVersion: source.schemaVersion, resolverVersion: source.resolverVersion, exceptions: source.exceptions.length, reviewedAt: source.reviewedAt };
 }
@@ -505,6 +578,34 @@ function historicalInaDestination(context, mapping, targetSection, local) {
     historicalOfficialUrl: historicalUrl,
     citationNote: `This reference opens the retained historical text: ${historical.versionLabel || historical.originalTitle || `former INA ${mapping.inaSection}`}. The official archive is its base source; later amendments are documented with the local text.`
   } : {};
+}
+
+function cfrClassificationTableReferences(text, context) {
+  if (context.kind !== "cfr" || String(context.title) !== "8" || context.section !== "214.1" ||
+      context.tableColumn !== 0 || context.tableHeaders?.join("|") !== "Section|Designation") return [];
+  const match = String(text).match(/^(101|212)((?:\([A-Za-z0-9]+\))+)(?: (qualified family members))?$/);
+  if (!match) return [];
+  const writtenPath = pathTokens(match[2]), targetPath = [...writtenPath];
+  if (match[3] && (match[1] !== "101" || writtenPath.join("/") !== "a/15/S")) return [];
+  if (match[1] === "101") {
+    if (targetPath[0] !== "a" || targetPath[1] !== "15" || !/^[A-Za-z]$/.test(targetPath[2] || "")) return [];
+    targetPath[2] = targetPath[2].toUpperCase();
+    const classification = targetPath[2], clause = targetPath[3];
+    // Paragraph (a)(1) creates administrative classes that do not always
+    // correspond to separately numbered clauses of the underlying statute.
+    if (classification === "Q" && ["ii", "iii"].includes(clause)) return [];
+    if (["B", "J", "L"].includes(classification) && ["i", "ii"].includes(clause) ||
+        classification === "Q" && clause === "i" || classification === "H" && clause === "iv") targetPath.splice(3);
+    if (classification === "T" && ["iii", "iv", "v", "vi"].includes(clause)) targetPath.splice(3, targetPath.length - 3, "ii");
+    if (classification === "H" && ["i", "ii"].includes(clause) && targetPath.length === 5) targetPath[4] = targetPath[4].toLowerCase();
+  } else if (JSON.stringify(targetPath) !== '["d","8"]') return [];
+  const target = inaReferenceTarget(context, match[1], targetPath);
+  if (target.resolution !== "local") return [];
+  const changed = JSON.stringify(writtenPath) !== JSON.stringify(targetPath);
+  const end = match[1].length + match[2].length;
+  return [{ id: makeId(context, 0, "context-cfr-ina-act-section"), start: 0, end, text: text.slice(0,end),
+    provenance: "deterministic-context", ruleId: "context-cfr-ina-act-section", ...target,
+    ...(changed ? { citationNote: "The table uses an administrative classification or different letter case. This link opens its underlying INA provision; the printed classification is preserved." } : {}) }];
 }
 
 function inaReferenceTarget(context, inaSection, targetPath) {
@@ -652,9 +753,20 @@ function inaActReferenceCandidates(text, context) {
   const input = String(text || "");
   const results = [];
   if (context.kind !== "cfr") return results;
-  const suffixPattern = /\bof\s+(?:(the)\s+)?(?:(Immigration\s+and\s+Nationality)\s+)?(?:Act\b(?!\s+(?:of|Amendments?)\b)|(INA)\b)/gi;
+  // Some regulations put the Act's section number in parentheses too.
+  // The written owner and a verified local path distinguish that number
+  // from an ordinary paragraph label.
+  for (const match of input.matchAll(/\bsection\s+\((\d+[A-Za-z-]*)\)((?:\s*\([A-Za-z0-9-]+\))+)\s+of\s+(?:the\s+)?(Immigration\s+and\s+Nationality\s+)?Act\b(?!\s+(?:of|Amendments?)\b)/gi)) {
+    if (!match[3] && !cfrContextUsesInaAct(context)) continue;
+    const target = inaReferenceTarget(context, match[1], pathTokens(match[2]));
+    if (target.resolution !== "local") continue;
+    results.push({ id: makeId(context, match.index, "context-cfr-ina-act-section"),
+      start: match.index, end: match.index + match[0].length, text: match[0],
+      provenance: "deterministic-context", ruleId: "context-cfr-ina-act-section", ...target });
+  }
+  const suffixPattern = /\bof\s+(?:(the)\s+)?(?:(Immigration\s+and\s+Nationality)\s+)?(?:Act\b(?!\s+(?:of|Amendments?)\b)|(INA)\b)|,\s*(Immigration\s+and\s+Nationality\s+Act)\b(?!\s+(?:of|Amendments?)\b)/gi;
   for (const suffix of input.matchAll(suffixPattern)) {
-    const explicitlyIna = Boolean(suffix[2] || suffix[3]);
+    const explicitlyIna = Boolean(suffix[2] || suffix[3] || suffix[4]);
     if (!explicitlyIna && !cfrContextUsesInaAct(context)) continue;
     const windowStart = Math.max(0, suffix.index - 420);
     const prefix = input.slice(windowStart, suffix.index);
@@ -1002,6 +1114,28 @@ function explicitReferenceCandidates(text, context) {
     }
   };
 
+  // Subpart C of 8 CFR part 204 defines "Convention" as the 1993
+  // Hague Adoption Convention. These verified article paths are external
+  // treaty provisions, not statutory or regulatory paragraph addresses.
+  if (context.kind === "cfr" && String(context.title) === "8" && /^204\.(?:30\d|31[0-4])$/.test(String(context.section))) {
+    addMatches(/\barticle\s+(5|6)\((c|1)\)\s+of\s+the\s+Convention\b/gi, "embedded-named-instrument-section", match => {
+      if (!new Set(["5:c", "6:1"]).has(`${match[1]}:${match[2]}`)) return null;
+      return { family: "instrument", targetKind: "instrument", targetTitle: "Hague Adoption Convention, Article", targetSection: match[1], targetPath: [match[2]],
+        resolution: "official-source-only", officialUrl: "https://www.hcch.net/en/instruments/conventions/full-text/?cid=69",
+        citationNote: "The Convention of 29 May 1993 on Protection of Children and Co-operation in Respect of Intercountry Adoption, defined in 8 CFR 204.301." };
+    });
+  }
+  if (context.kind === "cfr" && String(context.title) === "8" && ["208.13", "208.35", "235.15"].includes(String(context.section))) {
+    addMatches(/\b(section\s+(3|4)\((b|d)\))\s+of\s+the\s+Presidential\s+Proclamation\s+of\s+June\s+3,\s+2024,\s+as\s+defined\s+in\s+(?:8\s+CFR\s+208\.13\(h\)|paragraph\s+\(h\)\s+of\s+this\s+section)/gi,
+      "embedded-named-instrument-section", match => {
+        if (!["3:b", "4:d"].includes(`${match[2]}:${match[3]}`)) return null;
+        return { text: match[1], family: "instrument", targetKind: "instrument", targetTitle: "Proclamation 10773 (as amended September 27, 2024), §",
+          targetSection: match[2], targetPath: [match[3]], resolution: "official-source-only",
+          officialUrl: "https://www.govinfo.gov/content/pkg/DCPD-202400485/html/DCPD-202400485.htm",
+          citationNote: "8 CFR 208.13(h) defines this as Proclamation 10773 as amended September 27, 2024. Proclamation 10817 left this provision unchanged; the official original proclamation contains its text." };
+      });
+  }
+
   addMatches(/\b(\d+)\s+U\.?\s*S\.?\s*C\.?\s*(?:§{1,2}\s*)?(\d+[A-Za-z]*(?:[–—-]\d+[A-Za-z]*)?)((?:\s*\([A-Za-z0-9-]+\))*)/gi, "explicit-usc", match => {
     const title = match[1], section = writtenUscSection(match[2]), complete = section === match[2].replace(/[–—]/g, "-"), targetPath = complete ? pathTokens(match[3]) : [];
     const actAcronym = targetPath.length === 1 && /^[A-Z]{3,}$/.test(targetPath[0]) && !/^[IVXLCDM]+$/.test(targetPath[0]);
@@ -1012,6 +1146,10 @@ function explicitReferenceCandidates(text, context) {
     const local = localUscTarget(context, title, section, targetPath);
     const sectionStart = match[0].indexOf(match[2]);
     const sourceText = complete && !actAcronym ? match[0] : match[0].slice(0, sectionStart + section.length);
+    if (title === "12" && section === "1141j" && targetPath.join("/") === "g") {
+      const commodity = agriculturalCommodityTarget(context);
+      if (commodity) return { text: sourceText, ...commodity };
+    }
     return { text: sourceText, family: "usc", targetKind: "usc", targetTitle: title, targetSection: section, targetPath, resolution: local ? "local" : "official-source-only", officialUrl: houseSectionUrl(title, section) };
   });
   addMatches(/\b(\d+)\s+C\.?\s*F\.?\s*R\.?\s*(?:(?:§{1,2}|sections?)\s*)?(\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?(?:\s*\([A-Za-z0-9-]+\))*-\d+(?:\.\d+)?[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?)((?:\s*\([A-Za-z0-9-]+\))*)/gi, "explicit-cfr", match => {
@@ -1043,6 +1181,12 @@ function explicitReferenceCandidates(text, context) {
     const sourceText = section === match[1] ? match[0] : match[0].slice(0, sectionStart + section.length);
     return { text: sourceText, family: "cfr", targetKind: "cfr", targetTitle: title, targetSection: section, targetPath, resolution: local ? "local" : "official-source-only", officialUrl: ecfrSectionUrl(title, section) };
   });
+  if (context.kind === "cfr") addMatches(/\b(?:in|under)\s+(\d+[A-Za-z]*\.\d+[A-Za-z]*)((?:\([A-Za-z0-9-]+\))+)/gi, "explicit-cfr", match => {
+    const title = String(context.title || ""), section = match[1], targetPath = pathTokens(match[2]);
+    if (!localCfrTarget(context, title, section, targetPath) || /^\s+of\b/i.test(input.slice(match.index + match[0].length))) return null;
+    return { relativeStart: match[0].indexOf(section), family: "cfr", targetKind: "cfr", targetTitle: title, targetSection: section,
+      targetPath, resolution: "local", officialUrl: ecfrSectionUrl(title, section) };
+  });
   addMatches(/\bINA\s*(?:§{1,2}|sections?)?\s*(\d+[A-Za-z-]*)((?:\s*\([A-Za-z0-9-]+\))*)/gi, "explicit-ina", match => {
     const inaSection = match[1], inaPath = pathTokens(match[2]);
     return inaReferenceTarget(context, inaSection, inaPath);
@@ -1065,6 +1209,7 @@ function bareSectionReferenceCandidates(text, context) {
   if (context.kind !== "usc") return [];
   const input = String(text || "");
   const results = [];
+  const numberedLists = EmbeddedReferences.parseNumberedSectionReferences(input);
   const pattern = /\bsection\s+(\d+[A-Za-z]+[–—-]\d+[A-Za-z]*|\d{3,5}[A-Za-z-]*)((?:\s*\([A-Za-z0-9-]+\))*)/gi;
   for (const [index, match] of [...input.matchAll(pattern)].entries()) {
     const section = String(match[1]).replace(/[–—]/g, "-");
@@ -1076,7 +1221,12 @@ function bareSectionReferenceCandidates(text, context) {
     const titleContainer = trailingText.replace(/^\s*\[[^\]]+\]/,'').match(/^(?:\s*(?:,\s*(?:(?:and|or)\s+)?|(?:and|or)\s+)(?:\d+[A-Za-z]*(?:\([^()]+\))*|(?:\([^()]+\))+))*(?:\s+et\s+seq\.)?\s+of\s+(?:title\s+(\d+)|(such)\s+title|(this)\s+title)\b/i);
     const precedingTitle = titleContainer?.[2] ? [...input.slice(Math.max(0, match.index - 350), match.index).matchAll(/\btitle\s+(\d+)\b/gi)].at(-1)?.[1] : null;
     const editorialBracket = input.lastIndexOf("[", match.index) > input.lastIndexOf("]", match.index) && input.indexOf("]", match.index) >= 0;
-    const explicitTitle = titleContainer?.[1] || precedingTitle || (titleContainer?.[3] && (!context.quotedScope || editorialBracket) ? String(context.title || 8) : "");
+    // The section-list grammar can carry qualifiers such as “or as described
+    // in section”. Its explicit shared title outranks an indexed same-number
+    // section in the source title, even when the shorter suffix regex stops.
+    const listOwner = numberedLists.find(candidate => candidate.start === match.index &&
+      candidate.members[0]?.end === match.index + match[0].length)?.scope;
+    const explicitTitle = (listOwner?.type === "numbered-title" ? listOwner.title : "") || titleContainer?.[1] || precedingTitle || (titleContainer?.[3] && (!context.quotedScope || editorialBracket) ? String(context.title || 8) : "");
     let target = null;
     let ruleId = "context-bare-usc-section";
     const enclosingSection = trailingText.match(/^\s+of\s+(section\s+\d)/i);
@@ -1470,7 +1620,7 @@ function explicitCitationContinuationCandidates(text, context, baseReferences = 
     while (cursor < input.length && cursor - base.end < 1600) {
       const ignorable = input.slice(cursor).match(/^\s+(?:note\b|et\s+seq\.?\b)/i);
       if (ignorable) cursor += ignorable[0].length;
-      const connector = input.slice(cursor).match(/^\s*(?:,\s*(?:(?:and|or)\s+)?|[–—-]\s*|&\s*|(?:and\/or|and|or|through|to)\s+)/i);
+      const connector = input.slice(cursor).match(/^\s*(?:,\s*(?:(?:and\/or|and|or)\s+)?|[–—-]\s*|&\s*|(?:and\/or|and|or|through|to)\s+)/i);
       if (!connector) break;
       let memberStart = cursor + connector[0].length;
       const repeatedUnit = input.slice(memberStart).match(/^(?:(?:sections?|§{1,2})\s*)/i);
@@ -1901,14 +2051,14 @@ function extendInterruptedUnitList(input, list) {
   if (!list?.members?.length || !EmbeddedReferences?.parseUnitList) return list;
   const members = [...list.members];
   let end = list.end;
-  for (let pass = 0; pass < 3; pass++) {
-    const whitespace = String(input || "").slice(end).match(/^\s*/)?.[0] || "";
+  while (end < input.length) {
+    const whitespace = String(input || "").slice(end).match(/^\s*,?\s*/)?.[0] || "";
     const groupStart = end + whitespace.length;
     const groupEnd = balancedParentheticalEnd(input, groupStart);
     if (groupEnd < 0) break;
     const groupText = input.slice(groupStart, groupEnd);
     if (/^\([A-Za-z0-9-]+\)(?:\s*\([A-Za-z0-9-]+\))*$/.test(groupText)) break;
-    const connector = input.slice(groupEnd).match(/^\s*,?\s*(?:(?:and|or)\s+)?(?=\()/i);
+    const connector = input.slice(groupEnd).match(/^\s*[,;]?\s*(?:(?:and|or)\s+)?(?=\()/i);
     if (!connector) break;
     const continuation = EmbeddedReferences.parseUnitList(input, groupEnd + connector[0].length);
     if (!continuation?.members?.length) break;
@@ -1918,7 +2068,7 @@ function extendInterruptedUnitList(input, list) {
   return members.length === list.members.length ? list : { ...list, end, text: input.slice(list.start, end), members, listMembers: members, tokens: members.map(member => member.tokens), listTokens: members.map(member => member.tokens), next: end };
 }
 
-function implicitUnitPhrases(text) {
+function implicitUnitPhrases(text, context = {}) {
   const input = String(text || "");
   const phrases = [];
   if (!EmbeddedReferences?.parseUnitList) return phrases;
@@ -1926,18 +2076,23 @@ function implicitUnitPhrases(text) {
     const list = EmbeddedReferences.parseUnitList(input, match.index + match[0].length);
     if (!list) continue;
     const tail = input.slice(list.end).match(/^\s+(above|below)\b/i);
-    if (!tail) continue;
+    // A complete multi-level CFR address after "in" or "under" is a
+    // paragraph citation even when the unit noun is omitted. Resolution still
+    // requires a unique existing path and rejects a following foreign owner.
+    const cfrAddress = context.kind === "cfr" && list.members.every(member => member.tokens.length >= 2);
+    if (!tail && !cfrAddress) continue;
+    const end = list.end + (tail?.[0].length || 0);
     phrases.push({
       type: "implicit-unit-list",
       start: match.index,
-      end: list.end + tail[0].length,
-      text: input.slice(match.index, list.end + tail[0].length),
-      unitKind: "",
+      end,
+      text: input.slice(match.index, end),
+      unitKind: cfrAddress ? "paragraph" : "",
       unitPlural: list.members.length > 1,
       unitSpan: { start: match.index, end: match.index + match[0].trimEnd().length, text: match[0].trimEnd() },
       list,
       members: list.members,
-      relation: tail[1].toLowerCase()
+      relation: tail?.[1].toLowerCase() || ""
     });
   }
   return phrases;
@@ -2034,7 +2189,30 @@ function inferredDirectContainer(context, phrase, anchorReferences = [], state =
     }
   }
   if (context.quotedScope) return quotedContainerTarget(context, parentContainerKind(phrase.unitKind), phrase.start);
-  if (context.kind === "cfr") return null;
+  if (context.kind === "cfr") {
+    if (phrase.type === "implicit-unit-list" || phrase.unitKind === "subsection") {
+      const preceding = [
+        ...anchorReferences.filter(reference => reference.end <= phrase.start).map(reference => ({ ...packedTargetBase(reference), end: reference.end })),
+        ...(state?.frames || []).filter(frame => frame.sourceId === context.sourceId && frame.end <= phrase.start)
+      ].sort((left, right) => right.end - left.end)[0];
+      if (preceding && (preceding.family !== "cfr" || String(preceding.title) !== String(context.title) || String(preceding.section) !== String(context.section))) return null;
+    }
+    // An unqualified numbered paragraph normally belongs to this section.
+    // Require one exact local interpretation across the enclosing paths;
+    // repeated labels and a written foreign owner cannot select a guess.
+    if (!["subsection", "paragraph", "subparagraph", "item"].includes(phrase.unitKind) ||
+        /^\s+of\b/i.test(input.slice(phrase.list?.end || phrase.end))) return null;
+    const bases = new Map();
+    const sourcePath = (context.path || []).map(String);
+    for (let length = sourcePath.length; length >= 0; length--) {
+      const base = { family: "cfr", title: String(context.title || ""), section: String(context.section || ""), path: sourcePath.slice(0, length) };
+      const targets = expandedEmbeddedTargets(context, base, phrase);
+      if (!targets.length || !targets.every(target => embeddedTargetExists(context, target))) continue;
+      const identity = JSON.stringify(targets.map(target => target.path));
+      if (!bases.has(identity)) bases.set(identity, base);
+    }
+    return bases.size === 1 ? [...bases.values()][0] : null;
+  }
   const title = String(context.title || "8");
   const section = String(context.section || "");
   if (!section) return null;
@@ -2248,7 +2426,7 @@ function sharedTrailingContainerReferenceCandidates(text, context, anchorReferen
       // a nested exception before their one shared trailing section anchor:
       // “subparagraph (A) (other than clause (ii)), (B), or (C) of section …”.
       // The depth and unit checks below keep this within the same citation.
-      const simpleTail = /^\s*(?:\([^()]{1,120}\)\s*)?(?:of|if\s+section)\s*$/i.test(afterList);
+      const simpleTail = /^\s*(?:\([^()]{1,120}\)\s*)?(?:of\s+(?:the\s+(?:first|second|last)\s+sentence\s+of\s+)?|if\s+section\s*)$/i.test(afterList);
       const coordinatedTail = context.sourceKind !== "usc-note" && /\b(?:of|if\s+section)\s*$/i.test(afterList) &&
         (/[()]/.test(afterList) || new RegExp(`\\b${kind}s?\\b`, "i").test(afterList));
       // A shared container may follow list connectors and parenthetical
@@ -2557,10 +2735,59 @@ function resolvedCfrContinuationPath(context, title, section, previousPath, toke
   return relative;
 }
 
+function agriculturalCommodityTarget(context) {
+  const text = String(context.sourceText || "");
+  if (context.kind !== "cfr" || !new Set(["20:655", "29:501", "29:502"]).has(`${context.title}:${context.part}`) ||
+      !/agricultural commodit(?:y|ies)/i.test(text) || !/Agricultural Marketing Act,\s+as amended\b/i.test(text) ||
+      /\bas (?:in )?effect\b/i.test(text)) return null;
+  return { family: "usc", targetKind: "usc", targetTitle: "12", targetSection: "1141j", targetPath: ["f"],
+    resolution: localUscTarget(context, "12", "1141j", ["f"]) ? "local" : "official-source-only", officialUrl: houseSectionUrl("12", "1141j"),
+    citationNote: "The source cites former Agricultural Marketing Act section 15(g), 12 U.S.C. 1141j(g). That agricultural commodity definition was redesignated subsection (f) by Public Law 110-246, section 1610, effective May 22, 2008." };
+}
+
 function namedActTarget(actName, member, context = {}) {
   const cleanActName = canonicalActName(actName);
   const normalized = cleanActName.toLowerCase();
   const writtenContainers = namedActContainerPath(actName);
+  if (normalized === "adult education and family literacy act" && String(member.section) === "203") return {
+    family: "usc", targetKind: "usc", targetTitle: "29", targetSection: "3272", targetPath: [...(member.tokens || [])],
+    resolution: "official-source-only", officialUrl: houseSectionUrl("29", "3272")
+  };
+  if (normalized === "agricultural marketing act" && String(member.section) === "15" && member.tokens?.join("/") === "g") {
+    const commodity = agriculturalCommodityTarget(context);
+    if (commodity) return commodity;
+  }
+  // APA §10(c) was codified as the whole of 5 U.S.C. 704; its source
+  // subsection letter is not a subsection of the codified destination.
+  if (normalized === "administrative procedure act" && String(member.section) === "10" &&
+      member.tokens?.length === 1 && member.tokens[0] === "c") return {
+    family: "usc", targetKind: "usc", targetTitle: "5", targetSection: "704", targetPath: [],
+    resolution: "official-source-only", officialUrl: houseSectionUrl("5", "704")
+  };
+  if (normalized === "foreign affairs reform and restructuring act of 1998" && String(member.section) === "2242") return {
+    family: "public-law", targetKind: "public-law", targetCongress: "105", targetLaw: "277",
+    targetPath: ["division-G", "subdivision-B", "title-XXII", "s2242", ...(member.tokens || [])],
+    resolution: "official-source-only", officialUrl: houseSectionUrl("8", "1231"),
+    citationNote: "Section 2242 is published in the statutory notes to 8 U.S.C. 1231 under United States Policy With Respect to Involuntary Return of Persons in Danger of Subjection to Torture."
+  };
+  if (/^(?:ac-?21|american competitiveness in the (?:twenty-first|21st) century act(?: of 2000)?)$/.test(normalized) && String(member.section) === "106") return {
+    family: "public-law", targetKind: "public-law", targetCongress: "106", targetLaw: "313",
+    targetPath: ["title-I", "s106", ...(member.tokens || [])],
+    resolution: "official-source-only", officialUrl: houseSectionUrl("8", "1184"),
+    citationNote: "AC21 section 106, as amended by Public Law 107-273, is published in the statutory notes to 8 U.S.C. 1184 under Special Provisions in Cases of Lengthy Adjudications."
+  };
+  if (/^(?:tvpa|trafficking victims protection act(?: of 2000)?)$/.test(normalized) && String(member.section) === "107") {
+    if (member.tokens?.[0] === "c") return {
+      family: "usc", targetKind: "usc", targetTitle: "22", targetSection: "7105", targetPath: [...member.tokens],
+      resolution: "official-source-only", officialUrl: houseSectionUrl("22", "7105")
+    };
+    if (member.tokens?.[0] === "e") return {
+      family: "public-law", targetKind: "public-law", targetCongress: "106", targetLaw: "386",
+      targetPath: ["division-A", "s107", ...member.tokens], resolution: "official-source-only",
+      officialUrl: "https://www.govinfo.gov/content/pkg/PLAW-106publ386/pdf/PLAW-106publ386.pdf#page=15",
+      citationNote: "TVPA section 107(e) is the original amendatory provision in division A of Public Law 106-386. It amended several INA provisions and is not subsection (e) of 22 U.S.C. 7105."
+    };
+  }
   if (normalized === "job training partnership act") return {
     family:"public-law", targetKind:"public-law", targetCongress:"97", targetLaw:"300",
     targetPath:[...(String(member.section)==="106" ? ["tI"] : []), `s${member.section}`, ...(member.tokens||[])],
@@ -2584,10 +2811,19 @@ function namedActTarget(actName, member, context = {}) {
     "social security act:218a": ["42", "418a"],
     "social security act:223": ["42", "423"],
     "social security act:230": ["42", "430"],
+    "social security act:1614": ["42", "1382c"],
+    "social security act:1616": ["42", "1382e"],
+    "social security act:1633": ["42", "1383b"],
     "social security act:1931": ["42", "1396u-1"],
     "social security act:1181": ["42", "1320e"],
     "social security act:1855": ["42", "1395w-25"],
     "higher education act of 1965:101": ["20", "1001"],
+    "fair labor standards act of 1938:3": ["29", "203"],
+    "fair labor standards act of 1938:7": ["29", "207"],
+    "fair labor standards act:3": ["29", "203"],
+    "fair labor standards act:7": ["29", "207"],
+    "flsa:3": ["29", "203"],
+    "flsa:7": ["29", "207"],
     "public health service act:319": ["42", "247d"],
     "public health service act:332": ["42", "254e"],
     "civil rights act of 1964:703": ["42", "2000e-2"],
@@ -3177,7 +3413,8 @@ function namedInstrumentTarget(instrumentName, member) {
       targetVolume: "61",
       targetPage: "758",
       targetPath: [`section-${member.section}`, ...member.tokens],
-      officialUrl: "https://www.govinfo.gov/app/details/STATUTE-61/STATUTE-61-Pg758"
+      officialUrl: "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg756-2.pdf" + (String(member.section) === "11" ? "#page=6" : ""),
+      citationNote: "The official archive contains the joint resolution and the United Nations Headquarters Agreement. Section 11 appears at 61 Stat. 761."
     };
   }
   return null;
@@ -3634,11 +3871,28 @@ function describeHistoricalArchive(reference, context) {
   return {...reference,citationNote:[reference.citationNote,notice].filter(Boolean).join(" ")};
 }
 
+function continuingCulturalExchangeTarget(reference, context) {
+  const culturalRule = context.kind === "cfr" &&
+    (String(context.title) === "8" && context.section === "214.2" &&
+      (context.path?.[0] === "q" || /international cultural exchange/i.test(context.sourceText || "")) ||
+     String(context.title) === "22" && context.section === "41.57");
+  if (!culturalRule || !["usc", "ina"].includes(reference.family) || reference.targetTitle !== "8" ||
+      reference.targetSection !== "1101" || reference.targetPath?.join("/") !== "a/15/Q/i" ||
+      reference.targetEdition || reference.historicalOfficialUrl) return reference;
+  const targetPath = ["a", "15", "Q"];
+  const local = localUscTarget(context, "8", "1101", targetPath);
+  return { ...reference, targetPath, targetKind: local ? "usc" : reference.targetKind,
+    resolution: local ? "local" : "official-source-only", officialUrl: houseSectionUrl("8", "1101"),
+    citationNote: "The source uses the former (Q)(i) designation for international cultural exchange. Public Law 108-449 removed the (i) designation effective October 1, 2008, while repealing the separate Irish program in (Q)(ii). The continuing cultural-exchange provision is now INA 101(a)(15)(Q)." };
+}
+
 function applySourceExceptions(references, context, text) {
   const reviewed = sourceExceptions(context, text).map(exception => {
     context.embeddedExceptionUsage?.add(exception.id);
     const target = exception.target;
-    const local = !target.edition && embeddedTargetExists(context, target);
+    const local = !target.edition && (target.chapter
+      ? target.title === "8" && context.uscHierarchyTargets?.has(`${target.chapter}:`)
+      : embeddedTargetExists(context, target));
     const reference = { id: makeId(context, exception.start, "embedded-exception"), start: exception.start, end: exception.end,
       text: exception.text, family: target.family, targetKind: target.family, targetPath: [...target.path],
       resolution: exception.resolution || (local ? "local" : "official-source-only"), officialUrl: exception.officialUrl,
@@ -3648,10 +3902,13 @@ function applySourceExceptions(references, context, text) {
       ...(target.edition ? {targetEdition: target.edition, forceOfficial: true} : {}) };
     if (target.family === "public-law") Object.assign(reference, {targetCongress: target.title, targetLaw: target.section});
     else if (target.family === "statutes-at-large") Object.assign(reference, {targetVolume: target.title, targetPage: target.section});
+    else if (target.family === "usc" && target.chapter) Object.assign(reference, {targetKind: "usc-hierarchy", targetTitle: target.title, targetChapter: target.chapter});
     else Object.assign(reference, {targetTitle: target.title, targetSection: target.section});
     return reference;
   });
-  return [...references.filter(reference => !overlaps(reference, reviewed)), ...reviewed].map(reference=>describeHistoricalArchive(normalizeOfficialDestination(reference),context)).sort((a,b) => a.start-b.start || a.end-b.end);
+  return [...references.filter(reference => !overlaps(reference, reviewed)), ...reviewed]
+    .map(reference=>describeHistoricalArchive(normalizeOfficialDestination(continuingCulturalExchangeTarget(reference,context)),context))
+    .sort((a,b) => a.start-b.start || a.end-b.end);
 }
 
 function embeddedReferenceCandidates(text, context, anchorReferences = []) {
@@ -3659,7 +3916,7 @@ function embeddedReferenceCandidates(text, context, anchorReferences = []) {
   if (!EmbeddedReferences?.parseEmbeddedReferences) return [];
   const parsed = EmbeddedReferences.parseEmbeddedReferences(input);
   const direct = embeddedUnitPhrases(input, context);
-  const implicit = implicitUnitPhrases(input);
+  const implicit = implicitUnitPhrases(input, context);
   const state = context.embeddedState || { frames: [] };
   if (!Array.isArray(state.frames)) state.frames = [];
   for (const reference of anchorReferences) {
@@ -3675,6 +3932,9 @@ function embeddedReferenceCandidates(text, context, anchorReferences = []) {
   const targetFrom = (family, title, section, path) => ({ family, title: String(title || ""), section: String(section || ""), path: path.map(String) });
   const makeReference = (member, candidate, target, base, ruleId, index) => {
     const exception = embeddedExceptionFor(context, member);
+    // A missing closing parenthesis must not turn a compound locator into
+    // a seemingly valid reference to its broader parent provision.
+    if (!exception && /^\s*\(\d+(?=\s+of\b)/i.test(input.slice(member.end))) return null;
     if (exception) {
       target = targetFrom(exception.target.family, exception.target.title || context.title, exception.target.section, exception.target.path);
       ruleId = "embedded-exception";
@@ -4614,7 +4874,7 @@ function generatedReferencesInScope(text, context, existing = []) {
     existing = [...reviewed, ...existing.filter(reference => !overlaps(reference, reviewed))];
   }
   const footnoteCorrectedExisting = [...(existing || [])].map(reference => applyHouseEditorialCorrection(reference, context));
-  const footnoteCorrectedBases = [...explicitReferenceCandidates(text, context), ...bareSectionReferenceCandidates(text, context), ...repeatedInstrumentActReferences(text, context), ...inaActReferenceCandidates(text, context), ...scopedCfrActReferenceCandidates(text, context), ...contextualReferenceCandidates(text, context)]
+  const footnoteCorrectedBases = [...explicitReferenceCandidates(text, context), ...bareSectionReferenceCandidates(text, context), ...repeatedInstrumentActReferences(text, context), ...inaActReferenceCandidates(text, context), ...cfrClassificationTableReferences(text, context), ...scopedCfrActReferenceCandidates(text, context), ...contextualReferenceCandidates(text, context)]
     .map(reference => applyHouseEditorialCorrection(reference, context));
   const footnoteCorrectedDeterministic = [
     ...footnoteCorrectedBases,
@@ -4924,16 +5184,17 @@ function applyGeneratedLegalReferences(corpus) {
   }
   const attachCfrBlocks = (section, blocks, pathPrefix = [], inheritedState = newState()) => {
     const stateByPath = new Map([["", newState(inheritedState.frames)]]);
+    const suppressionPathFor = cfrSuppressionTracker();
     (blocks || []).forEach((block, index) => {
       const path = pathTokens(block.a || block.u?.at(-1)?.a || block.c || "");
-      const context = { kind: "cfr", title: String(section.title), part: cfrPartNumber(section), chapter: cfrChapterNumber(section), section: String(section.section || ""), path, sourceId: `cfr-${section.id}-${[...pathPrefix, index].join("-")}`, suppressSelfReferences: true };
+      const context = { kind: "cfr", title: String(section.title), part: cfrPartNumber(section), chapter: cfrChapterNumber(section), section: String(section.section || ""), path, suppressionPath: suppressionPathFor(block, path), sourceId: `cfr-${section.id}-${[...pathPrefix, index].join("-")}`, suppressSelfReferences: true };
       const parentKey = path.slice(0, -1).join("/");
       const blockState = newState((stateByPath.get(parentKey) || stateByPath.get("") || inheritedState).frames);
       attach(block, "x", context, blockState);
       stateByPath.set(path.join("/"), blockState);
       if (!path.length) stateByPath.set("", blockState);
       if (block.t === "table") {
-        (block.rows || []).forEach((row, rowIndex) => row.forEach((cell, cellIndex) => attach(cell, "x", { ...context, sourceId: `${context.sourceId}-cell-${rowIndex}-${cellIndex}` }, newState(blockState.frames))));
+        (block.rows || []).forEach((row, rowIndex) => row.forEach((cell, cellIndex) => attach(cell, "x", { ...context, tableHeaders: block.rows?.[0]?.map(cell => cell.x), tableColumn: cellIndex, sourceId: `${context.sourceId}-cell-${rowIndex}-${cellIndex}` }, newState(blockState.frames))));
       }
       if (block.t === "note") attachCfrBlocks(section, block.blocks, [...pathPrefix, index], newState(blockState.frames));
     });
@@ -4972,7 +5233,7 @@ function applyGeneratedLegalReferences(corpus) {
     suppressedSelfReferencesByRule: referenceAudit.suppressedByRule,
     suppressedSelfReferencesByFamily: referenceAudit.suppressedByFamily,
     generatedAtBuild: true,
-    cfrHierarchyVersion: 21,
+    cfrHierarchyVersion: 22,
     uscHierarchyVersion: 2,
     runtimeNetworkForPreviews: false,
     policySchemaVersion: corpus.legalReferencePolicy?.schemaVersion || null,
@@ -5025,11 +5286,12 @@ function applyCfrReferences(corpus, changedPartIds) {
   };
   const attachBlocks = (section, blocks, pathPrefix = [], inheritedState = newState()) => {
     const stateByPath = new Map([["", newState(inheritedState.frames)]]);
+    const suppressionPathFor = cfrSuppressionTracker();
     (blocks || []).forEach((block, index) => {
       const path = pathTokens(block.a || block.u?.at(-1)?.a || block.c || "");
       const context = {
         kind: "cfr", title: String(section.title), part: cfrPartNumber(section), chapter: cfrChapterNumber(section),
-        section: String(section.section || ""), path, sourceId: `runtime-cfr-${section.id}-${[...pathPrefix, index].join("-")}`,
+        section: String(section.section || ""), path, suppressionPath: suppressionPathFor(block, path), sourceId: `runtime-cfr-${section.id}-${[...pathPrefix, index].join("-")}`,
         suppressSelfReferences: true
       };
       const parentKey = path.slice(0, -1).join("/");
@@ -5039,7 +5301,7 @@ function applyCfrReferences(corpus, changedPartIds) {
       if (!path.length) stateByPath.set("", blockState);
       if (block.t === "table") {
         (block.rows || []).forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
-          attach(cell, "x", { ...context, sourceId: `${context.sourceId}-cell-${rowIndex}-${cellIndex}` }, newState(blockState.frames));
+          attach(cell, "x", { ...context, tableHeaders: block.rows?.[0]?.map(cell => cell.x), tableColumn: cellIndex, sourceId: `${context.sourceId}-cell-${rowIndex}-${cellIndex}` }, newState(blockState.frames));
         }));
       }
       if (block.t === "note") attachBlocks(section, block.blocks, [...pathPrefix, index], newState(blockState.frames));

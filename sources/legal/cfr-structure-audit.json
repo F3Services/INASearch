@@ -1,14 +1,14 @@
 {
   "schemaVersion": 2,
-  "captureTime": "2026-10-23T23:11:01Z",
+  "captureTime": "2026-10-26T06:20:43Z",
   "inputs": {
     "captureManifest": {
-      "sha256": "ba593b8cfa9bd00226fe7798cc310ab11b9d225c19d27d0b82d6acab4ab3157b",
+      "sha256": "c4466eef7c8ecf3f41f70bf4efb8c1cda047a26431eec05952476670d68c609f",
       "description": "Official eCFR XML and enhanced renderer capture"
     },
     "corpus": {
       "path": "src/INASearch-CFR.js",
-      "sha256": "a86c91b865a954dfc0e85aba9a0d66d39606fb1515f1a715f7e7968373e95456"
+      "sha256": "da5b5cfcfc06cbd000883eeeb1f5cd6a17fe0164ef073cc9eff5aabf1dccb924"
     },
     "reviewedExpectations": {
       "path": "sources/legal/cfr-hierarchy/reviewed-expectations.json",

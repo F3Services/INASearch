@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-10-23",
+  "capturedAt": "2026-10-26",
   "sources": [
     {
       "id": "house-title-8-uslm",
@@ -29,8 +29,8 @@
           "sha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8"
         }
       ],
-      "checkedAt": "2026-10-23",
-      "currentThroughDate": "2026-10-15"
+      "currentThroughDate": "2026-10-15",
+      "checkedAt": "2026-10-26"
     },
     {
       "id": "govinfo-ina-compilation",
@@ -50,18 +50,18 @@
           "sha256": "cdc4d5d77cf5e893ac58680cd89522694f926d10e1cd26efeba70b6eb79ba9ca"
         }
       ],
-      "checkedAt": "2026-10-23",
       "currentThroughPublicLaw": "119-21",
       "amendedThroughDate": "2025-07-04",
-      "processedDate": "2026-10-16"
+      "processedDate": "2026-10-16",
+      "checkedAt": "2026-10-26"
     },
     {
       "id": "uscis-ina-crosswalk",
       "publisher": "U.S. Citizenship and Immigration Services",
       "requestedUrl": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
       "finalUrl": "https://www.uscis.gov/laws-and-policy/legislation/immigration-and-nationality-act",
-      "lastModified": "Fri, 23 Oct 2026 22:42:49 GMT",
-      "etag": "\"1792795369\"",
+      "lastModified": "Mon, 26 Oct 2026 06:20:08 GMT",
+      "etag": "\"1792995608\"",
       "artifacts": [
         {
           "id": "uscis-ina-crosswalk-html",
@@ -72,7 +72,7 @@
           "sha256": "11000b7e41757a7df81a6986b187dfa9d33688997aec90782441e06ef6579812"
         }
       ],
-      "checkedAt": "2026-10-23"
+      "checkedAt": "2026-10-26"
     }
   ]
 }

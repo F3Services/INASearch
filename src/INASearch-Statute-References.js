@@ -3,7 +3,7 @@ window.INA_SEARCH_STATUTE_REFERENCES = {
   "schemaVersion": 3,
   "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip",
   "sourceReleasePoint": "119-124",
-  "capturedAt": "2026-10-23",
+  "capturedAt": "2026-10-26",
   "sourceArtifact": "sources/legal/raw/usc08@119-124.xml",
   "sourceBytes": 7384424,
   "sourceSha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8",
