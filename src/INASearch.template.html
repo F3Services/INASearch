@@ -435,8 +435,11 @@
     .copy-option-divider-full { width: calc(100% + 2px); }
     .reader-action-icon { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .copy-option-symbol { font: 700 20px/1 Georgia, serif; }
-    .combined-copy-symbol { display: flex; flex-direction: column; align-items: center; font: 700 18px/1 Georgia, serif; }
-    .combined-copy-symbol > span:nth-child(2) { font: 700 13px/1 var(--sans); }
+    .combined-copy-symbol { position: relative; display: block; height: 24px; font: 700 12px/1 Georgia, serif; }
+    .combined-copy-symbol > span { position: absolute; }
+    .combined-copy-symbol > span:first-child { top: 0; left: 3px; }
+    .combined-copy-symbol > span:nth-child(2) { top: 0; left: 12px; }
+    .combined-copy-symbol > span:last-child { right: 3px; bottom: 0; }
     .reader-note-icon { width: 23px; height: 23px; }
     .reader-note-icon text { fill: currentColor; stroke: none; font: 750 10px var(--sans); }
     .main-reader-actions .main-reader-authority { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; font: 800 9px/1 var(--mono); }
@@ -447,7 +450,6 @@
     .main-reader-actions .live-citation-copies { color: var(--navy); border-color: var(--blue); background: var(--blue-soft); }
     .main-reader-actions .live-citation-copies[aria-disabled="true"] { color: color-mix(in srgb, var(--muted) 55%, transparent); background: var(--panel); border-color: color-mix(in srgb, var(--blue) 35%, var(--line)); }
     .main-reader-actions .live-citation-copies .statute-history-button { width: 27px; height: 29px; min-height: 29px; border-color: transparent; border-radius: 5px; background: transparent; }
-    .main-reader-actions .live-citation-copies .combined-copy-button { height: 53px; min-height: 53px; }
     .main-reader-actions .live-citation-copies .statute-history-button:hover:not(:disabled), .main-reader-actions .live-citation-copies .statute-history-button:focus-visible { border-color: var(--blue); }
     .main-reader-actions .statute-history-button:hover:not(:disabled) { background: var(--blue-soft); }
     .main-reader-actions .live-citation-copies .copy-action-button { display: flex; align-self: flex-start; align-items: center; justify-content: flex-start; width: max-content; min-width: 27px; flex-shrink: 0; }
@@ -1340,7 +1342,7 @@
     .statute-citation-link { border-radius: 3px; color: var(--blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
     .statute-citation-link:hover { color: var(--navy); background: var(--blue-soft); }
     .statute-citation-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-    .statute-citation-link.citation-display-ina { color: var(--warning); background: color-mix(in srgb, var(--warning-soft) 72%, transparent); text-decoration-color: currentColor; }
+    .citation-display-ina { color: var(--warning); background: color-mix(in srgb, var(--warning-soft) 72%, transparent); text-decoration-color: currentColor; }
     .occurrence-row-text .citation-display-ina,
     .legal-reference-preview .citation-display-ina { color: var(--warning); background: color-mix(in srgb, var(--warning-soft) 72%, transparent); }
     .statute-citation-link.citation-display-ina:hover { color: var(--warning); background: var(--warning-soft); }
@@ -2015,9 +2017,9 @@
       <span class="live-citation-copies" id="liveCitationCopies" role="group" aria-label="Copy options">
         <svg class="reader-action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8zM16 8V3H4v13h4"></path></svg>
         <span class="copy-option-divider copy-option-divider-full" aria-hidden="true"></span>
-        <button class="statute-history-button copy-action-button live-citation-copy" type="button" data-live-citation-action="copy-citation" aria-label="Copy citation"><span class="copy-option-symbol" aria-hidden="true">§</span><span class="copy-action-label" aria-hidden="true"></span></button>
+        <button class="statute-history-button copy-action-button" type="button" data-live-citation-action="copy-text" aria-label="Copy legal text only"><span class="copy-option-symbol" aria-hidden="true">T</span><span class="copy-action-label" aria-hidden="true"></span></button>
         <span class="copy-option-divider" aria-hidden="true"></span>
-        <button class="statute-history-button copy-action-button" type="button" data-live-citation-action="copy-text" aria-label="Copy legal text"><span class="copy-option-symbol" aria-hidden="true">T</span><span class="copy-action-label" aria-hidden="true"></span></button>
+        <button class="statute-history-button copy-action-button combined-copy-button" type="button" data-live-citation-action="copy-citation-text" aria-label="Copy citation and legal text"><span class="combined-copy-symbol" aria-hidden="true"><span>§</span><span>:</span><span>T</span></span><span class="copy-action-label" aria-hidden="true"></span></button>
       </span>
       <button class="statute-history-button" type="button" data-live-citation-action="add-note" aria-label="Add note" title="Add note"><svg class="reader-action-icon reader-note-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2h10l5 5v5M14 2v6h5M4 2v17h5"></path><text x="9" y="22">N+</text></svg></button>
       <button class="statute-history-button print-action" type="button" data-live-citation-action="print" aria-label="Print Section"><svg class="reader-action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 17H3V9h18v8h-3M6 14h12v7H6zM17 12h1"></path></svg><span class="print-action-label" aria-hidden="true">Print Section</span></button>
@@ -2285,7 +2287,7 @@
         <section class="settings-section" aria-labelledby="citationCopySettingsHeading">
           <h3 class="settings-section-heading" id="citationCopySettingsHeading">Citation copying</h3>
           <div class="settings-input-block">
-            <label for="citationCopyPrefaceInput"><strong>Copied text format</strong><small>[citation] is replaced with the citation and [text] with the complete legal text, regardless of capitalization. Put them in any order and include any punctuation or line breaks you want.</small></label>
+            <label for="citationCopyPrefaceInput"><strong>Copied text format</strong><small>[citation] inserts the citation, [text] the complete legal text, [space] one space, and [tab] one tab, regardless of capitalization. Spaces or tabs before [citation] at the start of a line also indent every line of [text], preserving its nested indentation. Paste with source formatting to retain indentation on wrapped lines; plain-text paste retains spaces and tabs.</small></label>
             <div class="settings-input-row"><textarea class="field" id="citationCopyPrefaceInput" rows="4" maxlength="2006" aria-describedby="citationCopyPrefaceWarning" spellcheck="false"></textarea><button class="button secondary" id="resetCitationCopyPrefaceButton" type="button">Default</button></div>
             <p class="citation-copy-warning" id="citationCopyPrefaceWarning" role="status" aria-live="polite" hidden>[citation] not detected</p>
           </div>
@@ -2746,7 +2748,7 @@
           [72, "Automatic CFR updates are optional.", "Enabling the setting checks included CFR material directly against eCFR; it does not update the U.S. Code, INA crosswalk, forms, or Policy Manual snapshot."],
           [75, "Start with a working research query.", "Set Default startup query in Settings to in:237 has:notes to open your annotated deportability provisions each time. You can save any citation or search there; leave it blank to start at Home."],
           [76, "Citation links in statutes and regulations can display INA or U.S.C. citations.", "Convert citations to INA format in Settings controls the wording without changing link destinations."],
-          [83, "Customize the format of copied legal text.", "Change Copied text format in Settings to control what T copies. The default is [citation] - [text]. Put [citation] and [text] in any order, with your own punctuation or line breaks; the tokens work regardless of capitalization."],
+          [83, "Customize the format of copied legal text.", "Change Copied text format in Settings to control citation + text copying. The default is [citation] - [text]. Add [space] or [tab] before [citation] at the start of a line to indent the copied text too. Tokens work regardless of capitalization; T alone copies text without the template."],
         ]
       },
     ]);
@@ -6218,7 +6220,7 @@
       const title = result?.level === "hierarchy-matches" ? result.label : hierarchyNodeCitation(node) || result?.label || pane.entry.text;
       const heading = result?.message || node?.heading || result?.heading || "Choose a legal unit.";
       const expanded = pane.readerState.hierarchyExpanded instanceof Set ? pane.readerState.hierarchyExpanded : new Set();
-      pane.detail.innerHTML = `<section class="pane-hierarchy">${cfrPartAlternativesHtml(node)}<header class="pane-view-heading"><h2>${escapeHtml(title)}</h2><span class="occurrence-count">${roots.length.toLocaleString()} entries</span><p>${escapeHtml(heading)}</p></header><div class="pane-hierarchy-list">${paneHierarchyRows(roots, expanded)}</div></section>`;
+      pane.detail.innerHTML = `<section class="pane-hierarchy">${cfrPartAlternativesHtml(node)}<header class="pane-view-heading"><h2>${escapeHtml(title)}</h2><span class="occurrence-count">${roots.length.toLocaleString()} entries</span><p>${escapeHtml(node?.authority === "cfr" ? cfrHeadingDisplayText(heading) : heading)}</p></header><div class="pane-hierarchy-list">${paneHierarchyRows(roots, expanded)}</div></section>`;
       withFocusedCitationPane(pane, () => renderHierarchyNavigation(result));
     }
 
@@ -9606,7 +9608,7 @@
       // A USC note or an open-ended sequence is a Code location, not an exact
       // equivalence to the INA provision mapped at its first section number.
       if ((reference.targetPath || []).some(token => /^(?:notes?|(?:17|18|19|20)\d{2})$/i.test(token)) ||
-          /^\s*(?:[([]\s*)?(?:notes?\b|et\s+seq\b)/i.test(suffix) ||
+          /^\s*(?:[([]\s*)?(?:(?:and\s+)?notes?\b|et\s+seq\b)/i.test(suffix) ||
           /\b(?:notes?\s+(?:under|to|following)|set\s+out\s+under)\s*$/i.test(prefix)) return null;
       // Preserve edition and former-law locators instead of implying that the
       // current INA crosswalk identifies the historical provision's text.
@@ -9653,19 +9655,64 @@
       return system === "view" ? state.statuteHierarchyAuthority === "ina" : system === "ina";
     }
 
+    function cfrWrittenInaCitation(reference, sourceContext = null) {
+      if (sourceContext?.kind !== "cfr" && sourceContext?.sourceHost?.kind !== "cfr") return "";
+      const written = String(reference?.text || "").trim();
+      if (["embedded-exception", "historical-reviewed-reference"].includes(reference?.ruleId) && reference.family === "usc" && String(reference.targetTitle) === "8") {
+        if (reference.inaSection) return `INA ${reference.inaSection}${canonicalPath(reference.targetPath || [])}`;
+        const address = written.match(/^(?:INA\s+)?(?:sections?\s+)?(\d+[A-Za-z]*)\s*((?:\s*\([A-Za-z0-9-]+\))*)/i);
+        const section = address?.[1];
+        const mapping = section && inaMap.get(normCitationPart(section));
+        if (mapping && /^(?:INA\s+)?sections?\s+|\bof\s+the\s+Act\b/i.test(written)) {
+          const corrected = reference.ruleId === "embedded-exception" && reference.resolution !== "unresolved" ? statutoryReferenceCrosswalk(reference, sourceContext)?.ina : "";
+          return corrected || `INA ${mapping.inaSection || section}${address[2].replace(/\s+/g, "")}`;
+        }
+        // Relative reviewed members keep their established target path; their
+        // written abbreviation remains in place within a coordinated list.
+        const parent = uscToIna.get(normCitationPart(reference.targetSection));
+        if (/^\(/.test(written) && parent) return `INA ${parent.inaSection}${canonicalPath(reference.targetPath || [])}`;
+        if (section && !mapping && parent && /^sections?\s+/i.test(written)) return `INA ${parent.inaSection}${canonicalPath(reference.targetPath || [])}`;
+      }
+      // This normalizes a written INA authority; it is not a crosswalk to
+      // current law. Historical and unresolved references retain their target
+      // and resolution, including citations without any navigable destination.
+      if (reference?.family !== "ina" && !(reference?.inaSection && reference.ruleId === "embedded-named-act-section")) return "";
+      const rawSection = reference.inaSection || written.match(/^(?:(?:INA\s+)?(?:sections?|secs?\.)\s+)(\d+[A-Za-z]*)\b/i)?.[1];
+      if (!rawSection) return "";
+      const section = inaMap.get(normCitationPart(rawSection))?.inaSection || rawSection;
+      const address = written.match(/^(?:INA\s*)?(?:(?:sections?|secs?\.|§{1,2})\s*)?\(?(\d+[A-Za-z-]*)\)?((?:\s*\([A-Za-z0-9-]+\))*)/i);
+      // A classification table may link to an underlying provision while
+      // printing an administrative subclassification. Its label is source
+      // wording, not a replacement by the navigation path.
+      const sourcePath = address && normCitationPart(address[1]) === normCitationPart(section)
+        ? [...address[2].matchAll(/\(([^)]+)\)/g)].map(match => match[1]) : reference.targetPath || [];
+      return `INA ${section}${canonicalPath(sourcePath)}`;
+    }
+
     function coordinatedStatutoryInaLists(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length, sourceContext = null) {
-      if (sourceContext?.sourceHost && uscSection(sourceContext.sourceHost.title || 8, sourceContext.sourceHost.section)?.historical) return [];
+      if (sourceContext?.sourceHost?.kind === "usc" && uscSection(sourceContext.sourceHost.title || 8, sourceContext.sourceHost.section)?.historical) return [];
       if (!statutoryLinksUseIna(sourceContext)) return [];
       const input = String(value || "");
       sourceContext = { ...(sourceContext || {}), referenceSourceText: input, referenceSourceReferences: references };
-      const crosswalkFor = reference => statutoryReferenceCrosswalk(reference, sourceContext);
+      const authorityList = /^\s*Authority\s*:/i.test(input);
+      const authorityGap = gap => {
+        let depth = 0, outside = "";
+        for (const character of gap) {
+          if (character === "(") depth++;
+          else if (character === ")") { if (!depth) return false; depth--; }
+          else if (!depth) outside += character;
+        }
+        return !depth && /^(?:\s|[,;–—-]|\b(?:and\/or|and|or|through|to|notes?)\b|\d+[A-Za-z]+\d+)+$/i.test(outside);
+      };
+      const crosswalkFor = reference => cfrWrittenInaCitation(reference, sourceContext)
+        ? { ina: cfrWrittenInaCitation(reference, sourceContext) } : statutoryReferenceCrosswalk(reference, sourceContext);
       const start = Math.max(0, Number(segmentStart) || 0);
       const end = Math.min(input.length, Number.isFinite(Number(segmentEnd)) ? Number(segmentEnd) : input.length);
       const parser = globalThis.INASearchEmbeddedReferences?.parseCoordinatedSectionReferences;
       if (typeof parser !== "function") return [];
       const statutoryContext = ["ina", "usc"].includes(sourceContext?.kind) && sourceContext.uscSection;
       const supportedScope = scope => statutoryContext && (["this-title", "such-title"].includes(scope?.type) || (scope?.type === "numbered-title" && String(scope.title) === "8"));
-      const eligible = references.filter(reference => reference?.resolution !== "unresolved" && ["usc", "ina"].includes(reference?.family) &&
+      const eligible = references.filter(reference => (reference?.resolution !== "unresolved" || cfrWrittenInaCitation(reference, sourceContext)) && ["usc", "ina"].includes(reference?.family) &&
         Number.isInteger(reference.start) && Number.isInteger(reference.end) && reference.start >= start && reference.end <= end &&
         input.slice(reference.start, reference.end) === reference.text);
       // A trailing section container stays in its original position. Its unit
@@ -9698,34 +9745,36 @@
       let explicitRun = [];
       const finishExplicitRun = () => {
         if (explicitRun.length > 1) {
-          const crosswalks = explicitRun.map(reference => statutoryReferenceCrosswalk(reference, { ...sourceContext, referenceGroupStart: explicitRun[0].start, referenceGroupEnd: explicitRun.at(-1).end, referenceGroupSections: explicitRun.map(member => member.targetSection), referenceGroupHistorical: /\((?:17|18|19|20)\d{2}\)\s*$/.test(explicitRun.at(-1).text) }));
+          const crosswalks = explicitRun.map(reference => authorityList && /^\s+(?:and\s+)?notes?\b/i.test(input.slice(reference.end)) ? null : statutoryReferenceCrosswalk(reference, { ...sourceContext, referenceGroupStart: explicitRun[0].start, referenceGroupEnd: explicitRun.at(-1).end, referenceGroupSections: explicitRun.map(member => member.targetSection), referenceGroupHistorical: /\((?:17|18|19|20)\d{2}\)\s*$/.test(explicitRun.at(-1).text) }));
           const preserveOriginal = !crosswalks.some(Boolean);
-          groups.push({ start: explicitRun[0].start, end: explicitRun.at(-1).end, grammar: "explicit-usc-list", members: explicitRun, preserveOriginal,
+          groups.push({ start: explicitRun[0].start, end: explicitRun.at(-1).end, grammar: "explicit-usc-list", members: explicitRun, preserveOriginal, renderGapReferences: authorityList,
             crosswalks: explicitRun.map((reference, index) => crosswalks[index] || { ina: legalReferenceCitation(reference), usc: legalReferenceCitation(reference), isIna: false }),
             parsedMembers: explicitRun.map(reference => ({ start: reference.start, end: reference.end, text: reference.text, relative: /^\(/.test(reference.text) })) });
         }
         explicitRun = [];
       };
-      for (const reference of eligible) {
+      for (const reference of eligible.filter(reference => !authorityList || reference.family === "usc" && /^explicit-usc(?:-continuation)?$/.test(reference.ruleId))) {
         const full = /^8\s*U\.?\s*S\.?\s*C\.?\s*(?:§{1,2}\s*)?\d/i.test(reference.text);
         const continuation = /^(?:\d+[A-Za-z]*(?:-\d+[A-Za-z]*)?)?(?:\s*\([A-Za-z0-9-]+\))*$/.test(reference.text.trim());
-        const connected = explicitRun.length && /^\s*(?:,\s*(?:(?:and\/or|and|or)\s+)?|(?:and\/or|and|or|through|to)\s+|[–—-]\s*)$/i.test(input.slice(explicitRun.at(-1).end, reference.start));
+        const gap = explicitRun.length ? input.slice(explicitRun.at(-1).end, reference.start) : "";
+        const connected = explicitRun.length && (authorityList ? authorityGap(gap) : /^\s*(?:,\s*(?:(?:and\/or|and|or)\s+)?|(?:and\/or|and|or|through|to)\s+|[–—-]\s*)$/i.test(gap));
         if (!connected || reference.family !== "usc" || String(reference.targetTitle) !== "8" || (!full && !continuation)) finishExplicitRun();
         if (reference.family === "usc" && String(reference.targetTitle) === "8" && (full || explicitRun.length && continuation)) explicitRun.push(reference);
       }
       finishExplicitRun();
-      const actReferences = eligible.filter(reference => reference.ruleId === "context-cfr-ina-act-section" && crosswalkFor(reference));
+      const actReferences = eligible.filter(reference => (reference.ruleId === "context-cfr-ina-act-section" || cfrWrittenInaCitation(reference, sourceContext)) && crosswalkFor(reference));
       let actRun = [];
       const finishActRun = () => {
-        if (actRun.length > 1 && /^(?:(?:sections?|§{1,2})\s*)?\d/i.test(actRun[0].text)) {
+        if (actRun.length > 1 && /^(?:INA\s+)?(?:(?:sections?|§{1,2})\s*)?\d/i.test(actRun[0].text) &&
+            actRun.some(reference => !["explicit-ina", "explicit-ina-continuation"].includes(reference.ruleId) || /^INA\s+(?:sections?\b|§)/i.test(reference.text))) {
           groups.push({ start: actRun[0].start, end: actRun.at(-1).end, grammar: "cfr-act-list", members: actRun,
             crosswalks: actRun.map(crosswalkFor), parsedMembers: actRun.map(reference => ({ start: reference.start, end: reference.end,
-              text: reference.text.replace(/\s+of\s+the\s+Act$/i, ""), relative: /^\(/.test(reference.text) })) });
+              text: reference.text.replace(/,\s*respectively,?/i, "").replace(/\s+of\s+the\s+Act$/i, ""), relative: /^\(/.test(reference.text) })) });
         }
         actRun = [];
       };
       for (const reference of actReferences) {
-        if (actRun.length && !/^\s*(?:,\s*(?:(?:and\/or|and|or)\s+)?|(?:and\/or|and|or)\s+|(?:through|to)\s+)$/i.test(input.slice(actRun.at(-1).end, reference.start))) finishActRun();
+        if (actRun.length && !/^\s*(?:\((?:other\s+than|except(?:ing)?|excluding)\b(?:[^()]|\([^()]*\))*\)\s*)?(?:,\s*(?:(?:and\/or|and|or|paragraphs?)\s+)?|(?:and\/or|and|or)\s+|(?:through|to)\s+|[–—-]\s*)$/i.test(input.slice(actRun.at(-1).end, reference.start))) finishActRun();
         actRun.push(reference);
       }
       finishActRun();
@@ -9751,18 +9800,24 @@
         if (nonoverlapping.some(previous => group.start < previous.end && group.end > previous.start)) continue;
         group.labels = group.members.map((reference, index) => {
           if (group.preserveOriginal) return reference.text;
-          const full = group.crosswalks[index].ina;
+          const full = group.crosswalks[index].ina.replace(/\s+note$/i, /^\s+(?:and\s+)?notes?\b/i.test(input.slice(reference.end)) ? "" : " note");
           const written = group.parsedMembers[index];
-          if (!index) return full;
+          if (!index || /;|\b\d+[A-Za-z]+\d+\b/.test(input.slice(group.members[index - 1].end, reference.start))) return full;
+          if (group.grammar === "cfr-act-list" && /^section\b/i.test(written.text) && reference.targetSection !== group.members[index - 1].targetSection) return full;
+          if ((reference.targetPath || []).length < (group.members[index - 1].targetPath || []).length &&
+              !/^\(/.test(written.text) && /^section\b/i.test(written.text)) return full;
+          if (group.crosswalks[index].isIna === false && group.crosswalks[index - 1].isIna === false &&
+              /^[\s–—-]+$/.test(input.slice(group.members[index - 1].end, reference.start))) return /^\d+$/.test(reference.text) ? reference.text : full.replace(/^8\s+U\.S\.C\.\s+/i, "");
           if (reference.targetSection !== group.members[index - 1].targetSection) return group.crosswalks[index].isIna === false || group.crosswalks[index - 1].isIna === false ? full : full.replace(/^INA\s+/i, "");
           // Use the common ancestor of the entire contiguous same-section run.
           // Keep at least one unit when an address repeats or names an ancestor.
           let first = index - 1, last = index;
           while (first > 0 && group.members[first - 1].targetSection === reference.targetSection) first--;
           while (last + 1 < group.members.length && group.members[last + 1].targetSection === reference.targetSection) last++;
-          const path = reference.targetPath || [];
+          const displayPath = member => { const written = cfrWrittenInaCitation(member, sourceContext); return written ? [...written.matchAll(/\(([^)]+)\)/g)].map(match => match[1]) : member.targetPath || []; };
+          const path = displayPath(reference);
           let common = 0;
-          while (common < path.length && group.members.slice(first, last + 1).every(member => member.targetPath?.[common] === path[common])) common++;
+          while (common < path.length && group.members.slice(first, last + 1).every(member => displayPath(member)[common] === path[common])) common++;
           const tail = path.slice(Math.min(common, Math.max(0, path.length - 1)));
           const abbreviated = tail.length ? tail.map(token => `(${token})`).join("") : full.replace(/^INA\s+/i, "");
           // Source abbreviations may already omit more than the shared prefix.
@@ -9770,6 +9825,17 @@
           // by every member of this same-section run.
           return written.relative && written.text.length <= abbreviated.length ? written.text : abbreviated;
         });
+        group.labels = group.labels.map((label, index) => label + (group.members[index].text.match(/(,\s*respectively,?)\s+of\b/i)?.[1] || "").replace(/,$/, /^,/.test(input.slice(group.members[index].end)) ? "" : ","));
+        if (group.grammar === "cfr-act-list") {
+          const prefix = input.slice(start, group.start).match(/\b(?:INA\s+)?(?:(?:sub)?sections?|secs?\.)\s+$/i);
+          if (prefix) group.start -= prefix[0].length;
+          const suffix = input.slice(group.end, end).match(/^\s+of\s+(?:(?:the|this|such|that)\s+Act|(?:the\s+)?(?:INA|Immigration\s+and\s+Nationality\s+Act)(?:\s+of\s+1952)?)\b(?:\s+\([“\"]?INA[”\"]?\))?/i);
+          if (suffix && !references.some(reference => reference.start >= group.end && reference.start < group.end + suffix[0].length)) group.end += suffix[0].length;
+        }
+        if (group.grammar === "explicit-usc-list" && /^INA\s/.test(group.labels[0])) {
+          const redundant = input.slice(start, group.start).match(/\bINA,\s+$/i);
+          if (redundant) group.start -= redundant[0].length;
+        }
         nonoverlapping.push(group);
       }
       return nonoverlapping;
@@ -9779,7 +9845,7 @@
       const equivalent = item => item?.family === "usc" && String(item.targetTitle) === "8" && String(item.targetChapter) === "12" &&
         !item.targetEdition && item.resolution !== "unresolved" && (!item.targetSubchapter || /^(?:I|II|III|IV|V)$/.test(item.targetSubchapter));
       if (!statutoryLinksUseIna(sourceContext) || !equivalent(reference)) return null;
-      if (sourceContext?.sourceHost && uscSection(sourceContext.sourceHost.title || 8, sourceContext.sourceHost.section)?.historical) return null;
+      if (sourceContext?.sourceHost?.kind === "usc" && uscSection(sourceContext.sourceHost.title || 8, sourceContext.sourceHost.section)?.historical) return null;
       const input = String(sourceContext?.referenceSourceText || "");
       const prefix = input.slice(0, reference.start), suffix = input.slice(reference.end);
       // A classification statement describes the Code location itself. Keep
@@ -9875,9 +9941,15 @@
     }
 
     function statutoryLinkInaCitation(reference, sourceContext = null) {
-      if (sourceContext?.sourceHost && uscSection(sourceContext.sourceHost.title || 8, sourceContext.sourceHost.section)?.historical) return "";
+      if (sourceContext?.sourceHost?.kind === "usc" && uscSection(sourceContext.sourceHost.title || 8, sourceContext.sourceHost.section)?.historical) return "";
+      if (statutoryLinksUseIna(sourceContext) && cfrWrittenInaCitation(reference, sourceContext) &&
+          !/^INA\s+\d/i.test(reference.text || "") && reference.ruleId !== "explicit-ina-continuation" && !/^\(/.test(reference.text || "")) return cfrWrittenInaCitation(reference, sourceContext);
       if (reference?.targetChapter) return statutoryHierarchyInaPresentation(reference, sourceContext)?.label || "";
       if (!statutoryLinksUseIna(sourceContext) || !reference || reference.resolution === "unresolved" || !statutoryLinkUsesConvertibleUscWording(reference, sourceContext)) return "";
+      const source = String(sourceContext?.referenceSourceText || "");
+      const prior = (sourceContext?.referenceSourceReferences || []).filter(member => member.end <= reference.start && cfrWrittenInaCitation(member, sourceContext)).at(-1);
+      if (prior && /^\s*(?:\s|[,;(]|as\s+amended|at|INA|or\s+Act|[“”"]|\))*\s*$/i.test(source.slice(prior.end, reference.start).replace(/^\s+of\s+(?:the\s+)?(?:Immigration\s+and\s+Nationality\s+Act(?:\s+of\s+1952)?|INA)\b/i, "")) &&
+          prior.targetSection === reference.targetSection && canonicalPath(prior.targetPath || []) === canonicalPath(reference.targetPath || [])) return "";
       const crosswalk = statutoryReferenceCrosswalk(reference, sourceContext);
       return crosswalk?.ina || "";
     }
@@ -9969,15 +10041,6 @@
     }
 
     function legalReferenceHtml(reference, contents, sourceContext = null, displayOptions = null) {
-      const resolution = reference?.resolution || "unresolved";
-      if (resolution === "unresolved") return contents ?? escapeHtml(reference?.text || "");
-      const historicalSource = Boolean(sourceContext?.sourceHost && uscSection(sourceContext.sourceHost.title || 8, sourceContext.sourceHost.section)?.historical);
-      const disposition = legalReferenceDisposition(reference);
-      const hierarchy = statutoryHierarchyInaPresentation(reference, sourceContext);
-      const crosswalk = hierarchy ? { ina: hierarchy.citation, usc: legalReferenceCitation(reference) } : disposition.historical && !disposition.available ? null : statutoryReferenceCrosswalk(reference, { ...sourceContext, allowParallelCrosswalk: true });
-      const inaCitation = historicalSource ? "" : displayOptions?.inaCitation || statutoryLinkInaCitation(reference, sourceContext);
-      if (sourceContext?.plainText) return inaCitation && !displayOptions?.preserveContents ? inaCitation : String(contents ?? reference.text ?? "");
-      const citation = disposition.historical && reference.family === "statutes-at-large" ? disposition.heading : reference.targetChapter ? hierarchy?.citation || legalReferenceCitation(reference) : inaCitation || legalReferenceCitation(reference);
       const convertedContents = (label, start, end, render = sourceContext?.renderConvertedText || (value => escapeHtml(value))) => {
         const original = String(sourceContext?.referenceSourceText || "").slice(start, end);
         const core = original.replace(/,?\s+of\s+(?:this\s+title|the\s+Immigration\s+and\s+Nationality\s+Act|(?:such|the|this)\s+Act)\s*$/i, "");
@@ -9995,8 +10058,8 @@
           const whole = block.start <= start && block.end >= start + core.length;
           const from = whole ? 0 : labelSuffix + Math.max(block.start, sourceSuffix) - sourceSuffix;
           const to = whole ? label.length : labelSuffix + Math.min(block.end, start + core.length) - sourceSuffix;
-          return Object.keys(presentation).length && to > from
-            ? [{ tag: "inline", start: from, end: to, presentation, children }] : children;
+          return (Object.keys(presentation).length || ["sup", "sub"].includes(block.tag)) && to > from
+            ? [{ tag: ["sup", "sub"].includes(block.tag) ? block.tag : "inline", start: from, end: to, presentation, children }] : children;
         });
         const layout = project(sourceContext?.sourceLayout);
         if (!layout.length) return render(label, start, end);
@@ -10004,12 +10067,31 @@
         return globalThis.INA_SEARCH_OCCURRENCE.presentation.format(layout, 0, label.length,
           (from, to) => render(label.slice(from, to), sourcePosition(from, false), sourcePosition(to, true)), { mode: "inline" });
       };
+      const resolution = reference?.resolution || "unresolved";
+      if (resolution === "unresolved") {
+        const range = displayOptions?.convertedText;
+        let label = range?.label || (displayOptions?.preserveContents ? contents : statutoryLinkInaCitation(reference, sourceContext));
+        if (!label) return contents ?? escapeHtml(reference?.text || "");
+        const qualifier = !displayOptions?.preserveContents ? (String(reference.text || "").match(/(,\s*respectively,?)\s+of\b/i)?.[1] || "").replace(/,$/, /^,/.test(String(sourceContext?.referenceSourceText || "").slice(reference.end)) ? "" : ",") : "";
+        if (sourceContext?.plainText) return label + qualifier;
+        const rendered = convertedContents(label, range?.start ?? reference.start, range?.end ?? sourceContext?.referenceDisplayEnd ?? reference.end, range?.render) + escapeHtml(qualifier);
+        return profile?.preferences?.highlightInaCitationLinks === true
+          ? `<span class="citation-display-ina">${rendered}</span>` : rendered;
+      }
+      const historicalSource = Boolean(sourceContext?.sourceHost?.kind === "usc" && uscSection(sourceContext.sourceHost.title || 8, sourceContext.sourceHost.section)?.historical);
+      const disposition = legalReferenceDisposition(reference);
+      const hierarchy = statutoryHierarchyInaPresentation(reference, sourceContext);
+      const crosswalk = hierarchy ? { ina: hierarchy.citation, usc: legalReferenceCitation(reference) } : disposition.historical && !disposition.available ? null : statutoryReferenceCrosswalk(reference, { ...sourceContext, allowParallelCrosswalk: true });
+      const inaCitation = historicalSource ? "" : displayOptions?.inaCitation || statutoryLinkInaCitation(reference, sourceContext);
+      const qualifier = inaCitation && !displayOptions?.preserveContents ? (String(reference.text || "").match(/(,\s*respectively,?)\s+of\b/i)?.[1] || "").replace(/,$/, /^,/.test(String(sourceContext?.referenceSourceText || "").slice(reference.end)) ? "" : ",") : "";
+      if (sourceContext?.plainText) return inaCitation && !displayOptions?.preserveContents ? inaCitation + qualifier : String(contents ?? reference.text ?? "");
+      const citation = disposition.historical && reference.family === "statutes-at-large" ? disposition.heading : reference.targetChapter ? hierarchy?.citation || legalReferenceCitation(reference) : inaCitation || legalReferenceCitation(reference);
       const displayRange = displayOptions?.convertedText;
-      const displayedContents = displayRange
+      const displayedContents = (displayRange
         ? convertedContents(displayRange.label, displayRange.start, displayRange.end, displayRange.render)
         : inaCitation ? displayOptions?.preserveContents ? contents
-          : convertedContents(inaCitation, reference.start, sourceContext?.referenceDisplayEnd ?? reference.end) : contents;
-      const convertedToIna = Boolean(inaCitation && displayOptions?.isInaConversion !== false && !/^INA\b/i.test(String(reference.text || "").trim()) && ["usc", "ina"].includes(reference.family));
+          : convertedContents(inaCitation, reference.start, sourceContext?.referenceDisplayEnd ?? reference.end) : contents) + escapeHtml(qualifier);
+      const convertedToIna = Boolean(inaCitation && displayOptions?.isInaConversion !== false && !/^INA\s+\d/i.test(String(reference.text || "").trim()) && ["usc", "ina"].includes(reference.family));
       const highlightInaCitation = convertedToIna && profile?.preferences?.highlightInaCitationLinks === true;
       if (sourceContext?.referenceTextOnly) return highlightInaCitation ? `<span class="citation-display-ina">${displayedContents}</span>` : displayedContents;
       const classes = `statute-citation-link legal-reference-link${highlightInaCitation ? " citation-display-ina" : ""}${resolution === "unresolved" ? " reference-unavailable" : resolution === "official-source-only" ? " reference-official-only" : ""}${disposition.status === "omitted" ? " reference-omitted" : (disposition.status === "repealed" || disposition.historical) ? " reference-repealed" : disposition.status === "transferred" ? " reference-transferred" : ""}`;
@@ -11216,9 +11298,32 @@
       return currentViewShareLink(locationLike, query);
     }
 
+    function legalCopyHtml(value) {
+      const paragraphs = String(value).split(/\r\n?|\n/).map(line => {
+        const prefix = line.match(/^[ \t]*/)[0];
+        let columns = 0;
+        for (const character of prefix) columns += character === "\t" ? 4 - columns % 4 : 1;
+        const content = escapeHtml(line.slice(prefix.length));
+        // macOS treats a zero text-indent as absent and cancels the first-line
+        // margin. This subpixel value rounds to zero in native paragraph styles.
+        return `<p style="margin:0;margin-left:${columns * .5}em;text-indent:0.01px;white-space:pre-wrap;tab-size:4">${content || "<br>"}</p>`;
+      }).join("");
+      return `<div>${paragraphs}</div>`;
+    }
+
     async function copyLegalText(value) {
       const text = String(value || "");
       if (!text) return false;
+      const html = /[\r\n\t]|^ /.test(text) ? legalCopyHtml(text) : "";
+      if (html && typeof ClipboardItem === "function" && navigator.clipboard?.write) {
+        try {
+          await navigator.clipboard.write([new ClipboardItem({
+            "text/plain": new Blob([text], { type: "text/plain" }),
+            "text/html": new Blob([html], { type: "text/html" })
+          })]);
+          return true;
+        } catch (_) { /* Preserve plain-text copying if rich clipboard access fails. */ }
+      }
       try {
         await navigator.clipboard.writeText(text);
         return true;
@@ -11229,12 +11334,20 @@
         textarea.style.position = "fixed";
         textarea.style.opacity = "0";
         document.body.append(textarea);
+        const onCopy = event => {
+          if (!event.clipboardData) return;
+          event.clipboardData.setData("text/plain", text);
+          event.clipboardData.setData("text/html", html);
+          event.preventDefault();
+        };
+        if (html) document.addEventListener("copy", onCopy);
         try {
           textarea.select();
           return document.execCommand("copy");
         } catch (_) {
           return false;
         } finally {
+          if (html) document.removeEventListener("copy", onCopy);
           textarea.remove();
         }
       }
@@ -11344,7 +11457,24 @@
     }
 
     function citationCopyPreface(citation, text = "Highlighted text") {
-      return profile.preferences.citationCopyPreface.replace(/\[(citation|text)\]/gi, (_, tag) => tag.toLowerCase() === "citation" ? citation : text);
+      const template = profile.preferences.citationCopyPreface.replace(/\[(space|tab)\]/gi, (_, tag) => tag.toLowerCase() === "space" ? " " : "\t");
+      const indents = [...template.matchAll(/^([ \t]*)\[citation\]/gim)].map(match => ({ offset: match.index, value: match[1] }));
+      return template.replace(/\[(citation|text)\]/gi, (_, tag, offset) => {
+        if (tag.toLowerCase() === "citation") return citation;
+        let indentation = indents[0]?.value || "";
+        for (const indent of indents) {
+          if (indent.offset > offset) break;
+          indentation = indent.value;
+        }
+        if (!indentation) return text;
+        // An inline [text] already shares the citation's first-line indentation.
+        // At a new line, supply any base indentation not written in the template.
+        const prefix = template.slice(0, offset).split("\n").at(-1);
+        let firstIndent = /^[ \t]*$/.test(prefix) ? indentation : "";
+        if (firstIndent.startsWith(prefix)) firstIndent = firstIndent.slice(prefix.length);
+        else if (prefix.startsWith(firstIndent)) firstIndent = "";
+        return String(text).split(/\r\n?|\n/).map((line, index) => line ? `${index ? indentation : firstIndent}${line}` : line).join("\n");
+      });
     }
 
     function citationWithLegalText(context, citation = preferredLegalUnitCitation(context)) {
@@ -11585,7 +11715,7 @@
     }
 
     function hierarchyRowCitation(node) {
-      if (node.kind === "subject-group") return navigationTitleCase(node.heading || "Topic");
+      if (node.kind === "subject-group") return navigationTitleCase(node.authority === "cfr" ? cfrHeadingDisplayText(node.heading) : node.heading || "Topic");
       if (node.authority === "ina" && node.kind === "section") return `INA ${node.number}`;
       if (node.authority === "usc" && node.kind === "section") return `§ ${node.number}`;
       if (node.authority === "cfr" && node.kind === "section") return `§ ${node.number}`;
@@ -11594,8 +11724,33 @@
       return `${titleCaseTopic(node.kind)} ${node.number}`;
     }
 
+    function cfrHeadingDisplayText(value) {
+      const text = String(value || "");
+      if (!statutoryLinksUseIna({kind:"cfr"})) return text;
+      const cfr = corpus?.cfr;
+      const roots = [cfr?.parts, cfr?.sections, cfr?.appendices];
+      if (cfrHeadingDisplayText.cfr !== cfr || roots.some((root, index) => root !== cfrHeadingDisplayText.roots?.[index])) {
+        cfrHeadingDisplayText.cfr = cfr;
+        cfrHeadingDisplayText.roots = roots;
+        // Index owners, not their lazily expanded reference arrays. The
+        // matching heading alone is hydrated when it is actually displayed.
+        cfrHeadingDisplayText.records = roots.flatMap(records => records || []).filter(record => record.heading);
+      }
+      const records = cfrHeadingDisplayText.records;
+      const record = records.find(record => record.heading === text) || records.find(record => (record.headingReferences?.length || record._lr?.h) && (record.heading.endsWith(text) || text.endsWith(record.heading)));
+      if (!record) return text;
+      if (!record.headingReferences && record._lr?.h) {
+        const heading = {heading:record.heading, _lr:{h:record._lr.h}};
+        hydrateLegalReferences(heading);
+        record.headingReferences = heading.headingReferences || [];
+      }
+      const start = Math.max(0, record.heading.length - text.length);
+      const prefix = text.length > record.heading.length ? text.slice(0, text.length - record.heading.length) : "";
+      return prefix + linkifyCfrText(record.heading, record.headingReferences || [], start, undefined, null, {plainText:true, citationDisplaySystem:"ina"});
+    }
+
     function hierarchyRowHeading(node) {
-      return node.kind === "subject-group" ? "" : navigationTitleCase(node.heading || "");
+      return node.kind === "subject-group" ? "" : navigationTitleCase(node.authority === "cfr" ? cfrHeadingDisplayText(node.heading) : node.heading || "");
     }
 
     function hierarchyStatusReplacesHeading(node) {
@@ -11767,9 +11922,9 @@
         const markers = hierarchyNoteMarkers(node);
         const heading = statusReplacesHeading
           ? `<span>${hierarchyStatusBadge(node, true)}${markers}</span>`
-          : `<span class="hierarchy-heading-with-status">${hierarchyStatusBadge(node, true)} <span class="hierarchy-heading">${escapeHtml(navigationTitleCase(node.heading || hierarchyNodeCitation(node)))}${markers}</span></span>`;
+          : `<span class="hierarchy-heading-with-status">${hierarchyStatusBadge(node, true)} <span class="hierarchy-heading">${escapeHtml(navigationTitleCase(node.authority === "cfr" ? cfrHeadingDisplayText(node.heading || hierarchyNodeCitation(node)) : node.heading || hierarchyNodeCitation(node)))}${markers}</span></span>`;
         const label = node.kind === "subject-group" ? `<span class="hierarchy-heading hierarchy-topic-heading">${escapeHtml(hierarchyRowCitation(node))}${markers}</span>` : `<span class="hierarchy-citation">${escapeHtml(hierarchyRowCitation(node))}</span>${heading}`;
-        return globalThis.INASearchStartup.hierarchyRowHtml({ id: node.id, citation: hierarchyRowCitation(node), label, size: rowSize, expandable, expanded, interactiveLabel: !!markers, navigationLabel: `${hierarchyRowCitation(node)} ${navigationTitleCase(node.heading || hierarchyNodeCitation(node))}`, children: expanded ? renderHierarchyRows(node.children) : "" });
+        return globalThis.INASearchStartup.hierarchyRowHtml({ id: node.id, citation: hierarchyRowCitation(node), label, size: rowSize, expandable, expanded, interactiveLabel: !!markers, navigationLabel: `${hierarchyRowCitation(node)} ${navigationTitleCase(node.authority === "cfr" ? cfrHeadingDisplayText(node.heading || hierarchyNodeCitation(node)) : node.heading || hierarchyNodeCitation(node))}`, children: expanded ? renderHierarchyRows(node.children) : "" });
       }).join("");
     }
 
@@ -11875,7 +12030,7 @@
       els.resultsPanel.setAttribute("aria-labelledby", "authorityBrowseTitle");
       const headerHtml = `${cfrPartAlternativesHtml(node)}${authorityBrowseHeading({
         sourceLabel: hierarchySourceLabel(result.type), sourceUrl,
-        title, meta: navigationTitleCase(heading), markers: hierarchyNoteMarkers(node)
+        title, meta: navigationTitleCase(node?.authority === "cfr" ? cfrHeadingDisplayText(heading) : heading), markers: hierarchyNoteMarkers(node)
       })}${expandableCount ? hierarchyPageActions(node?.id) : ""}`;
       els.resultList.setAttribute("role", "group");
       els.resultList.setAttribute("aria-label", `${title}${isStackedHome(result) ? " and CFR" : ""} index`);
@@ -12263,7 +12418,7 @@
           // The main dispatcher commits its target; focused readers commit in
           // their own pane because they are excluded from isMainLegalReader().
           if (pane) selectLegalCitationLocation(context.kind, context.sectionId, context.path, context.occurrenceBlockPath);
-          void handleLegalUnitAction(action === "copy-text" ? "copy-citation-text" : action, context);
+          void handleLegalUnitAction(action, context);
         });
       });
     }
@@ -12296,7 +12451,7 @@
       const printTarget = mainReaderPrintTarget();
       copies.setAttribute("aria-disabled", String(!target));
       const hierarchy = hierarchyActionNode();
-      const descriptions = { "copy-citation": "Copy citation", "copy-text": "Copy legal text", "copy-citation-text": "Copy citation and legal text", "add-note": "Add note", print: "Print", open: "Open official source" };
+      const descriptions = { "copy-citation": "Copy citation", "copy-text": "Copy legal text only", "copy-citation-text": "Copy citation and legal text", "add-note": "Add note", print: "Print", open: "Open official source" };
       for (const button of $$("[data-live-citation-action]", actions)) {
         if (button.dataset.liveCitationAction === "print") {
           const label = printTarget?.printHighlighted ? "Print Highlighted Citation" : "Print Section";
@@ -12313,12 +12468,11 @@
         if (copyLabel) {
           button.removeAttribute("title");
           if (!target) copyLabel.textContent = "";
-          else if (button.dataset.liveCitationAction === "copy-text") copyLabel.textContent = citationCopyPreface(target.query).split("\n")[0];
+          else if (button.dataset.liveCitationAction === "copy-text") copyLabel.textContent = `Copy text only: ${target.query}`;
           else {
             const citation = target.query;
             const preface = citationCopyPreface(citation);
-            copyLabel.textContent = button.dataset.liveCitationAction === "copy-citation" ? citation
-              : preface.includes("\n") ? preface.split("\n")[0] : citationWithLegalText(mainReaderActionContext(target), citation).split("\n")[0];
+            copyLabel.textContent = button.dataset.liveCitationAction === "copy-citation" ? citation : preface.split("\n")[0];
           }
           if (target) button.setAttribute("aria-label", button.dataset.liveCitationAction === "copy-citation" ? `Copy citation: ${copyLabel.textContent}` : legalCopyDescription(copyLabel.textContent));
           else button.setAttribute("aria-label", label);
@@ -14234,7 +14388,10 @@
           const gap = input.slice(cursor, nextStart);
           const repeatedWord = gap.match(/sections?\s*$/i);
           if (repeatedWord) displayStart = nextStart - repeatedWord[0].length;
-          parts.push(renderText(cursor, repeatedWord ? nextStart - repeatedWord[0].length : nextStart));
+          const gapEnd = repeatedWord ? nextStart - repeatedWord[0].length : nextStart;
+          parts.push(group.renderGapReferences
+            ? linkifyStatutoryText(input, references, cursor, gapEnd, searchMatch, [], definitionContext)
+            : renderText(cursor, gapEnd));
         }
         const crosswalk = group.crosswalks[index];
         const written = group.parsedMembers[index];
@@ -14296,7 +14453,13 @@
       const authoritySuffixes = eligibleReferences.flatMap(annotation => {
         if (annotation.reference.targetChapter) return [];
         if (!statutoryLinkInaCitation(annotation.reference, definitionContext)) return [];
-        const suffix = input.slice(annotation.end, end).match(/^((?:\s*(?:(?:,|[–—-]|and|or|through|to)\s*)?[“"]?\((?:[^()]|\([^()]*\))*\)[”"]?)*)(,?\s+of\s+(?:this\s+(?:title|chapter|subchapter)|the\s+Immigration\s+and\s+Nationality\s+Act|(?:such|the|this)\s+Act)\b)/i);
+        const redesignation = definitionContext.kind === "cfr" && /\(\s*(?:redesignated|renumbered)\s+as\s+$/i.test(input.slice(0, annotation.start))
+          && input.slice(annotation.end, end).match(/^(\s*\))(\s+of\s+(?:the\s+Act|(?:the\s+)?INA))\b/i);
+        if (redesignation) return [{kind:"citation-authority-suffix",start:annotation.end+redesignation[1].length,end:annotation.end+redesignation[0].length,reference:annotation.reference}];
+        const consumedAuthority = /\bof\s+(?:(?:the\s+)?(?:Immigration\s+and\s+Nationality\s+Act|INA)|the\s+Act)\s*$/i.test(annotation.reference.text);
+        const redundantTail = consumedAuthority && input.slice(annotation.end, end).match(/^(?:\s+of\s+1952)?(?:\s+\([“"]?INA[”"]?\))?/i)?.[0];
+        if (redundantTail) return [{kind:"citation-authority-suffix",start:annotation.end,end:annotation.end+redundantTail.length,reference:annotation.reference}];
+        const suffix = input.slice(annotation.end, end).match(/^((?:\s*(?:(?:,|[–—-]|and|or|through|to)\s*)?[“"]?\((?:[^()]|\([^()]*\))*\)[”"]?)*)(,?\s+of\s+(?:this\s+(?:title|chapter|subchapter)|(?:the\s+)?(?:Immigration\s+and\s+Nationality\s+Act|INA)|(?:such|the|this)\s+Act)(?:\s+of\s+1952)?\b(?:\s+\([“\"]?INA[”\"]?\))?)/i);
         if (!suffix) return [];
         const suffixStart = annotation.end + suffix[1].length;
         const suffixEnd = annotation.end + suffix[0].length;
@@ -14304,12 +14467,40 @@
             (footnoteReferences || []).some(reference => reference.offset >= suffixStart && reference.offset < suffixEnd)) return [];
         return [{ kind: "citation-authority-suffix", start: suffixStart, end: suffixEnd, reference: annotation.reference }];
       });
+      const authorityPrefixes = eligibleReferences.flatMap(annotation => {
+        if (!statutoryLinkInaCitation(annotation.reference, definitionContext)) return [];
+        const prefix = input.slice(start, annotation.start).match(cfrWrittenInaCitation(annotation.reference, definitionContext)
+          ? /\b(?:INA\s+)?(?:(?:sub)?sections?|secs?\.)\s+$/i : /\bINA,\s+$/i);
+        if (!prefix) return [];
+        const prefixStart = annotation.start - prefix[0].length;
+        if (references.some(reference => reference.start < annotation.start && reference.end > prefixStart)) return [];
+        return [{ kind: "citation-authority-suffix", start: prefixStart, end: annotation.start, reference: annotation.reference }];
+      });
+      const eligibleLists = coordinatedLists.map(group => ({ kind: "citation-list", start: group.start, end: group.end, group }));
+      const articleEdits = [...eligibleReferences, ...eligibleLists].flatMap(annotation => {
+        const reference = annotation.reference || annotation.group.members[0];
+        if (!/^INA\s/.test(annotation.group?.labels[0] || statutoryLinkInaCitation(reference, definitionContext)) || /^INA\b/i.test(reference.text)) return [];
+        const citationStart = authorityPrefixes.find(prefix => prefix.reference === reference)?.start ?? annotation.start;
+        const article = input.slice(start, citationStart).match(/\b([Aa])\s+$/);
+        if (!article) return [];
+        const from = citationStart - article[0].length;
+        return [{ kind: "hierarchy-wording", start: from, end: from + 1, label: article[1] === "A" ? "An" : "an", reference }];
+      });
       const eligibleFootnotes = (footnoteReferences || [])
         .filter(reference => Number.isInteger(reference.offset) && reference.offset >= start && (reference.offset < end || ((end === input.length || reference.includeAtRangeEnd) && reference.offset === end)))
         .filter(reference => !coordinatedFootnotes.has(reference))
         .map(reference => ({ kind: "footnote", start: reference.offset, end: reference.offset, reference }));
-      const eligibleLists = coordinatedLists.map(group => ({ kind: "citation-list", start: group.start, end: group.end, group }));
-      const eligible = [...eligibleReferences, ...eligibleFootnotes, ...eligibleLists, ...authoritySuffixes, ...hierarchyEdits].sort((a, b) => a.start - b.start || (a.kind === "footnote" ? -1 : 1) || a.end - b.end);
+      const malformedAuthorityEdits = definitionContext.kind === "cfr" && statutoryLinksUseIna(definitionContext) && /^\s*Authority\s*:/i.test(input)
+        ? [...input.matchAll(/\b\d+[A-Za-z]+\d+\b/g)].flatMap(match => {
+          const prior = references.filter(reference => reference.end <= match.index && reference.ruleId === "explicit-usc").at(-1);
+          if (!prior || String(prior.targetTitle) !== "8" || match.index < start || match.index+match[0].length > end || references.some(reference => reference.start < match.index+match[0].length && reference.end > match.index)) return [];
+          return [{kind:"hierarchy-wording",start:match.index,end:match.index+match[0].length,label:`8 U.S.C. ${match[0]}`}];
+        }) : [];
+      const namedHierarchyEdits = definitionContext.kind === "cfr" && statutoryLinksUseIna(definitionContext)
+        ? [...input.matchAll(/\bchapter\s+(\d+)\s+of\s+title\s+([IVX]+)\s+of\s+the\s+Immigration\s+and\s+Nationality\s+Act(?:\s+of\s+1952)?/gi)]
+          .filter(match => match.index >= start && match.index + match[0].length <= end && !references.some(reference => reference.start < match.index + match[0].length && reference.end > match.index))
+          .map(match => ({kind:"hierarchy-wording",start:match.index,end:match.index+match[0].length,label:`INA title ${match[2].toUpperCase()}, chapter ${match[1]}`})) : [];
+      const eligible = [...eligibleReferences, ...eligibleFootnotes, ...eligibleLists, ...authoritySuffixes, ...authorityPrefixes, ...hierarchyEdits, ...articleEdits, ...namedHierarchyEdits, ...malformedAuthorityEdits].sort((a, b) => a.start - b.start || (a.kind === "footnote" ? -1 : 1) || a.end - b.end);
       if (!eligible.length) return renderText(start, end);
       const parts = [];
       let cursor = start;
@@ -14329,7 +14520,7 @@
           parts.push(coordinatedInaListHtml(annotation.group, input, references, searchMatch, footnoteReferences, definitionContext));
           cursor = annotation.end;
         } else {
-          const referenceContext = { ...definitionContext, referenceOrdinal: Math.max(0, (references || []).indexOf(reference)), referenceDisplayEnd: authoritySuffixes.find(suffix => suffix.reference === reference)?.end ?? reference.end };
+          const referenceContext = { ...definitionContext, renderConvertedText: definitionContext.renderConvertedText || ((label, left, right) => searchMatch && searchMatch.start < right && searchMatch.end > left ? `<mark class="statute-search-match" data-statute-search-match>${escapeHtml(label)}</mark>` : escapeHtml(label)), referenceOrdinal: Math.max(0, (references || []).indexOf(reference)), referenceDisplayEnd: authoritySuffixes.find(suffix => suffix.reference === reference)?.end ?? reference.end };
           const nestedFootnotes = eligibleFootnotes.filter(item => item.start > reference.start && item.start < reference.end);
           if (nestedFootnotes.length && !statutoryLinkInaCitation(reference, definitionContext)) {
             // Keep a marker at its exact source position without nesting its
@@ -14602,7 +14793,7 @@
     }
 
     function linkifyCfrText(value, references = [], segmentStart = 0, segmentEnd = String(value || "").length, searchMatch = null, definitionContext = null) {
-      return linkifyStatutoryText(value, references, segmentStart, segmentEnd, searchMatch, [], definitionContext);
+      return linkifyStatutoryText(value, references, segmentStart, segmentEnd, searchMatch, [], { kind: "cfr", ...(definitionContext || {}) });
     }
 
     function sameBlockPath(left, right) {
@@ -14616,19 +14807,13 @@
       if (to <= from) return "";
       const candidateRuns = block?.r?.length ? block.r : [{ x: text }];
       const runs = candidateRuns.map(run => run.x || "").join("") === text ? candidateRuns : [{ x: text }];
-      const output = [];
       let offset = 0;
-      for (const run of runs) {
-        const runStart = offset;
-        const runEnd = offset + String(run.x || "").length;
-        offset = runEnd;
-        const pieceStart = Math.max(from, runStart);
-        const pieceEnd = Math.min(to, runEnd);
-        if (pieceEnd <= pieceStart) continue;
-        const contents = linkifyCfrText(text, block.xReferences || [], pieceStart, pieceEnd, searchMatch, definitionContext);
-        output.push(run.s === "i" ? `<em>${contents}</em>` : run.s === "b" ? `<strong>${contents}</strong>` : run.s === "sup" ? `<sup>${contents}</sup>` : run.s === "sub" ? `<sub>${contents}</sub>` : contents);
-      }
-      return output.join("");
+      const sourceLayout = runs.flatMap(run => {
+        const start = offset; offset += String(run.x || "").length;
+        const presentation = run.s === "i" ? {italic:true} : run.s === "b" ? {bold:true} : {};
+        return run.s ? [{tag: run.s === "i" || run.s === "b" ? "inline" : run.s, start, end:offset, presentation}] : [];
+      });
+      return linkifyCfrText(text, block.xReferences || [], from, to, searchMatch, { ...definitionContext, sourceLayout, layoutApplied:true });
     }
 
     function cfrReferenceContext(baseDefinitionContext, section, blockPath, path, kind = "cfr-unit", field = "x") {

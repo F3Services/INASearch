@@ -284,8 +284,13 @@ function extractedFunction(source, name, _nextName, context = {}) {
     sandbox.allUscSections ||= [...(context.corpus.title8?.sections || []), ...(context.corpus.referencedUsc?.titles || []).flatMap(title => title.sections || [])];
     sandbox.uscSectionById ||= new Map(sandbox.allUscSections.map(section => [section.id, section]));
   }
+  sandbox.inaMap ||= new Map((context.corpus?.inaCrosswalk || []).map(row => [sandbox.normCitationPart(row.inaSection), row]));
+  if (!sandbox.uscToIna) {
+    sandbox.uscToIna = new Map();
+    for (const row of context.corpus?.inaCrosswalk || []) if (row.uscSection && !sandbox.uscToIna.has(sandbox.normCitationPart(row.uscSection))) sandbox.uscToIna.set(sandbox.normCitationPart(row.uscSection), row);
+  }
   if (context.globalThis) sandbox.globalThis = { INA_SEARCH_OCCURRENCE: require("../src/INASearch-Occurrence"), INASearchStatuteStatus: statuteStatusRules, INA_SEARCH_COMMAND: searchCommandRuntime, ...context.globalThis };
-  const dependencies = ["uscSection", "uscMapping", "uscBase", ...(name === "parseCitation" ? ["parseUscCitation"] : [])].filter(helper => helper !== name && !sandbox[helper]);
+  const dependencies = ["uscSection", "uscMapping", "uscBase", "canonicalPath", "cfrWrittenInaCitation", ...(name === "parseCitation" ? ["parseUscCitation"] : [])].filter(helper => helper !== name && !sandbox[helper]);
   const declarations = dependencies.map(helper => require("./test-function-source")(source, helper)).join("\n");
   return vm.runInNewContext(`${declarations}\n(${functionSource})`, sandbox);
 }
@@ -1078,7 +1083,9 @@ async function main() {
   // statutory guesses with evidenced regulatory addresses.
   // Excluding the et-seq.-only 42 USC 2000e section removes 14 references,
   // six embedded candidates, and four resolved evidence records.
-  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 50288, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
+  // CFR authority continuations, explicit INA forms, and qualified/historical
+  // lists add 194 references after the owner/token-boundary audit.
+  assert.strictEqual(hydratedSource.legalReferenceMetadata.generatedReferences, 50482, "Unexpected deterministic legal-reference total with historical and referenced USC sections.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedCandidates, 22265, "Unexpected embedded-reference candidate total with historical and referenced USC sections.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedResolvedReferences, 20103, "Unexpected inferred-reference evidence total with historical and referenced USC sections.");
   assert.strictEqual(hydratedSource.legalReferenceMetadata.embeddedIssues, 662, "Unexpected unresolved/ambiguous embedded-reference total with historical and referenced USC sections.");
@@ -1897,8 +1904,9 @@ async function main() {
       exception.target.title === reference.targetTitle && exception.target.section === reference.targetSection &&
       isDeepStrictEqual(exception.target.path, reference.targetPath)), "An unsupported authority lacks its exact reviewed exception and explanatory notice.");
   }
-  // Former INA 244A remains disclosed plain text without a verified historical target.
-  assert.strictEqual(intentionallyUnlinkedHistoricalReferences.length, 1429, "The exact reviewed plain-text reference inventory changed.");
+  // Former and otherwise unverified INA locators remain plain text; the full
+  // frozen field inventory confirms seven additional non-actionable references.
+  assert.strictEqual(intentionallyUnlinkedHistoricalReferences.length, 1436, "The exact reviewed plain-text reference inventory changed.");
   assert(intentionallyUnlinkedHistoricalReferences.every(reference => reference.citationNote), "Every historical, malformed or otherwise unverified target must disclose why it remains unlinked.");
   assert(!hydratedSource.legalReferenceMetadata.rules.includes("context-cfr-the-act"), "Build metadata still advertises the removed bare-Act rule.");
   assert.strictEqual(full.corpus.definitions.entries.length, 506, "Unexpected definition record count.");
@@ -4959,7 +4967,7 @@ async function main() {
     formatNavigationCitationLike
   });
   assert.strictEqual(uscViewerQuery(viewerContext), "8 USC 1153 b 1 A, 8 USC 1182 h, 8 USC 1184 i 1", "The preview viewer action did not preserve the existing U.S.C. list or its citation formatting when adding a pane.");
-  assert(fallbackSource.includes('.statute-citation-link.citation-display-ina { color: var(--warning);'), "Converted INA-format statutory links are not visibly distinguished in amber.");
+  assert(fallbackSource.includes('.citation-display-ina { color: var(--warning);'), "Converted INA-format citations, including unresolved spans, are not visibly distinguished in amber.");
   assert(!fallbackSource.includes("Open verified official source") && !fallbackSource.includes("data-open-legal-reference"), "The redundant official-source preview footer button remains in the application.");
   const hydrated1184Reference = runtimeHouseReferenceFixture.source.references[0];
   const reference1184Preview = legalReferenceContextForElement({

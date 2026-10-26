@@ -10,6 +10,7 @@ const statuteStatus = require('../src/INASearch-Statute-Status');
 const functionSource = require('./test-function-source');
 const escapeHtml = value => String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 const plain = value => String(value).replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/g, '').replace(/<[^>]*>/g, '').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+const plainCfr = value => plain(String(value).replace(/<(\/?)sup\b/g, '<$1span'));
 function runtime(template, corpus) {
   const allUscSections = [...(corpus.title8?.sections || []), ...(corpus.referencedUsc?.titles || []).flatMap(title => title.sections || [])];
   const scope = {
@@ -18,7 +19,7 @@ function runtime(template, corpus) {
     INASearchStatuteStatus: statuteStatus,
     state: { statuteHierarchyAuthority: 'ina' },
     profile: { preferences: { statutoryLinkCitationSystem: 'ina' } },
-    INASearchEmbeddedReferences: embedded,
+    INASearchEmbeddedReferences: embedded, hydratedLegalReferenceRoots: new WeakSet(),
     inaMap: new Map(corpus.inaCrosswalk.map(row => [String(row.inaSection).toLowerCase(), row])),
     uscToIna: new Map(corpus.inaCrosswalk.map(row => [String(row.uscSection).toLowerCase(), row])),
     canonicalPath: tokens => (tokens || []).map(token => `(${token})`).join(''),
@@ -31,6 +32,11 @@ function runtime(template, corpus) {
   vm.createContext(scope);
   if (template.includes('function statuteFieldPreviewHtml(')) vm.runInContext(functionSource(template, 'statuteFieldPreviewHtml'), scope);
   if (template.includes('function statutoryLinksUseIna(')) vm.runInContext(functionSource(template, 'statutoryLinksUseIna'), scope);
+  if (template.includes('function cfrWrittenInaCitation(')) vm.runInContext(functionSource(template, 'cfrWrittenInaCitation'), scope);
+  for (const name of ['expandPackedHouseHref','hydrateLegalReferences']) if (template.includes(`function ${name}(`)) vm.runInContext(functionSource(template, name), scope);
+  if (template.includes('function cfrHeadingDisplayText(')) vm.runInContext(functionSource(template, 'cfrHeadingDisplayText'), scope);
+  if (template.includes('function renderCfrStyledRange(')) vm.runInContext(functionSource(template, 'renderCfrStyledRange'), scope);
+  if (template.includes('function linkifyCfrText(')) vm.runInContext(functionSource(template, 'linkifyCfrText'), scope);
   for (const name of ['uscSection', 'uscMapping', 'uscBase', 'normCitationPart', 'statuteStatus', 'transferSourceKey', 'transferTargetForSource', 'transferTargetLabel', 'houseSectionUrl', 'transferTargetUrl', 'legalReferenceDisposition', 'renderSearchHighlightedText', 'legalReferenceCitation', 'statutoryReferenceCrosswalk', 'inUnfinishedStatutoryList', 'coordinatedStatutoryInaLists', 'statutoryHierarchyInaPresentation', 'statutoryLinkUsesConvertibleUscWording', 'statutoryLinkInaCitation', 'legalReferenceSourceDiscrepancy', 'legalReferenceHtml', 'houseFootnoteReferenceHtml', 'coordinatedInaListHtml', 'linkifyStatutoryText']) {
     if (name === "inUnfinishedStatutoryList" && !template.includes(`function ${name}(`)) continue; // Pre-change snapshots have no such helper.
     vm.runInContext(functionSource(template, name), scope);
@@ -45,10 +51,22 @@ function runtime(template, corpus) {
   return scope;
 }
 function contextFor(field, corpus) {
-  if (field.scope === 'cfr') return { kind: 'cfr', title: field.sourceId.match(/cfr-(?:part-)?(\d+)/)?.[1] || '8' };
+  if (field.scope === 'cfr') {
+    const [, title = '8', section = ''] = field.sourceId.match(/^cfr-(?:part-)?(\d+):(.+)$/) || [];
+    return { kind: 'cfr', title, sourceHost: { kind: 'cfr', title, section } };
+  }
   const section = field.sourcePath.match(/title8.sections\[([^\]]+)\]/)[1];
   const mapping = corpus.inaCrosswalk.find(row => String(row.uscSection) === section);
   return { kind: mapping ? 'ina' : 'usc', uscSection: section, inaSection: mapping?.inaSection };
+}
+function renderField(api, field, corpus, context) {
+  const match = field.sourcePath.match(/^cfr\.records\[([^\]]+)\](.*)$/);
+  if (match && field.field === 'x') {
+    let block = [...corpus.cfr.sections, ...(corpus.cfr.appendices || [])].find(record => record.id === match[1]);
+    for (const token of match[2].matchAll(/\.([a-zA-Z]+)|\[(\d+)\]/g)) block = block?.[token[1] || Number(token[2])];
+    if (block?.x === field.text) return api.renderCfrStyledRange(block, 0, undefined, null, context);
+  }
+  return api.linkifyStatutoryText(field.text, field.references, 0, undefined, null, [], context);
 }
 function audit(artifact, templateFile, output) {
   const corpus = readArtifact(artifact), template = fs.readFileSync(templateFile, 'utf8'), api = runtime(template, corpus);
@@ -56,9 +74,9 @@ function audit(artifact, templateFile, output) {
   const records = [], summary = { fields: 0, references: 0, renderedLinks: 0, groups: {}, changedFields: 0, artifactSha256: crypto.createHash('sha256').update(fs.readFileSync(artifact)).digest('hex'), templateSha256: crypto.createHash('sha256').update(template).digest('hex') };
   for (const field of collectFields(corpus)) {
     const context = contextFor(field, corpus);
-    const html = api.linkifyStatutoryText(field.text, field.references, 0, undefined, null, [], context);
+    const html = renderField(api, field, corpus, context);
     const groups = api.coordinatedStatutoryInaLists(field.text, field.references, 0, undefined, context);
-    const displayed = plain(html);
+    const displayed = field.scope === 'cfr' ? plainCfr(html) : plain(html);
     let htmlCursor = 0, displayCursor = 0;
     const links = [...html.matchAll(/<a\b([^>]*data-legal-reference[^>]*)>([\s\S]*?)<\/a>/g)].map(match => {
       const attrs = Object.fromEntries([...match[1].matchAll(/([\w-]+)="([^"]*)"/g)].map(attr => [attr[1], plain(attr[2])]));
@@ -78,4 +96,4 @@ function audit(artifact, templateFile, output) {
   return summary;
 }
 if (require.main === module) console.log(JSON.stringify(audit(process.argv[2] || 'INASearch-Uncompressed.html', process.argv[3] || 'src/INASearch.template.html', process.argv[4] || 'tmp/ina-display-current'), null, 2));
-module.exports = { runtime, plain, contextFor, audit };
+module.exports = { runtime, plain, plainCfr, contextFor, renderField, audit };

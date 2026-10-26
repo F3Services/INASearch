@@ -25,6 +25,23 @@ assert.deepEqual([...used],['n1'],'A footnote at the next unit boundary belongs 
 assert.equal(api.legalFieldPlainText(source,'text',{}),'A < B¹ & ²C > D; “quoted”','Plain text must preserve punctuation and must not HTML-escape source characters');
 for (const name of ['preferredLegalUnitCitation','legalUnitCopyText','citationCopyPreface','citationWithLegalText']) vm.runInContext(functionSource(template,name),api);
 api.state.statuteHierarchyAuthority='usc';
+const formatCases=[
+  {format:'[CiTaTiOn][SpAcE][TaB][TeXt]',text:'First\n  Child',want:'8 U.S.C. 1101(a) \tFirst\n  Child'},
+  {format:'Heading\n[tab][space][tab][citation]:\n[text]',text:'First\n  Child\n\nLast',want:'Heading\n\t \t8 U.S.C. 1101(a):\n\t \tFirst\n\t \t  Child\n\n\t \tLast'},
+  {format:'[tab][citation] - [text]',text:'First\n  Child',want:'\t8 U.S.C. 1101(a) - First\n\t  Child'},
+  {format:'[tab][citation]\n[tab][text]',text:'First\n  Child',want:'\t8 U.S.C. 1101(a)\n\tFirst\n\t  Child'},
+  {format:'[text]\n[space][space][citation]',text:'First\n  Child',want:'  First\n    Child\n  8 U.S.C. 1101(a)'},
+  {format:'See [space][citation]\n[text]',text:'First\n  Child',want:'See  8 U.S.C. 1101(a)\nFirst\n  Child'},
+  {format:'\t[citation]\n[text]\n [citation]\n[text]',text:'First\n  Child',want:'\t8 U.S.C. 1101(a)\n\tFirst\n\t  Child\n 8 U.S.C. 1101(a)\n First\n   Child'},
+  {format:'[citation][space][text]',text:'Literal [space], [tab] and [unknown].',want:'8 U.S.C. 1101(a) Literal [space], [tab] and [unknown].'},
+  {format:'[tab][text]',text:'First\n  Child',want:'\tFirst\n  Child'},
+  {format:'[space][tab][citation]:\n[text]',text:'First\r\n  Child\r\n',want:' \t8 U.S.C. 1101(a):\n \tFirst\n \t  Child\n'}
+];
+for(const fixture of formatCases) {
+  api.profile.preferences.citationCopyPreface=fixture.format;
+  assert.equal(api.citationCopyPreface('8 U.S.C. 1101(a)',fixture.text),fixture.want,
+    `Copy format must expand whitespace and inherit citation indentation: ${JSON.stringify(fixture.format)}`);
+}
 api.profile.preferences.citationCopyPreface='[citation] - [text]';
 const copyCases=[
   {path:['a','1'],text:'(1) Original source text.\n  (A) Child text.',want:'Original source text.\n  (A) Child text.'},
@@ -57,4 +74,52 @@ for(const section of corpus.title8.sections) for(const node of section.body||[])
   assert.equal(text.split('\n').length,source.split('\n').length,`Copy changes paragraph structure in ${section.id}/${node.label}`);
   checked++;
 }
-console.log(`PASS explicit copy formatting: display independence, literal punctuation, footnote boundaries and ${checked} statutory subtrees`);
+vm.runInContext(functionSource(template,'legalCopyHtml'),api);
+assert.equal(api.legalCopyHtml('\t A < B & C\n  child\n\n'),
+  '<div><p style="margin:0;margin-left:2.5em;text-indent:0.01px;white-space:pre-wrap;tab-size:4">A &lt; B &amp; C</p><p style="margin:0;margin-left:1em;text-indent:0.01px;white-space:pre-wrap;tab-size:4">child</p><p style="margin:0;margin-left:0em;text-indent:0.01px;white-space:pre-wrap;tab-size:4"><br></p><p style="margin:0;margin-left:0em;text-indent:0.01px;white-space:pre-wrap;tab-size:4"><br></p></div>',
+  'Rich copy must apply paragraph indentation to wrapped lines, escape source text and preserve blank lines');
+assert(api.legalCopyHtml(' \tline').includes('margin-left:2em'), 'A tab advances to the next four-space stop');
+if(process.platform==='darwin'&&process.env.INASEARCH_NATIVE_CLIPBOARD_TESTS==='1') {
+  const rich=api.legalCopyHtml('Root\n  (i) Paragraph\n    (A) Subparagraph\n      (1) Clause\n        (i) Deep clause');
+  const rtf=require('node:child_process').execFileSync('textutil',['-convert','rtf','-stdout','-format','html','-stdin'],{input:rich,encoding:'utf8'});
+  const paragraphs=[...rtf.matchAll(/\\li(\d+)\\fi(-?\d+)/g)].map(match=>({left:Number(match[1]),firstLine:Number(match[2])}));
+  assert.equal(paragraphs.length,4,'Native rich-text import must retain all four child indentation levels');
+  assert(paragraphs.every((p,index)=>p.firstLine===0&&(!index||p.left>paragraphs[index-1].left)),
+    'Native import must indent first and wrapped lines together at every child level');
+}
+
+(async()=>{
+  let richItems=null,plainText=null;
+  const clipboardScope=vm.createContext({Blob,ClipboardItem:class {constructor(data){this.data=data;}},
+    navigator:{clipboard:{write:async items=>{richItems=items;},writeText:async text=>{plainText=text;}}},
+    legalCopyHtml:api.legalCopyHtml});
+  vm.runInContext(functionSource(template,'copyLegalText'),clipboardScope);
+  const copied='\t8 U.S.C. 1101(a)\n\tFirst\n\t  Child';
+  assert.equal(await clipboardScope.copyLegalText(copied),true);
+  assert(richItems,'Indented copy must put a rich representation on the clipboard');
+  assert.equal(await richItems[0].data['text/plain'].text(),copied,'Plain-text copy must retain exact tabs and spaces');
+  assert.equal(await richItems[0].data['text/html'].text(),api.legalCopyHtml(copied),'Rich and plain copies must describe the same content');
+  assert.equal(plainText,null,'A successful rich copy must not be overwritten by plain text');
+  clipboardScope.navigator.clipboard.write=async()=>{throw new Error('Rich clipboard unavailable');};
+  assert.equal(await clipboardScope.copyLegalText(copied),true);
+  assert.equal(plainText,copied,'Rejected rich clipboard writes must fall back to exact plain text');
+  plainText=null;
+  delete clipboardScope.ClipboardItem;
+  assert.equal(await clipboardScope.copyLegalText(copied),true);
+  assert.equal(plainText,copied,'Browsers without rich clipboard support must still preserve literal indentation');
+  const handlers=new Set(),legacyData=new Map();
+  let textareaRemoved=false,prevented=false;
+  clipboardScope.navigator.clipboard.writeText=async()=>{throw new Error('Clipboard API unavailable');};
+  clipboardScope.document={
+    createElement:()=>({style:{},setAttribute(){},select(){},remove(){textareaRemoved=true;}}),body:{append(){}},
+    addEventListener:(_type,listener)=>handlers.add(listener),removeEventListener:(_type,listener)=>handlers.delete(listener),
+    execCommand:()=>{for(const listener of handlers) listener({clipboardData:{setData:(type,value)=>legacyData.set(type,value)},preventDefault(){prevented=true;}});return true;}
+  };
+  assert.equal(await clipboardScope.copyLegalText(copied),true);
+  assert.equal(legacyData.get('text/plain'),copied,'Legacy copy must keep the exact plain-text payload');
+  assert.equal(legacyData.get('text/html'),api.legalCopyHtml(copied),'Legacy copy must retain paragraph formatting when Clipboard API access is unavailable');
+  assert.equal(prevented,true);
+  assert.equal(handlers.size,0,'A fallback copy must remove its temporary clipboard listener');
+  assert.equal(textareaRemoved,true);
+  console.log(`PASS explicit copy formatting: whitespace tokens, inherited indentation, rich/plain clipboard, display independence, footnote boundaries and ${checked} statutory subtrees`);
+})().catch(error=>{console.error(error);process.exitCode=1;});

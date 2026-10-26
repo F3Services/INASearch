@@ -370,7 +370,8 @@ function isHouseEditorialSourceError(reference, context) {
 
 function retainNavigableReferences(references, context) {
   return references.filter(reference => {
-    if (reference.resolution === "unresolved" || reference.family === "unknown") return false;
+    if (reference.family === "unknown") return false;
+    if (reference.resolution === "unresolved" && !(reference.family === "ina" && reference.ruleId === "context-cfr-ina-act-section" && reference.inaSection)) return false;
     const structural = (context.inlineUnitMarkers || []).some(marker => marker.start <= reference.start && marker.end >= reference.end);
     if (structural) return false;
     if (isHouseEditorialSourceError(reference, context)) return false;
@@ -663,6 +664,15 @@ function resolvedInaContinuationPath(context, inaSection, basePath, continuation
   return null;
 }
 
+function completeCitationAddressBoundary(input, end) {
+  return !/[A-Za-z0-9]/.test(String(input)[end] || "") && !/^\.\d/.test(String(input).slice(end));
+}
+
+function trimInaCitationGloss(address) {
+  const gloss = [...address.matchAll(/\s*\(([A-Za-z]{4,})\)/g)].find(match => !/^[ivxlcdm]+$/i.test(match[1]));
+  return gloss ? address.slice(0, gloss.index) : address;
+}
+
 function parseInaActCitationList(input, start, end) {
   const citations = [];
   let cursor = start;
@@ -679,12 +689,17 @@ function parseInaActCitationList(input, start, end) {
       cursor += sectionWord[0].length;
       continue;
     }
-    const connector = remainder.match(/^(?:and\/or|and|or|through|to|respectively)\b/i);
+    const paragraphWord = citations.length && remainder.match(/^paragraphs?\b/i);
+    if (paragraphWord) { cursor += paragraphWord[0].length; continue; }
+    const connector = remainder.match(/^(?:and\/or|and|or|through|to|respectively|former)\b/i);
     if (connector) { cursor += connector[0].length; continue; }
     const punctuation = remainder.match(/^[,;:\-–—]+/);
     if (punctuation) { cursor += punctuation[0].length; continue; }
+    const qualifier = citations.length && remainder.match(/^\((?:other\s+than|except(?:ing)?|excluding)\b(?:[^()]|\([^()]*\))*\)/i);
+    if (qualifier) { cursor += qualifier[0].length; continue; }
     const absolute = remainder.match(/^\d+[A-Za-z-]*(?:\s*\([A-Za-z0-9-]+\))*/);
     if (absolute) {
+      absolute[0] = trimInaCitationGloss(absolute[0]);
       citations.push({
         start: pendingPrefixStart ?? cursor,
         end: cursor + absolute[0].length,
@@ -699,6 +714,8 @@ function parseInaActCitationList(input, start, end) {
     }
     const continuation = remainder.match(/^(?:\([A-Za-z0-9-]+\))(?:\s*\([A-Za-z0-9-]+\))*/);
     if (continuation) {
+      continuation[0] = trimInaCitationGloss(continuation[0]);
+      if (!continuation[0]) return null;
       citations.push({
         start: pendingPrefixStart ?? cursor,
         end: cursor + continuation[0].length,
@@ -724,7 +741,9 @@ function parseInaActCitationPrefix(input, start) {
     const absolute = remainder.match(/^\d+[A-Za-z-]*(?:\s*\([A-Za-z0-9-]+\))*/);
     const continuation = absolute ? null : remainder.match(/^(?:\([A-Za-z0-9-]+\))(?:\s*\([A-Za-z0-9-]+\))*/);
     const match = absolute || continuation;
-    if (!match) return false;
+    if (!match || !completeCitationAddressBoundary(remainder, match[0].length)) return false;
+    match[0] = trimInaCitationGloss(match[0]);
+    if (!match[0]) return false;
     citations.push({
       start: leadStart === null ? cursor : leadStart,
       end: cursor + match[0].length,
@@ -818,7 +837,8 @@ function inaActReferenceCandidates(text, context) {
   const assumesIna = cfrContextUsesInaAct(context) || /\b(?:INA|Immigration\s+and\s+Nationality\s+Act)\b/i.test(input);
   if (assumesIna) {
     const writtenOwners = EmbeddedReferences.parseNumberedSectionReferences(input);
-    for (const match of input.matchAll(/\bsections?\s+(?=\d+[A-Za-z-]*\s*\()/gi)) {
+    for (const match of input.matchAll(/\bsections?\s+(?=\d+[A-Za-z-]*(?:\s*\(|\b))/gi)) {
+      if (/\b(?!INA\b)[A-Z]{2,8}\s+$/.test(input.slice(0, match.index))) continue;
       // The owner at the end of a coordinated list also governs earlier
       // members and ranges, even when the INA shorthand grammar stops early.
       if (writtenOwners.some(candidate => candidate.start <= match.index && match.index < candidate.scope.start &&
@@ -842,20 +862,22 @@ function inaActReferenceCandidates(text, context) {
         continue;
       }
       const suffixText = input.slice(parsed.end, parsed.end + 240);
+      if (/^\s*,?\s*Pub(?:lic)?\.?\s+L(?:aw)?\.?\s+\d+/i.test(suffixText)) continue;
       const writtenActSuffix = suffixText.match(/^\s+of\s+([^.;]{1,220}?\bAct(?:\s+of\s+\d{4})?)\b/i)?.[1] || "";
-      const acceptedSuffixMatch = suffixText.match(/^\s+of\s+(?:(?:the|this|such|that)\s+Act\b(?!\s+of\s+\d{4}\b)|INA\b|(?:the\s+)?Immigration\s+and\s+Nationality\s+Act\b)/i);
+      const acceptedSuffixMatch = suffixText.match(/^\s+of\s+(?:(?:the|this|such|that)\s+Act\b(?!\s+of\s+(?:\d{4}\b|[A-Za-z.]+\s+\d{1,4}\b|\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b))|INA\b|(?:the\s+)?Immigration\s+and\s+Nationality\s+Act\b)/i);
       // An explicitly written owner outranks the CFR part's default INA
       // context. In particular, "section 101(e) of Public Law 100-202" is
       // not INA 101(e). Leave other named or unknown owners to their own
       // resolvers rather than guessing an INA destination.
       if (/^\s*,?\s*of\b/i.test(suffixText) && !acceptedSuffixMatch) continue;
+      if (/^\s+of\s+(?:the|this|such|that)\s+Act\b/i.test(suffixText) && !cfrContextUsesInaAct(context)) continue;
       const acceptedActSuffix = /^(?:(?:the|this|such|that)\s+Act|INA|Immigration\s+and\s+Nationality\s+Act)\b/i.test(writtenActSuffix);
       const normalizedSuffix = suffixText.trimStart().toLowerCase();
       const catalogNamedActSuffix = [...(context.namedActs?.keys?.() || [])].some(name => {
         const prefix = `of ${String(name).toLowerCase()}`;
         return normalizedSuffix.startsWith(prefix) && !/[a-z0-9]/.test(normalizedSuffix[prefix.length] || " ");
       });
-      const structuredNamedActSuffix = !/^\s*(?:and|or)\b/i.test(suffixText) && /^\s*,?\s*(?:(?:division|title)\b[^.;]{0,200}?\s+of\s+)?(?:the\s+)?[A-Z][^.;]{0,200}\bAct\b/i.test(suffixText);
+      const structuredNamedActSuffix = !/^\s*(?:and|or)\b/i.test(suffixText) && /^\s*,?\s*(?:(?:division|title)\b[^.;]{0,200}?\s+of\s+)?(?:[Tt]he\s+)?[A-Z][^.;]{0,200}\bAct\b/.test(suffixText);
       // A written, specifically named Act is affirmative evidence against the
       // CFR scope's default INA meaning, even when the catalog stores a longer
       // formal title (for example, a trailing "of 1996"). Let the named-Act
@@ -895,6 +917,12 @@ function inaActReferenceCandidates(text, context) {
           if (!context.inaMap?.has(String(currentSection).toLowerCase())) break;
         }
         currentPath = targetPath;
+        const target = inaReferenceTarget(context, currentSection, targetPath);
+        if (!acceptedSuffixMatch && targetPath.length && target.resolution === "official-source-only" && !target.targetEdition && !localUscTarget(context, "8", target.targetSection, targetPath)) {
+          target.resolution = "unresolved";
+          target.officialUrl = "";
+          target.citationNote = "The written INA locator is outside the included current text. No matching historical destination has been verified.";
+        }
         results.push({
           id: makeId(context, citation.start, "context-cfr-ina-act-section", index),
           start: citation.start,
@@ -902,7 +930,7 @@ function inaActReferenceCandidates(text, context) {
           text: input.slice(citation.start, citation.end),
           provenance: "deterministic-context",
           ruleId: "context-cfr-ina-act-section",
-          ...inaReferenceTarget(context, currentSection, targetPath)
+          ...target
         });
         if (index === parsed.citations.length - 1) finalCitationAdded = true;
       }
@@ -1137,6 +1165,7 @@ function explicitReferenceCandidates(text, context) {
   }
 
   addMatches(/\b(\d+)\s+U\.?\s*S\.?\s*C\.?\s*(?:§{1,2}\s*)?(\d+[A-Za-z]*(?:[–—-]\d+[A-Za-z]*)?)((?:\s*\([A-Za-z0-9-]+\))*)/gi, "explicit-usc", match => {
+    if (!completeCitationAddressBoundary(input, match.index + match[0].length)) return null;
     const title = match[1], section = writtenUscSection(match[2]), complete = section === match[2].replace(/[–—]/g, "-"), targetPath = complete ? pathTokens(match[3]) : [];
     const actAcronym = targetPath.length === 1 && /^[A-Z]{3,}$/.test(targetPath[0]) && !/^[IVXLCDM]+$/.test(targetPath[0]);
     if (actAcronym) targetPath.pop();
@@ -1187,10 +1216,12 @@ function explicitReferenceCandidates(text, context) {
     return { relativeStart: match[0].indexOf(section), family: "cfr", targetKind: "cfr", targetTitle: title, targetSection: section,
       targetPath, resolution: "local", officialUrl: ecfrSectionUrl(title, section) };
   });
-  addMatches(/\bINA\s*(?:§{1,2}|sections?)?\s*(\d+[A-Za-z-]*)((?:\s*\([A-Za-z0-9-]+\))*)/gi, "explicit-ina", match => {
-    const inaSection = match[1], inaPath = pathTokens(match[2]);
+  addMatches(/\bINA\s*(?:§{1,2}|sections?|secs?\.)?\s*(?:(\d+[A-Za-z-]*)|\((\d+[A-Za-z-]*)\))((?:\s*\([A-Za-z0-9-]+\))*)/gi, "explicit-ina", match => {
+    if (!completeCitationAddressBoundary(input, match.index + match[0].length)) return null;
+    const inaSection = match[1] || match[2], inaPath = pathTokens(match[3]);
     return inaReferenceTarget(context, inaSection, inaPath);
   });
+  addMatches(/\bsections?\s+(\d+[A-Za-z-]*)((?:\s*\([A-Za-z0-9-]+\))*)\s+INA\b/gi, "explicit-ina", match => inaReferenceTarget(context, match[1], pathTokens(match[2])));
   addMatches(/Pub(?:lic)?\.?\s+L(?:aw)?\.?\s+(\d+)[–—-](\d+)\b/gi, "explicit-public-law", match => ({
     family: "public-law", targetKind: "public-law", targetCongress: match[1], targetLaw: match[2], targetPath: [], resolution: "official-source-only", officialUrl: `https://www.govinfo.gov/app/details/PLAW-${match[1]}publ${match[2]}`
   }));
@@ -1606,6 +1637,7 @@ function explicitCitationContinuationCandidates(text, context, baseReferences = 
     .filter(reference => ["explicit-usc", "explicit-ina", "explicit-cfr", "context-bare-usc-section"].includes(reference.ruleId) && ["usc", "ina", "cfr"].includes(reference.family) && reference.targetSection)
     .sort((left, right) => left.end - right.end || left.start - right.start);
   for (const base of bases) {
+    const cfrAuthorityList = context.kind === "cfr" && context.sourceField === "authority" && base.ruleId === "explicit-usc";
     let cursor = base.end;
     let currentSection = String(base.targetSection);
     let currentInaSection = String(base.inaSection || "");
@@ -1618,9 +1650,24 @@ function explicitCitationContinuationCandidates(text, context, baseReferences = 
     // grammar and stop at a semicolon or prose, so the title cannot leak into
     // a later authority.
     while (cursor < input.length && cursor - base.end < 1600) {
-      const ignorable = input.slice(cursor).match(/^\s+(?:note\b|et\s+seq\.?\b)/i);
+      const ignorable = input.slice(cursor).match(cfrAuthorityList ? /^\s+(?:(?:and\s+)?notes?\b|et\s+seq\.?\b)/i : /^\s+(?:note\b|et\s+seq\.?\b)/i);
       if (ignorable) cursor += ignorable[0].length;
-      const connector = input.slice(cursor).match(/^\s*(?:,\s*(?:(?:and\/or|and|or)\s+)?|[–—-]\s*|&\s*|(?:and\/or|and|or|through|to)\s+)/i);
+      // Authority fields retain one USC title through parenthetical source
+      // annotations and semicolons. A new explicit authority still stops the
+      // run below; ordinary prose fields keep the narrower list grammar.
+      if (cfrAuthorityList) {
+        const open = cursor + (input.slice(cursor).match(/^\s*/)?.[0].length || 0);
+        if (input[open] === "(") {
+          let depth = 0, close = open;
+          for (; close < input.length && close - open < 1600; close++) {
+            if (input[close] === "(") depth++;
+            if (input[close] === ")" && --depth === 0) { cursor = close + 1; break; }
+          }
+        }
+      }
+      const connector = input.slice(cursor).match(cfrAuthorityList
+        ? /^\s*(?:[;,]\s*(?:(?:and\/or|and|or)\s+)?|[–—-]\s*|&\s*|(?:and\/or|and|or|through|to)\s+)/i
+        : /^\s*(?:,\s*(?:(?:and\/or|and|or)\s+)?|[–—-]\s*|&\s*|(?:and\/or|and|or|through|to)\s+)/i);
       if (!connector) break;
       let memberStart = cursor + connector[0].length;
       const repeatedUnit = input.slice(memberStart).match(/^(?:(?:sections?|§{1,2})\s*)/i);
@@ -1629,7 +1676,7 @@ function explicitCitationContinuationCandidates(text, context, baseReferences = 
       if (/^(?:18|19|20)\d{2}\s+(?:ed(?:ition)?\.?)(?:\s|[.,;)]|$)/i.test(remainder)) break;
       // A new authority starts here, not another section of the preceding
       // authority (e.g. “8 U.S.C. 1188, 20 CFR part 655, subpart B”).
-      if (/^\d+\s*(?:C\.?\s*F\.?\s*R\.?|U\.?\s*S\.?\s*C\.?|F\.?R\.?|Stat\.?)\b/i.test(remainder)) break;
+      if (/^\d+\s*(?:C\.?\s*F\.?\s*R\.?|U\.?\s*S\.?\s*C\.?|F\.?R\.?|Stat\.?|Op\.?\s*A\.?\s*G\.?)\b/i.test(remainder)) break;
       const compound = base.family === "cfr" && currentSection.match(/^(\d+[A-Za-z]*\.\d+[A-Za-z]*)\([^()]+\)-\d/)
         && remainder.match(/^(\([A-Za-z0-9]+\)-\d+(?:\.\d+)?[A-Za-z]*)((?:\s*\([A-Za-z0-9-]+\))*)/);
       const relative = !compound && remainder.match(/^((?:\([A-Za-z0-9-]+\))(?:\s*\([A-Za-z0-9-]+\))*)/);
@@ -1637,6 +1684,12 @@ function explicitCitationContinuationCandidates(text, context, baseReferences = 
         ? remainder.match(/^(\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?(?:\s*\([A-Za-z0-9-]+\))*-\d+(?:\.\d+)?[A-Za-z]*|\d+[A-Za-z]*(?:\.\d+[A-Za-z]*)?)((?:\s*\([A-Za-z0-9-]+\))*)/)
         : remainder.match(/^(\d+[A-Za-z]*(?:[–—-]\d+[A-Za-z]*)?)((?:\s*\([A-Za-z0-9-]+\))*)/);
       if (!relative && !absolute && !compound) break;
+      if (absolute && !completeCitationAddressBoundary(remainder, absolute[0].length)) {
+        const malformed = cfrAuthorityList && remainder.match(/^\d+[A-Za-z]+\d+(?=\s*[,;])/);
+        if (malformed) { cursor = memberStart + malformed[0].length; continue; }
+        break;
+      }
+      if (absolute && /^\s*,?\s*(?:Pub(?:lic)?\.?\s+L(?:aw)?\.?|[A-Z][^.;]{0,100}\bAct\b)/.test(remainder.slice(absolute[0].length))) break;
       let memberEnd;
       let sourceText;
       let targetPath;
@@ -1696,6 +1749,17 @@ function explicitCitationContinuationCandidates(text, context, baseReferences = 
           resolution: localUscTarget(context, title, section, targetPath) ? "local" : "official-source-only",
           officialUrl: houseSectionUrl(title, section)
         };
+      }
+      const range = cfrAuthorityList && sourceText.match(/^(\d{3,})[-–—](\d{2,})$/);
+      const rangeEnd = range && range[2].length < range[1].length ? range[1].slice(0, range[1].length - range[2].length) + range[2] : "";
+      if (rangeEnd && Number(rangeEnd) >= Number(range[1]) && localUscTarget(context, base.targetTitle, range[1], []) && localUscTarget(context, base.targetTitle, rangeEnd, [])) {
+        for (const [offset, text, section] of [[0,range[1],range[1]], [range[1].length+1,range[2],rangeEnd]]) results.push({
+          id:makeId(context,memberStart+offset,ruleId,referenceIndex++), start:memberStart+offset,end:memberStart+offset+text.length,text,
+          ...target,targetSection:section,targetPath:[],resolution:"local",officialUrl:houseSectionUrl(base.targetTitle,section),provenance:"deterministic-parser",ruleId
+        });
+        currentSection = rangeEnd;
+        cursor = memberEnd;
+        continue;
       }
       results.push({
         id: makeId(context, memberStart, ruleId, referenceIndex++), start: memberStart, end: memberStart + sourceText.length, text: sourceText,
@@ -3895,6 +3959,7 @@ function applySourceExceptions(references, context, text) {
       : embeddedTargetExists(context, target));
     const reference = { id: makeId(context, exception.start, "embedded-exception"), start: exception.start, end: exception.end,
       text: exception.text, family: target.family, targetKind: target.family, targetPath: [...target.path],
+      ...(target.inaSection ? {inaSection:target.inaSection} : {}),
       resolution: exception.resolution || (local ? "local" : "official-source-only"), officialUrl: exception.officialUrl,
       provenance: "reviewed-exception", ruleId: "embedded-exception",
       ...(exception.historicalOfficialUrl ? {historicalOfficialUrl: exception.historicalOfficialUrl} : {}),
@@ -4592,6 +4657,7 @@ function applyHistoricalVersionRequirements(references, context, text) {
   const defined = source && (context.historicalCfrActScopes?.get(cfrActScopeKey(source)) || context.historicalCfrActScopes?.get(cfrActScopeKey(source, "part")));
   const requirements = new Map();
   const qualifier = tail => {
+    tail = tail.replace(/^\s*\(redesignated\s+as\s+sections?\s+\d+[A-Za-z]*(?:\([^()]+\))*\)\s*/i, "");
     tail = tail.replace(/^\s*\[[^\]]+\]\s*/, "");
     tail = tail.replace(/^\s*of\s+(?:this\s+title|(?:(?:the|such|that)\s+)?(?:Act|INA|Immigration\s+and\s+Nationality\s+Act))\s*/i, "").replace(/^\s*\[[^\]]+\]\s*/, "");
     const match = tail.match(/^\s*(?:[\[\](),]\s*)*(?:(?:as\s+)?(?:(?:it|so)\s+)?(?:existed|in\s+effect|designated)|before\s+amended)\b[^;]{0,180}/i);

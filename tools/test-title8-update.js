@@ -2,13 +2,22 @@
 const assert = require("node:assert/strict");
 const { applyStatuteFootnotes } = require("./statute-footnotes");
 const { indexStatuteRunIns, statuteRunInMarkers } = require("./statute-run-ins");
-const { correctedProjection, verifyCorpusIdentity } = require("./title8-update-gate");
+const { correctedProjection, correctedSourceProjection, verifyCorpusIdentity } = require("./title8-update-gate");
 const freshIdentity = { corpusVersion: "title8-119-121-source-usc-order.1-uslm.1", title8Update: { corpusVersion: "title8-119-121-source", xmlSha256: "source" }, sources: { title8: { sourceSha256: "source" } } };
 verifyCorpusIdentity(freshIdentity);
 assert.throws(() => verifyCorpusIdentity({ ...freshIdentity, corpusVersion: "older-usc-order.1-uslm.1" }), /corpus cache/);
 assert.throws(() => verifyCorpusIdentity({ ...freshIdentity, corpusVersion: "title8-119-121-source-unreviewed" }), /corpus cache/);
 const projection = correctedProjection({ section: "1", heading: "Example", notes: [{ text: "Note" }] });
 assert.deepEqual(projection, JSON.parse(JSON.stringify(projection)), "Preservation snapshots must survive JSON serialization");
+const group = { id: "8-1 to 2", section: "1 to 2" };
+const children = [
+  { section: "1", combinedHouseRecord: group.id, text: "First historical provision." },
+  { section: "2", combinedHouseRecord: group.id, text: "Second historical provision." }
+];
+assert.deepEqual(correctedSourceProjection(group, children), children.map(correctedProjection),
+  "Update preservation must check every delivered child of a combined House record");
+assert.throws(() => correctedSourceProjection(group, []), /missing.*1 to 2/i,
+  "An absent source record must fail the update gate instead of losing preservation coverage");
 
 // A later release may legitimately contain a different number of footnotes.
 const corpus = { title8: { sections: [{ section: "1101", preamble: "Law1 Note.", body: [] }] } };

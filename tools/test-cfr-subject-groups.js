@@ -15,10 +15,11 @@ const context = {
   corpus: { cfr: box.window.INA_SEARCH_CFR }, authorityHierarchyNodes: nodes,
   hierarchyLeafByReader: new Map(), cfrPartHierarchyNode: new Map(), inaMap: new Map(),
   INA_SOURCE_URL: "https://www.uscis.gov", statuteStatus: () => "current",
-  state: { hierarchyExpanded: new Set() }
+  state: { hierarchyExpanded: new Set() },
+  profile: { preferences: {statutoryLinkCitationSystem:"usc"} }
 };
 vm.runInNewContext(fs.readFileSync("src/INASearch-Startup.js", "utf8"), context);
-const names = ["normalize", "normCitationPart", "escapeHtml", "titleCaseTopic", "navigationTitleCase", "hierarchyUnitKind", "hierarchyNodeId", "createHierarchyNode", "hierarchySourceHeading", "buildAuthorityHierarchies", "addReferencedUscHierarchy", "hierarchyNodeAncestors", "hierarchyOfficialUrl", "hierarchyNodeCitation", "hierarchyBrowseResult", "hierarchyDescendants", "hierarchyUnitMatches", "hierarchyResultForUnits", "namedHierarchyUnits", "parseCfrHierarchy", "hierarchyRowCitation", "hierarchyRowHeading", "hierarchyStatusBadge", "hierarchyStatusReplacesHeading", "hierarchyTocFootnoteMarkers", "renderHierarchyTocNotes", "hierarchyNoteEntries", "hierarchyNoteMarkers", "renderHierarchyRows", "paneHierarchyRows", "hierarchyNavigationSegments", "hierarchyChildNavigationSegment"];
+const names = ["cfrHeadingDisplayText", "statutoryLinksUseIna", "normalize", "normCitationPart", "escapeHtml", "titleCaseTopic", "navigationTitleCase", "hierarchyUnitKind", "hierarchyNodeId", "createHierarchyNode", "hierarchySourceHeading", "buildAuthorityHierarchies", "addReferencedUscHierarchy", "hierarchyNodeAncestors", "hierarchyOfficialUrl", "hierarchyNodeCitation", "hierarchyBrowseResult", "hierarchyDescendants", "hierarchyUnitMatches", "hierarchyResultForUnits", "namedHierarchyUnits", "parseCfrHierarchy", "hierarchyRowCitation", "hierarchyRowHeading", "hierarchyStatusBadge", "hierarchyStatusReplacesHeading", "hierarchyTocFootnoteMarkers", "renderHierarchyTocNotes", "hierarchyNoteEntries", "hierarchyNoteMarkers", "renderHierarchyRows", "paneHierarchyRows", "hierarchyNavigationSegments", "hierarchyChildNavigationSegment"];
 const declarations = names.map(name => {
   const start = source.indexOf(`function ${name}(`);
   assert(start >= 0, name);

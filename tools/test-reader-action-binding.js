@@ -32,7 +32,7 @@ class Control extends EventTarget {
 class Rail extends EventTarget {
   constructor() {
     super();
-    this.buttons = [new Control("", true), ...["copy-citation", "copy-text", "add-note", "print", "open"].map(action => new Control(action))];
+    this.buttons = [new Control("", true), ...["copy-text", "copy-citation-text", "add-note", "print", "open"].map(action => new Control(action))];
     this.hovered = false;
   }
   contains(element) { return this.buttons.includes(element); }
@@ -112,15 +112,21 @@ async function checkHost(paneMode) {
   const click = fire(h.rail, "click", { target: copy });
   await Promise.resolve();
   assert.equal(click.defaultPrevented, true);
-  assert.equal(h.copies[0], `${paneMode ? "8 CFR 212.4(a)(1)" : "8 U.S.C. 1101(a)(1)"} - Original source text.`,
-    "The text action keeps citation formatting and the frozen copy target");
+  assert.equal(h.copies[0], "(1) Original source text.",
+    "The text-only action copies the frozen target without a citation preface");
   assert.deepEqual(h.selections[0], { pane: host, args: [h.context.kind, h.context.sectionId, ["a", "1"], paneMode ? [7] : null] },
     "The action commits exactly once, including a pane's occurrence locator");
   assert.equal(h.selections.length, 1);
 
+  fire(h.rail, "click", { target: h.rail.button("copy-citation-text") });
+  await Promise.resolve();
+  assert.equal(h.copies[1], `${paneMode ? "8 CFR 212.4(a)(1)" : "8 U.S.C. 1101(a)(1)"} - Original source text.`,
+    "The combined action applies the citation template to the same frozen target");
+  assert.deepEqual(h.selections[1], h.selections[0]);
+
   fire(h.rail, "click", { target: h.rail.button("print") });
   assert.equal(h.prints[0].text, "(1) Original source text.", "Print shares the frozen target with every action");
-  assert.deepEqual(h.selections[1].args[2], ["a", "1"]);
+  assert.deepEqual(h.selections[2].args[2], ["a", "1"]);
   fire(h.rail, "click", { target: h.rail.button("add-note") });
   assert.equal(h.notes[0][3][2].join("/"), "a/1", "The note is attached to the shared citation");
   fire(h.rail, "click", { target: h.rail.button("open") });
@@ -130,7 +136,7 @@ async function checkHost(paneMode) {
   copy.disabled = true;
   fire(copy, "mouseenter");
   fire(h.rail, "click", { target: copy });
-  assert.equal(h.copies.length, 1, "Disabled actions cannot copy or retarget either reader");
+  assert.equal(h.copies.length, 2, "Disabled actions cannot copy or retarget either reader");
   assert.equal(h.selections.length, before);
   assert.equal(h.previews.length, 1);
 
@@ -171,7 +177,7 @@ async function checkHost(paneMode) {
       assert.equal(h.previews.length, 0, `Hover/focus must preserve the view when the citation starts at visible y=${top}, pane=${paneMode}`);
       fire(h.rail, "click", { target: h.rail.button("copy-text") });
       await Promise.resolve();
-      assert.equal(h.copies[0], `${h.context.citation} - Original source text.`, "Visible citations remain the action target");
+      assert.equal(h.copies[0], "(1) Original source text.", "Visible citations remain the text-only action target");
       fire(h.rail, "mouseleave");
       while (h.frames.length) h.frames.shift()();
       assert.equal(h.restores.length, 0, "Leaving an unscrolled hover must not move the reader");

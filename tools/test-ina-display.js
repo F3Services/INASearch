@@ -10,7 +10,101 @@ const fields = collectFields(corpus);
 function render(text, references, context, match = null, footnotes = []) {
   return api.linkifyStatutoryText(text, references, 0, undefined, match, footnotes, context);
 }
+// Exercise the actual reader boundary, including citations split by inline styles.
+for (const [title, section, indices] of [[8, '212.18', [0]], [22, '41.24', [4,5,6]]]) {
+  const record = corpus.cfr.sections.find(row => row.title === title && row.section === section);
+  for (const index of indices) {
+    const block = record.blocks[index], context = {kind:'cfr',title,sourceHost:{kind:'cfr',title,section}};
+    assert.equal(plain(api.renderCfrStyledRange(block, 0, undefined, null, context)), plain(render(block.x, block.xReferences, context)), 'Reader styling cannot split citation conversion');
+    assert.equal(plain(api.renderCfrStyledRange(block, 0, undefined, null, {...context,citationDisplaySystem:'usc'})), block.x);
+  }
+}
+const historicalBlock = corpus.cfr.sections.find(row => row.title === 8 && row.section === '208.13').blocks.find(row => row.x?.includes('212(a)(3)(B)(i)(I),(II)'));
+const historicalRef = historicalBlock.xReferences.find(ref => ref.resolution === 'unresolved');
+for (const highlighting of [false,true]) {
+  api.profile.preferences.highlightInaCitationLinks = highlighting;
+  const html = render(historicalBlock.x, historicalBlock.xReferences, {kind:'cfr',title:8}, {start:historicalRef.start,end:historicalRef.end});
+  assert(html.includes('data-statute-search-match'), 'Unresolved converted citations retain search matches');
+}
+const styledUnresolved = 'section 212(a)(3)(B)(i)(I) of the Act';
+const styledReference = {...historicalRef,start:0,end:styledUnresolved.length,text:styledUnresolved};
+const styledHtml = api.renderCfrStyledRange({x:styledUnresolved,xReferences:[styledReference],r:[{x:styledUnresolved,s:'i'}]},0,undefined,{start:0,end:styledUnresolved.length},{kind:'cfr'});
+assert(styledHtml.includes('font-style:italic') && styledHtml.includes('data-statute-search-match'), 'Unresolved conversion projects source presentation and search together');
+assert(!styledHtml.includes('data-legal-reference'), 'Unresolved display normalization creates no navigation');
+for(const part of corpus.cfr.parts.filter(row=>['245a','501','502'].includes(String(row.part))&&row.headingReferences?.length)) {
+ assert(api.cfrHeadingDisplayText(part.heading).includes('INA '), 'Hierarchy metadata reuses the owning heading references');
+}
+const printedList = 'sections 101(a)(15)(T)(ii) and 101(a)(15)(T)(iii) of the Act';
+const printedRefs = ['sections 101(a)(15)(T)(ii)', '101(a)(15)(T)(iii) of the Act'].map(text => ({text,start:printedList.indexOf(text),end:printedList.indexOf(text)+text.length,family:'ina',ruleId:'context-cfr-ina-act-section',inaSection:'101',targetTitle:'8',targetSection:'1101',targetPath:['a','15','T','ii'],resolution:'local'}));
+assert.equal(plain(render(printedList,printedRefs,{kind:'cfr'})), 'INA 101(a)(15)(T)(ii) and (iii)', 'Coordinated labels preserve different printed classifications even when their reviewed destinations agree');
+const namedChapter = 'under any provision of chapter 3 of title III of the Immigration and Nationality Act of 1952';
+assert.equal(plain(api.linkifyCfrText(namedChapter,[])), 'under any provision of INA title III, chapter 3');
+for (const section of ['68.53','68.55']) {
+ const record = corpus.cfr.sections.find(row=>row.title===28&&row.section===section);
+ assert(!/section 274/i.test(api.cfrHeadingDisplayText(`§ ${section} ${record.heading}`)), 'Hierarchy labels with a section-number prefix reuse the owning heading conversion');
+}
+const parallelBlock = corpus.cfr.sections.find(row=>row.id==='20:655.600').blocks.find(block=>block.x?.includes('section 258 of the INA (8 U.S.C. 1288)'));
+assert(parallelBlock, 'The parenthetical-parallel regression must exercise captured text');
+assert(plain(api.linkifyCfrText(parallelBlock.x,parallelBlock.xReferences)).includes('INA 258 (8 U.S.C. 1288)'), 'Named INA conversion retains the balanced Code parallel');
+const datedBlock = corpus.cfr.sections.find(row=>row.id==='8:1240.11').blocks.find(block=>block.x?.includes('section 101 or 104 of the Act of October 28, 1977'));
+assert(plain(api.linkifyCfrText(datedBlock.x,datedBlock.xReferences)).includes('section 101 or 104 of the Act of October 28, 1977'), 'A dated foreign Act keeps its complete source identity');
+const lawAuthority = corpus.cfr.parts.find(row=>row.title===8&&String(row.part)==='1245');
+assert(plain(api.linkifyCfrText(lawAuthority.authority,lawAuthority.authorityReferences)).includes('section 202, Public Law 105-100'), 'Public Law section wording survives INA conversion of the preceding USC list');
+const decimalBlock = corpus.cfr.sections.find(row=>row.id==='8:103.38').blocks.find(block=>block.x?.includes('Sections 103.38 through 103.41'));
+assert(plain(api.linkifyCfrText(decimalBlock.x,decimalBlock.xReferences)).includes('Sections 103.38 through 103.41'), 'A decimal CFR range cannot turn into an INA prefix');
+// Start from the delivered lazy-reference state and the default Follow view
+// preference, rather than the audit's eagerly expanded/forced-INA corpus.
+for (const artifact of ['INASearch.html','INASearch-Uncompressed.html']) {
+ const packed = require('./read-build-corpus').readBuildCorpus(artifact);
+ const fresh = runtime(fs.readFileSync('src/INASearch.template.html','utf8'),packed);
+ fresh.profile.preferences.statutoryLinkCitationSystem = 'view';
+ fresh.state.statuteHierarchyAuthority = 'ina';
+ const part = packed.cfr.parts.find(record=>record.title===8&&String(record.part)==='245a');
+ assert(part._lr?.h && !part.headingReferences, 'The fixture must begin with lazily packed heading references');
+ const unrelated = packed.cfr.sections.find(record=>record.blocks?.some(block=>block._lr?.x));
+ const block = unrelated.blocks.find(block=>block._lr?.x);
+ const first = fresh.cfrHeadingDisplayText(part.heading);
+ assert(first.includes('INA 245A') && !first.includes('<'), 'Fresh packed headings convert to actual plain text in Follow view');
+ const reservedHeading = '§ 41.82 Certain parents and children of section 101(a)(27)(I) special immigrants. [Reserved]';
+ assert(fresh.cfrHeadingDisplayText(reservedHeading).includes('of INA 101(a)(27)(I)'), 'A generic reserved heading cannot shadow the matching citation owner');
+ assert(part.headingReferences?.length && block._lr?.x, 'Heading lookup hydrates only its owning heading, not the corpus');
+ fresh.hydrateLegalReferences(part);
+ assert.equal(fresh.cfrHeadingDisplayText(part.heading),first,'Later owner hydration cannot stale the heading cache');
+ fresh.state.statuteHierarchyAuthority = 'usc';
+ assert.equal(fresh.cfrHeadingDisplayText(part.heading),part.heading,'Follow view retains source wording in the USC hierarchy');
+ fresh.profile.preferences.statutoryLinkCitationSystem = 'ina';
+ assert.equal(fresh.cfrHeadingDisplayText(part.heading),first,'Explicit INA mode returns the same plain heading in either hierarchy');
+ fresh.state.statuteHierarchyAuthority = 'ina';
+ fresh.profile.preferences.statutoryLinkCitationSystem = 'usc';
+ assert.equal(fresh.cfrHeadingDisplayText(part.heading),part.heading,'Source preference retains the source heading');
+ const replacementText = 'Replacement under SECTION 101(a)(43) OF THE INA';
+ const written = 'SECTION 101(a)(43) OF THE INA', offset = replacementText.indexOf(written);
+ packed.cfr = {...packed.cfr,parts:[{heading:replacementText,headingReferences:[{start:offset,end:replacementText.length,text:written,family:'ina',inaSection:'101',targetTitle:'8',targetSection:'1101',targetPath:['a','43'],resolution:'local',ruleId:'context-cfr-ina-act-section'}]}],sections:[],appendices:[]};
+ fresh.profile.preferences.statutoryLinkCitationSystem = 'view';
+ assert.equal(fresh.cfrHeadingDisplayText(replacementText),'Replacement under INA 101(a)(43)','Replacing the CFR root invalidates the owning-heading index');
+}
+const historicalRedesignation = corpus.cfr.sections.find(row=>row.id==='8:1245.22').blocks.find(block=>block.x?.includes('242 or 242A (redesignated as section 238)'));
+const historicalDisplay = plain(api.linkifyCfrText(historicalRedesignation.x,historicalRedesignation.xReferences));
+assert(historicalDisplay.includes('INA 242 or 242A (redesignated as INA 238) (as in effect prior to April 1, 1997)'), 'Redesignation suffix cleanup retains both parenthetical qualifiers');
+assert.equal(plain(api.linkifyCfrText(historicalRedesignation.x,historicalRedesignation.xReferences,0,undefined,null,{citationDisplaySystem:'usc'})),historicalRedesignation.x,'Redesignation source wording remains exact');
 const sectionContext = { kind: 'ina', uscSection: '1226' };
+// CFR decimal section numbers must never inherit the historical status of a
+// similarly normalized U.S. Code section (1.2 -> 12, 1.3 -> 13).
+for (const [section, prefix, expected] of [
+  ['1.2', 'Aggravated felony means', 'described in INA 101(a)(43).'],
+  ['1.3', '(3) An alien', 'pursuant to INA 212(d)(5) for less than 1 year']
+]) {
+  const record = corpus.cfr.sections.find(row => row.title === 8 && row.section === section);
+  const block = record.blocks.find(row => row.x?.startsWith(prefix));
+  const context = { kind: 'cfr', title: 8, sourceHost: { kind: 'cfr', title: 8, section } };
+  api.profile.preferences.highlightInaCitationLinks = true;
+  const html = render(block.x, block.xReferences, context);
+  assert(plain(html).includes(expected), `8 CFR ${section}: reader context must convert an INA Act citation`);
+  assert(html.includes('citation-display-ina'), 'A converted citation receives the optional highlight');
+  assert.equal(render(block.x, block.xReferences, { ...context, plainText: true }), plain(html), 'Copy and reader wording agree');
+  assert.equal(plain(render(block.x, block.xReferences, { ...context, citationDisplaySystem: 'usc' })), block.x, 'Source view preserves the complete original text');
+}
+api.profile.preferences.highlightInaCitationLinks = false;
 for (const [id, expected] of [
   ['8-1226-c-1-B', 'is deportable by reason of having committed any offense covered in INA 237(a)(2)(A)(ii), (A)(iii), (B), (C), or (D),'],
   ['8-1226-c-1-E-i', 'is inadmissible under paragraph (6)(A), (6)(C), or (7) of INA 212(a); and']
@@ -47,6 +141,16 @@ const actRefs = refsFor(actText, ['section 101(a)(27)(H)', '(J) of the Act'], [[
 assert.equal(plain(render(actText, actRefs, {kind:'cfr',title:'8'})), 'A special immigrant under INA 101(a)(27)(H) or (J);');
 const andOrText = 'section 101(a)(15)(H) and/or (L) of the Act';
 assert.equal(plain(render(andOrText, refsFor(andOrText, ['section 101(a)(15)(H)', '(L) of the Act'], [['a','15','H'],['a','15','L']], 'ina','1101'), {kind:'cfr',title:'8'})), 'INA 101(a)(15)(H) and/or (L)');
+for (const sourceSection of ['1.2', '1.3']) {
+  const context = { kind: 'cfr', title: 8, sourceHost: { kind: 'cfr', title: 8, section: sourceSection } };
+  assert.equal(plain(render(actText, actRefs, context)), 'A special immigrant under INA 101(a)(27)(H) or (J);', 'Coordinated CFR citations share their authority in the reader');
+  assert.equal(render(actText, actRefs, { ...context, plainText: true }), 'A special immigrant under INA 101(a)(27)(H) or (J);', 'Copy retains the same coordinated grammar');
+  const mixed = 'sections 101(a)(15) and 212(a) of the Act';
+  const mixedRefs = refsFor(mixed, ['sections 101(a)(15)', '212(a) of the Act'], [['a','15'],['a']], 'ina', '1101');
+  Object.assign(mixedRefs[1], { inaSection: '212', targetSection: '1182' });
+  assert.equal(plain(render(mixed, mixedRefs, context)), 'INA 101(a)(15) and 212(a)', 'Different sections share the INA prefix without a dangling Act suffix');
+}
+assert.equal(plain(render(actText, actRefs, { kind: 'usc', sourceHost: { kind: 'usc', title: 8, section: '12' } })), actText, 'An actual historical U.S. Code host retains its original citation wording');
 const capitalizedAct = 'Section 101(a)(27)(H) of the Act provides';
 assert.equal(plain(render(capitalizedAct, refsFor(capitalizedAct, ['Section 101(a)(27)(H) of the Act'], [['a','27','H']], 'ina','1101'), {kind:'cfr',title:'8'})), 'INA 101(a)(27)(H) provides');
 const separated = 'section 1227(a)(1) of this title, except as provided in section 1227(a)(2) of this title';
@@ -173,6 +277,42 @@ const parallelRefs = refsFor(parallelText, ['section 101(a)', '8 U.S.C. 1101(a)'
 parallelRefs[0].ruleId = 'embedded-a-explicit-container-base';
 assert.equal(plain(render(parallelText, parallelRefs, sectionContext)), 'INA 101(a) (8 U.S.C. 1101(a))');
 const allFields = require('./audit-explicit-usc-display').fields(corpus);
+for (const [title, section, phrase, expected] of [
+  [20, '655.500', '(1) Under the prevailing practice exception', 'in INA 258(c),'],
+  [20, '655.700', 'The term “labor condition application”', 'under INA 212(t)(1) for an E-3'],
+  [20, '655.700', 'The term “labor condition application”', 'under INA 101(a)(15)(E)(iii) and (H)(i)(b1) (8 U.S.C.'],
+  [20, '416.1619', 'temporary protected status', 'under INA 244A.'],
+  [8, '208.13', 'as it existed prior to April 1, 1997', 'INA 212(a)(3)(B)(i)(I),(II), and (III) as it existed prior to April 1, 1997'],
+  [8, '207.7', '(c) Relationship.', '(D), or (E), respectively, must have existed'],
+  [8, '204.5', '(f) Maintaining the priority date', 'INA 203(b)(3), respectively, as in effect']
+]) {
+  const field = allFields.find(row => Number(row.context.sourceHost?.title) === title && row.context.sourceHost.section === section && row.text.includes(phrase));
+  assert(field, `${title} CFR ${section}: source fixture exists`);
+  const html = render(field.text, field.references, field.context);
+  assert(plain(html).includes(expected), `${title} CFR ${section}: normalize written INA authority and preserve its surrounding grammar`);
+  assert.equal(render(field.text, field.references, { ...field.context, plainText: true }), plain(html), 'Historical and named-Act copy normalization matches reader text');
+  const unresolved = field.references.filter(reference => reference.resolution === 'unresolved');
+  for (const reference of unresolved) assert(!html.includes(`data-reference-source-text="${reference.text}"`), 'Display normalization must not turn an unresolved source citation into a link');
+}
+const cfrSourceContext = { kind: 'cfr', title: 8, sourceHost: { kind: 'cfr', title: 8, section: '214.1' } };
+const classificationText = '101(a)(15)(T)(iii)';
+const classificationReference = { ...refsFor(classificationText, [classificationText], [['a','15','T','ii']], 'ina', '1101')[0], citationNote: 'The printed administrative classification is preserved; the link opens its underlying INA provision.' };
+const classificationHtml = render(classificationText, [classificationReference], cfrSourceContext);
+assert.equal(plain(classificationHtml), 'INA 101(a)(15)(T)(iii)', 'Printed classification suffix stays independent of the link destination');
+assert(classificationHtml.includes('data-show-citation="INA 101(a)(15)(T)(ii)"'), 'Classification navigation retains the reviewed underlying provision');
+const articleText = 'covered by a section 101(a)(27)(K) of the Act agreement';
+assert.equal(plain(render(articleText, refsFor(articleText, ['section 101(a)(27)(K) of the Act'], [['a','27','K']], 'ina', '1101'), cfrSourceContext)), 'covered by an INA 101(a)(27)(K) agreement', 'INA conversion adjusts an immediately preceding indefinite article');
+const namedInaText = 'section 212(t)(1) of the INA';
+const namedInaReference = { ...refsFor(namedInaText, ['212(t)(1)'], [['t','1']], 'usc', '1182')[0], ruleId: 'embedded-named-act-section', inaSection: '212' };
+assert.equal(plain(api.linkifyCfrText(namedInaText, [namedInaReference])), 'INA 212(t)(1)', 'CFR headings and source details retain CFR display context without a reader host');
+api.profile.preferences.highlightInaCitationLinks = true;
+for (const field of allFields.filter(field => field.context.sourceHost?.title === 22 && ['41.12', '42.11'].includes(field.context.sourceHost.section))) {
+  if (field.references.some(reference => reference.inaSection && !['explicit-ina', 'explicit-ina-continuation'].includes(reference.ruleId))) continue;
+  const html = render(field.text, field.references, field.context);
+  assert.equal(plain(html), field.text, 'Standard INA classification citations retain their wording');
+  assert(!html.includes('citation-display-ina'), 'Already-standard INA classification citations do not receive a conversion highlight');
+}
+api.profile.preferences.highlightInaCitationLinks = false;
 for (const [title, section, sourcePhrase, retainedParallel] of [
   [8, '212.17', 'waivers of inadmissibility', '8 U.S.C. 1182(d)(3)(B) or (d)(14)'],
   [20, '655.1', 'Section 214(c)(1)', '8 U.S.C. 1184(c)(1)'],
@@ -222,7 +362,9 @@ for (const correction of canonicalLocators) {
     assert(/as in effect|prior to|before|repeal/i.test(field.text), 'A historical guard must be grounded in the source temporal qualification');
     assert(/historical|verified|effect/i.test(reference.citationNote || ''), 'A guarded locator must explain why its old default edition is insufficient');
     assert(!reference.targetEdition, 'An unverified exact date must not claim a verified edition');
-    assert.equal(render(reference.text, [{...reference,start:0,end:reference.text.length}], field.context), reference.text, 'A guarded historical locator must not render an action');
+    const isolated = [{...reference,start:0,end:reference.text.length}];
+    assert(!render(reference.text, isolated, field.context).includes('data-legal-reference'), 'A guarded historical locator must not render an action');
+    assert.equal(render(reference.text, isolated, { ...field.context, citationDisplaySystem: 'usc' }), reference.text, 'A guarded historical locator retains exact source wording in source mode');
     continue;
   }
   if (reference.resolution === 'local' && reference.targetSection === '1254' && !reference.targetEdition) {

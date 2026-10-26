@@ -37,14 +37,21 @@ function correctedProjection(section) {
   visit(section, section.section);
   return { fields, runInPaths: section.runInPaths || [] };
 }
+function correctedSourceProjection(source, sections) {
+  // Delivery expands combined House records into individual historical sections
+  // and removes the original group metadata. Preserve every expanded child.
+  const matches = sections.filter(section => section.section === source.section || section.combinedHouseRecord === source.id);
+  assert(matches.length, `Missing delivered source record: ${source.section}`);
+  return matches.map(correctedProjection);
+}
 function snapshot() {
   const authored = assigned("src/INASearch-Corpus.js");
   const built = readArtifact("INASearch.html");
   const generated = assigned("src/INASearch-Statute-References.js");
-  const sections = new Map([...(built.historicalUsc?.groupSources || []), ...built.title8.sections].map(section => [section.section, section]));
+  const sections = built.title8.sections;
   return {
     sections: Object.fromEntries(authored.title8.sections.map(section => [section.section, {
-      sourceHash: hash(legalSource(section)), corrected: correctedProjection(sections.get(section.section))
+      sourceHash: hash(legalSource(section)), corrected: correctedSourceProjection(section, sections)
     }])),
     skippedHouseReferences: generated.extraction.skipped,
   };
@@ -94,4 +101,4 @@ if (require.main === module) {
   else if (process.argv[2] === "verify") verify(JSON.parse(fs.readFileSync(process.argv[3], "utf8")));
   else throw new Error("Usage: title8-update-gate.js snapshot|verify FILE");
 }
-module.exports = { correctedProjection, legalSource, verifyReviewed, verifyCorpusIdentity };
+module.exports = { correctedProjection, correctedSourceProjection, legalSource, verifyReviewed, verifyCorpusIdentity };

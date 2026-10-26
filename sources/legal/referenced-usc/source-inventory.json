@@ -1,8 +1,8 @@
 {
   "edition": "prelim",
-  "releasePoint": "119-124",
-  "currentThrough": "2026-10-15",
-  "capturedAt": "2026-10-26T06:22:34.182448+00:00",
+  "releasePoint": "119-134",
+  "currentThrough": "2026-10-20",
+  "capturedAt": "2026-10-26T19:39:25.831094+00:00",
   "publisher": "Office of the Law Revision Counsel, U.S. House of Representatives",
   "schemaVersion": 1,
   "captureMethod": "Fields excerpted from SHA-256 verified current official OLRC title XHTML archives; head, statute, sourcecredit, and operative footnote fields only. CRLF line endings are normalized to LF; source title hashes and byte counts describe the unmodified publisher bytes.",
@@ -35,16 +35,16 @@
         }
       ],
       "documentId": "5_5332",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "5:5332",
       "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
       "path": "raw/title-5-section-5332.html",
       "sha256": "8550fd3da8ca01ad3234039fdb989cebe6e230602b994d7344dd9a693a6d5ffc",
       "bytes": 1667,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc05@119-124.zip",
-      "sourceTitleSha256": "6d8da5a8c27b790209a283f08a9e6b8ff9cd7f268220050a9641c43615e0a2e8",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc05@119-134.zip",
+      "sourceTitleSha256": "94969a12d253be26abad8d65e6270e40f0410c3c895d8515c466ab43c1271e9b",
       "sourceTitleBytes": 12476299,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 5,
@@ -69,16 +69,16 @@
         }
       ],
       "documentId": "5_552",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "5:552",
       "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
       "path": "raw/title-5-section-552.html",
       "sha256": "c173acd985d7a6756cb5f8ce52c486cce5913cbce9d3afada8b277d00789ea8d",
       "bytes": 60979,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc05@119-124.zip",
-      "sourceTitleSha256": "6d8da5a8c27b790209a283f08a9e6b8ff9cd7f268220050a9641c43615e0a2e8",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc05@119-134.zip",
+      "sourceTitleSha256": "94969a12d253be26abad8d65e6270e40f0410c3c895d8515c466ab43c1271e9b",
       "sourceTitleBytes": 12476299,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 5,
@@ -103,16 +103,16 @@
         }
       ],
       "documentId": "5_553",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "5:553",
       "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
       "path": "raw/title-5-section-553.html",
       "sha256": "5951cd20155601507f931cc8de2b68fbfc561839e118cb1a8a2cfdac9644eb75",
       "bytes": 3616,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc05@119-124.zip",
-      "sourceTitleSha256": "6d8da5a8c27b790209a283f08a9e6b8ff9cd7f268220050a9641c43615e0a2e8",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc05@119-134.zip",
+      "sourceTitleSha256": "94969a12d253be26abad8d65e6270e40f0410c3c895d8515c466ab43c1271e9b",
       "sourceTitleBytes": 12476299,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 5,
@@ -137,16 +137,16 @@
         }
       ],
       "documentId": "5_554",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "5:554",
       "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
       "path": "raw/title-5-section-554.html",
       "sha256": "303c0bd2f056591551214ed580915b57dd6f31f704dd99f2d2c9922fd8cd03a2",
       "bytes": 4665,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc05@119-124.zip",
-      "sourceTitleSha256": "6d8da5a8c27b790209a283f08a9e6b8ff9cd7f268220050a9641c43615e0a2e8",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc05@119-134.zip",
+      "sourceTitleSha256": "94969a12d253be26abad8d65e6270e40f0410c3c895d8515c466ab43c1271e9b",
       "sourceTitleBytes": 12476299,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 5,
@@ -171,16 +171,16 @@
         }
       ],
       "documentId": "5_556",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "5:556",
       "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
       "path": "raw/title-5-section-556.html",
       "sha256": "b7033f7387d689306d0be8cc83638d64f13a74ff18c0ef9c5cd6133f640c47f9",
       "bytes": 5290,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc05@119-124.zip",
-      "sourceTitleSha256": "6d8da5a8c27b790209a283f08a9e6b8ff9cd7f268220050a9641c43615e0a2e8",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc05@119-134.zip",
+      "sourceTitleSha256": "94969a12d253be26abad8d65e6270e40f0410c3c895d8515c466ab43c1271e9b",
       "sourceTitleBytes": 12476299,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 5,
@@ -200,16 +200,16 @@
         }
       ],
       "documentId": "5_706",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "5:706",
       "titleName": "GOVERNMENT ORGANIZATION AND EMPLOYEES",
       "path": "raw/title-5-section-706.html",
       "sha256": "c67e3e1ae46060f08ee8472a594ba83b40591e91ee4c2a66cb74066d85ffb933",
       "bytes": 1903,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc05@119-124.zip",
-      "sourceTitleSha256": "6d8da5a8c27b790209a283f08a9e6b8ff9cd7f268220050a9641c43615e0a2e8",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc05@119-134.zip",
+      "sourceTitleSha256": "94969a12d253be26abad8d65e6270e40f0410c3c895d8515c466ab43c1271e9b",
       "sourceTitleBytes": 12476299,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 6,
@@ -234,16 +234,16 @@
         }
       ],
       "documentId": "6_279",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "6:279",
       "titleName": "DOMESTIC SECURITY",
       "path": "raw/title-6-section-279.html",
       "sha256": "547cf6c62b32e7ecb60fdb36abd0da258635bb2a3068968c44511ff620d9dec1",
       "bytes": 10576,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc06@119-124.zip",
-      "sourceTitleSha256": "5f7c07c5391de798fcc504524097fb653d1163b0459e0324ec2252ae46931c48",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc06@119-134.zip",
+      "sourceTitleSha256": "085ffab7bebcedc895f9c4fe0cd48623f4d0d01a0a8e8ff4e948373b221aa6cc",
       "sourceTitleBytes": 4301090,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 9,
@@ -258,16 +258,16 @@
         }
       ],
       "documentId": "9_10",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "9:10",
       "titleName": "ARBITRATION",
       "path": "raw/title-9-section-10.html",
       "sha256": "3d84c9f7478ddaca2b336ac79a30613ab84ba0b65f765b2be8940d613d1a1cde",
       "bytes": 2173,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc09@119-124.zip",
-      "sourceTitleSha256": "24e5af45b1c5a27da6d4e8061f263092c422bc935cf530034940443f29f9ddb1",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc09@119-134.zip",
+      "sourceTitleSha256": "f3705750e30a6a41b51741f3040b0e5baf8cc8a2dc87e2efda8779cc36f6206b",
       "sourceTitleBytes": 87836,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 9,
@@ -282,16 +282,16 @@
         }
       ],
       "documentId": "9_11",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "9:11",
       "titleName": "ARBITRATION",
       "path": "raw/title-9-section-11.html",
       "sha256": "af35206f2f45a61590a6d3df13531129b721df352940c1ffe741a560553caa05",
       "bytes": 1263,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc09@119-124.zip",
-      "sourceTitleSha256": "24e5af45b1c5a27da6d4e8061f263092c422bc935cf530034940443f29f9ddb1",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc09@119-134.zip",
+      "sourceTitleSha256": "f3705750e30a6a41b51741f3040b0e5baf8cc8a2dc87e2efda8779cc36f6206b",
       "sourceTitleBytes": 87836,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 10,
@@ -316,16 +316,16 @@
         }
       ],
       "documentId": "10_101",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "10:101",
       "titleName": "ARMED FORCES",
       "path": "raw/title-10-section-101.html",
       "sha256": "b10eaf09c644d65b7aa3cce2bf3d1819c5b7a66e10a86930eb036df376167c7a",
       "bytes": 31166,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc10@119-124.zip",
-      "sourceTitleSha256": "2affa307c12cb28abb312fcba977e1f8742ff4e7f98576f48f9f5786809ac01c",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc10@119-134.zip",
+      "sourceTitleSha256": "a3dc080055541cb925dd85250085f1f142a27e7e9cc661addf32fbaa6ab3589b",
       "sourceTitleBytes": 37794149,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 13,
@@ -345,16 +345,16 @@
         }
       ],
       "documentId": "13_8",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "13:8",
       "titleName": "CENSUS",
       "path": "raw/title-13-section-8.html",
       "sha256": "87ec2fb3c9be5f141f2faf883c9b3d2544a0e65b8144b6c446b7538993d7cff4",
       "bytes": 2584,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc13@119-124.zip",
-      "sourceTitleSha256": "a184a8343dc0b418cf6f67a36f08ae8b068fdafb74cd44835c314887d3042d21",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc13@119-134.zip",
+      "sourceTitleSha256": "6773532eb5dd43cb2daa6d3ca6e735277f6225b1c82276b36e4f84469f7b0287",
       "sourceTitleBytes": 377198,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 15,
@@ -374,16 +374,16 @@
         }
       ],
       "documentId": "15_77e",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "15:77e",
       "titleName": "COMMERCE AND TRADE",
       "path": "raw/title-15-section-77e.html",
       "sha256": "47357cc39132ee096f6c9d164e5825ee72c8ef1021f3fd6e29a53ab06f90b46e",
       "bytes": 4380,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc15@119-124.zip",
-      "sourceTitleSha256": "507a76fff369255d169a9ba177775987c70cce2b86ed9f6e4d5dc0a3aafa9f1a",
-      "sourceTitleBytes": 21680913,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc15@119-134.zip",
+      "sourceTitleSha256": "2283ea5e9fc3ed7af31fe957132c6b5f8ed1e5ddb0c17e5c9d0c7590409d2392",
+      "sourceTitleBytes": 21695626,
+      "releasePoint": "119-134"
     },
     {
       "title": 15,
@@ -398,16 +398,16 @@
         }
       ],
       "documentId": "15_78o",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "15:78o",
       "titleName": "COMMERCE AND TRADE",
       "path": "raw/title-15-section-78o.html",
       "sha256": "5b9c3623b47886a5c3b1ae7503bb0c9d1aace08240768698b65fcab581903a31",
       "bytes": 84568,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc15@119-124.zip",
-      "sourceTitleSha256": "507a76fff369255d169a9ba177775987c70cce2b86ed9f6e4d5dc0a3aafa9f1a",
-      "sourceTitleBytes": 21680913,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc15@119-134.zip",
+      "sourceTitleSha256": "2283ea5e9fc3ed7af31fe957132c6b5f8ed1e5ddb0c17e5c9d0c7590409d2392",
+      "sourceTitleBytes": 21695626,
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -427,16 +427,16 @@
         }
       ],
       "documentId": "18_1001",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1001",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1001.html",
       "sha256": "c7c0954de5514ac5f6626e727e7175e9af99d6a53df9a88d9013c6c5a44f0264",
       "bytes": 2734,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -456,16 +456,16 @@
         }
       ],
       "documentId": "18_1028",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1028",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1028.html",
       "sha256": "04bf54ccdca2488817cd1cdb8fe4fe8f5c1a0f7a874de31144cd12e5efdf0b40",
       "bytes": 16376,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -485,16 +485,16 @@
         }
       ],
       "documentId": "18_1091",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1091",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1091.html",
       "sha256": "41c91fd976150d1d3c64195ef56321c423939e4ea2f411a827bf7f1052a9c236",
       "bytes": 4006,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -514,16 +514,16 @@
         }
       ],
       "documentId": "18_1116",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1116",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1116.html",
       "sha256": "4a8a91988b80a168ba7639dd50948087001d46f7daafe17ed50dea3c67613b5c",
       "bytes": 5409,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -543,16 +543,16 @@
         }
       ],
       "documentId": "18_1202",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1202",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1202.html",
       "sha256": "2b8d697b86207fb8d15e014ccf64ff11fa5fb0036351ed41882b846c69c2a976",
       "bytes": 1479,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -572,16 +572,16 @@
         }
       ],
       "documentId": "18_1351",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1351",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1351.html",
       "sha256": "dc9bd2a33acdf8a14f7b450332d01b0bd6d3ff2655c1d51f54d8d642aaa976dc",
       "bytes": 1863,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -601,16 +601,16 @@
         }
       ],
       "documentId": "18_1365",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1365",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1365.html",
       "sha256": "01f217d2fddef2b74f8155986d1546816799667e28ecdb202ab2c409c37426e5",
       "bytes": 6684,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -630,16 +630,16 @@
         }
       ],
       "documentId": "18_1425",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1425",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1425.html",
       "sha256": "6791d402b2815150b03d39110d69d75f55e4fc91915f827093894a484ca5c41f",
       "bytes": 1867,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -659,16 +659,16 @@
         }
       ],
       "documentId": "18_1543",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1543",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1543.html",
       "sha256": "845b358fbcf9e8c3bb69f7e12dce78857b02b8abd115d349bd79b28aecae7680",
       "bytes": 1777,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -688,16 +688,16 @@
         }
       ],
       "documentId": "18_1546",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1546",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1546.html",
       "sha256": "308b6bd58b771d125c8a1f5f0bd8713640142cb9a32ac518969caa0a8e57212d",
       "bytes": 5901,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -717,16 +717,16 @@
         }
       ],
       "documentId": "18_1595",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1595",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1595.html",
       "sha256": "61f8479090ad3813f076ef6833ab23e68670b79dfc6b0547e149bd19231fed3f",
       "bytes": 2407,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -746,16 +746,16 @@
         }
       ],
       "documentId": "18_16",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:16",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-16.html",
       "sha256": "5b0d4a0fbe3cc1fb8487cb477d988c4d2ab9aba146cdeb54e880dfde64ad4dd3",
       "bytes": 877,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -775,16 +775,16 @@
         }
       ],
       "documentId": "18_1621",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1621",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1621.html",
       "sha256": "57a55adf99544d965b67f8cf899d885d818e108b571e06530e1b912c3ad2799e",
       "bytes": 1623,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -804,16 +804,16 @@
         }
       ],
       "documentId": "18_1956",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1956",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1956.html",
       "sha256": "0341622b12c93c53b5d4f842082b49fac2ce84d6e7678708903b0a32ed6b2e2e",
       "bytes": 28962,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -833,16 +833,16 @@
         }
       ],
       "documentId": "18_1957",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1957",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1957.html",
       "sha256": "d4609c05fca226789f70080f72250155e9cd50396ed970b3f27c3dbd8a4efeae",
       "bytes": 4841,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -862,16 +862,16 @@
         }
       ],
       "documentId": "18_1962",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:1962",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-1962.html",
       "sha256": "c0fd679067bd0e8d28821f70fc956d4595dab2182b555eb17670ad3d7d236522",
       "bytes": 2577,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -891,16 +891,16 @@
         }
       ],
       "documentId": "18_20",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:20",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-20.html",
       "sha256": "614598e838411f92e11dc0b25c449ca80cfb57e0cb52b87efcea814a487449a6",
       "bytes": 2680,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -920,16 +920,16 @@
         }
       ],
       "documentId": "18_2250",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2250",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2250.html",
       "sha256": "219bd8e95d69b8853ed5fdffef88bb873c5123e9856e6b0b13c1b405e3bd0ed6",
       "bytes": 3765,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -949,16 +949,16 @@
         }
       ],
       "documentId": "18_2251",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2251",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2251.html",
       "sha256": "8dcfacce340e2a43bfb68d9618655c5689014b1d89515fdf01587162720b69da",
       "bytes": 7959,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -978,16 +978,16 @@
         }
       ],
       "documentId": "18_2251A",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2251a",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2251a.html",
       "sha256": "75290ed272f7b2801b5c0541040ce8c4951c62deda77b4e5e1cc8fbaa8e9d26e",
       "bytes": 3592,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1007,16 +1007,16 @@
         }
       ],
       "documentId": "18_2252",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2252",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2252.html",
       "sha256": "60aaaa6b9c9e0c02d689c26b3aca9c85f85a1e44e3e693519044f93df591447e",
       "bytes": 8231,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1036,16 +1036,16 @@
         }
       ],
       "documentId": "18_2339B",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2339b",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2339b.html",
       "sha256": "833514a6b09c19248ccebb83446984b2b66c2308adc2d8ac1be5d1651bac8719",
       "bytes": 16904,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1065,16 +1065,16 @@
         }
       ],
       "documentId": "18_2339D",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2339d",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2339d.html",
       "sha256": "758862a0cb5798b4e52f0685e7ebbdbcd5e6d264cddd80caa60e4ed7406dcba6",
       "bytes": 4825,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1094,16 +1094,16 @@
         }
       ],
       "documentId": "18_2340",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2340",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2340.html",
       "sha256": "601fcac332652e5f822fa39f39604aabc98a8b1ad7958a20a0d4033055cae0aa",
       "bytes": 2069,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1123,16 +1123,16 @@
         }
       ],
       "documentId": "18_2383",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2383",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2383.html",
       "sha256": "48a1662864b111c20e94dbaca6831e6e6a3d061fa0b43c9e76d093f4fd25ded3",
       "bytes": 764,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1152,16 +1152,16 @@
         }
       ],
       "documentId": "18_2384",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2384",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2384.html",
       "sha256": "c4e7565916787dee4dca4cd732ebe4bcd5df2d9ea6a9e8bd646f51240ee9addd",
       "bytes": 1047,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1181,16 +1181,16 @@
         }
       ],
       "documentId": "18_2385",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2385",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2385.html",
       "sha256": "fbb15ac493a39ff393da525dc9d11127d0d7dcd6ea56ef9fc6c20f8b1e509c02",
       "bytes": 2698,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1210,16 +1210,16 @@
         }
       ],
       "documentId": "18_2421",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2421",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2421.html",
       "sha256": "a1d36dd873bd1af3e7d7e9fc1a715c2380a639276827e81b8df30db42fe12d20",
       "bytes": 1646,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1239,16 +1239,16 @@
         }
       ],
       "documentId": "18_2422",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2422",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2422.html",
       "sha256": "24663e5ec4699dabb514ea4f9421d5b42640223c3424b1188e7a05e922e8a01b",
       "bytes": 1722,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1268,16 +1268,16 @@
         }
       ],
       "documentId": "18_2423",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2423",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2423.html",
       "sha256": "8b581021725c9183b9594c7eb55d1bc3298b954b51203dcb0a97fcef8cd7cbfb",
       "bytes": 5842,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1297,16 +1297,16 @@
         }
       ],
       "documentId": "18_2442",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:2442",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-2442.html",
       "sha256": "3830e2149b6a3f01ccba674464e8d165d6613da77b17c35458c74a8368ff5fba",
       "bytes": 3422,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1326,16 +1326,16 @@
         }
       ],
       "documentId": "18_3006A",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:3006a",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-3006a.html",
       "sha256": "d3d9b060418b5495a926d96f14ba154af8f533070c44d50a9ae7ce6c63a6bd5a",
       "bytes": 31822,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1355,16 +1355,16 @@
         }
       ],
       "documentId": "18_3142",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:3142",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-3142.html",
       "sha256": "5ba9d06978417129fbf72c81afbc742eb34706f9828c5ba6f20fe00e93a3f50a",
       "bytes": 22633,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1384,16 +1384,16 @@
         }
       ],
       "documentId": "18_3504",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:3504",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-3504.html",
       "sha256": "a75191d54dd41020208f46dc6ef672e927b9b5bbfab572e251357e38591a8677",
       "bytes": 1967,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1413,16 +1413,16 @@
         }
       ],
       "documentId": "18_3521",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:3521",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-3521.html",
       "sha256": "cb79c30abcaba25bb3c52017ab4c6993574507d90d1cc563d40c8559c7f04252",
       "bytes": 12682,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1442,16 +1442,16 @@
         }
       ],
       "documentId": "18_648",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:648",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-648.html",
       "sha256": "c5b45aedbeb660f8c6289e8e32228f11c85e57c9bd6b1f754e8eca96d564e809",
       "bytes": 1488,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1471,16 +1471,16 @@
         }
       ],
       "documentId": "18_751",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:751",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-751.html",
       "sha256": "a7f8a4c00177f04526f2cba5dcc084713bddd3c2517b1a73b2b5d5550e0057fc",
       "bytes": 2848,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1500,16 +1500,16 @@
         }
       ],
       "documentId": "18_752",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:752",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-752.html",
       "sha256": "92b43e58c3d2045002132c72f5f58e566979c7e6a21fe2ed21f8293622cbd697",
       "bytes": 2454,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1529,16 +1529,16 @@
         }
       ],
       "documentId": "18_758",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:758",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-758.html",
       "sha256": "a23e74c92274a6ee0e7b360d2f22ba6855b79a7798b28b222f22be9b78145910",
       "bytes": 778,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1558,16 +1558,16 @@
         }
       ],
       "documentId": "18_841",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:841",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-841.html",
       "sha256": "6c3fe124bb7d26380e05e26c99ac27ba49e33ea6953a11e0efccf81db38ff726",
       "bytes": 8215,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1587,16 +1587,16 @@
         }
       ],
       "documentId": "18_842",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:842",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-842.html",
       "sha256": "4371880ea8d9a0614b13c4cecb36f43f86c6b84dd9bc30af1e61896ca189481d",
       "bytes": 17915,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1616,16 +1616,16 @@
         }
       ],
       "documentId": "18_844",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:844",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-844.html",
       "sha256": "0579248ced7b7f4c48bbe440e52506fa7062106e09c4a1c703c671c84429e333",
       "bytes": 13603,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1645,16 +1645,16 @@
         }
       ],
       "documentId": "18_871",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:871",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-871.html",
       "sha256": "451adff11566320cbb4cac661f500f190a0a95630d36891b9b7c7194eda8e7fc",
       "bytes": 2118,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1674,16 +1674,16 @@
         }
       ],
       "documentId": "18_875",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:875",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-875.html",
       "sha256": "609cd11ea170e06c101067c36d23c8515212823b2452f540868181a05aae461f",
       "bytes": 1914,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1703,16 +1703,16 @@
         }
       ],
       "documentId": "18_876",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:876",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-876.html",
       "sha256": "f4f6e5e975a9cad686253fe8588f47dd67802a6379a45acfd17b41ffe5af2ee2",
       "bytes": 2994,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1732,16 +1732,16 @@
         }
       ],
       "documentId": "18_877",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:877",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-877.html",
       "sha256": "e509e5c92e79c08cf2bd593622b108436edb1f1aed39f4e4e4d935b4ed4b06c9",
       "bytes": 2493,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1761,16 +1761,16 @@
         }
       ],
       "documentId": "18_921",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:921",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-921.html",
       "sha256": "1a74f776fb1af08b303efda99c16ffe9cd2b6af0f189538de6b9436e21606e69",
       "bytes": 27981,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1790,16 +1790,16 @@
         }
       ],
       "documentId": "18_922",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:922",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-922.html",
       "sha256": "c63a8e787ab54a65907f3d14d35cb2aa6677ace7402ca1b19f92abeb247c9c4e",
       "bytes": 69222,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1819,16 +1819,16 @@
         }
       ],
       "documentId": "18_924",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:924",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-924.html",
       "sha256": "f78c500c6f5cadf60cdd0b623fd06c63a1f5b71bc7d9d979e353e0b444e1b4a1",
       "bytes": 26584,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1848,16 +1848,16 @@
         }
       ],
       "documentId": "18_960",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:960",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-960.html",
       "sha256": "b7d97404de267e7885510673c80cfc710f820f08af25d9817db672b4d5ab094b",
       "bytes": 894,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 18,
@@ -1877,16 +1877,16 @@
         }
       ],
       "documentId": "18_981",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "18:981",
       "titleName": "CRIMES AND CRIMINAL PROCEDURE",
       "path": "raw/title-18-section-981.html",
       "sha256": "423016db6c1907248f3704e2c4fdf42b47501d20e46c7c1852fb2c3c942dc672",
       "bytes": 33883,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc18@119-124.zip",
-      "sourceTitleSha256": "675a0cf01b021f041a6f5b108d546bb7e2a65b364316bd650e22944b3fb88365",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc18@119-134.zip",
+      "sourceTitleSha256": "30f1ff4f065bd34c02b2c4031e9b27e65794dacec869bb203e1a38587b498d9c",
       "sourceTitleBytes": 8988138,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 19,
@@ -1901,16 +1901,16 @@
         }
       ],
       "documentId": "19_4502",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "19:4502",
       "titleName": "CUSTOMS DUTIES",
       "path": "raw/title-19-section-4502.html",
       "sha256": "6cac59dbfb2202a61cf54b59f570a46a937c6fac82631c8f27a24703c8cd4c70",
       "bytes": 3626,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc19@119-124.zip",
-      "sourceTitleSha256": "10c6e8c878df370e731d3c84731e6824a9f4f55fa531803bb31e5f24117f4df6",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc19@119-134.zip",
+      "sourceTitleSha256": "061607341f329f632dc125a027cbaa8fed5fc5b6aa488032bfb2ac28b0a9ca92",
       "sourceTitleBytes": 10301637,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 20,
@@ -1935,16 +1935,16 @@
         }
       ],
       "documentId": "20_1001",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "20:1001",
       "titleName": "EDUCATION",
       "path": "raw/title-20-section-1001.html",
       "sha256": "afd783c61db85c813c4e1f70406747927d1dcc7c38249beaafeb032aa93afe49",
       "bytes": 3666,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc20@119-124.zip",
-      "sourceTitleSha256": "c22b07a09187ee2b4eec14c11e81f8eb7e1608298f89f11f744d500fea0c8b72",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc20@119-134.zip",
+      "sourceTitleSha256": "c5813445ac6da1b917e3c49eff758822cce8a04c2698040502a68a5d4bca3e71",
       "sourceTitleBytes": 15498977,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 21,
@@ -1969,16 +1969,16 @@
         }
       ],
       "documentId": "21_802",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "21:802",
       "titleName": "FOOD AND DRUGS",
       "path": "raw/title-21-section-802.html",
       "sha256": "cf59d21394750a63f75b11a9bcd35461c0435907d86765ee4daf05eeaf4260ed",
       "bytes": 56563,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc21@119-124.zip",
-      "sourceTitleSha256": "4d417d3b3c68b03c3c66c4cb109006d96028d23ab1d4b822cea0c1ab229c1768",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc21@119-134.zip",
+      "sourceTitleSha256": "64052e99f4537248d3f5e0c86cdc55d2d6fbc5da5c3b2b718db37a5829509f51",
       "sourceTitleBytes": 8464958,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -1998,16 +1998,16 @@
         }
       ],
       "documentId": "22_2131",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:2131",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-2131.html",
       "sha256": "d7bd6e21f59581fd3522ff915093b4ea871b9b644e4156ddb526bb07bb6d25c9",
       "bytes": 26737,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2032,16 +2032,16 @@
         }
       ],
       "documentId": "22_2371",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:2371",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-2371.html",
       "sha256": "c074a6a71966dc7b815bff24e56cdc1a71f14b452312f52e319a9ebdc8276767",
       "bytes": 4539,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2056,16 +2056,16 @@
         }
       ],
       "documentId": "22_2656f",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:2656f",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-2656f.html",
       "sha256": "22d499621f2e59b721f97f863fc243bdbafb469841ec04b4c777df1cc7dc56f4",
       "bytes": 13322,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2080,16 +2080,16 @@
         }
       ],
       "documentId": "22_2708",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:2708",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-2708.html",
       "sha256": "1d2c8a7bf988309bf188abeaa53c331e3672ffceac9957d411bc0cc92c86882f",
       "bytes": 22780,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2109,16 +2109,16 @@
         }
       ],
       "documentId": "22_2780",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:2780",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-2780.html",
       "sha256": "ae7b080100595d3d8f37da09adce6d9ff46f058571cff3ba685a424cd9f8a99f",
       "bytes": 19548,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2138,16 +2138,16 @@
         }
       ],
       "documentId": "22_288",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:288",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-288.html",
       "sha256": "f8c8d0759cfe039390a40866ac58a6ef31a9edac5b9208907943a0dc15007c58",
       "bytes": 1943,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2162,16 +2162,16 @@
         }
       ],
       "documentId": "22_3602",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:3602",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-3602.html",
       "sha256": "8f49a30e5d861ca0d1550249d713f941741615d090d05690e38b6e4028226599",
       "bytes": 3793,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2186,16 +2186,16 @@
         }
       ],
       "documentId": "22_4309a",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:4309a",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-4309a.html",
       "sha256": "82ca51756049c7f1442ad26b2e7f396a582761a2a9c7a22ef5245820ed8257a2",
       "bytes": 3943,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2210,16 +2210,16 @@
         }
       ],
       "documentId": "22_6402",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:6402",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-6402.html",
       "sha256": "b05e27db019c137c29472c82e78300aa0696b88d2719002b1824faee847b424a",
       "bytes": 7396,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2234,16 +2234,16 @@
         }
       ],
       "documentId": "22_7102",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:7102",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-7102.html",
       "sha256": "9e18de72223330969413f259e8840773451f0116023ae21522413bd80c5b30c3",
       "bytes": 12327,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 22,
@@ -2258,16 +2258,16 @@
         }
       ],
       "documentId": "22_7105",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "22:7105",
       "titleName": "FOREIGN RELATIONS AND INTERCOURSE",
       "path": "raw/title-22-section-7105.html",
       "sha256": "19a6c69922c8c45ded782ff29c85becdf56e165c13c3aff77a1b951b48691b31",
       "bytes": 32121,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc22@119-124.zip",
-      "sourceTitleSha256": "a379beb9cbe093715f258ce75f06b81f01dda794fabc1e180e526282e19c6808",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc22@119-134.zip",
+      "sourceTitleSha256": "97cfc461b211d2c1faf1da4f335bf84a7be4ec0c81333903061804e5021cdbd1",
       "sourceTitleBytes": 21566741,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 26,
@@ -2292,16 +2292,16 @@
         }
       ],
       "documentId": "26_3121",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "26:3121",
       "titleName": "INTERNAL REVENUE CODE",
       "path": "raw/title-26-section-3121.html",
       "sha256": "e774ae64dfb70e82d1c18aba601e5e901f629c03e1c497d9522caa610c2165bd",
       "bytes": 102345,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc26@119-124.zip",
-      "sourceTitleSha256": "5c6eca39410163dc0d8ac94c7341168642369dd084758be5e701f31b4801e1fd",
-      "sourceTitleBytes": 36449559,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc26@119-134.zip",
+      "sourceTitleSha256": "631dfd81ebeff301e079957449b8a2620a017389b038b73ca93083ce5e7c9312",
+      "sourceTitleBytes": 36455453,
+      "releasePoint": "119-134"
     },
     {
       "title": 26,
@@ -2336,16 +2336,16 @@
         }
       ],
       "documentId": "26_414",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "26:414",
       "titleName": "INTERNAL REVENUE CODE",
       "path": "raw/title-26-section-414.html",
       "sha256": "90cef34ced63612c6b3b24c2f83652d508ad4f3e12c488721ffde5481f182127",
       "bytes": 140302,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc26@119-124.zip",
-      "sourceTitleSha256": "5c6eca39410163dc0d8ac94c7341168642369dd084758be5e701f31b4801e1fd",
-      "sourceTitleBytes": 36449559,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc26@119-134.zip",
+      "sourceTitleSha256": "631dfd81ebeff301e079957449b8a2620a017389b038b73ca93083ce5e7c9312",
+      "sourceTitleBytes": 36455453,
+      "releasePoint": "119-134"
     },
     {
       "title": 26,
@@ -2375,16 +2375,16 @@
         }
       ],
       "documentId": "26_501",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "26:501",
       "titleName": "INTERNAL REVENUE CODE",
       "path": "raw/title-26-section-501.html",
       "sha256": "907f75eeb3f58644a32fd1cf5995ac7080212ce83b189925abcbf83672ed0775",
       "bytes": 95700,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc26@119-124.zip",
-      "sourceTitleSha256": "5c6eca39410163dc0d8ac94c7341168642369dd084758be5e701f31b4801e1fd",
-      "sourceTitleBytes": 36449559,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc26@119-134.zip",
+      "sourceTitleSha256": "631dfd81ebeff301e079957449b8a2620a017389b038b73ca93083ce5e7c9312",
+      "sourceTitleBytes": 36455453,
+      "releasePoint": "119-134"
     },
     {
       "title": 26,
@@ -2409,16 +2409,16 @@
         }
       ],
       "documentId": "26_5861",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "26:5861",
       "titleName": "INTERNAL REVENUE CODE",
       "path": "raw/title-26-section-5861.html",
       "sha256": "b3be8fd9665064a29d7c9d4779478bfc781e48e3db3e029be5b2f9405ae83876",
       "bytes": 2355,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc26@119-124.zip",
-      "sourceTitleSha256": "5c6eca39410163dc0d8ac94c7341168642369dd084758be5e701f31b4801e1fd",
-      "sourceTitleBytes": 36449559,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc26@119-134.zip",
+      "sourceTitleSha256": "631dfd81ebeff301e079957449b8a2620a017389b038b73ca93083ce5e7c9312",
+      "sourceTitleBytes": 36455453,
+      "releasePoint": "119-134"
     },
     {
       "title": 26,
@@ -2448,16 +2448,16 @@
         }
       ],
       "documentId": "26_7201",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "26:7201",
       "titleName": "INTERNAL REVENUE CODE",
       "path": "raw/title-26-section-7201.html",
       "sha256": "519de679edbf5b3a664e5defd32b812fda3b6020a2a1c10cfdc035768b81db09",
       "bytes": 837,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc26@119-124.zip",
-      "sourceTitleSha256": "5c6eca39410163dc0d8ac94c7341168642369dd084758be5e701f31b4801e1fd",
-      "sourceTitleBytes": 36449559,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc26@119-134.zip",
+      "sourceTitleSha256": "631dfd81ebeff301e079957449b8a2620a017389b038b73ca93083ce5e7c9312",
+      "sourceTitleBytes": 36455453,
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2477,16 +2477,16 @@
         }
       ],
       "documentId": "28_1254",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:1254",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-1254.html",
       "sha256": "c46da101c696b61fe036f39504650d87690fdfabb6fbcfed937333f011c529a4",
       "bytes": 1061,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2506,16 +2506,16 @@
         }
       ],
       "documentId": "28_1350",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:1350",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-1350.html",
       "sha256": "9de2684fe9b2142bd392d03155d8c04548b4b3615252863fcea2fb075e85c288",
       "bytes": 523,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2535,16 +2535,16 @@
         }
       ],
       "documentId": "28_1361",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:1361",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-1361.html",
       "sha256": "a0e7677f40055f441c056f87037f7cbd6c6e6948bce07ca4a1e93f845d684da9",
       "bytes": 627,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2564,16 +2564,16 @@
         }
       ],
       "documentId": "28_1651",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:1651",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-1651.html",
       "sha256": "1d91b0284d4bfeaece81a0299d6027dca1bdd8cb3c44b126b71bae8a24f999ab",
       "bytes": 714,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2593,16 +2593,16 @@
         }
       ],
       "documentId": "28_1746",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:1746",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-1746.html",
       "sha256": "d8ed1fed0f04a0d2b4594f36c85879f3ef7c8f9435abfd73c523c658e8bf3903",
       "bytes": 1772,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2622,16 +2622,16 @@
         }
       ],
       "documentId": "28_2201",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:2201",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-2201.html",
       "sha256": "54c5e77dfe2acaaeed6cab7231b78633d71d52b8fbdb7183d830d0f33f06ad7d",
       "bytes": 2157,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2651,16 +2651,16 @@
         }
       ],
       "documentId": "28_2241",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:2241",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-2241.html",
       "sha256": "5013e3ab06ccef285eee6ceecfe21f18d824118ac3a3319eedfa2d8730973c8f",
       "bytes": 4166,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2680,16 +2680,16 @@
         }
       ],
       "documentId": "28_2253",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:2253",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-2253.html",
       "sha256": "cc4d9fb9e6905277a5bfd17079158aff20b35ade7332e38db0be5423b7c819be",
       "bytes": 1887,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2709,16 +2709,16 @@
         }
       ],
       "documentId": "28_2347",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:2347",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-2347.html",
       "sha256": "b9f14a2631c5cb577f62c6fe7a3d0f2fe9fab22169e935b27af4b6b6ad88748f",
       "bytes": 2715,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2743,16 +2743,16 @@
         }
       ],
       "documentId": "28_3201",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:3201",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-3201.html",
       "sha256": "bc4c901f9f78bb49c85cc5c6a324448ec820fcb30815cc90f02d4e3a6b1cf563",
       "bytes": 3352,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2777,16 +2777,16 @@
         }
       ],
       "documentId": "28_3203",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:3203",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-3203.html",
       "sha256": "00de9e7cc74581f56003e8651c5db73ca3dc50066b608942e9d5545e181cea71",
       "bytes": 19223,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2811,16 +2811,16 @@
         }
       ],
       "documentId": "28_3204",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:3204",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-3204.html",
       "sha256": "decda5eef67c0c77d6a5d40e779af38021556ebcce54223be83e469a09bbf8be",
       "bytes": 2534,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 28,
@@ -2845,16 +2845,16 @@
         }
       ],
       "documentId": "28_3205",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "28:3205",
       "titleName": "JUDICIARY AND JUDICIAL PROCEDURE",
       "path": "raw/title-28-section-3205.html",
       "sha256": "f62e31b53fa7ec1b424c1d356c7ce996d22848a851e755e88fb330bd251d27c1",
       "bytes": 10577,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc28@119-124.zip",
-      "sourceTitleSha256": "6e0c67ee3885cafb783d97a559e6bebe6366882ec73558124dae80d3e26b4796",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc28@119-134.zip",
+      "sourceTitleSha256": "0694497bdac0b4de43050eaa3dd70878d80da3e088847cce428d38d6ef27db7a",
       "sourceTitleBytes": 6124212,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 29,
@@ -2869,16 +2869,16 @@
         }
       ],
       "documentId": "29_1802",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "29:1802",
       "titleName": "LABOR",
       "path": "raw/title-29-section-1802.html",
       "sha256": "25e7d63cdb257cb11ea6936c0bf8b9005b8fd9fe29dc7ff4e80f256315dfa0b2",
       "bytes": 5412,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc29@119-124.zip",
-      "sourceTitleSha256": "d9b48e426069192f36583d3f208812483a853aa9728da77170de2604c1382e55",
-      "sourceTitleBytes": 7980302,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc29@119-134.zip",
+      "sourceTitleSha256": "9919d32c7a651f3a3d5b52512c76a19ac8d51aa21238bb90eee1ddb6bde57758",
+      "sourceTitleBytes": 7986172,
+      "releasePoint": "119-134"
     },
     {
       "title": 29,
@@ -2893,16 +2893,16 @@
         }
       ],
       "documentId": "29_203",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "29:203",
       "titleName": "LABOR",
       "path": "raw/title-29-section-203.html",
       "sha256": "f3310d7d862aba5cab24b3d387cfbe0c03bac60f187ce8e11718e9022d72743b",
       "bytes": 20320,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc29@119-124.zip",
-      "sourceTitleSha256": "d9b48e426069192f36583d3f208812483a853aa9728da77170de2604c1382e55",
-      "sourceTitleBytes": 7980302,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc29@119-134.zip",
+      "sourceTitleSha256": "9919d32c7a651f3a3d5b52512c76a19ac8d51aa21238bb90eee1ddb6bde57758",
+      "sourceTitleBytes": 7986172,
+      "releasePoint": "119-134"
     },
     {
       "title": 29,
@@ -2927,16 +2927,16 @@
         }
       ],
       "documentId": "29_3224a",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "29:3224a",
       "titleName": "LABOR",
       "path": "raw/title-29-section-3224a.html",
       "sha256": "f87eb59a9140e835c5dc7f24044b2888f03b08c5bd36afdbdecaed7c8b5e6583",
       "bytes": 5843,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc29@119-124.zip",
-      "sourceTitleSha256": "d9b48e426069192f36583d3f208812483a853aa9728da77170de2604c1382e55",
-      "sourceTitleBytes": 7980302,
-      "releasePoint": "119-124"
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc29@119-134.zip",
+      "sourceTitleSha256": "9919d32c7a651f3a3d5b52512c76a19ac8d51aa21238bb90eee1ddb6bde57758",
+      "sourceTitleBytes": 7986172,
+      "releasePoint": "119-134"
     },
     {
       "title": 31,
@@ -2961,16 +2961,16 @@
         }
       ],
       "documentId": "31_1341",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "31:1341",
       "titleName": "MONEY AND FINANCE",
       "path": "raw/title-31-section-1341.html",
       "sha256": "159c514c5d2e9116d1b08e522cedb79d4d9e66ed4b97ac8b961b76220d25e55e",
       "bytes": 4068,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc31@119-124.zip",
-      "sourceTitleSha256": "1c2894d5500fd42d74f87e7bce6a16d1f427f34073dc17d789bff2cadbb4f259",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc31@119-134.zip",
+      "sourceTitleSha256": "5982f48e36ac86dc0173fe4238e7f8c14e5362bcc2a35ae4536f435e37423463",
       "sourceTitleBytes": 5481956,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 31,
@@ -2995,16 +2995,16 @@
         }
       ],
       "documentId": "31_1342",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "31:1342",
       "titleName": "MONEY AND FINANCE",
       "path": "raw/title-31-section-1342.html",
       "sha256": "44447e91bb9a508f1816095af6e062560dbd3f1aa9589b58ab12b2149b9cd0f1",
       "bytes": 1295,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc31@119-124.zip",
-      "sourceTitleSha256": "1c2894d5500fd42d74f87e7bce6a16d1f427f34073dc17d789bff2cadbb4f259",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc31@119-134.zip",
+      "sourceTitleSha256": "5982f48e36ac86dc0173fe4238e7f8c14e5362bcc2a35ae4536f435e37423463",
       "sourceTitleBytes": 5481956,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 31,
@@ -3029,16 +3029,16 @@
         }
       ],
       "documentId": "31_3302",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "31:3302",
       "titleName": "MONEY AND FINANCE",
       "path": "raw/title-31-section-3302.html",
       "sha256": "6df2751a92e2c64547736fafb59619251b444af029f60686f9fb424862fea777",
       "bytes": 3597,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc31@119-124.zip",
-      "sourceTitleSha256": "1c2894d5500fd42d74f87e7bce6a16d1f427f34073dc17d789bff2cadbb4f259",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc31@119-134.zip",
+      "sourceTitleSha256": "5982f48e36ac86dc0173fe4238e7f8c14e5362bcc2a35ae4536f435e37423463",
       "sourceTitleBytes": 5481956,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 31,
@@ -3063,16 +3063,16 @@
         }
       ],
       "documentId": "31_3324",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "31:3324",
       "titleName": "MONEY AND FINANCE",
       "path": "raw/title-31-section-3324.html",
       "sha256": "4d34904b5dba6da2cbf0f2e6ec2d9754e75b5173752c26ff6736a48674e224fb",
       "bytes": 2375,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc31@119-124.zip",
-      "sourceTitleSha256": "1c2894d5500fd42d74f87e7bce6a16d1f427f34073dc17d789bff2cadbb4f259",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc31@119-134.zip",
+      "sourceTitleSha256": "5982f48e36ac86dc0173fe4238e7f8c14e5362bcc2a35ae4536f435e37423463",
       "sourceTitleBytes": 5481956,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 31,
@@ -3092,16 +3092,16 @@
         }
       ],
       "documentId": "31_9102",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "31:9102",
       "titleName": "MONEY AND FINANCE",
       "path": "raw/title-31-section-9102.html",
       "sha256": "dbe2b833581ec005d801ee8a6938d4b7dad8d9c3fd0d0e400d59004dbaa1c575",
       "bytes": 523,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc31@119-124.zip",
-      "sourceTitleSha256": "1c2894d5500fd42d74f87e7bce6a16d1f427f34073dc17d789bff2cadbb4f259",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc31@119-134.zip",
+      "sourceTitleSha256": "5982f48e36ac86dc0173fe4238e7f8c14e5362bcc2a35ae4536f435e37423463",
       "sourceTitleBytes": 5481956,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 31,
@@ -3121,16 +3121,16 @@
         }
       ],
       "documentId": "31_9701",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "31:9701",
       "titleName": "MONEY AND FINANCE",
       "path": "raw/title-31-section-9701.html",
       "sha256": "48a21b936a0058d6126d7c85e3b3324e5a4781946e7f84a83da27d27eb2f00ea",
       "bytes": 1876,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc31@119-124.zip",
-      "sourceTitleSha256": "1c2894d5500fd42d74f87e7bce6a16d1f427f34073dc17d789bff2cadbb4f259",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc31@119-134.zip",
+      "sourceTitleSha256": "5982f48e36ac86dc0173fe4238e7f8c14e5362bcc2a35ae4536f435e37423463",
       "sourceTitleBytes": 5481956,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 33,
@@ -3150,16 +3150,16 @@
         }
       ],
       "documentId": "33_1321",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "33:1321",
       "titleName": "NAVIGATION AND NAVIGABLE WATERS",
       "path": "raw/title-33-section-1321.html",
       "sha256": "a5a90a952b3e0cd3c3e79f4021b7f7133949d974c848ad080b083230a6f3af01",
       "bytes": 141706,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc33@119-124.zip",
-      "sourceTitleSha256": "a3b0d936705e247e25669cb5b73cc848a6f1e36de99b8affaed4d466155578a2",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc33@119-134.zip",
+      "sourceTitleSha256": "59fc91d52778f9581ef13642258002c83f5cc5a21b28c3035efbe3b8fc36676e",
       "sourceTitleBytes": 9175456,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 33,
@@ -3174,16 +3174,16 @@
         }
       ],
       "documentId": "33_932",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "33:932",
       "titleName": "NAVIGATION AND NAVIGABLE WATERS",
       "path": "raw/title-33-section-932.html",
       "sha256": "14884d6baef1c78c17e7636c908231cc95a8c52ccaf9734565c668a1420b040d",
       "bytes": 3063,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc33@119-124.zip",
-      "sourceTitleSha256": "a3b0d936705e247e25669cb5b73cc848a6f1e36de99b8affaed4d466155578a2",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc33@119-134.zip",
+      "sourceTitleSha256": "59fc91d52778f9581ef13642258002c83f5cc5a21b28c3035efbe3b8fc36676e",
       "sourceTitleBytes": 9175456,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 34,
@@ -3213,16 +3213,16 @@
         }
       ],
       "documentId": "34_20911",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "34:20911",
       "titleName": "CRIME CONTROL AND LAW ENFORCEMENT",
       "path": "raw/title-34-section-20911.html",
       "sha256": "64b1bc16ba3ed9ef8146f6813e9696ce8112c79ac9124340b8f1b92db3dde173",
       "bytes": 9342,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc34@119-124.zip",
-      "sourceTitleSha256": "f79b27476c668d5cfe78616d9d50f7c21daac8e7b19ece0ebea5fe2eb4d9e196",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc34@119-134.zip",
+      "sourceTitleSha256": "4b0146733b8c65667167649050ddad5b166d4a63bc5e176764ab6808643c7c44",
       "sourceTitleBytes": 6080460,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 40,
@@ -3252,16 +3252,16 @@
         }
       ],
       "documentId": "40_3113",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "40:3113",
       "titleName": "PUBLIC BUILDINGS, PROPERTY, AND WORKS",
       "path": "raw/title-40-section-3113.html",
       "sha256": "6b98dd426cda34593b705b028c54a23598f5d315f81ec93be96b082949d71d7c",
       "bytes": 847,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc40@119-124.zip",
-      "sourceTitleSha256": "f79dfd4e7182f336b5d70cadc4191104eb5e661800bea8a6197755a969566142",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc40@119-134.zip",
+      "sourceTitleSha256": "d13150fc7fb40e709e5f4d2932f7bf6604b59713dab8c19ded625b084d3d70b7",
       "sourceTitleBytes": 2944176,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 40,
@@ -3291,16 +3291,16 @@
         }
       ],
       "documentId": "40_8141",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "40:8141",
       "titleName": "PUBLIC BUILDINGS, PROPERTY, AND WORKS",
       "path": "raw/title-40-section-8141.html",
       "sha256": "e172302b6269afdaad14e7dfeb8e0139038e8f48199530056bc39d859f2e345c",
       "bytes": 756,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc40@119-124.zip",
-      "sourceTitleSha256": "f79dfd4e7182f336b5d70cadc4191104eb5e661800bea8a6197755a969566142",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc40@119-134.zip",
+      "sourceTitleSha256": "d13150fc7fb40e709e5f4d2932f7bf6604b59713dab8c19ded625b084d3d70b7",
       "sourceTitleBytes": 2944176,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 41,
@@ -3325,16 +3325,16 @@
         }
       ],
       "documentId": "41_3901",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "41:3901",
       "titleName": "PUBLIC CONTRACTS",
       "path": "raw/title-41-section-3901.html",
       "sha256": "9002d2808a2dc5277f23ace3bb5f888c53aff2b83ad801fefd674b6c41647084",
       "bytes": 2094,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc41@119-124.zip",
-      "sourceTitleSha256": "beab6799c4a72b390d7aeb92fdc6f0309437b7c4daf92a5b9907db198ed89a80",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc41@119-134.zip",
+      "sourceTitleSha256": "c3a0c269f434d4906f417db532cf6117f3e011d7de8d3bdb5eaae26378c69d3a",
       "sourceTitleBytes": 2001096,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 41,
@@ -3354,16 +3354,16 @@
         }
       ],
       "documentId": "41_6101",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "41:6101",
       "titleName": "PUBLIC CONTRACTS",
       "path": "raw/title-41-section-6101.html",
       "sha256": "63d900e45c975db12a58e08f726b01b581953813598dca14ff0ff0a8f8c8ff76",
       "bytes": 2674,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc41@119-124.zip",
-      "sourceTitleSha256": "beab6799c4a72b390d7aeb92fdc6f0309437b7c4daf92a5b9907db198ed89a80",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc41@119-134.zip",
+      "sourceTitleSha256": "c3a0c269f434d4906f417db532cf6117f3e011d7de8d3bdb5eaae26378c69d3a",
       "sourceTitleBytes": 2001096,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 41,
@@ -3383,16 +3383,16 @@
         }
       ],
       "documentId": "41_6301",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "41:6301",
       "titleName": "PUBLIC CONTRACTS",
       "path": "raw/title-41-section-6301.html",
       "sha256": "a5c6b8cf36da499988d19ad031a0d325958f239defa3dc0fdb4d4b178dfd50b6",
       "bytes": 2217,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc41@119-124.zip",
-      "sourceTitleSha256": "beab6799c4a72b390d7aeb92fdc6f0309437b7c4daf92a5b9907db198ed89a80",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc41@119-134.zip",
+      "sourceTitleSha256": "c3a0c269f434d4906f417db532cf6117f3e011d7de8d3bdb5eaae26378c69d3a",
       "sourceTitleBytes": 2001096,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 41,
@@ -3412,16 +3412,16 @@
         }
       ],
       "documentId": "41_6306",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "41:6306",
       "titleName": "PUBLIC CONTRACTS",
       "path": "raw/title-41-section-6306.html",
       "sha256": "f3b7f2c5ad8939e1b89491cce099756b3cb9e33e5b876350c250273c0b99fec0",
       "bytes": 1514,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc41@119-124.zip",
-      "sourceTitleSha256": "beab6799c4a72b390d7aeb92fdc6f0309437b7c4daf92a5b9907db198ed89a80",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc41@119-134.zip",
+      "sourceTitleSha256": "c3a0c269f434d4906f417db532cf6117f3e011d7de8d3bdb5eaae26378c69d3a",
       "sourceTitleBytes": 2001096,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3446,16 +3446,16 @@
         }
       ],
       "documentId": "42_1320b-7",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:1320b-7",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-1320b-7.html",
       "sha256": "21c36123452468fda629b8352a3a77e7b53c3827a40f3ff81fd32e47eb7f0fce",
       "bytes": 17253,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3480,16 +3480,16 @@
         }
       ],
       "documentId": "42_1382c",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:1382c",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-1382c.html",
       "sha256": "3865328be9a35cb8279bbf107638ab8a9fa81c8af41eb666ee299dc0d6162898",
       "bytes": 25357,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3514,16 +3514,16 @@
         }
       ],
       "documentId": "42_1395ww",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:1395ww",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-1395ww.html",
       "sha256": "bc070e51242c2f04b5500d7315bac7fead4b6f460baddc930111f2e5eaa6cfb6",
       "bytes": 453593,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3543,16 +3543,16 @@
         }
       ],
       "documentId": "42_1396a",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:1396a",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-1396a.html",
       "sha256": "fa976dba43afa14e37c622a4f3e1d7ee17eb206b26338866837974ceeaf5cdf4",
       "bytes": 337802,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3572,16 +3572,16 @@
         }
       ],
       "documentId": "42_1396o",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:1396o",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-1396o.html",
       "sha256": "756baf64b6b39b7703fce4fcc6f355070ba07c7cf372c6d77406b56dd5a0a5ad",
       "bytes": 28646,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3596,16 +3596,16 @@
         }
       ],
       "documentId": "42_1862",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:1862",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-1862.html",
       "sha256": "f79b3857f4c57e255f340b7bd0cbb8872dd874d2192f67afabc855da67ec37bc",
       "bytes": 8501,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3620,16 +3620,16 @@
         }
       ],
       "documentId": "42_1869c",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:1869c",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-1869c.html",
       "sha256": "1bc16b630b489f6e746d46da93d8603e960cce7525126c88b028b6ec56a57a25",
       "bytes": 3862,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3649,16 +3649,16 @@
         }
       ],
       "documentId": "42_2000e-2",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:2000e-2",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-2000e-2.html",
       "sha256": "f51d3165f5787f6afa1d104db58905bdf6d679d782e39b4d018308fba1738267",
       "bytes": 16721,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3688,16 +3688,16 @@
         }
       ],
       "documentId": "42_254e",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:254e",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-254e.html",
       "sha256": "f3a01514dc073f42ffb77d1838e835a646ec11e4cf73a3c00a3d71582db5d277",
       "bytes": 14640,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3717,16 +3717,16 @@
         }
       ],
       "documentId": "42_405",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:405",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-405.html",
       "sha256": "bb2dfc4ffecd7139ed8a439a4aa1d4cc0029f8e21a395193067c6776de5b6830",
       "bytes": 129044,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 42,
@@ -3741,16 +3741,16 @@
         }
       ],
       "documentId": "42_9902",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "42:9902",
       "titleName": "THE PUBLIC HEALTH AND WELFARE",
       "path": "raw/title-42-section-9902.html",
       "sha256": "44ebf6f60e37a9b618089d16ae09f24fae16b4c4cd9e76e9e18706577da97bdd",
       "bytes": 3189,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "sourceTitleBytes": 79232332,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 46,
@@ -3770,16 +3770,16 @@
         }
       ],
       "documentId": "46_116",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "46:116",
       "titleName": "SHIPPING",
       "path": "raw/title-46-section-116.html",
       "sha256": "d1c997a1cc301ad1a33b276a40b769db468a153f3db7e15fe26a88c5d8dfaec9",
       "bytes": 638,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc46@119-124.zip",
-      "sourceTitleSha256": "3ec6b1bbc99d719d1b2d961cf6e1e18e00aeaa9433b420ced1c21ef6689f935b",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc46@119-134.zip",
+      "sourceTitleSha256": "fa4c6036fbc04da89c748f531ffce04b019abc3d59c7f2ed61eec53367951083",
       "sourceTitleBytes": 6044960,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 49,
@@ -3809,16 +3809,16 @@
         }
       ],
       "documentId": "49_40102",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "49:40102",
       "titleName": "TRANSPORTATION",
       "path": "raw/title-49-section-40102.html",
       "sha256": "1e91f8d126746e4e18e209ca135eacdca8b9f96747b902193bfa1e9002126268",
       "bytes": 19455,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc49@119-124.zip",
-      "sourceTitleSha256": "4b1ba9db7efa8aaa81af191f25bcb85f3dca8994e3cd1d3fcf37f8f854085830",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc49@119-134.zip",
+      "sourceTitleSha256": "e610e959624fd96d7e9cfcc55ff83610e55d0924f9cd3e3da9925bb1b173be2c",
       "sourceTitleBytes": 16812662,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 49,
@@ -3838,16 +3838,16 @@
         }
       ],
       "documentId": "49_5103",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "49:5103",
       "titleName": "TRANSPORTATION",
       "path": "raw/title-49-section-5103.html",
       "sha256": "8db1386af85ca39cbd17cf1e43e363d3c1d5c27161ffd7f9460c6ec0fd0c4bc1",
       "bytes": 5628,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc49@119-124.zip",
-      "sourceTitleSha256": "4b1ba9db7efa8aaa81af191f25bcb85f3dca8994e3cd1d3fcf37f8f854085830",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc49@119-134.zip",
+      "sourceTitleSha256": "e610e959624fd96d7e9cfcc55ff83610e55d0924f9cd3e3da9925bb1b173be2c",
       "sourceTitleBytes": 16812662,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 49,
@@ -3867,16 +3867,16 @@
         }
       ],
       "documentId": "49_5104",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "49:5104",
       "titleName": "TRANSPORTATION",
       "path": "raw/title-49-section-5104.html",
       "sha256": "a4ad9bdb04a692d2233ef48f4d460b5c81489c79f6c47c23526565fcbe440366",
       "bytes": 1745,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc49@119-124.zip",
-      "sourceTitleSha256": "4b1ba9db7efa8aaa81af191f25bcb85f3dca8994e3cd1d3fcf37f8f854085830",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc49@119-134.zip",
+      "sourceTitleSha256": "e610e959624fd96d7e9cfcc55ff83610e55d0924f9cd3e3da9925bb1b173be2c",
       "sourceTitleBytes": 16812662,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 49,
@@ -3896,16 +3896,16 @@
         }
       ],
       "documentId": "49_5106",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "49:5106",
       "titleName": "TRANSPORTATION",
       "path": "raw/title-49-section-5106.html",
       "sha256": "55e5324eb9358fbbde28ae45dd3780e07a62100289dfa7adc80573216f6d0130",
       "bytes": 1175,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc49@119-124.zip",
-      "sourceTitleSha256": "4b1ba9db7efa8aaa81af191f25bcb85f3dca8994e3cd1d3fcf37f8f854085830",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc49@119-134.zip",
+      "sourceTitleSha256": "e610e959624fd96d7e9cfcc55ff83610e55d0924f9cd3e3da9925bb1b173be2c",
       "sourceTitleBytes": 16812662,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 49,
@@ -3925,16 +3925,16 @@
         }
       ],
       "documentId": "49_5107",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "49:5107",
       "titleName": "TRANSPORTATION",
       "path": "raw/title-49-section-5107.html",
       "sha256": "9de2e36025a957b93ee9f369374a19ef63f274168bc1463da3d7595a7237dc67",
       "bytes": 7618,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc49@119-124.zip",
-      "sourceTitleSha256": "4b1ba9db7efa8aaa81af191f25bcb85f3dca8994e3cd1d3fcf37f8f854085830",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc49@119-134.zip",
+      "sourceTitleSha256": "e610e959624fd96d7e9cfcc55ff83610e55d0924f9cd3e3da9925bb1b173be2c",
       "sourceTitleBytes": 16812662,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 49,
@@ -3954,16 +3954,16 @@
         }
       ],
       "documentId": "49_5110",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "49:5110",
       "titleName": "TRANSPORTATION",
       "path": "raw/title-49-section-5110.html",
       "sha256": "4cd16e0672704d58b230dbc0aeb251d5ef28e24fe09201267f5844d978d96128",
       "bytes": 3717,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc49@119-124.zip",
-      "sourceTitleSha256": "4b1ba9db7efa8aaa81af191f25bcb85f3dca8994e3cd1d3fcf37f8f854085830",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc49@119-134.zip",
+      "sourceTitleSha256": "e610e959624fd96d7e9cfcc55ff83610e55d0924f9cd3e3da9925bb1b173be2c",
       "sourceTitleBytes": 16812662,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 50,
@@ -3983,16 +3983,16 @@
         }
       ],
       "documentId": "50_1803",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "50:1803",
       "titleName": "WAR AND NATIONAL DEFENSE",
       "path": "raw/title-50-section-1803.html",
       "sha256": "3102b8021fd80051d856e400b1201b9616c5568c9f0b76ee13ea008f7d611761",
       "bytes": 22059,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc50@119-124.zip",
-      "sourceTitleSha256": "cc097f3fb8d13e8df57960644c9a8bcf8921b4a1872fae4d3c1c677cd126c1b0",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc50@119-134.zip",
+      "sourceTitleSha256": "499a4a0aa8e5017479fa08e1d776e7dbfd337148ce8a0d7b3349ea2840e80dca",
       "sourceTitleBytes": 10260682,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 50,
@@ -4012,16 +4012,16 @@
         }
       ],
       "documentId": "50_1806",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "50:1806",
       "titleName": "WAR AND NATIONAL DEFENSE",
       "path": "raw/title-50-section-1806.html",
       "sha256": "c8b2df13271f07acaa67071a8c84f83f72b7e85b2e39666ae4c1cbecd089bb74",
       "bytes": 11132,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc50@119-124.zip",
-      "sourceTitleSha256": "cc097f3fb8d13e8df57960644c9a8bcf8921b4a1872fae4d3c1c677cd126c1b0",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc50@119-134.zip",
+      "sourceTitleSha256": "499a4a0aa8e5017479fa08e1d776e7dbfd337148ce8a0d7b3349ea2840e80dca",
       "sourceTitleBytes": 10260682,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 50,
@@ -4041,16 +4041,16 @@
         }
       ],
       "documentId": "50_3121",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "50:3121",
       "titleName": "WAR AND NATIONAL DEFENSE",
       "path": "raw/title-50-section-3121.html",
       "sha256": "d874e05cc8a1935457c28cc4d633e32ee4356233e96a005c1bde12c543b2cdca",
       "bytes": 3176,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc50@119-124.zip",
-      "sourceTitleSha256": "cc097f3fb8d13e8df57960644c9a8bcf8921b4a1872fae4d3c1c677cd126c1b0",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc50@119-134.zip",
+      "sourceTitleSha256": "499a4a0aa8e5017479fa08e1d776e7dbfd337148ce8a0d7b3349ea2840e80dca",
       "sourceTitleBytes": 10260682,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     },
     {
       "title": 50,
@@ -4065,16 +4065,16 @@
         }
       ],
       "documentId": "50_3803",
-      "currentThrough": "2026-10-15",
+      "currentThrough": "2026-10-20",
       "target": "50:3803",
       "titleName": "WAR AND NATIONAL DEFENSE",
       "path": "raw/title-50-section-3803.html",
       "sha256": "685757f33682b81ae8f20389124fe685a454e7f6ee5684979ec36ea68266d9bd",
       "bytes": 29370,
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc50@119-124.zip",
-      "sourceTitleSha256": "cc097f3fb8d13e8df57960644c9a8bcf8921b4a1872fae4d3c1c677cd126c1b0",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc50@119-134.zip",
+      "sourceTitleSha256": "499a4a0aa8e5017479fa08e1d776e7dbfd337148ce8a0d7b3349ea2840e80dca",
       "sourceTitleBytes": 10260682,
-      "releasePoint": "119-124"
+      "releasePoint": "119-134"
     }
   ],
   "unavailable": [
@@ -4082,20 +4082,19 @@
       "target": "42:259",
       "status": "repealed",
       "heading": "Repealed. Pub. L. 106–310, div. B, title XXXIV, §3405(a), Oct. 17, 2000, 114 Stat. 1221, as amended by Pub. L. 114–198, title I, §110(b), July 22, 2016, 130 Stat. 710",
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc42@119-124.zip",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc42@119-134.zip",
       "documentId": "42_259_to_261a",
-      "sourceTitleSha256": "5894ceb7cf6dcacc6ea4e7c3a079c312d92eef50b07aa130e708c3c6e77bab39",
+      "sourceTitleSha256": "46b0511b45e113ee47ff58e47414cc971f4ff669f2afe465feb6377677258cdd",
       "reason": "No current operative text in source release; historical locator remains external."
     },
     {
       "target": "50:4605",
       "status": "repealed",
       "heading": "Repealed. Pub. L. 115–232, div. A, title XVII, §1766(a), Aug. 13, 2018, 132 Stat. 2232",
-      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/htm_usc50@119-124.zip",
+      "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/htm_usc50@119-134.zip",
       "documentId": "50_4605_to_4610",
-      "sourceTitleSha256": "cc097f3fb8d13e8df57960644c9a8bcf8921b4a1872fae4d3c1c677cd126c1b0",
+      "sourceTitleSha256": "499a4a0aa8e5017479fa08e1d776e7dbfd337148ce8a0d7b3349ea2840e80dca",
       "reason": "No current operative text in source release; historical locator remains external."
     }
-  ],
-  "checkedAt": "2026-10-26T06:22:34.182448+00:00"
+  ]
 }

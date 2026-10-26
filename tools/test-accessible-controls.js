@@ -45,7 +45,7 @@ for (const everything of [false, true]) {
 test("sidebar copy controls stay visible and disabled in searches without a selected citation", () => {
   const element = () => ({ hidden: false, dataset: {}, setAttribute() {}, removeAttribute() {}, matches: () => false, contains: () => false });
   const copies = element(), authority = element(), official = element(), region = element();
-  const buttons = ["copy-citation", "copy-text"].map(action => ({ ...element(), dataset: { liveCitationAction: action } }));
+  const buttons = ["copy-text", "copy-citation-text"].map(action => ({ ...element(), dataset: { liveCitationAction: action } }));
   const actions = element();
   const state = { mainOccurrencePane: { searchState: {}, entry: {} }, statuteHierarchyAuthority: "ina" };
   const sync = vm.runInNewContext(`(${functionSource(template, "syncMainReaderActionTarget")})`, {

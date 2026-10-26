@@ -22,6 +22,11 @@ assert(headingCopy.includes("INA 212(d)(1)"), "Standardized whole-section output
 const output = api.cfrUnitText(reg("212.4"), ["a", "1"]);
 assert.match(output, /^  \(i\) The reasons/m, "CFR exports retain a child's relative hierarchy depth");
 assert.match(output, /^If the alien desires/m, "CFR parent continuation returns to the parent depth");
+const agricultural = api.cfrUnitText(reg("214.2"), ["h", "5"]);
+assert.match(agricultural, /^  \(i\) Filing a petition/m, "Copying (h)(5) retains light paragraph indentation");
+assert.match(agricultural, /^    \(A\) General\./m, "Copying (h)(5) retains subparagraph indentation");
+assert.match(agricultural, /^      \(1\) An H-2A petition/m, "Copying (h)(5) retains clause indentation");
+assert.match(agricultural, /^        \(i\) An H-2A worker/m, "Copying (h)(5) retains deeper clause indentation");
 const print = api.legalUnitPrintHtml({ kind: "cfr", text: output, citation: "8 CFR 212.4(a)(1)", heading: "Fixture" });
 assert.match(print, /padding-inline-start:1\.5em"><strong>\(i\)<\/strong>/,
   "The shared printer preserves hierarchy supplied by the CFR adapter");
@@ -34,5 +39,5 @@ assert.doesNotMatch(api.cfrUnitText(repeated, path, occurrences[1].row.blockPath
 const block = { t: "p", a: "(a)(1)", x: "(1) Italic marker.", u: [{ a: "(a)(1)", s: 0, e: 3 }],
   r: [{ x: "(" }, { x: "1", s: "i" }, { x: ") Italic marker." }] };
 const marker = api.renderCfrParagraphContents(block, [0], null, { id: "8:999.1", title: 8, section: "999.1" }, "8 CFR 999.1");
-assert.match(marker, /<button[^>]+>[\s\S]*?\(<em>1<\/em>\)<\/button>/, "Clickable markers preserve the publisher's italic numeral");
+assert.match(marker, /<button[^>]+>[\s\S]*?\(<(?:em|span\b[^>]*style="[^"]*font-style:italic[^"]*")>1<\/(?:em|span)>\)<\/button>/, "Clickable markers preserve the publisher's italic numeral");
 console.log("PASS viewer output: graphics, heading conversion, hierarchy, continuations, aliases, occurrences and styled markers");

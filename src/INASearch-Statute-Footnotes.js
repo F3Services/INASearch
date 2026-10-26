@@ -2,12 +2,12 @@
 window.INA_SEARCH_STATUTE_FOOTNOTES = {
   "schemaVersion": 1,
   "corpusSchemaVersion": 3,
-  "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/124/xml_usc08@119-124.zip",
-  "sourceReleasePoint": "119-124",
+  "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/xml_usc08@119-134.zip",
+  "sourceReleasePoint": "119-134",
   "capturedAt": "2026-10-26",
-  "sourceArtifact": "sources/legal/raw/usc08@119-124.xml",
+  "sourceArtifact": "sources/legal/raw/usc08@119-134.xml",
   "sourceBytes": 7384424,
-  "sourceSha256": "e810a9d5856a6495c696107022fae9617866015297cde35e5d9b2f3c76a9a1d8",
+  "sourceSha256": "c1d6e8f61af4ec7fe7da38ed88b14430aad190579afc03a7c52ad0a7eb6884fd",
   "extraction": {
     "footnotes": 118,
     "references": 151,

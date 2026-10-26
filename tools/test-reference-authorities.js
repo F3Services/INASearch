@@ -26,7 +26,52 @@ function check(text, expected, forbidden=[], overrides={}) {
  for(const reference of references) assert.equal(text.slice(reference.start,reference.end),reference.text,'Reference span must preserve source text');
  return references;
 }
+for (const source of ['Authority: 8 U.S.C. 1188(c)(4); 41 Op.A.G. 406 (1959).', 'Authority: 8 U.S.C. 1255; section 202, Public Law 105-100.', 'Authority: 8 U.S.C. 1103, 11f58.']) {
+ const refs = check(source, [], [], {title:'8',sourceField:'authority'});
+ assert(!refs.some(ref => ref.family === 'usc' && ['41','202','11f'].includes(ref.targetSection)), 'A new authority or malformed token cannot continue a USC list');
+}
+check('under INA(101)(a)(27) (A) or (B)', [['INA(101)(a)(27) (A)',['ina','8','1101',['a','27','A']]]]);
+check('under section 313 INA', [['section 313 INA',['ina','8','1424',[]]]]);
+check('INA sec. 274A(b)', [['INA sec. 274A(b)',['ina','8','1324a',['b']]]]);
+assert(!check('IAA section 301(a) and INA section 204(d)(2)',[],[]).some(ref=>ref.family==='ina'&&ref.inaSection==='301'), 'IAA cannot inherit INA authority');
+const rangeReferences = check('Authority: 8 U.S.C. 1185, 1731-32, 1440-1.', [
+ ['1731',['usc','8','1731',[]]], ['32',['usc','8','1732',[]]], ['1440-1',['usc','8','1440-1',[]]]
+],[],{title:'8',sourceField:'authority'});
+assert(!rangeReferences.some(ref=>ref.officialUrl?.includes('s1731-32')), 'Range endpoints use actual section destinations');
+check('section 101, paragraphs (a)(15)(A)(i), or (a)(15)(G)(ii) of the Immigration and Nationality Act', [
+ ['section 101',['ina','8','1101',[]]], ['(a)(15)(A)(i)',['ina','8','1101',['a','15','A','i']]]
+],[],{title:'8',chapter:'V',part:'1245',section:'1245.3'});
+const historicalBare = check('section 212(a)(28)(I)(ii) in conjunction with section 249 of the Act',[
+ ['section 212(a)(28)(I)(ii)',['ina','8','1182',['a','28','I','ii']]]
+],[],{title:'8',chapter:'V',part:'1249',section:'1249.1'});
+assert.equal(historicalBare[0].resolution,'unresolved','A missing historical path has a written label without a fabricated current destination');
+assert(!check('The Mutual Educational and Cultural Exchange Act of 1961 (the “Act”). Section 102 of the Act, 22 U.S.C. 2452, and section 101(a)(15)(J) of the Immigration and Nationality Act.',[],[],{title:'22',part:'62',section:'62.1'}).some(ref=>ref.inaSection==='102'), 'A separate Act defined in the text cannot inherit an adjacent explicit INA citation');
+check('Authority: 8 U.S.C. 1101, 11f58, 1182, 1184.', [
+ ['1182',['usc','8','1182',[]]],['1184',['usc','8','1184',[]]]
+],[],{title:'8',sourceField:'authority'});
+for (const text of [
+ 'Authority: 8 U.S.C. 1255; section 202, Public Law 105-100, 111 Stat. 2160; section 902, Public Law 105-277.',
+ 'under section 101 or 104 of the Act of October 28, 1977',
+ 'Sections 103.38 through 103.41 comprise the regulations.'
+]) assert(!check(text,[],[],{title:'8',chapter:'V',part:'1240',section:'1240.11',sourceField:'authority'}).some(ref=>ref.family==='ina'), 'A written Public Law, dated Act, or CFR decimal locator must not inherit INA authority');
+const parallelIna = check('section 258 of the INA (8 U.S.C. 1288)',[],[],{title:'20',part:'655',section:'655.600'});
+assert(!parallelIna.some(ref=>ref.text==='INA (8'||ref.inaSection==='8'), 'The opening parenthesis of a USC parallel is not a parenthesized INA section');
+const redesignation = check('under section 242 or 242A (redesignated as section 238) of the Act (as in effect prior to April 1, 1997)', [], [], {title:'8',chapter:'V',part:'1245',section:'1245.22'});
+assert.equal(redesignation.find(ref=>ref.text==='section 242')?.resolution,'unresolved', 'A historical date scopes the original coordinated list across a redesignation parenthesis');
+assert.equal(redesignation.find(ref=>ref.text==='section 238')?.targetSection,'1228', 'The separately named redesignated provision retains its identity');
 const classificationTableContext = {title:'8',chapter:'I',part:'214',section:'214.1',path:[],tableHeaders:['Section','Designation'],tableColumn:0};
+check('Authority: 8 U.S.C. 1101 and note, 1102, 1103; 1182; 1440 and note, and 1440-1; 22 U.S.C. 2651a.', [
+ ['1102',['usc','8','1102',[]]], ['1103',['usc','8','1103',[]]], ['1182',['usc','8','1182',[]]], ['1440-1',['usc','8','1440-1',[]]], ['22 U.S.C. 2651a',['usc','22','2651a',[]]]
+], [], { title:'8', part:'212', section:'', sourceField:'authority' });
+check('Authority: 8 U.S.C. 1185 (E.O. 13323, 69 FR 241), 1357; 48 U.S.C. 1806.', [
+ ['1357',['usc','8','1357',[]]], ['48 U.S.C. 1806',['usc','48','1806',[]]]
+], [], { title:'8', part:'215', section:'', sourceField:'authority' });
+check('Section 212(a)(6) (tuberculosis). Apply section 212(a)(6) of the Act.', [
+ ['Section 212(a)(6)',['ina','8','1182',['a','6']]]
+], [], { title:'8', chapter:'V', part:'1212', section:'1212.7' });
+check('section 212(a)(3)(A) (other than clause (ii)), (B), or (C) of the Act', [
+ ['(B)',['ina','8','1182',['a','3','B']]], ['(C) of the Act',['ina','8','1182',['a','3','C']]]
+], [], { title:'8', chapter:'V', part:'1235', section:'1235.8' });
 check('section 203(1) of the Adult Education and Family Literacy Act',[
  ['203(1)',['usc','29','3272',['1']]]
 ]);

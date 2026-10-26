@@ -69,7 +69,7 @@ You can turn updates on in **Settings**. When enabled, INASearch checks the incl
 - Regulations come from [eCFR](https://www.ecfr.gov/current/title-8). The release pairs the official XML text with same-date eCFR enhanced-renderer paragraph IDs and independently audits the resulting hierarchy. Cross-title CFR coverage is selected using GovInfo's [Parallel Table of Authorities and Rules](https://www.govinfo.gov/content/pkg/GPO-CFR-INDEX-2025/html/GPO-CFR-INDEX-2025-4.htm).
 - Definitions come from the [USCIS Glossary](https://www.uscis.gov/tools/glossary), [INA 101](https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1101&num=0&edition=prelim), and [8 CFR 1.2](https://www.ecfr.gov/current/title-8/part-1/section-1.2).
 
-The October 26, 2026 source refresh includes the U.S. Code release current through Public Law 119-124 (October 15, 2026) and the included eCFR material current through October 22, 2026. The INA crosswalk and USCIS resource metadata were checked on October 26. Historical material retains its identified edition.
+The October 26, 2026 source refresh includes the U.S. Code release current through Public Law 119-134 (October 20, 2026) and the included eCFR material current through October 22, 2026. The INA crosswalk and USCIS resource metadata were checked on October 26. Historical material retains its identified edition.
 
 The **About** page shows the capture dates and coverage for the copy you are using. Official-source links are available throughout the reader when you need to confirm current law.
 
