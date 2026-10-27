@@ -23,8 +23,27 @@ const used=new Set();
 assert.equal(api.legalFieldPlainText(source,'text',{},used,0,8),'A < B¹ & ');
 assert.deepEqual([...used],['n1'],'A footnote at the next unit boundary belongs to that unit');
 assert.equal(api.legalFieldPlainText(source,'text',{}),'A < B¹ & ²C > D; “quoted”','Plain text must preserve punctuation and must not HTML-escape source characters');
-for (const name of ['preferredLegalUnitCitation','legalUnitCopyText','citationCopyPreface','citationWithLegalText']) vm.runInContext(functionSource(template,name),api);
+for (const name of ['preferredLegalUnitCitation','legalUnitCopyText','citationCopyPreface','citationWithLegalText','legalUnitTextWithoutCitation','legalTextForCopy']) vm.runInContext(functionSource(template,name),api);
 api.state.statuteHierarchyAuthority='usc';
+const simpleContext={kind:'usc',uscCitation:'8 U.S.C. 1101(a)(1)',path:['a','1'],text:'(1) First paragraph.\n  (A) Child paragraph.'};
+api.profile.preferences.citationCopyPreface='Custom [citation]\n[text]';
+assert.equal(api.legalTextForCopy(simpleContext),'First paragraph.\n  (A) Child paragraph.',
+  'Default Copy must use simple legal text even with a saved custom template');
+api.profile.preferences.simpleCopyIncludeCitation=true;
+assert.equal(api.legalTextForCopy(simpleContext),'8 U.S.C. 1101(a)(1) : First paragraph.\n  (A) Child paragraph.',
+  'Simple copy optionally prefixes the full citation with a spaced colon');
+api.profile.preferences.defaultCopyFormat='custom';
+assert.equal(api.legalTextForCopy(simpleContext),'Custom 8 U.S.C. 1101(a)(1)\nFirst paragraph.\n  (A) Child paragraph.');
+assert.equal(api.legalTextForCopy(simpleContext,'simple'),'8 U.S.C. 1101(a)(1) : First paragraph.\n  (A) Child paragraph.',
+  'Explicit Simple ignores the chosen default and custom template');
+api.profile.preferences.simpleCopyIncludeCitation=false;
+api.profile.preferences.defaultCopyFormat='simple';
+assert.equal(api.legalTextForCopy(simpleContext,'custom'),'Custom 8 U.S.C. 1101(a)(1)\nFirst paragraph.\n  (A) Child paragraph.',
+  'Explicit Custom ignores the chosen default and simple prefix preference');
+api.profile.preferences.citationCopyPreface='[citation]';
+assert.equal(api.legalTextForCopy(simpleContext,'custom'),'8 U.S.C. 1101(a)(1)','Custom may intentionally omit text');
+api.profile.preferences.citationCopyPreface='';
+assert.equal(api.legalTextForCopy(simpleContext,'custom'),'','An empty custom template remains literal');
 const formatCases=[
   {format:'[CiTaTiOn][SpAcE][TaB][TeXt]',text:'First\n  Child',want:'8 U.S.C. 1101(a) \tFirst\n  Child'},
   {format:'Heading\n[tab][space][tab][citation]:\n[text]',text:'First\n  Child\n\nLast',want:'Heading\n\t \t8 U.S.C. 1101(a):\n\t \tFirst\n\t \t  Child\n\n\t \tLast'},
@@ -59,6 +78,10 @@ const copyCases=[
 for(const fixture of copyCases) {
   const citation='8 U.S.C. 1101'+fixture.path.map(token=>`(${token})`).join('');
   const context={kind:'usc',path:fixture.path,uscCitation:citation,text:fixture.text,statuteSection:fixture.historical?{historical:{status:'repealed'}}:fixture.duplicates?{body:[{label:'t'},{label:'t'}]}:null};
+  assert.equal(api.legalTextForCopy(context,'simple'),fixture.want,'Simple text omits the selected unit marker while retaining child markers and historical notices');
+  api.profile.preferences.simpleCopyIncludeCitation=true;
+  assert.equal(api.legalTextForCopy(context,'simple'),citation+' : '+fixture.want,'Simple text with a full citation must not repeat the selected unit marker');
+  api.profile.preferences.simpleCopyIncludeCitation=false;
   assert.equal(api.citationWithLegalText(context),citation+' - '+fixture.want,'The template must not repeat the selected citation unit in [text]');
   api.profile.preferences.citationCopyPreface='[TeXt]\n\n[CiTaTiOn]';
   assert.equal(api.citationWithLegalText(context),fixture.want+'\n\n'+citation,'Custom token order and capitalization must preserve the same text boundary');
@@ -76,9 +99,43 @@ for(const section of corpus.title8.sections) for(const node of section.body||[])
 }
 vm.runInContext(functionSource(template,'legalCopyHtml'),api);
 assert.equal(api.legalCopyHtml('\t A < B & C\n  child\n\n'),
-  '<div><p style="margin:0;margin-left:2.5em;text-indent:0.01px;white-space:pre-wrap;tab-size:4">A &lt; B &amp; C</p><p style="margin:0;margin-left:1em;text-indent:0.01px;white-space:pre-wrap;tab-size:4">child</p><p style="margin:0;margin-left:0em;text-indent:0.01px;white-space:pre-wrap;tab-size:4"><br></p><p style="margin:0;margin-left:0em;text-indent:0.01px;white-space:pre-wrap;tab-size:4"><br></p></div>',
+  '<div><p style="margin:0;margin-left:30pt;text-indent:0.01px;white-space:pre-wrap;tab-size:4">A &lt; B &amp; C</p><p style="margin:0;margin-left:12pt;text-indent:0.01px;white-space:pre-wrap;tab-size:4">child</p><p style="margin:0;margin-left:0pt;text-indent:0.01px;white-space:pre-wrap;tab-size:4"><br></p><p style="margin:0;margin-left:0pt;text-indent:0.01px;white-space:pre-wrap;tab-size:4"><br></p></div>',
   'Rich copy must apply paragraph indentation to wrapped lines, escape source text and preserve blank lines');
-assert(api.legalCopyHtml(' \tline').includes('margin-left:2em'), 'A tab advances to the next four-space stop');
+assert(api.legalCopyHtml(' \tline').includes('margin-left:24pt'), 'A tab advances to the next four-space stop');
+if(process.env.INASEARCH_LIBREOFFICE_TESTS==='1') {
+  const path=require('node:path'),os=require('node:os'),{execFileSync}=require('node:child_process');
+  const directory=fs.mkdtempSync(path.join(process.env.INASEARCH_VERIFICATION_DIR||os.tmpdir(),'inasearch-copy-import-'));
+  try {
+    const html=path.join(directory,'clipboard.html');
+    fs.writeFileSync(html,'<!doctype html><html><head><meta charset="utf-8"></head><body>'+
+      api.legalCopyHtml('Root\n  (i) Paragraph\n    (A) Subparagraph\n      (1) Clause\n        (i) Deep clause')+'</body></html>');
+    execFileSync(process.env.INASEARCH_SOFFICE_BIN||'soffice',[
+      `-env:UserInstallation=${require('node:url').pathToFileURL(path.join(directory,'profile')).href}`,
+      '--headless','--convert-to','docx:Office Open XML Text','--outdir',directory,html
+    ],{encoding:'utf8',timeout:30000});
+    const imported=JSON.parse(execFileSync('python3',['-c',String.raw`
+import json,sys
+from zipfile import ZipFile
+from xml.etree import ElementTree as ET
+ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
+with ZipFile(sys.argv[1]) as z:
+    root=ET.fromstring(z.read('word/document.xml'))
+    paragraphs=[]
+    for p in root.findall('.//w:body/w:p',ns):
+        text=''.join(t.text or '' for t in p.findall('.//w:t',ns))
+        if not text: continue
+        ind=p.find('w:pPr/w:ind',ns)
+        attrs={} if ind is None else {k.split('}')[-1]:int(v) for k,v in ind.attrib.items()}
+        paragraphs.append({'text':text,'left':attrs.get('start',attrs.get('left',0)),'firstLine':attrs.get('firstLine',0)-attrs.get('hanging',0)})
+    print(json.dumps(paragraphs))
+`,path.join(directory,'clipboard.docx')],{encoding:'utf8'}));
+    assert.deepEqual(imported.map(p=>p.text),['Root','(i) Paragraph','(A) Subparagraph','(1) Clause','(i) Deep clause']);
+    assert.deepEqual(imported.map(p=>p.left),[0,240,480,720,960],
+      'LibreOffice import must preserve twelve-point paragraph indents at every child level');
+    assert(imported.every(p=>p.firstLine===0),'First and wrapped lines must share the same child indent');
+    console.log('PASS LibreOffice clipboard HTML import: four nested paragraph indents and aligned wrapped lines');
+  } finally {fs.rmSync(directory,{recursive:true,force:true});}
+}
 if(process.platform==='darwin'&&process.env.INASEARCH_NATIVE_CLIPBOARD_TESTS==='1') {
   const rich=api.legalCopyHtml('Root\n  (i) Paragraph\n    (A) Subparagraph\n      (1) Clause\n        (i) Deep clause');
   const rtf=require('node:child_process').execFileSync('textutil',['-convert','rtf','-stdout','-format','html','-stdin'],{input:rich,encoding:'utf8'});
@@ -87,6 +144,104 @@ if(process.platform==='darwin'&&process.env.INASEARCH_NATIVE_CLIPBOARD_TESTS==='
   assert(paragraphs.every((p,index)=>p.firstLine===0&&(!index||p.left>paragraphs[index-1].left)),
     'Native import must indent first and wrapped lines together at every child level');
 }
+
+// Catch native-copy interception of selections/editors and stale split-pane targets.
+const copyState={view:'search',focusedCitationMode:false};
+let selectedText='',editing=false,dialogOpen=false;
+let reducedMotion=false;
+const animationCalls=[];
+function feedbackElement(id) {
+  const animations=[];
+  return {id,isConnected:true,getAnimations:()=>animations.filter(animation=>!animation.canceled),
+    animate(frames,options){const animation={cancel(){this.canceled=true;}};animations.push(animation);animationCalls.push({id,frames,options,animation});return animation;}};
+}
+const mainBox=feedbackElement('main-box'),paneBox=feedbackElement('pane-box');
+const mainActions={simple:feedbackElement('main-simple'),custom:feedbackElement('main-custom')};
+const paneActions={simple:feedbackElement('pane-simple'),custom:feedbackElement('pane-custom')};
+const copyTarget={closest:()=>editing?{}:null};
+const searchTarget={closest:()=>searchTarget,selectionStart:4,selectionEnd:4};
+const pane={id:'second',readerActions:paneActions,context:{kind:'cfr',cfrCitation:'8 CFR 103.2(b)',path:['b'],text:'(b) Second pane text.'}};
+const nativeScope=vm.createContext({
+  state:copyState,profile:api.profile,els:{search:searchTarget,mainReaderActions:mainActions}, document:{activeElement:copyTarget,querySelector:()=>dialogOpen?{}:null},
+  window:{getSelection:()=>({toString:()=>selectedText}),matchMedia:()=>({matches:reducedMotion})},
+  getComputedStyle:()=>({backgroundColor:'#ffffff',boxShadow:'none',getPropertyValue:name=>name==='--success'?'#148045':'#ecf9f1'}),
+  $:(selector,root)=>root[selector.includes('copy-citation-text')?'custom':'simple'],
+  focusedPaneForElement:target=>target?.pane || null,
+  focusedPaneById:id=>id===pane.id?pane:null,
+  withFocusedCitationPane:(value,callback)=>{copyState.focusedPaneContext=value;try{return callback();}finally{copyState.focusedPaneContext=null;}},
+  mainReaderActionContext:()=>copyState.focusedPaneContext?.context || simpleContext,
+  mainReaderActionTarget:()=>({preview:copyState.focusedPaneContext?paneBox:mainBox}),
+  legalTextForCopy:api.legalTextForCopy, legalCopyHtml:api.legalCopyHtml,toast:()=>{}
+});
+for(const name of ['readerCopyFeedbackTargets','flashLegalCopyFeedback']) if(template.includes(`function ${name}(`)) vm.runInContext(functionSource(template,name),nativeScope);
+vm.runInContext(functionSource(template,'handleReaderCopy'),nativeScope);
+function nativeCopy(overrides={}) {
+  animationCalls.length=0;
+  const data=new Map();
+  const event={target:copyTarget,defaultPrevented:false,clipboardData:{setData:(type,text)=>data.set(type,text)},preventDefault(){this.defaultPrevented=true;},...overrides};
+  const handled=nativeScope.handleReaderCopy(event);
+  return {data,event,handled};
+}
+api.profile.preferences.citationCopyPreface='Custom [citation]\n[text]';
+assert.equal(nativeCopy().data.get('text/plain'),'First paragraph.\n  (A) Child paragraph.',
+  'No-selection Copy must copy the complete highlighted provision');
+api.profile.preferences.defaultCopyFormat='custom';
+assert.equal(nativeCopy().data.get('text/plain'),'Custom 8 U.S.C. 1101(a)(1)\nFirst paragraph.\n  (A) Child paragraph.');
+api.profile.preferences.defaultCopyFormat='simple';
+copyState.focusedCitationMode=true;
+copyState.focusedCitationPanes=[{id:'first'},pane];
+assert.equal(nativeCopy({target:{pane,closest:()=>null}}).data.get('text/plain'),'Second pane text.','Copy uses the pane containing the event target');
+copyState.focusedCopyPaneId=pane.id;
+assert.equal(nativeCopy().data.get('text/plain'),'Second pane text.','Copy retains the last active pane when focus leaves its body');
+copyState.focusedCitationMode=false;
+for(const selection of ['Selected legal words',' ']) {
+  selectedText=selection;
+  assert.equal(nativeCopy().event.defaultPrevented,false,'A real text selection must retain native copy behavior');
+}
+selectedText='';
+editing=true;
+assert.equal(nativeCopy().event.defaultPrevented,false,'Inputs and clipboard fallback textareas keep native copy');
+editing=false;
+nativeScope.document.activeElement=searchTarget;
+assert.equal(nativeCopy({target:searchTarget}).data.get('text/plain'),'First paragraph.\n  (A) Child paragraph.',
+  'A search field with only a caret must still copy the highlighted provision');
+searchTarget.selectionEnd=8;
+assert.equal(nativeCopy({target:searchTarget}).event.defaultPrevented,false,'Selected search text retains native copy');
+nativeScope.document.activeElement=copyTarget;
+dialogOpen=true;
+assert.equal(nativeCopy().event.defaultPrevented,false,'Copy inside an open dialog must not copy a reader behind it');
+dialogOpen=false;
+nativeScope.els.savingMenuModal={hidden:false};
+assert.equal(nativeCopy().event.defaultPrevented,false,'The Settings modal is a visible backdrop, not a native dialog; it must block copying the reader behind it');
+nativeScope.els.savingMenuModal.hidden=true;
+assert.equal(nativeCopy({defaultPrevented:true}).data.size,0,'Do not override another copy handler');
+assert.equal(nativeCopy({clipboardData:null}).event.defaultPrevented,false);
+copyState.view='sources';
+assert.equal(nativeCopy().event.defaultPrevented,false,'Nonreader views retain native copy behavior');
+copyState.view='search';
+const richNative=nativeCopy();
+assert.equal(richNative.event.defaultPrevented,true);
+assert(richNative.data.get('text/html').includes('margin-left:12pt'),'Native Copy preserves nested indentation in rich paste');
+assert.deepEqual(animationCalls.map(call=>call.id),['main-simple','main-box'],'Successful native Simple Copy flashes its sidebar button and highlighted box');
+const oldAnimation=animationCalls[0].animation;
+nativeCopy();
+assert.equal(oldAnimation.canceled,true,'Repeated Copy restarts feedback immediately');
+api.profile.preferences.defaultCopyFormat='custom';
+nativeCopy();
+assert.deepEqual(animationCalls.map(call=>call.id),['main-custom','main-box'],'Custom Copy flashes only the Custom button and highlighted box');
+copyState.focusedCitationMode=true;
+nativeCopy({target:{pane,closest:()=>null}});
+assert.deepEqual(animationCalls.map(call=>call.id),['pane-custom','pane-box'],'Split-pane Copy flashes only its own sidebar and highlighted box');
+copyState.focusedCitationMode=false;
+selectedText='Native text selection';
+nativeCopy();
+assert.equal(animationCalls.length,0,'Native selected-text copy must not flash a whole provision');
+selectedText='';
+reducedMotion=true;
+nativeCopy();
+assert(animationCalls.every(call=>call.options.iterations===1),'Reduced-motion Copy uses one steady confirmation');
+reducedMotion=false;
+api.profile.preferences.defaultCopyFormat='simple';
 
 (async()=>{
   let richItems=null,plainText=null;

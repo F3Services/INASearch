@@ -2017,9 +2017,9 @@
       <span class="live-citation-copies" id="liveCitationCopies" role="group" aria-label="Copy options">
         <svg class="reader-action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8zM16 8V3H4v13h4"></path></svg>
         <span class="copy-option-divider copy-option-divider-full" aria-hidden="true"></span>
-        <button class="statute-history-button copy-action-button" type="button" data-live-citation-action="copy-text" aria-label="Copy legal text only"><span class="copy-option-symbol" aria-hidden="true">T</span><span class="copy-action-label" aria-hidden="true"></span></button>
+        <button class="statute-history-button copy-action-button" type="button" data-live-citation-action="copy-text" aria-label="Simple text copy"><span class="copy-option-symbol" aria-hidden="true">T</span><span class="copy-action-label" aria-hidden="true"></span></button>
         <span class="copy-option-divider" aria-hidden="true"></span>
-        <button class="statute-history-button copy-action-button combined-copy-button" type="button" data-live-citation-action="copy-citation-text" aria-label="Copy citation and legal text"><span class="combined-copy-symbol" aria-hidden="true"><span>§</span><span>:</span><span>T</span></span><span class="copy-action-label" aria-hidden="true"></span></button>
+        <button class="statute-history-button copy-action-button combined-copy-button" type="button" data-live-citation-action="copy-citation-text" aria-label="Custom citation copy"><span class="combined-copy-symbol" aria-hidden="true"><span>§</span><span>:</span><span>T</span></span><span class="copy-action-label" aria-hidden="true"></span></button>
       </span>
       <button class="statute-history-button" type="button" data-live-citation-action="add-note" aria-label="Add note" title="Add note"><svg class="reader-action-icon reader-note-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2h10l5 5v5M14 2v6h5M4 2v17h5"></path><text x="9" y="22">N+</text></svg></button>
       <button class="statute-history-button print-action" type="button" data-live-citation-action="print" aria-label="Print Section"><svg class="reader-action-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 17H3V9h18v8h-3M6 14h12v7H6zM17 12h1"></path></svg><span class="print-action-label" aria-hidden="true">Print Section</span></button>
@@ -2115,7 +2115,7 @@
           <li><strong>Reference previews, Split, and Insert.</strong> Hover over a citation within the legal text to preview the cited wording. In the preview, <strong>Split</strong> opens it in another pane; <strong>Insert</strong> places an excerpt immediately after the provision you are reading.</li>
           <li><strong>Notes and highlights.</strong> Select legal text and choose <strong>Highlight</strong> or <strong>Highlight + note</strong>, or add a note from a citation's action menu. Click a note to edit it; use <strong>Shared with</strong> to attach it to other citations. Search note text with <code>in:notes waiver</code>.</li>
           <li><strong>Definitions.</strong> Type <code>define: child</code>, or open the book icon beside About. Filter definitions by source and where they apply to distinguish an INA definition from a regulatory definition or USCIS glossary explanation.</li>
-          <li><strong>Copy, Share, and Print.</strong> Use <strong>§</strong> to copy a citation or <strong>T</strong> to copy legal text using your <strong>Copied text format</strong> in Settings; the default includes both citation and text. The Share button beside the search field copies a link to the current view. A citation's action menu also lets you print that provision or open its official source.</li>
+          <li><strong>Copy, Share, and Print.</strong> Use <strong>T</strong> for Simple text copy and <strong>§ : T</strong> for your Custom citation format. Settings lets Simple copy include the full citation before the text and chooses the default Copy format. Ctrl/Cmd+C copies selected text normally; with no text selected, it copies the highlighted provision using that default. The Share button beside the search field copies a link to the current view. A citation's action menu also lets you print that provision or open its official source.</li>
           <li><strong>Saving &amp; data.</strong> Notes and highlights save automatically in your browser. Open <strong>Settings → Saving &amp; data</strong> to download a backup or connect an <code>INASearch_Data.json</code> file that you can carry to another browser or computer.</li>
         </ul>
       </article>
@@ -2286,8 +2286,16 @@
         </section>
         <section class="settings-section" aria-labelledby="citationCopySettingsHeading">
           <h3 class="settings-section-heading" id="citationCopySettingsHeading">Citation copying</h3>
+          <div class="settings-toggle">
+            <span><label for="defaultCopyFormatSelect"><strong>Default Copy format</strong></label><small>With no text selected, Ctrl/Cmd+C copies the highlighted provision in this format. Copy buttons in reference previews and inserted excerpts use it too. Selected text copies normally.</small></span>
+            <select class="field" id="defaultCopyFormatSelect"><option value="simple">Simple (default)</option><option value="custom">Custom citation</option></select>
+          </div>
+          <label class="settings-toggle" for="simpleCopyIncludeCitationToggle">
+            <span><strong>Include full citation in simple text copy</strong><small>Off: [text]. On: [full citation] : [text]. The Simple button always uses this choice.</small></span>
+            <input id="simpleCopyIncludeCitationToggle" type="checkbox" role="switch">
+          </label>
           <div class="settings-input-block">
-            <label for="citationCopyPrefaceInput"><strong>Copied text format</strong><small>[citation] inserts the citation, [text] the complete legal text, [space] one space, and [tab] one tab, regardless of capitalization. Spaces or tabs before [citation] at the start of a line also indent every line of [text], preserving its nested indentation. Paste with source formatting to retain indentation on wrapped lines; plain-text paste retains spaces and tabs.</small></label>
+            <label for="citationCopyPrefaceInput"><strong>Custom citation format</strong><small>The Custom button always uses this template. [citation] inserts the full citation, [text] the complete legal text, [space] one space, and [tab] one tab, regardless of capitalization. Arrange or omit tokens and add your own wording. Spaces or tabs before [citation] at the start of a line also indent every line of [text], preserving its nested indentation. Paste with source formatting to retain indentation on wrapped lines; plain-text paste retains spaces and tabs.</small></label>
             <div class="settings-input-row"><textarea class="field" id="citationCopyPrefaceInput" rows="4" maxlength="2006" aria-describedby="citationCopyPrefaceWarning" spellcheck="false"></textarea><button class="button secondary" id="resetCitationCopyPrefaceButton" type="button">Default</button></div>
             <p class="citation-copy-warning" id="citationCopyPrefaceWarning" role="status" aria-live="polite" hidden>[citation] not detected</p>
           </div>
@@ -2748,7 +2756,7 @@
           [72, "Automatic CFR updates are optional.", "Enabling the setting checks included CFR material directly against eCFR; it does not update the U.S. Code, INA crosswalk, forms, or Policy Manual snapshot."],
           [75, "Start with a working research query.", "Set Default startup query in Settings to in:237 has:notes to open your annotated deportability provisions each time. You can save any citation or search there; leave it blank to start at Home."],
           [76, "Citation links in statutes and regulations can display INA or U.S.C. citations.", "Convert citations to INA format in Settings controls the wording without changing link destinations."],
-          [83, "Customize the format of copied legal text.", "Change Copied text format in Settings to control citation + text copying. The default is [citation] - [text]. Add [space] or [tab] before [citation] at the start of a line to indent the copied text too. Tokens work regardless of capitalization; T alone copies text without the template."],
+          [83, "Customize the format of copied legal text.", "Settings → Citation copying offers Simple text or a Custom citation template. Simple can prefix the full citation with a colon. Choose which format Ctrl/Cmd+C uses when no text is selected. The T and § : T buttons always use Simple and Custom respectively. Tokens work regardless of capitalization."],
         ]
       },
     ]);
@@ -2968,7 +2976,7 @@
       highlights: [],
       annotationOrdinals: {},
       tipProgress: { schemaVersion: 1, currentTipId: null, lastAdvancedLocalDate: null, dismissedLocalDate: null },
-      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, useHostedShareLinks: true, statutoryLinkCitationSystem: "view", statutoryLinkCitationSystemVersion: 2, highlightInaCitationLinks: false, notesUseHandwrittenFont: false, statutoryNavigationSystem: "ina", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: false, splitAuthoritySearchPanes: false, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, scrollSearchDepth: 2, selectionUpdatesSearch: true, pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, mainNavigatorCollapsed: false, citationCopyPreface: "[citation] - [text]", citationCopyPrefaceVersion: 3, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
+      preferences: { theme: "light", showDetailedStatus: false, hideTopThemeControls: false, hideLocalShareWarning: false, useHostedShareLinks: true, statutoryLinkCitationSystem: "view", statutoryLinkCitationSystemVersion: 2, highlightInaCitationLinks: false, notesUseHandwrittenFont: false, statutoryNavigationSystem: "ina", statuteSectionDisplay: "hierarchy", automaticStatutoryNavigationSystem: false, splitAuthoritySearchPanes: false, legalNavigatorVisibility: "single", scrollUpdatesSearch: false, scrollSearchDepth: 2, selectionUpdatesSearch: true, pageViewOffsetPercent: DEFAULT_READING_OFFSET_PERCENT, mainNavigatorCollapsed: false, defaultCopyFormat: "simple", simpleCopyIncludeCitation: false, citationCopyPreface: "[citation] - [text]", citationCopyPrefaceVersion: 3, expandSearchResultsByDefault: true, showCfrChapterSubchapterInSearchHierarchy: false, syncCfrCommonDepthFromStatute: true, persistInlineReferenceInsertions: false, animatedCitationJumps: true, statuteNavigationDepth: STATUTE_NAVIGATION_DEPTHS.length - 1, cfrNavigationDepth: CFR_NAVIGATION_DEPTHS.length - 1, highlightDefinedTerms: false, automaticCfrUpdates: false, backupReminder: "weekly", defaultStartupQuery: DEFAULT_STARTUP_QUERY },
       referenceInsertions: emptyReferenceInsertions()
     });
 
@@ -3014,6 +3022,8 @@
       normalized.preferences.selectionUpdatesSearch = normalized.preferences.selectionUpdatesSearch !== false;
       normalized.preferences.pageViewOffsetPercent = normalizeReadingOffsetPercent(normalized.preferences.pageViewOffsetPercent);
       normalized.preferences.mainNavigatorCollapsed = normalized.preferences.mainNavigatorCollapsed === true;
+      normalized.preferences.defaultCopyFormat = normalized.preferences.defaultCopyFormat === "custom" ? "custom" : "simple";
+      normalized.preferences.simpleCopyIncludeCitation = normalized.preferences.simpleCopyIncludeCitation === true;
       // Preserve legacy prefaces by making their implicit trailing text explicit.
       // Version 3 templates are literal, including whitespace and omitted tags.
       let copyPreface = normalized.preferences.citationCopyPreface;
@@ -3101,7 +3111,7 @@
 
     const els = {
       search: $("#searchInput"), searchScopeToken: $("#searchScopeToken"), searchScopeLabel: $("#searchScopeLabel"), searchScopeInput: $("#searchScopeInput"), searchScopeClear: $("#searchScopeClear"),
-      mainSearchHistoryControls: $("#mainSearchHistoryControls"), mainSearchHistoryBack: $("#mainSearchHistoryBack"), mainSearchHistoryForward: $("#mainSearchHistoryForward"), mainCitationToolbar: $("#mainCitationToolbar"), mainReaderActions: $("#mainReaderActions"), mainReaderAuthorityToggle: $("#mainReaderAuthorityToggle"), citationCopyPrefaceInput: $("#citationCopyPrefaceInput"), citationCopyPrefaceWarning: $("#citationCopyPrefaceWarning"), mainNavigatorToggle: $("#mainNavigatorToggle"), mainNavigatorLeading: $("#mainNavigatorLeading"), mainNavigatorOverflow: $("#mainNavigatorOverflow"), mainNavigatorOverflowMenu: $("#mainNavigatorOverflowMenu"), liveCitationCopies: $("#liveCitationCopies"), liveOfficialSource: $("#liveOfficialSource"), mainShareButton: $("#mainShareButton"), useHostedShareLinksToggle: $("#useHostedShareLinksToggle"), mainShareLocalWarning: $("#mainShareLocalWarning"),
+      mainSearchHistoryControls: $("#mainSearchHistoryControls"), mainSearchHistoryBack: $("#mainSearchHistoryBack"), mainSearchHistoryForward: $("#mainSearchHistoryForward"), mainCitationToolbar: $("#mainCitationToolbar"), mainReaderActions: $("#mainReaderActions"), mainReaderAuthorityToggle: $("#mainReaderAuthorityToggle"), defaultCopyFormatSelect: $("#defaultCopyFormatSelect"), simpleCopyIncludeCitationToggle: $("#simpleCopyIncludeCitationToggle"), citationCopyPrefaceInput: $("#citationCopyPrefaceInput"), citationCopyPrefaceWarning: $("#citationCopyPrefaceWarning"), mainNavigatorToggle: $("#mainNavigatorToggle"), mainNavigatorLeading: $("#mainNavigatorLeading"), mainNavigatorOverflow: $("#mainNavigatorOverflow"), mainNavigatorOverflowMenu: $("#mainNavigatorOverflowMenu"), liveCitationCopies: $("#liveCitationCopies"), liveOfficialSource: $("#liveOfficialSource"), mainShareButton: $("#mainShareButton"), useHostedShareLinksToggle: $("#useHostedShareLinksToggle"), mainShareLocalWarning: $("#mainShareLocalWarning"),
       mainCommonSearchControl: $("#mainCommonSearchControl"), mainCommonSearchSummary: $("#mainCommonSearchSummary"), mainCommonStatuteRow: $("#mainCommonStatuteRow"), mainCommonCfrRow: $("#mainCommonCfrRow"),
       searchInputMirror: $("#searchInputMirror"), citationEquivalent: $("#citationEquivalent"),
       citationEquivalentIna: $("#citationEquivalentIna"), citationEquivalentInaLabel: $("#citationEquivalentInaLabel"), citationEquivalentInaCopy: $("#citationEquivalentInaCopy"),
@@ -11304,9 +11314,11 @@
         let columns = 0;
         for (const character of prefix) columns += character === "\t" ? 4 - columns % 4 : 1;
         const content = escapeHtml(line.slice(prefix.length));
+        // Writer ignores em-based paragraph margins on HTML import. Physical
+        // points retain each level's indent, including wrapped lines.
         // macOS treats a zero text-indent as absent and cancels the first-line
         // margin. This subpixel value rounds to zero in native paragraph styles.
-        return `<p style="margin:0;margin-left:${columns * .5}em;text-indent:0.01px;white-space:pre-wrap;tab-size:4">${content || "<br>"}</p>`;
+        return `<p style="margin:0;margin-left:${columns * 6}pt;text-indent:0.01px;white-space:pre-wrap;tab-size:4">${content || "<br>"}</p>`;
       }).join("");
       return `<div>${paragraphs}</div>`;
     }
@@ -11392,6 +11404,8 @@
       if (!context) return false;
       if (!["copy-usc-citation", "copy-cfr-citation", "copy-ina-citation", "copy-citation", "copy-citation-text", "copy-text", "add-note", "print", "open"].includes(action)) return false;
       commitMainLegalContext(context);
+      const feedback = ["copy-text", "copy-citation-text"].includes(action)
+        ? readerCopyFeedbackTargets(action === "copy-text" ? "simple" : "custom") : [];
       if (["copy-usc-citation", "copy-cfr-citation", "copy-ina-citation"].includes(action)) {
         const citation = action === "copy-ina-citation" ? context.inaCitation : action === "copy-usc-citation" ? context.uscCitation : context.cfrCitation;
         const copied = await copyLegalText(citation);
@@ -11400,9 +11414,11 @@
         const citation = preferredLegalUnitCitation(context);
         const text = action === "copy-citation" ? citation : citationWithLegalText(context, citation);
         const copied = await copyLegalText(text);
-        toast(copied ? action === "copy-citation" ? "Citation copied." : "Citation and legal text copied." : "The text could not be copied.");
+        if (copied) flashLegalCopyFeedback(feedback);
+        toast(copied ? action === "copy-citation" ? "Citation copied." : "Custom citation copied." : "The text could not be copied.");
       } else if (action === "copy-text") {
-        const copied = await copyLegalText(legalUnitCopyText(context));
+        const copied = await copyLegalText(legalTextForCopy(context, "simple"));
+        if (copied) flashLegalCopyFeedback(feedback);
         toast(copied ? `${context.noun} copied.` : `The ${context.noun.toLowerCase()} could not be copied.`);
       } else if (action === "add-note") {
         const trigger = context.trigger;
@@ -11438,6 +11454,61 @@
         if (section) return cfrUnitText(section, context.path || [], context.occurrenceBlockPath, "ina");
       }
       return String(context.text || "");
+    }
+
+    function legalTextForCopy(context, format = profile.preferences.defaultCopyFormat) {
+      if (!context) return "";
+      if (format === "custom") return citationWithLegalText(context);
+      const text = legalUnitTextWithoutCitation(context);
+      const citation = preferredLegalUnitCitation(context);
+      return profile.preferences.simpleCopyIncludeCitation === true && citation ? `${citation} : ${text}` : text;
+    }
+
+    function readerCopyFeedbackTargets(format = profile.preferences.defaultCopyFormat, target = mainReaderActionTarget()) {
+      const actions = state.focusedPaneContext?.readerActions || els.mainReaderActions;
+      const action = format === "custom" ? "copy-citation-text" : "copy-text";
+      return [$(`[data-live-citation-action="${action}"]`, actions), target?.preview].filter(Boolean);
+    }
+
+    function flashLegalCopyFeedback(elements) {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      for (const element of new Set(elements)) {
+        if (!element?.animate || element.isConnected === false) continue;
+        for (const animation of element.getAnimations()) if (animation.id === "legal-copy-confirmation") animation.cancel();
+        const style = getComputedStyle(element);
+        const base = { backgroundColor: style.backgroundColor, boxShadow: style.boxShadow };
+        const confirmed = { backgroundColor: style.getPropertyValue("--success-soft").trim(),
+          boxShadow: `0 0 0 3px ${style.getPropertyValue("--success").trim()}` };
+        const animation = element.animate(reducedMotion ? [confirmed, confirmed]
+          : [{ ...base, offset: 0 }, { ...confirmed, offset: .08 }, { ...base, offset: 1 }],
+          { duration: reducedMotion ? 650 : 1100, iterations: 1, easing: "ease-out" });
+        animation.id = "legal-copy-confirmation";
+      }
+    }
+
+    function handleReaderCopy(event) {
+      // Native selections and editors own Copy, including copyLegalText's
+      // temporary textarea when the Clipboard API is unavailable.
+      if (event.defaultPrevented || !event.clipboardData || state.view !== "search"
+        || els.savingMenuModal?.hidden === false || document.querySelector("dialog[open]")
+        || window.getSelection()?.toString()) return false;
+      const targetPane = focusedPaneForElement(event.target);
+      const editor = event.target?.closest?.("input, textarea, select, [contenteditable]")
+        || document.activeElement?.closest?.("input, textarea, select, [contenteditable]");
+      if (editor && (editor !== els.search && editor !== targetPane?.input
+        || editor.selectionStart !== editor.selectionEnd)) return false;
+      const pane = state.focusedCitationMode
+        ? targetPane || focusedPaneById(state.focusedCopyPaneId) || state.focusedCitationPanes[0]
+        : null;
+      const payload = () => ({ text: legalTextForCopy(mainReaderActionContext()), feedback: readerCopyFeedbackTargets() });
+      const copied = pane ? withFocusedCitationPane(pane, payload) : state.focusedCitationMode ? null : payload();
+      if (!copied?.text) return false;
+      event.clipboardData.setData("text/plain", copied.text);
+      event.clipboardData.setData("text/html", legalCopyHtml(copied.text));
+      event.preventDefault();
+      flashLegalCopyFeedback(copied.feedback);
+      toast("Legal text copied.");
+      return true;
     }
 
     function legalCopyDescription(label) {
@@ -11477,10 +11548,10 @@
       });
     }
 
-    function citationWithLegalText(context, citation = preferredLegalUnitCitation(context)) {
+    function legalUnitTextWithoutCitation(context) {
       let text = legalUnitCopyText(context);
-      // The template's citation already identifies the selected unit. Keep its
-      // heading and descendants, but omit that unit's own marker from [text].
+      // Copy includes the full citation or none. Keep the heading and child
+      // designations, but omit the selected unit's own leading designation.
       if (context?.occurrenceRow?.contentKind !== "annotations") {
         const section = context?.statuteSection || (typeof context?.section === "object" ? context.section : null)
           || (context?.sectionId ? uscSectionById.get(context.sectionId) : null);
@@ -11502,7 +11573,11 @@
         }
         text = notice + text;
       }
-      return citationCopyPreface(citation, text);
+      return text;
+    }
+
+    function citationWithLegalText(context, citation = preferredLegalUnitCitation(context)) {
+      return citationCopyPreface(citation, legalUnitTextWithoutCitation(context));
     }
 
     function syncCitationCopyFormatWarning() {
@@ -12451,7 +12526,7 @@
       const printTarget = mainReaderPrintTarget();
       copies.setAttribute("aria-disabled", String(!target));
       const hierarchy = hierarchyActionNode();
-      const descriptions = { "copy-citation": "Copy citation", "copy-text": "Copy legal text only", "copy-citation-text": "Copy citation and legal text", "add-note": "Add note", print: "Print", open: "Open official source" };
+      const descriptions = { "copy-citation": "Copy citation", "copy-text": "Simple text copy", "copy-citation-text": "Custom citation copy", "add-note": "Add note", print: "Print", open: "Open official source" };
       for (const button of $$("[data-live-citation-action]", actions)) {
         if (button.dataset.liveCitationAction === "print") {
           const label = printTarget?.printHighlighted ? "Print Highlighted Citation" : "Print Section";
@@ -12468,11 +12543,11 @@
         if (copyLabel) {
           button.removeAttribute("title");
           if (!target) copyLabel.textContent = "";
-          else if (button.dataset.liveCitationAction === "copy-text") copyLabel.textContent = `Copy text only: ${target.query}`;
+          else if (button.dataset.liveCitationAction === "copy-text") copyLabel.textContent = `Simple${profile.preferences.simpleCopyIncludeCitation === true ? " citation + text" : " text"}: ${target.query}`;
           else {
             const citation = target.query;
             const preface = citationCopyPreface(citation);
-            copyLabel.textContent = button.dataset.liveCitationAction === "copy-citation" ? citation : preface.split("\n")[0];
+            copyLabel.textContent = button.dataset.liveCitationAction === "copy-citation" ? citation : `Custom: ${preface.split("\n")[0]}`;
           }
           if (target) button.setAttribute("aria-label", button.dataset.liveCitationAction === "copy-citation" ? `Copy citation: ${copyLabel.textContent}` : legalCopyDescription(copyLabel.textContent));
           else button.setAttribute("aria-label", label);
@@ -15251,6 +15326,8 @@
       els.statuteSectionDisplaySelect.value = profile.preferences.statuteSectionDisplay || "hierarchy";
       syncNavigationDepthSettings();
       syncMainShareWarning();
+      els.defaultCopyFormatSelect.value = profile.preferences.defaultCopyFormat;
+      els.simpleCopyIncludeCitationToggle.checked = profile.preferences.simpleCopyIncludeCitation === true;
       els.citationCopyPrefaceInput.value = profile.preferences.citationCopyPreface;
       syncCitationCopyFormatWarning();
       els.defaultStartupQueryInput.value = profile.preferences.defaultStartupQuery;
@@ -16987,6 +17064,16 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
       on(els.cfrNavigationDepthSelect, "change", () => setNavigationDepth("cfr", Number(els.cfrNavigationDepthSelect.value)));
       on(els.defaultStartupQueryForm, "submit", event => { event.preventDefault(); setDefaultStartupQuery(els.defaultStartupQueryInput.value); });
       on($("#clearDefaultStartupQueryButton"), "click", () => setDefaultStartupQuery(""));
+      on(els.defaultCopyFormatSelect, "change", () => {
+        profile.preferences.defaultCopyFormat = els.defaultCopyFormatSelect.value === "custom" ? "custom" : "simple";
+        markProfileChanged();
+      });
+      on(els.simpleCopyIncludeCitationToggle, "change", () => {
+        profile.preferences.simpleCopyIncludeCitation = els.simpleCopyIncludeCitationToggle.checked;
+        markProfileChanged();
+        if (state.focusedCitationMode) state.focusedCitationPanes.forEach(pane => withFocusedCitationPane(pane, syncMainReaderActionTarget));
+        else syncMainReaderActionTarget();
+      });
       on(els.citationCopyPrefaceInput, "input", () => setCitationCopyPreface(els.citationCopyPrefaceInput.value));
       on($("#resetCitationCopyPrefaceButton"), "click", () => setCitationCopyPreface(defaultProfile().preferences.citationCopyPreface));
       on(els.themeCycleButton, "click", cycleThemePreference);
@@ -16997,6 +17084,11 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
 
     function attachEvents() {
       bindPreferenceEvents();
+      document.addEventListener("copy", handleReaderCopy);
+      for (const type of ["pointerdown", "focusin"]) document.addEventListener(type, event => {
+        const pane = focusedPaneForElement(event.target);
+        if (pane) state.focusedCopyPaneId = pane.id;
+      });
       bindHierarchyNotePreviews();
       let searchTimer;
       els.brand.addEventListener("mouseenter", beginBrandTributeHover);
@@ -17464,7 +17556,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (!tool || tool.disabled) return;
         event.preventDefault();
         if (tool.dataset.legalReferenceTool === "copy-text") {
-          const copied = await copyLegalText(legalUnitCopyText(state.legalReferenceContext));
+          const copied = await copyLegalText(legalTextForCopy(state.legalReferenceContext));
           const noun = state.legalReferenceContext?.family === "cfr" ? "regulation" : "statute";
           toast(copied ? `${noun[0].toUpperCase()}${noun.slice(1)} copied.` : `The ${noun} could not be copied.`);
         } else if (tool.dataset.legalReferenceTool === "focused-view") {
@@ -17545,7 +17637,7 @@ for ($i = 0; $i -lt $manifest.shards.Count; $i++) {
         if (insertedCopyText) {
           event.preventDefault();
           const target = insertionTargetContext(state.referenceInsertionSession?.get(insertedCopyText.dataset.insertedCopyText));
-          void copyLegalText(legalUnitCopyText(target)).then(copied => toast(copied ? "Inserted legal text copied." : "The legal text could not be copied."));
+          void copyLegalText(legalTextForCopy(target)).then(copied => toast(copied ? "Inserted legal text copied." : "The legal text could not be copied."));
           return;
         }
         const insertedOpenPane = event.target.closest("[data-inserted-open-pane]");

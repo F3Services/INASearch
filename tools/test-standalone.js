@@ -5798,6 +5798,18 @@ async function main() {
     assert(!Object.hasOwn(legacy.preferences, "emptySearchView") && !Object.hasOwn(legacy.preferences, "closeBlankCompanionOnSectionOpen"), "Profile imports must discard retired homepage settings.");
   }
   const oldCopyPreferences = { ...blankProfile.preferences };
+  delete oldCopyPreferences.defaultCopyFormat;
+  delete oldCopyPreferences.simpleCopyIncludeCitation;
+  const copyDefaults = migration.normalizeProfile({ ...blankProfile, preferences: { ...oldCopyPreferences, citationCopyPreface: "Keep [citation]: [text]" } }).preferences;
+  assert.strictEqual(copyDefaults.defaultCopyFormat, "simple", "Existing profiles default to Simple without losing their custom template.");
+  assert.strictEqual(copyDefaults.simpleCopyIncludeCitation, false, "Simple copies text alone by default.");
+  assert.strictEqual(copyDefaults.citationCopyPreface, "Keep [citation]: [text]");
+  const customCopyPreferences = migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, defaultCopyFormat: "custom", simpleCopyIncludeCitation: true } }).preferences;
+  assert.strictEqual(customCopyPreferences.defaultCopyFormat, "custom");
+  assert.strictEqual(customCopyPreferences.simpleCopyIncludeCitation, true);
+  const invalidCopyPreferences = migration.normalizeProfile({ ...blankProfile, preferences: { ...blankProfile.preferences, defaultCopyFormat: "other", simpleCopyIncludeCitation: "false" } }).preferences;
+  assert.strictEqual(invalidCopyPreferences.defaultCopyFormat, "simple");
+  assert.strictEqual(invalidCopyPreferences.simpleCopyIncludeCitation, false);
   delete oldCopyPreferences.citationCopyPrefaceVersion;
   for (const legacyDefault of ["[Citation] states the following", "[Citation] states the following[/n]"]) {
     assert.strictEqual(migration.normalizeProfile({ ...blankProfile, preferences: { ...oldCopyPreferences, citationCopyPreface: legacyDefault } }).preferences.citationCopyPreface, "[Citation] states the following -\n\n[text]", "Legacy defaults must become a literal multiline preface.");

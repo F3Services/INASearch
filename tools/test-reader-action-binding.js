@@ -53,7 +53,7 @@ function harness(paneMode = false, anchorTop = 50) {
     occurrenceBlockPath: paneMode ? [7] : null, citation: paneMode ? "8 CFR 212.4(a)(1)" : "8 U.S.C. 1101(a)(1)",
     cfrCitation: paneMode ? "8 CFR 212.4(a)(1)" : "", uscCitation: paneMode ? "" : "8 U.S.C. 1101(a)(1)",
     text: "(1) Original source text.", heading: "Heading", noun: paneMode ? "Regulation" : "Statute", url: "https://example.test/source" };
-  const copies = [], selections = [], prints = [], opened = [], previews = [], syncs = [], hover = [], hierarchy = [], frames = [], notes = [], restores = [];
+  const copies = [], selections = [], prints = [], opened = [], previews = [], syncs = [], hover = [], hierarchy = [], frames = [], notes = [], restores = [], feedback = [];
   const scope = vm.createContext({
     uscSectionById: new Map(),
     state: { statuteHierarchyAuthority: "usc", focusedCitationMode: paneMode, focusedPaneContext: null, view: "search",
@@ -83,16 +83,18 @@ function harness(paneMode = false, anchorTop = 50) {
     adoptPromotedNavigationHistory: () => {},
     selectLegalCitationLocation: (...args) => selections.push({ pane: scope.state.focusedPaneContext?.id || "main", args: plain(args) }),
     copyLegalText: async value => { copies.push(value); return true; },
+    readerCopyFeedbackTargets: format => [`${scope.state.focusedPaneContext?.id || "main"}:${format}`],
+    flashLegalCopyFeedback: targets => feedback.push(...targets),
     printLegalUnit: value => prints.push(plain(value)), safeOpen: value => opened.push(value), toast: () => {},
     handleHierarchySourceAction: action => hierarchy.push(action)
   });
   scope.current = context;
   scope.printTarget = { ...context, path: ["b"], citation: context.citation.replace("(a)(1)", "(b)"), text: "(b) Highlighted print text." };
-  for (const name of ["isMainLegalReader", "commitMainLegalContext", "preferredLegalUnitCitation", "legalUnitCopyText", "citationCopyPreface", "citationWithLegalText", "handleLegalUnitAction", "statuteReadingLine", "beginCopyActionPreview", "endCopyActionPreview", "bindCopyActionPreview", "bindReaderActions"]) {
+  for (const name of ["isMainLegalReader", "commitMainLegalContext", "preferredLegalUnitCitation", "legalUnitCopyText", "legalTextForCopy", "legalUnitTextWithoutCitation", "citationCopyPreface", "citationWithLegalText", "handleLegalUnitAction", "statuteReadingLine", "beginCopyActionPreview", "endCopyActionPreview", "bindCopyActionPreview", "bindReaderActions"]) {
     vm.runInContext(functionSource(template, name), scope);
   }
   scope.bindReaderActions(rail, pane);
-  return { rail, pane, scope, context, copies, selections, prints, opened, previews, syncs, hover, hierarchy, frames, notes, restores };
+  return { rail, pane, scope, context, copies, selections, prints, opened, previews, syncs, hover, hierarchy, frames, notes, restores, feedback };
 }
 
 async function checkHost(paneMode) {
@@ -110,19 +112,21 @@ async function checkHost(paneMode) {
   assert.equal(h.previews.length, 1, "Moving to another action must not jump again");
   h.scope.current = { ...h.context, text: "Wrong target after preview scrolling." };
   const click = fire(h.rail, "click", { target: copy });
-  await Promise.resolve();
+  await new Promise(setImmediate);
   assert.equal(click.defaultPrevented, true);
-  assert.equal(h.copies[0], "(1) Original source text.",
+  assert.equal(h.copies[0], "Original source text.",
     "The text-only action copies the frozen target without a citation preface");
   assert.deepEqual(h.selections[0], { pane: host, args: [h.context.kind, h.context.sectionId, ["a", "1"], paneMode ? [7] : null] },
     "The action commits exactly once, including a pane's occurrence locator");
   assert.equal(h.selections.length, 1);
+  assert.deepEqual(h.feedback, [`${host}:simple`], "Successful Simple copy confirms the original reader even after its asynchronous clipboard write");
 
   fire(h.rail, "click", { target: h.rail.button("copy-citation-text") });
-  await Promise.resolve();
+  await new Promise(setImmediate);
   assert.equal(h.copies[1], `${paneMode ? "8 CFR 212.4(a)(1)" : "8 U.S.C. 1101(a)(1)"} - Original source text.`,
     "The combined action applies the citation template to the same frozen target");
   assert.deepEqual(h.selections[1], h.selections[0]);
+  assert.deepEqual(h.feedback, [`${host}:simple`, `${host}:custom`], "Custom copy confirms the matching sidebar action");
 
   fire(h.rail, "click", { target: h.rail.button("print") });
   assert.equal(h.prints[0].text, "(1) Original source text.", "Print shares the frozen target with every action");
@@ -176,8 +180,8 @@ async function checkHost(paneMode) {
       fire(h.rail, "focusin", { target: h.rail.button("copy-text") });
       assert.equal(h.previews.length, 0, `Hover/focus must preserve the view when the citation starts at visible y=${top}, pane=${paneMode}`);
       fire(h.rail, "click", { target: h.rail.button("copy-text") });
-      await Promise.resolve();
-      assert.equal(h.copies[0], "(1) Original source text.", "Visible citations remain the text-only action target");
+      await new Promise(setImmediate);
+      assert.equal(h.copies[0], "Original source text.", "Visible citations remain the text-only action target");
       fire(h.rail, "mouseleave");
       while (h.frames.length) h.frames.shift()();
       assert.equal(h.restores.length, 0, "Leaving an unscrolled hover must not move the reader");
@@ -189,6 +193,13 @@ async function checkHost(paneMode) {
       fire(h.rail, "mouseleave");
       assert.equal(h.restores[0].top, 900, "Leaving a scrolled preview restores the original view");
     }
+  }
+  for (const paneMode of [false, true]) {
+    const h = harness(paneMode);
+    h.scope.copyLegalText = async () => false;
+    fire(h.rail, "click", { target: h.rail.button("copy-text") });
+    await new Promise(setImmediate);
+    assert.equal(h.feedback.length, 0, "Failed clipboard writes must not show success feedback");
   }
   await checkHost(false);
   await checkHost(true);
