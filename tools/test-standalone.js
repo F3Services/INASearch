@@ -2364,6 +2364,7 @@ async function main() {
   assert(fallbackSource.includes('setReadingOffsetPreference("pageViewOffsetPercent"'), "The shared percentage control is not wired to the persisted reading offset.");
   assert(fallbackSource.includes('.settings-toggle input[type="checkbox"] { width: 19px; height: 19px;') && !fallbackSource.includes('.settings-toggle input { width: 19px; height: 19px;'), "The settings checkbox rule still collapses percentage inputs to checkbox dimensions.");
   const protectableProfile = { notes: [], highlights: [], referenceInsertions: { records: [] }, preferences: { backupReminder: "weekly" } };
+  const profileHasAnnotations = extractedFunction(fallbackSource, "profileHasAnnotations", "profileHasProtectableContent", { profile: protectableProfile, Boolean });
   const profileHasProtectableContent = extractedFunction(fallbackSource, "profileHasProtectableContent", "profileSetupMode", { profile: protectableProfile, defaultProfile: () => ({ preferences: blankProfile.preferences }), Boolean });
   protectableProfile.updatedAt = new Date().toISOString();
   protectableProfile.tipProgress = { currentTipId: 1, lastAdvancedLocalDate: "2026-10-06", dismissedLocalDate: null };
@@ -2383,10 +2384,10 @@ async function main() {
   assert.strictEqual(profileHasProtectableContent(), true, "A persisted reference insertion does not activate durable-data protection.");
   protectableProfile.referenceInsertions.records = [];
   const protectableState = { browserSaveConflict: false, browserSaveError: "", browserStorageAvailable: true, profileChanged: true, backupReminderDue: true, fileConnected: false };
-  const profileSetupMode = extractedFunction(fallbackSource, "profileSetupMode", "renderProfileSetupNotice", { profile: protectableProfile, state: protectableState, profileHasProtectableContent });
+  const profileSetupMode = extractedFunction(fallbackSource, "profileSetupMode", "renderProfileSetupNotice", { profile: protectableProfile, state: protectableState, profileHasProtectableContent, profileHasAnnotations });
   assert.strictEqual(profileSetupMode(), "idle", "Default settings display the bold data-file warning.");
   protectableProfile.preferences.theme = "dark";
-  assert.strictEqual(profileSetupMode(), "backup", "A due startup reminder did not protect customized settings.");
+  assert.strictEqual(profileSetupMode(), "idle", "Customized settings displayed a backup reminder without notes or highlights.");
   protectableProfile.preferences.theme = "light";
   protectableProfile.notes = [{ id: "note" }];
   assert.strictEqual(profileSetupMode(), "backup", "A due reminder is not shown after the user creates a note.");
@@ -2967,7 +2968,7 @@ async function main() {
   const maybeShowBackupReminder = extractedFunction(fallbackSource, "maybeShowBackupReminder", "dismissBackupReminder", {
     state: reminderState,
     profile: reminderProfile,
-    profileHasProtectableContent: () => profileHasProtectableContent(reminderProfile),
+    profileHasAnnotations: () => profileHasAnnotations(reminderProfile),
     BACKUP_REMINDER_INTERVAL_MS: 7 * 24 * 60 * 60 * 1000,
     Date,
     globalThis: { INASearchStorage: { async setMetadata(key, value) { reminderWrites.push([key, value]); } } },
@@ -2996,7 +2997,7 @@ async function main() {
   assert.strictEqual(await maybeShowBackupReminder(), false, "The don't-remind-again preference did not suppress filesystem reminders.");
   reminderProfile.notes = [];
   reminderProfile.preferences = { backupReminder: "weekly", theme: "dark" };
-  assert.strictEqual(await maybeShowBackupReminder(), true, "Existing customized settings did not schedule a startup reminder.");
+  assert.strictEqual(await maybeShowBackupReminder(), false, "Existing customized settings scheduled a reminder without notes or highlights.");
   assert(/<button class="brand" id="inaSearchBrand"[\s\S]*?<span class="brand-mark"[\s\S]*?<strong>INASearch<\/strong><small>Find your authority<\/small>[\s\S]*?id="brandTribute"/.test(fallbackSource), "The tribute hover area and Home control do not continuously wrap the full INASearch brand and tagline.");
   assert(fallbackSource.includes("Inspired by the excellent work of 2604"), "The INASearch tribute text is missing.");
   assert(fallbackSource.includes('els.brand.addEventListener("mouseenter", beginBrandTributeHover);'), "The tribute timer is not attached to the continuous brand area.");

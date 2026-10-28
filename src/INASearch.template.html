@@ -2414,7 +2414,7 @@
             <input id="importProfileInput" type="file" accept=".json,application/json" hidden>
           </div>
           <label class="settings-toggle" for="backupReminderToggle">
-            <span><strong>Weekly filesystem backup reminders</strong><small>On by default. Reminders appear only when no data file is connected and can be disabled at any time.</small></span>
+            <span><strong>Weekly filesystem backup reminders</strong><small>On by default. Reminders appear at startup only when notes or highlights are saved and no data file is connected. They can be disabled at any time.</small></span>
             <input id="backupReminderToggle" type="checkbox" role="switch" checked>
           </label>
           <label class="settings-toggle" for="persistInlineReferenceInsertionsToggle">
@@ -3095,7 +3095,7 @@
         ? normalizeProfile(window.INA_SEARCH_PROFILE)
         : defaultProfile();
     // Capture existing work before startup bookkeeping or this visit's edits.
-    state.backupReminderEligibleAtStartup = profileHasProtectableContent();
+    state.backupReminderEligibleAtStartup = profileHasAnnotations();
     applyThemePreference(profile.preferences.theme);
     document.body?.classList.toggle("notes-use-handwritten-font", profile.preferences.notesUseHandwrittenFont === true);
     replaceReferenceInsertionSession(profile.referenceInsertions?.records || []);
@@ -15241,6 +15241,10 @@
 
     const BACKUP_REMINDER_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000;
 
+    function profileHasAnnotations(candidate = profile) {
+      return Boolean(candidate?.notes?.length || candidate?.highlights?.length);
+    }
+
     function profileHasProtectableContent(candidate = profile) {
       return Boolean(
         (candidate?.notes || []).length ||
@@ -15256,7 +15260,7 @@
       if (!profileHasProtectableContent()) return "idle";
       if (state.browserSaveConflict) return "conflict";
       if (state.browserSaveError || (!state.browserStorageAvailable && state.profileChanged)) return "error";
-      if (state.backupReminderDue && !state.fileConnected && profile.preferences.backupReminder !== "disabled") return "backup";
+      if (state.backupReminderDue && profileHasAnnotations() && !state.fileConnected && profile.preferences.backupReminder !== "disabled") return "backup";
       return "idle";
     }
 
@@ -16017,7 +16021,7 @@
     }
 
     async function maybeShowBackupReminder() {
-      if (!state.backupReminderEligibleAtStartup || !profileHasProtectableContent() || state.fileConnected || profile.preferences.backupReminder === "disabled" || state.browserSaveConflict || state.browserSaveError) return false;
+      if (!state.backupReminderEligibleAtStartup || !profileHasAnnotations() || state.fileConnected || profile.preferences.backupReminder === "disabled" || state.browserSaveConflict || state.browserSaveError) return false;
       const baseline = Math.max(Date.parse(state.lastBackupReminderAt || 0) || 0, Date.parse(state.lastFilesystemProtectionAt || 0) || 0);
       if (baseline && Date.now() - baseline < BACKUP_REMINDER_INTERVAL_MS) return false;
       const at = new Date().toISOString();

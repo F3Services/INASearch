@@ -20,7 +20,7 @@ Create a note from an exact INA, U.S.C., or CFR citation's actions menu, or from
 
 Browser storage can disappear if you clear site data, use a private window, change browser profiles, run short of storage, or open the standalone HTML from a location the browser treats as a different storage context. INASearch requests persistent storage when supported, but the browser may decline and users can always clear browser data.
 
-For stronger protection, open **Saving & data** and select or create `INASearch_Data.json`. INASearch then saves to that file and mirrors the verified file copy into browser storage. You can also download a portable JSON backup. Weekly reminders are on by default when no data file is connected and can be disabled in Settings.
+For stronger protection, open **Saving & data** and select or create `INASearch_Data.json`. INASearch then saves to that file and mirrors the verified file copy into browser storage. You can also download a portable JSON backup. Weekly reminders are on by default and appear only at startup when the profile contains notes or highlights and no data file is connected. They can be disabled in Settings.
 
 The browser grants access only to the file you selected. INASearch does not receive permission to browse the surrounding folder. It checks the file before writing and reads it back afterward to confirm that the save succeeded.
 

@@ -135,6 +135,46 @@ function applicationFixture(storage, state = {}) {
   return { app: context, messages };
 }
 
+function backupReminderFixture(savedProfile, state = {}) {
+  const metadata = new Map();
+  const context = vm.createContext({
+    profile: savedProfile,
+    state: { backupReminderEligibleAtStartup: true, fileConnected: false, browserSaveConflict: false, browserSaveError: "", browserStorageAvailable: true, profileChanged: false, backupReminderDue: false, ...state },
+    defaultProfile: () => ({ preferences: { backupReminder: "weekly", theme: "light" } }),
+    INASearchStorage: { async setMetadata(key, value) { metadata.set(key, value); } },
+    renderProfileSetupNotice() {}
+  });
+  vm.runInContext(template.slice(template.indexOf("    const BACKUP_REMINDER_INTERVAL_MS"), template.indexOf("    function renderProfileSetupNotice")), context);
+  vm.runInContext(functionSource(template, "maybeShowBackupReminder"), context);
+  return { app: context, metadata };
+}
+
+for (const [name, content, expected] of [
+  ["settings only", { preferences: { theme: "dark" } }, false],
+  ["saved reference expansions only", { referenceInsertions: { records: [{ key: "expanded-reference" }] } }, false],
+  ["daily-tip progress only", { tipProgress: { currentTipId: "tip" }, updatedAt: "2026-10-01T00:00:00.000Z" }, false],
+  ["a note", { notes: [{ id: "note", text: "Saved note" }] }, true],
+  ["a highlight", { highlights: [{ id: "highlight" }] }, true],
+  ["notes and highlights", { notes: [{ id: "note", text: "Saved note" }], highlights: [{ id: "highlight" }] }, true]
+]) {
+  test(`startup backup reminder eligibility for ${name}`, async () => {
+    const savedProfile = { notes: [], highlights: [], referenceInsertions: { records: [] }, ...content,
+      preferences: { backupReminder: "weekly", ...content.preferences } };
+    const { app, metadata } = backupReminderFixture(savedProfile);
+    assert.equal(await app.maybeShowBackupReminder(), expected);
+    assert.equal(app.state.backupReminderDue, expected);
+    assert.equal(metadata.has("last-backup-reminder-at"), expected, "Only an eligible reminder should start its weekly interval");
+    assert.equal(app.profileSetupMode(), expected ? "backup" : "idle");
+  });
+}
+
+test("a pending backup reminder disappears when only settings remain", () => {
+  const { app } = backupReminderFixture({ notes: [], highlights: [], preferences: { backupReminder: "weekly", theme: "dark" } }, { backupReminderDue: true });
+  assert.equal(app.profileSetupMode(), "idle");
+  app.state.browserSaveError = "Browser write failed";
+  assert.equal(app.profileSetupMode(), "error", "Actual saving errors must still surface for customized settings");
+});
+
 test("main navigation expands by default and remembers collapse and reopen across browser sessions", async () => {
   const { stores, storage } = storageFixture();
   const blankScope = { window: {} };
