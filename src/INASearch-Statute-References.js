@@ -1,12 +1,12 @@
 /* Generated from official House USLM Title 8 XML; rebuild with tools/generate-statute-references.js. */
 window.INA_SEARCH_STATUTE_REFERENCES = {
   "schemaVersion": 3,
-  "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/134/xml_usc08@119-134.zip",
-  "sourceReleasePoint": "119-134",
-  "capturedAt": "2026-10-26",
-  "sourceArtifact": "sources/legal/raw/usc08@119-134.xml",
+  "sourceUrl": "https://uscode.house.gov/download/releasepoints/us/pl/119/138/xml_usc08@119-138.zip",
+  "sourceReleasePoint": "119-138",
+  "capturedAt": "2026-11-06",
+  "sourceArtifact": "sources/legal/raw/usc08@119-138.xml",
   "sourceBytes": 7384424,
-  "sourceSha256": "c1d6e8f61af4ec7fe7da38ed88b14430aad190579afc03a7c52ad0a7eb6884fd",
+  "sourceSha256": "96a015ba502ffe3e723571f3f319ad2a8956f6abebe602e6dafa9ebd1b3939ab",
   "unitTypes": {
     "1101:a": "subsection",
     "1101:a/1": "paragraph",
